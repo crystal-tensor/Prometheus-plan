@@ -102,12 +102,13 @@ rows, 33 distance-5/7 improved rows, no reduced rounds, and no new-code,
 threshold, device, or circuit-level decoder claim.
 
 B2 now also has a Stim HERALDED_ERASE / DEPOLARIZE1 stress boundary, a
-false-positive overhead stress, and a posterior-calibrated shot-conditioned
-leakage boundary. The latest B2 run evaluates 4 calibration profiles across
-1,152 profile rows; at most 4 positive-false-positive d=5/d=7 rows survive in
-one profile, strict-profile survival is 0, and all-profile robustness is false.
-This is still not a production decoder, threshold, hardware result, or new-code
-claim.
+false-positive overhead stress, a posterior-calibrated shot-conditioned leakage
+boundary, and a posterior-weighted decoder-risk ledger. The latest B2 ledger
+evaluates 4 risk budgets across 4,608 budget/profile rows. The raw T-B2-006
+profile survivors are 6; mild/nominal/conservative/strict adjusted survivors
+are 6/5/3/3, strict high-purity survivors remain 0, and all-profile robustness
+is still false. This is still not a circuit-level decoder, production decoder,
+threshold, hardware result, or new-code claim.
 
 ## Repository Layout
 

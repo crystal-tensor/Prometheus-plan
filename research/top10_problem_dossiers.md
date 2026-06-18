@@ -135,14 +135,22 @@ rows, max 4 surviving d=5/d=7 rows in one profile, strict high-purity survival
 0, and robust all-profile survival false. It performs calibration modeling but
 still does not claim a production decoder, hardware-calibrated leakage model,
 threshold, hardware result, or new code.
+T-B2-007 adds a posterior-weighted decoder-risk ledger over those profile rows:
+4 risk budgets, 4,608 budget/profile rows, 6 raw profile-survivor rows, and
+mild/nominal/conservative/strict adjusted survivors of 6/5/3/3. Strict
+high-purity adjusted survivors remain 0 and all-profile adjusted survival is
+false. This is useful risk accounting, but it is not a circuit-level
+shot-conditioned decoder, production decoder, threshold result, hardware result,
+or new code.
 
 **Remaining path to a serious solution:** integrate posterior flag probabilities
 into an actual circuit-level decoder; collect or emulate calibrated leakage/flag
 data with realistic false-positive and false-negative rates; stress surviving
-d=5/d=7 rows under strict posterior, missed-leakage, noise-mismatch, and larger
-shot gates; connect only robust non-artifact B2 rows into the B7 resource ledger.
+d=5/d=7 rows under conservative/strict posterior-weighted risk, missed-leakage,
+noise-mismatch, and larger shot gates; connect only robust non-artifact B2 rows
+into the B7 resource ledger.
 
-**Current internal maturity:** 42/100.
+**Current internal maturity:** 43/100.
 
 ## B3: Quantum Algorithms for Molecular Reaction Dynamics
 

@@ -1311,6 +1311,7 @@ def audit(root: Path) -> dict:
     b2_stim_heralded_erasure = b2_results.get("stim_heralded_erasure_stress_v0")
     b2_false_positive_erasure = b2_results.get("heralded_erasure_false_positive_stress_v0")
     b2_shot_conditioned_erasure = b2_results.get("shot_conditioned_erasure_decoder_boundary_v0")
+    b2_posterior_risk_ledger = b2_results.get("posterior_weighted_decoder_risk_ledger_v0")
     b2_status = {}
     if not b2_baseline:
         warnings.append("B2 manifest has no repetition-code control baseline result")
@@ -2106,6 +2107,113 @@ def audit(root: Path) -> dict:
                 errors.append(f"B2 shot-conditioned boundary must keep {key}=False")
         if len(payload.get("validation_errors", [])) != 0:
             errors.append("B2 shot-conditioned boundary validation errors must be zero")
+
+    b2_posterior_risk_ledger_status = {}
+    if not b2_posterior_risk_ledger:
+        warnings.append("B2 manifest has no posterior-weighted decoder-risk ledger result")
+    else:
+        result_path = b2_posterior_risk_ledger.get("result")
+        markdown_path = b2_posterior_risk_ledger.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B2 posterior-risk ledger result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B2 posterior-risk ledger markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        claims = payload.get("claim_boundary", {})
+        b2_posterior_risk_ledger_status = {
+            "status": b2_posterior_risk_ledger.get("status"),
+            "method": b2_posterior_risk_ledger.get("method"),
+            "model_status": payload.get("model_status"),
+            "risk_budget_count": summary.get("risk_budget_count"),
+            "evaluated_budget_profile_rows": summary.get("evaluated_budget_profile_rows"),
+            "source_raw_surviving_d5_d7_rows": summary.get("source_raw_surviving_d5_d7_rows"),
+            "mild_adjusted_surviving_d5_d7_rows": summary.get("mild_adjusted_surviving_d5_d7_rows"),
+            "nominal_adjusted_surviving_d5_d7_rows": summary.get("nominal_adjusted_surviving_d5_d7_rows"),
+            "conservative_adjusted_surviving_d5_d7_rows": summary.get(
+                "conservative_adjusted_surviving_d5_d7_rows"
+            ),
+            "strict_adjusted_surviving_d5_d7_rows": summary.get("strict_adjusted_surviving_d5_d7_rows"),
+            "strict_high_purity_adjusted_survivors": summary.get(
+                "strict_high_purity_adjusted_survivors"
+            ),
+            "robust_all_profile_adjusted_survival": summary.get(
+                "robust_all_profile_adjusted_survival"
+            ),
+            "conservative_max_decoder_adjusted_reduction": summary.get(
+                "conservative_max_decoder_adjusted_reduction"
+            ),
+            "strict_max_decoder_adjusted_reduction": summary.get("strict_max_decoder_adjusted_reduction"),
+            "posterior_weighted_decoder_risk_model_performed": claims.get(
+                "posterior_weighted_decoder_risk_model_performed"
+            ),
+            "new_code_claimed": claims.get("new_code_claimed"),
+            "threshold_claimed": claims.get("threshold_claimed"),
+            "calibrated_device_claimed": claims.get("calibrated_device_claimed"),
+            "full_physical_leakage_decoder_claimed": claims.get("full_physical_leakage_decoder_claimed"),
+            "production_decoder_claimed": claims.get("production_decoder_claimed"),
+            "circuit_level_decoder_claimed": claims.get("circuit_level_decoder_claimed"),
+            "shot_conditioned_erasure_decoder_claimed": claims.get(
+                "shot_conditioned_erasure_decoder_claimed"
+            ),
+            "hardware_result_claimed": claims.get("hardware_result_claimed"),
+            "reduced_rounds_used": claims.get("reduced_rounds_used"),
+            "distance_3_candidate_used": claims.get("distance_3_candidate_used"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != b2_posterior_risk_ledger.get("status"):
+            errors.append("B2 posterior-risk ledger status mismatch")
+        if payload.get("method") != b2_posterior_risk_ledger.get("method"):
+            errors.append("B2 posterior-risk ledger method mismatch")
+        if payload.get("model_status") != b2_posterior_risk_ledger.get("model_status"):
+            errors.append("B2 posterior-risk ledger model-status mismatch")
+        for key in [
+            "risk_budget_count",
+            "evaluated_budget_profile_rows",
+            "source_raw_surviving_d5_d7_rows",
+            "mild_adjusted_surviving_d5_d7_rows",
+            "nominal_adjusted_surviving_d5_d7_rows",
+            "conservative_adjusted_surviving_d5_d7_rows",
+            "strict_adjusted_surviving_d5_d7_rows",
+            "strict_high_purity_adjusted_survivors",
+            "robust_all_profile_adjusted_survival",
+            "conservative_max_decoder_adjusted_reduction",
+            "strict_max_decoder_adjusted_reduction",
+        ]:
+            if summary.get(key) != b2_posterior_risk_ledger.get(key):
+                errors.append(f"B2 posterior-risk ledger {key} mismatch")
+        if int(summary.get("conservative_adjusted_surviving_d5_d7_rows", 0)) >= int(
+            summary.get("source_raw_surviving_d5_d7_rows", 0)
+        ):
+            errors.append("B2 posterior-risk ledger must shrink survivors under conservative risk")
+        if summary.get("strict_high_purity_adjusted_survivors") != 0:
+            errors.append("B2 posterior-risk ledger strict high-purity survivors must be zero")
+        if summary.get("robust_all_profile_adjusted_survival") is not False:
+            errors.append("B2 posterior-risk ledger must not claim all-profile survival")
+        if claims.get("posterior_weighted_decoder_risk_model_performed") is not True:
+            errors.append("B2 posterior-risk ledger must disclose posterior risk modeling")
+        for key in [
+            "new_code_claimed",
+            "threshold_claimed",
+            "calibrated_device_claimed",
+            "full_physical_leakage_decoder_claimed",
+            "production_decoder_claimed",
+            "circuit_level_decoder_claimed",
+            "shot_conditioned_erasure_decoder_claimed",
+            "hardware_result_claimed",
+            "reduced_rounds_used",
+            "distance_3_candidate_used",
+        ]:
+            if claims.get(key) is not False:
+                errors.append(f"B2 posterior-risk ledger must keep {key}=False")
+        if len(payload.get("validation_errors", [])) != 0:
+            errors.append("B2 posterior-risk ledger validation errors must be zero")
 
     b3_manifest = yaml.safe_load(read(b3_manifest_path))
     b3_results = b3_manifest.get("current_results", {})
@@ -7457,6 +7565,7 @@ def audit(root: Path) -> dict:
             "stim_heralded_erasure_stress": b2_stim_heralded_erasure_status,
             "heralded_erasure_false_positive_stress": b2_false_positive_erasure_status,
             "shot_conditioned_erasure_decoder_boundary": b2_shot_conditioned_erasure_status,
+            "posterior_weighted_decoder_risk_ledger": b2_posterior_risk_ledger_status,
         },
         "b3": {
             "manifest": str(b3_manifest_path),
@@ -7597,6 +7706,9 @@ def audit(root: Path) -> dict:
             ),
             "b2_shot_conditioned_erasure_decoder_boundary": str(
                 research / "B2_shot_conditioned_erasure_decoder_boundary.md"
+            ),
+            "b2_posterior_weighted_decoder_risk_ledger": str(
+                research / "B2_posterior_weighted_decoder_risk_ledger.md"
             ),
             "b3_quantum_observable_fci_comparison": str(research / "B3_quantum_observable_fci_comparison.md"),
             "b3_quantum_observable_fci_qasm_directory": str(
@@ -8089,6 +8201,14 @@ def markdown_report(report: dict) -> str:
             f"- Shot-conditioned erasure boundary calibration model / production decoder / threshold / hardware: {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('shot_conditioned_calibration_model_performed')} / {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('production_decoder_claimed')} / {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('threshold_claimed')} / {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('hardware_result_claimed')}",
             f"- Shot-conditioned erasure boundary validation errors: {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('validation_error_count')}",
             f"- Shot-conditioned erasure boundary result/markdown exists: {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('result_exists')} / {report['b2']['shot_conditioned_erasure_decoder_boundary'].get('markdown_exists')}",
+            f"- Posterior-risk ledger status: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('status')}",
+            f"- Posterior-risk ledger budgets / evaluated rows: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('risk_budget_count')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('evaluated_budget_profile_rows')}",
+            f"- Posterior-risk ledger raw / mild / nominal / conservative / strict survivors: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('source_raw_surviving_d5_d7_rows')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('mild_adjusted_surviving_d5_d7_rows')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('nominal_adjusted_surviving_d5_d7_rows')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('conservative_adjusted_surviving_d5_d7_rows')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('strict_adjusted_surviving_d5_d7_rows')}",
+            f"- Posterior-risk ledger strict high-purity / all-profile robust: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('strict_high_purity_adjusted_survivors')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('robust_all_profile_adjusted_survival')}",
+            f"- Posterior-risk ledger conservative / strict max adjusted reduction: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('conservative_max_decoder_adjusted_reduction')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('strict_max_decoder_adjusted_reduction')}",
+            f"- Posterior-risk ledger risk model / circuit decoder / production decoder / threshold / hardware: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('posterior_weighted_decoder_risk_model_performed')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('circuit_level_decoder_claimed')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('production_decoder_claimed')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('threshold_claimed')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('hardware_result_claimed')}",
+            f"- Posterior-risk ledger validation errors: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('validation_error_count')}",
+            f"- Posterior-risk ledger result/markdown exists: {report['b2']['posterior_weighted_decoder_risk_ledger'].get('result_exists')} / {report['b2']['posterior_weighted_decoder_risk_ledger'].get('markdown_exists')}",
             "",
             "## B3 Resource Proxy Status",
             "",

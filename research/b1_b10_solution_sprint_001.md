@@ -206,6 +206,16 @@ all-profile survival is false. Next: `T-B2-007` should integrate posterior flag
 probabilities into a circuit-level decoder or use calibrated leakage/flag data;
 otherwise demote the heralded-erasure route.
 
+**Sprint update 43:** `T-B2-007` is now merged as a posterior-weighted
+decoder-risk ledger, not a production decoder. The tool reads T-B2-006's 1,152
+posterior-calibrated profile rows and evaluates 4 risk budgets over 4,608
+budget/profile rows. The source has 6 raw d=5/d=7 profile-survivor rows;
+mild/nominal/conservative/strict adjusted survivors are 6/5/3/3. Strict
+high-purity adjusted survivors remain 0, and robust all-profile adjusted
+survival is false. Next: `T-B2-008` must be a real circuit-level
+shot-conditioned decoder or a calibrated leakage/flag dataset; otherwise this
+route should stay a boundary track.
+
 ## B3: Molecular Reaction Dynamics
 
 **Technical target:** produce a reaction-coordinate quantum observable estimate

@@ -2,7 +2,7 @@
   "schema_version": "0.1",
   "last_updated": "2026-06-18",
   "purpose": "Execution board for turning the Top 10 quantum attack directions from v0 artifacts into a one-year technical-resolution portfolio.",
-  "portfolio_state": "stage 1n evidence hardening; B6 now has a structural/electronic proxy boundary that beats formula-only ranking but still loses to family priors, while B2 and B10 remain boundary-stress tracks",
+  "portfolio_state": "stage 1o evidence hardening; B2 now has a posterior-weighted decoder-risk ledger, B6 has a structural/electronic proxy boundary, and B10 remains a denominator-boundary track",
   "decision_rules": {
     "monthly_keep_rule": "Keep a direction only if the next 30-day artifact can falsify or improve a concrete claim.",
     "merge_rule": "Merge directions when their validation stack is shared, such as B4 plus B8 or B1 plus B7.",
@@ -50,17 +50,17 @@
       "problem_id": 22,
       "title": "Low-overhead quantum error-correcting codes",
       "priority_lane": "technical_system_spine",
-      "current_maturity": "Stim baseline plus closed reduced-round artifact boundary; T-B2-004 Stim HERALDED_ERASE / DEPOLARIZE1 stress found 10 d=5/d=7 improved rows; T-B2-005 false-positive stress found 5 positive-false-positive d=5/d=7 improved rows at fp=0.001/tick but 0 improved rows by fp=0.003/tick; T-B2-006 posterior-calibrated shot-conditioned boundary evaluates 4 calibration profiles / 1152 profile rows, with 3 profiles preserving some rows, max 4 surviving d=5/d=7 rows in one profile, strict high-purity survival 0, and no robust all-profile survival.",
-      "strongest_evidence": "Stim/PyMatching baseline plus closed reduced-round artifact boundary; T-B2-003 analytic leakage-erasure proxy found 42 improved rows; T-B2-004 circuit-derived HERALDED_ERASE stress found 10 d=5/d=7 rows; T-B2-005 false-positive stress preserved 5 rows at fp=0.001/tick; T-B2-006 posterior calibration keeps at most 4 d=5/d=7 rows under one profile but fails strict/all-profile robustness.",
-      "30_day_gate": "Replace posterior-only calibration with a circuit-level shot-conditioned decoder or hardware-calibrated leakage/flag dataset that preserves d=5/d=7 target-volume rows under strict posterior, missed-leakage, noise-mismatch, and realistic false-positive gates.",
-      "next_artifact": "B2 circuit-level shot-conditioned decoder or calibrated leakage-data stress with posterior flag integration.",
-      "kill_condition": "Demote the leakage-erasure route if d=5/d=7 target-volume rows disappear under strict posterior thresholds, calibrated false-positive rates, missed-leakage bounds, or noise mismatch.",
+      "current_maturity": "Stim baseline plus closed reduced-round artifact boundary; T-B2-007 posterior-weighted decoder-risk ledger over 4 risk budgets / 4608 budget-profile rows leaves mild/nominal/conservative/strict adjusted survivors at 6/5/3/3, strict high-purity survivors 0, and no robust all-profile adjusted survival.",
+      "strongest_evidence": "Stim/PyMatching baseline plus closed reduced-round artifact boundary; T-B2-003 analytic leakage-erasure proxy found 42 improved rows; T-B2-004 circuit-derived HERALDED_ERASE stress found 10 d=5/d=7 rows; T-B2-005 false-positive stress preserved 5 rows at fp=0.001/tick; T-B2-006 posterior calibration gave 6 raw profile-survivor rows; T-B2-007 risk ledger shrinks conservative/strict adjusted survivors to 3 and keeps strict high-purity survivors at 0.",
+      "30_day_gate": "Replace the posterior-weighted risk ledger with a circuit-level shot-conditioned decoder or hardware-calibrated leakage/flag dataset that preserves d=5/d=7 target-volume rows under strict posterior, missed-leakage, noise-mismatch, and realistic false-positive gates.",
+      "next_artifact": "B2 T-B2-008 circuit-level shot-conditioned decoder or calibrated leakage-data stress with posterior flag integration.",
+      "kill_condition": "Demote the leakage-erasure route if d=5/d=7 target-volume rows disappear under conservative/strict posterior-weighted risk, calibrated false-positive rates, missed-leakage bounds, or noise mismatch.",
       "downstream_translation_route": "Deferred until B2 shows Wilson-bounded target-volume reduction under shot-conditioned or calibrated leakage/erasure evidence, without relying on the closed reduced-round artifact.",
       "dependencies": [
         "B1",
         "B7"
       ],
-      "kill_or_merge_condition": "Demote the leakage-erasure route if the d=5/d=7 target-volume rows disappear under shot-conditioned erasure decoding, calibrated leakage stress, or realistic flag false-positive overhead above the observed fp=0.001/tick survival boundary."
+      "kill_or_merge_condition": "Demote the leakage-erasure route if d=5/d=7 target-volume rows disappear under conservative/strict posterior-weighted risk, calibrated false-positive rates, missed-leakage bounds, or noise mismatch."
     },
     {
       "b_id": "B3",

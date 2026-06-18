@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 37, 'B2': 42, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 21, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 49}
+- Maturity scores: {'B1': 37, 'B2': 43, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 21, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 49}
 
 ## Technical Resolution Program
 
@@ -354,6 +354,14 @@ Overall audit: PASS
 - Shot-conditioned erasure boundary calibration model / production decoder / threshold / hardware: True / False / False / False
 - Shot-conditioned erasure boundary validation errors: 0
 - Shot-conditioned erasure boundary result/markdown exists: True / True
+- Posterior-risk ledger status: posterior_weighted_decoder_risk_boundary_not_production_decoder
+- Posterior-risk ledger budgets / evaluated rows: 4 / 4608
+- Posterior-risk ledger raw / mild / nominal / conservative / strict survivors: 6 / 6 / 5 / 3 / 3
+- Posterior-risk ledger strict high-purity / all-profile robust: 0 / False
+- Posterior-risk ledger conservative / strict max adjusted reduction: 1.9936373276776251 / 1.7942735949098625
+- Posterior-risk ledger risk model / circuit decoder / production decoder / threshold / hardware: True / False / False / False / False
+- Posterior-risk ledger validation errors: 0
+- Posterior-risk ledger result/markdown exists: True / True
 
 ## B3 Resource Proxy Status
 
