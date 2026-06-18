@@ -3,43 +3,44 @@ problem_id: 30
 name: Classical Verification of Quantum Outputs
 version: 0.1
 status: draft
-claim: >
-  Task-relevant hidden invariants and randomized projections can reject
-  spoofed quantum outputs without requiring full distribution verification.
+claim: 'Task-relevant hidden invariants and randomized projections can reject spoofed
+  quantum outputs without requiring full distribution verification.
+
+  '
 task_families:
-  - hidden_parity_projection_sampling
-  - randomized_measurement_invariants
-  - classical_shadow_observable_tests
-  - cross_device_projection_consistency
+- hidden_parity_projection_sampling
+- randomized_measurement_invariants
+- classical_shadow_observable_tests
+- cross_device_projection_consistency
 baselines_and_adversaries:
-  - honest_invariant_sampler
-  - uniform_random_spoofer
-  - marginal_matching_spoofer
-  - public_invariant_spoofer
-  - leaked_half_invariant_spoofer
-  - weak_surrogate_spoofer
+- honest_invariant_sampler
+- uniform_random_spoofer
+- marginal_matching_spoofer
+- public_invariant_spoofer
+- leaked_half_invariant_spoofer
+- weak_surrogate_spoofer
 metrics:
-  - honest_completeness
-  - adversary_soundness
-  - sample_count
-  - invariant_count
-  - maximum_projection_error
-  - adversaries_failing_rule
+- honest_completeness
+- adversary_soundness
+- sample_count
+- invariant_count
+- maximum_projection_error
+- adversaries_failing_rule
 acceptance_threshold:
-  honest_completeness: ">=0.80"
-  adversary_soundness: "<=0.05"
-  adversaries_failing_rule: ">=3"
+  honest_completeness: '>=0.80'
+  adversary_soundness: <=0.05
+  adversaries_failing_rule: '>=3'
   explicit_not_full_distribution_verification: true
 failure_conditions:
-  - invariants_are_public_and_easy_to_spoof
-  - sample_complexity_matches_full_distribution_learning
-  - verifier_cannot_hide_random_projections
-  - honest_noise_breaks_completeness
+- invariants_are_public_and_easy_to_spoof
+- sample_complexity_matches_full_distribution_learning
+- verifier_cannot_hide_random_projections
+- honest_noise_breaks_completeness
 next_actions:
-  - replace_toy_parity_tasks_with_randomized_measurement_data
-  - add_classical_shadow_observable_tests
-  - connect_to_b4_trap_protocol_tasks
-  - add_adaptive_spoofer_interfaces
+- replace_toy_parity_tasks_with_randomized_measurement_data
+- add_classical_shadow_observable_tests
+- connect_to_b4_trap_protocol_tasks
+- add_adaptive_spoofer_interfaces
 current_results:
   openqasm3_randomized_measurement_packet_v0:
     status: openqasm3_randomized_measurement_packet_not_hardware_execution_or_advantage_claim
@@ -70,6 +71,30 @@ current_results:
     qasm_directory: ../results/B4_B8_openqasm3_randomized_measurement_packet/circuits
     result: ../results/B4_B8_openqasm3_randomized_measurement_packet_v0.json
     markdown_report: ../research/B4_B8_openqasm3_randomized_measurement_packet.md
+  public_qasm_packet_spoofer_gate_v0:
+    status: public_qasm_packet_spoofer_boundary_not_protocol_soundness
+    model_status: public_packet_stabilizer_emulation_guardrail_not_hardware_execution
+    method: b4_b8_openqasm3_packet_public_spoofer_gate_v0
+    source_method: b4_b8_openqasm3_randomized_measurement_packet_v0
+    packet_circuit_count: 36
+    parsed_circuit_count: 36
+    deterministic_classical_file_count: 36
+    unsupported_file_count: 0
+    public_stabilizer_emulator_prediction_success_rate: 1.0
+    public_packet_spoofer_acceptance_rate: 1.0
+    public_packet_contract_soundness_rejected: true
+    late_bound_private_challenges_required: true
+    real_backend_or_hardware_execution_still_required: true
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    protocol_soundness_proved: false
+    validation_error_count: 0
+    result: ../results/B4_B8_openqasm3_packet_public_spoofer_gate_v0.json
+    markdown_report: ../research/B4_B8_openqasm3_packet_public_spoofer_gate.md
   toy_hidden_invariant_output_verifier_v0:
     status: toy_invariant_property_test
     model_status: toy_invariant_property_test_not_full_distribution_verification
@@ -84,11 +109,11 @@ current_results:
     minimum_honest_completeness: 1.0
     maximum_adversary_soundness: 0.0
     adversaries_failing_invariant_rule:
-      - leaked_half_invariant_spoofer
-      - marginal_matching_spoofer
-      - public_invariant_spoofer
-      - uniform_random_spoofer
-      - weak_surrogate_spoofer
+    - leaked_half_invariant_spoofer
+    - marginal_matching_spoofer
+    - public_invariant_spoofer
+    - uniform_random_spoofer
+    - weak_surrogate_spoofer
     result: ../results/B8_output_invariant_verifier_v0.json
   adaptive_leakage_spoofer_stress_v0:
     status: adaptive_leakage_stress_test_not_full_distribution_verification
@@ -99,13 +124,17 @@ current_results:
     invariant_count: 10
     trials: 120
     tolerance: 0.08
-    leakage_fractions: [0.0, 0.25, 0.5, 0.75]
+    leakage_fractions:
+    - 0.0
+    - 0.25
+    - 0.5
+    - 0.75
     adaptive_adversaries_tested: 4
     minimum_honest_completeness: 1.0
     maximum_adaptive_soundness: 0.7916666666666666
     dangerous_leakage_threshold: 0.75
     adversaries_over_5pct_at_dangerous_threshold:
-      - trap_aware_leakage_spoofer
+    - trap_aware_leakage_spoofer
     interpretation: low_and_mid_leakage_rejected_high_leakage_exposes_refresh_requirement
     result: ../results/B8_adaptive_leakage_spoofer_v0.json
     markdown_report: ../research/B8_adaptive_leakage_spoofer.md
@@ -118,12 +147,16 @@ current_results:
     invariant_count: 10
     trials: 120
     tolerance: 0.08
-    leakage_fractions: [0.0, 0.25, 0.5, 0.75]
+    leakage_fractions:
+    - 0.0
+    - 0.25
+    - 0.5
+    - 0.75
     refresh_modes:
-      - none
-      - projection_rotation
-      - challenge_refresh
-      - refresh_plus_rotation
+    - none
+    - projection_rotation
+    - challenge_refresh
+    - refresh_plus_rotation
     interpretation: challenge_refresh_and_projection_rotation_reduce_effective_leakage_in_toy_repair_model
     result: ../results/B8_challenge_refresh_repair_v0.json
     markdown_report: ../research/B8_challenge_refresh_repair.md
@@ -133,25 +166,32 @@ current_results:
     task_family: random_cnot_hidden_projection_sampling
     task_count: 3
     configuration_count: 192
-    qubits: [12, 16, 20]
+    qubits:
+    - 12
+    - 16
+    - 20
     circuit_depth_factor: 4
     invariant_count: 10
     trials: 120
     sample_count: 4096
-    leakage_fractions: [0.0, 0.25, 0.5, 0.75]
+    leakage_fractions:
+    - 0.0
+    - 0.25
+    - 0.5
+    - 0.75
     refresh_modes:
-      - none
-      - projection_rotation
-      - challenge_refresh
-      - refresh_plus_rotation
+    - none
+    - projection_rotation
+    - challenge_refresh
+    - refresh_plus_rotation
     minimum_honest_completeness: 1.0
     maximum_adaptive_soundness: 0.675
     none_high_leakage_max_soundness: 0.675
     best_repair_high_leakage_max_soundness: 0.0
     high_leakage_repair_modes_passing:
-      - challenge_refresh
-      - projection_rotation
-      - refresh_plus_rotation
+    - challenge_refresh
+    - projection_rotation
+    - refresh_plus_rotation
     interpretation: circuit_level_hidden_projection_refresh_rejects_high_leakage_adaptive_spoofer_in_proxy_model
     caveat: cnot_hidden_projection_proxy_not_full_distribution_verification_or_hardware_randomized_measurement_protocol
     result: ../results/B4_B8_circuit_refresh_task_v0.json
@@ -163,19 +203,19 @@ current_results:
     task_count: 3
     configuration_count: 144
     learners_tested:
-      - correlation_mask_learner
-      - generative_projection_learner
-      - leakage_augmented_generator
+    - correlation_mask_learner
+    - generative_projection_learner
+    - leakage_augmented_generator
     training_count: 4096
     trials: 80
     minimum_honest_completeness: 1.0
     maximum_learned_soundness: 1.0
     safe_high_leakage_refresh_modes:
-      - challenge_refresh
-      - projection_rotation
-      - refresh_plus_rotation
+    - challenge_refresh
+    - projection_rotation
+    - refresh_plus_rotation
     unsafe_high_leakage_refresh_modes:
-      - none
+    - none
     interpretation: no_refresh_breaks_under_trained_learners_projection_rotation_or_stronger_refresh_is_required_in_this_proxy
     caveat: trained_correlation_generator_not_cryptographic_soundness_proof
     result: ../results/B8_generative_spoofer_refresh_v0.json
@@ -188,3 +228,4 @@ prototype_artifacts:
   openqasm3_randomized_measurement_packet: ../tools/b4_b8_openqasm3_randomized_measurement_packet.py
   generative_spoofer_refresh: ../tools/b8_generative_spoofer_refresh.py
   prototype_notes: ../research/B8_prototype_notes.md
+  openqasm3_public_spoofer_gate: ../tools/b4_b8_openqasm3_packet_public_spoofer_gate.py

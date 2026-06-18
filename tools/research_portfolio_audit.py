@@ -4909,6 +4909,7 @@ def audit(root: Path) -> dict:
     b4_trap = b4_results.get("toy_hidden_trap_protocol_sim_v0")
     b4_circuit_refresh = b4_results.get("circuit_hidden_projection_refresh_v0")
     b4_openqasm3_packet = b4_results.get("openqasm3_randomized_measurement_packet_v0")
+    b4_public_qasm_spoofer = b4_results.get("public_qasm_packet_spoofer_gate_v0")
     b4_status = {}
     if not b4_trap:
         warnings.append("B4 manifest has no toy hidden-trap protocol result")
@@ -5087,6 +5088,75 @@ def audit(root: Path) -> dict:
                 errors.append(f"B4 OpenQASM 3 circuit sha256 mismatch: {qasm_path}")
         if len(payload.get("validation_errors", [])) != b4_openqasm3_packet.get("validation_error_count"):
             errors.append("B4 OpenQASM 3 packet validation-error count mismatch")
+
+    b4_public_qasm_spoofer_status = {}
+    if not b4_public_qasm_spoofer:
+        warnings.append("B4 manifest has no public-QASM packet spoofer gate")
+    else:
+        result_path = b4_public_qasm_spoofer.get("result")
+        markdown_path = b4_public_qasm_spoofer.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B4 public-QASM spoofer result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B4 public-QASM spoofer markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        b4_public_qasm_spoofer_status = {
+            "status": b4_public_qasm_spoofer.get("status"),
+            "method": b4_public_qasm_spoofer.get("method"),
+            "packet_circuit_count": payload.get("packet_circuit_count"),
+            "parsed_circuit_count": payload.get("parsed_circuit_count"),
+            "public_stabilizer_emulator_prediction_success_rate": payload.get(
+                "public_stabilizer_emulator_prediction_success_rate"
+            ),
+            "public_packet_contract_soundness_rejected": payload.get(
+                "public_packet_contract_soundness_rejected"
+            ),
+            "late_bound_private_challenges_required": payload.get("late_bound_private_challenges_required"),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append("B4 public-QASM spoofer benchmark_id must be B4_B8")
+        if payload.get("status") != b4_public_qasm_spoofer.get("status"):
+            errors.append("B4 public-QASM spoofer status mismatch")
+        if payload.get("method") != b4_public_qasm_spoofer.get("method"):
+            errors.append("B4 public-QASM spoofer method mismatch")
+        for field in [
+            "packet_circuit_count",
+            "parsed_circuit_count",
+            "deterministic_classical_file_count",
+            "unsupported_file_count",
+            "public_stabilizer_emulator_prediction_success_rate",
+            "public_packet_spoofer_acceptance_rate",
+            "public_packet_contract_soundness_rejected",
+            "late_bound_private_challenges_required",
+            "real_backend_or_hardware_execution_still_required",
+            "hardware_execution_performed",
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+        ]:
+            if payload.get(field) != b4_public_qasm_spoofer.get(field):
+                errors.append(f"B4 public-QASM spoofer {field} mismatch")
+        if payload.get("source_method") != "b4_b8_openqasm3_randomized_measurement_packet_v0":
+            errors.append("B4 public-QASM spoofer source method mismatch")
+        if payload.get("public_stabilizer_emulator_prediction_success_rate") != 1.0:
+            errors.append("B4 public-QASM spoofer should predict the current public packet exactly")
+        if payload.get("public_packet_contract_soundness_rejected") is not True:
+            errors.append("B4 public-QASM spoofer should reject public-packet protocol soundness")
+        if len(payload.get("validation_errors", [])) != b4_public_qasm_spoofer.get("validation_error_count"):
+            errors.append("B4 public-QASM spoofer validation-error count mismatch")
 
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
     b5_results = b5_manifest.get("current_results", {})
@@ -7631,6 +7701,7 @@ def audit(root: Path) -> dict:
     b8_refresh = b8_results.get("challenge_refresh_projection_rotation_repair_v0")
     b8_circuit_refresh = b8_results.get("circuit_hidden_projection_refresh_v0")
     b8_openqasm3_packet = b8_results.get("openqasm3_randomized_measurement_packet_v0")
+    b8_public_qasm_spoofer = b8_results.get("public_qasm_packet_spoofer_gate_v0")
     b8_generative_spoofer = b8_results.get("generative_spoofer_refresh_stress_v0")
     b8_status = {}
     if not b8_verifier:
@@ -7856,6 +7927,73 @@ def audit(root: Path) -> dict:
             errors.append("B4 and B8 OpenQASM 3 packet manifests must point to the same result")
         if len(payload.get("validation_errors", [])) != b8_openqasm3_packet.get("validation_error_count"):
             errors.append("B8 OpenQASM 3 packet validation-error count mismatch")
+
+    b8_public_qasm_spoofer_status = {}
+    if not b8_public_qasm_spoofer:
+        warnings.append("B8 manifest has no public-QASM packet spoofer gate")
+    else:
+        result_path = b8_public_qasm_spoofer.get("result")
+        markdown_path = b8_public_qasm_spoofer.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B8 public-QASM spoofer result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B8 public-QASM spoofer markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        b8_public_qasm_spoofer_status = {
+            "status": b8_public_qasm_spoofer.get("status"),
+            "method": b8_public_qasm_spoofer.get("method"),
+            "packet_circuit_count": payload.get("packet_circuit_count"),
+            "parsed_circuit_count": payload.get("parsed_circuit_count"),
+            "public_stabilizer_emulator_prediction_success_rate": payload.get(
+                "public_stabilizer_emulator_prediction_success_rate"
+            ),
+            "public_packet_contract_soundness_rejected": payload.get(
+                "public_packet_contract_soundness_rejected"
+            ),
+            "late_bound_private_challenges_required": payload.get("late_bound_private_challenges_required"),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append("B8 public-QASM spoofer benchmark_id must be B4_B8")
+        if payload.get("status") != b8_public_qasm_spoofer.get("status"):
+            errors.append("B8 public-QASM spoofer status mismatch")
+        if payload.get("method") != b8_public_qasm_spoofer.get("method"):
+            errors.append("B8 public-QASM spoofer method mismatch")
+        if payload.get("packet_circuit_count") != b8_public_qasm_spoofer.get("packet_circuit_count"):
+            errors.append("B8 public-QASM spoofer packet circuit count mismatch")
+        if payload.get("parsed_circuit_count") != b8_public_qasm_spoofer.get("parsed_circuit_count"):
+            errors.append("B8 public-QASM spoofer parsed circuit count mismatch")
+        if payload.get("public_stabilizer_emulator_prediction_success_rate") != 1.0:
+            errors.append("B8 public-QASM spoofer should exactly predict public packet transcripts")
+        if payload.get("public_packet_contract_soundness_rejected") is not True:
+            errors.append("B8 public-QASM spoofer should reject public-packet protocol soundness")
+        if payload.get("late_bound_private_challenges_required") is not True:
+            errors.append("B8 public-QASM spoofer should require late-bound private challenges")
+        if payload.get("hardware_execution_performed") is not False:
+            errors.append("B8 public-QASM spoofer must not claim hardware execution")
+        for field in [
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+        ]:
+            if payload.get(field) is not False:
+                errors.append(f"B8 public-QASM spoofer must keep {field}=False")
+        if b4_public_qasm_spoofer and b4_public_qasm_spoofer.get("result") != b8_public_qasm_spoofer.get("result"):
+            errors.append("B4 and B8 public-QASM spoofer manifests must point to the same result")
+        if len(payload.get("validation_errors", [])) != b8_public_qasm_spoofer.get("validation_error_count"):
+            errors.append("B8 public-QASM spoofer validation-error count mismatch")
 
     b8_generative_spoofer_status = {}
     if not b8_generative_spoofer:
@@ -9732,6 +9870,7 @@ def audit(root: Path) -> dict:
             "trap_protocol": b4_status,
             "circuit_refresh_task": b4_circuit_refresh_status,
             "openqasm3_randomized_measurement_packet": b4_openqasm3_packet_status,
+            "public_qasm_packet_spoofer_gate": b4_public_qasm_spoofer_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -9784,6 +9923,7 @@ def audit(root: Path) -> dict:
             "challenge_refresh_repair": b8_refresh_status,
             "circuit_refresh_task": b8_circuit_refresh_status,
             "openqasm3_randomized_measurement_packet": b8_openqasm3_packet_status,
+            "public_qasm_packet_spoofer_gate": b8_public_qasm_spoofer_status,
             "generative_spoofer_refresh": b8_generative_spoofer_status,
         },
         "b9": {
@@ -10018,6 +10158,9 @@ def audit(root: Path) -> dict:
             "b4_b8_circuit_refresh_task": str(research / "B4_B8_circuit_refresh_task.md"),
             "b4_b8_openqasm3_randomized_measurement_packet": str(
                 research / "B4_B8_openqasm3_randomized_measurement_packet.md"
+            ),
+            "b4_b8_openqasm3_packet_public_spoofer_gate": str(
+                research / "B4_B8_openqasm3_packet_public_spoofer_gate.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
@@ -10645,6 +10788,11 @@ def markdown_report(report: dict) -> str:
             f"- OpenQASM 3 packet headers / Aer mismatches / honest completeness: {report['b4']['openqasm3_randomized_measurement_packet'].get('all_qasm3_headers_valid')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('aer_semantic_mismatch_count')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('minimum_aer_honest_completeness')}",
             f"- OpenQASM 3 packet hardware execution / advantage / BQP separation: {report['b4']['openqasm3_randomized_measurement_packet'].get('hardware_execution_performed')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('quantum_advantage_claimed')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('bqp_separation_claimed')}",
             f"- OpenQASM 3 packet result/markdown/directory exists: {report['b4']['openqasm3_randomized_measurement_packet'].get('result_exists')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('markdown_exists')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('qasm_directory_exists')}",
+            f"- Public-QASM spoofer status: {report['b4']['public_qasm_packet_spoofer_gate'].get('status')}",
+            f"- Public-QASM spoofer parsed circuits / prediction success: {report['b4']['public_qasm_packet_spoofer_gate'].get('parsed_circuit_count')} / {report['b4']['public_qasm_packet_spoofer_gate'].get('public_stabilizer_emulator_prediction_success_rate')}",
+            f"- Public-QASM packet soundness rejected / late-bound private challenges required: {report['b4']['public_qasm_packet_spoofer_gate'].get('public_packet_contract_soundness_rejected')} / {report['b4']['public_qasm_packet_spoofer_gate'].get('late_bound_private_challenges_required')}",
+            f"- Public-QASM spoofer hardware execution / advantage / BQP separation: {report['b4']['public_qasm_packet_spoofer_gate'].get('hardware_execution_performed')} / {report['b4']['public_qasm_packet_spoofer_gate'].get('quantum_advantage_claimed')} / {report['b4']['public_qasm_packet_spoofer_gate'].get('bqp_separation_claimed')}",
+            f"- Public-QASM spoofer result/markdown exists: {report['b4']['public_qasm_packet_spoofer_gate'].get('result_exists')} / {report['b4']['public_qasm_packet_spoofer_gate'].get('markdown_exists')}",
             "",
             "## B5 Hubbard Embedding Status",
             "",
@@ -10935,6 +11083,11 @@ def markdown_report(report: dict) -> str:
             f"- OpenQASM 3 packet headers / Aer mismatches / honest completeness: {report['b8']['openqasm3_randomized_measurement_packet'].get('all_qasm3_headers_valid')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('aer_semantic_mismatch_count')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('minimum_aer_honest_completeness')}",
             f"- OpenQASM 3 packet hardware execution / advantage / BQP separation: {report['b8']['openqasm3_randomized_measurement_packet'].get('hardware_execution_performed')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('quantum_advantage_claimed')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('bqp_separation_claimed')}",
             f"- OpenQASM 3 packet result/markdown/directory exists: {report['b8']['openqasm3_randomized_measurement_packet'].get('result_exists')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('markdown_exists')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('qasm_directory_exists')}",
+            f"- Public-QASM spoofer status: {report['b8']['public_qasm_packet_spoofer_gate'].get('status')}",
+            f"- Public-QASM spoofer parsed circuits / prediction success: {report['b8']['public_qasm_packet_spoofer_gate'].get('parsed_circuit_count')} / {report['b8']['public_qasm_packet_spoofer_gate'].get('public_stabilizer_emulator_prediction_success_rate')}",
+            f"- Public-QASM packet soundness rejected / late-bound private challenges required: {report['b8']['public_qasm_packet_spoofer_gate'].get('public_packet_contract_soundness_rejected')} / {report['b8']['public_qasm_packet_spoofer_gate'].get('late_bound_private_challenges_required')}",
+            f"- Public-QASM spoofer hardware execution / advantage / BQP separation: {report['b8']['public_qasm_packet_spoofer_gate'].get('hardware_execution_performed')} / {report['b8']['public_qasm_packet_spoofer_gate'].get('quantum_advantage_claimed')} / {report['b8']['public_qasm_packet_spoofer_gate'].get('bqp_separation_claimed')}",
+            f"- Public-QASM spoofer result/markdown exists: {report['b8']['public_qasm_packet_spoofer_gate'].get('result_exists')} / {report['b8']['public_qasm_packet_spoofer_gate'].get('markdown_exists')}",
             f"- Generative spoofer status: {report['b8']['generative_spoofer_refresh'].get('status')}",
             f"- Generative spoofer configurations: {report['b8']['generative_spoofer_refresh'].get('configuration_count')}",
             f"- Generative spoofer maximum learned soundness: {report['b8']['generative_spoofer_refresh'].get('maximum_learned_soundness')}",

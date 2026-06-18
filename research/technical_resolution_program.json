@@ -38,9 +38,9 @@
     {
       "b_id": "B4",
       "technical_solution_target": "Circuit-level verifiable advantage task with explicit completeness/soundness against adaptive spoofers.",
-      "current_evidence": "Toy hidden-trap protocol rejects four spoofing families; shared B4/B8 CNOT hidden-projection refresh task runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0. T-B4-002a exports 36 OpenQASM 3 randomized-measurement verifier circuits with max 30 qubits including verifier ancillas and 0 Qiskit/Aer semantic mismatches.",
-      "main_blocker": "The packet is still a CNOT/projection verifier packet and semantic check, not real hardware execution, cryptographic soundness, sampling hardness, or quantum advantage.",
-      "next_experiment": "Run the OpenQASM 3 packet on real backend properties or hardware randomized-measurement execution, or attack the same packet with stronger trained/generative spoofers.",
+      "current_evidence": "Toy hidden-trap protocol rejects four spoofing families; shared B4/B8 CNOT hidden-projection refresh task runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0. T-B4-002a exports 36 OpenQASM 3 randomized-measurement verifier circuits with max 30 qubits including verifier ancillas and 0 Qiskit/Aer semantic mismatches. T-B8-003a adds a public-QASM packet spoofer gate: a deterministic parser/emulator predicts all 36 public packet transcripts, so public-packet protocol soundness is rejected.",
+      "main_blocker": "The packet is still a public CNOT/projection verifier packet. Because verifier-private material is embedded in public QASM, public-packet soundness is rejected; this is not real hardware execution, cryptographic soundness, sampling hardness, or quantum advantage.",
+      "next_experiment": "Build late-bound private challenge material, run real backend/hardware randomized-measurement execution, or attack transcripts whose verifier-private material is not embedded in public QASM.",
       "gate_status": "early"
     },
     {
@@ -70,9 +70,9 @@
     {
       "b_id": "B8",
       "technical_solution_target": "Classical verifier whose soundness stays low under adaptive leakage through challenge refresh/projection rotation.",
-      "current_evidence": "Hidden-invariant verifier, adaptive leakage stress, challenge refresh/rotation repair, shared B4/B8 circuit-refresh task, T-B4-002a OpenQASM 3 packet with 36 verifier circuits and 0 Aer semantic mismatches, trained/generative spoofer stress, B10-T2 proof gate, restricted lemma, transcript/device-noise bridge, ideal/noisy Aer bridges, and backend-calibrated-style GenericBackendV2 bridge with safe calibrated honest acceptance 1.0 and adversary acceptance 0.25.",
-      "main_blocker": "All verifier evidence remains CNOT hidden-projection/proxy evidence. The new OpenQASM 3 packet is executable input material, but not real backend properties, hardware execution, cryptographic soundness, or sampling hardness.",
-      "next_experiment": "Replace GenericBackendV2 snapshots with real backend properties or run hardware randomized-measurement verifier execution using the OpenQASM 3 packet, then compare against noisy Aer, backend-calibrated-style, and transcript device-noise bridges.",
+      "current_evidence": "Hidden-invariant verifier, adaptive leakage stress, challenge refresh/rotation repair, shared B4/B8 circuit-refresh task, T-B4-002a OpenQASM 3 packet with 36 verifier circuits and 0 Aer semantic mismatches, trained/generative spoofer stress, B10-T2 proof gate, restricted lemma, transcript/device-noise bridge, ideal/noisy Aer bridges, and backend-calibrated-style GenericBackendV2 bridge with safe calibrated honest acceptance 1.0 and adversary acceptance 0.25. T-B8-003a public-QASM packet spoofer gate predicts all 36 public packet transcripts and rejects public-packet protocol soundness.",
+      "main_blocker": "All verifier evidence remains CNOT hidden-projection/proxy evidence. The public OpenQASM 3 packet exposes verifier structure, so the next protocol must late-bind private challenge material or move to real backend/hardware transcripts.",
+      "next_experiment": "Create a late-bound private challenge verifier packet or run real backend/hardware randomized-measurement verifier execution, then compare against public-QASM spoofer, noisy Aer, backend-calibrated-style, and transcript device-noise bridges.",
       "gate_status": "in_progress"
     },
     {

@@ -105,6 +105,14 @@ count is 0. This is a circuit packet and semantic check only, not hardware
 execution, sampling hardness, cryptographic soundness, quantum advantage, or a
 BQP separation claim.
 
+The follow-up B4/B8 public-packet spoofer gate rejects a public-protocol
+soundness interpretation of that packet. A deterministic parser/emulator can
+predict all 36 public OpenQASM 3 packet transcripts, giving a public-packet
+spoofer acceptance rate of 1.0. This is a guardrail, not a failure of a private
+protocol: the next gate must late-bind private challenge material, use real
+backend or hardware execution, or attack transcripts that do not embed the
+verifier's private material in public QASM.
+
 B6 has moved from a synthetic descriptor toy to curated leakage audits and a
 structural/electronic proxy boundary. The latest B6 screen keeps 38 records
 across 22 families with 12 expanded negative controls; structural/electronic

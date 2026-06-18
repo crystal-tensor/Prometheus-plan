@@ -355,6 +355,17 @@ hardness, cryptographic soundness, quantum advantage, or BQP separation. Next:
 run the packet against real backend properties, hardware randomized-measurement
 execution, or stronger trained/generative spoofers.
 
+**Sprint update 55:** `T-B8-003a` is now merged back into B4 as a public-QASM
+packet spoofer boundary. The new tool
+`tools/b4_b8_openqasm3_packet_public_spoofer_gate.py` parses the 36 exported
+OpenQASM 3 packet circuits and deterministically emulates the generated
+X/CX/measure subset from public text. The public emulator predicts all 36
+packet transcripts, so a public-packet protocol-soundness interpretation is
+rejected. This is not an attack on a private protocol, not hardware execution,
+not sampling hardness, and not quantum advantage. Next: late-bind private
+challenge material or move to real backend/hardware transcripts before making
+any verifier-soundness claim.
+
 ## B5: Strongly Correlated Matter
 
 **Technical target:** show an accuracy-per-resource improvement on a meaningful
@@ -939,6 +950,16 @@ hardware run, cryptographic soundness proof, sampling-hardness proof, quantum
 advantage claim, or BQP separation claim. The next B8 gate is to run this
 packet with real backend properties or hardware randomized-measurement
 execution, and to attack the same packet with stronger spoofers.
+
+**Sprint update 55:** `T-B8-003a` is now merged as the public-QASM packet
+spoofer gate. The new result
+`results/B4_B8_openqasm3_packet_public_spoofer_gate_v0.json` and report
+`research/B4_B8_openqasm3_packet_public_spoofer_gate.md` show that a public
+parser/emulator predicts all 36 OpenQASM 3 packet transcripts, with
+public-packet spoofer acceptance 1.0. The gate rejects public-packet protocol
+soundness and requires late-bound private challenge material, real backend
+properties, hardware randomized-measurement execution, or non-public
+transcripts before the verifier line can advance.
 
 ## B9: Quantum PCP / Local Hamiltonian Hardness
 
