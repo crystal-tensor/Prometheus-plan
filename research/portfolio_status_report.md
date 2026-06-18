@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 43, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 40, 'B8': 32, 'B9': 13, 'B10': 49}
+- Maturity scores: {'B1': 44, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 41, 'B8': 32, 'B9': 13, 'B10': 49}
 
 ## Technical Resolution Program
 
@@ -313,6 +313,19 @@ Overall audit: PASS
 - Occurrence-ledger clears target: False
 - Additional occurrence certificates required: 30
 - Cache model accepted as FT ledger: False
+- Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
+- Validation errors: 0
+
+## B1/B7 cone_01 Theta-Sharing Cost-Model Gate
+
+- Exists: True
+- Status: cone01_theta_sharing_cost_model_not_accepted
+- Candidate windows / theta groups / duplicate theta occurrences: 35 / 4 / 31
+- Optimistic cache signal / target proxy-T: 620 / 600
+- Acceptance gates passed / failed / total: 0 / 8 / 8
+- Cost model accepted: False
+- B7 ledger proxy-T reduction after cost model: 0
+- Additional occurrence certificates / cost-model gates required: 30 / 8
 - Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 

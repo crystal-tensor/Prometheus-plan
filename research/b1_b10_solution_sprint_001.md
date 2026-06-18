@@ -740,6 +740,17 @@ ledger target remains uncleared. The next `T-B1-004` attempt must either produce
 30 occurrence-removing certificates or justify a new physical theta-sharing cost
 model before B7 can count a resource delta.
 
+**Sprint update 18h:** `T-B1-004g` is now merged as a physical cost-model
+feasibility gate for `cone_01` theta sharing. The new artifact
+`research/B1_B7_cone01_theta_sharing_cost_model_gate.md` keeps the optimistic
+620 proxy-T cache signal visible, but checks the eight requirements that would
+make theta sharing physically countable. Current evidence passes 0/8 gates:
+there is no shared synthesis object, replay verifier, layout/routing model,
+factory-amortization ledger, shared-error budget, independent baseline, or
+refreshed B7 ledger. The cost model is not accepted, B7 ledger reduction remains
+0, and the next `T-B1-004` work must either produce 30 occurrence-removing
+certificates or satisfy CM-01 through CM-08.
+
 ## B8: Classical Verification of Quantum Outputs
 
 **Technical target:** keep verifier soundness low under adaptive leakage by

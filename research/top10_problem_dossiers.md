@@ -85,6 +85,11 @@ pressure: 31 duplicate theta occurrences create an optimistic 620 proxy-T
 cache-reuse signal, but the accepted occurrence ledger still counts 0 removed
 occurrences and 0 proxy-T reduction. This is a guardrail, not a resource-saving
 claim.
+The physical cost-model gate then checks whether that cache signal can already
+be promoted into countable B7 savings. Current evidence passes 0/8 acceptance
+gates: there is no shared synthesis object, replay verifier, layout/routing
+model, factory-amortization ledger, shared-error budget, independent baseline,
+or refreshed B7 ledger.
 
 **Remaining path to a serious solution:** connect to calibrated/live-like
 heavy-hex baselines; cover dynamic circuits and reset/measurement semantics;
@@ -92,10 +97,10 @@ turn `cone_01` into a broader replayable semantic rewrite certificate,
 KAK/Clifford scaffold, or scoped obstruction report that explicitly carries,
 shares, or eliminates theta while addressing at least 30 arbitrary rotation
 occurrences / 600
-proxy-T units, or justify a new physical theta-sharing cost model; broaden benchmarks; package certificates for independent
+proxy-T units, or satisfy CM-01 through CM-08 for a new physical theta-sharing cost model; broaden benchmarks; package certificates for independent
 reproduction.
 
-**Current internal maturity:** 43/100.
+**Current internal maturity:** 44/100.
 
 ## B2: Low-Overhead Quantum Error Correction
 
@@ -535,18 +540,20 @@ The theta-sharing ledger gate adds the next guardrail: the 4 theta groups imply
 31 duplicate theta occurrences and 620 optimistic cache-reuse proxy-T units, but
 the occurrence-based FT ledger still accepts 0 occurrence removal and 0 proxy-T
 reduction.
+The physical cost-model gate then rejects current theta-sharing accounting with
+0/8 acceptance gates passed, leaving B7 ledger reduction at 0.
 
 **Remaining path to a serious solution:** produce a symbolic KAK/Clifford-
 scaffold proof, scoped obstruction, or certified broader `cone_01`
 occurrence-removing rewrite for `gcm_h6` with explicit theta-carrier
-accounting, or justify a new physical theta-sharing cost model; strengthen B1 non-Clifford/T-depth
+accounting, or satisfy CM-01 through CM-08 for a new physical theta-sharing cost model; strengthen B1 non-Clifford/T-depth
 optimization until a certified occurrence-removing rewrite improves minimum
 factory STV;
 separate claims by data-path versus T-factory dominated regimes; include
 physical layout, routing, and feed-forward constraints; run a full algorithm
 resource ledger.
 
-**Current internal maturity:** 40/100.
+**Current internal maturity:** 41/100.
 
 ## B8: Classical Verification of Quantum Outputs
 

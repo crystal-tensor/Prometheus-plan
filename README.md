@@ -188,6 +188,13 @@ B7 target remains uncleared. The next useful `T-B1-004` artifact must therefore
 produce at least 30 occurrence-removing certificates or justify a new physical
 theta-sharing cost model before B7 can count a resource delta.
 
+The follow-up `cone_01` physical cost-model gate now makes that second route
+explicit. The optimistic 620 proxy-T cache signal remains present, but 0/8
+cost-model acceptance gates pass: there is no shared synthesis object, replay
+verifier, layout/routing model, factory-amortization ledger, shared-error budget,
+independent baseline, or refreshed B7 ledger. The cost model is therefore not
+accepted and the counted B7 ledger reduction remains 0.
+
 ## Repository Layout
 
 ```text

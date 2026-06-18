@@ -141,6 +141,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_euler_reabsorption_path = results / "B1_B7_cone01_euler_reabsorption_gate_v0.json"
     b1_b7_cone01_parameter_transfer_path = results / "B1_B7_cone01_parameter_transfer_gate_v0.json"
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
+    b1_b7_cone01_theta_sharing_cost_model_path = (
+        results / "B1_B7_cone01_theta_sharing_cost_model_gate_v0.json"
+    )
     b1_synthetic_noise_path = research / "B1_synthetic_noise_proxy_report.json"
     b1_manifest_path = benchmarks / "B1_circuit_compression.yaml"
     b2_manifest_path = benchmarks / "B2_qec_overhead.yaml"
@@ -615,6 +618,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
+    )
+    b1_b7_cone01_theta_sharing_cost_model_manifest = current_results.get(
+        "b1_b7_cone01_theta_sharing_cost_model_gate_v0"
     )
     synthetic_noise_manifest = current_results.get("b1_synthetic_heavyhex_noise_proxy_v0")
     b1_routing_diagnostic = {
@@ -1740,6 +1746,130 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 cone_01 theta-sharing gate validation errors must remain zero")
     else:
         errors.append(f"missing B1/B7 cone_01 theta-sharing gate report: {b1_b7_cone01_theta_sharing_path}")
+
+    b1_b7_cone01_theta_sharing_cost_model = {
+        "path": str(b1_b7_cone01_theta_sharing_cost_model_path),
+        "exists": b1_b7_cone01_theta_sharing_cost_model_path.exists(),
+    }
+    if not b1_b7_cone01_theta_sharing_cost_model_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_theta_sharing_cost_model_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_theta_sharing_cost_model_manifest.get("status")
+            != "cone01_theta_sharing_cost_model_not_accepted"
+        ):
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must remain not accepted")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_theta_sharing_cost_model_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 theta-sharing cost-model gate missing existing {field} path: {value}")
+    if b1_b7_cone01_theta_sharing_cost_model_path.exists():
+        cost_payload = json.loads(read(b1_b7_cone01_theta_sharing_cost_model_path))
+        cost_summary = cost_payload.get("summary", {})
+        cost_claims = cost_payload.get("claim_boundary", {})
+        b1_b7_cone01_theta_sharing_cost_model.update(
+            {
+                "status": cost_payload.get("status"),
+                "model_status": cost_payload.get("model_status"),
+                "method": cost_payload.get("method"),
+                "workload": cost_payload.get("workload"),
+                "candidate_window_count": cost_summary.get("candidate_window_count"),
+                "distinct_theta_group_count": cost_summary.get("distinct_theta_group_count"),
+                "duplicate_theta_occurrence_count": cost_summary.get("duplicate_theta_occurrence_count"),
+                "optimistic_cache_proxy_t_reuse": cost_summary.get("optimistic_cache_proxy_t_reuse"),
+                "target_proxy_t_ledger_reduction_for_gcm_h6_1_20": cost_summary.get(
+                    "target_proxy_t_ledger_reduction_for_gcm_h6_1_20"
+                ),
+                "optimistic_cache_signal_present": cost_summary.get("optimistic_cache_signal_present"),
+                "cost_model_acceptance_gate_count": cost_summary.get("cost_model_acceptance_gate_count"),
+                "cost_model_acceptance_pass_count": cost_summary.get("cost_model_acceptance_pass_count"),
+                "cost_model_acceptance_fail_count": cost_summary.get("cost_model_acceptance_fail_count"),
+                "cost_model_accepted": cost_summary.get("cost_model_accepted"),
+                "occurrence_ledger_removed_occurrences": cost_summary.get(
+                    "occurrence_ledger_removed_occurrences"
+                ),
+                "occurrence_ledger_proxy_t_reduction": cost_summary.get("occurrence_ledger_proxy_t_reduction"),
+                "b7_ledger_proxy_t_reduction_after_cost_model": cost_summary.get(
+                    "b7_ledger_proxy_t_reduction_after_cost_model"
+                ),
+                "additional_occurrence_certificates_required": cost_summary.get(
+                    "additional_occurrence_certificates_required"
+                ),
+                "additional_cost_model_gates_required": cost_summary.get("additional_cost_model_gates_required"),
+                "rewrite_claimed": cost_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": cost_claims.get("resource_saving_claimed"),
+                "semantic_certificate_claimed": cost_claims.get("semantic_certificate_claimed"),
+                "physical_resource_reduction_claimed": cost_claims.get("physical_resource_reduction_claimed"),
+                "b7_ledger_improvement_claimed": cost_claims.get("b7_ledger_improvement_claimed"),
+                "validation_error_count": cost_summary.get("validation_error_count"),
+            }
+        )
+        if cost_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate report must have benchmark_id B1")
+        if cost_payload.get("method") != "b1_b7_cone01_theta_sharing_cost_model_gate_v0":
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate method mismatch")
+        if cost_payload.get("status") != "cone01_theta_sharing_cost_model_not_accepted":
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate status mismatch")
+        if cost_payload.get("model_status") != "physical_theta_sharing_cost_model_requirements_failed":
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate model_status mismatch")
+        for field in [
+            "candidate_window_count",
+            "distinct_theta_group_count",
+            "duplicate_theta_occurrence_count",
+            "optimistic_cache_proxy_t_reuse",
+            "target_proxy_t_ledger_reduction_for_gcm_h6_1_20",
+            "optimistic_cache_signal_present",
+            "cost_model_acceptance_gate_count",
+            "cost_model_acceptance_pass_count",
+            "cost_model_acceptance_fail_count",
+            "cost_model_accepted",
+            "occurrence_ledger_removed_occurrences",
+            "occurrence_ledger_proxy_t_reduction",
+            "b7_ledger_proxy_t_reduction_after_cost_model",
+            "additional_occurrence_certificates_required",
+            "additional_cost_model_gates_required",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if cost_summary.get(field) != b1_b7_cone01_theta_sharing_cost_model_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 theta-sharing cost-model gate {field} mismatch")
+        if cost_summary.get("candidate_window_count") != 35:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must account for 35 windows")
+        if cost_summary.get("duplicate_theta_occurrence_count") != 31:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate should record 31 duplicate occurrences")
+        if cost_summary.get("optimistic_cache_proxy_t_reuse") != 620:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate optimistic signal should be 620")
+        if cost_summary.get("optimistic_cache_signal_present") is not True:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must preserve optimistic signal")
+        if cost_summary.get("cost_model_acceptance_gate_count") != 8:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must have 8 acceptance gates")
+        if cost_summary.get("cost_model_acceptance_pass_count") != 0:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate pass count must remain 0")
+        if cost_summary.get("cost_model_acceptance_fail_count") != 8:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate fail count must remain 8")
+        if cost_summary.get("cost_model_accepted") is not False:
+            errors.append("B1/B7 cone_01 theta-sharing cost model must not be accepted")
+        if cost_summary.get("b7_ledger_proxy_t_reduction_after_cost_model") != 0:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate B7 reduction must remain 0")
+        for field in [
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if cost_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 theta-sharing cost-model gate must not claim {field}")
+        if cost_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate validation errors must remain zero")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 theta-sharing cost-model gate report: "
+            f"{b1_b7_cone01_theta_sharing_cost_model_path}"
+        )
 
     b1_synthetic_noise = {
         "path": str(b1_synthetic_noise_path),
@@ -9261,6 +9391,7 @@ def audit(root: Path) -> dict:
             "b7_cone01_euler_reabsorption_gate": b1_b7_cone01_euler_reabsorption,
             "b7_cone01_parameter_transfer_gate": b1_b7_cone01_parameter_transfer,
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
+            "b7_cone01_theta_sharing_cost_model_gate": b1_b7_cone01_theta_sharing_cost_model,
             "synthetic_noise_proxy": b1_synthetic_noise,
         },
         "b2": {
@@ -9420,6 +9551,9 @@ def audit(root: Path) -> dict:
             "b1_b7_cone01_euler_reabsorption_gate": str(b1_b7_cone01_euler_reabsorption_path),
             "b1_b7_cone01_parameter_transfer_gate": str(b1_b7_cone01_parameter_transfer_path),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
+            "b1_b7_cone01_theta_sharing_cost_model_gate": str(
+                b1_b7_cone01_theta_sharing_cost_model_path
+            ),
             "b1_synthetic_noise_proxy": str(b1_synthetic_noise_path),
             "b2_phenomenological_decoder": str(research / "B2_phenomenological_repetition_decoder.md"),
             "b2_stim_surface_code_baseline": str(research / "B2_stim_surface_code_memory_baseline.md"),
@@ -9917,6 +10051,19 @@ def markdown_report(report: dict) -> str:
             f"- Cache model accepted as FT ledger: {not report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('cache_model_not_accepted_as_ft_ledger')}",
             f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_theta_sharing_ledger_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Theta-Sharing Cost-Model Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('status')}",
+            f"- Candidate windows / theta groups / duplicate theta occurrences: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('distinct_theta_group_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('duplicate_theta_occurrence_count')}",
+            f"- Optimistic cache signal / target proxy-T: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('optimistic_cache_proxy_t_reuse')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('target_proxy_t_ledger_reduction_for_gcm_h6_1_20')}",
+            f"- Acceptance gates passed / failed / total: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_pass_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_fail_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_gate_count')}",
+            f"- Cost model accepted: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_accepted')}",
+            f"- B7 ledger proxy-T reduction after cost model: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('b7_ledger_proxy_t_reduction_after_cost_model')}",
+            f"- Additional occurrence certificates / cost-model gates required: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('additional_occurrence_certificates_required')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('additional_cost_model_gates_required')}",
+            f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('validation_error_count')}",
             "",
             "## B1 Synthetic Heavy-Hex Noise Proxy",
             "",
