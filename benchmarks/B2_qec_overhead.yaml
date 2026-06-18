@@ -317,6 +317,44 @@ current_results:
     caveat: stim_heralded_erasure_dem_stress_not_shot_conditioned_leakage_decoder_or_calibrated_hardware_claim
     result: ../results/B2_stim_heralded_erasure_stress_v0.json
     markdown_report: ../research/B2_stim_heralded_erasure_stress.md
+  heralded_erasure_false_positive_stress_v0:
+    status: heralded_erasure_false_positive_boundary_not_shot_conditioned_decoder
+    method: b2_heralded_erasure_false_positive_stress_v0
+    source: stim_heralded_erasure_stress_v0
+    model_status: stim_generated_surface_code_with_tick_level_heralded_erasure_false_positive_stress
+    toolchain: Stim HERALDED_ERASE / DEPOLARIZE1 plus PyMatching detector-error-model decoder
+    distances: [5, 7, 9]
+    physical_error_rates: [0.001, 0.003, 0.005]
+    leakage_rates_per_tick: [0.003, 0.005, 0.01]
+    false_positive_rates_per_tick: [0.0, 0.001, 0.003, 0.005]
+    memory_bases: [x, z]
+    target_logical_errors: [0.1, 0.05, 0.02, 0.01]
+    criterion: wilson_95_high
+    base_flag_overhead: 1.15
+    false_positive_overhead_scale: 0.25
+    shots_per_configuration: 1200
+    configurations: 270
+    total_shots: 324000
+    target_comparisons: 288
+    candidate_met_count: 207
+    improved_volume_count: 13
+    false_positive_positive_improved_volume_count: 5
+    false_positive_positive_d5_d7_improved_count: 5
+    max_volume_reduction: 4.5978260869565215
+    mean_volume_reduction_on_improved: 2.4620014545995943
+    positive_rows_survive_until_false_positive_rate_per_tick: 0.001
+    positive_rows_disappear_at_false_positive_rate_per_tick: 0.003
+    reduced_rounds_used: false
+    distance_3_candidate_used: false
+    new_code_claimed: false
+    threshold_claimed: false
+    calibrated_device_claimed: false
+    full_physical_leakage_decoder_claimed: false
+    shot_conditioned_erasure_decoder_claimed: false
+    interpretation: d5_d7_heralded_erasure_rows_survive_low_false_positive_rate_but_disappear_by_0p003_per_tick
+    caveat: false_positive_stim_stress_not_shot_conditioned_decoder_or_calibrated_leakage_model
+    result: ../results/B2_heralded_erasure_false_positive_stress_v0.json
+    markdown_report: ../research/B2_heralded_erasure_false_positive_stress.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -329,4 +367,5 @@ prototype_artifacts:
   same_hardware_schedule_candidate: ../tools/b2_same_hardware_schedule_candidate.py
   same_hardware_schedule_robustness: ../tools/b2_same_hardware_schedule_robustness.py
   reduced_round_artifact_boundary: ../tools/b2_reduced_round_artifact_boundary.py
+  heralded_erasure_false_positive_stress: ../tools/b2_heralded_erasure_false_positive_stress.py
   prototype_notes: ../research/B2_prototype_notes.md

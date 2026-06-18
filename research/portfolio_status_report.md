@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 37, 'B2': 39, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 19, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 48}
+- Maturity scores: {'B1': 37, 'B2': 41, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 19, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 48}
 
 ## Technical Resolution Program
 
@@ -337,6 +337,15 @@ Overall audit: PASS
 - Stim heralded-erasure stress new-code/threshold/device/full-decoder/shot-conditioned claims: False / False / False / False / False
 - Stim heralded-erasure stress validation errors: 0
 - Stim heralded-erasure stress result/markdown exists: True / True
+- Heralded-erasure false-positive stress status: heralded_erasure_false_positive_boundary_not_shot_conditioned_decoder
+- Heralded-erasure false-positive stress configurations / shots: 270 / 324000
+- Heralded-erasure false-positive stress candidate met / improved rows: 207 / 13
+- Heralded-erasure false-positive stress positive-fp improved / d5-d7 rows: 5 / 5
+- Heralded-erasure false-positive stress fp=0.001 / fp=0.003 improved rows: 5 / 0
+- Heralded-erasure false-positive stress max/mean volume reduction: 4.5978260869565215 / 2.4620014545995943
+- Heralded-erasure false-positive stress new-code/threshold/device/full-decoder/shot-conditioned claims: False / False / False / False / False
+- Heralded-erasure false-positive stress validation errors: 0
+- Heralded-erasure false-positive stress result/markdown exists: True / True
 
 ## B3 Resource Proxy Status
 

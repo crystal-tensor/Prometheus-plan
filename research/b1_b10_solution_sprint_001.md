@@ -186,9 +186,16 @@ candidate-only target hits, and 10 improved target-volume rows. All 10 improved
 rows are candidate distance 5 or 7; max reduction is 4.598x and mean reduction
 is 2.623x after flag overhead. This is stronger than the analytic proxy, but it
 is still not a shot-conditioned erasure decoder, calibrated leakage model,
-threshold, hardware, or new-code claim. Next: `T-B2-005` should replace this
-detector-error-model stress with a shot-conditioned erasure decoder or
-calibrated leakage model.
+threshold, hardware, or new-code claim.
+
+**Sprint update 41:** `T-B2-005` is now merged as a heralded-erasure
+false-positive overhead stress. The official run executes 270 configurations /
+324k shots and 288 target comparisons. It preserves 5 d=5/d=7 improved rows at
+positive false-positive rate fp=0.001/tick, but all improved rows disappear by
+fp=0.003/tick. This is not a shot-conditioned erasure decoder or calibrated
+leakage model; it is the current flag-noise survival boundary. Next:
+`T-B2-006` should replace this detector-error-model stress with a real
+shot-conditioned erasure decoder or calibrated leakage model.
 
 ## B3: Molecular Reaction Dynamics
 

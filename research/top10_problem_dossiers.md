@@ -123,16 +123,21 @@ rows, 7 candidate-only target hits, 10 improved target-volume rows, all 10 with
 candidate distance 5 or 7, max reduction 4.598x, mean reduction 2.623x,
 validation errors 0, no reduced rounds, no d=3 candidates, and no new-code,
 threshold, calibrated-device, full physical leakage-decoder, or shot-conditioned
-erasure-decoder claim.
+erasure-decoder claim. T-B2-005 adds a heralded-erasure false-positive overhead
+stress: 270 configurations, 324,000 shots, 288 target comparisons, 13 improved
+rows total, 5 positive-false-positive d=5/d=7 improved rows at fp=0.001/tick,
+and 0 improved rows by fp=0.003/tick. It explicitly does not claim
+shot-conditioned erasure decoding, calibrated leakage, a threshold, hardware
+evidence, or a new code.
 
-**Remaining path to a serious solution:** replace the Stim detector-error-model
-stress with a shot-conditioned erasure decoder; stress the result with calibrated
-or more realistic leakage and correlated-noise models; verify that distance-5/7
-Wilson target-volume reductions survive flag false-positive overhead; measure
-decoder/runtime overhead at larger distances and more shots; connect only
-shot-conditioned or calibrated non-artifact B2 rows into the B7 resource ledger.
+**Remaining path to a serious solution:** implement a real shot-conditioned
+erasure decoder or calibrated leakage model; stress the surviving d=5/d=7 rows
+under calibrated flag false-positive rates beyond the observed fp=0.001/tick
+survival boundary; measure decoder/runtime overhead at larger distances and
+more shots; connect only shot-conditioned or calibrated non-artifact B2 rows
+into the B7 resource ledger.
 
-**Current internal maturity:** 39/100.
+**Current internal maturity:** 41/100.
 
 ## B3: Quantum Algorithms for Molecular Reaction Dynamics
 

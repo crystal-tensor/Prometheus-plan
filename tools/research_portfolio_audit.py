@@ -1309,6 +1309,7 @@ def audit(root: Path) -> dict:
     b2_reduced_round_boundary = b2_results.get("reduced_round_artifact_boundary_v0")
     b2_leakage_flagged_erasure = b2_results.get("leakage_flagged_erasure_boundary_v0")
     b2_stim_heralded_erasure = b2_results.get("stim_heralded_erasure_stress_v0")
+    b2_false_positive_erasure = b2_results.get("heralded_erasure_false_positive_stress_v0")
     b2_status = {}
     if not b2_baseline:
         warnings.append("B2 manifest has no repetition-code control baseline result")
@@ -1910,6 +1911,107 @@ def audit(root: Path) -> dict:
             errors.append("B2 Stim heralded-erasure stress must not claim a shot-conditioned erasure decoder")
         if len(payload.get("validation_errors", [])) != 0:
             errors.append("B2 Stim heralded-erasure stress validation errors must be zero")
+
+    b2_false_positive_erasure_status = {}
+    if not b2_false_positive_erasure:
+        warnings.append("B2 manifest has no heralded-erasure false-positive stress result")
+    else:
+        result_path = b2_false_positive_erasure.get("result")
+        markdown_path = b2_false_positive_erasure.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B2 heralded-erasure false-positive stress result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B2 heralded-erasure false-positive stress markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        claims = payload.get("claim_boundary", {})
+        fp_breakdown = summary.get("by_false_positive_rate", {})
+        b2_false_positive_erasure_status = {
+            "status": b2_false_positive_erasure.get("status"),
+            "method": b2_false_positive_erasure.get("method"),
+            "model_status": payload.get("model_status"),
+            "configuration_count": summary.get("configuration_count"),
+            "total_shots": summary.get("total_shots"),
+            "target_comparisons": summary.get("target_comparisons"),
+            "candidate_met_count": summary.get("candidate_met_count"),
+            "improved_volume_count": summary.get("improved_volume_count"),
+            "false_positive_positive_improved_volume_count": summary.get(
+                "false_positive_positive_improved_volume_count"
+            ),
+            "false_positive_positive_d5_d7_improved_count": summary.get(
+                "false_positive_positive_d5_d7_improved_count"
+            ),
+            "false_positive_rates_per_tick": summary.get("false_positive_rates_per_tick"),
+            "fp_0p001_improved_volume_count": fp_breakdown.get("0.001", {}).get("improved_volume_count"),
+            "fp_0p003_improved_volume_count": fp_breakdown.get("0.003", {}).get("improved_volume_count"),
+            "max_volume_reduction": summary.get("max_volume_reduction"),
+            "mean_volume_reduction_on_improved": summary.get("mean_volume_reduction_on_improved"),
+            "reduced_rounds_used": claims.get("reduced_rounds_used"),
+            "distance_3_candidate_used": claims.get("distance_3_candidate_used"),
+            "new_code_claimed": claims.get("new_code_claimed"),
+            "threshold_claimed": claims.get("threshold_claimed"),
+            "calibrated_device_claimed": claims.get("calibrated_device_claimed"),
+            "full_physical_leakage_decoder_claimed": claims.get("full_physical_leakage_decoder_claimed"),
+            "shot_conditioned_erasure_decoder_claimed": claims.get("shot_conditioned_erasure_decoder_claimed"),
+            "false_positive_overhead_stress_performed": claims.get("false_positive_overhead_stress_performed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != b2_false_positive_erasure.get("status"):
+            errors.append("B2 heralded-erasure false-positive stress status mismatch")
+        if payload.get("method") != b2_false_positive_erasure.get("method"):
+            errors.append("B2 heralded-erasure false-positive stress method mismatch")
+        if payload.get("model_status") != b2_false_positive_erasure.get("model_status"):
+            errors.append("B2 heralded-erasure false-positive stress model-status mismatch")
+        if summary.get("configuration_count") != b2_false_positive_erasure.get("configurations"):
+            errors.append("B2 heralded-erasure false-positive stress configuration count mismatch")
+        if summary.get("total_shots") != b2_false_positive_erasure.get("total_shots"):
+            errors.append("B2 heralded-erasure false-positive stress total-shot count mismatch")
+        if summary.get("target_comparisons") != b2_false_positive_erasure.get("target_comparisons"):
+            errors.append("B2 heralded-erasure false-positive stress target comparison count mismatch")
+        if summary.get("candidate_met_count") != b2_false_positive_erasure.get("candidate_met_count"):
+            errors.append("B2 heralded-erasure false-positive stress candidate met count mismatch")
+        if summary.get("improved_volume_count") != b2_false_positive_erasure.get("improved_volume_count"):
+            errors.append("B2 heralded-erasure false-positive stress improved-volume count mismatch")
+        if summary.get("false_positive_positive_improved_volume_count") != b2_false_positive_erasure.get(
+            "false_positive_positive_improved_volume_count"
+        ):
+            errors.append("B2 heralded-erasure false-positive positive-improved count mismatch")
+        if summary.get("false_positive_positive_d5_d7_improved_count") != b2_false_positive_erasure.get(
+            "false_positive_positive_d5_d7_improved_count"
+        ):
+            errors.append("B2 heralded-erasure false-positive positive d5/d7 count mismatch")
+        if int(summary.get("false_positive_positive_improved_volume_count", 0)) < 1:
+            errors.append("B2 heralded-erasure false-positive stress should preserve some positive-fp rows")
+        if int(summary.get("false_positive_positive_d5_d7_improved_count", 0)) < 1:
+            errors.append("B2 heralded-erasure false-positive stress should preserve positive-fp d5/d7 rows")
+        if fp_breakdown.get("0.001", {}).get("improved_volume_count") != 5:
+            errors.append("B2 false-positive stress expected five improved rows at fp=0.001")
+        if fp_breakdown.get("0.003", {}).get("improved_volume_count") != 0:
+            errors.append("B2 false-positive stress expected zero improved rows at fp=0.003")
+        if claims.get("false_positive_overhead_stress_performed") is not True:
+            errors.append("B2 false-positive stress must disclose false-positive overhead stress")
+        if claims.get("reduced_rounds_used") is not False:
+            errors.append("B2 false-positive stress must not use reduced rounds")
+        if claims.get("distance_3_candidate_used") is not False:
+            errors.append("B2 false-positive stress must not use distance-3 candidates")
+        if claims.get("new_code_claimed") is not False:
+            errors.append("B2 false-positive stress must not claim a new code")
+        if claims.get("threshold_claimed") is not False:
+            errors.append("B2 false-positive stress must not claim a threshold")
+        if claims.get("calibrated_device_claimed") is not False:
+            errors.append("B2 false-positive stress must not claim calibrated device evidence")
+        if claims.get("full_physical_leakage_decoder_claimed") is not False:
+            errors.append("B2 false-positive stress must not claim a full physical leakage decoder")
+        if claims.get("shot_conditioned_erasure_decoder_claimed") is not False:
+            errors.append("B2 false-positive stress must not claim a shot-conditioned erasure decoder")
+        if len(payload.get("validation_errors", [])) != 0:
+            errors.append("B2 false-positive stress validation errors must be zero")
 
     b3_manifest = yaml.safe_load(read(b3_manifest_path))
     b3_results = b3_manifest.get("current_results", {})
@@ -7035,6 +7137,7 @@ def audit(root: Path) -> dict:
             "reduced_round_artifact_boundary": b2_reduced_round_boundary_status,
             "leakage_flagged_erasure_boundary": b2_leakage_flagged_erasure_status,
             "stim_heralded_erasure_stress": b2_stim_heralded_erasure_status,
+            "heralded_erasure_false_positive_stress": b2_false_positive_erasure_status,
         },
         "b3": {
             "manifest": str(b3_manifest_path),
@@ -7168,6 +7271,9 @@ def audit(root: Path) -> dict:
             "b2_reduced_round_artifact_boundary": str(research / "B2_reduced_round_artifact_boundary.md"),
             "b2_leakage_flagged_erasure_boundary": str(research / "B2_leakage_flagged_erasure_boundary.md"),
             "b2_stim_heralded_erasure_stress": str(research / "B2_stim_heralded_erasure_stress.md"),
+            "b2_heralded_erasure_false_positive_stress": str(
+                research / "B2_heralded_erasure_false_positive_stress.md"
+            ),
             "b3_quantum_observable_fci_comparison": str(research / "B3_quantum_observable_fci_comparison.md"),
             "b3_quantum_observable_fci_qasm_directory": str(
                 results / "b3_quantum_observable_fci_comparison" / "circuits"
@@ -7636,6 +7742,15 @@ def markdown_report(report: dict) -> str:
             f"- Stim heralded-erasure stress new-code/threshold/device/full-decoder/shot-conditioned claims: {report['b2']['stim_heralded_erasure_stress'].get('new_code_claimed')} / {report['b2']['stim_heralded_erasure_stress'].get('threshold_claimed')} / {report['b2']['stim_heralded_erasure_stress'].get('calibrated_device_claimed')} / {report['b2']['stim_heralded_erasure_stress'].get('full_physical_leakage_decoder_claimed')} / {report['b2']['stim_heralded_erasure_stress'].get('shot_conditioned_erasure_decoder_claimed')}",
             f"- Stim heralded-erasure stress validation errors: {report['b2']['stim_heralded_erasure_stress'].get('validation_error_count')}",
             f"- Stim heralded-erasure stress result/markdown exists: {report['b2']['stim_heralded_erasure_stress'].get('result_exists')} / {report['b2']['stim_heralded_erasure_stress'].get('markdown_exists')}",
+            f"- Heralded-erasure false-positive stress status: {report['b2']['heralded_erasure_false_positive_stress'].get('status')}",
+            f"- Heralded-erasure false-positive stress configurations / shots: {report['b2']['heralded_erasure_false_positive_stress'].get('configuration_count')} / {report['b2']['heralded_erasure_false_positive_stress'].get('total_shots')}",
+            f"- Heralded-erasure false-positive stress candidate met / improved rows: {report['b2']['heralded_erasure_false_positive_stress'].get('candidate_met_count')} / {report['b2']['heralded_erasure_false_positive_stress'].get('improved_volume_count')}",
+            f"- Heralded-erasure false-positive stress positive-fp improved / d5-d7 rows: {report['b2']['heralded_erasure_false_positive_stress'].get('false_positive_positive_improved_volume_count')} / {report['b2']['heralded_erasure_false_positive_stress'].get('false_positive_positive_d5_d7_improved_count')}",
+            f"- Heralded-erasure false-positive stress fp=0.001 / fp=0.003 improved rows: {report['b2']['heralded_erasure_false_positive_stress'].get('fp_0p001_improved_volume_count')} / {report['b2']['heralded_erasure_false_positive_stress'].get('fp_0p003_improved_volume_count')}",
+            f"- Heralded-erasure false-positive stress max/mean volume reduction: {report['b2']['heralded_erasure_false_positive_stress'].get('max_volume_reduction')} / {report['b2']['heralded_erasure_false_positive_stress'].get('mean_volume_reduction_on_improved')}",
+            f"- Heralded-erasure false-positive stress new-code/threshold/device/full-decoder/shot-conditioned claims: {report['b2']['heralded_erasure_false_positive_stress'].get('new_code_claimed')} / {report['b2']['heralded_erasure_false_positive_stress'].get('threshold_claimed')} / {report['b2']['heralded_erasure_false_positive_stress'].get('calibrated_device_claimed')} / {report['b2']['heralded_erasure_false_positive_stress'].get('full_physical_leakage_decoder_claimed')} / {report['b2']['heralded_erasure_false_positive_stress'].get('shot_conditioned_erasure_decoder_claimed')}",
+            f"- Heralded-erasure false-positive stress validation errors: {report['b2']['heralded_erasure_false_positive_stress'].get('validation_error_count')}",
+            f"- Heralded-erasure false-positive stress result/markdown exists: {report['b2']['heralded_erasure_false_positive_stress'].get('result_exists')} / {report['b2']['heralded_erasure_false_positive_stress'].get('markdown_exists')}",
             "",
             "## B3 Resource Proxy Status",
             "",
