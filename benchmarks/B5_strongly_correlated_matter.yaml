@@ -40,6 +40,43 @@ next_actions:
   - add_observable_errors_beyond_energy
   - move_from_1d_chain_to_2d_plaquette_proxy
 current_results:
+  canonical_dmrg_readiness_gate_v0:
+    status: canonical_dmrg_readiness_gate_failed_not_production_dmrg
+    model_status: cross_reference_readiness_gate_not_solver
+    method: b5_canonical_dmrg_readiness_gate_v0
+    model: one_dimensional_fermi_hubbard_half_filled_density_response
+    dependency_two_site_dmrg_result: ../results/B5_two_site_dmrg_response_reference_v0.json
+    dependency_variational_mps_als_result: ../results/B5_variational_mps_als_response_reference_v0.json
+    dependency_seeded_mps_pressure_result: ../results/B5_mps_truncation_response_reference_v0.json
+    dependency_non_oracle_embedding_result: ../results/B5_non_oracle_response_embedding_baseline_v0.json
+    instance_count: 9
+    readiness_gate_count: 8
+    passed_gate_count: 0
+    failed_gate_count: 8
+    two_site_mean_relative_response_error: 0.08196129814275509
+    two_site_max_relative_response_error: 0.2771034796538877
+    variational_mps_als_mean_relative_response_error: 0.01805548365563228
+    variational_mps_als_max_relative_response_error: 0.03907201105154143
+    seeded_mps_pressure_mean_relative_response_error: 0.0004416259745141554
+    seeded_mps_pressure_max_relative_response_error: 0.0016954037598740704
+    non_oracle_embedding_mean_relative_response_error: 0.050983452310434746
+    two_site_rows_beating_variational_mps_als_reference: 4
+    two_site_rows_beating_seeded_mps_pressure_reference: 0
+    variational_mps_rows_beating_seeded_mps_pressure_reference: 0
+    fixed_sector_norm_threshold: 0.01
+    two_site_min_fixed_sector_norm_before_normalization: 0.0004341448345871234
+    variational_min_fixed_sector_norm_before_normalization: 0.0001648333575571581
+    exact_state_seeded_reference_is_strongest: true
+    prototype_fixed_sector_norms_pass: false
+    mature_canonical_dmrg_ready: false
+    canonical_environment_production_dmrg: false
+    production_dmrg: false
+    same_access_positive_route_claimed: false
+    quantum_response_win_claimed: false
+    accuracy_per_resource_win_claimed: false
+    validation_error_count: 0
+    result: ../results/B5_canonical_dmrg_readiness_gate_v0.json
+    markdown_report: ../research/B5_canonical_dmrg_readiness_gate.md
   two_site_finite_dmrg_response_reference_v0:
     status: two_site_finite_dmrg_pressure_reference_not_production_dmrg_or_advantage_claim
     model_status: two_site_finite_dmrg_style_pressure_reference
@@ -202,6 +239,7 @@ current_results:
       cluster4: 0.05921856583390095
     result: ../results/B5_hubbard_embedding_baseline_v0.json
 prototype_artifacts:
+  canonical_dmrg_readiness_gate: ../tools/b5_canonical_dmrg_readiness_gate.py
   two_site_finite_dmrg_response_reference: ../tools/b5_two_site_dmrg_response_reference.py
   variational_mps_als_response_reference: ../tools/b5_variational_mps_als_response_reference.py
   mps_schmidt_truncation_response_reference: ../tools/b5_mps_truncation_response_reference.py

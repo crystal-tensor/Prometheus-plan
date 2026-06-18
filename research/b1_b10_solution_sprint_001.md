@@ -315,6 +315,19 @@ exact-state-seeded MPS pressure reference. This is not canonical-environment
 production DMRG, not a deployable tensor solver, and not a quantum advantage
 claim; it is a denominator-pressure artifact for the next B10-T1 gate.
 
+**Sprint update 44:** `T-B5-005` is now merged as a canonical DMRG readiness
+gate, not as production DMRG. `tools/b5_canonical_dmrg_readiness_gate.py`
+cross-checks the seeded MPS pressure, one-site MPS/ALS, two-site
+finite-DMRG-style, and non-oracle embedding references on the same 9 B5/B10 D5
+Hubbard response rows. It evaluates 8 readiness gates, passes 0, fails 8,
+keeps seeded MPS pressure as the strongest reference, records 0 non-seeded
+tensor rows beating seeded pressure, and keeps production DMRG, same-access
+positive route, quantum response win, and accuracy-per-resource win all false.
+Next: `T-B5-006` must implement actual canonical-environment DMRG/MPS with
+stored environments, orthonormal residuals, sweep convergence, no exact-state
+seeding, and full cost accounting, or provide a fully costed quantum response
+kernel that beats the denominator ladder.
+
 ## B6: High-Temperature Superconductivity Search
 
 **Technical target:** rank candidate materials using mechanism-aware
@@ -838,6 +851,10 @@ to match the exact-state-seeded MPS pressure target, with 0 rows beating
 explicit D5 matvec-equivalent costs by shots. It creates no sampling oracle, no
 same-access positive route, no quantum advantage claim, and no BQP separation
 claim.
+`T-B5-005` now feeds `T-B10-014`: the canonical DMRG readiness gate passes 0/8
+production-readiness conditions, keeps seeded MPS pressure strongest, records 0
+non-seeded rows beating seeded pressure, and preserves the no-production-DMRG,
+no-same-access-positive-route, no-quantum-advantage boundary.
 
 **Next PR:** `T-B10-014` or `T-B10-009`. Expected artifacts:
 

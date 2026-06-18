@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 37, 'B2': 43, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 21, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 49}
+- Maturity scores: {'B1': 37, 'B2': 43, 'B3': 30, 'B4': 20, 'B5': 25, 'B6': 21, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 49}
 
 ## Technical Resolution Program
 
@@ -518,6 +518,12 @@ Overall audit: PASS
 - Variational MPS/ALS exact-state seeded / production DMRG / quantum win claimed: False / False / False
 - Variational MPS/ALS validation errors: 0
 - Variational MPS/ALS result/markdown exists: True / True
+- Canonical DMRG readiness status: canonical_dmrg_readiness_gate_failed_not_production_dmrg
+- Canonical DMRG readiness gates passed/failed: 0 / 8
+- Canonical DMRG readiness seeded reference strongest / prototype fixed-sector norms pass: True / False
+- Canonical DMRG readiness production DMRG / quantum win / same-access positive route: False / False / False
+- Canonical DMRG readiness validation errors: 0
+- Canonical DMRG readiness result/markdown exists: True / True
 
 ## B6 Superconductivity Descriptor Status
 

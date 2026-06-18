@@ -354,17 +354,23 @@ relative response error 0.08196/0.27710, selected mean/max energy error per
 site 0.01619/0.02836, min exact-state overlap 0.93945, 4 rows beating one-site
 ALS, 0 rows beating the exact-state-seeded MPS pressure reference, and explicit
 non-claim of canonical-environment production DMRG, quantum response, or
-accuracy-per-resource win.
+accuracy-per-resource win. T-B5-005 adds a canonical DMRG readiness gate over
+the current tensor portfolio: 8 readiness gates evaluated, 0 passed and 8
+failed; seeded MPS pressure remains the strongest response reference; two-site
+and one-site ALS prototypes each have 0 rows beating seeded pressure; prototype
+fixed-sector norms fail the 0.01 threshold; and production DMRG, quantum
+response win, accuracy-per-resource win, and same-access positive route all
+remain false.
 
-**Remaining path to a serious solution:** replace the MPS/ALS and two-site
-finite-DMRG-style prototypes with a mature canonical-environment variational
-DMRG/MPS reference; expand to
-two-dimensional/doped grids; select observables where classical methods
-disagree; generate quantum impurity or response-kernel circuits; prove an
-accuracy-per-resource advantage after state-preparation, measurement,
-optimizer-loop, and classical-denominator costs are charged.
+**Remaining path to a serious solution:** run T-B5-006 by implementing mature
+canonical-environment DMRG/MPS for the same response rows, with stored
+left/right environments, orthonormal residuals, sweep convergence, no
+exact-state seeding, and full cost accounting; or compare a fully costed
+quantum impurity/response kernel against exact D5, non-oracle embedding, seeded
+MPS pressure, one-site ALS, two-site finite-DMRG-style, and readiness-gate
+denominators.
 
-**Current internal maturity:** 24/100.
+**Current internal maturity:** 25/100.
 
 ## B6: High-Temperature Superconductivity Search
 
@@ -745,14 +751,19 @@ exact-state-seeded MPS pressure target, min/median/max total shots are
 3.861e9 / 7.645e12 / 2.849e29; 0 rows beat explicit D5 matvec-equivalent
 costs by shots, and the result constructs no sampling oracle, no same-access
 positive route, no quantum advantage claim, and no BQP separation claim.
+T-B5-005 now adds a canonical DMRG readiness gate into the B10-T1/B5
+access-model chain: 0/8 readiness gates pass, seeded MPS pressure remains
+strongest, non-seeded tensor references beat seeded pressure on 0 rows, and no
+production-DMRG, same-access positive-route, quantum-advantage, or
+BQP-separation claim is made.
 
 **Remaining path to a serious solution:** treat B3 as demoted unless a
 multi-parameter UCCSD/ADAPT or stronger measurement rescue succeeds; run
-T-B10-014 by replacing the sampler-cost negative boundary with
+T-B10-014 with T-B5-006 by replacing the readiness/cost negative boundary with
 canonical-environment production DMRG/MPS for the same B5 Hubbard response rows,
 or by supplying a real same-access response oracle with preparation, mixing,
-variance, and confidence costs strong enough to survive the T-B10-012/T-B10-013
-denominator ladder; turn the B10-T2
+variance, confidence, optimizer-loop, and classical denominator costs strong
+enough to survive the full denominator ladder; turn the B10-T2
 bridge into real backend-property verifier execution or hardware randomized
 measurements; connect B4/B8 verification burdens back into the boundary map.
 

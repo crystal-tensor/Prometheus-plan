@@ -3552,6 +3552,7 @@ def audit(root: Path) -> dict:
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
     b5_results = b5_manifest.get("current_results", {})
     b5_hubbard = b5_results.get("hubbard_exact_diagonalization_cluster_proxy_v0")
+    b5_dmrg_readiness = b5_results.get("canonical_dmrg_readiness_gate_v0")
     b5_two_site_dmrg = b5_results.get("two_site_finite_dmrg_response_reference_v0")
     b5_var_mps = b5_results.get("variational_mps_als_response_reference_v0")
     b5_mps = b5_results.get("mps_schmidt_truncation_response_reference_v0")
@@ -3591,6 +3592,121 @@ def audit(root: Path) -> dict:
             "result_exists": result_exists,
             "result": result_path,
         }
+
+    b5_dmrg_readiness_status = {}
+    if not b5_dmrg_readiness:
+        warnings.append("B5 manifest has no canonical DMRG readiness gate")
+    else:
+        result_path = b5_dmrg_readiness.get("result")
+        markdown_path = b5_dmrg_readiness.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B5 canonical DMRG readiness result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B5 canonical DMRG readiness markdown path missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        b5_dmrg_readiness_status = {
+            "status": b5_dmrg_readiness.get("status"),
+            "method": b5_dmrg_readiness.get("method"),
+            "model_status": b5_dmrg_readiness.get("model_status"),
+            "instance_count": summary.get("instance_count"),
+            "readiness_gate_count": summary.get("readiness_gate_count"),
+            "passed_gate_count": summary.get("passed_gate_count"),
+            "failed_gate_count": summary.get("failed_gate_count"),
+            "two_site_mean_relative_response_error": summary.get("two_site_mean_relative_response_error"),
+            "variational_mps_als_mean_relative_response_error": summary.get(
+                "variational_mps_als_mean_relative_response_error"
+            ),
+            "seeded_mps_pressure_mean_relative_response_error": summary.get(
+                "seeded_mps_pressure_mean_relative_response_error"
+            ),
+            "two_site_rows_beating_variational_mps_als_reference": summary.get(
+                "two_site_rows_beating_variational_mps_als_reference"
+            ),
+            "two_site_rows_beating_seeded_mps_pressure_reference": summary.get(
+                "two_site_rows_beating_seeded_mps_pressure_reference"
+            ),
+            "variational_mps_rows_beating_seeded_mps_pressure_reference": summary.get(
+                "variational_mps_rows_beating_seeded_mps_pressure_reference"
+            ),
+            "prototype_fixed_sector_norms_pass": summary.get("prototype_fixed_sector_norms_pass"),
+            "exact_state_seeded_reference_is_strongest": summary.get("exact_state_seeded_reference_is_strongest"),
+            "mature_canonical_dmrg_ready": summary.get("mature_canonical_dmrg_ready"),
+            "canonical_environment_production_dmrg": summary.get("canonical_environment_production_dmrg"),
+            "production_dmrg": summary.get("production_dmrg"),
+            "same_access_positive_route_claimed": summary.get("same_access_positive_route_claimed"),
+            "quantum_response_win_claimed": summary.get("quantum_response_win_claimed"),
+            "accuracy_per_resource_win_claimed": summary.get("accuracy_per_resource_win_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B5":
+            errors.append("B5 canonical DMRG readiness result benchmark_id must be B5")
+        if payload.get("method") != b5_dmrg_readiness.get("method"):
+            errors.append("B5 canonical DMRG readiness method mismatch")
+        if payload.get("status") != "canonical_dmrg_readiness_gate_failed_not_production_dmrg":
+            errors.append("B5 canonical DMRG readiness status must remain a failed readiness gate")
+        if payload.get("model_status") != "cross_reference_readiness_gate_not_solver":
+            errors.append("B5 canonical DMRG readiness model_status must disclose that it is not a solver")
+        for field in [
+            "instance_count",
+            "readiness_gate_count",
+            "passed_gate_count",
+            "failed_gate_count",
+            "two_site_rows_beating_variational_mps_als_reference",
+            "two_site_rows_beating_seeded_mps_pressure_reference",
+            "variational_mps_rows_beating_seeded_mps_pressure_reference",
+        ]:
+            if summary.get(field) != b5_dmrg_readiness.get(field):
+                errors.append(f"B5 canonical DMRG readiness {field} mismatch")
+        if summary.get("instance_count") != 9:
+            errors.append("B5 canonical DMRG readiness must cover all nine D5 B5 instances")
+        if summary.get("readiness_gate_count") != 8:
+            errors.append("B5 canonical DMRG readiness should evaluate eight gates")
+        if summary.get("passed_gate_count") != 0 or summary.get("failed_gate_count") != 8:
+            errors.append("B5 canonical DMRG readiness should currently fail all readiness gates")
+        if summary.get("mature_canonical_dmrg_ready") is not False:
+            errors.append("B5 canonical DMRG readiness must not mark mature canonical DMRG ready")
+        if summary.get("canonical_environment_production_dmrg") is not False:
+            errors.append("B5 canonical DMRG readiness must not claim canonical production DMRG")
+        if summary.get("production_dmrg") is not False:
+            errors.append("B5 canonical DMRG readiness must not claim production DMRG")
+        if summary.get("same_access_positive_route_claimed") is not False:
+            errors.append("B5 canonical DMRG readiness must not claim a same-access positive route")
+        if summary.get("quantum_response_win_claimed") is not False:
+            errors.append("B5 canonical DMRG readiness must not claim a quantum response win")
+        if summary.get("accuracy_per_resource_win_claimed") is not False:
+            errors.append("B5 canonical DMRG readiness must not claim an accuracy-per-resource win")
+        if summary.get("exact_state_seeded_reference_is_strongest") is not True:
+            errors.append("B5 canonical DMRG readiness must preserve the seeded pressure reference as strongest")
+        if summary.get("prototype_fixed_sector_norms_pass") is not False:
+            errors.append("B5 canonical DMRG readiness should fail the prototype fixed-sector norm gate")
+        if int(summary.get("two_site_rows_beating_seeded_mps_pressure_reference", -1)) != 0:
+            errors.append("B5 canonical DMRG readiness two-site rows should not beat seeded pressure")
+        if int(summary.get("variational_mps_rows_beating_seeded_mps_pressure_reference", -1)) != 0:
+            errors.append("B5 canonical DMRG readiness ALS rows should not beat seeded pressure")
+        if len(payload.get("readiness_gates", [])) != summary.get("readiness_gate_count"):
+            errors.append("B5 canonical DMRG readiness gate count mismatch")
+        if any(gate.get("passed") for gate in payload.get("readiness_gates", [])):
+            errors.append("B5 canonical DMRG readiness payload unexpectedly has a passing gate")
+        if len(payload.get("validation_errors", [])) != b5_dmrg_readiness.get("validation_error_count"):
+            errors.append("B5 canonical DMRG readiness validation-error count mismatch")
+        claim_boundary = payload.get("claim_boundary", {})
+        for field in [
+            "mature_canonical_dmrg_ready",
+            "production_dmrg",
+            "canonical_environment_production_dmrg",
+            "quantum_response_win_claimed",
+            "accuracy_per_resource_win_claimed",
+            "same_access_positive_route_claimed",
+        ]:
+            if claim_boundary.get(field) is not False:
+                errors.append(f"B5 canonical DMRG readiness claim boundary must keep {field}=False")
 
     b5_boundary_field_status = {}
     if not b5_boundary_field:
@@ -7589,6 +7705,7 @@ def audit(root: Path) -> dict:
         "b5": {
             "manifest": str(b5_manifest_path),
             "hubbard_embedding": b5_status,
+            "canonical_dmrg_readiness_gate": b5_dmrg_readiness_status,
             "two_site_finite_dmrg_response_reference": b5_two_site_dmrg_status,
             "variational_mps_als_response_reference": b5_var_mps_status,
             "mps_truncation_response_reference": b5_mps_status,
@@ -7758,6 +7875,9 @@ def audit(root: Path) -> dict:
             ),
             "b5_variational_mps_als_response_reference": str(
                 research / "B5_variational_mps_als_response_reference.md"
+            ),
+            "b5_canonical_dmrg_readiness_gate": str(
+                research / "B5_canonical_dmrg_readiness_gate.md"
             ),
             "b6_curated_materials_leakage_audit": str(research / "B6_curated_materials_leakage_audit.md"),
             "b6_formula_descriptor_screen": str(research / "B6_formula_descriptor_screen.md"),
@@ -8365,6 +8485,12 @@ def markdown_report(report: dict) -> str:
             f"- Variational MPS/ALS exact-state seeded / production DMRG / quantum win claimed: {report['b5']['variational_mps_als_response_reference'].get('exact_state_seeded')} / {report['b5']['variational_mps_als_response_reference'].get('production_dmrg')} / {report['b5']['variational_mps_als_response_reference'].get('quantum_response_win_claimed')}",
             f"- Variational MPS/ALS validation errors: {report['b5']['variational_mps_als_response_reference'].get('validation_error_count')}",
             f"- Variational MPS/ALS result/markdown exists: {report['b5']['variational_mps_als_response_reference'].get('result_exists')} / {report['b5']['variational_mps_als_response_reference'].get('markdown_exists')}",
+            f"- Canonical DMRG readiness status: {report['b5']['canonical_dmrg_readiness_gate'].get('status')}",
+            f"- Canonical DMRG readiness gates passed/failed: {report['b5']['canonical_dmrg_readiness_gate'].get('passed_gate_count')} / {report['b5']['canonical_dmrg_readiness_gate'].get('failed_gate_count')}",
+            f"- Canonical DMRG readiness seeded reference strongest / prototype fixed-sector norms pass: {report['b5']['canonical_dmrg_readiness_gate'].get('exact_state_seeded_reference_is_strongest')} / {report['b5']['canonical_dmrg_readiness_gate'].get('prototype_fixed_sector_norms_pass')}",
+            f"- Canonical DMRG readiness production DMRG / quantum win / same-access positive route: {report['b5']['canonical_dmrg_readiness_gate'].get('production_dmrg')} / {report['b5']['canonical_dmrg_readiness_gate'].get('quantum_response_win_claimed')} / {report['b5']['canonical_dmrg_readiness_gate'].get('same_access_positive_route_claimed')}",
+            f"- Canonical DMRG readiness validation errors: {report['b5']['canonical_dmrg_readiness_gate'].get('validation_error_count')}",
+            f"- Canonical DMRG readiness result/markdown exists: {report['b5']['canonical_dmrg_readiness_gate'].get('result_exists')} / {report['b5']['canonical_dmrg_readiness_gate'].get('markdown_exists')}",
             "",
             "## B6 Superconductivity Descriptor Status",
             "",

@@ -2,7 +2,7 @@
   "schema_version": "0.1",
   "last_updated": "2026-06-18",
   "purpose": "Execution board for turning the Top 10 quantum attack directions from v0 artifacts into a one-year technical-resolution portfolio.",
-  "portfolio_state": "stage 1o evidence hardening; B2 now has a posterior-weighted decoder-risk ledger, B6 has a structural/electronic proxy boundary, and B10 remains a denominator-boundary track",
+  "portfolio_state": "stage 1p evidence hardening; B2 has a posterior-weighted decoder-risk ledger, B5 has a canonical DMRG readiness gate, B6 has a structural/electronic proxy boundary, and B10 remains a denominator-boundary track",
   "decision_rules": {
     "monthly_keep_rule": "Keep a direction only if the next 30-day artifact can falsify or improve a concrete claim.",
     "merge_rule": "Merge directions when their validation stack is shared, such as B4 plus B8 or B1 plus B7.",
@@ -99,10 +99,10 @@
       "problem_id": 38,
       "title": "Strongly correlated matter via hybrid quantum-tensor solvers",
       "priority_lane": "coupled_application",
-      "current_maturity": "two_site_dmrg_style_pressure_negative_against_seeded_mps",
-      "strongest_evidence": "Same 9 B10 D5 Hubbard density-response rows now have oracle-tuned and non-oracle embedding denominators, exact-state-seeded MPS pressure, one-site MPS/ALS, and two-site finite-DMRG-style pressure. The two-site prototype uses bond dimension 4, 2 restarts x 4 sweeps, mean/max response error 0.08196/0.27710, beats ALS on 4 rows, and beats seeded MPS pressure on 0 rows.",
-      "30_day_gate": "Replace the prototypes with canonical-environment production DMRG/MPS, or compare a fully costed quantum impurity/response kernel against the full D5 denominator ladder.",
-      "next_artifact": "B5 production DMRG/MPS response reference or fully costed quantum response-kernel comparison.",
+      "current_maturity": "canonical_dmrg_readiness_failed_not_production_dmrg",
+      "strongest_evidence": "Same 9 B10 D5 Hubbard density-response rows now have oracle-tuned and non-oracle embedding denominators, exact-state-seeded MPS pressure, one-site MPS/ALS, two-site finite-DMRG-style pressure, and a canonical DMRG readiness gate. The readiness gate passes 0/8 production conditions, fails fixed-sector norm and canonical-environment gates, keeps seeded MPS pressure as strongest, and records 0 non-seeded rows beating seeded pressure.",
+      "30_day_gate": "Implement canonical-environment production DMRG/MPS with convergence and cost ledgers, or compare a fully costed quantum impurity/response kernel against the full D5 denominator ladder.",
+      "next_artifact": "B5 canonical-environment production DMRG/MPS response reference or fully costed quantum response-kernel comparison.",
       "kill_condition": "Demote any B5 positive route if production DMRG/MPS or equivalent tensor denominator remains stronger under the same access and response contract.",
       "downstream_translation_route": "Deferred until a real hybrid baseline beats a classical proxy on a meaningful model.",
       "dependencies": [
@@ -178,10 +178,10 @@
       "problem_id": 11,
       "title": "Mapping the boundary of BQP",
       "priority_lane": "theory_and_negative_results",
-      "current_maturity": "b5_same_access_sampling_bridge_blocked_dmrg_required_plus_t2_backend_calibrated_style_bridge T-B10-013 now adds an optimistic response-sampler cost stress: min/median/max shots to match exact-state-seeded MPS pressure are 3.861e9 / 7.645e12 / 2.849e29, and 0 rows beat explicit D5 matvec ops by shots.",
-      "strongest_evidence": "Reduction graph plus 2 formal targets; B10-T1 explicit-I/O boundary stack includes B3 demotion, B5 D5 Hubbard response denominators, MPS pressure references, T-B10-010 missing-assumption note, T-B10-011 access-contract note, and T-B10-012 same-access B5 bridge: 4 denominator ladder rows, 5 blocking sampling requirements, 6 seeded-MPS-over-non-oracle rows, 0 variational-over-seeded rows, no sampling oracle, no production DMRG, and no positive route. B10-T2 has trained-spoofer, proof-gate, restricted-lemma, transcript/device-noise, ideal/noisy Aer, and GenericBackendV2 calibrated-style verifier bridges. T-B5-004 also adds a two-site finite-DMRG-style pressure prototype feeding the B10-T1 same-access ladder.",
-      "30_day_gate": "T-B10-014 must replace the sampler-cost negative boundary with mature production DMRG/MPS or a real same-access response oracle with state-preparation, mixing, measurement, and confidence costs; separately, replace the GenericBackendV2 bridge with real backend properties or hardware verifier execution.",
-      "next_artifact": "B10-T1/B5 production DMRG response reference, B5 response-sampler stress note, or B10-T2 real-backend-properties verifier bridge.",
+      "current_maturity": "b5_canonical_dmrg_readiness_failed_same_access_route_blocked_plus_t2_backend_calibrated_style_bridge",
+      "strongest_evidence": "Reduction graph plus 2 formal targets; B10-T1 explicit-I/O boundary stack includes B3 demotion, B5 D5 Hubbard response denominators, MPS pressure references, T-B10-010 missing-assumption note, T-B10-011 access-contract note, T-B10-012 same-access B5 bridge, T-B10-013 response-sampler cost stress, and T-B5-005 canonical DMRG readiness gate. The B5 gate passes 0/8 readiness conditions; there is still no production DMRG, no sampling oracle, no same-access positive route, no quantum advantage, and no BQP separation. B10-T2 has trained-spoofer, proof-gate, restricted-lemma, transcript/device-noise, ideal/noisy Aer, and GenericBackendV2 calibrated-style verifier bridges.",
+      "30_day_gate": "T-B10-014 must replace the readiness/cost negative boundary with mature production DMRG/MPS or a real same-access response oracle with state-preparation, mixing, measurement, confidence, and optimizer-loop costs; separately, replace the GenericBackendV2 bridge with real backend properties or hardware verifier execution.",
+      "next_artifact": "B10-T1/B5 production DMRG response reference, same-access response-oracle ledger, or B10-T2 real-backend-properties verifier bridge.",
       "kill_condition": "Keep B10-T1 negative unless a same-access sampler or production DMRG/quantum response comparison beats the full denominator ladder without hidden access advantages.",
       "downstream_translation_route": "Deferred until one formal target yields a source-backed restricted theorem, reusable negative lemma, or strong proof-attempt record.",
       "dependencies": [
@@ -206,7 +206,7 @@
     ],
     "week_3": [
       "Connect B3 to a reaction-coordinate toy path.",
-      "Promote B5 exact-state-seeded MPS pressure reference to real variational DMRG/MPS or costed quantum-kernel comparison.",
+      "Promote B5 from readiness-failed prototype tensor references to mature canonical DMRG/MPS or a fully costed quantum response-kernel comparison.",
       "Connect B6 to a real or curated retrospective materials table."
     ],
     "week_4": [

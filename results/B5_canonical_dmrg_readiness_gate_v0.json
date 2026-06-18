@@ -1,0 +1,142 @@
+{
+  "benchmark_id": "B5",
+  "claim_boundary": {
+    "accuracy_per_resource_win_claimed": false,
+    "canonical_environment_production_dmrg": false,
+    "mature_canonical_dmrg_ready": false,
+    "next_gate": "Implement mature canonical-environment DMRG/MPS with convergence and cost ledgers, or provide a same-access response oracle with full state-preparation and measurement costs.",
+    "production_dmrg": false,
+    "quantum_response_win_claimed": false,
+    "same_access_positive_route_claimed": false,
+    "what_is_not_supported": "This is not a production DMRG implementation, not a canonical-environment solver, not a quantum response kernel, not a same-access positive B10 route, and not an accuracy-per-resource win.",
+    "what_is_supported": "A cross-reference readiness audit over the current B5 tensor and embedding pressure references."
+  },
+  "dependency_non_oracle_embedding_result": "results/B5_non_oracle_response_embedding_baseline_v0.json",
+  "dependency_seeded_mps_pressure_result": "results/B5_mps_truncation_response_reference_v0.json",
+  "dependency_two_site_dmrg_result": "results/B5_two_site_dmrg_response_reference_v0.json",
+  "dependency_variational_mps_als_result": "results/B5_variational_mps_als_response_reference_v0.json",
+  "last_updated": "2026-06-18",
+  "method": "b5_canonical_dmrg_readiness_gate_v0",
+  "model_status": "cross_reference_readiness_gate_not_solver",
+  "problem_id": 38,
+  "readiness_gates": [
+    {
+      "evidence": {
+        "two_site_canonical_environment_production_dmrg": false
+      },
+      "gate_id": "G1",
+      "label": "Canonical left/right environments are present",
+      "passed": false,
+      "required_next_step": "Implement canonical-center sweeps with stored left/right environments and orthonormal residual checks."
+    },
+    {
+      "evidence": {
+        "two_site_production_dmrg": false,
+        "variational_production_dmrg": false
+      },
+      "gate_id": "G2",
+      "label": "Production DMRG is available",
+      "passed": false,
+      "required_next_step": "Replace prototype optimizers with a mature finite-system DMRG/MPS solver and convergence ledger."
+    },
+    {
+      "evidence": {
+        "two_site_rows_beating_seeded_mps_pressure_reference": 0,
+        "variational_mps_rows_beating_seeded_mps_pressure_reference": 0
+      },
+      "gate_id": "G3",
+      "label": "Non-seeded tensor references beat the seeded pressure reference",
+      "passed": false,
+      "required_next_step": "Produce non-exact-state-seeded tensor rows that beat the seeded MPS pressure reference under the same D5 observables."
+    },
+    {
+      "evidence": {
+        "two_site_mean_relative_response_error": 0.08196129814275509,
+        "two_site_rows_beating_variational_mps_als_reference": 4,
+        "variational_mps_als_mean_relative_response_error": 0.01805548365563228
+      },
+      "gate_id": "G4",
+      "label": "Two-site prototype improves mean response error over one-site ALS",
+      "passed": false,
+      "required_next_step": "Improve the two-site update or demote it behind the stronger one-site ALS pressure reference."
+    },
+    {
+      "evidence": {
+        "seeded_min_fixed_sector_norm_before_normalization": 0.9991007973728403,
+        "threshold": 0.01,
+        "two_site_min_fixed_sector_norm_before_normalization": 0.0004341448345871234,
+        "variational_min_fixed_sector_norm_before_normalization": 0.0001648333575571581
+      },
+      "gate_id": "G5",
+      "label": "Prototype fixed-sector norms are stable before normalization",
+      "passed": false,
+      "required_next_step": "Add canonical gauges and sector-aware initialization so selected states do not rely on tiny fixed-sector projection norms."
+    },
+    {
+      "evidence": {
+        "seeded_mps_pressure_max_relative_response_error": 0.0016954037598740704,
+        "two_site_max_relative_response_error": 0.2771034796538877,
+        "variational_mps_als_max_relative_response_error": 0.03907201105154143
+      },
+      "gate_id": "G6",
+      "label": "Best non-seeded max response error is within seeded pressure max error",
+      "passed": false,
+      "required_next_step": "Close the worst-row gap to the exact-state-seeded pressure reference before claiming a mature tensor denominator."
+    },
+    {
+      "evidence": {
+        "quantum_response_win_claimed": false,
+        "same_access_response_oracle_available": false
+      },
+      "gate_id": "G7",
+      "label": "Same-access quantum response kernel exists",
+      "passed": false,
+      "required_next_step": "If pursuing a quantum route, add state-preparation, mixing, measurement, and confidence costs on the same rows."
+    },
+    {
+      "evidence": {
+        "optimizer_loop_costs": "missing",
+        "quantum_measurement_costs": "missing",
+        "tensor_environment_costs": "missing"
+      },
+      "gate_id": "G8",
+      "label": "Full cost accounting is ready for B10 same-access comparison",
+      "passed": false,
+      "required_next_step": "Add wall-clock, matvec, sweep, memory, shot, and optimizer-loop costs before feeding a positive B10 route."
+    }
+  ],
+  "runtime_seconds": 0.001706,
+  "status": "canonical_dmrg_readiness_gate_failed_not_production_dmrg",
+  "summary": {
+    "accuracy_per_resource_win_claimed": false,
+    "canonical_environment_production_dmrg": false,
+    "exact_state_seeded_reference_is_strongest": true,
+    "failed_gate_count": 8,
+    "fixed_sector_norm_threshold": 0.01,
+    "instance_count": 9,
+    "mature_canonical_dmrg_ready": false,
+    "non_oracle_embedding_mean_relative_response_error": 0.050983452310434746,
+    "passed_gate_count": 0,
+    "production_dmrg": false,
+    "prototype_fixed_sector_norms_pass": false,
+    "quantum_response_win_claimed": false,
+    "readiness_gate_count": 8,
+    "same_access_positive_route_claimed": false,
+    "seeded_min_fixed_sector_norm_before_normalization": 0.9991007973728403,
+    "seeded_mps_pressure_max_relative_response_error": 0.0016954037598740704,
+    "seeded_mps_pressure_mean_relative_response_error": 0.0004416259745141554,
+    "two_site_max_relative_response_error": 0.2771034796538877,
+    "two_site_mean_relative_response_error": 0.08196129814275509,
+    "two_site_min_fixed_sector_norm_before_normalization": 0.0004341448345871234,
+    "two_site_rows_beating_seeded_mps_pressure_reference": 0,
+    "two_site_rows_beating_variational_mps_als_reference": 4,
+    "validation_error_count": 0,
+    "variational_min_fixed_sector_norm_before_normalization": 0.0001648333575571581,
+    "variational_mps_als_max_relative_response_error": 0.03907201105154143,
+    "variational_mps_als_mean_relative_response_error": 0.01805548365563228,
+    "variational_mps_rows_beating_seeded_mps_pressure_reference": 0
+  },
+  "title": "B5 canonical DMRG readiness gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
