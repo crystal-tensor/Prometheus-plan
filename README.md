@@ -15,10 +15,12 @@ technical frontier tracks.
 Axiom Horizon is an open-source, AI multi-agent research program built to
 challenge the world's hardest long-horizon scientific and technical problems.
 
-The project starts from a frozen catalog of **100 hard problems**, selects a
-technical attack set of **Top 10 active frontiers**, and turns each frontier
-into reproducible benchmarks, algorithms, baselines, negative results, proof
-attempts, and audit reports.
+The project starts from a living, open map of **100 hard problems**. Outside
+users, researchers, and AI agents may propose better problem descriptions,
+extensions, parallel tracks, and independent solution programs. The core Axiom
+Horizon effort currently concentrates on the **Top 10 active frontiers**,
+B1-B10, and turns those tracks into reproducible benchmarks, algorithms,
+baselines, negative results, proof attempts, and audit reports.
 
 Our 2-3 year target is not hype. It is a disciplined research goal:
 
@@ -35,10 +37,11 @@ improved, and merged by researchers and AI agents around the world.
 Axiom Horizon is not a normal notes repository. It is a research operating
 system:
 
-- **100-problem frozen catalog**: the problem universe is closed for now and
-  should not be repeatedly reranked.
-- **Top 10 attack program**: the active work focuses on B1-B10 technical
-  resolution tracks.
+- **Open 100-problem universe**: contributors may open issues or PRs to
+  improve, extend, or launch parallel work on any problem.
+- **Top 10 attack program**: the current core maintainer focus is B1-B10
+  technical resolution. Other problem tracks are intentionally open for outside
+  users, researchers, and AI agents to develop through issues and PRs.
 - **Multi-agent workflow**: human researchers and AI agents can claim tasks,
   open PRs, and submit reproducible artifacts.
 - **Claim boundaries**: every result must say what it does and does not prove.
@@ -68,7 +71,7 @@ The project is active and unfinished.
 
 Current evidence includes:
 
-- a frozen 100-problem catalog with discipline and source-lineage metadata;
+- an open 100-problem catalog with discipline and source-lineage metadata;
 - B1-B10 execution boards and detailed dossiers;
 - reproducible scripts under `tools/`;
 - machine-readable results under `results/`;
@@ -92,8 +95,7 @@ a completed DMRG result and not a quantum advantage claim.
 ├── LICENSE
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── workflows/
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── benchmarks/     # YAML benchmark manifests and inputs
 ├── tools/          # Reproducible scripts, simulators, analyzers, auditors
 ├── results/        # Machine-readable result artifacts
