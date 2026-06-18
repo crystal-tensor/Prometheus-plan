@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 44, 'B2': 48, 'B3': 30, 'B4': 24, 'B5': 27, 'B6': 21, 'B7': 41, 'B8': 36, 'B9': 13, 'B10': 50}
+- Maturity scores: {'B1': 44, 'B2': 48, 'B3': 30, 'B4': 25, 'B5': 27, 'B6': 21, 'B7': 41, 'B8': 37, 'B9': 13, 'B10': 50}
 
 ## Technical Resolution Program
 
@@ -621,6 +621,11 @@ Overall audit: PASS
 - Non-stabilizer pilot gates passed/failed: 6 / 2
 - Non-stabilizer pilot hardware execution / advantage / BQP separation: False / False / False
 - Non-stabilizer pilot result/markdown/directory exists: True / True / True
+- Support-spoofer gate status: support_aware_spoofer_boundary_not_protocol_soundness
+- Support-spoofer circuits / spoofers / rows: 36 / 4 / 144
+- Support-spoofer exact success / support acceptance: 0.0625 / 1.0
+- Support-spoofer support-only soundness rejected / exact blocker survives: True / True
+- Support-spoofer result/markdown exists: True / True
 
 ## B5 Hubbard Embedding Status
 
@@ -927,6 +932,11 @@ Overall audit: PASS
 - Non-stabilizer pilot gates passed/failed: 6 / 2
 - Non-stabilizer pilot hardware execution / advantage / BQP separation: False / False / False
 - Non-stabilizer pilot result/markdown/directory exists: True / True / True
+- Support-spoofer gate status: support_aware_spoofer_boundary_not_protocol_soundness
+- Support-spoofer circuits / spoofers / rows: 36 / 4 / 144
+- Support-spoofer exact success / support acceptance: 0.0625 / 1.0
+- Support-spoofer support-only soundness rejected / exact blocker survives: True / True
+- Support-spoofer result/markdown exists: True / True
 - Generative spoofer status: trained_generative_spoofer_refresh_boundary_not_soundness_proof
 - Generative spoofer configurations: 144
 - Generative spoofer maximum learned soundness: 1.0

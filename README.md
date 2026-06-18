@@ -131,6 +131,14 @@ transcript, minimum min-entropy is 4 bits, and maximum output probability is
 cryptographic soundness, sampling hardness, quantum advantage, or BQP
 separation.
 
+The next B4/B8 support-aware spoofer gate keeps that boundary honest. Four
+public-support spoofer families attack all 36 pilot circuits. Exact transcript
+guessing remains capped at 0.0625, so the single-transcript blocker survives,
+but a support-only verifier is fully spoofable with support acceptance 1.0.
+That rejects support-membership soundness and forces the next protocol step
+toward verifier-private predicates, real backend properties, or hardware
+randomized-measurement execution.
+
 B6 has moved from a synthetic descriptor toy to curated leakage audits and a
 structural/electronic proxy boundary. The latest B6 screen keeps 38 records
 across 22 families with 12 expanded negative controls; structural/electronic

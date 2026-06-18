@@ -5129,6 +5129,112 @@ def audit(root: Path) -> dict:
                 errors.append(f"{label} non-stabilizer pilot QASM missing H plus T/RZ basis layer: {pilot_path}")
         return status
 
+    def audit_nonstabilizer_support_spoofer(entry, label):
+        status = {}
+        if not entry:
+            warnings.append(f"{label} manifest has no non-stabilizer support spoofer gate")
+            return status
+        result_path = entry.get("result")
+        markdown_path = entry.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"{label} support-spoofer result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"{label} support-spoofer markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        status = {
+            "status": entry.get("status"),
+            "method": entry.get("method"),
+            "circuit_count": payload.get("circuit_count"),
+            "spoofer_count": payload.get("spoofer_count"),
+            "attack_row_count": payload.get("attack_row_count"),
+            "max_exact_transcript_success_probability": payload.get(
+                "max_exact_transcript_success_probability"
+            ),
+            "max_support_acceptance_rate": payload.get("max_support_acceptance_rate"),
+            "support_only_verifier_soundness_rejected": payload.get(
+                "support_only_verifier_soundness_rejected"
+            ),
+            "deterministic_exact_transcript_blocker_survives": payload.get(
+                "deterministic_exact_transcript_blocker_survives"
+            ),
+            "passed_gate_count": payload.get("passed_gate_count"),
+            "failed_gate_count": payload.get("failed_gate_count"),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append(f"{label} support-spoofer benchmark_id must be B4_B8")
+        if payload.get("status") != entry.get("status"):
+            errors.append(f"{label} support-spoofer status mismatch")
+        if payload.get("method") != entry.get("method"):
+            errors.append(f"{label} support-spoofer method mismatch")
+        if payload.get("source_method") != "b4_b8_nonstabilizer_late_bound_transcript_pilot_v0":
+            errors.append(f"{label} support-spoofer source method mismatch")
+        for field in [
+            "circuit_count",
+            "spoofer_count",
+            "attack_row_count",
+            "challenge_qubit_count_per_circuit",
+            "max_exact_transcript_success_probability",
+            "min_exact_transcript_success_probability",
+            "max_support_acceptance_rate",
+            "min_support_acceptance_rate",
+            "support_only_verifier_soundness_rejected",
+            "deterministic_exact_transcript_blocker_survives",
+            "public_support_template_attack_performed",
+            "learned_generative_spoofer_attack_performed",
+            "hardware_execution_performed",
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+            "acceptance_gate_count",
+            "passed_gate_count",
+            "failed_gate_count",
+        ]:
+            if payload.get(field) != entry.get(field):
+                errors.append(f"{label} support-spoofer {field} mismatch")
+        if payload.get("circuit_count") != 36:
+            errors.append(f"{label} support-spoofer should cover 36 pilot circuits")
+        if payload.get("spoofer_count") != 4:
+            errors.append(f"{label} support-spoofer should cover four spoofer families")
+        if payload.get("attack_row_count") != 144:
+            errors.append(f"{label} support-spoofer should emit 144 attack rows")
+        if payload.get("max_exact_transcript_success_probability") != 0.0625:
+            errors.append(f"{label} support-spoofer exact transcript ceiling should be 0.0625")
+        if payload.get("max_support_acceptance_rate") != 1.0:
+            errors.append(f"{label} support-spoofer should fully pass support-only verification")
+        if payload.get("support_only_verifier_soundness_rejected") is not True:
+            errors.append(f"{label} support-spoofer must reject support-only verifier soundness")
+        if payload.get("deterministic_exact_transcript_blocker_survives") is not True:
+            errors.append(f"{label} support-spoofer exact transcript blocker must survive")
+        for field in [
+            "hardware_execution_performed",
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+        ]:
+            if payload.get(field) is not False:
+                errors.append(f"{label} support-spoofer must keep {field}=False")
+        if len(payload.get("validation_errors", [])) != entry.get("validation_error_count"):
+            errors.append(f"{label} support-spoofer validation-error count mismatch")
+        if payload.get("validation_error_count") != len(payload.get("validation_errors", [])):
+            errors.append(f"{label} support-spoofer payload validation-error count mismatch")
+        return status
+
     b4_manifest = yaml.safe_load(read(b4_manifest_path))
     b4_results = b4_manifest.get("current_results", {})
     b4_trap = b4_results.get("toy_hidden_trap_protocol_sim_v0")
@@ -5137,6 +5243,7 @@ def audit(root: Path) -> dict:
     b4_public_qasm_spoofer = b4_results.get("public_qasm_packet_spoofer_gate_v0")
     b4_late_bound_contract = b4_results.get("late_bound_private_challenge_contract_gate_v0")
     b4_nonstabilizer_pilot = b4_results.get("nonstabilizer_late_bound_transcript_pilot_v0")
+    b4_support_spoofer = b4_results.get("nonstabilizer_support_spoofer_gate_v0")
     b4_status = {}
     if not b4_trap:
         warnings.append("B4 manifest has no toy hidden-trap protocol result")
@@ -5387,6 +5494,7 @@ def audit(root: Path) -> dict:
 
     b4_late_bound_contract_status = audit_late_bound_contract(b4_late_bound_contract, "B4")
     b4_nonstabilizer_pilot_status = audit_nonstabilizer_pilot(b4_nonstabilizer_pilot, "B4")
+    b4_support_spoofer_status = audit_nonstabilizer_support_spoofer(b4_support_spoofer, "B4")
 
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
     b5_results = b5_manifest.get("current_results", {})
@@ -7934,6 +8042,7 @@ def audit(root: Path) -> dict:
     b8_public_qasm_spoofer = b8_results.get("public_qasm_packet_spoofer_gate_v0")
     b8_late_bound_contract = b8_results.get("late_bound_private_challenge_contract_gate_v0")
     b8_nonstabilizer_pilot = b8_results.get("nonstabilizer_late_bound_transcript_pilot_v0")
+    b8_support_spoofer = b8_results.get("nonstabilizer_support_spoofer_gate_v0")
     b8_generative_spoofer = b8_results.get("generative_spoofer_refresh_stress_v0")
     b8_status = {}
     if not b8_verifier:
@@ -8229,6 +8338,7 @@ def audit(root: Path) -> dict:
 
     b8_late_bound_contract_status = audit_late_bound_contract(b8_late_bound_contract, "B8")
     b8_nonstabilizer_pilot_status = audit_nonstabilizer_pilot(b8_nonstabilizer_pilot, "B8")
+    b8_support_spoofer_status = audit_nonstabilizer_support_spoofer(b8_support_spoofer, "B8")
 
     b8_generative_spoofer_status = {}
     if not b8_generative_spoofer:
@@ -10108,6 +10218,7 @@ def audit(root: Path) -> dict:
             "public_qasm_packet_spoofer_gate": b4_public_qasm_spoofer_status,
             "late_bound_private_challenge_contract_gate": b4_late_bound_contract_status,
             "nonstabilizer_late_bound_transcript_pilot": b4_nonstabilizer_pilot_status,
+            "nonstabilizer_support_spoofer_gate": b4_support_spoofer_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -10163,6 +10274,7 @@ def audit(root: Path) -> dict:
             "public_qasm_packet_spoofer_gate": b8_public_qasm_spoofer_status,
             "late_bound_private_challenge_contract_gate": b8_late_bound_contract_status,
             "nonstabilizer_late_bound_transcript_pilot": b8_nonstabilizer_pilot_status,
+            "nonstabilizer_support_spoofer_gate": b8_support_spoofer_status,
             "generative_spoofer_refresh": b8_generative_spoofer_status,
         },
         "b9": {
@@ -10406,6 +10518,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_nonstabilizer_late_bound_transcript_pilot": str(
                 research / "B4_B8_nonstabilizer_late_bound_transcript_pilot.md"
+            ),
+            "b4_b8_nonstabilizer_support_spoofer_gate": str(
+                research / "B4_B8_nonstabilizer_support_spoofer_gate.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
@@ -11049,6 +11164,11 @@ def markdown_report(report: dict) -> str:
             f"- Non-stabilizer pilot gates passed/failed: {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('passed_gate_count')} / {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('failed_gate_count')}",
             f"- Non-stabilizer pilot hardware execution / advantage / BQP separation: {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('hardware_execution_performed')} / {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('quantum_advantage_claimed')} / {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('bqp_separation_claimed')}",
             f"- Non-stabilizer pilot result/markdown/directory exists: {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('result_exists')} / {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('markdown_exists')} / {report['b4']['nonstabilizer_late_bound_transcript_pilot'].get('nonstabilizer_pilot_directory_exists')}",
+            f"- Support-spoofer gate status: {report['b4']['nonstabilizer_support_spoofer_gate'].get('status')}",
+            f"- Support-spoofer circuits / spoofers / rows: {report['b4']['nonstabilizer_support_spoofer_gate'].get('circuit_count')} / {report['b4']['nonstabilizer_support_spoofer_gate'].get('spoofer_count')} / {report['b4']['nonstabilizer_support_spoofer_gate'].get('attack_row_count')}",
+            f"- Support-spoofer exact success / support acceptance: {report['b4']['nonstabilizer_support_spoofer_gate'].get('max_exact_transcript_success_probability')} / {report['b4']['nonstabilizer_support_spoofer_gate'].get('max_support_acceptance_rate')}",
+            f"- Support-spoofer support-only soundness rejected / exact blocker survives: {report['b4']['nonstabilizer_support_spoofer_gate'].get('support_only_verifier_soundness_rejected')} / {report['b4']['nonstabilizer_support_spoofer_gate'].get('deterministic_exact_transcript_blocker_survives')}",
+            f"- Support-spoofer result/markdown exists: {report['b4']['nonstabilizer_support_spoofer_gate'].get('result_exists')} / {report['b4']['nonstabilizer_support_spoofer_gate'].get('markdown_exists')}",
             "",
             "## B5 Hubbard Embedding Status",
             "",
@@ -11355,6 +11475,11 @@ def markdown_report(report: dict) -> str:
             f"- Non-stabilizer pilot gates passed/failed: {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('passed_gate_count')} / {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('failed_gate_count')}",
             f"- Non-stabilizer pilot hardware execution / advantage / BQP separation: {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('hardware_execution_performed')} / {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('quantum_advantage_claimed')} / {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('bqp_separation_claimed')}",
             f"- Non-stabilizer pilot result/markdown/directory exists: {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('result_exists')} / {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('markdown_exists')} / {report['b8']['nonstabilizer_late_bound_transcript_pilot'].get('nonstabilizer_pilot_directory_exists')}",
+            f"- Support-spoofer gate status: {report['b8']['nonstabilizer_support_spoofer_gate'].get('status')}",
+            f"- Support-spoofer circuits / spoofers / rows: {report['b8']['nonstabilizer_support_spoofer_gate'].get('circuit_count')} / {report['b8']['nonstabilizer_support_spoofer_gate'].get('spoofer_count')} / {report['b8']['nonstabilizer_support_spoofer_gate'].get('attack_row_count')}",
+            f"- Support-spoofer exact success / support acceptance: {report['b8']['nonstabilizer_support_spoofer_gate'].get('max_exact_transcript_success_probability')} / {report['b8']['nonstabilizer_support_spoofer_gate'].get('max_support_acceptance_rate')}",
+            f"- Support-spoofer support-only soundness rejected / exact blocker survives: {report['b8']['nonstabilizer_support_spoofer_gate'].get('support_only_verifier_soundness_rejected')} / {report['b8']['nonstabilizer_support_spoofer_gate'].get('deterministic_exact_transcript_blocker_survives')}",
+            f"- Support-spoofer result/markdown exists: {report['b8']['nonstabilizer_support_spoofer_gate'].get('result_exists')} / {report['b8']['nonstabilizer_support_spoofer_gate'].get('markdown_exists')}",
             f"- Generative spoofer status: {report['b8']['generative_spoofer_refresh'].get('status')}",
             f"- Generative spoofer configurations: {report['b8']['generative_spoofer_refresh'].get('configuration_count')}",
             f"- Generative spoofer maximum learned soundness: {report['b8']['generative_spoofer_refresh'].get('maximum_learned_soundness')}",

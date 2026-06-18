@@ -391,6 +391,15 @@ exact small-probability pilot only: not hardware execution, not cryptographic
 or protocol soundness, not sampling hardness, not quantum advantage, and not
 BQP separation.
 
+**Sprint update 58:** `T-B8-003d` is now merged back into B4 as a support-aware
+spoofer gate. The new tool `tools/b4_b8_nonstabilizer_support_spoofer_gate.py`
+reads the non-stabilizer pilot and evaluates four public-support spoofer
+families across all 36 circuits. Exact transcript success remains capped at
+0.0625, so the single-transcript blocker survives. But support-only verifier
+acceptance is 1.0, so public support membership is rejected as protocol
+soundness. The next B4 gate must add verifier-private acceptance predicates,
+real backend properties, or hardware randomized-measurement execution.
+
 ## B5: Strongly Correlated Matter
 
 **Technical target:** show an accuracy-per-resource improvement on a meaningful
@@ -1009,6 +1018,15 @@ min-entropy 4 bits and maximum output probability 0.0625. This advances the
 transcript line, but it is still exact small-probability evidence only, not
 hardware execution, cryptographic/protocol soundness, sampling hardness,
 quantum advantage, or BQP separation.
+
+**Sprint update 58:** `T-B8-003d` is now merged as the support-aware spoofer
+gate. The result `results/B4_B8_nonstabilizer_support_spoofer_gate_v0.json` and
+report `research/B4_B8_nonstabilizer_support_spoofer_gate.md` show a sharp
+boundary: exact transcript success remains 0.0625, but a verifier that only
+checks the public support template has support acceptance 1.0 under four
+support-aware spoofer families. This keeps the exact-transcript blocker while
+rejecting support-membership soundness. The next B8 gate must add a
+verifier-private predicate, real backend properties, or hardware execution.
 
 ## B9: Quantum PCP / Local Hamiltonian Hardness
 

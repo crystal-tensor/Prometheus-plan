@@ -361,15 +361,17 @@ challenge-basis layers, the deterministic transcript blocker is removed for
 36/36 pilot circuits, minimum min-entropy is 4 bits, and maximum output
 probability is 0.0625; it remains an exact small-probability pilot, not
 hardware execution, cryptographic soundness, sampling hardness, quantum
-advantage, or BQP separation.
+advantage, or BQP separation. T-B8-003d adds a support-aware spoofer gate: four
+public-support spoofer families attack all 36 non-stabilizer pilot circuits;
+exact transcript success remains capped at 0.0625, but support-only verifier
+acceptance is 1.0, so support-membership soundness is rejected.
 
-**Remaining path to a serious solution:** attack the non-stabilizer late-bound
-transcript pilot with stronger learned/generative spoofers; replace exact
-probability modeling with real backend properties or hardware randomized-
-measurement execution; then prove completeness and soundness under explicit
-assumptions.
+**Remaining path to a serious solution:** add verifier-private acceptance
+predicates, real backend properties, or hardware randomized-measurement
+execution beyond public support membership; attack the resulting non-public
+transcript; then prove completeness and soundness under explicit assumptions.
 
-**Current internal maturity:** 24/100.
+**Current internal maturity:** 25/100.
 
 ## B5: Strongly Correlated Matter via Hybrid Quantum-Tensor Solvers
 
@@ -637,6 +639,10 @@ deterministic public-data transcript blocker is removed, minimum min-entropy is
 4 bits, and maximum output probability is 0.0625; it is still exact
 small-probability evidence only, not hardware execution, cryptographic/protocol
 soundness, sampling hardness, quantum advantage, or BQP separation.
+T-B8-003d adds the support-aware spoofer gate: four public-support spoofer
+families attack all 36 non-stabilizer pilot circuits; exact transcript success
+remains 0.0625, but support-only verifier acceptance is 1.0, rejecting
+support-membership soundness while preserving the exact-transcript blocker.
 The device-noise transcript bridge now adds 480 configurations across five
 noise profiles: bounded bridge profiles preserve honest completeness 1.0, and
 challenge_refresh / refresh_plus_rotation stay at max high-leakage soundness
@@ -658,11 +664,12 @@ acceptance at 1.0, calibrated adversary acceptance at 0.25, max honest
 predicate-bit error at 0.0703125, and at least 7 unknown independent
 predicates; no-refresh remains unsafe.
 
-**Remaining path to a serious solution:** attack the non-stabilizer late-bound
-transcript pilot with stronger learned/generative spoofers, then move to real
-backend properties or hardware randomized-measurement verifier execution.
+**Remaining path to a serious solution:** move beyond public support membership
+by adding verifier-private predicates, real backend properties, or hardware
+randomized-measurement execution; then attack that non-public transcript with
+stronger learned/generative spoofers.
 
-**Current internal maturity:** 36/100.
+**Current internal maturity:** 37/100.
 
 ## B9: Quantum PCP and Local Hamiltonian Hardness
 
