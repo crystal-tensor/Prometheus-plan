@@ -40,6 +40,38 @@ next_actions:
   - add_observable_errors_beyond_energy
   - move_from_1d_chain_to_2d_plaquette_proxy
 current_results:
+  two_site_finite_dmrg_response_reference_v0:
+    status: two_site_finite_dmrg_pressure_reference_not_production_dmrg_or_advantage_claim
+    model_status: two_site_finite_dmrg_style_pressure_reference
+    method: b5_two_site_finite_dmrg_response_reference_v0
+    model: one_dimensional_fermi_hubbard_half_filled_density_response
+    dependency_b10_table: b10_t1_d5_observable_denominator_table_v0
+    dependency_seeded_mps_pressure_result: ../results/B5_mps_truncation_response_reference_v0.json
+    dependency_variational_mps_als_result: ../results/B5_variational_mps_als_response_reference_v0.json
+    sites: [4, 6, 8]
+    u_over_t_values: [2.0, 4.0, 8.0]
+    bond_dimensions_tested: [4]
+    selected_bond_dimensions: [4]
+    restarts_per_instance_bond_dimension: 2
+    sweeps_per_restart: 4
+    instance_count: 9
+    selected_mean_relative_response_error: 0.08196129814275509
+    selected_max_relative_response_error: 0.2771034796538877
+    selected_mean_energy_error_per_site: 0.016187894063942734
+    selected_max_energy_error_per_site: 0.028363686241287045
+    selected_min_overlap_with_exact_ground_state: 0.9394528924758745
+    selected_min_fixed_sector_norm_before_normalization: 0.0004341448345871234
+    two_site_dmrg_rows_beating_seeded_mps_pressure_reference: 0
+    two_site_dmrg_rows_beating_variational_mps_als_reference: 4
+    exact_state_seeded: false
+    two_site_finite_dmrg_style: true
+    canonical_environment_production_dmrg: false
+    production_dmrg: false
+    quantum_response_win_claimed: false
+    accuracy_per_resource_win_claimed: false
+    validation_error_count: 0
+    result: ../results/B5_two_site_dmrg_response_reference_v0.json
+    markdown_report: ../research/B5_two_site_dmrg_response_reference.md
   variational_mps_als_response_reference_v0:
     status: variational_mps_als_pressure_reference_not_production_dmrg_or_advantage_claim
     model_status: non_exact_state_seeded_variational_mps_als_pressure_reference
@@ -170,6 +202,7 @@ current_results:
       cluster4: 0.05921856583390095
     result: ../results/B5_hubbard_embedding_baseline_v0.json
 prototype_artifacts:
+  two_site_finite_dmrg_response_reference: ../tools/b5_two_site_dmrg_response_reference.py
   variational_mps_als_response_reference: ../tools/b5_variational_mps_als_response_reference.py
   mps_schmidt_truncation_response_reference: ../tools/b5_mps_truncation_response_reference.py
   non_oracle_response_embedding_baseline: ../tools/b5_non_oracle_response_embedding_baseline.py

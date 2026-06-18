@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 37, 'B2': 39, 'B3': 30, 'B4': 20, 'B5': 21, 'B6': 19, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 47}
+- Maturity scores: {'B1': 37, 'B2': 39, 'B3': 30, 'B4': 20, 'B5': 24, 'B6': 19, 'B7': 33, 'B8': 32, 'B9': 12, 'B10': 48}
 
 ## Technical Resolution Program
 
@@ -476,6 +476,13 @@ Overall audit: PASS
 - MPS exact-state seeded / variational DMRG / quantum win claimed: True / False / False
 - MPS validation errors: 0
 - MPS result/markdown exists: True / True
+- Two-site finite-DMRG status: two_site_finite_dmrg_pressure_reference_not_production_dmrg_or_advantage_claim
+- Two-site finite-DMRG instances / bond dimensions / restarts x sweeps: 9 / [4] / 2 x 4
+- Two-site finite-DMRG selected mean/max relative error: 0.08196129814275509 / 0.2771034796538877
+- Two-site finite-DMRG rows beating ALS / seeded pressure: 4 / 0
+- Two-site finite-DMRG production DMRG / quantum win claimed: False / False
+- Two-site finite-DMRG validation errors: 0
+- Two-site finite-DMRG result/markdown exists: True / True
 - Variational MPS/ALS status: variational_mps_als_pressure_reference_not_production_dmrg_or_advantage_claim
 - Variational MPS/ALS instances / bond dimensions / selected bond dimensions: 9 / [2, 4] / [4]
 - Variational MPS/ALS restarts x sweeps: 3 x 8

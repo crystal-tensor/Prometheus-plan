@@ -3248,6 +3248,7 @@ def audit(root: Path) -> dict:
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
     b5_results = b5_manifest.get("current_results", {})
     b5_hubbard = b5_results.get("hubbard_exact_diagonalization_cluster_proxy_v0")
+    b5_two_site_dmrg = b5_results.get("two_site_finite_dmrg_response_reference_v0")
     b5_var_mps = b5_results.get("variational_mps_als_response_reference_v0")
     b5_mps = b5_results.get("mps_schmidt_truncation_response_reference_v0")
     b5_non_oracle = b5_results.get("non_oracle_response_embedding_baseline_v0")
@@ -3542,6 +3543,117 @@ def audit(root: Path) -> dict:
                 errors.append(f"B5 MPS truncation response row claims a quantum win: {label}")
             if float(row.get("selected_response_relative_residual", 1.0)) > 1e-6:
                 errors.append(f"B5 MPS truncation response row residual exceeds tolerance: {label}")
+
+    b5_two_site_dmrg_status = {}
+    if not b5_two_site_dmrg:
+        warnings.append("B5 manifest has no two-site finite-DMRG response reference")
+    else:
+        result_path = b5_two_site_dmrg.get("result")
+        markdown_path = b5_two_site_dmrg.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B5 two-site finite-DMRG response result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B5 two-site finite-DMRG response markdown path missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        b5_two_site_dmrg_status = {
+            "status": b5_two_site_dmrg.get("status"),
+            "method": b5_two_site_dmrg.get("method"),
+            "model_status": b5_two_site_dmrg.get("model_status"),
+            "dependency_b10_table": b5_two_site_dmrg.get("dependency_b10_table"),
+            "instance_count": summary.get("instance_count"),
+            "bond_dimensions_tested": summary.get("bond_dimensions_tested"),
+            "selected_bond_dimensions": summary.get("selected_bond_dimensions"),
+            "restarts_per_instance_bond_dimension": summary.get("restarts_per_instance_bond_dimension"),
+            "sweeps_per_restart": summary.get("sweeps_per_restart"),
+            "selected_mean_relative_response_error": summary.get("selected_mean_relative_response_error"),
+            "selected_max_relative_response_error": summary.get("selected_max_relative_response_error"),
+            "selected_mean_energy_error_per_site": summary.get("selected_mean_energy_error_per_site"),
+            "selected_max_energy_error_per_site": summary.get("selected_max_energy_error_per_site"),
+            "selected_min_overlap_with_exact_ground_state": summary.get(
+                "selected_min_overlap_with_exact_ground_state"
+            ),
+            "selected_min_fixed_sector_norm_before_normalization": summary.get(
+                "selected_min_fixed_sector_norm_before_normalization"
+            ),
+            "two_site_dmrg_rows_beating_seeded_mps_pressure_reference": summary.get(
+                "two_site_dmrg_rows_beating_seeded_mps_pressure_reference"
+            ),
+            "two_site_dmrg_rows_beating_variational_mps_als_reference": summary.get(
+                "two_site_dmrg_rows_beating_variational_mps_als_reference"
+            ),
+            "two_site_finite_dmrg_style": summary.get("two_site_finite_dmrg_style"),
+            "canonical_environment_production_dmrg": summary.get("canonical_environment_production_dmrg"),
+            "production_dmrg": summary.get("production_dmrg"),
+            "exact_state_seeded": summary.get("exact_state_seeded"),
+            "quantum_response_win_claimed": summary.get("quantum_response_win_claimed"),
+            "accuracy_per_resource_win_claimed": summary.get("accuracy_per_resource_win_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B5":
+            errors.append("B5 two-site finite-DMRG response result benchmark_id must be B5")
+        if payload.get("method") != b5_two_site_dmrg.get("method"):
+            errors.append("B5 two-site finite-DMRG response method mismatch")
+        if payload.get("status") != "two_site_finite_dmrg_pressure_reference_not_production_dmrg_or_advantage_claim":
+            errors.append("B5 two-site finite-DMRG response status mismatch")
+        if payload.get("model_status") != b5_two_site_dmrg.get("model_status"):
+            errors.append("B5 two-site finite-DMRG response model_status mismatch")
+        if payload.get("dependency_b10_table") != b5_two_site_dmrg.get("dependency_b10_table"):
+            errors.append("B5 two-site finite-DMRG response B10 dependency mismatch")
+        for field in [
+            "instance_count",
+            "bond_dimensions_tested",
+            "selected_bond_dimensions",
+            "restarts_per_instance_bond_dimension",
+            "sweeps_per_restart",
+            "two_site_dmrg_rows_beating_seeded_mps_pressure_reference",
+            "two_site_dmrg_rows_beating_variational_mps_als_reference",
+        ]:
+            if summary.get(field) != b5_two_site_dmrg.get(field):
+                errors.append(f"B5 two-site finite-DMRG response {field} mismatch")
+        if summary.get("instance_count") != 9:
+            errors.append("B5 two-site finite-DMRG response must cover all nine D5 B5 instances")
+        if summary.get("two_site_finite_dmrg_style") is not True:
+            errors.append("B5 two-site finite-DMRG response must disclose two-site finite-DMRG style")
+        if summary.get("canonical_environment_production_dmrg") is not False:
+            errors.append("B5 two-site finite-DMRG response must not claim canonical production DMRG")
+        if summary.get("production_dmrg") is not False:
+            errors.append("B5 two-site finite-DMRG response must not claim production DMRG")
+        if summary.get("exact_state_seeded") is not False:
+            errors.append("B5 two-site finite-DMRG response must not be exact-state seeded")
+        if summary.get("quantum_response_win_claimed") is not False:
+            errors.append("B5 two-site finite-DMRG response must not claim a quantum response win")
+        if summary.get("accuracy_per_resource_win_claimed") is not False:
+            errors.append("B5 two-site finite-DMRG response must not claim an accuracy-per-resource win")
+        if int(summary.get("two_site_dmrg_rows_beating_variational_mps_als_reference", -1)) < 1:
+            errors.append("B5 two-site finite-DMRG response should beat one-site ALS on at least one row")
+        if int(summary.get("two_site_dmrg_rows_beating_seeded_mps_pressure_reference", -1)) != 0:
+            errors.append("B5 two-site finite-DMRG response should not beat the exact-state-seeded pressure reference")
+        if len(payload.get("validation_errors", [])) != b5_two_site_dmrg.get("validation_error_count"):
+            errors.append("B5 two-site finite-DMRG response validation-error count mismatch")
+        claim_boundary = payload.get("claim_boundary", {})
+        if claim_boundary.get("production_dmrg") is not False:
+            errors.append("B5 two-site finite-DMRG response payload claims production DMRG")
+        if claim_boundary.get("quantum_response_win_claimed") is not False:
+            errors.append("B5 two-site finite-DMRG response payload claims quantum response win")
+        for row in payload.get("rows", []):
+            label = f"sites={row.get('sites')} U/t={row.get('u_over_t')}"
+            if row.get("two_site_finite_dmrg_style") is not True:
+                errors.append(f"B5 two-site finite-DMRG row must disclose optimizer style: {label}")
+            if row.get("production_dmrg") is not False:
+                errors.append(f"B5 two-site finite-DMRG row must not claim production DMRG: {label}")
+            if row.get("exact_state_seeded") is not False:
+                errors.append(f"B5 two-site finite-DMRG row must not be exact-state seeded: {label}")
+            if row.get("quantum_response_win_claimed") is not False:
+                errors.append(f"B5 two-site finite-DMRG row claims quantum response win: {label}")
+            if float(row.get("selected_response_relative_residual", 1.0)) > 1e-6:
+                errors.append(f"B5 two-site finite-DMRG row residual exceeds tolerance: {label}")
 
     b5_var_mps_status = {}
     if not b5_var_mps:
@@ -6946,6 +7058,7 @@ def audit(root: Path) -> dict:
         "b5": {
             "manifest": str(b5_manifest_path),
             "hubbard_embedding": b5_status,
+            "two_site_finite_dmrg_response_reference": b5_two_site_dmrg_status,
             "variational_mps_als_response_reference": b5_var_mps_status,
             "mps_truncation_response_reference": b5_mps_status,
             "non_oracle_response_embedding": b5_non_oracle_status,
@@ -7097,6 +7210,9 @@ def audit(root: Path) -> dict:
             ),
             "b5_mps_truncation_response_reference": str(
                 research / "B5_mps_truncation_response_reference.md"
+            ),
+            "b5_two_site_dmrg_response_reference": str(
+                research / "B5_two_site_dmrg_response_reference.md"
             ),
             "b5_variational_mps_als_response_reference": str(
                 research / "B5_variational_mps_als_response_reference.md"
@@ -7659,6 +7775,13 @@ def markdown_report(report: dict) -> str:
             f"- MPS exact-state seeded / variational DMRG / quantum win claimed: {report['b5']['mps_truncation_response_reference'].get('exact_state_seeded')} / {report['b5']['mps_truncation_response_reference'].get('variational_dmrg')} / {report['b5']['mps_truncation_response_reference'].get('quantum_response_win_claimed')}",
             f"- MPS validation errors: {report['b5']['mps_truncation_response_reference'].get('validation_error_count')}",
             f"- MPS result/markdown exists: {report['b5']['mps_truncation_response_reference'].get('result_exists')} / {report['b5']['mps_truncation_response_reference'].get('markdown_exists')}",
+            f"- Two-site finite-DMRG status: {report['b5']['two_site_finite_dmrg_response_reference'].get('status')}",
+            f"- Two-site finite-DMRG instances / bond dimensions / restarts x sweeps: {report['b5']['two_site_finite_dmrg_response_reference'].get('instance_count')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('bond_dimensions_tested')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('restarts_per_instance_bond_dimension')} x {report['b5']['two_site_finite_dmrg_response_reference'].get('sweeps_per_restart')}",
+            f"- Two-site finite-DMRG selected mean/max relative error: {report['b5']['two_site_finite_dmrg_response_reference'].get('selected_mean_relative_response_error')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('selected_max_relative_response_error')}",
+            f"- Two-site finite-DMRG rows beating ALS / seeded pressure: {report['b5']['two_site_finite_dmrg_response_reference'].get('two_site_dmrg_rows_beating_variational_mps_als_reference')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('two_site_dmrg_rows_beating_seeded_mps_pressure_reference')}",
+            f"- Two-site finite-DMRG production DMRG / quantum win claimed: {report['b5']['two_site_finite_dmrg_response_reference'].get('production_dmrg')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('quantum_response_win_claimed')}",
+            f"- Two-site finite-DMRG validation errors: {report['b5']['two_site_finite_dmrg_response_reference'].get('validation_error_count')}",
+            f"- Two-site finite-DMRG result/markdown exists: {report['b5']['two_site_finite_dmrg_response_reference'].get('result_exists')} / {report['b5']['two_site_finite_dmrg_response_reference'].get('markdown_exists')}",
             f"- Variational MPS/ALS status: {report['b5']['variational_mps_als_response_reference'].get('status')}",
             f"- Variational MPS/ALS instances / bond dimensions / selected bond dimensions: {report['b5']['variational_mps_als_response_reference'].get('instance_count')} / {report['b5']['variational_mps_als_response_reference'].get('bond_dimensions_tested')} / {report['b5']['variational_mps_als_response_reference'].get('selected_bond_dimensions')}",
             f"- Variational MPS/ALS restarts x sweeps: {report['b5']['variational_mps_als_response_reference'].get('restarts_per_instance_bond_dimension')} x {report['b5']['variational_mps_als_response_reference'].get('sweeps_per_restart')}",

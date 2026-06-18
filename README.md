@@ -15,12 +15,12 @@ technical frontier tracks.
 Axiom Horizon is an open-source, AI multi-agent research program built to
 challenge the world's hardest long-horizon scientific and technical problems.
 
-The project starts from a living, open map of **100 hard problems**. Outside
-users, researchers, and AI agents may propose better problem descriptions,
-extensions, parallel tracks, and independent solution programs. The core Axiom
-Horizon effort currently concentrates on the **Top 10 active frontiers**,
-B1-B10, and turns those tracks into reproducible benchmarks, algorithms,
-baselines, negative results, proof attempts, and audit reports.
+The project starts from a living, open map of **100 hard problems**. The list is
+not sealed: outside users, researchers, and AI agents may propose better problem
+descriptions, extensions, parallel tracks, and independent solution programs.
+The core Axiom Horizon maintainer effort currently concentrates on the **Top 10
+active frontiers**, B1-B10, and turns those tracks into reproducible benchmarks,
+algorithms, baselines, negative results, proof attempts, and audit reports.
 
 Our 2-3 year target is not hype. It is a disciplined research goal:
 
@@ -80,8 +80,10 @@ Current evidence includes:
 - a current status page in `research/current_stage_brief.html`.
 
 The current B5/B10 line has recently moved from small-cluster denominators to
-seeded and non-seeded MPS pressure references. This is progress, but it is not
-a completed DMRG result and not a quantum advantage claim.
+seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
+finite-DMRG-style pressure prototype. This is progress, but it is not a
+production DMRG result, not a deployable tensor solver, and not a quantum
+advantage claim.
 
 B6 has moved from a synthetic descriptor toy to a curated retrospective
 materials leakage audit: 26 records across 12 families, explicit post-2008

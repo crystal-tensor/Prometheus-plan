@@ -279,6 +279,16 @@ site, observable choice, and where a quantum impurity/kernel would enter.
 **Failure value:** if the classical embedding baseline is already strong, use
 it as a denominator for B10 rather than overclaiming quantum advantage.
 
+**Sprint update 19:** `T-B5-004` is now merged as a two-site
+finite-DMRG-style pressure prototype on the same 9 B5/B10 D5 Hubbard
+density-response rows. The official run tests bond dimension 4 with 2 restarts
+x 4 sweeps, selected mean/max relative response error 0.08196/0.27710, selected
+mean/max energy error per site 0.01619/0.02836, min exact-state overlap
+0.93945, 4 rows beating the one-site MPS/ALS prototype, and 0 rows beating the
+exact-state-seeded MPS pressure reference. This is not canonical-environment
+production DMRG, not a deployable tensor solver, and not a quantum advantage
+claim; it is a denominator-pressure artifact for the next B10-T1 gate.
+
 ## B6: High-Temperature Superconductivity Search
 
 **Technical target:** rank candidate materials using mechanism-aware
@@ -788,6 +798,10 @@ advantage claim.
 requirements that all block the current bridge, 6 seeded-MPS-over-non-oracle
 rows, 0 variational-over-seeded rows, no sampling oracle, no production DMRG,
 and no same-access positive route.
+`T-B5-004` now feeds `T-B10-013`: the two-site finite-DMRG-style prototype
+beats one-site ALS on 4 rows but still beats seeded MPS pressure on 0 rows, so
+the same-access bridge remains blocked until production DMRG/MPS or a fully
+costed response sampler exists.
 
 **Next PR:** `T-B10-013` or `T-B10-009`. Expected artifacts:
 

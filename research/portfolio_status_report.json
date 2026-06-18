@@ -1353,6 +1353,40 @@
       "uses_exact_target_for_selection": false,
       "validation_error_count": 0
     },
+    "two_site_finite_dmrg_response_reference": {
+      "accuracy_per_resource_win_claimed": false,
+      "bond_dimensions_tested": [
+        4
+      ],
+      "canonical_environment_production_dmrg": false,
+      "dependency_b10_table": "b10_t1_d5_observable_denominator_table_v0",
+      "exact_state_seeded": false,
+      "instance_count": 9,
+      "markdown_exists": true,
+      "markdown_report": "../research/B5_two_site_dmrg_response_reference.md",
+      "method": "b5_two_site_finite_dmrg_response_reference_v0",
+      "model_status": "two_site_finite_dmrg_style_pressure_reference",
+      "production_dmrg": false,
+      "quantum_response_win_claimed": false,
+      "restarts_per_instance_bond_dimension": 2,
+      "result": "../results/B5_two_site_dmrg_response_reference_v0.json",
+      "result_exists": true,
+      "selected_bond_dimensions": [
+        4
+      ],
+      "selected_max_energy_error_per_site": 0.028363686241287045,
+      "selected_max_relative_response_error": 0.2771034796538877,
+      "selected_mean_energy_error_per_site": 0.016187894063942734,
+      "selected_mean_relative_response_error": 0.08196129814275509,
+      "selected_min_fixed_sector_norm_before_normalization": 0.0004341448345871234,
+      "selected_min_overlap_with_exact_ground_state": 0.9394528924758745,
+      "status": "two_site_finite_dmrg_pressure_reference_not_production_dmrg_or_advantage_claim",
+      "sweeps_per_restart": 4,
+      "two_site_dmrg_rows_beating_seeded_mps_pressure_reference": 0,
+      "two_site_dmrg_rows_beating_variational_mps_als_reference": 4,
+      "two_site_finite_dmrg_style": true,
+      "validation_error_count": 0
+    },
     "variational_mps_als_response_reference": {
       "accuracy_per_resource_win_claimed": false,
       "bond_dimensions_tested": [
@@ -2113,11 +2147,11 @@
     "markdown_path": "research/top10_problem_dossiers.md",
     "maturity_scores": {
       "B1": 37,
-      "B10": 47,
+      "B10": 48,
       "B2": 39,
       "B3": 30,
       "B4": 20,
-      "B5": 21,
+      "B5": 24,
       "B6": 19,
       "B7": 33,
       "B8": 32,
@@ -2189,6 +2223,7 @@
     "b5_boundary_field_embedding_baseline": "research/B5_boundary_field_embedding_baseline.md",
     "b5_mps_truncation_response_reference": "research/B5_mps_truncation_response_reference.md",
     "b5_non_oracle_response_embedding_baseline": "research/B5_non_oracle_response_embedding_baseline.md",
+    "b5_two_site_dmrg_response_reference": "research/B5_two_site_dmrg_response_reference.md",
     "b5_variational_mps_als_response_reference": "research/B5_variational_mps_als_response_reference.md",
     "b6_curated_materials_leakage_audit": "research/B6_curated_materials_leakage_audit.md",
     "b6_formula_descriptor_screen": "research/B6_formula_descriptor_screen.md",

@@ -330,16 +330,23 @@ dimensions 2/4, 3 restarts x 8 sweeps, selected mean/max relative response
 error 0.01806/0.03907, selected mean/max energy error per site
 0.00303/0.00853, min exact-state overlap 0.9626, 0 rows beating the seeded
 MPS pressure reference, and explicit non-claim of production DMRG or quantum
-advantage.
+advantage. T-B5-004 adds a two-site finite-DMRG-style pressure prototype on the
+same 9 rows: bond dimension 4, 2 restarts x 4 sweeps, selected mean/max
+relative response error 0.08196/0.27710, selected mean/max energy error per
+site 0.01619/0.02836, min exact-state overlap 0.93945, 4 rows beating one-site
+ALS, 0 rows beating the exact-state-seeded MPS pressure reference, and explicit
+non-claim of canonical-environment production DMRG, quantum response, or
+accuracy-per-resource win.
 
-**Remaining path to a serious solution:** replace the MPS/ALS prototype with a
-mature canonical-environment variational DMRG/MPS reference; expand to
+**Remaining path to a serious solution:** replace the MPS/ALS and two-site
+finite-DMRG-style prototypes with a mature canonical-environment variational
+DMRG/MPS reference; expand to
 two-dimensional/doped grids; select observables where classical methods
 disagree; generate quantum impurity or response-kernel circuits; prove an
 accuracy-per-resource advantage after state-preparation, measurement,
 optimizer-loop, and classical-denominator costs are charged.
 
-**Current internal maturity:** 21/100.
+**Current internal maturity:** 24/100.
 
 ## B6: High-Temperature Superconductivity Search
 
@@ -702,6 +709,10 @@ seeded-MPS-over-non-oracle rows, 0 variational-over-seeded rows, no sampling
 oracle, no production DMRG, no same-access positive route, and explicit
 non-claim of dequantization, sampling theorem, BQP separation, or quantum
 advantage.
+T-B5-004 now feeds T-B10-013 with a two-site finite-DMRG-style B5 response
+pressure prototype. It beats the one-site ALS prototype on 4 rows but still
+beats the exact-state-seeded MPS pressure reference on 0 rows, so it strengthens
+the same-access blocker instead of creating a positive BQP boundary route.
 
 **Remaining path to a serious solution:** treat B3 as demoted unless a
 multi-parameter UCCSD/ADAPT or stronger measurement rescue succeeds; run
@@ -712,7 +723,7 @@ strong enough to survive the T-B10-012 denominator ladder; turn the B10-T2
 bridge into real backend-property verifier execution or hardware randomized
 measurements; connect B4/B8 verification burdens back into the boundary map.
 
-**Current internal maturity:** 47/100.
+**Current internal maturity:** 48/100.
 
 ## Cross-Portfolio Process
 
