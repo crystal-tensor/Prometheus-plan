@@ -146,6 +146,15 @@ with 35 candidate windows. This makes `cone_01` the next concrete rewrite
 target; it is still not a rewrite, not a semantic certificate, and not a
 resource-saving claim.
 
+B1/B7 also has a restricted `cone_01` phase-removal gate. It tests all 35
+candidate windows under a narrow same-envelope hypothesis: delete the arbitrary
+RY or replace it with a local Z phase while keeping the two surrounding CNOTs.
+The result is negative: remove-only, fixed Z-phase replacement, and continuous
+RZ replacement each have 0 exact-pass windows at tolerance 1e-8. The best
+continuous-RZ residual is 0.36435162331705345. This closes the simple
+phase-absorption route, but it is not a global obstruction theorem and not a
+B7 resource-saving claim.
+
 ## Repository Layout
 
 ```text

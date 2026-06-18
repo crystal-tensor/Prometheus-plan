@@ -66,16 +66,22 @@ now counts 270 arbitrary decimal rotations, and the cone-feasibility gate shows
 CNOT-rotation-CNOT sandwiches total only 4, but `cone_01` has 35 pair-local
 single-arbitrary windows and is the only cone class meeting B7's 30-occurrence
 target under that stricter local-window criterion. No rewrite, semantic
-certificate, or resource saving is claimed yet.
+certificate, or resource saving is claimed yet. The restricted `cone_01`
+phase-removal gate then tests all 35 windows under remove-only, fixed-Z, and
+continuous-RZ same-envelope replacement; all three routes have 0 exact-pass
+windows at tolerance 1e-8, with best continuous-RZ residual
+0.36435162331705345. This closes the simple phase-absorption route without
+proving a global obstruction theorem.
 
 **Remaining path to a serious solution:** connect to calibrated/live-like
 heavy-hex baselines; cover dynamic circuits and reset/measurement semantics;
-turn `cone_01` into a replayable semantic rewrite certificate that removes at
-least 30 arbitrary rotation occurrences / 600
+turn `cone_01` into a broader replayable semantic rewrite certificate,
+KAK/Clifford scaffold, or scoped obstruction report that addresses at least 30
+arbitrary rotation occurrences / 600
 proxy-T units; broaden benchmarks; package certificates for independent
 reproduction.
 
-**Current internal maturity:** 39/100.
+**Current internal maturity:** 40/100.
 
 ## B2: Low-Overhead Quantum Error Correction
 
@@ -502,17 +508,21 @@ single-template routes clear the one-sided `gcm_h6` 1.20x target, and best
 cone-feasibility gate shows strict direct CNOT-rotation-CNOT sandwiches total
 only 4, while `cone_01` has 35 pair-local single-arbitrary windows and is the
 only target cone meeting the 30-occurrence threshold under that stricter filter.
-This is still not an occurrence-removing certificate or a resource-saving claim.
+The restricted phase-removal gate then tests all 35 `cone_01` windows and finds
+0 exact-pass windows for remove-only, fixed-Z, and continuous-RZ same-envelope
+replacement. This is still not an occurrence-removing certificate, resource-
+saving claim, or global obstruction theorem.
 
 **Remaining path to a serious solution:** produce a symbolic KAK/Clifford-
-scaffold proof or certified `cone_01` occurrence-removing rewrite for
-`gcm_h6`; strengthen B1 non-Clifford/T-depth optimization until a certified
-occurrence-removing rewrite improves minimum factory STV;
+scaffold proof, scoped obstruction, or certified broader `cone_01`
+occurrence-removing rewrite for `gcm_h6`; strengthen B1 non-Clifford/T-depth
+optimization until a certified occurrence-removing rewrite improves minimum
+factory STV;
 separate claims by data-path versus T-factory dominated regimes; include
 physical layout, routing, and feed-forward constraints; run a full algorithm
 resource ledger.
 
-**Current internal maturity:** 36/100.
+**Current internal maturity:** 37/100.
 
 ## B8: Classical Verification of Quantum Outputs
 

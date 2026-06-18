@@ -693,6 +693,18 @@ pair-local single-arbitrary windows and is the only cone class that meets the
 rewrite for at least 30 `cone_01` windows, emit replayable certificates, and
 only then re-run the B7 FT ledger.
 
+**Sprint update 18d:** `T-B1-004c` is now merged as a restricted
+phase-removal gate. The new artifact
+`research/B1_B7_cone01_phase_removal_gate.md` tests all 35 `cone_01`
+pair-local single-arbitrary windows under a narrow same-envelope hypothesis:
+delete the arbitrary `RY`, replace it with a fixed Z phase, or replace it with
+an optimized continuous `RZ` while keeping the same two surrounding CNOTs. All
+three routes have 0 exact-pass windows at tolerance 1e-8; the best
+continuous-RZ residual is 0.36435162331705345. This closes the simple
+phase-absorption route, but it is not a global obstruction theorem. `T-B1-004`
+now needs broader two-qubit synthesis, KAK/Clifford scaffolding, or another
+certificate-bearing transformation.
+
 ## B8: Classical Verification of Quantum Outputs
 
 **Technical target:** keep verifier soundness low under adaptive leakage by

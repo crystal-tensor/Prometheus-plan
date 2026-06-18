@@ -137,6 +137,7 @@ def audit(root: Path) -> dict:
     b1_u3_phase_factored_path = results / "B1_u3_phase_factored_optimizer_v0.json"
     b1_b7_gcm_h6_target_selector_path = results / "B1_B7_gcm_h6_target_selector_v0.json"
     b1_b7_gcm_h6_cone_feasibility_path = results / "B1_B7_gcm_h6_cone_feasibility_gate_v0.json"
+    b1_b7_cone01_phase_removal_path = results / "B1_B7_cone01_phase_removal_gate_v0.json"
     b1_synthetic_noise_path = research / "B1_synthetic_noise_proxy_report.json"
     b1_manifest_path = benchmarks / "B1_circuit_compression.yaml"
     b2_manifest_path = benchmarks / "B2_qec_overhead.yaml"
@@ -599,6 +600,9 @@ def audit(root: Path) -> dict:
     b1_b7_gcm_h6_target_selector_manifest = current_results.get("b1_b7_gcm_h6_target_selector_v0")
     b1_b7_gcm_h6_cone_feasibility_manifest = current_results.get(
         "b1_b7_gcm_h6_cone_feasibility_gate_v0"
+    )
+    b1_b7_cone01_phase_removal_manifest = current_results.get(
+        "b1_b7_cone01_phase_removal_gate_v0"
     )
     synthetic_noise_manifest = current_results.get("b1_synthetic_heavyhex_noise_proxy_v0")
     b1_routing_diagnostic = {
@@ -1316,6 +1320,99 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 gcm_h6 cone feasibility gate validation errors must remain zero")
     else:
         errors.append(f"missing B1/B7 gcm_h6 cone feasibility gate report: {b1_b7_gcm_h6_cone_feasibility_path}")
+
+    b1_b7_cone01_phase_removal = {
+        "path": str(b1_b7_cone01_phase_removal_path),
+        "exists": b1_b7_cone01_phase_removal_path.exists(),
+    }
+    if not b1_b7_cone01_phase_removal_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_phase_removal_gate_v0")
+    else:
+        if b1_b7_cone01_phase_removal_manifest.get("status") != "cone01_phase_removal_restricted_negative_gate":
+            errors.append("B1/B7 cone_01 phase-removal gate must remain a restricted negative gate")
+        for field in ["report", "markdown_report", "source_qasm"]:
+            value = b1_b7_cone01_phase_removal_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 phase-removal gate missing existing {field} path: {value}")
+    if b1_b7_cone01_phase_removal_path.exists():
+        phase_payload = json.loads(read(b1_b7_cone01_phase_removal_path))
+        phase_summary = phase_payload.get("summary", {})
+        phase_claims = phase_payload.get("claim_boundary", {})
+        b1_b7_cone01_phase_removal.update(
+            {
+                "status": phase_payload.get("status"),
+                "model_status": phase_payload.get("model_status"),
+                "method": phase_payload.get("method"),
+                "workload": phase_payload.get("workload"),
+                "target_cone_id": phase_summary.get("target_cone_id"),
+                "candidate_window_count": phase_summary.get("candidate_window_count"),
+                "required_exact_windows_for_b7_target": phase_summary.get(
+                    "required_exact_windows_for_b7_target"
+                ),
+                "remove_only_exact_pass_count": phase_summary.get("remove_only_exact_pass_count"),
+                "fixed_phase_exact_pass_count": phase_summary.get("fixed_phase_exact_pass_count"),
+                "continuous_rz_exact_pass_count": phase_summary.get("continuous_rz_exact_pass_count"),
+                "best_continuous_rz_residual_norm": phase_summary.get(
+                    "best_continuous_rz_residual_norm"
+                ),
+                "median_continuous_rz_residual_norm": phase_summary.get(
+                    "median_continuous_rz_residual_norm"
+                ),
+                "best_fixed_phase_residual_norm": phase_summary.get("best_fixed_phase_residual_norm"),
+                "restricted_gate_clears_b7_target": phase_summary.get("restricted_gate_clears_b7_target"),
+                "rewrite_claimed": phase_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": phase_claims.get("resource_saving_claimed"),
+                "semantic_certificate_claimed": phase_claims.get("semantic_certificate_claimed"),
+                "obstruction_theorem_claimed": phase_claims.get("obstruction_theorem_claimed"),
+                "validation_error_count": phase_summary.get("validation_error_count"),
+            }
+        )
+        if phase_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 phase-removal gate report must have benchmark_id B1")
+        if phase_payload.get("method") != "b1_b7_cone01_phase_removal_gate_v0":
+            errors.append("B1/B7 cone_01 phase-removal gate method mismatch")
+        if phase_payload.get("status") != "cone01_phase_removal_restricted_negative_gate":
+            errors.append("B1/B7 cone_01 phase-removal gate status mismatch")
+        for field in [
+            "target_cone_id",
+            "candidate_window_count",
+            "required_exact_windows_for_b7_target",
+            "remove_only_exact_pass_count",
+            "fixed_phase_exact_pass_count",
+            "continuous_rz_exact_pass_count",
+            "best_continuous_rz_residual_norm",
+            "median_continuous_rz_residual_norm",
+            "best_fixed_phase_residual_norm",
+            "restricted_gate_clears_b7_target",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "obstruction_theorem_claimed",
+        ]:
+            if phase_summary.get(field) != b1_b7_cone01_phase_removal_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 phase-removal gate {field} mismatch")
+        if phase_summary.get("target_cone_id") != "cone_01":
+            errors.append("B1/B7 cone_01 phase-removal gate target cone must remain cone_01")
+        if phase_summary.get("candidate_window_count") != 35:
+            errors.append("B1/B7 cone_01 phase-removal gate must test 35 windows")
+        if phase_summary.get("required_exact_windows_for_b7_target") != 30:
+            errors.append("B1/B7 cone_01 phase-removal gate B7 target must remain 30 windows")
+        if phase_summary.get("continuous_rz_exact_pass_count") != 0:
+            errors.append("B1/B7 cone_01 phase-removal gate should have 0 continuous-RZ exact passes")
+        if phase_summary.get("restricted_gate_clears_b7_target") is not False:
+            errors.append("B1/B7 cone_01 phase-removal gate must not clear the B7 target")
+        for field in [
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "obstruction_theorem_claimed",
+        ]:
+            if phase_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 phase-removal gate must not claim {field}")
+        if phase_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 phase-removal gate validation errors must remain zero")
+    else:
+        errors.append(f"missing B1/B7 cone_01 phase-removal gate report: {b1_b7_cone01_phase_removal_path}")
 
     b1_synthetic_noise = {
         "path": str(b1_synthetic_noise_path),
@@ -8749,6 +8846,7 @@ def audit(root: Path) -> dict:
             "u3_phase_factored_optimizer": b1_u3_phase_factored,
             "b7_gcm_h6_target_selector": b1_b7_gcm_h6_target_selector,
             "b7_gcm_h6_cone_feasibility_gate": b1_b7_gcm_h6_cone_feasibility,
+            "b7_cone01_phase_removal_gate": b1_b7_cone01_phase_removal,
             "synthetic_noise_proxy": b1_synthetic_noise,
         },
         "b2": {
@@ -8903,6 +9001,7 @@ def audit(root: Path) -> dict:
             "b1_u3_phase_factored_optimizer": str(b1_u3_phase_factored_path),
             "b1_b7_gcm_h6_target_selector": str(b1_b7_gcm_h6_target_selector_path),
             "b1_b7_gcm_h6_cone_feasibility_gate": str(b1_b7_gcm_h6_cone_feasibility_path),
+            "b1_b7_cone01_phase_removal_gate": str(b1_b7_cone01_phase_removal_path),
             "b1_synthetic_noise_proxy": str(b1_synthetic_noise_path),
             "b2_phenomenological_decoder": str(research / "B2_phenomenological_repetition_decoder.md"),
             "b2_stim_surface_code_baseline": str(research / "B2_stim_surface_code_memory_baseline.md"),
@@ -9345,6 +9444,18 @@ def markdown_report(report: dict) -> str:
             f"- Leading feasible cone / windows / direct sandwiches: {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('leading_feasible_cone_id')} / {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('leading_feasible_pair_local_single_window_count')} / {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('leading_feasible_direct_sandwich_count')}",
             f"- Rewrite/resource/semantic claims: {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('rewrite_claimed')} / {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('resource_saving_claimed')} / {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('semantic_certificate_claimed')}",
             f"- Validation errors: {report['b1']['b7_gcm_h6_cone_feasibility_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Phase-Removal Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_phase_removal_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_phase_removal_gate'].get('status')}",
+            f"- Target cone / candidate windows / required windows: {report['b1']['b7_cone01_phase_removal_gate'].get('target_cone_id')} / {report['b1']['b7_cone01_phase_removal_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_phase_removal_gate'].get('required_exact_windows_for_b7_target')}",
+            f"- Remove-only / fixed-phase / continuous-RZ exact passes: {report['b1']['b7_cone01_phase_removal_gate'].get('remove_only_exact_pass_count')} / {report['b1']['b7_cone01_phase_removal_gate'].get('fixed_phase_exact_pass_count')} / {report['b1']['b7_cone01_phase_removal_gate'].get('continuous_rz_exact_pass_count')}",
+            f"- Best / median continuous-RZ residual: {report['b1']['b7_cone01_phase_removal_gate'].get('best_continuous_rz_residual_norm')} / {report['b1']['b7_cone01_phase_removal_gate'].get('median_continuous_rz_residual_norm')}",
+            f"- Best fixed-phase residual: {report['b1']['b7_cone01_phase_removal_gate'].get('best_fixed_phase_residual_norm')}",
+            f"- Restricted gate clears B7 target: {report['b1']['b7_cone01_phase_removal_gate'].get('restricted_gate_clears_b7_target')}",
+            f"- Rewrite/resource/semantic/obstruction claims: {report['b1']['b7_cone01_phase_removal_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_phase_removal_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_phase_removal_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_phase_removal_gate'].get('obstruction_theorem_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_phase_removal_gate'].get('validation_error_count')}",
             "",
             "## B1 Synthetic Heavy-Hex Noise Proxy",
             "",

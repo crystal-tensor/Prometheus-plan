@@ -464,6 +464,32 @@ current_results:
     validation_error_count: 0
     report: ../results/B1_B7_gcm_h6_cone_feasibility_gate_v0.json
     markdown_report: ../research/B1_B7_gcm_h6_cone_feasibility_gate.md
+  b1_b7_cone01_phase_removal_gate_v0:
+    circuits: 1
+    status: cone01_phase_removal_restricted_negative_gate
+    model_status: restricted_two_cnot_phase_replacement_search_not_semantic_certificate
+    method: b1_b7_cone01_phase_removal_gate_v0
+    source_qasm: ../results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm
+    source_selector: b1_b7_gcm_h6_target_selector_v0
+    source_feasibility_gate: b1_b7_gcm_h6_cone_feasibility_gate_v0
+    workload: qasmbench_medium_exact/gcm_h6.qasm
+    target_cone_id: cone_01
+    candidate_window_count: 35
+    required_exact_windows_for_b7_target: 30
+    remove_only_exact_pass_count: 0
+    fixed_phase_exact_pass_count: 0
+    continuous_rz_exact_pass_count: 0
+    best_continuous_rz_residual_norm: 0.36435162331705345
+    median_continuous_rz_residual_norm: 0.41976650460733583
+    best_fixed_phase_residual_norm: 0.36435162331705345
+    restricted_gate_clears_b7_target: false
+    rewrite_claimed: false
+    resource_saving_claimed: false
+    semantic_certificate_claimed: false
+    obstruction_theorem_claimed: false
+    validation_error_count: 0
+    report: ../results/B1_B7_cone01_phase_removal_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_phase_removal_gate.md
   b1_synthetic_heavyhex_noise_proxy_v0:
     circuits: 30
     status: synthetic_noise_proxy_not_calibrated_device_claim
@@ -608,4 +634,5 @@ prototype_artifacts:
   u3_phase_factored_optimizer: ../tools/b1_u3_phase_factored_optimizer.py
   b1_b7_gcm_h6_target_selector: ../tools/b1_b7_gcm_h6_target_selector.py
   b1_b7_gcm_h6_cone_feasibility_gate: ../tools/b1_b7_gcm_h6_cone_feasibility_gate.py
+  b1_b7_cone01_phase_removal_gate: ../tools/b1_b7_cone01_phase_removal_gate.py
   synthetic_noise_proxy: ../tools/b1_synthetic_noise_proxy.py

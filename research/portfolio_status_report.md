@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 39, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 36, 'B8': 32, 'B9': 12, 'B10': 49}
+- Maturity scores: {'B1': 40, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 37, 'B8': 32, 'B9': 12, 'B10': 49}
 
 ## Technical Resolution Program
 
@@ -262,6 +262,18 @@ Overall audit: PASS
 - Cone classes meeting target by pair-local single windows: 1
 - Leading feasible cone / windows / direct sandwiches: cone_01 / 35 / 1
 - Rewrite/resource/semantic claims: False / False / False
+- Validation errors: 0
+
+## B1/B7 cone_01 Phase-Removal Gate
+
+- Exists: True
+- Status: cone01_phase_removal_restricted_negative_gate
+- Target cone / candidate windows / required windows: cone_01 / 35 / 30
+- Remove-only / fixed-phase / continuous-RZ exact passes: 0 / 0 / 0
+- Best / median continuous-RZ residual: 0.36435162331705345 / 0.41976650460733583
+- Best fixed-phase residual: 0.36435162331705345
+- Restricted gate clears B7 target: False
+- Rewrite/resource/semantic/obstruction claims: False / False / False / False
 - Validation errors: 0
 
 ## B1 Synthetic Heavy-Hex Noise Proxy
