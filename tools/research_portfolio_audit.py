@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -4907,6 +4908,7 @@ def audit(root: Path) -> dict:
     b4_results = b4_manifest.get("current_results", {})
     b4_trap = b4_results.get("toy_hidden_trap_protocol_sim_v0")
     b4_circuit_refresh = b4_results.get("circuit_hidden_projection_refresh_v0")
+    b4_openqasm3_packet = b4_results.get("openqasm3_randomized_measurement_packet_v0")
     b4_status = {}
     if not b4_trap:
         warnings.append("B4 manifest has no toy hidden-trap protocol result")
@@ -4985,6 +4987,106 @@ def audit(root: Path) -> dict:
             errors.append("B4/B8 circuit refresh repair should reduce high-leakage soundness to <=5%")
         if not payload.get("high_leakage_repair_modes_passing"):
             errors.append("B4/B8 circuit refresh should identify at least one passing high-leakage repair mode")
+
+    b4_openqasm3_packet_status = {}
+    if not b4_openqasm3_packet:
+        warnings.append("B4 manifest has no OpenQASM 3 randomized-measurement packet")
+    else:
+        result_path = b4_openqasm3_packet.get("result")
+        markdown_path = b4_openqasm3_packet.get("markdown_report")
+        qasm_directory = b4_openqasm3_packet.get("qasm_directory")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        qasm_directory_exists = bool(qasm_directory and path_exists_from(benchmarks, qasm_directory))
+        if not result_exists:
+            errors.append(f"B4/B8 OpenQASM 3 packet result path missing from B4 manifest: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B4/B8 OpenQASM 3 packet markdown missing from B4 manifest: {markdown_path}")
+        if not qasm_directory_exists:
+            errors.append(f"B4/B8 OpenQASM 3 packet directory missing from B4 manifest: {qasm_directory}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        b4_openqasm3_packet_status = {
+            "status": b4_openqasm3_packet.get("status"),
+            "method": b4_openqasm3_packet.get("method"),
+            "qasm_version": payload.get("qasm_version"),
+            "task_count": payload.get("task_count"),
+            "refresh_mode_count": payload.get("refresh_mode_count"),
+            "packet_circuits_per_task_mode": payload.get("packet_circuits_per_task_mode"),
+            "circuit_file_count": payload.get("circuit_file_count"),
+            "max_total_qubits": payload.get("max_total_qubits"),
+            "all_qasm3_headers_valid": payload.get("all_qasm3_headers_valid"),
+            "aer_semantic_mismatch_count": payload.get("aer_semantic_mismatch_count"),
+            "minimum_aer_honest_completeness": payload.get("minimum_aer_honest_completeness"),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "qasm_directory_exists": qasm_directory_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+            "qasm_directory": qasm_directory,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append("B4 OpenQASM 3 packet benchmark_id must be B4_B8")
+        if payload.get("status") != b4_openqasm3_packet.get("status"):
+            errors.append("B4 OpenQASM 3 packet status mismatch")
+        if payload.get("method") != b4_openqasm3_packet.get("method"):
+            errors.append("B4 OpenQASM 3 packet method mismatch")
+        if payload.get("qasm_version") != "OPENQASM 3.0":
+            errors.append("B4 OpenQASM 3 packet must export OPENQASM 3.0 circuits")
+        for field in [
+            "task_count",
+            "refresh_mode_count",
+            "packet_circuits_per_task_mode",
+            "circuit_file_count",
+            "max_total_qubits",
+            "openqasm3_files_exported",
+            "all_qasm3_headers_valid",
+            "hardware_executable_randomized_measurement_circuits_instantiated",
+            "qiskit_aer_semantic_check_performed",
+            "aer_semantic_mismatch_count",
+            "minimum_aer_honest_completeness",
+            "maximum_predicate_bit_error_rate",
+            "hardware_execution_performed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "full_distribution_verification_claimed",
+        ]:
+            if payload.get(field) != b4_openqasm3_packet.get(field):
+                errors.append(f"B4 OpenQASM 3 packet {field} mismatch")
+        if payload.get("circuit_file_count") != 36:
+            errors.append("B4 OpenQASM 3 packet should export 36 circuits")
+        if len(payload.get("circuits", [])) != payload.get("circuit_file_count"):
+            errors.append("B4 OpenQASM 3 packet circuit metadata count mismatch")
+        if payload.get("aer_semantic_mismatch_count") != 0:
+            errors.append("B4 OpenQASM 3 packet must have zero Aer semantic mismatches")
+        if payload.get("hardware_execution_performed") is not False:
+            errors.append("B4 OpenQASM 3 packet must not claim hardware execution")
+        for field in [
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "full_distribution_verification_claimed",
+        ]:
+            if payload.get(field) is not False:
+                errors.append(f"B4 OpenQASM 3 packet must keep {field}=False")
+        for row in payload.get("circuits", []):
+            qasm_path = row.get("path")
+            if not qasm_path or not path_exists_from(root, qasm_path):
+                errors.append(f"B4 OpenQASM 3 circuit file missing: {qasm_path}")
+                continue
+            qasm_text = read((root / qasm_path).resolve())
+            if not qasm_text.startswith("OPENQASM 3.0;"):
+                errors.append(f"B4 OpenQASM 3 circuit header invalid: {qasm_path}")
+            if hashlib.sha256(qasm_text.encode("utf-8")).hexdigest() != row.get("sha256"):
+                errors.append(f"B4 OpenQASM 3 circuit sha256 mismatch: {qasm_path}")
+        if len(payload.get("validation_errors", [])) != b4_openqasm3_packet.get("validation_error_count"):
+            errors.append("B4 OpenQASM 3 packet validation-error count mismatch")
 
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
     b5_results = b5_manifest.get("current_results", {})
@@ -7528,6 +7630,7 @@ def audit(root: Path) -> dict:
     b8_adaptive = b8_results.get("adaptive_leakage_spoofer_stress_v0")
     b8_refresh = b8_results.get("challenge_refresh_projection_rotation_repair_v0")
     b8_circuit_refresh = b8_results.get("circuit_hidden_projection_refresh_v0")
+    b8_openqasm3_packet = b8_results.get("openqasm3_randomized_measurement_packet_v0")
     b8_generative_spoofer = b8_results.get("generative_spoofer_refresh_stress_v0")
     b8_status = {}
     if not b8_verifier:
@@ -7684,6 +7787,75 @@ def audit(root: Path) -> dict:
             errors.append("B8 circuit refresh should expose high-leakage no-refresh risk")
         if float(payload.get("best_repair_high_leakage_max_soundness", 1.0)) > 0.05:
             errors.append("B8 circuit refresh repair should reduce high-leakage soundness to <=5%")
+
+    b8_openqasm3_packet_status = {}
+    if not b8_openqasm3_packet:
+        warnings.append("B8 manifest has no OpenQASM 3 randomized-measurement packet")
+    else:
+        result_path = b8_openqasm3_packet.get("result")
+        markdown_path = b8_openqasm3_packet.get("markdown_report")
+        qasm_directory = b8_openqasm3_packet.get("qasm_directory")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        qasm_directory_exists = bool(qasm_directory and path_exists_from(benchmarks, qasm_directory))
+        if not result_exists:
+            errors.append(f"B8 OpenQASM 3 packet result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B8 OpenQASM 3 packet markdown missing: {markdown_path}")
+        if not qasm_directory_exists:
+            errors.append(f"B8 OpenQASM 3 packet directory missing: {qasm_directory}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        b8_openqasm3_packet_status = {
+            "status": b8_openqasm3_packet.get("status"),
+            "method": b8_openqasm3_packet.get("method"),
+            "qasm_version": payload.get("qasm_version"),
+            "circuit_file_count": payload.get("circuit_file_count"),
+            "max_total_qubits": payload.get("max_total_qubits"),
+            "all_qasm3_headers_valid": payload.get("all_qasm3_headers_valid"),
+            "aer_semantic_mismatch_count": payload.get("aer_semantic_mismatch_count"),
+            "minimum_aer_honest_completeness": payload.get("minimum_aer_honest_completeness"),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "qasm_directory_exists": qasm_directory_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+            "qasm_directory": qasm_directory,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append("B8 OpenQASM 3 packet benchmark_id must be B4_B8")
+        if payload.get("status") != b8_openqasm3_packet.get("status"):
+            errors.append("B8 OpenQASM 3 packet status mismatch")
+        if payload.get("method") != b8_openqasm3_packet.get("method"):
+            errors.append("B8 OpenQASM 3 packet method mismatch")
+        if payload.get("qasm_version") != "OPENQASM 3.0":
+            errors.append("B8 OpenQASM 3 packet must export OPENQASM 3.0 circuits")
+        if payload.get("circuit_file_count") != b8_openqasm3_packet.get("circuit_file_count"):
+            errors.append("B8 OpenQASM 3 packet circuit count mismatch")
+        if payload.get("all_qasm3_headers_valid") is not True:
+            errors.append("B8 OpenQASM 3 packet must report valid QASM3 headers")
+        if payload.get("aer_semantic_mismatch_count") != 0:
+            errors.append("B8 OpenQASM 3 packet must have zero Aer semantic mismatches")
+        if payload.get("minimum_aer_honest_completeness") != 1.0:
+            errors.append("B8 OpenQASM 3 packet must preserve ideal honest completeness")
+        if payload.get("hardware_execution_performed") is not False:
+            errors.append("B8 OpenQASM 3 packet must not claim hardware execution")
+        for field in [
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "full_distribution_verification_claimed",
+        ]:
+            if payload.get(field) is not False:
+                errors.append(f"B8 OpenQASM 3 packet must keep {field}=False")
+        if b4_openqasm3_packet and b4_openqasm3_packet.get("result") != b8_openqasm3_packet.get("result"):
+            errors.append("B4 and B8 OpenQASM 3 packet manifests must point to the same result")
+        if len(payload.get("validation_errors", [])) != b8_openqasm3_packet.get("validation_error_count"):
+            errors.append("B8 OpenQASM 3 packet validation-error count mismatch")
 
     b8_generative_spoofer_status = {}
     if not b8_generative_spoofer:
@@ -9559,6 +9731,7 @@ def audit(root: Path) -> dict:
             "manifest": str(b4_manifest_path),
             "trap_protocol": b4_status,
             "circuit_refresh_task": b4_circuit_refresh_status,
+            "openqasm3_randomized_measurement_packet": b4_openqasm3_packet_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -9610,6 +9783,7 @@ def audit(root: Path) -> dict:
             "adaptive_leakage_spoofer": b8_adaptive_status,
             "challenge_refresh_repair": b8_refresh_status,
             "circuit_refresh_task": b8_circuit_refresh_status,
+            "openqasm3_randomized_measurement_packet": b8_openqasm3_packet_status,
             "generative_spoofer_refresh": b8_generative_spoofer_status,
         },
         "b9": {
@@ -9842,6 +10016,9 @@ def audit(root: Path) -> dict:
             "b7_w8_21_scoped_minimality_note": str(research / "B7_w8_21_scoped_minimality_note.md"),
             "b7_w8_21_claim_boundary_fragment": str(research / "B7_w8_21_claim_boundary_fragment.md"),
             "b4_b8_circuit_refresh_task": str(research / "B4_B8_circuit_refresh_task.md"),
+            "b4_b8_openqasm3_randomized_measurement_packet": str(
+                research / "B4_B8_openqasm3_randomized_measurement_packet.md"
+            ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),
@@ -10463,6 +10640,11 @@ def markdown_report(report: dict) -> str:
             f"- Circuit refresh no-refresh high-leakage max soundness: {report['b4']['circuit_refresh_task'].get('none_high_leakage_max_soundness')}",
             f"- Circuit refresh best repaired high-leakage max soundness: {report['b4']['circuit_refresh_task'].get('best_repair_high_leakage_max_soundness')}",
             f"- Circuit refresh result/markdown exists: {report['b4']['circuit_refresh_task'].get('result_exists')} / {report['b4']['circuit_refresh_task'].get('markdown_exists')}",
+            f"- OpenQASM 3 packet status: {report['b4']['openqasm3_randomized_measurement_packet'].get('status')}",
+            f"- OpenQASM 3 packet circuits / max qubits: {report['b4']['openqasm3_randomized_measurement_packet'].get('circuit_file_count')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('max_total_qubits')}",
+            f"- OpenQASM 3 packet headers / Aer mismatches / honest completeness: {report['b4']['openqasm3_randomized_measurement_packet'].get('all_qasm3_headers_valid')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('aer_semantic_mismatch_count')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('minimum_aer_honest_completeness')}",
+            f"- OpenQASM 3 packet hardware execution / advantage / BQP separation: {report['b4']['openqasm3_randomized_measurement_packet'].get('hardware_execution_performed')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('quantum_advantage_claimed')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('bqp_separation_claimed')}",
+            f"- OpenQASM 3 packet result/markdown/directory exists: {report['b4']['openqasm3_randomized_measurement_packet'].get('result_exists')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('markdown_exists')} / {report['b4']['openqasm3_randomized_measurement_packet'].get('qasm_directory_exists')}",
             "",
             "## B5 Hubbard Embedding Status",
             "",
@@ -10748,6 +10930,11 @@ def markdown_report(report: dict) -> str:
             f"- Circuit refresh best repaired high-leakage max soundness: {report['b8']['circuit_refresh_task'].get('best_repair_high_leakage_max_soundness')}",
             f"- Circuit refresh high-leakage repair modes passing: {report['b8']['circuit_refresh_task'].get('high_leakage_repair_modes_passing')}",
             f"- Circuit refresh result/markdown exists: {report['b8']['circuit_refresh_task'].get('result_exists')} / {report['b8']['circuit_refresh_task'].get('markdown_exists')}",
+            f"- OpenQASM 3 packet status: {report['b8']['openqasm3_randomized_measurement_packet'].get('status')}",
+            f"- OpenQASM 3 packet circuits / max qubits: {report['b8']['openqasm3_randomized_measurement_packet'].get('circuit_file_count')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('max_total_qubits')}",
+            f"- OpenQASM 3 packet headers / Aer mismatches / honest completeness: {report['b8']['openqasm3_randomized_measurement_packet'].get('all_qasm3_headers_valid')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('aer_semantic_mismatch_count')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('minimum_aer_honest_completeness')}",
+            f"- OpenQASM 3 packet hardware execution / advantage / BQP separation: {report['b8']['openqasm3_randomized_measurement_packet'].get('hardware_execution_performed')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('quantum_advantage_claimed')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('bqp_separation_claimed')}",
+            f"- OpenQASM 3 packet result/markdown/directory exists: {report['b8']['openqasm3_randomized_measurement_packet'].get('result_exists')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('markdown_exists')} / {report['b8']['openqasm3_randomized_measurement_packet'].get('qasm_directory_exists')}",
             f"- Generative spoofer status: {report['b8']['generative_spoofer_refresh'].get('status')}",
             f"- Generative spoofer configurations: {report['b8']['generative_spoofer_refresh'].get('configuration_count')}",
             f"- Generative spoofer maximum learned soundness: {report['b8']['generative_spoofer_refresh'].get('maximum_learned_soundness')}",

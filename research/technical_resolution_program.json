@@ -38,9 +38,9 @@
     {
       "b_id": "B4",
       "technical_solution_target": "Circuit-level verifiable advantage task with explicit completeness/soundness against adaptive spoofers.",
-      "current_evidence": "Toy hidden-trap protocol rejects four spoofing families; shared B4/B8 CNOT hidden-projection refresh task runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0.",
-      "main_blocker": "The new task is still a CNOT/projection proxy, not a hardware-executable randomized-measurement protocol, hardness result, or quantum advantage claim.",
-      "next_experiment": "Upgrade the CNOT hidden-projection proxy to hardware-executable randomized measurement circuits or attack it with trained/generative spoofers.",
+      "current_evidence": "Toy hidden-trap protocol rejects four spoofing families; shared B4/B8 CNOT hidden-projection refresh task runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0. T-B4-002a exports 36 OpenQASM 3 randomized-measurement verifier circuits with max 30 qubits including verifier ancillas and 0 Qiskit/Aer semantic mismatches.",
+      "main_blocker": "The packet is still a CNOT/projection verifier packet and semantic check, not real hardware execution, cryptographic soundness, sampling hardness, or quantum advantage.",
+      "next_experiment": "Run the OpenQASM 3 packet on real backend properties or hardware randomized-measurement execution, or attack the same packet with stronger trained/generative spoofers.",
       "gate_status": "early"
     },
     {
@@ -70,9 +70,9 @@
     {
       "b_id": "B8",
       "technical_solution_target": "Classical verifier whose soundness stays low under adaptive leakage through challenge refresh/projection rotation.",
-      "current_evidence": "Honest completeness 1.0; five adversaries rejected; 0.75 leakage failure boundary; toy refresh/rotation repair makes high-leakage repair modes pass <=5% soundness; shared B4/B8 circuit-refresh task instantiates refresh/rotation on CNOT hidden-projection tasks and reduces high-leakage adaptive soundness from 0.675 without refresh to 0.0 under the best repaired modes; trained/generative spoofer stress runs 144 configs and shows no-refresh high leakage reaches learned soundness 1.0; B10-T2 proof-obligation gate rejects no-refresh high-leakage claims; restricted lemma gives a 8.94e-44 single-unknown-mask bound; transcript leakage simulator runs 192 configs; device-noise transcript bridge runs 480 configs and keeps challenge_refresh/refresh_plus_rotation high-leakage soundness <=0.0208 under bounded noise; Qiskit/Aer verifier bridge instantiates 216 ideal randomized parity-verifier circuits with 0 semantic mismatches and honest completeness 1.0; noisy Aer bridge executes 9600 randomized parity-verifier circuits with circuit-level adversary inputs, bridge-safe noisy honest acceptance 1.0, and bridge-safe noisy adversary acceptance 0.0; backend-calibrated-style bridge derives per-qubit/per-edge Aer noise from Qiskit GenericBackendV2 target InstructionProperties and executes 5760 circuits with safe calibrated honest acceptance 1.0, safe calibrated adversary acceptance 0.25, and max honest predicate-bit error 0.0703125.",
-      "main_blocker": "The circuit-refresh, trained-spoofer, proof gate, restricted lemma, transcript simulator, device-noise bridge, and Aer bridges remain CNOT hidden-projection/proxy evidence. T-B10-008 now adds GenericBackendV2 calibration-style noise parameters, but it is still not real backend properties, hardware randomized-measurement verifier execution, cryptographic soundness, or sampling-hardness.",
-      "next_experiment": "Replace GenericBackendV2 snapshots with real backend properties or run a hardware randomized-measurement verifier, then compare against the noisy Aer, backend-calibrated-style, and transcript device-noise bridges.",
+      "current_evidence": "Hidden-invariant verifier, adaptive leakage stress, challenge refresh/rotation repair, shared B4/B8 circuit-refresh task, T-B4-002a OpenQASM 3 packet with 36 verifier circuits and 0 Aer semantic mismatches, trained/generative spoofer stress, B10-T2 proof gate, restricted lemma, transcript/device-noise bridge, ideal/noisy Aer bridges, and backend-calibrated-style GenericBackendV2 bridge with safe calibrated honest acceptance 1.0 and adversary acceptance 0.25.",
+      "main_blocker": "All verifier evidence remains CNOT hidden-projection/proxy evidence. The new OpenQASM 3 packet is executable input material, but not real backend properties, hardware execution, cryptographic soundness, or sampling hardness.",
+      "next_experiment": "Replace GenericBackendV2 snapshots with real backend properties or run hardware randomized-measurement verifier execution using the OpenQASM 3 packet, then compare against noisy Aer, backend-calibrated-style, and transcript device-noise bridges.",
       "gate_status": "in_progress"
     },
     {

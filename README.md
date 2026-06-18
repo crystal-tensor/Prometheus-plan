@@ -96,6 +96,15 @@ The latest B10-T1 stress test still finds no positive same-access route because
 it is not a production DMRG result, not a deployable tensor solver, not a
 sampling oracle, and not a quantum advantage claim.
 
+B4/B8 now has an OpenQASM 3 randomized-measurement packet for the shared
+hidden-projection verifier spine. The packet exports 36 hardware-executable
+verifier circuits across 3 tasks, 3 refresh modes, and 4 circuit instances per
+task-mode; every file starts with `OPENQASM 3.0`, the maximum circuit size is
+30 qubits including verifier ancillas, and the Qiskit/Aer semantic mismatch
+count is 0. This is a circuit packet and semantic check only, not hardware
+execution, sampling hardness, cryptographic soundness, quantum advantage, or a
+BQP separation claim.
+
 B6 has moved from a synthetic descriptor toy to curated leakage audits and a
 structural/electronic proxy boundary. The latest B6 screen keeps 38 records
 across 22 families with 12 expanded negative controls; structural/electronic

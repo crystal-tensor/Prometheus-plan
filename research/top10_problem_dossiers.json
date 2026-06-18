@@ -116,14 +116,9 @@
         "interactive proofs"
       ],
       "our_solution": "Hidden-trap and hidden-invariant hybrid tasks with leakage stress tests, challenge refresh, and circuit-derived projection checks.",
-      "completed": "Toy hidden-trap statistical protocol; four spoofing families rejected; B8 identifies 75% leakage as dangerous; shared B4/B8 CNOT hidden-projection refresh proxy runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0.",
-      "remaining_steps": [
-        "hardware-executable randomized measurement hidden task",
-        "trained adaptive/generative spoofers",
-        "completeness and soundness proof",
-        "simulator and small-device trials"
-      ],
-      "maturity_score": 20
+      "completed": "Toy hidden-trap statistical protocol; four spoofing families rejected; B8 identifies 75% leakage as dangerous; shared B4/B8 CNOT hidden-projection refresh proxy runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0, no-refresh high-leakage max soundness 0.675, and repaired high-leakage max soundness 0.0. T-B4-002a exports a B4/B8 OpenQASM 3 randomized-measurement packet with 36 hidden-projection verifier circuits, max 30 qubits including ancillas, and 0 Qiskit/Aer semantic mismatches; it is not hardware execution, hardness, advantage, or BQP separation.",
+      "remaining_steps": "Run the OpenQASM 3 packet on real backend properties or hardware randomized-measurement execution; attack it with stronger trained/generative spoofers; then prove completeness and soundness under explicit assumptions.",
+      "maturity_score": 21
     },
     {
       "b_id": "B5",
@@ -220,14 +215,9 @@
         "property testing"
       ],
       "our_solution": "Hidden-invariant tests plus adaptive leakage stress, followed by challenge refresh, projection rotation, and B4 circuit-derived hidden projection tasks.",
-      "completed": "Toy hidden-invariant verifier with honest completeness 1.0; five adversaries rejected; 48-configuration leakage test shows 0.75 leakage dangerous; toy refresh/rotation repair passes the <=5% high-leakage soundness gate; shared B4/B8 circuit-refresh proxy reduces high-leakage adaptive soundness from 0.675 without refresh to 0.0 under repaired modes; trained/generative spoofer stress runs 144 configs, reaches learned soundness 1.0 without refresh, and keeps projection_rotation/challenge_refresh/refresh_plus_rotation <=5% in this proxy; B10-T2 proof-obligation gate rejects no-refresh high-leakage claims; restricted refresh-independence lemma gives a 8.94e-44 single-unknown-mask bound under declared assumptions; transcript leakage simulator runs 192 configs and shows refreshed high-leakage modes retain >=6 unknown independent predicates with max empirical soundness 0.025 while no-refresh high leakage remains unsafe; device-noise transcript bridge runs 480 configs and keeps challenge_refresh/refresh_plus_rotation high-leakage soundness <=0.0208 under bounded noise, while projection_rotation is margin-sensitive and calibration side-channel leakage is rejected; Qiskit/Aer verifier bridge instantiates 216 ideal randomized parity-verifier circuits with 0 semantic mismatches, honest completeness 1.0, and up to 30 qubits including verifier ancillas; noisy Aer verifier bridge executes 9600 randomized parity-verifier circuits with honest and four adversary input families, bridge-safe noisy honest acceptance 1.0, bridge-safe noisy adversary acceptance 0.0, and at least 7 unknown independent predicates; backend-calibrated-style verifier bridge derives noise from Qiskit GenericBackendV2 target InstructionProperties and executes 5760 circuits with safe calibrated honest acceptance 1.0, safe calibrated adversary acceptance 0.25, max honest predicate-bit error 0.0703125, and no-refresh marked unsafe.",
-      "remaining_steps": [
-        "real backend properties bridge",
-        "hardware-executable randomized measurement verifier",
-        "stronger learned/generative adversaries against noisy/backend-calibrated circuits",
-        "soundness curves under realistic leakage models"
-      ],
-      "maturity_score": 32
+      "completed": "Toy hidden-invariant verifier with honest completeness 1.0; five adversaries rejected; 48-configuration leakage test shows 0.75 leakage dangerous; toy refresh/rotation repair passes the <=5% high-leakage soundness gate; shared B4/B8 circuit-refresh proxy reduces high-leakage adaptive soundness from 0.675 without refresh to 0.0 under repaired modes; trained/generative spoofer stress runs 144 configs, reaches learned soundness 1.0 without refresh, and keeps projection_rotation/challenge_refresh/refresh_plus_rotation <=5% in this proxy; B10-T2 proof-obligation gate rejects no-refresh high-leakage claims; restricted refresh-independence lemma gives a 8.94e-44 single-unknown-mask bound under declared assumptions; transcript leakage simulator runs 192 configs and shows refreshed high-leakage modes retain >=6 unknown independent predicates with max empirical soundness 0.025 while no-refresh high leakage remains unsafe; device-noise transcript bridge runs 480 configs and keeps challenge_refresh/refresh_plus_rotation high-leakage soundness <=0.0208 under bounded noise, while projection_rotation is margin-sensitive and calibration side-channel leakage is rejected; Qiskit/Aer verifier bridge instantiates 216 ideal randomized parity-verifier circuits with 0 semantic mismatches, honest completeness 1.0, and up to 30 qubits including verifier ancillas; noisy Aer verifier bridge executes 9600 randomized parity-verifier circuits with honest and four adversary input families, bridge-safe noisy honest acceptance 1.0, bridge-safe noisy adversary acceptance 0.0, and at least 7 unknown independent predicates; backend-calibrated-style verifier bridge derives noise from Qiskit GenericBackendV2 target InstructionProperties and executes 5760 circuits with safe calibrated honest acceptance 1.0, safe calibrated adversary acceptance 0.25, max honest predicate-bit error 0.0703125, and no-refresh marked unsafe. T-B4-002a adds the shared OpenQASM 3 packet: 36 hardware-executable verifier circuits, all with OPENQASM 3.0 headers, max 30 qubits, and 0 Qiskit/Aer semantic mismatches.",
+      "remaining_steps": "Replace GenericBackendV2 snapshots with real backend properties; run hardware randomized-measurement verifier execution using the OpenQASM 3 packet; attack noisy/backend-calibrated circuits with stronger learned/generative adversaries; output soundness curves under realistic leakage models.",
+      "maturity_score": 33
     },
     {
       "b_id": "B9",

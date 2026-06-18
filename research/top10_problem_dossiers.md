@@ -344,14 +344,19 @@ families rejected; B8 leakage stress test shows 75% leakage is a dangerous
 boundary for trap-aware spoofing; shared B4/B8 CNOT hidden-projection refresh
 proxy runs 3 circuit-derived tasks / 192 configs with honest completeness 1.0,
 no-refresh high-leakage max soundness 0.675, and repaired high-leakage max
-soundness 0.0.
+soundness 0.0. T-B4-002a exports a hardware-executable OpenQASM 3 randomized
+measurement packet for the same hidden-projection verifier spine: 36 circuit
+files, 3 tasks, 3 refresh modes, 4 packet circuits per task-mode, max 30 qubits
+including verifier ancillas, and 0 Qiskit/Aer semantic mismatches. It is not
+hardware execution, sampling hardness, quantum advantage, or BQP separation.
 
-**Remaining path to a serious solution:** upgrade the CNOT/projection proxy to
-hardware-executable randomized measurement hidden tasks; test trained
-adaptive/generative classical spoofers; prove completeness and soundness under
-explicit assumptions; run simulator and small-device trials.
+**Remaining path to a serious solution:** run the OpenQASM 3 packet on real
+backend properties or hardware randomized-measurement execution; test trained
+adaptive/generative classical spoofers against the same packet; prove
+completeness and soundness under explicit assumptions; run simulator and
+small-device trials.
 
-**Current internal maturity:** 20/100.
+**Current internal maturity:** 21/100.
 
 ## B5: Strongly Correlated Matter via Hybrid Quantum-Tensor Solvers
 
@@ -603,6 +608,10 @@ single-unknown-mask soundness bound. The transcript leakage simulator now runs
 192 configurations and shows refreshed high-leakage modes retain at least 6
 unknown independent predicates with max empirical soundness 0.025, while
 no-refresh high leakage remains unsafe.
+T-B4-002a now adds a B4/B8 OpenQASM 3 randomized-measurement packet with 36
+hardware-executable verifier circuits, all using `OPENQASM 3.0`, max 30 qubits
+including verifier ancillas, and 0 Qiskit/Aer semantic mismatches. It is a
+packet and semantic check, not hardware execution or sampling hardness.
 The device-noise transcript bridge now adds 480 configurations across five
 noise profiles: bounded bridge profiles preserve honest completeness 1.0, and
 challenge_refresh / refresh_plus_rotation stay at max high-leakage soundness
@@ -626,11 +635,11 @@ predicates; no-refresh remains unsafe.
 
 **Remaining path to a serious solution:** replace GenericBackendV2 snapshots
 with real backend properties; instantiate hardware randomized-measurement
-verifier execution; attack noisy/backend-calibrated circuits with stronger
+verifier execution using the OpenQASM 3 packet; attack noisy/backend-calibrated circuits with stronger
 learned/generative adversaries; output soundness curves under realistic leakage
 models.
 
-**Current internal maturity:** 32/100.
+**Current internal maturity:** 33/100.
 
 ## B9: Quantum PCP and Local Hamiltonian Hardness
 

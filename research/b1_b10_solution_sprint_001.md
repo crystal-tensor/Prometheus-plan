@@ -344,6 +344,17 @@ repaired high-leakage max soundness 0.0. This is not a quantum advantage claim;
 it is the first circuit-level B4/B8 verification proxy with a clear leakage
 failure and refresh/rotation repair boundary.
 
+**Sprint update 54:** `T-B4-002a` is now merged as an OpenQASM 3
+randomized-measurement packet for the B4/B8 hidden-projection verifier spine.
+The new tool `tools/b4_b8_openqasm3_randomized_measurement_packet.py` exports
+36 `OPENQASM 3.0` verifier circuits across 3 tasks, 3 refresh modes, and 4
+packet circuits per task-mode. The largest circuit uses 30 qubits including
+verifier ancillas, and the Qiskit/Aer semantic mismatch count is 0. This is a
+circuit packet and semantic check only: it is not hardware execution, sampling
+hardness, cryptographic soundness, quantum advantage, or BQP separation. Next:
+run the packet against real backend properties, hardware randomized-measurement
+execution, or stronger trained/generative spoofers.
+
 ## B5: Strongly Correlated Matter
 
 **Technical target:** show an accuracy-per-resource improvement on a meaningful
@@ -915,6 +926,19 @@ honest predicate-bit error is 0.0703125, and at least 7 unknown independent
 predicates remain. The no-refresh mode remains unsafe. Next: `T-B10-009`
 should replace GenericBackendV2 snapshots with real backend properties or run
 hardware randomized-measurement verifier execution.
+
+**Sprint update 54:** `T-B4-002a` is now merged into B8 as the OpenQASM 3
+randomized-measurement packet for the shared B4/B8 verifier spine. The packet
+adds `results/B4_B8_openqasm3_randomized_measurement_packet_v0.json`,
+`research/B4_B8_openqasm3_randomized_measurement_packet.md`, and 36 exported
+`.qasm` circuits under
+`results/B4_B8_openqasm3_randomized_measurement_packet/circuits/`. Every
+circuit starts with `OPENQASM 3.0`, the maximum size is 30 qubits including
+verifier ancillas, and the Aer semantic mismatch count is 0. It is not a
+hardware run, cryptographic soundness proof, sampling-hardness proof, quantum
+advantage claim, or BQP separation claim. The next B8 gate is to run this
+packet with real backend properties or hardware randomized-measurement
+execution, and to attack the same packet with stronger spoofers.
 
 ## B9: Quantum PCP / Local Hamiltonian Hardness
 

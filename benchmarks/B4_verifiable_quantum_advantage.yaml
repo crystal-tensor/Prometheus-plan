@@ -39,6 +39,35 @@ next_actions:
   - choose_small_exact_simulation_sizes
   - choose_beyond_exact_simulation_target_sizes
 current_results:
+  openqasm3_randomized_measurement_packet_v0:
+    status: openqasm3_randomized_measurement_packet_not_hardware_execution_or_advantage_claim
+    model_status: hardware_executable_circuit_packet_not_hardware_run
+    method: b4_b8_openqasm3_randomized_measurement_packet_v0
+    source_method: b4_b8_circuit_hidden_projection_refresh_v0
+    task_family: random_cnot_hidden_projection_sampling
+    qasm_version: OPENQASM 3.0
+    task_count: 3
+    refresh_mode_count: 3
+    packet_circuits_per_task_mode: 4
+    circuit_file_count: 36
+    max_total_qubits: 30
+    openqasm3_files_exported: true
+    all_qasm3_headers_valid: true
+    hardware_executable_randomized_measurement_circuits_instantiated: true
+    qiskit_aer_semantic_check_performed: true
+    aer_semantic_mismatch_count: 0
+    minimum_aer_honest_completeness: 1.0
+    maximum_predicate_bit_error_rate: 0.0
+    hardware_execution_performed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    full_distribution_verification_claimed: false
+    validation_error_count: 0
+    qasm_directory: ../results/B4_B8_openqasm3_randomized_measurement_packet/circuits
+    result: ../results/B4_B8_openqasm3_randomized_measurement_packet_v0.json
+    markdown_report: ../research/B4_B8_openqasm3_randomized_measurement_packet.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim
@@ -89,4 +118,5 @@ current_results:
 prototype_artifacts:
   trap_protocol_simulator: ../tools/b4_trap_protocol_sim.py
   circuit_refresh_task: ../tools/b4_b8_circuit_refresh_task.py
+  openqasm3_randomized_measurement_packet: ../tools/b4_b8_openqasm3_randomized_measurement_packet.py
   prototype_notes: ../research/B4_prototype_notes.md
