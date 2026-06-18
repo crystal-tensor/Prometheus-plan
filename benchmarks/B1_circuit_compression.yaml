@@ -518,6 +518,35 @@ current_results:
     validation_error_count: 0
     report: ../results/B1_B7_cone01_euler_reabsorption_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_euler_reabsorption_gate.md
+  b1_b7_cone01_parameter_transfer_gate_v0:
+    circuits: 1
+    status: cone01_parameter_transfer_obligation_gate
+    model_status: parameter_sensitivity_guardrail_not_rewrite_certificate
+    method: b1_b7_cone01_parameter_transfer_gate_v0
+    source_qasm: ../results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm
+    source_selector: b1_b7_gcm_h6_target_selector_v0
+    source_feasibility_gate: b1_b7_gcm_h6_cone_feasibility_gate_v0
+    source_phase_removal_gate: b1_b7_cone01_phase_removal_gate_v0
+    source_euler_reabsorption_gate: b1_b7_cone01_euler_reabsorption_gate_v0
+    workload: qasmbench_medium_exact/gcm_h6.qasm
+    target_cone_id: cone_01
+    candidate_window_count: 35
+    required_exact_windows_for_b7_target: 30
+    nonzero_parameter_sensitivity_count: 35
+    parameter_sensitivity_zero_count: 0
+    near_pi_over_four_grid_count: 0
+    distinct_canonical_theta_count: 4
+    largest_repeated_theta_group: 16
+    repeated_theta_occurrence_count: 35
+    minimum_parameter_carrier_obligation_for_b7_target: 30
+    deletion_without_parameter_carrier_clears_b7_target: false
+    rewrite_claimed: false
+    resource_saving_claimed: false
+    semantic_certificate_claimed: false
+    obstruction_theorem_claimed: false
+    validation_error_count: 0
+    report: ../results/B1_B7_cone01_parameter_transfer_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_parameter_transfer_gate.md
   b1_synthetic_heavyhex_noise_proxy_v0:
     circuits: 30
     status: synthetic_noise_proxy_not_calibrated_device_claim

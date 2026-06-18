@@ -1,0 +1,496 @@
+{
+  "angle_groups": [
+    {
+      "canonical_theta": 0.420540811611,
+      "line_numbers": [
+        94,
+        97,
+        252,
+        255,
+        345,
+        348,
+        427,
+        1254,
+        1257,
+        1310,
+        1313,
+        1366,
+        1369,
+        1422,
+        1543,
+        1546
+      ],
+      "min_distance_to_pi_over_four_grid": 0.36485735178627676,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "occurrence_count": 16
+    },
+    {
+      "canonical_theta": 0.364857351786,
+      "line_numbers": [
+        29,
+        87,
+        187,
+        245,
+        280,
+        338,
+        359,
+        417,
+        1478,
+        1536
+      ],
+      "min_distance_to_pi_over_four_grid": 0.3648573517862772,
+      "nearest_pi_over_four_label": "-8*pi/4",
+      "occurrence_count": 10
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "line_numbers": [
+        139,
+        152,
+        155,
+        1588,
+        1599,
+        1602
+      ],
+      "min_distance_to_pi_over_four_grid": 0.21263670123274103,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "occurrence_count": 6
+    },
+    {
+      "canonical_theta": 2.813468447841,
+      "line_numbers": [
+        462,
+        474,
+        477
+      ],
+      "min_distance_to_pi_over_four_grid": 0.3281242057491873,
+      "nearest_pi_over_four_label": "-4*pi/4",
+      "occurrence_count": 3
+    }
+  ],
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "next_gate": "Run a broader two-qubit synthesis/KAK scaffold only on routes that explicitly account for the theta carrier and preserve or reduce the arbitrary-rotation ledger.",
+    "obstruction_theorem_claimed": false,
+    "physical_layout_claimed": false,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "semantic_certificate_claimed": false,
+    "supported_claim": "The cone_01 RY(theta) occurrences carry nonzero local unitary sensitivity, so a deletion route must either carry theta elsewhere, prove exact special-angle identities, or show certified cross-window parameter sharing before B7 can count savings.",
+    "unsupported_claims": [
+      "No local rewrite certificate is produced.",
+      "No KAK lower bound or global obstruction theorem is proved.",
+      "No B7 FT ledger improvement is counted.",
+      "Repeated theta groups are not counted as physical resource savings without certificates."
+    ]
+  },
+  "last_updated": "2026-06-18",
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_parameter_transfer_gate_v0",
+  "model_status": "parameter_sensitivity_guardrail_not_rewrite_certificate",
+  "problem_id": 25,
+  "source_euler_reabsorption_gate": "results/B1_B7_cone01_euler_reabsorption_gate_v0.json",
+  "source_feasibility_gate": "results/B1_B7_gcm_h6_cone_feasibility_gate_v0.json",
+  "source_phase_removal_gate": "results/B1_B7_cone01_phase_removal_gate_v0.json",
+  "source_qasm": "results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm",
+  "source_selector": "results/B1_B7_gcm_h6_target_selector_v0.json",
+  "status": "cone01_parameter_transfer_obligation_gate",
+  "summary": {
+    "candidate_window_count": 35,
+    "deletion_without_parameter_carrier_clears_b7_target": false,
+    "distinct_canonical_theta_count": 4,
+    "largest_repeated_theta_group": 16,
+    "minimum_parameter_carrier_obligation_for_b7_target": 30,
+    "near_pi_over_four_grid_count": 0,
+    "nonzero_parameter_sensitivity_count": 35,
+    "obstruction_theorem_claimed": false,
+    "parameter_sensitivity_zero_count": 0,
+    "repeated_theta_occurrence_count": 35,
+    "required_exact_windows_for_b7_target": 30,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "semantic_certificate_claimed": false,
+    "target_cone_id": "cone_01",
+    "target_proxy_t_ledger_reduction_for_gcm_h6_1_20": 600,
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 cone_01 parameter-transfer obligation gate",
+  "top_angle_groups": [
+    {
+      "canonical_theta": 0.420540811611,
+      "line_numbers": [
+        94,
+        97,
+        252,
+        255,
+        345,
+        348,
+        427,
+        1254,
+        1257,
+        1310,
+        1313,
+        1366,
+        1369,
+        1422,
+        1543,
+        1546
+      ],
+      "min_distance_to_pi_over_four_grid": 0.36485735178627676,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "occurrence_count": 16
+    },
+    {
+      "canonical_theta": 0.364857351786,
+      "line_numbers": [
+        29,
+        87,
+        187,
+        245,
+        280,
+        338,
+        359,
+        417,
+        1478,
+        1536
+      ],
+      "min_distance_to_pi_over_four_grid": 0.3648573517862772,
+      "nearest_pi_over_four_label": "-8*pi/4",
+      "occurrence_count": 10
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "line_numbers": [
+        139,
+        152,
+        155,
+        1588,
+        1599,
+        1602
+      ],
+      "min_distance_to_pi_over_four_grid": 0.21263670123274103,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "occurrence_count": 6
+    },
+    {
+      "canonical_theta": 2.813468447841,
+      "line_numbers": [
+        462,
+        474,
+        477
+      ],
+      "min_distance_to_pi_over_four_grid": 0.3281242057491873,
+      "nearest_pi_over_four_label": "-4*pi/4",
+      "occurrence_count": 3
+    }
+  ],
+  "top_windows_by_parameter_sensitivity": [
+    {
+      "canonical_theta": 2.813468447841,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.3281242057491873,
+      "line_number": 477,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -3.141592653589793,
+      "nearest_pi_over_four_label": "-4*pi/4",
+      "next_cx_line": 479,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 472,
+      "original_ry_params": "2.8134684478406053",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000001671387,
+        "plus_residual_per_eps": 1.0000000001038696,
+        "projective_derivative_norm": 1.0000000001354727
+      },
+      "partner": 14,
+      "previous_cx_line": 475,
+      "qubit": 5,
+      "theta": 2.8134684478406053,
+      "window_operation_count": 5,
+      "window_text": [
+        "cx q[14],q[5];",
+        "rz(pi) q[5];",
+        "ry(2.8134684478406053) q[5];",
+        "rz(-pi/2) q[5];",
+        "cx q[14],q[5];"
+      ]
+    },
+    {
+      "canonical_theta": 2.813468447841,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.3281242057491873,
+      "line_number": 474,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -3.141592653589793,
+      "nearest_pi_over_four_label": "-4*pi/4",
+      "next_cx_line": 475,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 469,
+      "original_ry_params": "2.8134684478406049",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000001896878,
+        "plus_residual_per_eps": 1.0000000000762355,
+        "projective_derivative_norm": 1.0000000001329303
+      },
+      "partner": 14,
+      "previous_cx_line": 473,
+      "qubit": 5,
+      "theta": 2.813468447840605,
+      "window_operation_count": 3,
+      "window_text": [
+        "cx q[14],q[5];",
+        "ry(2.8134684478406049) q[5];",
+        "cx q[14],q[5];"
+      ]
+    },
+    {
+      "canonical_theta": 2.813468447841,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.3281242057491873,
+      "line_number": 462,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -3.141592653589793,
+      "nearest_pi_over_four_label": "-4*pi/4",
+      "next_cx_line": 464,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 457,
+      "original_ry_params": "2.8134684478406058",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000001622176,
+        "plus_residual_per_eps": 1.0000000000682068,
+        "projective_derivative_norm": 1.0000000001151808
+      },
+      "partner": 14,
+      "previous_cx_line": 460,
+      "qubit": 16,
+      "theta": 2.813468447840606,
+      "window_operation_count": 5,
+      "window_text": [
+        "cx q[14],q[16];",
+        "rz(3*pi/4) q[16];",
+        "ry(2.8134684478406058) q[16];",
+        "rz(pi) q[16];",
+        "cx q[14],q[16];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274103,
+      "line_number": 155,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -5.497787143782138,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "next_cx_line": 157,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 150,
+      "original_ry_params": "0.99803486463018953",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000000961622,
+        "plus_residual_per_eps": 1.000000000081894,
+        "projective_derivative_norm": 1.0000000000889968
+      },
+      "partner": 14,
+      "previous_cx_line": 154,
+      "qubit": 10,
+      "theta": 0.9980348646301895,
+      "window_operation_count": 4,
+      "window_text": [
+        "cx q[14],q[10];",
+        "ry(0.99803486463018953) q[10];",
+        "rz(pi/2) q[10];",
+        "cx q[14],q[10];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274103,
+      "line_number": 1602,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -5.497787143782138,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "next_cx_line": 1604,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 1597,
+      "original_ry_params": "0.99803486463018953",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000000961622,
+        "plus_residual_per_eps": 1.000000000081894,
+        "projective_derivative_norm": 1.0000000000889968
+      },
+      "partner": 14,
+      "previous_cx_line": 1601,
+      "qubit": 15,
+      "theta": 0.9980348646301895,
+      "window_operation_count": 4,
+      "window_text": [
+        "cx q[14],q[15];",
+        "ry(0.99803486463018953) q[15];",
+        "rz(pi/2) q[15];",
+        "cx q[14],q[15];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274192,
+      "line_number": 152,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": 0.7853981633974483,
+      "nearest_pi_over_four_label": "1*pi/4",
+      "next_cx_line": 154,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 147,
+      "original_ry_params": "0.99803486463019042",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000000925837,
+        "plus_residual_per_eps": 0.9999999999988233,
+        "projective_derivative_norm": 1.0000000000456721
+      },
+      "partner": 14,
+      "previous_cx_line": 150,
+      "qubit": 10,
+      "theta": 0.9980348646301904,
+      "window_operation_count": 5,
+      "window_text": [
+        "cx q[14],q[10];",
+        "rz(pi) q[10];",
+        "ry(0.99803486463019042) q[10];",
+        "rz(pi) q[10];",
+        "cx q[14],q[10];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274192,
+      "line_number": 1599,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": 0.7853981633974483,
+      "nearest_pi_over_four_label": "1*pi/4",
+      "next_cx_line": 1601,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 1594,
+      "original_ry_params": "0.99803486463019042",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 1.0000000000925837,
+        "plus_residual_per_eps": 0.9999999999988233,
+        "projective_derivative_norm": 1.0000000000456721
+      },
+      "partner": 14,
+      "previous_cx_line": 1597,
+      "qubit": 15,
+      "theta": 0.9980348646301904,
+      "window_operation_count": 5,
+      "window_text": [
+        "cx q[14],q[15];",
+        "rz(pi) q[15];",
+        "ry(0.99803486463019042) q[15];",
+        "rz(pi) q[15];",
+        "cx q[14],q[15];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274103,
+      "line_number": 139,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -5.497787143782138,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "next_cx_line": 140,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 134,
+      "original_ry_params": "0.99803486463018931",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 0.9999999999465878,
+        "plus_residual_per_eps": 1.0000000001273315,
+        "projective_derivative_norm": 1.0000000000369282
+      },
+      "partner": 14,
+      "previous_cx_line": 137,
+      "qubit": 2,
+      "theta": 0.9980348646301893,
+      "window_operation_count": 4,
+      "window_text": [
+        "cx q[14],q[2];",
+        "rz(-pi/4) q[2];",
+        "ry(0.99803486463018931) q[2];",
+        "cx q[14],q[2];"
+      ]
+    },
+    {
+      "canonical_theta": 0.99803486463,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.21263670123274103,
+      "line_number": 1588,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -5.497787143782138,
+      "nearest_pi_over_four_label": "-7*pi/4",
+      "next_cx_line": 1589,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 1583,
+      "original_ry_params": "0.99803486463018931",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 0.9999999999465878,
+        "plus_residual_per_eps": 1.0000000001273315,
+        "projective_derivative_norm": 1.0000000000369282
+      },
+      "partner": 14,
+      "previous_cx_line": 1586,
+      "qubit": 4,
+      "theta": 0.9980348646301893,
+      "window_operation_count": 4,
+      "window_text": [
+        "cx q[14],q[4];",
+        "rz(-pi/4) q[4];",
+        "ry(0.99803486463018931) q[4];",
+        "cx q[14],q[4];"
+      ]
+    },
+    {
+      "canonical_theta": 0.364857351786,
+      "deletion_without_parameter_carrier_admissible": false,
+      "distance_to_pi_over_four_grid": 0.3648573517862772,
+      "line_number": 29,
+      "near_pi_over_four_grid": false,
+      "nearest_pi_over_four_angle": -6.283185307179586,
+      "nearest_pi_over_four_label": "-8*pi/4",
+      "next_cx_line": 31,
+      "nonzero_parameter_sensitivity": true,
+      "op_index": 24,
+      "original_ry_params": "0.36485735178627743",
+      "parameter_sensitivity": {
+        "finite_difference_eps": 1e-06,
+        "minus_residual_per_eps": 0.9999999999463561,
+        "plus_residual_per_eps": 1.0000000000338654,
+        "projective_derivative_norm": 0.9999999999900795
+      },
+      "partner": 14,
+      "previous_cx_line": 27,
+      "qubit": 13,
+      "theta": 0.36485735178627743,
+      "window_operation_count": 5,
+      "window_text": [
+        "cx q[14],q[13];",
+        "rz(-pi/4) q[13];",
+        "ry(0.36485735178627743) q[13];",
+        "rz(pi) q[13];",
+        "cx q[14],q[13];"
+      ]
+    }
+  ],
+  "validation_errors": [],
+  "version": "0.1",
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

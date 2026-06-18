@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 41, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 38, 'B8': 32, 'B9': 13, 'B10': 49}
+- Maturity scores: {'B1': 42, 'B2': 48, 'B3': 30, 'B4': 20, 'B5': 26, 'B6': 21, 'B7': 39, 'B8': 32, 'B9': 13, 'B10': 49}
 
 ## Technical Resolution Program
 
@@ -286,6 +286,19 @@ Overall audit: PASS
 - Best / median residual: 0.21253656711362606 / 0.3643516233170531
 - Editable RZ parameter range: 0 - 2
 - Restricted gate clears B7 target: False
+- Rewrite/resource/semantic/obstruction claims: False / False / False / False
+- Validation errors: 0
+
+## B1/B7 cone_01 Parameter-Transfer Gate
+
+- Exists: True
+- Status: cone01_parameter_transfer_obligation_gate
+- Target cone / candidate windows / required windows: cone_01 / 35 / 30
+- Nonzero/zero parameter-sensitivity windows: 35 / 0
+- Near pi/4-grid windows: 0
+- Distinct theta / largest group / repeated occurrences: 4 / 16 / 35
+- Minimum parameter-carrier obligation: 30
+- Deletion without parameter carrier clears B7 target: False
 - Rewrite/resource/semantic/obstruction claims: False / False / False / False
 - Validation errors: 0
 

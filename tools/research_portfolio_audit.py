@@ -139,6 +139,7 @@ def audit(root: Path) -> dict:
     b1_b7_gcm_h6_cone_feasibility_path = results / "B1_B7_gcm_h6_cone_feasibility_gate_v0.json"
     b1_b7_cone01_phase_removal_path = results / "B1_B7_cone01_phase_removal_gate_v0.json"
     b1_b7_cone01_euler_reabsorption_path = results / "B1_B7_cone01_euler_reabsorption_gate_v0.json"
+    b1_b7_cone01_parameter_transfer_path = results / "B1_B7_cone01_parameter_transfer_gate_v0.json"
     b1_synthetic_noise_path = research / "B1_synthetic_noise_proxy_report.json"
     b1_manifest_path = benchmarks / "B1_circuit_compression.yaml"
     b2_manifest_path = benchmarks / "B2_qec_overhead.yaml"
@@ -607,6 +608,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_euler_reabsorption_manifest = current_results.get(
         "b1_b7_cone01_euler_reabsorption_gate_v0"
+    )
+    b1_b7_cone01_parameter_transfer_manifest = current_results.get(
+        "b1_b7_cone01_parameter_transfer_gate_v0"
     )
     synthetic_noise_manifest = current_results.get("b1_synthetic_heavyhex_noise_proxy_v0")
     b1_routing_diagnostic = {
@@ -1514,6 +1518,112 @@ def audit(root: Path) -> dict:
     else:
         errors.append(
             f"missing B1/B7 cone_01 Euler-reabsorption gate report: {b1_b7_cone01_euler_reabsorption_path}"
+        )
+
+    b1_b7_cone01_parameter_transfer = {
+        "path": str(b1_b7_cone01_parameter_transfer_path),
+        "exists": b1_b7_cone01_parameter_transfer_path.exists(),
+    }
+    if not b1_b7_cone01_parameter_transfer_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_parameter_transfer_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_parameter_transfer_manifest.get("status")
+            != "cone01_parameter_transfer_obligation_gate"
+        ):
+            errors.append("B1/B7 cone_01 parameter-transfer gate must remain an obligation gate")
+        for field in ["report", "markdown_report", "source_qasm"]:
+            value = b1_b7_cone01_parameter_transfer_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 parameter-transfer gate missing existing {field} path: {value}")
+    if b1_b7_cone01_parameter_transfer_path.exists():
+        transfer_payload = json.loads(read(b1_b7_cone01_parameter_transfer_path))
+        transfer_summary = transfer_payload.get("summary", {})
+        transfer_claims = transfer_payload.get("claim_boundary", {})
+        b1_b7_cone01_parameter_transfer.update(
+            {
+                "status": transfer_payload.get("status"),
+                "model_status": transfer_payload.get("model_status"),
+                "method": transfer_payload.get("method"),
+                "workload": transfer_payload.get("workload"),
+                "target_cone_id": transfer_summary.get("target_cone_id"),
+                "candidate_window_count": transfer_summary.get("candidate_window_count"),
+                "required_exact_windows_for_b7_target": transfer_summary.get(
+                    "required_exact_windows_for_b7_target"
+                ),
+                "nonzero_parameter_sensitivity_count": transfer_summary.get(
+                    "nonzero_parameter_sensitivity_count"
+                ),
+                "parameter_sensitivity_zero_count": transfer_summary.get("parameter_sensitivity_zero_count"),
+                "near_pi_over_four_grid_count": transfer_summary.get("near_pi_over_four_grid_count"),
+                "distinct_canonical_theta_count": transfer_summary.get("distinct_canonical_theta_count"),
+                "largest_repeated_theta_group": transfer_summary.get("largest_repeated_theta_group"),
+                "repeated_theta_occurrence_count": transfer_summary.get("repeated_theta_occurrence_count"),
+                "minimum_parameter_carrier_obligation_for_b7_target": transfer_summary.get(
+                    "minimum_parameter_carrier_obligation_for_b7_target"
+                ),
+                "deletion_without_parameter_carrier_clears_b7_target": transfer_summary.get(
+                    "deletion_without_parameter_carrier_clears_b7_target"
+                ),
+                "rewrite_claimed": transfer_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": transfer_claims.get("resource_saving_claimed"),
+                "semantic_certificate_claimed": transfer_claims.get("semantic_certificate_claimed"),
+                "obstruction_theorem_claimed": transfer_claims.get("obstruction_theorem_claimed"),
+                "validation_error_count": transfer_summary.get("validation_error_count"),
+            }
+        )
+        if transfer_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 parameter-transfer gate report must have benchmark_id B1")
+        if transfer_payload.get("method") != "b1_b7_cone01_parameter_transfer_gate_v0":
+            errors.append("B1/B7 cone_01 parameter-transfer gate method mismatch")
+        if transfer_payload.get("status") != "cone01_parameter_transfer_obligation_gate":
+            errors.append("B1/B7 cone_01 parameter-transfer gate status mismatch")
+        for field in [
+            "target_cone_id",
+            "candidate_window_count",
+            "required_exact_windows_for_b7_target",
+            "nonzero_parameter_sensitivity_count",
+            "parameter_sensitivity_zero_count",
+            "near_pi_over_four_grid_count",
+            "distinct_canonical_theta_count",
+            "largest_repeated_theta_group",
+            "repeated_theta_occurrence_count",
+            "minimum_parameter_carrier_obligation_for_b7_target",
+            "deletion_without_parameter_carrier_clears_b7_target",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "obstruction_theorem_claimed",
+        ]:
+            if transfer_summary.get(field) != b1_b7_cone01_parameter_transfer_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 parameter-transfer gate {field} mismatch")
+        if transfer_summary.get("target_cone_id") != "cone_01":
+            errors.append("B1/B7 cone_01 parameter-transfer gate target cone must remain cone_01")
+        if transfer_summary.get("candidate_window_count") != 35:
+            errors.append("B1/B7 cone_01 parameter-transfer gate must test 35 windows")
+        if transfer_summary.get("required_exact_windows_for_b7_target") != 30:
+            errors.append("B1/B7 cone_01 parameter-transfer gate B7 target must remain 30 windows")
+        if transfer_summary.get("nonzero_parameter_sensitivity_count") != 35:
+            errors.append("B1/B7 cone_01 parameter-transfer gate should find all 35 windows parameter-sensitive")
+        if transfer_summary.get("parameter_sensitivity_zero_count") != 0:
+            errors.append("B1/B7 cone_01 parameter-transfer gate should find zero insensitive windows")
+        if transfer_summary.get("near_pi_over_four_grid_count") != 0:
+            errors.append("B1/B7 cone_01 parameter-transfer gate should find zero pi/4-grid windows")
+        if transfer_summary.get("deletion_without_parameter_carrier_clears_b7_target") is not False:
+            errors.append("B1/B7 cone_01 parameter-transfer gate must not clear B7 without parameter carrier")
+        for field in [
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "semantic_certificate_claimed",
+            "obstruction_theorem_claimed",
+        ]:
+            if transfer_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 parameter-transfer gate must not claim {field}")
+        if transfer_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 parameter-transfer gate validation errors must remain zero")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 parameter-transfer gate report: {b1_b7_cone01_parameter_transfer_path}"
         )
 
     b1_synthetic_noise = {
@@ -9034,6 +9144,7 @@ def audit(root: Path) -> dict:
             "b7_gcm_h6_cone_feasibility_gate": b1_b7_gcm_h6_cone_feasibility,
             "b7_cone01_phase_removal_gate": b1_b7_cone01_phase_removal,
             "b7_cone01_euler_reabsorption_gate": b1_b7_cone01_euler_reabsorption,
+            "b7_cone01_parameter_transfer_gate": b1_b7_cone01_parameter_transfer,
             "synthetic_noise_proxy": b1_synthetic_noise,
         },
         "b2": {
@@ -9191,6 +9302,7 @@ def audit(root: Path) -> dict:
             "b1_b7_gcm_h6_cone_feasibility_gate": str(b1_b7_gcm_h6_cone_feasibility_path),
             "b1_b7_cone01_phase_removal_gate": str(b1_b7_cone01_phase_removal_path),
             "b1_b7_cone01_euler_reabsorption_gate": str(b1_b7_cone01_euler_reabsorption_path),
+            "b1_b7_cone01_parameter_transfer_gate": str(b1_b7_cone01_parameter_transfer_path),
             "b1_synthetic_noise_proxy": str(b1_synthetic_noise_path),
             "b2_phenomenological_decoder": str(research / "B2_phenomenological_repetition_decoder.md"),
             "b2_stim_surface_code_baseline": str(research / "B2_stim_surface_code_memory_baseline.md"),
@@ -9661,6 +9773,19 @@ def markdown_report(report: dict) -> str:
             f"- Restricted gate clears B7 target: {report['b1']['b7_cone01_euler_reabsorption_gate'].get('restricted_gate_clears_b7_target')}",
             f"- Rewrite/resource/semantic/obstruction claims: {report['b1']['b7_cone01_euler_reabsorption_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_euler_reabsorption_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_euler_reabsorption_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_euler_reabsorption_gate'].get('obstruction_theorem_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_euler_reabsorption_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Parameter-Transfer Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_parameter_transfer_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_parameter_transfer_gate'].get('status')}",
+            f"- Target cone / candidate windows / required windows: {report['b1']['b7_cone01_parameter_transfer_gate'].get('target_cone_id')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('required_exact_windows_for_b7_target')}",
+            f"- Nonzero/zero parameter-sensitivity windows: {report['b1']['b7_cone01_parameter_transfer_gate'].get('nonzero_parameter_sensitivity_count')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('parameter_sensitivity_zero_count')}",
+            f"- Near pi/4-grid windows: {report['b1']['b7_cone01_parameter_transfer_gate'].get('near_pi_over_four_grid_count')}",
+            f"- Distinct theta / largest group / repeated occurrences: {report['b1']['b7_cone01_parameter_transfer_gate'].get('distinct_canonical_theta_count')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('largest_repeated_theta_group')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('repeated_theta_occurrence_count')}",
+            f"- Minimum parameter-carrier obligation: {report['b1']['b7_cone01_parameter_transfer_gate'].get('minimum_parameter_carrier_obligation_for_b7_target')}",
+            f"- Deletion without parameter carrier clears B7 target: {report['b1']['b7_cone01_parameter_transfer_gate'].get('deletion_without_parameter_carrier_clears_b7_target')}",
+            f"- Rewrite/resource/semantic/obstruction claims: {report['b1']['b7_cone01_parameter_transfer_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_parameter_transfer_gate'].get('obstruction_theorem_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_parameter_transfer_gate'].get('validation_error_count')}",
             "",
             "## B1 Synthetic Heavy-Hex Noise Proxy",
             "",

@@ -75,16 +75,22 @@ proving a global obstruction theorem. The Euler-reabsorption gate then locks
 the arbitrary RY to 9 exact/Clifford-like candidate angles while neighboring
 target-qubit RZ phases reoptimize; it still finds 0 exact-pass windows, with
 best/median residual 0.21253656711362606 / 0.3643516233170531.
+The parameter-transfer obligation gate then checks all 35 `cone_01` windows:
+every original `RY(theta)` has nonzero projective unitary sensitivity, 0
+angles are near the pi/4 exact grid, and 4 distinct theta groups cover the
+windows. This does not prove a KAK lower bound or produce a rewrite, but it
+prevents no-carrier deletion from being counted as B7 savings.
 
 **Remaining path to a serious solution:** connect to calibrated/live-like
 heavy-hex baselines; cover dynamic circuits and reset/measurement semantics;
 turn `cone_01` into a broader replayable semantic rewrite certificate,
-KAK/Clifford scaffold, or scoped obstruction report that addresses at least 30
-arbitrary rotation occurrences / 600
+KAK/Clifford scaffold, or scoped obstruction report that explicitly carries,
+shares, or eliminates theta while addressing at least 30 arbitrary rotation
+occurrences / 600
 proxy-T units; broaden benchmarks; package certificates for independent
 reproduction.
 
-**Current internal maturity:** 41/100.
+**Current internal maturity:** 42/100.
 
 ## B2: Low-Overhead Quantum Error Correction
 
@@ -517,17 +523,21 @@ replacement. The Euler-reabsorption gate also finds 0 exact-pass windows after
 locking RY to exact candidates and reoptimizing neighboring RZ phases. This is
 still not an occurrence-removing certificate, resource-saving claim, or global
 obstruction theorem.
+The parameter-transfer gate adds the sharper accounting constraint: all 35
+candidate windows are sensitive to their `RY(theta)` values, none are pi/4-grid
+exact, and no-carrier deletion cannot clear the 30-window B7 target.
 
 **Remaining path to a serious solution:** produce a symbolic KAK/Clifford-
 scaffold proof, scoped obstruction, or certified broader `cone_01`
-occurrence-removing rewrite for `gcm_h6`; strengthen B1 non-Clifford/T-depth
+occurrence-removing rewrite for `gcm_h6` with explicit theta-carrier
+accounting; strengthen B1 non-Clifford/T-depth
 optimization until a certified occurrence-removing rewrite improves minimum
 factory STV;
 separate claims by data-path versus T-factory dominated regimes; include
 physical layout, routing, and feed-forward constraints; run a full algorithm
 resource ledger.
 
-**Current internal maturity:** 38/100.
+**Current internal maturity:** 39/100.
 
 ## B8: Classical Verification of Quantum Outputs
 

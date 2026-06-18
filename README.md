@@ -171,6 +171,14 @@ same 35 windows, the exact-pass count is still 0; the best residual is
 another narrow same-envelope route and pushes the next useful work toward
 broader two-qubit synthesis or a KAK/Clifford scaffold.
 
+B1/B7 also now has a `cone_01` parameter-transfer obligation gate. It checks
+the same 35 candidate windows and finds that all 35 original RY(theta)
+occurrences have nonzero unitary sensitivity, 0 are near the pi/4 exact grid,
+and the windows collapse into 4 theta groups. This means deletion without a
+theta carrier cannot clear the B7 30-window target. Future synthesis must
+explicitly carry, share, or eliminate theta with replayable certificates before
+any B7 ledger saving can be counted.
+
 ## Repository Layout
 
 ```text

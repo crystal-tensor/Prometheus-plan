@@ -716,6 +716,18 @@ still cannot clear the B7 target. This closes another narrow route and makes
 the next useful `T-B1-004` work a genuine two-qubit synthesis/KAK/Clifford
 scaffold problem rather than a local Euler absorption trick.
 
+**Sprint update 18f:** `T-B1-004e` is now merged as a parameter-transfer
+obligation gate for `cone_01`. The new artifact
+`research/B1_B7_cone01_parameter_transfer_gate.md` checks all 35 candidate
+windows and finds nonzero projective unitary sensitivity for every original
+`RY(theta)` occurrence. None of the 35 angles is near the pi/4 exact grid, and
+the windows collapse into 4 distinct theta groups with the largest group
+covering 16 occurrences. This does not prove a KAK lower bound and does not
+produce a rewrite, but it makes the next `T-B1-004` attempt sharper: any
+broader two-qubit synthesis or Clifford/KAK scaffold must explicitly carry,
+share, or eliminate theta with certificates before B7 can count a 30-occurrence
+or 600 proxy-T ledger reduction.
+
 ## B8: Classical Verification of Quantum Outputs
 
 **Technical target:** keep verifier soundness low under adaptive leakage by
