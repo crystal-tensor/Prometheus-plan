@@ -148,6 +148,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_shared_theta_replay_verifier_path = (
         results / "B1_B7_cone01_shared_theta_replay_verifier_gate_v0.json"
     )
+    b1_b7_cone01_shared_theta_layout_routing_path = (
+        results / "B1_B7_cone01_shared_theta_layout_routing_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_cost_model_path = (
         results / "B1_B7_cone01_theta_sharing_cost_model_gate_v0.json"
     )
@@ -631,6 +634,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_shared_theta_replay_verifier_manifest = current_results.get(
         "b1_b7_cone01_shared_theta_replay_verifier_gate_v0"
+    )
+    b1_b7_cone01_shared_theta_layout_routing_manifest = current_results.get(
+        "b1_b7_cone01_shared_theta_layout_routing_gate_v0"
     )
     b1_b7_cone01_theta_sharing_cost_model_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_cost_model_gate_v0"
@@ -2011,6 +2017,142 @@ def audit(root: Path) -> dict:
             f"{b1_b7_cone01_shared_theta_replay_verifier_path}"
         )
 
+    b1_b7_cone01_shared_theta_layout_routing = {
+        "path": str(b1_b7_cone01_shared_theta_layout_routing_path),
+        "exists": b1_b7_cone01_shared_theta_layout_routing_path.exists(),
+    }
+    if not b1_b7_cone01_shared_theta_layout_routing_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_shared_theta_layout_routing_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_shared_theta_layout_routing_manifest.get("status")
+            != "cone01_shared_theta_logical_layout_routing_scaffold"
+        ):
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must remain a logical scaffold")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_shared_theta_layout_routing_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 shared-theta layout/routing gate missing existing {field} path: {value}")
+    if b1_b7_cone01_shared_theta_layout_routing_path.exists():
+        layout_payload = json.loads(read(b1_b7_cone01_shared_theta_layout_routing_path))
+        layout_summary = layout_payload.get("summary", {})
+        layout_claims = layout_payload.get("claim_boundary", {})
+        b1_b7_cone01_shared_theta_layout_routing.update(
+            {
+                "status": layout_payload.get("status"),
+                "model_status": layout_payload.get("model_status"),
+                "method": layout_payload.get("method"),
+                "workload": layout_payload.get("workload"),
+                "candidate_window_count": layout_summary.get("candidate_window_count"),
+                "shared_synthesis_object_count": layout_summary.get("shared_synthesis_object_count"),
+                "replay_verified_object_count": layout_summary.get("replay_verified_object_count"),
+                "replayed_occurrence_count": layout_summary.get("replayed_occurrence_count"),
+                "layout_routed_object_count": layout_summary.get("layout_routed_object_count"),
+                "layout_routed_occurrence_count": layout_summary.get("layout_routed_occurrence_count"),
+                "logical_anchor_object_count": layout_summary.get("logical_anchor_object_count"),
+                "logical_route_packet_count": layout_summary.get("logical_route_packet_count"),
+                "logical_line_topology_qubit_count": layout_summary.get("logical_line_topology_qubit_count"),
+                "total_logical_hop_count": layout_summary.get("total_logical_hop_count"),
+                "max_logical_hop_count": layout_summary.get("max_logical_hop_count"),
+                "missing_route_count": layout_summary.get("missing_route_count"),
+                "layout_routing_gate_passed": layout_summary.get("layout_routing_gate_passed"),
+                "physical_layout_claimed": layout_summary.get("physical_layout_claimed"),
+                "factory_amortization_model_present": layout_summary.get("factory_amortization_model_present"),
+                "shared_error_budget_present": layout_summary.get("shared_error_budget_present"),
+                "semantic_rewrite_verified": layout_summary.get("semantic_rewrite_verified"),
+                "semantic_certificate_claimed": layout_summary.get("semantic_certificate_claimed"),
+                "occurrence_ledger_removed_occurrences": layout_summary.get("occurrence_ledger_removed_occurrences"),
+                "occurrence_ledger_proxy_t_reduction": layout_summary.get("occurrence_ledger_proxy_t_reduction"),
+                "cost_model_accepted": layout_summary.get("cost_model_accepted"),
+                "rewrite_claimed": layout_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": layout_claims.get("resource_saving_claimed"),
+                "physical_resource_reduction_claimed": layout_claims.get("physical_resource_reduction_claimed"),
+                "b7_ledger_improvement_claimed": layout_claims.get("b7_ledger_improvement_claimed"),
+                "validation_error_count": layout_summary.get("validation_error_count"),
+            }
+        )
+        if layout_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate report must have benchmark_id B1")
+        if layout_payload.get("method") != "b1_b7_cone01_shared_theta_layout_routing_gate_v0":
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate method mismatch")
+        if layout_payload.get("status") != "cone01_shared_theta_logical_layout_routing_scaffold":
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate status mismatch")
+        if layout_payload.get("model_status") != "logical_layout_routing_scaffold_not_physical_layout":
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate model_status mismatch")
+        for field in [
+            "candidate_window_count",
+            "shared_synthesis_object_count",
+            "replay_verified_object_count",
+            "replayed_occurrence_count",
+            "layout_routed_object_count",
+            "layout_routed_occurrence_count",
+            "logical_anchor_object_count",
+            "logical_route_packet_count",
+            "logical_line_topology_qubit_count",
+            "total_logical_hop_count",
+            "max_logical_hop_count",
+            "missing_route_count",
+            "layout_routing_gate_passed",
+            "physical_layout_claimed",
+            "factory_amortization_model_present",
+            "shared_error_budget_present",
+            "semantic_rewrite_verified",
+            "semantic_certificate_claimed",
+            "occurrence_ledger_removed_occurrences",
+            "occurrence_ledger_proxy_t_reduction",
+            "cost_model_accepted",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if layout_summary.get(field) != b1_b7_cone01_shared_theta_layout_routing_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 shared-theta layout/routing gate {field} mismatch")
+        if layout_summary.get("candidate_window_count") != 35:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must cover 35 candidate windows")
+        if layout_summary.get("shared_synthesis_object_count") != 4:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must see 4 shared objects")
+        if layout_summary.get("layout_routed_object_count") != 4:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must route 4 objects")
+        if layout_summary.get("layout_routed_occurrence_count") != 35:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must route 35 occurrences")
+        if layout_summary.get("logical_route_packet_count") != 35:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate must emit 35 route packets")
+        if layout_summary.get("total_logical_hop_count") != 139:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate total hop count must be 139")
+        if layout_summary.get("max_logical_hop_count") != 11:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate max hop count must be 11")
+        if layout_summary.get("missing_route_count") != 0:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate missing routes must remain zero")
+        if layout_summary.get("layout_routing_gate_passed") is not True:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate should pass")
+        for field in [
+            "physical_layout_claimed",
+            "factory_amortization_model_present",
+            "shared_error_budget_present",
+            "semantic_rewrite_verified",
+            "semantic_certificate_claimed",
+            "cost_model_accepted",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if layout_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 shared-theta layout/routing gate summary must not claim {field}")
+            if field in layout_claims and layout_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 shared-theta layout/routing gate must not claim {field}")
+        for field in ["occurrence_ledger_removed_occurrences", "occurrence_ledger_proxy_t_reduction"]:
+            if layout_summary.get(field) != 0:
+                errors.append(f"B1/B7 cone_01 shared-theta layout/routing gate {field} must remain 0")
+        if layout_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 shared-theta layout/routing gate validation errors must remain zero")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 shared-theta layout/routing gate report: "
+            f"{b1_b7_cone01_shared_theta_layout_routing_path}"
+        )
+
     b1_b7_cone01_theta_sharing_cost_model = {
         "path": str(b1_b7_cone01_theta_sharing_cost_model_path),
         "exists": b1_b7_cone01_theta_sharing_cost_model_path.exists(),
@@ -2055,6 +2197,21 @@ def audit(root: Path) -> dict:
                 "shared_theta_replayed_occurrence_count": cost_summary.get(
                     "shared_theta_replayed_occurrence_count"
                 ),
+                "shared_theta_layout_routing_gate_passed": cost_summary.get(
+                    "shared_theta_layout_routing_gate_passed"
+                ),
+                "shared_theta_layout_routed_object_count": cost_summary.get(
+                    "shared_theta_layout_routed_object_count"
+                ),
+                "shared_theta_layout_routed_occurrence_count": cost_summary.get(
+                    "shared_theta_layout_routed_occurrence_count"
+                ),
+                "shared_theta_layout_total_logical_hop_count": cost_summary.get(
+                    "shared_theta_layout_total_logical_hop_count"
+                ),
+                "shared_theta_layout_max_logical_hop_count": cost_summary.get(
+                    "shared_theta_layout_max_logical_hop_count"
+                ),
                 "cost_model_acceptance_gate_count": cost_summary.get("cost_model_acceptance_gate_count"),
                 "cost_model_acceptance_pass_count": cost_summary.get("cost_model_acceptance_pass_count"),
                 "cost_model_acceptance_fail_count": cost_summary.get("cost_model_acceptance_fail_count"),
@@ -2084,7 +2241,7 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate method mismatch")
         if cost_payload.get("status") != "cone01_theta_sharing_cost_model_not_accepted":
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate status mismatch")
-        if cost_payload.get("model_status") != "physical_theta_sharing_cost_model_requirements_replay_scaffolded":
+        if cost_payload.get("model_status") != "physical_theta_sharing_cost_model_requirements_layout_scaffolded":
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate model_status mismatch")
         for field in [
             "candidate_window_count",
@@ -2099,6 +2256,11 @@ def audit(root: Path) -> dict:
             "shared_theta_replay_gate_passed",
             "shared_theta_replay_verified_object_count",
             "shared_theta_replayed_occurrence_count",
+            "shared_theta_layout_routing_gate_passed",
+            "shared_theta_layout_routed_object_count",
+            "shared_theta_layout_routed_occurrence_count",
+            "shared_theta_layout_total_logical_hop_count",
+            "shared_theta_layout_max_logical_hop_count",
             "cost_model_acceptance_gate_count",
             "cost_model_acceptance_pass_count",
             "cost_model_acceptance_fail_count",
@@ -2138,10 +2300,20 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 4 replay-verified objects")
         if cost_summary.get("shared_theta_replayed_occurrence_count") != 35:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 35 replayed occurrences")
-        if cost_summary.get("cost_model_acceptance_pass_count") != 2:
-            errors.append("B1/B7 cone_01 theta-sharing cost-model gate pass count must now be 2")
-        if cost_summary.get("cost_model_acceptance_fail_count") != 6:
-            errors.append("B1/B7 cone_01 theta-sharing cost-model gate fail count must now be 6")
+        if cost_summary.get("shared_theta_layout_routing_gate_passed") is not True:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate CM-04 layout evidence must pass")
+        if cost_summary.get("shared_theta_layout_routed_object_count") != 4:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 4 layout-routed objects")
+        if cost_summary.get("shared_theta_layout_routed_occurrence_count") != 35:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 35 layout-routed occurrences")
+        if cost_summary.get("shared_theta_layout_total_logical_hop_count") != 139:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 139 total logical hops")
+        if cost_summary.get("shared_theta_layout_max_logical_hop_count") != 11:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 11 max logical hops")
+        if cost_summary.get("cost_model_acceptance_pass_count") != 3:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate pass count must now be 3")
+        if cost_summary.get("cost_model_acceptance_fail_count") != 5:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate fail count must now be 5")
         if cost_summary.get("cost_model_accepted") is not False:
             errors.append("B1/B7 cone_01 theta-sharing cost model must not be accepted")
         if cost_summary.get("b7_ledger_proxy_t_reduction_after_cost_model") != 0:
@@ -10462,6 +10634,7 @@ def audit(root: Path) -> dict:
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
+            "b7_cone01_shared_theta_layout_routing_gate": b1_b7_cone01_shared_theta_layout_routing,
             "b7_cone01_theta_sharing_cost_model_gate": b1_b7_cone01_theta_sharing_cost_model,
             "synthetic_noise_proxy": b1_synthetic_noise,
         },
@@ -10638,6 +10811,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_shared_theta_replay_verifier_gate": str(
                 b1_b7_cone01_shared_theta_replay_verifier_path
+            ),
+            "b1_b7_cone01_shared_theta_layout_routing_gate": str(
+                b1_b7_cone01_shared_theta_layout_routing_path
             ),
             "b1_b7_cone01_theta_sharing_cost_model_gate": str(
                 b1_b7_cone01_theta_sharing_cost_model_path
@@ -11185,6 +11361,20 @@ def markdown_report(report: dict) -> str:
             f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('validation_error_count')}",
             "",
+            "## B1/B7 cone_01 Shared-Theta Layout/Routing Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('status')}",
+            f"- Candidate windows / shared objects: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('shared_synthesis_object_count')}",
+            f"- Layout-routed objects / occurrences: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('layout_routed_object_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('layout_routed_occurrence_count')}",
+            f"- Logical anchors / route packets: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('logical_anchor_object_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('logical_route_packet_count')}",
+            f"- Logical topology qubits / total hops / max hops: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('logical_line_topology_qubit_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('total_logical_hop_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('max_logical_hop_count')}",
+            f"- Missing routes / layout gate passed: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('missing_route_count')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('layout_routing_gate_passed')}",
+            f"- Physical layout / factory model / error budget present: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('physical_layout_claimed')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('factory_amortization_model_present')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('shared_error_budget_present')}",
+            f"- Occurrence-ledger removed occurrences / proxy-T reduction: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('occurrence_ledger_removed_occurrences')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('occurrence_ledger_proxy_t_reduction')}",
+            f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_shared_theta_layout_routing_gate'].get('validation_error_count')}",
+            "",
             "## B1/B7 cone_01 Theta-Sharing Cost-Model Gate",
             "",
             f"- Exists: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('exists')}",
@@ -11193,6 +11383,8 @@ def markdown_report(report: dict) -> str:
             f"- Optimistic cache signal / target proxy-T: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('optimistic_cache_proxy_t_reuse')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('target_proxy_t_ledger_reduction_for_gcm_h6_1_20')}",
             f"- Shared object gate / replay gate: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_object_existence_gate_passed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replay_gate_passed')}",
             f"- Replay-verified shared objects / replayed occurrences: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replay_verified_object_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replayed_occurrence_count')}",
+            f"- Layout gate / routed objects / routed occurrences: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_layout_routing_gate_passed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_layout_routed_object_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_layout_routed_occurrence_count')}",
+            f"- Layout total / max logical hops: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_layout_total_logical_hop_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_layout_max_logical_hop_count')}",
             f"- Acceptance gates passed / failed / total: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_pass_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_fail_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_gate_count')}",
             f"- Cost model accepted: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_accepted')}",
             f"- B7 ledger proxy-T reduction after cost model: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('b7_ledger_proxy_t_reduction_after_cost_model')}",

@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 46, 'B2': 48, 'B3': 30, 'B4': 25, 'B5': 27, 'B6': 21, 'B7': 43, 'B8': 37, 'B9': 13, 'B10': 50}
+- Maturity scores: {'B1': 47, 'B2': 48, 'B3': 30, 'B4': 25, 'B5': 27, 'B6': 21, 'B7': 44, 'B8': 37, 'B9': 13, 'B10': 50}
 
 ## Technical Resolution Program
 
@@ -343,6 +343,20 @@ Overall audit: PASS
 - Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Shared-Theta Layout/Routing Gate
+
+- Exists: True
+- Status: cone01_shared_theta_logical_layout_routing_scaffold
+- Candidate windows / shared objects: 35 / 4
+- Layout-routed objects / occurrences: 4 / 35
+- Logical anchors / route packets: 4 / 35
+- Logical topology qubits / total hops / max hops: 16 / 139 / 11
+- Missing routes / layout gate passed: 0 / True
+- Physical layout / factory model / error budget present: False / False / False
+- Occurrence-ledger removed occurrences / proxy-T reduction: 0 / 0
+- Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Cost-Model Gate
 
 - Exists: True
@@ -351,10 +365,12 @@ Overall audit: PASS
 - Optimistic cache signal / target proxy-T: 620 / 600
 - Shared object gate / replay gate: True / True
 - Replay-verified shared objects / replayed occurrences: 4 / 35
-- Acceptance gates passed / failed / total: 2 / 6 / 8
+- Layout gate / routed objects / routed occurrences: True / 4 / 35
+- Layout total / max logical hops: 139 / 11
+- Acceptance gates passed / failed / total: 3 / 5 / 8
 - Cost model accepted: False
 - B7 ledger proxy-T reduction after cost model: 0
-- Additional occurrence certificates / cost-model gates required: 30 / 6
+- Additional occurrence certificates / cost-model gates required: 30 / 5
 - Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 

@@ -814,9 +814,9 @@ make theta sharing physically countable. This initial gate passed 0/8 gates:
 there was no shared synthesis object, replay verifier, layout/routing model,
 factory-amortization ledger, shared-error budget, independent baseline, or
 refreshed B7 ledger. The follow-up `T-B1-004h` now supplies the shared object
-proposal and `T-B1-004i` adds a line-level replay verifier, moving the scaffold
-to 2/8 gates passed. The cost model is still not accepted and B7 ledger reduction
-remains 0.
+proposal, `T-B1-004i` adds a line-level replay verifier, and `T-B1-004j` adds a
+logical layout/routing scaffold. The scaffold is now 3/8 gates passed. The cost
+model is still not accepted and B7 ledger reduction remains 0.
 
 **Sprint update 18i:** `T-B1-004h` is now merged as a shared-theta synthesis object
 proposal gate. The new artifact `research/B1_B7_cone01_shared_theta_synthesis_object_gate.md`
@@ -825,10 +825,21 @@ windows. This upgrades the cost-model scaffold to 1/8 passed gates by satisfying
 CM-02 object existence. The follow-up `T-B1-004i` is now merged as a replay
 verifier scaffold: 4/4 shared objects and 35/35 occurrences replay cleanly
 against source QASM and parameter-transfer theta groups with 0 mismatches. The
-updated cost model is 2/8 passed, 6/8 failed; it still has no layout, factory
-amortization, error budget, independent baseline, refreshed B7 ledger, or
-occurrence-removing certificates. The cost model remains unaccepted and B7
-ledger reduction remains 0.
+follow-up `T-B1-004j` is now merged as a logical layout/routing scaffold: all 4
+objects and all 35 occurrences receive anchor/route packets, with total/max
+logical hops 139/11. The updated cost model is 3/8 passed, 5/8 failed; it still
+has no physical device layout, factory amortization, error budget, independent
+baseline, refreshed B7 ledger, or occurrence-removing certificates. The cost
+model remains unaccepted and B7 ledger reduction remains 0.
+
+**Sprint update 18j:** `T-B1-004j` is now merged as a shared-theta logical
+layout/routing scaffold. The new artifact
+`research/B1_B7_cone01_shared_theta_layout_routing_gate.md` assigns logical
+anchor qubits to all 4 replay-verified shared-theta objects and emits 35
+occurrence route packets. This satisfies CM-04 as logical route scaffolding only:
+it is not a physical device layout, not a factory-amortization model, not a
+semantic rewrite certificate, and not a B7 resource claim. The cost-model gate is
+now 3/8 passed and 5/8 failed, with counted B7 ledger reduction still 0.
 
 ## B8: Classical Verification of Quantum Outputs
 

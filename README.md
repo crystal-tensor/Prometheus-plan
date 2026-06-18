@@ -237,13 +237,15 @@ theta-sharing cost model before B7 can count a resource delta.
 
 The follow-up `cone_01` physical cost-model gate now makes that second route
 explicit. A shared-theta synthesis object proposal gate defines 4 machine-readable
-objects covering all 35 candidate windows, and a replay-verifier gate checks 4/4
+objects covering all 35 candidate windows, a replay-verifier gate checks 4/4
 objects plus 35/35 occurrences against source QASM and parameter-transfer groups
-with 0 mismatches. The cost-model scaffold has moved from 0/8 to 2/8 acceptance
-gates by passing CM-02 object existence and CM-03 replay. The model is still not
-accepted: there are no 30 occurrence-removing certificates, no layout/routing
-model, no factory-amortization ledger, no shared-error budget, no independent
-baseline, and no refreshed B7 ledger. The counted B7 ledger reduction remains 0.
+with 0 mismatches, and a logical layout/routing scaffold assigns anchor qubits
+and route packets for all 35 occurrences. The cost-model scaffold has moved from
+0/8 to 3/8 acceptance gates by passing CM-02 object existence, CM-03 replay, and
+CM-04 logical layout/routing. The model is still not accepted: there are no 30
+occurrence-removing certificates, no physical device layout, no factory-amortization
+ledger, no shared-error budget, no independent baseline, and no refreshed B7
+ledger. The counted B7 ledger reduction remains 0.
 
 ## Repository Layout
 

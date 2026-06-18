@@ -2,7 +2,7 @@
 
 Status: `cone01_theta_sharing_cost_model_not_accepted`
 
-This artifact asks whether the repeated-theta cache signal from T-B1-004f can already be promoted into a physical B7 cost model. The answer is no. A shared synthesis object proposal now exists for the four theta groups, and a line-level replay verifier covers the shared objects. The current evidence still lacks occurrence-removing certificates, layout, factory amortization, error budget, independent baseline, and refreshed B7 ledger.
+This artifact asks whether the repeated-theta cache signal from T-B1-004f can already be promoted into a physical B7 cost model. The answer is no. A shared synthesis object proposal now exists for the four theta groups, a line-level replay verifier covers the shared objects, and a logical layout/routing scaffold assigns anchors and route packets. The current evidence still lacks occurrence-removing certificates, physical device layout, factory amortization, error budget, independent baseline, and refreshed B7 ledger.
 
 It is not a rewrite certificate, not a resource-saving claim, and not a physical cost-model acceptance.
 
@@ -18,11 +18,15 @@ It is not a rewrite certificate, not a resource-saving claim, and not a physical
 - Shared object existence gate passed: `True`
 - Shared-theta replay gate passed: `True`
 - Replay-verified shared objects: `4`
-- Acceptance gates passed / total: `2` / `8`
+- Logical layout/routing gate passed: `True`
+- Layout-routed shared objects: `4`
+- Layout-routed occurrences: `35`
+- Layout total / max logical hops: `139` / `11`
+- Acceptance gates passed / total: `3` / `8`
 - Cost model accepted: `False`
 - B7 ledger proxy-T reduction after cost model: `0`
 - Additional occurrence certificates required: `30`
-- Additional cost-model gates required: `6`
+- Additional cost-model gates required: `5`
 - Validation errors: `0`
 
 ## Acceptance Gates
@@ -32,7 +36,7 @@ It is not a rewrite certificate, not a resource-saving claim, and not a physical
 | CM-01 | At least 30 replayable occurrence-removing semantic certificates. | `0` | `30` | `False` |
 | CM-02 | A shared synthesis object that replaces repeated theta occurrences, not only a classical template label. | `4` | `4` | `True` |
 | CM-03 | A replay verifier for the shared-theta object across all affected windows. | `4` | `4` | `True` |
-| CM-04 | An explicit layout/routing model showing where the shared object lives and how windows consume it. | `False` | `True` | `False` |
+| CM-04 | An explicit layout/routing model showing where the shared object lives and how windows consume it. | `4` | `True` | `True` |
 | CM-05 | A factory-amortization model proving lower T-factory pressure under the shared object. | `False` | `True` | `False` |
 | CM-06 | A synthesis-error and correlation budget for shared theta reuse. | `False` | `True` | `False` |
 | CM-07 | An independent baseline showing cache-only accounting is not double-counting occurrence cost. | `False` | `True` | `False` |
@@ -40,4 +44,4 @@ It is not a rewrite certificate, not a resource-saving claim, and not a physical
 
 ## Interpretation
 
-The repeated-theta structure is valuable because it identifies where a future physical-sharing proposal would have leverage. The shared object proposal and replay verifier close two bookkeeping gaps, but they are not enough by themselves. A future PR must satisfy the remaining gates, or bypass the cost-model route by producing 30 occurrence-removing certificates.
+The repeated-theta structure is valuable because it identifies where a future physical-sharing proposal would have leverage. The shared object proposal, replay verifier, and logical layout/routing scaffold close three bookkeeping gaps, but they are not enough by themselves. A future PR must satisfy the remaining gates, or bypass the cost-model route by producing 30 occurrence-removing certificates.

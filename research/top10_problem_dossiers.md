@@ -87,14 +87,15 @@ occurrences and 0 proxy-T reduction. This is a guardrail, not a resource-saving
 claim.
 The physical cost-model gate then checks whether that cache signal can already
 be promoted into countable B7 savings. A follow-up shared-theta synthesis object gate defines 4 machine-readable
-object proposals covering all 35 windows, and a replay-verifier gate now checks
+object proposals covering all 35 windows, a replay-verifier gate now checks
 4/4 objects and 35/35 occurrences against source QASM and parameter-transfer
-groups with 0 mismatches. This upgrades the cost-model scaffold from 0/8 to 2/8
-acceptance gates by passing CM-02 object existence and CM-03 replay. The cost
-model remains unaccepted: there are still no 30 occurrence-removing certificates,
-no layout/routing model, no factory-amortization ledger, no shared-error budget,
-no independent baseline, and no refreshed B7 ledger. Accepted B7 reduction
-remains 0.
+groups with 0 mismatches, and a logical layout/routing scaffold assigns route
+packets for all 35 occurrences. This upgrades the cost-model scaffold from 0/8
+to 3/8 acceptance gates by passing CM-02 object existence, CM-03 replay, and
+CM-04 logical routing. The cost model remains unaccepted: there are still no 30
+occurrence-removing certificates, no physical device layout, no
+factory-amortization ledger, no shared-error budget, no independent baseline,
+and no refreshed B7 ledger. Accepted B7 reduction remains 0.
 
 **Remaining path to a serious solution:** connect to calibrated/live-like
 heavy-hex baselines; cover dynamic circuits and reset/measurement semantics;
@@ -105,7 +106,7 @@ occurrences / 600
 proxy-T units, or satisfy the remaining CM gates for the shared-theta physical cost model after CM-02/CM-03; broaden benchmarks; package certificates for independent
 reproduction.
 
-**Current internal maturity:** 46/100.
+**Current internal maturity:** 47/100.
 
 ## B2: Low-Overhead Quantum Error Correction
 
@@ -573,10 +574,11 @@ the occurrence-based FT ledger still accepts 0 occurrence removal and 0 proxy-T
 reduction.
 The physical cost-model gate first rejected theta-sharing accounting at 0/8
 gates. A follow-up shared-theta synthesis object gate defines 4 object proposals
-covering all 35 `cone_01` windows, and a replay-verifier gate checks 4/4 objects
-and 35/35 occurrences with 0 mismatches. The updated cost-model scaffold now
-passes CM-02 and CM-03 and is 2/8 passed, 6/8 failed. It is still not accepted,
-and B7 ledger reduction remains 0.
+covering all 35 `cone_01` windows, a replay-verifier gate checks 4/4 objects
+and 35/35 occurrences with 0 mismatches, and a logical layout/routing scaffold
+assigns anchor/route packets for all occurrences. The updated cost-model
+scaffold now passes CM-02, CM-03, and CM-04 and is 3/8 passed, 5/8 failed. It is
+still not accepted, and B7 ledger reduction remains 0.
 
 **Remaining path to a serious solution:** produce a symbolic KAK/Clifford-
 scaffold proof, scoped obstruction, or certified broader `cone_01`
@@ -588,7 +590,7 @@ separate claims by data-path versus T-factory dominated regimes; include
 physical layout, routing, and feed-forward constraints; run a full algorithm
 resource ledger.
 
-**Current internal maturity:** 43/100.
+**Current internal maturity:** 44/100.
 
 ## B8: Classical Verification of Quantum Outputs
 
