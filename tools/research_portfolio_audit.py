@@ -145,6 +145,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
     )
+    b1_b7_cone01_shared_theta_replay_verifier_path = (
+        results / "B1_B7_cone01_shared_theta_replay_verifier_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_cost_model_path = (
         results / "B1_B7_cone01_theta_sharing_cost_model_gate_v0.json"
     )
@@ -625,6 +628,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_shared_theta_synthesis_object_manifest = current_results.get(
         "b1_b7_cone01_shared_theta_synthesis_object_gate_v0"
+    )
+    b1_b7_cone01_shared_theta_replay_verifier_manifest = current_results.get(
+        "b1_b7_cone01_shared_theta_replay_verifier_gate_v0"
     )
     b1_b7_cone01_theta_sharing_cost_model_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_cost_model_gate_v0"
@@ -1879,6 +1885,132 @@ def audit(root: Path) -> dict:
             f"{b1_b7_cone01_shared_theta_synthesis_object_path}"
         )
 
+    b1_b7_cone01_shared_theta_replay_verifier = {
+        "path": str(b1_b7_cone01_shared_theta_replay_verifier_path),
+        "exists": b1_b7_cone01_shared_theta_replay_verifier_path.exists(),
+    }
+    if not b1_b7_cone01_shared_theta_replay_verifier_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_shared_theta_replay_verifier_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_shared_theta_replay_verifier_manifest.get("status")
+            != "cone01_shared_theta_replay_verifier_scaffold"
+        ):
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must remain a scaffold")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_shared_theta_replay_verifier_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 shared-theta replay verifier missing existing {field} path: {value}")
+    if b1_b7_cone01_shared_theta_replay_verifier_path.exists():
+        replay_payload = json.loads(read(b1_b7_cone01_shared_theta_replay_verifier_path))
+        replay_summary = replay_payload.get("summary", {})
+        replay_claims = replay_payload.get("claim_boundary", {})
+        b1_b7_cone01_shared_theta_replay_verifier.update(
+            {
+                "status": replay_payload.get("status"),
+                "model_status": replay_payload.get("model_status"),
+                "method": replay_payload.get("method"),
+                "workload": replay_payload.get("workload"),
+                "candidate_window_count": replay_summary.get("candidate_window_count"),
+                "shared_synthesis_object_count": replay_summary.get("shared_synthesis_object_count"),
+                "replay_verified_object_count": replay_summary.get("replay_verified_object_count"),
+                "replayed_occurrence_count": replay_summary.get("replayed_occurrence_count"),
+                "parameter_transfer_expected_occurrence_count": replay_summary.get(
+                    "parameter_transfer_expected_occurrence_count"
+                ),
+                "coverage_matches_parameter_transfer": replay_summary.get("coverage_matches_parameter_transfer"),
+                "duplicate_line_count": replay_summary.get("duplicate_line_count"),
+                "missing_qasm_line_count": replay_summary.get("missing_qasm_line_count"),
+                "line_theta_mismatch_count": replay_summary.get("line_theta_mismatch_count"),
+                "object_group_mismatch_count": replay_summary.get("object_group_mismatch_count"),
+                "shared_theta_replay_gate_passed": replay_summary.get("shared_theta_replay_gate_passed"),
+                "semantic_rewrite_verified": replay_summary.get("semantic_rewrite_verified"),
+                "semantic_certificate_claimed": replay_summary.get("semantic_certificate_claimed"),
+                "occurrence_ledger_removed_occurrences": replay_summary.get("occurrence_ledger_removed_occurrences"),
+                "occurrence_ledger_proxy_t_reduction": replay_summary.get("occurrence_ledger_proxy_t_reduction"),
+                "cost_model_accepted": replay_summary.get("cost_model_accepted"),
+                "rewrite_claimed": replay_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": replay_claims.get("resource_saving_claimed"),
+                "physical_resource_reduction_claimed": replay_claims.get("physical_resource_reduction_claimed"),
+                "b7_ledger_improvement_claimed": replay_claims.get("b7_ledger_improvement_claimed"),
+                "validation_error_count": replay_summary.get("validation_error_count"),
+            }
+        )
+        if replay_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 shared-theta replay verifier report must have benchmark_id B1")
+        if replay_payload.get("method") != "b1_b7_cone01_shared_theta_replay_verifier_gate_v0":
+            errors.append("B1/B7 cone_01 shared-theta replay verifier method mismatch")
+        if replay_payload.get("status") != "cone01_shared_theta_replay_verifier_scaffold":
+            errors.append("B1/B7 cone_01 shared-theta replay verifier status mismatch")
+        if replay_payload.get("model_status") != "shared_theta_replay_verified_without_semantic_rewrite":
+            errors.append("B1/B7 cone_01 shared-theta replay verifier model_status mismatch")
+        for field in [
+            "candidate_window_count",
+            "shared_synthesis_object_count",
+            "replay_verified_object_count",
+            "replayed_occurrence_count",
+            "parameter_transfer_expected_occurrence_count",
+            "coverage_matches_parameter_transfer",
+            "duplicate_line_count",
+            "missing_qasm_line_count",
+            "line_theta_mismatch_count",
+            "object_group_mismatch_count",
+            "shared_theta_replay_gate_passed",
+            "semantic_rewrite_verified",
+            "semantic_certificate_claimed",
+            "occurrence_ledger_removed_occurrences",
+            "occurrence_ledger_proxy_t_reduction",
+            "cost_model_accepted",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if replay_summary.get(field) != b1_b7_cone01_shared_theta_replay_verifier_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 shared-theta replay verifier {field} mismatch")
+        if replay_summary.get("candidate_window_count") != 35:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must cover 35 candidate windows")
+        if replay_summary.get("shared_synthesis_object_count") != 4:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must see 4 shared objects")
+        if replay_summary.get("replay_verified_object_count") != 4:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must verify 4 shared objects")
+        if replay_summary.get("replayed_occurrence_count") != 35:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must replay 35 occurrences")
+        if replay_summary.get("coverage_matches_parameter_transfer") is not True:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier must match parameter transfer coverage")
+        if replay_summary.get("shared_theta_replay_gate_passed") is not True:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier gate should pass")
+        for field in [
+            "duplicate_line_count",
+            "missing_qasm_line_count",
+            "line_theta_mismatch_count",
+            "object_group_mismatch_count",
+            "occurrence_ledger_removed_occurrences",
+            "occurrence_ledger_proxy_t_reduction",
+        ]:
+            if replay_summary.get(field) != 0:
+                errors.append(f"B1/B7 cone_01 shared-theta replay verifier {field} must remain 0")
+        for field in [
+            "semantic_rewrite_verified",
+            "semantic_certificate_claimed",
+            "cost_model_accepted",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "physical_resource_reduction_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if replay_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 shared-theta replay verifier summary must not claim {field}")
+            if replay_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 shared-theta replay verifier must not claim {field}")
+        if replay_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 shared-theta replay verifier validation errors must remain zero")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 shared-theta replay verifier report: "
+            f"{b1_b7_cone01_shared_theta_replay_verifier_path}"
+        )
+
     b1_b7_cone01_theta_sharing_cost_model = {
         "path": str(b1_b7_cone01_theta_sharing_cost_model_path),
         "exists": b1_b7_cone01_theta_sharing_cost_model_path.exists(),
@@ -1913,6 +2045,16 @@ def audit(root: Path) -> dict:
                     "target_proxy_t_ledger_reduction_for_gcm_h6_1_20"
                 ),
                 "optimistic_cache_signal_present": cost_summary.get("optimistic_cache_signal_present"),
+                "shared_synthesis_object_count": cost_summary.get("shared_synthesis_object_count"),
+                "shared_object_existence_gate_passed": cost_summary.get("shared_object_existence_gate_passed"),
+                "shared_object_all_windows_covered": cost_summary.get("shared_object_all_windows_covered"),
+                "shared_theta_replay_gate_passed": cost_summary.get("shared_theta_replay_gate_passed"),
+                "shared_theta_replay_verified_object_count": cost_summary.get(
+                    "shared_theta_replay_verified_object_count"
+                ),
+                "shared_theta_replayed_occurrence_count": cost_summary.get(
+                    "shared_theta_replayed_occurrence_count"
+                ),
                 "cost_model_acceptance_gate_count": cost_summary.get("cost_model_acceptance_gate_count"),
                 "cost_model_acceptance_pass_count": cost_summary.get("cost_model_acceptance_pass_count"),
                 "cost_model_acceptance_fail_count": cost_summary.get("cost_model_acceptance_fail_count"),
@@ -1942,7 +2084,7 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate method mismatch")
         if cost_payload.get("status") != "cone01_theta_sharing_cost_model_not_accepted":
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate status mismatch")
-        if cost_payload.get("model_status") != "physical_theta_sharing_cost_model_requirements_partially_scaffolded":
+        if cost_payload.get("model_status") != "physical_theta_sharing_cost_model_requirements_replay_scaffolded":
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate model_status mismatch")
         for field in [
             "candidate_window_count",
@@ -1954,6 +2096,9 @@ def audit(root: Path) -> dict:
             "shared_synthesis_object_count",
             "shared_object_existence_gate_passed",
             "shared_object_all_windows_covered",
+            "shared_theta_replay_gate_passed",
+            "shared_theta_replay_verified_object_count",
+            "shared_theta_replayed_occurrence_count",
             "cost_model_acceptance_gate_count",
             "cost_model_acceptance_pass_count",
             "cost_model_acceptance_fail_count",
@@ -1987,10 +2132,16 @@ def audit(root: Path) -> dict:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate CM-02 evidence must pass")
         if cost_summary.get("shared_object_all_windows_covered") is not True:
             errors.append("B1/B7 cone_01 theta-sharing cost-model gate shared objects must cover all windows")
-        if cost_summary.get("cost_model_acceptance_pass_count") != 1:
-            errors.append("B1/B7 cone_01 theta-sharing cost-model gate pass count must now be 1")
-        if cost_summary.get("cost_model_acceptance_fail_count") != 7:
-            errors.append("B1/B7 cone_01 theta-sharing cost-model gate fail count must now be 7")
+        if cost_summary.get("shared_theta_replay_gate_passed") is not True:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate CM-03 replay evidence must pass")
+        if cost_summary.get("shared_theta_replay_verified_object_count") != 4:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 4 replay-verified objects")
+        if cost_summary.get("shared_theta_replayed_occurrence_count") != 35:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate must see 35 replayed occurrences")
+        if cost_summary.get("cost_model_acceptance_pass_count") != 2:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate pass count must now be 2")
+        if cost_summary.get("cost_model_acceptance_fail_count") != 6:
+            errors.append("B1/B7 cone_01 theta-sharing cost-model gate fail count must now be 6")
         if cost_summary.get("cost_model_accepted") is not False:
             errors.append("B1/B7 cone_01 theta-sharing cost model must not be accepted")
         if cost_summary.get("b7_ledger_proxy_t_reduction_after_cost_model") != 0:
@@ -10310,6 +10461,7 @@ def audit(root: Path) -> dict:
             "b7_cone01_parameter_transfer_gate": b1_b7_cone01_parameter_transfer,
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
+            "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
             "b7_cone01_theta_sharing_cost_model_gate": b1_b7_cone01_theta_sharing_cost_model,
             "synthetic_noise_proxy": b1_synthetic_noise,
         },
@@ -10483,6 +10635,9 @@ def audit(root: Path) -> dict:
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
                 b1_b7_cone01_shared_theta_synthesis_object_path
+            ),
+            "b1_b7_cone01_shared_theta_replay_verifier_gate": str(
+                b1_b7_cone01_shared_theta_replay_verifier_path
             ),
             "b1_b7_cone01_theta_sharing_cost_model_gate": str(
                 b1_b7_cone01_theta_sharing_cost_model_path
@@ -11016,12 +11171,28 @@ def markdown_report(report: dict) -> str:
             f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_shared_theta_synthesis_object_gate'].get('validation_error_count')}",
             "",
+            "## B1/B7 cone_01 Shared-Theta Replay Verifier Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('status')}",
+            f"- Candidate windows / shared objects: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('shared_synthesis_object_count')}",
+            f"- Replay-verified objects / replayed occurrences: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('replay_verified_object_count')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('replayed_occurrence_count')}",
+            f"- Coverage matches parameter transfer: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('coverage_matches_parameter_transfer')}",
+            f"- Duplicate/missing/theta-mismatch/object-mismatch counts: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('duplicate_line_count')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('missing_qasm_line_count')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('line_theta_mismatch_count')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('object_group_mismatch_count')}",
+            f"- Shared-theta replay gate passed: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('shared_theta_replay_gate_passed')}",
+            f"- Semantic rewrite verified / cost model accepted: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('semantic_rewrite_verified')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('cost_model_accepted')}",
+            f"- Occurrence-ledger removed occurrences / proxy-T reduction: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('occurrence_ledger_removed_occurrences')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('occurrence_ledger_proxy_t_reduction')}",
+            f"- Rewrite/resource/semantic/physical/B7-ledger claims: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('physical_resource_reduction_claimed')} / {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_shared_theta_replay_verifier_gate'].get('validation_error_count')}",
+            "",
             "## B1/B7 cone_01 Theta-Sharing Cost-Model Gate",
             "",
             f"- Exists: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('exists')}",
             f"- Status: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('status')}",
             f"- Candidate windows / theta groups / duplicate theta occurrences: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('candidate_window_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('distinct_theta_group_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('duplicate_theta_occurrence_count')}",
             f"- Optimistic cache signal / target proxy-T: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('optimistic_cache_proxy_t_reuse')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('target_proxy_t_ledger_reduction_for_gcm_h6_1_20')}",
+            f"- Shared object gate / replay gate: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_object_existence_gate_passed')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replay_gate_passed')}",
+            f"- Replay-verified shared objects / replayed occurrences: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replay_verified_object_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('shared_theta_replayed_occurrence_count')}",
             f"- Acceptance gates passed / failed / total: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_pass_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_fail_count')} / {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_acceptance_gate_count')}",
             f"- Cost model accepted: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('cost_model_accepted')}",
             f"- B7 ledger proxy-T reduction after cost model: {report['b1']['b7_cone01_theta_sharing_cost_model_gate'].get('b7_ledger_proxy_t_reduction_after_cost_model')}",

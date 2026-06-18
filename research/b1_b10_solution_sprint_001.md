@@ -814,16 +814,20 @@ make theta sharing physically countable. This initial gate passed 0/8 gates:
 there was no shared synthesis object, replay verifier, layout/routing model,
 factory-amortization ledger, shared-error budget, independent baseline, or
 refreshed B7 ledger. The follow-up `T-B1-004h` now supplies the shared object
-proposal and moves the scaffold to 1/8 gates passed, but the cost model is still
-not accepted and B7 ledger reduction remains 0.
+proposal and `T-B1-004i` adds a line-level replay verifier, moving the scaffold
+to 2/8 gates passed. The cost model is still not accepted and B7 ledger reduction
+remains 0.
 
 **Sprint update 18i:** `T-B1-004h` is now merged as a shared-theta synthesis object
 proposal gate. The new artifact `research/B1_B7_cone01_shared_theta_synthesis_object_gate.md`
 defines 4 machine-readable shared objects covering all 35 `cone_01` candidate
 windows. This upgrades the cost-model scaffold to 1/8 passed gates by satisfying
-CM-02 object existence, but it does not provide replay verification, layout,
-factory amortization, error budget, independent baseline, refreshed B7 ledger,
-or occurrence-removing certificates. The cost model remains unaccepted and B7
+CM-02 object existence. The follow-up `T-B1-004i` is now merged as a replay
+verifier scaffold: 4/4 shared objects and 35/35 occurrences replay cleanly
+against source QASM and parameter-transfer theta groups with 0 mismatches. The
+updated cost model is 2/8 passed, 6/8 failed; it still has no layout, factory
+amortization, error budget, independent baseline, refreshed B7 ledger, or
+occurrence-removing certificates. The cost model remains unaccepted and B7
 ledger reduction remains 0.
 
 ## B8: Classical Verification of Quantum Outputs

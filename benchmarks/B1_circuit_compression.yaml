@@ -606,13 +606,46 @@ current_results:
     validation_error_count: 0
     report: ../results/B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_shared_theta_synthesis_object_gate.md
+  b1_b7_cone01_shared_theta_replay_verifier_gate_v0:
+    circuits: 1
+    status: cone01_shared_theta_replay_verifier_scaffold
+    model_status: shared_theta_replay_verified_without_semantic_rewrite
+    method: b1_b7_cone01_shared_theta_replay_verifier_gate_v0
+    source_qasm: ../results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm
+    source_parameter_transfer_gate: b1_b7_cone01_parameter_transfer_gate_v0
+    source_shared_theta_synthesis_object_gate: b1_b7_cone01_shared_theta_synthesis_object_gate_v0
+    workload: qasmbench_medium_exact/gcm_h6.qasm
+    candidate_window_count: 35
+    shared_synthesis_object_count: 4
+    replay_verified_object_count: 4
+    replayed_occurrence_count: 35
+    parameter_transfer_expected_occurrence_count: 35
+    coverage_matches_parameter_transfer: true
+    duplicate_line_count: 0
+    missing_qasm_line_count: 0
+    line_theta_mismatch_count: 0
+    object_group_mismatch_count: 0
+    shared_theta_replay_gate_passed: true
+    semantic_rewrite_verified: false
+    semantic_certificate_claimed: false
+    occurrence_ledger_removed_occurrences: 0
+    occurrence_ledger_proxy_t_reduction: 0
+    cost_model_accepted: false
+    rewrite_claimed: false
+    resource_saving_claimed: false
+    physical_resource_reduction_claimed: false
+    b7_ledger_improvement_claimed: false
+    validation_error_count: 0
+    report: ../results/B1_B7_cone01_shared_theta_replay_verifier_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_shared_theta_replay_verifier_gate.md
   b1_b7_cone01_theta_sharing_cost_model_gate_v0:
     circuits: 1
     status: cone01_theta_sharing_cost_model_not_accepted
-    model_status: physical_theta_sharing_cost_model_requirements_partially_scaffolded
+    model_status: physical_theta_sharing_cost_model_requirements_replay_scaffolded
     method: b1_b7_cone01_theta_sharing_cost_model_gate_v0
     source_theta_sharing_ledger_gate: b1_b7_cone01_theta_sharing_ledger_gate_v0
     source_shared_theta_synthesis_object_gate: b1_b7_cone01_shared_theta_synthesis_object_gate_v0
+    source_shared_theta_replay_verifier_gate: b1_b7_cone01_shared_theta_replay_verifier_gate_v0
     workload: qasmbench_medium_exact/gcm_h6.qasm
     candidate_window_count: 35
     distinct_theta_group_count: 4
@@ -623,15 +656,18 @@ current_results:
     shared_synthesis_object_count: 4
     shared_object_existence_gate_passed: true
     shared_object_all_windows_covered: true
+    shared_theta_replay_gate_passed: true
+    shared_theta_replay_verified_object_count: 4
+    shared_theta_replayed_occurrence_count: 35
     cost_model_acceptance_gate_count: 8
-    cost_model_acceptance_pass_count: 1
-    cost_model_acceptance_fail_count: 7
+    cost_model_acceptance_pass_count: 2
+    cost_model_acceptance_fail_count: 6
     cost_model_accepted: false
     occurrence_ledger_removed_occurrences: 0
     occurrence_ledger_proxy_t_reduction: 0
     b7_ledger_proxy_t_reduction_after_cost_model: 0
     additional_occurrence_certificates_required: 30
-    additional_cost_model_gates_required: 7
+    additional_cost_model_gates_required: 6
     rewrite_claimed: false
     resource_saving_claimed: false
     semantic_certificate_claimed: false
@@ -789,5 +825,6 @@ prototype_artifacts:
   b1_b7_cone01_parameter_transfer_gate: ../tools/b1_b7_cone01_parameter_transfer_gate.py
   b1_b7_cone01_theta_sharing_ledger_gate: ../tools/b1_b7_cone01_theta_sharing_ledger_gate.py
   b1_b7_cone01_shared_theta_synthesis_object_gate: ../tools/b1_b7_cone01_shared_theta_synthesis_object_gate.py
+  b1_b7_cone01_shared_theta_replay_verifier_gate: ../tools/b1_b7_cone01_shared_theta_replay_verifier_gate.py
   b1_b7_cone01_theta_sharing_cost_model_gate: ../tools/b1_b7_cone01_theta_sharing_cost_model_gate.py
   synthetic_noise_proxy: ../tools/b1_synthetic_noise_proxy.py

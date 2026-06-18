@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 45, 'B2': 48, 'B3': 30, 'B4': 25, 'B5': 27, 'B6': 21, 'B7': 42, 'B8': 37, 'B9': 13, 'B10': 50}
+- Maturity scores: {'B1': 46, 'B2': 48, 'B3': 30, 'B4': 25, 'B5': 27, 'B6': 21, 'B7': 43, 'B8': 37, 'B9': 13, 'B10': 50}
 
 ## Technical Resolution Program
 
@@ -329,16 +329,32 @@ Overall audit: PASS
 - Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Shared-Theta Replay Verifier Gate
+
+- Exists: True
+- Status: cone01_shared_theta_replay_verifier_scaffold
+- Candidate windows / shared objects: 35 / 4
+- Replay-verified objects / replayed occurrences: 4 / 35
+- Coverage matches parameter transfer: True
+- Duplicate/missing/theta-mismatch/object-mismatch counts: 0 / 0 / 0 / 0
+- Shared-theta replay gate passed: True
+- Semantic rewrite verified / cost model accepted: False / False
+- Occurrence-ledger removed occurrences / proxy-T reduction: 0 / 0
+- Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Cost-Model Gate
 
 - Exists: True
 - Status: cone01_theta_sharing_cost_model_not_accepted
 - Candidate windows / theta groups / duplicate theta occurrences: 35 / 4 / 31
 - Optimistic cache signal / target proxy-T: 620 / 600
-- Acceptance gates passed / failed / total: 1 / 7 / 8
+- Shared object gate / replay gate: True / True
+- Replay-verified shared objects / replayed occurrences: 4 / 35
+- Acceptance gates passed / failed / total: 2 / 6 / 8
 - Cost model accepted: False
 - B7 ledger proxy-T reduction after cost model: 0
-- Additional occurrence certificates / cost-model gates required: 30 / 7
+- Additional occurrence certificates / cost-model gates required: 30 / 6
 - Rewrite/resource/semantic/physical/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 
