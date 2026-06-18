@@ -1,10 +1,6 @@
 # Axiom Horizon
 
-**公理视界计划**
-
 **An AI Multi-Agent Research Program for Quantum Computing's Hardest Frontiers**
-
-**面向量子计算最难前沿的 AI 多智能体研究计划**
 
 Broader open-source mission: challenge the world's hardest 100 problems through
 AI multi-agent research, with a 2-3 year concentrated push on the Top 10
