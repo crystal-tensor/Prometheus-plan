@@ -253,7 +253,7 @@
         <span class="chip">工作区：/Users/avalok/work/FurturePlan</span>
         <span class="chip">目标状态：active，未完成</span>
         <span class="chip">当前阶段：B1-B10 技术解决推进</span>
-        <span class="chip">最新动作：T-B1-004ak four-parameter line-1381 repair pressure gate</span>
+        <span class="chip">最新动作：T-B1-004al five-parameter line-1381 exact repair gate</span>
         <span class="chip">组合审计：PASS / 0 warnings</span>
       </div>
     </header>
@@ -395,6 +395,9 @@
       </p>
       <p style="margin-top: 10px;">
         最新推进 90：B1/B7/T-B1-004ak 已完成 <code>cone_01</code> four-parameter line-1381 repair pressure gate。新增 <code>tools/b1_b7_cone01_four_parameter_line1381_repair_pressure_gate.py</code>、<code>results/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate_v0.json</code> 和 <code>research/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate.md</code>。结果：对最后一个 unresolved packet line 1381 穷举 exactly-four-parameter repair，共搜索 3,060 个 candidates；best residual 从 0.049865177666770955 降到 0.02997767950993884，但 exact repair 仍为 0。现在 bounded packet repairs 仍为 2/3；accepted full-circuit rewrite、occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0。下一步必须扩大或更换 scaffold，给 line 1381 形成 scoped obstruction，或放弃该 reduced-CNOT route。
+      </p>
+      <p style="margin-top: 10px;">
+        最新推进 91：B1/B7/T-B1-004al 已完成 <code>cone_01</code> five-parameter line-1381 exact repair gate。新增 <code>tools/b1_b7_cone01_five_parameter_line1381_exact_repair_gate.py</code>、<code>results/B1_B7_cone01_five_parameter_line1381_exact_repair_gate_v0.json</code> 和 <code>research/B1_B7_cone01_five_parameter_line1381_exact_repair_gate.md</code>。结果：在 same two-CNOT pi/4-snapped scaffold 上释放 exactly five local-U3 parameters，line 1381 在第 5,795 / 8,568 个 deterministic combinations 找到 exact packet repair，residual 为 6.513934436930801e-13。现在 bounded packet repairs 为 3/3，candidate CNOT reduction 如果后续被接受可到 9；但 accepted full-circuit rewrite、symbolic decomposition、occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0，因为还没有 full-circuit replay certificate，也没有 off-grid local-U3 resource accounting 被接受。
       </p>
       <p style="margin-top: 10px;">
         最新推进 50：B1/T-B1-004e 已完成 <code>cone_01</code> parameter-transfer obligation gate。新增 <code>tools/b1_b7_cone01_parameter_transfer_gate.py</code>、<code>results/B1_B7_cone01_parameter_transfer_gate_v0.json</code> 和 <code>research/B1_B7_cone01_parameter_transfer_gate.md</code>，检查同一组 35 个 <code>cone_01</code> candidate windows：35/35 个原始 <code>RY(theta)</code> 都有非零 projective unitary sensitivity，0 个角落在 pi/4 exact grid 上，35 个 occurrences 归成 4 个 distinct theta groups，最大组覆盖 16 个 occurrences。结论：无 parameter carrier 的删除路线不能清 B7 的 30-window / 600 proxy-T 目标；后续 broader two-qubit synthesis、KAK/Clifford scaffold 或 scoped obstruction 必须显式说明 theta 是被转移、共享还是被证书化消除。这仍不是 rewrite certificate、不是 resource saving、不是 KAK lower bound，也不是 B7 ledger improvement。
@@ -1124,6 +1127,7 @@
         <li>最新 T-B1-004ai：sparse local-U3 repair gate 已完成；在 pi/4-snapped scaffold 上释放 1 或 2 个 local-U3 参数搜索 420 个 candidates，line 1378 可 exact repair，但 line 1381 / 268 仍 unrepaired。partial packet evidence 不能计入 B7，accepted occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0。</li>
         <li>最新 T-B1-004aj：three-parameter local-U3 repair gate 已完成；对剩余 line 1381 / 268 穷举 1,632 个 exactly-three-parameter candidates，line 268 exact repair，但 line 1381 仍 unresolved。现在 bounded packet repairs 为 2/3；partial packet evidence 仍不能计入 B7，accepted occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0。</li>
         <li>最新 T-B1-004ak：four-parameter line-1381 repair pressure gate 已完成；对最后 unresolved packet line 1381 穷举 3,060 个 exactly-four-parameter candidates，best residual 从 0.049865177666770955 降到 0.02997767950993884，但 exact repair 仍为 0。bounded packet repairs 仍为 2/3；accepted occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0。</li>
+        <li>最新 T-B1-004al：five-parameter line-1381 exact repair gate 已完成；line 1381 在 5,795 / 8,568 个 deterministic five-parameter combinations 后 exact repair，residual 为 6.513934436930801e-13。bounded packet repairs 现在为 3/3，但 accepted full-circuit rewrite、occurrence removal、proxy-T reduction 和 B7 improvement 仍为 0。</li>
         <li>最新 T-B2-006：posterior-calibrated shot-conditioned leakage boundary 已完成；读取 T-B2-005 的 288 target comparisons，评估 4 calibration profiles / 1152 profile rows，3 profiles 保留部分 d=5/d=7 rows，单 profile 最多 4 行，strict high-purity survival 0，robust all-profile survival false；随后 T-B2-007 已把这些 posterior rows 接入 decoder-risk ledger。</li>
         <li>最新 T-B2-007：posterior-weighted decoder-risk ledger 已完成；读取 T-B2-006 的 1152 profile rows，评估 4 risk budgets / 4608 budget-profile rows，raw profile survivors 6，mild/nominal/conservative/strict adjusted survivors 6/5/3/3，strict high-purity adjusted survivors 0，robust all-profile adjusted survival false。</li>
         <li>最新 T-B2-008：decoder-input contract feasibility gate 已完成；10 个 decoder inputs 中 4 个可用、6 个缺失，9 个 feasibility gates 中 4 个通过、5 个关键 gate 失败；随后 T-B2-009a 先补 per-shot trace input fixture。</li>

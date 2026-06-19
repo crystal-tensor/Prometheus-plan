@@ -1,0 +1,107 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "full_circuit_rewrite_claimed": false,
+    "partial_packet_repair_claimed_as_b7_saving": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "A deterministic exactly-five-parameter search finds a bounded packet-level exact repair for line 1381, closing the cone_01 reduced-CNOT packet set at 3/3.",
+    "symbolic_exact_decomposition_claimed": false,
+    "unsupported_claims": [
+      "The packet repair is not accepted as a full-circuit rewrite.",
+      "No symbolic exact decomposition or absorption certificate is emitted.",
+      "The five off-grid local-U3 degrees of freedom are not accepted as a B7 saving.",
+      "No B7 occurrence or proxy-T ledger reduction is accepted."
+    ]
+  },
+  "five_parameter_line1381_exact_repair_rows": [
+    {
+      "accepted_five_parameter_repair_as_full_circuit_rewrite": false,
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "best_five_parameter_free_indices": [
+        3,
+        4,
+        9,
+        16,
+        17
+      ],
+      "best_five_parameter_residual_norm": 6.513934436930801e-13,
+      "candidate_cnot_reduction": 3,
+      "candidate_line_number": 1381,
+      "first_exact_five_parameter_free_indices": [
+        3,
+        4,
+        9,
+        16,
+        17
+      ],
+      "first_exact_five_parameter_free_values": [
+        1.428268820279441,
+        -1.1475089599716777,
+        -1.0525172906866098,
+        0.5589456541983555,
+        0.4232873668235233
+      ],
+      "first_exact_five_parameter_off_pi_over_four_parameter_count": 5,
+      "first_exact_five_parameter_residual_norm": 6.513934436930801e-13,
+      "five_parameter_candidate_count_until_first_exact": 5795,
+      "five_parameter_exact_pass": true,
+      "five_parameter_residual_improvement_over_four_parameter": 0.02997767950928745,
+      "five_parameter_total_combination_count": 8568,
+      "pattern_id": "flat_pattern_01",
+      "replacement_cnot_count": 2,
+      "replacement_off_pi_over_four_parameter_count": 15,
+      "replacement_parameter_count": 18,
+      "snapped_residual_norm": 0.47574352650518004,
+      "source_best_four_parameter_residual_norm": 0.02997767950993884,
+      "source_cnot_count": 5,
+      "support_qubits": [
+        4,
+        8
+      ],
+      "window_end_line": 1379,
+      "window_start_line": 1369
+    }
+  ],
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0",
+  "model_status": "line1381_five_parameter_exact_packet_repair_found",
+  "source_four_parameter_line1381_repair_pressure_result": "results/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate_v0.json",
+  "source_packet_synthesis_result": "results/B1_B7_cone01_packet_synthesis_search_gate_v0.json",
+  "source_semantic_packet_result": "results/B1_B7_cone01_semantic_replay_packet_gate_v0.json",
+  "status": "cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted",
+  "summary": {
+    "accepted_five_parameter_repair_as_full_circuit_rewrite_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_ledger_improvement_claimed": false,
+    "best_five_parameter_residual_norm": 6.513934436930801e-13,
+    "best_four_parameter_residual_norm": 0.02997767950993884,
+    "candidate_cnot_reduction_if_all_packets_accepted": 9,
+    "five_parameter_candidate_count_until_first_exact": 5795,
+    "five_parameter_exact_packet_count": 1,
+    "five_parameter_exact_repair_off_pi_over_four_parameter_count": 5,
+    "five_parameter_free_count": 5,
+    "five_parameter_packet_count": 1,
+    "five_parameter_residual_improvement_over_four_parameter": 0.02997767950928745,
+    "five_parameter_total_combination_count": 8568,
+    "five_parameter_unresolved_packet_count": 0,
+    "full_circuit_rewrite_claimed": false,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "partial_candidate_cnot_reduction_if_accepted": 9,
+    "partial_packet_repair_claimed_as_b7_saving": false,
+    "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": 0,
+    "resource_saving_claimed": false,
+    "source_four_parameter_method": "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0",
+    "source_total_packet_exact_before_five_parameter_gate": 2,
+    "source_total_packet_unresolved_before_five_parameter_gate": 1,
+    "symbolic_exact_decomposition_claimed": false,
+    "target_candidate_line_number": 1381,
+    "total_packet_exact_after_five_parameter_gate": 3,
+    "total_packet_unresolved_after_five_parameter_gate": 0,
+    "validation_error_count": 0
+  },
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

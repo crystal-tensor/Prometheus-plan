@@ -342,6 +342,16 @@ ledger improvement remain 0. The next route must broaden the scaffold,
 formalize a scoped obstruction for line 1381, or move to a different
 ledger-reducing construction.
 
+The five-parameter line-1381 exact-repair gate then searches the same
+two-CNOT pi/4-snapped scaffold with exactly five freed local-U3 parameters and
+finds a first exact packet repair after 5,795 of 8,568 deterministic
+combinations. The best residual is 6.513934436930801e-13, so all three reduced
+CNOT packets now have bounded packet-level repairs. This is real progress, but
+it is still not an accepted B7 saving: the line-1381 repair carries five
+off-grid local-U3 parameters, no symbolic full-circuit replay certificate has
+been emitted, and accepted occurrence removal, proxy-T reduction, and B7 ledger
+improvement remain 0.
+
 ## Repository Layout
 
 ```text

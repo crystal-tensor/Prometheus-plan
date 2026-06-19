@@ -210,6 +210,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_four_parameter_line1381_repair_pressure_path = (
         results / "B1_B7_cone01_four_parameter_line1381_repair_pressure_gate_v0.json"
     )
+    b1_b7_cone01_five_parameter_line1381_exact_repair_path = (
+        results / "B1_B7_cone01_five_parameter_line1381_exact_repair_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -775,6 +778,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest = current_results.get(
         "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0"
+    )
+    b1_b7_cone01_five_parameter_line1381_exact_repair_manifest = current_results.get(
+        "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -5830,6 +5836,225 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 four-parameter line-1381 pressure report: "
             f"{b1_b7_cone01_four_parameter_line1381_repair_pressure_path}"
+        )
+
+    b1_b7_cone01_five_parameter_line1381_exact_repair = {
+        "path": str(b1_b7_cone01_five_parameter_line1381_exact_repair_path),
+        "exists": b1_b7_cone01_five_parameter_line1381_exact_repair_path.exists(),
+    }
+    if not b1_b7_cone01_five_parameter_line1381_exact_repair_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_five_parameter_line1381_exact_repair_manifest.get("status")
+            != "cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted"
+        ):
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair gate status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_five_parameter_line1381_exact_repair_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 five-parameter line-1381 exact repair gate missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_five_parameter_line1381_exact_repair_path.exists():
+        five_payload = json.loads(read(b1_b7_cone01_five_parameter_line1381_exact_repair_path))
+        five_summary = five_payload.get("summary", {})
+        five_claims = five_payload.get("claim_boundary", {})
+        b1_b7_cone01_five_parameter_line1381_exact_repair.update(
+            {
+                "status": five_payload.get("status"),
+                "model_status": five_payload.get("model_status"),
+                "method": five_payload.get("method"),
+                "workload": five_payload.get("workload"),
+                "source_four_parameter_method": five_summary.get("source_four_parameter_method"),
+                "target_candidate_line_number": five_summary.get("target_candidate_line_number"),
+                "source_total_packet_exact_before_five_parameter_gate": five_summary.get(
+                    "source_total_packet_exact_before_five_parameter_gate"
+                ),
+                "source_total_packet_unresolved_before_five_parameter_gate": five_summary.get(
+                    "source_total_packet_unresolved_before_five_parameter_gate"
+                ),
+                "five_parameter_free_count": five_summary.get("five_parameter_free_count"),
+                "five_parameter_packet_count": five_summary.get("five_parameter_packet_count"),
+                "five_parameter_total_combination_count": five_summary.get(
+                    "five_parameter_total_combination_count"
+                ),
+                "five_parameter_candidate_count_until_first_exact": five_summary.get(
+                    "five_parameter_candidate_count_until_first_exact"
+                ),
+                "five_parameter_exact_packet_count": five_summary.get(
+                    "five_parameter_exact_packet_count"
+                ),
+                "five_parameter_unresolved_packet_count": five_summary.get(
+                    "five_parameter_unresolved_packet_count"
+                ),
+                "total_packet_exact_after_five_parameter_gate": five_summary.get(
+                    "total_packet_exact_after_five_parameter_gate"
+                ),
+                "total_packet_unresolved_after_five_parameter_gate": five_summary.get(
+                    "total_packet_unresolved_after_five_parameter_gate"
+                ),
+                "best_four_parameter_residual_norm": five_summary.get(
+                    "best_four_parameter_residual_norm"
+                ),
+                "best_five_parameter_residual_norm": five_summary.get(
+                    "best_five_parameter_residual_norm"
+                ),
+                "five_parameter_residual_improvement_over_four_parameter": five_summary.get(
+                    "five_parameter_residual_improvement_over_four_parameter"
+                ),
+                "candidate_cnot_reduction_if_all_packets_accepted": five_summary.get(
+                    "candidate_cnot_reduction_if_all_packets_accepted"
+                ),
+                "partial_candidate_cnot_reduction_if_accepted": five_summary.get(
+                    "partial_candidate_cnot_reduction_if_accepted"
+                ),
+                "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": five_summary.get(
+                    "remaining_unrepaired_replacement_off_pi_over_four_parameter_count"
+                ),
+                "five_parameter_exact_repair_off_pi_over_four_parameter_count": five_summary.get(
+                    "five_parameter_exact_repair_off_pi_over_four_parameter_count"
+                ),
+                "accepted_five_parameter_repair_as_full_circuit_rewrite_count": five_summary.get(
+                    "accepted_five_parameter_repair_as_full_circuit_rewrite_count"
+                ),
+                "accepted_occurrence_removal": five_summary.get("accepted_occurrence_removal"),
+                "accepted_proxy_t_reduction": five_summary.get("accepted_proxy_t_reduction"),
+                "missing_occurrences_after_gate": five_summary.get("missing_occurrences_after_gate"),
+                "missing_proxy_t_after_gate": five_summary.get("missing_proxy_t_after_gate"),
+                "partial_packet_repair_claimed_as_b7_saving": five_summary.get(
+                    "partial_packet_repair_claimed_as_b7_saving"
+                ),
+                "symbolic_exact_decomposition_claimed": five_summary.get(
+                    "symbolic_exact_decomposition_claimed"
+                ),
+                "full_circuit_rewrite_claimed": five_summary.get("full_circuit_rewrite_claimed"),
+                "resource_saving_claimed": five_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": five_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": five_summary.get("validation_error_count"),
+                "five_parameter_line1381_exact_repair_row_count": len(
+                    five_payload.get("five_parameter_line1381_exact_repair_rows", [])
+                ),
+            }
+        )
+        if five_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair report must have benchmark_id B1")
+        if (
+            five_payload.get("method")
+            != "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair method mismatch")
+        if (
+            five_payload.get("status")
+            != "cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted"
+        ):
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair status mismatch")
+        if five_payload.get("model_status") != "line1381_five_parameter_exact_packet_repair_found":
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair model_status mismatch")
+        for field in [
+            "target_candidate_line_number",
+            "source_total_packet_exact_before_five_parameter_gate",
+            "source_total_packet_unresolved_before_five_parameter_gate",
+            "five_parameter_free_count",
+            "five_parameter_packet_count",
+            "five_parameter_total_combination_count",
+            "five_parameter_candidate_count_until_first_exact",
+            "five_parameter_exact_packet_count",
+            "five_parameter_unresolved_packet_count",
+            "total_packet_exact_after_five_parameter_gate",
+            "total_packet_unresolved_after_five_parameter_gate",
+            "best_four_parameter_residual_norm",
+            "best_five_parameter_residual_norm",
+            "five_parameter_residual_improvement_over_four_parameter",
+            "candidate_cnot_reduction_if_all_packets_accepted",
+            "partial_candidate_cnot_reduction_if_accepted",
+            "remaining_unrepaired_replacement_off_pi_over_four_parameter_count",
+            "five_parameter_exact_repair_off_pi_over_four_parameter_count",
+            "accepted_five_parameter_repair_as_full_circuit_rewrite_count",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "partial_packet_repair_claimed_as_b7_saving",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if (
+                five_summary.get(field)
+                != b1_b7_cone01_five_parameter_line1381_exact_repair_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 five-parameter line-1381 exact repair {field} mismatch")
+        expected_five_fields = {
+            "target_candidate_line_number": 1381,
+            "source_total_packet_exact_before_five_parameter_gate": 2,
+            "source_total_packet_unresolved_before_five_parameter_gate": 1,
+            "five_parameter_free_count": 5,
+            "five_parameter_packet_count": 1,
+            "five_parameter_total_combination_count": 8568,
+            "five_parameter_candidate_count_until_first_exact": 5795,
+            "five_parameter_exact_packet_count": 1,
+            "five_parameter_unresolved_packet_count": 0,
+            "total_packet_exact_after_five_parameter_gate": 3,
+            "total_packet_unresolved_after_five_parameter_gate": 0,
+            "candidate_cnot_reduction_if_all_packets_accepted": 9,
+            "partial_candidate_cnot_reduction_if_accepted": 9,
+            "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": 0,
+            "five_parameter_exact_repair_off_pi_over_four_parameter_count": 5,
+            "accepted_five_parameter_repair_as_full_circuit_rewrite_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_five_fields.items():
+            if five_summary.get(field) != value:
+                errors.append(
+                    f"B1/B7 cone_01 five-parameter line-1381 exact repair expected {field}={value}"
+                )
+        if five_summary.get("best_five_parameter_residual_norm", 1.0) > 1e-9:
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair residual too large")
+        for field in [
+            "partial_packet_repair_claimed_as_b7_saving",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if five_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 five-parameter line-1381 exact repair must not claim {field}")
+            if five_claims.get(field) is not False:
+                errors.append(
+                    f"B1/B7 cone_01 five-parameter line-1381 exact repair claim boundary must not claim {field}"
+                )
+        rows = five_payload.get("five_parameter_line1381_exact_repair_rows", [])
+        if len(rows) != 1:
+            errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair row count must be 1")
+        else:
+            row = rows[0]
+            if row.get("candidate_line_number") != 1381:
+                errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair must target line 1381")
+            if row.get("five_parameter_exact_pass") is not True:
+                errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair must exact-repair line 1381")
+            if row.get("first_exact_five_parameter_free_indices") != [3, 4, 9, 16, 17]:
+                errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair indices mismatch")
+            if row.get("accepted_five_parameter_repair_as_full_circuit_rewrite") is not False:
+                errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair row must not accept rewrite")
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append("B1/B7 cone_01 five-parameter line-1381 exact repair row must not remove occurrences")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 five-parameter line-1381 exact repair report: "
+            f"{b1_b7_cone01_five_parameter_line1381_exact_repair_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -15759,6 +15984,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_four_parameter_line1381_repair_pressure_gate": (
                 b1_b7_cone01_four_parameter_line1381_repair_pressure
             ),
+            "b7_cone01_five_parameter_line1381_exact_repair_gate": (
+                b1_b7_cone01_five_parameter_line1381_exact_repair
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -16008,6 +16236,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate": str(
                 b1_b7_cone01_four_parameter_line1381_repair_pressure_path
+            ),
+            "b1_b7_cone01_five_parameter_line1381_exact_repair_gate": str(
+                b1_b7_cone01_five_parameter_line1381_exact_repair_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -16822,6 +17053,18 @@ def markdown_report(report: dict) -> str:
             f"- All-packet candidate CNOT reduction / partial candidate CNOT reduction: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('candidate_cnot_reduction_if_all_packets_accepted')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('partial_candidate_cnot_reduction_if_accepted')}",
             f"- Accepted rewrite / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_four_parameter_repair_as_full_circuit_rewrite_count')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Five-Parameter Line-1381 Exact Repair Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('status')}",
+            f"- Five-parameter total combinations / searched until exact: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_total_combination_count')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_candidate_count_until_first_exact')}",
+            f"- Five-parameter exact packets / unresolved packets: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_exact_packet_count')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_unresolved_packet_count')}",
+            f"- Total exact packets after gate / total unresolved after gate: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('total_packet_exact_after_five_parameter_gate')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('total_packet_unresolved_after_five_parameter_gate')}",
+            f"- Best four-parameter residual / best five-parameter residual / improvement: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('best_four_parameter_residual_norm')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('best_five_parameter_residual_norm')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_residual_improvement_over_four_parameter')}",
+            f"- All-packet candidate CNOT reduction / partial candidate CNOT reduction: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('candidate_cnot_reduction_if_all_packets_accepted')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('partial_candidate_cnot_reduction_if_accepted')}",
+            f"- Exact repair off-grid params / accepted rewrite / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('five_parameter_exact_repair_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('accepted_five_parameter_repair_as_full_circuit_rewrite_count')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_five_parameter_line1381_exact_repair_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

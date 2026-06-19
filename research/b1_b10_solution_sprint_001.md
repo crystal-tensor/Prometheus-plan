@@ -1582,6 +1582,17 @@ full-circuit rewrite, occurrence removal, proxy-T reduction, and B7 improvement
 remain 0. Next work must broaden or change the scaffold, formalize a scoped
 obstruction for line 1381, or abandon this reduced-CNOT route.
 
+**Sprint update 18al:** `T-B1-004al` is now merged as a five-parameter
+line-1381 exact repair gate. The new artifact
+`research/B1_B7_cone01_five_parameter_line1381_exact_repair_gate.md` consumes
+T-B1-004ak and finds a first exact packet repair after 5,795 of 8,568
+deterministic five-parameter combinations, with residual
+6.513934436930801e-13. The reduced-CNOT packet set is now 3/3 repaired at
+bounded packet level, with candidate CNOT reduction 9 only if later accepted.
+Accepted full-circuit rewrite, symbolic decomposition, occurrence removal,
+proxy-T reduction, and B7 improvement all remain 0 because the repairs still
+need symbolic full-circuit replay and off-grid local-U3 resource accounting.
+
 ## Sprint Promotion Matrix
 
 | Track | Can become paper after this sprint? | Can become patent after this sprint? | Can become fundable/tool after this sprint? |

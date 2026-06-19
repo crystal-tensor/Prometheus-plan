@@ -585,6 +585,18 @@ Overall audit: PASS
 - Accepted rewrite / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Five-Parameter Line-1381 Exact Repair Gate
+
+- Exists: True
+- Status: cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted
+- Five-parameter total combinations / searched until exact: 8568 / 5795
+- Five-parameter exact packets / unresolved packets: 1 / 0
+- Total exact packets after gate / total unresolved after gate: 3 / 0
+- Best four-parameter residual / best five-parameter residual / improvement: 0.02997767950993884 / 6.513934436930801e-13 / 0.02997767950928745
+- All-packet candidate CNOT reduction / partial candidate CNOT reduction: 9 / 9
+- Exact repair off-grid params / accepted rewrite / occurrence / proxy-T reduction / B7 claim: 5 / 0 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True
