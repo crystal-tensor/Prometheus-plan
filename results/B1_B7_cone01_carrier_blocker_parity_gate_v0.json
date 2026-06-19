@@ -1,0 +1,385 @@
+{
+  "benchmark_id": "B1",
+  "carrier_blocker_parity_rows": [
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_parity_clearance_count": 0,
+      "accepted_proxy_t_reduction": 0,
+      "claim_boundary": "CNOT parity grouping is a cheap-clearance diagnostic only; it is not a semantic CNOT-stack rewrite, replay certificate, or B7 resource certificate.",
+      "clean_adjacent_cnot_cancel_pair_count": 0,
+      "cnot_only_parity_identity_candidate_count": 1,
+      "occurrence_count": 8,
+      "odd_cnot_parity_candidate_count": 2,
+      "parity_candidate_count": 3,
+      "parity_candidates": [
+        {
+          "accepted_occurrence_removal": 0,
+          "accepted_proxy_t_reduction": 0,
+          "blocked_repeated_pair_count": 3,
+          "candidate_line_number": 1378,
+          "candidate_qubit": 8,
+          "clean_adjacent_cnot_cancel_pair_count": 0,
+          "cnot_only_parity_identity": true,
+          "edge_counts": {
+            "4-8": 4
+          },
+          "nearest_source_line": 1366,
+          "odd_parity_edge_signatures": [],
+          "parity_clearance_accepted": false,
+          "rejection_reason": "cnot-only parity is even but repeated blockers are separated by target-qubit operations",
+          "repeated_same_edge_pair_count": 3,
+          "repeated_same_edge_pairs": [
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 2,
+              "left_blocker_line": 1369,
+              "line_span": [
+                1369,
+                1372
+              ],
+              "right_blocker_line": 1372,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                1370,
+                1371
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 1,
+              "left_blocker_line": 1372,
+              "line_span": [
+                1372,
+                1374
+              ],
+              "right_blocker_line": 1374,
+              "target_single_qubit_line_count": 1,
+              "target_single_qubit_lines": [
+                1373
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 2,
+              "left_blocker_line": 1374,
+              "line_span": [
+                1374,
+                1377
+              ],
+              "right_blocker_line": 1377,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                1375,
+                1376
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            }
+          ],
+          "source_distance": 12,
+          "stack_length": 4,
+          "target_single_qubit_between_repeated_pair_count": 5,
+          "target_touching_cx_between_repeated_pair_count": 0
+        },
+        {
+          "accepted_occurrence_removal": 0,
+          "accepted_proxy_t_reduction": 0,
+          "blocked_repeated_pair_count": 4,
+          "candidate_line_number": 1381,
+          "candidate_qubit": 8,
+          "clean_adjacent_cnot_cancel_pair_count": 0,
+          "cnot_only_parity_identity": false,
+          "edge_counts": {
+            "4-8": 5
+          },
+          "nearest_source_line": 1366,
+          "odd_parity_edge_signatures": [
+            "4-8"
+          ],
+          "parity_clearance_accepted": false,
+          "rejection_reason": "blocker CNOT parity has odd edge counts",
+          "repeated_same_edge_pair_count": 4,
+          "repeated_same_edge_pairs": [
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 2,
+              "left_blocker_line": 1369,
+              "line_span": [
+                1369,
+                1372
+              ],
+              "right_blocker_line": 1372,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                1370,
+                1371
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 1,
+              "left_blocker_line": 1372,
+              "line_span": [
+                1372,
+                1374
+              ],
+              "right_blocker_line": 1374,
+              "target_single_qubit_line_count": 1,
+              "target_single_qubit_lines": [
+                1373
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 2,
+              "left_blocker_line": 1374,
+              "line_span": [
+                1374,
+                1377
+              ],
+              "right_blocker_line": 1377,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                1375,
+                1376
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "4-8",
+              "intervening_line_count": 1,
+              "left_blocker_line": 1377,
+              "line_span": [
+                1377,
+                1379
+              ],
+              "right_blocker_line": 1379,
+              "target_single_qubit_line_count": 1,
+              "target_single_qubit_lines": [
+                1378
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            }
+          ],
+          "source_distance": 15,
+          "stack_length": 5,
+          "target_single_qubit_between_repeated_pair_count": 6,
+          "target_touching_cx_between_repeated_pair_count": 0
+        },
+        {
+          "accepted_occurrence_removal": 0,
+          "accepted_proxy_t_reduction": 0,
+          "blocked_repeated_pair_count": 4,
+          "candidate_line_number": 268,
+          "candidate_qubit": 2,
+          "clean_adjacent_cnot_cancel_pair_count": 0,
+          "cnot_only_parity_identity": false,
+          "edge_counts": {
+            "10-14": 1,
+            "2-14": 5
+          },
+          "nearest_source_line": 252,
+          "odd_parity_edge_signatures": [
+            "10-14",
+            "2-14"
+          ],
+          "parity_clearance_accepted": false,
+          "rejection_reason": "blocker CNOT parity has odd edge counts",
+          "repeated_same_edge_pair_count": 4,
+          "repeated_same_edge_pairs": [
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "2-14",
+              "intervening_line_count": 2,
+              "left_blocker_line": 256,
+              "line_span": [
+                256,
+                259
+              ],
+              "right_blocker_line": 259,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                257,
+                258
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "2-14",
+              "intervening_line_count": 2,
+              "left_blocker_line": 259,
+              "line_span": [
+                259,
+                262
+              ],
+              "right_blocker_line": 262,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                260,
+                261
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "2-14",
+              "intervening_line_count": 1,
+              "left_blocker_line": 262,
+              "line_span": [
+                262,
+                264
+              ],
+              "right_blocker_line": 264,
+              "target_single_qubit_line_count": 1,
+              "target_single_qubit_lines": [
+                263
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            },
+            {
+              "clean_for_adjacent_cnot_cancel": false,
+              "edge_signature": "2-14",
+              "intervening_line_count": 2,
+              "left_blocker_line": 264,
+              "line_span": [
+                264,
+                267
+              ],
+              "right_blocker_line": 267,
+              "target_single_qubit_line_count": 2,
+              "target_single_qubit_lines": [
+                265,
+                266
+              ],
+              "target_touching_cx_line_count": 0,
+              "target_touching_cx_lines": []
+            }
+          ],
+          "source_distance": 16,
+          "stack_length": 6,
+          "target_single_qubit_between_repeated_pair_count": 7,
+          "target_touching_cx_between_repeated_pair_count": 0
+        }
+      ],
+      "pattern_id": "flat_pattern_01",
+      "repeated_same_edge_pair_count": 11,
+      "target_qubits": [
+        1,
+        2,
+        8,
+        10,
+        13
+      ],
+      "target_single_qubit_between_repeated_pair_count": 18
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_parity_clearance_count": 0,
+      "accepted_proxy_t_reduction": 0,
+      "claim_boundary": "CNOT parity grouping is a cheap-clearance diagnostic only; it is not a semantic CNOT-stack rewrite, replay certificate, or B7 resource certificate.",
+      "clean_adjacent_cnot_cancel_pair_count": 0,
+      "cnot_only_parity_identity_candidate_count": 0,
+      "occurrence_count": 2,
+      "odd_cnot_parity_candidate_count": 0,
+      "parity_candidate_count": 0,
+      "parity_candidates": [],
+      "pattern_id": "flat_pattern_02",
+      "repeated_same_edge_pair_count": 0,
+      "target_qubits": [
+        10,
+        15
+      ],
+      "target_single_qubit_between_repeated_pair_count": 0
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_parity_clearance_count": 0,
+      "accepted_proxy_t_reduction": 0,
+      "claim_boundary": "CNOT parity grouping is a cheap-clearance diagnostic only; it is not a semantic CNOT-stack rewrite, replay certificate, or B7 resource certificate.",
+      "clean_adjacent_cnot_cancel_pair_count": 0,
+      "cnot_only_parity_identity_candidate_count": 0,
+      "occurrence_count": 1,
+      "odd_cnot_parity_candidate_count": 0,
+      "parity_candidate_count": 0,
+      "parity_candidates": [],
+      "pattern_id": "flat_pattern_03",
+      "repeated_same_edge_pair_count": 0,
+      "target_qubits": [
+        5
+      ],
+      "target_single_qubit_between_repeated_pair_count": 0
+    }
+  ],
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "cnot_parity_rewrite_claimed": false,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "semantic_certificate_claimed": false,
+    "supported_claim": "The current source-aligned blocker stacks do not admit cheap CNOT parity or adjacent-duplicate clearance.",
+    "unsupported_claims": [
+      "No CNOT-stack semantic rewrite is produced.",
+      "No replay certificate is produced.",
+      "No occurrence is removed from the B7 ledger."
+    ]
+  },
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_carrier_blocker_parity_gate_v0",
+  "model_status": "blocker_stacks_do_not_admit_cheap_cnot_parity_clearance",
+  "problem_id": 25,
+  "source_method": "b1_b7_cone01_carrier_blocker_stack_gate_v0",
+  "source_result": "results/B1_B7_cone01_carrier_blocker_stack_gate_v0.json",
+  "status": "cone01_carrier_blocker_parity_negative_gate",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_parity_clearance_count": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_ledger_improvement_claimed": false,
+    "clean_adjacent_cnot_cancel_pair_count": 0,
+    "cnot_only_parity_identity_but_interleaved_candidate_count": 1,
+    "cnot_only_parity_identity_candidate_count": 1,
+    "cnot_parity_rewrite_claimed": false,
+    "covered_invariant_flat_occurrence_count": 11,
+    "inventory_qasm": "results/b1_native_t_resource_optimizer/qasmbench_medium_exact/gcm_h6.qasm",
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "odd_cnot_parity_candidate_count": 2,
+    "parity_candidate_count": 3,
+    "parity_clearance_gate_passed": false,
+    "pattern_group_count": 3,
+    "repeated_same_edge_pair_count": 11,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "semantic_certificate_claimed": false,
+    "source_aligned_candidate_count": 3,
+    "source_method": "b1_b7_cone01_carrier_blocker_stack_gate_v0",
+    "source_status": "cone01_carrier_blocker_stack_negative_gate",
+    "target_single_qubit_between_repeated_pair_count": 18,
+    "target_touching_cx_between_repeated_pair_count": 0,
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 cone_01 carrier blocker CNOT parity gate",
+  "validation_errors": [],
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

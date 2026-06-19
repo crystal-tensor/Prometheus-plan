@@ -486,6 +486,17 @@ Overall audit: PASS
 - Template/semantic/rewrite/resource/B7 claims: False / False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Carrier Blocker CNOT Parity Gate
+
+- Exists: True
+- Status: cone01_carrier_blocker_parity_negative_gate
+- Parity candidates / CNOT-only parity identity / odd parity candidates: 3 / 1 / 2
+- Repeated same-edge pairs / clean cancel pairs: 11 / 0
+- Target single-qubit interleavings / parity-identity but interleaved candidates: 18 / 1
+- Parity gate passed / accepted occurrence / proxy-T reduction: False / 0 / 0
+- CNOT-parity/semantic/rewrite/resource/B7 claims: False / False / False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

@@ -183,6 +183,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_carrier_blocker_motif_path = (
         results / "B1_B7_cone01_carrier_blocker_motif_gate_v0.json"
     )
+    b1_b7_cone01_carrier_blocker_parity_path = (
+        results / "B1_B7_cone01_carrier_blocker_parity_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -721,6 +724,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_carrier_blocker_motif_manifest = current_results.get(
         "b1_b7_cone01_carrier_blocker_motif_gate_v0"
+    )
+    b1_b7_cone01_carrier_blocker_parity_manifest = current_results.get(
+        "b1_b7_cone01_carrier_blocker_parity_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -4088,6 +4094,173 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 carrier blocker-motif report: "
             f"{b1_b7_cone01_carrier_blocker_motif_path}"
+        )
+
+    b1_b7_cone01_carrier_blocker_parity = {
+        "path": str(b1_b7_cone01_carrier_blocker_parity_path),
+        "exists": b1_b7_cone01_carrier_blocker_parity_path.exists(),
+    }
+    if not b1_b7_cone01_carrier_blocker_parity_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_carrier_blocker_parity_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_carrier_blocker_parity_manifest.get("status")
+            != "cone01_carrier_blocker_parity_negative_gate"
+        ):
+            errors.append("B1/B7 cone_01 carrier blocker-parity gate status must remain negative")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_carrier_blocker_parity_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    f"B1/B7 cone_01 carrier blocker-parity gate missing existing {field} path: {value}"
+                )
+    if b1_b7_cone01_carrier_blocker_parity_path.exists():
+        carrier_parity_payload = json.loads(read(b1_b7_cone01_carrier_blocker_parity_path))
+        carrier_parity_summary = carrier_parity_payload.get("summary", {})
+        carrier_parity_claims = carrier_parity_payload.get("claim_boundary", {})
+        b1_b7_cone01_carrier_blocker_parity.update(
+            {
+                "status": carrier_parity_payload.get("status"),
+                "model_status": carrier_parity_payload.get("model_status"),
+                "method": carrier_parity_payload.get("method"),
+                "workload": carrier_parity_payload.get("workload"),
+                "source_method": carrier_parity_payload.get("source_method"),
+                "pattern_group_count": carrier_parity_summary.get("pattern_group_count"),
+                "covered_invariant_flat_occurrence_count": carrier_parity_summary.get(
+                    "covered_invariant_flat_occurrence_count"
+                ),
+                "source_aligned_candidate_count": carrier_parity_summary.get(
+                    "source_aligned_candidate_count"
+                ),
+                "parity_candidate_count": carrier_parity_summary.get("parity_candidate_count"),
+                "cnot_only_parity_identity_candidate_count": carrier_parity_summary.get(
+                    "cnot_only_parity_identity_candidate_count"
+                ),
+                "odd_cnot_parity_candidate_count": carrier_parity_summary.get(
+                    "odd_cnot_parity_candidate_count"
+                ),
+                "repeated_same_edge_pair_count": carrier_parity_summary.get(
+                    "repeated_same_edge_pair_count"
+                ),
+                "clean_adjacent_cnot_cancel_pair_count": carrier_parity_summary.get(
+                    "clean_adjacent_cnot_cancel_pair_count"
+                ),
+                "target_single_qubit_between_repeated_pair_count": carrier_parity_summary.get(
+                    "target_single_qubit_between_repeated_pair_count"
+                ),
+                "target_touching_cx_between_repeated_pair_count": carrier_parity_summary.get(
+                    "target_touching_cx_between_repeated_pair_count"
+                ),
+                "cnot_only_parity_identity_but_interleaved_candidate_count": (
+                    carrier_parity_summary.get("cnot_only_parity_identity_but_interleaved_candidate_count")
+                ),
+                "accepted_parity_clearance_count": carrier_parity_summary.get(
+                    "accepted_parity_clearance_count"
+                ),
+                "parity_clearance_gate_passed": carrier_parity_summary.get(
+                    "parity_clearance_gate_passed"
+                ),
+                "accepted_occurrence_removal": carrier_parity_summary.get("accepted_occurrence_removal"),
+                "accepted_proxy_t_reduction": carrier_parity_summary.get("accepted_proxy_t_reduction"),
+                "missing_occurrences_after_gate": carrier_parity_summary.get("missing_occurrences_after_gate"),
+                "missing_proxy_t_after_gate": carrier_parity_summary.get("missing_proxy_t_after_gate"),
+                "cnot_parity_rewrite_claimed": carrier_parity_summary.get("cnot_parity_rewrite_claimed"),
+                "semantic_certificate_claimed": carrier_parity_claims.get("semantic_certificate_claimed"),
+                "rewrite_claimed": carrier_parity_claims.get("rewrite_claimed"),
+                "resource_saving_claimed": carrier_parity_claims.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": carrier_parity_claims.get("b7_ledger_improvement_claimed"),
+                "validation_error_count": carrier_parity_summary.get("validation_error_count"),
+                "carrier_blocker_parity_row_count": len(
+                    carrier_parity_payload.get("carrier_blocker_parity_rows", [])
+                ),
+            }
+        )
+        if carrier_parity_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 carrier blocker-parity report must have benchmark_id B1")
+        if carrier_parity_payload.get("method") != "b1_b7_cone01_carrier_blocker_parity_gate_v0":
+            errors.append("B1/B7 cone_01 carrier blocker-parity method mismatch")
+        if carrier_parity_payload.get("status") != "cone01_carrier_blocker_parity_negative_gate":
+            errors.append("B1/B7 cone_01 carrier blocker-parity status mismatch")
+        if (
+            carrier_parity_payload.get("model_status")
+            != "blocker_stacks_do_not_admit_cheap_cnot_parity_clearance"
+        ):
+            errors.append("B1/B7 cone_01 carrier blocker-parity model_status mismatch")
+        if carrier_parity_payload.get("source_method") != "b1_b7_cone01_carrier_blocker_stack_gate_v0":
+            errors.append("B1/B7 cone_01 carrier blocker-parity source method mismatch")
+        for field in [
+            "pattern_group_count",
+            "covered_invariant_flat_occurrence_count",
+            "source_aligned_candidate_count",
+            "parity_candidate_count",
+            "cnot_only_parity_identity_candidate_count",
+            "odd_cnot_parity_candidate_count",
+            "repeated_same_edge_pair_count",
+            "clean_adjacent_cnot_cancel_pair_count",
+            "target_single_qubit_between_repeated_pair_count",
+            "target_touching_cx_between_repeated_pair_count",
+            "cnot_only_parity_identity_but_interleaved_candidate_count",
+            "accepted_parity_clearance_count",
+            "parity_clearance_gate_passed",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "cnot_parity_rewrite_claimed",
+            "semantic_certificate_claimed",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if carrier_parity_summary.get(field) != b1_b7_cone01_carrier_blocker_parity_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 carrier blocker-parity {field} mismatch")
+        expected_parity_fields = {
+            "pattern_group_count": 3,
+            "covered_invariant_flat_occurrence_count": 11,
+            "source_aligned_candidate_count": 3,
+            "parity_candidate_count": 3,
+            "cnot_only_parity_identity_candidate_count": 1,
+            "odd_cnot_parity_candidate_count": 2,
+            "clean_adjacent_cnot_cancel_pair_count": 0,
+            "cnot_only_parity_identity_but_interleaved_candidate_count": 1,
+            "accepted_parity_clearance_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_parity_fields.items():
+            if carrier_parity_summary.get(field) != value:
+                errors.append(f"B1/B7 cone_01 carrier blocker-parity expected {field}={value}")
+        if carrier_parity_summary.get("repeated_same_edge_pair_count", 0) <= 0:
+            errors.append("B1/B7 cone_01 carrier blocker-parity repeated-pair count must be positive")
+        if carrier_parity_summary.get("target_single_qubit_between_repeated_pair_count", 0) <= 0:
+            errors.append(
+                "B1/B7 cone_01 carrier blocker-parity target single-qubit interleaving must be positive"
+            )
+        if len(carrier_parity_payload.get("carrier_blocker_parity_rows", [])) != 3:
+            errors.append("B1/B7 cone_01 carrier blocker-parity row count must be 3")
+        for row in carrier_parity_payload.get("carrier_blocker_parity_rows", []):
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append("B1/B7 cone_01 carrier blocker-parity rows must not remove occurrences")
+            for candidate in row.get("parity_candidates", []):
+                if candidate.get("parity_clearance_accepted"):
+                    errors.append("B1/B7 cone_01 carrier blocker-parity must not accept candidates")
+        for field in [
+            "cnot_parity_rewrite_claimed",
+            "semantic_certificate_claimed",
+            "rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if carrier_parity_summary.get(field) is not False or carrier_parity_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 carrier blocker-parity must not claim {field}")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 carrier blocker-parity report: "
+            f"{b1_b7_cone01_carrier_blocker_parity_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -14002,6 +14175,7 @@ def audit(root: Path) -> dict:
             "b7_cone01_carrier_source_alignment_gate": b1_b7_cone01_carrier_source_alignment,
             "b7_cone01_carrier_blocker_stack_gate": b1_b7_cone01_carrier_blocker_stack,
             "b7_cone01_carrier_blocker_motif_gate": b1_b7_cone01_carrier_blocker_motif,
+            "b7_cone01_carrier_blocker_parity_gate": b1_b7_cone01_carrier_blocker_parity,
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -14224,6 +14398,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_carrier_blocker_motif_gate": str(
                 b1_b7_cone01_carrier_blocker_motif_path
+            ),
+            "b1_b7_cone01_carrier_blocker_parity_gate": str(
+                b1_b7_cone01_carrier_blocker_parity_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -14939,6 +15116,17 @@ def markdown_report(report: dict) -> str:
             f"- Accepted template motifs / occurrence / proxy-T reduction: {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('accepted_template_motif_count')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('accepted_proxy_t_reduction')}",
             f"- Template/semantic/rewrite/resource/B7 claims: {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('template_rewrite_claimed')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_carrier_blocker_motif_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Carrier Blocker CNOT Parity Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('status')}",
+            f"- Parity candidates / CNOT-only parity identity / odd parity candidates: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('parity_candidate_count')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('cnot_only_parity_identity_candidate_count')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('odd_cnot_parity_candidate_count')}",
+            f"- Repeated same-edge pairs / clean cancel pairs: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('repeated_same_edge_pair_count')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('clean_adjacent_cnot_cancel_pair_count')}",
+            f"- Target single-qubit interleavings / parity-identity but interleaved candidates: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('target_single_qubit_between_repeated_pair_count')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('cnot_only_parity_identity_but_interleaved_candidate_count')}",
+            f"- Parity gate passed / accepted occurrence / proxy-T reduction: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('parity_clearance_gate_passed')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('accepted_proxy_t_reduction')}",
+            f"- CNOT-parity/semantic/rewrite/resource/B7 claims: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('cnot_parity_rewrite_claimed')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_carrier_blocker_parity_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

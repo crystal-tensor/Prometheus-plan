@@ -1475,6 +1475,19 @@ and B7 ledger improvement all remain 0. The next `T-B1-004` route must either
 perform a real semantic CNOT-stack rewrite or leave the carrier route as a
 negative boundary.
 
+**Sprint update 18ac:** `T-B1-004ac` is now merged as a carrier blocker
+CNOT-parity pressure gate. The new artifact
+`research/B1_B7_cone01_carrier_blocker_parity_gate.md` consumes the
+blocker-stack and blocker-motif gates and asks whether the 3 blocked
+source-aligned candidates can be cleared by cheap CNOT parity or adjacent
+duplicate-CNOT cancellation. They cannot: 1 candidate has CNOT-only parity
+identity only if interleaved gates are ignored, 2 candidates have odd CNOT
+parity, repeated same-edge blocker pairs total 11, clean adjacent cancel pairs
+are 0, and target-qubit single-qubit interleavings total 18. Accepted parity
+clearance, occurrence removal, proxy-T reduction, and B7 ledger improvement
+all remain 0. The next `T-B1-004` route must now perform real semantic
+CNOT-stack synthesis/replay rather than parity-level clearance.
+
 ## Sprint Promotion Matrix
 
 | Track | Can become paper after this sprint? | Can become patent after this sprint? | Can become fundable/tool after this sprint? |
