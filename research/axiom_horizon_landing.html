@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Axiom Horizon - Multi-Agent Quantum Research Lattice</title>
-  <meta name="description" content="Axiom Horizon is a multi-agent quantum research lattice for reproducible B1-B10 frontier research.">
+  <meta name="description" content="Axiom Horizon is a multi-agent quantum research lattice for auditable B1-B10 frontier research.">
   <style>
     :root {
       color-scheme: dark;
@@ -29,8 +29,8 @@
         radial-gradient(circle at 82% 0%, rgba(255, 120, 214, 0.12), transparent 24rem),
         linear-gradient(180deg, #050607 0%, #070909 48%, #030404 100%);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      line-height: 1.65;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
     }
 
     body::before {
@@ -43,7 +43,7 @@
         linear-gradient(rgba(158, 240, 255, 0.28) 1px, transparent 1px),
         linear-gradient(90deg, rgba(247, 217, 107, 0.18) 1px, transparent 1px);
       background-size: 72px 72px;
-      mask-image: linear-gradient(to bottom, #000 0%, transparent 86%);
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
     }
 
     main {
@@ -54,16 +54,11 @@
     }
 
     h1, h2, h3, p { margin: 0; }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
       border: 1px solid rgba(158, 240, 255, 0.36);
       background: rgba(0, 0, 0, 0.36);
       padding: 8px 11px;
@@ -95,29 +90,28 @@
     }
 
     .lead {
-      max-width: 850px;
+      max-width: 880px;
       margin-top: 28px;
       color: #cbd4d8;
       font-size: clamp(16px, 2vw, 19px);
     }
 
-    .metrics,
-    .cards,
-    .updates,
-    .frontiers {
-      display: grid;
-      gap: 14px;
-    }
-
-    .metrics {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 34px;
-    }
+    .grid { display: grid; gap: 14px; }
+    .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 34px; }
+    .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 24px; }
+    .updates { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .frontiers, .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .agent-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
     .metric,
     .card,
     .update,
-    .frontier {
+    .frontier,
+    .track,
+    .repo-panel,
+    .agent,
+    .source {
       border: 1px solid var(--line);
       background: rgba(14, 17, 18, 0.82);
     }
@@ -143,20 +137,24 @@
       text-transform: uppercase;
     }
 
-    .cards {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 24px;
-    }
-
     .card,
     .update,
-    .frontier {
+    .frontier,
+    .track,
+    .repo-panel,
+    .agent,
+    .source {
       padding: 22px;
     }
 
-    .card h3,
-    .update h3,
-    .frontier h3 {
+    h2 {
+      margin-top: 11px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+    }
+
+    h3 {
       color: white;
       font-family: Georgia, "Times New Roman", serif;
       font-size: 20px;
@@ -165,7 +163,12 @@
 
     .card p,
     .update p,
-    .frontier p {
+    .frontier p,
+    .track p,
+    .repo-panel p,
+    .agent p,
+    .source p,
+    li {
       margin-top: 10px;
       color: var(--muted);
       font-size: 14px;
@@ -184,25 +187,16 @@
       margin-bottom: 28px;
     }
 
-    .section-head h2 {
-      margin-top: 11px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.05;
-    }
-
     .section-head p {
       color: var(--muted);
       font-size: 15px;
     }
 
-    .updates {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .tag {
-      display: inline-block;
-      margin-bottom: 18px;
+    .tag,
+    .date,
+    .track-id {
+      display: inline-flex;
+      margin-bottom: 16px;
       border: 1px solid rgba(247, 217, 107, 0.34);
       background: rgba(247, 217, 107, 0.1);
       padding: 5px 8px;
@@ -210,6 +204,12 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 10px;
       text-transform: uppercase;
+    }
+
+    .date {
+      border-color: rgba(158, 240, 255, 0.32);
+      background: rgba(158, 240, 255, 0.1);
+      color: var(--cyan);
     }
 
     .label {
@@ -222,35 +222,38 @@
       text-transform: uppercase;
     }
 
-    .frontiers {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 20px;
-    }
-
-    .frontier {
+    .frontier, .source {
       transition: border-color 160ms ease, transform 160ms ease;
     }
 
-    .frontier:hover {
+    .frontier:hover, .source:hover {
       border-color: rgba(158, 240, 255, 0.55);
       transform: translateY(-2px);
     }
 
-    .date {
-      display: inline-flex;
-      margin-bottom: 14px;
-      border: 1px solid rgba(158, 240, 255, 0.32);
-      background: rgba(158, 240, 255, 0.1);
-      padding: 4px 8px;
+    .source-name {
       color: var(--cyan);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 11px;
+      font-size: 12px;
+      text-transform: uppercase;
     }
 
-    .source {
-      margin-left: 8px;
-      color: #77838c;
+    .repo-tree {
+      margin: 18px 0 0;
+      padding: 18px;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.34);
+      color: #dce7ea;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 12px;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
     }
 
     footer {
@@ -264,7 +267,10 @@
       .updates,
       .frontiers,
       .cards,
-      .section-head {
+      .section-head,
+      .top-grid,
+      .agent-grid,
+      .source-grid {
         grid-template-columns: 1fr;
       }
 
@@ -280,32 +286,30 @@
     <section class="hero">
       <div>
         <div class="eyebrow">Axiom Horizon / multi-agent quantum research lattice</div>
-        <h1>公理视界计划<span>Axiom Horizon</span></h1>
+        <h1>Axiom Horizon<span>Multi-Agent Quantum Research Lattice</span></h1>
         <p class="lead">
-          这里展示 Axiom Horizon 为未来量子计算研究建立的完整战场图：100 个世界级难题冻结版、Top 10 攻关方向、
-          B1-B10 技术门槛、多智能体 PR 协作协议，以及从技术证据到论文、专利、融资、工具化的后置路径。
-          当前策略先解决 B1-B10 的技术门槛，商业化与发表转化暂时停在后置停车场。
+          Axiom Horizon is an open research operating system for future quantum computing. It freezes a 100-problem frontier map, focuses current execution on B1-B10 technical gates, and routes every claim through reproducible benchmarks, adversarial baselines, audit logs, and reviewable research artifacts before any paper, patent, fundraising, or product translation.
         </p>
 
-        <div class="metrics" aria-label="Research metrics">
+        <div class="grid metrics" aria-label="Research metrics">
           <div class="metric"><strong>100</strong><span>Hard Problems</span></div>
           <div class="metric"><strong>B1-B10</strong><span>Attack Tracks</span></div>
           <div class="metric"><strong>100-Lock</strong><span>Catalog Lock</span></div>
           <div class="metric"><strong>12M</strong><span>Goal Window</span></div>
         </div>
 
-        <div class="cards">
+        <div class="grid cards">
           <article class="card">
             <h3>Agent PR Flow</h3>
-            <p>Issue -> Branch -> Benchmark -> Result -> Audit -> Review，每一步都能被复现。</p>
+            <p>Issue -> Branch -> Benchmark -> Result -> Audit -> Review. Every step must be reproducible.</p>
           </article>
           <article class="card">
             <h3>Claim Boundary</h3>
-            <p>任何“突破”都必须说明尚未解决的边界，避免把 proxy 当成最终答案。</p>
+            <p>Every claimed result must state what remains unsolved, so proxy evidence cannot be mistaken for a final answer.</p>
           </article>
           <article class="card">
             <h3>Translation Parking Lot</h3>
-            <p>论文、专利、融资、工具化只在 B1-B10 技术门槛之后启动。</p>
+            <p>Papers, patents, fundraising, and tools start only after a B1-B10 technical gate clears.</p>
           </article>
         </div>
       </div>
@@ -315,79 +319,282 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">Latest Research Update / 2026-06-19</div>
-          <h2>最新研究更新</h2>
+          <h2>Latest Research Update</h2>
         </div>
         <p>
-          这组更新把本地 B1-B10 最新任务板和 2026 公开前沿放在同一张仪表板里。绿色信号不会自动升格为“突破”，每条都保留下一道证据门槛。
+          This board combines the current B1-B10 task state with public 2026 quantum-computing frontiers. Positive signals do not automatically become breakthrough claims; every card keeps its next evidence gate visible.
         </p>
       </div>
 
-      <div class="updates">
+      <div class="grid updates">
         <article class="update">
           <span class="tag">B1/B7 / merged</span>
-          <h3>gcm_h6 从 w8_21 数值搜索转入 symbolic scaffold</h3>
-          <p>T-B7-009 与 T-B7-010a 已把 local-search 空间压到明确边界：43,480 次 w8_21 optimizer runs 后仍无 exact occurrence-removing certificate。</p>
+          <h3>gcm_h6 moves from w8_21 numerical search to symbolic scaffold</h3>
+          <p>T-B7-009 and T-B7-010a compress the local-search space into a clear boundary: 43,480 w8_21 optimizer runs still produced no exact occurrence-removing certificate.</p>
           <div class="label">Evidence</div>
-          <p>12 个 retained templates 中 0 个 single-template one-angle route 清除 1.20x STV 边界；最佳 w8_21 仍至少需要每 occurrence 移除 2 个 arbitrary rotations。</p>
+          <p>Among 12 retained templates, zero single-template one-angle routes clear the 1.20x STV boundary. The best w8_21 route still needs at least two arbitrary-rotation removals per occurrence.</p>
           <div class="label">Next Gate</div>
-          <p>停止继续堆同类 numerical search；下一步只接受 symbolic KAK/Clifford scaffold 或不同 occurrence-removing rewrite。</p>
+          <p>Stop expanding the same numerical search family. Accept only a symbolic KAK or Clifford-scaffold proof, or a different occurrence-removing rewrite.</p>
         </article>
 
         <article class="update">
           <span class="tag">B2 / negative boundary</span>
-          <h3>leakage-aware decoder 路线已进入硬件式观测模型压力测试</h3>
-          <p>最新 hardware-like leakage model gate 消耗 detector bitstrings，不再只依赖 synthetic flag fixture，但仍不是 calibrated hardware 或 production decoder。</p>
+          <h3>Leakage-aware decoding enters hardware-like observation stress</h3>
+          <p>The latest hardware-like leakage model gate consumes detector bitstrings rather than only synthetic flag fixtures, but it is still not calibrated hardware evidence or a production decoder.</p>
           <div class="label">Evidence</div>
-          <p>3 个 strict challenge rows、3 个 observation profiles、1,728 profile-shots 与 864 holdout shots；best conservative profile 415 flag events，0 prediction changes，0 fixed failures，22 injected failures 保持不变。</p>
+          <p>Three strict challenge rows, three observation profiles, 1,728 profile-shots, and 864 holdout shots. The best conservative profile has 415 flag events, zero prediction changes, zero fixed failures, and 22 injected failures unchanged.</p>
           <div class="label">Next Gate</div>
-          <p>需要真实/校准 leakage traces、shot-conditioned decoder contract，或证明当前 DEM-edge posterior 注入机制为什么应当改变 PyMatching 决策。</p>
+          <p>Provide real or calibrated leakage traces, a shot-conditioned decoder contract, or a reason the current DEM-edge posterior injection should change PyMatching decisions.</p>
         </article>
 
         <article class="update">
           <span class="tag">B10/B8 / verifier bridge</span>
-          <h3>量子优势验证从 toy leakage 进入 noisy circuit bridge</h3>
-          <p>B10-T2 已完成 Qiskit/Aer circuit-level、noisy Aer 和 backend-calibrated-style 三层桥接；refresh mode 仍是必要防线。</p>
+          <h3>Quantum-advantage verification moves into noisy circuit bridges</h3>
+          <p>B10-T2 now has Qiskit/Aer semantic, noisy Aer, and backend-calibrated-style bridge layers. Refresh remains a necessary defense.</p>
           <div class="label">Evidence</div>
-          <p>9,600 noisy Aer parity-verifier circuits：safe refresh modes 下 honest acceptance 1.0、adversary acceptance 0.0；GenericBackendV2-style bridge 中 adversary acceptance 升到 0.25，暴露校准敏感性。</p>
+          <p>9,600 noisy Aer parity-verifier circuits preserve honest acceptance at 1.0 and adversary acceptance at 0.0 under safe refresh modes. GenericBackendV2-style calibration raises adversary acceptance to 0.25, exposing calibration sensitivity.</p>
           <div class="label">Next Gate</div>
-          <p>把 GenericBackendV2 快照替换成真实 backend properties，或直接做 hardware randomized-measurement verifier execution。</p>
+          <p>Replace GenericBackendV2 snapshots with real backend properties, or run hardware randomized-measurement verifier execution.</p>
         </article>
 
         <article class="update">
           <span class="tag">B5/B10 / same-access guardrail</span>
-          <h3>response-sampler cost stress 继续拒绝轻率量子优势叙事</h3>
-          <p>同 9 个 D5 Hubbard response rows 上，乐观 bounded-density finite-difference sampler 仍无法追平 exact-state-seeded MPS pressure。</p>
+          <h3>Response-sampler cost stress rejects loose advantage narratives</h3>
+          <p>On the same nine D5 Hubbard response rows, an optimistic bounded-density finite-difference sampler still cannot match exact-state-seeded MPS pressure.</p>
           <div class="label">Evidence</div>
-          <p>匹配 seeded-MPS pressure 的 shot lower bound 为 min/median/max 3.861e9 / 7.645e12 / 2.849e29；0 rows by shots beat explicit D5 matvec ops。</p>
+          <p>The shot lower bound to match seeded-MPS pressure is min/median/max 3.861e9 / 7.645e12 / 2.849e29. Zero rows beat explicit D5 matvec operations by shots.</p>
           <div class="label">Next Gate</div>
-          <p>要么补 mature canonical-environment production DMRG/MPS，要么给出真实 same-access response oracle 的 state-preparation、mixing、measurement 与 confidence 成本。</p>
+          <p>Add a mature canonical-environment production DMRG/MPS denominator, or a real same-access response oracle with state-preparation, mixing, measurement, and confidence costs.</p>
         </article>
       </div>
 
-      <div class="frontiers">
+      <div class="grid frontiers">
         <a class="frontier" href="https://thequantuminsider.com/2026/06/13/microsoft-and-quantinuum-report-on-major-gains-in-quantum-error-correction/">
-          <span class="date">2026-06-13</span><span class="source">Nature coverage via The Quantum Insider</span>
+          <span class="date">2026-06-13</span>
           <h3>Microsoft + Quantinuum: mid-computation QEC shows 11x-800x error suppression</h3>
-          <p>carbon code 与 tesseract subsystem code 在 trapped-ion hardware 上展示 repeated error correction；但 post-selection、real-time decoding 和 feed-forward 仍是未闭合门槛。</p>
+          <p>Carbon-code and tesseract-code experiments raise the external bar for B2/B7 claims, especially around mid-computation correction, decoder latency, feed-forward, and post-selection boundaries.</p>
         </a>
 
         <a class="frontier" href="https://www.nature.com/articles/s41567-026-03220-8">
-          <span class="date">2026-04-02</span><span class="source">Nature Physics</span>
+          <span class="date">2026-04-02</span>
           <h3>Low-overhead FTQC by gauging logical operators</h3>
-          <p>给 B2/B7 一个明确研究分叉：除了 surface-code schedule/decoder，还要追踪 gauged logical measurement 是否能降低 logical operation overhead。</p>
+          <p>This route gives B2/B7 a clear fork beyond surface-code schedules and decoders: track whether gauged logical measurements can reduce logical-operation overhead.</p>
         </a>
 
         <a class="frontier" href="https://www.nature.com/articles/s41467-026-68533-x">
-          <span class="date">2026-02</span><span class="source">Nature Communications</span>
+          <span class="date">2026-02</span>
           <h3>Measurement-free universal logical quantum computation</h3>
-          <p>如果 measurement-free route 可扩展，部分架构账本中的测量/反馈瓶颈需要重计价。</p>
+          <p>If this route scales, B7 resource ledgers need to reprice some measurement and feed-forward timing bottlenecks.</p>
         </a>
 
         <a class="frontier" href="https://www.ibm.com/quantum/blog/large-scale-ftqc">
-          <span class="date">2025-06-10</span><span class="source">IBM Quantum</span>
-          <h3>IBM Starling roadmap frames 2029 FTQC target</h3>
-          <p>近期研究要产出的是 resource ledger、compiler/QEC gates 与验证协议，而不是泛化商业承诺。</p>
+          <span class="date">2025-06-10</span>
+          <h3>IBM Starling frames a 2029 FTQC target</h3>
+          <p>The near-term output should be resource ledgers, compiler gates, QEC gates, and verification protocols, not broad commercial promises.</p>
         </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">First Attack Wave</div>
+          <h2>Top 10 Attack Problems</h2>
+        </div>
+        <p>
+          The Top 10 list is not a solved-problem list. It is the first wave of high-leverage research surfaces where multi-agent effort can produce auditable progress. Each track must pass its next technical gate before entering translation.
+        </p>
+      </div>
+
+      <div class="grid top-grid">
+        <article class="track">
+          <span class="track-id">B1 / Problem 25</span>
+          <h3>Hardware-Aware Quantum Circuit Compression</h3>
+          <p>Proof-logged local rewrites, virtual-SWAP elimination, native phase canonicalization, and measurement-aware compression. Current boundary: local routes are not enough to count B7 resource savings.</p>
+          <div class="label">Next Gate</div>
+          <p>Find an occurrence-removing rewrite for gcm_h6 or a symbolic scaffold for w8_21 that survives the B7 STV ledger.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B2 / Problem 22</span>
+          <h3>Low-Overhead Quantum Error Correction</h3>
+          <p>Surface-code target-volume baselines, leakage-aware erasure boundaries, per-shot trace packets, and hardware-like observation-model stress tests.</p>
+          <div class="label">Next Gate</div>
+          <p>Move from negative decoder-boundary evidence to calibrated leakage data or a real shot-conditioned decoder contract.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B3 / Problem 49</span>
+          <h3>Molecular Reaction Dynamics</h3>
+          <p>Observable-first quantum chemistry: choose the reaction observable, then derive Hamiltonians, circuits, resource thresholds, and classical denominators.</p>
+          <div class="label">Next Gate</div>
+          <p>Produce quantum observable-estimation circuits and compare them against FCI or selected-CI denominators.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B4 / Problem 16</span>
+          <h3>Verifiable Quantum Advantage</h3>
+          <p>Hidden-task and challenge-refresh protocols, attacked by adaptive classical spoofers before any soundness story is trusted.</p>
+          <div class="label">Next Gate</div>
+          <p>Build a circuit-level hidden task with explicit completeness and soundness pressure.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B5 / Problem 38</span>
+          <h3>Strongly Correlated Quantum Matter</h3>
+          <p>Use quantum processors as entanglement or impurity kernels inside stronger classical embedding and tensor workflows.</p>
+          <div class="label">Next Gate</div>
+          <p>Add a mature tensor-network or boundary-field embedding baseline for hard response observables.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B6 / Problem 37</span>
+          <h3>High-Temperature Superconductivity Search</h3>
+          <p>Mechanism-aware descriptors with leakage-controlled ranking, family-prior audits, and eventual links to B5 observables.</p>
+          <div class="label">Next Gate</div>
+          <p>Replace toy or curated proxies with real crystallographic, DFT, or B5-computed observables.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B7 / Problem 21</span>
+          <h3>Fault-Tolerant Architecture Co-Design</h3>
+          <p>Every B1/B2 local improvement must pass through factories, layout, timing, feed-forward, and full space-time-volume accounting.</p>
+          <div class="label">Next Gate</div>
+          <p>Produce 30 replayable semantic certificates, an alternate gcm_h6 rewrite, or a symbolic KAK/Clifford proof for the current bottleneck.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B8 / Problem 30</span>
+          <h3>Classical Verification of Quantum Outputs</h3>
+          <p>Hidden-invariant tests, leakage stress, randomized measurements, challenge refresh, and adaptive spoofer pressure.</p>
+          <div class="label">Next Gate</div>
+          <p>Move from toy invariants to circuit-level protocols and formal leakage assumptions.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B9 / Problem 17</span>
+          <h3>Quantum PCP and Local Hamiltonian Hardness</h3>
+          <p>Small-instance gap labs, counterexample databases, local parametric certificates, and proof-assistant readiness gates.</p>
+          <div class="label">Next Gate</div>
+          <p>Formalize one restricted family and upgrade local verifier evidence into a real Lean 4 or mathlib theorem path.</p>
+        </article>
+
+        <article class="track">
+          <span class="track-id">B10 / Problem 11</span>
+          <h3>Boundary of BQP</h3>
+          <p>Every advantage claim is decomposed into promise, input model, certificate, classical baseline, noise tolerance, and verifier burden.</p>
+          <div class="label">Next Gate</div>
+          <p>Replace simulated or GenericBackend-style evidence with real backend verifier properties or a mature same-access denominator.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Research Repository Frame</div>
+          <h2>A Relay-Friendly Research Tree</h2>
+        </div>
+        <p>
+          The repository is not a slide deck. It is an auditable research system that can be split across humans, AI agents, baseline adversaries, theorists, and maintainers. Contributions should land as issues, benchmarks, scripts, results, reports, or audits.
+        </p>
+      </div>
+
+      <div class="grid agent-grid">
+        <article class="agent">
+          <h3>Maintainer Agent</h3>
+          <p>Splits issues, freezes claim boundaries, and decides whether a result can merge.</p>
+        </article>
+        <article class="agent">
+          <h3>Builder Agents</h3>
+          <p>Implement algorithms, generate proof logs, and maintain benchmark manifests.</p>
+        </article>
+        <article class="agent">
+          <h3>Baseline Adversaries</h3>
+          <p>Attack every claim with stronger classical or quantum baselines.</p>
+        </article>
+        <article class="agent">
+          <h3>Audit Agent</h3>
+          <p>Runs portfolio audits and rejects maturity upgrades that are not supported by evidence.</p>
+        </article>
+      </div>
+
+      <article class="repo-panel" style="margin-top: 14px;">
+        <h3>Project Tree</h3>
+        <p>Every important claim should map to a benchmark, executable method, result artifact, written note, and audit status.</p>
+        <pre class="repo-tree">FurturePlan/
+  README.md
+  RESEARCH_FRAMEWORK.md
+  research/problem_catalog_100.md
+  research/top10_problem_dossiers.md
+  research/top10_execution_board.md
+  research/ops/agent_protocol.md
+  research/ops/agent_task_board.md
+  research/axiom_horizon_landing.html
+  benchmarks/B1_circuit_compression.yaml
+  benchmarks/B2_qec_overhead.yaml
+  benchmarks/B7_fault_tolerance_codesign.yaml
+  tools/research_portfolio_audit.py
+  tools/portfolio_refresh_check.py
+  results/
+  .github/ISSUE_TEMPLATE/
+  .github/PULL_REQUEST_TEMPLATE.md</pre>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Source Families</div>
+          <h2>100-Problem Catalog Source Boundaries</h2>
+        </div>
+        <p>
+          This is not a claim to own an official global Top 100. It is a frozen research candidate pool assembled from public mathematical challenges, quantum-computing bottlenecks, engineering grand challenges, life science, climate security, cryptographic security, and long-horizon civilizational risk. The 100-problem catalog stops expanding by default; current execution shifts to B1-B10.
+        </p>
+      </div>
+
+      <div class="grid source-grid">
+        <a class="source" href="https://www.claymath.org/millennium-problems/">
+          <div class="source-name">Clay Millennium Problems</div>
+          <p>Formal source family for several foundational mathematical targets.</p>
+        </a>
+        <a class="source" href="https://www.engineeringchallenges.org/">
+          <div class="source-name">NAE Grand Challenges</div>
+          <p>Engineering, energy, water, infrastructure, health, and education challenge boundaries.</p>
+        </a>
+        <a class="source" href="https://csrc.nist.gov/projects/post-quantum-cryptography">
+          <div class="source-name">NIST Post-Quantum Cryptography</div>
+          <p>Reference boundary for post-quantum migration, standardization, and cryptographic-risk claims.</p>
+        </a>
+        <a class="source" href="https://www.quantum.gov/">
+          <div class="source-name">National Quantum Initiative</div>
+          <p>Strategic reference for quantum information science programs and public roadmap framing.</p>
+        </a>
+        <a class="source" href="https://www.who.int/health-topics/antimicrobial-resistance">
+          <div class="source-name">WHO Antimicrobial Resistance</div>
+          <p>Global-risk reference for antimicrobial resistance, pathogen defense, and health-system resilience.</p>
+        </a>
+        <a class="source" href="https://sdgs.un.org/goals">
+          <div class="source-name">UN Sustainable Development Goals</div>
+          <p>Boundary source for water, energy, climate, education, cities, and long-term development problems.</p>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Collaboration Architecture</div>
+          <h2>Research Moves Like a GitHub PR</h2>
+        </div>
+        <p>
+          Axiom Horizon is built for many agents working in parallel. Every pull request must carry a reproducible command, result files, explicit claim boundaries, and an audit trail.
+        </p>
+      </div>
+      <div class="grid cards">
+        <article class="card"><h3>01 Issue Claim</h3><p>An agent claims one B-track task from the board.</p></article>
+        <article class="card"><h3>02 Benchmark / Method</h3><p>The contributor produces a manifest, script, result JSON, and report.</p></article>
+        <article class="card"><h3>03 Adversarial Review</h3><p>A separate agent tries to break the claim with stronger baselines.</p></article>
       </div>
     </section>
 
