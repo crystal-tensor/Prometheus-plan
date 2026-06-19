@@ -1,0 +1,96 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "full_circuit_rewrite_claimed": false,
+    "partial_packet_repair_claimed_as_b7_saving": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "Exhaustive exactly-four-parameter pressure on line 1381 improves the best packet residual but does not exactify the reduced-CNOT scaffold.",
+    "symbolic_exact_decomposition_claimed": false,
+    "unsupported_claims": [
+      "Line 1381 is not repaired by this gate.",
+      "The repaired two-packet subset is not accepted as a full-circuit rewrite.",
+      "No symbolic exact decomposition or B7 occurrence/proxy-T saving is emitted."
+    ]
+  },
+  "four_parameter_line1381_repair_pressure_rows": [
+    {
+      "accepted_four_parameter_repair_as_full_circuit_rewrite": false,
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "best_four_parameter_free_indices": [
+        5,
+        9,
+        10,
+        15
+      ],
+      "best_four_parameter_free_values": [
+        -0.3919594038069891,
+        -1.1216438677032539,
+        0.7455461462986928,
+        -1.1256338913677912
+      ],
+      "best_four_parameter_off_pi_over_four_parameter_count": 4,
+      "best_four_parameter_residual_norm": 0.02997767950993884,
+      "candidate_cnot_reduction": 3,
+      "candidate_line_number": 1381,
+      "exact_four_parameter_free_indices": null,
+      "exact_four_parameter_free_values": null,
+      "exact_four_parameter_residual_norm": null,
+      "four_parameter_candidate_count": 3060,
+      "four_parameter_exact_pass": false,
+      "four_parameter_residual_improvement_over_three_parameter": 0.019887498156832113,
+      "pattern_id": "flat_pattern_01",
+      "replacement_cnot_count": 2,
+      "replacement_off_pi_over_four_parameter_count": 15,
+      "replacement_parameter_count": 18,
+      "snapped_residual_norm": 0.47574352650518004,
+      "source_best_three_parameter_residual_norm": 0.049865177666770955,
+      "source_cnot_count": 5,
+      "support_qubits": [
+        4,
+        8
+      ],
+      "window_end_line": 1379,
+      "window_start_line": 1369
+    }
+  ],
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0",
+  "model_status": "line1381_four_parameter_pressure_improves_residual_but_remains_unrepaired",
+  "source_packet_synthesis_result": "results/B1_B7_cone01_packet_synthesis_search_gate_v0.json",
+  "source_semantic_packet_result": "results/B1_B7_cone01_semantic_replay_packet_gate_v0.json",
+  "source_three_parameter_local_u3_repair_result": "results/B1_B7_cone01_three_parameter_local_u3_repair_gate_v0.json",
+  "status": "cone01_four_parameter_line1381_pressure_no_exact_repair",
+  "summary": {
+    "accepted_four_parameter_repair_as_full_circuit_rewrite_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_ledger_improvement_claimed": false,
+    "best_four_parameter_residual_norm": 0.02997767950993884,
+    "best_three_parameter_residual_norm": 0.049865177666770955,
+    "candidate_cnot_reduction_if_all_packets_accepted": 9,
+    "four_parameter_candidate_count": 3060,
+    "four_parameter_exact_packet_count": 0,
+    "four_parameter_free_count": 4,
+    "four_parameter_packet_count": 1,
+    "four_parameter_residual_improvement_over_three_parameter": 0.019887498156832113,
+    "four_parameter_unresolved_packet_count": 1,
+    "full_circuit_rewrite_claimed": false,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "partial_candidate_cnot_reduction_if_accepted": 6,
+    "partial_packet_repair_claimed_as_b7_saving": false,
+    "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": 15,
+    "resource_saving_claimed": false,
+    "source_three_parameter_method": "b1_b7_cone01_three_parameter_local_u3_repair_gate_v0",
+    "source_total_packet_exact_before_four_parameter_gate": 2,
+    "source_total_packet_unresolved_before_four_parameter_gate": 1,
+    "symbolic_exact_decomposition_claimed": false,
+    "target_candidate_line_number": 1381,
+    "total_packet_exact_after_four_parameter_gate": 2,
+    "total_packet_unresolved_after_four_parameter_gate": 1,
+    "validation_error_count": 0
+  },
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

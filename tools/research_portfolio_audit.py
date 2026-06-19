@@ -207,6 +207,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_three_parameter_local_u3_repair_path = (
         results / "B1_B7_cone01_three_parameter_local_u3_repair_gate_v0.json"
     )
+    b1_b7_cone01_four_parameter_line1381_repair_pressure_path = (
+        results / "B1_B7_cone01_four_parameter_line1381_repair_pressure_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -769,6 +772,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_three_parameter_local_u3_repair_manifest = current_results.get(
         "b1_b7_cone01_three_parameter_local_u3_repair_gate_v0"
+    )
+    b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest = current_results.get(
+        "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -5612,6 +5618,218 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 three-parameter local-U3 repair report: "
             f"{b1_b7_cone01_three_parameter_local_u3_repair_path}"
+        )
+
+    b1_b7_cone01_four_parameter_line1381_repair_pressure = {
+        "path": str(b1_b7_cone01_four_parameter_line1381_repair_pressure_path),
+        "exists": b1_b7_cone01_four_parameter_line1381_repair_pressure_path.exists(),
+    }
+    if not b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest.get("status")
+            != "cone01_four_parameter_line1381_pressure_no_exact_repair"
+        ):
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure gate status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 four-parameter line-1381 pressure gate missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_four_parameter_line1381_repair_pressure_path.exists():
+        four_payload = json.loads(read(b1_b7_cone01_four_parameter_line1381_repair_pressure_path))
+        four_summary = four_payload.get("summary", {})
+        four_claims = four_payload.get("claim_boundary", {})
+        b1_b7_cone01_four_parameter_line1381_repair_pressure.update(
+            {
+                "status": four_payload.get("status"),
+                "model_status": four_payload.get("model_status"),
+                "method": four_payload.get("method"),
+                "workload": four_payload.get("workload"),
+                "source_three_parameter_method": four_summary.get("source_three_parameter_method"),
+                "target_candidate_line_number": four_summary.get("target_candidate_line_number"),
+                "source_total_packet_exact_before_four_parameter_gate": four_summary.get(
+                    "source_total_packet_exact_before_four_parameter_gate"
+                ),
+                "source_total_packet_unresolved_before_four_parameter_gate": four_summary.get(
+                    "source_total_packet_unresolved_before_four_parameter_gate"
+                ),
+                "four_parameter_free_count": four_summary.get("four_parameter_free_count"),
+                "four_parameter_packet_count": four_summary.get("four_parameter_packet_count"),
+                "four_parameter_candidate_count": four_summary.get("four_parameter_candidate_count"),
+                "four_parameter_exact_packet_count": four_summary.get(
+                    "four_parameter_exact_packet_count"
+                ),
+                "four_parameter_unresolved_packet_count": four_summary.get(
+                    "four_parameter_unresolved_packet_count"
+                ),
+                "total_packet_exact_after_four_parameter_gate": four_summary.get(
+                    "total_packet_exact_after_four_parameter_gate"
+                ),
+                "total_packet_unresolved_after_four_parameter_gate": four_summary.get(
+                    "total_packet_unresolved_after_four_parameter_gate"
+                ),
+                "best_three_parameter_residual_norm": four_summary.get(
+                    "best_three_parameter_residual_norm"
+                ),
+                "best_four_parameter_residual_norm": four_summary.get(
+                    "best_four_parameter_residual_norm"
+                ),
+                "four_parameter_residual_improvement_over_three_parameter": four_summary.get(
+                    "four_parameter_residual_improvement_over_three_parameter"
+                ),
+                "candidate_cnot_reduction_if_all_packets_accepted": four_summary.get(
+                    "candidate_cnot_reduction_if_all_packets_accepted"
+                ),
+                "partial_candidate_cnot_reduction_if_accepted": four_summary.get(
+                    "partial_candidate_cnot_reduction_if_accepted"
+                ),
+                "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": four_summary.get(
+                    "remaining_unrepaired_replacement_off_pi_over_four_parameter_count"
+                ),
+                "accepted_four_parameter_repair_as_full_circuit_rewrite_count": four_summary.get(
+                    "accepted_four_parameter_repair_as_full_circuit_rewrite_count"
+                ),
+                "accepted_occurrence_removal": four_summary.get("accepted_occurrence_removal"),
+                "accepted_proxy_t_reduction": four_summary.get("accepted_proxy_t_reduction"),
+                "missing_occurrences_after_gate": four_summary.get("missing_occurrences_after_gate"),
+                "missing_proxy_t_after_gate": four_summary.get("missing_proxy_t_after_gate"),
+                "partial_packet_repair_claimed_as_b7_saving": four_summary.get(
+                    "partial_packet_repair_claimed_as_b7_saving"
+                ),
+                "symbolic_exact_decomposition_claimed": four_summary.get(
+                    "symbolic_exact_decomposition_claimed"
+                ),
+                "full_circuit_rewrite_claimed": four_summary.get("full_circuit_rewrite_claimed"),
+                "resource_saving_claimed": four_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": four_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": four_summary.get("validation_error_count"),
+                "four_parameter_line1381_repair_pressure_row_count": len(
+                    four_payload.get("four_parameter_line1381_repair_pressure_rows", [])
+                ),
+            }
+        )
+        if four_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure report must have benchmark_id B1")
+        if (
+            four_payload.get("method")
+            != "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure method mismatch")
+        if (
+            four_payload.get("status")
+            != "cone01_four_parameter_line1381_pressure_no_exact_repair"
+        ):
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure status mismatch")
+        if (
+            four_payload.get("model_status")
+            != "line1381_four_parameter_pressure_improves_residual_but_remains_unrepaired"
+        ):
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure model_status mismatch")
+        for field in [
+            "target_candidate_line_number",
+            "source_total_packet_exact_before_four_parameter_gate",
+            "source_total_packet_unresolved_before_four_parameter_gate",
+            "four_parameter_free_count",
+            "four_parameter_packet_count",
+            "four_parameter_candidate_count",
+            "four_parameter_exact_packet_count",
+            "four_parameter_unresolved_packet_count",
+            "total_packet_exact_after_four_parameter_gate",
+            "total_packet_unresolved_after_four_parameter_gate",
+            "best_three_parameter_residual_norm",
+            "best_four_parameter_residual_norm",
+            "four_parameter_residual_improvement_over_three_parameter",
+            "candidate_cnot_reduction_if_all_packets_accepted",
+            "partial_candidate_cnot_reduction_if_accepted",
+            "remaining_unrepaired_replacement_off_pi_over_four_parameter_count",
+            "accepted_four_parameter_repair_as_full_circuit_rewrite_count",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "partial_packet_repair_claimed_as_b7_saving",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if (
+                four_summary.get(field)
+                != b1_b7_cone01_four_parameter_line1381_repair_pressure_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 four-parameter line-1381 pressure {field} mismatch")
+        expected_four_fields = {
+            "target_candidate_line_number": 1381,
+            "source_total_packet_exact_before_four_parameter_gate": 2,
+            "source_total_packet_unresolved_before_four_parameter_gate": 1,
+            "four_parameter_free_count": 4,
+            "four_parameter_packet_count": 1,
+            "four_parameter_candidate_count": 3060,
+            "four_parameter_exact_packet_count": 0,
+            "four_parameter_unresolved_packet_count": 1,
+            "total_packet_exact_after_four_parameter_gate": 2,
+            "total_packet_unresolved_after_four_parameter_gate": 1,
+            "candidate_cnot_reduction_if_all_packets_accepted": 9,
+            "partial_candidate_cnot_reduction_if_accepted": 6,
+            "remaining_unrepaired_replacement_off_pi_over_four_parameter_count": 15,
+            "accepted_four_parameter_repair_as_full_circuit_rewrite_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_four_fields.items():
+            if four_summary.get(field) != value:
+                errors.append(
+                    f"B1/B7 cone_01 four-parameter line-1381 pressure expected {field}={value}"
+                )
+        if four_summary.get("best_four_parameter_residual_norm", 1.0) >= four_summary.get(
+            "best_three_parameter_residual_norm", 0.0
+        ):
+            errors.append(
+                "B1/B7 cone_01 four-parameter line-1381 pressure must improve residual"
+            )
+        for field in [
+            "partial_packet_repair_claimed_as_b7_saving",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if four_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 four-parameter line-1381 pressure must not claim {field}")
+            if four_claims.get(field) is not False:
+                errors.append(
+                    f"B1/B7 cone_01 four-parameter line-1381 pressure claim boundary must not claim {field}"
+                )
+        rows = four_payload.get("four_parameter_line1381_repair_pressure_rows", [])
+        if len(rows) != 1:
+            errors.append("B1/B7 cone_01 four-parameter line-1381 pressure row count must be 1")
+        else:
+            row = rows[0]
+            if row.get("candidate_line_number") != 1381:
+                errors.append("B1/B7 cone_01 four-parameter line-1381 pressure must target line 1381")
+            if row.get("four_parameter_exact_pass") is not False:
+                errors.append("B1/B7 cone_01 four-parameter line-1381 pressure must not exact-repair line 1381")
+            if row.get("accepted_four_parameter_repair_as_full_circuit_rewrite") is not False:
+                errors.append("B1/B7 cone_01 four-parameter line-1381 pressure row must not accept rewrite")
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append("B1/B7 cone_01 four-parameter line-1381 pressure row must not remove occurrences")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 four-parameter line-1381 pressure report: "
+            f"{b1_b7_cone01_four_parameter_line1381_repair_pressure_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -15538,6 +15756,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_three_parameter_local_u3_repair_gate": (
                 b1_b7_cone01_three_parameter_local_u3_repair
             ),
+            "b7_cone01_four_parameter_line1381_repair_pressure_gate": (
+                b1_b7_cone01_four_parameter_line1381_repair_pressure
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -15784,6 +16005,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_three_parameter_local_u3_repair_gate": str(
                 b1_b7_cone01_three_parameter_local_u3_repair_path
+            ),
+            "b1_b7_cone01_four_parameter_line1381_repair_pressure_gate": str(
+                b1_b7_cone01_four_parameter_line1381_repair_pressure_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -16587,6 +16811,17 @@ def markdown_report(report: dict) -> str:
             f"- Remaining unrepaired off-grid params / exact-repair off-grid params: {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('remaining_unrepaired_replacement_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('three_parameter_exact_repair_off_pi_over_four_parameter_count')}",
             f"- Accepted rewrite / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('accepted_three_parameter_repair_as_full_circuit_rewrite_count')} / {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_three_parameter_local_u3_repair_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Four-Parameter Line-1381 Repair Pressure Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('status')}",
+            f"- Four-parameter candidates / exact packets / unresolved packets: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('four_parameter_candidate_count')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('four_parameter_exact_packet_count')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('four_parameter_unresolved_packet_count')}",
+            f"- Total exact packets after gate / total unresolved after gate: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('total_packet_exact_after_four_parameter_gate')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('total_packet_unresolved_after_four_parameter_gate')}",
+            f"- Best three-parameter residual / best four-parameter residual / improvement: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('best_three_parameter_residual_norm')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('best_four_parameter_residual_norm')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('four_parameter_residual_improvement_over_three_parameter')}",
+            f"- All-packet candidate CNOT reduction / partial candidate CNOT reduction: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('candidate_cnot_reduction_if_all_packets_accepted')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('partial_candidate_cnot_reduction_if_accepted')}",
+            f"- Accepted rewrite / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_four_parameter_repair_as_full_circuit_rewrite_count')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_four_parameter_line1381_repair_pressure_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

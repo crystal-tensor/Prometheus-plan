@@ -1571,6 +1571,17 @@ and a partial candidate CNOT reduction of 6 if later accepted, but accepted
 full-circuit rewrite, occurrence removal, proxy-T reduction, and B7 improvement
 remain 0.
 
+**Sprint update 18ak:** `T-B1-004ak` is now merged as a four-parameter
+line-1381 repair pressure gate. The new artifact
+`research/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate.md`
+consumes T-B1-004aj and exhaustively searches 3,060 exactly-four-parameter
+repairs for the remaining unresolved reduced-CNOT packet. The best residual
+improves from 0.049865177666770955 to 0.02997767950993884, but the gate finds
+0 exact repairs. The route remains at 2/3 bounded packet repairs, and accepted
+full-circuit rewrite, occurrence removal, proxy-T reduction, and B7 improvement
+remain 0. Next work must broaden or change the scaffold, formalize a scoped
+obstruction for line 1381, or abandon this reduced-CNOT route.
+
 ## Sprint Promotion Matrix
 
 | Track | Can become paper after this sprint? | Can become patent after this sprint? | Can become fundable/tool after this sprint? |

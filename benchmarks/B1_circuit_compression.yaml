@@ -1303,6 +1303,42 @@ current_results:
     validation_error_count: 0
     report: ../results/B1_B7_cone01_three_parameter_local_u3_repair_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_three_parameter_local_u3_repair_gate.md
+  b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0:
+    circuits: 1
+    status: cone01_four_parameter_line1381_pressure_no_exact_repair
+    model_status: line1381_four_parameter_pressure_improves_residual_but_remains_unrepaired
+    method: b1_b7_cone01_four_parameter_line1381_repair_pressure_gate_v0
+    source_three_parameter_local_u3_repair_gate: b1_b7_cone01_three_parameter_local_u3_repair_gate_v0
+    workload: qasmbench_medium_exact/gcm_h6.qasm
+    target_candidate_line_number: 1381
+    source_total_packet_exact_before_four_parameter_gate: 2
+    source_total_packet_unresolved_before_four_parameter_gate: 1
+    four_parameter_free_count: 4
+    four_parameter_packet_count: 1
+    four_parameter_candidate_count: 3060
+    four_parameter_exact_packet_count: 0
+    four_parameter_unresolved_packet_count: 1
+    total_packet_exact_after_four_parameter_gate: 2
+    total_packet_unresolved_after_four_parameter_gate: 1
+    best_three_parameter_residual_norm: 0.049865177666770955
+    best_four_parameter_residual_norm: 0.02997767950993884
+    four_parameter_residual_improvement_over_three_parameter: 0.019887498156832113
+    candidate_cnot_reduction_if_all_packets_accepted: 9
+    partial_candidate_cnot_reduction_if_accepted: 6
+    remaining_unrepaired_replacement_off_pi_over_four_parameter_count: 15
+    accepted_four_parameter_repair_as_full_circuit_rewrite_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    missing_occurrences_after_gate: 30
+    missing_proxy_t_after_gate: 600
+    partial_packet_repair_claimed_as_b7_saving: false
+    symbolic_exact_decomposition_claimed: false
+    full_circuit_rewrite_claimed: false
+    resource_saving_claimed: false
+    b7_ledger_improvement_claimed: false
+    validation_error_count: 0
+    report: ../results/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_four_parameter_line1381_repair_pressure_gate.md
   b1_b7_cone01_theta_sharing_ledger_gate_v0:
     circuits: 1
     status: cone01_theta_sharing_ledger_guardrail
@@ -1814,4 +1850,5 @@ prototype_artifacts:
   b1_b7_cone01_shared_theta_refreshed_b7_ledger_gate: ../tools/b1_b7_cone01_shared_theta_refreshed_b7_ledger_gate.py
   b1_b7_cone01_theta_sharing_cost_model_gate: ../tools/b1_b7_cone01_theta_sharing_cost_model_gate.py
   b1_b7_cone01_three_parameter_local_u3_repair_gate: ../tools/b1_b7_cone01_three_parameter_local_u3_repair_gate.py
+  b1_b7_cone01_four_parameter_line1381_repair_pressure_gate: ../tools/b1_b7_cone01_four_parameter_line1381_repair_pressure_gate.py
   synthetic_noise_proxy: ../tools/b1_synthetic_noise_proxy.py

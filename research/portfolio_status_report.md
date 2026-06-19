@@ -574,6 +574,17 @@ Overall audit: PASS
 - Accepted rewrite / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Four-Parameter Line-1381 Repair Pressure Gate
+
+- Exists: True
+- Status: cone01_four_parameter_line1381_pressure_no_exact_repair
+- Four-parameter candidates / exact packets / unresolved packets: 3060 / 0 / 1
+- Total exact packets after gate / total unresolved after gate: 2 / 1
+- Best three-parameter residual / best four-parameter residual / improvement: 0.049865177666770955 / 0.02997767950993884 / 0.019887498156832113
+- All-packet candidate CNOT reduction / partial candidate CNOT reduction: 9 / 6
+- Accepted rewrite / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

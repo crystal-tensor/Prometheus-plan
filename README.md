@@ -333,6 +333,15 @@ repairs, with candidate CNOT reduction 6 if those packets were later accepted.
 They are not accepted yet: symbolic decomposition, full-circuit replay,
 occurrence removal, proxy-T reduction, and B7 ledger improvement remain 0.
 
+The four-parameter line-1381 pressure gate then exhaustively searches 3,060
+exactly-four-parameter repairs for the last unresolved packet. It improves the
+best residual from 0.049865177666770955 to 0.02997767950993884, but still finds
+0 exact repairs. The reduced-CNOT packet route therefore remains at 2/3 bounded
+packet repairs, and accepted occurrence removal, proxy-T reduction, and B7
+ledger improvement remain 0. The next route must broaden the scaffold,
+formalize a scoped obstruction for line 1381, or move to a different
+ledger-reducing construction.
+
 ## Repository Layout
 
 ```text
