@@ -155,7 +155,7 @@ KAK/Clifford scaffold, or scoped obstruction report that explicitly carries,
 shares, or eliminates theta while addressing at least 30 arbitrary rotation
 occurrences / 600
 proxy-T units, turn the single-carrier exact packets into replayable occurrence-removing
-certificates that beat the T-B1-004v replacement ledger and T-B1-004w shareability boundary and T-B1-004x inventory-only boundary, or produce a method beyond direct pi/4 projection or shared grid
+certificates that beat the T-B1-004v replacement ledger and T-B1-004w shareability boundary and T-B1-004x inventory-only boundary and T-B1-004y neighborhood-only boundary, or produce a method beyond direct pi/4 projection or shared grid
 signatures for the carrier-bearing packets only as part of a larger
 30-occurrence certificate set, or reverse the rejected CM-08 with accepted physical model
 evidence after CM-02/CM-07; broaden benchmarks; package certificates for independent
@@ -1032,3 +1032,5 @@ measurements; connect B4/B8 verification burdens back into the boundary map.
 4. Merge B4/B8 and B1/B7 when validation stacks overlap.
 5. Demote any direction after two failed monthly gates unless it produces a
    useful negative result.
+
+ Future work must beat both the T-B1-004x inventory-only boundary and the T-B1-004y neighborhood-only boundary with line-local, commutation-certified, semantic-replay, or broader occurrence-removing evidence.

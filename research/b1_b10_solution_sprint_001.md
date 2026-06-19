@@ -1423,6 +1423,21 @@ and classical baseline.
 **Failure value:** if the target cannot be proven, the failed proof should
 still identify which assumption is too strong or too weak.
 
+**Sprint update 18y:** `T-B1-004y` is now merged as a carrier
+neighborhood/commutation pressure gate. The new artifact
+`research/B1_B7_cone01_carrier_neighborhood_commutation_gate.md` consumes the
+carrier absorption inventory boundary from `T-B1-004x` and asks whether
+same-target carrier inventory matches are close enough to become credible
+absorption search hints. The answer is still negative for accepted B7 progress:
+2/3 patterns have same-target inventory matches, but 0/3 have radius-4
+candidates, only `flat_pattern_01` has a radius-16/blocker-free candidate,
+`flat_pattern_02` has no same-target match, and `flat_pattern_03` is 99 lines
+away from its nearest same-target match. Accepted neighborhood absorption
+certificates, occurrence removal, proxy-T reduction, commutation claims, and B7
+ledger improvement all remain 0. The next `T-B1-004` route must now beat both
+the inventory-only boundary and the neighborhood-only boundary with line-local,
+commutation-certified, semantic-replay, or broader occurrence-removing evidence.
+
 ## Sprint Promotion Matrix
 
 | Track | Can become paper after this sprint? | Can become patent after this sprint? | Can become fundable/tool after this sprint? |

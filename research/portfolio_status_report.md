@@ -438,6 +438,20 @@ Overall audit: PASS
 - Absorption/ledger/rewrite/semantic/resource/B7 claims: False / False / False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Carrier Neighborhood Commutation Gate
+
+- Exists: True
+- Status: cone01_carrier_neighborhood_commutation_negative_gate
+- Inventory QASM: results/b1_native_t_resource_optimizer/qasmbench_medium_exact/gcm_h6.qasm
+- Pattern groups / covered occurrences / carrier signatures: 3 / 11 / 3
+- Same-target / radius-4 / radius-8 / radius-16 candidate patterns: 2 / 0 / 1 / 1
+- Blocker-free radius-16 candidate patterns: 1
+- Patterns without same-target / radius-16 / blocker-free radius-16 candidates: ['flat_pattern_02'] / ['flat_pattern_02', 'flat_pattern_03'] / ['flat_pattern_02', 'flat_pattern_03']
+- All-pattern radius-16 / blocker-free radius-16 coverage: False / False
+- Accepted certificates / occurrence / proxy-T reduction: 0 / 0 / 0
+- Neighborhood/commutation/ledger/rewrite/semantic/resource/B7 claims: False / False / False / False / False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

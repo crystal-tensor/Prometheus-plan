@@ -96,3 +96,5 @@ Lead with **B1**, not because the other nine are unimportant, but because B1
 already has the strongest chain from method to measurement to verification.
 Use B7 and B2 to turn it into a system-level claim, while B4/B8 and B9/B10
 continue as protocol and theory tracks.
+
+ Future work must beat both the T-B1-004x inventory-only boundary and the T-B1-004y neighborhood-only boundary with line-local, commutation-certified, semantic-replay, or broader occurrence-removing evidence.

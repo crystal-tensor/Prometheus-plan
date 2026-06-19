@@ -171,6 +171,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_carrier_absorption_inventory_path = (
         results / "B1_B7_cone01_carrier_absorption_inventory_gate_v0.json"
     )
+    b1_b7_cone01_carrier_neighborhood_commutation_path = (
+        results / "B1_B7_cone01_carrier_neighborhood_commutation_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -697,6 +700,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_carrier_absorption_inventory_manifest = current_results.get(
         "b1_b7_cone01_carrier_absorption_inventory_gate_v0"
+    )
+    b1_b7_cone01_carrier_neighborhood_commutation_manifest = current_results.get(
+        "b1_b7_cone01_carrier_neighborhood_commutation_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -3299,6 +3305,239 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 carrier absorption inventory report: "
             f"{b1_b7_cone01_carrier_absorption_inventory_path}"
+        )
+
+    b1_b7_cone01_carrier_neighborhood_commutation = {
+        "path": str(b1_b7_cone01_carrier_neighborhood_commutation_path),
+        "exists": b1_b7_cone01_carrier_neighborhood_commutation_path.exists(),
+    }
+    if not b1_b7_cone01_carrier_neighborhood_commutation_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_carrier_neighborhood_commutation_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_carrier_neighborhood_commutation_manifest.get("status")
+            != "cone01_carrier_neighborhood_commutation_negative_gate"
+        ):
+            errors.append("B1/B7 cone_01 carrier neighborhood gate status must remain negative")
+        for field in ["report", "markdown_report", "inventory_qasm"]:
+            value = b1_b7_cone01_carrier_neighborhood_commutation_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    f"B1/B7 cone_01 carrier neighborhood gate missing existing {field} path: {value}"
+                )
+    if b1_b7_cone01_carrier_neighborhood_commutation_path.exists():
+        carrier_neighborhood_payload = json.loads(read(b1_b7_cone01_carrier_neighborhood_commutation_path))
+        carrier_neighborhood_summary = carrier_neighborhood_payload.get("summary", {})
+        carrier_neighborhood_claims = carrier_neighborhood_payload.get("claim_boundary", {})
+        b1_b7_cone01_carrier_neighborhood_commutation.update(
+            {
+                "status": carrier_neighborhood_payload.get("status"),
+                "model_status": carrier_neighborhood_payload.get("model_status"),
+                "method": carrier_neighborhood_payload.get("method"),
+                "workload": carrier_neighborhood_payload.get("workload"),
+                "source_method": carrier_neighborhood_payload.get("source_method"),
+                "source_inventory_method": carrier_neighborhood_payload.get("source_inventory_method"),
+                "inventory_qasm": carrier_neighborhood_summary.get("inventory_qasm"),
+                "pattern_group_count": carrier_neighborhood_summary.get("pattern_group_count"),
+                "covered_invariant_flat_occurrence_count": carrier_neighborhood_summary.get(
+                    "covered_invariant_flat_occurrence_count"
+                ),
+                "carrier_signature_count": carrier_neighborhood_summary.get("carrier_signature_count"),
+                "same_target_inventory_match_pattern_count": carrier_neighborhood_summary.get(
+                    "same_target_inventory_match_pattern_count"
+                ),
+                "radius_4_candidate_pattern_count": carrier_neighborhood_summary.get(
+                    "radius_4_candidate_pattern_count"
+                ),
+                "radius_8_candidate_pattern_count": carrier_neighborhood_summary.get(
+                    "radius_8_candidate_pattern_count"
+                ),
+                "radius_16_candidate_pattern_count": carrier_neighborhood_summary.get(
+                    "radius_16_candidate_pattern_count"
+                ),
+                "blocker_free_radius_16_candidate_pattern_count": carrier_neighborhood_summary.get(
+                    "blocker_free_radius_16_candidate_pattern_count"
+                ),
+                "patterns_without_same_target_inventory_match": carrier_neighborhood_summary.get(
+                    "patterns_without_same_target_inventory_match"
+                ),
+                "patterns_without_radius_16_candidate": carrier_neighborhood_summary.get(
+                    "patterns_without_radius_16_candidate"
+                ),
+                "patterns_without_blocker_free_radius_16_candidate": carrier_neighborhood_summary.get(
+                    "patterns_without_blocker_free_radius_16_candidate"
+                ),
+                "all_patterns_have_radius_16_candidate": carrier_neighborhood_summary.get(
+                    "all_patterns_have_radius_16_candidate"
+                ),
+                "all_patterns_have_blocker_free_radius_16_candidate": carrier_neighborhood_summary.get(
+                    "all_patterns_have_blocker_free_radius_16_candidate"
+                ),
+                "accepted_neighborhood_absorption_certificate_count": carrier_neighborhood_summary.get(
+                    "accepted_neighborhood_absorption_certificate_count"
+                ),
+                "accepted_occurrence_removal": carrier_neighborhood_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": carrier_neighborhood_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": carrier_neighborhood_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": carrier_neighborhood_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "neighborhood_absorption_certificate_claimed": carrier_neighborhood_summary.get(
+                    "neighborhood_absorption_certificate_claimed"
+                ),
+                "commutation_certificate_claimed": carrier_neighborhood_summary.get(
+                    "commutation_certificate_claimed"
+                ),
+                "carrier_ledger_reduction_claimed": carrier_neighborhood_summary.get(
+                    "carrier_ledger_reduction_claimed"
+                ),
+                "rewrite_claimed": carrier_neighborhood_claims.get("rewrite_claimed"),
+                "semantic_certificate_claimed": carrier_neighborhood_claims.get(
+                    "semantic_certificate_claimed"
+                ),
+                "resource_saving_claimed": carrier_neighborhood_claims.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": carrier_neighborhood_claims.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": carrier_neighborhood_summary.get("validation_error_count"),
+                "carrier_neighborhood_row_count": len(
+                    carrier_neighborhood_payload.get("carrier_neighborhood_rows", [])
+                ),
+            }
+        )
+        if carrier_neighborhood_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 carrier neighborhood report must have benchmark_id B1")
+        if (
+            carrier_neighborhood_payload.get("method")
+            != "b1_b7_cone01_carrier_neighborhood_commutation_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 carrier neighborhood method mismatch")
+        if carrier_neighborhood_payload.get("status") != "cone01_carrier_neighborhood_commutation_negative_gate":
+            errors.append("B1/B7 cone_01 carrier neighborhood status mismatch")
+        if (
+            carrier_neighborhood_payload.get("model_status")
+            != "nearby_inventory_matches_do_not_cover_all_carriers_or_accept_absorption"
+        ):
+            errors.append("B1/B7 cone_01 carrier neighborhood model_status mismatch")
+        if carrier_neighborhood_payload.get("source_method") != "b1_b7_cone01_single_carrier_ledger_gate_v0":
+            errors.append("B1/B7 cone_01 carrier neighborhood source method mismatch")
+        if (
+            carrier_neighborhood_payload.get("source_inventory_method")
+            != "b1_b7_cone01_carrier_absorption_inventory_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 carrier neighborhood inventory source method mismatch")
+        for field in [
+            "pattern_group_count",
+            "covered_invariant_flat_occurrence_count",
+            "carrier_signature_count",
+            "same_target_inventory_match_pattern_count",
+            "radius_4_candidate_pattern_count",
+            "radius_8_candidate_pattern_count",
+            "radius_16_candidate_pattern_count",
+            "blocker_free_radius_16_candidate_pattern_count",
+            "patterns_without_same_target_inventory_match",
+            "patterns_without_radius_16_candidate",
+            "patterns_without_blocker_free_radius_16_candidate",
+            "all_patterns_have_radius_16_candidate",
+            "all_patterns_have_blocker_free_radius_16_candidate",
+            "accepted_neighborhood_absorption_certificate_count",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "neighborhood_absorption_certificate_claimed",
+            "commutation_certificate_claimed",
+            "carrier_ledger_reduction_claimed",
+            "rewrite_claimed",
+            "semantic_certificate_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if (
+                carrier_neighborhood_summary.get(field)
+                != b1_b7_cone01_carrier_neighborhood_commutation_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 carrier neighborhood {field} mismatch")
+        expected_neighborhood_fields = {
+            "pattern_group_count": 3,
+            "covered_invariant_flat_occurrence_count": 11,
+            "carrier_signature_count": 3,
+            "same_target_inventory_match_pattern_count": 2,
+            "radius_4_candidate_pattern_count": 0,
+            "radius_8_candidate_pattern_count": 1,
+            "radius_16_candidate_pattern_count": 1,
+            "blocker_free_radius_16_candidate_pattern_count": 1,
+            "accepted_neighborhood_absorption_certificate_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_neighborhood_fields.items():
+            if carrier_neighborhood_summary.get(field) != value:
+                errors.append(f"B1/B7 cone_01 carrier neighborhood expected {field}={value}")
+        if carrier_neighborhood_summary.get("patterns_without_same_target_inventory_match") != [
+            "flat_pattern_02"
+        ]:
+            errors.append("B1/B7 cone_01 carrier neighborhood same-target missing list mismatch")
+        if carrier_neighborhood_summary.get("patterns_without_radius_16_candidate") != [
+            "flat_pattern_02",
+            "flat_pattern_03",
+        ]:
+            errors.append("B1/B7 cone_01 carrier neighborhood radius-16 missing list mismatch")
+        if carrier_neighborhood_summary.get("patterns_without_blocker_free_radius_16_candidate") != [
+            "flat_pattern_02",
+            "flat_pattern_03",
+        ]:
+            errors.append("B1/B7 cone_01 carrier neighborhood blocker-free missing list mismatch")
+        if carrier_neighborhood_summary.get("all_patterns_have_radius_16_candidate") is not False:
+            errors.append("B1/B7 cone_01 carrier neighborhood must not cover all radius-16 candidates")
+        if carrier_neighborhood_summary.get("all_patterns_have_blocker_free_radius_16_candidate") is not False:
+            errors.append("B1/B7 cone_01 carrier neighborhood must not cover all blocker-free radius-16 candidates")
+        expected_distances = {
+            "flat_pattern_01": 8,
+            "flat_pattern_02": None,
+            "flat_pattern_03": 99,
+        }
+        if len(carrier_neighborhood_payload.get("carrier_neighborhood_rows", [])) != 3:
+            errors.append("B1/B7 cone_01 carrier neighborhood row count must be 3")
+        for row in carrier_neighborhood_payload.get("carrier_neighborhood_rows", []):
+            pattern_id = row.get("pattern_id")
+            if row.get("nearest_same_target_distance") != expected_distances.get(pattern_id):
+                errors.append(f"B1/B7 cone_01 carrier neighborhood {pattern_id} distance mismatch")
+            if row.get("accepted_neighborhood_absorption_certificate") is not False:
+                errors.append("B1/B7 cone_01 carrier neighborhood rows must not accept certificates")
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append("B1/B7 cone_01 carrier neighborhood rows must not remove occurrences")
+        for field in [
+            "neighborhood_absorption_certificate_claimed",
+            "commutation_certificate_claimed",
+            "carrier_ledger_reduction_claimed",
+            "rewrite_claimed",
+            "semantic_certificate_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if (
+                carrier_neighborhood_summary.get(field) is not False
+                or carrier_neighborhood_claims.get(field) is not False
+            ):
+                errors.append(f"B1/B7 cone_01 carrier neighborhood must not claim {field}")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 carrier neighborhood report: "
+            f"{b1_b7_cone01_carrier_neighborhood_commutation_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -13207,6 +13446,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_single_carrier_ledger_gate": b1_b7_cone01_single_carrier_ledger,
             "b7_cone01_single_carrier_shareability_gate": b1_b7_cone01_single_carrier_shareability,
             "b7_cone01_carrier_absorption_inventory_gate": b1_b7_cone01_carrier_absorption_inventory,
+            "b7_cone01_carrier_neighborhood_commutation_gate": (
+                b1_b7_cone01_carrier_neighborhood_commutation
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -13417,6 +13659,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_carrier_absorption_inventory_gate": str(
                 b1_b7_cone01_carrier_absorption_inventory_path
+            ),
+            "b1_b7_cone01_carrier_neighborhood_commutation_gate": str(
+                b1_b7_cone01_carrier_neighborhood_commutation_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -14084,6 +14329,20 @@ def markdown_report(report: dict) -> str:
             f"- Accepted certificates / occurrence / proxy-T reduction: {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('accepted_absorption_certificate_count')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('accepted_proxy_t_reduction')}",
             f"- Absorption/ledger/rewrite/semantic/resource/B7 claims: {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('carrier_absorption_certificate_claimed')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('carrier_ledger_reduction_claimed')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_carrier_absorption_inventory_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Carrier Neighborhood Commutation Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('status')}",
+            f"- Inventory QASM: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('inventory_qasm')}",
+            f"- Pattern groups / covered occurrences / carrier signatures: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('pattern_group_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('covered_invariant_flat_occurrence_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('carrier_signature_count')}",
+            f"- Same-target / radius-4 / radius-8 / radius-16 candidate patterns: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('same_target_inventory_match_pattern_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('radius_4_candidate_pattern_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('radius_8_candidate_pattern_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('radius_16_candidate_pattern_count')}",
+            f"- Blocker-free radius-16 candidate patterns: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('blocker_free_radius_16_candidate_pattern_count')}",
+            f"- Patterns without same-target / radius-16 / blocker-free radius-16 candidates: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('patterns_without_same_target_inventory_match')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('patterns_without_radius_16_candidate')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('patterns_without_blocker_free_radius_16_candidate')}",
+            f"- All-pattern radius-16 / blocker-free radius-16 coverage: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('all_patterns_have_radius_16_candidate')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('all_patterns_have_blocker_free_radius_16_candidate')}",
+            f"- Accepted certificates / occurrence / proxy-T reduction: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('accepted_neighborhood_absorption_certificate_count')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('accepted_proxy_t_reduction')}",
+            f"- Neighborhood/commutation/ledger/rewrite/semantic/resource/B7 claims: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('neighborhood_absorption_certificate_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('commutation_certificate_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('carrier_ledger_reduction_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_carrier_neighborhood_commutation_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",
