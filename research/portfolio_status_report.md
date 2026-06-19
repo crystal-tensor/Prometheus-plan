@@ -411,6 +411,20 @@ Overall audit: PASS
 - Carrier-ledger/rewrite/semantic/resource/B7-ledger claims: False / False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Single-Carrier Shareability Gate
+
+- Exists: True
+- Status: cone01_single_carrier_shareability_negative_gate
+- Source exact packets / carrier signatures / covered occurrences: 3 / 3 / 11
+- Shareable objects / cross-pattern signatures / largest signature occurrences: 3 / 0 / 8
+- One-signature / relaxed-source-axis-role shareability: False / False
+- Optimistic shared objects / duplicate occurrences / proxy-T reuse: 3 / 8 / 160
+- Optimistic shareability clears target: False
+- Max accepted-all removal / clears B7 target / still-missing occurrences: 11 / False / 19
+- Accepted occurrence/proxy-T reduction: 0 / 0
+- Shareability/ledger/rewrite/semantic/resource/B7 claims: False / False / False / False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

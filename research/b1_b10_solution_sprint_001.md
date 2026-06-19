@@ -1011,6 +1011,17 @@ carrier occurrences, but that is not accepted as a B7 resource reduction. Even
 if all carriers are later absorbed, the route removes at most 11 occurrences
 and still misses the 30-occurrence target by 19.
 
+**Sprint update 18w:** `T-B1-004w` is now merged as the single-carrier
+shareability gate. The new artifact
+`research/B1_B7_cone01_single_carrier_shareability_gate.md` consumes
+T-B1-004v and asks whether the exact carrier packets can coalesce into shared
+carrier objects. The result is negative: the 11 covered occurrences still split
+into 3 distinct carrier signatures, cross-pattern shareable signature count is
+0, the largest signature covers only 8 occurrences, and optimistic reuse is
+only 160 proxy-T, below the 600 proxy-T B7 target. Even accepting all shared
+objects would still remove at most 11 occurrences and miss the B7 target by 19;
+accepted occurrence removal and accepted proxy-T reduction remain 0.
+
 ## B8: Classical Verification of Quantum Outputs
 
 **Technical target:** keep verifier soundness low under adaptive leakage by

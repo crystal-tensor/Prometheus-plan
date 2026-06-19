@@ -165,6 +165,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_single_carrier_ledger_path = (
         results / "B1_B7_cone01_single_carrier_ledger_gate_v0.json"
     )
+    b1_b7_cone01_single_carrier_shareability_path = (
+        results / "B1_B7_cone01_single_carrier_shareability_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -685,6 +688,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_single_carrier_ledger_manifest = current_results.get(
         "b1_b7_cone01_single_carrier_ledger_gate_v0"
+    )
+    b1_b7_cone01_single_carrier_shareability_manifest = current_results.get(
+        "b1_b7_cone01_single_carrier_shareability_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -2934,6 +2940,188 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 single-carrier ledger report: "
             f"{b1_b7_cone01_single_carrier_ledger_path}"
+        )
+
+    b1_b7_cone01_single_carrier_shareability = {
+        "path": str(b1_b7_cone01_single_carrier_shareability_path),
+        "exists": b1_b7_cone01_single_carrier_shareability_path.exists(),
+    }
+    if not b1_b7_cone01_single_carrier_shareability_manifest:
+        errors.append("B1 manifest missing current result: b1_b7_cone01_single_carrier_shareability_gate_v0")
+    else:
+        if (
+            b1_b7_cone01_single_carrier_shareability_manifest.get("status")
+            != "cone01_single_carrier_shareability_negative_gate"
+        ):
+            errors.append("B1/B7 cone_01 single-carrier shareability gate status must remain negative")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_single_carrier_shareability_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"B1/B7 cone_01 single-carrier shareability missing existing {field} path: {value}")
+    if b1_b7_cone01_single_carrier_shareability_path.exists():
+        carrier_share_payload = json.loads(read(b1_b7_cone01_single_carrier_shareability_path))
+        carrier_share_summary = carrier_share_payload.get("summary", {})
+        carrier_share_claims = carrier_share_payload.get("claim_boundary", {})
+        b1_b7_cone01_single_carrier_shareability.update(
+            {
+                "status": carrier_share_payload.get("status"),
+                "model_status": carrier_share_payload.get("model_status"),
+                "method": carrier_share_payload.get("method"),
+                "workload": carrier_share_payload.get("workload"),
+                "source_method": carrier_share_payload.get("source_method"),
+                "source_exact_packet_count": carrier_share_summary.get("source_exact_packet_count"),
+                "source_unique_carrier_signature_count": carrier_share_summary.get(
+                    "source_unique_carrier_signature_count"
+                ),
+                "pattern_group_count": carrier_share_summary.get("pattern_group_count"),
+                "covered_invariant_flat_occurrence_count": carrier_share_summary.get(
+                    "covered_invariant_flat_occurrence_count"
+                ),
+                "shareable_carrier_object_count": carrier_share_summary.get(
+                    "shareable_carrier_object_count"
+                ),
+                "unique_carrier_signature_count": carrier_share_summary.get("unique_carrier_signature_count"),
+                "cross_pattern_shareable_signature_count": carrier_share_summary.get(
+                    "cross_pattern_shareable_signature_count"
+                ),
+                "largest_signature_occurrence_count": carrier_share_summary.get(
+                    "largest_signature_occurrence_count"
+                ),
+                "all_carriers_share_one_signature": carrier_share_summary.get(
+                    "all_carriers_share_one_signature"
+                ),
+                "relaxed_group_count": carrier_share_summary.get("relaxed_group_count"),
+                "all_carriers_share_relaxed_source_axis_role": carrier_share_summary.get(
+                    "all_carriers_share_relaxed_source_axis_role"
+                ),
+                "optimistic_shared_object_count": carrier_share_summary.get("optimistic_shared_object_count"),
+                "optimistic_duplicate_occurrences": carrier_share_summary.get(
+                    "optimistic_duplicate_occurrences"
+                ),
+                "optimistic_proxy_t_reuse": carrier_share_summary.get("optimistic_proxy_t_reuse"),
+                "optimistic_shareability_clears_proxy_t_target": carrier_share_summary.get(
+                    "optimistic_shareability_clears_proxy_t_target"
+                ),
+                "max_occurrence_removal_if_all_shared_objects_accepted": carrier_share_summary.get(
+                    "max_occurrence_removal_if_all_shared_objects_accepted"
+                ),
+                "all_shared_objects_accepted_clears_b7_target": carrier_share_summary.get(
+                    "all_shared_objects_accepted_clears_b7_target"
+                ),
+                "missing_occurrences_if_all_shared_objects_accepted": carrier_share_summary.get(
+                    "missing_occurrences_if_all_shared_objects_accepted"
+                ),
+                "missing_proxy_t_if_all_shared_objects_accepted": carrier_share_summary.get(
+                    "missing_proxy_t_if_all_shared_objects_accepted"
+                ),
+                "accepted_occurrence_removal": carrier_share_summary.get("accepted_occurrence_removal"),
+                "accepted_proxy_t_reduction": carrier_share_summary.get("accepted_proxy_t_reduction"),
+                "missing_occurrences_after_gate": carrier_share_summary.get("missing_occurrences_after_gate"),
+                "missing_proxy_t_after_gate": carrier_share_summary.get("missing_proxy_t_after_gate"),
+                "single_carrier_exact_packet_found": carrier_share_summary.get(
+                    "single_carrier_exact_packet_found"
+                ),
+                "carrier_shareability_certificate_claimed": carrier_share_summary.get(
+                    "carrier_shareability_certificate_claimed"
+                ),
+                "carrier_ledger_reduction_claimed": carrier_share_summary.get(
+                    "carrier_ledger_reduction_claimed"
+                ),
+                "rewrite_claimed": carrier_share_claims.get("rewrite_claimed"),
+                "semantic_certificate_claimed": carrier_share_claims.get("semantic_certificate_claimed"),
+                "resource_saving_claimed": carrier_share_claims.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": carrier_share_claims.get("b7_ledger_improvement_claimed"),
+                "validation_error_count": carrier_share_summary.get("validation_error_count"),
+                "carrier_shareability_row_count": len(
+                    carrier_share_payload.get("carrier_shareability_rows", [])
+                ),
+                "relaxed_shareability_row_count": len(
+                    carrier_share_payload.get("relaxed_shareability_rows", [])
+                ),
+            }
+        )
+        if carrier_share_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 single-carrier shareability report must have benchmark_id B1")
+        if carrier_share_payload.get("method") != "b1_b7_cone01_single_carrier_shareability_gate_v0":
+            errors.append("B1/B7 cone_01 single-carrier shareability method mismatch")
+        if carrier_share_payload.get("status") != "cone01_single_carrier_shareability_negative_gate":
+            errors.append("B1/B7 cone_01 single-carrier shareability status mismatch")
+        if (
+            carrier_share_payload.get("model_status")
+            != "distinct_carrier_signatures_do_not_coalesce_into_accepted_resource_model"
+        ):
+            errors.append("B1/B7 cone_01 single-carrier shareability model_status mismatch")
+        if carrier_share_payload.get("source_method") != "b1_b7_cone01_single_carrier_ledger_gate_v0":
+            errors.append("B1/B7 cone_01 single-carrier shareability source method mismatch")
+        for field in [
+            "source_exact_packet_count",
+            "source_unique_carrier_signature_count",
+            "pattern_group_count",
+            "covered_invariant_flat_occurrence_count",
+            "shareable_carrier_object_count",
+            "unique_carrier_signature_count",
+            "cross_pattern_shareable_signature_count",
+            "largest_signature_occurrence_count",
+            "all_carriers_share_one_signature",
+            "relaxed_group_count",
+            "all_carriers_share_relaxed_source_axis_role",
+            "optimistic_shared_object_count",
+            "optimistic_duplicate_occurrences",
+            "optimistic_proxy_t_reuse",
+            "optimistic_shareability_clears_proxy_t_target",
+            "max_occurrence_removal_if_all_shared_objects_accepted",
+            "all_shared_objects_accepted_clears_b7_target",
+            "missing_occurrences_if_all_shared_objects_accepted",
+            "missing_proxy_t_if_all_shared_objects_accepted",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "single_carrier_exact_packet_found",
+            "carrier_shareability_certificate_claimed",
+            "carrier_ledger_reduction_claimed",
+            "rewrite_claimed",
+            "semantic_certificate_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if carrier_share_summary.get(field) != b1_b7_cone01_single_carrier_shareability_manifest.get(field):
+                errors.append(f"B1/B7 cone_01 single-carrier shareability {field} mismatch")
+        if carrier_share_summary.get("unique_carrier_signature_count") != 3:
+            errors.append("B1/B7 cone_01 single-carrier shareability must preserve 3 signatures")
+        if carrier_share_summary.get("cross_pattern_shareable_signature_count") != 0:
+            errors.append("B1/B7 cone_01 single-carrier shareability must find 0 cross-pattern signatures")
+        if carrier_share_summary.get("largest_signature_occurrence_count") != 8:
+            errors.append("B1/B7 cone_01 single-carrier shareability largest signature must cover 8")
+        if carrier_share_summary.get("optimistic_proxy_t_reuse") != 160:
+            errors.append("B1/B7 cone_01 single-carrier shareability optimistic reuse must be 160")
+        if carrier_share_summary.get("optimistic_shareability_clears_proxy_t_target") is not False:
+            errors.append("B1/B7 cone_01 single-carrier shareability must not clear proxy-T target")
+        if carrier_share_summary.get("all_shared_objects_accepted_clears_b7_target") is not False:
+            errors.append("B1/B7 cone_01 single-carrier shareability must not clear B7 target")
+        if carrier_share_summary.get("missing_occurrences_if_all_shared_objects_accepted") != 19:
+            errors.append("B1/B7 cone_01 single-carrier shareability accepted-all route must still miss by 19")
+        if carrier_share_summary.get("accepted_occurrence_removal") != 0:
+            errors.append("B1/B7 cone_01 single-carrier shareability accepted removal must be 0")
+        if carrier_share_summary.get("accepted_proxy_t_reduction") != 0:
+            errors.append("B1/B7 cone_01 single-carrier shareability accepted proxy-T reduction must be 0")
+        for field in [
+            "carrier_shareability_certificate_claimed",
+            "carrier_ledger_reduction_claimed",
+            "rewrite_claimed",
+            "semantic_certificate_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if carrier_share_summary.get(field) is not False or carrier_share_claims.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 single-carrier shareability must not claim {field}")
+        if carrier_share_summary.get("validation_error_count") != 0:
+            errors.append("B1/B7 cone_01 single-carrier shareability validation errors must remain zero")
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 single-carrier shareability report: "
+            f"{b1_b7_cone01_single_carrier_shareability_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -12840,6 +13028,7 @@ def audit(root: Path) -> dict:
             "b7_cone01_local_clifford_dressing_gate": b1_b7_cone01_local_clifford_dressing,
             "b7_cone01_single_carrier_dressing_gate": b1_b7_cone01_single_carrier_dressing,
             "b7_cone01_single_carrier_ledger_gate": b1_b7_cone01_single_carrier_ledger,
+            "b7_cone01_single_carrier_shareability_gate": b1_b7_cone01_single_carrier_shareability,
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -13044,6 +13233,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_single_carrier_ledger_gate": str(
                 b1_b7_cone01_single_carrier_ledger_path
+            ),
+            "b1_b7_cone01_single_carrier_shareability_gate": str(
+                b1_b7_cone01_single_carrier_shareability_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -13684,6 +13876,20 @@ def markdown_report(report: dict) -> str:
             f"- Accepted occurrence/proxy-T reduction: {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('accepted_proxy_t_reduction')}",
             f"- Carrier-ledger/rewrite/semantic/resource/B7-ledger claims: {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('carrier_ledger_reduction_claimed')} / {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_single_carrier_ledger_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Single-Carrier Shareability Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('status')}",
+            f"- Source exact packets / carrier signatures / covered occurrences: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('source_exact_packet_count')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('unique_carrier_signature_count')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('covered_invariant_flat_occurrence_count')}",
+            f"- Shareable objects / cross-pattern signatures / largest signature occurrences: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('shareable_carrier_object_count')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('cross_pattern_shareable_signature_count')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('largest_signature_occurrence_count')}",
+            f"- One-signature / relaxed-source-axis-role shareability: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('all_carriers_share_one_signature')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('all_carriers_share_relaxed_source_axis_role')}",
+            f"- Optimistic shared objects / duplicate occurrences / proxy-T reuse: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('optimistic_shared_object_count')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('optimistic_duplicate_occurrences')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('optimistic_proxy_t_reuse')}",
+            f"- Optimistic shareability clears target: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('optimistic_shareability_clears_proxy_t_target')}",
+            f"- Max accepted-all removal / clears B7 target / still-missing occurrences: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('max_occurrence_removal_if_all_shared_objects_accepted')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('all_shared_objects_accepted_clears_b7_target')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('missing_occurrences_if_all_shared_objects_accepted')}",
+            f"- Accepted occurrence/proxy-T reduction: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('accepted_proxy_t_reduction')}",
+            f"- Shareability/ledger/rewrite/semantic/resource/B7 claims: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('carrier_shareability_certificate_claimed')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('carrier_ledger_reduction_claimed')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('rewrite_claimed')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('semantic_certificate_claimed')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('resource_saving_claimed')} / {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_single_carrier_shareability_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",
