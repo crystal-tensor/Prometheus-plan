@@ -676,6 +676,19 @@ Overall audit: PASS
 - Accepted replay / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Full-Circuit Replay Obligation Gate
+
+- Exists: True
+- Status: cone01_full_circuit_replay_obligations_not_satisfied
+- Packets / bounded exact repairs: 3 / 3
+- Resource-clean packets / unpriced off-grid packets: 2 / 1
+- Symbolic exactness / replay events / QASM patches: 0 / 0 / 0
+- Occurrence lift / B7 ledger acceptance / line-1381 context-or-pricing: 0 / 0 / 0
+- Blocking obligations total/max: 17 / 7
+- Candidate CNOT reduction if accepted: 9
+- Accepted replay / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

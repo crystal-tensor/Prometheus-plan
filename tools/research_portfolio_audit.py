@@ -231,6 +231,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_line1381_commutation_corridor_path = (
         results / "B1_B7_cone01_line1381_commutation_corridor_gate_v0.json"
     )
+    b1_b7_cone01_full_circuit_replay_obligation_path = (
+        results / "B1_B7_cone01_full_circuit_replay_obligation_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -817,6 +820,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_line1381_commutation_corridor_manifest = current_results.get(
         "b1_b7_cone01_line1381_commutation_corridor_gate_v0"
+    )
+    b1_b7_cone01_full_circuit_replay_obligation_manifest = current_results.get(
+        "b1_b7_cone01_full_circuit_replay_obligation_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -7388,6 +7394,242 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 line-1381 commutation corridor report: "
             f"{b1_b7_cone01_line1381_commutation_corridor_path}"
+        )
+
+    b1_b7_cone01_full_circuit_replay_obligation = {
+        "path": str(b1_b7_cone01_full_circuit_replay_obligation_path),
+        "exists": b1_b7_cone01_full_circuit_replay_obligation_path.exists(),
+    }
+    if not b1_b7_cone01_full_circuit_replay_obligation_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_full_circuit_replay_obligation_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_full_circuit_replay_obligation_manifest.get("status")
+            != "cone01_full_circuit_replay_obligations_not_satisfied"
+        ):
+            errors.append("B1/B7 cone_01 full-circuit replay obligation gate status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_full_circuit_replay_obligation_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 full-circuit replay obligation gate missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_full_circuit_replay_obligation_path.exists():
+        obligation_payload = json.loads(read(b1_b7_cone01_full_circuit_replay_obligation_path))
+        obligation_summary = obligation_payload.get("summary", {})
+        obligation_claims = obligation_payload.get("claim_boundary", {})
+        b1_b7_cone01_full_circuit_replay_obligation.update(
+            {
+                "status": obligation_payload.get("status"),
+                "model_status": obligation_payload.get("model_status"),
+                "method": obligation_payload.get("method"),
+                "workload": obligation_payload.get("workload"),
+                "packet_count": obligation_summary.get("packet_count"),
+                "bounded_packet_exact_repair_count": obligation_summary.get(
+                    "bounded_packet_exact_repair_count"
+                ),
+                "resource_clean_or_priced_packet_count": obligation_summary.get(
+                    "resource_clean_or_priced_packet_count"
+                ),
+                "packets_with_remaining_unpriced_off_grid_count": obligation_summary.get(
+                    "packets_with_remaining_unpriced_off_grid_count"
+                ),
+                "symbolic_exactness_certificate_count": obligation_summary.get(
+                    "symbolic_exactness_certificate_count"
+                ),
+                "full_circuit_replay_event_count": obligation_summary.get(
+                    "full_circuit_replay_event_count"
+                ),
+                "replacement_qasm_patch_count": obligation_summary.get(
+                    "replacement_qasm_patch_count"
+                ),
+                "occurrence_class_lift_count": obligation_summary.get(
+                    "occurrence_class_lift_count"
+                ),
+                "b7_ledger_acceptance_count": obligation_summary.get(
+                    "b7_ledger_acceptance_count"
+                ),
+                "line1381_context_or_pricing_accept_count": obligation_summary.get(
+                    "line1381_context_or_pricing_accept_count"
+                ),
+                "total_blocking_obligation_count": obligation_summary.get(
+                    "total_blocking_obligation_count"
+                ),
+                "max_blocking_obligation_count": obligation_summary.get(
+                    "max_blocking_obligation_count"
+                ),
+                "candidate_cnot_reduction_if_all_packets_accepted": obligation_summary.get(
+                    "candidate_cnot_reduction_if_all_packets_accepted"
+                ),
+                "accepted_full_circuit_replay_certificate_count": obligation_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_occurrence_removal": obligation_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": obligation_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": obligation_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": obligation_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "bounded_packet_repair_claimed_as_full_circuit_rewrite": (
+                    obligation_summary.get("bounded_packet_repair_claimed_as_full_circuit_rewrite")
+                ),
+                "symbolic_exact_decomposition_claimed": obligation_summary.get(
+                    "symbolic_exact_decomposition_claimed"
+                ),
+                "full_circuit_rewrite_claimed": obligation_summary.get(
+                    "full_circuit_rewrite_claimed"
+                ),
+                "resource_saving_claimed": obligation_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": obligation_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": obligation_summary.get("validation_error_count"),
+                "full_circuit_replay_obligation_row_count": len(
+                    obligation_payload.get("full_circuit_replay_obligation_rows", [])
+                ),
+            }
+        )
+        if obligation_payload.get("benchmark_id") != "B1":
+            errors.append(
+                "B1/B7 cone_01 full-circuit replay obligation report must have benchmark_id B1"
+            )
+        if (
+            obligation_payload.get("method")
+            != "b1_b7_cone01_full_circuit_replay_obligation_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 full-circuit replay obligation method mismatch")
+        if (
+            obligation_payload.get("status")
+            != "cone01_full_circuit_replay_obligations_not_satisfied"
+        ):
+            errors.append("B1/B7 cone_01 full-circuit replay obligation status mismatch")
+        if (
+            obligation_payload.get("model_status")
+            != "bounded_packet_repairs_do_not_yet_form_full_circuit_replay_certificates"
+        ):
+            errors.append("B1/B7 cone_01 full-circuit replay obligation model_status mismatch")
+        for field in [
+            "packet_count",
+            "bounded_packet_exact_repair_count",
+            "resource_clean_or_priced_packet_count",
+            "packets_with_remaining_unpriced_off_grid_count",
+            "symbolic_exactness_certificate_count",
+            "full_circuit_replay_event_count",
+            "replacement_qasm_patch_count",
+            "occurrence_class_lift_count",
+            "b7_ledger_acceptance_count",
+            "line1381_context_or_pricing_accept_count",
+            "total_blocking_obligation_count",
+            "max_blocking_obligation_count",
+            "candidate_cnot_reduction_if_all_packets_accepted",
+            "accepted_full_circuit_replay_certificate_count",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "bounded_packet_repair_claimed_as_full_circuit_rewrite",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if (
+                obligation_summary.get(field)
+                != b1_b7_cone01_full_circuit_replay_obligation_manifest.get(field)
+            ):
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation {field} mismatch"
+                )
+        expected_obligation_fields = {
+            "packet_count": 3,
+            "bounded_packet_exact_repair_count": 3,
+            "resource_clean_or_priced_packet_count": 2,
+            "packets_with_remaining_unpriced_off_grid_count": 1,
+            "symbolic_exactness_certificate_count": 0,
+            "full_circuit_replay_event_count": 0,
+            "replacement_qasm_patch_count": 0,
+            "occurrence_class_lift_count": 0,
+            "b7_ledger_acceptance_count": 0,
+            "line1381_context_or_pricing_accept_count": 0,
+            "total_blocking_obligation_count": 17,
+            "max_blocking_obligation_count": 7,
+            "candidate_cnot_reduction_if_all_packets_accepted": 9,
+            "accepted_full_circuit_replay_certificate_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_obligation_fields.items():
+            if obligation_summary.get(field) != value:
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation expected {field}={value}"
+                )
+        for field in [
+            "bounded_packet_repair_claimed_as_full_circuit_rewrite",
+            "symbolic_exact_decomposition_claimed",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if obligation_summary.get(field) is not False:
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation must not claim {field}"
+                )
+            if obligation_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 full-circuit replay obligation claim boundary "
+                    f"must not claim {field}"
+                )
+        rows = obligation_payload.get("full_circuit_replay_obligation_rows", [])
+        if [row.get("candidate_line_number") for row in rows] != [1378, 268, 1381]:
+            errors.append("B1/B7 cone_01 full-circuit replay obligation rows must be 1378/268/1381")
+        for row in rows:
+            line = row.get("candidate_line_number")
+            obligations = row.get("obligations", {})
+            if row.get("bounded_packet_exact_repair") is not True:
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation line {line} must preserve bounded repair"
+                )
+            if row.get("accepted_full_circuit_replay_certificate") is not False:
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation line {line} must not accept replay"
+                )
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append(
+                    f"B1/B7 cone_01 full-circuit replay obligation line {line} must not remove occurrences"
+                )
+            for field in [
+                "symbolic_exactness_certificate_available",
+                "full_circuit_replay_event_available",
+                "replacement_qasm_patch_available",
+                "occurrence_class_lift_available",
+                "b7_ledger_acceptance_available",
+            ]:
+                if obligations.get(field) is not False:
+                    errors.append(
+                        f"B1/B7 cone_01 full-circuit replay obligation line {line} {field} must be false"
+                    )
+            if line == 1381 and obligations.get("line1381_context_or_pricing_available") is not False:
+                errors.append(
+                    "B1/B7 cone_01 full-circuit replay obligation line 1381 context/pricing must be false"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 full-circuit replay obligation report: "
+            f"{b1_b7_cone01_full_circuit_replay_obligation_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -17338,6 +17580,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_line1381_commutation_corridor_gate": (
                 b1_b7_cone01_line1381_commutation_corridor
             ),
+            "b7_cone01_full_circuit_replay_obligation_gate": (
+                b1_b7_cone01_full_circuit_replay_obligation
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -17608,6 +17853,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_line1381_commutation_corridor_gate": str(
                 b1_b7_cone01_line1381_commutation_corridor_path
+            ),
+            "b1_b7_cone01_full_circuit_replay_obligation_gate": str(
+                b1_b7_cone01_full_circuit_replay_obligation_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -18513,6 +18761,19 @@ def markdown_report(report: dict) -> str:
             f"- Clear external standalone-Z references / all-reference accepted candidates: {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('clear_external_standalone_z_reference_count')} / {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('candidate_all_references_corridor_accepted_count')}",
             f"- Accepted replay / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_line1381_commutation_corridor_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Full-Circuit Replay Obligation Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('status')}",
+            f"- Packets / bounded exact repairs: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('packet_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('bounded_packet_exact_repair_count')}",
+            f"- Resource-clean packets / unpriced off-grid packets: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('resource_clean_or_priced_packet_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('packets_with_remaining_unpriced_off_grid_count')}",
+            f"- Symbolic exactness / replay events / QASM patches: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('symbolic_exactness_certificate_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('full_circuit_replay_event_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('replacement_qasm_patch_count')}",
+            f"- Occurrence lift / B7 ledger acceptance / line-1381 context-or-pricing: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('occurrence_class_lift_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('b7_ledger_acceptance_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('line1381_context_or_pricing_accept_count')}",
+            f"- Blocking obligations total/max: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('total_blocking_obligation_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('max_blocking_obligation_count')}",
+            f"- Candidate CNOT reduction if accepted: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('candidate_cnot_reduction_if_all_packets_accepted')}",
+            f"- Accepted replay / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

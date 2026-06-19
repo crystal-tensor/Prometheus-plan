@@ -418,6 +418,18 @@ replay, occurrence removal, proxy-T reduction, and B7 ledger improvement remain
 0. This does not prove a global obstruction, but it closes the cheap
 commutation-corridor interpretation of the current bounded context hints.
 
+The follow-on full-circuit replay obligation gate turns that boundary into a
+reviewable checklist. T-B1-004as confirms that all 3 reduced-CNOT packets still
+have bounded exact repairs, but 0/3 have symbolic exactness certificates,
+full-circuit replay events, replacement QASM patches, occurrence-class lifts, or
+B7 ledger acceptance. Two packets are resource-clean at bounded-packet level;
+line 1381 still has one unpriced off-grid local-U3 burden after the failed exact
+decomposition, bounded context, and cheap corridor routes. Accepted full-circuit
+replay, occurrence removal, proxy-T reduction, and B7 ledger improvement remain
+0. The next useful PR must create actual replay certificates or a different
+occurrence-removing route, not another local diagnostic that cannot enter the
+B7 ledger.
+
 ## Repository Layout
 
 ```text
