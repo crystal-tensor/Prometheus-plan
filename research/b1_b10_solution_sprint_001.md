@@ -1547,6 +1547,19 @@ occurrence removal, proxy-T reduction, and B7 improvement remain 0. The next
 route must use stronger symbolic/local synthesis, context absorption with
 replay certificates, or a different occurrence-removing scaffold.
 
+**Sprint update 18ai:** `T-B1-004ai` is now merged as a sparse local-U3 repair
+gate. The new artifact
+`research/B1_B7_cone01_sparse_local_u3_repair_gate.md` consumes T-B1-004ah,
+keeps the pi/4-snapped scaffold, and searches 420 sparse repair candidates
+where only one or two local-U3 parameters are freed. One bounded packet, line
+1378, admits an exact one-parameter grid-choice repair with residual
+9.049428032408627e-13. The other two packets, line 1381 and line 268, remain
+unrepaired even with two free parameters. This is partial bounded-packet
+evidence only: accepted full-circuit rewrite, occurrence removal, proxy-T
+reduction, and B7 improvement remain 0. The next route must broaden the repair
+scaffold for the two unresolved packets, convert the line-1378 repair into a
+symbolic full-circuit replay certificate, or abandon this reduced-CNOT scaffold.
+
 ## Sprint Promotion Matrix
 
 | Track | Can become paper after this sprint? | Can become patent after this sprint? | Can become fundable/tool after this sprint? |

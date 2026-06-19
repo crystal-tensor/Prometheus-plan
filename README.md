@@ -317,6 +317,14 @@ breaks the bounded replay instead of producing an accepted exact decomposition.
 Accepted local-U3 exactification, absorption certificates, full-circuit replay,
 occurrence removal, proxy-T reduction, and B7 ledger improvement remain 0.
 
+The sparse local-U3 repair gate then tests the next-cheapest route: keep the
+pi/4-snapped scaffold, but free only one or two local-U3 parameters. It searches
+420 sparse repair candidates. One bounded packet, line 1378, is repaired by
+changing one snapped grid choice; the other two packets remain unrepaired even
+with two free parameters. This is partial packet evidence only. It is not a
+full-circuit rewrite, not a symbolic decomposition, and not a B7 ledger saving.
+Accepted occurrence removal, proxy-T reduction, and B7 improvement remain 0.
+
 ## Repository Layout
 
 ```text

@@ -552,6 +552,17 @@ Overall audit: PASS
 - Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Sparse Local-U3 Repair Gate
+
+- Exists: True
+- Status: cone01_sparse_local_u3_repair_partial_not_ledger_accepted
+- Sparse candidates / max free parameters: 420 / 2
+- One-param exact / <=2-param exact / unresolved packets: 1 / 1 / 2
+- All-packet candidate CNOT reduction / partial candidate CNOT reduction: 9 / 3
+- Replacement off-grid params / exact-repair off-grid params / unrepaired off-grid params: 40 / 0 / 30
+- Accepted rewrite / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True
