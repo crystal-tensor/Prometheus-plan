@@ -273,6 +273,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_union_region_two_cnot_orientation_census_path = (
         results / "B1_B7_cone01_union_region_two_cnot_orientation_census_gate_v0.json"
     )
+    b1_b7_cone01_union_region_pricing_dominance_path = (
+        results / "B1_B7_cone01_union_region_pricing_dominance_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -901,6 +904,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_union_region_two_cnot_orientation_census_manifest = current_results.get(
         "b1_b7_cone01_union_region_two_cnot_orientation_census_gate_v0"
+    )
+    b1_b7_cone01_union_region_pricing_dominance_manifest = current_results.get(
+        "b1_b7_cone01_union_region_pricing_dominance_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -10105,6 +10111,222 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 union-region 2-CNOT orientation census report: "
             f"{b1_b7_cone01_union_region_two_cnot_orientation_census_path}"
+        )
+
+    b1_b7_cone01_union_region_pricing_dominance = {
+        "path": str(b1_b7_cone01_union_region_pricing_dominance_path),
+        "exists": b1_b7_cone01_union_region_pricing_dominance_path.exists(),
+    }
+    if not b1_b7_cone01_union_region_pricing_dominance_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_union_region_pricing_dominance_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_union_region_pricing_dominance_manifest.get("status")
+            != "cone01_union_region_two_cnot_candidates_pricing_dominated"
+        ):
+            errors.append("B1/B7 cone_01 union-region pricing dominance status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_union_region_pricing_dominance_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 union-region pricing dominance missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_union_region_pricing_dominance_path.exists():
+        dominance_payload = json.loads(read(b1_b7_cone01_union_region_pricing_dominance_path))
+        dominance_summary = dominance_payload.get("summary", {})
+        dominance_claims = dominance_payload.get("claim_boundary", {})
+        b1_b7_cone01_union_region_pricing_dominance.update(
+            {
+                "status": dominance_payload.get("status"),
+                "model_status": dominance_payload.get("model_status"),
+                "method": dominance_payload.get("method"),
+                "workload": dominance_payload.get("workload"),
+                "target_line_number": dominance_summary.get("target_line_number"),
+                "union_window": dominance_summary.get("union_window"),
+                "support_qubits": dominance_summary.get("support_qubits"),
+                "source_cnot_count": dominance_summary.get("source_cnot_count"),
+                "current_min_exact_replacement_cnot_count": dominance_summary.get(
+                    "current_min_exact_replacement_cnot_count"
+                ),
+                "current_candidate_cnot_delta": dominance_summary.get(
+                    "current_candidate_cnot_delta"
+                ),
+                "current_line1381_off_pi_over_four_parameter_count": dominance_summary.get(
+                    "current_line1381_off_pi_over_four_parameter_count"
+                ),
+                "current_line1381_proxy_t_pressure": dominance_summary.get(
+                    "current_line1381_proxy_t_pressure"
+                ),
+                "proxy_t_per_off_grid_local_u3_parameter": dominance_summary.get(
+                    "proxy_t_per_off_grid_local_u3_parameter"
+                ),
+                "two_cnot_exact_sequence_count": dominance_summary.get(
+                    "two_cnot_exact_sequence_count"
+                ),
+                "two_cnot_sequence_count_reviewed": dominance_summary.get(
+                    "two_cnot_sequence_count_reviewed"
+                ),
+                "min_census_off_pi_over_four_parameter_count": dominance_summary.get(
+                    "min_census_off_pi_over_four_parameter_count"
+                ),
+                "min_census_proxy_t_pressure": dominance_summary.get(
+                    "min_census_proxy_t_pressure"
+                ),
+                "best_priced_census_sequence_id": dominance_summary.get(
+                    "best_priced_census_sequence_id"
+                ),
+                "best_priced_census_residual_norm": dominance_summary.get(
+                    "best_priced_census_residual_norm"
+                ),
+                "best_priced_census_max_abs_entry_error": dominance_summary.get(
+                    "best_priced_census_max_abs_entry_error"
+                ),
+                "off_grid_delta_vs_current_line1381": dominance_summary.get(
+                    "off_grid_delta_vs_current_line1381"
+                ),
+                "proxy_t_pressure_delta_vs_current_line1381": dominance_summary.get(
+                    "proxy_t_pressure_delta_vs_current_line1381"
+                ),
+                "census_candidate_dominates_current_line1381_pricing": dominance_summary.get(
+                    "census_candidate_dominates_current_line1381_pricing"
+                ),
+                "dominating_census_sequence_count": dominance_summary.get(
+                    "dominating_census_sequence_count"
+                ),
+                "current_line1381_patch_pricing_dominates_census": dominance_summary.get(
+                    "current_line1381_patch_pricing_dominates_census"
+                ),
+                "line1378_additive_recovery_blocked": dominance_summary.get(
+                    "line1378_additive_recovery_blocked"
+                ),
+                "extra_delta_found_beyond_current_line1381_replacement": dominance_summary.get(
+                    "extra_delta_found_beyond_current_line1381_replacement"
+                ),
+                "selected_replacement_changed": dominance_summary.get(
+                    "selected_replacement_changed"
+                ),
+                "two_cnot_census_adopted_for_b7_ledger": dominance_summary.get(
+                    "two_cnot_census_adopted_for_b7_ledger"
+                ),
+                "local_u3_pricing_completed": dominance_summary.get(
+                    "local_u3_pricing_completed"
+                ),
+                "accepted_full_circuit_replay_certificate_count": dominance_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_full_circuit_qasm_patch_count": dominance_summary.get(
+                    "accepted_full_circuit_qasm_patch_count"
+                ),
+                "accepted_occurrence_removal": dominance_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": dominance_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": dominance_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": dominance_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "resource_saving_claimed": dominance_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": dominance_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": dominance_summary.get("validation_error_count"),
+            }
+        )
+        if dominance_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 union-region pricing dominance must have benchmark_id B1")
+        if dominance_payload.get("method") != "b1_b7_cone01_union_region_pricing_dominance_gate_v0":
+            errors.append("B1/B7 cone_01 union-region pricing dominance method mismatch")
+        if dominance_payload.get("status") != "cone01_union_region_two_cnot_candidates_pricing_dominated":
+            errors.append("B1/B7 cone_01 union-region pricing dominance status mismatch")
+        if (
+            dominance_payload.get("model_status")
+            != "current_line1381_patch_has_lower_local_u3_pricing_pressure"
+        ):
+            errors.append("B1/B7 cone_01 union-region pricing dominance model_status mismatch")
+        expected_dominance_fields = {
+            "target_line_number": 1381,
+            "union_window": [1369, 1379],
+            "support_qubits": [4, 8],
+            "source_cnot_count": 5,
+            "current_min_exact_replacement_cnot_count": 2,
+            "current_candidate_cnot_delta": 3,
+            "current_line1381_off_pi_over_four_parameter_count": 5,
+            "current_line1381_proxy_t_pressure": 100,
+            "proxy_t_per_off_grid_local_u3_parameter": 20,
+            "two_cnot_exact_sequence_count": 4,
+            "two_cnot_sequence_count_reviewed": 4,
+            "min_census_off_pi_over_four_parameter_count": 13,
+            "min_census_proxy_t_pressure": 260,
+            "best_priced_census_sequence_id": "01-10",
+            "best_priced_census_residual_norm": 5.812946138498332e-13,
+            "best_priced_census_max_abs_entry_error": 3.4095575404049453e-13,
+            "off_grid_delta_vs_current_line1381": 8,
+            "proxy_t_pressure_delta_vs_current_line1381": 160,
+            "census_candidate_dominates_current_line1381_pricing": False,
+            "dominating_census_sequence_count": 0,
+            "current_line1381_patch_pricing_dominates_census": True,
+            "line1378_additive_recovery_blocked": True,
+            "extra_delta_found_beyond_current_line1381_replacement": 0,
+            "selected_replacement_changed": False,
+            "two_cnot_census_adopted_for_b7_ledger": False,
+            "local_u3_pricing_completed": False,
+            "accepted_full_circuit_replay_certificate_count": 0,
+            "accepted_full_circuit_qasm_patch_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "resource_saving_claimed": False,
+            "b7_ledger_improvement_claimed": False,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_dominance_fields.items():
+            if dominance_summary.get(field) != value:
+                errors.append(
+                    f"B1/B7 cone_01 union-region pricing dominance expected {field}={value}"
+                )
+            if (
+                b1_b7_cone01_union_region_pricing_dominance_manifest
+                and field in b1_b7_cone01_union_region_pricing_dominance_manifest
+                and dominance_summary.get(field)
+                != b1_b7_cone01_union_region_pricing_dominance_manifest.get(field)
+            ):
+                errors.append(
+                    f"B1/B7 cone_01 union-region pricing dominance {field} mismatch"
+                )
+        rows = dominance_payload.get("union_region_pricing_dominance_rows", [])
+        if len(rows) != 4:
+            errors.append("B1/B7 cone_01 union-region pricing dominance must have 4 rows")
+        if any(row.get("exact_pass") is not True for row in rows):
+            errors.append("B1/B7 cone_01 union-region pricing dominance rows must all remain exact")
+        if any(row.get("dominates_current_line1381_pricing") is not False for row in rows):
+            errors.append("B1/B7 cone_01 union-region pricing dominance rows must not dominate current pricing")
+        for field in [
+            "selected_replacement_changed",
+            "two_cnot_census_adopted_for_b7_ledger",
+            "local_u3_pricing_completed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if dominance_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 union-region pricing dominance must not claim {field}")
+            if dominance_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 union-region pricing dominance claim boundary "
+                    f"must not claim {field}"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 union-region pricing dominance report: "
+            f"{b1_b7_cone01_union_region_pricing_dominance_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -20097,6 +20319,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_union_region_two_cnot_orientation_census_gate": (
                 b1_b7_cone01_union_region_two_cnot_orientation_census
             ),
+            "b7_cone01_union_region_pricing_dominance_gate": (
+                b1_b7_cone01_union_region_pricing_dominance
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -20409,6 +20634,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_union_region_two_cnot_orientation_census_gate": str(
                 b1_b7_cone01_union_region_two_cnot_orientation_census_path
+            ),
+            "b1_b7_cone01_union_region_pricing_dominance_gate": str(
+                b1_b7_cone01_union_region_pricing_dominance_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -21498,6 +21726,18 @@ def markdown_report(report: dict) -> str:
             f"- Best exact off-grid / nonzero / total U3 parameters: {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('best_exact_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('best_exact_nonzero_parameter_count')} / {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('best_exact_parameter_count')}",
             f"- Extra delta beyond current replacement / replay certificates / B7 claim: {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('extra_delta_found_beyond_current_line1381_replacement')} / {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('two_cnot_union_replay_certificate_count')} / {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_union_region_two_cnot_orientation_census_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Union-Region Pricing Dominance Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('status')}",
+            f"- Union window / support: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('union_window')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('support_qubits')}",
+            f"- Current line-1381 off-grid / proxy-T pressure: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('current_line1381_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('current_line1381_proxy_t_pressure')}",
+            f"- Best priced census sequence / off-grid / proxy-T pressure: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('best_priced_census_sequence_id')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('min_census_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('min_census_proxy_t_pressure')}",
+            f"- Delta vs current line-1381 off-grid / proxy-T pressure: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('off_grid_delta_vs_current_line1381')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('proxy_t_pressure_delta_vs_current_line1381')}",
+            f"- Census dominates current / current dominates census: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('census_candidate_dominates_current_line1381_pricing')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('current_line1381_patch_pricing_dominates_census')}",
+            f"- Selected replacement changed / adopted for B7 / B7 claim: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('selected_replacement_changed')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('two_cnot_census_adopted_for_b7_ledger')} / {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_union_region_pricing_dominance_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

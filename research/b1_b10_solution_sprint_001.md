@@ -1807,3 +1807,12 @@ local-U3 parameters among 18 total parameters. This makes the 2-CNOT candidate
 robust rather than fragile, but it remains candidate-only: accepted
 full-circuit replay, QASM patch, local-U3 pricing, occurrence removal,
 proxy-T reduction, and B7 improvement remain 0.
+
+Sprint update 18bg: B1/B7 now has a pricing-dominance gate for the 2-CNOT
+census candidates. T-B1-004bg compares the exact T-B1-004bf candidates with
+the current line-1381 pricing boundary. The current branch has 5 off-pi/4
+local-U3 parameters, priced as 100 proxy-T pressure units; the best-priced
+exact census candidate has 13 off-pi/4 parameters, priced as 260 proxy-T
+pressure units. The census candidate is therefore not adopted as a better B7
+route. Selected replacement change, occurrence removal, proxy-T reduction, and
+B7 improvement remain 0.

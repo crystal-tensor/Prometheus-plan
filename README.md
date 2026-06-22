@@ -553,6 +553,15 @@ not a fragile single-orientation artifact, but it remains candidate-only: no
 full-circuit replay certificate, QASM patch, local-U3 pricing acceptance,
 occurrence removal, proxy-T reduction, or B7 ledger credit is accepted.
 
+T-B1-004bg then prevents that robustness result from being over-counted. It
+compares the T-B1-004bf exact 2-CNOT candidates against the current line-1381
+pricing boundary. The current line-1381 branch carries 5 off-pi/4 local-U3
+parameters, or 100 proxy-T pressure units, while the best-priced 2-CNOT census
+candidate still carries 13 off-pi/4 parameters, or 260 proxy-T pressure units.
+The census route is therefore pricing-dominated by the current patch boundary:
+selected replacement changes, accepted occurrence removal, proxy-T reduction,
+and B7 ledger credit all remain 0.
+
 ## Repository Layout
 
 ```text

@@ -860,6 +860,18 @@ Overall audit: PASS
 - Extra delta beyond current replacement / replay certificates / B7 claim: 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Union-Region Pricing Dominance Gate
+
+- Exists: True
+- Status: cone01_union_region_two_cnot_candidates_pricing_dominated
+- Union window / support: [1369, 1379] / [4, 8]
+- Current line-1381 off-grid / proxy-T pressure: 5 / 100
+- Best priced census sequence / off-grid / proxy-T pressure: 01-10 / 13 / 260
+- Delta vs current line-1381 off-grid / proxy-T pressure: 8 / 160
+- Census dominates current / current dominates census: False / True
+- Selected replacement changed / adopted for B7 / B7 claim: False / False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True
