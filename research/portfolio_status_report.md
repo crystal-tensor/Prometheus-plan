@@ -808,6 +808,20 @@ Overall audit: PASS
 - Symbolic equivalence / local-U3 pricing / line1378 recovered / B7 claim: False / False / False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Line-1381 Local-U3 Pricing Gate
+
+- Exists: True
+- Status: cone01_line1381_local_u3_pricing_boundary_no_b7_credit
+- Semantic patch certificate passed: True
+- Selected lines / dropped overlap lines: [268, 1381] / [1378]
+- Selected CNOT delta / lost line-1378 delta / possible recovered delta: 6 / 3 / 9
+- Line-268 / line-1381 / selected off-grid local-U3 params: 0 / 5 / 5
+- Line-1381 / selected unpriced proxy-T pressure: 100 / 100
+- Boundary passed / local-U3 pricing accepted: True / False
+- Accepted replay / QASM patch artifacts: 1 / 1
+- Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

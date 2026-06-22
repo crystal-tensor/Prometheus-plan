@@ -1,0 +1,60 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "line1378_delta_recovered": false,
+    "local_u3_resource_pricing_accepted": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "The T-B1-004bb semantic patch certificate is now resource-priced at the remaining line-1381 local-U3 boundary: five off-grid parameters create 100 proxy-T pressure units under the project ledger.",
+    "unsupported_claims": [
+      "This does not eliminate, absorb, or symbolically decompose the line-1381 parameters.",
+      "This does not recover the dropped line-1378 CNOT delta.",
+      "This is not an accepted B7 occurrence-removing certificate.",
+      "This does not improve the B7 ledger."
+    ]
+  },
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_line1381_local_u3_pricing_gate_v0",
+  "model_status": "semantic_patch_certificate_blocked_by_unpriced_local_u3_and_dropped_line1378",
+  "source_composable_patch_result": "results/B1_B7_cone01_composable_patch_certificate_gate_v0.json",
+  "source_nonoverlap_subset_result": "results/B1_B7_cone01_nonoverlap_patch_subset_gate_v0.json",
+  "status": "cone01_line1381_local_u3_pricing_boundary_no_b7_credit",
+  "summary": {
+    "accepted_full_circuit_qasm_patch_count": 1,
+    "accepted_full_circuit_replay_certificate_count": 1,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_ledger_improvement_claimed": false,
+    "dropped_overlap_candidate_line_numbers": [
+      1378
+    ],
+    "line1378_delta_recovered": false,
+    "line1381_off_grid_parameters_absorbed": false,
+    "line1381_off_grid_parameters_eliminated": false,
+    "line1381_off_grid_parameters_symbolically_decomposed": false,
+    "line1381_replacement_off_pi_over_four_parameter_count": 5,
+    "line1381_unpriced_proxy_t_pressure": 100,
+    "line268_replacement_off_pi_over_four_parameter_count": 0,
+    "local_u3_pricing_boundary_passed": true,
+    "local_u3_resource_pricing_accepted": false,
+    "lost_candidate_cnot_reduction_due_to_overlap": 3,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "proxy_t_per_off_grid_local_u3_parameter": 20,
+    "resource_saving_claimed": false,
+    "selected_candidate_cnot_reduction": 6,
+    "selected_line_numbers": [
+      268,
+      1381
+    ],
+    "selected_proxy_t_pressure_minus_cnot_delta_proxy": -20,
+    "selected_replacement_off_pi_over_four_parameter_count": 5,
+    "selected_unpriced_proxy_t_pressure": 100,
+    "source_composable_patch_method": "b1_b7_cone01_composable_patch_certificate_gate_v0",
+    "source_nonoverlap_subset_method": "b1_b7_cone01_nonoverlap_patch_subset_gate_v0",
+    "tolerance_bounded_semantic_patch_certificate_passed": true,
+    "total_possible_cnot_delta_if_line1378_recovered": 9,
+    "validation_error_count": 0
+  },
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

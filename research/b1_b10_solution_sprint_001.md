@@ -1760,3 +1760,14 @@ entry error is 4.525273102184799e-13. One tolerance-bounded full-circuit
 semantic replay/QASM patch artifact is accepted, but B7 occurrence removal,
 proxy-T reduction, local-U3 pricing, line-1378 recovery, and ledger improvement
 remain 0.
+
+Sprint update 18bc: B1/B7 now has a line-1381 local-U3 pricing boundary gate.
+T-B1-004bc consumes the T-B1-004bb composable patch certificate and prices the
+remaining blocker: line 1381 retains 5 off-grid local-U3 parameters, equal to
+100 unaccepted proxy-T pressure units under the current ledger. The accepted
+semantic replay/QASM patch artifact remains 1, selected CNOT delta remains 6,
+and the dropped line-1378 delta remains 3. This is not a resource win:
+local-U3 pricing, occurrence removal, proxy-T reduction, and B7 ledger
+improvement remain 0. The next sprint gate must eliminate, absorb, or
+symbolically decompose the five line-1381 parameters, recover the line-1378
+merged-region delta, or find a different occurrence-removing route.

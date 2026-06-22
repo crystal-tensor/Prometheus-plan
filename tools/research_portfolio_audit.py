@@ -261,6 +261,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_composable_patch_certificate_path = (
         results / "B1_B7_cone01_composable_patch_certificate_gate_v0.json"
     )
+    b1_b7_cone01_line1381_local_u3_pricing_path = (
+        results / "B1_B7_cone01_line1381_local_u3_pricing_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -877,6 +880,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_composable_patch_certificate_manifest = current_results.get(
         "b1_b7_cone01_composable_patch_certificate_gate_v0"
+    )
+    b1_b7_cone01_line1381_local_u3_pricing_manifest = current_results.get(
+        "b1_b7_cone01_line1381_local_u3_pricing_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -9332,6 +9338,185 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 composable patch certificate report: "
             f"{b1_b7_cone01_composable_patch_certificate_path}"
+        )
+
+    b1_b7_cone01_line1381_local_u3_pricing = {
+        "path": str(b1_b7_cone01_line1381_local_u3_pricing_path),
+        "exists": b1_b7_cone01_line1381_local_u3_pricing_path.exists(),
+    }
+    if not b1_b7_cone01_line1381_local_u3_pricing_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_line1381_local_u3_pricing_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_line1381_local_u3_pricing_manifest.get("status")
+            != "cone01_line1381_local_u3_pricing_boundary_no_b7_credit"
+        ):
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_line1381_local_u3_pricing_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 line-1381 local-U3 pricing missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_line1381_local_u3_pricing_path.exists():
+        pricing_payload = json.loads(read(b1_b7_cone01_line1381_local_u3_pricing_path))
+        pricing_summary = pricing_payload.get("summary", {})
+        pricing_claims = pricing_payload.get("claim_boundary", {})
+        b1_b7_cone01_line1381_local_u3_pricing.update(
+            {
+                "status": pricing_payload.get("status"),
+                "model_status": pricing_payload.get("model_status"),
+                "method": pricing_payload.get("method"),
+                "workload": pricing_payload.get("workload"),
+                "tolerance_bounded_semantic_patch_certificate_passed": pricing_summary.get(
+                    "tolerance_bounded_semantic_patch_certificate_passed"
+                ),
+                "selected_line_numbers": pricing_summary.get("selected_line_numbers"),
+                "dropped_overlap_candidate_line_numbers": pricing_summary.get(
+                    "dropped_overlap_candidate_line_numbers"
+                ),
+                "selected_candidate_cnot_reduction": pricing_summary.get(
+                    "selected_candidate_cnot_reduction"
+                ),
+                "lost_candidate_cnot_reduction_due_to_overlap": pricing_summary.get(
+                    "lost_candidate_cnot_reduction_due_to_overlap"
+                ),
+                "total_possible_cnot_delta_if_line1378_recovered": pricing_summary.get(
+                    "total_possible_cnot_delta_if_line1378_recovered"
+                ),
+                "line268_replacement_off_pi_over_four_parameter_count": pricing_summary.get(
+                    "line268_replacement_off_pi_over_four_parameter_count"
+                ),
+                "line1381_replacement_off_pi_over_four_parameter_count": pricing_summary.get(
+                    "line1381_replacement_off_pi_over_four_parameter_count"
+                ),
+                "selected_replacement_off_pi_over_four_parameter_count": pricing_summary.get(
+                    "selected_replacement_off_pi_over_four_parameter_count"
+                ),
+                "proxy_t_per_off_grid_local_u3_parameter": pricing_summary.get(
+                    "proxy_t_per_off_grid_local_u3_parameter"
+                ),
+                "line1381_unpriced_proxy_t_pressure": pricing_summary.get(
+                    "line1381_unpriced_proxy_t_pressure"
+                ),
+                "selected_unpriced_proxy_t_pressure": pricing_summary.get(
+                    "selected_unpriced_proxy_t_pressure"
+                ),
+                "local_u3_pricing_boundary_passed": pricing_summary.get(
+                    "local_u3_pricing_boundary_passed"
+                ),
+                "local_u3_resource_pricing_accepted": pricing_summary.get(
+                    "local_u3_resource_pricing_accepted"
+                ),
+                "line1381_off_grid_parameters_eliminated": pricing_summary.get(
+                    "line1381_off_grid_parameters_eliminated"
+                ),
+                "line1381_off_grid_parameters_absorbed": pricing_summary.get(
+                    "line1381_off_grid_parameters_absorbed"
+                ),
+                "line1381_off_grid_parameters_symbolically_decomposed": pricing_summary.get(
+                    "line1381_off_grid_parameters_symbolically_decomposed"
+                ),
+                "line1378_delta_recovered": pricing_summary.get("line1378_delta_recovered"),
+                "accepted_full_circuit_replay_certificate_count": pricing_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_full_circuit_qasm_patch_count": pricing_summary.get(
+                    "accepted_full_circuit_qasm_patch_count"
+                ),
+                "accepted_occurrence_removal": pricing_summary.get("accepted_occurrence_removal"),
+                "accepted_proxy_t_reduction": pricing_summary.get("accepted_proxy_t_reduction"),
+                "missing_occurrences_after_gate": pricing_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": pricing_summary.get("missing_proxy_t_after_gate"),
+                "resource_saving_claimed": pricing_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": pricing_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": pricing_summary.get("validation_error_count"),
+            }
+        )
+        if pricing_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing must have benchmark_id B1")
+        if pricing_payload.get("method") != "b1_b7_cone01_line1381_local_u3_pricing_gate_v0":
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing method mismatch")
+        if (
+            pricing_payload.get("status")
+            != "cone01_line1381_local_u3_pricing_boundary_no_b7_credit"
+        ):
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing status mismatch")
+        if (
+            pricing_payload.get("model_status")
+            != "semantic_patch_certificate_blocked_by_unpriced_local_u3_and_dropped_line1378"
+        ):
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing model_status mismatch")
+        expected_pricing_fields = {
+            "tolerance_bounded_semantic_patch_certificate_passed": True,
+            "selected_line_numbers": [268, 1381],
+            "dropped_overlap_candidate_line_numbers": [1378],
+            "selected_candidate_cnot_reduction": 6,
+            "lost_candidate_cnot_reduction_due_to_overlap": 3,
+            "total_possible_cnot_delta_if_line1378_recovered": 9,
+            "line268_replacement_off_pi_over_four_parameter_count": 0,
+            "line1381_replacement_off_pi_over_four_parameter_count": 5,
+            "selected_replacement_off_pi_over_four_parameter_count": 5,
+            "proxy_t_per_off_grid_local_u3_parameter": 20,
+            "line1381_unpriced_proxy_t_pressure": 100,
+            "selected_unpriced_proxy_t_pressure": 100,
+            "local_u3_pricing_boundary_passed": True,
+            "local_u3_resource_pricing_accepted": False,
+            "line1381_off_grid_parameters_eliminated": False,
+            "line1381_off_grid_parameters_absorbed": False,
+            "line1381_off_grid_parameters_symbolically_decomposed": False,
+            "line1378_delta_recovered": False,
+            "accepted_full_circuit_replay_certificate_count": 1,
+            "accepted_full_circuit_qasm_patch_count": 1,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "resource_saving_claimed": False,
+            "b7_ledger_improvement_claimed": False,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_pricing_fields.items():
+            if pricing_summary.get(field) != value:
+                errors.append(f"B1/B7 cone_01 line-1381 local-U3 pricing expected {field}={value}")
+            if (
+                b1_b7_cone01_line1381_local_u3_pricing_manifest
+                and field in b1_b7_cone01_line1381_local_u3_pricing_manifest
+                and pricing_summary.get(field)
+                != b1_b7_cone01_line1381_local_u3_pricing_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 line-1381 local-U3 pricing {field} mismatch")
+        if (
+            pricing_summary.get("selected_unpriced_proxy_t_pressure")
+            != pricing_summary.get("selected_replacement_off_pi_over_four_parameter_count")
+            * pricing_summary.get("proxy_t_per_off_grid_local_u3_parameter")
+        ):
+            errors.append("B1/B7 cone_01 line-1381 local-U3 pricing proxy-T arithmetic mismatch")
+        for field in [
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "local_u3_resource_pricing_accepted",
+            "line1378_delta_recovered",
+        ]:
+            if pricing_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 line-1381 local-U3 pricing must not claim {field}")
+            if pricing_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 line-1381 local-U3 pricing claim boundary "
+                    f"must not claim {field}"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 line-1381 local-U3 pricing report: "
+            f"{b1_b7_cone01_line1381_local_u3_pricing_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -19312,6 +19497,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_composable_patch_certificate_gate": (
                 b1_b7_cone01_composable_patch_certificate
             ),
+            "b7_cone01_line1381_local_u3_pricing_gate": (
+                b1_b7_cone01_line1381_local_u3_pricing
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -19612,6 +19800,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_composable_patch_certificate_gate": str(
                 b1_b7_cone01_composable_patch_certificate_path
+            ),
+            "b1_b7_cone01_line1381_local_u3_pricing_gate": str(
+                b1_b7_cone01_line1381_local_u3_pricing_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -20649,6 +20840,20 @@ def markdown_report(report: dict) -> str:
             f"- Accepted replay / QASM patch / occurrence / proxy-T reduction: {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('accepted_full_circuit_qasm_patch_count')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('accepted_proxy_t_reduction')}",
             f"- Symbolic equivalence / local-U3 pricing / line1378 recovered / B7 claim: {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('symbolic_unitary_equivalence_claimed')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('local_u3_resource_pricing_accepted')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('line1378_delta_recovered')} / {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_composable_patch_certificate_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Line-1381 Local-U3 Pricing Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('status')}",
+            f"- Semantic patch certificate passed: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('tolerance_bounded_semantic_patch_certificate_passed')}",
+            f"- Selected lines / dropped overlap lines: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('selected_line_numbers')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('dropped_overlap_candidate_line_numbers')}",
+            f"- Selected CNOT delta / lost line-1378 delta / possible recovered delta: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('selected_candidate_cnot_reduction')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('lost_candidate_cnot_reduction_due_to_overlap')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('total_possible_cnot_delta_if_line1378_recovered')}",
+            f"- Line-268 / line-1381 / selected off-grid local-U3 params: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('line268_replacement_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('line1381_replacement_off_pi_over_four_parameter_count')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('selected_replacement_off_pi_over_four_parameter_count')}",
+            f"- Line-1381 / selected unpriced proxy-T pressure: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('line1381_unpriced_proxy_t_pressure')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('selected_unpriced_proxy_t_pressure')}",
+            f"- Boundary passed / local-U3 pricing accepted: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('local_u3_pricing_boundary_passed')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('local_u3_resource_pricing_accepted')}",
+            f"- Accepted replay / QASM patch artifacts: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('accepted_full_circuit_qasm_patch_count')}",
+            f"- Accepted occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_line1381_local_u3_pricing_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

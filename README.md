@@ -518,6 +518,13 @@ full-circuit replay/QASM patch artifact, but B7 resource credit remains 0
 because line 1378 is still dropped and line 1381 still has 5 unpriced off-grid
 local-U3 parameters.
 
+T-B1-004bc prices that remaining line-1381 local-U3 boundary. The five off-grid
+local-U3 parameters correspond to 100 proxy-T pressure units under the project
+ledger, while the selected CNOT delta remains 6 and the dropped line-1378 delta
+remains 3. This is a quantified blocker, not a win: local-U3 pricing is still
+not accepted, line 1378 is not recovered, and B7 occurrence, proxy-T, and
+ledger credit remain 0.
+
 ## Repository Layout
 
 ```text
