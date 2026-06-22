@@ -886,3 +886,17 @@ This accepts one project-local OpenQASM 3 finite-span certificate, but it still
 covers only 6 of 524,288 input dimensions and remains separate from
 Qiskit-loader replay, full-space symbolic/local-unitary equivalence,
 local-U3 pricing, occurrence removal, proxy-T reduction, and B7 ledger credit.
+
+T-B1-004cc lifts the selected line-268 plus line-1381 composable patch
+certificate onto the OpenQASM 3 artifact. It consumes the QASM2 composable patch
+certificate, the OpenQASM 3 structural roundtrip gate, and the OpenQASM 3
+finite-span replay certificate. The canonical QASM2/OpenQASM 3 instruction
+stream still matches at 1,878 instructions with zero mismatches and SHA-256
+`7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343`; the
+selected patch lines remain `[268, 1381]`, the dropped overlap line remains
+`[1378]`, max selected patch residual is `6.513210005207597e-13`, max selected
+entry error is `4.525273102184799e-13`, and the OpenQASM 3 finite-span spectral
+error remains `2.7889440543898627e-13`. This accepts one project-local
+OpenQASM 3 composable patch-lift artifact, but it is still not a Qiskit-loader
+parse, full-space symbolic/unitary proof, local-U3 pricing certificate,
+occurrence removal, proxy-T reduction, or B7 ledger credit.

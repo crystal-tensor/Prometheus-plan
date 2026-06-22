@@ -847,6 +847,22 @@ Overall audit: PASS
 - Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 OpenQASM 3 Composable Patch Lift Gate
+
+- Exists: True
+- Status: cone01_openqasm3_composable_patch_lift_passed_without_b7_resource_credit
+- QASM2 / OpenQASM 3 paths: results/B1_B7_cone01_qasm2_candidate_rewrite_gate/gcm_h6_line268_line1381_candidate.qasm / results/B1_B7_cone01_openqasm3_candidate_export_gate/gcm_h6_line268_line1381_candidate_openqasm3.qasm
+- Normalized stream match / mismatches / length delta: True / 0 / 0
+- Normalized instruction count / stream hash: 1878 / 7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343
+- Selected patches / lines / dropped overlap lines: 2 / [268, 1381] / [1378]
+- Non-overlap / local-unitary certificates / lift passed: True / True / True
+- Max selected patch residual / entry error / OpenQASM 3 span spectral error: 6.513210005207597e-13 / 4.525273102184799e-13 / 2.7889440543898627e-13
+- OpenQASM 3 finite-span certificate / subspace / full space: True / 6 / 524288
+- Source / OpenQASM 3 CNOT count / delta: 795 / 789 / 6
+- Accepted OpenQASM 3 patch lift / Qiskit loader / symbolic artifacts: 1 / 0 / 0
+- Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Full-Statevector Replay Probe Gate
 
 - Exists: True

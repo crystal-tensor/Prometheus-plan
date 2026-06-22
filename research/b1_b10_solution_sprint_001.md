@@ -2053,3 +2053,17 @@ certificate only; it covers 6/524,288 input dimensions and does not claim
 Qiskit-loader replay, full-space symbolic/local-unitary equivalence,
 local-U3 pricing, occurrence removal, proxy-T reduction, or B7 ledger
 improvement.
+
+Sprint update 18cc: B1/B7 now has an OpenQASM 3 composable patch-lift gate.
+T-B1-004cc consumes the QASM2 composable patch certificate, the OpenQASM 3
+structural roundtrip, and the OpenQASM 3 finite-span certificate. The legacy
+candidate and OpenQASM 3 artifact still share the same 1,878-instruction stream
+with zero mismatches and stream hash
+`7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343`; the
+selected patch lines remain `[268, 1381]`, dropped overlap line `[1378]`, max
+selected patch residual `6.513210005207597e-13`, max selected entry error
+`4.525273102184799e-13`, and OpenQASM 3 finite-span spectral error
+`2.7889440543898627e-13`. This accepts one project-local OpenQASM 3 composable
+patch-lift artifact only; Qiskit-loader replay, full-space symbolic/local-unitary
+equivalence, local-U3 pricing, occurrence removal, proxy-T reduction, and B7
+ledger improvement remain 0.
