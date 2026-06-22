@@ -1,0 +1,144 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "arbitrary_input_equivalence_claimed": false,
+    "b7_ledger_improvement_claimed": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "The T-B1-004av QASM2 candidate matches the source circuit across a deterministic sampled-input statevector replay pressure suite.",
+    "symbolic_unitary_equivalence_claimed": false,
+    "unsupported_claims": [
+      "This is not a symbolic unitary-equivalence proof for arbitrary input states.",
+      "This is not an exhaustive input-space replay certificate.",
+      "This is not an accepted B7 occurrence-removing certificate.",
+      "This does not recover the dropped line-1378 overlap delta.",
+      "This does not price or eliminate the remaining line-1381 off-grid local-U3 parameters."
+    ]
+  },
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_multi_input_statevector_replay_gate_v0",
+  "model_status": "qasm2_candidate_matches_sampled_input_statevectors_without_b7_credit",
+  "source_candidate_rewrite_result": "results/B1_B7_cone01_qasm2_candidate_rewrite_gate_v0.json",
+  "status": "cone01_multi_input_statevector_replay_pressure_passed_not_symbolic_certificate",
+  "summary": {
+    "accepted_full_circuit_qasm_patch_count": 0,
+    "accepted_full_circuit_replay_certificate_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "arbitrary_input_equivalence_claimed": false,
+    "b7_ledger_improvement_claimed": false,
+    "candidate_cnot_count": 789,
+    "candidate_cnot_delta": 6,
+    "candidate_operation_count_without_measurements": 1877,
+    "candidate_qasm": "results/B1_B7_cone01_qasm2_candidate_rewrite_gate/gcm_h6_line268_line1381_candidate.qasm",
+    "computational_basis_input_count": 6,
+    "deterministic_product_state_input_count": 2,
+    "failed_input_case_count": 0,
+    "failed_input_cases": [],
+    "final_measurement_removed_for_statevector": true,
+    "input_case_count": 8,
+    "input_cases": [
+      {
+        "infidelity": 4.4853010194856324e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.5303097952503064e-13,
+        "label": "zero",
+        "max_global_phase_aligned_amplitude_delta": 1.3908205762322243e-13,
+        "max_probability_delta": 5.551115123125783e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999551
+      },
+      {
+        "infidelity": 4.4853010194856324e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.5303097952503064e-13,
+        "label": "x_q0",
+        "max_global_phase_aligned_amplitude_delta": 1.3908205762322243e-13,
+        "max_probability_delta": 5.551115123125783e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999551
+      },
+      {
+        "infidelity": 4.529709940470639e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.4699041835716477e-13,
+        "label": "x_q4",
+        "max_global_phase_aligned_amplitude_delta": 1.389062912973026e-13,
+        "max_probability_delta": 4.996003610813204e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999547
+      },
+      {
+        "infidelity": 4.107825191113079e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.5340447632180223e-13,
+        "label": "x_q14",
+        "max_global_phase_aligned_amplitude_delta": 1.392888964263601e-13,
+        "max_probability_delta": 4.996003610813204e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999589
+      },
+      {
+        "infidelity": 4.1744385725905886e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.47412239626466e-13,
+        "label": "x_q4_q14",
+        "max_global_phase_aligned_amplitude_delta": 1.3920569169236498e-13,
+        "max_probability_delta": 7.771561172376096e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999583
+      },
+      {
+        "infidelity": 4.1744385725905886e-14,
+        "input_kind": "computational_basis",
+        "l2_global_phase_aligned_amplitude_delta": 2.47412239626466e-13,
+        "label": "x_q0_q4_q14",
+        "max_global_phase_aligned_amplitude_delta": 1.3920569169236498e-13,
+        "max_probability_delta": 7.771561172376096e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999583
+      },
+      {
+        "infidelity": 3.3306690738754696e-14,
+        "input_kind": "deterministic_product_state",
+        "l2_global_phase_aligned_amplitude_delta": 2.800889980273697e-13,
+        "label": "product_seed_17",
+        "max_global_phase_aligned_amplitude_delta": 3.096857909047322e-14,
+        "max_probability_delta": 8.370040771588094e-16,
+        "passed": true,
+        "state_fidelity": 0.9999999999999667
+      },
+      {
+        "infidelity": 4.063416270128073e-14,
+        "input_kind": "deterministic_product_state",
+        "l2_global_phase_aligned_amplitude_delta": 2.5546175295001374e-13,
+        "label": "product_seed_29",
+        "max_global_phase_aligned_amplitude_delta": 2.0785455530934426e-14,
+        "max_probability_delta": 1.8214596497756474e-15,
+        "passed": true,
+        "state_fidelity": 0.9999999999999594
+      }
+    ],
+    "max_global_phase_aligned_amplitude_delta": 1.392888964263601e-13,
+    "max_infidelity": 4.529709940470639e-14,
+    "max_probability_delta": 1.8214596497756474e-15,
+    "min_state_fidelity": 0.9999999999999547,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "multi_input_statevector_replay_passed": true,
+    "product_state_seeds": [
+      17,
+      29
+    ],
+    "qubit_count": 19,
+    "resource_saving_claimed": false,
+    "source_cnot_count": 795,
+    "source_default_input_replay_method": "b1_b7_cone01_full_statevector_replay_probe_gate_v0",
+    "source_method": "b1_b7_cone01_qasm2_candidate_rewrite_gate_v0",
+    "source_operation_count_without_measurements": 1884,
+    "source_qasm": "results/b1_native_t_resource_optimizer/qasmbench_medium_exact/gcm_h6.qasm",
+    "statevector_dimension": 524288,
+    "symbolic_unitary_equivalence_claimed": false,
+    "validation_error_count": 0
+  },
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

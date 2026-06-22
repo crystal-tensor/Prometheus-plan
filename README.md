@@ -471,6 +471,15 @@ benchmark default input state, but it is still not a symbolic unitary proof for
 arbitrary inputs and still does not accept B7 occurrence, proxy-T, or ledger
 credit.
 
+T-B1-004ax adds sampled-input replay pressure. It runs the same source and
+candidate circuits on 8 deterministic input states: 6 computational-basis
+preparations and 2 seeded product states. All 8 pass; min state fidelity is
+0.9999999999999547, max global-phase-aligned amplitude delta is
+1.392888964263601e-13, and max probability delta is
+1.8214596497756474e-15. This is stronger than default-input replay, but it is
+still sampled evidence, not symbolic arbitrary-input equivalence, and it still
+does not accept B7 occurrence, proxy-T, or ledger credit.
+
 ## Repository Layout
 
 ```text

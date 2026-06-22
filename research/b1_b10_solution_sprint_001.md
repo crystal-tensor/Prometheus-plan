@@ -1709,3 +1709,13 @@ occurrence removal, not proxy-T reduction, and not B7 improvement. The next
 sprint gate should either turn this into symbolic or multi-input replay
 evidence with resource pricing, or synthesize a merged line-1378/line-1381
 region that recovers the dropped 3-CNOT delta.
+
+Sprint update 18ax: B1/B7 now has sampled-input statevector replay pressure.
+T-B1-004ax consumes T-B1-004aw and tests the same source/candidate circuits
+across 8 deterministic inputs: 6 computational-basis preparations and 2 seeded
+product states. All 8 pass, with min state fidelity 0.9999999999999547, max
+infidelity 4.529709940470639e-14, max global-phase-aligned amplitude delta
+1.392888964263601e-13, and max probability delta 1.8214596497756474e-15. This
+is stronger than default-input replay but still sampled evidence, not symbolic
+arbitrary-input equivalence, and accepted occurrence removal, proxy-T
+reduction, local-U3 pricing, and B7 improvement remain 0.

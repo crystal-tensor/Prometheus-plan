@@ -246,6 +246,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_full_statevector_replay_probe_path = (
         results / "B1_B7_cone01_full_statevector_replay_probe_gate_v0.json"
     )
+    b1_b7_cone01_multi_input_statevector_replay_path = (
+        results / "B1_B7_cone01_multi_input_statevector_replay_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -847,6 +850,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_full_statevector_replay_probe_manifest = current_results.get(
         "b1_b7_cone01_full_statevector_replay_probe_gate_v0"
+    )
+    b1_b7_cone01_multi_input_statevector_replay_manifest = current_results.get(
+        "b1_b7_cone01_multi_input_statevector_replay_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -8444,6 +8450,176 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 full-statevector replay probe report: "
             f"{b1_b7_cone01_full_statevector_replay_probe_path}"
+        )
+
+    b1_b7_cone01_multi_input_statevector_replay = {
+        "path": str(b1_b7_cone01_multi_input_statevector_replay_path),
+        "exists": b1_b7_cone01_multi_input_statevector_replay_path.exists(),
+    }
+    if not b1_b7_cone01_multi_input_statevector_replay_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_multi_input_statevector_replay_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_multi_input_statevector_replay_manifest.get("status")
+            != "cone01_multi_input_statevector_replay_pressure_passed_not_symbolic_certificate"
+        ):
+            errors.append("B1/B7 cone_01 multi-input statevector replay gate status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_multi_input_statevector_replay_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 multi-input statevector replay gate missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_multi_input_statevector_replay_path.exists():
+        replay_payload = json.loads(read(b1_b7_cone01_multi_input_statevector_replay_path))
+        replay_summary = replay_payload.get("summary", {})
+        replay_claims = replay_payload.get("claim_boundary", {})
+        b1_b7_cone01_multi_input_statevector_replay.update(
+            {
+                "status": replay_payload.get("status"),
+                "model_status": replay_payload.get("model_status"),
+                "method": replay_payload.get("method"),
+                "workload": replay_payload.get("workload"),
+                "qubit_count": replay_summary.get("qubit_count"),
+                "statevector_dimension": replay_summary.get("statevector_dimension"),
+                "input_case_count": replay_summary.get("input_case_count"),
+                "computational_basis_input_count": replay_summary.get(
+                    "computational_basis_input_count"
+                ),
+                "deterministic_product_state_input_count": replay_summary.get(
+                    "deterministic_product_state_input_count"
+                ),
+                "failed_input_case_count": replay_summary.get("failed_input_case_count"),
+                "multi_input_statevector_replay_passed": replay_summary.get(
+                    "multi_input_statevector_replay_passed"
+                ),
+                "min_state_fidelity": replay_summary.get("min_state_fidelity"),
+                "max_infidelity": replay_summary.get("max_infidelity"),
+                "max_global_phase_aligned_amplitude_delta": replay_summary.get(
+                    "max_global_phase_aligned_amplitude_delta"
+                ),
+                "max_probability_delta": replay_summary.get("max_probability_delta"),
+                "source_cnot_count": replay_summary.get("source_cnot_count"),
+                "candidate_cnot_count": replay_summary.get("candidate_cnot_count"),
+                "candidate_cnot_delta": replay_summary.get("candidate_cnot_delta"),
+                "symbolic_unitary_equivalence_claimed": replay_summary.get(
+                    "symbolic_unitary_equivalence_claimed"
+                ),
+                "arbitrary_input_equivalence_claimed": replay_summary.get(
+                    "arbitrary_input_equivalence_claimed"
+                ),
+                "accepted_full_circuit_replay_certificate_count": replay_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_full_circuit_qasm_patch_count": replay_summary.get(
+                    "accepted_full_circuit_qasm_patch_count"
+                ),
+                "accepted_occurrence_removal": replay_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": replay_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": replay_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": replay_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "resource_saving_claimed": replay_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": replay_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": replay_summary.get("validation_error_count"),
+            }
+        )
+        if replay_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 multi-input statevector replay report must have benchmark_id B1")
+        if replay_payload.get("method") != "b1_b7_cone01_multi_input_statevector_replay_gate_v0":
+            errors.append("B1/B7 cone_01 multi-input statevector replay method mismatch")
+        if (
+            replay_payload.get("status")
+            != "cone01_multi_input_statevector_replay_pressure_passed_not_symbolic_certificate"
+        ):
+            errors.append("B1/B7 cone_01 multi-input statevector replay status mismatch")
+        if (
+            replay_payload.get("model_status")
+            != "qasm2_candidate_matches_sampled_input_statevectors_without_b7_credit"
+        ):
+            errors.append("B1/B7 cone_01 multi-input statevector replay model_status mismatch")
+        expected_replay_fields = {
+            "qubit_count": 19,
+            "statevector_dimension": 524288,
+            "source_cnot_count": 795,
+            "candidate_cnot_count": 789,
+            "candidate_cnot_delta": 6,
+            "final_measurement_removed_for_statevector": True,
+            "input_case_count": 8,
+            "computational_basis_input_count": 6,
+            "deterministic_product_state_input_count": 2,
+            "multi_input_statevector_replay_passed": True,
+            "failed_input_case_count": 0,
+            "symbolic_unitary_equivalence_claimed": False,
+            "arbitrary_input_equivalence_claimed": False,
+            "accepted_full_circuit_replay_certificate_count": 0,
+            "accepted_full_circuit_qasm_patch_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "resource_saving_claimed": False,
+            "b7_ledger_improvement_claimed": False,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_replay_fields.items():
+            if replay_summary.get(field) != value:
+                errors.append(f"B1/B7 cone_01 multi-input statevector replay expected {field}={value}")
+            if (
+                b1_b7_cone01_multi_input_statevector_replay_manifest
+                and field in b1_b7_cone01_multi_input_statevector_replay_manifest
+                and replay_summary.get(field)
+                != b1_b7_cone01_multi_input_statevector_replay_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 multi-input statevector replay {field} mismatch")
+        if replay_summary.get("product_state_seeds") != [17, 29]:
+            errors.append("B1/B7 cone_01 multi-input statevector replay product seeds mismatch")
+        if replay_summary.get("failed_input_cases") != []:
+            errors.append("B1/B7 cone_01 multi-input statevector replay has failed input cases")
+        if float(replay_summary.get("max_infidelity", 1.0)) > 1e-10:
+            errors.append("B1/B7 cone_01 multi-input statevector replay infidelity too high")
+        if float(replay_summary.get("max_global_phase_aligned_amplitude_delta", 1.0)) > 1e-10:
+            errors.append(
+                "B1/B7 cone_01 multi-input statevector replay amplitude delta too high"
+            )
+        if float(replay_summary.get("max_probability_delta", 1.0)) > 1e-10:
+            errors.append("B1/B7 cone_01 multi-input statevector replay probability delta too high")
+        for case in replay_summary.get("input_cases", []):
+            if case.get("passed") is not True:
+                errors.append(
+                    "B1/B7 cone_01 multi-input statevector replay failed case "
+                    f"{case.get('label')}"
+                )
+        for field in [
+            "symbolic_unitary_equivalence_claimed",
+            "arbitrary_input_equivalence_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if replay_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 multi-input statevector replay must not claim {field}")
+            if replay_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 multi-input statevector replay claim boundary "
+                    f"must not claim {field}"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 multi-input statevector replay report: "
+            f"{b1_b7_cone01_multi_input_statevector_replay_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -18409,6 +18585,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_full_statevector_replay_probe_gate": (
                 b1_b7_cone01_full_statevector_replay_probe
             ),
+            "b7_cone01_multi_input_statevector_replay_gate": (
+                b1_b7_cone01_multi_input_statevector_replay
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -18694,6 +18873,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_full_statevector_replay_probe_gate": str(
                 b1_b7_cone01_full_statevector_replay_probe_path
+            ),
+            "b1_b7_cone01_multi_input_statevector_replay_gate": str(
+                b1_b7_cone01_multi_input_statevector_replay_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -19661,6 +19843,19 @@ def markdown_report(report: dict) -> str:
             f"- Replay probe passed / symbolic unitary claimed / arbitrary input claimed: {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('statevector_replay_probe_passed')} / {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('symbolic_unitary_equivalence_claimed')} / {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('arbitrary_input_equivalence_claimed')}",
             f"- Accepted replay / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_full_statevector_replay_probe_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Multi-Input Statevector Replay Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('status')}",
+            f"- Input cases / failed cases: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('input_case_count')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('failed_input_case_count')}",
+            f"- Basis / product-state inputs: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('computational_basis_input_count')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('deterministic_product_state_input_count')}",
+            f"- Source / candidate CNOT count / delta: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('source_cnot_count')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('candidate_cnot_count')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('candidate_cnot_delta')}",
+            f"- Min fidelity / max infidelity: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('min_state_fidelity')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('max_infidelity')}",
+            f"- Max amplitude / probability delta: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('max_global_phase_aligned_amplitude_delta')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('max_probability_delta')}",
+            f"- Multi-input replay passed / symbolic unitary claimed / arbitrary input claimed: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('multi_input_statevector_replay_passed')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('symbolic_unitary_equivalence_claimed')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('arbitrary_input_equivalence_claimed')}",
+            f"- Accepted replay / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_multi_input_statevector_replay_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

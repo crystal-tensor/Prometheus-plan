@@ -17,6 +17,8 @@ Current state: **stage 1z evidence hardening; B1/B7 has now closed same-envelope
 
 Latest B1/B7 addendum: **T-B1-004aw now consumes the T-B1-004av OpenQASM 2.0 candidate in a 19-qubit default-input full-statevector replay probe. After final measurements are removed, source and candidate statevectors have dimension 524,288, fidelity 0.9999999999999551, max global-phase-aligned amplitude delta 1.3908205762322243e-13, max probability delta 5.551115123125783e-16, and measured q[4] marginal delta 5.551115123125783e-16. This upgrades the candidate from structural emission to whole-circuit numerical replay pressure, but accepted occurrence removal, proxy-T reduction, local-U3 resource acceptance, symbolic arbitrary-input equivalence, and B7 ledger improvement all remain 0.**
 
+Latest B1/B7 addendum: **T-B1-004ax now upgrades that replay pressure from one default input to 8 deterministic sampled inputs: 6 computational-basis preparations and 2 seeded product states. All 8 pass with min fidelity 0.9999999999999547, max amplitude delta 1.392888964263601e-13, and max probability delta 1.8214596497756474e-15. This is still sampled replay evidence, not symbolic arbitrary-input equivalence or B7 ledger credit.**
+
 The first research pass created:
 
 - a 100-problem catalog,
