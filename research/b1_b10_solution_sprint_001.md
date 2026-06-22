@@ -1719,3 +1719,13 @@ infidelity 4.529709940470639e-14, max global-phase-aligned amplitude delta
 is stronger than default-input replay but still sampled evidence, not symbolic
 arbitrary-input equivalence, and accepted occurrence removal, proxy-T
 reduction, local-U3 pricing, and B7 improvement remain 0.
+
+Sprint update 18ay: B1/B7 now has phase-consistent and superposition replay
+pressure. T-B1-004ay consumes T-B1-004ax and tests 4 phase-anchor inputs plus 4
+superposition inputs after final measurements are removed. All 8 pass, with
+overlap phase spread 1.3722356584366935e-13 radians, min overlap magnitude
+0.9999999999999772, min state fidelity 0.9999999999999547, max infidelity
+4.529709940470639e-14, and max probability delta 1.074140776324839e-14. This
+reduces the independent-global-phase alignment risk, but it is still sampled
+evidence, not symbolic arbitrary-input equivalence, and accepted occurrence
+removal, proxy-T reduction, local-U3 pricing, and B7 improvement remain 0.

@@ -751,6 +751,20 @@ Overall audit: PASS
 - Accepted replay / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Phase-Consistent Replay Gate
+
+- Exists: True
+- Status: cone01_phase_consistent_sampled_replay_passed_not_symbolic_certificate
+- Input cases / failed cases: 8 / 0
+- Phase anchors / superposition inputs: 4 / 4
+- Source / candidate CNOT count / delta: 795 / 789 / 6
+- Phase spread / min overlap magnitude: 1.3722356584366935e-13 / 0.9999999999999772
+- Min fidelity / max infidelity: 0.9999999999999547 / 4.529709940470639e-14
+- Max amplitude / probability delta: 1.392888964263601e-13 / 1.074140776324839e-14
+- Phase-consistent replay passed / symbolic unitary claimed / arbitrary input claimed: True / False / False
+- Accepted replay / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

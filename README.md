@@ -480,6 +480,16 @@ preparations and 2 seeded product states. All 8 pass; min state fidelity is
 still sampled evidence, not symbolic arbitrary-input equivalence, and it still
 does not accept B7 occurrence, proxy-T, or ledger credit.
 
+T-B1-004ay adds phase-consistency and superposition replay pressure. It checks
+the same source/candidate pair on 4 phase-anchor inputs and 4 superposition
+inputs after final measurements are removed. All 8 pass; overlap phase spread
+is 1.3722356584366935e-13 radians, min overlap magnitude is
+0.9999999999999772, min state fidelity is 0.9999999999999547, and max
+probability delta is 1.074140776324839e-14. This reduces the risk that
+independent per-input global-phase alignment hides an input-dependent phase
+mismatch, but it is still sampled evidence, not symbolic arbitrary-input
+equivalence, and accepted B7 occurrence, proxy-T, and ledger credit remain 0.
+
 ## Repository Layout
 
 ```text

@@ -19,6 +19,8 @@ Latest B1/B7 addendum: **T-B1-004aw now consumes the T-B1-004av OpenQASM 2.0 can
 
 Latest B1/B7 addendum: **T-B1-004ax now upgrades that replay pressure from one default input to 8 deterministic sampled inputs: 6 computational-basis preparations and 2 seeded product states. All 8 pass with min fidelity 0.9999999999999547, max amplitude delta 1.392888964263601e-13, and max probability delta 1.8214596497756474e-15. This is still sampled replay evidence, not symbolic arbitrary-input equivalence or B7 ledger credit.**
 
+Latest B1/B7 addendum: **T-B1-004ay now adds phase-consistent replay pressure with 4 phase-anchor inputs and 4 superposition inputs. All 8 pass with overlap phase spread 1.3722356584366935e-13 radians, min overlap magnitude 0.9999999999999772, min fidelity 0.9999999999999547, and max probability delta 1.074140776324839e-14. This reduces the hidden input-dependent phase concern, but it is still sampled replay evidence, not symbolic arbitrary-input equivalence or B7 ledger credit.**
+
 The first research pass created:
 
 - a 100-problem catalog,
