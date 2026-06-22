@@ -591,6 +591,17 @@ cheap three-parameter free-removal claim, but it still does not prove global
 five-parameter minimality. Occurrence removal, proxy-T reduction, local-U3
 acceptance, and B7 ledger credit remain 0.
 
+T-B1-004bk pushes the same boundary to leave-four-out pressure. It snaps every
+quadruple among the same five off-pi/4 line-1381 local-U3 parameters back to
+the pi/4 grid, then re-optimizes the remaining one parameter on the same
+two-CNOT scaffold. All 5/5 leave-four-out trials fail the exact replay
+threshold. The best residual is 0.45761708677312707 for fixed quadruple
+[3, 4, 9, 16], and the worst residual is 0.8369082341779268 for fixed
+quadruple [4, 9, 16, 17]. This blocks a cheap four-parameter free-removal
+claim, but it still does not prove global five-parameter minimality.
+Occurrence removal, proxy-T reduction, local-U3 acceptance, and B7 ledger
+credit remain 0.
+
 ## Repository Layout
 
 ```text

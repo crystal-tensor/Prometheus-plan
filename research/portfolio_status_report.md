@@ -907,6 +907,18 @@ Overall audit: PASS
 - Three-parameter removal accepted / B7 claim: False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Line-1381 Leave-Four-Out Parameter Gate
+
+- Exists: True
+- Status: cone01_line1381_no_four_parameter_free_removal
+- Current off-grid parameter indices: [3, 4, 9, 16, 17]
+- Leave-four-out exact pass / fail: 0 / 5
+- Best leave-four-out residual / fixed quadruple: 0.45761708677312707 / [3, 4, 9, 16]
+- Worst leave-four-out residual / fixed quadruple: 0.8369082341779268 / [4, 9, 16, 17]
+- Residual ratio to exact tolerance min / max: 45761708.67731271 / 83690823.41779268
+- Four-parameter removal accepted / B7 claim: False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True
