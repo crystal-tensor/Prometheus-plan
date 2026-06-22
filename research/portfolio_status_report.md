@@ -689,6 +689,18 @@ Overall audit: PASS
 - Accepted replay / occurrence / proxy-T reduction / B7 claim: 0 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Bounded Replacement Patch Gate
+
+- Exists: True
+- Status: cone01_bounded_replacement_patches_not_composable_full_circuit
+- Bounded QASM3 patches / exact-pass patches: 3 / 3
+- Candidate CNOT reduction if accepted: 9
+- Remaining off-grid parameters: 5
+- Overlapping window pairs / composable patch set: 1 / False
+- Accepted full-circuit patch / replay / occurrence / proxy-T reduction: 0 / 0 / 0 / 0
+- B7 ledger improvement claimed: False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Theta-Sharing Ledger Gate
 
 - Exists: True

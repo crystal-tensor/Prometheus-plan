@@ -1,6 +1,6 @@
 # B1-B10 Technical Resolution Program v0.1
 
-Last updated: 2026-06-19
+Last updated: 2026-06-22
 
 Purpose: keep the portfolio focused on solving the ten technical problems first.
 Publication, patent, financing, and product outcomes are downstream consequences
@@ -82,3 +82,5 @@ B1/B7 update: T-B1-004aq consumes T-B1-004ap and tests the five remaining line-1
 B1/B7 update: T-B1-004ar consumes the best bounded context hints from T-B1-004ap/aq and checks whether they have a cheap commutation corridor into the line-1381 packet. It reviews 10 best context candidates, 32 context references, and 8 unique context lines. The gate accepts 0 corridor candidates: 7 references are inside the target packet, 13 are not standalone RZ-like rotations, 21 have support-touching CNOT or non-diagonal single-qubit blockers, and 0 external standalone-Z references have a clear path into the packet. Accepted full-circuit replay, occurrence removal, proxy-T reduction, and B7 improvement remain 0. This closes only the cheap corridor interpretation of the current bounded context hints; symbolic/full-circuit replay or another occurrence-removing scaffold remains required.
 
 B1/B7 update: T-B1-004as consumes the repaired-packet resource boundary and the line-1381 exact/context/corridor pressure gates as a full-circuit replay obligation matrix. All 3 reduced-CNOT packets still have bounded exact repairs, but 0 symbolic exactness certificates, 0 full-circuit replay events, 0 replacement QASM patches, 0 occurrence-class lifts, and 0 B7 ledger acceptances exist. Two packets are resource-clean at bounded-packet level, while line 1381 remains the unpriced off-grid packet; total blocking obligations are 17, max per-packet blocker count is 7, accepted replay/occurrence/proxy-T reduction remains 0. This makes the next gate explicit: produce symbolic/full-circuit replay artifacts or a different occurrence-removing route, not another unpriced local diagnostic.
+
+B1/B7 update: T-B1-004at consumes the full-circuit replay obligation matrix and emits bounded OpenQASM 3 replacement snippets for all 3 repaired reduced-CNOT packets. All 3 snippets pass bounded exactness, and the candidate CNOT reduction remains 9 if a future full-circuit patch is accepted. The new blocker is composability: the line-1378 and line-1381 source windows overlap on lines 1369-1377, so the snippets are not accepted as an independent full-circuit patch set. Accepted full-circuit patches, replay certificates, occurrence removal, proxy-T reduction, and B7 ledger improvement remain 0. The next gate must merge or resynthesize the overlapping patch region and replay it against the source circuit before any B7 credit can be counted.

@@ -234,6 +234,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_full_circuit_replay_obligation_path = (
         results / "B1_B7_cone01_full_circuit_replay_obligation_gate_v0.json"
     )
+    b1_b7_cone01_bounded_replacement_patch_path = (
+        results / "B1_B7_cone01_bounded_replacement_patch_gate_v0.json"
+    )
     b1_b7_cone01_theta_sharing_path = results / "B1_B7_cone01_theta_sharing_ledger_gate_v0.json"
     b1_b7_cone01_shared_theta_synthesis_object_path = (
         results / "B1_B7_cone01_shared_theta_synthesis_object_gate_v0.json"
@@ -823,6 +826,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_full_circuit_replay_obligation_manifest = current_results.get(
         "b1_b7_cone01_full_circuit_replay_obligation_gate_v0"
+    )
+    b1_b7_cone01_bounded_replacement_patch_manifest = current_results.get(
+        "b1_b7_cone01_bounded_replacement_patch_gate_v0"
     )
     b1_b7_cone01_theta_sharing_manifest = current_results.get(
         "b1_b7_cone01_theta_sharing_ledger_gate_v0"
@@ -7630,6 +7636,204 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 full-circuit replay obligation report: "
             f"{b1_b7_cone01_full_circuit_replay_obligation_path}"
+        )
+
+    b1_b7_cone01_bounded_replacement_patch = {
+        "path": str(b1_b7_cone01_bounded_replacement_patch_path),
+        "exists": b1_b7_cone01_bounded_replacement_patch_path.exists(),
+    }
+    if not b1_b7_cone01_bounded_replacement_patch_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_bounded_replacement_patch_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_bounded_replacement_patch_manifest.get("status")
+            != "cone01_bounded_replacement_patches_not_composable_full_circuit"
+        ):
+            errors.append("B1/B7 cone_01 bounded replacement patch gate status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_bounded_replacement_patch_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 bounded replacement patch gate missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_bounded_replacement_patch_path.exists():
+        patch_payload = json.loads(read(b1_b7_cone01_bounded_replacement_patch_path))
+        patch_summary = patch_payload.get("summary", {})
+        patch_claims = patch_payload.get("claim_boundary", {})
+        b1_b7_cone01_bounded_replacement_patch.update(
+            {
+                "status": patch_payload.get("status"),
+                "model_status": patch_payload.get("model_status"),
+                "method": patch_payload.get("method"),
+                "workload": patch_payload.get("workload"),
+                "packet_count": patch_summary.get("packet_count"),
+                "bounded_replacement_qasm3_patch_count": patch_summary.get(
+                    "bounded_replacement_qasm3_patch_count"
+                ),
+                "bounded_patch_exact_pass_count": patch_summary.get(
+                    "bounded_patch_exact_pass_count"
+                ),
+                "candidate_cnot_reduction_if_all_patches_accepted": patch_summary.get(
+                    "candidate_cnot_reduction_if_all_patches_accepted"
+                ),
+                "replacement_off_pi_over_four_parameter_count": patch_summary.get(
+                    "replacement_off_pi_over_four_parameter_count"
+                ),
+                "overlapping_patch_window_pair_count": patch_summary.get(
+                    "overlapping_patch_window_pair_count"
+                ),
+                "composable_full_circuit_patch_set_available": patch_summary.get(
+                    "composable_full_circuit_patch_set_available"
+                ),
+                "accepted_full_circuit_qasm_patch_count": patch_summary.get(
+                    "accepted_full_circuit_qasm_patch_count"
+                ),
+                "accepted_full_circuit_replay_certificate_count": patch_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_occurrence_removal": patch_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": patch_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": patch_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": patch_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "bounded_replacement_patch_claimed_as_full_circuit_patch": (
+                    patch_summary.get("bounded_replacement_patch_claimed_as_full_circuit_patch")
+                ),
+                "full_circuit_rewrite_claimed": patch_summary.get(
+                    "full_circuit_rewrite_claimed"
+                ),
+                "resource_saving_claimed": patch_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": patch_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": patch_summary.get("validation_error_count"),
+                "bounded_replacement_patch_row_count": len(
+                    patch_payload.get("bounded_replacement_patch_rows", [])
+                ),
+            }
+        )
+        if patch_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 bounded replacement patch report must have benchmark_id B1")
+        if patch_payload.get("method") != "b1_b7_cone01_bounded_replacement_patch_gate_v0":
+            errors.append("B1/B7 cone_01 bounded replacement patch method mismatch")
+        if (
+            patch_payload.get("status")
+            != "cone01_bounded_replacement_patches_not_composable_full_circuit"
+        ):
+            errors.append("B1/B7 cone_01 bounded replacement patch status mismatch")
+        if (
+            patch_payload.get("model_status")
+            != "bounded_qasm3_patches_exist_but_overlapping_windows_block_full_circuit_patch"
+        ):
+            errors.append("B1/B7 cone_01 bounded replacement patch model_status mismatch")
+        for field in [
+            "packet_count",
+            "bounded_replacement_qasm3_patch_count",
+            "bounded_patch_exact_pass_count",
+            "candidate_cnot_reduction_if_all_patches_accepted",
+            "replacement_off_pi_over_four_parameter_count",
+            "overlapping_patch_window_pair_count",
+            "composable_full_circuit_patch_set_available",
+            "accepted_full_circuit_qasm_patch_count",
+            "accepted_full_circuit_replay_certificate_count",
+            "accepted_occurrence_removal",
+            "accepted_proxy_t_reduction",
+            "missing_occurrences_after_gate",
+            "missing_proxy_t_after_gate",
+            "bounded_replacement_patch_claimed_as_full_circuit_patch",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+            "validation_error_count",
+        ]:
+            if (
+                patch_summary.get(field)
+                != b1_b7_cone01_bounded_replacement_patch_manifest.get(field)
+            ):
+                errors.append(f"B1/B7 cone_01 bounded replacement patch {field} mismatch")
+        expected_patch_fields = {
+            "packet_count": 3,
+            "bounded_replacement_qasm3_patch_count": 3,
+            "bounded_patch_exact_pass_count": 3,
+            "candidate_cnot_reduction_if_all_patches_accepted": 9,
+            "replacement_off_pi_over_four_parameter_count": 5,
+            "overlapping_patch_window_pair_count": 1,
+            "composable_full_circuit_patch_set_available": False,
+            "accepted_full_circuit_qasm_patch_count": 0,
+            "accepted_full_circuit_replay_certificate_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_patch_fields.items():
+            if patch_summary.get(field) != value:
+                errors.append(f"B1/B7 cone_01 bounded replacement patch expected {field}={value}")
+        for field in [
+            "bounded_replacement_patch_claimed_as_full_circuit_patch",
+            "full_circuit_rewrite_claimed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if patch_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 bounded replacement patch must not claim {field}")
+            if patch_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 bounded replacement patch claim boundary "
+                    f"must not claim {field}"
+                )
+        patch_rows = patch_payload.get("bounded_replacement_patch_rows", [])
+        if [row.get("candidate_line_number") for row in patch_rows] != [1378, 1381, 268]:
+            errors.append("B1/B7 cone_01 bounded replacement patch rows must be 1378/1381/268")
+        overlap_pairs = patch_summary.get("overlapping_patch_window_pairs", [])
+        if len(overlap_pairs) != 1:
+            errors.append("B1/B7 cone_01 bounded replacement patch must record one overlap pair")
+        elif (
+            overlap_pairs[0].get("left_candidate_line_number") != 1378
+            or overlap_pairs[0].get("right_candidate_line_number") != 1381
+            or overlap_pairs[0].get("overlap_start_line") != 1369
+            or overlap_pairs[0].get("overlap_end_line") != 1377
+        ):
+            errors.append("B1/B7 cone_01 bounded replacement patch overlap pair mismatch")
+        for row in patch_rows:
+            line = row.get("candidate_line_number")
+            if row.get("bounded_replacement_qasm3_patch_available") is not True:
+                errors.append(f"B1/B7 cone_01 bounded replacement patch line {line} must have QASM3")
+            if row.get("bounded_patch_exact_pass") is not True:
+                errors.append(f"B1/B7 cone_01 bounded replacement patch line {line} must exact-pass")
+            if row.get("accepted_full_circuit_qasm_patch") is not False:
+                errors.append(
+                    f"B1/B7 cone_01 bounded replacement patch line {line} must not accept full-circuit patch"
+                )
+            if row.get("accepted_full_circuit_replay_certificate") is not False:
+                errors.append(
+                    f"B1/B7 cone_01 bounded replacement patch line {line} must not accept replay"
+                )
+            if row.get("accepted_occurrence_removal") != 0:
+                errors.append(
+                    f"B1/B7 cone_01 bounded replacement patch line {line} must not remove occurrences"
+                )
+            snippet = row.get("qasm3_patch_snippet", [])
+            if not snippet or "OPENQASM 3" not in snippet[0]:
+                errors.append(
+                    f"B1/B7 cone_01 bounded replacement patch line {line} snippet must be OpenQASM 3"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 bounded replacement patch report: "
+            f"{b1_b7_cone01_bounded_replacement_patch_path}"
         )
 
     b1_b7_cone01_theta_sharing = {
@@ -17583,6 +17787,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_full_circuit_replay_obligation_gate": (
                 b1_b7_cone01_full_circuit_replay_obligation
             ),
+            "b7_cone01_bounded_replacement_patch_gate": (
+                b1_b7_cone01_bounded_replacement_patch
+            ),
             "b7_cone01_theta_sharing_ledger_gate": b1_b7_cone01_theta_sharing,
             "b7_cone01_shared_theta_synthesis_object_gate": b1_b7_cone01_shared_theta_synthesis_object,
             "b7_cone01_shared_theta_replay_verifier_gate": b1_b7_cone01_shared_theta_replay_verifier,
@@ -17856,6 +18063,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_full_circuit_replay_obligation_gate": str(
                 b1_b7_cone01_full_circuit_replay_obligation_path
+            ),
+            "b1_b7_cone01_bounded_replacement_patch_gate": str(
+                b1_b7_cone01_bounded_replacement_patch_path
             ),
             "b1_b7_cone01_theta_sharing_ledger_gate": str(b1_b7_cone01_theta_sharing_path),
             "b1_b7_cone01_shared_theta_synthesis_object_gate": str(
@@ -18774,6 +18984,18 @@ def markdown_report(report: dict) -> str:
             f"- Candidate CNOT reduction if accepted: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('candidate_cnot_reduction_if_all_packets_accepted')}",
             f"- Accepted replay / occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_full_circuit_replay_obligation_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Bounded Replacement Patch Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('status')}",
+            f"- Bounded QASM3 patches / exact-pass patches: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('bounded_replacement_qasm3_patch_count')} / {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('bounded_patch_exact_pass_count')}",
+            f"- Candidate CNOT reduction if accepted: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('candidate_cnot_reduction_if_all_patches_accepted')}",
+            f"- Remaining off-grid parameters: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('replacement_off_pi_over_four_parameter_count')}",
+            f"- Overlapping window pairs / composable patch set: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('overlapping_patch_window_pair_count')} / {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('composable_full_circuit_patch_set_available')}",
+            f"- Accepted full-circuit patch / replay / occurrence / proxy-T reduction: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('accepted_full_circuit_qasm_patch_count')} / {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('accepted_full_circuit_replay_certificate_count')} / {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('accepted_proxy_t_reduction')}",
+            f"- B7 ledger improvement claimed: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_bounded_replacement_patch_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Theta-Sharing Ledger Gate",
             "",

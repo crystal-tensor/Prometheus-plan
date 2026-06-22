@@ -1,6 +1,6 @@
 # Top 10 Problem Dossiers v0.1
 
-Last updated: 2026-06-19
+Last updated: 2026-06-22
 
 Purpose: turn the Top 10 attack directions into reviewable research dossiers.
 Each dossier states what we are trying to solve, why the problem remains hard,
@@ -1067,3 +1067,5 @@ B1/B7 update: T-B1-004aq consumes T-B1-004ap and tests the five remaining line-1
 B1/B7 update: T-B1-004ar consumes the best bounded context hints from T-B1-004ap/aq and checks whether they have a cheap commutation corridor into the line-1381 packet. It reviews 10 best context candidates, 32 context references, and 8 unique context lines. The gate accepts 0 corridor candidates: 7 references are inside the target packet, 13 are not standalone RZ-like rotations, 21 have support-touching CNOT or non-diagonal single-qubit blockers, and 0 external standalone-Z references have a clear path into the packet. Accepted full-circuit replay, occurrence removal, proxy-T reduction, and B7 improvement remain 0. This closes only the cheap corridor interpretation of the current bounded context hints; symbolic/full-circuit replay or another occurrence-removing scaffold remains required.
 
 B1/B7 update: T-B1-004as consumes the repaired-packet boundary plus the line-1381 exact/context/corridor pressure gates and turns the next replay gap into an auditable obligation matrix. The route keeps 3/3 bounded exact packet repairs and a candidate 9-CNOT reduction if later accepted, but symbolic exactness certificates, full-circuit replay events, replacement QASM patches, occurrence-class lifts, B7 ledger acceptances, and accepted replay/occurrence/proxy-T reductions all remain 0. Two packets are resource-clean at bounded level; line 1381 remains unpriced. Future work must produce actual symbolic/full-circuit replay artifacts, non-cheap resynthesis with honest resource pricing, or a different occurrence-removing route.
+
+B1/B7 update: T-B1-004at now emits bounded OpenQASM 3 replacement snippets for the 3 repaired reduced-CNOT packets. All 3 snippets pass bounded exactness and preserve the candidate 9-CNOT reduction only as a future-if-accepted signal. The blocker has moved from "no replacement QASM snippets" to "bounded snippets exist but cannot compose": line 1378 and line 1381 source windows overlap on lines 1369-1377. Accepted full-circuit patch count, replay certificates, occurrence removal, proxy-T reduction, and B7 improvement remain 0 until the overlapping region is merged or resynthesized and replayed against the source circuit.

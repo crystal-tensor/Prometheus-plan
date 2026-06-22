@@ -430,6 +430,17 @@ replay, occurrence removal, proxy-T reduction, and B7 ledger improvement remain
 occurrence-removing route, not another local diagnostic that cannot enter the
 B7 ledger.
 
+T-B1-004at now converts the replacement-QASM obligation into concrete bounded
+OpenQASM 3 patch snippets. All 3 repaired reduced-CNOT packets have bounded
+QASM3 snippets and all 3 pass the bounded exactness check, preserving the
+candidate 9-CNOT reduction if a future full-circuit patch is accepted. The gate
+still rejects B7 credit: the line-1378 and line-1381 source windows overlap on
+lines 1369-1377, so the snippets are not a composable full-circuit patch set.
+Accepted full-circuit patches, replay certificates, occurrence removal,
+proxy-T reduction, and B7 ledger improvement remain 0. The next useful PR must
+merge or resynthesize the overlapping patch region and then replay it against
+the source circuit.
+
 ## Repository Layout
 
 ```text
