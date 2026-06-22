@@ -909,6 +909,19 @@ Overall audit: PASS
 - Two-free pricing accepted / B7 claim: False / False
 - Validation errors: 0
 
+## B1/B7 cone_01 Union-Region Targeted Three-Free Expansion Pricing Gate
+
+- Exists: True
+- Status: cone01_union_region_targeted_three_free_expansion_rejected
+- Probe scope / exhaustive for three-free: best_two_free_pair_plus_one_parameter_per_sequence / False
+- Orientation sequences: ['01-01', '01-10', '10-01', '10-10']
+- Targeted three-free exact pass / fail: 0 / 64
+- Best targeted three-free residual / sequence / triple: 0.04582709543239648 / 10-10 / [5, 7, 4]
+- Worst best-sequence residual / sequence: 0.3812803680403496 / 10-01
+- Targeted three-free proxy-T if accepted / current line-1381 proxy-T / source census proxy-T: 60 / 100 / 260
+- Targeted three-free pricing accepted / B7 claim: False / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Line-1381 Leave-One-Out Parameter Gate
 
 - Exists: True

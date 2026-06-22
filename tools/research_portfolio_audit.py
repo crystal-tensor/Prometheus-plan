@@ -285,6 +285,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_union_region_two_free_parameter_pricing_path = (
         results / "B1_B7_cone01_union_region_two_free_parameter_pricing_gate_v0.json"
     )
+    b1_b7_cone01_union_region_three_free_expansion_pricing_path = (
+        results / "B1_B7_cone01_union_region_three_free_expansion_pricing_gate_v0.json"
+    )
     b1_b7_cone01_line1381_leave_one_out_parameter_path = (
         results / "B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json"
     )
@@ -940,6 +943,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_union_region_two_free_parameter_pricing_manifest = current_results.get(
         "b1_b7_cone01_union_region_two_free_parameter_pricing_gate_v0"
+    )
+    b1_b7_cone01_union_region_three_free_expansion_pricing_manifest = current_results.get(
+        "b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0"
     )
     b1_b7_cone01_line1381_leave_one_out_parameter_manifest = current_results.get(
         "b1_b7_cone01_line1381_leave_one_out_parameter_gate_v0"
@@ -10990,6 +10996,228 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 union-region two-free-parameter pricing report: "
             f"{b1_b7_cone01_union_region_two_free_parameter_pricing_path}"
+        )
+
+    b1_b7_cone01_union_region_three_free_expansion_pricing = {
+        "path": str(b1_b7_cone01_union_region_three_free_expansion_pricing_path),
+        "exists": b1_b7_cone01_union_region_three_free_expansion_pricing_path.exists(),
+    }
+    if not b1_b7_cone01_union_region_three_free_expansion_pricing_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_union_region_three_free_expansion_pricing_manifest.get("status")
+            != "cone01_union_region_targeted_three_free_expansion_rejected"
+        ):
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing status mismatch")
+        for field in ["report", "markdown_report"]:
+            value = b1_b7_cone01_union_region_three_free_expansion_pricing_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 union-region targeted three-free expansion pricing missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_union_region_three_free_expansion_pricing_path.exists():
+        three_free_payload = json.loads(
+            read(b1_b7_cone01_union_region_three_free_expansion_pricing_path)
+        )
+        three_free_summary = three_free_payload.get("summary", {})
+        three_free_claims = three_free_payload.get("claim_boundary", {})
+        b1_b7_cone01_union_region_three_free_expansion_pricing.update(
+            {
+                "status": three_free_payload.get("status"),
+                "model_status": three_free_payload.get("model_status"),
+                "method": three_free_payload.get("method"),
+                "workload": three_free_payload.get("workload"),
+                "target_line_number": three_free_summary.get("target_line_number"),
+                "union_window": three_free_summary.get("union_window"),
+                "support_qubits": three_free_summary.get("support_qubits"),
+                "source_cnot_count": three_free_summary.get("source_cnot_count"),
+                "searched_cnot_count": three_free_summary.get("searched_cnot_count"),
+                "orientation_sequence_count": three_free_summary.get("orientation_sequence_count"),
+                "orientation_sequence_ids": three_free_summary.get("orientation_sequence_ids"),
+                "targeted_three_free_trial_count": three_free_summary.get(
+                    "targeted_three_free_trial_count"
+                ),
+                "targeted_three_free_exact_pass_count": three_free_summary.get(
+                    "targeted_three_free_exact_pass_count"
+                ),
+                "targeted_three_free_exact_fail_count": three_free_summary.get(
+                    "targeted_three_free_exact_fail_count"
+                ),
+                "all_targeted_three_free_trials_fail": three_free_summary.get(
+                    "all_targeted_three_free_trials_fail"
+                ),
+                "best_targeted_three_free_sequence_id": three_free_summary.get(
+                    "best_targeted_three_free_sequence_id"
+                ),
+                "best_targeted_three_free_parameter_triple": three_free_summary.get(
+                    "best_targeted_three_free_parameter_triple"
+                ),
+                "best_targeted_three_free_residual_norm": three_free_summary.get(
+                    "best_targeted_three_free_residual_norm"
+                ),
+                "best_targeted_three_free_residual_ratio_to_exact_tolerance": three_free_summary.get(
+                    "best_targeted_three_free_residual_ratio_to_exact_tolerance"
+                ),
+                "worst_best_sequence_id": three_free_summary.get("worst_best_sequence_id"),
+                "worst_best_sequence_residual_norm": three_free_summary.get(
+                    "worst_best_sequence_residual_norm"
+                ),
+                "targeted_three_free_proxy_t_pressure_if_accepted": three_free_summary.get(
+                    "targeted_three_free_proxy_t_pressure_if_accepted"
+                ),
+                "two_free_proxy_t_pressure_if_accepted": three_free_summary.get(
+                    "two_free_proxy_t_pressure_if_accepted"
+                ),
+                "current_line1381_proxy_t_pressure": three_free_summary.get(
+                    "current_line1381_proxy_t_pressure"
+                ),
+                "best_source_proxy_t_pressure": three_free_summary.get(
+                    "best_source_proxy_t_pressure"
+                ),
+                "targeted_three_free_pricing_candidate_found": three_free_summary.get(
+                    "targeted_three_free_pricing_candidate_found"
+                ),
+                "targeted_three_free_pricing_accepted": three_free_summary.get(
+                    "targeted_three_free_pricing_accepted"
+                ),
+                "local_u3_pricing_completed": three_free_summary.get(
+                    "local_u3_pricing_completed"
+                ),
+                "accepted_full_circuit_replay_certificate_count": three_free_summary.get(
+                    "accepted_full_circuit_replay_certificate_count"
+                ),
+                "accepted_full_circuit_qasm_patch_count": three_free_summary.get(
+                    "accepted_full_circuit_qasm_patch_count"
+                ),
+                "accepted_occurrence_removal": three_free_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": three_free_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": three_free_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": three_free_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "resource_saving_claimed": three_free_summary.get("resource_saving_claimed"),
+                "b7_ledger_improvement_claimed": three_free_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "probe_scope": three_free_summary.get("probe_scope"),
+                "probe_exhaustive_for_three_free": three_free_summary.get(
+                    "probe_exhaustive_for_three_free"
+                ),
+                "validation_error_count": three_free_summary.get("validation_error_count"),
+            }
+        )
+        if three_free_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing must have benchmark_id B1")
+        if (
+            three_free_payload.get("method")
+            != "b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing method mismatch")
+        if (
+            three_free_payload.get("status")
+            != "cone01_union_region_targeted_three_free_expansion_rejected"
+        ):
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing status mismatch")
+        if (
+            three_free_payload.get("model_status")
+            != "best_two_free_pair_plus_one_parameter_expansion_does_not_recover_exactness"
+        ):
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing model_status mismatch")
+        expected_three_free_fields = {
+            "target_line_number": 1381,
+            "union_window": [1369, 1379],
+            "support_qubits": [4, 8],
+            "source_cnot_count": 5,
+            "searched_cnot_count": 2,
+            "orientation_sequence_count": 4,
+            "orientation_sequence_ids": ["01-01", "01-10", "10-01", "10-10"],
+            "targeted_three_free_trial_count": 64,
+            "targeted_three_free_exact_pass_count": 0,
+            "targeted_three_free_exact_fail_count": 64,
+            "all_targeted_three_free_trials_fail": True,
+            "best_targeted_three_free_sequence_id": "10-10",
+            "best_targeted_three_free_parameter_triple": [5, 7, 4],
+            "best_targeted_three_free_residual_norm": 0.04582709543239648,
+            "best_targeted_three_free_residual_ratio_to_exact_tolerance": 4582709.5432396475,
+            "worst_best_sequence_id": "10-01",
+            "worst_best_sequence_residual_norm": 0.3812803680403496,
+            "targeted_three_free_proxy_t_pressure_if_accepted": 60,
+            "two_free_proxy_t_pressure_if_accepted": 40,
+            "current_line1381_proxy_t_pressure": 100,
+            "best_source_proxy_t_pressure": 260,
+            "targeted_three_free_pricing_candidate_found": False,
+            "targeted_three_free_pricing_accepted": False,
+            "local_u3_pricing_completed": False,
+            "accepted_full_circuit_replay_certificate_count": 0,
+            "accepted_full_circuit_qasm_patch_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "resource_saving_claimed": False,
+            "b7_ledger_improvement_claimed": False,
+            "probe_scope": "best_two_free_pair_plus_one_parameter_per_sequence",
+            "probe_exhaustive_for_three_free": False,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_three_free_fields.items():
+            if three_free_summary.get(field) != value:
+                errors.append(
+                    "B1/B7 cone_01 union-region targeted three-free expansion pricing "
+                    f"expected {field}={value}"
+                )
+            if (
+                b1_b7_cone01_union_region_three_free_expansion_pricing_manifest
+                and field in b1_b7_cone01_union_region_three_free_expansion_pricing_manifest
+                and three_free_summary.get(field)
+                != b1_b7_cone01_union_region_three_free_expansion_pricing_manifest.get(field)
+            ):
+                errors.append(
+                    "B1/B7 cone_01 union-region targeted three-free expansion pricing "
+                    f"{field} mismatch"
+                )
+        sequence_rows = three_free_payload.get(
+            "union_region_targeted_three_free_sequence_rows", []
+        )
+        trial_rows = three_free_payload.get(
+            "union_region_targeted_three_free_trial_rows", []
+        )
+        if len(sequence_rows) != 4:
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing must have 4 sequence rows")
+        if len(trial_rows) != 64:
+            errors.append("B1/B7 cone_01 union-region targeted three-free expansion pricing must have 64 trial rows")
+        if any(row.get("targeted_three_free_exact_pass_count") != 0 for row in sequence_rows):
+            errors.append("B1/B7 cone_01 union-region targeted three-free sequence rows must all have 0 exact passes")
+        if any(row.get("exact_pass") is not False for row in trial_rows):
+            errors.append("B1/B7 cone_01 union-region targeted three-free trials must all fail")
+        for field in [
+            "targeted_three_free_pricing_accepted",
+            "local_u3_pricing_completed",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if three_free_summary.get(field) is not False:
+                errors.append(f"B1/B7 cone_01 union-region targeted three-free expansion pricing must not claim {field}")
+            if three_free_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 union-region targeted three-free expansion pricing claim boundary "
+                    f"must not claim {field}"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 union-region targeted three-free expansion pricing report: "
+            f"{b1_b7_cone01_union_region_three_free_expansion_pricing_path}"
         )
 
     b1_b7_cone01_line1381_leave_one_out_parameter = {
@@ -22054,6 +22282,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_union_region_two_free_parameter_pricing_gate": (
                 b1_b7_cone01_union_region_two_free_parameter_pricing
             ),
+            "b7_cone01_union_region_three_free_expansion_pricing_gate": (
+                b1_b7_cone01_union_region_three_free_expansion_pricing
+            ),
             "b7_cone01_line1381_leave_one_out_parameter_gate": (
                 b1_b7_cone01_line1381_leave_one_out_parameter
             ),
@@ -22393,6 +22624,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_union_region_two_free_parameter_pricing_gate": str(
                 b1_b7_cone01_union_region_two_free_parameter_pricing_path
+            ),
+            "b1_b7_cone01_union_region_three_free_expansion_pricing_gate": str(
+                b1_b7_cone01_union_region_three_free_expansion_pricing_path
             ),
             "b1_b7_cone01_line1381_leave_one_out_parameter_gate": str(
                 b1_b7_cone01_line1381_leave_one_out_parameter_path
@@ -23546,6 +23780,19 @@ def markdown_report(report: dict) -> str:
             f"- Two-free proxy-T if accepted / current line-1381 proxy-T / source census proxy-T: {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('two_free_proxy_t_pressure_if_accepted')} / {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('current_line1381_proxy_t_pressure')} / {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('best_source_proxy_t_pressure')}",
             f"- Two-free pricing accepted / B7 claim: {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('two_free_pricing_accepted')} / {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_union_region_two_free_parameter_pricing_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 Union-Region Targeted Three-Free Expansion Pricing Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('status')}",
+            f"- Probe scope / exhaustive for three-free: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('probe_scope')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('probe_exhaustive_for_three_free')}",
+            f"- Orientation sequences: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('orientation_sequence_ids')}",
+            f"- Targeted three-free exact pass / fail: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('targeted_three_free_exact_pass_count')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('targeted_three_free_exact_fail_count')}",
+            f"- Best targeted three-free residual / sequence / triple: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('best_targeted_three_free_residual_norm')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('best_targeted_three_free_sequence_id')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('best_targeted_three_free_parameter_triple')}",
+            f"- Worst best-sequence residual / sequence: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('worst_best_sequence_residual_norm')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('worst_best_sequence_id')}",
+            f"- Targeted three-free proxy-T if accepted / current line-1381 proxy-T / source census proxy-T: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('targeted_three_free_proxy_t_pressure_if_accepted')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('current_line1381_proxy_t_pressure')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('best_source_proxy_t_pressure')}",
+            f"- Targeted three-free pricing accepted / B7 claim: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('targeted_three_free_pricing_accepted')} / {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_union_region_three_free_expansion_pricing_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Line-1381 Leave-One-Out Parameter Gate",
             "",

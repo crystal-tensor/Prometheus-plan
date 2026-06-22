@@ -1,0 +1,3344 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "local_u3_pricing_completed": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "Within the T-B1-004bf union-region two-CNOT census candidates, this targeted probe expands each sequence's best failed two-free pair by one additional free local-U3 parameter.",
+    "targeted_three_free_pricing_accepted": false,
+    "unsupported_claims": [
+      "This is not an exhaustive three-free-parameter lower bound.",
+      "A local exact targeted-three-free candidate, if present, is not a full-circuit replay certificate.",
+      "This does not accept occurrence removal, proxy-T reduction, or a B7 ledger improvement."
+    ]
+  },
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0",
+  "model_status": "best_two_free_pair_plus_one_parameter_expansion_does_not_recover_exactness",
+  "source_grid_snap_pricing_result": "results/B1_B7_cone01_union_region_grid_snap_pricing_gate_v0.json",
+  "source_orientation_census_result": "results/B1_B7_cone01_union_region_two_cnot_orientation_census_gate_v0.json",
+  "source_semantic_packet_result": "results/B1_B7_cone01_semantic_replay_packet_gate_v0.json",
+  "source_two_free_pricing_result": "results/B1_B7_cone01_union_region_two_free_parameter_pricing_gate_v0.json",
+  "status": "cone01_union_region_targeted_three_free_expansion_rejected",
+  "summary": {
+    "accepted_full_circuit_qasm_patch_count": 0,
+    "accepted_full_circuit_replay_certificate_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "all_targeted_three_free_trials_fail": true,
+    "b7_ledger_improvement_claimed": false,
+    "best_source_proxy_t_pressure": 260,
+    "best_targeted_three_free_parameter_triple": [
+      5,
+      7,
+      4
+    ],
+    "best_targeted_three_free_residual_norm": 0.04582709543239648,
+    "best_targeted_three_free_residual_ratio_to_exact_tolerance": 4582709.5432396475,
+    "best_targeted_three_free_sequence_id": "10-10",
+    "current_line1381_proxy_t_pressure": 100,
+    "local_u3_pricing_completed": false,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "orientation_sequence_count": 4,
+    "orientation_sequence_ids": [
+      "01-01",
+      "01-10",
+      "10-01",
+      "10-10"
+    ],
+    "probe_exhaustive_for_three_free": false,
+    "probe_scope": "best_two_free_pair_plus_one_parameter_per_sequence",
+    "resource_saving_claimed": false,
+    "searched_cnot_count": 2,
+    "source_cnot_count": 5,
+    "source_grid_snap_pricing_method": "b1_b7_cone01_union_region_grid_snap_pricing_gate_v0",
+    "source_orientation_census_method": "b1_b7_cone01_union_region_two_cnot_orientation_census_gate_v0",
+    "source_semantic_packet_method": "b1_b7_cone01_semantic_replay_packet_gate_v0",
+    "source_two_free_pricing_method": "b1_b7_cone01_union_region_two_free_parameter_pricing_gate_v0",
+    "support_qubits": [
+      4,
+      8
+    ],
+    "target_line_number": 1381,
+    "targeted_three_free_exact_fail_count": 64,
+    "targeted_three_free_exact_pass_count": 0,
+    "targeted_three_free_pricing_accepted": false,
+    "targeted_three_free_pricing_candidate_found": false,
+    "targeted_three_free_proxy_t_pressure_if_accepted": 60,
+    "targeted_three_free_trial_count": 64,
+    "two_free_proxy_t_pressure_if_accepted": 40,
+    "union_window": [
+      1369,
+      1379
+    ],
+    "validation_error_count": 0,
+    "worst_best_sequence_id": "10-01",
+    "worst_best_sequence_residual_norm": 0.3812803680403496
+  },
+  "union_region_targeted_three_free_sequence_rows": [
+    {
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_targeted_three_free_nonzero_parameter_count": 17,
+      "best_targeted_three_free_off_pi_over_four_parameter_count": 3,
+      "best_targeted_three_free_parameter_triple": [
+        10,
+        17,
+        5
+      ],
+      "best_targeted_three_free_residual_norm": 0.045827095432396485,
+      "best_targeted_three_free_residual_ratio_to_exact_tolerance": 4582709.543239648,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "grid_snap_residual_norm": 0.656090143720822,
+      "sequence_id": "01-01",
+      "source_off_pi_over_four_parameter_count": 15,
+      "source_residual_norm": 5.843214470341767e-13,
+      "targeted_three_free_exact_pass_count": 0,
+      "targeted_three_free_trial_count": 16
+    },
+    {
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_targeted_three_free_nonzero_parameter_count": 17,
+      "best_targeted_three_free_off_pi_over_four_parameter_count": 3,
+      "best_targeted_three_free_parameter_triple": [
+        4,
+        11,
+        16
+      ],
+      "best_targeted_three_free_residual_norm": 0.17961780740687913,
+      "best_targeted_three_free_residual_ratio_to_exact_tolerance": 17961780.740687914,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "grid_snap_residual_norm": 0.5773113079336994,
+      "sequence_id": "01-10",
+      "source_off_pi_over_four_parameter_count": 13,
+      "source_residual_norm": 5.812946138498332e-13,
+      "targeted_three_free_exact_pass_count": 0,
+      "targeted_three_free_trial_count": 16
+    },
+    {
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_targeted_three_free_nonzero_parameter_count": 17,
+      "best_targeted_three_free_off_pi_over_four_parameter_count": 3,
+      "best_targeted_three_free_parameter_triple": [
+        7,
+        15,
+        8
+      ],
+      "best_targeted_three_free_residual_norm": 0.3812803680403496,
+      "best_targeted_three_free_residual_ratio_to_exact_tolerance": 38128036.804034956,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "grid_snap_residual_norm": 1.021457442072864,
+      "sequence_id": "10-01",
+      "source_off_pi_over_four_parameter_count": 14,
+      "source_residual_norm": 5.896475870720445e-13,
+      "targeted_three_free_exact_pass_count": 0,
+      "targeted_three_free_trial_count": 16
+    },
+    {
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_targeted_three_free_nonzero_parameter_count": 15,
+      "best_targeted_three_free_off_pi_over_four_parameter_count": 3,
+      "best_targeted_three_free_parameter_triple": [
+        5,
+        7,
+        4
+      ],
+      "best_targeted_three_free_residual_norm": 0.04582709543239648,
+      "best_targeted_three_free_residual_ratio_to_exact_tolerance": 4582709.5432396475,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "grid_snap_residual_norm": 0.36435162331693166,
+      "sequence_id": "10-10",
+      "source_off_pi_over_four_parameter_count": 13,
+      "source_residual_norm": 5.874430624497437e-13,
+      "targeted_three_free_exact_pass_count": 0,
+      "targeted_three_free_trial_count": 16
+    }
+  ],
+  "union_region_targeted_three_free_trial_rows": [
+    {
+      "added_parameter_index": 0,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        0
+      ],
+      "free_parameter_values": [
+        -2.105514716317839,
+        1.8059465588523693,
+        0.0
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.0
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.31204185933778894,
+      "residual_ratio_to_exact_tolerance": 31204185.933778893,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        0.0
+      ]
+    },
+    {
+      "added_parameter_index": 1,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        1
+      ],
+      "free_parameter_values": [
+        -2.1055147159532708,
+        1.8059465601533944,
+        1.5707963266060165
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377889,
+      "residual_ratio_to_exact_tolerance": 31204185.93377889,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        1.474184834888426
+      ]
+    },
+    {
+      "added_parameter_index": 2,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        2
+      ],
+      "free_parameter_values": [
+        -2.105514716395007,
+        1.8059465602538278,
+        2.3561944902675362
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377889,
+      "residual_ratio_to_exact_tolerance": 31204185.93377889,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        2.3022468641828207
+      ]
+    },
+    {
+      "added_parameter_index": 3,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        3
+      ],
+      "free_parameter_values": [
+        -2.105371404382543,
+        1.8034104908721034,
+        -2.3724131757297804
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -2.356194490192345
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.31163543391903276,
+      "residual_ratio_to_exact_tolerance": 31163543.391903274,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -2.291336824921576
+      ]
+    },
+    {
+      "added_parameter_index": 4,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 4,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        4
+      ],
+      "free_parameter_values": [
+        -2.105514715670717,
+        -2.8003279566014605,
+        0.6792836991205782
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 27,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377878,
+      "residual_ratio_to_exact_tolerance": 31204185.933778778,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        2.585503440512559
+      ]
+    },
+    {
+      "added_parameter_index": 5,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        5
+      ],
+      "free_parameter_values": [
+        -2.100860945673887,
+        2.1089190237153943,
+        -0.35346157025630687
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.045827095432396485,
+      "residual_ratio_to_exact_tolerance": 4582709.543239648,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -0.4354486908208086
+      ]
+    },
+    {
+      "added_parameter_index": 6,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        6
+      ],
+      "free_parameter_values": [
+        -2.105514716282205,
+        1.8059465587953518,
+        -3.1415926534676593
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.31204185933778894,
+      "residual_ratio_to_exact_tolerance": 31204185.933778893,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -3.141592653589793
+      ]
+    },
+    {
+      "added_parameter_index": 7,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        7
+      ],
+      "free_parameter_values": [
+        1.0360779378346248,
+        -1.3356460947849038,
+        2.356194490419612
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377889,
+      "residual_ratio_to_exact_tolerance": 31204185.93377889,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -0.7757763580131289
+      ]
+    },
+    {
+      "added_parameter_index": 8,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        8
+      ],
+      "free_parameter_values": [
+        -2.1055147159153282,
+        1.8059465599396995,
+        0.7853981631042526
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 3,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377889,
+      "residual_ratio_to_exact_tolerance": 31204185.93377889,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        1.0864329313746381
+      ]
+    },
+    {
+      "added_parameter_index": 9,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        9
+      ],
+      "free_parameter_values": [
+        -2.118849983659498,
+        1.791402767304107,
+        2.952803108627963
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.24983603211829353,
+      "residual_ratio_to_exact_tolerance": 24983603.211829353,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        2.9276787049389323
+      ]
+    },
+    {
+      "added_parameter_index": 11,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        11
+      ],
+      "free_parameter_values": [
+        -0.6911190601566162,
+        1.8059465592479471,
+        0.628997492740659
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 25,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377888,
+      "residual_ratio_to_exact_tolerance": 31204185.93377888,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -0.5297174446801067
+      ]
+    },
+    {
+      "added_parameter_index": 12,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        12
+      ],
+      "free_parameter_values": [
+        -2.105514716317839,
+        1.8059465588523693,
+        3.1415926532073115
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.31204185933778894,
+      "residual_ratio_to_exact_tolerance": 31204185.933778893,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -3.141592653589793
+      ]
+    },
+    {
+      "added_parameter_index": 13,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        13
+      ],
+      "free_parameter_values": [
+        -2.1055147159153282,
+        1.8059465599396995,
+        -2.3561944902762453
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -2.356194490192345
+      ],
+      "optimizer_nfev": 3,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3120418593377889,
+      "residual_ratio_to_exact_tolerance": 31204185.93377889,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -2.3885558552228403
+      ]
+    },
+    {
+      "added_parameter_index": 14,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 4,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        14
+      ],
+      "free_parameter_values": [
+        1.0360779378601048,
+        -1.3356460942920318,
+        -1.570796326687212
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.31204185933778894,
+      "residual_ratio_to_exact_tolerance": 31204185.933778893,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        1.6792888064412832
+      ]
+    },
+    {
+      "added_parameter_index": 15,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        15
+      ],
+      "free_parameter_values": [
+        -2.0923371907742014,
+        1.8078967568847188,
+        -2.4585136314270333
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -2.356194490192345
+      ],
+      "optimizer_nfev": 20,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2952839819837463,
+      "residual_ratio_to_exact_tolerance": 29528398.19837463,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -2.204869416868837
+      ]
+    },
+    {
+      "added_parameter_index": 16,
+      "base_two_free_parameter_pair": [
+        10,
+        17
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        10,
+        17,
+        16
+      ],
+      "free_parameter_values": [
+        -2.1023351159079673,
+        1.7617128728702518,
+        -1.6303531910091589
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 10,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3095290092396349,
+      "residual_ratio_to_exact_tolerance": 30952900.923963487,
+      "sequence_id": "01-01",
+      "source_parameter_values": [
+        -1.851068621252261,
+        1.7850421365185234,
+        -1.6297934889309014
+      ]
+    },
+    {
+      "added_parameter_index": 0,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        0
+      ],
+      "free_parameter_values": [
+        -2.0927006539049082,
+        -1.924740095525457,
+        -8.971818843406254e-10
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        0.0
+      ],
+      "optimizer_nfev": 2,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.28784020041956887,
+      "residual_ratio_to_exact_tolerance": 28784020.041956887,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        -1.3322676295501878e-15
+      ]
+    },
+    {
+      "added_parameter_index": 1,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        1
+      ],
+      "free_parameter_values": [
+        -2.092700658140617,
+        -1.924740097292324,
+        2.356194490192345
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        1.9899521406125373
+      ]
+    },
+    {
+      "added_parameter_index": 2,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        2
+      ],
+      "free_parameter_values": [
+        -2.092700658140617,
+        -1.924740097292324,
+        0.7853981633974483
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        1.0359060085505423
+      ]
+    },
+    {
+      "added_parameter_index": 3,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        3
+      ],
+      "free_parameter_values": [
+        -2.103591043268365,
+        -1.9291412418423828,
+        1.6752843566890299
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2686478865400292,
+      "residual_ratio_to_exact_tolerance": 26864788.65400292,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        1.4965560220708118
+      ]
+    },
+    {
+      "added_parameter_index": 5,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        5
+      ],
+      "free_parameter_values": [
+        -2.081903080291372,
+        -1.9405735745571846,
+        -2.932140570536456
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 14,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1990037270064542,
+      "residual_ratio_to_exact_tolerance": 19900372.700645417,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        -3.059675873543383
+      ]
+    },
+    {
+      "added_parameter_index": 6,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        6
+      ],
+      "free_parameter_values": [
+        -2.092700658140617,
+        -1.924740097292324,
+        -1.5707963267948966
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        -1.5707963267948963
+      ]
+    },
+    {
+      "added_parameter_index": 7,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 6,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        7
+      ],
+      "free_parameter_values": [
+        -2.0927006545464057,
+        -1.9247400954562122,
+        -3.141592652885077
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 12,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        3.1415926535897913
+      ]
+    },
+    {
+      "added_parameter_index": 8,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        8
+      ],
+      "free_parameter_values": [
+        -2.0927006570816897,
+        -1.9247400968506074,
+        3.1415926535774616
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 3,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.28784020041956887,
+      "residual_ratio_to_exact_tolerance": 28784020.041956887,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        3.037706843361951
+      ]
+    },
+    {
+      "added_parameter_index": 9,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        9
+      ],
+      "free_parameter_values": [
+        -2.093680853349614,
+        -1.9246891870815634,
+        0.797826857192165
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.28757617991291184,
+      "residual_ratio_to_exact_tolerance": 28757617.991291184,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        0.693042207665429
+      ]
+    },
+    {
+      "added_parameter_index": 10,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        10
+      ],
+      "free_parameter_values": [
+        -2.093689539684519,
+        -1.916631479792518,
+        2.34465473333111
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.28772597476629225,
+      "residual_ratio_to_exact_tolerance": 28772597.476629224,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        2.3932020419270534
+      ]
+    },
+    {
+      "added_parameter_index": 12,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        12
+      ],
+      "free_parameter_values": [
+        -2.0927006556118184,
+        -1.9247400946479196,
+        1.570796327203733
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        1.5707963267948974
+      ]
+    },
+    {
+      "added_parameter_index": 13,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        13
+      ],
+      "free_parameter_values": [
+        -2.092700658140617,
+        -1.924740097292324,
+        -1.5707963267948966
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        -1.3511760121403427
+      ]
+    },
+    {
+      "added_parameter_index": 14,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        14
+      ],
+      "free_parameter_values": [
+        -2.0927006543053523,
+        -1.9247400948531395,
+        -3.1415926531229603
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 5,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2878402004195689,
+      "residual_ratio_to_exact_tolerance": 28784020.04195689,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        3.141592653589793
+      ]
+    },
+    {
+      "added_parameter_index": 15,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        15
+      ],
+      "free_parameter_values": [
+        -2.1555874670625705,
+        -1.9393547065341634,
+        0.911368402998729
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 10,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.2669344032008194,
+      "residual_ratio_to_exact_tolerance": 26693440.320081938,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        0.8652033981245726
+      ]
+    },
+    {
+      "added_parameter_index": 16,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        16
+      ],
+      "free_parameter_values": [
+        -1.9702095354638205,
+        -2.0689858755387234,
+        1.0795006207323254
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.17961780740687913,
+      "residual_ratio_to_exact_tolerance": 17961780.740687914,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        1.1479439483596554
+      ]
+    },
+    {
+      "added_parameter_index": 17,
+      "base_two_free_parameter_pair": [
+        4,
+        11
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        4,
+        11,
+        17
+      ],
+      "free_parameter_values": [
+        -2.0936895398801125,
+        -1.9166314834269103,
+        -1.5823360812361273
+      ],
+      "grid_parameter_values": [
+        -2.356194490192345,
+        -2.356194490192345,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.28772597476629247,
+      "residual_ratio_to_exact_tolerance": 28772597.476629246,
+      "sequence_id": "01-10",
+      "source_parameter_values": [
+        -1.979179702618067,
+        -1.9767776858851613,
+        -1.789894874078063
+      ]
+    },
+    {
+      "added_parameter_index": 0,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        0
+      ],
+      "free_parameter_values": [
+        -0.78539816599476,
+        2.081787072542748,
+        2.3561944901784067
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 4,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        2.585124428210724
+      ]
+    },
+    {
+      "added_parameter_index": 1,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        1
+      ],
+      "free_parameter_values": [
+        -0.7853981656559341,
+        2.0817870727044383,
+        1.570796326433463
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 3,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        1.5707963267949152
+      ]
+    },
+    {
+      "added_parameter_index": 2,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        2
+      ],
+      "free_parameter_values": [
+        -0.7853981639641066,
+        2.081787073783314,
+        2.3561944914380515
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        2.5097728518155167
+      ]
+    },
+    {
+      "added_parameter_index": 3,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 6,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        3
+      ],
+      "free_parameter_values": [
+        -0.7853981641463417,
+        2.082437441099664,
+        2.403325470137643
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46412416148785185,
+      "residual_ratio_to_exact_tolerance": 46412416.14878518,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        2.322174845940758
+      ]
+    },
+    {
+      "added_parameter_index": 4,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        4
+      ],
+      "free_parameter_values": [
+        -0.7853981633937059,
+        2.186275990035927,
+        0.6154797531166096
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 13,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.44727787980028116,
+      "residual_ratio_to_exact_tolerance": 44727787.980028115,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        0.6448355954216574
+      ]
+    },
+    {
+      "added_parameter_index": 5,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        5
+      ],
+      "free_parameter_values": [
+        -0.7853981585131988,
+        2.0170282788074605,
+        3.009953870394769
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 10,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.45251786296763197,
+      "residual_ratio_to_exact_tolerance": 45251786.2967632,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        2.7767353018036065
+      ]
+    },
+    {
+      "added_parameter_index": 6,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        6
+      ],
+      "free_parameter_values": [
+        -0.7853981643006027,
+        2.08178707335121,
+        -0.7853981639375931
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 2,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -1.0343297419521376
+      ]
+    },
+    {
+      "added_parameter_index": 8,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        8
+      ],
+      "free_parameter_values": [
+        -1.0502402003879263,
+        2.1028488472730924,
+        -1.1915935079184548
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.3812803680403496,
+      "residual_ratio_to_exact_tolerance": 38128036.804034956,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -1.272864132210096
+      ]
+    },
+    {
+      "added_parameter_index": 9,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        9
+      ],
+      "free_parameter_values": [
+        -0.78539816599476,
+        2.081787072542748,
+        1.570796326789309
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 4,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        1.5707963267948957
+      ]
+    },
+    {
+      "added_parameter_index": 10,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 4,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        10
+      ],
+      "free_parameter_values": [
+        -0.7853981631214175,
+        2.08178707343843,
+        -4.835234435063285e-10
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.0
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        9.769962616701378e-15
+      ]
+    },
+    {
+      "added_parameter_index": 11,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 8,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        11
+      ],
+      "free_parameter_values": [
+        -0.785398163796418,
+        2.186275986852734,
+        -1.7407147325920185
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 13,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.44727787980028155,
+      "residual_ratio_to_exact_tolerance": 44727787.98002815,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -1.4613168300692312
+      ]
+    },
+    {
+      "added_parameter_index": 12,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 6,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        12
+      ],
+      "free_parameter_values": [
+        -0.7853981612940633,
+        2.0817870735700046,
+        -1.5707963274168462
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853600994,
+      "residual_ratio_to_exact_tolerance": 46644639.853600994,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -1.5707963267948752
+      ]
+    },
+    {
+      "added_parameter_index": 13,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 4,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        13
+      ],
+      "free_parameter_values": [
+        -0.7853981622586352,
+        2.0817870732302284,
+        -2.35619448971385
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -2.356194490192345
+      ],
+      "optimizer_nfev": 11,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 1,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853601005,
+      "residual_ratio_to_exact_tolerance": 46644639.853601,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -2.5097728518155087
+      ]
+    },
+    {
+      "added_parameter_index": 14,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 8,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        14
+      ],
+      "free_parameter_values": [
+        2.7229354736945304,
+        2.0817870740576545,
+        -2.7229354736243394
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 25,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.46644639853600955,
+      "residual_ratio_to_exact_tolerance": 46644639.85360096,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        1.0938103452385821
+      ]
+    },
+    {
+      "added_parameter_index": 16,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        16
+      ],
+      "free_parameter_values": [
+        -0.7853981640049099,
+        2.100699112261987,
+        -0.5299027951937956
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 9,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.39241023761269717,
+      "residual_ratio_to_exact_tolerance": 39241023.76126972,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        -0.43079761822594786
+      ]
+    },
+    {
+      "added_parameter_index": 17,
+      "base_two_free_parameter_pair": [
+        7,
+        15
+      ],
+      "best_seed_index": 4,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        7,
+        15,
+        17
+      ],
+      "free_parameter_values": [
+        -0.7853981664150451,
+        2.100699114350382,
+        0.5299027947505195
+      ],
+      "grid_parameter_values": [
+        -1.5707963267948966,
+        1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 10,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 17,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.39241023761249866,
+      "residual_ratio_to_exact_tolerance": 39241023.76124986,
+      "sequence_id": "10-01",
+      "source_parameter_values": [
+        -1.2494856181905867,
+        1.9427455350590659,
+        0.6690936856051586
+      ]
+    },
+    {
+      "added_parameter_index": 0,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 8,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        0
+      ],
+      "free_parameter_values": [
+        2.9606695183794383,
+        -1.8280963224091613,
+        3.1415926535895355
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1831095797026286,
+      "residual_ratio_to_exact_tolerance": 18310957.97026286,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        3.141592653589779
+      ]
+    },
+    {
+      "added_parameter_index": 1,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        1
+      ],
+      "free_parameter_values": [
+        2.960669518426606,
+        -1.8280963220352286,
+        0.785398163128423
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 3,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.18310957970262862,
+      "residual_ratio_to_exact_tolerance": 18310957.970262863,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        0.5824430715858231
+      ]
+    },
+    {
+      "added_parameter_index": 2,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        2
+      ],
+      "free_parameter_values": [
+        2.9606695185687766,
+        -1.8280963209093437,
+        1.5707963267846843
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "optimizer_nfev": 2,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.18310957970262862,
+      "residual_ratio_to_exact_tolerance": 18310957.970262863,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        1.4014217329533993
+      ]
+    },
+    {
+      "added_parameter_index": 3,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 2,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        3
+      ],
+      "free_parameter_values": [
+        2.9591887462349256,
+        -1.82806143519799,
+        -0.8018530392384373
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1823778104510283,
+      "residual_ratio_to_exact_tolerance": 18237781.04510283,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -0.8194178076490624
+      ]
+    },
+    {
+      "added_parameter_index": 4,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        4
+      ],
+      "free_parameter_values": [
+        2.788131081703253,
+        -1.8261298715198218,
+        2.603469958132383
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 11,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.04582709543239648,
+      "residual_ratio_to_exact_tolerance": 4582709.5432396475,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        2.454849385007332
+      ]
+    },
+    {
+      "added_parameter_index": 6,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        6
+      ],
+      "free_parameter_values": [
+        2.9606695186702847,
+        -1.828096321186705,
+        0.0
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        0.0
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.18310957970262862,
+      "residual_ratio_to_exact_tolerance": 18310957.970262863,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -6.128431095930864e-14
+      ]
+    },
+    {
+      "added_parameter_index": 8,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        8
+      ],
+      "free_parameter_values": [
+        2.9606695185520024,
+        -1.8280963129583598,
+        -8.868600076539224e-09
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        0.0
+      ],
+      "optimizer_nfev": 16,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1831095797026285,
+      "residual_ratio_to_exact_tolerance": 18310957.97026285,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -0.07851735412819849
+      ]
+    },
+    {
+      "added_parameter_index": 9,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        9
+      ],
+      "free_parameter_values": [
+        2.960669519069743,
+        -1.8280963219317592,
+        3.1415926532449365
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -3.141592653589793
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1831095797026285,
+      "residual_ratio_to_exact_tolerance": 18310957.97026285,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -3.141592653589793
+      ]
+    },
+    {
+      "added_parameter_index": 10,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 6,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        10
+      ],
+      "free_parameter_values": [
+        2.7881310832969843,
+        -1.8261298712072989,
+        -1.032673629914588
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 10,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.045827095432396485,
+      "residual_ratio_to_exact_tolerance": 4582709.543239648,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -0.9008048878763804
+      ]
+    },
+    {
+      "added_parameter_index": 11,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 8,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        11
+      ],
+      "free_parameter_values": [
+        2.7881310833698407,
+        -1.8261298713468335,
+        2.6034699567091524
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        2.356194490192345
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.04582709543239655,
+      "residual_ratio_to_exact_tolerance": 4582709.543239655,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        2.55926738094729
+      ]
+    },
+    {
+      "added_parameter_index": 12,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 5,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        12
+      ],
+      "free_parameter_values": [
+        2.9606695186702847,
+        -1.828096321186705,
+        0.0
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        0.0
+      ],
+      "optimizer_nfev": 8,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.18310957970262862,
+      "residual_ratio_to_exact_tolerance": 18310957.970262863,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -6.572520305780927e-14
+      ]
+    },
+    {
+      "added_parameter_index": 13,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        13
+      ],
+      "free_parameter_values": [
+        2.960669518387304,
+        -1.8280963216144435,
+        -0.7853981641231638
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -0.7853981633974483
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.18310957970262853,
+      "residual_ratio_to_exact_tolerance": 18310957.97026285,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -0.7671422810705204
+      ]
+    },
+    {
+      "added_parameter_index": 14,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 7,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        14
+      ],
+      "free_parameter_values": [
+        2.9606695185687766,
+        -1.8280963209093435,
+        -1.5707963268843532
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 2,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 2,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1831095797026286,
+      "residual_ratio_to_exact_tolerance": 18310957.97026286,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -1.6226327070919684
+      ]
+    },
+    {
+      "added_parameter_index": 15,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 0,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        15
+      ],
+      "free_parameter_values": [
+        2.960746972695544,
+        -1.828125292069328,
+        -2.3557677223874114
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -2.356194490192345
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.1831091029068952,
+      "residual_ratio_to_exact_tolerance": 18310910.29068952,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -2.390214134443893
+      ]
+    },
+    {
+      "added_parameter_index": 16,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 3,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        16
+      ],
+      "free_parameter_values": [
+        2.9042226216407165,
+        -1.8265682848620182,
+        -1.4549030879646045
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        -1.5707963267948966
+      ],
+      "optimizer_nfev": 6,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.15268844203110643,
+      "residual_ratio_to_exact_tolerance": 15268844.203110643,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        -1.5707963267942555
+      ]
+    },
+    {
+      "added_parameter_index": 17,
+      "base_two_free_parameter_pair": [
+        5,
+        7
+      ],
+      "best_seed_index": 1,
+      "cnot_sequence": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "exact_pass": false,
+      "free_parameter_triple": [
+        5,
+        7,
+        17
+      ],
+      "free_parameter_values": [
+        2.7881310836470607,
+        -1.8261298711168947,
+        0.5381226972876636
+      ],
+      "grid_parameter_values": [
+        -3.141592653589793,
+        -1.5707963267948966,
+        0.7853981633974483
+      ],
+      "optimizer_nfev": 7,
+      "optimizer_success": true,
+      "repaired_parameter_stats": {
+        "nonzero_parameter_count": 15,
+        "off_pi_over_four_grid_parameter_count": 3,
+        "parameter_count": 18
+      },
+      "residual_norm": 0.04582709543239651,
+      "residual_ratio_to_exact_tolerance": 4582709.543239651,
+      "sequence_id": "10-10",
+      "source_parameter_values": [
+        2.7767353018036065,
+        -1.7473426655108948,
+        0.9474689806030936
+      ]
+    }
+  ],
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

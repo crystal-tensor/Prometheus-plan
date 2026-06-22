@@ -1902,3 +1902,14 @@ best-sequence residual is 0.46644639853601 on sequence `10-01`. This blocks a
 must change scaffold, produce symbolic/context absorption, accept honest larger
 local-U3 pricing with full-circuit replay, or find a different
 occurrence-removing branch.
+
+Sprint update 18bp: B1/B7 now has a targeted three-free expansion pricing gate.
+T-B1-004bp takes each sequence's best failed T-B1-004bo two-parameter pair,
+adds one more free local-U3 parameter, and re-optimizes that targeted triple.
+All 64 targeted three-free trials fail exact replay. The best residual is
+0.04582709543239648 on sequence `10-10` at triple `[5, 7, 4]`, about 4.58e6
+times the 1e-8 exact tolerance; the worst best-sequence residual is
+0.3812803680403496 on sequence `10-01`. This is not an exhaustive three-free
+lower bound, but it blocks the most direct 60-proxy-T extension of the failed
+two-free route. Occurrence removal, proxy-T reduction, local-U3 pricing
+acceptance, and B7 ledger improvement remain 0.

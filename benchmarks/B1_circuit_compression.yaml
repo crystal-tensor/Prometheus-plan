@@ -2341,6 +2341,63 @@ current_results:
     validation_error_count: 0
     report: ../results/B1_B7_cone01_union_region_two_free_parameter_pricing_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_union_region_two_free_parameter_pricing_gate.md
+  b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0:
+    circuits: 1
+    status: cone01_union_region_targeted_three_free_expansion_rejected
+    model_status: best_two_free_pair_plus_one_parameter_expansion_does_not_recover_exactness
+    method: b1_b7_cone01_union_region_three_free_expansion_pricing_gate_v0
+    source_union_region_two_cnot_orientation_census_gate: b1_b7_cone01_union_region_two_cnot_orientation_census_gate_v0
+    source_union_region_grid_snap_pricing_gate: b1_b7_cone01_union_region_grid_snap_pricing_gate_v0
+    source_union_region_two_free_parameter_pricing_gate: b1_b7_cone01_union_region_two_free_parameter_pricing_gate_v0
+    workload: qasmbench_medium_exact/gcm_h6.qasm
+    target_line_number: 1381
+    union_window:
+      - 1369
+      - 1379
+    support_qubits:
+      - 4
+      - 8
+    source_cnot_count: 5
+    searched_cnot_count: 2
+    orientation_sequence_count: 4
+    orientation_sequence_ids:
+      - 01-01
+      - 01-10
+      - 10-01
+      - 10-10
+    targeted_three_free_trial_count: 64
+    targeted_three_free_exact_pass_count: 0
+    targeted_three_free_exact_fail_count: 64
+    all_targeted_three_free_trials_fail: true
+    best_targeted_three_free_sequence_id: 10-10
+    best_targeted_three_free_parameter_triple:
+      - 5
+      - 7
+      - 4
+    best_targeted_three_free_residual_norm: 0.04582709543239648
+    best_targeted_three_free_residual_ratio_to_exact_tolerance: 4582709.5432396475
+    worst_best_sequence_id: 10-01
+    worst_best_sequence_residual_norm: 0.3812803680403496
+    targeted_three_free_proxy_t_pressure_if_accepted: 60
+    two_free_proxy_t_pressure_if_accepted: 40
+    current_line1381_proxy_t_pressure: 100
+    best_source_proxy_t_pressure: 260
+    targeted_three_free_pricing_candidate_found: false
+    targeted_three_free_pricing_accepted: false
+    local_u3_pricing_completed: false
+    accepted_full_circuit_replay_certificate_count: 0
+    accepted_full_circuit_qasm_patch_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    missing_occurrences_after_gate: 30
+    missing_proxy_t_after_gate: 600
+    resource_saving_claimed: false
+    b7_ledger_improvement_claimed: false
+    probe_scope: best_two_free_pair_plus_one_parameter_per_sequence
+    probe_exhaustive_for_three_free: false
+    validation_error_count: 0
+    report: ../results/B1_B7_cone01_union_region_three_free_expansion_pricing_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_union_region_three_free_expansion_pricing_gate.md
   b1_b7_cone01_line1381_leave_one_out_parameter_gate_v0:
     circuits: 1
     status: cone01_line1381_no_single_parameter_free_removal

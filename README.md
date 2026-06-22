@@ -593,6 +593,17 @@ larger local-U3 pricing with full-circuit replay, or a different
 occurrence-removing branch; occurrence removal, proxy-T reduction, local-U3
 pricing acceptance, and B7 ledger credit remain 0.
 
+T-B1-004bp adds a targeted three-free expansion pressure test instead of
+restarting a broad cheap-cleanup sweep. For each of the four exact 2-CNOT
+union-region candidates, it takes the best failed T-B1-004bo two-parameter pair,
+adds one more free local-U3 parameter, and re-optimizes the resulting targeted
+triple. All 64 targeted three-free trials fail exact replay. The best residual
+is 0.04582709543239648 on sequence `10-10` at triple `[5, 7, 4]`; the worst
+best-sequence residual is 0.3812803680403496 on sequence `10-01`. This does
+not prove an exhaustive three-free lower bound, but it blocks the most natural
+60-proxy-T extension of the failed two-free route. Occurrence removal,
+proxy-T reduction, local-U3 pricing acceptance, and B7 ledger credit remain 0.
+
 T-B1-004bh sharpens the remaining line-1381 blocker. It snaps each one of the
 five current off-pi/4 local-U3 parameters back to the pi/4 grid, then
 re-optimizes the other four parameters on the same two-CNOT scaffold. All 5/5
