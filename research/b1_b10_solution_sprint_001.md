@@ -2091,3 +2091,16 @@ index 1375, and dropped overlap line 1378 maps to instruction index 1372. This
 accepts one project-local source-map artifact only; Qiskit-loader replay,
 full-space symbolic/local-unitary equivalence, local-U3 pricing, occurrence
 removal, proxy-T reduction, and B7 ledger improvement remain 0.
+
+Sprint update 18cf: B1/B7 now has a compact OpenQASM 3 patch witness packet.
+T-B1-004cf consumes the OpenQASM 3 source map, composable patch certificate,
+patch-lift result, non-overlap subset, and bounded replacement patch evidence.
+It emits three witness rows for candidate lines 268, 1378, and 1381, with line
+1378 explicitly marked as the dropped-overlap witness. The witness instruction
+indices are 263, 1372, and 1375; selected witness count is 2, dropped-overlap
+witness count is 1, selected CNOT delta remains 6, lost overlap delta remains 3,
+and the witness packet hash is
+`e0d2e63f3f2c16be685baef3360ff68d5765db549c5e17e655a6e74c6fb82dc8`. This
+accepts one project-local review packet only; Qiskit-loader replay, full-space
+symbolic/local-unitary equivalence, local-U3 pricing, occurrence removal,
+proxy-T reduction, and B7 ledger improvement remain 0.

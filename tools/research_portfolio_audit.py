@@ -276,6 +276,9 @@ def audit(root: Path) -> dict:
     b1_b7_cone01_openqasm3_source_map_path = (
         results / "B1_B7_cone01_openqasm3_source_map_gate_v0.json"
     )
+    b1_b7_cone01_openqasm3_patch_witness_packet_path = (
+        results / "B1_B7_cone01_openqasm3_patch_witness_packet_gate_v0.json"
+    )
     b1_b7_cone01_full_statevector_replay_probe_path = (
         results / "B1_B7_cone01_full_statevector_replay_probe_gate_v0.json"
     )
@@ -979,6 +982,9 @@ def audit(root: Path) -> dict:
     )
     b1_b7_cone01_openqasm3_source_map_manifest = current_results.get(
         "b1_b7_cone01_openqasm3_source_map_gate_v0"
+    )
+    b1_b7_cone01_openqasm3_patch_witness_packet_manifest = current_results.get(
+        "b1_b7_cone01_openqasm3_patch_witness_packet_gate_v0"
     )
     b1_b7_cone01_full_statevector_replay_probe_manifest = current_results.get(
         "b1_b7_cone01_full_statevector_replay_probe_gate_v0"
@@ -10820,6 +10826,282 @@ def audit(root: Path) -> dict:
         errors.append(
             f"missing B1/B7 cone_01 OpenQASM 3 source-map report: "
             f"{b1_b7_cone01_openqasm3_source_map_path}"
+        )
+
+    b1_b7_cone01_openqasm3_patch_witness_packet = {
+        "path": str(b1_b7_cone01_openqasm3_patch_witness_packet_path),
+        "exists": b1_b7_cone01_openqasm3_patch_witness_packet_path.exists(),
+    }
+    if not b1_b7_cone01_openqasm3_patch_witness_packet_manifest:
+        errors.append(
+            "B1 manifest missing current result: "
+            "b1_b7_cone01_openqasm3_patch_witness_packet_gate_v0"
+        )
+    else:
+        if (
+            b1_b7_cone01_openqasm3_patch_witness_packet_manifest.get("status")
+            != "cone01_openqasm3_patch_witness_packet_passed_without_b7_resource_credit"
+        ):
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness packet status mismatch")
+        for field in ["report", "markdown_report", "openqasm3_candidate_path", "qasm2_candidate_path"]:
+            value = b1_b7_cone01_openqasm3_patch_witness_packet_manifest.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(
+                    "B1/B7 cone_01 OpenQASM 3 patch witness packet missing "
+                    f"existing {field} path: {value}"
+                )
+    if b1_b7_cone01_openqasm3_patch_witness_packet_path.exists():
+        qasm3_witness_payload = json.loads(
+            read(b1_b7_cone01_openqasm3_patch_witness_packet_path)
+        )
+        qasm3_witness_summary = qasm3_witness_payload.get("summary", {})
+        qasm3_witness_claims = qasm3_witness_payload.get("claim_boundary", {})
+        witness_rows = qasm3_witness_payload.get("witness_rows", [])
+        b1_b7_cone01_openqasm3_patch_witness_packet.update(
+            {
+                "status": qasm3_witness_payload.get("status"),
+                "model_status": qasm3_witness_payload.get("model_status"),
+                "method": qasm3_witness_payload.get("method"),
+                "workload": qasm3_witness_payload.get("workload"),
+                "qasm2_candidate_path": qasm3_witness_summary.get("qasm2_candidate_path"),
+                "openqasm3_candidate_path": qasm3_witness_summary.get(
+                    "openqasm3_candidate_path"
+                ),
+                "normalized_instruction_count": qasm3_witness_summary.get(
+                    "normalized_instruction_count"
+                ),
+                "normalized_stream_sha256": qasm3_witness_summary.get(
+                    "normalized_stream_sha256"
+                ),
+                "source_map_sha256": qasm3_witness_summary.get("source_map_sha256"),
+                "raw_line_delta_count": qasm3_witness_summary.get("raw_line_delta_count"),
+                "witness_row_count": qasm3_witness_summary.get("witness_row_count"),
+                "selected_witness_count": qasm3_witness_summary.get(
+                    "selected_witness_count"
+                ),
+                "dropped_overlap_witness_count": qasm3_witness_summary.get(
+                    "dropped_overlap_witness_count"
+                ),
+                "witness_candidate_line_numbers": qasm3_witness_summary.get(
+                    "witness_candidate_line_numbers"
+                ),
+                "witness_instruction_indices": qasm3_witness_summary.get(
+                    "witness_instruction_indices"
+                ),
+                "witness_openqasm3_line_numbers": qasm3_witness_summary.get(
+                    "witness_openqasm3_line_numbers"
+                ),
+                "witness_packet_sha256": qasm3_witness_summary.get(
+                    "witness_packet_sha256"
+                ),
+                "selected_candidate_cnot_reduction": qasm3_witness_summary.get(
+                    "selected_candidate_cnot_reduction"
+                ),
+                "lost_candidate_cnot_reduction_due_to_overlap": qasm3_witness_summary.get(
+                    "lost_candidate_cnot_reduction_due_to_overlap"
+                ),
+                "max_witness_residual_norm": qasm3_witness_summary.get(
+                    "max_witness_residual_norm"
+                ),
+                "max_witness_entry_error": qasm3_witness_summary.get(
+                    "max_witness_entry_error"
+                ),
+                "selected_replacement_off_pi_over_four_parameter_count": (
+                    qasm3_witness_summary.get(
+                        "selected_replacement_off_pi_over_four_parameter_count"
+                    )
+                ),
+                "patch_witness_packet_passed": qasm3_witness_summary.get(
+                    "patch_witness_packet_passed"
+                ),
+                "accepted_project_local_openqasm3_patch_witness_packet_count": (
+                    qasm3_witness_summary.get(
+                        "accepted_project_local_openqasm3_patch_witness_packet_count"
+                    )
+                ),
+                "accepted_qiskit_loader_parse_artifact_count": qasm3_witness_summary.get(
+                    "accepted_qiskit_loader_parse_artifact_count"
+                ),
+                "accepted_symbolic_unitary_equivalence_count": qasm3_witness_summary.get(
+                    "accepted_symbolic_unitary_equivalence_count"
+                ),
+                "accepted_local_u3_pricing_certificate_count": qasm3_witness_summary.get(
+                    "accepted_local_u3_pricing_certificate_count"
+                ),
+                "accepted_occurrence_removal": qasm3_witness_summary.get(
+                    "accepted_occurrence_removal"
+                ),
+                "accepted_proxy_t_reduction": qasm3_witness_summary.get(
+                    "accepted_proxy_t_reduction"
+                ),
+                "missing_occurrences_after_gate": qasm3_witness_summary.get(
+                    "missing_occurrences_after_gate"
+                ),
+                "missing_proxy_t_after_gate": qasm3_witness_summary.get(
+                    "missing_proxy_t_after_gate"
+                ),
+                "qiskit_loader_parse_claimed": qasm3_witness_summary.get(
+                    "qiskit_loader_parse_claimed"
+                ),
+                "symbolic_unitary_equivalence_claimed": qasm3_witness_summary.get(
+                    "symbolic_unitary_equivalence_claimed"
+                ),
+                "arbitrary_input_equivalence_claimed": qasm3_witness_summary.get(
+                    "arbitrary_input_equivalence_claimed"
+                ),
+                "full_hilbert_space_certificate_claimed": qasm3_witness_summary.get(
+                    "full_hilbert_space_certificate_claimed"
+                ),
+                "local_u3_pricing_accepted": qasm3_witness_summary.get(
+                    "local_u3_pricing_accepted"
+                ),
+                "resource_saving_claimed": qasm3_witness_summary.get(
+                    "resource_saving_claimed"
+                ),
+                "b7_ledger_improvement_claimed": qasm3_witness_summary.get(
+                    "b7_ledger_improvement_claimed"
+                ),
+                "validation_error_count": qasm3_witness_summary.get(
+                    "validation_error_count"
+                ),
+            }
+        )
+        if qasm3_witness_payload.get("benchmark_id") != "B1":
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness packet must have benchmark_id B1")
+        if (
+            qasm3_witness_payload.get("method")
+            != "b1_b7_cone01_openqasm3_patch_witness_packet_gate_v0"
+        ):
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness packet method mismatch")
+        if (
+            qasm3_witness_payload.get("status")
+            != "cone01_openqasm3_patch_witness_packet_passed_without_b7_resource_credit"
+        ):
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness packet status mismatch")
+        if (
+            qasm3_witness_payload.get("model_status")
+            != "openqasm3_patch_witness_packet_is_reviewable_without_b7_credit"
+        ):
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness packet model_status mismatch")
+        expected_qasm3_witness_fields = {
+            "normalized_instruction_count": 1878,
+            "normalized_stream_sha256": "7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343",
+            "source_map_sha256": "92a499ea6d549426095fbb0fc878f7033027991621a6d5ea1c03cd25d82e9e1e",
+            "raw_line_delta_count": 0,
+            "witness_row_count": 3,
+            "selected_witness_count": 2,
+            "dropped_overlap_witness_count": 1,
+            "witness_candidate_line_numbers": [268, 1378, 1381],
+            "witness_instruction_indices": [263, 1372, 1375],
+            "witness_openqasm3_line_numbers": [268, 1378, 1381],
+            "witness_packet_sha256": "e0d2e63f3f2c16be685baef3360ff68d5765db549c5e17e655a6e74c6fb82dc8",
+            "selected_candidate_cnot_reduction": 6,
+            "lost_candidate_cnot_reduction_due_to_overlap": 3,
+            "max_witness_residual_norm": 9.049428032408627e-13,
+            "max_witness_entry_error": 6.398911863522162e-13,
+            "selected_replacement_off_pi_over_four_parameter_count": 5,
+            "patch_witness_packet_passed": True,
+            "accepted_project_local_openqasm3_patch_witness_packet_count": 1,
+            "accepted_qiskit_loader_parse_artifact_count": 0,
+            "accepted_symbolic_unitary_equivalence_count": 0,
+            "accepted_local_u3_pricing_certificate_count": 0,
+            "accepted_occurrence_removal": 0,
+            "accepted_proxy_t_reduction": 0,
+            "missing_occurrences_after_gate": 30,
+            "missing_proxy_t_after_gate": 600,
+            "qiskit_loader_parse_claimed": False,
+            "symbolic_unitary_equivalence_claimed": False,
+            "arbitrary_input_equivalence_claimed": False,
+            "full_hilbert_space_certificate_claimed": False,
+            "local_u3_pricing_accepted": False,
+            "resource_saving_claimed": False,
+            "b7_ledger_improvement_claimed": False,
+            "validation_error_count": 0,
+        }
+        for field, value in expected_qasm3_witness_fields.items():
+            if qasm3_witness_summary.get(field) != value:
+                errors.append(
+                    f"B1/B7 cone_01 OpenQASM 3 patch witness packet expected {field}={value}"
+                )
+            if (
+                b1_b7_cone01_openqasm3_patch_witness_packet_manifest
+                and field in b1_b7_cone01_openqasm3_patch_witness_packet_manifest
+                and qasm3_witness_summary.get(field)
+                != b1_b7_cone01_openqasm3_patch_witness_packet_manifest.get(field)
+            ):
+                errors.append(
+                    f"B1/B7 cone_01 OpenQASM 3 patch witness packet {field} mismatch"
+                )
+        if not isinstance(witness_rows, list) or len(witness_rows) != 3:
+            errors.append("B1/B7 cone_01 OpenQASM 3 patch witness rows missing or wrong length")
+        else:
+            recomputed_witness_hash = hashlib.sha256(
+                json.dumps(witness_rows, sort_keys=True, separators=(",", ":")).encode(
+                    "utf-8"
+                )
+            ).hexdigest()
+            if recomputed_witness_hash != qasm3_witness_summary.get("witness_packet_sha256"):
+                errors.append("B1/B7 cone_01 OpenQASM 3 patch witness digest mismatch")
+            expected_witness_rows = [
+                {
+                    "candidate_line_number": 268,
+                    "disposition": "selected_nonoverlap",
+                    "source_map_instruction_index": 263,
+                    "openqasm3_line_number": 268,
+                    "operation": "rz",
+                    "candidate_cnot_reduction": 3,
+                    "replacement_off_pi_over_four_parameter_count": 0,
+                },
+                {
+                    "candidate_line_number": 1378,
+                    "disposition": "dropped_overlap",
+                    "source_map_instruction_index": 1372,
+                    "openqasm3_line_number": 1378,
+                    "operation": "U",
+                    "candidate_cnot_reduction": 3,
+                    "replacement_off_pi_over_four_parameter_count": 0,
+                },
+                {
+                    "candidate_line_number": 1381,
+                    "disposition": "selected_nonoverlap",
+                    "source_map_instruction_index": 1375,
+                    "openqasm3_line_number": 1381,
+                    "operation": "U",
+                    "candidate_cnot_reduction": 3,
+                    "replacement_off_pi_over_four_parameter_count": 5,
+                },
+            ]
+            for expected_row, actual_row in zip(expected_witness_rows, witness_rows):
+                for field, value in expected_row.items():
+                    if actual_row.get(field) != value:
+                        errors.append(
+                            f"B1/B7 cone_01 OpenQASM 3 patch witness row {field} mismatch"
+                        )
+            dropped = [row for row in witness_rows if row.get("disposition") == "dropped_overlap"]
+            if not dropped or not dropped[0].get("overlap_blocker"):
+                errors.append("B1/B7 cone_01 OpenQASM 3 patch witness missing overlap blocker")
+        for field in [
+            "qiskit_loader_parse_claimed",
+            "symbolic_unitary_equivalence_claimed",
+            "arbitrary_input_equivalence_claimed",
+            "full_hilbert_space_certificate_claimed",
+            "local_u3_pricing_accepted",
+            "resource_saving_claimed",
+            "b7_ledger_improvement_claimed",
+        ]:
+            if qasm3_witness_summary.get(field) is not False:
+                errors.append(
+                    f"B1/B7 cone_01 OpenQASM 3 patch witness packet must not claim {field}"
+                )
+            if qasm3_witness_claims.get(field) is not False:
+                errors.append(
+                    "B1/B7 cone_01 OpenQASM 3 patch witness packet claim boundary "
+                    f"must not claim {field}"
+                )
+    else:
+        errors.append(
+            f"missing B1/B7 cone_01 OpenQASM 3 patch witness packet report: "
+            f"{b1_b7_cone01_openqasm3_patch_witness_packet_path}"
         )
 
     b1_b7_cone01_full_statevector_replay_probe = {
@@ -25617,6 +25899,9 @@ def audit(root: Path) -> dict:
             "b7_cone01_openqasm3_source_map_gate": (
                 b1_b7_cone01_openqasm3_source_map
             ),
+            "b7_cone01_openqasm3_patch_witness_packet_gate": (
+                b1_b7_cone01_openqasm3_patch_witness_packet
+            ),
             "b7_cone01_full_statevector_replay_probe_gate": (
                 b1_b7_cone01_full_statevector_replay_probe
             ),
@@ -26004,6 +26289,9 @@ def audit(root: Path) -> dict:
             ),
             "b1_b7_cone01_openqasm3_source_map_gate": str(
                 b1_b7_cone01_openqasm3_source_map_path
+            ),
+            "b1_b7_cone01_openqasm3_patch_witness_packet_gate": str(
+                b1_b7_cone01_openqasm3_patch_witness_packet_path
             ),
             "b1_b7_cone01_full_statevector_replay_probe_gate": str(
                 b1_b7_cone01_full_statevector_replay_probe_path
@@ -27196,6 +27484,22 @@ def markdown_report(report: dict) -> str:
             f"- Accepted source-map / Qiskit loader / symbolic artifacts: {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('accepted_project_local_openqasm3_source_map_count')} / {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('accepted_qiskit_loader_parse_artifact_count')} / {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('accepted_symbolic_unitary_equivalence_count')}",
             f"- Accepted occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('b7_ledger_improvement_claimed')}",
             f"- Validation errors: {report['b1']['b7_cone01_openqasm3_source_map_gate'].get('validation_error_count')}",
+            "",
+            "## B1/B7 cone_01 OpenQASM 3 Patch Witness Packet Gate",
+            "",
+            f"- Exists: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('exists')}",
+            f"- Status: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('status')}",
+            f"- QASM2 / OpenQASM 3 paths: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('qasm2_candidate_path')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('openqasm3_candidate_path')}",
+            f"- Normalized instruction count / stream hash: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('normalized_instruction_count')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('normalized_stream_sha256')}",
+            f"- Source-map hash / raw-line drift count: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('source_map_sha256')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('raw_line_delta_count')}",
+            f"- Witness rows / selected / dropped-overlap: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('witness_row_count')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('selected_witness_count')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('dropped_overlap_witness_count')}",
+            f"- Witness candidate lines / instruction indices / OpenQASM 3 lines: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('witness_candidate_line_numbers')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('witness_instruction_indices')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('witness_openqasm3_line_numbers')}",
+            f"- Witness packet hash: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('witness_packet_sha256')}",
+            f"- Selected CNOT delta / lost overlap delta: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('selected_candidate_cnot_reduction')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('lost_candidate_cnot_reduction_due_to_overlap')}",
+            f"- Max witness residual / entry error / off-grid selected local-U3 count: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('max_witness_residual_norm')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('max_witness_entry_error')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('selected_replacement_off_pi_over_four_parameter_count')}",
+            f"- Accepted witness packet / Qiskit loader / symbolic artifacts: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('accepted_project_local_openqasm3_patch_witness_packet_count')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('accepted_qiskit_loader_parse_artifact_count')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('accepted_symbolic_unitary_equivalence_count')}",
+            f"- Accepted occurrence / proxy-T reduction / B7 claim: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('accepted_occurrence_removal')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('accepted_proxy_t_reduction')} / {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('b7_ledger_improvement_claimed')}",
+            f"- Validation errors: {report['b1']['b7_cone01_openqasm3_patch_witness_packet_gate'].get('validation_error_count')}",
             "",
             "## B1/B7 cone_01 Full-Statevector Replay Probe Gate",
             "",

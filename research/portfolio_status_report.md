@@ -891,6 +891,22 @@ Overall audit: PASS
 - Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 OpenQASM 3 Patch Witness Packet Gate
+
+- Exists: True
+- Status: cone01_openqasm3_patch_witness_packet_passed_without_b7_resource_credit
+- QASM2 / OpenQASM 3 paths: results/B1_B7_cone01_qasm2_candidate_rewrite_gate/gcm_h6_line268_line1381_candidate.qasm / results/B1_B7_cone01_openqasm3_candidate_export_gate/gcm_h6_line268_line1381_candidate_openqasm3.qasm
+- Normalized instruction count / stream hash: 1878 / 7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343
+- Source-map hash / raw-line drift count: 92a499ea6d549426095fbb0fc878f7033027991621a6d5ea1c03cd25d82e9e1e / 0
+- Witness rows / selected / dropped-overlap: 3 / 2 / 1
+- Witness candidate lines / instruction indices / OpenQASM 3 lines: [268, 1378, 1381] / [263, 1372, 1375] / [268, 1378, 1381]
+- Witness packet hash: e0d2e63f3f2c16be685baef3360ff68d5765db549c5e17e655a6e74c6fb82dc8
+- Selected CNOT delta / lost overlap delta: 6 / 3
+- Max witness residual / entry error / off-grid selected local-U3 count: 9.049428032408627e-13 / 6.398911863522162e-13 / 5
+- Accepted witness packet / Qiskit loader / symbolic artifacts: 1 / 0 / 0
+- Accepted occurrence / proxy-T reduction / B7 claim: 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Full-Statevector Replay Probe Gate
 
 - Exists: True

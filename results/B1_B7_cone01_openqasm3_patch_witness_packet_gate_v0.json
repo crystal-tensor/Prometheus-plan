@@ -1,0 +1,190 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "arbitrary_input_equivalence_claimed": false,
+    "b7_ledger_improvement_claimed": false,
+    "full_hilbert_space_certificate_claimed": false,
+    "local_u3_pricing_accepted": false,
+    "qiskit_loader_parse_claimed": false,
+    "resource_saving_claimed": false,
+    "supported_claim": "The OpenQASM 3 source-map evidence has been reduced into a compact three-row patch witness packet for candidate lines 268, 1378, and 1381. The packet records selected versus dropped-overlap disposition, source windows, OpenQASM 3 line mapping, context hashes, local certificate status, residuals, and resource-boundary counters.",
+    "symbolic_unitary_equivalence_claimed": false,
+    "unsupported_claims": [
+      "This is not a Qiskit OpenQASM 3 loader parse.",
+      "This is not a symbolic exact full-circuit unitary proof.",
+      "This is not arbitrary-input or full-Hilbert-space coverage.",
+      "This does not recover the dropped line-1378 overlap delta.",
+      "This does not price or eliminate the remaining line-1381 off-grid local-U3 parameters.",
+      "This does not improve the B7 resource ledger."
+    ]
+  },
+  "linked_b7_problem_id": 21,
+  "method": "b1_b7_cone01_openqasm3_patch_witness_packet_gate_v0",
+  "model_status": "openqasm3_patch_witness_packet_is_reviewable_without_b7_credit",
+  "status": "cone01_openqasm3_patch_witness_packet_passed_without_b7_resource_credit",
+  "summary": {
+    "accepted_local_u3_pricing_certificate_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_project_local_openqasm3_patch_witness_packet_count": 1,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_qiskit_loader_parse_artifact_count": 0,
+    "accepted_symbolic_unitary_equivalence_count": 0,
+    "arbitrary_input_equivalence_claimed": false,
+    "b7_ledger_improvement_claimed": false,
+    "dropped_overlap_witness_count": 1,
+    "full_hilbert_space_certificate_claimed": false,
+    "local_u3_pricing_accepted": false,
+    "lost_candidate_cnot_reduction_due_to_overlap": 3,
+    "max_witness_entry_error": 6.398911863522162e-13,
+    "max_witness_residual_norm": 9.049428032408627e-13,
+    "missing_occurrences_after_gate": 30,
+    "missing_proxy_t_after_gate": 600,
+    "normalized_instruction_count": 1878,
+    "normalized_stream_sha256": "7cd50bea1f5a3c191c5735c0891d3f70f8c07a9cfca9d6e93724e6d49cb36343",
+    "openqasm3_candidate_path": "results/B1_B7_cone01_openqasm3_candidate_export_gate/gcm_h6_line268_line1381_candidate_openqasm3.qasm",
+    "patch_witness_packet_passed": true,
+    "qasm2_candidate_path": "results/B1_B7_cone01_qasm2_candidate_rewrite_gate/gcm_h6_line268_line1381_candidate.qasm",
+    "qiskit_loader_parse_claimed": false,
+    "raw_line_delta_count": 0,
+    "resource_saving_claimed": false,
+    "selected_candidate_cnot_reduction": 6,
+    "selected_replacement_off_pi_over_four_parameter_count": 5,
+    "selected_witness_count": 2,
+    "source_bounded_replacement_patch_gate": "results/B1_B7_cone01_bounded_replacement_patch_gate_v0.json",
+    "source_composable_patch_certificate": "results/B1_B7_cone01_composable_patch_certificate_gate_v0.json",
+    "source_map_sha256": "92a499ea6d549426095fbb0fc878f7033027991621a6d5ea1c03cd25d82e9e1e",
+    "source_nonoverlap_patch_subset_gate": "results/B1_B7_cone01_nonoverlap_patch_subset_gate_v0.json",
+    "source_openqasm3_composable_patch_lift_gate": "results/B1_B7_cone01_openqasm3_composable_patch_lift_gate_v0.json",
+    "source_openqasm3_source_map_gate": "results/B1_B7_cone01_openqasm3_source_map_gate_v0.json",
+    "symbolic_unitary_equivalence_claimed": false,
+    "validation_error_count": 0,
+    "witness_candidate_line_numbers": [
+      268,
+      1378,
+      1381
+    ],
+    "witness_instruction_indices": [
+      263,
+      1372,
+      1375
+    ],
+    "witness_openqasm3_line_numbers": [
+      268,
+      1378,
+      1381
+    ],
+    "witness_packet_sha256": "e0d2e63f3f2c16be685baef3360ff68d5765db549c5e17e655a6e74c6fb82dc8",
+    "witness_row_count": 3
+  },
+  "validation_errors": [],
+  "witness_rows": [
+    {
+      "accepted_as_selected_nonoverlap_patch": true,
+      "bounded_patch_exact_pass": true,
+      "bounded_patch_max_abs_entry_error": 4.525273102184799e-13,
+      "bounded_patch_residual_norm": 6.39893112687052e-13,
+      "candidate_cnot_reduction": 3,
+      "candidate_line_number": 268,
+      "disposition": "selected_nonoverlap",
+      "local_unitary_certificate_passed": true,
+      "normalized_instruction_sha256": "d691861b24af25eec6d32b02febf61df61f6b5665b1cd87ddca729477ec8f42b",
+      "openqasm3_line_number": 268,
+      "operation": "rz",
+      "overlap_blocker": null,
+      "qasm3_patch_line_count": 9,
+      "qasm3_patch_snippet_sha256": "119bd28c980eba43049b34dc0cfcf686b41878b33ee36df97da95bed14648325",
+      "repair_gate_id": "T-B1-004aj",
+      "replacement_cnot_count": 2,
+      "replacement_off_pi_over_four_parameter_count": 0,
+      "source_cnot_count": 5,
+      "source_map_instruction_index": 263,
+      "source_window": {
+        "end_line": 267,
+        "line_count": 12,
+        "start_line": 256
+      },
+      "source_window_openqasm3_sha256": "0c34514549b85f219b5e998094f2d490b1be1b25cbac42597a1d1382683862bd",
+      "source_window_qasm2_sha256": "6dabf20a915b19a888d654a2254b7eae50b7dbc3ca82982f29ccd7b031c21e92",
+      "source_window_source_map_row_count": 11,
+      "source_window_source_map_sha256": "caa7ab0bc141bdca470d2305e75c7e1b1fba083884a5e527a5e108d3157ee4d5",
+      "support_qubits": [
+        2,
+        14
+      ]
+    },
+    {
+      "accepted_as_selected_nonoverlap_patch": false,
+      "bounded_patch_exact_pass": true,
+      "bounded_patch_max_abs_entry_error": 6.398911863522162e-13,
+      "bounded_patch_residual_norm": 9.049428032408627e-13,
+      "candidate_cnot_reduction": 3,
+      "candidate_line_number": 1378,
+      "disposition": "dropped_overlap",
+      "local_unitary_certificate_passed": false,
+      "normalized_instruction_sha256": "a60da5f688e761a8917718078ebc62b778834ccaf9e6e08e370e331b6528b703",
+      "openqasm3_line_number": 1378,
+      "operation": "U",
+      "overlap_blocker": {
+        "blocked_by_candidate_line_number": 1381,
+        "overlap_end_line": 1377,
+        "overlap_line_count": 9,
+        "overlap_start_line": 1369
+      },
+      "qasm3_patch_line_count": 6,
+      "qasm3_patch_snippet_sha256": "e9aab478a952de745046ceaa3cf2209d4787f6eaedbcc39af64e59db120d2a38",
+      "repair_gate_id": "T-B1-004ai",
+      "replacement_cnot_count": 1,
+      "replacement_off_pi_over_four_parameter_count": 0,
+      "source_cnot_count": 4,
+      "source_map_instruction_index": 1372,
+      "source_window": {
+        "end_line": 1377,
+        "line_count": 9,
+        "start_line": 1369
+      },
+      "source_window_openqasm3_sha256": "7bac5db614b7cb0f1a581edc5cb9f1581253e0fcc18c8ad9d5f5c1089de1f78d",
+      "source_window_qasm2_sha256": "e9ac64635a5c0125cb2eb96d8b5959642b41b7fa3dbe47559d1966b428c04571",
+      "source_window_source_map_row_count": 9,
+      "source_window_source_map_sha256": "3db0279069b451551ec05df926db67a9476679a00eb2539932c001398d48d070",
+      "support_qubits": [
+        4,
+        8
+      ]
+    },
+    {
+      "accepted_as_selected_nonoverlap_patch": true,
+      "bounded_patch_exact_pass": true,
+      "bounded_patch_max_abs_entry_error": 3.4460057102876843e-13,
+      "bounded_patch_residual_norm": 6.513210005207597e-13,
+      "candidate_cnot_reduction": 3,
+      "candidate_line_number": 1381,
+      "disposition": "selected_nonoverlap",
+      "local_unitary_certificate_passed": true,
+      "normalized_instruction_sha256": "42681086a1bf5fb9e2936811eb13d36feec750c13dd4da116b20ce9ca3aa75e0",
+      "openqasm3_line_number": 1381,
+      "operation": "U",
+      "overlap_blocker": null,
+      "qasm3_patch_line_count": 9,
+      "qasm3_patch_snippet_sha256": "53d96a46ecc1a08d0117095766408093e6010dc4be170f15bc63ce0159e36ba8",
+      "repair_gate_id": "T-B1-004al",
+      "replacement_cnot_count": 2,
+      "replacement_off_pi_over_four_parameter_count": 5,
+      "source_cnot_count": 5,
+      "source_map_instruction_index": 1375,
+      "source_window": {
+        "end_line": 1379,
+        "line_count": 11,
+        "start_line": 1369
+      },
+      "source_window_openqasm3_sha256": "8429c9930a09b436e4984003a0b06ece2313cc86cb4d75d2adc228432693dbd3",
+      "source_window_qasm2_sha256": "666d867f3ecab7a202f59f4b934c9573e2410cab0a1fd72bfe2dd58b8be3d378",
+      "source_window_source_map_row_count": 11,
+      "source_window_source_map_sha256": "77a18573cb83031d33adbd866589021699e1555cb93c4ff48e569af919eb9632",
+      "support_qubits": [
+        4,
+        8
+      ]
+    }
+  ],
+  "workload": "qasmbench_medium_exact/gcm_h6.qasm"
+}

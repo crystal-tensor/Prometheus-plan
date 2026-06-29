@@ -923,3 +923,14 @@ line 1381, mapped to instruction indices 263 and 1375; the dropped overlap line
 source-map artifact, but it still does not claim Qiskit-loader parsing,
 symbolic equivalence, local-U3 pricing, occurrence removal, proxy-T reduction,
 or B7 ledger credit.
+
+T-B1-004cf compresses that source-map evidence into a reviewable OpenQASM 3
+patch witness packet. The packet has 3 rows for candidate lines 268, 1378, and
+1381; 2 rows are selected non-overlap witnesses, 1 row is the dropped-overlap
+witness, and the instruction indices are 263, 1372, and 1375. The witness packet
+hash is `e0d2e63f3f2c16be685baef3360ff68d5765db549c5e17e655a6e74c6fb82dc8`;
+max witness residual is `9.049428032408627e-13`, max entry error is
+`6.398911863522162e-13`, selected CNOT delta remains 6, and the lost overlap
+delta remains 3. This accepts one project-local review packet only; Qiskit-loader
+parsing, symbolic equivalence, local-U3 pricing, occurrence removal, proxy-T
+reduction, and B7 ledger credit remain 0.
