@@ -1034,3 +1034,17 @@ source-hash mismatch count is 0. This accepts one evidence-seal reproduction
 artifact, but it is still a reproducibility gate only: full-space symbolic
 equivalence, local-U3 pricing, occurrence removal, proxy-T reduction, and B7
 ledger credit remain 0.
+
+T-B1-004co adds seeded product-state semantic pressure to the Qiskit-loader
+OpenQASM 3 path. It consumes the phase-consistent replay gate and the reproduced
+evidence seal, loads the same OpenQASM 3.0 candidate through Qiskit's qasm3
+loader, removes final measurements, and replays 16 deterministic product-state
+inputs generated from seeds
+`[17, 29, 41, 53, 67, 79, 83, 97, 101, 113, 127, 131, 149, 163, 181, 191]`
+with an `rx/ry/rz` preparation sequence. All 16 cases pass with min fidelity
+`0.9999999999999389`, max infidelity `6.106226635438361e-14`, max aligned
+amplitude delta `1.3496991625769186e-14`, max L2 aligned amplitude delta
+`2.8917153762798005e-13`, max probability delta `8.020927672047762e-16`, and
+0 failed cases. This accepts one seeded product-state replay artifact, but it
+does not establish arbitrary-input or symbolic equivalence, local-U3 pricing,
+occurrence removal, proxy-T reduction, or B7 ledger credit.

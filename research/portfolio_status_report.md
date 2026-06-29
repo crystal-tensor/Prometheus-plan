@@ -1027,6 +1027,20 @@ Overall audit: PASS
 - Accepted evidence seal / reproduction / occurrence / proxy-T reduction / B7 claim: 1 / 1 / 0 / 0 / False
 - Validation errors: 0
 
+## B1/B7 cone_01 OpenQASM 3 Qiskit-Loader Seeded Product-State Replay Gate
+
+- Exists: True
+- Status: cone01_openqasm3_qiskit_loader_seeded_product_replay_passed_without_b7_credit
+- Source phase / seal reproduction gates: results/B1_B7_cone01_openqasm3_qiskit_loader_phase_consistent_replay_gate_v0.json / results/B1_B7_cone01_openqasm3_qiskit_loader_evidence_seal_reproduction_gate_v0.json
+- Qiskit / qiskit-qasm3-import / openqasm3 versions: 2.4.1 / 0.6.0 / 1.0.1
+- Depth / operation counts: 1483 / {'cx': 789, 'measure': 1, 'rz': 601, 'u': 487}
+- Input cases / axis sequence / seeds: 16 / ['rx', 'ry', 'rz'] / [17, 29, 41, 53, 67, 79, 83, 97, 101, 113, 127, 131, 149, 163, 181, 191]
+- Replay passed / failed cases: True / 0
+- Min fidelity / max infidelity: 0.9999999999999389 / 6.106226635438361e-14
+- Max amplitude / L2 amplitude / probability delta: 1.3496991625769186e-14 / 2.8917153762798005e-13 / 8.020927672047762e-16
+- Accepted seeded-product replay / occurrence / proxy-T reduction / B7 claim: 1 / 0 / 0 / False
+- Validation errors: 0
+
 ## B1/B7 cone_01 Full-Statevector Replay Probe Gate
 
 - Exists: True

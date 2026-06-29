@@ -2213,3 +2213,17 @@ replay cases, selected lines [268, 1381], dropped overlap line [1378], and B7
 credit 0. This accepts one evidence-seal reproduction artifact only; arbitrary
 input or symbolic equivalence, local-U3 pricing, occurrence removal, proxy-T
 reduction, and B7 ledger improvement remain 0.
+
+Sprint update 18co: B1/B7 now has Qiskit-loader seeded product-state replay
+pressure beyond the reproduced evidence seal. T-B1-004co consumes the
+phase-consistent loader replay and the reproduced seal, loads the same OpenQASM
+3.0 candidate through Qiskit's qasm3 loader, removes final measurements, and
+replays 16 deterministic rx/ry/rz product states with seeds
+`[17, 29, 41, 53, 67, 79, 83, 97, 101, 113, 127, 131, 149, 163, 181, 191]`.
+All 16 cases pass with min fidelity `0.9999999999999389`, max infidelity
+`6.106226635438361e-14`, max aligned amplitude delta
+`1.3496991625769186e-14`, max L2 aligned amplitude delta
+`2.8917153762798005e-13`, max probability delta `8.020927672047762e-16`, and
+0 failed cases. This accepts one seeded product-state replay artifact only;
+arbitrary-input or symbolic equivalence, local-U3 pricing, occurrence removal,
+proxy-T reduction, and B7 ledger improvement remain 0.
