@@ -957,3 +957,14 @@ probability delta is `1.8214596497756474e-15`. This accepts one
 Qiskit-loader multi-input replay artifact, but it remains sampled numerical
 evidence, not arbitrary-input symbolic equivalence, local-U3 pricing,
 occurrence removal, proxy-T reduction, or B7 ledger credit.
+
+T-B1-004ci adds Qiskit-loader phase-consistent replay pressure. The
+Qiskit-loaded OpenQASM 3 candidate passes 4 phase-anchor inputs and 4
+superposition inputs with overlap phase spread `1.3722356584366935e-13`
+radians, min overlap magnitude `0.9999999999999772`, min fidelity
+`0.9999999999999547`, max aligned amplitude delta
+`1.392888964263601e-13`, max probability delta
+`1.074140776324839e-14`, and 0 failed cases. This accepts one Qiskit-loader
+phase-consistent replay artifact, but it remains sampled evidence, not
+symbolic or arbitrary-input equivalence, local-U3 pricing, occurrence removal,
+proxy-T reduction, or B7 ledger credit.

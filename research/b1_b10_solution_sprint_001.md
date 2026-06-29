@@ -2129,3 +2129,16 @@ amplitude delta is `1.392888964263601e-13`, max probability delta is
 Qiskit-loader multi-input replay artifact only; arbitrary-input/symbolic
 equivalence, local-U3 pricing, occurrence removal, proxy-T reduction, and B7
 ledger improvement remain 0.
+
+Sprint update 18ci: B1/B7 now has Qiskit-loader phase-consistent replay
+pressure. T-B1-004ci consumes the Qiskit-loader multi-input replay gate and the
+project-local OpenQASM 3 phase-consistent replay gate, then replays the
+Qiskit-loaded OpenQASM 3 candidate on 4 phase-anchor inputs plus 4
+superposition inputs. All 8 cases pass with overlap phase spread
+`1.3722356584366935e-13` radians, min overlap magnitude
+`0.9999999999999772`, min fidelity `0.9999999999999547`, max infidelity
+`4.529709940470639e-14`, max aligned amplitude delta
+`1.392888964263601e-13`, max probability delta `1.074140776324839e-14`, and
+failed cases 0. This accepts one Qiskit-loader phase-consistent replay artifact
+only; arbitrary-input/symbolic equivalence, local-U3 pricing, occurrence
+removal, proxy-T reduction, and B7 ledger improvement remain 0.
