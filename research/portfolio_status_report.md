@@ -1709,6 +1709,15 @@ Overall audit: PASS
 - Calibrated evidence contract transfer ready / production decoder / threshold: False / False / False
 - Calibrated evidence contract validation errors: 0
 - Calibrated evidence contract result/markdown exists: True / True
+- Calibrated trace scout status: calibrated_trace_scout_failed_missing_real_calibration
+- Calibrated trace scout passed / failed / failed IDs: 5 / 3 / ['S5', 'S6', 'S7']
+- Calibrated trace scout traces / trace hashes / synthetic flags: 576 / 3 / 482
+- Calibrated trace scout profiles / profile shots / holdout shots: 9 / 1728 / 864
+- Calibrated trace scout best profile / holdout baseline / injected / delta: conservative_hardware_like_leakage / 16 / 16 / 0
+- Calibrated trace scout calibrated rows / hardware rows / strict holdout improvements: 0 / 0 / 0
+- Calibrated trace scout ready / transfer ready / production decoder / threshold: False / False / False / False
+- Calibrated trace scout validation errors: 0
+- Calibrated trace scout result/markdown exists: True / True
 
 ## B3 Resource Proxy Status
 

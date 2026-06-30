@@ -685,6 +685,53 @@ current_results:
     caveat: contract_gate_defines_required_evidence_only_and_adds_no_new_hardware_or_calibrated_result
     result: ../results/B2_calibrated_evidence_contract_gate_v0.json
     markdown_report: ../research/B2_calibrated_evidence_contract_gate.md
+  calibrated_trace_scout_v0:
+    status: calibrated_trace_scout_failed_missing_real_calibration
+    method: b2_calibrated_trace_scout_v0
+    source: calibrated_evidence_contract_gate_v0
+    model_status: synthetic_trace_and_hardware_like_profiles_mapped_not_calibrated_decoder
+    toolchain: Maps existing synthetic B2 trace fixtures and hardware-like profile rows to the calibrated-evidence contract without treating them as calibrated hardware data.
+    source_contract_status: calibrated_evidence_contract_open_missing_hardware_data
+    source_guardrail_status: calibration_transfer_guardrail_failed
+    trace_scout_requirement_count: 8
+    trace_scout_requirements_passed: 5
+    trace_scout_requirements_failed: 3
+    failed_trace_scout_requirement_ids: [S5, S6, S7]
+    contract_packet_ids:
+      - B2-C4-calibrated-flag-data
+      - B2-C5-hardware-trace-replay
+      - B2-C6-holdout-improvement
+    challenge_count: 3
+    synthetic_trace_count: 576
+    challenge_trace_hash_rows: 3
+    synthetic_flag_event_count: 482
+    hardware_like_profile_result_count: 9
+    observation_profile_count: 3
+    total_profile_shots: 1728
+    holdout_profile_shots: 864
+    best_profile: conservative_hardware_like_leakage
+    best_profile_model_flag_events: 415
+    stress_profile_model_flag_events: 727
+    best_profile_holdout_baseline_failures: 16
+    best_profile_holdout_injected_failures: 16
+    best_profile_holdout_failure_delta: 0
+    calibrated_flag_observation_rows: 0
+    real_hardware_trace_rows: 0
+    strict_holdout_improvement_rows: 0
+    calibrated_trace_scout_ready: false
+    calibration_transfer_ready: false
+    production_decoder_ready: false
+    threshold_claim_supported: false
+    new_code_claimed: false
+    threshold_claimed: false
+    calibrated_device_claimed: false
+    production_decoder_claimed: false
+    hardware_result_claimed: false
+    quantum_advantage_claimed: false
+    interpretation: calibrated_trace_scout_maps_synthetic_trace_pressure_but_keeps_b2_demoted_until_real_calibration_hardware_replay_and_holdout_improvement_exist
+    caveat: scout_is_not_calibrated_data_not_hardware_trace_replay_not_threshold_or_decoder_claim
+    result: ../results/B2_calibrated_trace_scout_v0.json
+    markdown_report: ../research/B2_calibrated_trace_scout.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -703,6 +750,7 @@ prototype_artifacts:
   calibration_transfer_guardrail_gate: ../tools/b2_calibration_transfer_guardrail_gate.py
   decoder_input_contract_feasibility_gate: ../tools/b2_decoder_input_contract_feasibility_gate.py
   per_shot_decoder_trace_packet: ../tools/b2_per_shot_decoder_trace_packet.py
+  calibrated_trace_scout: ../tools/b2_calibrated_trace_scout.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

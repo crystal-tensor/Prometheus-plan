@@ -20565,6 +20565,7 @@ def audit(root: Path) -> dict:
     b2_calibrated_evidence_contract = b2_results.get(
         "calibrated_evidence_contract_gate_v0"
     )
+    b2_calibrated_trace_scout = b2_results.get("calibrated_trace_scout_v0")
     b2_status = {}
     if not b2_baseline:
         warnings.append("B2 manifest has no repetition-code control baseline result")
@@ -22489,6 +22490,172 @@ def audit(root: Path) -> dict:
                 errors.append(f"B2 calibrated evidence contract must keep {key}=False")
         if len(payload.get("validation_errors", [])) != 0:
             errors.append("B2 calibrated evidence contract validation errors must be zero")
+
+    b2_calibrated_trace_scout_status = {}
+    if not b2_calibrated_trace_scout:
+        warnings.append("B2 manifest has no calibrated trace scout")
+    else:
+        result_path = b2_calibrated_trace_scout.get("result")
+        markdown_path = b2_calibrated_trace_scout.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B2 calibrated trace scout result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B2 calibrated trace scout markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        claims = payload.get("claim_boundary", {})
+        b2_calibrated_trace_scout_status = {
+            "status": b2_calibrated_trace_scout.get("status"),
+            "method": b2_calibrated_trace_scout.get("method"),
+            "model_status": payload.get("model_status"),
+            "source_contract_status": summary.get("source_contract_status"),
+            "source_guardrail_status": summary.get("source_guardrail_status"),
+            "trace_scout_requirement_count": summary.get("trace_scout_requirement_count"),
+            "trace_scout_requirements_passed": summary.get("trace_scout_requirements_passed"),
+            "trace_scout_requirements_failed": summary.get("trace_scout_requirements_failed"),
+            "failed_trace_scout_requirement_ids": summary.get(
+                "failed_trace_scout_requirement_ids"
+            ),
+            "contract_packet_ids": summary.get("contract_packet_ids"),
+            "challenge_count": summary.get("challenge_count"),
+            "synthetic_trace_count": summary.get("synthetic_trace_count"),
+            "challenge_trace_hash_rows": summary.get("challenge_trace_hash_rows"),
+            "synthetic_flag_event_count": summary.get("synthetic_flag_event_count"),
+            "hardware_like_profile_result_count": summary.get(
+                "hardware_like_profile_result_count"
+            ),
+            "observation_profile_count": summary.get("observation_profile_count"),
+            "total_profile_shots": summary.get("total_profile_shots"),
+            "holdout_profile_shots": summary.get("holdout_profile_shots"),
+            "best_profile": summary.get("best_profile"),
+            "best_profile_model_flag_events": summary.get("best_profile_model_flag_events"),
+            "stress_profile_model_flag_events": summary.get("stress_profile_model_flag_events"),
+            "best_profile_holdout_baseline_failures": summary.get(
+                "best_profile_holdout_baseline_failures"
+            ),
+            "best_profile_holdout_injected_failures": summary.get(
+                "best_profile_holdout_injected_failures"
+            ),
+            "best_profile_holdout_failure_delta": summary.get(
+                "best_profile_holdout_failure_delta"
+            ),
+            "calibrated_flag_observation_rows": summary.get(
+                "calibrated_flag_observation_rows"
+            ),
+            "real_hardware_trace_rows": summary.get("real_hardware_trace_rows"),
+            "strict_holdout_improvement_rows": summary.get(
+                "strict_holdout_improvement_rows"
+            ),
+            "calibrated_trace_scout_ready": summary.get("calibrated_trace_scout_ready"),
+            "calibration_transfer_ready": summary.get("calibration_transfer_ready"),
+            "production_decoder_ready": summary.get("production_decoder_ready"),
+            "threshold_claim_supported": summary.get("threshold_claim_supported"),
+            "new_code_claimed": summary.get("new_code_claimed"),
+            "threshold_claimed": summary.get("threshold_claimed"),
+            "calibrated_device_claimed": summary.get("calibrated_device_claimed"),
+            "production_decoder_claimed": summary.get("production_decoder_claimed"),
+            "hardware_result_claimed": summary.get("hardware_result_claimed"),
+            "quantum_advantage_claimed": summary.get("quantum_advantage_claimed"),
+            "calibrated_trace_scout_built": claims.get("calibrated_trace_scout_built"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != b2_calibrated_trace_scout.get("status"):
+            errors.append("B2 calibrated trace scout status mismatch")
+        if payload.get("method") != b2_calibrated_trace_scout.get("method"):
+            errors.append("B2 calibrated trace scout method mismatch")
+        if payload.get("model_status") != b2_calibrated_trace_scout.get("model_status"):
+            errors.append("B2 calibrated trace scout model-status mismatch")
+        for key in [
+            "source_contract_status",
+            "source_guardrail_status",
+            "trace_scout_requirement_count",
+            "trace_scout_requirements_passed",
+            "trace_scout_requirements_failed",
+            "failed_trace_scout_requirement_ids",
+            "contract_packet_ids",
+            "challenge_count",
+            "synthetic_trace_count",
+            "challenge_trace_hash_rows",
+            "synthetic_flag_event_count",
+            "hardware_like_profile_result_count",
+            "observation_profile_count",
+            "total_profile_shots",
+            "holdout_profile_shots",
+            "best_profile",
+            "best_profile_model_flag_events",
+            "stress_profile_model_flag_events",
+            "best_profile_holdout_baseline_failures",
+            "best_profile_holdout_injected_failures",
+            "best_profile_holdout_failure_delta",
+            "calibrated_flag_observation_rows",
+            "real_hardware_trace_rows",
+            "strict_holdout_improvement_rows",
+            "calibrated_trace_scout_ready",
+            "calibration_transfer_ready",
+            "production_decoder_ready",
+            "threshold_claim_supported",
+            "new_code_claimed",
+            "threshold_claimed",
+            "calibrated_device_claimed",
+            "production_decoder_claimed",
+            "hardware_result_claimed",
+            "quantum_advantage_claimed",
+        ]:
+            if summary.get(key) != b2_calibrated_trace_scout.get(key):
+                errors.append(f"B2 calibrated trace scout {key} mismatch")
+        if summary.get("trace_scout_requirement_count") != 8:
+            errors.append("B2 calibrated trace scout should check eight requirements")
+        if summary.get("trace_scout_requirements_passed") != 5:
+            errors.append("B2 calibrated trace scout should pass five requirements")
+        if summary.get("trace_scout_requirements_failed") != 3:
+            errors.append("B2 calibrated trace scout should fail three requirements")
+        if summary.get("failed_trace_scout_requirement_ids") != ["S5", "S6", "S7"]:
+            errors.append("B2 calibrated trace scout failures should be S5/S6/S7")
+        if summary.get("synthetic_trace_count") != 576:
+            errors.append("B2 calibrated trace scout should preserve 576 synthetic traces")
+        if summary.get("challenge_trace_hash_rows") != 3:
+            errors.append("B2 calibrated trace scout should emit 3 challenge trace hashes")
+        if summary.get("synthetic_flag_event_count") != 482:
+            errors.append("B2 calibrated trace scout should preserve 482 synthetic flags")
+        if summary.get("hardware_like_profile_result_count") != 9:
+            errors.append("B2 calibrated trace scout should preserve 9 profile results")
+        for key in [
+            "calibrated_flag_observation_rows",
+            "real_hardware_trace_rows",
+            "strict_holdout_improvement_rows",
+        ]:
+            if summary.get(key) != 0:
+                errors.append(f"B2 calibrated trace scout must keep {key}=0")
+        for key in [
+            "calibrated_trace_scout_ready",
+            "calibration_transfer_ready",
+            "production_decoder_ready",
+            "threshold_claim_supported",
+            "new_code_claimed",
+            "threshold_claimed",
+            "calibrated_device_claimed",
+            "production_decoder_claimed",
+            "hardware_result_claimed",
+            "quantum_advantage_claimed",
+        ]:
+            if summary.get(key) is not False:
+                errors.append(f"B2 calibrated trace scout must keep {key}=False")
+            if key in claims and claims.get(key) is not False:
+                errors.append(f"B2 calibrated trace scout claim boundary must keep {key}=False")
+        if claims.get("calibrated_trace_scout_built") is not True:
+            errors.append("B2 calibrated trace scout must disclose scout construction")
+        if len(payload.get("rows", [])) != 3:
+            errors.append("B2 calibrated trace scout row count mismatch")
+        if len(payload.get("requirements", [])) != 8:
+            errors.append("B2 calibrated trace scout requirement count mismatch")
+        if len(payload.get("validation_errors", [])) != 0:
+            errors.append("B2 calibrated trace scout validation errors must be zero")
 
     b3_manifest = yaml.safe_load(read(b3_manifest_path))
     b3_results = b3_manifest.get("current_results", {})
@@ -32613,6 +32780,7 @@ def audit(root: Path) -> dict:
             "hardware_like_leakage_model_gate": b2_hardware_like_leakage_gate_status,
             "calibration_transfer_guardrail_gate": b2_calibration_transfer_guardrail_status,
             "calibrated_evidence_contract_gate": b2_calibrated_evidence_contract_status,
+            "calibrated_trace_scout": b2_calibrated_trace_scout_status,
         },
         "b3": {
             "manifest": str(b3_manifest_path),
@@ -33121,6 +33289,9 @@ def audit(root: Path) -> dict:
             ),
             "b2_calibrated_evidence_contract_gate": str(
                 research / "B2_calibrated_evidence_contract_gate.md"
+            ),
+            "b2_calibrated_trace_scout": str(
+                research / "B2_calibrated_trace_scout.md"
             ),
             "b3_quantum_observable_fci_comparison": str(research / "B3_quantum_observable_fci_comparison.md"),
             "b3_quantum_observable_fci_qasm_directory": str(
@@ -35088,6 +35259,15 @@ def markdown_report(report: dict) -> str:
             f"- Calibrated evidence contract transfer ready / production decoder / threshold: {report['b2']['calibrated_evidence_contract_gate'].get('calibration_transfer_ready')} / {report['b2']['calibrated_evidence_contract_gate'].get('production_decoder_ready')} / {report['b2']['calibrated_evidence_contract_gate'].get('threshold_claim_supported')}",
             f"- Calibrated evidence contract validation errors: {report['b2']['calibrated_evidence_contract_gate'].get('validation_error_count')}",
             f"- Calibrated evidence contract result/markdown exists: {report['b2']['calibrated_evidence_contract_gate'].get('result_exists')} / {report['b2']['calibrated_evidence_contract_gate'].get('markdown_exists')}",
+            f"- Calibrated trace scout status: {report['b2']['calibrated_trace_scout'].get('status')}",
+            f"- Calibrated trace scout passed / failed / failed IDs: {report['b2']['calibrated_trace_scout'].get('trace_scout_requirements_passed')} / {report['b2']['calibrated_trace_scout'].get('trace_scout_requirements_failed')} / {report['b2']['calibrated_trace_scout'].get('failed_trace_scout_requirement_ids')}",
+            f"- Calibrated trace scout traces / trace hashes / synthetic flags: {report['b2']['calibrated_trace_scout'].get('synthetic_trace_count')} / {report['b2']['calibrated_trace_scout'].get('challenge_trace_hash_rows')} / {report['b2']['calibrated_trace_scout'].get('synthetic_flag_event_count')}",
+            f"- Calibrated trace scout profiles / profile shots / holdout shots: {report['b2']['calibrated_trace_scout'].get('hardware_like_profile_result_count')} / {report['b2']['calibrated_trace_scout'].get('total_profile_shots')} / {report['b2']['calibrated_trace_scout'].get('holdout_profile_shots')}",
+            f"- Calibrated trace scout best profile / holdout baseline / injected / delta: {report['b2']['calibrated_trace_scout'].get('best_profile')} / {report['b2']['calibrated_trace_scout'].get('best_profile_holdout_baseline_failures')} / {report['b2']['calibrated_trace_scout'].get('best_profile_holdout_injected_failures')} / {report['b2']['calibrated_trace_scout'].get('best_profile_holdout_failure_delta')}",
+            f"- Calibrated trace scout calibrated rows / hardware rows / strict holdout improvements: {report['b2']['calibrated_trace_scout'].get('calibrated_flag_observation_rows')} / {report['b2']['calibrated_trace_scout'].get('real_hardware_trace_rows')} / {report['b2']['calibrated_trace_scout'].get('strict_holdout_improvement_rows')}",
+            f"- Calibrated trace scout ready / transfer ready / production decoder / threshold: {report['b2']['calibrated_trace_scout'].get('calibrated_trace_scout_ready')} / {report['b2']['calibrated_trace_scout'].get('calibration_transfer_ready')} / {report['b2']['calibrated_trace_scout'].get('production_decoder_ready')} / {report['b2']['calibrated_trace_scout'].get('threshold_claim_supported')}",
+            f"- Calibrated trace scout validation errors: {report['b2']['calibrated_trace_scout'].get('validation_error_count')}",
+            f"- Calibrated trace scout result/markdown exists: {report['b2']['calibrated_trace_scout'].get('result_exists')} / {report['b2']['calibrated_trace_scout'].get('markdown_exists')}",
             "",
             "## B3 Resource Proxy Status",
             "",

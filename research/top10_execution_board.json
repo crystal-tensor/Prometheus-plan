@@ -22,9 +22,9 @@
       "title": "Hardware-aware quantum circuit compression"
     },
     {
-      "30_day_gate": "Satisfy T-B2-010 K4-K6 with calibrated flag data, real or independently calibrated hardware traces replayed through the same decoder interface, and strict holdout improvement plus all-challenge non-regression.",
+      "30_day_gate": "Satisfy T-B2-010 K4-K6 and T-B2-010a S5-S7 with calibrated flag data, real or independently calibrated hardware traces replayed through the same decoder interface, and strict holdout improvement plus all-challenge non-regression.",
       "b_id": "B2",
-      "current_maturity": "calibrated_evidence_contract_open_missing_hardware_data: T-B2-010 consumes the calibration-transfer guardrail, checks 8 contract requirements, passes 5, fails K4/K5/K6, and emits 3 PR packets for calibrated flag data, real or independently calibrated hardware trace replay, and strict holdout improvement. Best conservative holdout remains 16 baseline / 16 injected / delta 0.",
+      "current_maturity": "calibrated_trace_scout_open_missing_real_calibration: T-B2-010a consumes the calibrated-evidence contract, calibration-transfer guardrail, per-shot traces, and hardware-like leakage profiles. It checks 8 scout requirements, passes 5, fails S5/S6/S7, and maps 576 synthetic traces, 3 challenge trace hashes, 482 synthetic flag events, 9 hardware-like profile results, and 864 holdout profile-shots while keeping calibrated flag rows, real hardware rows, and strict holdout-improvement rows at 0.",
       "dependencies": [
         "B1",
         "B7"
@@ -32,10 +32,10 @@
       "downstream_translation_route": "Deferred until B2 shows Wilson-bounded target-volume reduction under shot-conditioned or calibrated leakage/erasure evidence, without relying on the closed reduced-round artifact.",
       "kill_condition": "Keep the leakage-erasure route demoted if calibrated or hardware-derived posterior injection still fails to improve holdout strict challenge rows without introduced failures, or if strict high-purity/all-profile survival remains zero/false.",
       "kill_or_merge_condition": "Keep the leakage-erasure route demoted if calibrated or hardware-derived posterior injection still fails to improve holdout strict challenge rows without introduced failures, or if strict high-purity/all-profile survival remains zero/false.",
-      "next_artifact": "B2 T-B2-010 K4/K5/K6 evidence PR: calibrated leakage/flag observation packet, hardware trace replay packet, and holdout-improvement packet.",
+      "next_artifact": "B2 T-B2-010/T-B2-010a evidence PR: calibrated leakage/flag observation packet, hardware trace replay packet, and holdout-improvement packet that turns the scout failures S5/S6/S7 into passing rows.",
       "priority_lane": "technical_system_spine",
       "problem_id": 22,
-      "strongest_evidence": "Stim/PyMatching baseline plus closed reduced-round artifact boundary; leakage-erasure proxy/stress rows; posterior calibration; posterior-weighted risk ledger; T-B2-008 decoder-input contract gate; T-B2-009a per-shot trace packet; T-B2-009b posterior-likelihood injection gate; T-B2-009c DEM-informed detector-to-edge semantics gate; T-B2-009d hardware-like leakage observation model gate; T-B2-009e calibration-transfer guardrail; and T-B2-010 calibrated-evidence contract. The latest contract exposes 3 PR packets while preserving the negative boundary: calibrated flag data false, real hardware trace false, holdout improvement false.",
+      "strongest_evidence": "Stim/PyMatching baseline plus closed reduced-round artifact boundary; leakage-erasure proxy/stress rows; posterior calibration; posterior-weighted risk ledger; T-B2-008 decoder-input contract gate; T-B2-009a per-shot trace packet; T-B2-009b posterior-likelihood injection gate; T-B2-009c DEM-informed detector-to-edge semantics gate; T-B2-009d hardware-like leakage observation model gate; T-B2-009e calibration-transfer guardrail; T-B2-010 calibrated-evidence contract; and T-B2-010a calibrated trace scout. The latest scout preserves the negative boundary: calibrated flag observations false, real hardware traces false, strict holdout improvement false, and best conservative holdout remains 16 baseline / 16 injected / delta 0.",
       "title": "Low-overhead quantum error-correcting codes"
     },
     {

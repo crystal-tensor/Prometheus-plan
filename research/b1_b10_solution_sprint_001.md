@@ -301,6 +301,16 @@ conservative holdout remains 16 baseline / 16 injected / delta 0, so this is a
 handoff contract for qec agents rather than a production decoder, threshold,
 hardware, calibrated-device, new-code, or low-overhead QEC claim.
 
+**Sprint update 69:** `T-B2-010a` is now merged as a calibrated trace scout.
+The new tool `tools/b2_calibrated_trace_scout.py` consumes the calibrated
+evidence contract, calibration-transfer guardrail, per-shot trace packet, and
+hardware-like leakage profiles. It checks 8 scout requirements, passes 5, and
+fails 3 (`S5`, `S6`, `S7`). The scout preserves 576 synthetic traces, 3
+challenge trace hashes, 482 synthetic flag events, 9 hardware-like profile
+results, and 864 holdout profile-shots, but has 0 calibrated flag observation
+rows, 0 real hardware trace rows, and 0 strict holdout improvement rows. This
+keeps B2 demoted while making the next hardware-data PR boundary explicit.
+
 ## B3: Molecular Reaction Dynamics
 
 **Technical target:** produce a reaction-coordinate quantum observable estimate

@@ -264,10 +264,19 @@ flag data, real or independently calibrated hardware trace replay, and strict
 holdout improvement. The best conservative holdout remains 16 baseline / 16
 injected / delta 0, so this is a collaboration contract, not a promoted QEC
 result.
+T-B2-010a then adds a calibrated trace scout over the contract, guardrail,
+per-shot trace packet, and hardware-like leakage profiles. It checks 8 scout
+requirements, passes 5, and fails 3 (`S5`, `S6`, `S7`). It preserves 576
+synthetic traces, 3 challenge trace hashes, 482 synthetic flag events, 9
+hardware-like profile rows, and 864 holdout profile-shots, but records 0
+calibrated flag observation rows, 0 real hardware trace rows, and 0 strict
+holdout improvement rows. Synthetic traces are mapped but not promoted to
+calibrated evidence.
 
 **Remaining path to a serious solution:** replace synthetic detector/tick flag
 events and hardware-like observation models with real calibrated leakage/flag
-observations or independent hardware traces; satisfy T-B2-010 `K4`-`K6`; rerun
+observations or independent hardware traces; satisfy T-B2-010 `K4`-`K6` and
+T-B2-010a `S5`-`S7`; rerun
 posterior-likelihood decoding and require holdout improvement plus all-challenge non-regression;
 re-test d=5/d=7 rows under strict high-purity and all-profile robustness gates
 before feeding B7.

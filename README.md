@@ -268,17 +268,20 @@ boundary, a posterior-weighted decoder-risk ledger, a decoder-input contract
 feasibility gate, a per-shot decoder trace packet, a posterior-likelihood
 injection gate, a DEM-informed detector-to-edge semantics gate, and a
 hardware-like leakage observation model gate, a calibration-transfer guardrail,
-and a calibrated-evidence contract gate. The latest B2 contract consumes the
-calibration-transfer guardrail and turns its three blockers into PR-ready data
-packets: calibrated flag data (`K4`/`C4`), real or independently calibrated
-hardware trace replay (`K5`/`C5`), and strict holdout improvement
-(`K6`/`C6`). It checks 8 contract requirements: 5 pass and 3 fail, with 3
-contract packets emitted. The best conservative hardware-like profile still
-has 415 model flag events, 16 holdout baseline failures, 16 holdout injected
-failures, and holdout failure delta 0. Calibration transfer remains false,
-production decoder readiness remains false, and threshold support remains
-false. This is still not a circuit-level decoder, production decoder,
-threshold, hardware result, quantum-advantage result, or new-code claim.
+a calibrated-evidence contract gate, and now a calibrated trace scout. The
+latest B2 scout consumes the contract, guardrail, per-shot trace packet, and
+hardware-like leakage profiles. It checks 8 scout requirements: 5 pass and 3
+fail (`S5`, `S6`, `S7`). The scout preserves 576 synthetic traces, 3 challenge
+trace hashes, 482 synthetic flag events, 9 hardware-like profile results, and
+864 holdout profile-shots, but still has 0 calibrated flag observation rows, 0
+real hardware trace rows, and 0 strict holdout improvement rows. The best
+conservative hardware-like profile remains 16 holdout baseline failures, 16
+holdout injected failures, and holdout failure delta 0. Calibration transfer,
+production decoder readiness, threshold support, calibrated trace readiness,
+hardware support, quantum advantage, and new-code support all remain false.
+This is a sharper handoff artifact, not a circuit-level decoder, production
+decoder, threshold, hardware result, quantum-advantage result, or new-code
+claim.
 
 B9 now has a local parametric certificate checker plus a proof-environment
 contract gate for the `cluster_stabilizer_open_uniform_reweight` family. The

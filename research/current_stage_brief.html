@@ -253,7 +253,7 @@
         <span class="chip">工作区：/Users/avalok/work/FurturePlan</span>
         <span class="chip">目标状态：active，未完成</span>
         <span class="chip">当前阶段：B1-B10 技术解决推进</span>
-        <span class="chip">最新动作：T-B2-010 calibrated-evidence contract gate</span>
+        <span class="chip">最新动作：T-B2-010a calibrated trace scout</span>
         <span class="chip">组合审计：PASS / 0 warnings</span>
       </div>
     </header>
@@ -277,7 +277,7 @@
         100 问题目录已完成第一版元数据：<code>research/problem_catalog_100.md</code> 与 <code>research/problem_catalog_100.json</code> 均补入学科组群、来源脉络、约略未解时间、核心困难、前人路线/里程碑和项目定位。当前协作规则：目录可被展示、引用、路由和后续外部 agent 扩展，但本项目当前主攻资源集中在 B1-B10，不再把本轮工作耗在反复重排或润色 100 题本体上。
       </p>
       <p style="margin-top: 10px;">
-        当前最新推进：B2/T-B2-010 已完成 calibrated-evidence contract gate。新增 <code>tools/b2_calibrated_evidence_contract_gate.py</code>、<code>results/B2_calibrated_evidence_contract_gate_v0.json</code> 和 <code>research/B2_calibrated_evidence_contract_gate.md</code>。该 gate 消费 T-B2-009e calibration-transfer guardrail，把失败的 C4/C5/C6 拆成 3 个可认领 PR packets：<code>B2-C4-calibrated-flag-data</code>、<code>B2-C5-hardware-trace-replay</code>、<code>B2-C6-holdout-improvement</code>。它检查 8 个 contract requirements：5 passed / 3 failed，失败项为 K4/K5/K6；当前仍没有 calibrated flag data、real hardware trace 或 holdout improvement，best conservative holdout 仍为 16 baseline / 16 injected / delta 0。因此 B2 现在有了更清晰的多智能体交接面，但仍不是 production decoder、threshold、hardware result、new code 或 low-overhead QEC claim。
+        当前最新推进：B2/T-B2-010a 已完成 calibrated trace scout。新增 <code>tools/b2_calibrated_trace_scout.py</code>、<code>results/B2_calibrated_trace_scout_v0.json</code> 和 <code>research/B2_calibrated_trace_scout.md</code>。该 scout 消费 calibrated-evidence contract、calibration-transfer guardrail、per-shot trace packet 与 hardware-like leakage profiles，检查 8 个 scout requirements：5 passed / 3 failed，失败项为 S5/S6/S7。它保留 576 条 synthetic traces、3 条 challenge trace hashes、482 个 synthetic flag events、9 个 hardware-like profile results 和 864 个 holdout profile-shots，但 calibrated flag observation rows、real hardware trace rows、strict holdout improvement rows 仍全部为 0；best conservative holdout 仍为 16 baseline / 16 injected / delta 0。因此 B2 的交接面更清楚，但合成 trace 不能升级成真实校准证据，仍不是 production decoder、threshold、hardware result、new code 或 low-overhead QEC claim。
       </p>
       <p style="margin-top: 10px;">
         当前最新推进：B3/B10/T-B3-012/T-B10-015 已完成 same-access measurement-rescue gate。新增 <code>tools/b3_b10_same_access_measurement_rescue_gate.py</code>、<code>results/B3_B10_same_access_measurement_rescue_gate_v0.json</code> 和 <code>research/B3_B10_same_access_measurement_rescue_gate.md</code>。该 gate 消费 B3 grouped covariance、chemical derivative boundary、compiled UCC/ADAPT pilot、cross-molecule pressure、B10 FCI denominator、B10 B3/B5 comparison 与 B10 access contract，检查 10 个 same-access requirements：5 个通过，5 个失败。失败项为 M5 full cross-molecule compiled-state covariance、M6 multi-parameter/converged chemistry ansatz、M7 selected-CI/FCI denominator wins、M8 optimizer-loop shots below ceiling、M9 B10 access contract no longer rejecting the bridge。当前 denominator wins 仍为 0，max optimizer-loop shots lower bound 为 475,043,013,690,000，B3 仍保持 demoted；这不是 reaction-dynamics solution、quantum advantage 或 BQP separation。
@@ -479,6 +479,9 @@
       </p>
       <p>
         最新推进 100：B2/T-B2-009e 已完成 calibration-transfer guardrail。新工具消费 per-shot trace packet、posterior injection gate、DEM edge semantics gate 与 hardware-like leakage gate，检查 9 个 calibration-transfer requirements：6 个通过，3 个失败。失败项是 C4 calibrated flag data、C5 real hardware traces、C6 holdout improvement。最佳 conservative profile 的 holdout baseline/injected/delta 仍为 16 / 16 / 0；calibration transfer ready、production decoder ready 和 threshold claim supported 全部为 false。因此 B2 仍保持 demoted，下一步必须用真实校准 leakage/flag observations 或 independent hardware traces 同时补上 holdout improvement。
+      </p>
+      <p>
+        最新推进 101：B2/T-B2-010a 已完成 calibrated trace scout。新工具消费 calibrated-evidence contract、calibration-transfer guardrail、per-shot trace packet 和 hardware-like leakage profiles，检查 8 个 scout requirements：5 个通过，3 个失败。失败项是 S5 calibrated leakage/flag observations、S6 real or independently calibrated hardware trace rows、S7 strict holdout improvement。该 scout 保留 576 条 synthetic traces、3 条 challenge trace hashes、482 个 synthetic flag events、9 个 hardware-like profile results、1728 个 total profile-shots 与 864 个 holdout profile-shots；最佳 conservative profile 仍为 16 holdout baseline / 16 injected / delta 0。当前 calibrated flag observation rows、real hardware trace rows、strict holdout improvement rows 均为 0，因此 synthetic trace 与 hardware-like model 只被映射，不被提升为真实校准证据。
       </p>
       <p style="margin-top: 10px;">
         最新推进 42：B5/T-B5-006a 已完成 canonical-environment smoke gate，但仍是 negative boundary。新工具读取 two-site finite-DMRG-style prototype 的同一组 9 个 B5/B10 D5 Hubbard response rows，检查 environment ledger、fixed-sector norm、energy variance、discarded-weight pressure、energy monotonicity 和 response closeness。结果：9 个 environment ledgers 存在，0 行通过完整 smoke gate，3 行通过 fixed-sector norm / energy variance / discarded-weight / monotonicity 检查，0 行 close to seeded MPS pressure，0 行 beat seeded MPS pressure。它不是 mature canonical DMRG、不是 production DMRG、不是 quantum response win，也不是 accuracy-per-resource win；T-B5-006 仍必须实现真正 canonical-environment DMRG/MPS 或全成本 quantum response kernel。
