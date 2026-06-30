@@ -2101,6 +2101,14 @@ Overall audit: PASS
 - Backend replay scout discovery/mechanism/solution claims: False / False / False
 - Backend replay scout validation errors: 0
 - Backend replay scout result/markdown exists: True / True
+- Observable contract gate status: observable_contract_open_missing_dft_b5_rows
+- Observable contract gate passed / failed / failed IDs: 4 / 2 / ['O5', 'O6']
+- Observable contract gate packets / DFT keys / B5 keys: 5 / 11 / 11
+- Observable contract gate DFT/B5 schema hashes: e9215a51f2736f1c29890577b201ad5980b835dd787bd9bde4f2484293f17388 / 79217e965af5e0d4ed95f143fcfd0aa3936edef001a292f559a70cf9e688c576
+- Observable contract gate DFT rows / B5 rows: 0 / 0
+- Observable contract gate discovery/mechanism/solution claims: False / False / False
+- Observable contract gate validation errors: 0
+- Observable contract gate result/markdown exists: True / True
 
 ## B7 Fault-Tolerance Co-Design Status
 

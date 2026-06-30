@@ -283,6 +283,13 @@ DFT observable rows and B5-computed observable rows remain 0. This is a
 deterministic replay artifact, not an external crystallographic backend, source
 rewrite, material-discovery, mechanism, DFT/B5-observable, or solution claim.
 
+`T-B6-005e` adds an observable contract gate over the backend replay. It
+declares 5 observable packets, an 11-key DFT row schema, an 11-key B5 row
+schema, and hash-preservation requirements for the source table, replay formula,
+and replay table. The gate passes 4/6 and fails `O5`-`O6` because DFT rows and
+B5 rows are still 0. This is a contract for future observable PRs, not
+observable evidence or a candidate-ranking promotion.
+
 B2 has moved past the earlier reduced-round artifact into a leakage-flagged
 erasure analytic boundary: 480 configurations, 42 proxy target-volume improved
 rows, 33 distance-5/7 improved rows, no reduced rounds, and no new-code,

@@ -89,16 +89,16 @@
     {
       "30_day_gate": "Close at least one B6 contract packet with reproducible backend evidence, validation cleanup, family-prior denominator improvement, DFT observables, or B5-computed observables.",
       "b_id": "B6",
-      "current_maturity": "T-B6-005d backend replay scout: 8 requirements checked, 6 passed, 2 failed (R7-R8), with physics_risk_adjusted_v0 deterministically replayed from pinned source/formula/replay hashes.",
+      "current_maturity": "T-B6-005e observable contract gate: 6 requirements checked, 4 passed, 2 failed (O5-O6), with 5 observable packets and DFT/B5 row schemas declared.",
       "dependencies": [
         "B5"
       ],
       "downstream_translation_route": "Deferred until computed descriptors and leakage controls support a mechanism-aware ranking claim on a larger retrospective table.",
       "kill_condition": "Demote B6 ranking if the pinned crystallographic/DFT/B5 observable pipeline cannot beat family priors on post-split holdouts or cannot be reproduced without hidden local dependencies.",
-      "next_artifact": "First B6 observable PR: attach DFT and B5 observable rows to the T-B6-005d replay while preserving row scope and hashes.",
+      "next_artifact": "First B6 observable-row PR: submit DFT and B5 rows satisfying the T-B6-005e schemas while preserving row scope and hashes.",
       "priority_lane": "coupled_application",
       "problem_id": 37,
-      "strongest_evidence": "T-B6-005d backend replay scout deterministically replays physics_risk_adjusted_v0 from the same 56-record / 28-family / 18-negative-control table. It pins source/formula/replay hashes, passes 6/8, fails only R7-R8, keeps 2 negative controls in top-k, and reproduces post-split AP 1.0 vs family-prior AP 0.490136. No external backend, source rewrite, discovery, mechanism, complete-database, DFT, B5-observable, reproducible-descriptor, or solution claim is made.",
+      "strongest_evidence": "T-B6-005e observable contract gate consumes the backend replay and declares 5 observable packets, an 11-key DFT row schema, an 11-key B5 row schema, and hash-preservation requirements. It passes 4/6 and fails O5-O6 because DFT rows and B5-computed rows remain 0. No observable evidence, discovery, mechanism, complete-database, DFT, B5-observable, reproducible-descriptor, or solution claim is made.",
       "title": "High-temperature superconductivity search"
     },
     {

@@ -695,6 +695,13 @@ now sharper: DFT observable rows and B5-computed observable rows are both still
 0. This is a deterministic replay artifact, not an external crystallographic
 backend, source rewrite, material discovery, mechanism, DFT/B5 observable, or
 solution claim.
+T-B6-005e now adds an observable contract gate. It consumes the backend replay,
+declares 5 observable packets, an 11-key DFT row schema, an 11-key B5 row
+schema, and hash-preservation requirements for the source table, replay formula,
+and replay table. The contract passes 4/6 and fails O5-O6 because DFT rows and
+B5-computed rows are still 0. This is a data contract for the next PRs, not
+observable evidence, material discovery, mechanism, DFT/B5 observable, or
+solution claim.
 
 **Remaining path to a serious solution:** pin a reproducible crystallographic
 backend or equivalent descriptor implementation; remove the source validation

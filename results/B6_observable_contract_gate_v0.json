@@ -1,0 +1,177 @@
+{
+  "b5_computed_observable_rows": 0,
+  "b5_schema_hash": "79217e965af5e0d4ed95f143fcfd0aa3936edef001a292f559a70cf9e688c576",
+  "benchmark_id": "B6",
+  "claim_boundary": {
+    "next_gate": "Submit DFT and B5 rows that satisfy the declared schemas and preserve replay hashes.",
+    "what_is_not_supported": "No DFT or B5 observable rows exist yet, and no material discovery or mechanism solution is claimed.",
+    "what_is_supported": "Observable packet schemas and hash-preservation requirements are now explicit."
+  },
+  "claims": {
+    "b5_computed_observable_claimed": false,
+    "dft_observable_claimed": false,
+    "material_discovery_claimed": false,
+    "mechanism_solved": false,
+    "observable_contract_built": true,
+    "solution_claimed": false
+  },
+  "dft_observable_rows": 0,
+  "dft_schema_hash": "e9215a51f2736f1c29890577b201ad5980b835dd787bd9bde4f2484293f17388",
+  "failed_observable_contract_requirement_ids": [
+    "O5",
+    "O6"
+  ],
+  "method": "b6_observable_contract_gate_v0",
+  "model_status": "backend_replay_ready_for_observable_packets_but_no_observable_rows",
+  "observable_contract_requirement_count": 6,
+  "observable_contract_requirements_failed": 2,
+  "observable_contract_requirements_passed": 4,
+  "observable_packet_count": 5,
+  "observable_packets": [
+    {
+      "acceptance": [
+        "at least one row for each ranked material promoted by the replay",
+        "calculation_hash must bind structure, method, and numerical settings",
+        "units and relaxation status must be explicit"
+      ],
+      "packet_id": "B6-O1-dft-row-schema",
+      "required_keys": [
+        "material_id",
+        "structure_ref",
+        "functional",
+        "pseudopotential_or_basis",
+        "kpoint_density",
+        "energy_per_atom_ev",
+        "fermi_level_ev",
+        "density_of_states_at_fermi",
+        "magnetic_moment_mu_b",
+        "relaxation_status",
+        "calculation_hash"
+      ],
+      "title": "Submit DFT observable rows"
+    },
+    {
+      "acceptance": [
+        "rows must name the effective model and orbital basis",
+        "same-access cost units must be recorded",
+        "solver_trace_hash must bind the response computation"
+      ],
+      "packet_id": "B6-O2-b5-row-schema",
+      "required_keys": [
+        "material_id",
+        "effective_model",
+        "orbital_basis",
+        "interaction_u_ev",
+        "hopping_t_ev",
+        "filling",
+        "response_observable",
+        "response_value",
+        "denominator_method",
+        "solver_trace_hash",
+        "same_access_cost_units"
+      ],
+      "title": "Submit B5-computed observable rows"
+    },
+    {
+      "acceptance": [
+        "observable PRs must not silently change the replay table",
+        "any row-scope change requires a new replay artifact and audit"
+      ],
+      "packet_id": "B6-O3-hash-preservation",
+      "required_hashes": {
+        "replay_formula_hash": "e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230",
+        "replay_table_hash": "c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de",
+        "source_table_hash": "ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc"
+      },
+      "title": "Preserve replay hashes"
+    },
+    {
+      "acceptance": [
+        "every observable row joins to a replay material_id",
+        "duplicate material_id rows must explain method or setting differences"
+      ],
+      "packet_id": "B6-O4-join-key-audit",
+      "required_keys": [
+        "material_id"
+      ],
+      "title": "Join observables to replayed materials"
+    },
+    {
+      "acceptance": [
+        "DFT/B5 rows can promote evidence gates only after audit",
+        "ranked candidates remain hypotheses until external validation exists"
+      ],
+      "packet_id": "B6-O5-claim-boundary-audit",
+      "required_claims": [
+        "material_discovery_claimed=false",
+        "mechanism_solved=false",
+        "solution_claimed=false"
+      ],
+      "title": "Prevent observable rows from becoming premature discovery claims"
+    }
+  ],
+  "replay_formula_hash": "e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230",
+  "replay_table_hash": "c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de",
+  "required_b5_key_count": 11,
+  "required_dft_key_count": 11,
+  "requirements": [
+    {
+      "evidence": {
+        "method": "b6_backend_replay_scout_v0",
+        "status": "backend_replay_candidate_built_missing_observables"
+      },
+      "label": "backend replay source exists",
+      "passed": true,
+      "requirement_id": "O1"
+    },
+    {
+      "evidence": {
+        "replay_formula_hash": "e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230",
+        "replay_table_hash": "c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de",
+        "source_table_hash": "ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc"
+      },
+      "label": "replay hashes are preserved",
+      "passed": true,
+      "requirement_id": "O2"
+    },
+    {
+      "evidence": {
+        "dft_schema_hash": "e9215a51f2736f1c29890577b201ad5980b835dd787bd9bde4f2484293f17388",
+        "required_dft_key_count": 11
+      },
+      "label": "DFT row schema is declared",
+      "passed": true,
+      "requirement_id": "O3"
+    },
+    {
+      "evidence": {
+        "b5_schema_hash": "79217e965af5e0d4ed95f143fcfd0aa3936edef001a292f559a70cf9e688c576",
+        "required_b5_key_count": 11
+      },
+      "label": "B5 row schema is declared",
+      "passed": true,
+      "requirement_id": "O4"
+    },
+    {
+      "evidence": {
+        "dft_observable_rows": 0
+      },
+      "label": "DFT observable rows exist",
+      "passed": false,
+      "requirement_id": "O5"
+    },
+    {
+      "evidence": {
+        "b5_computed_observable_rows": 0
+      },
+      "label": "B5-computed observable rows exist",
+      "passed": false,
+      "requirement_id": "O6"
+    }
+  ],
+  "selected_variant": "physics_risk_adjusted_v0",
+  "source_backend_replay_status": "backend_replay_candidate_built_missing_observables",
+  "source_table_hash": "ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc",
+  "status": "observable_contract_open_missing_dft_b5_rows",
+  "validation_errors": []
+}

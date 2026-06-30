@@ -48,10 +48,10 @@
     },
     {
       "b_id": "B6",
-      "current_evidence": "Toy descriptor ranker plus T-B6-001 curated leakage audit, T-B6-002 formula-derived descriptor screen, T-B6-003 structural/electronic proxy boundary, T-B6-004 crystallographic reproducibility gate, T-B6-005a crystallographic evidence contract, T-B6-005b crystallographic packet scout, T-B6-005c validation rescue scout, and T-B6-005d backend replay scout. The latest replay checks 8 requirements, passes 6, fails R7-R8, pins source/formula/replay hashes, and reproduces physics_risk_adjusted_v0: 2 negative controls remain in top-k and post-split AP is 1.0 versus family-prior AP 0.490136. No external crystallographic backend, source rewrite, DFT row, B5 row, discovery, mechanism, DFT/B5-observable, reproducible descriptor, or solution claim is made.",
+      "current_evidence": "Toy descriptor ranker plus T-B6-001 curated leakage audit, T-B6-002 formula-derived descriptor screen, T-B6-003 structural/electronic proxy boundary, T-B6-004 crystallographic reproducibility gate, T-B6-005a crystallographic evidence contract, T-B6-005b crystallographic packet scout, T-B6-005c validation rescue scout, T-B6-005d backend replay scout, and T-B6-005e observable contract gate. The latest contract checks 6 requirements, passes 4, fails O5-O6, declares 5 observable packets, an 11-key DFT schema, an 11-key B5 schema, and hash-preservation requirements. DFT rows and B5 rows remain 0. No observable evidence, discovery, mechanism, DFT/B5-observable, reproducible descriptor, or solution claim is made.",
       "gate_status": "early_negative_boundary",
-      "main_blocker": "B6 has a deterministic backend replay artifact, but R7-R8 remain open: DFT observable channel and B5-computed observable channel.",
-      "next_experiment": "Attach DFT/B5 rows to the T-B6-005d replay while preserving hashes and the 56-record / 28-family / 18-negative-control scope, then rerun the audit before any candidate-ranking claim.",
+      "main_blocker": "B6 has a replay-backed observable contract, but O5-O6 remain open: DFT observable rows and B5-computed observable rows.",
+      "next_experiment": "Submit DFT/B5 rows satisfying T-B6-005e while preserving hashes and the 56-record / 28-family / 18-negative-control scope, then rerun the audit before any candidate-ranking claim.",
       "technical_solution_target": "Leakage-controlled high-Tc candidate ranking pipeline using physics descriptors, not family priors."
     },
     {

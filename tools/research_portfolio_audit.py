@@ -28334,6 +28334,7 @@ def audit(root: Path) -> dict:
     b6_crystallographic_packet_scout = b6_results.get("b6_crystallographic_packet_scout_v0")
     b6_validation_rescue_scout = b6_results.get("b6_validation_rescue_scout_v0")
     b6_backend_replay_scout = b6_results.get("b6_backend_replay_scout_v0")
+    b6_observable_contract_gate = b6_results.get("b6_observable_contract_gate_v0")
     b6_status = {}
     b6_curated_status = {}
     b6_formula_status = {}
@@ -28343,6 +28344,7 @@ def audit(root: Path) -> dict:
     b6_crystallographic_packet_scout_status = {}
     b6_validation_rescue_scout_status = {}
     b6_backend_replay_scout_status = {}
+    b6_observable_contract_gate_status = {}
     if not b6_descriptor:
         warnings.append("B6 manifest has no superconductivity descriptor ranking result")
     else:
@@ -29389,6 +29391,139 @@ def audit(root: Path) -> dict:
             "validation_error_count"
         ):
             errors.append("B6 backend replay scout validation-error count mismatch")
+
+    if not b6_observable_contract_gate:
+        warnings.append("B6 manifest has no observable contract gate")
+    else:
+        result_path = b6_observable_contract_gate.get("result")
+        markdown_path = b6_observable_contract_gate.get("markdown")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B6 observable contract gate result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B6 observable contract gate markdown path missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        claims = payload.get("claims", {})
+        b6_observable_contract_gate_status = {
+            "status": b6_observable_contract_gate.get("status"),
+            "method": b6_observable_contract_gate.get("method"),
+            "model_status": b6_observable_contract_gate.get("model_status"),
+            "selected_variant": payload.get("selected_variant"),
+            "observable_contract_requirement_count": payload.get(
+                "observable_contract_requirement_count"
+            ),
+            "observable_contract_requirements_passed": payload.get(
+                "observable_contract_requirements_passed"
+            ),
+            "observable_contract_requirements_failed": payload.get(
+                "observable_contract_requirements_failed"
+            ),
+            "failed_observable_contract_requirement_ids": payload.get(
+                "failed_observable_contract_requirement_ids"
+            ),
+            "observable_packet_count": payload.get("observable_packet_count"),
+            "required_dft_key_count": payload.get("required_dft_key_count"),
+            "required_b5_key_count": payload.get("required_b5_key_count"),
+            "source_table_hash": payload.get("source_table_hash"),
+            "replay_formula_hash": payload.get("replay_formula_hash"),
+            "replay_table_hash": payload.get("replay_table_hash"),
+            "dft_schema_hash": payload.get("dft_schema_hash"),
+            "b5_schema_hash": payload.get("b5_schema_hash"),
+            "dft_observable_rows": payload.get("dft_observable_rows"),
+            "b5_computed_observable_rows": payload.get("b5_computed_observable_rows"),
+            "observable_contract_built": claims.get("observable_contract_built"),
+            "dft_observable_claimed": claims.get("dft_observable_claimed"),
+            "b5_computed_observable_claimed": claims.get("b5_computed_observable_claimed"),
+            "material_discovery_claimed": claims.get("material_discovery_claimed"),
+            "mechanism_solved": claims.get("mechanism_solved"),
+            "solution_claimed": claims.get("solution_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B6":
+            errors.append("B6 observable contract gate benchmark_id mismatch")
+        if payload.get("status") != b6_observable_contract_gate.get("status"):
+            errors.append("B6 observable contract gate status mismatch")
+        if payload.get("method") != b6_observable_contract_gate.get("method"):
+            errors.append("B6 observable contract gate method mismatch")
+        if payload.get("model_status") != b6_observable_contract_gate.get("model_status"):
+            errors.append("B6 observable contract gate model_status mismatch")
+        for field in [
+            "selected_variant",
+            "observable_contract_requirement_count",
+            "observable_contract_requirements_passed",
+            "observable_contract_requirements_failed",
+            "failed_observable_contract_requirement_ids",
+            "observable_packet_count",
+            "required_dft_key_count",
+            "required_b5_key_count",
+            "source_table_hash",
+            "replay_formula_hash",
+            "replay_table_hash",
+            "dft_schema_hash",
+            "b5_schema_hash",
+            "dft_observable_rows",
+            "b5_computed_observable_rows",
+        ]:
+            if payload.get(field) != b6_observable_contract_gate.get(field):
+                errors.append(f"B6 observable contract gate {field} mismatch")
+        for field in [
+            "observable_contract_built",
+            "dft_observable_claimed",
+            "b5_computed_observable_claimed",
+            "material_discovery_claimed",
+            "mechanism_solved",
+            "solution_claimed",
+        ]:
+            if claims.get(field) != b6_observable_contract_gate.get(field):
+                errors.append(f"B6 observable contract gate claim {field} mismatch")
+        if payload.get("observable_contract_requirement_count") != 6:
+            errors.append("B6 observable contract gate should check six requirements")
+        if payload.get("observable_contract_requirements_passed") != 4:
+            errors.append("B6 observable contract gate should pass four requirements")
+        if payload.get("observable_contract_requirements_failed") != 2:
+            errors.append("B6 observable contract gate should fail two requirements")
+        if payload.get("failed_observable_contract_requirement_ids") != ["O5", "O6"]:
+            errors.append("B6 observable contract gate failures should be O5-O6")
+        if payload.get("observable_packet_count") != 5:
+            errors.append("B6 observable contract gate packet count mismatch")
+        if payload.get("required_dft_key_count") != 11 or payload.get("required_b5_key_count") != 11:
+            errors.append("B6 observable contract gate schema key count mismatch")
+        expected_hashes = {
+            "source_table_hash": "ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc",
+            "replay_formula_hash": "e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230",
+            "replay_table_hash": "c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de",
+            "dft_schema_hash": "e9215a51f2736f1c29890577b201ad5980b835dd787bd9bde4f2484293f17388",
+            "b5_schema_hash": "79217e965af5e0d4ed95f143fcfd0aa3936edef001a292f559a70cf9e688c576",
+        }
+        for field, expected in expected_hashes.items():
+            if payload.get(field) != expected:
+                errors.append(f"B6 observable contract gate {field} drifted")
+        if payload.get("dft_observable_rows") != 0 or payload.get("b5_computed_observable_rows") != 0:
+            errors.append("B6 observable contract gate must not fabricate DFT/B5 rows")
+        if claims.get("observable_contract_built") is not True:
+            errors.append("B6 observable contract gate must disclose contract construction")
+        for field in [
+            "dft_observable_claimed",
+            "b5_computed_observable_claimed",
+            "material_discovery_claimed",
+            "mechanism_solved",
+            "solution_claimed",
+        ]:
+            if claims.get(field) is not False:
+                errors.append(f"B6 observable contract gate claim boundary must keep {field}=False")
+        if len(payload.get("observable_packets", [])) != 5:
+            errors.append("B6 observable contract gate packet payload count mismatch")
+        if len(payload.get("requirements", [])) != 6:
+            errors.append("B6 observable contract gate requirement count mismatch")
+        if len(payload.get("validation_errors", [])) != b6_observable_contract_gate.get(
+            "validation_error_count"
+        ):
+            errors.append("B6 observable contract gate validation-error count mismatch")
 
     b7_manifest = yaml.safe_load(read(b7_manifest_path))
     b7_results = b7_manifest.get("current_results", {})
@@ -33488,6 +33623,7 @@ def audit(root: Path) -> dict:
             "crystallographic_packet_scout": b6_crystallographic_packet_scout_status,
             "validation_rescue_scout": b6_validation_rescue_scout_status,
             "backend_replay_scout": b6_backend_replay_scout_status,
+            "observable_contract_gate": b6_observable_contract_gate_status,
         },
         "b7": {
             "manifest": str(b7_manifest_path),
@@ -34045,6 +34181,7 @@ def audit(root: Path) -> dict:
             ),
             "b6_validation_rescue_scout": str(research / "B6_validation_rescue_scout.md"),
             "b6_backend_replay_scout": str(research / "B6_backend_replay_scout.md"),
+            "b6_observable_contract_gate": str(research / "B6_observable_contract_gate.md"),
             "b10_formal_theorem_targets": str(research / "B10_formal_theorem_targets.md"),
             "b10_t2_minimum_refresh_spoofer_boundary": str(research / "B8_generative_spoofer_refresh.md"),
             "b10_t2_refresh_proof_obligation_gate": str(research / "B10_t2_refresh_proof_obligation_gate.md"),
@@ -36304,6 +36441,14 @@ def markdown_report(report: dict) -> str:
             f"- Backend replay scout discovery/mechanism/solution claims: {report['b6']['backend_replay_scout'].get('material_discovery_claimed')} / {report['b6']['backend_replay_scout'].get('mechanism_solved')} / {report['b6']['backend_replay_scout'].get('solution_claimed')}",
             f"- Backend replay scout validation errors: {report['b6']['backend_replay_scout'].get('validation_error_count')}",
             f"- Backend replay scout result/markdown exists: {report['b6']['backend_replay_scout'].get('result_exists')} / {report['b6']['backend_replay_scout'].get('markdown_exists')}",
+            f"- Observable contract gate status: {report['b6']['observable_contract_gate'].get('status')}",
+            f"- Observable contract gate passed / failed / failed IDs: {report['b6']['observable_contract_gate'].get('observable_contract_requirements_passed')} / {report['b6']['observable_contract_gate'].get('observable_contract_requirements_failed')} / {report['b6']['observable_contract_gate'].get('failed_observable_contract_requirement_ids')}",
+            f"- Observable contract gate packets / DFT keys / B5 keys: {report['b6']['observable_contract_gate'].get('observable_packet_count')} / {report['b6']['observable_contract_gate'].get('required_dft_key_count')} / {report['b6']['observable_contract_gate'].get('required_b5_key_count')}",
+            f"- Observable contract gate DFT/B5 schema hashes: {report['b6']['observable_contract_gate'].get('dft_schema_hash')} / {report['b6']['observable_contract_gate'].get('b5_schema_hash')}",
+            f"- Observable contract gate DFT rows / B5 rows: {report['b6']['observable_contract_gate'].get('dft_observable_rows')} / {report['b6']['observable_contract_gate'].get('b5_computed_observable_rows')}",
+            f"- Observable contract gate discovery/mechanism/solution claims: {report['b6']['observable_contract_gate'].get('material_discovery_claimed')} / {report['b6']['observable_contract_gate'].get('mechanism_solved')} / {report['b6']['observable_contract_gate'].get('solution_claimed')}",
+            f"- Observable contract gate validation errors: {report['b6']['observable_contract_gate'].get('validation_error_count')}",
+            f"- Observable contract gate result/markdown exists: {report['b6']['observable_contract_gate'].get('result_exists')} / {report['b6']['observable_contract_gate'].get('markdown_exists')}",
             "",
             "## B7 Fault-Tolerance Co-Design Status",
             "",

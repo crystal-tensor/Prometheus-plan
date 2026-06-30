@@ -641,7 +641,13 @@ B5-computed observable rows remain 0. It is deterministic replay evidence, not
 an external backend, source rewrite, discovery, mechanism, DFT/B5 observable, or
 solution claim.
 
-**Next PR:** attach DFT and B5 observable rows to the `T-B6-005d` replay.
+Sprint update: `T-B6-005e` now adds an observable contract gate. It declares 5
+observable packets, an 11-key DFT row schema, an 11-key B5 row schema, and
+hash-preservation requirements for the replay. It passes 4/6 and fails O5-O6
+because DFT observable rows and B5-computed observable rows remain 0. It is a
+data contract, not observable evidence or a candidate-ranking promotion.
+
+**Next PR:** submit DFT and B5 observable rows that satisfy the `T-B6-005e` schemas.
 Expected artifacts:
 
 - `benchmarks/B6_high_temperature_superconductivity.yaml`
@@ -651,16 +657,19 @@ Expected artifacts:
 - `tools/b6_crystallographic_packet_scout.py`
 - `tools/b6_validation_rescue_scout.py`
 - `tools/b6_backend_replay_scout.py`
+- `tools/b6_observable_contract_gate.py`
 - `results/B6_crystallographic_reproducibility_gate_v0.json`
 - `results/B6_crystallographic_evidence_contract_gate_v0.json`
 - `results/B6_crystallographic_packet_scout_v0.json`
 - `results/B6_validation_rescue_scout_v0.json`
 - `results/B6_backend_replay_scout_v0.json`
+- `results/B6_observable_contract_gate_v0.json`
 - `research/B6_crystallographic_reproducibility_gate.md`
 - `research/B6_crystallographic_evidence_contract_gate.md`
 - `research/B6_crystallographic_packet_scout.md`
 - `research/B6_validation_rescue_scout.md`
 - `research/B6_backend_replay_scout.md`
+- `research/B6_observable_contract_gate.md`
 
 **Acceptance gate:** computed descriptors are reported separately from
 family-prior and formula-proxy baselines under random, time-forward, and
