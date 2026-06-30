@@ -456,6 +456,9 @@
       <p>
         最新推进 41：B2/T-B2-009d 已完成 hardware-like leakage observation model gate，但仍是 negative boundary。新工具不再消费 synthetic flag fixture，而是从 T-B2-009a 的 detector bitstrings 和 challenge-level leakage/false-positive 参数生成 deterministic hardware-like leakage observations，并映射到 Stim/PyMatching DEM edges。结果覆盖 3 个 observation profiles / 1728 profile-shots，其中 864 个 holdout profile-shots。最佳 conservative profile 生成 415 个 model flag events，改变 0 个 predictions、修复 0 个 failures、引入 0 个 failures，holdout failure delta 仍为 0；stress profile 生成 727 个 model flag events 也修复 0 个 failures。因此 holdout improvement gate 为 false，route demotion 仍为 true。下一步 T-B2-009e 必须提供 real calibrated leakage/flag observations 或 independent hardware traces。
       </p>
+      <p>
+        最新推进 100：B2/T-B2-009e 已完成 calibration-transfer guardrail。新工具消费 per-shot trace packet、posterior injection gate、DEM edge semantics gate 与 hardware-like leakage gate，检查 9 个 calibration-transfer requirements：6 个通过，3 个失败。失败项是 C4 calibrated flag data、C5 real hardware traces、C6 holdout improvement。最佳 conservative profile 的 holdout baseline/injected/delta 仍为 16 / 16 / 0；calibration transfer ready、production decoder ready 和 threshold claim supported 全部为 false。因此 B2 仍保持 demoted，下一步必须用真实校准 leakage/flag observations 或 independent hardware traces 同时补上 holdout improvement。
+      </p>
       <p style="margin-top: 10px;">
         最新推进 42：B5/T-B5-006a 已完成 canonical-environment smoke gate，但仍是 negative boundary。新工具读取 two-site finite-DMRG-style prototype 的同一组 9 个 B5/B10 D5 Hubbard response rows，检查 environment ledger、fixed-sector norm、energy variance、discarded-weight pressure、energy monotonicity 和 response closeness。结果：9 个 environment ledgers 存在，0 行通过完整 smoke gate，3 行通过 fixed-sector norm / energy variance / discarded-weight / monotonicity 检查，0 行 close to seeded MPS pressure，0 行 beat seeded MPS pressure。它不是 mature canonical DMRG、不是 production DMRG、不是 quantum response win，也不是 accuracy-per-resource win；T-B5-006 仍必须实现真正 canonical-environment DMRG/MPS 或全成本 quantum response kernel。
       </p>
@@ -1132,6 +1135,7 @@
         <li><code>research/B2_posterior_likelihood_decoder_injection_gate.md</code>：B2 posterior-likelihood injection gate，3 profiles / 1728 profile-shots；best profile delta 0，strong profile introduced failures 2，improvement gate false</li>
         <li><code>research/B2_dem_informed_detector_edge_semantics_gate.md</code>：B2 DEM-informed detector-edge semantics gate，3 semantic profiles / 1728 profile-shots；best conservative profile delta 0，aggressive profile introduced failures 1，improvement gate false</li>
         <li><code>research/B2_hardware_like_leakage_model_gate.md</code>：B2 hardware-like leakage observation model gate，3 observation profiles / 1728 profile-shots；best conservative profile delta 0，holdout delta 0，holdout improvement false</li>
+        <li><code>research/B2_calibration_transfer_guardrail_gate.md</code>：B2 calibration-transfer guardrail，9 requirements 中 6 passed / 3 failed；缺口为 C4 calibrated flag data、C5 real hardware traces、C6 holdout improvement</li>
         <li><code>research/B6_structural_electronic_proxy_screen.md</code>：B6 structural/electronic proxy boundary，structural AP@12 0.611 vs formula 0.10，但 family-prior AP@12 仍为 1.0，top-12 negative controls 为 3</li>
         <li><code>research/B7_b1_b2_dependency_schedule_bridge.md</code>：B7 B1/B2 dependency-schedule bridge</li>
         <li><code>research/B7_workload_dag_factory_schedule.md</code>：B7 workload-DAG factory-throughput schedule</li>

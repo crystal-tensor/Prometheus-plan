@@ -1,0 +1,169 @@
+{
+  "benchmark_id": "B2",
+  "calibration_requirements": [
+    {
+      "evidence": {
+        "max_detector_count": 120,
+        "per_shot_detector_bitstrings_persisted": true,
+        "stim_observable_bitstrings_persisted": true,
+        "total_shot_traces": 576
+      },
+      "gate_id": "C1",
+      "label": "Per-shot detector and observable traces are persisted",
+      "missing_to_promote": "Keep the same per-shot schema for calibrated device exports.",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "detector_bitstrings_consumed": true,
+        "hardware_like_leakage_model_used": true,
+        "synthetic_flag_fixture_consumed": false
+      },
+      "gate_id": "C2",
+      "label": "Hardware-like model consumes detector bitstrings",
+      "missing_to_promote": "Preserve detector-bitstring input when replacing the toy observation model.",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "holdout_profile_shots": 864,
+        "observation_profile_count": 3,
+        "profile_result_count": 9,
+        "total_profile_shots": 1728
+      },
+      "gate_id": "C3",
+      "label": "Profile sweep and holdout split are present",
+      "missing_to_promote": "Retain model-selection/holdout separation for real calibration sweeps.",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "calibrated_flag_data_used": false,
+        "per_shot_real_hardware_or_calibrated_flag_events": false
+      },
+      "gate_id": "C4",
+      "label": "Calibrated flag data is available",
+      "missing_to_promote": "Add calibrated leakage/erasure flag observations with a confusion matrix.",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "hardware_result_claimed": false,
+        "real_hardware_trace_used": false
+      },
+      "gate_id": "C5",
+      "label": "Real hardware traces are available",
+      "missing_to_promote": "Run the same decoder interface on real or independently calibrated hardware traces.",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "best_profile": "conservative_hardware_like_leakage",
+        "best_profile_holdout_baseline_failures": 16,
+        "best_profile_holdout_failure_delta": 0,
+        "best_profile_holdout_injected_failures": 16
+      },
+      "gate_id": "C6",
+      "label": "Holdout improvement is observed",
+      "missing_to_promote": "Show strictly fewer holdout logical failures under calibrated injection.",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "best_profile_holdout_introduced_failures": 0,
+        "holdout_nonregression_gate_passed": true
+      },
+      "gate_id": "C7",
+      "label": "Holdout non-regression is preserved",
+      "missing_to_promote": "Maintain non-regression after replacing the model with calibrated data.",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "stress_profile": "stress_hardware_like_leakage",
+        "stress_profile_injected_failures": 22,
+        "stress_profile_introduced_failures": 0,
+        "stress_profile_model_flag_events": 727
+      },
+      "gate_id": "C8",
+      "label": "Stress profile does not introduce failures",
+      "missing_to_promote": "Re-check this guardrail on real high-leakage slices.",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "gate_id": "C9",
+      "label": "No forbidden production or threshold claim is made",
+      "missing_to_promote": "Keep B2 as a negative-boundary result until C4-C6 pass on stronger data.",
+      "passed": true
+    }
+  ],
+  "claim_boundary": {
+    "calibrated_device_claimed": false,
+    "calibration_transfer_guardrail_built": true,
+    "calibration_transfer_ready": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "The route has no calibrated flag data, no real hardware trace, and no holdout improvement, so it cannot support a production decoder, threshold, low-overhead QEC, or hardware claim.",
+    "what_is_supported": "The current B2 pipeline has per-shot traces, detector-bitstring input, profile sweeps, holdout accounting, and non-regression under the best hardware-like model."
+  },
+  "elapsed_seconds": 0.002734661102294922,
+  "last_updated": "2026-06-30",
+  "method": "b2_calibration_transfer_guardrail_gate_v0",
+  "model_status": "hardware_like_model_has_no_calibrated_or_hardware_transfer_evidence",
+  "problem_id": 22,
+  "sources": {
+    "dem_edge_result": "results/B2_dem_informed_detector_edge_semantics_gate_v0.json",
+    "hardware_like_result": "results/B2_hardware_like_leakage_model_gate_v0.json",
+    "per_shot_trace_result": "results/B2_per_shot_decoder_trace_packet_v0.json",
+    "posterior_injection_result": "results/B2_posterior_likelihood_decoder_injection_gate_v0.json"
+  },
+  "status": "calibration_transfer_guardrail_failed",
+  "summary": {
+    "best_profile": "conservative_hardware_like_leakage",
+    "best_profile_holdout_baseline_failures": 16,
+    "best_profile_holdout_failure_delta": 0,
+    "best_profile_holdout_injected_failures": 16,
+    "best_profile_model_flag_events": 415,
+    "calibrated_flag_data_used": false,
+    "calibration_requirement_count": 9,
+    "calibration_transfer_ready": false,
+    "dem_route_demotion_recommended": true,
+    "failed_calibration_requirement_count": 3,
+    "hardware_route_demotion_recommended": true,
+    "holdout_improvement_gate_passed": false,
+    "holdout_nonregression_gate_passed": true,
+    "holdout_profile_shots": 864,
+    "missing_calibration_gate_ids": [
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "observation_profile_count": 3,
+    "passed_calibration_requirement_count": 6,
+    "posterior_route_demotion_recommended": true,
+    "production_decoder_ready": false,
+    "profile_result_count": 9,
+    "real_hardware_trace_used": false,
+    "source_challenge_count": 3,
+    "source_trace_count": 576,
+    "stress_profile_model_flag_events": 727,
+    "stress_profile_no_introduced_failures": true,
+    "threshold_claim_supported": false,
+    "total_profile_shots": 1728
+  },
+  "title": "B2 calibration transfer guardrail gate",
+  "toolchain": "Consumes the B2 per-shot trace packet, posterior injection gate, DEM-informed edge semantics gate, and hardware-like leakage gate; checks whether the model has enough calibration-transfer evidence to support production-decoder, threshold, or hardware claims.",
+  "validation_errors": [],
+  "version": "0.1"
+}

@@ -167,15 +167,17 @@ false-positive overhead stress, a posterior-calibrated shot-conditioned leakage
 boundary, a posterior-weighted decoder-risk ledger, a decoder-input contract
 feasibility gate, a per-shot decoder trace packet, a posterior-likelihood
 injection gate, a DEM-informed detector-to-edge semantics gate, and a
-hardware-like leakage observation model gate. The latest B2 gate consumes three
-strict challenge rows across three observation profiles / 1,728 profile-shots,
-with 864 holdout profile-shots. The best conservative hardware-like profile
-generates 415 model flag events, changes 0 predictions, fixes 0 failures,
-introduces 0 failures, and leaves 22 injected failures; holdout failure delta is
-also 0. The improvement gate remains false, the route remains demoted, and the
-model is still not calibrated or hardware-derived. This is still not a
-circuit-level decoder, production decoder, threshold, hardware result,
-quantum-advantage result, or new-code claim.
+hardware-like leakage observation model gate, and a calibration-transfer
+guardrail. The latest B2 guardrail consumes the per-shot trace packet,
+posterior injection gate, DEM edge semantics gate, and hardware-like leakage
+gate. It checks 9 calibration-transfer requirements: 6 pass and 3 fail. The
+missing gates are calibrated flag data (`C4`), real hardware traces (`C5`), and
+holdout improvement (`C6`). The best conservative hardware-like profile still
+has 415 model flag events, 16 holdout baseline failures, 16 holdout injected
+failures, and holdout failure delta 0. Calibration transfer remains false,
+production decoder readiness remains false, and threshold support remains
+false. This is still not a circuit-level decoder, production decoder,
+threshold, hardware result, quantum-advantage result, or new-code claim.
 
 B9 now has a local parametric certificate checker for the
 `cluster_stabilizer_open_uniform_reweight` family. It checks the n >= 4

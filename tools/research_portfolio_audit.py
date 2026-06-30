@@ -20559,6 +20559,9 @@ def audit(root: Path) -> dict:
     b2_hardware_like_leakage_gate = b2_results.get(
         "hardware_like_leakage_model_gate_v0"
     )
+    b2_calibration_transfer_guardrail = b2_results.get(
+        "calibration_transfer_guardrail_gate_v0"
+    )
     b2_status = {}
     if not b2_baseline:
         warnings.append("B2 manifest has no repetition-code control baseline result")
@@ -22143,6 +22146,174 @@ def audit(root: Path) -> dict:
                 errors.append(f"B2 hardware-like leakage gate must keep {key}=False")
         if len(payload.get("validation_errors", [])) != 0:
             errors.append("B2 hardware-like leakage gate validation errors must be zero")
+
+    b2_calibration_transfer_guardrail_status = {}
+    if not b2_calibration_transfer_guardrail:
+        warnings.append("B2 manifest has no calibration transfer guardrail gate")
+    else:
+        result_path = b2_calibration_transfer_guardrail.get("result")
+        markdown_path = b2_calibration_transfer_guardrail.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B2 calibration transfer guardrail result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(
+                f"B2 calibration transfer guardrail markdown missing: {markdown_path}"
+            )
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        claims = payload.get("claim_boundary", {})
+        b2_calibration_transfer_guardrail_status = {
+            "status": b2_calibration_transfer_guardrail.get("status"),
+            "method": b2_calibration_transfer_guardrail.get("method"),
+            "model_status": payload.get("model_status"),
+            "source_challenge_count": summary.get("source_challenge_count"),
+            "source_trace_count": summary.get("source_trace_count"),
+            "observation_profile_count": summary.get("observation_profile_count"),
+            "profile_result_count": summary.get("profile_result_count"),
+            "total_profile_shots": summary.get("total_profile_shots"),
+            "holdout_profile_shots": summary.get("holdout_profile_shots"),
+            "best_profile": summary.get("best_profile"),
+            "best_profile_model_flag_events": summary.get("best_profile_model_flag_events"),
+            "stress_profile_model_flag_events": summary.get("stress_profile_model_flag_events"),
+            "best_profile_holdout_baseline_failures": summary.get(
+                "best_profile_holdout_baseline_failures"
+            ),
+            "best_profile_holdout_injected_failures": summary.get(
+                "best_profile_holdout_injected_failures"
+            ),
+            "best_profile_holdout_failure_delta": summary.get(
+                "best_profile_holdout_failure_delta"
+            ),
+            "calibration_requirement_count": summary.get("calibration_requirement_count"),
+            "passed_calibration_requirement_count": summary.get(
+                "passed_calibration_requirement_count"
+            ),
+            "failed_calibration_requirement_count": summary.get(
+                "failed_calibration_requirement_count"
+            ),
+            "missing_calibration_gate_ids": summary.get("missing_calibration_gate_ids"),
+            "calibrated_flag_data_used": summary.get("calibrated_flag_data_used"),
+            "real_hardware_trace_used": summary.get("real_hardware_trace_used"),
+            "holdout_improvement_gate_passed": summary.get(
+                "holdout_improvement_gate_passed"
+            ),
+            "holdout_nonregression_gate_passed": summary.get(
+                "holdout_nonregression_gate_passed"
+            ),
+            "stress_profile_no_introduced_failures": summary.get(
+                "stress_profile_no_introduced_failures"
+            ),
+            "posterior_route_demotion_recommended": summary.get(
+                "posterior_route_demotion_recommended"
+            ),
+            "dem_route_demotion_recommended": summary.get("dem_route_demotion_recommended"),
+            "hardware_route_demotion_recommended": summary.get(
+                "hardware_route_demotion_recommended"
+            ),
+            "calibration_transfer_ready": summary.get("calibration_transfer_ready"),
+            "production_decoder_ready": summary.get("production_decoder_ready"),
+            "threshold_claim_supported": summary.get("threshold_claim_supported"),
+            "calibration_transfer_guardrail_built": claims.get(
+                "calibration_transfer_guardrail_built"
+            ),
+            "production_decoder_claimed": claims.get("production_decoder_claimed"),
+            "threshold_claimed": claims.get("threshold_claimed"),
+            "new_code_claimed": claims.get("new_code_claimed"),
+            "hardware_result_claimed": claims.get("hardware_result_claimed"),
+            "calibrated_device_claimed": claims.get("calibrated_device_claimed"),
+            "quantum_advantage_claimed": claims.get("quantum_advantage_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != b2_calibration_transfer_guardrail.get("status"):
+            errors.append("B2 calibration transfer guardrail status mismatch")
+        if payload.get("method") != b2_calibration_transfer_guardrail.get("method"):
+            errors.append("B2 calibration transfer guardrail method mismatch")
+        if payload.get("model_status") != b2_calibration_transfer_guardrail.get("model_status"):
+            errors.append("B2 calibration transfer guardrail model-status mismatch")
+        for key in [
+            "source_challenge_count",
+            "source_trace_count",
+            "observation_profile_count",
+            "profile_result_count",
+            "total_profile_shots",
+            "holdout_profile_shots",
+            "best_profile",
+            "best_profile_model_flag_events",
+            "stress_profile_model_flag_events",
+            "best_profile_holdout_baseline_failures",
+            "best_profile_holdout_injected_failures",
+            "best_profile_holdout_failure_delta",
+            "calibration_requirement_count",
+            "passed_calibration_requirement_count",
+            "failed_calibration_requirement_count",
+            "missing_calibration_gate_ids",
+            "calibrated_flag_data_used",
+            "real_hardware_trace_used",
+            "holdout_improvement_gate_passed",
+            "holdout_nonregression_gate_passed",
+            "stress_profile_no_introduced_failures",
+            "posterior_route_demotion_recommended",
+            "dem_route_demotion_recommended",
+            "hardware_route_demotion_recommended",
+            "calibration_transfer_ready",
+            "production_decoder_ready",
+            "threshold_claim_supported",
+        ]:
+            if summary.get(key) != b2_calibration_transfer_guardrail.get(key):
+                errors.append(f"B2 calibration transfer guardrail {key} mismatch")
+        if summary.get("source_challenge_count") != 3:
+            errors.append("B2 calibration transfer guardrail should consume three challenges")
+        if summary.get("source_trace_count") != 576:
+            errors.append("B2 calibration transfer guardrail should consume 576 traces")
+        if summary.get("calibration_requirement_count") != 9:
+            errors.append("B2 calibration transfer guardrail should check nine requirements")
+        if summary.get("passed_calibration_requirement_count") != 6:
+            errors.append("B2 calibration transfer guardrail should pass six requirements")
+        if summary.get("failed_calibration_requirement_count") != 3:
+            errors.append("B2 calibration transfer guardrail should fail three requirements")
+        if summary.get("missing_calibration_gate_ids") != ["C4", "C5", "C6"]:
+            errors.append("B2 calibration transfer guardrail missing gates should be C4/C5/C6")
+        for key in [
+            "calibrated_flag_data_used",
+            "real_hardware_trace_used",
+            "holdout_improvement_gate_passed",
+            "calibration_transfer_ready",
+            "production_decoder_ready",
+            "threshold_claim_supported",
+        ]:
+            if summary.get(key) is not False:
+                errors.append(f"B2 calibration transfer guardrail must keep {key}=False")
+        for key in [
+            "holdout_nonregression_gate_passed",
+            "stress_profile_no_introduced_failures",
+            "posterior_route_demotion_recommended",
+            "dem_route_demotion_recommended",
+            "hardware_route_demotion_recommended",
+        ]:
+            if summary.get(key) is not True:
+                errors.append(f"B2 calibration transfer guardrail must keep {key}=True")
+        if claims.get("calibration_transfer_guardrail_built") is not True:
+            errors.append("B2 calibration transfer guardrail must disclose guardrail construction")
+        if claims.get("calibration_transfer_ready") is not False:
+            errors.append("B2 calibration transfer guardrail must not claim transfer readiness")
+        for key in [
+            "production_decoder_claimed",
+            "threshold_claimed",
+            "new_code_claimed",
+            "hardware_result_claimed",
+            "calibrated_device_claimed",
+            "quantum_advantage_claimed",
+        ]:
+            if claims.get(key) is not False:
+                errors.append(f"B2 calibration transfer guardrail must keep {key}=False")
+        if len(payload.get("validation_errors", [])) != 0:
+            errors.append("B2 calibration transfer guardrail validation errors must be zero")
 
     b3_manifest = yaml.safe_load(read(b3_manifest_path))
     b3_results = b3_manifest.get("current_results", {})
@@ -29744,6 +29915,7 @@ def audit(root: Path) -> dict:
             "posterior_likelihood_decoder_injection_gate": b2_posterior_injection_gate_status,
             "dem_informed_detector_edge_semantics_gate": b2_dem_edge_semantics_gate_status,
             "hardware_like_leakage_model_gate": b2_hardware_like_leakage_gate_status,
+            "calibration_transfer_guardrail_gate": b2_calibration_transfer_guardrail_status,
         },
         "b3": {
             "manifest": str(b3_manifest_path),
@@ -30207,6 +30379,9 @@ def audit(root: Path) -> dict:
             ),
             "b2_hardware_like_leakage_model_gate": str(
                 research / "B2_hardware_like_leakage_model_gate.md"
+            ),
+            "b2_calibration_transfer_guardrail_gate": str(
+                research / "B2_calibration_transfer_guardrail_gate.md"
             ),
             "b3_quantum_observable_fci_comparison": str(research / "B3_quantum_observable_fci_comparison.md"),
             "b3_quantum_observable_fci_qasm_directory": str(
@@ -32084,6 +32259,13 @@ def markdown_report(report: dict) -> str:
             f"- Hardware-like leakage gate production decoder / threshold / hardware: {report['b2']['hardware_like_leakage_model_gate'].get('production_decoder_claimed')} / {report['b2']['hardware_like_leakage_model_gate'].get('threshold_claimed')} / {report['b2']['hardware_like_leakage_model_gate'].get('hardware_result_claimed')}",
             f"- Hardware-like leakage gate validation errors: {report['b2']['hardware_like_leakage_model_gate'].get('validation_error_count')}",
             f"- Hardware-like leakage gate result/markdown exists: {report['b2']['hardware_like_leakage_model_gate'].get('result_exists')} / {report['b2']['hardware_like_leakage_model_gate'].get('markdown_exists')}",
+            f"- Calibration transfer guardrail status: {report['b2']['calibration_transfer_guardrail_gate'].get('status')}",
+            f"- Calibration transfer guardrail challenges / traces / profiles / profile rows: {report['b2']['calibration_transfer_guardrail_gate'].get('source_challenge_count')} / {report['b2']['calibration_transfer_guardrail_gate'].get('source_trace_count')} / {report['b2']['calibration_transfer_guardrail_gate'].get('observation_profile_count')} / {report['b2']['calibration_transfer_guardrail_gate'].get('profile_result_count')}",
+            f"- Calibration transfer guardrail passed / failed / missing gates: {report['b2']['calibration_transfer_guardrail_gate'].get('passed_calibration_requirement_count')} / {report['b2']['calibration_transfer_guardrail_gate'].get('failed_calibration_requirement_count')} / {report['b2']['calibration_transfer_guardrail_gate'].get('missing_calibration_gate_ids')}",
+            f"- Calibration transfer guardrail calibrated flags / hardware traces / holdout improvement: {report['b2']['calibration_transfer_guardrail_gate'].get('calibrated_flag_data_used')} / {report['b2']['calibration_transfer_guardrail_gate'].get('real_hardware_trace_used')} / {report['b2']['calibration_transfer_guardrail_gate'].get('holdout_improvement_gate_passed')}",
+            f"- Calibration transfer guardrail non-regression / transfer ready / production decoder / threshold: {report['b2']['calibration_transfer_guardrail_gate'].get('holdout_nonregression_gate_passed')} / {report['b2']['calibration_transfer_guardrail_gate'].get('calibration_transfer_ready')} / {report['b2']['calibration_transfer_guardrail_gate'].get('production_decoder_ready')} / {report['b2']['calibration_transfer_guardrail_gate'].get('threshold_claim_supported')}",
+            f"- Calibration transfer guardrail validation errors: {report['b2']['calibration_transfer_guardrail_gate'].get('validation_error_count')}",
+            f"- Calibration transfer guardrail result/markdown exists: {report['b2']['calibration_transfer_guardrail_gate'].get('result_exists')} / {report['b2']['calibration_transfer_guardrail_gate'].get('markdown_exists')}",
             "",
             "## B3 Resource Proxy Status",
             "",

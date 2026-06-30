@@ -280,6 +280,17 @@ events and still fixes 0 failures. The route remains demoted until
 `T-B2-009e` supplies real calibrated leakage/flag observations or independent
 hardware traces.
 
+**Sprint update 50:** `T-B2-009e` is now merged as a calibration-transfer
+guardrail. The new tool `tools/b2_calibration_transfer_guardrail_gate.py`
+consumes the per-shot trace packet, posterior injection gate, DEM-informed
+edge-semantics gate, and hardware-like leakage gate. It checks 9 requirements:
+6 pass and 3 fail. The failed requirements are calibrated flag data (`C4`),
+real hardware traces (`C5`), and holdout improvement (`C6`). The best
+conservative profile still has 16 holdout baseline failures, 16 holdout
+injected failures, and holdout delta 0. Calibration transfer, production
+decoder readiness, and threshold support all remain false, so B2 stays demoted
+until those three gates are satisfied with stronger data.
+
 ## B3: Molecular Reaction Dynamics
 
 **Technical target:** produce a reaction-coordinate quantum observable estimate

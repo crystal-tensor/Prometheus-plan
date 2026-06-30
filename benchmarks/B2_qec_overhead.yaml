@@ -593,6 +593,49 @@ current_results:
     caveat: observation_model_is_not_calibrated_not_real_hardware_and_not_a_production_decoder
     result: ../results/B2_hardware_like_leakage_model_gate_v0.json
     markdown_report: ../research/B2_hardware_like_leakage_model_gate.md
+  calibration_transfer_guardrail_gate_v0:
+    status: calibration_transfer_guardrail_failed
+    method: b2_calibration_transfer_guardrail_gate_v0
+    source: hardware_like_leakage_model_gate_v0
+    model_status: hardware_like_model_has_no_calibrated_or_hardware_transfer_evidence
+    toolchain: Calibration-transfer guardrail over per-shot traces, posterior injection, DEM edge semantics, and hardware-like leakage evidence
+    source_challenge_count: 3
+    source_trace_count: 576
+    observation_profile_count: 3
+    profile_result_count: 9
+    total_profile_shots: 1728
+    holdout_profile_shots: 864
+    best_profile: conservative_hardware_like_leakage
+    best_profile_model_flag_events: 415
+    stress_profile_model_flag_events: 727
+    best_profile_holdout_baseline_failures: 16
+    best_profile_holdout_injected_failures: 16
+    best_profile_holdout_failure_delta: 0
+    calibration_requirement_count: 9
+    passed_calibration_requirement_count: 6
+    failed_calibration_requirement_count: 3
+    missing_calibration_gate_ids: [C4, C5, C6]
+    calibrated_flag_data_used: false
+    real_hardware_trace_used: false
+    holdout_improvement_gate_passed: false
+    holdout_nonregression_gate_passed: true
+    stress_profile_no_introduced_failures: true
+    posterior_route_demotion_recommended: true
+    dem_route_demotion_recommended: true
+    hardware_route_demotion_recommended: true
+    calibration_transfer_ready: false
+    production_decoder_ready: false
+    threshold_claim_supported: false
+    new_code_claimed: false
+    threshold_claimed: false
+    calibrated_device_claimed: false
+    production_decoder_claimed: false
+    hardware_result_claimed: false
+    quantum_advantage_claimed: false
+    interpretation: calibration_transfer_guardrail_keeps_b2_demoted_until_calibrated_flags_real_hardware_traces_and_holdout_improvement_exist
+    caveat: guardrail_is_a_transfer_readiness_check_not_a_new_decoder_or_hardware_experiment
+    result: ../results/B2_calibration_transfer_guardrail_gate_v0.json
+    markdown_report: ../research/B2_calibration_transfer_guardrail_gate.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -608,6 +651,7 @@ prototype_artifacts:
   heralded_erasure_false_positive_stress: ../tools/b2_heralded_erasure_false_positive_stress.py
   shot_conditioned_erasure_decoder_boundary: ../tools/b2_shot_conditioned_erasure_decoder_boundary.py
   posterior_weighted_decoder_risk_ledger: ../tools/b2_posterior_weighted_decoder_risk_ledger.py
+  calibration_transfer_guardrail_gate: ../tools/b2_calibration_transfer_guardrail_gate.py
   decoder_input_contract_feasibility_gate: ../tools/b2_decoder_input_contract_feasibility_gate.py
   per_shot_decoder_trace_packet: ../tools/b2_per_shot_decoder_trace_packet.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py

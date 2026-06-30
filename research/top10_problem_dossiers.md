@@ -251,9 +251,13 @@ aggressive DEM profile introduces 1 failure. T-B2-009d adds a hardware-like
 leakage observation model gate: 3 observation profiles / 1,728 profile-shots,
 864 holdout profile-shots, best conservative hardware-like profile generates
 415 model flag events, changes 0 predictions, fixes 0 failures, introduces 0
-failures, and has holdout failure delta 0. No circuit-level production decoder,
-threshold, hardware, calibrated-device, quantum-advantage, or new-code claim is
-made.
+failures, and has holdout failure delta 0. T-B2-009e adds a
+calibration-transfer guardrail over the per-shot trace packet, posterior
+injection gate, DEM edge-semantics gate, and hardware-like leakage gate. It
+checks 9 requirements, passes 6, and fails 3: calibrated flag data (`C4`), real
+hardware traces (`C5`), and holdout improvement (`C6`). No circuit-level
+production decoder, threshold, hardware, calibrated-device, quantum-advantage,
+or new-code claim is made.
 
 **Remaining path to a serious solution:** replace synthetic detector/tick flag
 events and hardware-like observation models with real calibrated leakage/flag

@@ -1695,6 +1695,13 @@ Overall audit: PASS
 - Hardware-like leakage gate production decoder / threshold / hardware: False / False / False
 - Hardware-like leakage gate validation errors: 0
 - Hardware-like leakage gate result/markdown exists: True / True
+- Calibration transfer guardrail status: calibration_transfer_guardrail_failed
+- Calibration transfer guardrail challenges / traces / profiles / profile rows: 3 / 576 / 3 / 9
+- Calibration transfer guardrail passed / failed / missing gates: 6 / 3 / ['C4', 'C5', 'C6']
+- Calibration transfer guardrail calibrated flags / hardware traces / holdout improvement: False / False / False
+- Calibration transfer guardrail non-regression / transfer ready / production decoder / threshold: True / False / False / False
+- Calibration transfer guardrail validation errors: 0
+- Calibration transfer guardrail result/markdown exists: True / True
 
 ## B3 Resource Proxy Status
 
