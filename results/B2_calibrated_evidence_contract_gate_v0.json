@@ -1,0 +1,221 @@
+{
+  "benchmark_id": "B2",
+  "claim_boundary": {
+    "calibrated_device_claimed": false,
+    "calibrated_evidence_contract_built": true,
+    "calibration_transfer_ready": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "No new calibrated flag data, real hardware trace, holdout improvement, production decoder, threshold, or low-overhead QEC claim is established by this contract gate.",
+    "what_is_supported": "B2 now has explicit PR packets for the three blockers that prevent calibration transfer: calibrated flag data, real or independently calibrated hardware traces, and strict holdout improvement with non-regression."
+  },
+  "contract_packets": [
+    {
+      "acceptance_rule": "calibrated_flag_data_used must become true without changing the per-shot decoder interface or claiming hardware advantage.",
+      "blocks_gate": "K4",
+      "owner_role": "hardware_data_or_calibration_agent",
+      "packet_id": "B2-C4-calibrated-flag-data",
+      "required_artifacts": [
+        "per-shot detector bitstrings using the existing B2 trace schema",
+        "per-shot observable bitstrings or logical labels",
+        "detector-tick-indexed leakage/erasure/flag events",
+        "calibrated flag confusion matrix with provenance",
+        "calibration date, backend family, noise slice, and shot count metadata"
+      ]
+    },
+    {
+      "acceptance_rule": "real_hardware_trace_used must become true and replay must produce the same summary fields as the current guardrail.",
+      "blocks_gate": "K5",
+      "owner_role": "hardware_trace_replay_agent",
+      "packet_id": "B2-C5-hardware-trace-replay",
+      "required_artifacts": [
+        "independent real or provider-calibrated trace rows",
+        "same decoder replay command used for synthetic B2 traces",
+        "source-to-result trace hash ledger",
+        "explicit separation between calibration, model-selection, and holdout slices"
+      ]
+    },
+    {
+      "acceptance_rule": "best_profile_holdout_injected_failures must be strictly lower than the current baseline 16 while introduced failures remain zero.",
+      "blocks_gate": "K6",
+      "owner_role": "decoder_baseline_adversary_agent",
+      "packet_id": "B2-C6-holdout-improvement",
+      "required_artifacts": [
+        "strict holdout baseline logical failure count",
+        "strict holdout injected logical failure count",
+        "all-challenge non-regression table",
+        "runtime and changed-prediction audit",
+        "negative-control profile where flags are shuffled or withheld"
+      ]
+    }
+  ],
+  "contract_requirements": [
+    {
+      "acceptance_rule": "The source guardrail must stay valid and fail only C4/C5/C6.",
+      "evidence": {
+        "missing_source_gates": [
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "source_method": "b2_calibration_transfer_guardrail_gate_v0",
+        "source_status": "calibration_transfer_guardrail_failed",
+        "source_validation_error_count": 0
+      },
+      "gate_id": "K1",
+      "label": "Source guardrail is a valid negative calibration-transfer boundary",
+      "passed": true,
+      "pr_packet": "source-audit"
+    },
+    {
+      "acceptance_rule": "Keep at least the current three-challenge / 576-trace replay shape.",
+      "evidence": {
+        "source_challenge_count": 3,
+        "source_trace_count": 576
+      },
+      "gate_id": "K2",
+      "label": "Replayable per-shot trace schema remains available",
+      "passed": true,
+      "pr_packet": "trace-schema"
+    },
+    {
+      "acceptance_rule": "Every failed blocker must map to a concrete PR packet.",
+      "evidence": {
+        "contract_packet_count": 3,
+        "contract_packet_ids": [
+          "B2-C4-calibrated-flag-data",
+          "B2-C5-hardware-trace-replay",
+          "B2-C6-holdout-improvement"
+        ]
+      },
+      "gate_id": "K3",
+      "label": "PR packets exist for every failed calibration-transfer gate",
+      "passed": true,
+      "pr_packet": "packet-index"
+    },
+    {
+      "acceptance_rule": "Submit calibrated leakage/erasure flag observations with confusion metadata.",
+      "evidence": {
+        "calibrated_flag_data_used": false,
+        "source_gate": "C4"
+      },
+      "gate_id": "K4",
+      "label": "Calibrated flag-data packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B2-C4-calibrated-flag-data"
+    },
+    {
+      "acceptance_rule": "Submit real or independently calibrated hardware traces replayed by the same decoder.",
+      "evidence": {
+        "real_hardware_trace_used": false,
+        "source_gate": "C5"
+      },
+      "gate_id": "K5",
+      "label": "Real hardware trace-replay packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B2-C5-hardware-trace-replay"
+    },
+    {
+      "acceptance_rule": "Show strictly fewer holdout logical failures under calibrated injection.",
+      "evidence": {
+        "best_profile": "conservative_hardware_like_leakage",
+        "holdout_baseline_failures": 16,
+        "holdout_failure_delta": 0,
+        "holdout_injected_failures": 16,
+        "source_gate": "C6"
+      },
+      "gate_id": "K6",
+      "label": "Holdout improvement packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B2-C6-holdout-improvement"
+    },
+    {
+      "acceptance_rule": "Keep non-regression true after C4/C5 data are introduced.",
+      "evidence": {
+        "holdout_nonregression_gate_passed": true,
+        "stress_profile_no_introduced_failures": true
+      },
+      "gate_id": "K7",
+      "label": "Holdout non-regression remains preserved",
+      "passed": true,
+      "pr_packet": "holdout-nonregression"
+    },
+    {
+      "acceptance_rule": "Do not promote B2 until K4-K6 pass under replayable evidence.",
+      "evidence": {
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "gate_id": "K8",
+      "label": "Forbidden production, threshold, hardware, and advantage claims remain absent",
+      "passed": true,
+      "pr_packet": "claim-boundary"
+    }
+  ],
+  "elapsed_seconds": 8.702278137207031e-05,
+  "last_updated": "2026-07-01",
+  "method": "b2_calibrated_evidence_contract_gate_v0",
+  "model_status": "calibration_transfer_blockers_decomposed_for_data_prs",
+  "problem_id": 22,
+  "sources": {
+    "guardrail_result": "results/B2_calibration_transfer_guardrail_gate_v0.json"
+  },
+  "status": "calibrated_evidence_contract_open_missing_hardware_data",
+  "summary": {
+    "best_profile": "conservative_hardware_like_leakage",
+    "best_profile_holdout_baseline_failures": 16,
+    "best_profile_holdout_failure_delta": 0,
+    "best_profile_holdout_injected_failures": 16,
+    "best_profile_model_flag_events": 415,
+    "calibrated_flag_data_required": true,
+    "calibrated_flag_data_used": false,
+    "calibration_transfer_ready": false,
+    "contract_packet_count": 3,
+    "contract_packet_ids": [
+      "B2-C4-calibrated-flag-data",
+      "B2-C5-hardware-trace-replay",
+      "B2-C6-holdout-improvement"
+    ],
+    "contract_requirement_count": 8,
+    "data_contract_ready_for_prs": true,
+    "failed_contract_requirement_count": 3,
+    "failed_contract_requirement_ids": [
+      "K4",
+      "K5",
+      "K6"
+    ],
+    "holdout_improvement_gate_passed": false,
+    "holdout_improvement_required": true,
+    "holdout_nonregression_gate_passed": true,
+    "holdout_profile_shots": 864,
+    "observation_profile_count": 3,
+    "passed_contract_requirement_count": 5,
+    "production_decoder_ready": false,
+    "profile_result_count": 9,
+    "real_hardware_trace_required": true,
+    "real_hardware_trace_used": false,
+    "source_challenge_count": 3,
+    "source_method": "b2_calibration_transfer_guardrail_gate_v0",
+    "source_missing_gate_ids": [
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "source_status": "calibration_transfer_guardrail_failed",
+    "source_trace_count": 576,
+    "stress_profile_model_flag_events": 727,
+    "threshold_claim_supported": false,
+    "total_profile_shots": 1728
+  },
+  "title": "B2 calibrated evidence contract gate",
+  "toolchain": "Consumes the B2 calibration-transfer guardrail and decomposes its C4/C5/C6 blockers into PR-ready data contracts for calibrated flag data, hardware trace replay, and strict holdout improvement.",
+  "validation_errors": [],
+  "version": "0.1"
+}

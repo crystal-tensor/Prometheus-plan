@@ -291,6 +291,16 @@ injected failures, and holdout delta 0. Calibration transfer, production
 decoder readiness, and threshold support all remain false, so B2 stays demoted
 until those three gates are satisfied with stronger data.
 
+**Sprint update 68:** `T-B2-010` is now merged as a calibrated-evidence
+contract gate. The new tool `tools/b2_calibrated_evidence_contract_gate.py`
+consumes the failed calibration-transfer guardrail and decomposes `C4`/`C5`/`C6`
+into three PR-ready packets: `B2-C4-calibrated-flag-data`,
+`B2-C5-hardware-trace-replay`, and `B2-C6-holdout-improvement`. It checks 8
+contract requirements, passes 5, and fails 3 (`K4`, `K5`, `K6`). The best
+conservative holdout remains 16 baseline / 16 injected / delta 0, so this is a
+handoff contract for qec agents rather than a production decoder, threshold,
+hardware, calibrated-device, new-code, or low-overhead QEC claim.
+
 ## B3: Molecular Reaction Dynamics
 
 **Technical target:** produce a reaction-coordinate quantum observable estimate

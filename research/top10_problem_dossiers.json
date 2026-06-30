@@ -32,8 +32,10 @@
       "completed": "Stim/PyMatching baseline; Wilson target-volume table; biased schedule proxy; circuit-level biased-schedule sweep; same-hardware reduced-round candidate and robustness stress closed by artifact boundary; T-B2-003 leakage-flagged analytic boundary; T-B2-004 Stim HERALDED_ERASE / DEPOLARIZE1 stress with 10 d=5/d=7 improved rows; T-B2-005 false-positive overhead stress with 5 positive-false-positive d=5/d=7 rows at fp=0.001/tick and 0 improved rows by fp=0.003/tick; T-B2-006 posterior-calibrated shot-conditioned leakage boundary over 288 target comparisons and 4 calibration profiles, preserving at most 4 d=5/d=7 rows in one profile, with strict survival 0 and robust all-profile survival false; T-B2-007 posterior-weighted decoder-risk ledger over 4 risk budgets / 4608 budget-profile rows, with raw survivors 6, adjusted survivors 6/5/3/3, strict high-purity adjusted survivors 0, and robust all-profile adjusted survival false; T-B2-008 decoder-input contract feasibility gate: 10 required decoder inputs, 4 available, 6 missing; 9 feasibility gates, 4 passed, 5 failed critical gates; T-B2-009a per-shot decoder trace packet: 3 strict challenge rows, 192 shots each, 576 detector-bitstring traces, observable/prediction rows, and 482 synthetic detector/tick flag events; T-B2-009b posterior-likelihood injection gate: 3 injection profiles / 1728 profile-shots, best profile changes 0 predictions and fixes 0 failures, strong profile introduces 2 failures, improvement gate false, route demotion recommended; T-B2-009c DEM-informed detector-to-edge semantics gate: 3 semantic profiles / 1728 profile-shots, best conservative profile changes 0 predictions, fixes 0 failures, introduces 0 failures, and leaves 22 injected failures, while aggressive DEM semantics introduces 1 failure; T-B2-009d hardware-like leakage observation model gate: 3 observation profiles / 1728 profile-shots, 864 holdout profile-shots, best conservative hardware-like profile generates 415 model flag events, changes 0 predictions, fixes 0 failures, introduces 0 failures, and has holdout failure delta 0. No circuit-level production decoder, threshold, hardware, calibrated-device, quantum-advantage, or new-code claim is made. T-B2-009e now adds a calibration-transfer guardrail over the per-shot trace packet, posterior injection gate, DEM edge-semantics gate, and hardware-like leakage gate. It checks 9 requirements, passes 6, and fails C4 calibrated flag data, C5 real hardware traces, and C6 holdout improvement; best conservative holdout remains 16 baseline / 16 injected / delta 0.",
       "completed_here": "Stim/PyMatching rotated surface-code baseline, reduced-round artifact closure, leakage-flagged erasure analytic boundary, Stim HERALDED_ERASE stress, false-positive stress, posterior-calibrated shot-conditioned boundary, T-B2-007 posterior-weighted decoder-risk ledger, T-B2-008 decoder-input contract feasibility gate, T-B2-009a per-shot trace packet, T-B2-009b posterior-likelihood injection gate, T-B2-009c DEM-informed detector-to-edge semantics gate, and T-B2-009d hardware-like leakage observation model gate. The latest gate consumes 3 strict challenge rows across 3 observation profiles / 1728 profile-shots with 864 holdout profile-shots; best conservative hardware-like profile changes 0 predictions and fixes 0 failures, holdout failure delta remains 0, holdout improvement remains false, and route demotion remains recommended. No circuit-level decoder, production decoder, threshold, hardware, calibrated-device, quantum-advantage, or new-code claim is made.",
       "current_difficulty": "Overhead depends on noise, decoder latency, leakage, correlated errors, measurement schedules, and layout; paper-best codes may fail under circuit-level constraints.",
+      "current_status": "T-B2-010 calibrated-evidence contract gate is open: 8 requirements checked, 5 passed, 3 failed (K4/K5/K6), and 3 PR packets emitted for calibrated flag data, hardware trace replay, and holdout improvement. No calibrated data, hardware result, threshold, production decoder, or low-overhead QEC claim is supported.",
       "lineage": "Shor quantum error correction, Steane/CSS codes, Kitaev topological ideas, and Dennis-Kitaev-Landahl-Preskill topological memory.",
       "maturity_score": 48,
+      "next_step": "Submit evidence satisfying K4-K6 under the existing B2 trace and decoder interface before B2 can feed B7.",
       "our_solution": "Use Wilson-bounded target-volume baselines and force every candidate code, schedule, decoder, or leakage-mitigation mechanism to beat the same denominator. Reduced-round signals are now explicitly boundary-checked; the active new route is leakage-flagged erasure information that may lower required distance without reducing syndrome rounds.",
       "prior_approaches": [
         "Shor/Steane/CSS codes",
@@ -121,6 +123,7 @@
       "current_difficulty": "Sign problem, entanglement growth, finite-size extrapolation, competing phases, and dynamical correlations.",
       "lineage": "Hubbard electron-correlation model and later many-body simulation methods.",
       "maturity_score": 30,
+      "next_steps_to_complete": "Implement tools/b5_production_dmrg_mps_denominator.py or equivalent, preserve the T-B5-006d row-contract hash, satisfy T-B5-006g D3-D9, then rerun B5/B10 production contract and B10-T1 boundary audit.",
       "our_solution": "Use quantum processors as entanglement or impurity kernels inside classical embedding/tensor workflows.",
       "prior_approaches": [
         "exact diagonalization",
@@ -132,6 +135,7 @@
         "cold-atom simulation"
       ],
       "problem_id": 38,
+      "remaining": "Build the actual W1 production DMRG/MPS denominator engine: non-exact-state-seeded canonical sweeps, stored left/right environments, orthonormal residuals, 9/9 convergence ledgers, seeded-pressure replacement or honest failure, full same-access cost accounting, and no positive-route claim until T-B5-006g passes.",
       "remaining_steps": [
         "Close W1-E4-env-residuals by storing canonical left/right environments and orthonormal residual norms for all 9 rows.",
         "Close W1-E5-convergence by passing fixed-sector, energy-variance, discarded-weight, and monotonicity gates for all 9 rows.",
@@ -141,9 +145,7 @@
       ],
       "title": "Strongly correlated matter via hybrid quantum-tensor solvers",
       "unresolved_duration": "Roughly 60 years for broad strongly correlated electron problems.",
-      "what_to_solve": "Predict strongly correlated models where classical methods disagree, especially 2D doped, finite-temperature, or dynamical settings.",
-      "remaining": "Build the actual W1 production DMRG/MPS denominator engine: non-exact-state-seeded canonical sweeps, stored left/right environments, orthonormal residuals, 9/9 convergence ledgers, seeded-pressure replacement or honest failure, full same-access cost accounting, and no positive-route claim until T-B5-006g passes.",
-      "next_steps_to_complete": "Implement tools/b5_production_dmrg_mps_denominator.py or equivalent, preserve the T-B5-006d row-contract hash, satisfy T-B5-006g D3-D9, then rerun B5/B10 production contract and B10-T1 boundary audit."
+      "what_to_solve": "Predict strongly correlated models where classical methods disagree, especially 2D doped, finite-temperature, or dynamical settings."
     },
     {
       "b_id": "B6",
@@ -257,6 +259,7 @@
       "current_difficulty": "Unconditional complexity separations are hard; oracle separations do not imply real-world advantage; input models and verification can erase speedups.",
       "lineage": "Bernstein-Vazirani quantum complexity theory, Shor algorithm, hidden subgroup work, Hamiltonian simulation, quantum walks, and sampling advantage.",
       "maturity_score": 53,
+      "next_steps_to_complete": "Run T-B10-014 through an actual B5 W1 denominator engine satisfying T-B5-006g, or move B10-T2 from GenericBackendV2-style proxies to real backend or hardware verifier transcripts.",
       "our_solution": "Reduction and failure-mode graph decomposing each advantage claim into promise, input, certificate, baseline, noise, and verification assumptions.",
       "prior_approaches": [
         "oracle separations",
@@ -269,6 +272,7 @@
         "fine-grained complexity"
       ],
       "problem_id": 11,
+      "remaining": "B10-T1 remains negative: B3 is demoted, B5 W2 failed to replace seeded pressure, and B5 W3 failed to construct a same-access response oracle. Remaining B5 route is W1 production DMRG/MPS; B10-T2 still needs real backend or hardware verifier evidence.",
       "remaining_steps": [
         "Keep B3 demoted unless M5-M9 are replaced by same-access evidence.",
         "Run T-B10-014 through B5 W1 by closing W1-E4-env-residuals, W1-E5-convergence, W1-E6-seeded-pressure, and W1-E7-cost-ledger on the same B5 Hubbard response rows.",
@@ -278,9 +282,7 @@
       ],
       "title": "Mapping the boundary of BQP",
       "unresolved_duration": "Roughly 30 years for the true boundary between BQP and classical computation.",
-      "what_to_solve": "Separate robust quantum advantage claims from claims dependent on unrealistic data loading, oracle construction, precision, verification gaps, or noise assumptions.",
-      "remaining": "B10-T1 remains negative: B3 is demoted, B5 W2 failed to replace seeded pressure, and B5 W3 failed to construct a same-access response oracle. Remaining B5 route is W1 production DMRG/MPS; B10-T2 still needs real backend or hardware verifier evidence.",
-      "next_steps_to_complete": "Run T-B10-014 through an actual B5 W1 denominator engine satisfying T-B5-006g, or move B10-T2 from GenericBackendV2-style proxies to real backend or hardware verifier transcripts."
+      "what_to_solve": "Separate robust quantum advantage claims from claims dependent on unrealistic data loading, oracle construction, precision, verification gaps, or noise assumptions."
     }
   ],
   "last_updated": "2026-07-01",

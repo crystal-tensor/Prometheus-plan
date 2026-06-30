@@ -636,6 +636,55 @@ current_results:
     caveat: guardrail_is_a_transfer_readiness_check_not_a_new_decoder_or_hardware_experiment
     result: ../results/B2_calibration_transfer_guardrail_gate_v0.json
     markdown_report: ../research/B2_calibration_transfer_guardrail_gate.md
+  calibrated_evidence_contract_gate_v0:
+    status: calibrated_evidence_contract_open_missing_hardware_data
+    method: b2_calibrated_evidence_contract_gate_v0
+    source: calibration_transfer_guardrail_gate_v0
+    model_status: calibration_transfer_blockers_decomposed_for_data_prs
+    toolchain: Contract gate that turns C4/C5/C6 calibration-transfer blockers into PR-ready calibrated-data, hardware-trace, and holdout-improvement packets
+    source_challenge_count: 3
+    source_trace_count: 576
+    observation_profile_count: 3
+    profile_result_count: 9
+    total_profile_shots: 1728
+    holdout_profile_shots: 864
+    best_profile: conservative_hardware_like_leakage
+    best_profile_model_flag_events: 415
+    stress_profile_model_flag_events: 727
+    best_profile_holdout_baseline_failures: 16
+    best_profile_holdout_injected_failures: 16
+    best_profile_holdout_failure_delta: 0
+    source_missing_gate_ids: [C4, C5, C6]
+    contract_requirement_count: 8
+    passed_contract_requirement_count: 5
+    failed_contract_requirement_count: 3
+    failed_contract_requirement_ids: [K4, K5, K6]
+    contract_packet_count: 3
+    contract_packet_ids:
+      - B2-C4-calibrated-flag-data
+      - B2-C5-hardware-trace-replay
+      - B2-C6-holdout-improvement
+    calibrated_flag_data_required: true
+    real_hardware_trace_required: true
+    holdout_improvement_required: true
+    calibrated_flag_data_used: false
+    real_hardware_trace_used: false
+    holdout_improvement_gate_passed: false
+    holdout_nonregression_gate_passed: true
+    calibration_transfer_ready: false
+    production_decoder_ready: false
+    threshold_claim_supported: false
+    data_contract_ready_for_prs: true
+    new_code_claimed: false
+    threshold_claimed: false
+    calibrated_device_claimed: false
+    production_decoder_claimed: false
+    hardware_result_claimed: false
+    quantum_advantage_claimed: false
+    interpretation: calibrated_evidence_contract_splits_the_b2_transfer_blocker_into_three_reviewable_data_prs_without_promoting_the_qec_claim
+    caveat: contract_gate_defines_required_evidence_only_and_adds_no_new_hardware_or_calibrated_result
+    result: ../results/B2_calibrated_evidence_contract_gate_v0.json
+    markdown_report: ../research/B2_calibrated_evidence_contract_gate.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -657,4 +706,5 @@ prototype_artifacts:
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
+  calibrated_evidence_contract_gate: ../tools/b2_calibrated_evidence_contract_gate.py
   prototype_notes: ../research/B2_prototype_notes.md

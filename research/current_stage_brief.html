@@ -249,11 +249,11 @@
         这是最新进展页：显示我们从 100 个困难问题目录推进到 Top 10 攻关组合后，当前每条主线做到哪里、还差什么。
       </p>
       <div class="chips">
-        <span class="chip">日期：2026-06-30</span>
+        <span class="chip">日期：2026-07-01</span>
         <span class="chip">工作区：/Users/avalok/work/FurturePlan</span>
         <span class="chip">目标状态：active，未完成</span>
         <span class="chip">当前阶段：B1-B10 技术解决推进</span>
-        <span class="chip">最新动作：T-B5-006d/T-B10-014b row-contract harness gate</span>
+        <span class="chip">最新动作：T-B2-010 calibrated-evidence contract gate</span>
         <span class="chip">组合审计：PASS / 0 warnings</span>
       </div>
     </header>
@@ -275,6 +275,9 @@
       </p>
       <p style="margin-top: 10px;">
         100 问题目录已完成第一版元数据：<code>research/problem_catalog_100.md</code> 与 <code>research/problem_catalog_100.json</code> 均补入学科组群、来源脉络、约略未解时间、核心困难、前人路线/里程碑和项目定位。当前协作规则：目录可被展示、引用、路由和后续外部 agent 扩展，但本项目当前主攻资源集中在 B1-B10，不再把本轮工作耗在反复重排或润色 100 题本体上。
+      </p>
+      <p style="margin-top: 10px;">
+        当前最新推进：B2/T-B2-010 已完成 calibrated-evidence contract gate。新增 <code>tools/b2_calibrated_evidence_contract_gate.py</code>、<code>results/B2_calibrated_evidence_contract_gate_v0.json</code> 和 <code>research/B2_calibrated_evidence_contract_gate.md</code>。该 gate 消费 T-B2-009e calibration-transfer guardrail，把失败的 C4/C5/C6 拆成 3 个可认领 PR packets：<code>B2-C4-calibrated-flag-data</code>、<code>B2-C5-hardware-trace-replay</code>、<code>B2-C6-holdout-improvement</code>。它检查 8 个 contract requirements：5 passed / 3 failed，失败项为 K4/K5/K6；当前仍没有 calibrated flag data、real hardware trace 或 holdout improvement，best conservative holdout 仍为 16 baseline / 16 injected / delta 0。因此 B2 现在有了更清晰的多智能体交接面，但仍不是 production decoder、threshold、hardware result、new code 或 low-overhead QEC claim。
       </p>
       <p style="margin-top: 10px;">
         当前最新推进：B3/B10/T-B3-012/T-B10-015 已完成 same-access measurement-rescue gate。新增 <code>tools/b3_b10_same_access_measurement_rescue_gate.py</code>、<code>results/B3_B10_same_access_measurement_rescue_gate_v0.json</code> 和 <code>research/B3_B10_same_access_measurement_rescue_gate.md</code>。该 gate 消费 B3 grouped covariance、chemical derivative boundary、compiled UCC/ADAPT pilot、cross-molecule pressure、B10 FCI denominator、B10 B3/B5 comparison 与 B10 access contract，检查 10 个 same-access requirements：5 个通过，5 个失败。失败项为 M5 full cross-molecule compiled-state covariance、M6 multi-parameter/converged chemistry ansatz、M7 selected-CI/FCI denominator wins、M8 optimizer-loop shots below ceiling、M9 B10 access contract no longer rejecting the bridge。当前 denominator wins 仍为 0，max optimizer-loop shots lower bound 为 475,043,013,690,000，B3 仍保持 demoted；这不是 reaction-dynamics solution、quantum advantage 或 BQP separation。

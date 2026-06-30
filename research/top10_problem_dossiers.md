@@ -257,12 +257,18 @@ injection gate, DEM edge-semantics gate, and hardware-like leakage gate. It
 checks 9 requirements, passes 6, and fails 3: calibrated flag data (`C4`), real
 hardware traces (`C5`), and holdout improvement (`C6`). No circuit-level
 production decoder, threshold, hardware, calibrated-device, quantum-advantage,
-or new-code claim is made.
+or new-code claim is made. T-B2-010 converts that failed guardrail into a
+calibrated-evidence contract gate: 8 contract requirements are checked, 5 pass,
+and 3 fail (`K4`, `K5`, `K6`). The gate emits 3 PR packets for calibrated
+flag data, real or independently calibrated hardware trace replay, and strict
+holdout improvement. The best conservative holdout remains 16 baseline / 16
+injected / delta 0, so this is a collaboration contract, not a promoted QEC
+result.
 
 **Remaining path to a serious solution:** replace synthetic detector/tick flag
 events and hardware-like observation models with real calibrated leakage/flag
-observations or independent hardware traces; rerun posterior-likelihood
-decoding and require holdout improvement plus all-challenge non-regression;
+observations or independent hardware traces; satisfy T-B2-010 `K4`-`K6`; rerun
+posterior-likelihood decoding and require holdout improvement plus all-challenge non-regression;
 re-test d=5/d=7 rows under strict high-purity and all-profile robustness gates
 before feeding B7.
 

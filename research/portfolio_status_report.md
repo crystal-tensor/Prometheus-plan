@@ -1702,6 +1702,13 @@ Overall audit: PASS
 - Calibration transfer guardrail non-regression / transfer ready / production decoder / threshold: True / False / False / False
 - Calibration transfer guardrail validation errors: 0
 - Calibration transfer guardrail result/markdown exists: True / True
+- Calibrated evidence contract status: calibrated_evidence_contract_open_missing_hardware_data
+- Calibrated evidence contract source gates / contract failures: ['C4', 'C5', 'C6'] / ['K4', 'K5', 'K6']
+- Calibrated evidence contract passed / failed / packets: 5 / 3 / 3
+- Calibrated evidence contract data required flags: calibrated=True / hardware=True / holdout=True
+- Calibrated evidence contract transfer ready / production decoder / threshold: False / False / False
+- Calibrated evidence contract validation errors: 0
+- Calibrated evidence contract result/markdown exists: True / True
 
 ## B3 Resource Proxy Status
 

@@ -239,12 +239,13 @@ false-positive overhead stress, a posterior-calibrated shot-conditioned leakage
 boundary, a posterior-weighted decoder-risk ledger, a decoder-input contract
 feasibility gate, a per-shot decoder trace packet, a posterior-likelihood
 injection gate, a DEM-informed detector-to-edge semantics gate, and a
-hardware-like leakage observation model gate, and a calibration-transfer
-guardrail. The latest B2 guardrail consumes the per-shot trace packet,
-posterior injection gate, DEM edge semantics gate, and hardware-like leakage
-gate. It checks 9 calibration-transfer requirements: 6 pass and 3 fail. The
-missing gates are calibrated flag data (`C4`), real hardware traces (`C5`), and
-holdout improvement (`C6`). The best conservative hardware-like profile still
+hardware-like leakage observation model gate, a calibration-transfer guardrail,
+and a calibrated-evidence contract gate. The latest B2 contract consumes the
+calibration-transfer guardrail and turns its three blockers into PR-ready data
+packets: calibrated flag data (`K4`/`C4`), real or independently calibrated
+hardware trace replay (`K5`/`C5`), and strict holdout improvement
+(`K6`/`C6`). It checks 8 contract requirements: 5 pass and 3 fail, with 3
+contract packets emitted. The best conservative hardware-like profile still
 has 415 model flag events, 16 holdout baseline failures, 16 holdout injected
 failures, and holdout failure delta 0. Calibration transfer remains false,
 production decoder readiness remains false, and threshold support remains
