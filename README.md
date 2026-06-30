@@ -275,6 +275,14 @@ observable channel, and no B5-computed observable channel. The source screen is
 not rewritten, and no material-discovery, mechanism, DFT/B5-observable, or
 solution claim is made.
 
+`T-B6-005d` adds a backend replay scout for that rescue. The repo-local replay
+recomputes `physics_risk_adjusted_v0` from the existing table, pins the source
+table, formula, and replay hashes, and reproduces post-split AP 1.0 with 2
+negative controls in top-k. The gate now passes 6/8 and fails only `R7`-`R8`:
+DFT observable rows and B5-computed observable rows remain 0. This is a
+deterministic replay artifact, not an external crystallographic backend, source
+rewrite, material-discovery, mechanism, DFT/B5-observable, or solution claim.
+
 B2 has moved past the earlier reduced-round artifact into a leakage-flagged
 erasure analytic boundary: 480 configurations, 42 proxy target-volume improved
 rows, 33 distance-5/7 improved rows, no reduced rounds, and no new-code,

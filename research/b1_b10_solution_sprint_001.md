@@ -633,7 +633,15 @@ DFT observable rows, or B5-computed observable rows exist. It is a rescue
 candidate, not a source rewrite, discovery, mechanism, DFT/B5 observable, or
 solution claim.
 
-**Next PR:** turn the `T-B6-005c` rescue candidate into a pinned backend artifact.
+Sprint update: `T-B6-005d` now adds a backend replay scout. It recomputes
+`physics_risk_adjusted_v0` from the existing table, pins source/formula/replay
+hashes, reproduces post-split AP 1.0 with 2 negative controls in top-k, and
+passes 6/8 requirements. It still fails R7-R8 because DFT observable rows and
+B5-computed observable rows remain 0. It is deterministic replay evidence, not
+an external backend, source rewrite, discovery, mechanism, DFT/B5 observable, or
+solution claim.
+
+**Next PR:** attach DFT and B5 observable rows to the `T-B6-005d` replay.
 Expected artifacts:
 
 - `benchmarks/B6_high_temperature_superconductivity.yaml`
@@ -642,14 +650,17 @@ Expected artifacts:
 - `tools/b6_crystallographic_evidence_contract_gate.py`
 - `tools/b6_crystallographic_packet_scout.py`
 - `tools/b6_validation_rescue_scout.py`
+- `tools/b6_backend_replay_scout.py`
 - `results/B6_crystallographic_reproducibility_gate_v0.json`
 - `results/B6_crystallographic_evidence_contract_gate_v0.json`
 - `results/B6_crystallographic_packet_scout_v0.json`
 - `results/B6_validation_rescue_scout_v0.json`
+- `results/B6_backend_replay_scout_v0.json`
 - `research/B6_crystallographic_reproducibility_gate.md`
 - `research/B6_crystallographic_evidence_contract_gate.md`
 - `research/B6_crystallographic_packet_scout.md`
 - `research/B6_validation_rescue_scout.md`
+- `research/B6_backend_replay_scout.md`
 
 **Acceptance gate:** computed descriptors are reported separately from
 family-prior and formula-proxy baselines under random, time-forward, and

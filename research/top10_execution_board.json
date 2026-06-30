@@ -89,16 +89,16 @@
     {
       "30_day_gate": "Close at least one B6 contract packet with reproducible backend evidence, validation cleanup, family-prior denominator improvement, DFT observables, or B5-computed observables.",
       "b_id": "B6",
-      "current_maturity": "T-B6-005c validation rescue scout: 8 requirements checked, 5 passed, 3 failed (V6-V8), with physics_risk_adjusted_v0 selected as a source-validation rescue candidate.",
+      "current_maturity": "T-B6-005d backend replay scout: 8 requirements checked, 6 passed, 2 failed (R7-R8), with physics_risk_adjusted_v0 deterministically replayed from pinned source/formula/replay hashes.",
       "dependencies": [
         "B5"
       ],
       "downstream_translation_route": "Deferred until computed descriptors and leakage controls support a mechanism-aware ranking claim on a larger retrospective table.",
       "kill_condition": "Demote B6 ranking if the pinned crystallographic/DFT/B5 observable pipeline cannot beat family priors on post-split holdouts or cannot be reproduced without hidden local dependencies.",
-      "next_artifact": "First B6 validation-rescue PR: rerun physics_risk_adjusted_v0 through a pinned crystallographic backend, then attach DFT and B5 observable rows.",
+      "next_artifact": "First B6 observable PR: attach DFT and B5 observable rows to the T-B6-005d replay while preserving row scope and hashes.",
       "priority_lane": "coupled_application",
       "problem_id": 37,
-      "strongest_evidence": "T-B6-005c validation rescue scout tests 6 predeclared variants over the same 56-record / 28-family / 18-negative-control table. The selected physics_risk_adjusted_v0 candidate keeps 2 negative controls in top-k and reaches post-split AP 1.0 vs family-prior AP 0.490136. The gate still fails V6-V8 because no pinned backend, DFT rows, or B5-computed observable rows exist. No source rewrite, discovery, mechanism, complete-database, DFT, B5-observable, reproducible-descriptor, or solution claim is made.",
+      "strongest_evidence": "T-B6-005d backend replay scout deterministically replays physics_risk_adjusted_v0 from the same 56-record / 28-family / 18-negative-control table. It pins source/formula/replay hashes, passes 6/8, fails only R7-R8, keeps 2 negative controls in top-k, and reproduces post-split AP 1.0 vs family-prior AP 0.490136. No external backend, source rewrite, discovery, mechanism, complete-database, DFT, B5-observable, reproducible-descriptor, or solution claim is made.",
       "title": "High-temperature superconductivity search"
     },
     {

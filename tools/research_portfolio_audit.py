@@ -28333,6 +28333,7 @@ def audit(root: Path) -> dict:
     b6_crystallographic_contract = b6_results.get("b6_crystallographic_evidence_contract_gate_v0")
     b6_crystallographic_packet_scout = b6_results.get("b6_crystallographic_packet_scout_v0")
     b6_validation_rescue_scout = b6_results.get("b6_validation_rescue_scout_v0")
+    b6_backend_replay_scout = b6_results.get("b6_backend_replay_scout_v0")
     b6_status = {}
     b6_curated_status = {}
     b6_formula_status = {}
@@ -28341,6 +28342,7 @@ def audit(root: Path) -> dict:
     b6_crystallographic_contract_status = {}
     b6_crystallographic_packet_scout_status = {}
     b6_validation_rescue_scout_status = {}
+    b6_backend_replay_scout_status = {}
     if not b6_descriptor:
         warnings.append("B6 manifest has no superconductivity descriptor ranking result")
     else:
@@ -29242,6 +29244,151 @@ def audit(root: Path) -> dict:
             "validation_error_count"
         ):
             errors.append("B6 validation rescue scout validation-error count mismatch")
+
+    if not b6_backend_replay_scout:
+        warnings.append("B6 manifest has no backend replay scout")
+    else:
+        result_path = b6_backend_replay_scout.get("result")
+        markdown_path = b6_backend_replay_scout.get("markdown")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B6 backend replay scout result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B6 backend replay scout markdown path missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        claims = payload.get("claims", {})
+        b6_backend_replay_scout_status = {
+            "status": b6_backend_replay_scout.get("status"),
+            "method": b6_backend_replay_scout.get("method"),
+            "model_status": b6_backend_replay_scout.get("model_status"),
+            "selected_variant": payload.get("selected_variant"),
+            "backend_replay_requirement_count": payload.get("backend_replay_requirement_count"),
+            "backend_replay_requirements_passed": payload.get("backend_replay_requirements_passed"),
+            "backend_replay_requirements_failed": payload.get("backend_replay_requirements_failed"),
+            "failed_backend_replay_requirement_ids": payload.get(
+                "failed_backend_replay_requirement_ids"
+            ),
+            "record_count": payload.get("record_count"),
+            "family_count": payload.get("family_count"),
+            "negative_control_count": payload.get("negative_control_count"),
+            "post_split_record_count": payload.get("post_split_record_count"),
+            "selected_negative_controls_in_top_k": payload.get(
+                "selected_negative_controls_in_top_k"
+            ),
+            "selected_post_split_ap": payload.get("selected_post_split_ap"),
+            "post_split_family_prior_ap": payload.get("post_split_family_prior_ap"),
+            "selected_beats_family_prior": payload.get("selected_beats_family_prior"),
+            "source_table_hash": payload.get("source_table_hash"),
+            "replay_formula_hash": payload.get("replay_formula_hash"),
+            "replay_table_hash": payload.get("replay_table_hash"),
+            "dft_observable_rows": payload.get("dft_observable_rows"),
+            "b5_computed_observable_rows": payload.get("b5_computed_observable_rows"),
+            "backend_replay_built": claims.get("backend_replay_built"),
+            "pinned_external_crystallographic_backend_claimed": claims.get(
+                "pinned_external_crystallographic_backend_claimed"
+            ),
+            "source_screen_rewritten": claims.get("source_screen_rewritten"),
+            "material_discovery_claimed": claims.get("material_discovery_claimed"),
+            "mechanism_solved": claims.get("mechanism_solved"),
+            "dft_observable_claimed": claims.get("dft_observable_claimed"),
+            "b5_computed_observable_claimed": claims.get("b5_computed_observable_claimed"),
+            "solution_claimed": claims.get("solution_claimed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B6":
+            errors.append("B6 backend replay scout benchmark_id mismatch")
+        if payload.get("status") != b6_backend_replay_scout.get("status"):
+            errors.append("B6 backend replay scout status mismatch")
+        if payload.get("method") != b6_backend_replay_scout.get("method"):
+            errors.append("B6 backend replay scout method mismatch")
+        if payload.get("model_status") != b6_backend_replay_scout.get("model_status"):
+            errors.append("B6 backend replay scout model_status mismatch")
+        for field in [
+            "selected_variant",
+            "backend_replay_requirement_count",
+            "backend_replay_requirements_passed",
+            "backend_replay_requirements_failed",
+            "failed_backend_replay_requirement_ids",
+            "record_count",
+            "family_count",
+            "negative_control_count",
+            "post_split_record_count",
+            "selected_negative_controls_in_top_k",
+            "selected_post_split_ap",
+            "post_split_family_prior_ap",
+            "selected_beats_family_prior",
+            "source_table_hash",
+            "replay_formula_hash",
+            "replay_table_hash",
+            "dft_observable_rows",
+            "b5_computed_observable_rows",
+        ]:
+            if payload.get(field) != b6_backend_replay_scout.get(field):
+                errors.append(f"B6 backend replay scout {field} mismatch")
+        for field in [
+            "backend_replay_built",
+            "pinned_external_crystallographic_backend_claimed",
+            "source_screen_rewritten",
+            "material_discovery_claimed",
+            "mechanism_solved",
+            "dft_observable_claimed",
+            "b5_computed_observable_claimed",
+            "solution_claimed",
+        ]:
+            if claims.get(field) != b6_backend_replay_scout.get(field):
+                errors.append(f"B6 backend replay scout claim {field} mismatch")
+        if payload.get("selected_variant") != "physics_risk_adjusted_v0":
+            errors.append("B6 backend replay scout selected variant drifted")
+        if payload.get("backend_replay_requirement_count") != 8:
+            errors.append("B6 backend replay scout should check eight requirements")
+        if payload.get("backend_replay_requirements_passed") != 6:
+            errors.append("B6 backend replay scout should pass six requirements")
+        if payload.get("backend_replay_requirements_failed") != 2:
+            errors.append("B6 backend replay scout should fail two requirements")
+        if payload.get("failed_backend_replay_requirement_ids") != ["R7", "R8"]:
+            errors.append("B6 backend replay scout failures should be R7-R8")
+        expected_hashes = {
+            "source_table_hash": "ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc",
+            "replay_formula_hash": "e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230",
+            "replay_table_hash": "c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de",
+        }
+        for field, expected in expected_hashes.items():
+            if payload.get(field) != expected:
+                errors.append(f"B6 backend replay scout {field} drifted")
+        if payload.get("selected_negative_controls_in_top_k") != 2:
+            errors.append("B6 backend replay scout negative-control count mismatch")
+        if payload.get("selected_post_split_ap") != 1.0:
+            errors.append("B6 backend replay scout selected AP mismatch")
+        if payload.get("post_split_family_prior_ap") != 0.4901360544217687:
+            errors.append("B6 backend replay scout family-prior AP mismatch")
+        if payload.get("selected_beats_family_prior") is not True:
+            errors.append("B6 backend replay scout must beat the family prior")
+        if payload.get("dft_observable_rows") != 0 or payload.get("b5_computed_observable_rows") != 0:
+            errors.append("B6 backend replay scout must not fabricate DFT/B5 rows")
+        if claims.get("backend_replay_built") is not True:
+            errors.append("B6 backend replay scout must disclose replay construction")
+        for field in [
+            "pinned_external_crystallographic_backend_claimed",
+            "source_screen_rewritten",
+            "dft_observable_claimed",
+            "b5_computed_observable_claimed",
+            "material_discovery_claimed",
+            "mechanism_solved",
+            "solution_claimed",
+        ]:
+            if claims.get(field) is not False:
+                errors.append(f"B6 backend replay scout claim boundary must keep {field}=False")
+        if len(payload.get("requirements", [])) != 8:
+            errors.append("B6 backend replay scout requirement count mismatch")
+        if len(payload.get("validation_errors", [])) != b6_backend_replay_scout.get(
+            "validation_error_count"
+        ):
+            errors.append("B6 backend replay scout validation-error count mismatch")
 
     b7_manifest = yaml.safe_load(read(b7_manifest_path))
     b7_results = b7_manifest.get("current_results", {})
@@ -33340,6 +33487,7 @@ def audit(root: Path) -> dict:
             "crystallographic_evidence_contract_gate": b6_crystallographic_contract_status,
             "crystallographic_packet_scout": b6_crystallographic_packet_scout_status,
             "validation_rescue_scout": b6_validation_rescue_scout_status,
+            "backend_replay_scout": b6_backend_replay_scout_status,
         },
         "b7": {
             "manifest": str(b7_manifest_path),
@@ -33896,6 +34044,7 @@ def audit(root: Path) -> dict:
                 research / "B6_crystallographic_packet_scout.md"
             ),
             "b6_validation_rescue_scout": str(research / "B6_validation_rescue_scout.md"),
+            "b6_backend_replay_scout": str(research / "B6_backend_replay_scout.md"),
             "b10_formal_theorem_targets": str(research / "B10_formal_theorem_targets.md"),
             "b10_t2_minimum_refresh_spoofer_boundary": str(research / "B8_generative_spoofer_refresh.md"),
             "b10_t2_refresh_proof_obligation_gate": str(research / "B10_t2_refresh_proof_obligation_gate.md"),
@@ -36146,6 +36295,15 @@ def markdown_report(report: dict) -> str:
             f"- Validation rescue scout discovery/mechanism/solution claims: {report['b6']['validation_rescue_scout'].get('material_discovery_claimed')} / {report['b6']['validation_rescue_scout'].get('mechanism_solved')} / {report['b6']['validation_rescue_scout'].get('solution_claimed')}",
             f"- Validation rescue scout validation errors: {report['b6']['validation_rescue_scout'].get('validation_error_count')}",
             f"- Validation rescue scout result/markdown exists: {report['b6']['validation_rescue_scout'].get('result_exists')} / {report['b6']['validation_rescue_scout'].get('markdown_exists')}",
+            f"- Backend replay scout status: {report['b6']['backend_replay_scout'].get('status')}",
+            f"- Backend replay scout selected variant: {report['b6']['backend_replay_scout'].get('selected_variant')}",
+            f"- Backend replay scout passed / failed / failed IDs: {report['b6']['backend_replay_scout'].get('backend_replay_requirements_passed')} / {report['b6']['backend_replay_scout'].get('backend_replay_requirements_failed')} / {report['b6']['backend_replay_scout'].get('failed_backend_replay_requirement_ids')}",
+            f"- Backend replay scout selected AP / family prior / negative controls: {report['b6']['backend_replay_scout'].get('selected_post_split_ap')} / {report['b6']['backend_replay_scout'].get('post_split_family_prior_ap')} / {report['b6']['backend_replay_scout'].get('selected_negative_controls_in_top_k')}",
+            f"- Backend replay scout source/formula/replay hashes: {report['b6']['backend_replay_scout'].get('source_table_hash')} / {report['b6']['backend_replay_scout'].get('replay_formula_hash')} / {report['b6']['backend_replay_scout'].get('replay_table_hash')}",
+            f"- Backend replay scout DFT rows / B5 rows: {report['b6']['backend_replay_scout'].get('dft_observable_rows')} / {report['b6']['backend_replay_scout'].get('b5_computed_observable_rows')}",
+            f"- Backend replay scout discovery/mechanism/solution claims: {report['b6']['backend_replay_scout'].get('material_discovery_claimed')} / {report['b6']['backend_replay_scout'].get('mechanism_solved')} / {report['b6']['backend_replay_scout'].get('solution_claimed')}",
+            f"- Backend replay scout validation errors: {report['b6']['backend_replay_scout'].get('validation_error_count')}",
+            f"- Backend replay scout result/markdown exists: {report['b6']['backend_replay_scout'].get('result_exists')} / {report['b6']['backend_replay_scout'].get('markdown_exists')}",
             "",
             "## B7 Fault-Tolerance Co-Design Status",
             "",

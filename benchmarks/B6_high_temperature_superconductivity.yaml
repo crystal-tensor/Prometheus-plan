@@ -247,6 +247,41 @@ current_results:
     validation_error_count: 0
     result: ../results/B6_validation_rescue_scout_v0.json
     markdown: ../research/B6_validation_rescue_scout.md
+  b6_backend_replay_scout_v0:
+    status: backend_replay_candidate_built_missing_observables
+    method: b6_backend_replay_scout_v0
+    model_status: repo_local_validation_rescue_replay_built_but_dft_b5_observables_missing
+    source_descriptor_status: crystallographic_descriptor_screen_not_material_discovery_claim
+    source_validation_rescue_status: validation_rescue_candidate_found_not_material_discovery_claim
+    selected_variant: physics_risk_adjusted_v0
+    backend_replay_requirement_count: 8
+    backend_replay_requirements_passed: 6
+    backend_replay_requirements_failed: 2
+    failed_backend_replay_requirement_ids: [R7, R8]
+    record_count: 56
+    family_count: 28
+    negative_control_count: 18
+    post_split_record_count: 27
+    selected_negative_controls_in_top_k: 2
+    selected_post_split_ap: 1.0
+    post_split_family_prior_ap: 0.4901360544217687
+    selected_beats_family_prior: true
+    source_table_hash: ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc
+    replay_formula_hash: e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230
+    replay_table_hash: c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de
+    dft_observable_rows: 0
+    b5_computed_observable_rows: 0
+    backend_replay_built: true
+    pinned_external_crystallographic_backend_claimed: false
+    source_screen_rewritten: false
+    material_discovery_claimed: false
+    mechanism_solved: false
+    dft_observable_claimed: false
+    b5_computed_observable_claimed: false
+    solution_claimed: false
+    validation_error_count: 0
+    result: ../results/B6_backend_replay_scout_v0.json
+    markdown: ../research/B6_backend_replay_scout.md
   b6_curated_materials_leakage_audit_v0:
     status: curated_retrospective_leakage_audit
     model_status: curated_materials_table_with_time_family_leakage_audit
@@ -306,4 +341,5 @@ prototype_artifacts:
   crystallographic_evidence_contract_gate: ../tools/b6_crystallographic_evidence_contract_gate.py
   crystallographic_packet_scout: ../tools/b6_crystallographic_packet_scout.py
   validation_rescue_scout: ../tools/b6_validation_rescue_scout.py
+  backend_replay_scout: ../tools/b6_backend_replay_scout.py
   prototype_notes: ../research/B6_prototype_notes.md

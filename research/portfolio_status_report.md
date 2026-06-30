@@ -2092,6 +2092,15 @@ Overall audit: PASS
 - Validation rescue scout discovery/mechanism/solution claims: False / False / False
 - Validation rescue scout validation errors: 0
 - Validation rescue scout result/markdown exists: True / True
+- Backend replay scout status: backend_replay_candidate_built_missing_observables
+- Backend replay scout selected variant: physics_risk_adjusted_v0
+- Backend replay scout passed / failed / failed IDs: 6 / 2 / ['R7', 'R8']
+- Backend replay scout selected AP / family prior / negative controls: 1.0 / 0.4901360544217687 / 2
+- Backend replay scout source/formula/replay hashes: ce134d0a5d295af982b77be0a8a43e90ea19e828af20cc80ac3f20b7664d2fdc / e23239648dd11aa8e0db8ecdeb5824506a5a379c9ba2777965c3aafa5d5d8230 / c44099194d0bc04d74cd3c4c4e068bf51a9e114d11c6e0b5e3890786cda5b8de
+- Backend replay scout DFT rows / B5 rows: 0 / 0
+- Backend replay scout discovery/mechanism/solution claims: False / False / False
+- Backend replay scout validation errors: 0
+- Backend replay scout result/markdown exists: True / True
 
 ## B7 Fault-Tolerance Co-Design Status
 

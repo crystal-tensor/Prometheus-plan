@@ -48,10 +48,10 @@
     },
     {
       "b_id": "B6",
-      "current_evidence": "Toy descriptor ranker plus T-B6-001 curated leakage audit, T-B6-002 formula-derived descriptor screen, T-B6-003 structural/electronic proxy boundary, T-B6-004 crystallographic reproducibility gate, T-B6-005a crystallographic evidence contract, T-B6-005b crystallographic packet scout, and T-B6-005c validation rescue scout. The latest rescue checks 8 requirements, passes 5, fails V6-V8, tests 6 predeclared variants, and selects physics_risk_adjusted_v0: 2 negative controls remain in top-k and post-split AP is 1.0 versus family-prior AP 0.490136. No source rewrite, pinned backend, DFT row, B5 row, discovery, mechanism, DFT/B5-observable, reproducible descriptor, or solution claim is made.",
+      "current_evidence": "Toy descriptor ranker plus T-B6-001 curated leakage audit, T-B6-002 formula-derived descriptor screen, T-B6-003 structural/electronic proxy boundary, T-B6-004 crystallographic reproducibility gate, T-B6-005a crystallographic evidence contract, T-B6-005b crystallographic packet scout, T-B6-005c validation rescue scout, and T-B6-005d backend replay scout. The latest replay checks 8 requirements, passes 6, fails R7-R8, pins source/formula/replay hashes, and reproduces physics_risk_adjusted_v0: 2 negative controls remain in top-k and post-split AP is 1.0 versus family-prior AP 0.490136. No external crystallographic backend, source rewrite, DFT row, B5 row, discovery, mechanism, DFT/B5-observable, reproducible descriptor, or solution claim is made.",
       "gate_status": "early_negative_boundary",
-      "main_blocker": "B6 has a validation-rescue candidate, but V6-V8 remain open: pinned backend, DFT observable channel, and B5-computed observable channel.",
-      "next_experiment": "Turn T-B6-005c into a backend-backed artifact preserving the 56-record / 28-family / 18-negative-control scope, then attach DFT/B5 rows and rerun the audit before any candidate-ranking claim.",
+      "main_blocker": "B6 has a deterministic backend replay artifact, but R7-R8 remain open: DFT observable channel and B5-computed observable channel.",
+      "next_experiment": "Attach DFT/B5 rows to the T-B6-005d replay while preserving hashes and the 56-record / 28-family / 18-negative-control scope, then rerun the audit before any candidate-ranking claim.",
       "technical_solution_target": "Leakage-controlled high-Tc candidate ranking pipeline using physics descriptors, not family priors."
     },
     {

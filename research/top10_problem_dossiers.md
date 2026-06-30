@@ -687,6 +687,14 @@ crystallographic backend, no DFT observable channel, and no B5-computed
 observable channel. The source screen is not rewritten, and this is still not a
 material-discovery, mechanism, reproducible-descriptor, DFT-observable,
 B5-observable, or solution claim.
+T-B6-005d now adds a backend replay scout for that rescue. It recomputes
+`physics_risk_adjusted_v0` from the existing table, pins source/formula/replay
+hashes, reproduces post-split AP 1.0 with 2 negative controls in top-k, and
+passes 6/8 requirements while failing only R7-R8. The remaining blockers are
+now sharper: DFT observable rows and B5-computed observable rows are both still
+0. This is a deterministic replay artifact, not an external crystallographic
+backend, source rewrite, material discovery, mechanism, DFT/B5 observable, or
+solution claim.
 
 **Remaining path to a serious solution:** pin a reproducible crystallographic
 backend or equivalent descriptor implementation; remove the source validation
