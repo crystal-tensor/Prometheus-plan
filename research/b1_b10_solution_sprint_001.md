@@ -2249,3 +2249,16 @@ have exact absorption back to the pi/4 grid; min/max best width-5 grid error is
 `0.001581991109333103` / `0.026659551749407484`. This is a scoped negative
 boundary, not a global theorem. It keeps occurrence removal, proxy-T reduction,
 resource saving, and B7 ledger improvement at 0.
+
+Sprint update 59b: B4/B8 now has the formal verifier-private challenge protocol
+model that the earlier private-predicate pressure gate was missing.
+T-B4-002b/T-B8-003f repairs
+`tools/B4_B8_verifier_private_challenge_protocol.py` so it emits both JSON and
+Markdown reports for a 36-row commit-challenge-response-verify simulation with
+4 private predicate bits and 4 protocol rounds. All 8 analytic gates pass:
+hidden-private acceptance is 0.0625, public support-only acceptance is 0.5,
+one-bit leakage acceptance is 0.125, three-bit leakage acceptance is 0.5, and
+full private-material leakage acceptance is 1.0. This is a stronger protocol
+boundary than the earlier private-predicate pressure gate, but it remains an
+analytic model rather than hardware execution, cryptographic soundness,
+protocol soundness, sampling hardness, quantum advantage, or BQP separation.

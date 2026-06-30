@@ -1,11 +1,11 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """T-B4-002: Formal verifier-private challenge protocol for B4/B8.
 Builds commit-challenge-response-verify protocol with analytic leakage
 models and explicit spoofer attack families. Replaces the analytic
 private-predicate pressure gate.
 Claim: formal protocol simulation. Not hardware, not cryptographic.
 """
-import argparse, json, hashlib, time, math
+import argparse, json, hashlib, time
 from pathlib import Path
 import numpy as np
 
@@ -61,12 +61,34 @@ def build(pred_bits, seed):
         "G8_support_above_no_leak": support >= 3.0 * no_leak,
     }
 
+    validation_errors = []
+    if len(rows) != TOTAL:
+        validation_errors.append(f"expected {TOTAL} protocol rows, got {len(rows)}")
+    if pred_bits != PRED_BITS:
+        validation_errors.append(f"expected {PRED_BITS} private predicate bits, got {pred_bits}")
+    if gates["G7_full_leak_breaks"] is not True:
+        validation_errors.append("full private-material leakage should break the analytic gate")
+
     return {
-        "benchmark": "B4/B8", "method": METHOD, "status": STATUS,
+        "benchmark": "B4/B8",
+        "benchmark_id": "B4_B8",
+        "method": METHOD,
+        "source_method": "b4_b8_verifier_private_predicate_gate_v0",
+        "status": STATUS,
         "model_status": "formal_commit_challenge_response_verify_protocol",
         "protocol": "commit_challenge_response_verify",
-        "predicate_bits": pred_bits, "circuit_count": TOTAL,
-        "row_count": len(rows), "timestamp": time.time(),
+        "predicate_bits": pred_bits,
+        "private_predicate_bit_count": pred_bits,
+        "task_count": TASKS,
+        "refresh_mode_count": len(MODES),
+        "instances_per_task_mode": INSTANCES,
+        "circuit_count": TOTAL,
+        "row_count": len(rows),
+        "protocol_row_count": len(rows),
+        "protocol_round_count": 4,
+        "challenge_family_count": TASKS,
+        "spoofer_family_count": 5,
+        "timestamp": time.time(),
         "metrics": {
             "honest_completeness": round(honest, 6),
             "no_leak_soundness": round(1.0 - no_leak, 6),
@@ -85,8 +107,33 @@ def build(pred_bits, seed):
             "full_leak": {"acceptance": round(full_leak, 6), "desc": "all predicate bits known"},
         },
         "gate_results": gates,
+        "acceptance_gate_count": len(gates),
         "gates_passed": sum(1 for v in gates.values() if v),
         "gates_total": len(gates),
+        "passed_gate_count": sum(1 for v in gates.values() if v),
+        "failed_gate_count": sum(1 for v in gates.values() if not v),
+        "public_acceptance_without_private_material": round(support, 6),
+        "private_acceptance_with_hidden_predicate": round(no_leak, 6),
+        "one_private_bit_leak_acceptance": round(one_leak, 6),
+        "three_private_bit_leak_acceptance": round(three_leak, 6),
+        "full_private_material_leakage_acceptance": round(full_leak, 6),
+        "private_protocol_suppresses_support_spoofer": support > no_leak,
+        "support_to_private_protocol_suppression_factor": round(support / no_leak, 6),
+        "full_private_material_leakage_breaks_protocol": full_leak >= 0.99,
+        "formal_private_challenge_protocol_defined": True,
+        "commitment_round_defined": True,
+        "challenge_round_private": True,
+        "response_round_defined": True,
+        "verification_round_defined": True,
+        "hardware_execution_performed": False,
+        "real_backend_properties_used": False,
+        "quantum_advantage_claimed": False,
+        "bqp_separation_claimed": False,
+        "sampling_hardness_proved": False,
+        "cryptographic_soundness_proved": False,
+        "protocol_soundness_proved": False,
+        "validation_errors": validation_errors,
+        "validation_error_count": len(validation_errors),
         "protocol_rows": rows,
         "claim_boundary": {
             "is_formal_protocol": True, "is_hardware": False,
@@ -96,6 +143,69 @@ def build(pred_bits, seed):
             "next": "Qiskit Aer noise-modeled simulation or real backend execution",
         },
     }
+
+def render_markdown(payload):
+    metrics = payload["metrics"]
+    leakage = payload["leakage_cascade"]
+    gates = payload["gate_results"]
+    lines = [
+        "# B4/B8 Verifier-Private Challenge Protocol Gate",
+        "",
+        "- Gate: T-B4-002b / T-B8-003f",
+        f"- Method: `{payload['method']}`",
+        f"- Status: `{payload['status']}`",
+        f"- Protocol: `{payload['protocol']}`",
+        f"- Protocol rows: {payload['protocol_row_count']}",
+        f"- Predicate bits: {payload['predicate_bits']}",
+        f"- Gates passed: {payload['passed_gate_count']} / {payload['acceptance_gate_count']}",
+        "",
+        "## Result",
+        "",
+        (
+            "This gate upgrades the previous analytic verifier-private predicate "
+            "pressure into an explicit commit-challenge-response-verify protocol "
+            "model over the same 36 B4/B8 challenge rows."
+        ),
+        "",
+        "| Metric | Value |",
+        "| --- | ---: |",
+        f"| honest completeness | {metrics['honest_completeness']} |",
+        f"| no-leak adversary acceptance | {metrics['no_leak_acceptance']} |",
+        f"| no-leak soundness | {metrics['no_leak_soundness']} |",
+        f"| public support-only acceptance | {metrics['support_acceptance']} |",
+        f"| one-bit leakage acceptance | {metrics['one_leak_acceptance']} |",
+        f"| three-bit leakage acceptance | {metrics['three_leak_acceptance']} |",
+        f"| full private-material leakage acceptance | {metrics['full_leak_acceptance']} |",
+        "",
+        "## Leakage Cascade",
+        "",
+    ]
+    for name, row in leakage.items():
+        lines.append(f"- `{name}`: acceptance {row['acceptance']} ({row['desc']}).")
+    lines.extend(
+        [
+            "",
+            "## Acceptance Gates",
+            "",
+        ]
+    )
+    for gate, passed in gates.items():
+        lines.append(f"- `{gate}`: {passed}")
+    lines.extend(
+        [
+            "",
+            "## Claim Boundary",
+            "",
+            "- This is a formal protocol simulation and analytic leakage model.",
+            "- It is not hardware execution.",
+            "- It is not a cryptographic proof.",
+            "- It is not a sampling-hardness proof.",
+            "- It is not a quantum-advantage or BQP-separation claim.",
+            "- Next gate: run the protocol against Qiskit Aer/noise-modeled transcripts, real backend properties, or hardware randomized-measurement execution.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
 
 def main():
     p = argparse.ArgumentParser()
@@ -110,6 +220,7 @@ def main():
     a.md_out.parent.mkdir(parents=True, exist_ok=True)
     indent = 2 if a.pretty else None
     a.json_out.write_text(json.dumps(payload, indent=indent, sort_keys=True) + "\n", encoding="utf-8")
+    a.md_out.write_text(render_markdown(payload), encoding="utf-8")
     s = {"honest": payload["metrics"]["honest_completeness"],
          "no_leak_snd": payload["metrics"]["no_leak_soundness"],
          "leakage": {k: v["acceptance"] for k, v in payload["leakage_cascade"].items()},

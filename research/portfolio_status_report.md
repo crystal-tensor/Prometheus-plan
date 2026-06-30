@@ -1808,6 +1808,11 @@ Overall audit: PASS
 - Private-predicate public support / hidden acceptance: 1.0 / 0.0625
 - Private-predicate suppression / full leakage breaks gate: 16.0 / True
 - Private-predicate result/markdown exists: True / True
+- Private-challenge protocol status: formal_verifier_private_challenge_protocol_not_hardware
+- Private-challenge protocol rows / gates passed-failed: 36 / 8-0
+- Private-challenge support / hidden / full-leak acceptance: 0.5 / 0.0625 / 1.0
+- Private-challenge hardware / protocol soundness claim: False / False
+- Private-challenge result/markdown exists: True / True
 
 ## B5 Hubbard Embedding Status
 
@@ -2123,6 +2128,11 @@ Overall audit: PASS
 - Private-predicate public support / hidden acceptance: 1.0 / 0.0625
 - Private-predicate suppression / full leakage breaks gate: 16.0 / True
 - Private-predicate result/markdown exists: True / True
+- Private-challenge protocol status: formal_verifier_private_challenge_protocol_not_hardware
+- Private-challenge protocol rows / gates passed-failed: 36 / 8-0
+- Private-challenge support / hidden / full-leak acceptance: 0.5 / 0.0625 / 1.0
+- Private-challenge hardware / protocol soundness claim: False / False
+- Private-challenge result/markdown exists: True / True
 - Generative spoofer status: trained_generative_spoofer_refresh_boundary_not_soundness_proof
 - Generative spoofer configurations: 144
 - Generative spoofer maximum learned soundness: 1.0

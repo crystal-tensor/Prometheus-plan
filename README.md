@@ -1074,3 +1074,12 @@ error range `0.001581991109333103` to `0.026659551749407484`. This closes the
 bounded width-5 local context route, but it is not a global obstruction theorem.
 No full-circuit replay certificate, occurrence removal, proxy-T reduction,
 resource saving, or B7 ledger improvement is accepted.
+
+B4/B8 now has a formal verifier-private challenge protocol model:
+`T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
+into a commit-challenge-response-verify protocol over 36 shared challenge rows.
+The analytic protocol passes 8/8 gates with hidden-private acceptance 0.0625,
+public support-only acceptance 0.5, one-bit leakage acceptance 0.125, and full
+private-material leakage acceptance 1.0. This is still not hardware execution,
+cryptographic soundness, protocol soundness, sampling hardness, quantum
+advantage, or a BQP separation.

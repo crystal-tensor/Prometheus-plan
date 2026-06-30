@@ -213,6 +213,40 @@ current_results:
     validation_error_count: 0
     result: ../results/B4_B8_verifier_private_predicate_gate_v0.json
     markdown_report: ../research/B4_B8_verifier_private_predicate_gate.md
+  verifier_private_challenge_protocol_v0:
+    status: formal_verifier_private_challenge_protocol_not_hardware
+    model_status: formal_commit_challenge_response_verify_protocol
+    method: b4_b8_verifier_private_challenge_protocol_v0
+    source_method: b4_b8_verifier_private_predicate_gate_v0
+    protocol: commit_challenge_response_verify
+    protocol_round_count: 4
+    protocol_row_count: 36
+    challenge_family_count: 3
+    circuit_count: 36
+    private_predicate_bit_count: 4
+    spoofer_family_count: 5
+    public_acceptance_without_private_material: 0.5
+    private_acceptance_with_hidden_predicate: 0.0625
+    one_private_bit_leak_acceptance: 0.125
+    three_private_bit_leak_acceptance: 0.5
+    full_private_material_leakage_acceptance: 1.0
+    support_to_private_protocol_suppression_factor: 8.0
+    private_protocol_suppresses_support_spoofer: true
+    full_private_material_leakage_breaks_protocol: true
+    formal_private_challenge_protocol_defined: true
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    protocol_soundness_proved: false
+    acceptance_gate_count: 8
+    passed_gate_count: 8
+    failed_gate_count: 0
+    validation_error_count: 0
+    result: ../results/B4_B8_verifier_private_challenge_protocol_v0.json
+    markdown_report: ../research/B4_B8_verifier_private_challenge_protocol.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim
