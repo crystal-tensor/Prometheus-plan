@@ -2262,3 +2262,19 @@ full private-material leakage acceptance is 1.0. This is a stronger protocol
 boundary than the earlier private-predicate pressure gate, but it remains an
 analytic model rather than hardware execution, cryptographic soundness,
 protocol soundness, sampling hardness, quantum advantage, or BQP separation.
+
+Sprint update 59c: B4/B8 now has a conservative transcript-noise bridge above
+that formal protocol. T-B4-002c/T-B8-003g adds
+`tools/B4_B8_verifier_private_challenge_noise_bridge.py` and emits
+`results/B4_B8_verifier_private_challenge_noise_bridge_v0.json` plus
+`research/B4_B8_verifier_private_challenge_noise_bridge.md`. The bridge
+evaluates 720 transcript/noise/leakage cases from 36 protocol rows, 4 noise
+profiles, and 5 leakage profiles. Under the backend-like predicate-bit error
+profile, no-refresh honest acceptance is `0.747047070414` and fails the 0.8
+honest threshold; challenge_refresh recovers to `0.805169120213` and
+refresh_plus_rotation reaches `0.866618491942`. No-leak adversary acceptance
+remains `0.0625`, three-private-bit leakage reaches `0.5`, and full
+private-material leakage restores acceptance to `1.0`. This is progress because
+the protocol now faces explicit transcript-noise pressure, but it is still not
+real backend evidence, hardware execution, cryptographic/protocol soundness,
+sampling hardness, quantum advantage, or BQP separation.

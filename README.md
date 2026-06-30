@@ -1083,3 +1083,15 @@ public support-only acceptance 0.5, one-bit leakage acceptance 0.125, and full
 private-material leakage acceptance 1.0. This is still not hardware execution,
 cryptographic soundness, protocol soundness, sampling hardness, quantum
 advantage, or a BQP separation.
+
+`T-B4-002c` / `T-B8-003g` now pushes that protocol into a conservative
+noise-modeled transcript bridge. It evaluates 720 transcript/noise/leakage
+cases from 36 protocol rows, 4 noise profiles, and 5 leakage profiles.
+Under the backend-like predicate-bit error profile, no-refresh honest
+acceptance is 0.747047070414 and fails the 0.8 honest threshold, while
+challenge refresh reaches 0.805169120213 and refresh plus rotation reaches
+0.866618491942. No-leak adversary acceptance remains 0.0625, three-private-bit
+leakage rises to 0.5, and full private-material leakage restores acceptance to
+1.0. This is a transcript-noise pressure gate only; it still does not use real
+backend properties, execute hardware, prove protocol soundness, prove sampling
+hardness, claim quantum advantage, or separate BQP.

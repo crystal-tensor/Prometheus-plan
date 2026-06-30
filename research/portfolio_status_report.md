@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 30, 'B4': 27, 'B5': 27, 'B6': 21, 'B7': 59, 'B8': 39, 'B9': 15, 'B10': 50}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 30, 'B4': 28, 'B5': 27, 'B6': 21, 'B7': 59, 'B8': 40, 'B9': 15, 'B10': 50}
 
 ## Technical Resolution Program
 
@@ -1813,6 +1813,12 @@ Overall audit: PASS
 - Private-challenge support / hidden / full-leak acceptance: 0.5 / 0.0625 / 1.0
 - Private-challenge hardware / protocol soundness claim: False / False
 - Private-challenge result/markdown exists: True / True
+- Private-challenge noise bridge status: private_challenge_noise_transcript_bridge_not_hardware
+- Private-challenge noise bridge transcript cases / gates passed-failed: 720 / 8-0
+- Private-challenge noise bridge backend-like honest no-refresh / challenge / rotation: 0.747047070414 / 0.805169120213 / 0.866618491942
+- Private-challenge noise bridge no-leak / three-leak / full-leak acceptance: 0.0625 / 0.5 / 1.0
+- Private-challenge noise bridge hardware / protocol soundness claim: False / False
+- Private-challenge noise bridge result/markdown exists: True / True
 
 ## B5 Hubbard Embedding Status
 
@@ -2133,6 +2139,12 @@ Overall audit: PASS
 - Private-challenge support / hidden / full-leak acceptance: 0.5 / 0.0625 / 1.0
 - Private-challenge hardware / protocol soundness claim: False / False
 - Private-challenge result/markdown exists: True / True
+- Private-challenge noise bridge status: private_challenge_noise_transcript_bridge_not_hardware
+- Private-challenge noise bridge transcript cases / gates passed-failed: 720 / 8-0
+- Private-challenge noise bridge backend-like honest no-refresh / challenge / rotation: 0.747047070414 / 0.805169120213 / 0.866618491942
+- Private-challenge noise bridge no-leak / three-leak / full-leak acceptance: 0.0625 / 0.5 / 1.0
+- Private-challenge noise bridge hardware / protocol soundness claim: False / False
+- Private-challenge noise bridge result/markdown exists: True / True
 - Generative spoofer status: trained_generative_spoofer_refresh_boundary_not_soundness_proof
 - Generative spoofer configurations: 144
 - Generative spoofer maximum learned soundness: 1.0

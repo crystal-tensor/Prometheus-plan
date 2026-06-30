@@ -247,6 +247,39 @@ current_results:
     validation_error_count: 0
     result: ../results/B4_B8_verifier_private_challenge_protocol_v0.json
     markdown_report: ../research/B4_B8_verifier_private_challenge_protocol.md
+  verifier_private_challenge_noise_bridge_v0:
+    status: private_challenge_noise_transcript_bridge_not_hardware
+    model_status: noise_modeled_transcript_bridge_not_hardware
+    method: b4_b8_verifier_private_challenge_noise_bridge_v0
+    source_method: b4_b8_verifier_private_challenge_protocol_v0
+    protocol: commit_challenge_response_verify
+    protocol_row_count: 36
+    transcript_case_count: 720
+    noise_profile_count: 4
+    leakage_profile_count: 5
+    private_predicate_bit_count: 4
+    backend_like_no_refresh_honest_acceptance: 0.747047070414
+    backend_like_challenge_refresh_honest_acceptance: 0.805169120213
+    backend_like_refresh_plus_rotation_honest_acceptance: 0.866618491942
+    max_no_leak_adversary_acceptance: 0.0625
+    max_three_private_bit_leak_acceptance: 0.5
+    max_full_private_material_leak_acceptance: 1.0
+    backend_like_refresh_modes_pass_honest_threshold: true
+    backend_like_no_refresh_fails_honest_threshold: true
+    full_private_material_leakage_breaks_protocol: true
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    protocol_soundness_proved: false
+    acceptance_gate_count: 8
+    passed_gate_count: 8
+    failed_gate_count: 0
+    validation_error_count: 0
+    result: ../results/B4_B8_verifier_private_challenge_noise_bridge_v0.json
+    markdown_report: ../research/B4_B8_verifier_private_challenge_noise_bridge.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

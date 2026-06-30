@@ -23653,6 +23653,156 @@ def audit(root: Path) -> dict:
             errors.append(f"{label} private-challenge protocol payload validation-error count mismatch")
         return status
 
+    def audit_verifier_private_challenge_noise_bridge(entry, label):
+        status = {}
+        if not entry:
+            warnings.append(f"{label} manifest has no verifier-private challenge noise bridge")
+            return status
+        result_path = entry.get("result")
+        markdown_path = entry.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"{label} private-challenge noise bridge result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"{label} private-challenge noise bridge markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        status = {
+            "status": entry.get("status"),
+            "model_status": entry.get("model_status"),
+            "method": entry.get("method"),
+            "source_method": payload.get("source_method"),
+            "protocol": payload.get("protocol"),
+            "protocol_row_count": payload.get("protocol_row_count"),
+            "transcript_case_count": payload.get("transcript_case_count"),
+            "noise_profile_count": payload.get("noise_profile_count"),
+            "leakage_profile_count": payload.get("leakage_profile_count"),
+            "private_predicate_bit_count": payload.get("private_predicate_bit_count"),
+            "backend_like_no_refresh_honest_acceptance": payload.get(
+                "backend_like_no_refresh_honest_acceptance"
+            ),
+            "backend_like_challenge_refresh_honest_acceptance": payload.get(
+                "backend_like_challenge_refresh_honest_acceptance"
+            ),
+            "backend_like_refresh_plus_rotation_honest_acceptance": payload.get(
+                "backend_like_refresh_plus_rotation_honest_acceptance"
+            ),
+            "max_no_leak_adversary_acceptance": payload.get("max_no_leak_adversary_acceptance"),
+            "max_three_private_bit_leak_acceptance": payload.get("max_three_private_bit_leak_acceptance"),
+            "max_full_private_material_leak_acceptance": payload.get(
+                "max_full_private_material_leak_acceptance"
+            ),
+            "backend_like_refresh_modes_pass_honest_threshold": payload.get(
+                "backend_like_refresh_modes_pass_honest_threshold"
+            ),
+            "backend_like_no_refresh_fails_honest_threshold": payload.get(
+                "backend_like_no_refresh_fails_honest_threshold"
+            ),
+            "full_private_material_leakage_breaks_protocol": payload.get(
+                "full_private_material_leakage_breaks_protocol"
+            ),
+            "hardware_execution_performed": payload.get("hardware_execution_performed"),
+            "real_backend_properties_used": payload.get("real_backend_properties_used"),
+            "quantum_advantage_claimed": payload.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": payload.get("bqp_separation_claimed"),
+            "protocol_soundness_proved": payload.get("protocol_soundness_proved"),
+            "acceptance_gate_count": payload.get("acceptance_gate_count"),
+            "passed_gate_count": payload.get("passed_gate_count"),
+            "failed_gate_count": payload.get("failed_gate_count"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B4_B8":
+            errors.append(f"{label} private-challenge noise bridge benchmark_id must be B4_B8")
+        if payload.get("status") != entry.get("status"):
+            errors.append(f"{label} private-challenge noise bridge status mismatch")
+        if payload.get("model_status") != entry.get("model_status"):
+            errors.append(f"{label} private-challenge noise bridge model_status mismatch")
+        if payload.get("method") != entry.get("method"):
+            errors.append(f"{label} private-challenge noise bridge method mismatch")
+        if payload.get("source_method") != "b4_b8_verifier_private_challenge_protocol_v0":
+            errors.append(f"{label} private-challenge noise bridge source method mismatch")
+        for field in [
+            "protocol",
+            "protocol_row_count",
+            "transcript_case_count",
+            "noise_profile_count",
+            "leakage_profile_count",
+            "private_predicate_bit_count",
+            "backend_like_no_refresh_honest_acceptance",
+            "backend_like_challenge_refresh_honest_acceptance",
+            "backend_like_refresh_plus_rotation_honest_acceptance",
+            "max_no_leak_adversary_acceptance",
+            "max_three_private_bit_leak_acceptance",
+            "max_full_private_material_leak_acceptance",
+            "backend_like_refresh_modes_pass_honest_threshold",
+            "backend_like_no_refresh_fails_honest_threshold",
+            "full_private_material_leakage_breaks_protocol",
+            "hardware_execution_performed",
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+            "acceptance_gate_count",
+            "passed_gate_count",
+            "failed_gate_count",
+        ]:
+            if payload.get(field) != entry.get(field):
+                errors.append(f"{label} private-challenge noise bridge {field} mismatch")
+        if payload.get("protocol") != "commit_challenge_response_verify":
+            errors.append(f"{label} private-challenge noise bridge protocol mismatch")
+        if payload.get("protocol_row_count") != 36:
+            errors.append(f"{label} private-challenge noise bridge should cover 36 protocol rows")
+        if payload.get("transcript_case_count") != 720:
+            errors.append(f"{label} private-challenge noise bridge should cover 720 transcript cases")
+        if payload.get("private_predicate_bit_count") != 4:
+            errors.append(f"{label} private-challenge noise bridge should use four private bits")
+        if float(payload.get("backend_like_no_refresh_honest_acceptance", 1.0)) >= 0.8:
+            errors.append(f"{label} private-challenge noise bridge no-refresh should fail the 0.8 honest threshold")
+        if float(payload.get("backend_like_challenge_refresh_honest_acceptance", 0.0)) < 0.8:
+            errors.append(f"{label} private-challenge noise bridge challenge-refresh honest threshold failed")
+        if float(payload.get("backend_like_refresh_plus_rotation_honest_acceptance", 0.0)) < 0.8:
+            errors.append(f"{label} private-challenge noise bridge refresh-plus-rotation honest threshold failed")
+        if payload.get("max_no_leak_adversary_acceptance") != 0.0625:
+            errors.append(f"{label} private-challenge noise bridge no-leak adversary acceptance should be 1/16")
+        if payload.get("max_three_private_bit_leak_acceptance") != 0.5:
+            errors.append(f"{label} private-challenge noise bridge three-bit leak acceptance should be 0.5")
+        if payload.get("max_full_private_material_leak_acceptance") != 1.0:
+            errors.append(f"{label} private-challenge noise bridge full-leak acceptance should be 1.0")
+        if payload.get("backend_like_refresh_modes_pass_honest_threshold") is not True:
+            errors.append(f"{label} private-challenge noise bridge refreshed backend-like modes should pass")
+        if payload.get("backend_like_no_refresh_fails_honest_threshold") is not True:
+            errors.append(f"{label} private-challenge noise bridge no-refresh should be rejected")
+        if payload.get("full_private_material_leakage_breaks_protocol") is not True:
+            errors.append(f"{label} private-challenge noise bridge must expose full leakage break")
+        if payload.get("passed_gate_count") != 8 or payload.get("failed_gate_count") != 0:
+            errors.append(f"{label} private-challenge noise bridge should pass 8/8 gates")
+        for field in [
+            "hardware_execution_performed",
+            "real_backend_properties_used",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "sampling_hardness_proved",
+            "cryptographic_soundness_proved",
+            "protocol_soundness_proved",
+        ]:
+            if payload.get(field) is not False:
+                errors.append(f"{label} private-challenge noise bridge must keep {field}=False")
+        if len(payload.get("transcript_rows", [])) != payload.get("transcript_case_count"):
+            errors.append(f"{label} private-challenge noise bridge transcript row count mismatch")
+        if len(payload.get("gate_results", [])) != payload.get("acceptance_gate_count"):
+            errors.append(f"{label} private-challenge noise bridge gate-result count mismatch")
+        if len(payload.get("validation_errors", [])) != entry.get("validation_error_count"):
+            errors.append(f"{label} private-challenge noise bridge validation-error count mismatch")
+        if payload.get("validation_error_count") != len(payload.get("validation_errors", [])):
+            errors.append(f"{label} private-challenge noise bridge payload validation-error count mismatch")
+        return status
+
     b4_manifest = yaml.safe_load(read(b4_manifest_path))
     b4_results = b4_manifest.get("current_results", {})
     b4_trap = b4_results.get("toy_hidden_trap_protocol_sim_v0")
@@ -23664,6 +23814,7 @@ def audit(root: Path) -> dict:
     b4_support_spoofer = b4_results.get("nonstabilizer_support_spoofer_gate_v0")
     b4_private_predicate = b4_results.get("verifier_private_predicate_gate_v0")
     b4_private_challenge_protocol = b4_results.get("verifier_private_challenge_protocol_v0")
+    b4_private_challenge_noise_bridge = b4_results.get("verifier_private_challenge_noise_bridge_v0")
     b4_status = {}
     if not b4_trap:
         warnings.append("B4 manifest has no toy hidden-trap protocol result")
@@ -23918,6 +24069,9 @@ def audit(root: Path) -> dict:
     b4_private_predicate_status = audit_verifier_private_predicate(b4_private_predicate, "B4")
     b4_private_challenge_protocol_status = audit_verifier_private_challenge_protocol(
         b4_private_challenge_protocol, "B4"
+    )
+    b4_private_challenge_noise_bridge_status = audit_verifier_private_challenge_noise_bridge(
+        b4_private_challenge_noise_bridge, "B4"
     )
 
     b5_manifest = yaml.safe_load(read(b5_manifest_path))
@@ -26469,6 +26623,7 @@ def audit(root: Path) -> dict:
     b8_support_spoofer = b8_results.get("nonstabilizer_support_spoofer_gate_v0")
     b8_private_predicate = b8_results.get("verifier_private_predicate_gate_v0")
     b8_private_challenge_protocol = b8_results.get("verifier_private_challenge_protocol_v0")
+    b8_private_challenge_noise_bridge = b8_results.get("verifier_private_challenge_noise_bridge_v0")
     b8_generative_spoofer = b8_results.get("generative_spoofer_refresh_stress_v0")
     b8_status = {}
     if not b8_verifier:
@@ -26768,6 +26923,9 @@ def audit(root: Path) -> dict:
     b8_private_predicate_status = audit_verifier_private_predicate(b8_private_predicate, "B8")
     b8_private_challenge_protocol_status = audit_verifier_private_challenge_protocol(
         b8_private_challenge_protocol, "B8"
+    )
+    b8_private_challenge_noise_bridge_status = audit_verifier_private_challenge_noise_bridge(
+        b8_private_challenge_noise_bridge, "B8"
     )
 
     b8_generative_spoofer_status = {}
@@ -28959,6 +29117,7 @@ def audit(root: Path) -> dict:
             "nonstabilizer_support_spoofer_gate": b4_support_spoofer_status,
             "verifier_private_predicate_gate": b4_private_predicate_status,
             "verifier_private_challenge_protocol_gate": b4_private_challenge_protocol_status,
+            "verifier_private_challenge_noise_bridge": b4_private_challenge_noise_bridge_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -29017,6 +29176,7 @@ def audit(root: Path) -> dict:
             "nonstabilizer_support_spoofer_gate": b8_support_spoofer_status,
             "verifier_private_predicate_gate": b8_private_predicate_status,
             "verifier_private_challenge_protocol_gate": b8_private_challenge_protocol_status,
+            "verifier_private_challenge_noise_bridge": b8_private_challenge_noise_bridge_status,
             "generative_spoofer_refresh": b8_generative_spoofer_status,
         },
         "b9": {
@@ -29535,6 +29695,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_verifier_private_challenge_protocol": str(
                 research / "B4_B8_verifier_private_challenge_protocol.md"
+            ),
+            "b4_b8_verifier_private_challenge_noise_bridge": str(
+                research / "B4_B8_verifier_private_challenge_noise_bridge.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
@@ -31370,6 +31533,12 @@ def markdown_report(report: dict) -> str:
             f"- Private-challenge support / hidden / full-leak acceptance: {report['b4']['verifier_private_challenge_protocol_gate'].get('public_acceptance_without_private_material')} / {report['b4']['verifier_private_challenge_protocol_gate'].get('private_acceptance_with_hidden_predicate')} / {report['b4']['verifier_private_challenge_protocol_gate'].get('full_private_material_leakage_acceptance')}",
             f"- Private-challenge hardware / protocol soundness claim: {report['b4']['verifier_private_challenge_protocol_gate'].get('hardware_execution_performed')} / {report['b4']['verifier_private_challenge_protocol_gate'].get('protocol_soundness_proved')}",
             f"- Private-challenge result/markdown exists: {report['b4']['verifier_private_challenge_protocol_gate'].get('result_exists')} / {report['b4']['verifier_private_challenge_protocol_gate'].get('markdown_exists')}",
+            f"- Private-challenge noise bridge status: {report['b4']['verifier_private_challenge_noise_bridge'].get('status')}",
+            f"- Private-challenge noise bridge transcript cases / gates passed-failed: {report['b4']['verifier_private_challenge_noise_bridge'].get('transcript_case_count')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('passed_gate_count')}-{report['b4']['verifier_private_challenge_noise_bridge'].get('failed_gate_count')}",
+            f"- Private-challenge noise bridge backend-like honest no-refresh / challenge / rotation: {report['b4']['verifier_private_challenge_noise_bridge'].get('backend_like_no_refresh_honest_acceptance')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('backend_like_challenge_refresh_honest_acceptance')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('backend_like_refresh_plus_rotation_honest_acceptance')}",
+            f"- Private-challenge noise bridge no-leak / three-leak / full-leak acceptance: {report['b4']['verifier_private_challenge_noise_bridge'].get('max_no_leak_adversary_acceptance')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('max_three_private_bit_leak_acceptance')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('max_full_private_material_leak_acceptance')}",
+            f"- Private-challenge noise bridge hardware / protocol soundness claim: {report['b4']['verifier_private_challenge_noise_bridge'].get('hardware_execution_performed')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('protocol_soundness_proved')}",
+            f"- Private-challenge noise bridge result/markdown exists: {report['b4']['verifier_private_challenge_noise_bridge'].get('result_exists')} / {report['b4']['verifier_private_challenge_noise_bridge'].get('markdown_exists')}",
             "",
             "## B5 Hubbard Embedding Status",
             "",
@@ -31690,6 +31859,12 @@ def markdown_report(report: dict) -> str:
             f"- Private-challenge support / hidden / full-leak acceptance: {report['b8']['verifier_private_challenge_protocol_gate'].get('public_acceptance_without_private_material')} / {report['b8']['verifier_private_challenge_protocol_gate'].get('private_acceptance_with_hidden_predicate')} / {report['b8']['verifier_private_challenge_protocol_gate'].get('full_private_material_leakage_acceptance')}",
             f"- Private-challenge hardware / protocol soundness claim: {report['b8']['verifier_private_challenge_protocol_gate'].get('hardware_execution_performed')} / {report['b8']['verifier_private_challenge_protocol_gate'].get('protocol_soundness_proved')}",
             f"- Private-challenge result/markdown exists: {report['b8']['verifier_private_challenge_protocol_gate'].get('result_exists')} / {report['b8']['verifier_private_challenge_protocol_gate'].get('markdown_exists')}",
+            f"- Private-challenge noise bridge status: {report['b8']['verifier_private_challenge_noise_bridge'].get('status')}",
+            f"- Private-challenge noise bridge transcript cases / gates passed-failed: {report['b8']['verifier_private_challenge_noise_bridge'].get('transcript_case_count')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('passed_gate_count')}-{report['b8']['verifier_private_challenge_noise_bridge'].get('failed_gate_count')}",
+            f"- Private-challenge noise bridge backend-like honest no-refresh / challenge / rotation: {report['b8']['verifier_private_challenge_noise_bridge'].get('backend_like_no_refresh_honest_acceptance')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('backend_like_challenge_refresh_honest_acceptance')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('backend_like_refresh_plus_rotation_honest_acceptance')}",
+            f"- Private-challenge noise bridge no-leak / three-leak / full-leak acceptance: {report['b8']['verifier_private_challenge_noise_bridge'].get('max_no_leak_adversary_acceptance')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('max_three_private_bit_leak_acceptance')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('max_full_private_material_leak_acceptance')}",
+            f"- Private-challenge noise bridge hardware / protocol soundness claim: {report['b8']['verifier_private_challenge_noise_bridge'].get('hardware_execution_performed')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('protocol_soundness_proved')}",
+            f"- Private-challenge noise bridge result/markdown exists: {report['b8']['verifier_private_challenge_noise_bridge'].get('result_exists')} / {report['b8']['verifier_private_challenge_noise_bridge'].get('markdown_exists')}",
             f"- Generative spoofer status: {report['b8']['generative_spoofer_refresh'].get('status')}",
             f"- Generative spoofer configurations: {report['b8']['generative_spoofer_refresh'].get('configuration_count')}",
             f"- Generative spoofer maximum learned soundness: {report['b8']['generative_spoofer_refresh'].get('maximum_learned_soundness')}",
