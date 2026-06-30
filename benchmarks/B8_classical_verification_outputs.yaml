@@ -383,6 +383,53 @@ current_results:
     validation_error_count: 0
     result: ../results/B4_B8_real_backend_transcript_readiness_gate_v0.json
     markdown_report: ../research/B4_B8_real_backend_transcript_readiness_gate.md
+  real_backend_transcript_contract_gate_v0:
+    status: real_backend_transcript_contract_open_missing_hardware_evidence
+    model_status: readiness_blockers_decomposed_for_backend_transcript_prs
+    method: b4_b8_real_backend_transcript_contract_gate_v0
+    source_readiness_method: b4_b8_real_backend_transcript_readiness_gate_v0
+    source_readiness_status: real_backend_transcript_readiness_failed
+    source_missing_readiness_gate_ids: [R5, R6, R7, R8, R9]
+    source_transcript_case_count: 720
+    train_row_count: 560
+    holdout_row_count: 160
+    fitted_evaluation_row_count: 640
+    backend_calibrated_aer_circuit_count: 5760
+    qiskit_generic_backend_v2_used: true
+    backend_calibrated_noise_parameters_instantiated: true
+    private_safe_max_no_leak_fitted_acceptance: 0.0625
+    leakage_blind_max_no_leak_fitted_acceptance: 0.35
+    leakage_aware_max_full_private_material_leak_fitted_acceptance: 1.0
+    real_backend_properties_required: true
+    hardware_execution_required: true
+    leakage_separated_real_training_required: true
+    leakage_blind_no_leak_margin_required: true
+    full_private_material_leakage_containment_required: true
+    real_backend_properties_used: false
+    hardware_execution_performed: false
+    real_backend_transcript_rows: 0
+    leakage_separated_real_training_performed: false
+    contract_requirement_count: 10
+    passed_contract_requirement_count: 5
+    failed_contract_requirement_count: 5
+    failed_contract_requirement_ids: [K5, K6, K7, K8, K9]
+    contract_packet_count: 5
+    contract_packet_ids:
+      - B4B8-R5-real-backend-properties
+      - B4B8-R6-hardware-execution
+      - B4B8-R7-leakage-separated-real-fitting
+      - B4B8-R8-leakage-blind-no-leak-margin
+      - B4B8-R9-full-leakage-containment
+    real_backend_transcript_readiness: false
+    protocol_soundness_proved: false
+    cryptographic_soundness_proved: false
+    sampling_hardness_proved: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    data_contract_ready_for_prs: true
+    validation_error_count: 0
+    result: ../results/B4_B8_real_backend_transcript_contract_gate_v0.json
+    markdown_report: ../research/B4_B8_real_backend_transcript_contract_gate.md
   toy_hidden_invariant_output_verifier_v0:
     status: toy_invariant_property_test
     model_status: toy_invariant_property_test_not_full_distribution_verification
@@ -522,3 +569,4 @@ prototype_artifacts:
   nonstabilizer_support_spoofer_gate: ../tools/b4_b8_nonstabilizer_support_spoofer_gate.py
   verifier_private_predicate_gate: ../tools/b4_b8_verifier_private_predicate_gate.py
   real_backend_transcript_readiness_gate: ../tools/b4_b8_real_backend_transcript_readiness_gate.py
+  real_backend_transcript_contract_gate: ../tools/b4_b8_real_backend_transcript_contract_gate.py

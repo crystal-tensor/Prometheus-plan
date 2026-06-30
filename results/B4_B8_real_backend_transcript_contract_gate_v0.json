@@ -1,0 +1,276 @@
+{
+  "backend_calibrated_aer_circuit_count": 5760,
+  "backend_calibrated_noise_parameters_instantiated": true,
+  "benchmark": "B4/B8",
+  "benchmark_id": "B4_B8",
+  "bqp_separation_claimed": false,
+  "claim_boundary": {
+    "bqp_separation_claimed": false,
+    "cryptographic_soundness_proved": false,
+    "hardware_execution_performed": false,
+    "protocol_soundness_proved": false,
+    "quantum_advantage_claimed": false,
+    "real_backend_properties_used": false,
+    "real_backend_transcript_contract_built": true,
+    "real_backend_transcript_readiness": false,
+    "sampling_hardness_proved": false,
+    "what_is_not_supported": "No real backend transcript readiness, protocol soundness, sampling hardness, quantum advantage, or BQP separation is established.",
+    "what_is_supported": "B4/B8 now has five explicit PR packets for real backend properties, hardware execution transcripts, leakage-separated real fitting, leakage-blind no-leak margin, and full-leakage containment."
+  },
+  "contract_packet_count": 5,
+  "contract_packet_ids": [
+    "B4B8-R5-real-backend-properties",
+    "B4B8-R6-hardware-execution",
+    "B4B8-R7-leakage-separated-real-fitting",
+    "B4B8-R8-leakage-blind-no-leak-margin",
+    "B4B8-R9-full-leakage-containment"
+  ],
+  "contract_packets": [
+    {
+      "acceptance_rule": "real_backend_properties_used must become true while preserving the current B4/B8 verifier-private transcript fields.",
+      "blocks_gate": "K5",
+      "owner_role": "backend_calibration_agent",
+      "packet_id": "B4B8-R5-real-backend-properties",
+      "required_artifacts": [
+        "backend properties from a real device snapshot or provider export",
+        "per-qubit and per-edge timing/error/readout metadata",
+        "calibration timestamp, backend identifier, and provider provenance",
+        "mapping from exported properties into the verifier circuit layout"
+      ]
+    },
+    {
+      "acceptance_rule": "hardware_execution_performed must become true and the transcript schema must replay through the current fitted-spoofer evaluator.",
+      "blocks_gate": "K6",
+      "owner_role": "hardware_execution_agent",
+      "packet_id": "B4B8-R6-hardware-execution",
+      "required_artifacts": [
+        "hardware or independently supplied execution transcript rows",
+        "circuit id, shot id, refresh mode, leakage profile, and predicate outcome columns",
+        "raw-to-processed transcript hash ledger",
+        "explicit no-refresh, challenge-refresh, and refresh-plus-rotation coverage"
+      ]
+    },
+    {
+      "acceptance_rule": "leakage_separated_real_training_performed must become true and real_backend_transcript_rows must be positive.",
+      "blocks_gate": "K7",
+      "owner_role": "spoofer_baseline_agent",
+      "packet_id": "B4B8-R7-leakage-separated-real-fitting",
+      "required_artifacts": [
+        "leakage-separated train/holdout split over real transcript rows",
+        "private-safe, leakage-blind, and leakage-aware fitted families",
+        "fitted evaluation rows with the same 560/160 discipline or justified larger split",
+        "negative-control splits that prevent private-material leakage from contaminating no-leak training"
+      ]
+    },
+    {
+      "acceptance_rule": "leakage_blind_max_no_leak_fitted_acceptance must fall from 0.35 to <= 0.10.",
+      "blocks_gate": "K8",
+      "owner_role": "adversary_margin_agent",
+      "packet_id": "B4B8-R8-leakage-blind-no-leak-margin",
+      "required_artifacts": [
+        "leakage-blind no-leak fitted acceptance table",
+        "same private-safe no-leak denominator table",
+        "diagnostic proving no-leak acceptance stays below 0.10",
+        "predicate redesign notes if leakage-blind fitting remains unsafe"
+      ]
+    },
+    {
+      "acceptance_rule": "full-private-material leakage acceptance must be <= 0.25 or the claim boundary must explicitly exclude that leakage regime.",
+      "blocks_gate": "K9",
+      "owner_role": "protocol_boundary_agent",
+      "packet_id": "B4B8-R9-full-leakage-containment",
+      "required_artifacts": [
+        "full-private-material leakage acceptance table",
+        "explicit claim boundary excluding full leakage or a cryptographic protection layer",
+        "challenge-material redesign evidence if full leakage remains in scope",
+        "bounded leakage model with verifier-private material still hidden"
+      ]
+    }
+  ],
+  "contract_requirement_count": 10,
+  "contract_requirements": [
+    {
+      "acceptance_rule": "The source readiness gate must stay valid and fail only R5-R9.",
+      "evidence": {
+        "missing_readiness_gate_ids": [
+          "R5",
+          "R6",
+          "R7",
+          "R8",
+          "R9"
+        ],
+        "source_method": "b4_b8_real_backend_transcript_readiness_gate_v0",
+        "source_status": "real_backend_transcript_readiness_failed",
+        "source_validation_error_count": 0
+      },
+      "gate_id": "K1",
+      "label": "Source readiness gate is valid and fails only R5-R9",
+      "passed": true,
+      "pr_packet": "source-audit"
+    },
+    {
+      "acceptance_rule": "Preserve the synthetic transcript denominator while adding real rows.",
+      "evidence": {
+        "fitted_evaluation_row_count": 640,
+        "holdout_row_count": 160,
+        "source_transcript_case_count": 720,
+        "train_row_count": 560
+      },
+      "gate_id": "K2",
+      "label": "Synthetic transcript and fitted-spoofer denominators remain available",
+      "passed": true,
+      "pr_packet": "synthetic-control-denominator"
+    },
+    {
+      "acceptance_rule": "Keep this simulated denominator, but do not treat it as real backend evidence.",
+      "evidence": {
+        "backend_calibrated_aer_circuit_count": 5760,
+        "backend_calibrated_noise_parameters_instantiated": true,
+        "qiskit_generic_backend_v2_used": true
+      },
+      "gate_id": "K3",
+      "label": "GenericBackendV2 bridge remains a calibrated simulator denominator",
+      "passed": true,
+      "pr_packet": "generic-backend-control"
+    },
+    {
+      "acceptance_rule": "Every failed readiness gate must map to a concrete PR packet.",
+      "evidence": {
+        "contract_packet_count": 5,
+        "contract_packet_ids": [
+          "B4B8-R5-real-backend-properties",
+          "B4B8-R6-hardware-execution",
+          "B4B8-R7-leakage-separated-real-fitting",
+          "B4B8-R8-leakage-blind-no-leak-margin",
+          "B4B8-R9-full-leakage-containment"
+        ]
+      },
+      "gate_id": "K4",
+      "label": "PR packets exist for every failed real-backend readiness gate",
+      "passed": true,
+      "pr_packet": "packet-index"
+    },
+    {
+      "acceptance_rule": "Attach real backend properties with provenance and layout mapping.",
+      "evidence": {
+        "real_backend_properties_used": false,
+        "source_gate": "R5"
+      },
+      "gate_id": "K5",
+      "label": "Real backend properties packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B4B8-R5-real-backend-properties"
+    },
+    {
+      "acceptance_rule": "Submit hardware or independent execution transcript rows.",
+      "evidence": {
+        "hardware_execution_performed": false,
+        "source_gate": "R6"
+      },
+      "gate_id": "K6",
+      "label": "Hardware execution packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B4B8-R6-hardware-execution"
+    },
+    {
+      "acceptance_rule": "Train and hold out leakage-separated spoofers on real transcript rows.",
+      "evidence": {
+        "leakage_separated_real_training_performed": false,
+        "real_backend_transcript_rows": 0,
+        "source_gate": "R7"
+      },
+      "gate_id": "K7",
+      "label": "Leakage-separated real fitting packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B4B8-R7-leakage-separated-real-fitting"
+    },
+    {
+      "acceptance_rule": "Keep leakage-blind no-leak fitted acceptance <= 0.10.",
+      "evidence": {
+        "leakage_blind_max_no_leak_fitted_acceptance": 0.35,
+        "required_max_acceptance": 0.1,
+        "source_gate": "R8"
+      },
+      "gate_id": "K8",
+      "label": "Leakage-blind no-leak margin packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B4B8-R8-leakage-blind-no-leak-margin"
+    },
+    {
+      "acceptance_rule": "Bound full-private-material leakage or move it outside the claim boundary.",
+      "evidence": {
+        "leakage_aware_max_full_private_material_leak_fitted_acceptance": 1.0,
+        "required_max_acceptance": 0.25,
+        "source_gate": "R9"
+      },
+      "gate_id": "K9",
+      "label": "Full-private-material leakage packet has been satisfied",
+      "passed": false,
+      "pr_packet": "B4B8-R9-full-leakage-containment"
+    },
+    {
+      "acceptance_rule": "Do not promote B4/B8 until K5-K9 pass under replayable evidence.",
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "cryptographic_soundness_proved": false,
+        "protocol_soundness_proved": false,
+        "quantum_advantage_claimed": false,
+        "sampling_hardness_proved": false
+      },
+      "gate_id": "K10",
+      "label": "Forbidden advantage and soundness claims remain absent",
+      "passed": true,
+      "pr_packet": "claim-boundary"
+    }
+  ],
+  "cryptographic_soundness_proved": false,
+  "data_contract_ready_for_prs": true,
+  "elapsed_seconds": 9.894371032714844e-05,
+  "failed_contract_requirement_count": 5,
+  "failed_contract_requirement_ids": [
+    "K5",
+    "K6",
+    "K7",
+    "K8",
+    "K9"
+  ],
+  "fitted_evaluation_row_count": 640,
+  "full_private_material_leakage_containment_required": true,
+  "hardware_execution_performed": false,
+  "hardware_execution_required": true,
+  "holdout_row_count": 160,
+  "last_updated": "2026-07-01",
+  "leakage_aware_max_full_private_material_leak_fitted_acceptance": 1.0,
+  "leakage_blind_max_no_leak_fitted_acceptance": 0.35,
+  "leakage_blind_no_leak_margin_required": true,
+  "leakage_separated_real_training_performed": false,
+  "leakage_separated_real_training_required": true,
+  "method": "b4_b8_real_backend_transcript_contract_gate_v0",
+  "model_status": "readiness_blockers_decomposed_for_backend_transcript_prs",
+  "passed_contract_requirement_count": 5,
+  "private_safe_max_no_leak_fitted_acceptance": 0.0625,
+  "protocol_soundness_proved": false,
+  "qiskit_generic_backend_v2_used": true,
+  "quantum_advantage_claimed": false,
+  "real_backend_properties_required": true,
+  "real_backend_properties_used": false,
+  "real_backend_transcript_readiness": false,
+  "real_backend_transcript_rows": 0,
+  "sampling_hardness_proved": false,
+  "source_missing_readiness_gate_ids": [
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9"
+  ],
+  "source_readiness_method": "b4_b8_real_backend_transcript_readiness_gate_v0",
+  "source_readiness_status": "real_backend_transcript_readiness_failed",
+  "source_transcript_case_count": 720,
+  "status": "real_backend_transcript_contract_open_missing_hardware_evidence",
+  "title": "B4/B8 real-backend transcript contract gate",
+  "train_row_count": 560,
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1"
+}

@@ -1883,6 +1883,13 @@ Overall audit: PASS
 - Real-backend transcript readiness real backend / hardware / transcript rows: False / False / 0
 - Real-backend transcript readiness private-safe / leakage-blind / full-leak acceptance: 0.0625 / 0.35 / 1.0
 - Real-backend transcript readiness result/markdown exists: True / True
+- Real-backend transcript contract status: real_backend_transcript_contract_open_missing_hardware_evidence
+- Real-backend transcript contract source gates / contract failures: ['R5', 'R6', 'R7', 'R8', 'R9'] / ['K5', 'K6', 'K7', 'K8', 'K9']
+- Real-backend transcript contract passed / failed / packets: 5 / 5 / 5
+- Real-backend transcript contract required backend / hardware / leakage split: True / True / True
+- Real-backend transcript contract readiness / soundness / advantage: False / False / False
+- Real-backend transcript contract validation errors: 0
+- Real-backend transcript contract result/markdown exists: True / True
 
 ## B5 Hubbard Embedding Status
 
@@ -2270,6 +2277,13 @@ Overall audit: PASS
 - Real-backend transcript readiness real backend / hardware / transcript rows: False / False / 0
 - Real-backend transcript readiness private-safe / leakage-blind / full-leak acceptance: 0.0625 / 0.35 / 1.0
 - Real-backend transcript readiness result/markdown exists: True / True
+- Real-backend transcript contract status: real_backend_transcript_contract_open_missing_hardware_evidence
+- Real-backend transcript contract source gates / contract failures: ['R5', 'R6', 'R7', 'R8', 'R9'] / ['K5', 'K6', 'K7', 'K8', 'K9']
+- Real-backend transcript contract passed / failed / packets: 5 / 5 / 5
+- Real-backend transcript contract required backend / hardware / leakage split: True / True / True
+- Real-backend transcript contract readiness / soundness / advantage: False / False / False
+- Real-backend transcript contract validation errors: 0
+- Real-backend transcript contract result/markdown exists: True / True
 - Generative spoofer status: trained_generative_spoofer_refresh_boundary_not_soundness_proof
 - Generative spoofer configurations: 144
 - Generative spoofer maximum learned soundness: 1.0

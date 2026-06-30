@@ -32,10 +32,10 @@
     {
       "b_id": "B4",
       "blocker": "No real backend properties, no hardware execution, no leakage-separated real-transcript fitting, leakage-blind fitting remains unsafe, and full private-material leakage still breaks the protocol.",
-      "current_evidence": "B4/B8 has formal private-challenge protocol, conservative transcript-noise bridge, parametric spoofer pressure, fitted synthetic holdout, and T-B4-002f/T-B8-003j real-backend transcript readiness guardrail. The readiness guardrail passes 5/10 and fails R5-R9 with 0 real backend transcript rows, leakage-blind no-leak fitted acceptance 0.35, and full-private-material leakage fitted acceptance 1.0.",
+      "current_evidence": "B4/B8 has formal private-challenge protocol, conservative transcript-noise bridge, parametric spoofer pressure, fitted synthetic holdout, T-B4-002f/T-B8-003j real-backend transcript readiness guardrail, and T-B4-002g/T-B8-003k real-backend transcript evidence contract. The contract checks 10 requirements, passes 5, fails K5-K9, preserves source blockers R5-R9, emits 5 PR packets, and still has 0 real backend transcript rows, leakage-blind no-leak fitted acceptance 0.35, and full-private-material leakage fitted acceptance 1.0.",
       "gate_status": "early",
-      "main_blocker": "The fitted-spoofer gate shows private-safe no-leak fitting is not the immediate synthetic-transcript break, but leakage-blind training contamination reaches 0.35 and full private-material leakage still breaks the protocol. The active blocker is now leakage-separated learned attacks on real backend or hardware transcripts plus predicate redesign under calibrated noise.",
-      "next_experiment": "Run a real-backend or hardware transcript ingestion gate, preserve leakage-separated train/holdout splits, and rerun fitted/generative spoofers before promoting protocol soundness or B10-T2 claims.",
+      "main_blocker": "The contract turns the B4/B8 blocker into 5 implementation packets: real backend properties, hardware execution, leakage-separated real fitting, leakage-blind no-leak margin, and full-leakage containment. Until those pass together, the route remains demoted and cannot support protocol soundness or advantage claims.",
+      "next_experiment": "Close one or more B4/B8 contract packets by ingesting real backend properties or hardware randomized-measurement transcripts, preserving leakage-separated train/holdout splits, and rerunning fitted/generative spoofers before promoting any soundness claim.",
       "technical_solution_target": "Circuit-level verifiable advantage task with explicit completeness/soundness against adaptive spoofers."
     },
     {
@@ -66,10 +66,10 @@
     {
       "b_id": "B8",
       "blocker": "No real backend properties, no hardware execution, no leakage-separated real-transcript fitting, leakage-blind fitting remains unsafe, and full private-material leakage still breaks the protocol.",
-      "current_evidence": "B4/B8 has formal private-challenge protocol, conservative transcript-noise bridge, parametric spoofer pressure, fitted synthetic holdout, and T-B4-002f/T-B8-003j real-backend transcript readiness guardrail. The readiness guardrail passes 5/10 and fails R5-R9 with 0 real backend transcript rows, leakage-blind no-leak fitted acceptance 0.35, and full-private-material leakage fitted acceptance 1.0.",
+      "current_evidence": "B4/B8 has formal private-challenge protocol, conservative transcript-noise bridge, parametric spoofer pressure, fitted synthetic holdout, T-B4-002f/T-B8-003j real-backend transcript readiness guardrail, and T-B4-002g/T-B8-003k real-backend transcript evidence contract. The contract checks 10 requirements, passes 5, fails K5-K9, preserves source blockers R5-R9, emits 5 PR packets, and still has 0 real backend transcript rows, leakage-blind no-leak fitted acceptance 0.35, and full-private-material leakage fitted acceptance 1.0.",
       "gate_status": "in_progress",
-      "main_blocker": "The fitted-spoofer gate shows private-safe no-leak fitting is not the immediate synthetic-transcript break, but leakage-blind training contamination reaches 0.35 and full private-material leakage still breaks the protocol. The active blocker is now leakage-separated learned attacks on real backend or hardware transcripts plus predicate redesign under calibrated noise.",
-      "next_experiment": "Run a real-backend or hardware transcript ingestion gate, preserve leakage-separated train/holdout splits, and rerun fitted/generative spoofers before promoting protocol soundness or B10-T2 claims.",
+      "main_blocker": "The contract turns the B4/B8 blocker into 5 implementation packets: real backend properties, hardware execution, leakage-separated real fitting, leakage-blind no-leak margin, and full-leakage containment. Until those pass together, the route remains demoted and cannot support protocol soundness or advantage claims.",
+      "next_experiment": "Close one or more B4/B8 contract packets by ingesting real backend properties or hardware randomized-measurement transcripts, preserving leakage-separated train/holdout splits, and rerunning fitted/generative spoofers before promoting any soundness claim.",
       "technical_solution_target": "Classical verifier whose soundness stays low under adaptive leakage through challenge refresh/projection rotation."
     },
     {

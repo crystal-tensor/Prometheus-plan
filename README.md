@@ -1233,3 +1233,12 @@ has 0 real backend transcript rows, private-safe no-leak fitted acceptance
 leak fitted acceptance 1.0. This is not real-backend transcript readiness,
 protocol soundness, cryptographic soundness, sampling hardness, quantum
 advantage, or BQP separation.
+
+`T-B4-002g` / `T-B8-003k` converts the failed readiness guardrail into a
+real-backend transcript evidence contract. The contract checks 10 requirements:
+5 pass and 5 fail. It preserves the same failed source gates (`R5`-`R9`) and
+emits five PR packets: real backend properties, hardware execution,
+leakage-separated real fitting, leakage-blind no-leak margin, and full-leakage
+containment. The current state still has 0 real backend transcript rows,
+leakage-blind no-leak fitted acceptance 0.35, full-private-material leakage
+acceptance 1.0, and no protocol-soundness, hardware, advantage, or BQP claim.

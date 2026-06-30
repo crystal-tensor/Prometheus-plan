@@ -2456,6 +2456,19 @@ real backend transcript rows, leakage-blind no-leak fitted acceptance `0.35`,
 and full-private-material leakage fitted acceptance `1.0`, so it is not
 real-backend transcript readiness or protocol soundness.
 
+Sprint update 59g: B4/B8 now has a real-backend transcript contract gate.
+T-B4-002g/T-B8-003k adds
+`tools/b4_b8_real_backend_transcript_contract_gate.py` and emits
+`results/B4_B8_real_backend_transcript_contract_gate_v0.json` plus
+`research/B4_B8_real_backend_transcript_contract_gate.md`. The gate consumes
+the failed readiness guardrail, preserves source blockers R5-R9, checks 10
+contract requirements, passes 5, fails K5-K9, and emits 5 PR packets:
+real-backend properties, hardware execution, leakage-separated real fitting,
+leakage-blind no-leak margin, and full-leakage containment. This is a
+handoff contract for the next B4/B8 implementation PRs, not real-backend
+readiness, protocol soundness, hardware execution, quantum advantage, or BQP
+separation.
+
 Sprint update 63: B5/B10 now has the W4 row-contract harness that the
 production implementation triage requested. T-B5-006d/T-B10-014b adds
 `tools/b5_b10_row_contract_harness.py` and emits
