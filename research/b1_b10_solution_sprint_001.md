@@ -465,6 +465,22 @@ W1 production DMRG/MPS and W3 same-access response oracle. It is not production
 DMRG, not a response oracle, not a same-access positive route, not quantum
 advantage, and not BQP separation.
 
+Sprint update 65: B5/B10 now has the W3 same-access response-oracle cost
+ledger, and it is also a useful negative gate. T-B5-006f/T-B10-014d adds
+`tools/b5_b10_response_oracle_cost_ledger.py` and emits
+`results/B5_B10_response_oracle_cost_ledger_v0.json` plus
+`research/B5_B10_response_oracle_cost_ledger.md`. The ledger preserves the
+T-B5-006d row-contract hash
+`7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc` and
+checks 8 oracle requirements. O1 row contract, O2 measurement-confidence
+ledger, and O8 forbidden-claim discipline pass. O3 state preparation, O4
+mixing/query cost, O5 readout/noise cost, O6 optimizer-loop cost, and O7
+denominator win fail. No same-access response oracle is constructed, 0 rows
+beat explicit D5 matvec pressure for the seeded target, and the remaining
+positive-route packet is W1 production DMRG/MPS. This is not production DMRG,
+not a response oracle, not a same-access positive route, not quantum advantage,
+and not BQP separation.
+
 ## B5: Strongly Correlated Matter
 
 **Technical target:** show an accuracy-per-resource improvement on a meaningful

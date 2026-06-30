@@ -114,8 +114,14 @@ The seeded mean relative response error is `0.0004416259745141553`; the best
 replacement-by-mean is `variational_mps_als` at `0.01805548365563228`, with
 0 rows beating seeded pressure. The largest row-level win count across all
 candidate families is only 2/9, so the seeded-pressure blocker remains explicit
-and the positive-route implementation packets are now `W1` production DMRG/MPS
-or `W3` same-access response oracle.
+and W2 is closed as a current positive-route packet.
+The W3 same-access response-oracle cost ledger is now executed as well. It
+checks 8 oracle requirements under the same row contract: 3 pass and 5 fail
+(`O3` state preparation, `O4` mixing/query cost, `O5` readout/noise cost,
+`O6` optimizer-loop cost, and `O7` denominator win). The measurement-confidence
+ledger exists, but no response oracle is constructed, 0 rows beat explicit D5
+matvec pressure for the seeded target, and the remaining positive-route packet
+is now `W1` production DMRG/MPS.
 The latest B10-T1 stress test still finds no positive same-access route because
 0 rows beat explicit D5 matvec-equivalent costs by shots. This is progress, but
 it is not a production DMRG result, not a deployable tensor solver, not a

@@ -1965,6 +1965,11 @@ Overall audit: PASS
 - B5 seeded-pressure replacement audit deployable replacements / seeded replaced: 0 / False
 - B5 seeded-pressure replacement audit remaining positive-route packets: ['W1', 'W3']
 - B5 seeded-pressure replacement audit result/markdown exists: True / True
+- B5/B10 response-oracle cost ledger status: same_access_response_oracle_cost_ledger_failed_no_oracle
+- B5/B10 response-oracle cost ledger requirements passed/failed: 3 / 5
+- B5/B10 response-oracle cost ledger failed IDs: ['O3', 'O4', 'O5', 'O6', 'O7']
+- B5/B10 response-oracle cost ledger oracle constructed / remaining packets: False / ['W1']
+- B5/B10 response-oracle cost ledger result/markdown exists: True / True
 
 ## B6 Superconductivity Descriptor Status
 
@@ -2516,6 +2521,11 @@ Overall audit: PASS
 - B10-T1 B5 seeded-pressure replacement audit deployable replacements / seeded replaced: 0 / False
 - B10-T1 B5 seeded-pressure replacement audit remaining positive-route packets: ['W1', 'W3']
 - B10-T1 B5 seeded-pressure replacement audit result/markdown exists: True / True
+- B10-T1 B5 response-oracle cost ledger status: same_access_response_oracle_cost_ledger_failed_no_oracle
+- B10-T1 B5 response-oracle cost ledger requirements passed/failed: 3 / 5
+- B10-T1 B5 response-oracle cost ledger failed IDs: ['O3', 'O4', 'O5', 'O6', 'O7']
+- B10-T1 B5 response-oracle cost ledger oracle constructed / remaining packets: False / ['W1']
+- B10-T1 B5 response-oracle cost ledger result/markdown exists: True / True
 
 ## Errors
 

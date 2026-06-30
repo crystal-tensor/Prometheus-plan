@@ -40,6 +40,54 @@ next_actions:
   - add_observable_errors_beyond_energy
   - move_from_1d_chain_to_2d_plaquette_proxy
 current_results:
+  response_oracle_cost_ledger_v0:
+    status: same_access_response_oracle_cost_ledger_failed_no_oracle
+    model_status: w3_response_oracle_ledger_executed_oracle_not_constructed
+    method: b5_b10_response_oracle_cost_ledger_v0
+    source_row_contract_result: ../results/B5_B10_row_contract_harness_v0.json
+    source_sampler_stress_result: ../results/B10_t1_b5_response_sampler_cost_stress_v0.json
+    row_contract_count: 9
+    row_contract_hash: 7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc
+    sampler_instance_count: 9
+    oracle_requirement_count: 8
+    oracle_requirements_passed: 3
+    oracle_requirements_failed: 5
+    failed_oracle_requirement_ids: [O3, O4, O5, O6, O7]
+    measurement_confidence_ledger_present: true
+    state_preparation_algorithm_instantiated: false
+    mixing_cost_included: false
+    readout_error_included: false
+    optimizer_loop_cost_included: false
+    rows_beating_explicit_d5_matvec_for_seeded_target: 0
+    min_total_shots_to_match_seeded_mps_pressure: 3861425434
+    median_total_shots_to_match_seeded_mps_pressure: 7644706432712
+    max_total_shots_to_match_seeded_mps_pressure: 284916076006665507134714675200
+    max_optimistic_seeded_target_prep_2q_gate_floor: 1139664304026662028538858700800
+    seeded_pressure_replaced: false
+    w3_same_access_response_oracle_ledger_executed: true
+    w3_response_oracle_constructed: false
+    w3_remains_blocked_on_oracle: true
+    remaining_positive_route_packets: [W1]
+    production_dmrg_available: false
+    sampling_oracle_constructed: false
+    same_access_response_oracle_constructed: false
+    same_access_positive_route_ready: false
+    b10_t1_positive_route_ready: false
+    catalog_change_required: false
+    production_dmrg_claimed: false
+    quantum_response_win_claimed: false
+    accuracy_per_resource_win_claimed: false
+    same_access_positive_route_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    dequantization_theorem_claimed: false
+    sampling_access_theorem_claimed: false
+    condition_count: 8
+    conditions_satisfied: 3
+    conditions_failed: 5
+    validation_error_count: 0
+    result: ../results/B5_B10_response_oracle_cost_ledger_v0.json
+    markdown_report: ../research/B5_B10_response_oracle_cost_ledger.md
   seeded_pressure_replacement_audit_v0:
     status: seeded_pressure_replacement_failed_remains_blocker
     model_status: w2_replacement_audit_completed_no_deployable_denominator
@@ -405,6 +453,7 @@ current_results:
       cluster4: 0.05921856583390095
     result: ../results/B5_hubbard_embedding_baseline_v0.json
 prototype_artifacts:
+  response_oracle_cost_ledger: ../tools/b5_b10_response_oracle_cost_ledger.py
   seeded_pressure_replacement_audit: ../tools/b5_seeded_pressure_replacement_audit.py
   row_contract_harness: ../tools/b5_b10_row_contract_harness.py
   production_implementation_triage_gate: ../tools/b5_b10_production_implementation_triage_gate.py

@@ -536,6 +536,13 @@ deployable replacements, seeded mean relative response error
 0.0004416259745141553, best replacement-by-mean `variational_mps_als` at
 0.01805548365563228 with 0 rows beating seeded pressure, and max row-level win
 count 2/9. Seeded pressure remains the blocker.
+T-B5-006f/T-B10-014d executes W3 as a same-access response-oracle cost ledger.
+It checks 8 oracle requirements under the locked row contract: O1 row contract,
+O2 measurement confidence, and O8 forbidden-claim discipline pass; O3 state
+preparation, O4 mixing/query cost, O5 readout/noise cost, O6 optimizer-loop
+cost, and O7 denominator win fail. No response oracle is constructed, 0 rows
+beat explicit D5 matvec pressure for the seeded target, and W1 is the only
+remaining positive-route packet.
 
 **Remaining path to a serious solution:** run T-B5-006 by implementing mature
 canonical-environment DMRG/MPS for the same response rows, with stored
@@ -544,10 +551,10 @@ exact-state seeding, and full cost accounting; or compare a fully costed
 quantum impurity/response kernel against exact D5, non-oracle embedding, seeded
 MPS pressure, one-site ALS, two-site finite-DMRG-style, readiness-gate, and
 smoke-gate denominators while satisfying the same-access production contract.
-Use T-B5-006c/T-B5-006d/T-B5-006e as the execution queue: W2 is now a negative
-audit, so W1 production DMRG/MPS and W3 same-access response oracle are the
-remaining technical reopen routes and must preserve the row-contract hash,
-while W6 keeps claim discipline fixed.
+Use T-B5-006c/T-B5-006d/T-B5-006e/T-B5-006f as the execution queue: W2 and W3
+are now negative audits, so W1 production DMRG/MPS is the remaining technical
+reopen route and must preserve the row-contract hash, while W6 keeps claim
+discipline fixed.
 
 **Current internal maturity:** 29/100.
 
@@ -1057,13 +1064,15 @@ from changing the row set or observable contract.
 T-B5-006e/T-B10-014c now adds the W2 seeded-pressure replacement audit to that
 B10-T1 queue: 3 candidate families replayed, 0 deployable replacements, seeded
 pressure not replaced, and no positive same-access route.
+T-B5-006f/T-B10-014d now adds the W3 response-oracle cost ledger: 8 oracle
+requirements checked, 3 passed, 5 failed, no constructed response oracle, and
+0 rows beating explicit D5 matvec pressure for the seeded target.
 
 **Remaining path to a serious solution:** treat B3 as demoted unless a
 multi-parameter UCCSD/ADAPT or stronger measurement rescue succeeds; run
-T-B10-014 through the remaining B5 W1/W3 queue by replacing the readiness/cost
-negative boundary with canonical-environment production DMRG/MPS for the same
-B5 Hubbard response rows while preserving the row-contract hash, or by supplying
-a real same-access response oracle with
+T-B10-014 through B5 W1 by replacing the readiness/cost negative boundary with
+canonical-environment production DMRG/MPS for the same B5 Hubbard response rows
+while preserving the row-contract hash, or by supplying a future real same-access response oracle with
 preparation, mixing, variance, confidence, optimizer-loop, and classical
 denominator costs strong enough to survive the full denominator ladder; turn the B10-T2
 bridge into real backend-property verifier execution or hardware randomized

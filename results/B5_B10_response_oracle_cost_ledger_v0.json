@@ -1,0 +1,294 @@
+{
+  "benchmark_id": "B5",
+  "claim_boundary": {
+    "accuracy_per_resource_win_claimed": false,
+    "bqp_separation_claimed": false,
+    "dequantization_theorem_claimed": false,
+    "kill_condition": "Any future W3 retry must preserve the row-contract hash, instantiate state preparation, include mixing/query and readout/noise costs, bound optimizer-loop amplification, and beat the seeded-pressure denominator ladder without hidden access advantages.",
+    "next_gate": "Run W1 production DMRG/MPS; W3 is closed unless a real same-access response oracle is instantiated.",
+    "production_dmrg_claimed": false,
+    "quantum_advantage_claimed": false,
+    "quantum_response_win_claimed": false,
+    "same_access_positive_route_claimed": false,
+    "same_access_response_oracle_constructed": false,
+    "sampling_access_theorem_claimed": false,
+    "sampling_oracle_constructed": false,
+    "what_is_not_supported": "This is not a state-preparation algorithm, not a mixing/query oracle, not a hardware/noise-calibrated response oracle, not production DMRG, not a positive same-access route, not quantum advantage, and not BQP separation.",
+    "what_is_supported": "W3 is executed as a same-access response-oracle cost ledger over the locked nine B5/B10 rows. The measurement-confidence floor is present, but the full oracle is not constructed."
+  },
+  "created_unix": 1782838194,
+  "linked_benchmark_id": "B10",
+  "linked_problem_id": 11,
+  "method": "b5_b10_response_oracle_cost_ledger_v0",
+  "model_status": "w3_response_oracle_ledger_executed_oracle_not_constructed",
+  "problem_id": 38,
+  "requirements": [
+    {
+      "evidence": {
+        "row_contract_count": 9,
+        "row_contract_hash": "7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc",
+        "source_checks_failed": 0
+      },
+      "label": "W4 row contract is preserved before any oracle comparison",
+      "passed": true,
+      "requirement_id": "O1"
+    },
+    {
+      "evidence": {
+        "confidence_z": 2.576,
+        "density_variance_upper_bound": 1.0,
+        "instance_count": 9
+      },
+      "label": "Optimistic measurement-confidence ledger exists on all nine rows",
+      "passed": true,
+      "requirement_id": "O2"
+    },
+    {
+      "evidence": {
+        "reason": "sampler stress contains only an optimistic per-circuit floor",
+        "state_preparation_algorithm_instantiated": false,
+        "state_preparation_floor_present": true
+      },
+      "label": "State-preparation algorithm and cost ledger are instantiated",
+      "passed": false,
+      "requirement_id": "O3"
+    },
+    {
+      "evidence": {
+        "mixing_cost_included": false,
+        "response_estimator": "(E[n_i | +eta] - E[n_i | -eta]) / (2 eta)"
+      },
+      "label": "Mixing or response-query cost is included",
+      "passed": false,
+      "requirement_id": "O4"
+    },
+    {
+      "evidence": {
+        "readout_error_included": false,
+        "real_backend_or_hardware_rows": 0
+      },
+      "label": "Readout, noise, or backend calibration costs are included",
+      "passed": false,
+      "requirement_id": "O5"
+    },
+    {
+      "evidence": {
+        "optimizer_loop_cost_included": false,
+        "reason": "sampler stress prices fixed finite differences, not an optimizer loop"
+      },
+      "label": "Optimizer-loop or adaptive-query amplification cost is bounded",
+      "passed": false,
+      "requirement_id": "O6"
+    },
+    {
+      "evidence": {
+        "max_exact_d5_matvec_equivalent_ops": 1014300,
+        "max_shots_to_match_seeded_pressure": 284916076006665507134714675200,
+        "rows_beating_explicit_d5_matvec_for_seeded_target": 0,
+        "seeded_pressure_replaced": false
+      },
+      "label": "Oracle beats explicit D5 and seeded-pressure denominator ladder",
+      "passed": false,
+      "requirement_id": "O7"
+    },
+    {
+      "evidence": {
+        "bridge_same_access_positive_route_ready": false,
+        "production_quantum_response_win_claimed": false,
+        "sampler_bqp_separation_claimed": false,
+        "sampler_quantum_advantage_claimed": false
+      },
+      "label": "Forbidden claims remain false",
+      "passed": true,
+      "requirement_id": "O8"
+    }
+  ],
+  "rows": [
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 1620,
+      "exact_response": 0.0836060986395423,
+      "row_id": "4|2",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 1139664304026662028538858700800,
+      "shots_to_match_non_oracle_embedding": 33647381717520329727157267857408,
+      "shots_to_match_seeded_mps_pressure": 284916076006665507134714675200,
+      "shots_to_match_variational_mps_als": 23609989803634,
+      "sites": 4,
+      "u_over_t": 2.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 1620,
+      "exact_response": 0.03622603032182597,
+      "row_id": "4|4",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 10215033775701347317145665536,
+      "shots_to_match_non_oracle_embedding": 186423558749455057000857600,
+      "shots_to_match_seeded_mps_pressure": 2553758443925336829286416384,
+      "shots_to_match_variational_mps_als": 159653417022792,
+      "sites": 4,
+      "u_over_t": 4.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 1440,
+      "exact_response": 0.008377776428140199,
+      "row_id": "4|8",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 18440967482385243164150595584,
+      "shots_to_match_non_oracle_embedding": 2048589747820036963587151888384,
+      "shots_to_match_seeded_mps_pressure": 4610241870596310791037648896,
+      "shots_to_match_variational_mps_als": 1017740833188413568,
+      "sites": 4,
+      "u_over_t": 8.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 50400,
+      "exact_response": 0.09578490151113497,
+      "row_id": "6|2",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 69784193964,
+      "shots_to_match_non_oracle_embedding": 920720,
+      "shots_to_match_seeded_mps_pressure": 11630698994,
+      "shots_to_match_variational_mps_als": 41024686,
+      "sites": 6,
+      "u_over_t": 2.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 47600,
+      "exact_response": 0.03936862450197687,
+      "row_id": "6|4",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 19677538417380,
+      "shots_to_match_non_oracle_embedding": 229892488,
+      "shots_to_match_seeded_mps_pressure": 3279589736230,
+      "shots_to_match_variational_mps_als": 44872442,
+      "sites": 6,
+      "u_over_t": 4.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 42000,
+      "exact_response": 0.008466866704064192,
+      "row_id": "6|8",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 45868238596272,
+      "shots_to_match_non_oracle_embedding": 225502796,
+      "shots_to_match_seeded_mps_pressure": 7644706432712,
+      "shots_to_match_variational_mps_als": 1435179920,
+      "sites": 6,
+      "u_over_t": 8.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 1014300,
+      "exact_response": 0.09780451002539868,
+      "row_id": "8|2",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 30891403472,
+      "shots_to_match_non_oracle_embedding": 732674,
+      "shots_to_match_seeded_mps_pressure": 3861425434,
+      "shots_to_match_variational_mps_als": 490144880,
+      "sites": 8,
+      "u_over_t": 2.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 926100,
+      "exact_response": 0.04046928678042132,
+      "row_id": "8|4",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 1113731348384,
+      "shots_to_match_non_oracle_embedding": 352594400,
+      "shots_to_match_seeded_mps_pressure": 139216418548,
+      "shots_to_match_variational_mps_als": 50235256,
+      "sites": 8,
+      "u_over_t": 4.0
+    },
+    {
+      "eta": 0.25,
+      "exact_d5_matvec_equivalent_ops": 705600,
+      "exact_response": 0.00858130228459222,
+      "row_id": "8|8",
+      "same_access_positive_route_ready": false,
+      "sampler_beats_seeded_mps_pressure_by_shots": false,
+      "seeded_target_prep_2q_floor": 53564824975412736,
+      "shots_to_match_non_oracle_embedding": 115358158,
+      "shots_to_match_seeded_mps_pressure": 6695603121926592,
+      "shots_to_match_variational_mps_als": 1263752568,
+      "sites": 8,
+      "u_over_t": 8.0
+    }
+  ],
+  "source_production_contract_result": "results/B5_B10_same_access_production_contract_gate_v0.json",
+  "source_row_contract_result": "results/B5_B10_row_contract_harness_v0.json",
+  "source_same_access_bridge_result": "results/B10_t1_b5_same_access_sampling_or_dmrg_bridge_v0.json",
+  "source_sampler_stress_result": "results/B10_t1_b5_response_sampler_cost_stress_v0.json",
+  "source_seeded_replacement_result": "results/B5_seeded_pressure_replacement_audit_v0.json",
+  "source_target_id": "B10-T1",
+  "status": "same_access_response_oracle_cost_ledger_failed_no_oracle",
+  "summary": {
+    "accuracy_per_resource_win_claimed": false,
+    "b10_t1_positive_route_ready": false,
+    "bqp_separation_claimed": false,
+    "catalog_change_required": false,
+    "condition_count": 8,
+    "conditions_failed": 5,
+    "conditions_satisfied": 3,
+    "dequantization_theorem_claimed": false,
+    "failed_oracle_requirement_ids": [
+      "O3",
+      "O4",
+      "O5",
+      "O6",
+      "O7"
+    ],
+    "max_optimistic_seeded_target_prep_2q_gate_floor": 1139664304026662028538858700800,
+    "max_total_shots_to_match_seeded_mps_pressure": 284916076006665507134714675200,
+    "measurement_confidence_ledger_present": true,
+    "median_total_shots_to_match_seeded_mps_pressure": 7644706432712,
+    "min_total_shots_to_match_seeded_mps_pressure": 3861425434,
+    "mixing_cost_included": false,
+    "optimizer_loop_cost_included": false,
+    "oracle_requirement_count": 8,
+    "oracle_requirements_failed": 5,
+    "oracle_requirements_passed": 3,
+    "production_dmrg_available": false,
+    "production_dmrg_claimed": false,
+    "quantum_advantage_claimed": false,
+    "quantum_response_win_claimed": false,
+    "readout_error_included": false,
+    "remaining_positive_route_packets": [
+      "W1"
+    ],
+    "row_contract_count": 9,
+    "row_contract_hash": "7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc",
+    "rows_beating_explicit_d5_matvec_for_seeded_target": 0,
+    "same_access_positive_route_claimed": false,
+    "same_access_positive_route_ready": false,
+    "same_access_response_oracle_constructed": false,
+    "sampler_instance_count": 9,
+    "sampling_access_theorem_claimed": false,
+    "sampling_oracle_constructed": false,
+    "seeded_pressure_replaced": false,
+    "state_preparation_algorithm_instantiated": false,
+    "validation_error_count": 0,
+    "w3_remains_blocked_on_oracle": true,
+    "w3_response_oracle_constructed": false,
+    "w3_same_access_response_oracle_ledger_executed": true
+  },
+  "title": "B5/B10 same-access response-oracle cost ledger",
+  "validation_errors": [],
+  "version": "0.1"
+}

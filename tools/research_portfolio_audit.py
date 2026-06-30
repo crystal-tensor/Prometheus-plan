@@ -25292,6 +25292,7 @@ def audit(root: Path) -> dict:
     b5_b10_production_triage = b5_results.get("b5_b10_production_implementation_triage_gate_v0")
     b5_b10_row_contract = b5_results.get("b5_b10_row_contract_harness_v0")
     b5_seeded_pressure_replacement = b5_results.get("seeded_pressure_replacement_audit_v0")
+    b5_response_oracle_cost_ledger = b5_results.get("response_oracle_cost_ledger_v0")
     b5_two_site_dmrg = b5_results.get("two_site_finite_dmrg_response_reference_v0")
     b5_var_mps = b5_results.get("variational_mps_als_response_reference_v0")
     b5_mps = b5_results.get("mps_schmidt_truncation_response_reference_v0")
@@ -26106,6 +26107,203 @@ def audit(root: Path) -> dict:
 
     b5_seeded_pressure_replacement_status = audit_b5_seeded_pressure_replacement(
         b5_seeded_pressure_replacement, "B5"
+    )
+
+    def audit_b5_response_oracle_cost_ledger(entry, label):
+        status = {}
+        if not entry:
+            warnings.append(f"{label} manifest has no B5/B10 response-oracle cost ledger")
+            return status
+        result_path = entry.get("result")
+        markdown_path = entry.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"{label} response-oracle cost ledger result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"{label} response-oracle cost ledger markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        summary = payload.get("summary", {})
+        claims = payload.get("claim_boundary", {})
+        status = {
+            "status": entry.get("status"),
+            "method": entry.get("method"),
+            "model_status": entry.get("model_status"),
+            "row_contract_count": summary.get("row_contract_count"),
+            "row_contract_hash": summary.get("row_contract_hash"),
+            "sampler_instance_count": summary.get("sampler_instance_count"),
+            "oracle_requirement_count": summary.get("oracle_requirement_count"),
+            "oracle_requirements_passed": summary.get("oracle_requirements_passed"),
+            "oracle_requirements_failed": summary.get("oracle_requirements_failed"),
+            "failed_oracle_requirement_ids": summary.get("failed_oracle_requirement_ids"),
+            "measurement_confidence_ledger_present": summary.get("measurement_confidence_ledger_present"),
+            "state_preparation_algorithm_instantiated": summary.get(
+                "state_preparation_algorithm_instantiated"
+            ),
+            "mixing_cost_included": summary.get("mixing_cost_included"),
+            "readout_error_included": summary.get("readout_error_included"),
+            "optimizer_loop_cost_included": summary.get("optimizer_loop_cost_included"),
+            "rows_beating_explicit_d5_matvec_for_seeded_target": summary.get(
+                "rows_beating_explicit_d5_matvec_for_seeded_target"
+            ),
+            "min_total_shots_to_match_seeded_mps_pressure": summary.get(
+                "min_total_shots_to_match_seeded_mps_pressure"
+            ),
+            "median_total_shots_to_match_seeded_mps_pressure": summary.get(
+                "median_total_shots_to_match_seeded_mps_pressure"
+            ),
+            "max_total_shots_to_match_seeded_mps_pressure": summary.get(
+                "max_total_shots_to_match_seeded_mps_pressure"
+            ),
+            "max_optimistic_seeded_target_prep_2q_gate_floor": summary.get(
+                "max_optimistic_seeded_target_prep_2q_gate_floor"
+            ),
+            "seeded_pressure_replaced": summary.get("seeded_pressure_replaced"),
+            "w3_same_access_response_oracle_ledger_executed": summary.get(
+                "w3_same_access_response_oracle_ledger_executed"
+            ),
+            "w3_response_oracle_constructed": summary.get("w3_response_oracle_constructed"),
+            "w3_remains_blocked_on_oracle": summary.get("w3_remains_blocked_on_oracle"),
+            "remaining_positive_route_packets": summary.get("remaining_positive_route_packets"),
+            "production_dmrg_available": summary.get("production_dmrg_available"),
+            "sampling_oracle_constructed": summary.get("sampling_oracle_constructed"),
+            "same_access_response_oracle_constructed": summary.get(
+                "same_access_response_oracle_constructed"
+            ),
+            "same_access_positive_route_ready": summary.get("same_access_positive_route_ready"),
+            "b10_t1_positive_route_ready": summary.get("b10_t1_positive_route_ready"),
+            "catalog_change_required": summary.get("catalog_change_required"),
+            "production_dmrg_claimed": summary.get("production_dmrg_claimed"),
+            "quantum_response_win_claimed": summary.get("quantum_response_win_claimed"),
+            "accuracy_per_resource_win_claimed": summary.get("accuracy_per_resource_win_claimed"),
+            "same_access_positive_route_claimed": summary.get("same_access_positive_route_claimed"),
+            "quantum_advantage_claimed": summary.get("quantum_advantage_claimed"),
+            "bqp_separation_claimed": summary.get("bqp_separation_claimed"),
+            "dequantization_theorem_claimed": summary.get("dequantization_theorem_claimed"),
+            "sampling_access_theorem_claimed": summary.get("sampling_access_theorem_claimed"),
+            "condition_count": summary.get("condition_count"),
+            "conditions_satisfied": summary.get("conditions_satisfied"),
+            "conditions_failed": summary.get("conditions_failed"),
+            "validation_error_count": len(payload.get("validation_errors", [])),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("benchmark_id") != "B5":
+            errors.append(f"{label} response-oracle cost ledger benchmark_id must be B5")
+        if payload.get("linked_benchmark_id") != "B10":
+            errors.append(f"{label} response-oracle cost ledger linked_benchmark_id must be B10")
+        if payload.get("source_target_id") != "B10-T1":
+            errors.append(f"{label} response-oracle cost ledger source_target_id must be B10-T1")
+        if payload.get("method") != entry.get("method"):
+            errors.append(f"{label} response-oracle cost ledger method mismatch")
+        if payload.get("status") != entry.get("status"):
+            errors.append(f"{label} response-oracle cost ledger status mismatch")
+        if payload.get("model_status") != entry.get("model_status"):
+            errors.append(f"{label} response-oracle cost ledger model-status mismatch")
+        for field in [
+            "row_contract_count",
+            "row_contract_hash",
+            "sampler_instance_count",
+            "oracle_requirement_count",
+            "oracle_requirements_passed",
+            "oracle_requirements_failed",
+            "failed_oracle_requirement_ids",
+            "measurement_confidence_ledger_present",
+            "state_preparation_algorithm_instantiated",
+            "mixing_cost_included",
+            "readout_error_included",
+            "optimizer_loop_cost_included",
+            "rows_beating_explicit_d5_matvec_for_seeded_target",
+            "min_total_shots_to_match_seeded_mps_pressure",
+            "median_total_shots_to_match_seeded_mps_pressure",
+            "max_total_shots_to_match_seeded_mps_pressure",
+            "max_optimistic_seeded_target_prep_2q_gate_floor",
+            "seeded_pressure_replaced",
+            "w3_same_access_response_oracle_ledger_executed",
+            "w3_response_oracle_constructed",
+            "w3_remains_blocked_on_oracle",
+            "remaining_positive_route_packets",
+            "production_dmrg_available",
+            "sampling_oracle_constructed",
+            "same_access_response_oracle_constructed",
+            "same_access_positive_route_ready",
+            "b10_t1_positive_route_ready",
+            "catalog_change_required",
+            "production_dmrg_claimed",
+            "quantum_response_win_claimed",
+            "accuracy_per_resource_win_claimed",
+            "same_access_positive_route_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "dequantization_theorem_claimed",
+            "sampling_access_theorem_claimed",
+            "condition_count",
+            "conditions_satisfied",
+            "conditions_failed",
+        ]:
+            if summary.get(field) != entry.get(field):
+                errors.append(f"{label} response-oracle cost ledger {field} mismatch")
+        if summary.get("row_contract_count") != 9:
+            errors.append(f"{label} response-oracle cost ledger must preserve nine rows")
+        if summary.get("sampler_instance_count") != 9:
+            errors.append(f"{label} response-oracle cost ledger must cover nine sampler rows")
+        if summary.get("oracle_requirement_count") != 8:
+            errors.append(f"{label} response-oracle cost ledger should expose eight oracle requirements")
+        if summary.get("oracle_requirements_passed") != 3 or summary.get("oracle_requirements_failed") != 5:
+            errors.append(f"{label} response-oracle cost ledger should be 3/5 passed/failed")
+        if summary.get("failed_oracle_requirement_ids") != ["O3", "O4", "O5", "O6", "O7"]:
+            errors.append(f"{label} response-oracle cost ledger failed IDs changed")
+        if summary.get("measurement_confidence_ledger_present") is not True:
+            errors.append(f"{label} response-oracle cost ledger should preserve measurement confidence")
+        for field in [
+            "state_preparation_algorithm_instantiated",
+            "mixing_cost_included",
+            "readout_error_included",
+            "optimizer_loop_cost_included",
+            "seeded_pressure_replaced",
+            "w3_response_oracle_constructed",
+            "production_dmrg_available",
+            "sampling_oracle_constructed",
+            "same_access_response_oracle_constructed",
+            "same_access_positive_route_ready",
+            "b10_t1_positive_route_ready",
+        ]:
+            if summary.get(field) is not False:
+                errors.append(f"{label} response-oracle cost ledger must keep {field}=False")
+        if summary.get("w3_same_access_response_oracle_ledger_executed") is not True:
+            errors.append(f"{label} response-oracle cost ledger must execute W3")
+        if summary.get("w3_remains_blocked_on_oracle") is not True:
+            errors.append(f"{label} response-oracle cost ledger should remain blocked on oracle")
+        if summary.get("remaining_positive_route_packets") != ["W1"]:
+            errors.append(f"{label} response-oracle cost ledger should leave only W1 as positive route")
+        if summary.get("rows_beating_explicit_d5_matvec_for_seeded_target") != 0:
+            errors.append(f"{label} response-oracle cost ledger must not beat D5 by shots")
+        if len(payload.get("requirements", [])) != 8:
+            errors.append(f"{label} response-oracle cost ledger requirement row count mismatch")
+        if len(payload.get("rows", [])) != 9:
+            errors.append(f"{label} response-oracle cost ledger row count mismatch")
+        if len(payload.get("validation_errors", [])) != entry.get("validation_error_count"):
+            errors.append(f"{label} response-oracle cost ledger validation-error count mismatch")
+        for field in [
+            "production_dmrg_claimed",
+            "quantum_response_win_claimed",
+            "accuracy_per_resource_win_claimed",
+            "same_access_positive_route_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "dequantization_theorem_claimed",
+            "sampling_access_theorem_claimed",
+        ]:
+            if summary.get(field) is not False:
+                errors.append(f"{label} response-oracle cost ledger must keep {field}=False")
+            if claims.get(field) is not False:
+                errors.append(f"{label} response-oracle cost ledger claim boundary must keep {field}=False")
+        return status
+
+    b5_response_oracle_cost_ledger_status = audit_b5_response_oracle_cost_ledger(
+        b5_response_oracle_cost_ledger, "B5"
     )
 
     b5_boundary_field_status = {}
@@ -29190,6 +29388,9 @@ def audit(root: Path) -> dict:
     b10_t1_b5_seeded_pressure_replacement = b10_results.get(
         "b10_t1_b5_seeded_pressure_replacement_audit_v0"
     )
+    b10_t1_b5_response_oracle_cost_ledger = b10_results.get(
+        "b10_t1_b5_response_oracle_cost_ledger_v0"
+    )
     b10_status = {}
     if not b10_graph:
         warnings.append("B10 manifest has no BQP-boundary graph result")
@@ -30567,6 +30768,9 @@ def audit(root: Path) -> dict:
     b10_t1_b5_seeded_pressure_replacement_status = audit_b5_seeded_pressure_replacement(
         b10_t1_b5_seeded_pressure_replacement, "B10"
     )
+    b10_t1_b5_response_oracle_cost_ledger_status = audit_b5_response_oracle_cost_ledger(
+        b10_t1_b5_response_oracle_cost_ledger, "B10"
+    )
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -30922,6 +31126,7 @@ def audit(root: Path) -> dict:
             "production_implementation_triage_gate": b5_b10_production_triage_status,
             "row_contract_harness": b5_b10_row_contract_status,
             "seeded_pressure_replacement_audit": b5_seeded_pressure_replacement_status,
+            "response_oracle_cost_ledger": b5_response_oracle_cost_ledger_status,
             "canonical_environment_smoke_gate": b5_canonical_smoke_status,
             "canonical_dmrg_readiness_gate": b5_dmrg_readiness_status,
             "two_site_finite_dmrg_response_reference": b5_two_site_dmrg_status,
@@ -31021,6 +31226,7 @@ def audit(root: Path) -> dict:
             "t1_b5_production_implementation_triage_gate": b10_t1_b5_production_triage_status,
             "t1_b5_row_contract_harness": b10_t1_b5_row_contract_status,
             "t1_b5_seeded_pressure_replacement_audit": b10_t1_b5_seeded_pressure_replacement_status,
+            "t1_b5_response_oracle_cost_ledger": b10_t1_b5_response_oracle_cost_ledger_status,
         },
         "status_artifacts": {
             "roadmap": str(roadmap_path),
@@ -31432,6 +31638,9 @@ def audit(root: Path) -> dict:
             "b5_seeded_pressure_replacement_audit": str(
                 research / "B5_seeded_pressure_replacement_audit.md"
             ),
+            "b5_b10_response_oracle_cost_ledger": str(
+                research / "B5_B10_response_oracle_cost_ledger.md"
+            ),
             "b5_canonical_environment_smoke_gate": str(
                 research / "B5_canonical_environment_smoke_gate.md"
             ),
@@ -31487,6 +31696,9 @@ def audit(root: Path) -> dict:
             ),
             "b10_t1_b5_seeded_pressure_replacement_audit": str(
                 research / "B5_seeded_pressure_replacement_audit.md"
+            ),
+            "b10_t1_b5_response_oracle_cost_ledger": str(
+                research / "B5_B10_response_oracle_cost_ledger.md"
             ),
             "b9_failed_gap_amplification_lemma": str(research / "B9_failed_gap_amplification_lemma.md"),
             "b9_symbolic_gap_skeleton": str(research / "B9_symbolic_gap_skeleton.md"),
@@ -33544,6 +33756,11 @@ def markdown_report(report: dict) -> str:
             f"- B5 seeded-pressure replacement audit deployable replacements / seeded replaced: {report['b5']['seeded_pressure_replacement_audit'].get('deployable_replacement_count')} / {report['b5']['seeded_pressure_replacement_audit'].get('seeded_pressure_replaced')}",
             f"- B5 seeded-pressure replacement audit remaining positive-route packets: {report['b5']['seeded_pressure_replacement_audit'].get('remaining_positive_route_packets')}",
             f"- B5 seeded-pressure replacement audit result/markdown exists: {report['b5']['seeded_pressure_replacement_audit'].get('result_exists')} / {report['b5']['seeded_pressure_replacement_audit'].get('markdown_exists')}",
+            f"- B5/B10 response-oracle cost ledger status: {report['b5']['response_oracle_cost_ledger'].get('status')}",
+            f"- B5/B10 response-oracle cost ledger requirements passed/failed: {report['b5']['response_oracle_cost_ledger'].get('oracle_requirements_passed')} / {report['b5']['response_oracle_cost_ledger'].get('oracle_requirements_failed')}",
+            f"- B5/B10 response-oracle cost ledger failed IDs: {report['b5']['response_oracle_cost_ledger'].get('failed_oracle_requirement_ids')}",
+            f"- B5/B10 response-oracle cost ledger oracle constructed / remaining packets: {report['b5']['response_oracle_cost_ledger'].get('w3_response_oracle_constructed')} / {report['b5']['response_oracle_cost_ledger'].get('remaining_positive_route_packets')}",
+            f"- B5/B10 response-oracle cost ledger result/markdown exists: {report['b5']['response_oracle_cost_ledger'].get('result_exists')} / {report['b5']['response_oracle_cost_ledger'].get('markdown_exists')}",
             "",
             "## B6 Superconductivity Descriptor Status",
             "",
@@ -34095,6 +34312,11 @@ def markdown_report(report: dict) -> str:
             f"- B10-T1 B5 seeded-pressure replacement audit deployable replacements / seeded replaced: {report['b10']['t1_b5_seeded_pressure_replacement_audit'].get('deployable_replacement_count')} / {report['b10']['t1_b5_seeded_pressure_replacement_audit'].get('seeded_pressure_replaced')}",
             f"- B10-T1 B5 seeded-pressure replacement audit remaining positive-route packets: {report['b10']['t1_b5_seeded_pressure_replacement_audit'].get('remaining_positive_route_packets')}",
             f"- B10-T1 B5 seeded-pressure replacement audit result/markdown exists: {report['b10']['t1_b5_seeded_pressure_replacement_audit'].get('result_exists')} / {report['b10']['t1_b5_seeded_pressure_replacement_audit'].get('markdown_exists')}",
+            f"- B10-T1 B5 response-oracle cost ledger status: {report['b10']['t1_b5_response_oracle_cost_ledger'].get('status')}",
+            f"- B10-T1 B5 response-oracle cost ledger requirements passed/failed: {report['b10']['t1_b5_response_oracle_cost_ledger'].get('oracle_requirements_passed')} / {report['b10']['t1_b5_response_oracle_cost_ledger'].get('oracle_requirements_failed')}",
+            f"- B10-T1 B5 response-oracle cost ledger failed IDs: {report['b10']['t1_b5_response_oracle_cost_ledger'].get('failed_oracle_requirement_ids')}",
+            f"- B10-T1 B5 response-oracle cost ledger oracle constructed / remaining packets: {report['b10']['t1_b5_response_oracle_cost_ledger'].get('w3_response_oracle_constructed')} / {report['b10']['t1_b5_response_oracle_cost_ledger'].get('remaining_positive_route_packets')}",
+            f"- B10-T1 B5 response-oracle cost ledger result/markdown exists: {report['b10']['t1_b5_response_oracle_cost_ledger'].get('result_exists')} / {report['b10']['t1_b5_response_oracle_cost_ledger'].get('markdown_exists')}",
             "",
         ]
     )
