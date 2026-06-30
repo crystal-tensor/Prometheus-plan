@@ -1,0 +1,372 @@
+{
+  "benchmark_id": "B2",
+  "claim_boundary": {
+    "calibrated_device_claimed": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "next_gate": "Submit calibrated flag rows, real or independently calibrated trace replay rows, and strict holdout-improvement evidence while preserving the 3-challenge / 576-trace shape.",
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "No calibrated rows are submitted or accepted, no calibration retest is ready, and there is no production decoder, threshold, hardware, new-code, or quantum-advantage claim.",
+    "what_is_supported": "The open B2 calibration blockers K4/S5, K5/S6, and K6/S7 are converted into hashable calibrated-trace intake packets with explicit row keys."
+  },
+  "intake_packets": [
+    {
+      "acceptance_rule": "Submit calibrated leakage/erasure flag observation rows using the 21-key trace schema and preserve the existing challenge trace hashes.",
+      "accepted_calibrated_rows": 0,
+      "blocks_contract_gate": "K4",
+      "blocks_scout_gate": "S5",
+      "current_evidence": {
+        "challenge_trace_hash_rows": 3,
+        "current_calibrated_flag_observation_rows": 0,
+        "synthetic_flag_event_count": 482
+      },
+      "owner_role": "hardware_data_or_calibration_agent",
+      "packet_id": "B2-T5-calibrated-flag-observation-rows",
+      "production_required_keys": [
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "detector_bitstring_hash",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256"
+      ],
+      "ready_for_calibration_retest": false,
+      "required_row_keys": [
+        "trace_id",
+        "challenge_id",
+        "challenge_trace_hash",
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "shot_index",
+        "detector_bitstring_hash",
+        "observable_bit",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "leakage_rate_per_tick",
+        "false_positive_rate_per_tick",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "logical_label",
+        "holdout_partition",
+        "decoder_runtime_seconds",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256",
+        "claim_boundary"
+      ],
+      "submitted_calibrated_rows": 0,
+      "template_hash": "83e8f6ffd31a5becd304b1b2c0090998b6ab7167d6746f0bc90d234102117625"
+    },
+    {
+      "acceptance_rule": "Submit real or independently calibrated trace rows and replay them through the same decoder interface without changing the per-shot schema.",
+      "accepted_calibrated_rows": 0,
+      "blocks_contract_gate": "K5",
+      "blocks_scout_gate": "S6",
+      "current_evidence": {
+        "challenge_count": 3,
+        "current_real_hardware_trace_rows": 0,
+        "source_trace_count": 576
+      },
+      "owner_role": "hardware_trace_replay_agent",
+      "packet_id": "B2-T6-real-or-independent-trace-replay",
+      "production_required_keys": [
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "detector_bitstring_hash",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256"
+      ],
+      "ready_for_calibration_retest": false,
+      "required_row_keys": [
+        "trace_id",
+        "challenge_id",
+        "challenge_trace_hash",
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "shot_index",
+        "detector_bitstring_hash",
+        "observable_bit",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "leakage_rate_per_tick",
+        "false_positive_rate_per_tick",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "logical_label",
+        "holdout_partition",
+        "decoder_runtime_seconds",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256",
+        "claim_boundary"
+      ],
+      "submitted_calibrated_rows": 0,
+      "template_hash": "df58a9325b745c3145f2e9123c01a6a3a263bfa81c5d63520f28d1d8fba20526"
+    },
+    {
+      "acceptance_rule": "Show strict holdout improvement: injected failures must be below the baseline 16 while all challenge rows preserve non-regression.",
+      "accepted_calibrated_rows": 0,
+      "blocks_contract_gate": "K6",
+      "blocks_scout_gate": "S7",
+      "current_evidence": {
+        "best_profile": "conservative_hardware_like_leakage",
+        "best_profile_holdout_baseline_failures": 16,
+        "best_profile_holdout_failure_delta": 0,
+        "best_profile_holdout_injected_failures": 16,
+        "strict_holdout_improvement_rows": 0
+      },
+      "owner_role": "decoder_baseline_adversary_agent",
+      "packet_id": "B2-T7-strict-holdout-improvement",
+      "production_required_keys": [
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "detector_bitstring_hash",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256"
+      ],
+      "ready_for_calibration_retest": false,
+      "required_row_keys": [
+        "trace_id",
+        "challenge_id",
+        "challenge_trace_hash",
+        "backend_or_calibration_source",
+        "backend_properties_hash",
+        "shot_index",
+        "detector_bitstring_hash",
+        "observable_bit",
+        "calibrated_flag_events_hash",
+        "flag_confusion_matrix_hash",
+        "leakage_rate_per_tick",
+        "false_positive_rate_per_tick",
+        "decoder_profile",
+        "baseline_prediction",
+        "injected_prediction",
+        "logical_label",
+        "holdout_partition",
+        "decoder_runtime_seconds",
+        "raw_trace_artifact_sha256",
+        "postprocess_script_sha256",
+        "claim_boundary"
+      ],
+      "submitted_calibrated_rows": 0,
+      "template_hash": "d4386102bd5934bfefe47cf464afa360b1867ce1bf3d7305f81a3bb9814fb411"
+    }
+  ],
+  "last_updated": "2026-07-01",
+  "method": "b2_calibrated_trace_intake_template_gate_v0",
+  "model_status": "calibrated_trace_schema_and_holdout_packets_built_no_calibrated_rows",
+  "problem_id": 22,
+  "production_required_keys": [
+    "backend_or_calibration_source",
+    "backend_properties_hash",
+    "detector_bitstring_hash",
+    "calibrated_flag_events_hash",
+    "flag_confusion_matrix_hash",
+    "decoder_profile",
+    "baseline_prediction",
+    "injected_prediction",
+    "raw_trace_artifact_sha256",
+    "postprocess_script_sha256"
+  ],
+  "required_row_keys": [
+    "trace_id",
+    "challenge_id",
+    "challenge_trace_hash",
+    "backend_or_calibration_source",
+    "backend_properties_hash",
+    "shot_index",
+    "detector_bitstring_hash",
+    "observable_bit",
+    "calibrated_flag_events_hash",
+    "flag_confusion_matrix_hash",
+    "leakage_rate_per_tick",
+    "false_positive_rate_per_tick",
+    "decoder_profile",
+    "baseline_prediction",
+    "injected_prediction",
+    "logical_label",
+    "holdout_partition",
+    "decoder_runtime_seconds",
+    "raw_trace_artifact_sha256",
+    "postprocess_script_sha256",
+    "claim_boundary"
+  ],
+  "requirements": [
+    {
+      "evidence": {
+        "failed_contract_requirement_ids": [
+          "K4",
+          "K5",
+          "K6"
+        ],
+        "source_method": "b2_calibrated_evidence_contract_gate_v0",
+        "source_status": "calibrated_evidence_contract_open_missing_hardware_data"
+      },
+      "label": "Calibrated evidence contract is open on K4-K6",
+      "passed": true,
+      "requirement_id": "T1"
+    },
+    {
+      "evidence": {
+        "calibrated_flag_observation_rows": 0,
+        "failed_trace_scout_requirement_ids": [
+          "S5",
+          "S6",
+          "S7"
+        ],
+        "real_hardware_trace_rows": 0,
+        "source_method": "b2_calibrated_trace_scout_v0",
+        "source_status": "calibrated_trace_scout_failed_missing_real_calibration"
+      },
+      "label": "Trace scout is open on S5-S7 and preserves synthetic-only boundaries",
+      "passed": true,
+      "requirement_id": "T2"
+    },
+    {
+      "evidence": {
+        "contract_gate_sequence": [
+          "K4",
+          "K5",
+          "K6"
+        ],
+        "packet_count": 3,
+        "packet_ids": [
+          "B2-T5-calibrated-flag-observation-rows",
+          "B2-T6-real-or-independent-trace-replay",
+          "B2-T7-strict-holdout-improvement"
+        ],
+        "scout_gate_sequence": [
+          "S5",
+          "S6",
+          "S7"
+        ]
+      },
+      "label": "Three calibrated-trace intake packets map one-to-one to blockers",
+      "passed": true,
+      "requirement_id": "T3"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 10,
+        "required_row_key_count": 21,
+        "template_table_hash": "f69b48097c5c42df7a00ede62f98ded12127a1f32b8274dc3f0a4d1c6cbf8f61"
+      },
+      "label": "Trace row schema is explicit and hashable",
+      "passed": true,
+      "requirement_id": "T4"
+    },
+    {
+      "evidence": {
+        "submitted_calibrated_rows": 0
+      },
+      "label": "Submitted calibrated trace rows are present",
+      "passed": false,
+      "requirement_id": "T5"
+    },
+    {
+      "evidence": {
+        "accepted_calibrated_rows": 0,
+        "required_packet_count": 3
+      },
+      "label": "Accepted calibrated trace rows cover all packets",
+      "passed": false,
+      "requirement_id": "T6"
+    },
+    {
+      "evidence": {
+        "ready_packet_count": 0,
+        "required_packet_count": 3
+      },
+      "label": "Calibration retest is ready",
+      "passed": false,
+      "requirement_id": "T7"
+    },
+    {
+      "evidence": {
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "label": "Forbidden production, threshold, hardware, and advantage claims remain false",
+      "passed": true,
+      "requirement_id": "T8"
+    }
+  ],
+  "runtime_seconds": 0.0002448558807373047,
+  "source_contract_gate_result": "results/B2_calibrated_evidence_contract_gate_v0.json",
+  "source_trace_scout_result": "results/B2_calibrated_trace_scout_v0.json",
+  "status": "calibrated_trace_intake_template_open_missing_rows",
+  "summary": {
+    "accepted_calibrated_rows": 0,
+    "best_profile_holdout_baseline_failures": 16,
+    "best_profile_holdout_failure_delta": 0,
+    "best_profile_holdout_injected_failures": 16,
+    "calibrated_device_claimed": false,
+    "calibrated_flag_observation_rows": 0,
+    "calibrated_trace_intake_ready": false,
+    "calibration_retest_ready": false,
+    "challenge_count": 3,
+    "failed_contract_requirement_ids": [
+      "K4",
+      "K5",
+      "K6"
+    ],
+    "failed_intake_requirement_ids": [
+      "T5",
+      "T6",
+      "T7"
+    ],
+    "failed_trace_scout_requirement_ids": [
+      "S5",
+      "S6",
+      "S7"
+    ],
+    "hardware_result_claimed": false,
+    "holdout_profile_shots": 864,
+    "intake_requirement_count": 8,
+    "intake_requirements_failed": 3,
+    "intake_requirements_passed": 5,
+    "new_code_claimed": false,
+    "packet_count": 3,
+    "packet_ids": [
+      "B2-T5-calibrated-flag-observation-rows",
+      "B2-T6-real-or-independent-trace-replay",
+      "B2-T7-strict-holdout-improvement"
+    ],
+    "production_decoder_claimed": false,
+    "production_required_key_count": 10,
+    "quantum_advantage_claimed": false,
+    "real_hardware_trace_rows": 0,
+    "required_row_key_count": 21,
+    "source_contract_status": "calibrated_evidence_contract_open_missing_hardware_data",
+    "source_trace_count": 576,
+    "source_trace_scout_status": "calibrated_trace_scout_failed_missing_real_calibration",
+    "strict_holdout_improvement_rows": 0,
+    "submitted_calibrated_rows": 0,
+    "synthetic_flag_event_count": 482,
+    "template_table_hash": "f69b48097c5c42df7a00ede62f98ded12127a1f32b8274dc3f0a4d1c6cbf8f61",
+    "threshold_claimed": false,
+    "validation_error_count": 0
+  },
+  "title": "B2 Calibrated Trace Intake Template Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

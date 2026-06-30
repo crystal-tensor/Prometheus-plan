@@ -732,6 +732,51 @@ current_results:
     caveat: scout_is_not_calibrated_data_not_hardware_trace_replay_not_threshold_or_decoder_claim
     result: ../results/B2_calibrated_trace_scout_v0.json
     markdown_report: ../research/B2_calibrated_trace_scout.md
+  calibrated_trace_intake_template_gate_v0:
+    status: calibrated_trace_intake_template_open_missing_rows
+    method: b2_calibrated_trace_intake_template_gate_v0
+    source: calibrated_trace_scout_v0
+    model_status: calibrated_trace_schema_and_holdout_packets_built_no_calibrated_rows
+    source_contract_status: calibrated_evidence_contract_open_missing_hardware_data
+    source_trace_scout_status: calibrated_trace_scout_failed_missing_real_calibration
+    intake_requirement_count: 8
+    intake_requirements_passed: 5
+    intake_requirements_failed: 3
+    failed_intake_requirement_ids: [T5, T6, T7]
+    failed_contract_requirement_ids: [K4, K5, K6]
+    failed_trace_scout_requirement_ids: [S5, S6, S7]
+    packet_count: 3
+    packet_ids:
+      - B2-T5-calibrated-flag-observation-rows
+      - B2-T6-real-or-independent-trace-replay
+      - B2-T7-strict-holdout-improvement
+    required_row_key_count: 21
+    production_required_key_count: 10
+    challenge_count: 3
+    source_trace_count: 576
+    holdout_profile_shots: 864
+    synthetic_flag_event_count: 482
+    calibrated_flag_observation_rows: 0
+    real_hardware_trace_rows: 0
+    strict_holdout_improvement_rows: 0
+    best_profile_holdout_baseline_failures: 16
+    best_profile_holdout_injected_failures: 16
+    best_profile_holdout_failure_delta: 0
+    submitted_calibrated_rows: 0
+    accepted_calibrated_rows: 0
+    calibrated_trace_intake_ready: false
+    calibration_retest_ready: false
+    production_decoder_claimed: false
+    threshold_claimed: false
+    new_code_claimed: false
+    hardware_result_claimed: false
+    calibrated_device_claimed: false
+    quantum_advantage_claimed: false
+    validation_error_count: 0
+    interpretation: calibrated_trace_intake_template_turns_b2_calibration_blockers_into_hashable_pr_packets_without_promoting_synthetic_traces
+    caveat: template_only_no_calibrated_rows_hardware_rows_threshold_or_low_overhead_qec_claim
+    result: ../results/B2_calibrated_trace_intake_template_gate_v0.json
+    markdown_report: ../research/B2_calibrated_trace_intake_template_gate.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -751,6 +796,7 @@ prototype_artifacts:
   decoder_input_contract_feasibility_gate: ../tools/b2_decoder_input_contract_feasibility_gate.py
   per_shot_decoder_trace_packet: ../tools/b2_per_shot_decoder_trace_packet.py
   calibrated_trace_scout: ../tools/b2_calibrated_trace_scout.py
+  calibrated_trace_intake_template_gate: ../tools/b2_calibrated_trace_intake_template_gate.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
