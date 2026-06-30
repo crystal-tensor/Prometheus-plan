@@ -912,13 +912,19 @@ exits with failure, Lake is absent, no Lake/mathlib project files exist, the
 named-family theorem remains a placeholder `True` obligation, and no
 proof-assistant checked theorem exists. The certificate is still rejected as
 raw-gap-only rescaling, and it is still not a proof-assistant theorem.
+T-B9-004c adds a proof-environment contract gate: it consumes the readiness
+blocker, passes 3/8 requirements, fails K4-K8, and emits five PR-ready packets
+for Lean toolchain, Lake tooling, Lake/mathlib project files, indexed theorem
+replacement, and proof-assistant checked formal output. This makes the next
+formalization work assignable and auditable, but it remains an open contract,
+not a checked theorem or Quantum PCP result.
 
 **Remaining path to a serious solution:** pin a real Lean 4/Lake/mathlib or
-equivalent proof-checkable project; replace the placeholder `True` theorem with
-an indexed Hamiltonian-family theorem; formalize the open-boundary
-cluster-stabilizer family for all n >= 4; prove support-size,
-uniform-scaling, spectral-width, and normalized-gap invariance lemmas; then
-decide whether the checked statement informs the full conjecture.
+equivalent proof-checkable project; close the five T-B9-004c packets; replace
+the placeholder `True` theorem with an indexed Hamiltonian-family theorem;
+formalize the open-boundary cluster-stabilizer family for all n >= 4; prove
+support-size, uniform-scaling, spectral-width, and normalized-gap invariance
+lemmas; then decide whether the checked statement informs the full conjecture.
 
 **Current internal maturity:** 15/100.
 

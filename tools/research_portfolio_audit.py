@@ -29943,6 +29943,7 @@ def audit(root: Path) -> dict:
     b9_named_family_bound = b9_results.get("named_family_width_locality_bound_v0")
     b9_parametric_certificate = b9_results.get("cluster_stabilizer_parametric_certificate_v0")
     b9_proof_environment_gate = b9_results.get("proof_environment_readiness_gate_v0")
+    b9_proof_environment_contract = b9_results.get("proof_environment_contract_gate_v0")
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -30357,6 +30358,143 @@ def audit(root: Path) -> dict:
             errors.append("B9 proof-environment should require a real Lake project")
         if payload.get("validation_error_count") != 0 or len(payload.get("validation_errors", [])) != 0:
             errors.append("B9 proof-environment readiness validation errors must be zero")
+
+    b9_proof_environment_contract_status = {}
+    if not b9_proof_environment_contract:
+        warnings.append("B9 manifest has no proof-environment contract gate")
+    else:
+        result_path = b9_proof_environment_contract.get("result")
+        markdown_path = b9_proof_environment_contract.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B9 proof-environment contract result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B9 proof-environment contract markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        claim_boundary = payload.get("claim_boundary", {})
+        b9_proof_environment_contract_status = {
+            "status": b9_proof_environment_contract.get("status"),
+            "method": b9_proof_environment_contract.get("method"),
+            "model_status": b9_proof_environment_contract.get("model_status"),
+            "source_method": payload.get("source_method"),
+            "source_status": payload.get("source_status"),
+            "source_failed_gate_ids": payload.get("source_failed_gate_ids"),
+            "named_family": payload.get("named_family"),
+            "readiness_gate_count": payload.get("readiness_gate_count"),
+            "source_passed_gate_count": payload.get("source_passed_gate_count"),
+            "source_failed_gate_count": payload.get("source_failed_gate_count"),
+            "blocking_obligation_count": payload.get("blocking_obligation_count"),
+            "lean_available": payload.get("lean_available"),
+            "lean_return_code": payload.get("lean_return_code"),
+            "lake_available": payload.get("lake_available"),
+            "lake_return_code": payload.get("lake_return_code"),
+            "lake_project_present": payload.get("lake_project_present"),
+            "contains_placeholder_true_theorem": payload.get(
+                "contains_placeholder_true_theorem"
+            ),
+            "contract_requirement_count": payload.get("contract_requirement_count"),
+            "passed_contract_requirement_count": payload.get(
+                "passed_contract_requirement_count"
+            ),
+            "failed_contract_requirement_count": payload.get(
+                "failed_contract_requirement_count"
+            ),
+            "failed_contract_requirement_ids": payload.get("failed_contract_requirement_ids"),
+            "contract_packet_count": payload.get("contract_packet_count"),
+            "contract_packet_ids": payload.get("contract_packet_ids"),
+            "proof_environment_ready": payload.get("claim_boundary", {}).get(
+                "proof_environment_ready"
+            ),
+            "proof_assistant_checked": payload.get("claim_boundary", {}).get(
+                "proof_assistant_checked"
+            ),
+            "formal_theorem_proved": payload.get("claim_boundary", {}).get(
+                "formal_theorem_proved"
+            ),
+            "explicit_not_quantum_pcp_proof": payload.get("claim_boundary", {}).get(
+                "explicit_not_quantum_pcp_proof"
+            ),
+            "global_gap_amplification_impossibility_claimed": payload.get(
+                "claim_boundary", {}
+            ).get("global_gap_amplification_impossibility_claimed"),
+            "validation_error_count": payload.get("validation_error_count"),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        expected_source_failed = ["PE-03", "PE-04", "PE-05", "PE-08", "PE-09"]
+        expected_contract_failed = ["K4", "K5", "K6", "K7", "K8"]
+        expected_packets = [
+            "B9-PE03-lean-toolchain",
+            "B9-PE04-lake-tooling",
+            "B9-PE05-mathlib-project",
+            "B9-PE08-indexed-theorem",
+            "B9-PE09-checked-formal-output",
+        ]
+        if payload.get("benchmark_id") != "B9":
+            errors.append("B9 proof-environment contract benchmark_id mismatch")
+        if payload.get("status") != "proof_environment_contract_open_not_formal_theorem":
+            errors.append("B9 proof-environment contract status mismatch")
+        if payload.get("method") != b9_proof_environment_contract.get("method"):
+            errors.append("B9 proof-environment contract method mismatch")
+        if payload.get("source_method") != "b9_proof_environment_readiness_gate_v0":
+            errors.append("B9 proof-environment contract source method mismatch")
+        if payload.get("source_status") != "proof_environment_readiness_blocked_not_formal_theorem":
+            errors.append("B9 proof-environment contract source status mismatch")
+        if payload.get("source_failed_gate_ids") != expected_source_failed:
+            errors.append("B9 proof-environment contract source failed gates mismatch")
+        if payload.get("named_family") != "cluster_stabilizer_open_uniform_reweight":
+            errors.append("B9 proof-environment contract named family mismatch")
+        for field in [
+            "readiness_gate_count",
+            "source_passed_gate_count",
+            "source_failed_gate_count",
+            "blocking_obligation_count",
+            "lean_available",
+            "lean_return_code",
+            "lake_available",
+            "lake_return_code",
+            "lake_project_present",
+            "contains_placeholder_true_theorem",
+            "contract_requirement_count",
+            "passed_contract_requirement_count",
+            "failed_contract_requirement_count",
+            "failed_contract_requirement_ids",
+            "contract_packet_count",
+            "contract_packet_ids",
+        ]:
+            if payload.get(field) != b9_proof_environment_contract.get(field):
+                errors.append(f"B9 proof-environment contract {field} mismatch")
+        if payload.get("contract_requirement_count") != 8:
+            errors.append("B9 proof-environment contract should check eight requirements")
+        if payload.get("passed_contract_requirement_count") != 3:
+            errors.append("B9 proof-environment contract should pass three requirements")
+        if payload.get("failed_contract_requirement_count") != 5:
+            errors.append("B9 proof-environment contract should fail five requirements")
+        if payload.get("failed_contract_requirement_ids") != expected_contract_failed:
+            errors.append("B9 proof-environment contract failures should be K4-K8")
+        if payload.get("contract_packet_count") != 5 or payload.get("contract_packet_ids") != expected_packets:
+            errors.append("B9 proof-environment contract packets mismatch")
+        if claim_boundary.get("proof_environment_contract_built") is not True:
+            errors.append("B9 proof-environment contract must disclose contract construction")
+        if claim_boundary.get("local_verifier_checked") is not True:
+            errors.append("B9 proof-environment contract should preserve local verifier evidence")
+        for claim_key in [
+            "proof_environment_ready",
+            "independent_proof_check_ready",
+            "proof_assistant_checked",
+            "formal_theorem_proved",
+            "global_gap_amplification_impossibility_claimed",
+            "nlts_theorem_claimed",
+        ]:
+            if claim_boundary.get(claim_key) is not False:
+                errors.append(f"B9 proof-environment contract payload claims {claim_key}")
+        if claim_boundary.get("explicit_not_quantum_pcp_proof") is not True:
+            errors.append("B9 proof-environment contract must explicitly avoid Quantum PCP proof claims")
+        if payload.get("validation_error_count") != 0 or payload.get("validation_errors") != []:
+            errors.append("B9 proof-environment contract validation errors must be zero")
 
     b10_manifest = yaml.safe_load(read(b10_manifest_path))
     b10_results = b10_manifest.get("current_results", {})
@@ -32234,6 +32372,7 @@ def audit(root: Path) -> dict:
             "named_family_width_locality_bound": b9_named_family_bound_status,
             "cluster_stabilizer_parametric_certificate": b9_parametric_certificate_status,
             "proof_environment_readiness_gate": b9_proof_environment_gate_status,
+            "proof_environment_contract_gate": b9_proof_environment_contract_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -32785,6 +32924,7 @@ def audit(root: Path) -> dict:
                 research / "B9_cluster_stabilizer_parametric_certificate.md"
             ),
             "b9_proof_environment_readiness_gate": str(research / "B9_proof_environment_readiness_gate.md"),
+            "b9_proof_environment_contract_gate": str(research / "B9_proof_environment_contract_gate.md"),
             "b7_dependency_schedule_bridge": str(research / "B7_b1_b2_dependency_schedule_bridge.md"),
             "b7_workload_dag_factory_schedule": str(research / "B7_workload_dag_factory_schedule.md"),
             "b7_logical_t_factory_schedule": str(research / "B7_logical_t_factory_schedule.md"),
@@ -35217,6 +35357,11 @@ def markdown_report(report: dict) -> str:
             f"- Proof-environment explicitly not Quantum PCP proof: {report['b9']['proof_environment_readiness_gate'].get('explicit_not_quantum_pcp_proof')}",
             f"- Proof-environment validation errors: {report['b9']['proof_environment_readiness_gate'].get('validation_error_count')}",
             f"- Proof-environment result/markdown exists: {report['b9']['proof_environment_readiness_gate'].get('result_exists')} / {report['b9']['proof_environment_readiness_gate'].get('markdown_exists')}",
+            f"- Proof-environment contract status: {report['b9']['proof_environment_contract_gate'].get('status')}",
+            f"- Proof-environment contract source failures / contract failures: {report['b9']['proof_environment_contract_gate'].get('source_failed_gate_ids')} / {report['b9']['proof_environment_contract_gate'].get('failed_contract_requirement_ids')}",
+            f"- Proof-environment contract passed / failed / packets: {report['b9']['proof_environment_contract_gate'].get('passed_contract_requirement_count')} / {report['b9']['proof_environment_contract_gate'].get('failed_contract_requirement_count')} / {report['b9']['proof_environment_contract_gate'].get('contract_packet_count')}",
+            f"- Proof-environment contract packet IDs: {report['b9']['proof_environment_contract_gate'].get('contract_packet_ids')}",
+            f"- Proof-environment contract result/markdown exists: {report['b9']['proof_environment_contract_gate'].get('result_exists')} / {report['b9']['proof_environment_contract_gate'].get('markdown_exists')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

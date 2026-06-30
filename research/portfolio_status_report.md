@@ -2351,6 +2351,11 @@ Overall audit: PASS
 - Proof-environment explicitly not Quantum PCP proof: True
 - Proof-environment validation errors: 0
 - Proof-environment result/markdown exists: True / True
+- Proof-environment contract status: proof_environment_contract_open_not_formal_theorem
+- Proof-environment contract source failures / contract failures: ['PE-03', 'PE-04', 'PE-05', 'PE-08', 'PE-09'] / ['K4', 'K5', 'K6', 'K7', 'K8']
+- Proof-environment contract passed / failed / packets: 3 / 5 / 5
+- Proof-environment contract packet IDs: ['B9-PE03-lean-toolchain', 'B9-PE04-lake-tooling', 'B9-PE05-mathlib-project', 'B9-PE08-indexed-theorem', 'B9-PE09-checked-formal-output']
+- Proof-environment contract result/markdown exists: True / True
 
 ## B10 BQP Boundary Graph Status
 

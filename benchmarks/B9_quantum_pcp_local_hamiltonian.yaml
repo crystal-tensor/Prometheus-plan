@@ -151,6 +151,46 @@ current_results:
     validation_error_count: 0
     result: ../results/B9_proof_environment_readiness_gate_v0.json
     markdown_report: ../research/B9_proof_environment_readiness_gate.md
+  proof_environment_contract_gate_v0:
+    status: proof_environment_contract_open_not_formal_theorem
+    method: b9_proof_environment_contract_gate_v0
+    model_status: proof_environment_readiness_blockers_decomposed_for_prs
+    source_method: b9_proof_environment_readiness_gate_v0
+    source_status: proof_environment_readiness_blocked_not_formal_theorem
+    source_failed_gate_ids: [PE-03, PE-04, PE-05, PE-08, PE-09]
+    named_family: cluster_stabilizer_open_uniform_reweight
+    readiness_gate_count: 9
+    source_passed_gate_count: 4
+    source_failed_gate_count: 5
+    blocking_obligation_count: 5
+    lean_available: true
+    lean_return_code: 1
+    lake_available: false
+    lake_return_code:
+    lake_project_present: false
+    contains_placeholder_true_theorem: true
+    contract_requirement_count: 8
+    passed_contract_requirement_count: 3
+    failed_contract_requirement_count: 5
+    failed_contract_requirement_ids: [K4, K5, K6, K7, K8]
+    contract_packet_count: 5
+    contract_packet_ids:
+      - B9-PE03-lean-toolchain
+      - B9-PE04-lake-tooling
+      - B9-PE05-mathlib-project
+      - B9-PE08-indexed-theorem
+      - B9-PE09-checked-formal-output
+    proof_environment_contract_built: true
+    proof_environment_ready: false
+    independent_proof_check_ready: false
+    proof_assistant_checked: false
+    formal_theorem_proved: false
+    explicit_not_quantum_pcp_proof: true
+    global_gap_amplification_impossibility_claimed: false
+    nlts_theorem_claimed: false
+    validation_error_count: 0
+    result: ../results/B9_proof_environment_contract_gate_v0.json
+    markdown_report: ../research/B9_proof_environment_contract_gate.md
 prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -158,4 +198,5 @@ prototype_artifacts:
   named_family_width_locality_bound_builder: ../tools/b9_named_family_width_locality_bounds.py
   cluster_stabilizer_parametric_certificate: ../tools/b9_cluster_stabilizer_parametric_certificate.py
   proof_environment_readiness_gate: ../tools/b9_proof_environment_readiness_gate.py
+  proof_environment_contract_gate: ../tools/b9_proof_environment_contract_gate.py
   prototype_notes: ../research/B9_prototype_notes.md

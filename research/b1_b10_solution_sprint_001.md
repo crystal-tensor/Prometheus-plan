@@ -1466,6 +1466,21 @@ skeleton check in that project, replace the placeholder theorem, and formalize
 support-size, uniform-scaling, spectral-width, and normalized-gap invariance
 for all integer n >= 4.
 
+**Sprint update 61:** `T-B9-004c` is now merged as a proof-environment
+contract gate, still not as a checked theorem. The new tool
+`tools/b9_proof_environment_contract_gate.py` consumes
+`results/B9_proof_environment_readiness_gate_v0.json` and emits
+`results/B9_proof_environment_contract_gate_v0.json` plus
+`research/B9_proof_environment_contract_gate.md`. It converts the five failed
+readiness gates into PR-ready contract packets: Lean toolchain, Lake tooling,
+Lake/mathlib project files, indexed theorem replacement, and proof-assistant
+checked formal output. The contract passes 3/8 requirements and fails K4-K8.
+This is useful as a collaboration handoff because it states exactly what must
+be supplied before B9 can promote from a local exact-rational verifier to an
+independent formal theorem. It is still not a Quantum PCP proof, not an NLTS
+theorem, not a local-Hamiltonian hardness theorem, and not a global
+gap-amplification impossibility theorem.
+
 ## B10: Boundary of BQP
 
 **Technical target:** separate robust quantum advantage claims from hidden
