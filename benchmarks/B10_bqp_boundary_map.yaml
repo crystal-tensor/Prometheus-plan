@@ -1613,6 +1613,38 @@ current_results:
     caveat: priority_row_acceptance_packet_not_submitted_not_bqp_boundary_claim
     result: ../results/B5_B10_w1_priority_row_acceptance_packet_gate_v0.json
     markdown_report: ../research/B5_B10_w1_priority_row_acceptance_packet_gate.md
+  t1_positive_route_acceptance_boundary_v0:
+    status: b10_t1_positive_route_acceptance_boundary_synced
+    method: b10_t1_positive_route_acceptance_boundary_v0
+    model_status: b10_t1_zero_credit_boundary_after_b3_b5_acceptance_packet_gates
+    source_target_id: B10-T1
+    source_b3_acceptance_packet_gate: ../results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json
+    source_b5_acceptance_packet_gate: ../results/B5_B10_w1_priority_row_acceptance_packet_gate_v0.json
+    boundary_id: B10-T1-positive-route-acceptance-boundary
+    b3_acceptance_packet_id: B3-R1-full-covariance-row-acceptance-packet
+    b5_acceptance_packet_id: B5B10-W1-priority-row-acceptance-packet
+    requirement_count: 8
+    requirements_passed: 8
+    requirements_failed: 0
+    b3_failed_acceptance_requirement_ids: [P6, P7, P8]
+    b5_failed_acceptance_requirement_ids: [P6, P7, P8]
+    b3_submitted_acceptance_packet_exists: false
+    b5_submitted_acceptance_packet_exists: false
+    b3_accepted_full_covariance_row_count: 0
+    b3_denominator_win_count: 0
+    b3_optimizer_loop_shot_lower_bound: 475043013690000
+    b5_accepted_priority_row_count: 0
+    b5_production_contract_rows_accepted: 0
+    b10_t1_credit_allowed: false
+    b10_positive_route_ready: false
+    b10_bqp_separation_credit_allowed: false
+    b10_quantum_advantage_credit_allowed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    validation_error_count: 0
+    caveat: unified_positive_route_boundary_only_no_b3_or_b5_accepted_rows_no_bqp_claim
+    result: ../results/B10_T1_positive_route_acceptance_boundary_v0.json
+    markdown_report: ../research/B10_T1_positive_route_acceptance_boundary.md
 prototype_artifacts:
   boundary_graph_builder: ../tools/b10_bqp_boundary_graph.py
   formal_theorem_target_builder: ../tools/b10_formal_theorem_targets.py
@@ -1632,6 +1664,7 @@ prototype_artifacts:
   t1_b3_b10_full_covariance_row_replay_validation_manifest_gate: ../tools/b3_b10_full_covariance_row_replay_validation_manifest_gate.py
   t1_b3_b10_full_covariance_row_acceptance_packet_gate: ../tools/b3_b10_full_covariance_row_acceptance_packet_gate.py
   t1_b5_w1_replay_validation_manifest_gate: ../tools/b5_b10_w1_replay_validation_manifest_gate.py
+  t1_positive_route_acceptance_boundary: ../tools/b10_t1_positive_route_acceptance_boundary.py
   t1_missing_assumption_note_builder: ../tools/b10_t1_missing_assumption_note.py
   t1_asymptotic_access_contract_builder: ../tools/b10_t1_asymptotic_access_contract.py
   t1_b5_same_access_sampling_or_dmrg_bridge_builder: ../tools/b10_t1_b5_same_access_sampling_or_dmrg_bridge.py

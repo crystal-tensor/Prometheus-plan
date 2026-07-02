@@ -34689,6 +34689,9 @@ def audit(root: Path) -> dict:
             "b10_t2_real_backend_transcript_row_acceptance_boundary": str(
                 research / "B10_T2_real_backend_transcript_row_acceptance_boundary.md"
             ),
+            "b10_t1_positive_route_acceptance_boundary": str(
+                research / "B10_T1_positive_route_acceptance_boundary.md"
+            ),
             "b10_t3_checked_transcript_acceptance_boundary": str(
                 research / "B10_T3_checked_transcript_acceptance_boundary.md"
             ),
