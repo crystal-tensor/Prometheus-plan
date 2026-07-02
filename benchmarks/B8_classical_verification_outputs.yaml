@@ -695,6 +695,33 @@ current_results:
     caveat: transcript_row_acceptance_packet_only_no_real_backend_transcript_or_soundness_claim
     result: ../results/B4_B8_real_backend_transcript_row_acceptance_packet_gate_v0.json
     markdown_report: ../research/B4_B8_real_backend_transcript_row_acceptance_packet_gate.md
+  b8_b4_real_backend_soundness_boundary_v0:
+    status: b8_b4_real_backend_soundness_boundary_synced
+    model_status: b8_zero_credit_soundness_boundary_after_real_backend_transcript_row_gate
+    method: b8_b4_real_backend_soundness_boundary_v0
+    source_acceptance_packet_gate: ../results/B4_B8_real_backend_transcript_row_acceptance_packet_gate_v0.json
+    boundary_id: B8-B4-real-backend-soundness-boundary
+    boundary_hash: 83164aa6bca39fbb553738e94d6f8afdf79aaadd7eebda533cab97df1502fc1d
+    acceptance_packet_id: B4B8-M6-real-backend-transcript-row-acceptance-packet
+    transcript_packet_id: B4B8-M6-real-backend-transcript-rows
+    replay_validation_manifest_id: B4B8-M6-real-backend-transcript-replay-validation-manifest
+    requirements_passed: 7
+    requirements_failed: 0
+    source_failed_acceptance_requirement_ids: [P6, P7, P8]
+    holdout_row_count: 160
+    no_leak_allowed_accepts_per_160: 16
+    full_leak_allowed_accepts_per_160: 40
+    real_backend_transcript_rows: 0
+    accepted_priority_transcript_rows: 0
+    b8_protocol_soundness_credit_allowed: false
+    b8_cryptographic_soundness_credit_allowed: false
+    b8_sampling_hardness_credit_allowed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b10_t2_credit_allowed: false
+    validation_error_count: 0
+    caveat: b8_zero_credit_soundness_boundary_no_real_backend_transcript_rows_or_soundness_claim
+    result: ../results/B8_B4_real_backend_soundness_boundary_v0.json
+    markdown_report: ../research/B8_B4_real_backend_soundness_boundary.md
   toy_hidden_invariant_output_verifier_v0:
     status: toy_invariant_property_test
     model_status: toy_invariant_property_test_not_full_distribution_verification
@@ -843,3 +870,4 @@ prototype_artifacts:
   real_backend_transcript_provenance_manifest_gate: ../tools/b4_b8_real_backend_transcript_provenance_manifest_gate.py
   real_backend_transcript_replay_validation_manifest_gate: ../tools/b4_b8_real_backend_transcript_replay_validation_manifest_gate.py
   real_backend_transcript_row_acceptance_packet_gate: ../tools/b4_b8_real_backend_transcript_row_acceptance_packet_gate.py
+  b8_b4_real_backend_soundness_boundary: ../tools/b8_b4_real_backend_soundness_boundary.py
