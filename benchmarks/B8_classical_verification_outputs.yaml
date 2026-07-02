@@ -755,6 +755,39 @@ current_results:
     caveat: triage_only_no_real_backend_transcript_rows_no_soundness_or_advantage_credit
     result: ../results/B4_B8_real_backend_transcript_post_boundary_submission_triage_v0.json
     markdown_report: ../research/B4_B8_real_backend_transcript_post_boundary_submission_triage.md
+  b4_b8_h1_provider_session_replay_packet_gate_v0:
+    status: h1_provider_session_replay_packet_open_missing_artifact
+    method: b4_b8_h1_provider_session_replay_packet_gate_v0
+    model_status: h1_provider_session_device_property_replay_contract_ready_no_credit
+    source_post_boundary_triage: ../results/B4_B8_real_backend_transcript_post_boundary_submission_triage_v0.json
+    source_provider_manifest_gate: ../results/B4_B8_real_backend_provider_manifest_gate_v0.json
+    source_target_id: T-B4-002q/T-B8-003u/T-B10-009i
+    h1_packet_id: B4B8-H1-provider-session-device-property-replay
+    h1_packet_hash: 07fddb2ae188f8a927f62d0ba8c70c707c3f215980b9d4de2fb2b705e3a8ad26
+    source_triage_hash: 5053a624e0295f20d074e14dc6b74951f7f09930dde250f45f2027f5207d475a
+    source_provider_packet_hash: 2a8779ab19f55f9dcf88ef6af26c5c3d33e9043f603060b5da07a49d93b25072
+    downstream_transcript_packet_id: B4B8-M6-real-backend-transcript-rows
+    requirements_passed: 6
+    requirements_failed: 3
+    failed_requirement_ids: [P6, P7, P8]
+    required_key_count: 15
+    production_required_key_count: 10
+    required_evidence_file_count: 11
+    holdout_row_count: 160
+    no_leak_allowed_accepts_per_160: 16
+    full_leak_allowed_accepts_per_160: 40
+    real_backend_transcript_rows: 0
+    accepted_priority_transcript_rows: 0
+    h1_provider_session_replay_accepted: false
+    b8_protocol_soundness_credit_allowed: false
+    b8_cryptographic_soundness_credit_allowed: false
+    b8_sampling_hardness_credit_allowed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b10_t2_credit_allowed: false
+    validation_error_count: 0
+    caveat: h1_contract_only_no_provider_session_artifact_no_real_backend_rows_no_soundness_or_advantage_credit
+    result: ../results/B4_B8_H1_provider_session_replay_packet_gate_v0.json
+    markdown_report: ../research/B4_B8_H1_provider_session_replay_packet_gate.md
   toy_hidden_invariant_output_verifier_v0:
     status: toy_invariant_property_test
     model_status: toy_invariant_property_test_not_full_distribution_verification
@@ -905,3 +938,4 @@ prototype_artifacts:
   real_backend_transcript_row_acceptance_packet_gate: ../tools/b4_b8_real_backend_transcript_row_acceptance_packet_gate.py
   b8_b4_real_backend_soundness_boundary: ../tools/b8_b4_real_backend_soundness_boundary.py
   b4_b8_real_backend_transcript_post_boundary_submission_triage: ../tools/b4_b8_real_backend_transcript_post_boundary_submission_triage.py
+  h1_provider_session_replay_packet_gate: ../tools/b4_b8_h1_provider_session_replay_packet_gate.py

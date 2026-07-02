@@ -541,6 +541,40 @@ current_results:
     caveat: triage_only_no_b10_t2_credit_or_bqp_boundary_claim
     result: ../results/B4_B8_real_backend_transcript_post_boundary_submission_triage_v0.json
     markdown_report: ../research/B4_B8_real_backend_transcript_post_boundary_submission_triage.md
+  b10_t2_b4_b8_h1_provider_session_replay_packet_gate_v0:
+    status: h1_provider_session_replay_packet_open_missing_artifact
+    method: b4_b8_h1_provider_session_replay_packet_gate_v0
+    model_status: h1_provider_session_device_property_replay_contract_ready_no_credit
+    source_h1_packet_gate: ../results/B4_B8_H1_provider_session_replay_packet_gate_v0.json
+    source_post_boundary_triage: ../results/B4_B8_real_backend_transcript_post_boundary_submission_triage_v0.json
+    source_provider_manifest_gate: ../results/B4_B8_real_backend_provider_manifest_gate_v0.json
+    source_target_id: T-B4-002q/T-B8-003u/T-B10-009i
+    dependency_benchmark: B4/B8
+    h1_packet_id: B4B8-H1-provider-session-device-property-replay
+    h1_packet_hash: 07fddb2ae188f8a927f62d0ba8c70c707c3f215980b9d4de2fb2b705e3a8ad26
+    source_triage_hash: 5053a624e0295f20d074e14dc6b74951f7f09930dde250f45f2027f5207d475a
+    source_provider_packet_hash: 2a8779ab19f55f9dcf88ef6af26c5c3d33e9043f603060b5da07a49d93b25072
+    downstream_transcript_packet_id: B4B8-M6-real-backend-transcript-rows
+    requirements_passed: 6
+    requirements_failed: 3
+    failed_requirement_ids: [P6, P7, P8]
+    required_key_count: 15
+    production_required_key_count: 10
+    required_evidence_file_count: 11
+    holdout_row_count: 160
+    no_leak_allowed_accepts_per_160: 16
+    full_leak_allowed_accepts_per_160: 40
+    real_backend_transcript_rows: 0
+    accepted_priority_transcript_rows: 0
+    h1_provider_session_replay_accepted: false
+    b10_soundness_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    validation_error_count: 0
+    caveat: h1_contract_only_no_b10_t2_credit_or_bqp_boundary_claim
+    result: ../results/B4_B8_H1_provider_session_replay_packet_gate_v0.json
+    markdown_report: ../research/B4_B8_H1_provider_session_replay_packet_gate.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0
@@ -1757,6 +1791,7 @@ prototype_artifacts:
   t2_b4_b8_real_backend_soundness_margin_gate: ../tools/b4_b8_real_backend_soundness_margin_gate.py
   t2_b4_b8_real_backend_transcript_intake_template_gate: ../tools/b4_b8_real_backend_transcript_intake_template_gate.py
   t2_b4_b8_real_backend_transcript_post_boundary_submission_triage: ../tools/b4_b8_real_backend_transcript_post_boundary_submission_triage.py
+  t2_b4_b8_h1_provider_session_replay_packet_gate: ../tools/b4_b8_h1_provider_session_replay_packet_gate.py
   t2_b4_b8_real_backend_transcript_priority_packet_gate: ../tools/b4_b8_real_backend_transcript_priority_packet_gate.py
   t2_b4_b8_real_backend_transcript_provenance_manifest_gate: ../tools/b4_b8_real_backend_transcript_provenance_manifest_gate.py
   t2_b4_b8_real_backend_transcript_replay_validation_manifest_gate: ../tools/b4_b8_real_backend_transcript_replay_validation_manifest_gate.py
