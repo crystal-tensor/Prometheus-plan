@@ -1,0 +1,250 @@
+{
+  "benchmark_id": "B3",
+  "claim_boundary": {
+    "b10_t1_credit_allowed": false,
+    "b3_full_covariance_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "positive_same_access_route_allowed": false,
+    "problem_solved_claimed": false,
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false
+  },
+  "conditions": [
+    {
+      "condition_id": "C1",
+      "evidence": {
+        "requirements_failed": 0,
+        "source_method": "b3_b10_full_covariance_reopen_boundary_v0",
+        "validation_error_count": 0
+      },
+      "label": "Source B3/B10 full-covariance zero-credit boundary is current and valid",
+      "satisfied": true
+    },
+    {
+      "condition_id": "C2",
+      "evidence": {
+        "failed_acceptance_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "submitted_acceptance_packet_exists": false
+      },
+      "label": "The source acceptance packet remains blocked on missing submitted evidence",
+      "satisfied": true
+    },
+    {
+      "condition_id": "C3",
+      "evidence": {
+        "compiled_pilot_instance_count": 1,
+        "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+        "row_aligned_instance_count": 4
+      },
+      "label": "The B3 full-covariance scope is preserved",
+      "satisfied": true
+    },
+    {
+      "condition_id": "C4",
+      "evidence": {
+        "ready_packet_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      "label": "Four B3 evidence PR packets are ready for external agents",
+      "satisfied": true
+    },
+    {
+      "condition_id": "C5",
+      "evidence": {
+        "accepted_full_covariance_row_count": 0,
+        "blocked_packet_ids": [
+          "F5"
+        ],
+        "denominator_win_count": 0
+      },
+      "label": "B10-T1 access-contract acceptance is correctly blocked until F1-F4 evidence exists",
+      "satisfied": true
+    },
+    {
+      "condition_id": "C6",
+      "evidence": {
+        "b10_t1_credit_allowed": false,
+        "b3_full_covariance_credit_allowed": false,
+        "b3_reopen_ready": false,
+        "bqp_separation_claimed": false,
+        "quantum_advantage_claimed": false,
+        "reaction_dynamics_solution_claimed": false
+      },
+      "label": "Forbidden B3/B10 credit and advantage claims remain false",
+      "satisfied": true
+    }
+  ],
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B10",
+  "method": "b3_b10_full_covariance_post_boundary_submission_triage_v0",
+  "model_status": "b3_zero_credit_reopen_boundary_split_into_pr_sized_covariance_packets",
+  "runtime_seconds": 0.0002779960632324219,
+  "source_acceptance_packet_gate": "results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json",
+  "source_boundary": "results/B3_B10_full_covariance_reopen_boundary_v0.json",
+  "source_priority_packet_gate": "results/B3_B10_reopen_priority_packet_gate_v0.json",
+  "source_target_id": "T-B3-021/T-B10-015h",
+  "status": "b3_b10_full_covariance_post_boundary_triage_ready_no_credit",
+  "summary": {
+    "accepted_full_covariance_row_count": 0,
+    "accepted_priority_reopen_rows": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_full_covariance_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "blocked_packet_count": 1,
+    "blocked_packet_ids": [
+      "F5"
+    ],
+    "bqp_separation_claimed": false,
+    "compiled_pilot_instance_count": 1,
+    "condition_count": 6,
+    "conditions_failed": 0,
+    "conditions_satisfied": 6,
+    "denominator_win_count": 0,
+    "downstream_packet_id": "B3-R1-full-compiled-covariance",
+    "failed_condition_ids": [],
+    "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+    "positive_same_access_route_allowed": false,
+    "priority_packet_hash": "373a08c345cd80c3b5e1e55e0367d08468ba92fb0bb95cb287a3833b282360ca",
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false,
+    "ready_external_pr_packet_count": 4,
+    "ready_packet_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "row_aligned_instance_count": 4,
+    "selected_ci_larger_basis_denominator_beaten_count": 0,
+    "source_acceptance_packet_hash": "24b94105d0b0de8d88fb1a6f456cdf1769dcd2efac8186594900c3bc3fff1f69",
+    "source_boundary_hash": "ddeecdff97f61bf096acf6601ed7a09cbaaa4b566cc1d333828992c6f5cf1b5d",
+    "triage_hash": "74c8adb47c2505b314376585e02931c55d1e4eeffb9a1cebc15527c88d987f4b",
+    "triage_id": "B3-B10-full-covariance-post-boundary-submission-triage",
+    "validation_error_count": 0,
+    "work_packet_count": 5
+  },
+  "title": "B3/B10 Full-Covariance Post-Boundary Submission Triage",
+  "triage_packet": {
+    "acceptance_packet_hash": "24b94105d0b0de8d88fb1a6f456cdf1769dcd2efac8186594900c3bc3fff1f69",
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_full_covariance_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "boundary_hash": "ddeecdff97f61bf096acf6601ed7a09cbaaa4b566cc1d333828992c6f5cf1b5d",
+    "compiled_pilot_instance_count": 1,
+    "denominator_win_count": 0,
+    "downstream_packet_id": "B3-R1-full-compiled-covariance",
+    "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+    "priority_packet_hash": "373a08c345cd80c3b5e1e55e0367d08468ba92fb0bb95cb287a3833b282360ca",
+    "row_aligned_instance_count": 4,
+    "source_acceptance_packet_gate": "results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json",
+    "source_boundary": "results/B3_B10_full_covariance_reopen_boundary_v0.json",
+    "source_priority_packet_gate": "results/B3_B10_reopen_priority_packet_gate_v0.json",
+    "triage_hash": "74c8adb47c2505b314376585e02931c55d1e4eeffb9a1cebc15527c88d987f4b",
+    "triage_id": "B3-B10-full-covariance-post-boundary-submission-triage",
+    "work_packet_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ]
+  },
+  "validation_errors": [],
+  "version": "0.1",
+  "work_packets": [
+    {
+      "acceptance_evidence": [
+        "four row-aligned instances are source-backed",
+        "compiled-state covariance replay is hash-bound",
+        "accepted_full_covariance_row_count > 0 only after row replay validation"
+      ],
+      "blocker": "accepted full-covariance row count is still zero",
+      "expected_artifacts": [
+        "submissions/B3-R1-full-compiled-covariance/full_covariance_rows.json",
+        "submissions/B3-R1-full-compiled-covariance/compiled_state_replay/",
+        "submissions/B3-R1-full-compiled-covariance/covariance_replay_manifest.json"
+      ],
+      "owner_role": "chemistry-measurement-agent",
+      "packet_id": "F1",
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Four source-backed full compiled-state covariance rows"
+    },
+    {
+      "acceptance_evidence": [
+        "multi-parameter state-prep convergence is shown for the same rows",
+        "state-prep cost is charged in two-qubit gates and optimizer calls",
+        "one-parameter pilot evidence is not promoted beyond provenance"
+      ],
+      "blocker": "only one compiled pilot exists and it is not a converged multi-parameter state-prep result",
+      "expected_artifacts": [
+        "submissions/B3-R1-full-compiled-covariance/stateprep_convergence_ledger.json",
+        "submissions/B3-R1-full-compiled-covariance/multi_parameter_ansatz_manifest.json",
+        "submissions/B3-R1-full-compiled-covariance/stateprep_cost_ledger.json"
+      ],
+      "owner_role": "chemistry-stateprep-agent",
+      "packet_id": "F2",
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Multi-parameter converged chemistry state-preparation evidence"
+    },
+    {
+      "acceptance_evidence": [
+        "denominator_win_count > 0 under the same row and access contract",
+        "selected-CI/larger-basis replay is hash-bound",
+        "no hidden access advantage is used"
+      ],
+      "blocker": "denominator win count remains zero",
+      "expected_artifacts": [
+        "submissions/B3-R1-full-compiled-covariance/same_access_denominator_ledger.json",
+        "submissions/B3-R1-full-compiled-covariance/selected_ci_replay_manifest.json",
+        "submissions/B3-R1-full-compiled-covariance/denominator_comparison_table.json"
+      ],
+      "owner_role": "baseline-adversary",
+      "packet_id": "F3",
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Same-access selected-CI/larger-basis denominator wins"
+    },
+    {
+      "acceptance_evidence": [
+        "optimizer-loop lower-bound shots materially decrease",
+        "derivative estimator and measurement strategy are replayable",
+        "state-prep and measurement costs remain charged"
+      ],
+      "blocker": "optimizer-loop lower-bound shots remain 475,043,013,690,000",
+      "expected_artifacts": [
+        "submissions/B3-R1-full-compiled-covariance/optimizer_loop_cost_replay.json",
+        "submissions/B3-R1-full-compiled-covariance/derivative_estimator_replay.json",
+        "submissions/B3-R1-full-compiled-covariance/measurement_strategy_delta.json"
+      ],
+      "owner_role": "measurement-optimization-agent",
+      "packet_id": "F4",
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Optimizer-loop cost collapse evidence"
+    },
+    {
+      "acceptance_evidence": [
+        "F1-F4 evidence is accepted by the B3 row acceptance packet",
+        "positive same-access route is explicit",
+        "B10-T1 credit remains false until access-contract acceptance"
+      ],
+      "blocker": "B10-T1 cannot count credit without accepted rows, denominator wins, and same-access replay",
+      "expected_artifacts": [
+        "submissions/B3-R1-full-compiled-covariance/b10_access_contract_acceptance.json",
+        "submissions/B3-R1-full-compiled-covariance/b10_t1_claim_boundary.md"
+      ],
+      "owner_role": "bqp-boundary-agent",
+      "packet_id": "F5",
+      "status": "blocked_until_F1_F2_F3_F4_evidence",
+      "title": "B10-T1 access-contract acceptance after F1-F4"
+    }
+  ]
+}
