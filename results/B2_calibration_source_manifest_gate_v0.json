@@ -1,0 +1,225 @@
+{
+  "benchmark_id": "B2",
+  "calibration_source_manifest_packet": {
+    "accepted_only_if": [
+      "manifest_id equals B2-T5-calibration-source-manifest",
+      "downstream_packet_id equals B2-T5-calibrated-flag-observation-rows",
+      "calibration source type, backend/dataset name, acquisition window, detector trace hashes, flag schema hash, holdout partition hash, and replay command hash are present",
+      "manifest preserves the 3-challenge / 576-trace / 864 holdout profile-shot shape or declares a reviewed replacement denominator",
+      "source evidence files are present and hash-bound",
+      "claim_boundary forbids production decoder, threshold, calibrated-device, hardware-result, new-code, quantum-advantage, and B7 credit claims"
+    ],
+    "downstream_packet_id": "B2-T5-calibrated-flag-observation-rows",
+    "manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "manifest_id": "B2-T5-calibration-source-manifest",
+    "production_required_keys": [
+      "calibration_source_type",
+      "backend_or_dataset_name",
+      "acquisition_window_utc",
+      "detector_trace_hashes",
+      "flag_event_schema_hash",
+      "holdout_partition_hash",
+      "replay_command_hash"
+    ],
+    "required_evidence_files": [
+      "calibration_source_manifest",
+      "backend_or_dataset_access_note",
+      "acquisition_window_source",
+      "detector_trace_hash_manifest",
+      "flag_event_schema_note",
+      "confusion_matrix_or_labeling_plan",
+      "holdout_partition_manifest",
+      "replay_command_and_claim_boundary"
+    ],
+    "required_keys": [
+      "manifest_id",
+      "downstream_packet_id",
+      "calibration_source_type",
+      "backend_or_dataset_name",
+      "acquisition_window_utc",
+      "detector_trace_hashes",
+      "flag_event_schema_hash",
+      "confusion_matrix_plan_hash",
+      "holdout_partition_hash",
+      "replay_command_hash",
+      "claim_boundary"
+    ],
+    "source_b7_dependency_credit_gate": "results/B7_B2_calibrated_dependency_credit_gate_v0.json",
+    "source_priority_packet_gate": "results/B2_calibrated_trace_priority_packet_gate_v0.json",
+    "submission_artifact_path": "results/B2_calibration_source_manifest_submissions/B2-T5-calibration-source-manifest.json"
+  },
+  "claim_boundary": {
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "next_gate": "Submit B2-T5-calibration-source-manifest with calibration source type, backend/dataset name, acquisition window, detector trace hashes, flag schema hash, holdout partition hash, replay command hash, and claim boundary.",
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "No calibration source manifest or calibrated trace row has been submitted or accepted; no production decoder, threshold, hardware result, calibrated-device result, new-code result, quantum advantage, or B7 resource credit is supported.",
+    "what_is_supported": "The B2 calibrated-trace route now has a concrete source-manifest packet that must be accepted before calibrated flag observation rows or B7 dependency credit can be considered."
+  },
+  "last_updated": "2026-07-02",
+  "method": "b2_calibration_source_manifest_gate_v0",
+  "model_status": "calibration_source_manifest_required_before_calibrated_trace_rows",
+  "problem_id": 22,
+  "requirements": [
+    {
+      "evidence": {
+        "failed_priority_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_status": "calibrated_trace_priority_packet_open_missing_artifact",
+        "validation_error_count": 0
+      },
+      "label": "Priority calibrated-trace packet remains valid and blocked only on P6/P7/P8",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "accepted_priority_trace_rows": 0,
+        "downstream_packet_id": "B2-T5-calibrated-flag-observation-rows"
+      },
+      "label": "Source manifest is bound to the calibrated flag observation row packet",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 7,
+        "required_evidence_file_count": 8,
+        "required_key_count": 11
+      },
+      "label": "Manifest packet carries locked schema and evidence file classes",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "challenge_count": 3,
+        "holdout_profile_shots": 864,
+        "source_trace_count": 576
+      },
+      "label": "Existing B2 trace denominator shape is preserved",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "calibrated_flag_data_used": false,
+        "dependency_credit_allowed": false,
+        "holdout_improvement_gate_passed": false,
+        "real_hardware_trace_used": false
+      },
+      "label": "B7 dependency credit remains blocked before calibrated source evidence",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B2_calibration_source_manifest_submissions/B2-T5-calibration-source-manifest.json"
+      },
+      "label": "Calibration source manifest artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "manifest_id",
+          "downstream_packet_id",
+          "calibration_source_type",
+          "backend_or_dataset_name",
+          "acquisition_window_utc",
+          "detector_trace_hashes",
+          "flag_event_schema_hash",
+          "confusion_matrix_plan_hash",
+          "holdout_partition_hash",
+          "replay_command_hash",
+          "claim_boundary"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "calibration_source_type",
+          "backend_or_dataset_name",
+          "acquisition_window_utc",
+          "detector_trace_hashes",
+          "flag_event_schema_hash",
+          "holdout_partition_hash",
+          "replay_command_hash"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted manifest satisfies the locked source schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "downstream_bound": false,
+        "replay_bound": false,
+        "source_evidence_files_present": false
+      },
+      "label": "Submitted manifest is source-backed, downstream-bound, and replay-bound",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "b7_dependency_credit_allowed": false,
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "label": "Forbidden decoder, threshold, hardware, advantage, and B7-credit claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000188,
+  "source_b7_dependency_credit_gate": "results/B7_B2_calibrated_dependency_credit_gate_v0.json",
+  "source_priority_packet_gate": "results/B2_calibrated_trace_priority_packet_gate_v0.json",
+  "status": "calibration_source_manifest_open_missing_artifact",
+  "summary": {
+    "accepted_priority_trace_rows": 0,
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "challenge_count": 3,
+    "downstream_packet_id": "B2-T5-calibrated-flag-observation-rows",
+    "failed_manifest_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "hardware_result_claimed": false,
+    "holdout_profile_shots": 864,
+    "manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "manifest_id": "B2-T5-calibration-source-manifest",
+    "manifest_requirement_count": 9,
+    "manifest_requirements_failed": 3,
+    "manifest_requirements_passed": 6,
+    "missing_key_count": 11,
+    "new_code_claimed": false,
+    "production_decoder_claimed": false,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 7,
+    "quantum_advantage_claimed": false,
+    "required_evidence_file_count": 8,
+    "required_key_count": 11,
+    "source_trace_count": 576,
+    "submitted_manifest_exists": false,
+    "threshold_claimed": false,
+    "validation_error_count": 0
+  },
+  "title": "B2 Calibration Source Manifest Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

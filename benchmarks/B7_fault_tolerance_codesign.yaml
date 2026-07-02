@@ -120,6 +120,20 @@ current_results:
     b7_dependency_credit_allowed: false
     b7_credit_delta: 0
     caveat: priority_packet_only_no_calibrated_rows_no_b7_resource_credit
+  b2_calibration_source_manifest_dependency_v0:
+    status: b2_calibration_source_manifest_dependency_credit_still_zero
+    method: b2_calibration_source_manifest_gate_v0
+    source_b2_calibration_source_manifest: ../results/B2_calibration_source_manifest_gate_v0.json
+    manifest_id: B2-T5-calibration-source-manifest
+    downstream_packet_id: B2-T5-calibrated-flag-observation-rows
+    manifest_requirements_passed: 6
+    manifest_requirements_failed: 3
+    failed_manifest_requirement_ids: [P6, P7, P8]
+    submitted_manifest_exists: false
+    accepted_priority_trace_rows: 0
+    b7_dependency_credit_allowed: false
+    b7_credit_delta: 0
+    caveat: source_manifest_only_no_calibrated_rows_no_b7_resource_credit
   workload_dag_factory_schedule_v0:
     status: workload_dag_factory_schedule_not_physical_layout
     method: b7_workload_dag_factory_scheduler_v0
@@ -614,6 +628,7 @@ prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
   b2_calibrated_dependency_credit_gate: ../tools/b7_b2_calibrated_dependency_credit_gate.py
+  b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
   workload_dag_factory_scheduler: ../tools/b7_workload_dag_factory_scheduler.py
   logical_t_factory_scheduler: ../tools/b7_logical_t_factory_scheduler.py
   min_stv_regime_classifier: ../tools/b7_min_stv_regime_classifier.py
