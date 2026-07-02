@@ -1,0 +1,274 @@
+{
+  "benchmark_id": "B5",
+  "claim_boundary": {
+    "bqp_separation_claimed": false,
+    "next_gate": "Submit B5B10-W1-priority-row-replay-validation-manifest with the accepted provenance manifest hash, row replay hashes, cost ledgers, seeded-pressure comparison, B10 access boundary, and claim boundary before the priority production-row artifact can count.",
+    "production_dmrg_claimed": false,
+    "quantum_advantage_claimed": false,
+    "same_access_positive_route_claimed": false,
+    "what_is_not_supported": "No replay-validation manifest or priority production row has been submitted or accepted; no production DMRG denominator, same-access positive route, quantum advantage, or BQP separation is supported.",
+    "what_is_supported": "The B5/B10 W1 priority-row route now has a replay-validation manifest packet that must bind canonical states, environments, residuals, discarded weights, convergence, same-access cost, resource ledgers, seeded-pressure comparison, and B10 boundary evidence before the priority row can count."
+  },
+  "dependency_benchmarks": [
+    "B5",
+    "B10"
+  ],
+  "last_updated": "2026-07-02",
+  "linked_benchmark_id": "B10",
+  "method": "b5_b10_w1_replay_validation_manifest_gate_v0",
+  "model_status": "w1_replay_validation_manifest_required_before_priority_row_acceptance",
+  "replay_validation_manifest_packet": {
+    "accepted_only_if": [
+      "manifest_id equals B5B10-W1-priority-row-replay-validation-manifest",
+      "provenance_manifest_id equals B5B10-W1-priority-row-provenance-manifest",
+      "row_id equals D5H_s8_u2_eta0.25_n4x4_obs_density_site_4",
+      "row_contract_hash and provenance_manifest_hash match the source gates",
+      "canonical state, left/right environments, residuals, discarded weights, convergence, same-access cost, wall-clock/memory, sweep/matvec counts, seeded-pressure comparison, and B10 access boundary are hash-bound",
+      "replay_hashes bind row_contract_hash, provenance_manifest_hash, and row_id",
+      "source evidence files are present and hash-bound",
+      "claim_boundary forbids production DMRG, same-access positive route, quantum advantage, and BQP separation claims until accepted rows exist"
+    ],
+    "manifest_hash": "21de29a096bd3c6534b4420a7d69afca1bc4c95e80750657f3a3d357dd17dd97",
+    "manifest_id": "B5B10-W1-priority-row-replay-validation-manifest",
+    "production_contract_rows_accepted": 0,
+    "production_required_keys": [
+      "provenance_manifest_hash",
+      "canonical_state_replay_hash",
+      "left_environment_replay_hash",
+      "right_environment_replay_hash",
+      "orthonormal_residual_replay_hash",
+      "discarded_weight_replay_hash",
+      "convergence_replay_hash",
+      "same_access_cost_ledger_hash",
+      "wall_clock_memory_ledger_hash",
+      "sweep_matvec_count_ledger_hash",
+      "seeded_pressure_comparison_hash",
+      "b10_access_boundary_hash",
+      "claim_boundary"
+    ],
+    "prototype_discarded_weight_metric_rows": 9,
+    "prototype_trace_hash_rows": 9,
+    "provenance_manifest_hash": "2616aae62cc6af33da763faac1d7275e975ca9699dd752231b600975cff74b90",
+    "provenance_manifest_id": "B5B10-W1-priority-row-provenance-manifest",
+    "required_evidence_files": [
+      "accepted_priority_row_provenance_manifest",
+      "canonical_state_replay_manifest",
+      "left_environment_replay_manifest",
+      "right_environment_replay_manifest",
+      "orthonormal_residual_replay_table",
+      "discarded_weight_replay_table",
+      "convergence_replay_table",
+      "same_access_cost_ledger",
+      "wall_clock_memory_ledger",
+      "sweep_matvec_count_ledger",
+      "seeded_pressure_comparison_manifest",
+      "b10_access_boundary_note",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "manifest_id",
+      "provenance_manifest_id",
+      "row_id",
+      "row_contract_hash",
+      "provenance_manifest_hash",
+      "canonical_state_replay_hash",
+      "left_environment_replay_hash",
+      "right_environment_replay_hash",
+      "orthonormal_residual_replay_hash",
+      "discarded_weight_replay_hash",
+      "convergence_replay_hash",
+      "same_access_cost_ledger_hash",
+      "wall_clock_memory_ledger_hash",
+      "sweep_matvec_count_ledger_hash",
+      "seeded_pressure_comparison_hash",
+      "b10_access_boundary_hash",
+      "claim_boundary"
+    ],
+    "row_contract_count": 9,
+    "row_contract_hash": "7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc",
+    "row_id": "D5H_s8_u2_eta0.25_n4x4_obs_density_site_4",
+    "source_blocker_queue_gate": "results/B5_B10_w1_production_row_blocker_queue_gate_v0.json",
+    "source_prototype_environment_scout": "results/B5_B10_w1_prototype_environment_scout_v0.json",
+    "source_provenance_manifest_gate": "results/B5_B10_w1_priority_row_provenance_manifest_gate_v0.json",
+    "submission_artifact_path": "results/B5_B10_w1_replay_validation_manifest_submissions/B5B10-W1-priority-row-replay-validation-manifest.json"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "failed_manifest_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_status": "w1_priority_row_provenance_manifest_open_missing_artifact",
+        "validation_error_count": 0
+      },
+      "label": "Priority-row provenance manifest gate remains valid and blocked only on P6/P7/P8",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "priority_row_id": "D5H_s8_u2_eta0.25_n4x4_obs_density_site_4",
+        "provenance_manifest_id": "B5B10-W1-priority-row-provenance-manifest",
+        "row_contract_hash": "7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc"
+      },
+      "label": "Replay-validation manifest is bound to the priority W1 row contract",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 13,
+        "required_evidence_file_count": 13,
+        "required_key_count": 17
+      },
+      "label": "Manifest packet carries locked replay-validation schema and evidence classes",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "production_contract_rows_accepted": 0,
+        "production_dmrg_available": false,
+        "prototype_discarded_weight_metric_rows": 9,
+        "prototype_trace_hash_rows": 9,
+        "row_contract_count": 9
+      },
+      "label": "Prototype scope and production blockers remain preserved",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "accepted_priority_row_count": 0,
+        "accepted_production_row_count": 0,
+        "bqp_separation_claimed": false,
+        "production_dmrg_claimed": false,
+        "quantum_advantage_claimed": false,
+        "same_access_positive_route_claimed": false,
+        "submitted_production_row_count": 0
+      },
+      "label": "Blocker queue still has no submitted or accepted production rows",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B5_B10_w1_replay_validation_manifest_submissions/B5B10-W1-priority-row-replay-validation-manifest.json"
+      },
+      "label": "Replay-validation manifest artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "manifest_id",
+          "provenance_manifest_id",
+          "row_id",
+          "row_contract_hash",
+          "provenance_manifest_hash",
+          "canonical_state_replay_hash",
+          "left_environment_replay_hash",
+          "right_environment_replay_hash",
+          "orthonormal_residual_replay_hash",
+          "discarded_weight_replay_hash",
+          "convergence_replay_hash",
+          "same_access_cost_ledger_hash",
+          "wall_clock_memory_ledger_hash",
+          "sweep_matvec_count_ledger_hash",
+          "seeded_pressure_comparison_hash",
+          "b10_access_boundary_hash",
+          "claim_boundary"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "provenance_manifest_hash",
+          "canonical_state_replay_hash",
+          "left_environment_replay_hash",
+          "right_environment_replay_hash",
+          "orthonormal_residual_replay_hash",
+          "discarded_weight_replay_hash",
+          "convergence_replay_hash",
+          "same_access_cost_ledger_hash",
+          "wall_clock_memory_ledger_hash",
+          "sweep_matvec_count_ledger_hash",
+          "seeded_pressure_comparison_hash",
+          "b10_access_boundary_hash",
+          "claim_boundary"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted manifest satisfies the locked replay-validation schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "claim_boundary_bound": false,
+        "manifest_bound": false,
+        "replay_bound": false,
+        "source_evidence_files_present": false
+      },
+      "label": "Submitted manifest is source-backed, row-bound, replay-bound, and claim-boundary-bound",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "production_dmrg_claimed": false,
+        "quantum_advantage_claimed": false,
+        "same_access_positive_route_claimed": false
+      },
+      "label": "Forbidden production, positive-route, advantage, and BQP claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000314,
+  "source_blocker_queue_gate": "results/B5_B10_w1_production_row_blocker_queue_gate_v0.json",
+  "source_prototype_environment_scout": "results/B5_B10_w1_prototype_environment_scout_v0.json",
+  "source_provenance_manifest_gate": "results/B5_B10_w1_priority_row_provenance_manifest_gate_v0.json",
+  "source_target_id": "B10-T1",
+  "status": "w1_replay_validation_manifest_open_missing_artifact",
+  "summary": {
+    "accepted_priority_row_count": 0,
+    "b10_t1_positive_route_ready": false,
+    "bqp_separation_claimed": false,
+    "failed_manifest_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "manifest_hash": "21de29a096bd3c6534b4420a7d69afca1bc4c95e80750657f3a3d357dd17dd97",
+    "manifest_id": "B5B10-W1-priority-row-replay-validation-manifest",
+    "manifest_requirement_count": 9,
+    "manifest_requirements_failed": 3,
+    "manifest_requirements_passed": 6,
+    "missing_key_count": 17,
+    "priority_row_id": "D5H_s8_u2_eta0.25_n4x4_obs_density_site_4",
+    "production_contract_rows_accepted": 0,
+    "production_dmrg_claimed": false,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 13,
+    "prototype_discarded_weight_metric_rows": 9,
+    "prototype_trace_hash_rows": 9,
+    "provenance_manifest_hash": "2616aae62cc6af33da763faac1d7275e975ca9699dd752231b600975cff74b90",
+    "provenance_manifest_id": "B5B10-W1-priority-row-provenance-manifest",
+    "quantum_advantage_claimed": false,
+    "required_evidence_file_count": 13,
+    "required_key_count": 17,
+    "row_contract_count": 9,
+    "row_contract_hash": "7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc",
+    "same_access_positive_route_claimed": false,
+    "submitted_key_count": 0,
+    "submitted_manifest_exists": false,
+    "validation_error_count": 0
+  },
+  "title": "B5/B10 W1 Replay-Validation Manifest Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

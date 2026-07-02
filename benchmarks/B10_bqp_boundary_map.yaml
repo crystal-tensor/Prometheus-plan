@@ -1318,6 +1318,44 @@ current_results:
     caveat: provenance_manifest_not_submitted_not_bqp_boundary_claim
     result: ../results/B5_B10_w1_priority_row_provenance_manifest_gate_v0.json
     markdown_report: ../research/B5_B10_w1_priority_row_provenance_manifest_gate.md
+  t1_b5_w1_replay_validation_manifest_gate_v0:
+    status: w1_replay_validation_manifest_open_missing_artifact
+    model_status: w1_replay_validation_manifest_required_before_priority_row_acceptance
+    method: b5_b10_w1_replay_validation_manifest_gate_v0
+    source: b5_b10_w1_replay_validation_manifest_gate_v0
+    source_target_id: B10-T1
+    dependency_benchmarks:
+      - B5
+      - B10
+    manifest_id: B5B10-W1-priority-row-replay-validation-manifest
+    provenance_manifest_id: B5B10-W1-priority-row-provenance-manifest
+    priority_row_id: D5H_s8_u2_eta0.25_n4x4_obs_density_site_4
+    row_contract_hash: 7ee407e20f51bd0c003d885c8d43282359f84bea9729f0da203b9b2c2970a9fc
+    provenance_manifest_hash: 2616aae62cc6af33da763faac1d7275e975ca9699dd752231b600975cff74b90
+    manifest_hash: 21de29a096bd3c6534b4420a7d69afca1bc4c95e80750657f3a3d357dd17dd97
+    manifest_requirement_count: 9
+    manifest_requirements_passed: 6
+    manifest_requirements_failed: 3
+    failed_manifest_requirement_ids: [P6, P7, P8]
+    required_key_count: 17
+    production_required_key_count: 13
+    required_evidence_file_count: 13
+    row_contract_count: 9
+    prototype_trace_hash_rows: 9
+    prototype_discarded_weight_metric_rows: 9
+    production_contract_rows_accepted: 0
+    submitted_manifest_exists: false
+    accepted_priority_row_count: 0
+    b10_t1_positive_route_ready: false
+    production_dmrg_claimed: false
+    same_access_positive_route_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    explicit_not_bqp_separation: true
+    validation_error_count: 0
+    caveat: replay_validation_manifest_not_submitted_not_bqp_boundary_claim
+    result: ../results/B5_B10_w1_replay_validation_manifest_gate_v0.json
+    markdown_report: ../research/B5_B10_w1_replay_validation_manifest_gate.md
 prototype_artifacts:
   boundary_graph_builder: ../tools/b10_bqp_boundary_graph.py
   formal_theorem_target_builder: ../tools/b10_formal_theorem_targets.py
@@ -1334,6 +1372,7 @@ prototype_artifacts:
   t1_b3_b10_reopen_priority_packet_gate: ../tools/b3_b10_reopen_priority_packet_gate.py
   t1_b3_b10_full_covariance_provenance_manifest_gate: ../tools/b3_b10_full_covariance_provenance_manifest_gate.py
   t1_b3_b10_full_covariance_denominator_replay_manifest_gate: ../tools/b3_b10_full_covariance_denominator_replay_manifest_gate.py
+  t1_b5_w1_replay_validation_manifest_gate: ../tools/b5_b10_w1_replay_validation_manifest_gate.py
   t1_missing_assumption_note_builder: ../tools/b10_t1_missing_assumption_note.py
   t1_asymptotic_access_contract_builder: ../tools/b10_t1_asymptotic_access_contract.py
   t1_b5_same_access_sampling_or_dmrg_bridge_builder: ../tools/b10_t1_b5_same_access_sampling_or_dmrg_bridge.py
