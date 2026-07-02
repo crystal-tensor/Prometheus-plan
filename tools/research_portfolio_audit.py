@@ -34372,6 +34372,9 @@ def audit(root: Path) -> dict:
             "b7_w8_21_symbolic_certificate_replay_validation_manifest_gate": str(
                 research / "B7_w8_21_symbolic_certificate_replay_validation_manifest_gate.md"
             ),
+            "b7_w8_21_symbolic_certificate_acceptance_packet_gate": str(
+                research / "B7_w8_21_symbolic_certificate_acceptance_packet_gate.md"
+            ),
             "b1_b7_cone01_overlap_additivity_bound_gate": str(
                 b1_b7_cone01_overlap_additivity_bound_path
             ),
@@ -34780,6 +34783,9 @@ def audit(root: Path) -> dict:
             ),
             "b7_w8_21_symbolic_certificate_provenance_manifest_gate": str(
                 research / "B7_w8_21_symbolic_certificate_provenance_manifest_gate.md"
+            ),
+            "b7_w8_21_symbolic_certificate_acceptance_packet_gate": str(
+                research / "B7_w8_21_symbolic_certificate_acceptance_packet_gate.md"
             ),
             "b7_w8_21_small_block_synthesis": str(research / "B7_w8_21_small_block_synthesis.md"),
             "b7_w8_21_broad_skeleton_search": str(research / "B7_w8_21_broad_skeleton_search.md"),
