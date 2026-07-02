@@ -1,0 +1,282 @@
+{
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "accepted_full_covariance_rows": 0,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "next_gate": "Submit B3-R1-full-covariance-row-replay-validation-manifest with denominator manifest hash, row table replay, compiled-state replay, covariance replay, derivative estimator replay, denominator replay, optimizer-loop cost replay, same-access decision replay, B10 access-boundary replay, row acceptance ledger, and claim boundary before B3-R1-full-compiled-covariance rows can count.",
+    "positive_same_access_route_claimed": false,
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false,
+    "what_is_not_supported": "No row replay-validation manifest or full-covariance row has been submitted or accepted; B3 remains demoted and no reaction-dynamics solution, positive same-access route, quantum advantage, or BQP separation is supported.",
+    "what_is_supported": "The B3/B10 full-covariance reopen route now has a row replay-validation manifest packet after the denominator replay manifest and before any full compiled-state covariance rows can count."
+  },
+  "dependency_benchmarks": [
+    "B3",
+    "B10"
+  ],
+  "last_updated": "2026-07-02",
+  "method": "b3_b10_full_covariance_row_replay_validation_manifest_gate_v0",
+  "model_status": "row_replay_validation_manifest_required_before_full_covariance_rows",
+  "problem_ids": [
+    49,
+    11
+  ],
+  "requirements": [
+    {
+      "evidence": {
+        "failed_manifest_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_status": "b3_b10_full_covariance_denominator_replay_manifest_open_missing_artifact",
+        "validation_error_count": 0
+      },
+      "label": "Denominator replay manifest gate remains valid and blocked only on P6/P7/P8",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "denominator_manifest_hash": "d2e3e564caaa97f8f2a61805637651e94f2f6d7f5c86d6fa5f80ab87b9e53fde",
+        "denominator_replay_manifest_id": "B3-R1-full-covariance-denominator-replay-manifest",
+        "downstream_packet_id": "B3-R1-full-compiled-covariance"
+      },
+      "label": "Row replay manifest is bound to denominator replay and full compiled-covariance packet",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 15,
+        "required_evidence_file_count": 14,
+        "required_key_count": 18
+      },
+      "label": "Row replay packet carries locked replay schema and evidence classes",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "compiled_pilot_instance_count": 1,
+        "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+        "row_aligned_instance_count": 4,
+        "selected_ci_larger_basis_denominator_beaten_count": 0
+      },
+      "label": "Four-row scope and denominator negative boundary remain preserved",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "accepted_priority_reopen_rows": 0,
+        "b3_reopen_ready": false,
+        "bqp_separation_claimed": false,
+        "positive_same_access_route_available": false,
+        "quantum_advantage_claimed": false,
+        "reaction_dynamics_solution_claimed": false
+      },
+      "label": "B3/B10 route remains non-promoted before accepted rows",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B3_B10_full_covariance_row_replay_validation_manifest_submissions/B3-R1-full-covariance-row-replay-validation-manifest.json"
+      },
+      "label": "Full-covariance row replay-validation manifest artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "manifest_id",
+          "denominator_replay_manifest_id",
+          "downstream_packet_id",
+          "denominator_manifest_hash",
+          "provenance_manifest_hash",
+          "row_scope_hash",
+          "full_covariance_row_table_hash",
+          "compiled_state_amplitude_or_sampler_replay_hash",
+          "pauli_grouping_covariance_replay_hash",
+          "derivative_estimator_replay_hash",
+          "selected_ci_fci_denominator_replay_hash",
+          "optimizer_loop_cost_replay_hash",
+          "same_access_decision_replay_hash",
+          "b10_access_boundary_replay_hash",
+          "row_acceptance_ledger_hash",
+          "negative_boundary_nonpromotion_hash",
+          "reproduction_command_hash",
+          "claim_boundary"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "denominator_manifest_hash",
+          "provenance_manifest_hash",
+          "row_scope_hash",
+          "full_covariance_row_table_hash",
+          "compiled_state_amplitude_or_sampler_replay_hash",
+          "pauli_grouping_covariance_replay_hash",
+          "derivative_estimator_replay_hash",
+          "selected_ci_fci_denominator_replay_hash",
+          "optimizer_loop_cost_replay_hash",
+          "same_access_decision_replay_hash",
+          "b10_access_boundary_replay_hash",
+          "row_acceptance_ledger_hash",
+          "negative_boundary_nonpromotion_hash",
+          "reproduction_command_hash",
+          "claim_boundary"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted row replay manifest satisfies the locked replay schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "claim_boundary_bound": false,
+        "manifest_bound": false,
+        "replay_bound": false,
+        "source_evidence_files_present": false
+      },
+      "label": "Submitted row replay manifest is source-backed, gate-bound, replay-bound, and claim-boundary-safe",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "accepted_priority_reopen_rows": 0,
+        "b3_reopen_ready": false,
+        "bqp_separation_claimed": false,
+        "positive_same_access_route_available": false,
+        "quantum_advantage_claimed": false,
+        "reaction_dynamics_solution_claimed": false
+      },
+      "label": "Forbidden row acceptance, solution, advantage, and BQP claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "row_replay_validation_manifest_packet": {
+    "accepted_only_if": [
+      "manifest_id equals B3-R1-full-covariance-row-replay-validation-manifest",
+      "denominator_replay_manifest_id equals B3-R1-full-covariance-denominator-replay-manifest",
+      "downstream_packet_id equals B3-R1-full-compiled-covariance",
+      "denominator_manifest_hash and provenance_manifest_hash match the source gates",
+      "full covariance row table, compiled-state replay, Pauli grouping covariance replay, derivative estimator replay, denominator replay, optimizer-loop cost replay, same-access decision replay, and B10 access boundary replay are hash-bound",
+      "row_acceptance_ledger and negative_boundary_nonpromotion_hash keep accepted rows at 0 until full evidence exists",
+      "source evidence files are present and replay_hashes bind denominator manifest, provenance manifest, downstream packet, row count, and denominator-win count",
+      "claim_boundary forbids B3 reopen, positive same-access route, reaction-dynamics solution, quantum advantage, and BQP separation claims until accepted"
+    ],
+    "compiled_pilot_instance_count": 1,
+    "denominator_manifest_hash": "d2e3e564caaa97f8f2a61805637651e94f2f6d7f5c86d6fa5f80ab87b9e53fde",
+    "denominator_replay_manifest_id": "B3-R1-full-covariance-denominator-replay-manifest",
+    "downstream_packet_id": "B3-R1-full-compiled-covariance",
+    "manifest_hash": "1b1d0b18bd2c1027e36dcb70c281c4d5f5f52b9d47ac047f29841334651b955f",
+    "manifest_id": "B3-R1-full-covariance-row-replay-validation-manifest",
+    "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+    "production_required_keys": [
+      "denominator_manifest_hash",
+      "provenance_manifest_hash",
+      "row_scope_hash",
+      "full_covariance_row_table_hash",
+      "compiled_state_amplitude_or_sampler_replay_hash",
+      "pauli_grouping_covariance_replay_hash",
+      "derivative_estimator_replay_hash",
+      "selected_ci_fci_denominator_replay_hash",
+      "optimizer_loop_cost_replay_hash",
+      "same_access_decision_replay_hash",
+      "b10_access_boundary_replay_hash",
+      "row_acceptance_ledger_hash",
+      "negative_boundary_nonpromotion_hash",
+      "reproduction_command_hash",
+      "claim_boundary"
+    ],
+    "provenance_manifest_hash": "fdd5573fad11326b92f633c9d477cd83422106724d3e15ccd4999ca76c1e2811",
+    "required_evidence_files": [
+      "accepted_denominator_replay_manifest",
+      "full_covariance_row_scope_manifest",
+      "full_covariance_row_table",
+      "compiled_state_replay_or_sampler_trace",
+      "pauli_grouping_covariance_replay",
+      "derivative_estimator_replay",
+      "selected_ci_fci_denominator_replay",
+      "optimizer_loop_cost_replay",
+      "same_access_decision_replay",
+      "b10_access_boundary_replay",
+      "row_acceptance_ledger",
+      "negative_boundary_nonpromotion_note",
+      "reproduction_command_manifest",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "manifest_id",
+      "denominator_replay_manifest_id",
+      "downstream_packet_id",
+      "denominator_manifest_hash",
+      "provenance_manifest_hash",
+      "row_scope_hash",
+      "full_covariance_row_table_hash",
+      "compiled_state_amplitude_or_sampler_replay_hash",
+      "pauli_grouping_covariance_replay_hash",
+      "derivative_estimator_replay_hash",
+      "selected_ci_fci_denominator_replay_hash",
+      "optimizer_loop_cost_replay_hash",
+      "same_access_decision_replay_hash",
+      "b10_access_boundary_replay_hash",
+      "row_acceptance_ledger_hash",
+      "negative_boundary_nonpromotion_hash",
+      "reproduction_command_hash",
+      "claim_boundary"
+    ],
+    "row_aligned_instance_count": 4,
+    "selected_ci_larger_basis_denominator_beaten_count": 0,
+    "source_denominator_replay_manifest_gate": "results/B3_B10_full_covariance_denominator_replay_manifest_gate_v0.json",
+    "submission_artifact_path": "results/B3_B10_full_covariance_row_replay_validation_manifest_submissions/B3-R1-full-covariance-row-replay-validation-manifest.json"
+  },
+  "runtime_seconds": 0.000145,
+  "source_denominator_replay_manifest_gate": "results/B3_B10_full_covariance_denominator_replay_manifest_gate_v0.json",
+  "source_target_id": "B10-T1",
+  "status": "b3_b10_full_covariance_row_replay_validation_manifest_open_missing_artifact",
+  "summary": {
+    "accepted_priority_reopen_rows": 0,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "compiled_pilot_instance_count": 1,
+    "denominator_manifest_hash": "d2e3e564caaa97f8f2a61805637651e94f2f6d7f5c86d6fa5f80ab87b9e53fde",
+    "denominator_replay_manifest_id": "B3-R1-full-covariance-denominator-replay-manifest",
+    "downstream_packet_id": "B3-R1-full-compiled-covariance",
+    "failed_manifest_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "manifest_hash": "1b1d0b18bd2c1027e36dcb70c281c4d5f5f52b9d47ac047f29841334651b955f",
+    "manifest_id": "B3-R1-full-covariance-row-replay-validation-manifest",
+    "manifest_requirement_count": 9,
+    "manifest_requirements_failed": 3,
+    "manifest_requirements_passed": 6,
+    "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+    "missing_key_count": 18,
+    "positive_same_access_route_available": false,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 15,
+    "provenance_manifest_hash": "fdd5573fad11326b92f633c9d477cd83422106724d3e15ccd4999ca76c1e2811",
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false,
+    "required_evidence_file_count": 14,
+    "required_key_count": 18,
+    "row_aligned_instance_count": 4,
+    "selected_ci_larger_basis_denominator_beaten_count": 0,
+    "submitted_key_count": 0,
+    "submitted_manifest_exists": false,
+    "validation_error_count": 0
+  },
+  "title": "B3/B10 Full-Covariance Row Replay-Validation Manifest Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
