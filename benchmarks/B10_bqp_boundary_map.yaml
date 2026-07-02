@@ -1079,6 +1079,36 @@ current_results:
     caveat: one_candidate_row_only_no_b10_t1_credit_or_bqp_boundary_claim
     result: ../results/B3_B10_F1_pilot_row_candidate_gate_v0.json
     markdown_report: ../research/B3_B10_F1_pilot_row_candidate_gate.md
+  b10_t1_b3_f1_remaining_row_extension_scout_v0:
+    status: f1_remaining_row_extension_scout_blocked_zero_credit
+    method: b3_b10_f1_remaining_row_extension_scout_v0
+    source_f1_remaining_row_extension_scout: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
+    source_cross_molecule_pressure: ../results/B3_cross_molecule_ucc_adapt_pressure_v0.json
+    source_prior_candidate_gate: ../results/B3_B10_F1_pilot_row_candidate_gate_v0.json
+    source_target_id: T-B3-024/T-B10-015k
+    dependency_benchmark: B3
+    extension_scout_hash: 0f2e416cd0acfcb0326663667e33f0c0cd09a0db6ce509c4450d440714d2c414
+    prior_candidate_row_count: 1
+    remaining_extension_row_count: 3
+    blocked_extension_row_count: 3
+    acceptable_f1_row_count: 1
+    missing_acceptable_f1_row_count: 3
+    remaining_molecules: [lih_bond_stretch, h2o_symmetric_oh_stretch, n2_bond_stretch]
+    requirements_passed: 7
+    requirements_failed: 3
+    failed_requirement_ids: [P8, P9, P10]
+    max_optimizer_loop_total_shots_lower_bound: 475043013690000
+    max_optimizer_loop_two_qubit_executions_lower_bound: 281225464104480000
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b10_t1_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    validation_error_count: 0
+    caveat: remaining_rows_blocked_no_b10_t1_credit_or_bqp_boundary_claim
+    result: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
+    markdown_report: ../research/B3_B10_F1_remaining_row_extension_scout.md
   b10_t1_missing_assumption_note_v0:
     status: missing_assumption_note_not_dequantization_theorem
     method: b10_t1_missing_assumption_note_v0
@@ -1827,6 +1857,7 @@ prototype_artifacts:
   t1_b3_b10_full_covariance_post_boundary_submission_triage: ../tools/b3_b10_full_covariance_post_boundary_submission_triage.py
   t1_b3_b10_f1_full_covariance_row_packet_gate: ../tools/b3_b10_f1_full_covariance_row_packet_gate.py
   t1_b3_b10_f1_pilot_row_candidate_gate: ../tools/b3_b10_f1_pilot_row_candidate_gate.py
+  t1_b3_b10_f1_remaining_row_extension_scout: ../tools/b3_b10_f1_remaining_row_extension_scout.py
   t1_b5_w1_replay_validation_manifest_gate: ../tools/b5_b10_w1_replay_validation_manifest_gate.py
   t1_positive_route_acceptance_boundary: ../tools/b10_t1_positive_route_acceptance_boundary.py
   t1_missing_assumption_note_builder: ../tools/b10_t1_missing_assumption_note.py

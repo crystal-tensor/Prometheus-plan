@@ -1,0 +1,287 @@
+{
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "next_gate": "For each remaining molecule, compute full compiled-state covariance over the full QWC cover, preserve replay hashes, then resubmit the four-row F1 artifact.",
+    "what_is_not_supported": "The remaining rows are not acceptable F1 rows because they use bounded subset pressure rather than full compiled-state covariance, are not converged multi-parameter states, and do not beat same-access denominators.",
+    "what_is_supported": "The remaining LiH, H2O, and N2 row-extension targets are identified from cross-molecule pressure evidence, with sampled preview and optimizer-cost ledgers."
+  },
+  "extension_rows": [
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "ansatz_theta": 0.18,
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "candidate_beats_selected_ci_larger_basis_denominator": false,
+      "compiled_two_qubit_gates_per_preparation": 592,
+      "coordinate": "Li-H bond length",
+      "electrons": 4,
+      "extension_row_hash": "22973c26b973c6814ae0bf326fae5f6ba504804ecae820a1d23feaf856c38f0a",
+      "extension_row_id": "B3B10-F1-extension-scout-lih_bond_stretch",
+      "f1_extension_acceptance_ready": false,
+      "full_compiled_state_covariance_computed": false,
+      "full_compiled_state_covariance_reason": "T-B3-011 pressure run samples a bounded high-coefficient QWC subset for every molecule; full cross-molecule QWC cover construction and compiled covariance are left for a future multi-parameter ansatz run.",
+      "molecule": "lih_bond_stretch",
+      "optimistic_cross_molecule_derivative_shot_floor_lower_bound": 12839000370000,
+      "optimizer_loop_total_shots_lower_bound": 475043013690000,
+      "optimizer_loop_two_qubit_executions_lower_bound": 281225464104480000,
+      "pilot_group_count": 1,
+      "pilot_max_relative_variance_error": 0.033126631853785865,
+      "pilot_mean_relative_variance_error": 0.033126631853785865,
+      "pilot_shots_per_group": 384,
+      "random_pauli_terms_under_compiled_state": 77190,
+      "sample_subset_qwc_group_count": 16,
+      "sample_subset_term_count": 96,
+      "sampleable_qwc_group_count": 1,
+      "sampled_groups_preview_hash": "aeedde7a8a9f07124d34ecfa2b73d33ad421e6e81373f1e04fc442bb57624540",
+      "selected_ci_basis": "cc-pvdz",
+      "source_hf_qwc_group_count": 19644,
+      "total_qubits": 38
+    },
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "ansatz_theta": 0.18,
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "candidate_beats_selected_ci_larger_basis_denominator": false,
+      "compiled_two_qubit_gates_per_preparation": 400,
+      "coordinate": "symmetric O-H stretch scale",
+      "electrons": 10,
+      "extension_row_hash": "ec37e1b5730a202fc2bdc3ca4da2d3faf6f711733f6ea27c442123a07f183468",
+      "extension_row_id": "B3B10-F1-extension-scout-h2o_symmetric_oh_stretch",
+      "f1_extension_acceptance_ready": false,
+      "full_compiled_state_covariance_computed": false,
+      "full_compiled_state_covariance_reason": "T-B3-011 pressure run samples a bounded high-coefficient QWC subset for every molecule; full cross-molecule QWC cover construction and compiled covariance are left for a future multi-parameter ansatz run.",
+      "molecule": "h2o_symmetric_oh_stretch",
+      "optimistic_cross_molecule_derivative_shot_floor_lower_bound": 2153126460000,
+      "optimizer_loop_total_shots_lower_bound": 79665679020000,
+      "optimizer_loop_two_qubit_executions_lower_bound": 31866271608000000,
+      "pilot_group_count": 24,
+      "pilot_max_relative_variance_error": 0.50293717180872,
+      "pilot_mean_relative_variance_error": 0.22619141101235274,
+      "pilot_shots_per_group": 384,
+      "random_pauli_terms_under_compiled_state": 12430,
+      "sample_subset_qwc_group_count": 15,
+      "sample_subset_term_count": 96,
+      "sampleable_qwc_group_count": 96,
+      "sampled_groups_preview_hash": "fe70c8bbec2d253c86441306ba86d8a553faa3890e84d2b9e051f5fad204f9e5",
+      "selected_ci_basis": "3-21g",
+      "source_hf_qwc_group_count": 3129,
+      "total_qubits": 26
+    },
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "ansatz_theta": 0.18,
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "candidate_beats_selected_ci_larger_basis_denominator": false,
+      "compiled_two_qubit_gates_per_preparation": 560,
+      "coordinate": "N-N bond length",
+      "electrons": 14,
+      "extension_row_hash": "61ddbaa4b4c406eddf053375135b9bda5824f9e5db4ac8f8ae44e481228336f0",
+      "extension_row_id": "B3B10-F1-extension-scout-n2_bond_stretch",
+      "f1_extension_acceptance_ready": false,
+      "full_compiled_state_covariance_computed": false,
+      "full_compiled_state_covariance_reason": "T-B3-011 pressure run samples a bounded high-coefficient QWC subset for every molecule; full cross-molecule QWC cover construction and compiled covariance are left for a future multi-parameter ansatz run.",
+      "molecule": "n2_bond_stretch",
+      "optimistic_cross_molecule_derivative_shot_floor_lower_bound": 12389247350000,
+      "optimizer_loop_total_shots_lower_bound": 458402151950000,
+      "optimizer_loop_two_qubit_executions_lower_bound": 256705205092000000,
+      "pilot_group_count": 8,
+      "pilot_max_relative_variance_error": 0.08567232375979089,
+      "pilot_mean_relative_variance_error": 0.03125346826387667,
+      "pilot_shots_per_group": 384,
+      "random_pauli_terms_under_compiled_state": 34058,
+      "sample_subset_qwc_group_count": 9,
+      "sample_subset_term_count": 96,
+      "sampleable_qwc_group_count": 8,
+      "sampled_groups_preview_hash": "3af3676ec59de0885c072bc4e726a3a9e74487eb925d8097e87282277e845683",
+      "selected_ci_basis": "3-21g",
+      "source_hf_qwc_group_count": 9475,
+      "total_qubits": 36
+    }
+  ],
+  "last_updated": "2026-07-03",
+  "method": "b3_b10_f1_remaining_row_extension_scout_v0",
+  "model_status": "remaining_three_f1_rows_identified_from_cross_molecule_pressure_but_not_acceptable",
+  "problem_ids": [
+    "B3",
+    "B10"
+  ],
+  "requirements": [
+    {
+      "description": "Cross-molecule pressure source is valid",
+      "evidence": {
+        "method": "b3_cross_molecule_ucc_adapt_pressure_v0",
+        "source_file_hash": "991b4c225e02f72e2b7cb92fa60bf6cd5dfa7ecb6f025891ac128c8c291adc3a",
+        "validation_error_count": 0
+      },
+      "id": "P1",
+      "passed": true
+    },
+    {
+      "description": "Prior H2 F1 pilot candidate remains valid",
+      "evidence": {
+        "candidate_row_count": 1,
+        "candidate_row_hash": "df0e080e64011ee171d8e3079e84b71a873a3af7fb460f663c510b4214cd81f0",
+        "method": "b3_b10_f1_pilot_row_candidate_gate_v0"
+      },
+      "id": "P2",
+      "passed": true
+    },
+    {
+      "description": "Four row-aligned molecules are identified across prior candidate and pressure scout",
+      "evidence": {
+        "pressure_row_count": 4,
+        "prior_candidate_count": 1,
+        "remaining_extension_row_count": 3
+      },
+      "id": "P3",
+      "passed": true
+    },
+    {
+      "description": "Remaining LiH/H2O/N2 extension rows are enumerated",
+      "evidence": {
+        "remaining_molecules": [
+          "lih_bond_stretch",
+          "h2o_symmetric_oh_stretch",
+          "n2_bond_stretch"
+        ]
+      },
+      "id": "P4",
+      "passed": true
+    },
+    {
+      "description": "Each remaining row has sampled pressure preview evidence",
+      "evidence": {
+        "pilot_group_counts": {
+          "h2o_symmetric_oh_stretch": 24,
+          "lih_bond_stretch": 1,
+          "n2_bond_stretch": 8
+        },
+        "pilot_max_relative_variance_errors": {
+          "h2o_symmetric_oh_stretch": 0.50293717180872,
+          "lih_bond_stretch": 0.033126631853785865,
+          "n2_bond_stretch": 0.08567232375979089
+        }
+      },
+      "id": "P5",
+      "passed": true
+    },
+    {
+      "description": "Each remaining row keeps optimizer-loop cost pressure charged",
+      "evidence": {
+        "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+        "optimizer_loop_total_shots_lower_bounds": {
+          "h2o_symmetric_oh_stretch": 79665679020000,
+          "lih_bond_stretch": 475043013690000,
+          "n2_bond_stretch": 458402151950000
+        }
+      },
+      "id": "P6",
+      "passed": true
+    },
+    {
+      "description": "No reaction-dynamics, denominator-win, quantum-advantage, or B10 credit claim is made",
+      "evidence": {
+        "b10_t1_credit_allowed": false,
+        "quantum_advantage_claimed": false,
+        "reaction_dynamics_solution_claimed": false,
+        "selected_ci_larger_basis_denominator_beaten_count": 0
+      },
+      "id": "P7",
+      "passed": true
+    },
+    {
+      "description": "Remaining rows satisfy F1 full-covariance acceptance requirements",
+      "evidence": {
+        "blocked_extension_row_count": 3,
+        "blocked_reasons_by_row": {
+          "h2o_symmetric_oh_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ],
+          "lih_bond_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ],
+          "n2_bond_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ]
+        }
+      },
+      "id": "P8",
+      "passed": false
+    },
+    {
+      "description": "F1 has four acceptable row candidates",
+      "evidence": {
+        "acceptable_candidate_count": 1,
+        "required_f1_row_count": 4
+      },
+      "id": "P9",
+      "passed": false
+    },
+    {
+      "description": "Four-row F1 artifact is submitted and accepted",
+      "evidence": {
+        "accepted_full_covariance_row_count": 0,
+        "submitted_f1_artifact_exists": false
+      },
+      "id": "P10",
+      "passed": false
+    }
+  ],
+  "source_cross_molecule_pressure": "results/B3_cross_molecule_ucc_adapt_pressure_v0.json",
+  "source_prior_candidate_gate": "results/B3_B10_F1_pilot_row_candidate_gate_v0.json",
+  "source_target_id": "T-B3-024/T-B10-015k",
+  "status": "f1_remaining_row_extension_scout_blocked_zero_credit",
+  "summary": {
+    "acceptable_f1_row_count": 1,
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "blocked_extension_row_count": 3,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "extension_scout_hash": "0f2e416cd0acfcb0326663667e33f0c0cd09a0db6ce509c4450d440714d2c414",
+    "failed_requirement_ids": [
+      "P8",
+      "P9",
+      "P10"
+    ],
+    "max_optimizer_loop_total_shots_lower_bound": 475043013690000,
+    "max_optimizer_loop_two_qubit_executions_lower_bound": 281225464104480000,
+    "max_remaining_row_pilot_relative_variance_error": 0.50293717180872,
+    "missing_acceptable_f1_row_count": 3,
+    "prior_candidate_row_count": 1,
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false,
+    "remaining_extension_row_count": 3,
+    "required_f1_row_count": 4,
+    "requirements_failed": 3,
+    "requirements_passed": 7,
+    "validation_error_count": 0
+  },
+  "title": "B3/B10 F1 Remaining Row Extension Scout",
+  "validation_errors": [],
+  "version": "0.1"
+}
