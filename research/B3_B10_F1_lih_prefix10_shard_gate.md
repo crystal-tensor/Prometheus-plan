@@ -1,25 +1,25 @@
 # B3/B10 F1 LiH Prefix Shard Gate
 
-- Target: `T-B3-031/T-B10-015r`
-- Method: `b3_b10_f1_lih_prefix_shard_gate_v0`
+- Target: `T-B3-032/T-B10-015s`
+- Method: `b3_b10_f1_lih_prefix10_shard_gate_v0`
 - Status: `lih_full_covariance_shard_prefix_recorded_zero_credit`
-- LiH prefix batch hash: `94cdb0a9c7d9c981b5f1bbe4ec38fdb65c3e473ce5b15b00460520cbeca5c664`
-- LiH prefix shards: 5/39
-- Global shards: 31/65
+- LiH prefix batch hash: `2ac6a34196b800731b2fb845c3049537626b59971964193c5c6675e35fe93ca9`
+- LiH prefix shards: 10/39
+- Global shards: 36/65
 
 ## Result
 
-The gate records the first 5 LiH shard outputs for the F1 route. It passes 7/10 requirements and intentionally fails ['P8', 'P9', 'P10'] because the rest of LiH, assembled rows, and the accepted four-row F1 artifact do not exist yet.
+The gate records the first 10 LiH shard outputs for the F1 route. It passes 7/10 requirements and intentionally fails ['P8', 'P9', 'P10'] because the rest of LiH, assembled rows, and the accepted four-row F1 artifact do not exist yet.
 
 ## LiH Prefix Metrics
 
-- Prefix groups: 2560
+- Prefix groups: 5120
 - Compiled cover groups: 19645
 - Planning proxy groups: 19644
-- Nonzero covariance pairs: 56148
-- Variance sum: 1.9078478681097402
-- Remaining LiH shards: 34
-- Remaining global shards: 34
+- Nonzero covariance pairs: 70256
+- Variance sum: 1.9847796310349135
+- Remaining LiH shards: 29
+- Remaining global shards: 29
 
 ## Requirements
 
@@ -36,5 +36,5 @@ The gate records the first 5 LiH shard outputs for the F1 route. It passes 7/10 
 
 ## Claim Boundary
 
-- Supported: The first 5 LiH compiled-state full-covariance shard outputs exist and form a contiguous compiled QWC prefix.
+- Supported: The first 10 LiH compiled-state full-covariance shard outputs exist and form a contiguous compiled QWC prefix.
 - Not supported: This is not a complete LiH shard batch, not an assembled F1 row, not a four-row F1 artifact, not a denominator win, not B3/B10 credit, and not quantum advantage.

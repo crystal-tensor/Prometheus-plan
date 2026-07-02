@@ -20,6 +20,7 @@ EXPECTED_MOLECULE = "lih_bond_stretch"
 EXPECTED_LIH_PREFIX_SHARDS = 5
 EXPECTED_LIH_TOTAL_SHARDS = 39
 EXPECTED_TOTAL_SHARDS = 65
+COMPLETED_H2O_N2_SHARD_COUNT = 26
 EXPECTED_PREFIX_GROUP_COUNT = 2560
 EXPECTED_LIH_COMPILED_COVER_GROUP_COUNT = 19645
 EXPECTED_PREFIX_HASHES = [
@@ -64,8 +65,8 @@ def requirement(req_id: str, passed: bool, description: str, evidence: Any) -> d
     }
 
 
-def expected_prefix_paths(shard_dir: Path) -> list[Path]:
-    return [shard_dir / f"shard_{index:03d}.json" for index in range(1, EXPECTED_LIH_PREFIX_SHARDS + 1)]
+def expected_prefix_paths(shard_dir: Path, prefix_shards: int) -> list[Path]:
+    return [shard_dir / f"shard_{index:03d}.json" for index in range(1, prefix_shards + 1)]
 
 
 def summarize_shard(path: Path) -> dict[str, Any]:
@@ -97,10 +98,6 @@ def summarize_shard(path: Path) -> dict[str, Any]:
     }
 
 
-def count_existing_global_shards(root: Path) -> int:
-    return sum(1 for _ in root.glob("*/*.json"))
-
-
 def find_lih_work_order(work_order: dict[str, Any]) -> dict[str, Any]:
     for order in work_order.get("work_orders", []):
         if order.get("molecule") == EXPECTED_MOLECULE:
@@ -110,7 +107,8 @@ def find_lih_work_order(work_order: dict[str, Any]) -> dict[str, Any]:
 
 def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     work_order = load_json(args.work_order_gate)
-    paths = expected_prefix_paths(args.shard_dir)
+    expected_prefix_group_count = args.expected_prefix_shards * args.groups_per_shard
+    paths = expected_prefix_paths(args.shard_dir, args.expected_prefix_shards)
     existing_paths = [path for path in paths if path.exists()]
     shards = [summarize_shard(path) for path in existing_paths]
     lih_order = find_lih_work_order(work_order)
@@ -119,7 +117,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     ends = [item["group_end_exclusive"] for item in shards]
     group_counts = [item["group_count"] for item in shards]
     produced_prefix_count = len(shards)
-    produced_global_count = count_existing_global_shards(args.shard_root)
+    recorded_global_count = COMPLETED_H2O_N2_SHARD_COUNT + produced_prefix_count
     prefix_hash = canonical_hash(
         [
             {
@@ -156,11 +154,11 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         ),
         requirement(
             "P2",
-            produced_prefix_count == EXPECTED_LIH_PREFIX_SHARDS,
+            produced_prefix_count == args.expected_prefix_shards,
             "All expected LiH prefix shard files exist",
             {
                 "produced_lih_prefix_shard_count": produced_prefix_count,
-                "expected_lih_prefix_shard_count": EXPECTED_LIH_PREFIX_SHARDS,
+                "expected_lih_prefix_shard_count": args.expected_prefix_shards,
                 "missing_paths": [str(path) for path in paths if not path.exists()],
             },
         ),
@@ -182,9 +180,9 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         requirement(
             "P4",
             contiguous
-            and starts == [0, 512, 1024, 1536, 2048]
-            and ends == [512, 1024, 1536, 2048, EXPECTED_PREFIX_GROUP_COUNT]
-            and actual_prefix_group_count == EXPECTED_PREFIX_GROUP_COUNT
+            and starts == list(range(0, expected_prefix_group_count, args.groups_per_shard))
+            and ends == list(range(args.groups_per_shard, expected_prefix_group_count + 1, args.groups_per_shard))
+            and actual_prefix_group_count == expected_prefix_group_count
             and compiled_cover_counts == [EXPECTED_LIH_COMPILED_COVER_GROUP_COUNT],
             "LiH prefix shards form one contiguous compiled QWC prefix",
             {
@@ -197,7 +195,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         ),
         requirement(
             "P5",
-            shard_hashes == EXPECTED_PREFIX_HASHES,
+            shard_hashes == args.expected_prefix_hashes,
             "LiH prefix shard hashes are stable",
             {"shard_hashes": shard_hashes, "lih_prefix_shard_batch_hash": prefix_hash},
         ),
@@ -231,12 +229,12 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         ),
         requirement(
             "P8",
-            produced_global_count == EXPECTED_TOTAL_SHARDS,
+            recorded_global_count == EXPECTED_TOTAL_SHARDS,
             "All 65 global F1 shard outputs have been produced",
             {
-                "produced_global_shard_count": produced_global_count,
+                "produced_global_shard_count": recorded_global_count,
                 "required_total_shard_count": EXPECTED_TOTAL_SHARDS,
-                "remaining_global_shard_count": EXPECTED_TOTAL_SHARDS - produced_global_count,
+                "remaining_global_shard_count": EXPECTED_TOTAL_SHARDS - recorded_global_count,
             },
         ),
         requirement(
@@ -259,13 +257,13 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
 
     summary = {
         "produced_lih_prefix_shard_count": produced_prefix_count,
-        "required_lih_prefix_shard_count": EXPECTED_LIH_PREFIX_SHARDS,
+        "required_lih_prefix_shard_count": args.expected_prefix_shards,
         "produced_lih_total_shard_count": produced_prefix_count,
         "required_lih_total_shard_count": EXPECTED_LIH_TOTAL_SHARDS,
         "remaining_lih_shard_count": EXPECTED_LIH_TOTAL_SHARDS - produced_prefix_count,
-        "produced_global_shard_count": produced_global_count,
+        "produced_global_shard_count": recorded_global_count,
         "required_total_shard_count": EXPECTED_TOTAL_SHARDS,
-        "remaining_global_shard_count": EXPECTED_TOTAL_SHARDS - produced_global_count,
+        "remaining_global_shard_count": EXPECTED_TOTAL_SHARDS - recorded_global_count,
         "lih_prefix_group_count": actual_prefix_group_count,
         "lih_compiled_cover_group_count": EXPECTED_LIH_COMPILED_COVER_GROUP_COUNT,
         "lih_planning_proxy_group_count": lih_order.get("full_cover_group_count_proxy"),
@@ -293,13 +291,13 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     return {
         "benchmark_id": "B3_B10",
         "problem_ids": ["B3", "B10"],
-        "source_target_id": SOURCE_TARGET_ID,
+        "source_target_id": args.source_target_id,
         "title": "B3/B10 F1 LiH Prefix Shard Gate",
         "version": "0.1",
         "last_updated": args.last_updated,
         "status": STATUS,
-        "method": METHOD,
-        "model_status": MODEL_STATUS,
+        "method": args.method,
+        "model_status": args.model_status,
         "source_work_order_gate": str(args.work_order_gate),
         "source_shard_dir": str(args.shard_dir),
         "lih_work_order": lih_order,
@@ -308,7 +306,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "summary": summary,
         "validation_errors": validation_errors,
         "claim_boundary": {
-            "what_is_supported": "The first five LiH compiled-state full-covariance shard outputs exist and form a contiguous compiled QWC prefix.",
+            "what_is_supported": f"The first {args.expected_prefix_shards} LiH compiled-state full-covariance shard outputs exist and form a contiguous compiled QWC prefix.",
             "what_is_not_supported": "This is not a complete LiH shard batch, not an assembled F1 row, not a four-row F1 artifact, not a denominator win, not B3/B10 credit, and not quantum advantage.",
         },
     }
@@ -329,7 +327,7 @@ def write_markdown(path: Path, payload: dict[str, Any]) -> None:
         "## Result",
         "",
         (
-            "The gate records the first five LiH shard outputs for the F1 route. "
+            f"The gate records the first {summary['produced_lih_prefix_shard_count']} LiH shard outputs for the F1 route. "
             f"It passes {summary['requirements_passed']}/10 requirements and intentionally fails "
             f"{summary['failed_requirement_ids']} because the rest of LiH, assembled rows, "
             "and the accepted four-row F1 artifact do not exist yet."
@@ -392,6 +390,12 @@ def main() -> None:
         type=Path,
         default=Path("research/B3_B10_F1_lih_prefix_shard_gate.md"),
     )
+    parser.add_argument("--method", default=METHOD)
+    parser.add_argument("--model-status", default=MODEL_STATUS)
+    parser.add_argument("--source-target-id", default=SOURCE_TARGET_ID)
+    parser.add_argument("--groups-per-shard", type=int, default=512)
+    parser.add_argument("--expected-prefix-shards", type=int, default=EXPECTED_LIH_PREFIX_SHARDS)
+    parser.add_argument("--expected-prefix-hashes", nargs="*", default=EXPECTED_PREFIX_HASHES)
     parser.add_argument("--last-updated", default="2026-07-03")
     parser.add_argument("--pretty", action="store_true")
     args = parser.parse_args()
