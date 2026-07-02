@@ -752,6 +752,37 @@ current_results:
     caveat: remaining_rows_are_pressure_previews_not_full_compiled_covariance_rows_no_credit
     result: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
     markdown_report: ../research/B3_B10_F1_remaining_row_extension_scout.md
+  b3_b10_f1_full_covariance_work_order_gate_v0:
+    status: f1_full_covariance_work_order_ready_zero_credit
+    method: b3_b10_f1_full_covariance_work_order_gate_v0
+    model_status: remaining_blocked_rows_split_into_replayable_full_covariance_work_orders
+    source_remaining_row_scout: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
+    source_grouped_covariance: ../results/B3_grouped_covariance_shot_floor_v0.json
+    source_target_id: T-B3-025/T-B10-015l
+    work_order_manifest_hash: efa602ce2bc44d7469766c80c3df2befa322f5868776267f47129840620cd980
+    work_order_count: 3
+    total_shard_count: 65
+    groups_per_shard: 512
+    total_full_cover_group_count_proxy: 32248
+    max_row_shard_count: 39
+    lih_shard_count: 39
+    h2o_shard_count: 7
+    n2_shard_count: 19
+    worker_exists: false
+    shard_outputs_exist: false
+    row_acceptance_ready_count: 0
+    requirements_passed: 7
+    requirements_failed: 3
+    failed_requirement_ids: [P8, P9, P10]
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b3_reopen_ready: false
+    b3_full_covariance_credit_allowed: false
+    b10_t1_credit_allowed: false
+    validation_error_count: 0
+    caveat: work_orders_only_no_worker_no_shard_outputs_no_assembled_rows_no_credit
+    result: ../results/B3_B10_F1_full_covariance_work_order_gate_v0.json
+    markdown_report: ../research/B3_B10_F1_full_covariance_work_order_gate.md
 prototype_artifacts:
   resource_estimator: ../tools/b3_pyscf_resource_estimator.py
   quantum_observable_fci_comparison: ../tools/b3_quantum_observable_fci_comparison.py
@@ -777,4 +808,5 @@ prototype_artifacts:
   b3_b10_f1_full_covariance_row_packet_gate: ../tools/b3_b10_f1_full_covariance_row_packet_gate.py
   b3_b10_f1_pilot_row_candidate_gate: ../tools/b3_b10_f1_pilot_row_candidate_gate.py
   b3_b10_f1_remaining_row_extension_scout: ../tools/b3_b10_f1_remaining_row_extension_scout.py
+  b3_b10_f1_full_covariance_work_order_gate: ../tools/b3_b10_f1_full_covariance_work_order_gate.py
   prototype_notes: ../research/B3_prototype_notes.md

@@ -1109,6 +1109,36 @@ current_results:
     caveat: remaining_rows_blocked_no_b10_t1_credit_or_bqp_boundary_claim
     result: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
     markdown_report: ../research/B3_B10_F1_remaining_row_extension_scout.md
+  b10_t1_b3_f1_full_covariance_work_order_gate_v0:
+    status: f1_full_covariance_work_order_ready_zero_credit
+    method: b3_b10_f1_full_covariance_work_order_gate_v0
+    source_f1_full_covariance_work_order_gate: ../results/B3_B10_F1_full_covariance_work_order_gate_v0.json
+    source_remaining_row_scout: ../results/B3_B10_F1_remaining_row_extension_scout_v0.json
+    source_target_id: T-B3-025/T-B10-015l
+    dependency_benchmark: B3
+    work_order_manifest_hash: efa602ce2bc44d7469766c80c3df2befa322f5868776267f47129840620cd980
+    work_order_count: 3
+    total_shard_count: 65
+    groups_per_shard: 512
+    lih_shard_count: 39
+    h2o_shard_count: 7
+    n2_shard_count: 19
+    worker_exists: false
+    shard_outputs_exist: false
+    row_acceptance_ready_count: 0
+    requirements_passed: 7
+    requirements_failed: 3
+    failed_requirement_ids: [P8, P9, P10]
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b10_t1_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    validation_error_count: 0
+    caveat: work_orders_only_no_b10_t1_credit_or_bqp_boundary_claim
+    result: ../results/B3_B10_F1_full_covariance_work_order_gate_v0.json
+    markdown_report: ../research/B3_B10_F1_full_covariance_work_order_gate.md
   b10_t1_missing_assumption_note_v0:
     status: missing_assumption_note_not_dequantization_theorem
     method: b10_t1_missing_assumption_note_v0
@@ -1858,6 +1888,7 @@ prototype_artifacts:
   t1_b3_b10_f1_full_covariance_row_packet_gate: ../tools/b3_b10_f1_full_covariance_row_packet_gate.py
   t1_b3_b10_f1_pilot_row_candidate_gate: ../tools/b3_b10_f1_pilot_row_candidate_gate.py
   t1_b3_b10_f1_remaining_row_extension_scout: ../tools/b3_b10_f1_remaining_row_extension_scout.py
+  t1_b3_b10_f1_full_covariance_work_order_gate: ../tools/b3_b10_f1_full_covariance_work_order_gate.py
   t1_b5_w1_replay_validation_manifest_gate: ../tools/b5_b10_w1_replay_validation_manifest_gate.py
   t1_positive_route_acceptance_boundary: ../tools/b10_t1_positive_route_acceptance_boundary.py
   t1_missing_assumption_note_builder: ../tools/b10_t1_missing_assumption_note.py

@@ -1,0 +1,1073 @@
+{
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "next_gate": "Implement the row worker, produce every shard output, assemble each row, and resubmit the four-row F1 artifact.",
+    "what_is_not_supported": "No full covariance worker, shard outputs, assembled rows, denominator win, B3 reopen, B10-T1 credit, quantum advantage, or BQP separation is supported.",
+    "what_is_supported": "The three blocked LiH/H2O/N2 rows now have replayable full-covariance work orders and shard contracts."
+  },
+  "last_updated": "2026-07-03",
+  "method": "b3_b10_f1_full_covariance_work_order_gate_v0",
+  "model_status": "remaining_blocked_rows_split_into_replayable_full_covariance_work_orders",
+  "problem_ids": [
+    "B3",
+    "B10"
+  ],
+  "requirements": [
+    {
+      "description": "Remaining-row scout is valid and still blocked on P8/P9/P10",
+      "evidence": {
+        "failed_requirement_ids": [
+          "P8",
+          "P9",
+          "P10"
+        ],
+        "method": "b3_b10_f1_remaining_row_extension_scout_v0",
+        "source_file_hash": "725fcd08d3f7228b09dc5a8db026141a80c846f34fa55e9cb9b3368a307c4bf6"
+      },
+      "id": "P1",
+      "passed": true
+    },
+    {
+      "description": "LiH/H2O/N2 work orders are generated",
+      "evidence": {
+        "work_order_ids": [
+          "B3B10-F1-full-covariance-work-order-lih_bond_stretch",
+          "B3B10-F1-full-covariance-work-order-h2o_symmetric_oh_stretch",
+          "B3B10-F1-full-covariance-work-order-n2_bond_stretch"
+        ]
+      },
+      "id": "P2",
+      "passed": true
+    },
+    {
+      "description": "Each work order is split into replayable shards",
+      "evidence": {
+        "groups_per_shard": 512,
+        "shard_counts": {
+          "h2o_symmetric_oh_stretch": 7,
+          "lih_bond_stretch": 39,
+          "n2_bond_stretch": 19
+        },
+        "total_shard_count": 65
+      },
+      "id": "P3",
+      "passed": true
+    },
+    {
+      "description": "Worker output contract is explicit for every row",
+      "evidence": {
+        "required_worker_output_count": 8
+      },
+      "id": "P4",
+      "passed": true
+    },
+    {
+      "description": "Each work order preserves the blocker reasons from the scout",
+      "evidence": {
+        "blocked_reasons_by_row": {
+          "h2o_symmetric_oh_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ],
+          "lih_bond_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ],
+          "n2_bond_stretch": [
+            "full_compiled_state_covariance_not_computed",
+            "bounded_high_coefficient_subset_not_full_pauli_cover",
+            "one_parameter_seed_not_converged_multi_parameter_state",
+            "no_same_access_denominator_win"
+          ]
+        }
+      },
+      "id": "P5",
+      "passed": true
+    },
+    {
+      "description": "Work-order and shard contract hashes are reproducible",
+      "evidence": {
+        "work_order_hashes": {
+          "h2o_symmetric_oh_stretch": "5738b409b40f7444636af0998d21342842ba639606124dd1738d15527ddcb4bc",
+          "lih_bond_stretch": "ba4346db7bef1f121a756f8a04ddd74cf9c60b3179e1bee8f2e9b835e79d2a49",
+          "n2_bond_stretch": "f98c94796f0f8e3c7f8ffb92e5b16e1948c198773075ae601d2f3d041bf3328f"
+        }
+      },
+      "id": "P6",
+      "passed": true
+    },
+    {
+      "description": "No B3/B10 credit, denominator win, or accepted row is claimed",
+      "evidence": {
+        "accepted_full_covariance_row_count": 0,
+        "b10_t1_credit_allowed": false,
+        "denominator_win_count": 0
+      },
+      "id": "P7",
+      "passed": true
+    },
+    {
+      "description": "Full covariance worker implementation exists",
+      "evidence": {
+        "expected_worker": "tools/b3_b10_f1_full_covariance_row_worker.py"
+      },
+      "id": "P8",
+      "passed": false
+    },
+    {
+      "description": "All shard outputs have been produced",
+      "evidence": {
+        "total_expected_shard_outputs": 65
+      },
+      "id": "P9",
+      "passed": false
+    },
+    {
+      "description": "Remaining rows are assembled and ready for F1 acceptance",
+      "evidence": {
+        "row_acceptance_ready_count": 0
+      },
+      "id": "P10",
+      "passed": false
+    }
+  ],
+  "source_grouped_covariance": "results/B3_grouped_covariance_shot_floor_v0.json",
+  "source_remaining_row_scout": "results/B3_B10_F1_remaining_row_extension_scout_v0.json",
+  "source_target_id": "T-B3-025/T-B10-015l",
+  "status": "f1_full_covariance_work_order_ready_zero_credit",
+  "summary": {
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "failed_requirement_ids": [
+      "P8",
+      "P9",
+      "P10"
+    ],
+    "groups_per_shard": 512,
+    "max_row_shard_count": 39,
+    "quantum_advantage_claimed": false,
+    "reaction_dynamics_solution_claimed": false,
+    "requirements_failed": 3,
+    "requirements_passed": 7,
+    "row_acceptance_ready_count": 0,
+    "shard_outputs_exist": false,
+    "total_full_cover_group_count_proxy": 32248,
+    "total_shard_count": 65,
+    "validation_error_count": 0,
+    "work_order_count": 3,
+    "work_order_manifest_hash": "efa602ce2bc44d7469766c80c3df2befa322f5868776267f47129840620cd980",
+    "worker_exists": false
+  },
+  "title": "B3/B10 F1 Full Covariance Work Order Gate",
+  "validation_errors": [],
+  "version": "0.1",
+  "work_orders": [
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "avg_terms_per_group_proxy": 3.9294441050702504,
+      "blocked_extension_row_hash": "22973c26b973c6814ae0bf326fae5f6ba504804ecae820a1d23feaf856c38f0a",
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "compiled_random_pauli_term_count": 77190,
+      "coordinate": "Li-H bond length",
+      "electrons": 4,
+      "full_cover_group_count_proxy": 19644,
+      "groups_per_shard": 512,
+      "hf_cover_group_size_histogram": {
+        "1": 7005,
+        "10-19": 1160,
+        "100-109": 5,
+        "110-119": 6,
+        "120-129": 1,
+        "130-139": 3,
+        "150-159": 4,
+        "2": 4527,
+        "20-29": 196,
+        "290-299": 2,
+        "3": 2422,
+        "30-39": 125,
+        "4": 1233,
+        "40-49": 30,
+        "5": 951,
+        "50-59": 18,
+        "6": 642,
+        "60-69": 11,
+        "7": 508,
+        "70-79": 4,
+        "8": 450,
+        "80-89": 2,
+        "9": 335,
+        "90-99": 4
+      },
+      "hf_cover_nonzero_covariance_pair_count": 73474,
+      "molecule": "lih_bond_stretch",
+      "pair_budget_proxy": 113062,
+      "planning_note": "Group count and histogram are planning proxies from the full HF QWC cover; the worker must recompute or verify the compiled-state QWC cover before credit.",
+      "required_worker_outputs": [
+        "compiled_state_replay_hash",
+        "full_covariance_matrix_shard_hash",
+        "qwc_group_manifest_hash",
+        "measurement_basis_manifest_hash",
+        "shot_allocation_or_exact_mode",
+        "stdout_stderr_returncode_hash",
+        "wall_time_memory_ledger",
+        "claim_boundary_note"
+      ],
+      "row_acceptance_ready": false,
+      "selected_ci_basis": "cc-pvdz",
+      "shard_count": 39,
+      "shards": [
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_001.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 512,
+          "group_start_inclusive": 0,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 0 --group-end 512 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "07bce560ab7c33ca8536bd8fde80fc4d591db111913062aba91cd2089b766aaf",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-001"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_002.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1024,
+          "group_start_inclusive": 512,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 512 --group-end 1024 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "519de18cf7f0a9babf704b4a9ff1361ac7e3d89bf5fc390ce95812bed0518895",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-002"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_003.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1536,
+          "group_start_inclusive": 1024,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 1024 --group-end 1536 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "8136d1baf705619855943d7a5db0865e3ee8514c8cd94d30da66d46b4d099e30",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-003"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_004.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2048,
+          "group_start_inclusive": 1536,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 1536 --group-end 2048 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "a251c7a96328126dc3c987df54fea9980036ede1f6bce1f79c085d554e0a975f",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-004"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_005.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2560,
+          "group_start_inclusive": 2048,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 2048 --group-end 2560 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "b4b9ed9ada296166052f0ac3c82246b7d3824f4aba7398c99eff9071d99e9c1d",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-005"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_006.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 3072,
+          "group_start_inclusive": 2560,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 2560 --group-end 3072 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "0be31281076d53e35a9b536031a890b1c8e579fcf819d27ece27c9dddc3433d1",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-006"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_007.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 3584,
+          "group_start_inclusive": 3072,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 3072 --group-end 3584 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "3b3c174ca69c43f7c6e62b52365616f35f620d03b40e73e67bf1a67965c738b9",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-007"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_008.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 4096,
+          "group_start_inclusive": 3584,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 3584 --group-end 4096 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "f4f116345af24c9967eda548cd4bbd5439073d9649f9a10b19511a181ff7659a",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-008"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_009.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 4608,
+          "group_start_inclusive": 4096,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 4096 --group-end 4608 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "da2951fed9e57e2e52b7201adee307fb257322f6b50a06373663d89022e491f6",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-009"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_010.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 5120,
+          "group_start_inclusive": 4608,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 4608 --group-end 5120 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "b1948f863fa1e3e1b9f1055d1825ba075975e97b0addaa31a7ec9f49e3b00657",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-010"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_011.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 5632,
+          "group_start_inclusive": 5120,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 5120 --group-end 5632 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "8b81633ee089cfadfdd0e861c9996467cea7fe03b1312e4996509709d365eb2c",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-011"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_012.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 6144,
+          "group_start_inclusive": 5632,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 5632 --group-end 6144 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "aa7846ceacaa300d24ae02ca58917eb686d367017590085dc4ee554cf0496e97",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-012"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_013.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 6656,
+          "group_start_inclusive": 6144,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 6144 --group-end 6656 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "335f9a19480d03e727628d2996af58b78dcce76dacd4529c2d352eb92eb988b6",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-013"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_014.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 7168,
+          "group_start_inclusive": 6656,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 6656 --group-end 7168 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "e24d0e8ef959d9fe07ef517752481c053296630d77416b1019f2c30c30aedfe7",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-014"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_015.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 7680,
+          "group_start_inclusive": 7168,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 7168 --group-end 7680 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "1596bde8e2252e9cd097c3f0d3c1f47c7b107f9343a4dc90a31bc5c3570ea9f0",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-015"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_016.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 8192,
+          "group_start_inclusive": 7680,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 7680 --group-end 8192 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "1e84493d98c02ea8b2171da639638cdcdf65cf17f9cc29cf75b1e0fc6a1daf8b",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-016"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_017.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 8704,
+          "group_start_inclusive": 8192,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 8192 --group-end 8704 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "21a989a73f039d6afe5d73c18fea5a8a323faadebaedd4c31841768d2c4cdcac",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-017"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_018.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 9216,
+          "group_start_inclusive": 8704,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 8704 --group-end 9216 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "4e7466c746c07a3574a0caee754cf2c2503b32583c229a58a012472c22a28aa3",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-018"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_019.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 9728,
+          "group_start_inclusive": 9216,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 9216 --group-end 9728 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "3274d688a800794a33ff7c38295f19c08c7c09fd7ce8ec64010f646ec20e2904",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-019"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_020.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 10240,
+          "group_start_inclusive": 9728,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 9728 --group-end 10240 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "eaa4a43eddd8997656d87bd55631a347818dce641ca723b05e7cda2d5fa3a1a1",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-020"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_021.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 10752,
+          "group_start_inclusive": 10240,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 10240 --group-end 10752 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "50a32e8a8624fe0f0a377f486fb0107ecd785d8d5872acc1cdd0d9e98cc10199",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-021"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_022.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 11264,
+          "group_start_inclusive": 10752,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 10752 --group-end 11264 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "0b7697a24fa08c1851fed39c7e5600ca301ea1ae6bde2dad20d2a4123f361af8",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-022"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_023.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 11776,
+          "group_start_inclusive": 11264,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 11264 --group-end 11776 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "ddf3acf9f036ecc252b135f7eafa7c4b58280998a7feebe4017ee80b549a4526",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-023"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_024.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 12288,
+          "group_start_inclusive": 11776,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 11776 --group-end 12288 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "4af2bbd7f3854a0d7a7a4be4f20b22e8292df610a94861e7a049097115d89310",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-024"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_025.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 12800,
+          "group_start_inclusive": 12288,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 12288 --group-end 12800 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "9d92976499278cec718c735ef1be2602af2a1c047ad54e49764bedb65969f760",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-025"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_026.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 13312,
+          "group_start_inclusive": 12800,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 12800 --group-end 13312 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "578e4ecefa8f704a42c28605df4d84a27c6b9af60cea30e4e4c20a0360127438",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-026"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_027.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 13824,
+          "group_start_inclusive": 13312,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 13312 --group-end 13824 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "975d3244777963fef414ec849ebe169d5295585bbcb202a8b11d4e0482700461",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-027"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_028.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 14336,
+          "group_start_inclusive": 13824,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 13824 --group-end 14336 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "b0b05bd4a953d2294c8ed1d402b8604a112b4636660aad250a5002c7a456c5dc",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-028"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_029.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 14848,
+          "group_start_inclusive": 14336,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 14336 --group-end 14848 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "33a330bf84a7aeef1a00657467d0de9c6d5aba80a6903d2c4c1ff1b98a91ad3e",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-029"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_030.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 15360,
+          "group_start_inclusive": 14848,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 14848 --group-end 15360 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "aa18c5e5b54a04fb55fe620356e569d0bc4cc46274b873b6b2f065ae7d5d5488",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-030"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_031.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 15872,
+          "group_start_inclusive": 15360,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 15360 --group-end 15872 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "bcf0324c37ee972c6b102350715b1d7af57a27ee3a3036e57cfce675f19bd6e1",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-031"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_032.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 16384,
+          "group_start_inclusive": 15872,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 15872 --group-end 16384 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "0005722219fadc81a8484d5065eddbcebd2b9528ccd4e8b08a6572d1ec44595d",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-032"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_033.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 16896,
+          "group_start_inclusive": 16384,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 16384 --group-end 16896 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "655a4b44d65c15e5753e29a0ae4794226a266a09cd2a705db3fd4b26bb6621ff",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-033"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_034.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 17408,
+          "group_start_inclusive": 16896,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 16896 --group-end 17408 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "6f96881fc3bb6b76b1670ede7599a0d60da700c6549e537dfc8ef62bffa973a9",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-034"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_035.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 17920,
+          "group_start_inclusive": 17408,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 17408 --group-end 17920 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "e5293b51b45c0162bc9e5921cc36d82ffcc30335c8a85bbdcb3d3fcbb33736b7",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-035"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_036.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 18432,
+          "group_start_inclusive": 17920,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 17920 --group-end 18432 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "88b06c90d580296e6210d8aa49a56dfb87c6aad0e0af66b6a1023b5d2582c819",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-036"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_037.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 18944,
+          "group_start_inclusive": 18432,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 18432 --group-end 18944 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "b9efa8accd279ee39210368f506a5c021b51b64c48a77c14f052e5aa6d006838",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-037"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_038.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 19456,
+          "group_start_inclusive": 18944,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 18944 --group-end 19456 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "5c174ecd82634bddcbd406833fe0d6f2e7c253e0893574acd82f2a731d61a273",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-038"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/lih_bond_stretch/shard_039.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 188,
+          "group_end_exclusive": 19644,
+          "group_start_inclusive": 19456,
+          "molecule": "lih_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule lih_bond_stretch --group-start 19456 --group-end 19644 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "ac4b169dd16b82432e3c9d017da3c3a2d4f2fe6336c93ac423167a5b8d25ec05",
+          "shard_id": "lih_bond_stretch-full-covariance-shard-039"
+        }
+      ],
+      "total_qubits": 38,
+      "work_order_hash": "ba4346db7bef1f121a756f8a04ddd74cf9c60b3179e1bee8f2e9b835e79d2a49",
+      "work_order_id": "B3B10-F1-full-covariance-work-order-lih_bond_stretch"
+    },
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "avg_terms_per_group_proxy": 3.972515180568872,
+      "blocked_extension_row_hash": "ec37e1b5730a202fc2bdc3ca4da2d3faf6f711733f6ea27c442123a07f183468",
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "compiled_random_pauli_term_count": 12430,
+      "coordinate": "symmetric O-H stretch scale",
+      "electrons": 10,
+      "full_cover_group_count_proxy": 3129,
+      "groups_per_shard": 512,
+      "hf_cover_group_size_histogram": {
+        "1": 1171,
+        "10-19": 133,
+        "180-189": 2,
+        "2": 666,
+        "20-29": 45,
+        "3": 367,
+        "30-39": 11,
+        "4": 237,
+        "40-49": 3,
+        "5": 138,
+        "50-59": 2,
+        "6": 131,
+        "60-69": 2,
+        "7": 80,
+        "70-79": 3,
+        "8": 83,
+        "80-89": 4,
+        "9": 49,
+        "90-99": 2
+      },
+      "hf_cover_nonzero_covariance_pair_count": 13510,
+      "molecule": "h2o_symmetric_oh_stretch",
+      "pair_budget_proxy": 18475,
+      "planning_note": "Group count and histogram are planning proxies from the full HF QWC cover; the worker must recompute or verify the compiled-state QWC cover before credit.",
+      "required_worker_outputs": [
+        "compiled_state_replay_hash",
+        "full_covariance_matrix_shard_hash",
+        "qwc_group_manifest_hash",
+        "measurement_basis_manifest_hash",
+        "shot_allocation_or_exact_mode",
+        "stdout_stderr_returncode_hash",
+        "wall_time_memory_ledger",
+        "claim_boundary_note"
+      ],
+      "row_acceptance_ready": false,
+      "selected_ci_basis": "3-21g",
+      "shard_count": 7,
+      "shards": [
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_001.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 512,
+          "group_start_inclusive": 0,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 0 --group-end 512 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "d10950479ee0d503afc809065dbc10f697a6b5da59f690c64fe03491e593c3b6",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-001"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_002.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1024,
+          "group_start_inclusive": 512,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 512 --group-end 1024 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "7c3e2dffd26054794233307142f7d46b5ef7b98955b1e19808fb61c69774339e",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-002"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_003.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1536,
+          "group_start_inclusive": 1024,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 1024 --group-end 1536 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "49c832f4b2cbd176a45815a1326026944cb47990b8cc813f5eac9f9a249d2588",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-003"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_004.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2048,
+          "group_start_inclusive": 1536,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 1536 --group-end 2048 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "a0e7222874a10a36fef95803cfce81f2175dda4ae50c73f4718a8235999aa8b5",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-004"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_005.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2560,
+          "group_start_inclusive": 2048,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 2048 --group-end 2560 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "074bd309ae018123ed724834bffe5e5283c763dbd893de5c4778cef9cc1a5a19",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-005"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_006.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 3072,
+          "group_start_inclusive": 2560,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 2560 --group-end 3072 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "802f1522b43dd2596eedeb8cab8676c0a7480713c2b2ecbdf19dc870b8dbfc18",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-006"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/h2o_symmetric_oh_stretch/shard_007.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 57,
+          "group_end_exclusive": 3129,
+          "group_start_inclusive": 3072,
+          "molecule": "h2o_symmetric_oh_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule h2o_symmetric_oh_stretch --group-start 3072 --group-end 3129 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "009f5f5f30f4907ecf462553a341e9f68813ef24a6bfb768b1a42e716c493420",
+          "shard_id": "h2o_symmetric_oh_stretch-full-covariance-shard-007"
+        }
+      ],
+      "total_qubits": 26,
+      "work_order_hash": "5738b409b40f7444636af0998d21342842ba639606124dd1738d15527ddcb4bc",
+      "work_order_id": "B3B10-F1-full-covariance-work-order-h2o_symmetric_oh_stretch"
+    },
+    {
+      "ansatz_model": "cross_molecule_one_parameter_ucc_double_adapt_seed_pressure",
+      "avg_terms_per_group_proxy": 3.5945118733509234,
+      "blocked_extension_row_hash": "61ddbaa4b4c406eddf053375135b9bda5824f9e5db4ac8f8ae44e481228336f0",
+      "blocked_reasons": [
+        "full_compiled_state_covariance_not_computed",
+        "bounded_high_coefficient_subset_not_full_pauli_cover",
+        "one_parameter_seed_not_converged_multi_parameter_state",
+        "no_same_access_denominator_win"
+      ],
+      "compiled_random_pauli_term_count": 34058,
+      "coordinate": "N-N bond length",
+      "electrons": 14,
+      "full_cover_group_count_proxy": 9475,
+      "groups_per_shard": 512,
+      "hf_cover_group_size_histogram": {
+        "1": 3386,
+        "10-19": 367,
+        "100-109": 1,
+        "130-139": 2,
+        "150-159": 1,
+        "190-199": 1,
+        "2": 2162,
+        "20-29": 93,
+        "3": 1055,
+        "30-39": 53,
+        "4": 992,
+        "40-49": 15,
+        "5": 636,
+        "50-59": 5,
+        "6": 298,
+        "60-69": 2,
+        "7": 160,
+        "70-79": 2,
+        "8": 124,
+        "80-89": 2,
+        "9": 117,
+        "90-99": 1
+      },
+      "hf_cover_nonzero_covariance_pair_count": 33747,
+      "molecule": "n2_bond_stretch",
+      "pair_budget_proxy": 44182,
+      "planning_note": "Group count and histogram are planning proxies from the full HF QWC cover; the worker must recompute or verify the compiled-state QWC cover before credit.",
+      "required_worker_outputs": [
+        "compiled_state_replay_hash",
+        "full_covariance_matrix_shard_hash",
+        "qwc_group_manifest_hash",
+        "measurement_basis_manifest_hash",
+        "shot_allocation_or_exact_mode",
+        "stdout_stderr_returncode_hash",
+        "wall_time_memory_ledger",
+        "claim_boundary_note"
+      ],
+      "row_acceptance_ready": false,
+      "selected_ci_basis": "3-21g",
+      "shard_count": 19,
+      "shards": [
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_001.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 512,
+          "group_start_inclusive": 0,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 0 --group-end 512 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "773fbdbb83e251a405d514a9e50dd27d623548bdc8d06ba248d001fae52e92d8",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-001"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_002.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1024,
+          "group_start_inclusive": 512,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 512 --group-end 1024 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "854bd35bbe369476e6f28115f75e1de21344be6d2f0379466f9798e4db1aa324",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-002"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_003.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 1536,
+          "group_start_inclusive": 1024,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 1024 --group-end 1536 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "17553e70f3ae5c873f30b7c526327fc32b127d6b94190685011566aa74ac45f2",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-003"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_004.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2048,
+          "group_start_inclusive": 1536,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 1536 --group-end 2048 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "199aa82fc3b84e3beb3af163593ed6e6091e6d1b09eefda509078b466aa48159",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-004"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_005.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 2560,
+          "group_start_inclusive": 2048,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 2048 --group-end 2560 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "4d6e51c224d8e676f3cf5cd2114d8a3c793dee36934f7107767816d3f7b8daf9",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-005"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_006.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 3072,
+          "group_start_inclusive": 2560,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 2560 --group-end 3072 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "57957c3cc7c09499f50022a9e15c21b5d124a72a78de50a568df0b696004fd26",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-006"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_007.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 3584,
+          "group_start_inclusive": 3072,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 3072 --group-end 3584 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "e0af37945abaf45198e093d7fde86f193ef8d9e9ad050b734e9f6e07e067c2f0",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-007"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_008.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 4096,
+          "group_start_inclusive": 3584,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 3584 --group-end 4096 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "3156b6ebbdabc2e3ab280bd57b2fad4a6d2727280b8d9e82f513731631c8ab88",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-008"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_009.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 4608,
+          "group_start_inclusive": 4096,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 4096 --group-end 4608 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "15f7a1bc893878838158c98982f38a445bf9bbf06c2aea133d3876b615c3b465",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-009"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_010.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 5120,
+          "group_start_inclusive": 4608,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 4608 --group-end 5120 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "7e5b1e79cc6057f073dc44f7c7982a03f55542d8993b987caceb8ace9450178a",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-010"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_011.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 5632,
+          "group_start_inclusive": 5120,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 5120 --group-end 5632 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "9d61ff4a41d854823efc8ccd6f7a8341c8dcc015668478ec9a997048b82e375a",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-011"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_012.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 6144,
+          "group_start_inclusive": 5632,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 5632 --group-end 6144 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "fa256254038580ed2ad1d43bb1f59a4d48add17c925a07c7a91e751bc954af82",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-012"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_013.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 6656,
+          "group_start_inclusive": 6144,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 6144 --group-end 6656 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "92093633d96fe1aa6da2e5e8f54fe95eaddc9c4d377fa7a5b90243e58df8c899",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-013"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_014.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 7168,
+          "group_start_inclusive": 6656,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 6656 --group-end 7168 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "08e324a1fe10e1a96101d2898988f632958dbf9f330815c2c113b8ba537029fb",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-014"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_015.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 7680,
+          "group_start_inclusive": 7168,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 7168 --group-end 7680 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "521653313a7ff62a9e69d80bc4c9b1b0b6fa8ec3ee83fff133eb977b1f635656",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-015"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_016.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 8192,
+          "group_start_inclusive": 7680,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 7680 --group-end 8192 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "81619d2cf668e26340497940f58dd57c320ad2884d8a0f3efe7a8a1a9ee47951",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-016"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_017.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 8704,
+          "group_start_inclusive": 8192,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 8192 --group-end 8704 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "300190800feef1e08c25557102aecb9cb20b09c1e5d2c634c82a789aeb01a342",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-017"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_018.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 512,
+          "group_end_exclusive": 9216,
+          "group_start_inclusive": 8704,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 8704 --group-end 9216 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "a9b2ebbedcf58f8254f0bd8ecb4600ddfbf4822cd032a02e7d454023f9e4c094",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-018"
+        },
+        {
+          "expected_output": "results/B3_B10_F1_full_covariance_shards/n2_bond_stretch/shard_019.json",
+          "expected_output_hash_key": "full_covariance_matrix_shard_hash",
+          "group_count": 259,
+          "group_end_exclusive": 9475,
+          "group_start_inclusive": 9216,
+          "molecule": "n2_bond_stretch",
+          "replay_command_template": "python3 tools/b3_b10_f1_full_covariance_row_worker.py --molecule n2_bond_stretch --group-start 9216 --group-end 9475 --state-source compiled_ucc_adapt --emit-shard-json",
+          "shard_contract_hash": "1711c9fd13cb42bebe5ca451287458756d7f8403fe76a0ab922430d68a603827",
+          "shard_id": "n2_bond_stretch-full-covariance-shard-019"
+        }
+      ],
+      "total_qubits": 36,
+      "work_order_hash": "f98c94796f0f8e3c7f8ffb92e5b16e1948c198773075ae601d2f3d041bf3328f",
+      "work_order_id": "B3B10-F1-full-covariance-work-order-n2_bond_stretch"
+    }
+  ]
+}
