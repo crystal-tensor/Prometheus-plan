@@ -434,6 +434,36 @@ current_results:
     caveat: template_only_no_symbolic_obstruction_exact_rewrite_resource_reduction_or_global_lower_bound
     result: ../results/B7_w8_21_symbolic_obligation_intake_gate_v0.json
     markdown_report: ../research/B7_w8_21_symbolic_obligation_intake_gate.md
+  w8_21_symbolic_certificate_priority_packet_gate_v0:
+    status: w8_21_symbolic_certificate_priority_packet_open_missing_artifact
+    model_status: w8_21_symbolic_kak_packet_ready_no_artifact_submitted
+    method: b7_w8_21_symbolic_certificate_priority_packet_gate_v0
+    source_intake_gate: ../results/B7_w8_21_symbolic_obligation_intake_gate_v0.json
+    priority_packet_id: B7-S1-w8-21-symbolic-kak-obstruction
+    packet_hash: c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c
+    priority_requirement_count: 9
+    priority_requirements_passed: 6
+    priority_requirements_failed: 3
+    failed_priority_requirement_ids: [P6, P7, P8]
+    required_key_count: 10
+    required_evidence_file_count: 8
+    template_id: w8_21
+    prior_optimizer_runs: 43480
+    three_cnot_attempted_optimizer_runs: 8880
+    three_cnot_passing_candidate_count: 0
+    target_removed_arbitrary_occurrences: 30
+    target_removed_t_ledger: 600
+    submitted_artifact_exists: false
+    accepted_symbolic_certificate_count: 0
+    ready_for_b7_ledger_retest_count: 0
+    new_rewrite_claimed: false
+    global_lower_bound_claimed: false
+    physical_resource_reduction_claimed: false
+    b7_ledger_improvement_claimed: false
+    validation_error_count: 0
+    caveat: priority_packet_only_no_symbolic_certificate_rewrite_or_b7_ledger_claim
+    result: ../results/B7_w8_21_symbolic_certificate_priority_packet_gate_v0.json
+    markdown_report: ../research/B7_w8_21_symbolic_certificate_priority_packet_gate.md
   w8_21_small_block_synthesis_v0:
     status: w8_21_small_block_synthesis_negative_boundary_not_physical_layout
     method: b7_w8_21_small_block_synthesis_v0
@@ -595,6 +625,7 @@ prototype_artifacts:
   nonlocal_template_block_scan: ../tools/b7_nonlocal_template_block_scan.py
   template_priority_gate: ../tools/b7_template_priority_gate.py
   w8_21_symbolic_obligation_intake_gate: ../tools/b7_w8_21_symbolic_obligation_intake_gate.py
+  w8_21_symbolic_certificate_priority_packet_gate: ../tools/b7_w8_21_symbolic_certificate_priority_packet_gate.py
   w8_21_small_block_synthesis: ../tools/b7_w8_21_small_block_synthesis.py
   w8_21_broad_skeleton_search: ../tools/b7_w8_21_broad_skeleton_search.py
   w8_21_euler_local_search: ../tools/b7_w8_21_euler_local_search.py

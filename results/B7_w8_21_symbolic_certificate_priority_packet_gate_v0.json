@@ -1,0 +1,196 @@
+{
+  "benchmark_id": "B7",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "global_lower_bound_claimed": false,
+    "new_rewrite_claimed": false,
+    "next_gate": "Submit B7-S1-w8-21-symbolic-kak-obstruction with target matrix, symbolic coordinates/invariants, tested-scaffold exclusions, and a reproducible theorem or notebook.",
+    "physical_resource_reduction_claimed": false,
+    "what_is_not_supported": "No symbolic obstruction, constructive certificate, occurrence-removing rewrite, global lower bound, resource reduction, or B7 ledger improvement is established.",
+    "what_is_supported": "The first B7 w8_21 theory obligation now has a concrete source-backed submission packet for symbolic KAK/local-invariant evidence."
+  },
+  "last_updated": "2026-07-02",
+  "linked_benchmark_id": "B1",
+  "method": "b7_w8_21_symbolic_certificate_priority_packet_gate_v0",
+  "model_status": "w8_21_symbolic_kak_packet_ready_no_artifact_submitted",
+  "priority_symbolic_certificate_packet": {
+    "acceptance_rule": "Provide a symbolic KAK/local-invariant obstruction or exact constructive certificate for the w8_21 two-qubit target family.",
+    "accepted_only_if": [
+      "packet_id equals B7-S1-w8-21-symbolic-kak-obstruction",
+      "template_id equals w8_21",
+      "normalized target matrix hash is supplied and source-bound",
+      "symbolic coordinates or local invariants are reproducible",
+      "tested numerical scaffold exclusions are separated from untested global routes",
+      "machine-readable theorem or notebook reproduces the certificate",
+      "claim_boundary forbids rewrite, resource reduction, global lower bound, and B7 ledger credit claims"
+    ],
+    "owner_role": "theory_agent",
+    "packet_hash": "c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c",
+    "packet_id": "B7-S1-w8-21-symbolic-kak-obstruction",
+    "required_evidence_files": [
+      "normalized_two_qubit_target_matrix",
+      "symbolic_kak_or_local_invariant_coordinates",
+      "tested_scaffold_exclusion_table",
+      "uncovered_global_route_statement",
+      "machine_readable_theorem_or_reproducible_notebook",
+      "numeric_search_digest_binding_43480_runs",
+      "occurrence_ledger_nonpromotion_note",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "packet_id",
+      "template_id",
+      "normalized_target_matrix_hash",
+      "symbolic_coordinate_system",
+      "local_invariant_expression_hash",
+      "tested_scaffold_exclusion_hash",
+      "uncovered_route_statement_hash",
+      "machine_readable_theorem_or_notebook_hash",
+      "reproduction_command",
+      "claim_boundary"
+    ],
+    "source_intake_gate": "results/B7_w8_21_symbolic_obligation_intake_gate_v0.json",
+    "submission_artifact_path": "results/B7_w8_21_symbolic_certificate_priority_submissions/B7-S1-w8-21-symbolic-kak-obstruction.json"
+  },
+  "problem_id": 21,
+  "requirements": [
+    {
+      "evidence": {
+        "failed_intake_requirement_ids": [
+          "S5",
+          "S6",
+          "S7"
+        ],
+        "source_status": "w8_21_symbolic_obligation_intake_open_no_rewrite_certificate",
+        "validation_error_count": 0
+      },
+      "label": "Symbolic obligation intake gate remains valid and blocked only on S5/S6/S7",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "actual_packet_id": "B7-S1-w8-21-symbolic-kak-obstruction",
+        "expected_packet_id": "B7-S1-w8-21-symbolic-kak-obstruction",
+        "owner_role": "theory_agent"
+      },
+      "label": "Priority packet is fixed to the symbolic KAK/local-invariant route",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "prior_optimizer_runs": 43480,
+        "three_cnot_attempted_optimizer_runs": 8880,
+        "three_cnot_passing_candidate_count": 0
+      },
+      "label": "Current evidence preserves the 43,480-run negative numerical boundary",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "required_evidence_file_count": 8,
+        "required_key_count": 10
+      },
+      "label": "Packet carries locked schema and evidence file classes",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "accepted_certificate_count": 0,
+        "physical_resource_reduction_claimed": false,
+        "ready_for_b7_ledger_retest_count": 0,
+        "submitted_artifact_count": 0
+      },
+      "label": "Current B7 state has no accepted symbolic certificate or ledger credit",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B7_w8_21_symbolic_certificate_priority_submissions/B7-S1-w8-21-symbolic-kak-obstruction.json"
+      },
+      "label": "Priority symbolic certificate artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "packet_id",
+          "template_id",
+          "normalized_target_matrix_hash",
+          "symbolic_coordinate_system",
+          "local_invariant_expression_hash",
+          "tested_scaffold_exclusion_hash",
+          "uncovered_route_statement_hash",
+          "machine_readable_theorem_or_notebook_hash",
+          "reproduction_command",
+          "claim_boundary"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted artifact satisfies the locked symbolic certificate schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "accepted_certificate": false,
+        "source_evidence_files_present": false,
+        "template_id": null
+      },
+      "label": "Submitted artifact is source-backed and accepted as a symbolic certificate",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "global_lower_bound_claimed": false,
+        "new_rewrite_claimed": false,
+        "physical_resource_reduction_claimed": false
+      },
+      "label": "Forbidden rewrite, lower-bound, and resource claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000164,
+  "source_intake_gate": "results/B7_w8_21_symbolic_obligation_intake_gate_v0.json",
+  "status": "w8_21_symbolic_certificate_priority_packet_open_missing_artifact",
+  "summary": {
+    "accepted_symbolic_certificate_count": 0,
+    "b7_ledger_improvement_claimed": false,
+    "failed_priority_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "global_lower_bound_claimed": false,
+    "missing_key_count": 10,
+    "new_rewrite_claimed": false,
+    "packet_hash": "c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c",
+    "physical_resource_reduction_claimed": false,
+    "prior_optimizer_runs": 43480,
+    "priority_packet_id": "B7-S1-w8-21-symbolic-kak-obstruction",
+    "priority_requirement_count": 9,
+    "priority_requirements_failed": 3,
+    "priority_requirements_passed": 6,
+    "ready_for_b7_ledger_retest_count": 0,
+    "required_evidence_file_count": 8,
+    "required_key_count": 10,
+    "submitted_artifact_exists": false,
+    "target_removed_arbitrary_occurrences": 30,
+    "target_removed_t_ledger": 600,
+    "template_id": "w8_21",
+    "three_cnot_attempted_optimizer_runs": 8880,
+    "three_cnot_passing_candidate_count": 0,
+    "validation_error_count": 0
+  },
+  "title": "B7 w8_21 Symbolic Certificate Priority Packet Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
