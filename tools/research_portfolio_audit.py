@@ -34363,6 +34363,9 @@ def audit(root: Path) -> dict:
             "b1_b7_cone01_resource_escape_provenance_manifest_gate": str(
                 research / "B1_B7_cone01_resource_escape_provenance_manifest_gate.md"
             ),
+            "b1_b7_cone01_resource_escape_replay_validation_manifest_gate": str(
+                research / "B1_B7_cone01_resource_escape_replay_validation_manifest_gate.md"
+            ),
             "b1_b7_cone01_overlap_additivity_bound_gate": str(
                 b1_b7_cone01_overlap_additivity_bound_path
             ),
