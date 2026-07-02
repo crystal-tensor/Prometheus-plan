@@ -1239,6 +1239,39 @@ current_results:
     caveat: lih_full_shard_batch_only_no_assembled_row_no_f1_artifact_no_credit
     result: ../results/B3_B10_F1_lih_shard_batch_gate_v0.json
     markdown_report: ../research/B3_B10_F1_lih_shard_batch_gate.md
+  b3_b10_f1_assembled_rows_gate_v0:
+    status: f1_three_remaining_rows_assembled_zero_credit
+    method: b3_b10_f1_assembled_rows_gate_v0
+    model_status: h2_candidate_plus_h2o_n2_lih_rows_assembled_no_acceptance_credit
+    source_row_packet_gate: ../results/B3_B10_F1_full_covariance_row_packet_gate_v0.json
+    source_h2_candidate_gate: ../results/B3_B10_F1_pilot_row_candidate_gate_v0.json
+    source_h2o_shard_batch_gate: ../results/B3_B10_F1_h2o_shard_batch_gate_v0.json
+    source_n2_shard_batch_gate: ../results/B3_B10_F1_n2_shard_batch_gate_v0.json
+    source_lih_shard_batch_gate: ../results/B3_B10_F1_lih_shard_batch_gate_v0.json
+    source_target_id: T-B3-039/T-B10-015z
+    row_bundle_hash: 64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53
+    source_shard_count: 65
+    required_source_shard_count: 65
+    assembled_row_count: 3
+    h2_candidate_row_count: 1
+    f1_candidate_row_count: 4
+    required_f1_row_count: 4
+    total_assembled_group_count: 32251
+    total_nonzero_covariance_pair_count: 128544
+    total_variance_sum: 84.00917219228485
+    accepted_f1_artifact: false
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b3_reopen_ready: false
+    b3_full_covariance_credit_allowed: false
+    b10_t1_credit_allowed: false
+    requirements_passed: 8
+    requirements_failed: 2
+    failed_requirement_ids: [P9, P10]
+    validation_error_count: 0
+    caveat: assembled_candidate_rows_only_no_accepted_f1_artifact_no_denominator_win_no_credit
+    result: ../results/B3_B10_F1_assembled_rows_gate_v0.json
+    markdown_report: ../research/B3_B10_F1_assembled_rows_gate.md
 prototype_artifacts:
   resource_estimator: ../tools/b3_pyscf_resource_estimator.py
   quantum_observable_fci_comparison: ../tools/b3_quantum_observable_fci_comparison.py
@@ -1279,4 +1312,5 @@ prototype_artifacts:
   b3_b10_f1_lih_prefix30_shard_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
   b3_b10_f1_lih_prefix35_shard_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
   b3_b10_f1_lih_shard_batch_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
+  b3_b10_f1_assembled_rows_gate: ../tools/b3_b10_f1_assembled_rows_gate.py
   prototype_notes: ../research/B3_prototype_notes.md

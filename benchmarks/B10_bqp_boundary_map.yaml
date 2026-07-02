@@ -1566,6 +1566,35 @@ current_results:
     caveat: lih_full_shard_batch_only_no_b10_t1_credit_or_bqp_boundary_claim
     result: ../results/B3_B10_F1_lih_shard_batch_gate_v0.json
     markdown_report: ../research/B3_B10_F1_lih_shard_batch_gate.md
+  b10_t1_b3_f1_assembled_rows_gate_v0:
+    status: f1_three_remaining_rows_assembled_zero_credit
+    method: b3_b10_f1_assembled_rows_gate_v0
+    source_assembled_rows_gate: ../results/B3_B10_F1_assembled_rows_gate_v0.json
+    source_target_id: T-B3-039/T-B10-015z
+    dependency_benchmark: B3
+    row_bundle_hash: 64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53
+    source_shard_count: 65
+    assembled_row_count: 3
+    h2_candidate_row_count: 1
+    f1_candidate_row_count: 4
+    required_f1_row_count: 4
+    total_assembled_group_count: 32251
+    total_nonzero_covariance_pair_count: 128544
+    total_variance_sum: 84.00917219228485
+    accepted_f1_artifact: false
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b10_t1_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    requirements_passed: 8
+    requirements_failed: 2
+    failed_requirement_ids: [P9, P10]
+    validation_error_count: 0
+    caveat: assembled_candidate_rows_only_no_b10_t1_credit_or_bqp_boundary_claim
+    result: ../results/B3_B10_F1_assembled_rows_gate_v0.json
+    markdown_report: ../research/B3_B10_F1_assembled_rows_gate.md
   b10_t1_missing_assumption_note_v0:
     status: missing_assumption_note_not_dequantization_theorem
     method: b10_t1_missing_assumption_note_v0
@@ -2330,6 +2359,7 @@ prototype_artifacts:
   t1_b3_b10_f1_lih_prefix30_shard_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
   t1_b3_b10_f1_lih_prefix35_shard_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
   t1_b3_b10_f1_lih_shard_batch_gate: ../tools/b3_b10_f1_lih_prefix_shard_gate.py
+  t1_b3_b10_f1_assembled_rows_gate: ../tools/b3_b10_f1_assembled_rows_gate.py
   t1_b5_w1_replay_validation_manifest_gate: ../tools/b5_b10_w1_replay_validation_manifest_gate.py
   t1_positive_route_acceptance_boundary: ../tools/b10_t1_positive_route_acceptance_boundary.py
   t1_missing_assumption_note_builder: ../tools/b10_t1_missing_assumption_note.py
