@@ -241,6 +241,34 @@ current_results:
     b7_dependency_credit_allowed: false
     b7_credit_delta: 0
     caveat: trace_row_acceptance_packet_only_no_calibrated_rows_no_b7_resource_credit
+  b7_b2_calibrated_trace_acceptance_boundary_v0:
+    status: b7_b2_calibrated_trace_acceptance_boundary_synced
+    method: b7_b2_calibrated_trace_acceptance_boundary_v0
+    source_b2_trace_row_acceptance_packet: ../results/B2_calibrated_trace_row_acceptance_packet_gate_v0.json
+    boundary_id: B7-B2-calibrated-trace-acceptance-boundary
+    acceptance_packet_id: B2-T5-calibrated-trace-row-acceptance-packet
+    trace_packet_id: B2-T5-calibrated-flag-observation-rows
+    replay_validation_manifest_id: B2-T5-calibrated-trace-row-replay-validation-manifest
+    challenge_count: 3
+    source_trace_count: 576
+    holdout_profile_shots: 864
+    requirement_count: 7
+    requirements_passed: 7
+    requirements_failed: 0
+    source_failed_acceptance_requirement_ids: [P6, P7, P8]
+    submitted_acceptance_packet_exists: false
+    accepted_priority_trace_rows: 0
+    b7_dependency_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_reduction_credit: 0
+    b7_logical_error_improvement_credit: 0
+    validation_error_count: 0
+    interpretation: b7_zero_credit_boundary_synced_after_b2_calibrated_trace_acceptance_packet_gate
+    caveat: acceptance_boundary_only_no_calibrated_rows_no_ft_ledger_no_b7_resource_credit
+    result: ../results/B7_B2_calibrated_trace_acceptance_boundary_v0.json
+    markdown_report: ../research/B7_B2_calibrated_trace_acceptance_boundary.md
   workload_dag_factory_schedule_v0:
     status: workload_dag_factory_schedule_not_physical_layout
     method: b7_workload_dag_factory_scheduler_v0
@@ -841,6 +869,7 @@ prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
   b2_calibrated_dependency_credit_gate: ../tools/b7_b2_calibrated_dependency_credit_gate.py
+  b7_b2_calibrated_trace_acceptance_boundary: ../tools/b7_b2_calibrated_trace_acceptance_boundary.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py

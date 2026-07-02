@@ -1,0 +1,177 @@
+{
+  "benchmark_id": "B7",
+  "boundary_packet": {
+    "acceptance_packet_hash": "3cf42ae6e29cf23f20120a5d48db83efa510db007f24ec9b62fc9660ef8420c3",
+    "acceptance_packet_id": "B2-T5-calibrated-trace-row-acceptance-packet",
+    "accepted_priority_trace_rows": 0,
+    "b7_dependency_credit_allowed": false,
+    "b7_ft_ledger_credit_allowed": false,
+    "b7_logical_error_improvement_credit": 0,
+    "b7_resource_credit_allowed": false,
+    "b7_space_time_volume_reduction_credit": 0,
+    "boundary_hash": "b915a35d2e1e7b78440b277d23905b2fd34433350b27ee237ad61b4a2a932828",
+    "boundary_id": "B7-B2-calibrated-trace-acceptance-boundary",
+    "challenge_count": 3,
+    "holdout_profile_shots": 864,
+    "replay_validation_manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "required_downstream_before_b7_credit": [
+      "submitted B2-T5-calibrated-trace-row-acceptance-packet",
+      "source-backed row batch, detector trace, decoder profile, posterior, prediction, and holdout artifacts",
+      "positive accepted_trace_row_count",
+      "all-challenge non-regression proof",
+      "real or independently calibrated trace replay",
+      "strict holdout improvement under the same decoder path",
+      "B7 zero-credit boundary note updated to a nonzero-credit acceptance ledger",
+      "claim boundary that still forbids decoder, threshold, hardware-result, calibrated-device, quantum-advantage, and unpriced FT-resource claims"
+    ],
+    "source_acceptance_packet_gate": "results/B2_calibrated_trace_row_acceptance_packet_gate_v0.json",
+    "source_b7_credit_delta": 0,
+    "source_b7_dependency_credit_allowed": false,
+    "source_method": "b2_calibrated_trace_row_acceptance_packet_gate_v0",
+    "source_trace_count": 576,
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows"
+  },
+  "claim_boundary": {
+    "b7_dependency_credit_allowed": false,
+    "b7_ft_ledger_credit_allowed": false,
+    "b7_resource_credit_allowed": false,
+    "next_gate": "Submit and accept the B2 calibrated trace row acceptance packet, then provide source-backed accepted rows, all-challenge non-regression, real or independently calibrated replay, strict holdout improvement, and a nonzero B7 credit ledger before B7 can count dependency credit.",
+    "what_is_not_supported": "No calibrated B2 row, FT ledger improvement, logical error improvement, space-time-volume reduction, hardware result, threshold result, quantum advantage, or B7 resource credit is supported.",
+    "what_is_supported": "B7 is now explicitly synchronized to the B2 calibrated trace row acceptance packet as a zero-credit dependency boundary."
+  },
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B2",
+  "method": "b7_b2_calibrated_trace_acceptance_boundary_v0",
+  "model_status": "b7_zero_credit_boundary_after_b2_calibrated_trace_acceptance_packet_gate",
+  "requirements": [
+    {
+      "evidence": {
+        "acceptance_packet_id": "B2-T5-calibrated-trace-row-acceptance-packet",
+        "source_method": "b2_calibrated_trace_row_acceptance_packet_gate_v0",
+        "trace_packet_id": "B2-T5-calibrated-flag-observation-rows",
+        "validation_error_count": 0
+      },
+      "label": "Source B2 calibrated trace acceptance packet gate is present and current",
+      "passed": true,
+      "requirement_id": "S1"
+    },
+    {
+      "evidence": {
+        "failed_acceptance_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "submitted_acceptance_packet_exists": false
+      },
+      "label": "Source acceptance gate remains blocked on missing submitted packet evidence",
+      "passed": true,
+      "requirement_id": "S2"
+    },
+    {
+      "evidence": {
+        "challenge_count": 3,
+        "holdout_profile_shots": 864,
+        "source_trace_count": 576
+      },
+      "label": "B2 calibrated trace scope is preserved for the B7 dependency view",
+      "passed": true,
+      "requirement_id": "S3"
+    },
+    {
+      "evidence": {
+        "accepted_priority_trace_rows": 0,
+        "source_b7_credit_delta": 0,
+        "source_b7_dependency_credit_allowed": false
+      },
+      "label": "No calibrated rows have been accepted for B7 dependency credit",
+      "passed": true,
+      "requirement_id": "S4"
+    },
+    {
+      "evidence": {
+        "b7_dependency_credit_allowed": false,
+        "b7_ft_ledger_credit_allowed": false,
+        "b7_logical_error_improvement_credit": 0,
+        "b7_resource_credit_allowed": false,
+        "b7_space_time_volume_reduction_credit": 0
+      },
+      "label": "B7 FT ledger and resource credit remain explicitly disabled",
+      "passed": true,
+      "requirement_id": "S5"
+    },
+    {
+      "evidence": {
+        "b7_resource_credit_allowed": false,
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "label": "Forbidden decoder, threshold, hardware, advantage, and FT-resource claims remain absent",
+      "passed": true,
+      "requirement_id": "S6"
+    },
+    {
+      "evidence": {
+        "required_downstream_before_b7_credit": [
+          "submitted B2-T5-calibrated-trace-row-acceptance-packet",
+          "source-backed row batch, detector trace, decoder profile, posterior, prediction, and holdout artifacts",
+          "positive accepted_trace_row_count",
+          "all-challenge non-regression proof",
+          "real or independently calibrated trace replay",
+          "strict holdout improvement under the same decoder path",
+          "B7 zero-credit boundary note updated to a nonzero-credit acceptance ledger",
+          "claim boundary that still forbids decoder, threshold, hardware-result, calibrated-device, quantum-advantage, and unpriced FT-resource claims"
+        ]
+      },
+      "label": "Boundary records the downstream evidence required before B7 can count credit",
+      "passed": true,
+      "requirement_id": "S7"
+    }
+  ],
+  "runtime_seconds": 0.000161,
+  "source_acceptance_packet_gate": "results/B2_calibrated_trace_row_acceptance_packet_gate_v0.json",
+  "source_target_id": "T-B7-012h/T-B2-010h",
+  "status": "b7_b2_calibrated_trace_acceptance_boundary_synced",
+  "summary": {
+    "acceptance_packet_id": "B2-T5-calibrated-trace-row-acceptance-packet",
+    "accepted_priority_trace_rows": 0,
+    "b7_credit_delta": 0,
+    "b7_dependency_credit_allowed": false,
+    "b7_ft_ledger_credit_allowed": false,
+    "b7_logical_error_improvement_credit": 0,
+    "b7_resource_credit_allowed": false,
+    "b7_space_time_volume_reduction_credit": 0,
+    "boundary_hash": "b915a35d2e1e7b78440b277d23905b2fd34433350b27ee237ad61b4a2a932828",
+    "boundary_id": "B7-B2-calibrated-trace-acceptance-boundary",
+    "calibrated_device_claimed": false,
+    "challenge_count": 3,
+    "failed_requirement_ids": [],
+    "hardware_result_claimed": false,
+    "holdout_profile_shots": 864,
+    "new_code_claimed": false,
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "replay_validation_manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "requirement_count": 7,
+    "requirements_failed": 0,
+    "requirements_passed": 7,
+    "source_acceptance_packet_hash": "3cf42ae6e29cf23f20120a5d48db83efa510db007f24ec9b62fc9660ef8420c3",
+    "source_failed_acceptance_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "source_trace_count": 576,
+    "submitted_acceptance_packet_exists": false,
+    "threshold_claimed": false,
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows",
+    "validation_error_count": 0
+  },
+  "title": "B7/B2 Calibrated Trace Acceptance Boundary",
+  "validation_errors": [],
+  "version": "0.1"
+}
