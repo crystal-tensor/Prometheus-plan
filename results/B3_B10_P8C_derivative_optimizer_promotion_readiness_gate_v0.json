@@ -1,0 +1,222 @@
+{
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "accepted_denominator_win_row_count": 0,
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "next_gate": "Submit at least one accepted P8-A row replay artifact and one linked P8-B same-access denominator-win artifact, then rerun this P8-C readiness gate.",
+    "quantum_advantage_claimed": false,
+    "what_is_not_supported": "P8-C is not ready. No accepted P8-A row, no accepted P8-B denominator win, no B3 reopen, no B10-T1 credit, no quantum advantage, and no BQP separation are supported.",
+    "what_is_supported": "P8-C derivative/optimizer promotion now has a source-bound readiness gate that consumes P8 pressure, P8-A row replay intake, and P8-B same-access denominator replay intake artifacts."
+  },
+  "dependency_benchmarks": [
+    "B3",
+    "B10"
+  ],
+  "last_updated": "2026-07-03",
+  "method": "b3_b10_p8c_derivative_optimizer_promotion_readiness_gate_v0",
+  "model_status": "p8c_promotion_blocked_until_row_and_denominator_replay_positive",
+  "p8c_blockers": [
+    {
+      "blocker_id": "P8C-BLOCKER-ROW-REPLAY",
+      "current_value": 0,
+      "required_artifact": "results/B3_B10_P8A_accepted_row_replay_submissions/<row_id>.json",
+      "required_positive_condition": "accepted_full_covariance_row_count > 0",
+      "source_requirement_id": "C6"
+    },
+    {
+      "blocker_id": "P8C-BLOCKER-DENOMINATOR-REPLAY",
+      "current_value": 0,
+      "required_artifact": "results/B3_B10_P8B_same_access_denominator_replay_submissions/<row_id>.json",
+      "required_positive_condition": "accepted_denominator_win_row_count > 0",
+      "source_requirement_id": "C7"
+    },
+    {
+      "blocker_id": "P8C-BLOCKER-PROMOTION",
+      "current_value": false,
+      "required_artifact": "paired P8-A accepted row and P8-B same-access denominator win",
+      "required_positive_condition": "ready_for_derivative_optimizer_promotion is true",
+      "source_requirement_id": "C8"
+    }
+  ],
+  "p8c_dependencies": [
+    {
+      "artifact": "results/B3_B10_F1_P8_acceptance_pressure_gate_v0.json",
+      "current_state": "P8-C listed but still downstream of row and denominator positivity",
+      "dependency_id": "P8-source-pressure",
+      "hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+      "required_state": "P8-C appears in ready_pressure_packet_ids",
+      "satisfied": true
+    },
+    {
+      "artifact": "results/B3_B10_P8A_accepted_row_replay_intake_template_gate_v0.json",
+      "current_state": "accepted_full_covariance_row_count=0",
+      "dependency_id": "P8-A-accepted-row-replay",
+      "hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2",
+      "required_state": "accepted_full_covariance_row_count > 0",
+      "satisfied": false
+    },
+    {
+      "artifact": "results/B3_B10_P8B_same_access_denominator_replay_intake_template_gate_v0.json",
+      "current_state": "accepted_denominator_win_row_count=0",
+      "dependency_id": "P8-B-same-access-denominator-replay",
+      "hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba",
+      "required_state": "accepted_denominator_win_row_count > 0",
+      "satisfied": false
+    }
+  ],
+  "problem_ids": [
+    49,
+    11
+  ],
+  "requirements": [
+    {
+      "evidence": {
+        "method": "b3_b10_f1_p8_acceptance_pressure_gate_v0",
+        "pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+        "ready_pressure_packet_ids": [
+          "P8-A",
+          "P8-B",
+          "P8-C",
+          "P8-E"
+        ],
+        "validation_error_count": 0
+      },
+      "label": "P8 pressure gate is current and lists P8-C as a decomposed pressure packet",
+      "passed": true,
+      "requirement_id": "C1"
+    },
+    {
+      "evidence": {
+        "method": "b3_b10_p8a_accepted_row_replay_intake_template_gate_v0",
+        "template_table_hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2",
+        "validation_error_count": 0
+      },
+      "label": "P8-A intake artifact is current",
+      "passed": true,
+      "requirement_id": "C2"
+    },
+    {
+      "evidence": {
+        "method": "b3_b10_p8b_same_access_denominator_replay_intake_template_gate_v0",
+        "template_table_hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba",
+        "validation_error_count": 0
+      },
+      "label": "P8-B intake artifact is current",
+      "passed": true,
+      "requirement_id": "C3"
+    },
+    {
+      "evidence": {
+        "p8a_row_bundle_hash": "64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53",
+        "p8a_row_template_count": 4,
+        "p8b_row_bundle_hash": "64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53",
+        "p8b_row_template_count": 4
+      },
+      "label": "P8-A and P8-B cover the same four F1 candidate rows",
+      "passed": true,
+      "requirement_id": "C4"
+    },
+    {
+      "evidence": {
+        "p8a_b10_t1_credit_allowed": false,
+        "p8a_b3_reopen_ready": false,
+        "p8b_b10_t1_credit_allowed": false,
+        "p8b_b3_reopen_ready": false,
+        "p8b_bqp_separation_claimed": false,
+        "p8b_quantum_advantage_claimed": false
+      },
+      "label": "Both prerequisite intake gates preserve zero-credit claim boundaries",
+      "passed": true,
+      "requirement_id": "C5"
+    },
+    {
+      "evidence": {
+        "accepted_full_covariance_row_count": 0
+      },
+      "label": "At least one P8-A row replay artifact is accepted before P8-C promotion",
+      "passed": false,
+      "requirement_id": "C6"
+    },
+    {
+      "evidence": {
+        "accepted_denominator_win_row_count": 0
+      },
+      "label": "At least one P8-B same-access denominator replay artifact is accepted before P8-C promotion",
+      "passed": false,
+      "requirement_id": "C7"
+    },
+    {
+      "evidence": {
+        "accepted_denominator_win_row_count": 0,
+        "accepted_full_covariance_row_count": 0,
+        "p8c_ready": false
+      },
+      "label": "P8-C derivative/optimizer replay is allowed only after P8-A and P8-B positivity",
+      "passed": false,
+      "requirement_id": "C8"
+    },
+    {
+      "evidence": {
+        "b10_t1_credit_allowed": false,
+        "b3_reopen_ready": false,
+        "bqp_separation_claimed": false,
+        "p8c_ready": false,
+        "quantum_advantage_claimed": false
+      },
+      "label": "P8-C gate does not fabricate B3 reopen, B10-T1 credit, quantum advantage, or BQP separation",
+      "passed": true,
+      "requirement_id": "C9"
+    },
+    {
+      "evidence": {
+        "dependency_count": 3,
+        "dependency_table_hash": "2aa30e0a8d8a027c28e6cfac85858b4e6f22aa8752396c7e0ba879b0f53d56f7"
+      },
+      "label": "P8-C dependency table is deterministic and source-bound",
+      "passed": true,
+      "requirement_id": "C10"
+    }
+  ],
+  "runtime_seconds": 0.000277,
+  "source_p8_pressure_gate": "results/B3_B10_F1_P8_acceptance_pressure_gate_v0.json",
+  "source_p8a_intake_gate": "results/B3_B10_P8A_accepted_row_replay_intake_template_gate_v0.json",
+  "source_p8b_intake_gate": "results/B3_B10_P8B_same_access_denominator_replay_intake_template_gate_v0.json",
+  "source_target_id": "B10-T1",
+  "status": "b3_b10_p8c_derivative_optimizer_promotion_blocked_missing_p8a_p8b_evidence",
+  "summary": {
+    "acceptance_submission_hash": "40a5a0903de970b798f94d371c4d3cd6ccbdab9e514044ba760e05ac5db756cc",
+    "accepted_denominator_win_row_count": 0,
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "blocker_count": 3,
+    "blocker_table_hash": "290440c963db1924d8fefefaa3435e95830e171e4cd2ca29962a60f2992cb009",
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "dependency_count": 3,
+    "dependency_table_hash": "2aa30e0a8d8a027c28e6cfac85858b4e6f22aa8752396c7e0ba879b0f53d56f7",
+    "failed_requirement_ids": [
+      "C6",
+      "C7",
+      "C8"
+    ],
+    "quantum_advantage_claimed": false,
+    "readiness_gate_id": "B3B10-P8C-derivative-optimizer-promotion-readiness",
+    "ready_for_derivative_optimizer_promotion": false,
+    "ready_for_p8c_derivative_optimizer_replay": false,
+    "requirements_failed": 3,
+    "requirements_passed": 7,
+    "row_bundle_hash": "64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53",
+    "source_p8a_template_table_hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2",
+    "source_p8b_template_table_hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba",
+    "source_pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+    "validation_error_count": 0
+  },
+  "title": "B3/B10 P8-C Derivative Optimizer Promotion Readiness Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
