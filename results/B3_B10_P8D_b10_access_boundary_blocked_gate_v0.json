@@ -1,0 +1,210 @@
+{
+  "access_dependencies": [
+    {
+      "artifact": "results/B3_B10_P8A_accepted_row_replay_intake_template_gate_v0.json",
+      "current_value": 0,
+      "dependency_id": "P8-A-accepted-row",
+      "hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2",
+      "required_positive_condition": "accepted_full_covariance_row_count > 0",
+      "satisfied": false
+    },
+    {
+      "artifact": "results/B3_B10_P8B_same_access_denominator_replay_intake_template_gate_v0.json",
+      "current_value": 0,
+      "dependency_id": "P8-B-same-access-denominator-win",
+      "hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba",
+      "required_positive_condition": "accepted_denominator_win_row_count > 0",
+      "satisfied": false
+    },
+    {
+      "artifact": "results/B3_B10_P8C_derivative_optimizer_promotion_readiness_gate_v0.json",
+      "current_value": false,
+      "dependency_id": "P8-C-derivative-optimizer-readiness",
+      "hash": "290440c963db1924d8fefefaa3435e95830e171e4cd2ca29962a60f2992cb009",
+      "required_positive_condition": "ready_for_derivative_optimizer_promotion is true",
+      "satisfied": false
+    },
+    {
+      "artifact": "results/B3_B10_P8E_claim_boundary_audit_gate_v0.json",
+      "current_value": {
+        "forbidden_landing_hit_count": 0,
+        "forbidden_result_hit_count": 0,
+        "requirements_failed": 0
+      },
+      "dependency_id": "P8-E-claim-boundary-audit",
+      "hash": "5cb6bb002a4f67e28f28dcd943ff40dbe682a166bba7c7fa14c70a28c408e769",
+      "required_positive_condition": "claim-boundary audit passes with no forbidden hits",
+      "satisfied": true
+    }
+  ],
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "accepted_denominator_win_row_count": 0,
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "next_gate": "Submit positive P8-A/P8-B artifacts, rerun P8-C, rerun P8-E, then rerun P8-D before any B10-T1 access-boundary credit is considered.",
+    "quantum_advantage_claimed": false,
+    "what_is_not_supported": "This does not accept a B3 row, establish a denominator win, allow P8-C promotion, grant B10-T1 credit, claim quantum advantage, or claim BQP separation.",
+    "what_is_supported": "P8-D now has a source-bound B10 access-boundary blocked gate proving B10-T1 must remain zero-credit until P8-A, P8-B, and P8-C become positive."
+  },
+  "dependency_benchmarks": [
+    "B3",
+    "B10"
+  ],
+  "last_updated": "2026-07-03",
+  "method": "b3_b10_p8d_b10_access_boundary_blocked_gate_v0",
+  "model_status": "p8d_b10_t1_access_boundary_correctly_blocked_zero_credit",
+  "problem_ids": [
+    49,
+    11
+  ],
+  "requirements": [
+    {
+      "evidence": {
+        "blocked_pressure_packet_ids": [
+          "P8-D"
+        ],
+        "method": "b3_b10_f1_p8_acceptance_pressure_gate_v0",
+        "p8d_packet": {
+          "acceptance_predicate": "B10-T1 remains zero-credit until P8-A/P8-B/P8-C evidence is accepted",
+          "blocker": "B10-T1 credit is explicitly false until accepted rows and denominator wins exist",
+          "owner_role": "bqp-boundary-agent",
+          "packet_id": "P8-D",
+          "required_evidence": [
+            "B10 access-boundary note",
+            "positive same-access route claim boundary",
+            "BQP/advantage nonclaim ledger",
+            "dependency trace from accepted B3 rows to B10-T1 boundary"
+          ],
+          "status": "blocked_until_P8_A_B_C_pass",
+          "title": "B10 access-boundary replay"
+        },
+        "pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0"
+      },
+      "label": "P8 pressure gate exposes P8-D as the B10 access-boundary replay packet",
+      "passed": true,
+      "requirement_id": "D1"
+    },
+    {
+      "evidence": {
+        "accepted_full_covariance_row_count": 0,
+        "method": "b3_b10_p8a_accepted_row_replay_intake_template_gate_v0",
+        "template_table_hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2"
+      },
+      "label": "P8-A accepted-row prerequisite is still absent",
+      "passed": true,
+      "requirement_id": "D2"
+    },
+    {
+      "evidence": {
+        "accepted_denominator_win_row_count": 0,
+        "denominator_win_count": 0,
+        "method": "b3_b10_p8b_same_access_denominator_replay_intake_template_gate_v0",
+        "template_table_hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba"
+      },
+      "label": "P8-B same-access denominator prerequisite is still absent",
+      "passed": true,
+      "requirement_id": "D3"
+    },
+    {
+      "evidence": {
+        "blocker_table_hash": "290440c963db1924d8fefefaa3435e95830e171e4cd2ca29962a60f2992cb009",
+        "method": "b3_b10_p8c_derivative_optimizer_promotion_readiness_gate_v0",
+        "ready_for_derivative_optimizer_promotion": false
+      },
+      "label": "P8-C derivative/optimizer promotion remains blocked",
+      "passed": true,
+      "requirement_id": "D4"
+    },
+    {
+      "evidence": {
+        "boundary_table_hash": "5cb6bb002a4f67e28f28dcd943ff40dbe682a166bba7c7fa14c70a28c408e769",
+        "forbidden_landing_hit_count": 0,
+        "forbidden_result_hit_count": 0,
+        "method": "b3_b10_p8e_claim_boundary_audit_gate_v0",
+        "requirements_failed": 0
+      },
+      "label": "P8-E claim-boundary audit has passed with no forbidden positive claims",
+      "passed": true,
+      "requirement_id": "D5"
+    },
+    {
+      "evidence": {
+        "b10_access_boundary_blocked": true,
+        "unsatisfied_dependencies": [
+          "P8-A-accepted-row",
+          "P8-B-same-access-denominator-win",
+          "P8-C-derivative-optimizer-readiness"
+        ]
+      },
+      "label": "B10-T1 access boundary is correctly blocked until P8-A/P8-B/P8-C are positive",
+      "passed": true,
+      "requirement_id": "D6"
+    },
+    {
+      "evidence": {
+        "p8e_b10_t1_credit_allowed": false,
+        "p8e_b3_reopen_ready": false,
+        "pressure_b10_t1_credit_allowed": false,
+        "pressure_b3_reopen_ready": false,
+        "pressure_bqp_separation_claimed": false,
+        "pressure_quantum_advantage_claimed": false
+      },
+      "label": "No B10, BQP, advantage, or B3 credit is allowed by this gate",
+      "passed": true,
+      "requirement_id": "D7"
+    },
+    {
+      "evidence": {
+        "access_boundary_table_hash": "e5a2fa2de1148b5272d078dcfa7139bac8347682954cd966cea4894e51378495",
+        "dependency_count": 4
+      },
+      "label": "P8-D dependency table is deterministic and source-bound",
+      "passed": true,
+      "requirement_id": "D8"
+    }
+  ],
+  "runtime_seconds": 0.000394,
+  "source_p8_pressure_gate": "results/B3_B10_F1_P8_acceptance_pressure_gate_v0.json",
+  "source_p8a_intake_gate": "results/B3_B10_P8A_accepted_row_replay_intake_template_gate_v0.json",
+  "source_p8b_intake_gate": "results/B3_B10_P8B_same_access_denominator_replay_intake_template_gate_v0.json",
+  "source_p8c_readiness_gate": "results/B3_B10_P8C_derivative_optimizer_promotion_readiness_gate_v0.json",
+  "source_p8e_claim_audit_gate": "results/B3_B10_P8E_claim_boundary_audit_gate_v0.json",
+  "source_target_id": "B10-T1",
+  "status": "b3_b10_p8d_b10_access_boundary_blocked_until_p8abc_positive",
+  "summary": {
+    "accepted_denominator_win_row_count": 0,
+    "accepted_full_covariance_row_count": 0,
+    "access_boundary_gate_id": "B3B10-P8D-b10-access-boundary-blocked",
+    "access_boundary_table_hash": "e5a2fa2de1148b5272d078dcfa7139bac8347682954cd966cea4894e51378495",
+    "b10_access_boundary_blocked": true,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "dependency_count": 4,
+    "failed_requirement_ids": [],
+    "quantum_advantage_claimed": false,
+    "ready_for_derivative_optimizer_promotion": false,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "source_p8a_template_table_hash": "a82007811e0448e2436857aaf22ca5fcf30060a1d032370f8f8e8252848584a2",
+    "source_p8b_template_table_hash": "95ea8fecbfb592aae2491ec95d4dc6b19d0b12e98b4dfdbee0087499cfe523ba",
+    "source_p8c_blocker_table_hash": "290440c963db1924d8fefefaa3435e95830e171e4cd2ca29962a60f2992cb009",
+    "source_p8e_boundary_table_hash": "5cb6bb002a4f67e28f28dcd943ff40dbe682a166bba7c7fa14c70a28c408e769",
+    "source_pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+    "unsatisfied_dependency_count": 3,
+    "unsatisfied_dependency_ids": [
+      "P8-A-accepted-row",
+      "P8-B-same-access-denominator-win",
+      "P8-C-derivative-optimizer-readiness"
+    ],
+    "validation_error_count": 0
+  },
+  "title": "B3/B10 P8-D B10 Access-Boundary Blocked Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
