@@ -1,0 +1,275 @@
+{
+  "benchmark_id": "B2",
+  "calibrated_trace_replay_validation_manifest_packet": {
+    "accepted_only_if": [
+      "manifest_id equals B2-T5-calibrated-trace-row-replay-validation-manifest",
+      "provenance_manifest_id equals B2-T5-calibrated-trace-row-provenance-manifest",
+      "calibration_source_manifest_id and trace_packet_id match the source gates",
+      "calibration_source_manifest_hash and provenance_manifest_hash match the accepted source gates",
+      "row batch, detector trace, decoder profile, confusion matrix, posterior likelihood, baseline prediction, injected prediction, and holdout partition replays are hash-bound",
+      "holdout non-regression and all-challenge coverage replay tables are hash-bound",
+      "b7_credit_boundary keeps dependency_credit_allowed false until accepted calibrated rows and all-challenge non-regression exist",
+      "source evidence files are present and replay_hashes bind provenance, calibration source, and trace identifiers",
+      "claim_boundary forbids production decoder, threshold, calibrated-device, hardware-result, new-code, quantum-advantage, and B7 resource-credit claims"
+    ],
+    "calibration_source_manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "calibration_source_manifest_id": "B2-T5-calibration-source-manifest",
+    "challenge_count": 3,
+    "holdout_profile_shots": 864,
+    "manifest_hash": "206df5ca2c1a7e5d7aa8a8f140abeb9b8f1bfb80bf7eaaa2de70fb5033dd4137",
+    "manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "production_required_keys": [
+      "provenance_manifest_hash",
+      "row_batch_replay_hash",
+      "detector_trace_replay_hash",
+      "decoder_profile_replay_hash",
+      "confusion_matrix_replay_hash",
+      "posterior_likelihood_replay_hash",
+      "baseline_prediction_replay_hash",
+      "injected_prediction_replay_hash",
+      "holdout_partition_replay_hash",
+      "holdout_nonregression_replay_hash",
+      "all_challenge_coverage_replay_hash",
+      "b7_credit_boundary",
+      "claim_boundary"
+    ],
+    "provenance_manifest_hash": "05ae214885638ff10adf13fdf017063929d728d00e40ca4ed858b90b0844c208",
+    "provenance_manifest_id": "B2-T5-calibrated-trace-row-provenance-manifest",
+    "required_evidence_files": [
+      "accepted_calibrated_trace_provenance_manifest",
+      "row_batch_replay_manifest",
+      "detector_trace_replay_manifest",
+      "decoder_profile_replay_manifest",
+      "confusion_matrix_replay_artifact",
+      "posterior_likelihood_replay_table",
+      "baseline_prediction_replay_manifest",
+      "injected_prediction_replay_manifest",
+      "holdout_partition_replay_manifest",
+      "holdout_nonregression_replay_table",
+      "all_challenge_coverage_replay_table",
+      "b7_credit_boundary_note",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "manifest_id",
+      "provenance_manifest_id",
+      "calibration_source_manifest_id",
+      "trace_packet_id",
+      "calibration_source_manifest_hash",
+      "provenance_manifest_hash",
+      "row_batch_replay_hash",
+      "detector_trace_replay_hash",
+      "decoder_profile_replay_hash",
+      "confusion_matrix_replay_hash",
+      "posterior_likelihood_replay_hash",
+      "baseline_prediction_replay_hash",
+      "injected_prediction_replay_hash",
+      "holdout_partition_replay_hash",
+      "holdout_nonregression_replay_hash",
+      "all_challenge_coverage_replay_hash",
+      "b7_credit_boundary",
+      "claim_boundary"
+    ],
+    "source_b7_dependency_credit_gate": "results/B7_B2_calibrated_dependency_credit_gate_v0.json",
+    "source_trace_count": 576,
+    "source_trace_provenance_manifest_gate": "results/B2_calibrated_trace_provenance_manifest_gate_v0.json",
+    "submission_artifact_path": "results/B2_calibrated_trace_replay_validation_manifest_submissions/B2-T5-calibrated-trace-row-replay-validation-manifest.json",
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows"
+  },
+  "claim_boundary": {
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "next_gate": "Submit B2-T5-calibrated-trace-row-replay-validation-manifest with the accepted trace provenance hash, row/detector/decoder replay hashes, holdout non-regression, all-challenge coverage, and explicit B7 zero-credit boundary.",
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "No calibrated trace replay-validation manifest or calibrated trace row has been submitted or accepted; no production decoder, threshold, hardware result, calibrated-device result, new-code result, quantum advantage, or B7 resource credit is supported.",
+    "what_is_supported": "The B2/B7 calibrated-trace path now has a replay-validation manifest packet that must bind row, detector, decoder, posterior, prediction, holdout, all-challenge, and B7 zero-credit replay evidence before calibrated rows can count."
+  },
+  "last_updated": "2026-07-02",
+  "linked_benchmark_id": "B7",
+  "method": "b2_calibrated_trace_replay_validation_manifest_gate_v0",
+  "model_status": "trace_replay_validation_manifest_required_before_b2_b7_credit",
+  "problem_id": 22,
+  "requirements": [
+    {
+      "evidence": {
+        "failed_manifest_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_status": "calibrated_trace_provenance_manifest_open_missing_artifact",
+        "validation_error_count": 0
+      },
+      "label": "Calibrated trace provenance manifest remains valid and blocked only on P6/P7/P8",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "calibration_source_manifest_id": "B2-T5-calibration-source-manifest",
+        "provenance_manifest_hash": "05ae214885638ff10adf13fdf017063929d728d00e40ca4ed858b90b0844c208",
+        "provenance_manifest_id": "B2-T5-calibrated-trace-row-provenance-manifest",
+        "trace_packet_id": "B2-T5-calibrated-flag-observation-rows"
+      },
+      "label": "Replay manifest is bound to source, provenance, and calibrated trace packet",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 13,
+        "required_evidence_file_count": 13,
+        "required_key_count": 18
+      },
+      "label": "Replay manifest packet carries locked replay schema and evidence classes",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "challenge_count": 3,
+        "holdout_profile_shots": 864,
+        "source_trace_count": 576
+      },
+      "label": "Existing calibrated trace denominator shape is preserved",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "accepted_priority_trace_rows": 0,
+        "b7_dependency_credit_allowed": false,
+        "provenance_b7_dependency_credit_allowed": false
+      },
+      "label": "B7 dependency credit remains blocked before accepted replay-validated rows",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B2_calibrated_trace_replay_validation_manifest_submissions/B2-T5-calibrated-trace-row-replay-validation-manifest.json"
+      },
+      "label": "Calibrated trace replay-validation manifest artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "manifest_id",
+          "provenance_manifest_id",
+          "calibration_source_manifest_id",
+          "trace_packet_id",
+          "calibration_source_manifest_hash",
+          "provenance_manifest_hash",
+          "row_batch_replay_hash",
+          "detector_trace_replay_hash",
+          "decoder_profile_replay_hash",
+          "confusion_matrix_replay_hash",
+          "posterior_likelihood_replay_hash",
+          "baseline_prediction_replay_hash",
+          "injected_prediction_replay_hash",
+          "holdout_partition_replay_hash",
+          "holdout_nonregression_replay_hash",
+          "all_challenge_coverage_replay_hash",
+          "b7_credit_boundary",
+          "claim_boundary"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "provenance_manifest_hash",
+          "row_batch_replay_hash",
+          "detector_trace_replay_hash",
+          "decoder_profile_replay_hash",
+          "confusion_matrix_replay_hash",
+          "posterior_likelihood_replay_hash",
+          "baseline_prediction_replay_hash",
+          "injected_prediction_replay_hash",
+          "holdout_partition_replay_hash",
+          "holdout_nonregression_replay_hash",
+          "all_challenge_coverage_replay_hash",
+          "b7_credit_boundary",
+          "claim_boundary"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted replay manifest satisfies the locked calibrated-trace replay schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "b7_boundary_declared": false,
+        "claim_boundary_bound": false,
+        "manifest_bound": false,
+        "replay_bound": false,
+        "source_evidence_files_present": false
+      },
+      "label": "Submitted replay manifest is source-backed, manifest-bound, replay-bound, B7-boundary-bound, and claim-boundary-bound",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "b7_dependency_credit_allowed": false,
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "label": "Forbidden decoder, threshold, hardware, advantage, and B7-credit claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000201,
+  "source_b7_dependency_credit_gate": "results/B7_B2_calibrated_dependency_credit_gate_v0.json",
+  "source_trace_provenance_manifest_gate": "results/B2_calibrated_trace_provenance_manifest_gate_v0.json",
+  "status": "calibrated_trace_replay_validation_manifest_open_missing_artifact",
+  "summary": {
+    "accepted_priority_trace_rows": 0,
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "calibration_source_manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "calibration_source_manifest_id": "B2-T5-calibration-source-manifest",
+    "challenge_count": 3,
+    "failed_manifest_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "hardware_result_claimed": false,
+    "holdout_profile_shots": 864,
+    "manifest_hash": "206df5ca2c1a7e5d7aa8a8f140abeb9b8f1bfb80bf7eaaa2de70fb5033dd4137",
+    "manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "manifest_requirement_count": 9,
+    "manifest_requirements_failed": 3,
+    "manifest_requirements_passed": 6,
+    "missing_key_count": 18,
+    "new_code_claimed": false,
+    "production_decoder_claimed": false,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 13,
+    "provenance_manifest_hash": "05ae214885638ff10adf13fdf017063929d728d00e40ca4ed858b90b0844c208",
+    "provenance_manifest_id": "B2-T5-calibrated-trace-row-provenance-manifest",
+    "quantum_advantage_claimed": false,
+    "required_evidence_file_count": 13,
+    "required_key_count": 18,
+    "source_trace_count": 576,
+    "submitted_key_count": 0,
+    "submitted_manifest_exists": false,
+    "threshold_claimed": false,
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows",
+    "validation_error_count": 0
+  },
+  "title": "B2 Calibrated Trace Replay-Validation Manifest Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
