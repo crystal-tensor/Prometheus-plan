@@ -1,0 +1,160 @@
+{
+  "benchmark_id": "B10",
+  "boundary_packet": {
+    "acceptance_packet_hash": "d12e99b601c261d198a9ecdde701c7bf8298eb27b25c1620761db5593d4e4c67",
+    "acceptance_packet_id": "B4B8-M6-real-backend-transcript-row-acceptance-packet",
+    "accepted_priority_transcript_rows": 0,
+    "b10_bqp_separation_credit_allowed": false,
+    "b10_soundness_credit_allowed": false,
+    "boundary_hash": "eab53cdab2e07e4e8267eb0d28ab5905de2e5229b4e32f63c0e01ac832d40b45",
+    "boundary_id": "B10-T2-real-backend-transcript-row-acceptance-boundary",
+    "bqp_separation_claimed": false,
+    "full_leak_allowed_accepts_per_160": 40,
+    "holdout_row_count": 160,
+    "no_leak_allowed_accepts_per_160": 16,
+    "quantum_advantage_claimed": false,
+    "real_backend_transcript_rows": 0,
+    "required_downstream_before_credit": [
+      "accepted B4B8-M6-provider-session-manifest",
+      "accepted B4B8-M6-real-backend-transcript-provenance-manifest",
+      "accepted B4B8-M6-real-backend-transcript-replay-validation-manifest",
+      "accepted B4B8-M6-real-backend-transcript-row-acceptance-packet",
+      "nonzero real backend transcript rows",
+      "leakage-blind no-leak retest <=16/160",
+      "full-leak retest <=40/160 or explicit exclusion",
+      "spoofer attack replay table",
+      "B10 zero-credit boundary note replaced by an accepted credit boundary"
+    ],
+    "source_acceptance_packet_gate": "results/B4_B8_real_backend_transcript_row_acceptance_packet_gate_v0.json",
+    "source_method": "b4_b8_real_backend_transcript_row_acceptance_packet_gate_v0",
+    "transcript_packet_id": "B4B8-M6-real-backend-transcript-rows"
+  },
+  "claim_boundary": {
+    "b10_bqp_separation_credit_allowed": false,
+    "b10_soundness_credit_allowed": false,
+    "bqp_separation_claimed": false,
+    "next_gate": "Submit the provider/session manifest, transcript provenance manifest, transcript replay-validation manifest, row acceptance packet, and real backend transcript rows before B10-T2 can leave zero-credit status.",
+    "quantum_advantage_claimed": false,
+    "what_is_not_supported": "No real backend transcript row, protocol soundness result, quantum advantage, or BQP separation is supported.",
+    "what_is_supported": "B10-T2 is now explicitly synchronized to the B4/B8 real-backend transcript row acceptance packet gate as the current zero-credit boundary."
+  },
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B4_B8",
+  "method": "b10_t2_real_backend_transcript_row_acceptance_boundary_v0",
+  "model_status": "b10_t2_zero_credit_boundary_after_b4_b8_row_acceptance_packet_gate",
+  "requirements": [
+    {
+      "evidence": {
+        "acceptance_packet_id": "B4B8-M6-real-backend-transcript-row-acceptance-packet",
+        "source_method": "b4_b8_real_backend_transcript_row_acceptance_packet_gate_v0",
+        "validation_error_count": 0
+      },
+      "label": "Source B4/B8 row acceptance packet gate is present and current",
+      "passed": true,
+      "requirement_id": "S1"
+    },
+    {
+      "evidence": {
+        "failed_acceptance_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "submitted_acceptance_packet_exists": false
+      },
+      "label": "Source gate remains blocked on the missing submitted packet only",
+      "passed": true,
+      "requirement_id": "S2"
+    },
+    {
+      "evidence": {
+        "full_leak_allowed_accepts_per_160": 40,
+        "holdout_row_count": 160,
+        "no_leak_allowed_accepts_per_160": 16
+      },
+      "label": "B10-T2 margin budgets are preserved",
+      "passed": true,
+      "requirement_id": "S3"
+    },
+    {
+      "evidence": {
+        "accepted_priority_transcript_rows": 0,
+        "real_backend_transcript_rows": 0
+      },
+      "label": "No real backend transcript rows or accepted transcript rows are present",
+      "passed": true,
+      "requirement_id": "S4"
+    },
+    {
+      "evidence": {
+        "b10_bqp_separation_credit_allowed": false,
+        "b10_soundness_credit_allowed": false
+      },
+      "label": "B10 soundness and BQP separation credit remain explicitly disabled",
+      "passed": true,
+      "requirement_id": "S5"
+    },
+    {
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "cryptographic_soundness_proved": false,
+        "protocol_soundness_proved": false,
+        "quantum_advantage_claimed": false,
+        "sampling_hardness_proved": false
+      },
+      "label": "Forbidden soundness, hardness, advantage, and BQP claims remain false",
+      "passed": true,
+      "requirement_id": "S6"
+    },
+    {
+      "evidence": {
+        "required_downstream_before_credit": [
+          "accepted B4B8-M6-provider-session-manifest",
+          "accepted B4B8-M6-real-backend-transcript-provenance-manifest",
+          "accepted B4B8-M6-real-backend-transcript-replay-validation-manifest",
+          "accepted B4B8-M6-real-backend-transcript-row-acceptance-packet",
+          "nonzero real backend transcript rows",
+          "leakage-blind no-leak retest <=16/160",
+          "full-leak retest <=40/160 or explicit exclusion",
+          "spoofer attack replay table",
+          "B10 zero-credit boundary note replaced by an accepted credit boundary"
+        ]
+      },
+      "label": "B10 boundary packet records the required downstream evidence before credit",
+      "passed": true,
+      "requirement_id": "S7"
+    }
+  ],
+  "runtime_seconds": 0.0002,
+  "source_acceptance_packet_gate": "results/B4_B8_real_backend_transcript_row_acceptance_packet_gate_v0.json",
+  "source_target_id": "B10-T2",
+  "status": "b10_t2_real_backend_transcript_row_acceptance_boundary_synced",
+  "summary": {
+    "acceptance_packet_id": "B4B8-M6-real-backend-transcript-row-acceptance-packet",
+    "accepted_priority_transcript_rows": 0,
+    "b10_bqp_separation_credit_allowed": false,
+    "b10_soundness_credit_allowed": false,
+    "boundary_hash": "eab53cdab2e07e4e8267eb0d28ab5905de2e5229b4e32f63c0e01ac832d40b45",
+    "boundary_id": "B10-T2-real-backend-transcript-row-acceptance-boundary",
+    "bqp_separation_claimed": false,
+    "cryptographic_soundness_proved": false,
+    "failed_requirement_ids": [],
+    "full_leak_allowed_accepts_per_160": 40,
+    "holdout_row_count": 160,
+    "no_leak_allowed_accepts_per_160": 16,
+    "protocol_soundness_proved": false,
+    "quantum_advantage_claimed": false,
+    "real_backend_transcript_rows": 0,
+    "requirement_count": 7,
+    "requirements_failed": 0,
+    "requirements_passed": 7,
+    "sampling_hardness_proved": false,
+    "source_acceptance_packet_hash": "d12e99b601c261d198a9ecdde701c7bf8298eb27b25c1620761db5593d4e4c67",
+    "submitted_acceptance_packet_exists": false,
+    "transcript_packet_id": "B4B8-M6-real-backend-transcript-rows",
+    "validation_error_count": 0
+  },
+  "title": "B10-T2 Real-Backend Transcript Row Acceptance Boundary",
+  "validation_errors": [],
+  "version": "0.1"
+}
