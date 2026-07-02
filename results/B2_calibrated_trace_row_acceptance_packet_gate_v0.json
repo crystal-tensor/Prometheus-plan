@@ -1,0 +1,302 @@
+{
+  "benchmark_id": "B2",
+  "calibrated_trace_row_acceptance_packet": {
+    "acceptance_packet_id": "B2-T5-calibrated-trace-row-acceptance-packet",
+    "accepted_only_if": [
+      "acceptance_packet_id equals B2-T5-calibrated-trace-row-acceptance-packet",
+      "trace, calibration-source, provenance, and replay-validation IDs match source gates",
+      "calibration, provenance, replay-validation, and priority-packet hashes match source gates",
+      "row batch, detector trace, decoder profile, confusion, posterior, prediction, holdout, and coverage artifacts are hash-bound",
+      "accepted_trace_row_count is positive only after all-challenge non-regression passes",
+      "B7 dependency credit remains zero until accepted calibrated rows and independent all-challenge evidence exist",
+      "claim_boundary forbids production-decoder, threshold, hardware-result, calibrated-device, quantum-advantage, and B7 resource-credit claims"
+    ],
+    "calibration_source_manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "calibration_source_manifest_id": "B2-T5-calibration-source-manifest",
+    "challenge_count": 3,
+    "holdout_profile_shots": 864,
+    "packet_hash": "3cf42ae6e29cf23f20120a5d48db83efa510db007f24ec9b62fc9660ef8420c3",
+    "priority_packet_hash": "abec5e9114f6a6dcdc4d2b0bf7cc580c22fc6d8007fc68bdc2b1e9c7aae9378d",
+    "production_required_keys": [
+      "replay_validation_manifest_hash",
+      "priority_packet_hash",
+      "row_batch_manifest_hash",
+      "detector_trace_manifest_hash",
+      "decoder_profile_manifest_hash",
+      "confusion_matrix_table_hash",
+      "posterior_likelihood_table_hash",
+      "baseline_prediction_table_hash",
+      "injected_prediction_table_hash",
+      "holdout_partition_hash",
+      "holdout_nonregression_table_hash",
+      "all_challenge_coverage_table_hash",
+      "accepted_trace_row_count",
+      "all_challenge_nonregression_passed",
+      "b7_credit_boundary",
+      "claim_boundary"
+    ],
+    "provenance_manifest_hash": "05ae214885638ff10adf13fdf017063929d728d00e40ca4ed858b90b0844c208",
+    "provenance_manifest_id": "B2-T5-calibrated-trace-row-provenance-manifest",
+    "replay_validation_manifest_hash": "206df5ca2c1a7e5d7aa8a8f140abeb9b8f1bfb80bf7eaaa2de70fb5033dd4137",
+    "replay_validation_manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "required_evidence_files": [
+      "accepted_replay_validation_manifest",
+      "priority_trace_row_packet",
+      "row_batch_manifest",
+      "detector_trace_manifest",
+      "decoder_profile_manifest",
+      "confusion_matrix_table",
+      "posterior_likelihood_table",
+      "baseline_prediction_table",
+      "injected_prediction_table",
+      "holdout_partition_manifest",
+      "holdout_nonregression_table",
+      "all_challenge_coverage_table",
+      "calibrated_row_acceptance_ledger",
+      "b7_zero_credit_boundary_note",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "acceptance_packet_id",
+      "trace_packet_id",
+      "calibration_source_manifest_id",
+      "provenance_manifest_id",
+      "replay_validation_manifest_id",
+      "calibration_source_manifest_hash",
+      "provenance_manifest_hash",
+      "replay_validation_manifest_hash",
+      "priority_packet_hash",
+      "row_batch_manifest_hash",
+      "detector_trace_manifest_hash",
+      "decoder_profile_manifest_hash",
+      "confusion_matrix_table_hash",
+      "posterior_likelihood_table_hash",
+      "baseline_prediction_table_hash",
+      "injected_prediction_table_hash",
+      "holdout_partition_hash",
+      "holdout_nonregression_table_hash",
+      "all_challenge_coverage_table_hash",
+      "accepted_trace_row_count",
+      "all_challenge_nonregression_passed",
+      "b7_credit_boundary",
+      "claim_boundary",
+      "source_evidence_files_present"
+    ],
+    "source_trace_count": 576,
+    "source_trace_priority_packet_gate": "results/B2_calibrated_trace_priority_packet_gate_v0.json",
+    "source_trace_replay_validation_manifest_gate": "results/B2_calibrated_trace_replay_validation_manifest_gate_v0.json",
+    "submission_artifact_path": "research/submissions/B2-T5-calibrated-trace-row-acceptance-packet.json",
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows"
+  },
+  "claim_boundary": {
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "hardware_result_claimed": false,
+    "new_code_claimed": false,
+    "next_gate": "Submit B2-T5-calibrated-trace-row-acceptance-packet with accepted replay manifest hash, source-backed row batch replay, all-challenge non-regression, calibrated row acceptance ledger, B7 zero-credit boundary, and claim boundary.",
+    "production_decoder_claimed": false,
+    "quantum_advantage_claimed": false,
+    "threshold_claimed": false,
+    "what_is_not_supported": "No calibrated trace row acceptance packet or calibrated row artifact has been submitted or accepted; no production decoder, threshold, hardware result, calibrated-device result, quantum advantage, or B7 resource credit is supported.",
+    "what_is_supported": "The B2/B7 calibrated-trace path now has a row acceptance packet that binds the replay-validation manifest, priority packet hash, row batch, detector traces, decoder profiles, holdout non-regression, all-challenge coverage, and B7 zero-credit boundary."
+  },
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B7",
+  "method": "b2_calibrated_trace_row_acceptance_packet_gate_v0",
+  "model_status": "trace_row_acceptance_packet_required_before_b2_b7_credit",
+  "problem_id": 22,
+  "requirements": [
+    {
+      "evidence": {
+        "failed_manifest_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_status": "calibrated_trace_replay_validation_manifest_open_missing_artifact",
+        "validation_error_count": 0
+      },
+      "label": "Replay-validation manifest gate remains valid and blocked only on P6/P7/P8",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "failed_priority_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "packet_hash": "abec5e9114f6a6dcdc4d2b0bf7cc580c22fc6d8007fc68bdc2b1e9c7aae9378d",
+        "priority_packet_id": "B2-T5-calibrated-flag-observation-rows"
+      },
+      "label": "Priority trace packet remains fixed and source-shaped",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 16,
+        "required_evidence_file_count": 15,
+        "required_key_count": 24
+      },
+      "label": "Acceptance packet carries locked row acceptance schema and evidence classes",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "challenge_count": 3,
+        "holdout_profile_shots": 864,
+        "source_trace_count": 576
+      },
+      "label": "Existing calibrated trace scope is preserved",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "accepted_priority_trace_rows": 0,
+        "b7_dependency_credit_allowed": false
+      },
+      "label": "B7 dependency credit remains blocked before accepted calibrated trace rows",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "research/submissions/B2-T5-calibrated-trace-row-acceptance-packet.json"
+      },
+      "label": "Calibrated trace row acceptance packet has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "acceptance_packet_id",
+          "trace_packet_id",
+          "calibration_source_manifest_id",
+          "provenance_manifest_id",
+          "replay_validation_manifest_id",
+          "calibration_source_manifest_hash",
+          "provenance_manifest_hash",
+          "replay_validation_manifest_hash",
+          "priority_packet_hash",
+          "row_batch_manifest_hash",
+          "detector_trace_manifest_hash",
+          "decoder_profile_manifest_hash",
+          "confusion_matrix_table_hash",
+          "posterior_likelihood_table_hash",
+          "baseline_prediction_table_hash",
+          "injected_prediction_table_hash",
+          "holdout_partition_hash",
+          "holdout_nonregression_table_hash",
+          "all_challenge_coverage_table_hash",
+          "accepted_trace_row_count",
+          "all_challenge_nonregression_passed",
+          "b7_credit_boundary",
+          "claim_boundary",
+          "source_evidence_files_present"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "replay_validation_manifest_hash",
+          "priority_packet_hash",
+          "row_batch_manifest_hash",
+          "detector_trace_manifest_hash",
+          "decoder_profile_manifest_hash",
+          "confusion_matrix_table_hash",
+          "posterior_likelihood_table_hash",
+          "baseline_prediction_table_hash",
+          "injected_prediction_table_hash",
+          "holdout_partition_hash",
+          "holdout_nonregression_table_hash",
+          "all_challenge_coverage_table_hash",
+          "accepted_trace_row_count",
+          "all_challenge_nonregression_passed",
+          "b7_credit_boundary",
+          "claim_boundary"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted acceptance packet satisfies the locked calibrated-trace row schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "b7_boundary_bound": false,
+        "claim_boundary_bound": false,
+        "manifest_bound": false,
+        "row_acceptance_valid": false,
+        "source_backed": false
+      },
+      "label": "Submitted acceptance packet is source-backed, manifest-bound, row-valid, B7-boundary-bound, and claim-boundary-bound",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "b7_dependency_credit_allowed": false,
+        "calibrated_device_claimed": false,
+        "hardware_result_claimed": false,
+        "new_code_claimed": false,
+        "production_decoder_claimed": false,
+        "quantum_advantage_claimed": false,
+        "threshold_claimed": false
+      },
+      "label": "Forbidden decoder, threshold, hardware, advantage, and B7-credit claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000228,
+  "source_trace_priority_packet_gate": "results/B2_calibrated_trace_priority_packet_gate_v0.json",
+  "source_trace_replay_validation_manifest_gate": "results/B2_calibrated_trace_replay_validation_manifest_gate_v0.json",
+  "status": "calibrated_trace_row_acceptance_packet_open_missing_artifact",
+  "summary": {
+    "acceptance_packet_hash": "3cf42ae6e29cf23f20120a5d48db83efa510db007f24ec9b62fc9660ef8420c3",
+    "acceptance_packet_id": "B2-T5-calibrated-trace-row-acceptance-packet",
+    "acceptance_requirement_count": 9,
+    "acceptance_requirements_failed": 3,
+    "acceptance_requirements_passed": 6,
+    "accepted_priority_trace_rows": 0,
+    "b7_credit_delta": 0,
+    "b7_dependency_credit_allowed": false,
+    "calibrated_device_claimed": false,
+    "calibration_source_manifest_hash": "5e832922d1e2671a5ac0cc549e300d56e597210d66c97d5ef0f7e76242c6e46a",
+    "calibration_source_manifest_id": "B2-T5-calibration-source-manifest",
+    "challenge_count": 3,
+    "failed_acceptance_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "hardware_result_claimed": false,
+    "holdout_profile_shots": 864,
+    "missing_key_count": 24,
+    "new_code_claimed": false,
+    "priority_packet_hash": "abec5e9114f6a6dcdc4d2b0bf7cc580c22fc6d8007fc68bdc2b1e9c7aae9378d",
+    "production_decoder_claimed": false,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 16,
+    "provenance_manifest_hash": "05ae214885638ff10adf13fdf017063929d728d00e40ca4ed858b90b0844c208",
+    "provenance_manifest_id": "B2-T5-calibrated-trace-row-provenance-manifest",
+    "quantum_advantage_claimed": false,
+    "replay_validation_manifest_hash": "206df5ca2c1a7e5d7aa8a8f140abeb9b8f1bfb80bf7eaaa2de70fb5033dd4137",
+    "replay_validation_manifest_id": "B2-T5-calibrated-trace-row-replay-validation-manifest",
+    "required_evidence_file_count": 15,
+    "required_key_count": 24,
+    "source_trace_count": 576,
+    "submitted_acceptance_packet_exists": false,
+    "submitted_key_count": 0,
+    "threshold_claimed": false,
+    "trace_packet_id": "B2-T5-calibrated-flag-observation-rows",
+    "validation_error_count": 0
+  },
+  "title": "B2 Calibrated Trace Row Acceptance Packet Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
