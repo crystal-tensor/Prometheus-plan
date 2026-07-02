@@ -1,0 +1,282 @@
+{
+  "benchmark_id": "B3_B10",
+  "claim_boundary": {
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "bqp_separation_claimed": false,
+    "denominator_win_count": 0,
+    "next_gate": "Submit evidence for P8-A and P8-B first: at least one replayable accepted row and at least one same-access denominator win, then bind derivative/optimizer replay before any B10 access-boundary promotion.",
+    "quantum_advantage_claimed": false,
+    "what_is_not_supported": "P8 is not solved. The gate records zero accepted full-covariance rows, zero denominator wins, no B3 reopen, no B10-T1 credit, no quantum advantage, and no BQP separation.",
+    "what_is_supported": "The submitted B3/B10 F1 acceptance packet now has a machine-readable P8 pressure decomposition. Source and manifest binding pass; row acceptance is blocked only by accepted-row and denominator-win positivity."
+  },
+  "conditions": [
+    {
+      "condition_id": "C1",
+      "evidence": {
+        "acceptance_submission_hash": "40a5a0903de970b798f94d371c4d3cd6ccbdab9e514044ba760e05ac5db756cc",
+        "method": "b3_b10_full_covariance_row_acceptance_packet_gate_v0",
+        "submitted_acceptance_packet_exists": true,
+        "validation_error_count": 0
+      },
+      "label": "Source acceptance gate is the submitted zero-credit F1 gate",
+      "passed": true
+    },
+    {
+      "condition_id": "C2",
+      "evidence": {
+        "acceptance_requirements_failed": 1,
+        "acceptance_requirements_passed": 8,
+        "failed_acceptance_requirement_ids": [
+          "P8"
+        ]
+      },
+      "label": "P8 is isolated as the only failed acceptance requirement",
+      "passed": true
+    },
+    {
+      "condition_id": "C3",
+      "evidence": {
+        "manifest_bound": true,
+        "source_backed": true
+      },
+      "label": "Source and manifest binding subconditions already pass",
+      "passed": true
+    },
+    {
+      "condition_id": "C4",
+      "evidence": {
+        "row_acceptance_blockers": [
+          "accepted_full_covariance_row_count_positive",
+          "denominator_win_count_positive"
+        ],
+        "row_acceptance_subchecks": {
+          "accepted_full_covariance_row_count_positive": false,
+          "compiled_state_replay_hash_present": true,
+          "denominator_win_count_positive": false,
+          "derivative_estimator_replay_hash_present": true,
+          "full_covariance_row_table_hash_present": true,
+          "optimizer_loop_total_shots_lower_bound_locked": true,
+          "pauli_grouping_covariance_replay_hash_present": true,
+          "row_scope_hash_present": true,
+          "same_access_decision_hash_present": true
+        },
+        "row_acceptance_valid": false
+      },
+      "label": "Row-acceptance validity remains the live blocker",
+      "passed": true
+    },
+    {
+      "condition_id": "C5",
+      "evidence": {
+        "b10_boundary_bound": true,
+        "b3_boundary_bound": true,
+        "claim_boundary_bound": true
+      },
+      "label": "B3, B10, and claim-boundary bindings still pass",
+      "passed": true
+    },
+    {
+      "condition_id": "C6",
+      "evidence": {
+        "accepted_full_covariance_row_count": 0,
+        "b10_t1_credit_allowed": false,
+        "b3_reopen_ready": false,
+        "bqp_separation_claimed": false,
+        "denominator_win_count": 0,
+        "quantum_advantage_claimed": false
+      },
+      "label": "Zero-credit boundary remains locked while P8 is attacked",
+      "passed": true
+    },
+    {
+      "condition_id": "C7",
+      "evidence": {
+        "blocked_packet_ids": [
+          "P8-D"
+        ],
+        "ready_packet_ids": [
+          "P8-A",
+          "P8-B",
+          "P8-C",
+          "P8-E"
+        ]
+      },
+      "label": "P8 pressure is split into PR-sized packets",
+      "passed": true
+    }
+  ],
+  "dependency_benchmarks": [
+    "B3",
+    "B10"
+  ],
+  "last_updated": "2026-07-03",
+  "method": "b3_b10_f1_p8_acceptance_pressure_gate_v0",
+  "model_status": "submitted_f1_acceptance_packet_p8_blocker_decomposed_before_credit",
+  "p8_pressure_packet": {
+    "acceptance_packet_id": "B3-R1-full-covariance-row-acceptance-packet",
+    "acceptance_submission_hash": "40a5a0903de970b798f94d371c4d3cd6ccbdab9e514044ba760e05ac5db756cc",
+    "p8_evidence": {
+      "b10_boundary_bound": true,
+      "b3_boundary_bound": true,
+      "claim_boundary_bound": true,
+      "manifest_bound": true,
+      "row_acceptance_valid": false,
+      "source_backed": true
+    },
+    "pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+    "pressure_packet_id": "B3B10-F1-P8-acceptance-pressure",
+    "pressure_packet_ids": [
+      "P8-A",
+      "P8-B",
+      "P8-C",
+      "P8-D",
+      "P8-E"
+    ],
+    "row_acceptance_blockers": [
+      "accepted_full_covariance_row_count_positive",
+      "denominator_win_count_positive"
+    ],
+    "row_acceptance_subchecks": {
+      "accepted_full_covariance_row_count_positive": false,
+      "compiled_state_replay_hash_present": true,
+      "denominator_win_count_positive": false,
+      "derivative_estimator_replay_hash_present": true,
+      "full_covariance_row_table_hash_present": true,
+      "optimizer_loop_total_shots_lower_bound_locked": true,
+      "pauli_grouping_covariance_replay_hash_present": true,
+      "row_scope_hash_present": true,
+      "same_access_decision_hash_present": true
+    },
+    "row_bundle_hash": "64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53",
+    "source_acceptance_packet_gate": "results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json",
+    "source_acceptance_packet_submission": "results/B3_B10_full_covariance_row_acceptance_packet_submissions/B3-R1-full-covariance-row-acceptance-packet.json"
+  },
+  "pressure_packets": [
+    {
+      "acceptance_predicate": "accepted_full_covariance_row_count > 0 with replayable row evidence",
+      "blocker": "accepted_full_covariance_row_count is still 0",
+      "owner_role": "chemistry-measurement-agent",
+      "packet_id": "P8-A",
+      "required_evidence": [
+        "row-level observable table for H2/H2O/N2/LiH",
+        "compiled-state replay command transcript",
+        "row acceptance ledger with at least one accepted row",
+        "hash-bound replay bundle matching the submitted F1 packet"
+      ],
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Accepted-row validity replay"
+    },
+    {
+      "acceptance_predicate": "denominator_win_count > 0 under the locked same-access model",
+      "blocker": "denominator_win_count is still 0",
+      "owner_role": "baseline-adversary",
+      "packet_id": "P8-B",
+      "required_evidence": [
+        "same-access denominator comparison table",
+        "selected-CI/FCI replay transcript or stronger denominator replay",
+        "access-model note proving no hidden data-loading advantage",
+        "decision hash replacing the current negative same-access decision"
+      ],
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Same-access denominator win replay"
+    },
+    {
+      "acceptance_predicate": "derivative replay and optimizer ledger support the same accepted row and denominator comparison",
+      "blocker": "derivative and optimizer-loop evidence is hash-present but not yet acceptance-positive",
+      "owner_role": "measurement-optimization-agent",
+      "packet_id": "P8-C",
+      "required_evidence": [
+        "derivative estimator replay transcript",
+        "optimizer-loop cost ledger with state-prep and measurement charging",
+        "shot, circuit, and observable-count delta report",
+        "nonpromotion note if no cost collapse is achieved"
+      ],
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Derivative and optimizer-loop replay pressure"
+    },
+    {
+      "acceptance_predicate": "B10-T1 remains zero-credit until P8-A/P8-B/P8-C evidence is accepted",
+      "blocker": "B10-T1 credit is explicitly false until accepted rows and denominator wins exist",
+      "owner_role": "bqp-boundary-agent",
+      "packet_id": "P8-D",
+      "required_evidence": [
+        "B10 access-boundary note",
+        "positive same-access route claim boundary",
+        "BQP/advantage nonclaim ledger",
+        "dependency trace from accepted B3 rows to B10-T1 boundary"
+      ],
+      "status": "blocked_until_P8_A_B_C_pass",
+      "title": "B10 access-boundary replay"
+    },
+    {
+      "acceptance_predicate": "no B3 reopen, reaction-dynamics solution, advantage, or BQP claim before P8 passes",
+      "blocker": "the submitted packet must stay zero-credit while P8 is attacked",
+      "owner_role": "audit-agent",
+      "packet_id": "P8-E",
+      "required_evidence": [
+        "claim-boundary diff",
+        "forbidden-claim scan",
+        "benchmark YAML and landing-page status update",
+        "portfolio audit transcript"
+      ],
+      "status": "ready_for_external_pr_not_credit",
+      "title": "Claim-boundary audit"
+    }
+  ],
+  "problem_ids": [
+    49,
+    11
+  ],
+  "runtime_seconds": 0.000209,
+  "source_acceptance_packet_gate": "results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json",
+  "source_acceptance_packet_submission": "results/B3_B10_full_covariance_row_acceptance_packet_submissions/B3-R1-full-covariance-row-acceptance-packet.json",
+  "source_target_id": "B10-T1",
+  "status": "b3_b10_f1_p8_pressure_ready_zero_credit",
+  "summary": {
+    "acceptance_packet_id": "B3-R1-full-covariance-row-acceptance-packet",
+    "acceptance_submission_hash": "40a5a0903de970b798f94d371c4d3cd6ccbdab9e514044ba760e05ac5db756cc",
+    "accepted_full_covariance_row_count": 0,
+    "b10_t1_credit_allowed": false,
+    "b3_reopen_ready": false,
+    "blocked_pressure_packet_count": 1,
+    "blocked_pressure_packet_ids": [
+      "P8-D"
+    ],
+    "bqp_separation_claimed": false,
+    "conditions_failed": 0,
+    "conditions_passed": 7,
+    "denominator_win_count": 0,
+    "failed_condition_ids": [],
+    "p8_b10_boundary_bound": true,
+    "p8_b3_boundary_bound": true,
+    "p8_claim_boundary_bound": true,
+    "p8_manifest_bound": true,
+    "p8_row_acceptance_valid": false,
+    "p8_source_backed": true,
+    "pressure_packet_hash": "55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0",
+    "pressure_packet_id": "B3B10-F1-P8-acceptance-pressure",
+    "quantum_advantage_claimed": false,
+    "ready_pressure_packet_count": 4,
+    "ready_pressure_packet_ids": [
+      "P8-A",
+      "P8-B",
+      "P8-C",
+      "P8-E"
+    ],
+    "row_acceptance_blocker_count": 2,
+    "row_acceptance_blockers": [
+      "accepted_full_covariance_row_count_positive",
+      "denominator_win_count_positive"
+    ],
+    "row_bundle_hash": "64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53",
+    "source_failed_acceptance_requirement_ids": [
+      "P8"
+    ],
+    "validation_error_count": 0
+  },
+  "title": "B3/B10 F1 P8 Acceptance Pressure Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

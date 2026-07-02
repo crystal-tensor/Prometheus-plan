@@ -989,6 +989,44 @@ current_results:
     caveat: submitted_acceptance_packet_blocked_on_p8_no_denominator_win_no_bqp_boundary_claim
     result: ../results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json
     markdown_report: ../research/B3_B10_full_covariance_row_acceptance_packet_gate.md
+  b10_t1_b3_f1_p8_acceptance_pressure_gate_v0:
+    status: b3_b10_f1_p8_pressure_ready_zero_credit
+    method: b3_b10_f1_p8_acceptance_pressure_gate_v0
+    model_status: submitted_f1_acceptance_packet_p8_blocker_decomposed_before_credit
+    source_acceptance_packet_gate: ../results/B3_B10_full_covariance_row_acceptance_packet_gate_v0.json
+    source_acceptance_packet_submission: ../results/B3_B10_full_covariance_row_acceptance_packet_submissions/B3-R1-full-covariance-row-acceptance-packet.json
+    source_target_id: B10-T1
+    dependency_benchmark: B3/B10
+    pressure_packet_id: B3B10-F1-P8-acceptance-pressure
+    pressure_packet_hash: 55384c1a143b50d9b334193c3e55151f33bc9511b90dd19a21f22198bf9fe0b0
+    acceptance_packet_id: B3-R1-full-covariance-row-acceptance-packet
+    acceptance_submission_hash: 40a5a0903de970b798f94d371c4d3cd6ccbdab9e514044ba760e05ac5db756cc
+    row_bundle_hash: 64907f6c4fcdedede9e6edb0386a88bda478fc16ab06e462e3c68b1cfb2b5b53
+    source_failed_acceptance_requirement_ids: [P8]
+    p8_source_backed: true
+    p8_manifest_bound: true
+    p8_row_acceptance_valid: false
+    p8_b3_boundary_bound: true
+    p8_b10_boundary_bound: true
+    p8_claim_boundary_bound: true
+    row_acceptance_blocker_count: 2
+    row_acceptance_blockers: [accepted_full_covariance_row_count_positive, denominator_win_count_positive]
+    ready_pressure_packet_count: 4
+    blocked_pressure_packet_count: 1
+    ready_pressure_packet_ids: [P8-A, P8-B, P8-C, P8-E]
+    blocked_pressure_packet_ids: [P8-D]
+    accepted_full_covariance_row_count: 0
+    denominator_win_count: 0
+    b3_reopen_ready: false
+    b10_t1_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    conditions_passed: 7
+    conditions_failed: 0
+    validation_error_count: 0
+    caveat: p8_not_solved_pressure_decomposition_only_no_b10_t1_or_bqp_credit
+    result: ../results/B3_B10_F1_P8_acceptance_pressure_gate_v0.json
+    markdown_report: ../research/B3_B10_F1_P8_acceptance_pressure_gate.md
   b10_t1_b3_full_covariance_post_boundary_submission_triage_v0:
     status: b3_b10_full_covariance_post_boundary_triage_ready_no_credit
     method: b3_b10_full_covariance_post_boundary_submission_triage_v0
@@ -2345,6 +2383,7 @@ prototype_artifacts:
   t1_b3_b10_full_covariance_row_replay_validation_manifest_gate: ../tools/b3_b10_full_covariance_row_replay_validation_manifest_gate.py
   t1_b3_b10_full_covariance_row_acceptance_packet_gate: ../tools/b3_b10_full_covariance_row_acceptance_packet_gate.py
   t1_b3_b10_f1_acceptance_packet_submission: ../tools/b3_b10_f1_acceptance_packet_submission.py
+  t1_b3_b10_f1_p8_acceptance_pressure_gate: ../tools/b3_b10_f1_p8_acceptance_pressure_gate.py
   t1_b3_b10_full_covariance_post_boundary_submission_triage: ../tools/b3_b10_full_covariance_post_boundary_submission_triage.py
   t1_b3_b10_f1_full_covariance_row_packet_gate: ../tools/b3_b10_f1_full_covariance_row_packet_gate.py
   t1_b3_b10_f1_pilot_row_candidate_gate: ../tools/b3_b10_f1_pilot_row_candidate_gate.py
