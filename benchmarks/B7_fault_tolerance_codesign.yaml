@@ -170,6 +170,35 @@ current_results:
     caveat: zero_credit_boundary_after_b1_resource_escape_acceptance_packet_no_b7_resource_credit
     report: ../results/B7_B1_cone01_resource_escape_boundary_v0.json
     markdown_report: ../research/B7_B1_cone01_resource_escape_boundary.md
+  b1_b7_cone01_post_boundary_submission_triage_v0:
+    status: cone01_post_boundary_submission_triage_ready_no_credit
+    method: b1_b7_cone01_post_boundary_submission_triage_v0
+    source_b1_post_boundary_triage: ../results/B1_B7_cone01_post_boundary_submission_triage_v0.json
+    source_boundary: ../results/B7_B1_cone01_resource_escape_boundary_v0.json
+    triage_id: B1-B7-cone01-post-boundary-submission-triage
+    triage_hash: 475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b
+    source_boundary_hash: f99832a2905345cc099fbc07eb6cabc5c6e32868f76a5a2efa0f66471e31c8e5
+    work_packet_count: 4
+    ready_external_pr_packet_count: 3
+    blocked_packet_count: 1
+    ready_packet_ids: [R1, R2, R3]
+    blocked_packet_ids: [R4]
+    conditions_satisfied: 6
+    conditions_failed: 0
+    selected_line_numbers: [268, 1381]
+    dropped_overlap_candidate_line_numbers: [1378]
+    line1381_off_grid_parameter_count: 5
+    line1381_unpriced_proxy_t_pressure: 100
+    accepted_exit_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: post_boundary_triage_only_no_b7_resource_or_ft_credit
+    report: ../results/B1_B7_cone01_post_boundary_submission_triage_v0.json
+    markdown_report: ../research/B1_B7_cone01_post_boundary_submission_triage.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -901,6 +930,7 @@ prototype_artifacts:
   b2_calibrated_dependency_credit_gate: ../tools/b7_b2_calibrated_dependency_credit_gate.py
   b7_b2_calibrated_trace_acceptance_boundary: ../tools/b7_b2_calibrated_trace_acceptance_boundary.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
+  b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
