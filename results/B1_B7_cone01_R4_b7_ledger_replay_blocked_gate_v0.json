@@ -1,0 +1,254 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Accept one of R1, R2, or R3, then submit R4 with refreshed B7 ledger replay, resource delta replay, no-double-counting ledger, and claim boundary.",
+    "r4_replay_allowed": false,
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "No refreshed B7 ledger replay, resource credit, FT ledger credit, occurrence removal, proxy-T reduction, or STV credit is supported.",
+    "what_is_supported": "R4 refreshed B7 ledger replay is explicitly blocked until at least one of R1/R2/R3 has an accepted source-backed exit route."
+  },
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r4_b7_ledger_replay_blocked_gate_v0",
+  "model_status": "r4_refreshed_b7_ledger_replay_must_wait_for_r1_r2_or_r3_acceptance",
+  "r4_b7_ledger_replay_block_packet": {
+    "blocked_reasons": [
+      "R1 line-1381 resolution artifact is not submitted or accepted",
+      "R2 line-1378 overlap-recovery artifact is not submitted or accepted",
+      "R3 thirty-certificate occurrence-removal batch is not submitted or accepted",
+      "accepted_exit_route_count is 0",
+      "accepted_occurrence_removal is 0",
+      "accepted_proxy_t_reduction is 0",
+      "B7 zero-credit boundary still forbids resource, FT-ledger, occurrence, proxy-T, and STV credit"
+    ],
+    "boundary_hash": "f99832a2905345cc099fbc07eb6cabc5c6e32868f76a5a2efa0f66471e31c8e5",
+    "packet_hash": "9c62cf478bb831a75fb45d16ec80679f2c01dc786a9666e25ef6d6692245048d",
+    "packet_id": "B1-B7-cone01-R4-refreshed-B7-ledger-replay",
+    "route_rows": [
+      {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r1_line1381_resolution_packet_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R1",
+        "submitted_artifact_exists": false
+      },
+      {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r2_line1378_overlap_recovery_packet_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R2",
+        "submitted_artifact_exists": false
+      },
+      {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r3_occurrence_certificate_batch_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R3",
+        "submitted_artifact_exists": false
+      }
+    ],
+    "route_table_hash": "36abe75337d1073413100b3a4d9421e0d829ba7ddc5fb3e41006c313038b6250",
+    "source_b7_resource_boundary": "results/B7_B1_cone01_resource_escape_boundary_v0.json",
+    "source_post_boundary_triage": "results/B1_B7_cone01_post_boundary_submission_triage_v0.json",
+    "source_r1_gate": "results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json",
+    "source_r2_gate": "results/B1_B7_cone01_R2_line1378_overlap_recovery_packet_gate_v0.json",
+    "source_r3_gate": "results/B1_B7_cone01_R3_occurrence_certificate_batch_gate_v0.json",
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "unblock_only_if": [
+      "at least one of R1, R2, or R3 has a source-backed accepted exit route",
+      "accepted_exit_route_count is greater than 0",
+      "resource_delta_ledger and no-double-counting ledger are accepted by the resource-escape packet",
+      "B7 refreshed ledger replay explicitly replays accepted occurrence/proxy-T deltas"
+    ],
+    "work_packet_id": "R4"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "blocked_packet_ids": [
+          "R4"
+        ],
+        "method": "b1_b7_cone01_post_boundary_submission_triage_v0"
+      },
+      "label": "Post-boundary triage keeps R4 blocked",
+      "passed": true,
+      "requirement_id": "B1"
+    },
+    {
+      "evidence": {
+        "b7_ft_ledger_credit_allowed": false,
+        "b7_resource_credit_allowed": false,
+        "b7_space_time_volume_credit": 0,
+        "boundary_hash": "f99832a2905345cc099fbc07eb6cabc5c6e32868f76a5a2efa0f66471e31c8e5",
+        "method": "b7_b1_cone01_resource_escape_boundary_v0"
+      },
+      "label": "B7 zero-credit boundary still denies all credit classes",
+      "passed": true,
+      "requirement_id": "B2"
+    },
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r1_line1381_resolution_packet_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R1",
+        "submitted_artifact_exists": false
+      },
+      "label": "R1 remains unaccepted with zero credit",
+      "passed": true,
+      "requirement_id": "B3"
+    },
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r2_line1378_overlap_recovery_packet_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R2",
+        "submitted_artifact_exists": false
+      },
+      "label": "R2 remains unaccepted with zero credit",
+      "passed": true,
+      "requirement_id": "B4"
+    },
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r3_occurrence_certificate_batch_gate_v0",
+        "requirements_failed": 3,
+        "requirements_passed": 6,
+        "route": "R3",
+        "submitted_artifact_exists": false
+      },
+      "label": "R3 remains unaccepted with zero credit",
+      "passed": true,
+      "requirement_id": "B5"
+    },
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0
+      },
+      "label": "No accepted occurrence or proxy-T delta exists for B7 replay",
+      "passed": true,
+      "requirement_id": "B6"
+    },
+    {
+      "evidence": {
+        "r4_block_packet_hash": "9c62cf478bb831a75fb45d16ec80679f2c01dc786a9666e25ef6d6692245048d",
+        "route_count": 3,
+        "route_table_hash": "36abe75337d1073413100b3a4d9421e0d829ba7ddc5fb3e41006c313038b6250"
+      },
+      "label": "R4 block packet is source-bound to the three route gates",
+      "passed": true,
+      "requirement_id": "B7"
+    },
+    {
+      "evidence": {
+        "b7_ledger_improvement_claimed": false,
+        "b7_space_time_volume_credit": 0,
+        "resource_saving_claimed": false
+      },
+      "label": "Forbidden resource claims remain false",
+      "passed": true,
+      "requirement_id": "B8"
+    }
+  ],
+  "runtime_seconds": 0.000367,
+  "source_b7_resource_boundary": "results/B7_B1_cone01_resource_escape_boundary_v0.json",
+  "source_post_boundary_triage": "results/B1_B7_cone01_post_boundary_submission_triage_v0.json",
+  "source_r1_gate": "results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json",
+  "source_r2_gate": "results/B1_B7_cone01_R2_line1378_overlap_recovery_packet_gate_v0.json",
+  "source_r3_gate": "results/B1_B7_cone01_R3_occurrence_certificate_batch_gate_v0.json",
+  "source_target_id": "T-B1-004df/T-B7-012o",
+  "status": "cone01_r4_b7_ledger_replay_blocked_until_exit_route_acceptance",
+  "summary": {
+    "accepted_exit_route_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "blocked_packet_ids": [
+      "R4"
+    ],
+    "boundary_hash": "f99832a2905345cc099fbc07eb6cabc5c6e32868f76a5a2efa0f66471e31c8e5",
+    "failed_requirement_ids": [],
+    "r4_block_packet_hash": "9c62cf478bb831a75fb45d16ec80679f2c01dc786a9666e25ef6d6692245048d",
+    "r4_packet_id": "B1-B7-cone01-R4-refreshed-B7-ledger-replay",
+    "r4_replay_allowed": false,
+    "requirement_count": 8,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "resource_saving_claimed": false,
+    "route_table_hash": "36abe75337d1073413100b3a4d9421e0d829ba7ddc5fb3e41006c313038b6250",
+    "submitted_route_count": 0,
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R4 B7 Ledger Replay Blocked Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

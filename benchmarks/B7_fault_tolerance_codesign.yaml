@@ -310,6 +310,38 @@ current_results:
     caveat: r3_occurrence_certificate_batch_only_no_certificates_no_resource_saving_or_b7_credit
     report: ../results/B1_B7_cone01_R3_occurrence_certificate_batch_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R3_occurrence_certificate_batch_gate.md
+  b1_b7_cone01_r4_b7_ledger_replay_blocked_gate_v0:
+    status: cone01_r4_b7_ledger_replay_blocked_until_exit_route_acceptance
+    method: b1_b7_cone01_r4_b7_ledger_replay_blocked_gate_v0
+    source_b1_r4_b7_ledger_block_gate: ../results/B1_B7_cone01_R4_b7_ledger_replay_blocked_gate_v0.json
+    source_post_boundary_triage: ../results/B1_B7_cone01_post_boundary_submission_triage_v0.json
+    source_b7_resource_boundary: ../results/B7_B1_cone01_resource_escape_boundary_v0.json
+    source_r1_gate: ../results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json
+    source_r2_gate: ../results/B1_B7_cone01_R2_line1378_overlap_recovery_packet_gate_v0.json
+    source_r3_gate: ../results/B1_B7_cone01_R3_occurrence_certificate_batch_gate_v0.json
+    source_target_id: T-B1-004df/T-B7-012o
+    r4_packet_id: B1-B7-cone01-R4-refreshed-B7-ledger-replay
+    r4_block_packet_hash: 9c62cf478bb831a75fb45d16ec80679f2c01dc786a9666e25ef6d6692245048d
+    route_table_hash: 36abe75337d1073413100b3a4d9421e0d829ba7ddc5fb3e41006c313038b6250
+    triage_hash: 475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b
+    boundary_hash: f99832a2905345cc099fbc07eb6cabc5c6e32868f76a5a2efa0f66471e31c8e5
+    requirements_passed: 8
+    requirements_failed: 0
+    blocked_packet_ids: [R4]
+    submitted_route_count: 0
+    accepted_exit_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    r4_replay_allowed: false
+    validation_error_count: 0
+    caveat: r4_blocked_gate_only_no_b7_ledger_replay_or_credit_until_r1_r2_or_r3_accepts
+    report: ../results/B1_B7_cone01_R4_b7_ledger_replay_blocked_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R4_b7_ledger_replay_blocked_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -1107,6 +1139,7 @@ prototype_artifacts:
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
   b1_b7_cone01_r2_line1378_overlap_recovery_packet_gate: ../tools/b1_b7_cone01_r2_line1378_overlap_recovery_packet_gate.py
   b1_b7_cone01_r3_occurrence_certificate_batch_gate: ../tools/b1_b7_cone01_r3_occurrence_certificate_batch_gate.py
+  b1_b7_cone01_r4_b7_ledger_replay_blocked_gate: ../tools/b1_b7_cone01_r4_b7_ledger_replay_blocked_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
