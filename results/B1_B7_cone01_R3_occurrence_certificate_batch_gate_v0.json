@@ -1,0 +1,294 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Submit B1-B7-cone01-R3-thirty-occurrence-certificates with 30 stable certificate hashes, replay evidence, B7 ledger replay, no-double-counting ledger, resource ledger, and claim boundary.",
+    "occurrence_removal_claimed": false,
+    "proxy_t_reduction_claimed": false,
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "No R3 artifact, occurrence-removing certificate batch, accepted exit route, proxy-T reduction, B7 ledger credit, or resource saving is supported.",
+    "what_is_supported": "R3 now has a source-bound packet schema for a 30-certificate occurrence-removal batch with a 600 proxy-T B7 ledger threshold."
+  },
+  "last_updated": "2026-07-03",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r3_occurrence_certificate_batch_gate_v0",
+  "model_status": "thirty_occurrence_removing_certificates_required_before_b7_credit",
+  "r3_occurrence_certificate_batch_packet": {
+    "acceptance_packet_hash": "e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420",
+    "accepted_only_if": [
+      "packet_id equals B1-B7-cone01-R3-thirty-occurrence-certificates",
+      "triage_hash, acceptance_packet_hash, and resource_threshold_hash match the locked source gates",
+      "certificate_count is exactly 30 or greater and every certificate has a stable hash",
+      "accepted_occurrence_removal is at least 30",
+      "proxy_t_reduction is at least 600 under the B7 occurrence ledger",
+      "certificate replay bundle and full-circuit or local-equivalence replay are supplied",
+      "resource_delta_ledger_hash, b7_ledger_replay_hash, and no_double_counting_ledger_hash are present",
+      "claim_boundary forbids resource-saving and B7-credit claims before the resource-escape acceptance packet accepts the route"
+    ],
+    "packet_hash": "c71e65798d03679ae367bf70efce8730a704b08aa6f28dd5cdc10d940cbfb268",
+    "packet_id": "B1-B7-cone01-R3-thirty-occurrence-certificates",
+    "production_required_keys": [
+      "certificate_batch_manifest_hash",
+      "certificate_count",
+      "accepted_occurrence_removal",
+      "proxy_t_reduction",
+      "occurrence_certificate_hashes",
+      "certificate_replay_bundle_hash",
+      "full_circuit_or_local_equivalence_replay_hash",
+      "resource_delta_ledger_hash",
+      "b7_ledger_replay_hash",
+      "no_double_counting_ledger_hash",
+      "claim_boundary",
+      "source_evidence_files_present"
+    ],
+    "required_evidence_files": [
+      "certificate_batch_manifest",
+      "thirty_occurrence_certificate_files",
+      "certificate_replay_bundle",
+      "full_circuit_or_local_equivalence_replay",
+      "resource_delta_ledger",
+      "b7_ledger_replay",
+      "no_double_counting_ledger",
+      "source_lineage_map",
+      "failure_mode_coverage_note",
+      "claim_boundary_note"
+    ],
+    "required_keys": [
+      "packet_id",
+      "source_triage_id",
+      "source_acceptance_packet_id",
+      "triage_hash",
+      "acceptance_packet_hash",
+      "resource_threshold_hash",
+      "certificate_batch_manifest_hash",
+      "certificate_count",
+      "accepted_occurrence_removal",
+      "proxy_t_reduction",
+      "occurrence_certificate_hashes",
+      "certificate_replay_bundle_hash",
+      "full_circuit_or_local_equivalence_replay_hash",
+      "resource_delta_ledger_hash",
+      "b7_ledger_replay_hash",
+      "no_double_counting_ledger_hash",
+      "failure_mode_coverage_note_hash",
+      "claim_boundary",
+      "source_evidence_files_present"
+    ],
+    "resource_threshold_hash": "22fbb35211b0a145a6c0c59086ebea04118aabcd341dcd77a6044c26a298fdc4",
+    "resource_thresholds": {
+      "accepted_occurrence_removal_before": 0,
+      "accepted_proxy_t_reduction_before": 0,
+      "dropped_overlap_candidate_line_numbers": [
+        1378
+      ],
+      "per_occurrence_proxy_t_credit": 20,
+      "required_accepted_occurrence_removal": 30,
+      "required_proxy_t_reduction": 600,
+      "selected_line_numbers": [
+        268,
+        1381
+      ],
+      "source_missing_occurrences_after_gate": 30,
+      "source_missing_proxy_t_ledger_reduction": 600
+    },
+    "source_acceptance_packet_gate": "results/B1_B7_cone01_resource_escape_acceptance_packet_gate_v0.json",
+    "source_post_boundary_triage": "results/B1_B7_cone01_post_boundary_submission_triage_v0.json",
+    "source_seeded_resource_boundary": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0.json",
+    "submission_artifact_path": "results/B1_B7_cone01_r3_occurrence_certificate_batch_submissions/B1-B7-cone01-R3-thirty-occurrence-certificates.json",
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "work_packet_id": "R3"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "ready_packet_ids": [
+          "R1",
+          "R2",
+          "R3"
+        ],
+        "source_method": "b1_b7_cone01_post_boundary_submission_triage_v0",
+        "validation_error_count": 0
+      },
+      "label": "Post-boundary triage is current and exposes R3 as ready",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "failed_acceptance_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "source_method": "b1_b7_cone01_resource_escape_acceptance_packet_gate_v0",
+        "submitted_acceptance_packet_exists": false
+      },
+      "label": "Resource-escape acceptance packet remains open on missing submitted evidence",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "missing_proxy_t_ledger_reduction_for_gcm_h6_1_20": 600,
+        "qiskit_loader_seeded_product_replay_passed": true,
+        "source_method": "b1_b7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0"
+      },
+      "label": "Seeded resource boundary still requires 30 occurrence removals and 600 proxy-T",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "resource_threshold_hash": "22fbb35211b0a145a6c0c59086ebea04118aabcd341dcd77a6044c26a298fdc4",
+        "resource_thresholds": {
+          "accepted_occurrence_removal_before": 0,
+          "accepted_proxy_t_reduction_before": 0,
+          "dropped_overlap_candidate_line_numbers": [
+            1378
+          ],
+          "per_occurrence_proxy_t_credit": 20,
+          "required_accepted_occurrence_removal": 30,
+          "required_proxy_t_reduction": 600,
+          "selected_line_numbers": [
+            268,
+            1381
+          ],
+          "source_missing_occurrences_after_gate": 30,
+          "source_missing_proxy_t_ledger_reduction": 600
+        }
+      },
+      "label": "R3 threshold hash is locked to 30 removals and 600 proxy-T",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "production_required_key_count": 12,
+        "required_evidence_file_count": 10,
+        "required_key_count": 19
+      },
+      "label": "R3 packet schema and evidence classes are locked",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "exists": false,
+        "submission_artifact_path": "results/B1_B7_cone01_r3_occurrence_certificate_batch_submissions/B1-B7-cone01-R3-thirty-occurrence-certificates.json"
+      },
+      "label": "R3 occurrence-certificate batch artifact has been submitted",
+      "passed": false,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "missing_keys": [
+          "packet_id",
+          "source_triage_id",
+          "source_acceptance_packet_id",
+          "triage_hash",
+          "acceptance_packet_hash",
+          "resource_threshold_hash",
+          "certificate_batch_manifest_hash",
+          "certificate_count",
+          "accepted_occurrence_removal",
+          "proxy_t_reduction",
+          "occurrence_certificate_hashes",
+          "certificate_replay_bundle_hash",
+          "full_circuit_or_local_equivalence_replay_hash",
+          "resource_delta_ledger_hash",
+          "b7_ledger_replay_hash",
+          "no_double_counting_ledger_hash",
+          "failure_mode_coverage_note_hash",
+          "claim_boundary",
+          "source_evidence_files_present"
+        ],
+        "production_keys_present": [],
+        "production_required_keys": [
+          "certificate_batch_manifest_hash",
+          "certificate_count",
+          "accepted_occurrence_removal",
+          "proxy_t_reduction",
+          "occurrence_certificate_hashes",
+          "certificate_replay_bundle_hash",
+          "full_circuit_or_local_equivalence_replay_hash",
+          "resource_delta_ledger_hash",
+          "b7_ledger_replay_hash",
+          "no_double_counting_ledger_hash",
+          "claim_boundary",
+          "source_evidence_files_present"
+        ],
+        "submitted_key_count": 0
+      },
+      "label": "Submitted R3 artifact satisfies the locked schema",
+      "passed": false,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "certificate_batch_valid": false,
+        "claim_boundary_bound": false,
+        "replay_and_ledgers_bound": false,
+        "source_backed": false,
+        "source_bound": false
+      },
+      "label": "Submitted R3 artifact is source-backed, threshold-valid, replay-bound, ledger-bound, and claim-boundary-bound",
+      "passed": false,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "b1_resource_saving_claimed": false,
+        "b7_ledger_improvement_claimed": false,
+        "b7_space_time_volume_credit": 0
+      },
+      "label": "Forbidden B1/B7 resource and ledger claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    }
+  ],
+  "runtime_seconds": 0.000241,
+  "source_acceptance_packet_gate": "results/B1_B7_cone01_resource_escape_acceptance_packet_gate_v0.json",
+  "source_post_boundary_triage": "results/B1_B7_cone01_post_boundary_submission_triage_v0.json",
+  "source_seeded_resource_boundary": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0.json",
+  "source_target_id": "T-B1-004de/T-B7-012n",
+  "status": "cone01_r3_occurrence_certificate_batch_open_missing_artifact",
+  "summary": {
+    "acceptance_packet_hash": "e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420",
+    "accepted_exit_route_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b1_resource_saving_claimed": false,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "failed_requirement_ids": [
+      "P6",
+      "P7",
+      "P8"
+    ],
+    "missing_key_count": 19,
+    "per_occurrence_proxy_t_credit": 20,
+    "production_keys_present_count": 0,
+    "production_required_key_count": 12,
+    "r3_packet_hash": "c71e65798d03679ae367bf70efce8730a704b08aa6f28dd5cdc10d940cbfb268",
+    "r3_packet_id": "B1-B7-cone01-R3-thirty-occurrence-certificates",
+    "required_accepted_occurrence_removal": 30,
+    "required_evidence_file_count": 10,
+    "required_key_count": 19,
+    "required_proxy_t_reduction": 600,
+    "requirement_count": 9,
+    "requirements_failed": 3,
+    "requirements_passed": 6,
+    "resource_threshold_hash": "22fbb35211b0a145a6c0c59086ebea04118aabcd341dcd77a6044c26a298fdc4",
+    "source_acceptance_packet_id": "B1-B7-cone01-resource-escape-acceptance-packet",
+    "submitted_r3_artifact_exists": false,
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R3 Occurrence-Certificate Batch Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
