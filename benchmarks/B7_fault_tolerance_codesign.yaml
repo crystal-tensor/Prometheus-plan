@@ -199,6 +199,41 @@ current_results:
     caveat: post_boundary_triage_only_no_b7_resource_or_ft_credit
     report: ../results/B1_B7_cone01_post_boundary_submission_triage_v0.json
     markdown_report: ../research/B1_B7_cone01_post_boundary_submission_triage.md
+  b1_b7_cone01_r1_line1381_resolution_packet_gate_v0:
+    status: cone01_r1_line1381_resolution_packet_open_missing_artifact
+    method: b1_b7_cone01_r1_line1381_resolution_packet_gate_v0
+    source_b1_r1_line1381_packet_gate: ../results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json
+    source_post_boundary_triage: ../results/B1_B7_cone01_post_boundary_submission_triage_v0.json
+    source_acceptance_packet_gate: ../results/B1_B7_cone01_resource_escape_acceptance_packet_gate_v0.json
+    source_seeded_resource_boundary: ../results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0.json
+    source_target_id: T-B1-004dc/T-B7-012l
+    r1_packet_id: B1-B7-cone01-R1-line1381-resolution
+    r1_packet_hash: f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe
+    triage_hash: 475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b
+    acceptance_packet_hash: e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420
+    requirements_passed: 6
+    requirements_failed: 3
+    failed_requirement_ids: [P6, P7, P8]
+    required_key_count: 17
+    production_required_key_count: 9
+    required_evidence_file_count: 8
+    selected_line_numbers: [268, 1381]
+    dropped_overlap_candidate_line_numbers: [1378]
+    line1381_off_grid_parameter_count_before: 5
+    line1381_unpriced_proxy_t_pressure_before: 100
+    submitted_r1_artifact_exists: false
+    accepted_exit_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: r1_line1381_packet_only_no_resolution_artifact_no_resource_saving_or_b7_credit
+    report: ../results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R1_line1381_resolution_packet_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -993,6 +1028,7 @@ prototype_artifacts:
   b2_b7_c1_calibration_source_replay_packet_gate: ../tools/b2_b7_c1_calibration_source_replay_packet_gate.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
+  b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
