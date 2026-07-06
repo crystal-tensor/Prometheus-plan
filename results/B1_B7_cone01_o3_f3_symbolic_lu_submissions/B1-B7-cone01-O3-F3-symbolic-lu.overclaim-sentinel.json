@@ -1,0 +1,49 @@
+{
+  "artifact_id": "B1-B7-cone01-O3-F3-symbolic-lu-redteam-overclaim-sentinel",
+  "candidate_id": "NL-C02",
+  "checked_negative_lemma_present": true,
+  "claim_boundary": {
+    "kill_conditions": [
+      "missing preservation certificate",
+      "missing replay command",
+      "numerical-only lattice relation"
+    ],
+    "not_supported": "pretends B7 credit, STV credit, and reroute are available",
+    "supported": "claims full O3-F3 success without proof"
+  },
+  "counterexample_payload": {
+    "exact_values": null,
+    "payload_type": "overclaim_fixture",
+    "replayable_construction": null
+  },
+  "expected_outputs": {},
+  "family_id": "O3-F3",
+  "leaveout_domain_mapping": {
+    "covered_source_parameters": [
+      3,
+      4,
+      9,
+      16,
+      17
+    ],
+    "mapping": "identity labels only; no proof that rounded coordinates preserve the source unitary"
+  },
+  "machine_check_command": "",
+  "o3_closed": true,
+  "pi_over_four_lattice_relation": {
+    "evidence_mode": "numerical_only",
+    "redteam_note": "This must fail A4 because it is not a symbolic replayable relation.",
+    "relation": "reaches_lattice"
+  },
+  "reroute_allowed": true,
+  "route_a_effect": "clears_route_a",
+  "source_contract_hash": "d7b0e3fdac82bde9c3c312e9294ed2f80feb46b90d0bc167083d2ad408954f9f",
+  "source_registry_hash": "3a4cd3b08574775d52ee0292e7e5861c968efd0dd281dd04481f6e3da1271eae",
+  "source_target_id": "T-B1-004dw/T-B7-013f",
+  "source_unitary_preservation_certificate": null,
+  "symbolic_transform_definition": {
+    "definition": "theta_i := round(theta_i/(pi/4))*pi/4 for every source coordinate",
+    "redteam_note": "This fixture snaps parameters to the pi/4 lattice without a preservation proof.",
+    "status": "claimed_symbolic_but_unproved"
+  }
+}
