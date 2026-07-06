@@ -34423,6 +34423,10 @@ def audit(root: Path) -> dict:
                 research
                 / "B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate.md"
             ),
+            "b1_b7_cone01_r16_nlc02_clifford_frame_invariance_lemma_gate": str(
+                research
+                / "B1_B7_cone01_R16_nlc02_clifford_frame_invariance_lemma_gate.md"
+            ),
             "b7_w8_21_symbolic_certificate_replay_validation_manifest_gate": str(
                 research / "B7_w8_21_symbolic_certificate_replay_validation_manifest_gate.md"
             ),

@@ -682,6 +682,40 @@ current_results:
     caveat: r15_clifford_frame_screen_only_o1_o3_still_open_no_checked_negative_lemma_no_reroute_or_b7_credit
     report: ../results/B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate.md
+  b1_b7_cone01_r16_nlc02_clifford_frame_invariance_lemma_gate_v0:
+    status: cone01_r16_nlc02_clifford_frame_invariance_sublemma_closed_o3_still_open
+    method: b1_b7_cone01_r16_nlc02_clifford_frame_invariance_lemma_gate_v0
+    source_b1_r16_nlc02_clifford_frame_invariance_lemma: ../results/B1_B7_cone01_R16_nlc02_clifford_frame_invariance_lemma_gate_v0.json
+    source_r15_screen: ../results/B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate_v0.json
+    source_target_id: T-B1-004dr/T-B7-013a
+    candidate_id: NL-C02
+    lemma_hash: 190b5f8547ccfff539c2c9dba7e7fd19ed8791729d06d0937146430cea8cf904
+    proof_table_hash: e144ebe2e305f11b7ea5a65fd75e845ee3f4bdcdf978b5cec6b4952ee2faba12
+    requirements_passed: 10
+    requirements_failed: 0
+    invariant_probe_count: 450
+    proof_row_count: 5
+    accepted_escape_count: 0
+    min_pi_over_four_grid_error: 0.14252750651545298
+    max_invariance_error_delta: 2.6645352591003757e-15
+    clifford_frame_invariance_sublemma_closed: true
+    o3_closed: false
+    remaining_open_obligations: [O1, O3]
+    checked_negative_lemma_present: false
+    nlc02_full_lemma_ready: false
+    reroute_allowed: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: r16_clifford_frame_affine_sublemma_only_o1_o3_still_open_no_checked_negative_lemma_no_reroute_or_b7_credit
+    report: ../results/B1_B7_cone01_R16_nlc02_clifford_frame_invariance_lemma_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R16_nlc02_clifford_frame_invariance_lemma_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -1491,6 +1525,7 @@ prototype_artifacts:
   b1_b7_cone01_r13_nlc02_source_domain_binding_gate: ../tools/b1_b7_cone01_r13_nlc02_source_domain_binding_gate.py
   b1_b7_cone01_r14_nlc02_reparameterization_escape_screen_gate: ../tools/b1_b7_cone01_r14_nlc02_reparameterization_escape_screen_gate.py
   b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate: ../tools/b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate.py
+  b1_b7_cone01_r16_nlc02_clifford_frame_invariance_lemma_gate: ../tools/b1_b7_cone01_r16_nlc02_clifford_frame_invariance_lemma_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
