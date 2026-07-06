@@ -1,0 +1,352 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Submit the target R1 artifact against this contract, either by eliminating all five line1381 off-grid parameters with replay/symbolic equivalence or by providing a physical-pricing replay with cost-minus-credit <= 0.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "No submitted R1 resolution artifact, line1381 parameter elimination, physical-pricing win, accepted exit route, occurrence removal, proxy-T reduction, B7 credit, or resource saving is supported.",
+    "what_is_supported": "R7 creates a hash-bound R1 submission contract that external PRs can satisfy or refute."
+  },
+  "last_updated": "2026-07-06",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r7_r1_submission_contract_gate_v0",
+  "model_status": "r1_line1381_submission_contract_hash_bound_to_r6_inventory",
+  "r1_submission_contract": {
+    "acceptance_routes": [
+      {
+        "accepted_before_resource_escape_packet": false,
+        "name": "parameter_elimination_with_replay_or_symbolic_equivalence",
+        "required_predicates": [
+          "packet_id == B1-B7-cone01-R1-line1381-resolution",
+          "source_r6_inventory_hash matches this contract",
+          "line1381_off_grid_parameter_count_before == 5",
+          "line1381_off_grid_parameter_count_after == 0",
+          "line1381_resolution_artifact_hash is present",
+          "full_replay_or_symbolic_equivalence_hash is present",
+          "resource_delta_ledger_hash is present",
+          "no_double_counting_ledger_hash is present",
+          "all six evidence rows are referenced by hash"
+        ],
+        "route_id": "A"
+      },
+      {
+        "accepted_before_resource_escape_packet": false,
+        "name": "physical_pricing_replay_beats_boundary",
+        "required_predicates": [
+          "packet_id == B1-B7-cone01-R1-line1381-resolution",
+          "source_r6_inventory_hash matches this contract",
+          "physical_pricing_replay.cost_minus_credit <= 0",
+          "physical_pricing_replay_hash is present",
+          "resource_delta_ledger_hash is present",
+          "no_double_counting_ledger_hash is present",
+          "all six evidence rows are referenced by hash",
+          "claim boundary forbids B7 credit until resource-escape acceptance accepts the route"
+        ],
+        "route_id": "B"
+      }
+    ],
+    "contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+    "contract_id": "B1-B7-cone01-R7-R1-submission-contract",
+    "evidence_bindings": [
+      {
+        "class": "line1381_repaired_packet_candidate",
+        "evidence_id": "E1",
+        "method": "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_five_parameter_line1381_exact_repair_gate.md",
+        "report_sha256": "ec5d9ecde524de8886ab9f18e24dd0d2de5d2e1081c2b3b7f7fdca5c84620f69",
+        "result_path": "results/B1_B7_cone01_five_parameter_line1381_exact_repair_gate_v0.json",
+        "result_sha256": "1c5bb9ade0ed1367e30d3c41fbc0cf83055a490e31bd5968feabfd5f2b722eb5",
+        "status": "cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted"
+      },
+      {
+        "class": "line1381_local_u3_pricing_boundary",
+        "evidence_id": "E2",
+        "method": "b1_b7_cone01_line1381_local_u3_pricing_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_line1381_local_u3_pricing_gate.md",
+        "report_sha256": "85c6fda0ba5b94e9a2c994c7a5e8ae075ae6fb5f6ea47058496bd9aed885e21a",
+        "result_path": "results/B1_B7_cone01_line1381_local_u3_pricing_gate_v0.json",
+        "result_sha256": "3d86831c11f7d758e72f794971ba283b0fc1a884093929b3f810bfdfe97a8275",
+        "status": "cone01_line1381_local_u3_pricing_boundary_no_b7_credit"
+      },
+      {
+        "class": "physical_synthesis_pricing_rejection",
+        "evidence_id": "E3",
+        "method": "b1_b7_cone01_physical_synthesis_pricing_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_physical_synthesis_pricing_gate.md",
+        "report_sha256": "c2462ee1945bfe0c7079785965725c302de6ed15b454c0db4fda51357a2c1e31",
+        "result_path": "results/B1_B7_cone01_physical_synthesis_pricing_gate_v0.json",
+        "result_sha256": "bca6235672c89680c12894dd934deee34880dc2b06206c8ad35459a0385e08e6",
+        "status": "cone01_physical_synthesis_pricing_rejects_line1381_b7_credit"
+      },
+      {
+        "class": "openqasm3_qiskit_loader_evidence_seal",
+        "evidence_id": "E4",
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_evidence_seal_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_evidence_seal_gate.md",
+        "report_sha256": "7a648d78758b0f6499d7a743993714fef3d47932b9b02ec5de317228c7828dc7",
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_evidence_seal_gate_v0.json",
+        "result_sha256": "f7a5f57ced33e3d8c3f8be12fbcd0dba26a5b42206dac8bb0e1ed1723a735ad2",
+        "status": "cone01_openqasm3_qiskit_loader_evidence_seal_passed_without_b7_credit"
+      },
+      {
+        "class": "openqasm3_seeded_product_replay",
+        "evidence_id": "E5",
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate.md",
+        "report_sha256": "dac7d37e1cf4104902d642bacc899f7e96c52cb4b36934bba7b1ab292f6a9ec2",
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate_v0.json",
+        "result_sha256": "1e5ca69059d4b991198968b1e7b419133aff5dbf65d542c4038323cf9520d8a7",
+        "status": "cone01_openqasm3_qiskit_loader_seeded_product_replay_passed_without_b7_credit"
+      },
+      {
+        "class": "seeded_resource_boundary",
+        "evidence_id": "E6",
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0",
+        "must_bind_in_submission": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate.md",
+        "report_sha256": "9695e8092e4dfa0be86c012b2ec733abb629edf0c4ff99f6b9bbf5a96f06e989",
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0.json",
+        "result_sha256": "f57ff6dd952167f65ce4cdfab1823d5d1480708830be45e59de576dab418723c",
+        "status": "cone01_openqasm3_qiskit_loader_seeded_resource_boundary_no_b7_credit"
+      }
+    ],
+    "forbidden_claims_before_acceptance": {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_ledger_improvement_claimed": false,
+      "b7_space_time_volume_credit": 0,
+      "resource_saving_claimed": false
+    },
+    "line1381_current_boundary": {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit_delta": 0,
+      "off_grid_parameter_count": 5,
+      "unpriced_proxy_t_pressure": 100
+    },
+    "negative_result_route": {
+      "accepted_as_r1_solution": false,
+      "required_artifacts": [
+        "negative_lemma_or_counterexample",
+        "source_evidence_binding_table",
+        "claim_boundary_note",
+        "reroute_recommendation"
+      ],
+      "useful_if": "A checked impossibility or pricing-dominance lemma shows the selected R1 line1381 route should be abandoned and R5 should be rerun against R2/R3/R4."
+    },
+    "required_manifest_fields": [
+      "packet_id",
+      "source_triage_id",
+      "source_acceptance_packet_id",
+      "triage_hash",
+      "acceptance_packet_hash",
+      "seeded_resource_boundary_hash",
+      "selected_line_numbers",
+      "line1381_resolution_route",
+      "line1381_off_grid_parameter_count_before",
+      "line1381_off_grid_parameter_count_after",
+      "line1381_resolution_artifact_hash",
+      "full_replay_or_symbolic_equivalence_hash",
+      "physical_pricing_replay_hash",
+      "resource_delta_ledger_hash",
+      "no_double_counting_ledger_hash",
+      "claim_boundary",
+      "source_evidence_files_present"
+    ],
+    "required_production_fields": [
+      "line1381_resolution_route",
+      "line1381_off_grid_parameter_count_after",
+      "line1381_resolution_artifact_hash",
+      "full_replay_or_symbolic_equivalence_hash",
+      "physical_pricing_replay_hash",
+      "resource_delta_ledger_hash",
+      "no_double_counting_ledger_hash",
+      "claim_boundary",
+      "source_evidence_files_present"
+    ],
+    "required_submission_file_classes": [
+      "line1381_resolution_manifest",
+      "line1381_rewritten_patch_or_parameter_elimination_artifact",
+      "full_replay_or_symbolic_equivalence_certificate",
+      "physical_pricing_replay",
+      "resource_delta_ledger",
+      "no_double_counting_ledger",
+      "qiskit_loader_seeded_replay_reference",
+      "claim_boundary_note"
+    ],
+    "selected_line_numbers": [
+      268,
+      1381
+    ],
+    "selected_route_id": "R1",
+    "source_acceptance_packet_hash": "e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420",
+    "source_r1_packet_hash": "f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe",
+    "source_r6_inventory_hash": "43aeb8f22af8d3043489d73b50c5d57f3779e4f4ea02798479096c3448a3149b",
+    "source_r6_inventory_table_hash": "750be454fc99ea616e71a67a24a69a6c310a57977660b27807bb0e44987f0316",
+    "source_target_id": "T-B1-004di/T-B7-012r",
+    "source_triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "target_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+    "target_submission_artifact": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "r1_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+        "r6_method": "b1_b7_cone01_r6_r1_source_evidence_inventory_gate_v0",
+        "r6_requirements_failed": 0,
+        "selected_route_id": "R1"
+      },
+      "label": "R6 inventory is current and source-bound to R1",
+      "passed": true,
+      "requirement_id": "C1"
+    },
+    {
+      "evidence": {
+        "r1_submitted_artifact_exists": false,
+        "target_submission_artifact": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json",
+        "target_submission_exists": false
+      },
+      "label": "The real R1 submission artifact is still absent",
+      "passed": true,
+      "requirement_id": "C2"
+    },
+    {
+      "evidence": {
+        "contract_path": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.contract.json",
+        "submission_path": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json"
+      },
+      "label": "Contract is non-conflicting and points at a separate .contract.json artifact",
+      "passed": true,
+      "requirement_id": "C3"
+    },
+    {
+      "evidence": {
+        "evidence_row_count": 6,
+        "missing_hash_rows": []
+      },
+      "label": "All six R6 evidence rows are hash-bound in the contract",
+      "passed": true,
+      "requirement_id": "C4"
+    },
+    {
+      "evidence": {
+        "required_submission_file_count": 8,
+        "source_required_submission_file_count": 8
+      },
+      "label": "All eight missing R1 submission file classes are represented",
+      "passed": true,
+      "requirement_id": "C5"
+    },
+    {
+      "evidence": {
+        "route_a_predicates": [
+          "packet_id == B1-B7-cone01-R1-line1381-resolution",
+          "source_r6_inventory_hash matches this contract",
+          "line1381_off_grid_parameter_count_before == 5",
+          "line1381_off_grid_parameter_count_after == 0",
+          "line1381_resolution_artifact_hash is present",
+          "full_replay_or_symbolic_equivalence_hash is present",
+          "resource_delta_ledger_hash is present",
+          "no_double_counting_ledger_hash is present",
+          "all six evidence rows are referenced by hash"
+        ]
+      },
+      "label": "Route A requires eliminating all five line1381 off-grid parameters",
+      "passed": true,
+      "requirement_id": "C6"
+    },
+    {
+      "evidence": {
+        "route_b_predicates": [
+          "packet_id == B1-B7-cone01-R1-line1381-resolution",
+          "source_r6_inventory_hash matches this contract",
+          "physical_pricing_replay.cost_minus_credit <= 0",
+          "physical_pricing_replay_hash is present",
+          "resource_delta_ledger_hash is present",
+          "no_double_counting_ledger_hash is present",
+          "all six evidence rows are referenced by hash",
+          "claim boundary forbids B7 credit until resource-escape acceptance accepts the route"
+        ]
+      },
+      "label": "Route B requires honest physical pricing to beat the current boundary",
+      "passed": true,
+      "requirement_id": "C7"
+    },
+    {
+      "evidence": {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "b7_space_time_volume_credit": 0,
+        "resource_saving_claimed": false
+      },
+      "label": "Forbidden B1/B7 claims remain impossible inside the contract",
+      "passed": true,
+      "requirement_id": "C8"
+    },
+    {
+      "evidence": {
+        "accepted_as_r1_solution": false,
+        "required_artifacts": [
+          "negative_lemma_or_counterexample",
+          "source_evidence_binding_table",
+          "claim_boundary_note",
+          "reroute_recommendation"
+        ],
+        "useful_if": "A checked impossibility or pricing-dominance lemma shows the selected R1 line1381 route should be abandoned and R5 should be rerun against R2/R3/R4."
+      },
+      "label": "Negative R1 evidence can be submitted without pretending to solve R1",
+      "passed": true,
+      "requirement_id": "C9"
+    },
+    {
+      "evidence": {
+        "missing_contract_hash_fields": []
+      },
+      "label": "Contract is hash-bound to R1, R6, triage, and acceptance packet sources",
+      "passed": true,
+      "requirement_id": "C10"
+    }
+  ],
+  "runtime_seconds": 0.000271,
+  "source_r1_gate": "results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json",
+  "source_r6_inventory": "results/B1_B7_cone01_R6_r1_source_evidence_inventory_gate_v0.json",
+  "source_target_id": "T-B1-004di/T-B7-012r",
+  "status": "cone01_r7_r1_submission_contract_ready_for_external_pr",
+  "summary": {
+    "acceptance_route_count": 2,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+    "contract_id": "B1-B7-cone01-R7-R1-submission-contract",
+    "contract_path": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.contract.json",
+    "failed_requirement_ids": [],
+    "indexed_evidence_row_count": 6,
+    "line1381_off_grid_parameter_count": 5,
+    "line1381_unpriced_proxy_t_pressure": 100,
+    "negative_result_route_available": true,
+    "r1_packet_hash": "f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe",
+    "r1_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+    "r6_inventory_hash": "43aeb8f22af8d3043489d73b50c5d57f3779e4f4ea02798479096c3448a3149b",
+    "r6_inventory_table_hash": "750be454fc99ea616e71a67a24a69a6c310a57977660b27807bb0e44987f0316",
+    "required_submission_file_count": 8,
+    "requirement_count": 10,
+    "requirements_failed": 0,
+    "requirements_passed": 10,
+    "resource_saving_claimed": false,
+    "target_submission_artifact": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json",
+    "target_submission_exists": false,
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R7 R1 Submission Contract Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
