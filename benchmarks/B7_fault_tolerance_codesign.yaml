@@ -521,6 +521,39 @@ current_results:
     caveat: r10_candidate_registry_only_no_checked_negative_lemma_no_reroute_no_resource_saving_or_b7_credit
     report: ../results/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate.md
+  b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate_v0:
+    status: cone01_r11_nlc02_leaveout_proof_skeleton_ready_unchecked
+    method: b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate_v0
+    source_b1_r11_nlc02_leaveout_proof_skeleton: ../results/B1_B7_cone01_R11_nlc02_leaveout_proof_skeleton_gate_v0.json
+    source_r10_registry: ../results/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate_v0.json
+    source_target_id: T-B1-004dm/T-B7-012v
+    candidate_id: NL-C02
+    skeleton_hash: 4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab
+    row_table_hash: 0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c
+    requirements_passed: 10
+    requirements_failed: 0
+    expected_subset_count: 31
+    observed_subset_count: 31
+    leave_out_row_count: 31
+    leave_out_exact_pass_count: 0
+    open_proof_obligation_count: 4
+    falsification_check_count: 5
+    checked_negative_lemma_present: false
+    candidate_proof_skeleton_ready: true
+    falsification_harness_ready: true
+    reroute_allowed: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: r11_proof_skeleton_only_open_obligations_no_checked_negative_lemma_no_reroute_or_b7_credit
+    report: ../results/B1_B7_cone01_R11_nlc02_leaveout_proof_skeleton_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R11_nlc02_leaveout_proof_skeleton_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -1325,6 +1358,7 @@ prototype_artifacts:
   b1_b7_cone01_r8_r1_contract_preflight_gate: ../tools/b1_b7_cone01_r8_r1_contract_preflight_gate.py
   b1_b7_cone01_r9_r1_reroute_pressure_gate: ../tools/b1_b7_cone01_r9_r1_reroute_pressure_gate.py
   b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate: ../tools/b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate.py
+  b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate: ../tools/b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py

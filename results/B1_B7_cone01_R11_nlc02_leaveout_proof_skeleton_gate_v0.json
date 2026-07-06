@@ -1,0 +1,652 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Close O1-O4 or falsify NL-C02 with an exact leave-out pass, missing subset, validation error, tolerance inconsistency, or residual below tolerance.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "R11 is not a checked negative lemma. Optimizer completeness, tolerance-to-exactness, parameterization invariance, and source-domain binding remain open proof obligations. No R5 reroute, R1 solution, occurrence removal, proxy-T reduction, B7 credit, resource saving, or impossibility theorem is supported.",
+    "what_is_supported": "R11 proves the finite leave-out row coverage and creates a falsification harness for NL-C02 under the current search-domain evidence."
+  },
+  "last_updated": "2026-07-06",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate_v0",
+  "model_status": "nlc02_leaveout_domain_harness_ready_but_not_checked_lemma",
+  "nlc02_leaveout_proof_skeleton": {
+    "candidate_id": "NL-C02",
+    "candidate_source_r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+    "candidate_source_registry_hash": "c58910245e32ab5738959a711de1e903951a59dc96cfe9ee390b5c514c7fbf54",
+    "candidate_title": "Leave-out parameter elimination lemma candidate",
+    "claim_decision": {
+      "candidate_proof_skeleton_ready": true,
+      "checked_negative_lemma_present": false,
+      "falsification_harness_ready": true,
+      "reroute_allowed": false,
+      "why": "The finite row coverage is machine-checked, but O1-O4 remain open, so this is a proof skeleton and falsification harness, not a checked negative lemma."
+    },
+    "covered_parameter_domain": [
+      3,
+      4,
+      9,
+      16,
+      17
+    ],
+    "covered_subset_count": 31,
+    "falsification_harness": [
+      {
+        "current_result": true,
+        "description": "Find an observed subset row with exact_pass=true.",
+        "test_id": "F1"
+      },
+      {
+        "current_result": true,
+        "description": "Find a missing nonempty subset of the five-parameter domain.",
+        "test_id": "F2"
+      },
+      {
+        "current_result": true,
+        "description": "Find any leave-out gate with validation_error_count > 0.",
+        "test_id": "F3"
+      },
+      {
+        "current_result": true,
+        "description": "Find inconsistent exact_tolerance values across leave-out gates.",
+        "test_id": "F4"
+      },
+      {
+        "current_result": true,
+        "description": "Find residual_norm <= exact_tolerance in any normalized row.",
+        "test_id": "F5"
+      }
+    ],
+    "lemma_statement_candidate": "Under the current R1 line1381 five-parameter off-grid domain, declared tolerance, and leave-out optimizer model, no nonempty subset of the five parameters can be snapped to the pi/4 grid while preserving an exact replay.",
+    "machine_checked_facts": [
+      "all 31 nonempty subsets are present",
+      "all 31 rows have exact_pass=false",
+      "all five leave-out gates use the same exact_tolerance",
+      "all five leave-out gates report validation_error_count=0",
+      "the minimum residual norm remains above exact_tolerance"
+    ],
+    "observed_subset_count": 31,
+    "open_proof_obligations": [
+      {
+        "description": "Prove that each leave-out optimization search is complete for the declared parameterization, or explicitly downgrade the lemma to a search-domain lemma.",
+        "needed_for_checked_lemma": true,
+        "obligation_id": "O1",
+        "title": "Optimizer completeness boundary"
+      },
+      {
+        "description": "Justify that residual_norm > exact_tolerance excludes exact replay in the accepted arithmetic model.",
+        "needed_for_checked_lemma": true,
+        "obligation_id": "O2",
+        "title": "Tolerance-to-exactness bridge"
+      },
+      {
+        "description": "Show that no equivalent reparameterization of the same local unitary falls outside the leave-out table while still clearing Route A.",
+        "needed_for_checked_lemma": true,
+        "obligation_id": "O3",
+        "title": "Parameterization invariance"
+      },
+      {
+        "description": "Bind the five-parameter domain to the R7/R8/R9 source hashes and rule out accidental drift in line1381 indexing.",
+        "needed_for_checked_lemma": true,
+        "obligation_id": "O4",
+        "title": "Source-domain binding"
+      }
+    ],
+    "row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+    "skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+    "skeleton_id": "B1-B7-cone01-R11-NL-C02-leaveout-proof-skeleton",
+    "source_hashes": {
+      "leave_five": "52db3a5421075244170ff9c5faac19e70a5b072c7cab0dc26d0a1423c42ae5da",
+      "leave_four": "84e8ff371017a148e6a7fa23b30cfaa2e20b3e9da6873ee99d324a0a0d64db88",
+      "leave_one": "ea3381c10f09a98a528845eb4cd6d1cf20902dc01c96e6dfc59a4dfa2df95f3f",
+      "leave_three": "888e6ee98d12fcf43c1a949b507777e32346476a22f6f74ccf648abea3b72db3",
+      "leave_two": "5887a4dfe28344229e190328e0ea2e3ab344c8c725f50ca4a08d9e16210cf63a",
+      "r10_registry": "d83f257b27e2b52fc0c7b4493d44557fcb0537a136d10bf3d16424f6c9a1469d"
+    },
+    "source_target_id": "T-B1-004dm/T-B7-012v"
+  },
+  "normalized_leaveout_rows": [
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.09892087709180968,
+      "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+      "subset_key": "3",
+      "subset_size": 1
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.288314847983953,
+      "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+      "subset_key": "4",
+      "subset_size": 1
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        9
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.13580458968103096,
+      "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+      "subset_key": "9",
+      "subset_size": 1
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.10596513340750167,
+      "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+      "subset_key": "16",
+      "subset_size": 1
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.2136401293893235,
+      "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+      "subset_key": "17",
+      "subset_size": 1
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.33448226670849784,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "3,4",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        9
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.304124919729348,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "3,9",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.1717720418187663,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "3,16",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.21672567024982506,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "3,17",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        9
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.293917719744866,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "4,9",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.294771583996606,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "4,16",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.3423538340607389,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "4,17",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        9,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.13583443746892182,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "9,16",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        9,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.37126174598217193,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "9,17",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.41204448255804876,
+      "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+      "subset_key": "16,17",
+      "subset_size": 2
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        9
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.45707756906586605,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,4,9",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.40615311451229397,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,4,16",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.35793848562010133,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,4,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        9,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.3106228814074983,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,9,16",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        9,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.4503230734514779,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,9,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.4227361368613278,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "3,16,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        9,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.29673862906454757,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "4,9,16",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        9,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.5469360960062335,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "4,9,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.7449029676343185,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "4,16,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        9,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.4150816983155085,
+      "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+      "subset_key": "9,16,17",
+      "subset_size": 3
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        9,
+        16
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.45761708677312707,
+      "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+      "subset_key": "3,4,9,16",
+      "subset_size": 4
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        9,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.6375472922360571,
+      "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+      "subset_key": "3,4,9,17",
+      "subset_size": 4
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.7719645870589134,
+      "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+      "subset_key": "3,4,16,17",
+      "subset_size": 4
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        9,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.47013626270433356,
+      "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+      "subset_key": "3,9,16,17",
+      "subset_size": 4
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        4,
+        9,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.8369082341779268,
+      "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+      "subset_key": "4,9,16,17",
+      "subset_size": 4
+    },
+    {
+      "exact_pass": false,
+      "fixed_parameter_indices": [
+        3,
+        4,
+        9,
+        16,
+        17
+      ],
+      "optimizer_success": true,
+      "residual_norm": 0.8415210419190079,
+      "source_path": "results/B1_B7_cone01_line1381_leave_five_out_parameter_gate_v0.json",
+      "subset_key": "3,4,9,16,17",
+      "subset_size": 5
+    }
+  ],
+  "requirements": [
+    {
+      "evidence": {
+        "candidate_id": "NL-C02",
+        "r10_method": "b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate_v0",
+        "r10_validation_error_count": 0
+      },
+      "label": "R10 registry contains NL-C02 and remains validation-clean",
+      "passed": true,
+      "requirement_id": "S1"
+    },
+    {
+      "evidence": {
+        "validation_error_counts": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "label": "All five leave-out source gates are validation-clean",
+      "passed": true,
+      "requirement_id": "S2"
+    },
+    {
+      "evidence": {
+        "parameter_domain": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ]
+      },
+      "label": "The five-parameter domain is stable across leave-out gates",
+      "passed": true,
+      "requirement_id": "S3"
+    },
+    {
+      "evidence": {
+        "expected_subset_count": 31,
+        "extra_subsets": [],
+        "missing_subsets": [],
+        "observed_subset_count": 31,
+        "total_row_count": 31
+      },
+      "label": "All 31 nonempty leave-out subsets are covered exactly once",
+      "passed": true,
+      "requirement_id": "S4"
+    },
+    {
+      "evidence": {
+        "exact_pass_row_count": 0,
+        "total_fail_count": 31,
+        "total_pass_count": 0
+      },
+      "label": "All leave-out exact passes remain zero",
+      "passed": true,
+      "requirement_id": "S5"
+    },
+    {
+      "evidence": {
+        "exact_tolerances": [
+          1e-08
+        ],
+        "max_residual_norm": 0.8415210419190079,
+        "min_residual_norm": 0.09892087709180968
+      },
+      "label": "Exact tolerance is consistent and every residual remains above tolerance",
+      "passed": true,
+      "requirement_id": "S6"
+    },
+    {
+      "evidence": {
+        "open_obligation_count": 4
+      },
+      "label": "Proof skeleton records all four open obligations",
+      "passed": true,
+      "requirement_id": "S7"
+    },
+    {
+      "evidence": {
+        "falsification_check_count": 5
+      },
+      "label": "Falsification harness records five executable checks",
+      "passed": true,
+      "requirement_id": "S8"
+    },
+    {
+      "evidence": {
+        "source_hash_count": 6
+      },
+      "label": "All source files are hash-bound",
+      "passed": true,
+      "requirement_id": "S9"
+    },
+    {
+      "evidence": {
+        "candidate_proof_skeleton_ready": true,
+        "checked_negative_lemma_present": false,
+        "falsification_harness_ready": true,
+        "reroute_allowed": false,
+        "why": "The finite row coverage is machine-checked, but O1-O4 remain open, so this is a proof skeleton and falsification harness, not a checked negative lemma."
+      },
+      "label": "Skeleton is not upgraded into a checked lemma or reroute",
+      "passed": true,
+      "requirement_id": "S10"
+    }
+  ],
+  "runtime_seconds": 0.000636,
+  "source_target_id": "T-B1-004dm/T-B7-012v",
+  "status": "cone01_r11_nlc02_leaveout_proof_skeleton_ready_unchecked",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_route_count": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "candidate_id": "NL-C02",
+    "candidate_proof_skeleton_ready": true,
+    "checked_negative_lemma_present": false,
+    "covered_parameter_count": 5,
+    "exact_tolerance": 1e-08,
+    "expected_subset_count": 31,
+    "failed_requirement_ids": [],
+    "falsification_check_count": 5,
+    "falsification_harness_ready": true,
+    "leave_out_exact_fail_count": 31,
+    "leave_out_exact_pass_count": 0,
+    "leave_out_row_count": 31,
+    "max_residual_norm": 0.8415210419190079,
+    "min_residual_norm": 0.09892087709180968,
+    "observed_subset_count": 31,
+    "open_proof_obligation_count": 4,
+    "requirement_count": 10,
+    "requirements_failed": 0,
+    "requirements_passed": 10,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+    "skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+    "skeleton_id": "B1-B7-cone01-R11-NL-C02-leaveout-proof-skeleton",
+    "source_r10_registry_hash": "c58910245e32ab5738959a711de1e903951a59dc96cfe9ee390b5c514c7fbf54",
+    "source_r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R11 NL-C02 Leave-Out Proof-Skeleton Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
