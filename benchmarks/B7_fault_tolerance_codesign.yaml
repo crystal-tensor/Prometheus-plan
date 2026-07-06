@@ -492,6 +492,35 @@ current_results:
     caveat: r9_pressure_only_no_checked_negative_lemma_no_reroute_no_resource_saving_or_b7_credit
     report: ../results/B1_B7_cone01_R9_r1_reroute_pressure_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R9_r1_reroute_pressure_gate.md
+  b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate_v0:
+    status: cone01_r10_negative_lemma_candidate_registry_ready_no_checked_lemma
+    method: b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate_v0
+    source_b1_r10_negative_lemma_candidate_registry: ../results/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate_v0.json
+    source_r9_pressure: ../results/B1_B7_cone01_R9_r1_reroute_pressure_gate_v0.json
+    source_target_id: T-B1-004dl/T-B7-012u
+    registry_id: B1-B7-cone01-R10-R1-negative-lemma-candidate-registry
+    registry_hash: c58910245e32ab5738959a711de1e903951a59dc96cfe9ee390b5c514c7fbf54
+    r9_pressure_hash: 6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505
+    requirements_passed: 10
+    requirements_failed: 0
+    lemma_candidate_count: 5
+    falsification_test_count: 15
+    external_pr_packet_count: 5
+    checked_negative_lemma_present: false
+    reroute_allowed: false
+    r5_reroute_authorized: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: r10_candidate_registry_only_no_checked_negative_lemma_no_reroute_no_resource_saving_or_b7_credit
+    report: ../results/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R10_r1_negative_lemma_candidate_registry_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -1295,6 +1324,7 @@ prototype_artifacts:
   b1_b7_cone01_r7_r1_submission_contract_gate: ../tools/b1_b7_cone01_r7_r1_submission_contract_gate.py
   b1_b7_cone01_r8_r1_contract_preflight_gate: ../tools/b1_b7_cone01_r8_r1_contract_preflight_gate.py
   b1_b7_cone01_r9_r1_reroute_pressure_gate: ../tools/b1_b7_cone01_r9_r1_reroute_pressure_gate.py
+  b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate: ../tools/b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py

@@ -1,0 +1,342 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Submit a checked negative lemma artifact for at least one candidate, or falsify the registry by clearing R8 Route A or Route B.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "No candidate is a checked negative lemma. No R5 reroute, R1 solution, occurrence removal, proxy-T reduction, B7 credit, resource saving, or impossibility theorem is supported.",
+    "what_is_supported": "R10 turns R9 reroute pressure into five falsifiable negative-lemma candidates and five external PR packets."
+  },
+  "last_updated": "2026-07-06",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate_v0",
+  "model_status": "r1_line1381_negative_lemma_candidates_registered_but_unchecked",
+  "negative_lemma_candidate_registry": {
+    "candidate_negative_lemmas": [
+      {
+        "acceptance_conditions": [
+          "Bind the R7 contract hash and R8 preflight hash.",
+          "List each failed Route A/B predicate and prove the predicate cannot be cleared inside the covered domain.",
+          "State explicitly that the lemma is conditional on the current R7/R8 contract language."
+        ],
+        "candidate_id": "NL-C01",
+        "covered_domain": "The current R1 contract routes A and B under the R7 submission contract and R8 preflight predicates.",
+        "falsification_tests": [
+          "Submit a target R1 artifact that passes Route A.",
+          "Submit a target R1 artifact that passes Route B.",
+          "Show an R8 predicate mismatch against the R7 contract."
+        ],
+        "non_claims": [
+          "not_a_checked_negative_lemma",
+          "not_an_impossibility_theorem",
+          "not_a_resource_saving",
+          "not_a_b7_credit",
+          "not_a_reroute_authorization"
+        ],
+        "pressure_family": "contract_preflight",
+        "source_hashes": {
+          "r7_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+          "r8_preflight": "f4a83bd80d351f214ce16cc1f6121f4a90a324ff41ffd7fa0f151341ccefcf7c",
+          "r8_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977"
+        },
+        "title": "Route-contract rejection lemma candidate"
+      },
+      {
+        "acceptance_conditions": [
+          "Bind all 31 leave-out rows.",
+          "Bind the five-parameter off-grid domain.",
+          "Prove exact-pass count remains zero under the declared tolerance and grid."
+        ],
+        "candidate_id": "NL-C02",
+        "covered_domain": "All nonempty leave-out subsets of the five current line1381 off-grid parameters covered by R9 leave-out pressure.",
+        "falsification_tests": [
+          "Find any leave-out subset with exact pass.",
+          "Show a missing nonempty subset among the 31 leave-out rows.",
+          "Show a tolerance or grid mismatch that invalidates a recorded exact failure."
+        ],
+        "non_claims": [
+          "not_a_checked_negative_lemma",
+          "not_an_impossibility_theorem",
+          "not_a_resource_saving",
+          "not_a_b7_credit",
+          "not_a_reroute_authorization"
+        ],
+        "pressure_family": "parameter_removal",
+        "source_hashes": {
+          "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+          "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505"
+        },
+        "title": "Leave-out parameter elimination lemma candidate"
+      },
+      {
+        "acceptance_conditions": [
+          "Bind context widths [1, 2, 3, 4, 5].",
+          "Bind 173,761,280 width-5 virtual tests.",
+          "Prove total exact absorption count remains zero inside the covered arithmetic model."
+        ],
+        "candidate_id": "NL-C03",
+        "covered_domain": "Signed-grid context absorption attempts for widths 1 through 5 over the current line1381 parameter domain.",
+        "falsification_tests": [
+          "Produce one exact absorption at width <= 5.",
+          "Expose an untested signed-combination family inside the stated width bound.",
+          "Lower the best context-grid error to zero under the same arithmetic model."
+        ],
+        "non_claims": [
+          "not_a_checked_negative_lemma",
+          "not_an_impossibility_theorem",
+          "not_a_resource_saving",
+          "not_a_b7_credit",
+          "not_a_reroute_authorization"
+        ],
+        "pressure_family": "context_absorption",
+        "source_hashes": {
+          "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+          "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505"
+        },
+        "title": "Bounded context absorption lemma candidate"
+      },
+      {
+        "acceptance_conditions": [
+          "Bind the commutation-corridor source row.",
+          "Bind accepted replay candidate count 0.",
+          "State the exact corridor reference family under coverage."
+        ],
+        "candidate_id": "NL-C04",
+        "covered_domain": "Best-context replay candidates under the current commutation-corridor references.",
+        "falsification_tests": [
+          "Produce one candidate accepted by all corridor references.",
+          "Show a blocked corridor reference is unsound or outside the covered domain.",
+          "Replay a candidate that preserves the required references with nonzero accepted count."
+        ],
+        "non_claims": [
+          "not_a_checked_negative_lemma",
+          "not_an_impossibility_theorem",
+          "not_a_resource_saving",
+          "not_a_b7_credit",
+          "not_a_reroute_authorization"
+        ],
+        "pressure_family": "commutation_corridor",
+        "source_hashes": {
+          "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+          "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505"
+        },
+        "title": "Commutation-corridor replay lemma candidate"
+      },
+      {
+        "acceptance_conditions": [
+          "Bind physical cost-minus-credit 365.",
+          "Bind Route B failure under the same pricing ledger.",
+          "State that the lemma is ledger-conditional and does not rule out new physical evidence."
+        ],
+        "candidate_id": "NL-C05",
+        "covered_domain": "Current physical-pricing ledger used by R8/R9 for Route B.",
+        "falsification_tests": [
+          "Reduce physical cost-minus-credit to <= 0 under the same ledger.",
+          "Show the selected CNOT credit or placeholder proxy-T pressure is priced incorrectly.",
+          "Submit a same-ledger artifact that clears Route B."
+        ],
+        "non_claims": [
+          "not_a_checked_negative_lemma",
+          "not_an_impossibility_theorem",
+          "not_a_resource_saving",
+          "not_a_b7_credit",
+          "not_a_reroute_authorization"
+        ],
+        "pressure_family": "physical_pricing",
+        "source_hashes": {
+          "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+          "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505"
+        },
+        "title": "Physical Route-B deficit lemma candidate"
+      }
+    ],
+    "decision": {
+      "checked_negative_lemma_present": false,
+      "r5_reroute_authorized": false,
+      "reroute_allowed": false,
+      "why": "R10 makes the negative-lemma work concrete and falsifiable, but a candidate registry is still not a checked lemma."
+    },
+    "external_pr_packets": [
+      {
+        "owner_hint": "Theory Agent",
+        "packet_id": "R10-PR01",
+        "required_output": "machine-readable domain manifest plus human-readable scope note",
+        "title": "Formalize the covered R1 domain"
+      },
+      {
+        "owner_hint": "Audit Agent",
+        "packet_id": "R10-PR02",
+        "required_output": "replay transcript binding R8/R9 hashes and source paths",
+        "title": "Independently replay the R9 source hashes"
+      },
+      {
+        "owner_hint": "Formal Methods Agent",
+        "packet_id": "R10-PR03",
+        "required_output": "checked or checkable proof skeleton with open obligations",
+        "title": "Write a proof skeleton for one candidate"
+      },
+      {
+        "owner_hint": "Compiler Agent",
+        "packet_id": "R10-PR04",
+        "required_output": "R1 artifact attempting to clear Route A or Route B",
+        "title": "Attack the candidates with a route-clearing artifact"
+      },
+      {
+        "owner_hint": "Maintainer Agent",
+        "packet_id": "R10-PR05",
+        "required_output": "acceptance packet separating candidate, checked lemma, and reroute decision",
+        "title": "Build the negative-lemma acceptance packet"
+      }
+    ],
+    "r8_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+    "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+    "r9_reroute_allowed": false,
+    "r9_status": "cone01_r9_r1_reroute_pressure_not_checked_negative_lemma",
+    "registry_hash": "c58910245e32ab5738959a711de1e903951a59dc96cfe9ee390b5c514c7fbf54",
+    "registry_id": "B1-B7-cone01-R10-R1-negative-lemma-candidate-registry",
+    "source_hashes": {
+      "r8_preflight": "f4a83bd80d351f214ce16cc1f6121f4a90a324ff41ffd7fa0f151341ccefcf7c",
+      "r9_markdown": "ac584a5ed7862f487f2b4403f68a886cc058c6eab28306a8c752acba71ec686f",
+      "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf"
+    },
+    "source_r8_preflight": "results/B1_B7_cone01_R8_r1_contract_preflight_gate_v0.json",
+    "source_r9_pressure": "results/B1_B7_cone01_R9_r1_reroute_pressure_gate_v0.json",
+    "source_target_id": "T-B1-004dl/T-B7-012u"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "r9_method": "b1_b7_cone01_r9_r1_reroute_pressure_gate_v0",
+        "r9_requirements_failed": 0,
+        "r9_reroute_allowed": false,
+        "r9_validation_error_count": 0
+      },
+      "label": "R9 pressure is validation-clean and still blocks reroute",
+      "passed": true,
+      "requirement_id": "C1"
+    },
+    {
+      "evidence": {
+        "candidate_count": 5
+      },
+      "label": "Registry contains five candidate negative lemmas",
+      "passed": true,
+      "requirement_id": "C2"
+    },
+    {
+      "evidence": {
+        "pressure_families": [
+          "commutation_corridor",
+          "context_absorption",
+          "contract_preflight",
+          "parameter_removal",
+          "physical_pricing"
+        ]
+      },
+      "label": "Candidates cover contract, parameter, context, commutation, and physical pressure families",
+      "passed": true,
+      "requirement_id": "C3"
+    },
+    {
+      "evidence": {
+        "falsification_test_count": 15
+      },
+      "label": "Every candidate is falsifiable",
+      "passed": true,
+      "requirement_id": "C4"
+    },
+    {
+      "evidence": {
+        "acceptance_condition_count": 15
+      },
+      "label": "Every candidate has acceptance conditions",
+      "passed": true,
+      "requirement_id": "C5"
+    },
+    {
+      "evidence": {
+        "source_hash_count": 3,
+        "source_hashes": {
+          "r8_preflight": "f4a83bd80d351f214ce16cc1f6121f4a90a324ff41ffd7fa0f151341ccefcf7c",
+          "r9_markdown": "ac584a5ed7862f487f2b4403f68a886cc058c6eab28306a8c752acba71ec686f",
+          "r9_pressure": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf"
+        }
+      },
+      "label": "Registry binds R8, R9, and R9 report source hashes",
+      "passed": true,
+      "requirement_id": "C6"
+    },
+    {
+      "evidence": {
+        "pr_packet_count": 5
+      },
+      "label": "External PR packets separate theory, audit, compiler, formal, and maintainer work",
+      "passed": true,
+      "requirement_id": "C7"
+    },
+    {
+      "evidence": {
+        "checked_negative_lemma_present": false,
+        "r5_reroute_authorized": false,
+        "reroute_allowed": false,
+        "why": "R10 makes the negative-lemma work concrete and falsifiable, but a candidate registry is still not a checked lemma."
+      },
+      "label": "Registry explicitly refuses to upgrade candidates into checked lemmas",
+      "passed": true,
+      "requirement_id": "C8"
+    },
+    {
+      "evidence": {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "accepted_route_count": 0,
+        "b7_credit_delta": 0,
+        "b7_ledger_improvement_claimed": false,
+        "b7_space_time_volume_credit": 0,
+        "resource_saving_claimed": false
+      },
+      "label": "Registry preserves zero resource and B7 credit claims",
+      "passed": true,
+      "requirement_id": "C9"
+    },
+    {
+      "evidence": {
+        "next_gate": "Submit a checked negative lemma for one or more R10 candidates, or falsify the registry by submitting an R1 artifact that clears R8 Route A or Route B."
+      },
+      "label": "Next gate is a checked lemma or an R1 Route A/B clearing artifact",
+      "passed": true,
+      "requirement_id": "C10"
+    }
+  ],
+  "runtime_seconds": 0.000383,
+  "source_target_id": "T-B1-004dl/T-B7-012u",
+  "status": "cone01_r10_negative_lemma_candidate_registry_ready_no_checked_lemma",
+  "summary": {
+    "acceptance_condition_count": 15,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_route_count": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "checked_negative_lemma_present": false,
+    "external_pr_packet_count": 5,
+    "failed_requirement_ids": [],
+    "falsification_test_count": 15,
+    "lemma_candidate_count": 5,
+    "r5_reroute_authorized": false,
+    "r8_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+    "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+    "registry_hash": "c58910245e32ab5738959a711de1e903951a59dc96cfe9ee390b5c514c7fbf54",
+    "registry_id": "B1-B7-cone01-R10-R1-negative-lemma-candidate-registry",
+    "requirement_count": 10,
+    "requirements_failed": 0,
+    "requirements_passed": 10,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R10 R1 Negative-Lemma Candidate Registry Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
