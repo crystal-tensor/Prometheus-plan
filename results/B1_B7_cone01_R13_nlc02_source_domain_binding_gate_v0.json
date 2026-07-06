@@ -1,0 +1,604 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Close O1 or O3; or falsify the binding with a source hash mismatch, domain drift, or a leave-out source whose parameter indices, values, or tolerance differ.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "R13 does not close optimizer completeness or parameterization invariance. NL-C02 is still not a checked negative lemma. No R5 reroute, R1 solution, occurrence removal, proxy-T reduction, B7 credit, resource saving, or impossibility theorem is supported.",
+    "what_is_supported": "R13 closes O4 for the current R7-R12 hash chain by binding NL-C02 to the same line1381 five-parameter domain and the same 31 leave-out subset rows."
+  },
+  "last_updated": "2026-07-06",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r13_nlc02_source_domain_binding_gate_v0",
+  "model_status": "nlc02_o4_source_domain_binding_closed_for_current_hash_chain",
+  "nlc02_source_domain_binding_packet": {
+    "binding_hash": "1bcce90e3b032fab819e3062f90df7f8c631aa48bf744605b6e622cbd66c5598",
+    "binding_id": "B1-B7-cone01-R13-NL-C02-source-domain-binding",
+    "candidate_id": "NL-C02",
+    "canonical_domain": {
+      "domain_rows": [
+        {
+          "domain_role": "current_line1381_off_grid_parameter",
+          "line": 1381,
+          "off_grid_value": 1.428268820279441,
+          "parameter_index": 3
+        },
+        {
+          "domain_role": "current_line1381_off_grid_parameter",
+          "line": 1381,
+          "off_grid_value": -1.1475089599716777,
+          "parameter_index": 4
+        },
+        {
+          "domain_role": "current_line1381_off_grid_parameter",
+          "line": 1381,
+          "off_grid_value": -1.0525172906866098,
+          "parameter_index": 9
+        },
+        {
+          "domain_role": "current_line1381_off_grid_parameter",
+          "line": 1381,
+          "off_grid_value": 0.5589456541983555,
+          "parameter_index": 16
+        },
+        {
+          "domain_role": "current_line1381_off_grid_parameter",
+          "line": 1381,
+          "off_grid_value": 0.4232873668235233,
+          "parameter_index": 17
+        }
+      ],
+      "exact_tolerance": 1e-08,
+      "line": 1381,
+      "parameter_count": 5,
+      "parameter_indices": [
+        3,
+        4,
+        9,
+        16,
+        17
+      ],
+      "parameter_values": [
+        1.428268820279441,
+        -1.1475089599716777,
+        -1.0525172906866098,
+        0.5589456541983555,
+        0.4232873668235233
+      ]
+    },
+    "decision": {
+      "checked_negative_lemma_present": false,
+      "nlc02_full_lemma_ready": false,
+      "o4_closed_for_current_hash_chain": true,
+      "reroute_allowed": false,
+      "why": "O4 is source-bound for the current hash chain, but O1 optimizer completeness and O3 parameterization invariance remain open."
+    },
+    "domain_hash": "8222f1c0cee51f1ad1a7e8f696938d261c01d7a1841559e451b4fc22a8a676d3",
+    "hash_chain": [
+      {
+        "artifact_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+        "domain_count": 5,
+        "file_sha256": "f782996cee14d1fe08cbb2ddc175266cac928039afa5d34254e65a2c9d9f72bb",
+        "method": "b1_b7_cone01_r7_r1_submission_contract_gate_v0",
+        "path": "results/B1_B7_cone01_R7_r1_submission_contract_gate_v0.json",
+        "stage": "R7"
+      },
+      {
+        "artifact_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+        "domain_count": 5,
+        "file_sha256": "f4a83bd80d351f214ce16cc1f6121f4a90a324ff41ffd7fa0f151341ccefcf7c",
+        "method": "b1_b7_cone01_r8_r1_contract_preflight_gate_v0",
+        "path": "results/B1_B7_cone01_R8_r1_contract_preflight_gate_v0.json",
+        "source_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+        "stage": "R8"
+      },
+      {
+        "artifact_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+        "file_sha256": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+        "leave_attempt_row_count": 31,
+        "method": "b1_b7_cone01_r9_r1_reroute_pressure_gate_v0",
+        "path": "results/B1_B7_cone01_R9_r1_reroute_pressure_gate_v0.json",
+        "source_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+        "stage": "R9"
+      },
+      {
+        "artifact_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+        "covered_parameter_count": 5,
+        "file_sha256": "5620e936e70f0d9dffc8c785a5a80d915093f26d63fa39e045d2464b8d3da6ed",
+        "method": "b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate_v0",
+        "path": "results/B1_B7_cone01_R11_nlc02_leaveout_proof_skeleton_gate_v0.json",
+        "row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+        "source_r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+        "stage": "R11"
+      },
+      {
+        "artifact_hash": "f35487dc67401193e1f455cf42e2fff05900792ddb72f97a5efad2787772b6d9",
+        "bridge_row_count": 31,
+        "file_sha256": "ef03315ff13d835420ed4b0f09ce25e20b7762f82f83b0f8f2d7a39271a65808",
+        "method": "b1_b7_cone01_r12_nlc02_tolerance_bridge_gate_v0",
+        "path": "results/B1_B7_cone01_R12_nlc02_tolerance_bridge_gate_v0.json",
+        "source_r11_row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+        "source_r11_skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+        "stage": "R12"
+      }
+    ],
+    "leave_out_domain_sources": [
+      {
+        "current_off_grid_parameter_count": 5,
+        "current_off_grid_parameter_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "current_off_grid_parameter_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ],
+        "exact_tolerance": 1e-08,
+        "method": "b1_b7_cone01_line1381_leave_one_out_parameter_gate_v0",
+        "row_count": 5,
+        "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+        "source_sha256": "ea3381c10f09a98a528845eb4cd6d1cf20902dc01c96e6dfc59a4dfa2df95f3f",
+        "status": "cone01_line1381_no_single_parameter_free_removal",
+        "validation_error_count": 0
+      },
+      {
+        "current_off_grid_parameter_count": 5,
+        "current_off_grid_parameter_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "current_off_grid_parameter_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ],
+        "exact_tolerance": 1e-08,
+        "method": "b1_b7_cone01_line1381_leave_two_out_parameter_gate_v0",
+        "row_count": 10,
+        "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+        "source_sha256": "5887a4dfe28344229e190328e0ea2e3ab344c8c725f50ca4a08d9e16210cf63a",
+        "status": "cone01_line1381_no_two_parameter_free_removal",
+        "validation_error_count": 0
+      },
+      {
+        "current_off_grid_parameter_count": 5,
+        "current_off_grid_parameter_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "current_off_grid_parameter_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ],
+        "exact_tolerance": 1e-08,
+        "method": "b1_b7_cone01_line1381_leave_three_out_parameter_gate_v0",
+        "row_count": 10,
+        "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+        "source_sha256": "888e6ee98d12fcf43c1a949b507777e32346476a22f6f74ccf648abea3b72db3",
+        "status": "cone01_line1381_no_three_parameter_free_removal",
+        "validation_error_count": 0
+      },
+      {
+        "current_off_grid_parameter_count": 5,
+        "current_off_grid_parameter_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "current_off_grid_parameter_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ],
+        "exact_tolerance": 1e-08,
+        "method": "b1_b7_cone01_line1381_leave_four_out_parameter_gate_v0",
+        "row_count": 5,
+        "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+        "source_sha256": "84e8ff371017a148e6a7fa23b30cfaa2e20b3e9da6873ee99d324a0a0d64db88",
+        "status": "cone01_line1381_no_four_parameter_free_removal",
+        "validation_error_count": 0
+      },
+      {
+        "current_off_grid_parameter_count": 5,
+        "current_off_grid_parameter_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "current_off_grid_parameter_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ],
+        "exact_tolerance": 1e-08,
+        "method": "b1_b7_cone01_line1381_leave_five_out_parameter_gate_v0",
+        "row_count": 1,
+        "source_path": "results/B1_B7_cone01_line1381_leave_five_out_parameter_gate_v0.json",
+        "source_sha256": "52db3a5421075244170ff9c5faac19e70a5b072c7cab0dc26d0a1423c42ae5da",
+        "status": "cone01_line1381_no_all_grid_parameter_free_removal",
+        "validation_error_count": 0
+      }
+    ],
+    "normalized_subset_key_count": 31,
+    "remaining_open_obligations": [
+      "O1",
+      "O3"
+    ],
+    "source_domain_statement": "For the current R7-R12 hash chain, NL-C02 refers to the same five line1381 off-grid parameters [3, 4, 9, 16, 17] and the same 31 leave-out subset rows.",
+    "source_target_id": "T-B1-004do/T-B7-012x"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "validation_error_counts": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "label": "R7-R12 source artifacts are validation-clean where summaries expose validation counts",
+      "passed": true,
+      "requirement_id": "D1"
+    },
+    {
+      "evidence": {
+        "r11_skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+        "r11_source_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+        "r12_source_skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+        "r7_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+        "r8_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+        "r8_source_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+        "r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+        "r9_source_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977"
+      },
+      "label": "R7-R12 hash chain is consistent",
+      "passed": true,
+      "requirement_id": "D2"
+    },
+    {
+      "evidence": {
+        "canonical_indices": [
+          3,
+          4,
+          9,
+          16,
+          17
+        ],
+        "canonical_tolerance": 1e-08,
+        "canonical_values": [
+          1.428268820279441,
+          -1.1475089599716777,
+          -1.0525172906866098,
+          0.5589456541983555,
+          0.4232873668235233
+        ]
+      },
+      "label": "Canonical domain is the five current line1381 off-grid parameters",
+      "passed": true,
+      "requirement_id": "D3"
+    },
+    {
+      "evidence": {
+        "r11_count": 5,
+        "r7_count": 5,
+        "r8_count": 5
+      },
+      "label": "R7 and R8 domain counts match the canonical five-parameter domain",
+      "passed": true,
+      "requirement_id": "D4"
+    },
+    {
+      "evidence": {
+        "leave_out_domain_sources": [
+          {
+            "current_off_grid_parameter_count": 5,
+            "current_off_grid_parameter_indices": [
+              3,
+              4,
+              9,
+              16,
+              17
+            ],
+            "current_off_grid_parameter_values": [
+              1.428268820279441,
+              -1.1475089599716777,
+              -1.0525172906866098,
+              0.5589456541983555,
+              0.4232873668235233
+            ],
+            "exact_tolerance": 1e-08,
+            "method": "b1_b7_cone01_line1381_leave_one_out_parameter_gate_v0",
+            "row_count": 5,
+            "source_path": "results/B1_B7_cone01_line1381_leave_one_out_parameter_gate_v0.json",
+            "source_sha256": "ea3381c10f09a98a528845eb4cd6d1cf20902dc01c96e6dfc59a4dfa2df95f3f",
+            "status": "cone01_line1381_no_single_parameter_free_removal",
+            "validation_error_count": 0
+          },
+          {
+            "current_off_grid_parameter_count": 5,
+            "current_off_grid_parameter_indices": [
+              3,
+              4,
+              9,
+              16,
+              17
+            ],
+            "current_off_grid_parameter_values": [
+              1.428268820279441,
+              -1.1475089599716777,
+              -1.0525172906866098,
+              0.5589456541983555,
+              0.4232873668235233
+            ],
+            "exact_tolerance": 1e-08,
+            "method": "b1_b7_cone01_line1381_leave_two_out_parameter_gate_v0",
+            "row_count": 10,
+            "source_path": "results/B1_B7_cone01_line1381_leave_two_out_parameter_gate_v0.json",
+            "source_sha256": "5887a4dfe28344229e190328e0ea2e3ab344c8c725f50ca4a08d9e16210cf63a",
+            "status": "cone01_line1381_no_two_parameter_free_removal",
+            "validation_error_count": 0
+          },
+          {
+            "current_off_grid_parameter_count": 5,
+            "current_off_grid_parameter_indices": [
+              3,
+              4,
+              9,
+              16,
+              17
+            ],
+            "current_off_grid_parameter_values": [
+              1.428268820279441,
+              -1.1475089599716777,
+              -1.0525172906866098,
+              0.5589456541983555,
+              0.4232873668235233
+            ],
+            "exact_tolerance": 1e-08,
+            "method": "b1_b7_cone01_line1381_leave_three_out_parameter_gate_v0",
+            "row_count": 10,
+            "source_path": "results/B1_B7_cone01_line1381_leave_three_out_parameter_gate_v0.json",
+            "source_sha256": "888e6ee98d12fcf43c1a949b507777e32346476a22f6f74ccf648abea3b72db3",
+            "status": "cone01_line1381_no_three_parameter_free_removal",
+            "validation_error_count": 0
+          },
+          {
+            "current_off_grid_parameter_count": 5,
+            "current_off_grid_parameter_indices": [
+              3,
+              4,
+              9,
+              16,
+              17
+            ],
+            "current_off_grid_parameter_values": [
+              1.428268820279441,
+              -1.1475089599716777,
+              -1.0525172906866098,
+              0.5589456541983555,
+              0.4232873668235233
+            ],
+            "exact_tolerance": 1e-08,
+            "method": "b1_b7_cone01_line1381_leave_four_out_parameter_gate_v0",
+            "row_count": 5,
+            "source_path": "results/B1_B7_cone01_line1381_leave_four_out_parameter_gate_v0.json",
+            "source_sha256": "84e8ff371017a148e6a7fa23b30cfaa2e20b3e9da6873ee99d324a0a0d64db88",
+            "status": "cone01_line1381_no_four_parameter_free_removal",
+            "validation_error_count": 0
+          },
+          {
+            "current_off_grid_parameter_count": 5,
+            "current_off_grid_parameter_indices": [
+              3,
+              4,
+              9,
+              16,
+              17
+            ],
+            "current_off_grid_parameter_values": [
+              1.428268820279441,
+              -1.1475089599716777,
+              -1.0525172906866098,
+              0.5589456541983555,
+              0.4232873668235233
+            ],
+            "exact_tolerance": 1e-08,
+            "method": "b1_b7_cone01_line1381_leave_five_out_parameter_gate_v0",
+            "row_count": 1,
+            "source_path": "results/B1_B7_cone01_line1381_leave_five_out_parameter_gate_v0.json",
+            "source_sha256": "52db3a5421075244170ff9c5faac19e70a5b072c7cab0dc26d0a1423c42ae5da",
+            "status": "cone01_line1381_no_all_grid_parameter_free_removal",
+            "validation_error_count": 0
+          }
+        ]
+      },
+      "label": "All five leave-out source files expose identical parameter indices, values, and tolerance",
+      "passed": true,
+      "requirement_id": "D5"
+    },
+    {
+      "evidence": {
+        "all_leave_sources_clean": true,
+        "all_leave_sources_hashed": true,
+        "leave_source_count": 5
+      },
+      "label": "Leave-out sources are validation-clean and hash-bound",
+      "passed": true,
+      "requirement_id": "D6"
+    },
+    {
+      "evidence": {
+        "normalized_subset_key_count": 31,
+        "r11_leave_out_row_count": 31,
+        "r12_bridge_row_count": 31,
+        "r9_leave_attempt_row_count": 31
+      },
+      "label": "R9/R11/R12 row counts bind to the same 31 leave-out rows",
+      "passed": true,
+      "requirement_id": "D7"
+    },
+    {
+      "evidence": {
+        "chain_rows": [
+          {
+            "artifact_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+            "domain_count": 5,
+            "file_sha256": "f782996cee14d1fe08cbb2ddc175266cac928039afa5d34254e65a2c9d9f72bb",
+            "method": "b1_b7_cone01_r7_r1_submission_contract_gate_v0",
+            "path": "results/B1_B7_cone01_R7_r1_submission_contract_gate_v0.json",
+            "stage": "R7"
+          },
+          {
+            "artifact_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+            "domain_count": 5,
+            "file_sha256": "f4a83bd80d351f214ce16cc1f6121f4a90a324ff41ffd7fa0f151341ccefcf7c",
+            "method": "b1_b7_cone01_r8_r1_contract_preflight_gate_v0",
+            "path": "results/B1_B7_cone01_R8_r1_contract_preflight_gate_v0.json",
+            "source_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+            "stage": "R8"
+          },
+          {
+            "artifact_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+            "file_sha256": "d2b8630820677566161d12688ac1e09bd7e3d94072d4b68e506864a697b97fdf",
+            "leave_attempt_row_count": 31,
+            "method": "b1_b7_cone01_r9_r1_reroute_pressure_gate_v0",
+            "path": "results/B1_B7_cone01_R9_r1_reroute_pressure_gate_v0.json",
+            "source_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+            "stage": "R9"
+          },
+          {
+            "artifact_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+            "covered_parameter_count": 5,
+            "file_sha256": "5620e936e70f0d9dffc8c785a5a80d915093f26d63fa39e045d2464b8d3da6ed",
+            "method": "b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate_v0",
+            "path": "results/B1_B7_cone01_R11_nlc02_leaveout_proof_skeleton_gate_v0.json",
+            "row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+            "source_r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+            "stage": "R11"
+          },
+          {
+            "artifact_hash": "f35487dc67401193e1f455cf42e2fff05900792ddb72f97a5efad2787772b6d9",
+            "bridge_row_count": 31,
+            "file_sha256": "ef03315ff13d835420ed4b0f09ce25e20b7762f82f83b0f8f2d7a39271a65808",
+            "method": "b1_b7_cone01_r12_nlc02_tolerance_bridge_gate_v0",
+            "path": "results/B1_B7_cone01_R12_nlc02_tolerance_bridge_gate_v0.json",
+            "source_r11_row_table_hash": "0b7b5566197c780ca9e5e6c8d3ac86fe3a157e309c905a0499f23aadeb12b35c",
+            "source_r11_skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+            "stage": "R12"
+          }
+        ]
+      },
+      "label": "All R7-R12 stage files are file-hash and artifact-hash bound",
+      "passed": true,
+      "requirement_id": "D8"
+    },
+    {
+      "evidence": {
+        "decision": {
+          "checked_negative_lemma_present": false,
+          "nlc02_full_lemma_ready": false,
+          "o4_closed_for_current_hash_chain": true,
+          "reroute_allowed": false,
+          "why": "O4 is source-bound for the current hash chain, but O1 optimizer completeness and O3 parameterization invariance remain open."
+        },
+        "remaining_open_obligations": [
+          "O1",
+          "O3"
+        ]
+      },
+      "label": "O4 is closed only for the current hash chain while O1/O3 remain open",
+      "passed": true,
+      "requirement_id": "D9"
+    },
+    {
+      "evidence": {
+        "checked_negative_lemma_present": false,
+        "nlc02_full_lemma_ready": false,
+        "o4_closed_for_current_hash_chain": true,
+        "reroute_allowed": false,
+        "why": "O4 is source-bound for the current hash chain, but O1 optimizer completeness and O3 parameterization invariance remain open."
+      },
+      "label": "Binding is not upgraded into a checked negative lemma or reroute",
+      "passed": true,
+      "requirement_id": "D10"
+    }
+  ],
+  "runtime_seconds": 0.001193,
+  "source_target_id": "T-B1-004do/T-B7-012x",
+  "status": "cone01_r13_nlc02_source_domain_binding_ready_not_full_lemma",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_route_count": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "binding_hash": "1bcce90e3b032fab819e3062f90df7f8c631aa48bf744605b6e622cbd66c5598",
+    "binding_id": "B1-B7-cone01-R13-NL-C02-source-domain-binding",
+    "candidate_id": "NL-C02",
+    "canonical_exact_tolerance": 1e-08,
+    "canonical_line": 1381,
+    "canonical_parameter_count": 5,
+    "canonical_parameter_indices": [
+      3,
+      4,
+      9,
+      16,
+      17
+    ],
+    "checked_negative_lemma_present": false,
+    "domain_hash": "8222f1c0cee51f1ad1a7e8f696938d261c01d7a1841559e451b4fc22a8a676d3",
+    "failed_requirement_ids": [],
+    "hash_chain_stage_count": 5,
+    "leave_out_source_count": 5,
+    "nlc02_full_lemma_ready": false,
+    "normalized_subset_key_count": 31,
+    "o4_closed_for_current_hash_chain": true,
+    "remaining_open_obligation_count": 2,
+    "remaining_open_obligations": [
+      "O1",
+      "O3"
+    ],
+    "requirement_count": 10,
+    "requirements_failed": 0,
+    "requirements_passed": 10,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "source_r11_skeleton_hash": "4ec8ffb777d13acefabebfd213a61e0d7e7bc11d904ba227d8bbb6727fc833ab",
+    "source_r12_bridge_hash": "f35487dc67401193e1f455cf42e2fff05900792ddb72f97a5efad2787772b6d9",
+    "source_r7_contract_hash": "ffee37b9f6d07567fb60488cec42140757903ff8cb2deec812f4195f91bd897b",
+    "source_r8_preflight_hash": "e6d5be7ca79021780009f91fd17df8ec206db924e6d402c12472aa854bbac977",
+    "source_r9_pressure_hash": "6d91bce5a09c4407ef9d7bcac0a81a5983c186dc23b3c98edb1a91b4a4ef4505",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R13 NL-C02 Source-Domain Binding Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}

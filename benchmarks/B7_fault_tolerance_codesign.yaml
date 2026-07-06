@@ -586,6 +586,38 @@ current_results:
     caveat: r12_o2_bridge_only_o1_o3_o4_open_no_checked_negative_lemma_no_reroute_or_b7_credit
     report: ../results/B1_B7_cone01_R12_nlc02_tolerance_bridge_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R12_nlc02_tolerance_bridge_gate.md
+  b1_b7_cone01_r13_nlc02_source_domain_binding_gate_v0:
+    status: cone01_r13_nlc02_source_domain_binding_ready_not_full_lemma
+    method: b1_b7_cone01_r13_nlc02_source_domain_binding_gate_v0
+    source_b1_r13_nlc02_source_domain_binding: ../results/B1_B7_cone01_R13_nlc02_source_domain_binding_gate_v0.json
+    source_r12_bridge: ../results/B1_B7_cone01_R12_nlc02_tolerance_bridge_gate_v0.json
+    source_target_id: T-B1-004do/T-B7-012x
+    candidate_id: NL-C02
+    binding_hash: 1bcce90e3b032fab819e3062f90df7f8c631aa48bf744605b6e622cbd66c5598
+    domain_hash: 8222f1c0cee51f1ad1a7e8f696938d261c01d7a1841559e451b4fc22a8a676d3
+    requirements_passed: 10
+    requirements_failed: 0
+    canonical_line: 1381
+    canonical_parameter_count: 5
+    canonical_parameter_indices: [3, 4, 9, 16, 17]
+    normalized_subset_key_count: 31
+    o4_closed_for_current_hash_chain: true
+    remaining_open_obligations: [O1, O3]
+    checked_negative_lemma_present: false
+    nlc02_full_lemma_ready: false
+    reroute_allowed: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    validation_error_count: 0
+    caveat: r13_o4_source_domain_binding_only_o1_o3_open_no_checked_negative_lemma_no_reroute_or_b7_credit
+    report: ../results/B1_B7_cone01_R13_nlc02_source_domain_binding_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R13_nlc02_source_domain_binding_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
@@ -1392,6 +1424,7 @@ prototype_artifacts:
   b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate: ../tools/b1_b7_cone01_r10_r1_negative_lemma_candidate_registry_gate.py
   b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate: ../tools/b1_b7_cone01_r11_nlc02_leaveout_proof_skeleton_gate.py
   b1_b7_cone01_r12_nlc02_tolerance_bridge_gate: ../tools/b1_b7_cone01_r12_nlc02_tolerance_bridge_gate.py
+  b1_b7_cone01_r13_nlc02_source_domain_binding_gate: ../tools/b1_b7_cone01_r13_nlc02_source_domain_binding_gate.py
   b1_b7_cone01_resource_escape_replay_validation_manifest_gate: ../tools/b1_b7_cone01_resource_escape_replay_validation_manifest_gate.py
   b1_b7_cone01_resource_escape_acceptance_packet_gate: ../tools/b1_b7_cone01_resource_escape_acceptance_packet_gate.py
   b2_calibration_source_manifest_gate: ../tools/b2_calibration_source_manifest_gate.py
