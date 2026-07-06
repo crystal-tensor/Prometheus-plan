@@ -1,0 +1,296 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Submit the R1 line1381 resolution manifest and bind it to the six indexed evidence rows; then add either a parameter-elimination patch with full replay/symbolic equivalence or a physical-pricing replay that beats the current five-parameter 100-proxy-T boundary.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "No submitted R1 artifact, line1381 parameter elimination, accepted exit route, occurrence removal, proxy-T reduction, B7 ledger credit, or resource saving is supported.",
+    "what_is_supported": "R6 indexes the source evidence that an R1 line1381 resolution submission must bind."
+  },
+  "last_updated": "2026-07-06",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r6_r1_source_evidence_inventory_gate_v0",
+  "model_status": "r1_line1381_existing_evidence_indexed_but_resolution_artifact_missing",
+  "r1_source_evidence_inventory_packet": {
+    "acceptance_packet_hash": "e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420",
+    "evidence_rows": [
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "line1381_repaired_packet_candidate",
+        "evidence_id": "E1",
+        "line1381_off_grid_parameter_count": null,
+        "line1381_proxy_t_pressure": null,
+        "method": "b1_b7_cone01_five_parameter_line1381_exact_repair_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_five_parameter_line1381_exact_repair_gate.md",
+        "report_sha256": "ec5d9ecde524de8886ab9f18e24dd0d2de5d2e1081c2b3b7f7fdca5c84620f69",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_five_parameter_line1381_exact_repair_gate_v0.json",
+        "result_sha256": "1c5bb9ade0ed1367e30d3c41fbc0cf83055a490e31bd5968feabfd5f2b722eb5",
+        "status": "cone01_five_parameter_line1381_exact_packet_repair_not_ledger_accepted",
+        "validation_error_count": 0,
+        "why_it_matters": "Line 1381 has a bounded five-parameter exact packet repair candidate."
+      },
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "line1381_local_u3_pricing_boundary",
+        "evidence_id": "E2",
+        "line1381_off_grid_parameter_count": 5,
+        "line1381_proxy_t_pressure": 100,
+        "method": "b1_b7_cone01_line1381_local_u3_pricing_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_line1381_local_u3_pricing_gate.md",
+        "report_sha256": "85c6fda0ba5b94e9a2c994c7a5e8ae075ae6fb5f6ea47058496bd9aed885e21a",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_line1381_local_u3_pricing_gate_v0.json",
+        "result_sha256": "3d86831c11f7d758e72f794971ba283b0fc1a884093929b3f810bfdfe97a8275",
+        "status": "cone01_line1381_local_u3_pricing_boundary_no_b7_credit",
+        "validation_error_count": 0,
+        "why_it_matters": "The exact packet still carries five off-grid local-U3 parameters and 100 proxy-T pressure."
+      },
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "physical_synthesis_pricing_rejection",
+        "evidence_id": "E3",
+        "line1381_off_grid_parameter_count": 5,
+        "line1381_proxy_t_pressure": 100,
+        "method": "b1_b7_cone01_physical_synthesis_pricing_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_physical_synthesis_pricing_gate.md",
+        "report_sha256": "c2462ee1945bfe0c7079785965725c302de6ed15b454c0db4fda51357a2c1e31",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_physical_synthesis_pricing_gate_v0.json",
+        "result_sha256": "bca6235672c89680c12894dd934deee34880dc2b06206c8ad35459a0385e08e6",
+        "status": "cone01_physical_synthesis_pricing_rejects_line1381_b7_credit",
+        "validation_error_count": 0,
+        "why_it_matters": "Physical synthesis pricing rejects line1381 B7 credit under current evidence."
+      },
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "openqasm3_qiskit_loader_evidence_seal",
+        "evidence_id": "E4",
+        "line1381_off_grid_parameter_count": null,
+        "line1381_proxy_t_pressure": null,
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_evidence_seal_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_evidence_seal_gate.md",
+        "report_sha256": "7a648d78758b0f6499d7a743993714fef3d47932b9b02ec5de317228c7828dc7",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_evidence_seal_gate_v0.json",
+        "result_sha256": "f7a5f57ced33e3d8c3f8be12fbcd0dba26a5b42206dac8bb0e1ed1723a735ad2",
+        "status": "cone01_openqasm3_qiskit_loader_evidence_seal_passed_without_b7_credit",
+        "validation_error_count": 0,
+        "why_it_matters": "OpenQASM 3/Qiskit loader evidence is replayable but does not accept local-U3 pricing."
+      },
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "openqasm3_seeded_product_replay",
+        "evidence_id": "E5",
+        "line1381_off_grid_parameter_count": null,
+        "line1381_proxy_t_pressure": null,
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate.md",
+        "report_sha256": "dac7d37e1cf4104902d642bacc899f7e96c52cb4b36934bba7b1ab292f6a9ec2",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_product_replay_gate_v0.json",
+        "result_sha256": "1e5ca69059d4b991198968b1e7b419133aff5dbf65d542c4038323cf9520d8a7",
+        "status": "cone01_openqasm3_qiskit_loader_seeded_product_replay_passed_without_b7_credit",
+        "validation_error_count": 0,
+        "why_it_matters": "Seeded product replay passes while still forbidding resource credit."
+      },
+      {
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_ledger_improvement_claimed": false,
+        "class": "seeded_resource_boundary",
+        "evidence_id": "E6",
+        "line1381_off_grid_parameter_count": 5,
+        "line1381_proxy_t_pressure": 100,
+        "method": "b1_b7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0",
+        "report_exists": true,
+        "report_path": "research/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate.md",
+        "report_sha256": "9695e8092e4dfa0be86c012b2ec733abb629edf0c4ff99f6b9bbf5a96f06e989",
+        "resource_saving_claimed": false,
+        "result_exists": true,
+        "result_path": "results/B1_B7_cone01_openqasm3_qiskit_loader_seeded_resource_boundary_gate_v0.json",
+        "result_sha256": "f57ff6dd952167f65ce4cdfab1823d5d1480708830be45e59de576dab418723c",
+        "status": "cone01_openqasm3_qiskit_loader_seeded_resource_boundary_no_b7_credit",
+        "validation_error_count": 0,
+        "why_it_matters": "The seeded resource boundary names line1381 as a failed blocker with zero B7 credit."
+      }
+    ],
+    "first_next_pr": "Submit the R1 line1381 resolution manifest and bind it to the six indexed evidence rows; then add either a parameter-elimination patch with full replay/symbolic equivalence or a physical-pricing replay that beats the current five-parameter 100-proxy-T boundary.",
+    "inventory_hash": "43aeb8f22af8d3043489d73b50c5d57f3779e4f4ea02798479096c3448a3149b",
+    "inventory_id": "B1-B7-cone01-R6-R1-source-evidence-inventory",
+    "inventory_table_hash": "750be454fc99ea616e71a67a24a69a6c310a57977660b27807bb0e44987f0316",
+    "missing_submission_files": [
+      "line1381_resolution_manifest",
+      "line1381_rewritten_patch_or_parameter_elimination_artifact",
+      "full_replay_or_symbolic_equivalence_certificate",
+      "physical_pricing_replay",
+      "resource_delta_ledger",
+      "no_double_counting_ledger",
+      "qiskit_loader_seeded_replay_reference",
+      "claim_boundary_note"
+    ],
+    "r1_packet_hash": "f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe",
+    "r1_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+    "r5_selector_hash": "82cfd3a6e39a56452d7155198f76c16ecf14327464c8cf65452c5a35637d94fb",
+    "required_submission_files": [
+      "line1381_resolution_manifest",
+      "line1381_rewritten_patch_or_parameter_elimination_artifact",
+      "full_replay_or_symbolic_equivalence_certificate",
+      "physical_pricing_replay",
+      "resource_delta_ledger",
+      "no_double_counting_ledger",
+      "qiskit_loader_seeded_replay_reference",
+      "claim_boundary_note"
+    ],
+    "source_r1_gate": "results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json",
+    "source_r5_selector": "results/B1_B7_cone01_R5_exit_route_priority_selector_v0.json",
+    "submission_artifact_path": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json",
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "method": "b1_b7_cone01_r5_exit_route_priority_selector_v0",
+        "selected_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+        "selected_route_id": "R1",
+        "selector_hash": "82cfd3a6e39a56452d7155198f76c16ecf14327464c8cf65452c5a35637d94fb"
+      },
+      "label": "R5 still selects R1 as the next exit-route PR",
+      "passed": true,
+      "requirement_id": "I1"
+    },
+    {
+      "evidence": {
+        "failed_requirement_ids": [
+          "P6",
+          "P7",
+          "P8"
+        ],
+        "method": "b1_b7_cone01_r1_line1381_resolution_packet_gate_v0",
+        "submitted_r1_artifact_exists": false
+      },
+      "label": "R1 packet remains open because no submission artifact exists",
+      "passed": true,
+      "requirement_id": "I2"
+    },
+    {
+      "evidence": {
+        "available_row_count": 6,
+        "missing_rows": [],
+        "required_row_count": 6
+      },
+      "label": "All indexed source evidence result/report files exist",
+      "passed": true,
+      "requirement_id": "I3"
+    },
+    {
+      "evidence": {
+        "blocker_row_count": 3,
+        "r1_line1381_off_grid_parameter_count_before": 5,
+        "r1_line1381_unpriced_proxy_t_pressure_before": 100
+      },
+      "label": "Line1381 blocker remains visible in indexed evidence",
+      "passed": true,
+      "requirement_id": "I4"
+    },
+    {
+      "evidence": {
+        "r1_accepted_occurrence_removal": 0,
+        "r1_accepted_proxy_t_reduction": 0,
+        "required_row_count": 6,
+        "zero_credit_row_count": 6
+      },
+      "label": "Indexed evidence still carries zero accepted B7 credit",
+      "passed": true,
+      "requirement_id": "I5"
+    },
+    {
+      "evidence": {
+        "missing_submission_file_count": 8,
+        "submission_artifact_exists": false,
+        "submission_artifact_path": "results/B1_B7_cone01_r1_line1381_resolution_submissions/B1-B7-cone01-R1-line1381-resolution.json"
+      },
+      "label": "R1 required submission files remain missing",
+      "passed": true,
+      "requirement_id": "I6"
+    },
+    {
+      "evidence": {
+        "inventory_hash": "43aeb8f22af8d3043489d73b50c5d57f3779e4f4ea02798479096c3448a3149b",
+        "inventory_table_hash": "750be454fc99ea616e71a67a24a69a6c310a57977660b27807bb0e44987f0316",
+        "r1_packet_hash": "f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe",
+        "r5_selector_hash": "82cfd3a6e39a56452d7155198f76c16ecf14327464c8cf65452c5a35637d94fb"
+      },
+      "label": "Inventory packet is hash-bound to R1/R5 and evidence rows",
+      "passed": true,
+      "requirement_id": "I7"
+    },
+    {
+      "evidence": {
+        "r1_b1_resource_saving_claimed": false,
+        "r1_b7_ledger_improvement_claimed": false,
+        "r5_b7_ledger_improvement_claimed": false
+      },
+      "label": "Forbidden resource claims remain false",
+      "passed": true,
+      "requirement_id": "I8"
+    }
+  ],
+  "runtime_seconds": 0.001722,
+  "source_r1_gate": "results/B1_B7_cone01_R1_line1381_resolution_packet_gate_v0.json",
+  "source_r5_selector": "results/B1_B7_cone01_R5_exit_route_priority_selector_v0.json",
+  "source_target_id": "T-B1-004dh/T-B7-012q",
+  "status": "cone01_r6_r1_source_evidence_inventory_ready_missing_submission",
+  "summary": {
+    "acceptance_packet_hash": "e456ff08d70cb89cdb0b8093dd1527ce50ba3e5891e517688465939c2db75420",
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "available_evidence_row_count": 6,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "failed_requirement_ids": [],
+    "indexed_evidence_row_count": 6,
+    "inventory_hash": "43aeb8f22af8d3043489d73b50c5d57f3779e4f4ea02798479096c3448a3149b",
+    "inventory_id": "B1-B7-cone01-R6-R1-source-evidence-inventory",
+    "inventory_table_hash": "750be454fc99ea616e71a67a24a69a6c310a57977660b27807bb0e44987f0316",
+    "line1381_blocker_row_count": 3,
+    "line1381_off_grid_parameter_count": 5,
+    "line1381_unpriced_proxy_t_pressure": 100,
+    "missing_submission_file_count": 8,
+    "r1_packet_hash": "f8de5bf50928fa4aaeb43477169b850f4bb17be19fa6d9200367ab78fab01afe",
+    "r1_packet_id": "B1-B7-cone01-R1-line1381-resolution",
+    "r5_selector_hash": "82cfd3a6e39a56452d7155198f76c16ecf14327464c8cf65452c5a35637d94fb",
+    "requirement_count": 8,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "resource_saving_claimed": false,
+    "selected_route_id": "R1",
+    "submission_artifact_exists": false,
+    "triage_hash": "475137115d142f24ae7d2e747ce5d6f8e9a6020eb8cb42deb5cee005bd734e0b",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R6 R1 Source-Evidence Inventory Gate",
+  "validation_errors": [],
+  "version": "0.1"
+}
