@@ -3617,6 +3617,44 @@ current_results:
     caveat: r14_simple_reparameterization_screen_only_o1_o3_still_open_no_checked_negative_lemma_no_reroute_or_b7_credit
     report: ../results/B1_B7_cone01_R14_nlc02_reparameterization_escape_screen_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R14_nlc02_reparameterization_escape_screen_gate.md
+  b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate_v0:
+    circuits: 1
+    status: cone01_r15_nlc02_clifford_frame_screen_passed_o3_still_open
+    model_status: nlc02_clifford_frame_affine_screen_passed_but_o3_unclosed
+    method: b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate_v0
+    source_r14_screen: ../results/B1_B7_cone01_R14_nlc02_reparameterization_escape_screen_gate_v0.json
+    source_exact_decomposition: ../results/B1_B7_cone01_line1381_exact_decomposition_pressure_gate_v0.json
+    source_target_id: T-B1-004dq/T-B7-012z
+    candidate_id: NL-C02
+    screen_id: B1-B7-cone01-R15-NL-C02-clifford-frame-affine-screen
+    screen_hash: 88601f447749cf6b599520ee49403bba9fec173e97ecb3229a88deeca3fe3617
+    probe_table_hash: 9e90dc4037d158db0768c8c3e75757fb96ff7e34fe1e83072434d337f61d765e
+    source_r14_screen_hash: 97bc38b63779b504f3bbc157d622b0d893c4266bcd00f35e5143bccef9b98b26
+    requirements_passed: 10
+    requirements_failed: 0
+    sign_count: 2
+    clifford_frame_shift_count: 9
+    period_shift_count: 5
+    probe_count: 450
+    accepted_escape_count: 0
+    min_pi_over_four_grid_error: 0.14252750651545298
+    clifford_frame_escape_found: false
+    o3_closed: false
+    remaining_open_obligations: [O1, O3]
+    checked_negative_lemma_present: false
+    nlc02_full_lemma_ready: false
+    reroute_allowed: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    resource_saving_claimed: false
+    b7_ledger_improvement_claimed: false
+    validation_error_count: 0
+    caveat: r15_clifford_frame_screen_only_o1_o3_still_open_no_checked_negative_lemma_no_reroute_or_b7_credit
+    report: ../results/B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R15_nlc02_clifford_frame_screen_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate
@@ -5285,4 +5323,5 @@ prototype_artifacts:
   b1_b7_cone01_r12_nlc02_tolerance_bridge_gate: ../tools/b1_b7_cone01_r12_nlc02_tolerance_bridge_gate.py
   b1_b7_cone01_r13_nlc02_source_domain_binding_gate: ../tools/b1_b7_cone01_r13_nlc02_source_domain_binding_gate.py
   b1_b7_cone01_r14_nlc02_reparameterization_escape_screen_gate: ../tools/b1_b7_cone01_r14_nlc02_reparameterization_escape_screen_gate.py
+  b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate: ../tools/b1_b7_cone01_r15_nlc02_clifford_frame_screen_gate.py
   synthetic_noise_proxy: ../tools/b1_synthetic_noise_proxy.py
