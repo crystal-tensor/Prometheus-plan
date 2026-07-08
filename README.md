@@ -1485,6 +1485,24 @@ to replace smoke rows with real source-backed replay evidence and add
 provenance, witness schema, and preflight packets for `O3-F4-C02` through
 `O3-F4-C08`.
 
+`T-B1-004et` / `T-B7-014c` now binds source-provenance packets for the 7 C2
+rows that lacked provenance after R43. It adds hash-verifiable source dataset,
+source trace, and replay-environment files for `O3-F4-C02` through
+`O3-F4-C08` while keeping `O3-F4-C01` on its R39 provenance packet.
+Materialized rows pass `8`; source-provenance rows now pass `8`; source-
+provenance failures drop to `0`; unitary-distance rows remain `8`;
+witness-schema rows still pass only `1`; witness-preflight rows still pass only
+`1`; source-backed rows remain `0`; source-backed flag failures remain `8`.
+Remaining source-provenance fixture hash
+`23009a587461b2eb2ecae0e22e178aaa2935505efdc1010d6d76a2018a2bb98e`;
+evaluation hash `5bca1cbfcfe354876962402673c4c8eb125fd4de472a7cedd71dfa9a09c386f9`.
+C2 remains unaccepted because R44 is provenance binding, not witness-schema
+completion, not executable preflight completion, not source-backed replay, and
+not a same-unitary certificate. O3, reroute, B7 credit, STV credit, and
+resource-saving claims remain 0/false. The next useful PR should add witness
+schemas and executable preflight packets for `O3-F4-C02` through `O3-F4-C08`,
+then rerun the source-backed discriminator before C3-C7.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
