@@ -1,0 +1,27 @@
+{
+  "artifact": "R103 filled-looking claimed external counter decision",
+  "claimed_decision_hash": "cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7",
+  "decision_template_hash": "14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3",
+  "fields": {
+    "claim_boundary": "This is a filled-looking counter packet that requests one external reproduction counter increment. It must be rejected unless external origin and reviewer independence are verified.",
+    "clean_checkout_transcript_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-clean-clone-rerun-transcript.txt",
+    "clean_checkout_transcript_sha256": "85922995d55a7527df229940c89ea9af0a761402bbc77eef92e395b01f5ea299",
+    "counter_delta": 1,
+    "counter_target": "accepted_external_reproduction_count",
+    "decision_mode": "external_reproduction_counter_increment",
+    "double_count_decision": "claims_no_duplicate_but_external_origin_unverified",
+    "independence_statement": "claims_independent_but_no_external_origin_attestation",
+    "independent_environment_manifest_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-clean-clone-rerun-manifest.json",
+    "independent_environment_manifest_sha256": "d0d0caedd3ff78b80eaa0883bf676ae10acb48424a430a3202b2ebfcbaa5de8c",
+    "reviewer_affiliation_or_agent_context": "unverified_external_claim_reuses_repo_local_artifacts",
+    "reviewer_id": "claimed-external-reviewer-r103",
+    "signature_hash": "14003aeb3f7e4610c1d5413aef050823418b6077f038d921747fd0f597419ec7",
+    "source_r101_comparison_hash": "21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900"
+  },
+  "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+  "method": "b1_b7_cone01_r103_external_counter_transition_audit_gate_v0",
+  "negative_control_reason": "The packet is structurally filled and requests a counter increment, but it reuses repo-local R101 artifacts and lacks external origin attestation.",
+  "source_r101_manifest_hash": "dd4efc1db388f83e83e9e4353c46400e4817f29dd1c340a01ceb2df07a718540",
+  "source_target_id": "T-B1-004ha/T-B7-016j",
+  "upstream_target_id": "T-B1-004gz/T-B7-016i"
+}

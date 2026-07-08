@@ -1,0 +1,108 @@
+{
+  "artifact": "B1/B7 cone01 R103 external counter transition audit gate",
+  "audit_hash": "2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51",
+  "audit_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-external-counter-transition-audit.verdict.json",
+  "blocker_queue_hash": "876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-post-counter-transition-audit-blocker-queue.json",
+  "claimed_decision_hash": "cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7",
+  "claimed_decision_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-claimed-external-counter-decision.json",
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783553420,
+  "method": "b1_b7_cone01_r103_external_counter_transition_audit_gate_v0",
+  "model_status": "r102_contract_ready_but_filled_counter_packet_reuses_local_r101_artifacts",
+  "payload_hash": "c9d8a0a188c3ce594bacbcd763791886f5f3fa1b341bee46092656af333d037d",
+  "requirement_count": 5,
+  "requirements": [
+    {
+      "evidence": {
+        "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+        "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5",
+        "r102_payload_hash": "4654ab7597327340ffa82fa78d9fc554e674e7405a2a7785aac2414ca23a1c66"
+      },
+      "label": "R103 binds the R102 identity contract, preflight, and blocker queue",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "claimed_decision_hash": "cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7",
+        "requested_counter_delta": 1
+      },
+      "label": "R103 emits a filled-looking counter-increment packet",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "audit_hash": "2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51",
+        "failed_gates": [
+          "local_artifact_reuse_detected",
+          "external_origin_attested",
+          "counter_transition_accepted"
+        ]
+      },
+      "label": "R103 detects repo-local R101 artifact reuse and rejects the packet",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "accepted_external_falsification_count": 0,
+        "accepted_external_reproduction_count": 0,
+        "counter_delta": 0,
+        "new_credit_delta": 0
+      },
+      "label": "R103 keeps external counters and new credit at zero",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R103-G1-1",
+          "R103-G1-2",
+          "R103-G1-3"
+        ],
+        "blocker_queue_hash": "876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba"
+      },
+      "label": "R103 emits blockers for external origin, nonlocal replay artifacts, and accepted counter transition",
+      "passed": true,
+      "requirement_id": "A5"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 5,
+  "source_target_id": "T-B1-004ha/T-B7-016j",
+  "status": "cone01_r103_filled_external_counter_packet_rejected_no_external_origin",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-external-counter-transition-audit.stdout.txt",
+  "stdout_sha256": "3b2956624d3885d08fcf2aa7b386fb2f2730f0149c6e528f33ee08817f5cd463",
+  "summary": {
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "audit_hash": "2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51",
+    "blocker_queue_hash": "876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba",
+    "claimed_counter_delta": 1,
+    "claimed_decision_hash": "cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7",
+    "claimed_external_packet_rejected": true,
+    "counter_delta": 0,
+    "counter_transition_accepted": false,
+    "failed_gate_count": 3,
+    "failed_requirement_ids": [],
+    "method": "b1_b7_cone01_r103_external_counter_transition_audit_gate_v0",
+    "model_status": "r102_contract_ready_but_filled_counter_packet_reuses_local_r101_artifacts",
+    "new_credit_delta": 0,
+    "passed_gate_count": 7,
+    "payload_hash": "c9d8a0a188c3ce594bacbcd763791886f5f3fa1b341bee46092656af333d037d",
+    "requirements_failed": 0,
+    "requirements_passed": 5,
+    "source_target_id": "T-B1-004ha/T-B7-016j",
+    "status": "cone01_r103_filled_external_counter_packet_rejected_no_external_origin",
+    "stdout_sha256": "3b2956624d3885d08fcf2aa7b386fb2f2730f0149c6e528f33ee08817f5cd463",
+    "upstream_target_id": "T-B1-004gz/T-B7-016i",
+    "validation_error_count": 0
+  },
+  "upstream_target_id": "T-B1-004gz/T-B7-016i",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1"
+}

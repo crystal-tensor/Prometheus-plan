@@ -7180,6 +7180,35 @@ current_results:
     caveat: r102_contract_ready_but_local_surrogate_not_external_reviewer
     report: ../results/B1_B7_cone01_R102_external_reviewer_identity_contract_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R102_external_reviewer_identity_contract_gate.md
+  b1_b7_cone01_r103_external_counter_transition_audit_gate_v0:
+    circuits: 1
+    status: cone01_r103_filled_external_counter_packet_rejected_no_external_origin
+    model_status: r102_contract_ready_but_filled_counter_packet_reuses_local_r101_artifacts
+    method: b1_b7_cone01_r103_external_counter_transition_audit_gate_v0
+    source_target_id: T-B1-004ha/T-B7-016j
+    upstream_target_id: T-B1-004gz/T-B7-016i
+    source_b1_r102_external_reviewer_identity_contract: ../results/B1_B7_cone01_R102_external_reviewer_identity_contract_gate_v0.json
+    r103_claimed_decision: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-claimed-external-counter-decision.json
+    r103_audit: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-external-counter-transition-audit.verdict.json
+    r103_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R103-G1-post-counter-transition-audit-blocker-queue.json
+    claimed_counter_delta: 1
+    claimed_external_packet_rejected: true
+    counter_transition_accepted: false
+    passed_gate_count: 7
+    failed_gate_count: 3
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    claimed_decision_hash: cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7
+    audit_hash: 2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51
+    blocker_queue_hash: 876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba
+    requirements_passed: 5
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r103_rejects_local_artifact_reuse_no_external_counter_move
+    report: ../results/B1_B7_cone01_R103_external_counter_transition_audit_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R103_external_counter_transition_audit_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

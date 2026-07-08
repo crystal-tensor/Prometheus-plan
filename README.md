@@ -2444,3 +2444,19 @@ preflight hash `005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5
 blocker queue hash `548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1`.
 The next real gate is a real independent reviewer packet with environment,
 clean-checkout transcript, and exactly one audited external counter transition.
+
+`T-B1-004ha` / `T-B7-016j` now adds the R103 external counter transition audit
+gate. R103 fills the R102 decision template with a packet that requests `+1`
+accepted external reproduction, but rejects it because the packet reuses
+repo-local R101 clean-rerun artifacts and has no external-origin attestation.
+Requirements pass `5/5`; audit gates pass `7` and fail `3`; claimed counter
+delta is `1`; claimed external packet rejected is `true`; counter transition
+accepted is `false`; counter delta remains `0`; accepted external reproductions
+remain `0`; accepted external falsifications remain `0`; and
+`new_credit_delta` remains `0`. Claimed-decision hash
+`cff5f2c1ced3854bb0eccb4fb32ad72824f73b94420af5ab13e549761ad4e9b7`; audit
+hash `2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51`;
+blocker queue hash `876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba`.
+The next real gate must supply external-origin attestation, nonlocal replay
+artifacts, and an audit that accepts exactly one reproduction or falsification
+counter transition without moving B7/O3/resource/layout claims.

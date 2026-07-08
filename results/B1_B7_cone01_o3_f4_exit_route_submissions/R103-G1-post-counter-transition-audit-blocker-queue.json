@@ -1,0 +1,28 @@
+{
+  "artifact": "R103 post counter transition audit blocker queue",
+  "audit_hash": "2de6e6a2b8234af2e82c3e4af09296c5492054c7e0fbe6703bc1e7697bd2dc51",
+  "blocker_queue_hash": "876d3e77f00c0676c3d57eeeedef6896df05c1ac244b146d3ef5d6ed7bc027ba",
+  "method": "b1_b7_cone01_r103_external_counter_transition_audit_gate_v0",
+  "queue": [
+    {
+      "blocker_id": "R103-G1-1",
+      "needed_artifact": "attestation that reviewer, environment, and checkout were produced outside maintainer context",
+      "priority": 1,
+      "target_gate": "external_origin_attestation"
+    },
+    {
+      "blocker_id": "R103-G1-2",
+      "needed_artifact": "environment and transcript files not copied from repo-local R101 artifacts",
+      "priority": 2,
+      "target_gate": "nonlocal_replay_artifacts"
+    },
+    {
+      "blocker_id": "R103-G1-3",
+      "needed_artifact": "audit accepting exactly one reproduction or falsification counter transition",
+      "priority": 3,
+      "target_gate": "accepted_single_counter_transition"
+    }
+  ],
+  "source_target_id": "T-B1-004ha/T-B7-016j",
+  "upstream_target_id": "T-B1-004gz/T-B7-016i"
+}
