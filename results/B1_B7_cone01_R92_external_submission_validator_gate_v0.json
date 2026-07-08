@@ -1,0 +1,146 @@
+{
+  "artifact": "B1/B7 cone01 R92 external submission validator gate",
+  "blocker_queue_hash": "3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-post-validator-blocker-queue.json",
+  "command_transcript_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-command-transcript.txt",
+  "command_transcript_sha256": "1aa288265b9dcb5f2fe3461601c819172fba16623c9be477379054ee03a04656",
+  "double_count_test_hash": "bac14bb19c90e64556892366d7d4037742bead73a6640579ff02fd1328c1d89c",
+  "double_count_test_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-double-count-test.json",
+  "environment_manifest_hash": "16bf21d91f2471ba2c641cdbce3390f80f7e13aae28d22134c75efdf7693851a",
+  "environment_manifest_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-environment-manifest.json",
+  "failed_requirement_ids": [],
+  "fixture_preflight_hash": "f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114",
+  "fixture_preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-preflight.verdict.json",
+  "fixture_submission_hash": "8bd40bbfe6ae61cc4a02e1f1bbbd3d740289d7179a045243f782e73efcab86d0",
+  "fixture_submission_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-filled-submission.json",
+  "generated_at_unix": 1783546015,
+  "method": "b1_b7_cone01_r92_external_submission_validator_gate_v0",
+  "model_status": "r91_contract_has_runnable_validator_fixture_but_no_external_reproduction_yet",
+  "payload_hash": "7b03365ffec5e7468521ff04843dd2bd1dd22c761d6a8f29fcb6e1b40fd7b313",
+  "requirement_count": 7,
+  "requirements": [
+    {
+      "evidence": {
+        "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+        "r91_payload_hash": "6d3f45723018405351d4af19f114ab7ce2c541624b7be0a246a1729b2795930e",
+        "r91_preflight_hash": "7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6",
+        "template_hash": "2af8c0f624b493b159c4198fe4692aa5d2f52f92d6ba8cd15578e48c82ceeada"
+      },
+      "label": "R92 binds the R91 result, contract, template, and empty preflight",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "validator_gate_count": 9,
+        "validator_rules_hash": "49c4f245da0f16476a047c3c17935537adf62b256406ccd543f0bb4f0b4c65ec"
+      },
+      "label": "R92 emits validator rules covering all R91 required and production-required fields",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "command_transcript_sha256": "1aa288265b9dcb5f2fe3461601c819172fba16623c9be477379054ee03a04656",
+        "double_count_test_hash": "bac14bb19c90e64556892366d7d4037742bead73a6640579ff02fd1328c1d89c",
+        "environment_manifest_hash": "16bf21d91f2471ba2c641cdbce3390f80f7e13aae28d22134c75efdf7693851a"
+      },
+      "label": "R92 emits local fixture evidence files for environment, transcript, and double-count test",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "fixture_preflight_hash": "f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114",
+        "passed_gate_count": 9
+      },
+      "label": "R92 local fixture passes schema, hash, arithmetic, and claim-safety gates",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "accepted_external_falsification_count": 0,
+        "accepted_external_reproduction_count": 0,
+        "external_submission_accepted": false
+      },
+      "label": "R92 fixture is not counted as external reproduction or falsification",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "new_credit_delta": 0,
+        "o3_closed": false,
+        "physical_layout_claimed": false,
+        "resource_saving_claimed": false
+      },
+      "label": "R92 grants no new credit and keeps stronger claims closed",
+      "passed": true,
+      "requirement_id": "A6"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R92-G1-1",
+          "R92-G1-2",
+          "R92-G1-3"
+        ],
+        "blocker_queue_hash": "3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10"
+      },
+      "label": "R92 emits blockers for non-fixture external submission and accepted external verdict",
+      "passed": true,
+      "requirement_id": "A7"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 7,
+  "source_target_id": "T-B1-004gp/T-B7-015y",
+  "status": "cone01_r92_r91_submission_validator_fixture_passed_no_external_acceptance",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-external-submission-validator.stdout.txt",
+  "stdout_sha256": "1a4037d1823562d094665218629609e211916f708055033f0afcbccbca710674",
+  "summary": {
+    "accepted_b7_credit_delta_after_review": 1,
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "baseline_after_t_ledger": 6224,
+    "blocker_queue_hash": "3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10",
+    "candidate_after_t_ledger": 5624,
+    "candidate_t_ledger_reduction": 600,
+    "contract_id": "R91-G1-external-reproduction-contract",
+    "double_count_violation_found": false,
+    "external_submission_accepted": false,
+    "failed_requirement_ids": [],
+    "fixture_failed_gate_count": 0,
+    "fixture_passed_gate_count": 9,
+    "fixture_preflight_hash": "f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114",
+    "fixture_preflight_passed": true,
+    "fixture_reproduction_claimed": true,
+    "fixture_submission_hash": "8bd40bbfe6ae61cc4a02e1f1bbbd3d740289d7179a045243f782e73efcab86d0",
+    "method": "b1_b7_cone01_r92_external_submission_validator_gate_v0",
+    "model_status": "r91_contract_has_runnable_validator_fixture_but_no_external_reproduction_yet",
+    "new_credit_delta": 0,
+    "o3_closed": false,
+    "payload_hash": "7b03365ffec5e7468521ff04843dd2bd1dd22c761d6a8f29fcb6e1b40fd7b313",
+    "physical_layout_claimed": false,
+    "requirements_failed": 0,
+    "requirements_passed": 7,
+    "resource_saving_claimed": false,
+    "route_id": "R83-G1-30-arbitrary-rotation-batch",
+    "source_target_id": "T-B1-004gp/T-B7-015y",
+    "status": "cone01_r92_r91_submission_validator_fixture_passed_no_external_acceptance",
+    "stdout_sha256": "1a4037d1823562d094665218629609e211916f708055033f0afcbccbca710674",
+    "target_1_20_margin": 8,
+    "target_1_25_margin": -224,
+    "upstream_target_id": "T-B1-004go/T-B7-015x",
+    "validation_error_count": 0,
+    "validator_gate_count": 9,
+    "validator_rules_hash": "49c4f245da0f16476a047c3c17935537adf62b256406ccd543f0bb4f0b4c65ec"
+  },
+  "upstream_target_id": "T-B1-004go/T-B7-015x",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "validator_rules_hash": "49c4f245da0f16476a047c3c17935537adf62b256406ccd543f0bb4f0b4c65ec",
+  "validator_rules_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-external-submission-validator-rules.json",
+  "version": "0.1"
+}

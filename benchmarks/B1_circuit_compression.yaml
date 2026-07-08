@@ -6793,6 +6793,44 @@ current_results:
     caveat: r91_contract_only_no_external_submission_no_new_credit_or_b7_solution
     report: ../results/B1_B7_cone01_R91_external_reproduction_contract_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R91_external_reproduction_contract_gate.md
+  b1_b7_cone01_r92_external_submission_validator_gate_v0:
+    circuits: 1
+    status: cone01_r92_r91_submission_validator_fixture_passed_no_external_acceptance
+    model_status: r91_contract_has_runnable_validator_fixture_but_no_external_reproduction_yet
+    method: b1_b7_cone01_r92_external_submission_validator_gate_v0
+    source_target_id: T-B1-004gp/T-B7-015y
+    upstream_target_id: T-B1-004go/T-B7-015x
+    route_id: R83-G1-30-arbitrary-rotation-batch
+    source_b1_r91_external_reproduction_contract: ../results/B1_B7_cone01_R91_external_reproduction_contract_gate_v0.json
+    r92_validator_rules: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-external-submission-validator-rules.json
+    r92_fixture_submission: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-filled-submission.json
+    r92_fixture_preflight: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R92-G1-local-validator-preflight.verdict.json
+    validator_gate_count: 9
+    fixture_preflight_passed: true
+    fixture_passed_gate_count: 9
+    fixture_failed_gate_count: 0
+    external_submission_accepted: false
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    fixture_reproduction_claimed: true
+    double_count_violation_found: false
+    accepted_b7_credit_delta_after_review: 1
+    new_credit_delta: 0
+    target_1_20_margin: 8
+    target_1_25_margin: -224
+    o3_closed: false
+    resource_saving_claimed: false
+    physical_layout_claimed: false
+    validator_rules_hash: 49c4f245da0f16476a047c3c17935537adf62b256406ccd543f0bb4f0b4c65ec
+    fixture_submission_hash: 8bd40bbfe6ae61cc4a02e1f1bbbd3d740289d7179a045243f782e73efcab86d0
+    fixture_preflight_hash: f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114
+    blocker_queue_hash: 3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10
+    requirements_passed: 7
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r92_local_fixture_validates_submission_mechanics_but_is_not_external_reproduction
+    report: ../results/B1_B7_cone01_R92_external_submission_validator_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R92_external_submission_validator_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

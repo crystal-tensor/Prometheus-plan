@@ -2242,3 +2242,20 @@ preflight hash `7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6
 blocker queue hash `1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb`.
 This is a collaboration gate: it makes the one-unit proxy credit easier to
 reproduce or kill, but it does not add evidence by itself.
+
+`T-B1-004gp` / `T-B7-015y` now adds the R92 validator fixture for the R91
+contract. R92 emits validator rules, a local environment manifest, a command
+transcript, a double-count test, a filled fixture submission, and a fixture
+preflight verdict. The fixture passes all `9/9` validator gates, including
+schema, hash binding, arithmetic, double-count decision, and claim-boundary
+safety, but it is explicitly marked as a local fixture and is not counted as
+external reproduction or falsification. Accepted external reproductions remain
+`0`, accepted external falsifications remain `0`, and `new_credit_delta`
+remains `0`. Validator-rules hash
+`49c4f245da0f16476a047c3c17935537adf62b256406ccd543f0bb4f0b4c65ec`;
+fixture-submission hash
+`8bd40bbfe6ae61cc4a02e1f1bbbd3d740289d7179a045243f782e73efcab86d0`;
+fixture-preflight hash
+`f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114`;
+blocker queue hash `3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10`.
+The next real gate is a non-fixture external submission.

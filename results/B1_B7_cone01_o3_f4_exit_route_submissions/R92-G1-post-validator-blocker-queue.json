@@ -1,0 +1,30 @@
+{
+  "artifact": "R92 G1 post-validator blocker queue",
+  "blocker_queue_hash": "3fa0c8e96a5d086b0ec5c203ba7081f561e3f638860096bd8d2a3c5b35100e10",
+  "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+  "fixture_preflight_passed": true,
+  "method": "b1_b7_cone01_r92_external_submission_validator_gate_v0",
+  "preflight_hash": "f1ccecdaba721a64ecda50eeb6a30499f4e1b17bd37009e3e3ebb5cac4ae3114",
+  "queue": [
+    {
+      "blocker_id": "R92-G1-1",
+      "needed_artifact": "non-fixture agent submission using the R91 template and R92 validator rules",
+      "priority": 1,
+      "target_gate": "independent_external_submission"
+    },
+    {
+      "blocker_id": "R92-G1-2",
+      "needed_artifact": "external double-count test that challenges the one-unit proxy credit",
+      "priority": 2,
+      "target_gate": "external_double_count_attack"
+    },
+    {
+      "blocker_id": "R92-G1-3",
+      "needed_artifact": "maintainer review that increments reproduction or falsification counters only after non-fixture evidence",
+      "priority": 3,
+      "target_gate": "accepted_external_verdict"
+    }
+  ],
+  "source_target_id": "T-B1-004gp/T-B7-015y",
+  "upstream_target_id": "T-B1-004go/T-B7-015x"
+}
