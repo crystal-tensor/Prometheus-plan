@@ -1581,6 +1581,22 @@ claims remain 0/false. The next useful PR should submit `O3-F4-C01` with all
 production keys and hash-matched files, rerun R49 until exactly one row passes,
 then rerun R47 without weakening the source-backed discriminator.
 
+`T-B1-004ez` / `T-B7-014i` closes the next mechanical blocker without
+overclaiming the result: it binds the existing `O3-F4-C01` dataset, source
+trace, replay environment, OpenQASM 3.0 source/candidate circuits, stdout,
+unitary-distance witness, and an explicit verifier-signature blocker note into
+a hash-matched pre-submission row. R49's file-hash failures drop from `8` to
+`0`, while accepted source-backed rows remain `0`; empty production keys drop
+to `2`; the three semantic blockers remain `source_backed_replay=false`,
+`same_unitary_certificate=false`, and `smoke_only_not_c2_acceptance=true`.
+Presubmission row hash
+`3f7be50125146f8d4c68fd83f3d7526a25960e89b9584416e8fa6b5f2068059f`;
+evaluation hash `da44c636972d9d407d1ed066e207813c405358c75cb97e8dcdf5f1db8ed7a50f`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false. The next useful PR must replace the smoke witness,
+dry-run verifier, and signature blocker with source-backed replay evidence and
+a real same-unitary verifier, then rerun R49 and R47.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
