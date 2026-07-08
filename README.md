@@ -2226,3 +2226,19 @@ Review-ledger hash
 verdict hash `e62e53533dd9704ffef72501a161858b00b754cceb5b37a8cc619ef6aea63370`;
 blocker queue hash `a3a74ced55860ffa04c7e36e15a8f0b7bde852132d77614cb99f17531758e36b`.
 This is still a review/kill-test gate, not a B7 solution.
+
+`T-B1-004go` / `T-B7-015x` now turns the R89/R90 proxy-credit review into an
+external reproduction contract. R91 emits a fillable third-party submission
+template with `28` required fields and `14` production-required fields, accepts
+five review modes, and rejects the current empty submission on `6` preflight
+gates with `12` missing production fields. Accepted external reproductions are
+still `0`, accepted external falsifications are still `0`, and `new_credit_delta`
+remains `0`. The inherited R90 margins remain `8` at `1.20x` and `-224` at
+`1.25x`; O3 closure, physical-layout evidence, and resource-saving claims all
+remain false. Contract hash
+`ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76`;
+template hash `2af8c0f624b493b159c4198fe4692aa5d2f52f92d6ba8cd15578e48c82ceeada`;
+preflight hash `7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6`;
+blocker queue hash `1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb`.
+This is a collaboration gate: it makes the one-unit proxy credit easier to
+reproduce or kill, but it does not add evidence by itself.

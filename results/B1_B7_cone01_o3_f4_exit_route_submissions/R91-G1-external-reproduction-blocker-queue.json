@@ -1,0 +1,43 @@
+{
+  "artifact": "R91 G1 external reproduction blocker queue",
+  "blocker_queue_hash": "1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb",
+  "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+  "method": "b1_b7_cone01_r91_external_reproduction_contract_gate_v0",
+  "preflight_hash": "7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6",
+  "queue": [
+    {
+      "blocker_id": "R91-G1-1",
+      "missing_fields": [
+        "independent_environment_manifest_path",
+        "independent_environment_manifest_sha256",
+        "command_transcript_path",
+        "command_transcript_sha256",
+        "recomputed_baseline_after_t_ledger",
+        "recomputed_candidate_t_ledger_reduction",
+        "recomputed_candidate_after_t_ledger",
+        "recomputed_target_1_20_margin",
+        "recomputed_target_1_25_margin",
+        "double_count_test_path",
+        "double_count_test_sha256",
+        "double_count_violation_found"
+      ],
+      "needed_artifact": "hash-bound third-party submission using the R91 template",
+      "priority": 1,
+      "target_gate": "external_reproduction_submission"
+    },
+    {
+      "blocker_id": "R91-G1-2",
+      "needed_artifact": "independent double-count test that either preserves or revokes the R89/R90 credit",
+      "priority": 2,
+      "target_gate": "double_count_attack"
+    },
+    {
+      "blocker_id": "R91-G1-3",
+      "needed_artifact": "new accepted reduction or physical-layout reprice before stronger B7 claims",
+      "priority": 3,
+      "target_gate": "one_point_two_five_or_layout"
+    }
+  ],
+  "source_target_id": "T-B1-004go/T-B7-015x",
+  "upstream_target_id": "T-B1-004gn/T-B7-015w"
+}

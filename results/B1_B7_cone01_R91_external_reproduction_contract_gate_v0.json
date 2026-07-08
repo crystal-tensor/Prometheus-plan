@@ -1,0 +1,141 @@
+{
+  "artifact": "B1/B7 cone01 R91 external reproduction contract gate",
+  "blocker_queue_hash": "1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-blocker-queue.json",
+  "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+  "contract_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-contract.json",
+  "empty_submission_hash": "359e0edf18263eb0e64e03723da4678a45c840e5646bd6c65e1e9eeece6f8f57",
+  "empty_submission_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-empty-submission.json",
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783545447,
+  "method": "b1_b7_cone01_r91_external_reproduction_contract_gate_v0",
+  "model_status": "r90_review_exported_as_external_reproduction_contract_no_new_credit",
+  "payload_hash": "6d3f45723018405351d4af19f114ab7ce2c541624b7be0a246a1729b2795930e",
+  "preflight_hash": "7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6",
+  "preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-preflight.verdict.json",
+  "requirement_count": 6,
+  "requirements": [
+    {
+      "evidence": {
+        "r90_payload_hash": "de0d593df7108f996c8f1337be2da8f114e6cb3c76f59d344114e237afb7a36f",
+        "r90_review_ledger_hash": "ee61a303c275756871e1a9a9535803d8db911486e5f06aec47e049ed20b792a6",
+        "r90_verdict_hash": "e62e53533dd9704ffef72501a161858b00b754cceb5b37a8cc619ef6aea63370"
+      },
+      "label": "R91 binds the R90 result, review ledger, verdict, and blocker queue",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+        "production_required_field_count": 14,
+        "required_field_count": 28
+      },
+      "label": "R91 emits an external reproduction contract with required schema",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "template_field_count": 28,
+        "template_hash": "2af8c0f624b493b159c4198fe4692aa5d2f52f92d6ba8cd15578e48c82ceeada"
+      },
+      "label": "R91 emits a fillable external submission template",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "failed_gates": [
+          "production_evidence_present",
+          "external_environment_present",
+          "command_transcript_present",
+          "target_arithmetic_recomputed",
+          "double_count_decision_present",
+          "external_submission_accepted"
+        ],
+        "missing_production_field_count": 12,
+        "preflight_hash": "7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6"
+      },
+      "label": "R91 rejects the current empty submission before external evidence exists",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "new_credit_delta": 0,
+        "o3_closed": false,
+        "physical_layout_claimed": false,
+        "resource_saving_claimed": false
+      },
+      "label": "R91 grants no new credit and keeps stronger claims closed",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R91-G1-1",
+          "R91-G1-2",
+          "R91-G1-3"
+        ],
+        "blocker_queue_hash": "1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb"
+      },
+      "label": "R91 emits blockers for external submission, double-count attack, and stronger B7 evidence",
+      "passed": true,
+      "requirement_id": "A6"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 6,
+  "source_target_id": "T-B1-004go/T-B7-015x",
+  "status": "cone01_r91_external_reproduction_contract_open_no_submission_yet",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-contract.stdout.txt",
+  "stdout_sha256": "7a6c1f461c8ad92cd867fec75f2b889ac63a9622f8ca87dbae7d9a2f2e134c8a",
+  "summary": {
+    "accepted_b7_credit_delta_after_review": 1,
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "accepted_review_mode_count": 5,
+    "baseline_after_t_ledger": 6224,
+    "blocker_queue_hash": "1cc6567b04d3be2d0aad4e11749972e922607c98836f7eeabc3dec0d7258d7fb",
+    "candidate_after_t_ledger": 5624,
+    "candidate_t_ledger_reduction": 600,
+    "contract_hash": "ae6d508fdd10aa0e48e64800f08b48afe4b6c29d246b00a5640643ec972f2a76",
+    "contract_id": "R91-G1-external-reproduction-contract",
+    "empty_submission_hash": "359e0edf18263eb0e64e03723da4678a45c840e5646bd6c65e1e9eeece6f8f57",
+    "external_submission_accepted": false,
+    "failed_requirement_ids": [],
+    "method": "b1_b7_cone01_r91_external_reproduction_contract_gate_v0",
+    "missing_production_field_count": 12,
+    "model_status": "r90_review_exported_as_external_reproduction_contract_no_new_credit",
+    "new_credit_delta": 0,
+    "o3_closed": false,
+    "payload_hash": "6d3f45723018405351d4af19f114ab7ce2c541624b7be0a246a1729b2795930e",
+    "physical_layout_claimed": false,
+    "preflight_accepted": false,
+    "preflight_failed_gate_count": 6,
+    "preflight_hash": "7fe0e695aaaf84115d98e8e8dc48ff94eb3e13a3a052bdba645f25aa19063ec6",
+    "production_required_field_count": 14,
+    "required_field_count": 28,
+    "requirements_failed": 0,
+    "requirements_passed": 6,
+    "resource_saving_claimed": false,
+    "route_id": "R83-G1-30-arbitrary-rotation-batch",
+    "source_target_id": "T-B1-004go/T-B7-015x",
+    "status": "cone01_r91_external_reproduction_contract_open_no_submission_yet",
+    "stdout_sha256": "7a6c1f461c8ad92cd867fec75f2b889ac63a9622f8ca87dbae7d9a2f2e134c8a",
+    "target_1_20_margin": 8,
+    "target_1_25_margin": -224,
+    "template_emitted": true,
+    "template_hash": "2af8c0f624b493b159c4198fe4692aa5d2f52f92d6ba8cd15578e48c82ceeada",
+    "upstream_target_id": "T-B1-004gn/T-B7-015w",
+    "validation_error_count": 0
+  },
+  "template_hash": "2af8c0f624b493b159c4198fe4692aa5d2f52f92d6ba8cd15578e48c82ceeada",
+  "template_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R91-G1-external-reproduction-submission.template.json",
+  "upstream_target_id": "T-B1-004gn/T-B7-015w",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1"
+}
