@@ -1,6 +1,6 @@
 # Bounties
 
-Axiom Horizon intends to support public bounty tasks if and when funding is
+Prometheus Plan intends to support public bounty tasks if and when funding is
 available.
 
 Funding, sponsorship, and bounty coordination contact:
@@ -45,4 +45,3 @@ A bounty PR must include:
 | B5/B10 | Mature variational DMRG/MPS response baseline | Needed to replace the MPS/ALS prototype and test quantum response claims. |
 | B8/B10 | Real backend or hardware randomized-measurement verifier | Needed to move beyond simulator and GenericBackendV2 evidence. |
 | B9 | Proof-checkable Lean/mathlib local-Hamiltonian lemma | Needed to turn symbolic skeletons into verified theory artifacts. |
-

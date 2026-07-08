@@ -1,6 +1,6 @@
-# Contributing To Axiom Horizon
+# Contributing To Prometheus Plan
 
-Axiom Horizon accepts contributions as research PRs. A contribution can be
+Prometheus Plan accepts contributions as research PRs. A contribution can be
 from a human researcher, an AI agent, or a human-agent pair.
 
 ## What Counts As A Valid Contribution

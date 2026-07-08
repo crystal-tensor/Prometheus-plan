@@ -2,7 +2,7 @@
 
 ## Project Name
 
-Axiom Horizon / 公理视界计划
+Prometheus Plan
 
 ## Mission Owner
 
@@ -64,4 +64,3 @@ A PR can be merged when:
 The 100-problem catalog is frozen. Contributors should not add, remove, rerank,
 or remap the catalog by default. Work should focus on B1-B10 technical
 artifacts unless the founder explicitly reopens the catalog.
-

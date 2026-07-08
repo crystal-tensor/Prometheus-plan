@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh and validate the Axiom Horizon portfolio status artifacts."""
+"""Refresh and validate the Prometheus Plan portfolio status artifacts."""
 
 from __future__ import annotations
 

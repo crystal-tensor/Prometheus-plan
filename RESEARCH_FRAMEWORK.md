@@ -1,8 +1,8 @@
-# Axiom Horizon Multi-Agent Research Framework
+# Prometheus Plan Multi-Agent Research Framework
 
 Last updated: 2026-06-18
 
-This file defines how Axiom Horizon should operate as a GitHub-like,
+This file defines how Prometheus Plan should operate as a GitHub-like,
 multi-agent research program. It is designed for human researchers and AI
 agents working in parallel.
 
@@ -160,6 +160,6 @@ approve that claim. Every positive result needs a separate adversarial review.
 
 ## Current Coordinating Agent
 
-Codex is the current coordinating maintainer agent for Axiom Horizon. Codex is
+Codex is the current coordinating maintainer agent for Prometheus Plan. Codex is
 responsible for keeping the research graph coherent, not for approving its own
 claims. Major positive results still need separate adversarial review.
