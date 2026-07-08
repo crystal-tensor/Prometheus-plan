@@ -1,0 +1,541 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Replace the numeric-only fixture placeholders with valid sha256 witness/circuit/stdout hashes and a real replay command while keeping all 8 numeric replay errors <= 1e-08.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "R31 does not accept C2, does not complete the certificate triad, does not close O3, and does not permit reroute, B7 credit, STV credit, or resource-saving claims.",
+    "what_is_supported": "R31 proves numeric replay errors under tolerance are not enough for C2 acceptance without valid same-unitary witness hashes, source/candidate circuit hashes, replay command provenance, and stdout hashes."
+  },
+  "last_updated": "2026-07-08",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r31_o3_f4_c2_numeric_only_overclaim_sentinel_gate_v0",
+  "model_status": "o3_f4_c2_numeric_tolerance_alone_rejected_no_c2_acceptance",
+  "o3_f4_c2_numeric_only_overclaim_sentinel_packet": {
+    "fixture": {
+      "artifact_id": "B1-B7-cone01-O3-F4-C2-numeric-only-overclaim.fixture",
+      "b7_credit_delta": 0,
+      "candidate_id": "NL-C02",
+      "claim_boundary": {
+        "not_supported": "C2 acceptance, O3 closure, R5 reroute, B7 credit, STV credit, or resource savings",
+        "supported": "negative sentinel only: numeric replay values alone are insufficient for C2 acceptance"
+      },
+      "family_id": "O3-F4",
+      "fixture_hash": "78a33f7e7bcbad0f3f5dce8d172d997eb7cde9a43a2b979abd9d852971544e07",
+      "fixture_row_table_hash": "395f5ced2eef95baf0864ecbe15e2b592874c11dda0bb10af356fb3cd335b5b5",
+      "o3_closed": false,
+      "reroute_allowed": false,
+      "rows": [
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C01",
+          "max_unitary_replay_error": 1e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.533452693380428,
+            -1.033846781618468,
+            -1.034877289679127,
+            0.464345342284864,
+            0.303421832490631
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.533452693380428,
+            -1.033846781618468,
+            -1.034877289679127,
+            0.464345342284864,
+            0.303421832490631
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C02",
+          "max_unitary_replay_error": 2e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.323084947178454,
+            -1.261171138324888,
+            -1.070157291694093,
+            0.653545966111847,
+            0.543152901156416
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.323084947178454,
+            -1.261171138324888,
+            -1.070157291694093,
+            0.653545966111847,
+            0.543152901156416
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C03",
+          "max_unitary_replay_error": 3e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.638636566481415,
+            -0.920184603265257,
+            -1.017237288671643,
+            0.369745030371373,
+            0.183556298157739
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.638636566481415,
+            -0.920184603265257,
+            -1.017237288671643,
+            0.369745030371373,
+            0.183556298157739
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C04",
+          "max_unitary_replay_error": 4e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.217901074077467,
+            -1.374833316678098,
+            -1.087797292701577,
+            0.748146278025338,
+            0.663018435489308
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.217901074077467,
+            -1.374833316678098,
+            -1.087797292701577,
+            0.748146278025338,
+            0.663018435489308
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C05",
+          "max_unitary_replay_error": 5e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.743820439582402,
+            -0.806522424912047,
+            -0.99959728766416,
+            0.275144718457882,
+            0.063690763824846
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.743820439582402,
+            -0.806522424912047,
+            -0.99959728766416,
+            0.275144718457882,
+            0.063690763824846
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C06",
+          "max_unitary_replay_error": 6e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.11271720097648,
+            -1.488495495031308,
+            -1.10543729370906,
+            0.842746589938829,
+            0.7828839698222
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.11271720097648,
+            -1.488495495031308,
+            -1.10543729370906,
+            0.842746589938829,
+            0.7828839698222
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C07",
+          "max_unitary_replay_error": 7.000000000000001e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.849004312683389,
+            -0.692860246558837,
+            -0.981957286656676,
+            0.180544406544391,
+            -0.056174770508046
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.849004312683389,
+            -0.692860246558837,
+            -0.981957286656676,
+            0.180544406544391,
+            -0.056174770508046
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        },
+        {
+          "candidate_circuit_hash": "numeric-only-placeholder-candidate-hash",
+          "challenge_id": "O3-F4-C08",
+          "max_unitary_replay_error": 8e-10,
+          "parameter_indices": [
+            3,
+            4,
+            9,
+            16,
+            17
+          ],
+          "replay_command": "python3 tools/<missing-real-replay-command>.py",
+          "replay_stdout_hash": "numeric-only-placeholder-stdout-hash",
+          "same_unitary_witness_hash": "numeric-only-placeholder-no-witness",
+          "source_circuit_hash": "numeric-only-placeholder-source-hash",
+          "source_initial_values": [
+            1.007533327875493,
+            -1.602157673384518,
+            -1.123077294716543,
+            0.93734690185232,
+            0.902749504155093
+          ],
+          "strict_tolerance": 1e-08,
+          "submitted_parameter_values": [
+            1.007533327875493,
+            -1.602157673384518,
+            -1.123077294716543,
+            0.93734690185232,
+            0.902749504155093
+          ],
+          "unitary_distance_metric": "statevector_span_bound",
+          "verifier_version": "numeric-only-fixture-v0"
+        }
+      ],
+      "source_r30_preflight_hash": "f4b743162793460c4cd93c600cd9a7db07456edede109ec66c99c2138c67dadf",
+      "source_r30_row_table_hash": "fe1c57867f1e2e23a392e8a87045918b349c3df97bf2e5df3eb471459e7351e9",
+      "source_r30_template_hash": "5169bcb486c808157c30d89fd9e02d91bae2918748fa338f44d2b7aab5cd65ab",
+      "source_target_id": "T-B1-004eg/T-B7-013p",
+      "strict_tolerance": 1e-08,
+      "upstream_target_id": "T-B1-004ef/T-B7-013o"
+    },
+    "fixture_output": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-numeric-only-overclaim.fixture.json",
+    "preflight_result": {
+      "accepted": false,
+      "claim_boundary_zero_credit": true,
+      "evidence_pass": false,
+      "expected_row_count": 8,
+      "extra_challenge_ids": [],
+      "invalid_hash_cell_count": 32,
+      "invalid_hash_cells": [
+        "O3-F4-C01:same_unitary_witness_hash",
+        "O3-F4-C01:source_circuit_hash",
+        "O3-F4-C01:candidate_circuit_hash",
+        "O3-F4-C01:replay_stdout_hash",
+        "O3-F4-C02:same_unitary_witness_hash",
+        "O3-F4-C02:source_circuit_hash",
+        "O3-F4-C02:candidate_circuit_hash",
+        "O3-F4-C02:replay_stdout_hash",
+        "O3-F4-C03:same_unitary_witness_hash",
+        "O3-F4-C03:source_circuit_hash",
+        "O3-F4-C03:candidate_circuit_hash",
+        "O3-F4-C03:replay_stdout_hash",
+        "O3-F4-C04:same_unitary_witness_hash",
+        "O3-F4-C04:source_circuit_hash",
+        "O3-F4-C04:candidate_circuit_hash",
+        "O3-F4-C04:replay_stdout_hash",
+        "O3-F4-C05:same_unitary_witness_hash",
+        "O3-F4-C05:source_circuit_hash",
+        "O3-F4-C05:candidate_circuit_hash",
+        "O3-F4-C05:replay_stdout_hash",
+        "O3-F4-C06:same_unitary_witness_hash",
+        "O3-F4-C06:source_circuit_hash",
+        "O3-F4-C06:candidate_circuit_hash",
+        "O3-F4-C06:replay_stdout_hash",
+        "O3-F4-C07:same_unitary_witness_hash",
+        "O3-F4-C07:source_circuit_hash",
+        "O3-F4-C07:candidate_circuit_hash",
+        "O3-F4-C07:replay_stdout_hash",
+        "O3-F4-C08:same_unitary_witness_hash",
+        "O3-F4-C08:source_circuit_hash",
+        "O3-F4-C08:candidate_circuit_hash",
+        "O3-F4-C08:replay_stdout_hash"
+      ],
+      "max_observed_replay_error": 8e-10,
+      "missing_challenge_ids": [],
+      "missing_key_rows": {},
+      "numeric_replay_error_count": 8,
+      "placeholder_cell_count": 40,
+      "placeholder_cells": [
+        "O3-F4-C01:same_unitary_witness_hash",
+        "O3-F4-C01:source_circuit_hash",
+        "O3-F4-C01:candidate_circuit_hash",
+        "O3-F4-C01:replay_stdout_hash",
+        "O3-F4-C01:replay_command",
+        "O3-F4-C02:same_unitary_witness_hash",
+        "O3-F4-C02:source_circuit_hash",
+        "O3-F4-C02:candidate_circuit_hash",
+        "O3-F4-C02:replay_stdout_hash",
+        "O3-F4-C02:replay_command",
+        "O3-F4-C03:same_unitary_witness_hash",
+        "O3-F4-C03:source_circuit_hash",
+        "O3-F4-C03:candidate_circuit_hash",
+        "O3-F4-C03:replay_stdout_hash",
+        "O3-F4-C03:replay_command",
+        "O3-F4-C04:same_unitary_witness_hash",
+        "O3-F4-C04:source_circuit_hash",
+        "O3-F4-C04:candidate_circuit_hash",
+        "O3-F4-C04:replay_stdout_hash",
+        "O3-F4-C04:replay_command",
+        "O3-F4-C05:same_unitary_witness_hash",
+        "O3-F4-C05:source_circuit_hash",
+        "O3-F4-C05:candidate_circuit_hash",
+        "O3-F4-C05:replay_stdout_hash",
+        "O3-F4-C05:replay_command",
+        "O3-F4-C06:same_unitary_witness_hash",
+        "O3-F4-C06:source_circuit_hash",
+        "O3-F4-C06:candidate_circuit_hash",
+        "O3-F4-C06:replay_stdout_hash",
+        "O3-F4-C06:replay_command",
+        "O3-F4-C07:same_unitary_witness_hash",
+        "O3-F4-C07:source_circuit_hash",
+        "O3-F4-C07:candidate_circuit_hash",
+        "O3-F4-C07:replay_stdout_hash",
+        "O3-F4-C07:replay_command",
+        "O3-F4-C08:same_unitary_witness_hash",
+        "O3-F4-C08:source_circuit_hash",
+        "O3-F4-C08:candidate_circuit_hash",
+        "O3-F4-C08:replay_stdout_hash",
+        "O3-F4-C08:replay_command"
+      ],
+      "preflight_hash": "978f9ffe9d72a438c4701c659381eb4e818758448bb13f3b097e7d4b17625256",
+      "row_count": 8,
+      "strict_tolerance": 1e-08,
+      "surface_pass": true,
+      "tolerance_pass_count": 8
+    },
+    "source_c2_template": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-strict-replay-rows.template.json",
+    "source_r30_intake": "results/B1_B7_cone01_R30_o3_f4_c2_strict_replay_row_intake_gate_v0.json"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "r30_template_hash": "5169bcb486c808157c30d89fd9e02d91bae2918748fa338f44d2b7aab5cd65ab",
+        "r30_validation_error_count": 0,
+        "template_hash": "5169bcb486c808157c30d89fd9e02d91bae2918748fa338f44d2b7aab5cd65ab"
+      },
+      "label": "R30 source is validation-clean and template hash matches",
+      "passed": true,
+      "requirement_id": "S1"
+    },
+    {
+      "evidence": {
+        "missing_challenge_ids": [],
+        "missing_key_rows": {},
+        "row_count": 8
+      },
+      "label": "Numeric-only fixture covers all 8 C2 rows with required fields",
+      "passed": true,
+      "requirement_id": "S2"
+    },
+    {
+      "evidence": {
+        "max_observed_replay_error": 8e-10,
+        "numeric_replay_error_count": 8,
+        "strict_tolerance": 1e-08,
+        "tolerance_pass_count": 8
+      },
+      "label": "Numeric-only fixture passes the numeric tolerance surface",
+      "passed": true,
+      "requirement_id": "S3"
+    },
+    {
+      "evidence": {
+        "accepted": false,
+        "evidence_pass": false,
+        "invalid_hash_cell_count": 32,
+        "surface_pass": true
+      },
+      "label": "Numeric tolerance alone is rejected without witness and hash provenance",
+      "passed": true,
+      "requirement_id": "S4"
+    },
+    {
+      "evidence": {
+        "b7_credit_delta": 0,
+        "c2_accepted": false,
+        "o3_closed": false,
+        "reroute_allowed": false
+      },
+      "label": "Fixture keeps C2, O3, reroute, and B7 credit unaccepted",
+      "passed": true,
+      "requirement_id": "S5"
+    },
+    {
+      "evidence": {
+        "fixture_hash": "78a33f7e7bcbad0f3f5dce8d172d997eb7cde9a43a2b979abd9d852971544e07",
+        "fixture_row_table_hash": "395f5ced2eef95baf0864ecbe15e2b592874c11dda0bb10af356fb3cd335b5b5",
+        "preflight_hash": "978f9ffe9d72a438c4701c659381eb4e818758448bb13f3b097e7d4b17625256"
+      },
+      "label": "Fixture and preflight are hash-bound",
+      "passed": true,
+      "requirement_id": "S6"
+    },
+    {
+      "evidence": {
+        "c3_c7_progress_claimed": false,
+        "scope": "C2 numeric-only sentinel"
+      },
+      "label": "R31 does not claim C3-C7 progress",
+      "passed": true,
+      "requirement_id": "S7"
+    },
+    {
+      "evidence": {
+        "r30_row_table_hash": "fe1c57867f1e2e23a392e8a87045918b349c3df97bf2e5df3eb471459e7351e9",
+        "source_r30_row_table_hash": "fe1c57867f1e2e23a392e8a87045918b349c3df97bf2e5df3eb471459e7351e9"
+      },
+      "label": "Sentinel preserves the R30 challenge-row identity",
+      "passed": true,
+      "requirement_id": "S8"
+    }
+  ],
+  "runtime_seconds": 0.000427,
+  "source_target_id": "T-B1-004eg/T-B7-013p",
+  "status": "cone01_r31_o3_f4_c2_numeric_only_fixture_rejected",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_route_count": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "c2_numeric_only_fixture_accepted": false,
+    "c2_strict_replay_rows_accepted": false,
+    "candidate_id": "NL-C02",
+    "checked_negative_lemma_present": false,
+    "evidence_pass": false,
+    "failed_requirement_ids": [],
+    "family_id": "O3-F4",
+    "fixture_hash": "78a33f7e7bcbad0f3f5dce8d172d997eb7cde9a43a2b979abd9d852971544e07",
+    "fixture_row_table_hash": "395f5ced2eef95baf0864ecbe15e2b592874c11dda0bb10af356fb3cd335b5b5",
+    "invalid_hash_cell_count": 32,
+    "leakage_free_optimizer_trace_complete": false,
+    "machine_check_replay_complete": false,
+    "max_observed_replay_error": 8e-10,
+    "nlc02_full_lemma_ready": false,
+    "numeric_replay_error_count": 8,
+    "o3_closed": false,
+    "o3_f4_artifact_accepted": false,
+    "placeholder_cell_count": 40,
+    "preflight_hash": "978f9ffe9d72a438c4701c659381eb4e818758448bb13f3b097e7d4b17625256",
+    "remaining_open_obligation_count": 6,
+    "remaining_open_obligations": [
+      "C2_valid_sha256_witness_and_circuit_hashes",
+      "C2_real_replay_command_and_stdout_hash",
+      "C3_same_unitary_replay_certificate",
+      "C4_C5_same_access_denominator_comparison",
+      "C6_leakage_free_optimizer_trace",
+      "C7_machine_check_replay_bundle"
+    ],
+    "requirement_count": 8,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "row_count": 8,
+    "same_access_denominator_comparison_complete": false,
+    "same_unitary_replay_certificate_complete": false,
+    "source_c2_template_file_sha256": "e9c3bc5f7f4bfec2f34636e99c59857083b7b5e1b0cdf51b1ca58cfb9c051868",
+    "source_r30_preflight_hash": "f4b743162793460c4cd93c600cd9a7db07456edede109ec66c99c2138c67dadf",
+    "source_r30_row_table_hash": "fe1c57867f1e2e23a392e8a87045918b349c3df97bf2e5df3eb471459e7351e9",
+    "source_r30_template_hash": "5169bcb486c808157c30d89fd9e02d91bae2918748fa338f44d2b7aab5cd65ab",
+    "strict_tolerance": 1e-08,
+    "surface_pass": true,
+    "tolerance_pass_count": 8,
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R31 O3-F4 C2 Numeric-Only Overclaim Sentinel",
+  "upstream_target_id": "T-B1-004ef/T-B7-013o",
+  "validation_errors": [],
+  "version": "0.1"
+}

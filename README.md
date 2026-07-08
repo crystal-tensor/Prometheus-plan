@@ -1310,6 +1310,17 @@ preflight hash `f4b743162793460c4cd93c600cd9a7db07456edede109ec66c99c2138c67dadf
 O3 remains open; C2 acceptance, reroute, B7 credit, STV credit, and
 resource-saving claims remain 0/false.
 
+`T-B1-004eg` / `T-B7-013p` now hardens that C2 surface against a numeric-only
+overclaim. It builds a sentinel fixture with all 8 replay errors numerically
+below the `1e-08` tolerance; the largest error is `8e-10`, so the numeric
+surface passes. The fixture is still rejected because 32 witness, circuit, and
+stdout hash cells are invalid placeholders and no real replay command
+provenance is supplied. Fixture hash
+`78a33f7e7bcbad0f3f5dce8d172d997eb7cde9a43a2b979abd9d852971544e07`;
+preflight hash `978f9ffe9d72a438c4701c659381eb4e818758448bb13f3b097e7d4b17625256`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
