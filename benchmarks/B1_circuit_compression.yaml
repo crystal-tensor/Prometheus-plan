@@ -6152,6 +6152,36 @@ current_results:
     caveat: r72_rejects_metadata_positive_delta_until_r1_r2_source_backed_closure_exists
     report: ../results/B1_B7_cone01_R72_source_backed_delta_preflight_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R72_source_backed_delta_preflight_gate.md
+  b1_b7_cone01_r73_r1_r2_source_closure_intake_gate_v0:
+    circuits: 1
+    status: cone01_r73_r1_r2_source_closure_intake_ready_zero_credit
+    model_status: r72_blockers_are_converted_into_source_backed_intake_contract
+    method: b1_b7_cone01_r73_r1_r2_source_closure_intake_gate_v0
+    source_target_id: T-B1-004fw/T-B7-015f
+    upstream_target_id: T-B1-004fv/T-B7-015e
+    source_r72_preflight: ../results/B1_B7_cone01_R72_source_backed_delta_preflight_gate_v0.json
+    r73_contract: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-r1-r2-source-closure-intake.contract.json
+    r73_template: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-r1-r2-source-closure-intake.template.json
+    r73_metadata_only_fixture: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-metadata-only-source-closure.fixture.json
+    r73_metadata_only_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-metadata-only-source-closure.verdict.json
+    r73_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-source-closure-blocker-queue.json
+    required_packet_count: 3
+    required_field_count: 33
+    metadata_only_fixture_accepted: false
+    metadata_only_failed_gate_count: 5
+    accepted_exit_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_nonzero_retest_allowed: false
+    b7_credit_delta: 0
+    contract_hash: 80d127c990ad70fa35705d64e84db8777285fd4445cfb1d3b06610d20b664791
+    blocker_queue_hash: 54409f8f28f81752f19b34f04006f5d1809bca62ea94e57f6856d6397f7361e3
+    requirements_passed: 8
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r73_intake_contract_only_no_source_closure_no_exit_route_or_b7_credit
+    report: ../results/B1_B7_cone01_R73_r1_r2_source_closure_intake_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R73_r1_r2_source_closure_intake_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

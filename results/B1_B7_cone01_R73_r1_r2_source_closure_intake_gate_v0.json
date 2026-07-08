@@ -1,0 +1,312 @@
+{
+  "artifacts": {
+    "blocker_queue": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-source-closure-blocker-queue.json",
+    "contract": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-r1-r2-source-closure-intake.contract.json",
+    "metadata_only_fixture": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-metadata-only-source-closure.fixture.json",
+    "metadata_only_verdict": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-metadata-only-source-closure.verdict.json",
+    "template": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R73-r1-r2-source-closure-intake.template.json"
+  },
+  "claim_boundary": {
+    "next_gate": "Submit source-backed R1 occurrence, R1 proxy-T, and R2 no-double-counting artifacts against the R73 template, then rerun R73 and R72.",
+    "what_is_not_supported": "R73 does not close R1 or R2, does not accept the positive-delta row, and does not grant B7 credit.",
+    "what_is_supported": "R73 converts the R72 D1-D3 blockers into source-backed intake requirements and proves metadata-only closure is rejected."
+  },
+  "contract": {
+    "closure_packets": [
+      {
+        "acceptance_rule": "The R1 artifact must replay from source/candidate circuits, remove at least one accepted occurrence, and close R1 P6/P7/P8 without claiming B7 credit.",
+        "packet_id": "R73-D1-line1381-source-backed-occurrence",
+        "required_fields": [
+          "r1_source_artifact_path",
+          "r1_source_artifact_sha256",
+          "r1_replay_command",
+          "r1_replay_stdout_path",
+          "r1_replay_stdout_sha256",
+          "r1_selected_lines",
+          "r1_occurrence_removed_lines",
+          "r1_occurrence_delta_derivation",
+          "r1_replay_verdict_path",
+          "r1_replay_verdict_sha256",
+          "r1_claim_boundary"
+        ],
+        "source_blocker_id": "R72-D1",
+        "target_failed_gates": [
+          "r1_packet_requirements_all_pass",
+          "r1_submitted_source_backed_artifact_exists",
+          "r1_accepted_occurrence_positive"
+        ]
+      },
+      {
+        "acceptance_rule": "The proxy-T delta must be derived from a source-backed pricing model and replay, not from a metadata-only positive integer.",
+        "packet_id": "R73-D2-line1381-source-backed-proxy-t",
+        "required_fields": [
+          "proxy_t_derivation_artifact_path",
+          "proxy_t_derivation_artifact_sha256",
+          "proxy_t_before",
+          "proxy_t_after",
+          "proxy_t_delta",
+          "proxy_t_pricing_model_path",
+          "proxy_t_pricing_model_sha256",
+          "proxy_t_replay_command",
+          "proxy_t_replay_stdout_path",
+          "proxy_t_replay_stdout_sha256",
+          "proxy_t_claim_boundary"
+        ],
+        "source_blocker_id": "R72-D2",
+        "target_failed_gates": [
+          "r1_accepted_proxy_t_positive",
+          "ledger_positive_values_not_metadata_only"
+        ]
+      },
+      {
+        "acceptance_rule": "The R2 artifact must either recover line1378 or prove it is excluded from the line1381 count, with a hash-bound no-double-counting ledger.",
+        "packet_id": "R73-D3-line1378-source-backed-no-double-counting",
+        "required_fields": [
+          "r2_source_artifact_path",
+          "r2_source_artifact_sha256",
+          "r2_replay_command",
+          "r2_replay_stdout_path",
+          "r2_replay_stdout_sha256",
+          "line1378_recovery_or_exclusion_decision",
+          "line1378_overlap_window",
+          "line1381_window",
+          "no_double_counting_ledger_path",
+          "no_double_counting_ledger_sha256",
+          "r2_claim_boundary"
+        ],
+        "source_blocker_id": "R72-D3",
+        "target_failed_gates": [
+          "r2_packet_requirements_all_pass",
+          "r2_submitted_source_backed_artifact_exists",
+          "r2_no_double_counting_recovery_valid"
+        ]
+      }
+    ],
+    "contract_hash": "80d127c990ad70fa35705d64e84db8777285fd4445cfb1d3b06610d20b664791",
+    "contract_id": "B1-B7-cone01-R73-r1-r2-source-closure-intake",
+    "forbidden_shortcuts": [
+      "using R72 metadata-positive values as source-backed closure evidence",
+      "using structural CNOT delta alone as occurrence or proxy-T evidence",
+      "counting line1378 and line1381 overlap twice",
+      "requesting B7 nonzero credit before R1/R2 closure and R72 hardened preflight pass",
+      "claiming O3 closure or reroute permission from an intake packet"
+    ],
+    "required_field_count": 33,
+    "required_packet_count": 3,
+    "source_r72_blocker_queue": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R72-source-backed-delta-blocker-queue.json",
+    "source_r72_blocker_queue_hash": "3831fac3389f15a40f3bba857670802c903d808791dec45feffdcf38f2f3b6ac",
+    "source_r72_blocker_queue_sha256": "5e0974bb9d34d431891b00d5fd6aaffc5524b34df8de65530d849c30f2106bf4",
+    "source_r72_payload_hash": "cee019b19097d8f5372ccb456d667e39555ebf162e0687649571a5c54f56e44b",
+    "source_r72_result": "results/B1_B7_cone01_R72_source_backed_delta_preflight_gate_v0.json",
+    "source_r72_result_sha256": "d8682c04771e6042bcef8262a51d4b10201dbdfc9e76c122c0cfc62bfa067470",
+    "source_target_id": "T-B1-004fw/T-B7-015f",
+    "upstream_target_id": "T-B1-004fv/T-B7-015e"
+  },
+  "generated_at": "2026-07-08T17:58:23Z",
+  "metadata_only_verdict": {
+    "accepted": false,
+    "accepted_exit_route_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "artifact": "R73 R1/R2 source-closure intake verdict",
+    "b7_credit_delta": 0,
+    "failed_gate_count": 5,
+    "failed_gates": [
+      "all_required_fields_complete",
+      "all_hash_bound_artifacts_exist",
+      "r1_occurrence_delta_source_backed",
+      "proxy_t_delta_source_backed",
+      "r2_no_double_counting_source_backed"
+    ],
+    "gates": {
+      "all_hash_bound_artifacts_exist": false,
+      "all_required_fields_complete": false,
+      "b7_not_requested_before_closure": true,
+      "claim_boundary_blocks_b7": true,
+      "proxy_t_delta_source_backed": false,
+      "r1_occurrence_delta_source_backed": false,
+      "r2_no_double_counting_source_backed": false,
+      "source_contract_hash_matches": true
+    },
+    "hash_failures": [],
+    "method": "b1_b7_cone01_r73_r1_r2_source_closure_intake_gate_v0",
+    "missing_by_packet": {
+      "R73-D1-line1381-source-backed-occurrence": [
+        "r1_source_artifact_path",
+        "r1_source_artifact_sha256",
+        "r1_replay_command",
+        "r1_replay_stdout_path",
+        "r1_replay_stdout_sha256",
+        "r1_replay_verdict_path",
+        "r1_replay_verdict_sha256"
+      ],
+      "R73-D2-line1381-source-backed-proxy-t": [
+        "proxy_t_derivation_artifact_path",
+        "proxy_t_derivation_artifact_sha256",
+        "proxy_t_pricing_model_path",
+        "proxy_t_pricing_model_sha256",
+        "proxy_t_replay_command",
+        "proxy_t_replay_stdout_path",
+        "proxy_t_replay_stdout_sha256"
+      ],
+      "R73-D3-line1378-source-backed-no-double-counting": [
+        "r2_source_artifact_path",
+        "r2_source_artifact_sha256",
+        "r2_replay_command",
+        "r2_replay_stdout_path",
+        "r2_replay_stdout_sha256",
+        "no_double_counting_ledger_path",
+        "no_double_counting_ledger_sha256"
+      ]
+    },
+    "passed_gate_count": 3,
+    "source_target_id": "T-B1-004fw/T-B7-015f",
+    "submission_id": "B1-B7-cone01-R73-metadata-only-source-closure-fixture",
+    "verdict_hash": "fb6ec40e2e3cd23bac94556fa76c69479d6125d45e04c95fbb0629ffe3501735"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "r72_blocker_queue_hash": "3831fac3389f15a40f3bba857670802c903d808791dec45feffdcf38f2f3b6ac"
+      },
+      "label": "R73 consumes the R72 source-backed blocker queue",
+      "passed": true,
+      "requirement_id": "I1"
+    },
+    {
+      "evidence": {
+        "required_packet_count": 3
+      },
+      "label": "intake contract maps all three R72 blockers to closure packets",
+      "passed": true,
+      "requirement_id": "I2"
+    },
+    {
+      "evidence": {
+        "required_field_count": 33
+      },
+      "label": "template exposes every required source-backed field",
+      "passed": true,
+      "requirement_id": "I3"
+    },
+    {
+      "evidence": {
+        "failed_gates": [
+          "all_required_fields_complete",
+          "all_hash_bound_artifacts_exist",
+          "r1_occurrence_delta_source_backed",
+          "proxy_t_delta_source_backed",
+          "r2_no_double_counting_source_backed"
+        ]
+      },
+      "label": "metadata-only fixture is rejected",
+      "passed": true,
+      "requirement_id": "I4"
+    },
+    {
+      "evidence": {
+        "missing_by_packet": {
+          "R73-D1-line1381-source-backed-occurrence": [
+            "r1_source_artifact_path",
+            "r1_source_artifact_sha256",
+            "r1_replay_command",
+            "r1_replay_stdout_path",
+            "r1_replay_stdout_sha256",
+            "r1_replay_verdict_path",
+            "r1_replay_verdict_sha256"
+          ],
+          "R73-D2-line1381-source-backed-proxy-t": [
+            "proxy_t_derivation_artifact_path",
+            "proxy_t_derivation_artifact_sha256",
+            "proxy_t_pricing_model_path",
+            "proxy_t_pricing_model_sha256",
+            "proxy_t_replay_command",
+            "proxy_t_replay_stdout_path",
+            "proxy_t_replay_stdout_sha256"
+          ],
+          "R73-D3-line1378-source-backed-no-double-counting": [
+            "r2_source_artifact_path",
+            "r2_source_artifact_sha256",
+            "r2_replay_command",
+            "r2_replay_stdout_path",
+            "r2_replay_stdout_sha256",
+            "no_double_counting_ledger_path",
+            "no_double_counting_ledger_sha256"
+          ]
+        }
+      },
+      "label": "fixture rejection names missing source-backed artifacts",
+      "passed": true,
+      "requirement_id": "I5"
+    },
+    {
+      "evidence": {
+        "accepted_exit_route_count": 0,
+        "accepted_occurrence_removal": 0,
+        "accepted_proxy_t_reduction": 0,
+        "b7_credit_delta": 0
+      },
+      "label": "R73 keeps all accepted deltas and B7 credit at zero",
+      "passed": true,
+      "requirement_id": "I6"
+    },
+    {
+      "evidence": {
+        "blocker_queue_hash": "54409f8f28f81752f19b34f04006f5d1809bca62ea94e57f6856d6397f7361e3"
+      },
+      "label": "R73 emits a source-closure blocker queue",
+      "passed": true,
+      "requirement_id": "I7"
+    },
+    {
+      "evidence": {
+        "o3_closed": false,
+        "reroute_allowed": false,
+        "resource_saving_claimed": false
+      },
+      "label": "R73 does not claim O3 closure, reroute, or resource savings",
+      "passed": true,
+      "requirement_id": "I8"
+    }
+  ],
+  "summary": {
+    "accepted_exit_route_count": 0,
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_nonzero_retest_allowed": false,
+    "blocker_queue_hash": "54409f8f28f81752f19b34f04006f5d1809bca62ea94e57f6856d6397f7361e3",
+    "contract_hash": "80d127c990ad70fa35705d64e84db8777285fd4445cfb1d3b06610d20b664791",
+    "failed_requirement_ids": [],
+    "metadata_only_failed_gate_count": 5,
+    "metadata_only_failed_gates": [
+      "all_required_fields_complete",
+      "all_hash_bound_artifacts_exist",
+      "r1_occurrence_delta_source_backed",
+      "proxy_t_delta_source_backed",
+      "r2_no_double_counting_source_backed"
+    ],
+    "metadata_only_fixture_accepted": false,
+    "metadata_only_fixture_hash": "1dac6d8a1ba15482add67b902735a8f691aab99dd299dce370e7b4338de7ef27",
+    "metadata_only_verdict_hash": "fb6ec40e2e3cd23bac94556fa76c69479d6125d45e04c95fbb0629ffe3501735",
+    "method": "b1_b7_cone01_r73_r1_r2_source_closure_intake_gate_v0",
+    "model_status": "r72_blockers_are_converted_into_source_backed_intake_contract",
+    "o3_closed": false,
+    "payload_hash": "bc4eac3c251d966cc96aa2eea92dab2ce88e8e32e591fe6c1b94b60066b0ef06",
+    "required_field_count": 33,
+    "required_packet_count": 3,
+    "requirement_count": 8,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "source_target_id": "T-B1-004fw/T-B7-015f",
+    "status": "cone01_r73_r1_r2_source_closure_intake_ready_zero_credit",
+    "template_hash": "1f4a5fde31764f6035652c35377c7e4c3e26f192bb7e54e856eb007884d6cf19",
+    "upstream_target_id": "T-B1-004fv/T-B7-015e",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R73 R1/R2 Source-Closure Intake Gate",
+  "version": "0.1"
+}

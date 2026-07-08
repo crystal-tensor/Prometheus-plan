@@ -1,0 +1,61 @@
+{
+  "accepted": false,
+  "accepted_exit_route_count": 0,
+  "accepted_occurrence_removal": 0,
+  "accepted_proxy_t_reduction": 0,
+  "artifact": "R73 R1/R2 source-closure intake verdict",
+  "b7_credit_delta": 0,
+  "failed_gate_count": 5,
+  "failed_gates": [
+    "all_required_fields_complete",
+    "all_hash_bound_artifacts_exist",
+    "r1_occurrence_delta_source_backed",
+    "proxy_t_delta_source_backed",
+    "r2_no_double_counting_source_backed"
+  ],
+  "gates": {
+    "all_hash_bound_artifacts_exist": false,
+    "all_required_fields_complete": false,
+    "b7_not_requested_before_closure": true,
+    "claim_boundary_blocks_b7": true,
+    "proxy_t_delta_source_backed": false,
+    "r1_occurrence_delta_source_backed": false,
+    "r2_no_double_counting_source_backed": false,
+    "source_contract_hash_matches": true
+  },
+  "hash_failures": [],
+  "method": "b1_b7_cone01_r73_r1_r2_source_closure_intake_gate_v0",
+  "missing_by_packet": {
+    "R73-D1-line1381-source-backed-occurrence": [
+      "r1_source_artifact_path",
+      "r1_source_artifact_sha256",
+      "r1_replay_command",
+      "r1_replay_stdout_path",
+      "r1_replay_stdout_sha256",
+      "r1_replay_verdict_path",
+      "r1_replay_verdict_sha256"
+    ],
+    "R73-D2-line1381-source-backed-proxy-t": [
+      "proxy_t_derivation_artifact_path",
+      "proxy_t_derivation_artifact_sha256",
+      "proxy_t_pricing_model_path",
+      "proxy_t_pricing_model_sha256",
+      "proxy_t_replay_command",
+      "proxy_t_replay_stdout_path",
+      "proxy_t_replay_stdout_sha256"
+    ],
+    "R73-D3-line1378-source-backed-no-double-counting": [
+      "r2_source_artifact_path",
+      "r2_source_artifact_sha256",
+      "r2_replay_command",
+      "r2_replay_stdout_path",
+      "r2_replay_stdout_sha256",
+      "no_double_counting_ledger_path",
+      "no_double_counting_ledger_sha256"
+    ]
+  },
+  "passed_gate_count": 3,
+  "source_target_id": "T-B1-004fw/T-B7-015f",
+  "submission_id": "B1-B7-cone01-R73-metadata-only-source-closure-fixture",
+  "verdict_hash": "fb6ec40e2e3cd23bac94556fa76c69479d6125d45e04c95fbb0629ffe3501735"
+}

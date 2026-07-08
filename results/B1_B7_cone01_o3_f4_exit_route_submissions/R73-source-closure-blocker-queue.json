@@ -1,0 +1,30 @@
+{
+  "artifact": "R73 source-closure blocker queue",
+  "blocker_queue_hash": "54409f8f28f81752f19b34f04006f5d1809bca62ea94e57f6856d6397f7361e3",
+  "failed_gates": [
+    "all_required_fields_complete",
+    "all_hash_bound_artifacts_exist",
+    "r1_occurrence_delta_source_backed",
+    "proxy_t_delta_source_backed",
+    "r2_no_double_counting_source_backed"
+  ],
+  "queue": [
+    {
+      "blocker_id": "R73-C1",
+      "needed_artifact": "source-backed R1 occurrence artifact with replay stdout and verdict hash",
+      "priority": 1
+    },
+    {
+      "blocker_id": "R73-C2",
+      "needed_artifact": "source-backed proxy-T pricing derivation and replay transcript",
+      "priority": 2
+    },
+    {
+      "blocker_id": "R73-C3",
+      "needed_artifact": "source-backed line1378 recovery or exclusion ledger",
+      "priority": 3
+    }
+  ],
+  "source_target_id": "T-B1-004fw/T-B7-015f",
+  "upstream_target_id": "T-B1-004fv/T-B7-015e"
+}

@@ -1996,3 +1996,14 @@ and proxy-T fields are metadata-only. Requirements pass 7/7, accepted exit
 routes remain 0, occurrence removal remains 0, proxy-T reduction remains 0, B7
 credit remains 0, and the next work is to replace the metadata-positive row
 with real R1/R2 source-backed artifacts.
+
+`T-B1-004fw` / `T-B7-015f` now converts that replacement step into a source
+closure intake contract. R73 maps the R72 D1-D3 blockers into 3 required
+closure packets and 33 source-backed fields: R1 line1381 occurrence replay, R1
+proxy-T pricing replay, and R2 line1378 no-double-counting or recovery replay.
+The metadata-only fixture is rejected on 5 gates, including missing required
+source artifacts, missing hash-bound artifacts, non-source-backed occurrence
+derivation, non-source-backed proxy-T derivation, and non-source-backed
+line1378 no-double-counting. Requirements pass 8/8, accepted exit routes remain
+0, occurrence removal remains 0, proxy-T reduction remains 0, and B7 credit
+remains 0.

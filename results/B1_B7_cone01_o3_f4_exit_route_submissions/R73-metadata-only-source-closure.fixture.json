@@ -1,0 +1,65 @@
+{
+  "accepted_exit_route_count": 1,
+  "b7_nonzero_retest_requested": false,
+  "claim_boundary": "Rejected fixture. It copies R72 positive metadata but does not provide source-backed R1/R2 closure artifacts and must not be used for B7 credit.",
+  "fixture_hash": "1dac6d8a1ba15482add67b902735a8f691aab99dd299dce370e7b4338de7ef27",
+  "occurrence_removal_delta": 1,
+  "packets": {
+    "R73-D1-line1381-source-backed-occurrence": {
+      "r1_claim_boundary": "Rejected fixture. It copies R72 positive metadata but does not provide source-backed R1/R2 closure artifacts and must not be used for B7 credit.",
+      "r1_occurrence_delta_derivation": "Preflight candidate only: requests occurrence_removal_delta=1 from selected lines [268, 1381], but R1 and R2 remain open and line1378 recovery is not source-backed.",
+      "r1_occurrence_removed_lines": [
+        1381
+      ],
+      "r1_replay_command": null,
+      "r1_replay_stdout_path": null,
+      "r1_replay_stdout_sha256": null,
+      "r1_replay_verdict_path": null,
+      "r1_replay_verdict_sha256": null,
+      "r1_selected_lines": [
+        268,
+        1381
+      ],
+      "r1_source_artifact_path": null,
+      "r1_source_artifact_sha256": null
+    },
+    "R73-D2-line1381-source-backed-proxy-t": {
+      "proxy_t_after": 0,
+      "proxy_t_before": 1,
+      "proxy_t_claim_boundary": "Rejected fixture. It copies R72 positive metadata but does not provide source-backed R1/R2 closure artifacts and must not be used for B7 credit.",
+      "proxy_t_delta": 1,
+      "proxy_t_derivation_artifact_path": null,
+      "proxy_t_derivation_artifact_sha256": null,
+      "proxy_t_pricing_model_path": null,
+      "proxy_t_pricing_model_sha256": null,
+      "proxy_t_replay_command": null,
+      "proxy_t_replay_stdout_path": null,
+      "proxy_t_replay_stdout_sha256": null
+    },
+    "R73-D3-line1378-source-backed-no-double-counting": {
+      "line1378_overlap_window": [
+        1369,
+        1377
+      ],
+      "line1378_recovery_or_exclusion_decision": "metadata_only_not_source_backed",
+      "line1381_window": [
+        1369,
+        1379
+      ],
+      "no_double_counting_ledger_path": null,
+      "no_double_counting_ledger_sha256": null,
+      "r2_claim_boundary": "Rejected fixture. It copies R72 positive metadata but does not provide source-backed R1/R2 closure artifacts and must not be used for B7 credit.",
+      "r2_replay_command": null,
+      "r2_replay_stdout_path": null,
+      "r2_replay_stdout_sha256": null,
+      "r2_source_artifact_path": null,
+      "r2_source_artifact_sha256": null
+    }
+  },
+  "proxy_t_reduction_delta": 1,
+  "source_contract_hash": "80d127c990ad70fa35705d64e84db8777285fd4445cfb1d3b06610d20b664791",
+  "source_target_id": "T-B1-004fw/T-B7-015f",
+  "submission_id": "B1-B7-cone01-R73-metadata-only-source-closure-fixture",
+  "template_hash": "1f4a5fde31764f6035652c35377c7e4c3e26f192bb7e54e856eb007884d6cf19",
+  "upstream_target_id": "T-B1-004fv/T-B7-015e"
+}
