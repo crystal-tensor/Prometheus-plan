@@ -1730,6 +1730,22 @@ This is still not O3 closure and not B7 credit: C4/C5 denominator comparison,
 C6 leakage-free trace, C7 machine-check replay, and B7 ledger retest remain
 open; reroute remains false and B7/STV/resource/ledger credit remain 0/false.
 
+`T-B1-004fj` / `T-B7-014s` now turns the next C4/C5 same-access denominator
+step into a concrete submission contract instead of leaving it as a prose
+blocker. R60 emits 8 row-level denominator templates, one per R59 certificate,
+with 24 required acceptance fields per row. Each template is hash-bound to the
+R59 source circuit, candidate circuit, and replay certificate, pins a
+same-access model hash, forbids hidden optimizer traces, hardware calibration
+data, unbound external oracles, and post-hoc angle edits, and requires a
+verifier transcript plus leakage audit statement before any row can count.
+R60 passes 8/8 contract requirements and contract hash
+`2f1eea9d7fcc32e8cfeff6069d5fd351013b428586abff90c115c20b40812c2b`.
+This is deliberately still not a denominator win: submitted denominator rows
+`0`, accepted denominator rows `0`, C4/C5 comparison complete false, O3 open,
+`reroute_allowed=false`, and B7/STV/resource/ledger credit remain 0/false.
+The next useful PR must fill the R60 row templates with source-backed
+same-access denominator evidence before C6, C7, or any B7 ledger retest.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
