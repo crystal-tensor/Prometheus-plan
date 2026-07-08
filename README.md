@@ -1553,6 +1553,20 @@ remain 0/false. The next useful PR must replace smoke-only flags with external
 source-backed replay evidence and verifier-backed same-unitary certificates
 for all 8 rows before C3-C7.
 
+`T-B1-004ex` / `T-B7-014g` turns that next step into the first concrete
+source-backed row intake contract for `O3-F4-C01`. It emits a 30-key row
+submission contract, a 14-key production-required surface, 9 evidence-file
+classes, and a hash-bound submission template. Contract hash
+`17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d`;
+template hash `7f08f0e608964a9c95874e7e487ae7521727ca7b0e03e8aa81916af4a8b2a052`;
+evaluation hash `d647614066ffd8870051a08229e92ccffe96fd5ffb2b48f624626a8293cf89c2`.
+No source-backed row is submitted or accepted yet; accepted source-backed rows
+remain `0`; production-missing keys remain `14`; source-backed flags do not
+pass. C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-
+saving claims remain 0/false. The next useful PR should submit the
+`O3-F4-C01` row artifact against this template, then rerun R47 and require
+exactly one row to pass without weakening the discriminator.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.

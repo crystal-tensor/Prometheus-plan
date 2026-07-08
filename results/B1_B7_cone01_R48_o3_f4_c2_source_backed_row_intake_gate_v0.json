@@ -1,0 +1,359 @@
+{
+  "benchmark_id": "B1",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "next_gate": "Submit the O3-F4-C01 source-backed row artifact satisfying the R48 contract, then rerun R47 and require exactly one row to pass before scaling to all 8 rows.",
+    "resource_saving_claimed": false,
+    "what_is_not_supported": "R48 does not submit or accept a source-backed row, does not flip any source-backed flags, does not accept C2, close O3, allow reroute, or grant B7/STV credit.",
+    "what_is_supported": "R48 converts the R47 flags-only blocker into a concrete source-backed row intake contract and hash-bound submission template for O3-F4-C01."
+  },
+  "last_updated": "2026-07-08",
+  "linked_benchmark_id": "B7",
+  "method": "b1_b7_cone01_r48_o3_f4_c2_source_backed_row_intake_gate_v0",
+  "model_status": "o3_f4_c2_first_source_backed_row_contract_ready_no_row_submitted",
+  "o3_f4_c2_source_backed_row_intake_packet": {
+    "contract": {
+      "acceptance_statement": "One C2 row can be marked source-backed only after the submitted row satisfies every production key, carries independent external lineage, sets source_backed_replay=true and same_unitary_certificate=true, sets smoke_only_not_c2_acceptance=false, and preserves zero-credit claim boundaries. All-row C2 acceptance still requires 8/8 rows and a fresh discriminator rerun.",
+      "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+      "contract_id": "B1-B7-cone01-O3-F4-C2-source-backed-row-intake-contract",
+      "evidence_file_class_count": 9,
+      "evidence_file_classes": [
+        "independent_source_dataset",
+        "independent_source_trace",
+        "external_lineage_note",
+        "replay_environment_manifest",
+        "source_circuit",
+        "candidate_circuit",
+        "replay_stdout",
+        "same_unitary_witness",
+        "verifier_signature"
+      ],
+      "hard_reject_if": [
+        "source_backed_replay is not true",
+        "same_unitary_certificate is not true",
+        "smoke_only_not_c2_acceptance is not false",
+        "external_lineage_note does not identify source provenance outside the smoke fixture",
+        "verifier_signature_file is missing or hash-mismatched",
+        "claim_boundary omits no C2/O3/reroute/B7/STV credit until all 8 rows pass",
+        "submission mutates unrelated C3-C7 or B7 ledger state"
+      ],
+      "production_required_key_count": 14,
+      "production_required_keys": [
+        "source_dataset_file",
+        "source_trace_file",
+        "external_lineage_note",
+        "replay_environment_file",
+        "source_circuit_file",
+        "candidate_circuit_file",
+        "replay_stdout_file",
+        "same_unitary_witness_file",
+        "same_unitary_witness_verifier",
+        "verifier_signature_file",
+        "source_backed_replay",
+        "same_unitary_certificate",
+        "smoke_only_not_c2_acceptance",
+        "claim_boundary"
+      ],
+      "required_key_count": 30,
+      "required_keys": [
+        "artifact_id",
+        "challenge_id",
+        "source_target_id",
+        "upstream_target_id",
+        "source_dataset_id",
+        "source_dataset_file",
+        "source_dataset_sha256",
+        "source_trace_id",
+        "source_trace_file",
+        "source_trace_sha256",
+        "external_lineage_note",
+        "external_lineage_sha256",
+        "replay_environment_file",
+        "replay_environment_sha256",
+        "source_circuit_file",
+        "source_circuit_sha256",
+        "candidate_circuit_file",
+        "candidate_circuit_sha256",
+        "replay_stdout_file",
+        "replay_stdout_sha256",
+        "same_unitary_witness_file",
+        "same_unitary_witness_sha256",
+        "same_unitary_witness_schema",
+        "same_unitary_witness_verifier",
+        "verifier_signature_file",
+        "verifier_signature_sha256",
+        "source_backed_replay",
+        "same_unitary_certificate",
+        "smoke_only_not_c2_acceptance",
+        "claim_boundary"
+      ],
+      "selected_challenge_id": "O3-F4-C01",
+      "selected_row_existing_source_dataset_id": "qasmbench_medium_exact/gcm_h6.qasm::line1381::O3-F4-C01::r39_source_provenance",
+      "selected_row_existing_source_trace_id": "O3-F4-C01::r39_lineage_trace",
+      "source_r47_discriminator_hash": "b4db0ab566bad93fa2baba3d700e7a512a19a2d115bc7c8d35e1aa048faf4e98",
+      "source_r47_fixture_hash": "7665b3e23fe6663f2c4335a11b53ef0c9b5bb0bad9716cf0eb200f09274d5cbe",
+      "source_r47_replacement_contract_hash": "906da61aa3c205ebefe1caf001e3e2b86aeb74abcf89d1bbc6441f8c1137186f",
+      "source_target_id": "T-B1-004ex/T-B7-014g",
+      "upstream_target_id": "T-B1-004ew/T-B7-014f"
+    },
+    "contract_output": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-C01-source-backed-row-intake.contract.json",
+    "evaluation": {
+      "accepted": false,
+      "accepted_source_backed_row_count": 0,
+      "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+      "evaluation_hash": "d647614066ffd8870051a08229e92ccffe96fd5ffb2b48f624626a8293cf89c2",
+      "evidence_file_class_count": 9,
+      "failed_reasons": [
+        "source_backed_row_submission_missing",
+        "required_keys_missing",
+        "production_required_keys_missing",
+        "source_backed_flags_not_satisfied"
+      ],
+      "flag_state": {
+        "same_unitary_certificate": false,
+        "smoke_only_not_c2_acceptance": true,
+        "source_backed_replay": false
+      },
+      "missing_key_count": 30,
+      "missing_keys": [
+        "artifact_id",
+        "challenge_id",
+        "source_target_id",
+        "upstream_target_id",
+        "source_dataset_id",
+        "source_dataset_file",
+        "source_dataset_sha256",
+        "source_trace_id",
+        "source_trace_file",
+        "source_trace_sha256",
+        "external_lineage_note",
+        "external_lineage_sha256",
+        "replay_environment_file",
+        "replay_environment_sha256",
+        "source_circuit_file",
+        "source_circuit_sha256",
+        "candidate_circuit_file",
+        "candidate_circuit_sha256",
+        "replay_stdout_file",
+        "replay_stdout_sha256",
+        "same_unitary_witness_file",
+        "same_unitary_witness_sha256",
+        "same_unitary_witness_schema",
+        "same_unitary_witness_verifier",
+        "verifier_signature_file",
+        "verifier_signature_sha256",
+        "source_backed_replay",
+        "same_unitary_certificate",
+        "smoke_only_not_c2_acceptance",
+        "claim_boundary"
+      ],
+      "production_missing_key_count": 14,
+      "production_missing_keys": [
+        "source_dataset_file",
+        "source_trace_file",
+        "external_lineage_note",
+        "replay_environment_file",
+        "source_circuit_file",
+        "candidate_circuit_file",
+        "replay_stdout_file",
+        "same_unitary_witness_file",
+        "same_unitary_witness_verifier",
+        "verifier_signature_file",
+        "source_backed_replay",
+        "same_unitary_certificate",
+        "smoke_only_not_c2_acceptance",
+        "claim_boundary"
+      ],
+      "production_required_key_count": 14,
+      "required_key_count": 30,
+      "source_backed_flags_passed": false,
+      "submission_path": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/source_backed_rows/O3-F4-C01.source_backed_row_submission.json",
+      "submitted": false,
+      "template_hash": "7f08f0e608964a9c95874e7e487ae7521727ca7b0e03e8aa81916af4a8b2a052"
+    },
+    "source_r46_fixture": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-remaining-witness-preflight.fixture.json",
+    "source_r47_result": "results/B1_B7_cone01_R47_o3_f4_c2_source_backed_discriminator_rerun_gate_v0.json",
+    "template": {
+      "artifact_id": "B1-B7-cone01-O3-F4-C2-C01-source-backed-row-submission",
+      "candidate_circuit_file": null,
+      "candidate_circuit_sha256": null,
+      "challenge_id": "O3-F4-C01",
+      "claim_boundary": "no C2/O3/reroute/B7/STV credit until 8/8 source-backed rows pass",
+      "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+      "external_lineage_note": null,
+      "external_lineage_sha256": null,
+      "replay_environment_file": null,
+      "replay_environment_sha256": null,
+      "replay_stdout_file": null,
+      "replay_stdout_sha256": null,
+      "same_unitary_certificate": false,
+      "same_unitary_witness_file": null,
+      "same_unitary_witness_schema": "source_backed_unitary_equivalence_v1",
+      "same_unitary_witness_sha256": null,
+      "same_unitary_witness_verifier": null,
+      "smoke_only_not_c2_acceptance": true,
+      "source_backed_replay": false,
+      "source_circuit_file": null,
+      "source_circuit_sha256": null,
+      "source_dataset_file": null,
+      "source_dataset_id": null,
+      "source_dataset_sha256": null,
+      "source_target_id": "T-B1-004ex/T-B7-014g",
+      "source_trace_file": null,
+      "source_trace_id": null,
+      "source_trace_sha256": null,
+      "template_hash": "7f08f0e608964a9c95874e7e487ae7521727ca7b0e03e8aa81916af4a8b2a052",
+      "upstream_target_id": "T-B1-004ew/T-B7-014f",
+      "verifier_signature_file": null,
+      "verifier_signature_sha256": null
+    },
+    "template_output": "results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-C01-source-backed-row-intake.template.json"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "r47_flags_only_rejection_rows": 8,
+        "r47_prerequisite_clean_rows_passed": 8,
+        "r47_source_backed_rows_passed": 0,
+        "r47_validation_error_count": 0
+      },
+      "label": "R47 discriminator is validation-clean and flags-only blocked",
+      "passed": true,
+      "requirement_id": "S1"
+    },
+    {
+      "evidence": {
+        "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+        "evidence_file_class_count": 9,
+        "production_required_key_count": 14,
+        "required_key_count": 30
+      },
+      "label": "R48 emits a row-level source-backed intake contract",
+      "passed": true,
+      "requirement_id": "S2"
+    },
+    {
+      "evidence": {
+        "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+        "selected_challenge_id": "O3-F4-C01",
+        "template_hash": "7f08f0e608964a9c95874e7e487ae7521727ca7b0e03e8aa81916af4a8b2a052"
+      },
+      "label": "R48 emits a hash-bound first-row submission template",
+      "passed": true,
+      "requirement_id": "S3"
+    },
+    {
+      "evidence": {
+        "accepted_source_backed_row_count": 0,
+        "failed_reasons": [
+          "source_backed_row_submission_missing",
+          "required_keys_missing",
+          "production_required_keys_missing",
+          "source_backed_flags_not_satisfied"
+        ],
+        "submitted": false
+      },
+      "label": "Current state has no submitted source-backed row artifact",
+      "passed": true,
+      "requirement_id": "S4"
+    },
+    {
+      "evidence": {
+        "production_missing_key_count": 14,
+        "production_required_key_count": 14
+      },
+      "label": "The missing submission is explicitly blocked on required production keys",
+      "passed": true,
+      "requirement_id": "S5"
+    },
+    {
+      "evidence": {
+        "flag_state": {
+          "same_unitary_certificate": false,
+          "smoke_only_not_c2_acceptance": true,
+          "source_backed_replay": false
+        },
+        "source_backed_flags_passed": false
+      },
+      "label": "R48 preserves source-backed flag rejection until real evidence exists",
+      "passed": true,
+      "requirement_id": "S6"
+    },
+    {
+      "evidence": {
+        "b7_credit_delta": 0,
+        "b7_space_time_volume_credit": 0,
+        "c2_accepted": false,
+        "o3_closed": false,
+        "reroute_allowed": false
+      },
+      "label": "R48 preserves C2/O3/reroute/B7 zero-credit boundaries",
+      "passed": true,
+      "requirement_id": "S7"
+    },
+    {
+      "evidence": {
+        "b7_ledger_credit_claimed": false,
+        "c3_c7_progress_claimed": false,
+        "occurrence_removal_claimed": false
+      },
+      "label": "R48 claims no C3-C7, occurrence-removal, or B7 ledger progress",
+      "passed": true,
+      "requirement_id": "S8"
+    }
+  ],
+  "runtime_seconds": 0.000769,
+  "source_target_id": "T-B1-004ex/T-B7-014g",
+  "status": "cone01_r48_o3_f4_c2_source_backed_row_intake_contract_blocked_no_submission",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "accepted_route_count": 0,
+    "accepted_source_backed_row_count": 0,
+    "b7_credit_delta": 0,
+    "b7_ledger_improvement_claimed": false,
+    "b7_space_time_volume_credit": 0,
+    "c2_strict_replay_rows_accepted": false,
+    "contract_file_sha256": "9bb3d59925aa5fcee4c9e023b661af7b0ac164afa2552e029c43d4891e25ee97",
+    "contract_hash": "17cc41b93dc2ecefde937859f55f5ab4ad80d264c60940d4a39d0202eedd598d",
+    "evaluation_hash": "d647614066ffd8870051a08229e92ccffe96fd5ffb2b48f624626a8293cf89c2",
+    "evidence_file_class_count": 9,
+    "failed_requirement_ids": [],
+    "missing_key_count": 30,
+    "o3_closed": false,
+    "production_missing_key_count": 14,
+    "production_required_key_count": 14,
+    "remaining_open_obligation_count": 9,
+    "remaining_open_obligations": [
+      "submit_O3_F4_C01_source_backed_row_artifact",
+      "hash_bind_external_lineage_note_and_replay_environment",
+      "provide_verifier_signature_for_same_unitary_certificate",
+      "make_one_row_pass_the_R47_discriminator_without_weakening_rules",
+      "scale_source_backed_acceptance_from_1_row_to_8_rows",
+      "C3_same_unitary_replay_certificate",
+      "C4_C5_same_access_denominator_comparison",
+      "C6_leakage_free_optimizer_trace",
+      "C7_machine_check_replay_bundle"
+    ],
+    "required_key_count": 30,
+    "requirement_count": 8,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "selected_challenge_id": "O3-F4-C01",
+    "source_backed_flags_passed": false,
+    "source_r46_fixture_hash": "7665b3e23fe6663f2c4335a11b53ef0c9b5bb0bad9716cf0eb200f09274d5cbe",
+    "source_r47_discriminator_hash": "b4db0ab566bad93fa2baba3d700e7a512a19a2d115bc7c8d35e1aa048faf4e98",
+    "source_r47_file_sha256": "cafd7a4a76f5503acba0ea7a8d50f9322a2c07425e68804cef3f4c8b241e2075",
+    "source_r47_fixture_hash": "7665b3e23fe6663f2c4335a11b53ef0c9b5bb0bad9716cf0eb200f09274d5cbe",
+    "submitted_source_backed_row_count": 0,
+    "template_file_sha256": "d96660210f2b610dc9ed7cfcfd47fa7857e76f184101896a2b5bce5036ff380d",
+    "template_hash": "7f08f0e608964a9c95874e7e487ae7521727ca7b0e03e8aa81916af4a8b2a052",
+    "validation_error_count": 0
+  },
+  "title": "B1/B7 Cone01 R48 O3-F4 C2 Source-Backed Row Intake Gate",
+  "upstream_target_id": "T-B1-004ew/T-B7-014f",
+  "validation_errors": [],
+  "version": "0.1"
+}
