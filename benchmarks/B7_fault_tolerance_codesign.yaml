@@ -4060,6 +4060,40 @@ current_results:
     caveat: r99_semantic_intake_ready_but_r94_verdict_and_independent_external_review_still_missing
     report: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R99_substantive_evidence_intake_gate.md
+  b1_b7_cone01_r100_maintainer_verdict_no_counter_gate_v0:
+    method: b1_b7_cone01_r100_maintainer_verdict_no_counter_gate_v0
+    source_b1_r100_maintainer_verdict_no_counter: ../results/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate_v0.json
+    source_b1_r99_substantive_evidence_intake: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
+    r100_maintainer_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-maintainer-no-counter-verdict.json
+    r100_verdict_validation: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-maintainer-no-counter-verdict-validation.verdict.json
+    r100_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-post-verdict-blocker-queue.json
+    source_target_id: T-B1-004gx/T-B7-016g
+    upstream_target_id: T-B1-004gw/T-B7-016f
+    maintainer_verdict_accepted: true
+    passed_gate_count: 13
+    failed_gate_count: 0
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: true
+    b7_credit_delta: 1
+    b7_space_time_volume_credit: 1
+    new_credit_delta: 0
+    one_unit_proxy_credit_preserved: true
+    o3_closed: false
+    resource_saving_claimed: false
+    physical_layout_claimed: false
+    verdict_hash: 20bd06ba2b0888eb6ead5b504c7e57ab010cbecac956597966c7e8e92135c779
+    verdict_validation_hash: 76d0b46592318027706bfd18f4d977adc40e063d1cc37a1f200a7c5719507ff9
+    blocker_queue_hash: 81456ba48b081cf12135caa94e9789e782dfacfe796f675ed76d218051c44151
+    requirements_passed: 7
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r100_preserves_existing_proxy_credit_without_external_counter_new_credit_or_strong_b7_claim
+    report: ../results/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0

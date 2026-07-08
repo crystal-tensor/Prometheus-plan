@@ -7087,6 +7087,37 @@ current_results:
     caveat: r99_semantic_intake_ready_but_no_maintainer_verdict_or_new_credit
     report: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R99_substantive_evidence_intake_gate.md
+  b1_b7_cone01_r100_maintainer_verdict_no_counter_gate_v0:
+    circuits: 1
+    status: cone01_r100_maintainer_verdict_accepted_no_counter_change
+    model_status: r99_semantic_intake_promoted_to_no_counter_maintainer_verdict
+    method: b1_b7_cone01_r100_maintainer_verdict_no_counter_gate_v0
+    source_target_id: T-B1-004gx/T-B7-016g
+    upstream_target_id: T-B1-004gw/T-B7-016f
+    source_b1_r99_substantive_evidence_intake: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
+    r100_maintainer_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-maintainer-no-counter-verdict.json
+    r100_verdict_validation: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-maintainer-no-counter-verdict-validation.verdict.json
+    r100_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R100-G1-post-verdict-blocker-queue.json
+    maintainer_verdict_accepted: true
+    passed_gate_count: 13
+    failed_gate_count: 0
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    one_unit_proxy_credit_preserved: true
+    o3_closed: false
+    resource_saving_claimed: false
+    physical_layout_claimed: false
+    verdict_hash: 20bd06ba2b0888eb6ead5b504c7e57ab010cbecac956597966c7e8e92135c779
+    verdict_validation_hash: 76d0b46592318027706bfd18f4d977adc40e063d1cc37a1f200a7c5719507ff9
+    blocker_queue_hash: 81456ba48b081cf12135caa94e9789e782dfacfe796f675ed76d218051c44151
+    requirements_passed: 7
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r100_accepts_no_counter_maintainer_verdict_but_no_external_counter_or_new_credit
+    report: ../results/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

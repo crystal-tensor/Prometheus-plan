@@ -1,0 +1,28 @@
+{
+  "artifact": "R100 post no-counter verdict blocker queue",
+  "blocker_queue_hash": "81456ba48b081cf12135caa94e9789e782dfacfe796f675ed76d218051c44151",
+  "method": "b1_b7_cone01_r100_maintainer_verdict_no_counter_gate_v0",
+  "queue": [
+    {
+      "blocker_id": "R100-G1-1",
+      "needed_artifact": "independent clean-checkout rerun transcript and environment manifest",
+      "priority": 1,
+      "target_gate": "clean_clone_independent_rerun"
+    },
+    {
+      "blocker_id": "R100-G1-2",
+      "needed_artifact": "third-party decision that can move exactly one external counter",
+      "priority": 2,
+      "target_gate": "external_reproduction_or_falsification_decision"
+    },
+    {
+      "blocker_id": "R100-G1-3",
+      "needed_artifact": "separate gate for 1.25x, O3, physical layout, and resource-saving claims",
+      "priority": 3,
+      "target_gate": "strong_claim_separation"
+    }
+  ],
+  "source_target_id": "T-B1-004gx/T-B7-016g",
+  "upstream_target_id": "T-B1-004gw/T-B7-016f",
+  "verdict_validation_hash": "76d0b46592318027706bfd18f4d977adc40e063d1cc37a1f200a7c5719507ff9"
+}

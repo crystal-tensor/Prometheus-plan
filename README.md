@@ -2392,3 +2392,21 @@ verdict queue hash `6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991f
 The next real gate is an R94 maintainer verdict that references the accepted R99
 transcript and semantic-validation hashes, ideally rerun from a clean checkout
 and reviewed by an independent reproduction/falsification agent.
+
+`T-B1-004gx` / `T-B7-016g` now adds the R100 maintainer verdict no-counter
+gate. R100 consumes the accepted R99 semantic-intake packet and emits an
+R94-shaped maintainer verdict. The verdict is accepted as a no-counter decision:
+it preserves the already reviewed one-unit proxy FT/STV credit, but it does not
+increment external reproduction or falsification counters, does not grant new
+B7 credit, and does not close O3, resource-saving, or physical-layout claims.
+R100 passes `7/7` requirements and `13/13` verdict-validation gates. Maintainer
+verdict accepted is `true`; counter delta remains `0`; accepted external
+reproductions remain `0`; accepted external falsifications remain `0`; and
+`new_credit_delta` remains `0`. Verdict hash
+`20bd06ba2b0888eb6ead5b504c7e57ab010cbecac956597966c7e8e92135c779`;
+verdict-validation hash
+`76d0b46592318027706bfd18f4d977adc40e063d1cc37a1f200a7c5719507ff9`;
+blocker queue hash `81456ba48b081cf12135caa94e9789e782dfacfe796f675ed76d218051c44151`.
+The next real gate is an independent clean-clone rerun and an explicit external
+reproduction or falsification decision that can move exactly one external
+counter without touching B7/O3/resource/layout claims.
