@@ -1352,6 +1352,19 @@ replay errors are nonnumeric. Preflight hash
 C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
 claims remain 0/false.
 
+`T-B1-004ek` / `T-B7-013t` now hardens that verifier against metadata-only
+evidence. It constructs a fixture whose C2 rows pass the surface requirements:
+valid hash shape, recomputed provenance bindings, numeric replay errors below
+`1e-08`, and the zero-credit claim boundary. The fixture is still rejected
+because the four materialized execution-file classes per row are absent:
+replay stdout, source circuit, candidate circuit, and same-unitary witness.
+Surface rows pass/fail `8/0`; materialized rows pass/fail `0/8`; missing
+materialized files `32`. Fixture hash
+`df2c6cc13381c1762bd200a2f77ec0302c32bd6cbbc270b840c05c2778cf2c3a`;
+preflight hash `ab1ec9d5377dd719ccdf31a3c83983167c354db771043ca2aa2aa84de2154122`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.

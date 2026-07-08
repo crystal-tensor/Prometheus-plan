@@ -4528,6 +4528,61 @@ current_results:
     caveat: r34_verifier_only_template_rejected_no_c2_submission_no_o3_closure_no_reroute_or_b7_credit
     report: ../results/B1_B7_cone01_R34_o3_f4_c2_binding_preflight_verifier_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R34_o3_f4_c2_binding_preflight_verifier_gate.md
+  b1_b7_cone01_r35_o3_f4_c2_artifact_materialization_sentinel_gate_v0:
+    circuits: 1
+    status: cone01_r35_o3_f4_c2_artifact_materialization_sentinel_rejected
+    model_status: o3_f4_c2_materialized_artifact_gate_ready_no_c2_acceptance
+    method: b1_b7_cone01_r35_o3_f4_c2_artifact_materialization_sentinel_gate_v0
+    source_r34_verifier: ../results/B1_B7_cone01_R34_o3_f4_c2_binding_preflight_verifier_gate_v0.json
+    source_r33_contract: ../results/B1_B7_cone01_R33_o3_f4_c2_provenance_binding_contract_gate_v0.json
+    fixture_output: ../results/B1_B7_cone01_o3_f4_numerical_refit_submissions/B1-B7-cone01-O3-F4-C2-artifact-materialization-sentinel.fixture.json
+    source_target_id: T-B1-004ek/T-B7-013t
+    upstream_target_id: T-B1-004ej/T-B7-013s
+    candidate_id: NL-C02
+    family_id: O3-F4
+    source_r34_preflight_hash: bb3cccb45db7d5de25fb2747529d7860aa8b58a093bdfd7ad8bbd756301b67ac
+    source_r33_contract_hash: d4ff1b028d42ca0c995bfee52b0c4fdc5e3dc8cc877b358b1752bef17e4c92aa
+    fixture_hash: df2c6cc13381c1762bd200a2f77ec0302c32bd6cbbc270b840c05c2778cf2c3a
+    fixture_file_sha256: 437d361fb4e785b218dd00b1258370f289ed46b5e0e3800bf54a3e150b09387e
+    preflight_hash: ab1ec9d5377dd719ccdf31a3c83983167c354db771043ca2aa2aa84de2154122
+    strict_tolerance: 1.0e-08
+    binding_field_count: 11
+    required_execution_artifact_count: 9
+    file_artifact_field_count: 4
+    template_row_count: 8
+    surface_rows_passed: 8
+    surface_rows_failed: 0
+    materialized_rows_passed: 0
+    materialized_rows_failed: 8
+    missing_materialized_file_count: 32
+    materialized_hash_mismatch_count: 0
+    artifact_materialization_gate_ready: true
+    binding_preflight_verifier_ready: true
+    c2_provenance_binding_contract_ready: true
+    c2_provenance_submission_accepted: false
+    c2_strict_replay_rows_accepted: false
+    o3_f4_artifact_accepted: false
+    same_unitary_replay_certificate_complete: false
+    same_access_denominator_comparison_complete: false
+    leakage_free_optimizer_trace_complete: false
+    machine_check_replay_complete: false
+    o3_closed: false
+    checked_negative_lemma_present: false
+    nlc02_full_lemma_ready: false
+    reroute_allowed: false
+    accepted_route_count: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    resource_saving_claimed: false
+    b7_ledger_improvement_claimed: false
+    requirements_passed: 8
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r35_metadata_clean_fixture_rejected_missing_materialized_execution_files_no_c2_o3_reroute_or_b7_credit
+    report: ../results/B1_B7_cone01_R35_o3_f4_c2_artifact_materialization_sentinel_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R35_o3_f4_c2_artifact_materialization_sentinel_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate
