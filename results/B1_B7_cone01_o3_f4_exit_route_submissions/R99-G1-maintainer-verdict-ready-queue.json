@@ -1,0 +1,30 @@
+{
+  "artifact": "R99 maintainer verdict ready queue",
+  "method": "b1_b7_cone01_r99_substantive_evidence_intake_gate_v0",
+  "queue": [
+    {
+      "blocker_id": "R99-G1-1",
+      "needed_artifact": "R94 verdict referencing R99 transcript and semantic validation hashes",
+      "priority": 1,
+      "target_gate": "r94_maintainer_verdict_reference"
+    },
+    {
+      "blocker_id": "R99-G1-2",
+      "needed_artifact": "rerun transcript from a clean clone before any counter transition",
+      "priority": 2,
+      "target_gate": "clean_checkout_rerun"
+    },
+    {
+      "blocker_id": "R99-G1-3",
+      "needed_artifact": "independent reviewer identity and reproduction/falsification decision",
+      "priority": 3,
+      "target_gate": "external_reviewer_independence"
+    }
+  ],
+  "ready_for_maintainer_verdict": true,
+  "semantic_validation_hash": "bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c",
+  "source_target_id": "T-B1-004gw/T-B7-016f",
+  "transcript_hash": "299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2",
+  "upstream_target_id": "T-B1-004gv/T-B7-016e",
+  "verdict_queue_hash": "6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5"
+}

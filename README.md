@@ -2370,3 +2370,25 @@ blocker queue hash `68f0f0e8f86e34ee3e4e36ddb35afad48488e4dcff6a06c250f33feb4911
 The next real gate is a non-placeholder evidence bundle with an actual replay
 command, recorded environment, recomputed rows, double-count decision, and
 review rationale.
+
+`T-B1-004gw` / `T-B7-016f` now adds the R99 substantive evidence intake gate.
+R99 turns the R98 negative control into a positive semantic-intake packet. It
+emits `6` non-placeholder evidence files, binds their bytes into a review
+transcript, verifies replay command, environment identity, nonempty recomputed
+rows, explicit double-count decision, review rationale, non-placeholder packet
+and signature hashes, zero direct credit, and safe claim boundary, then marks
+the transcript ready for a later R94 maintainer verdict. Semantic validation
+accepted is `true`; review transcript accepted is `true`; ready for maintainer
+verdict is `true`; maintainer verdict accepted remains `false`; counter delta
+remains `0`; accepted external reproductions remain `0`; accepted external
+falsifications remain `0`; and `new_credit_delta` remains `0`.
+Bundle-manifest hash
+`a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd`;
+review-transcript hash
+`299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2`;
+semantic-validation hash
+`bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c`;
+verdict queue hash `6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5`.
+The next real gate is an R94 maintainer verdict that references the accepted R99
+transcript and semantic-validation hashes, ideally rerun from a clean checkout
+and reviewed by an independent reproduction/falsification agent.

@@ -1,0 +1,134 @@
+{
+  "artifact": "B1/B7 cone01 R99 substantive evidence intake gate",
+  "bundle_manifest_hash": "a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd",
+  "bundle_manifest_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-evidence-bundle-manifest.json",
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783551297,
+  "method": "b1_b7_cone01_r99_substantive_evidence_intake_gate_v0",
+  "model_status": "r98_placeholder_rejection_replaced_by_nonplaceholder_semantic_packet",
+  "payload_hash": "e93e6e3b487b5a902c10ca1e5b72da08a195056e4b53fe87165aeaaf9145725d",
+  "requirement_count": 7,
+  "requirements": [
+    {
+      "evidence": {
+        "r98_blocker_queue_hash": "68f0f0e8f86e34ee3e4e36ddb35afad48488e4dcff6a06c250f33feb491125aa",
+        "r98_payload_hash": "bc04b4f63af019766fdebf584f95503d19e79715c2ab8d2954e7e956b298d3b5",
+        "r98_semantic_validation_hash": "2fd9959eb5b9741ba0c32714bd8d5d4e5d7089bf7ec9a9d1558edd56d7a4c6d1"
+      },
+      "label": "R99 binds the R98 semantic rejection and blocker queue",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "bundle_manifest_hash": "a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd",
+        "evidence_file_count": 6
+      },
+      "label": "R99 emits six non-placeholder evidence files whose hashes match",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "bundle_manifest_hash": "a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd",
+        "review_transcript_hash": "299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2"
+      },
+      "label": "R99 transcript binds real replay, environment, recomputed rows, and review notes",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "passed_gate_count": 11,
+        "semantic_validation_hash": "bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c"
+      },
+      "label": "R99 semantic validation accepts the non-placeholder packet",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "accepted_external_falsification_count": 0,
+        "accepted_external_reproduction_count": 0,
+        "counter_delta": 0,
+        "maintainer_verdict_accepted": false,
+        "new_credit_delta": 0
+      },
+      "label": "R99 keeps maintainer verdict, external counters, and new credit at zero",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "o3_closed": false,
+        "physical_layout_claimed": false,
+        "resource_saving_claimed": false
+      },
+      "label": "R99 keeps O3, resource-saving, and physical-layout claims closed",
+      "passed": true,
+      "requirement_id": "A6"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R99-G1-1",
+          "R99-G1-2",
+          "R99-G1-3"
+        ],
+        "verdict_queue_hash": "6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5"
+      },
+      "label": "R99 emits next blockers for R94 verdict, clean rerun, and reviewer independence",
+      "passed": true,
+      "requirement_id": "A7"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 7,
+  "review_transcript_hash": "299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2",
+  "review_transcript_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-review-transcript.json",
+  "semantic_validation_hash": "bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c",
+  "semantic_validation_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-evidence-semantic-validation.verdict.json",
+  "source_target_id": "T-B1-004gw/T-B7-016f",
+  "status": "cone01_r99_substantive_evidence_semantic_intake_ready_for_verdict",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-evidence-semantic.stdout.txt",
+  "stdout_sha256": "e9c0beabc8368e26032be6de2035f7c017d45ea1249a9ae567a4dee9d420342b",
+  "summary": {
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "all_files_exist": true,
+    "all_hashes_match": true,
+    "bundle_manifest_hash": "a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd",
+    "counter_delta": 0,
+    "evidence_file_count": 6,
+    "failed_requirement_ids": [],
+    "maintainer_verdict_accepted": false,
+    "method": "b1_b7_cone01_r99_substantive_evidence_intake_gate_v0",
+    "model_status": "r98_placeholder_rejection_replaced_by_nonplaceholder_semantic_packet",
+    "new_credit_delta": 0,
+    "o3_closed": false,
+    "payload_hash": "e93e6e3b487b5a902c10ca1e5b72da08a195056e4b53fe87165aeaaf9145725d",
+    "physical_layout_claimed": false,
+    "ready_for_maintainer_verdict": true,
+    "requirements_failed": 0,
+    "requirements_passed": 7,
+    "resource_saving_claimed": false,
+    "review_transcript_accepted": true,
+    "review_transcript_hash": "299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2",
+    "semantic_failed_gate_count": 0,
+    "semantic_passed_gate_count": 11,
+    "semantic_validation_accepted": true,
+    "semantic_validation_hash": "bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c",
+    "source_target_id": "T-B1-004gw/T-B7-016f",
+    "status": "cone01_r99_substantive_evidence_semantic_intake_ready_for_verdict",
+    "stdout_sha256": "e9c0beabc8368e26032be6de2035f7c017d45ea1249a9ae567a4dee9d420342b",
+    "upstream_target_id": "T-B1-004gv/T-B7-016e",
+    "validation_error_count": 0,
+    "verdict_queue_hash": "6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5"
+  },
+  "upstream_target_id": "T-B1-004gv/T-B7-016e",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "verdict_queue_hash": "6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5",
+  "verdict_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-maintainer-verdict-ready-queue.json",
+  "version": "0.1"
+}

@@ -4019,6 +4019,47 @@ current_results:
     caveat: r98_placeholder_semantics_rejected_without_new_b7_credit
     report: ../results/B1_B7_cone01_R98_placeholder_evidence_semantic_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R98_placeholder_evidence_semantic_gate.md
+  b1_b7_cone01_r99_substantive_evidence_intake_gate_v0:
+    method: b1_b7_cone01_r99_substantive_evidence_intake_gate_v0
+    source_b1_r99_substantive_evidence_intake: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
+    source_b1_r98_placeholder_evidence_semantic: ../results/B1_B7_cone01_R98_placeholder_evidence_semantic_gate_v0.json
+    r99_bundle_manifest: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-evidence-bundle-manifest.json
+    r99_review_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-review-transcript.json
+    r99_semantic_validation: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-substantive-evidence-semantic-validation.verdict.json
+    r99_verdict_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R99-G1-maintainer-verdict-ready-queue.json
+    source_target_id: T-B1-004gw/T-B7-016f
+    upstream_target_id: T-B1-004gv/T-B7-016e
+    evidence_file_count: 6
+    all_files_exist: true
+    all_hashes_match: true
+    semantic_validation_accepted: true
+    review_transcript_accepted: true
+    ready_for_maintainer_verdict: true
+    maintainer_verdict_accepted: false
+    semantic_passed_gate_count: 11
+    semantic_failed_gate_count: 0
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: true
+    b7_credit_delta: 1
+    b7_space_time_volume_credit: 1
+    new_credit_delta: 0
+    o3_closed: false
+    resource_saving_claimed: false
+    physical_layout_claimed: false
+    bundle_manifest_hash: a4f4bc83d555bda4cc80fdc59716e103396bb245a024d1426c7ea30a341565bd
+    review_transcript_hash: 299da9741c918757081e42db960cda56f186ae01f5fcd2cd2a60748046c89ae2
+    semantic_validation_hash: bc476af1df2712aa78fc543b548cdf2f61d72edb2feb27c1f401a31b89e4352c
+    verdict_queue_hash: 6bb1b3de4e396dabd9802f8cc910a234906422f005235e2a5fb6b0f1991fadc5
+    requirements_passed: 7
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r99_semantic_intake_ready_but_r94_verdict_and_independent_external_review_still_missing
+    report: ../results/B1_B7_cone01_R99_substantive_evidence_intake_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R99_substantive_evidence_intake_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0
