@@ -2282,6 +2282,47 @@ current_results:
     caveat: r52_route_only_current_smoke_dry_run_blocker_triplet_satisfies_zero_evidence_slots_no_c2_o3_reroute_or_b7_credit
     report: ../results/B1_B7_cone01_R52_o3_f4_c2_evidence_triplet_route_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R52_o3_f4_c2_evidence_triplet_route_gate.md
+  b1_b7_cone01_r53_o3_f4_c2_e1_source_backed_replay_witness_gate_v0:
+    status: cone01_r53_o3_f4_c2_e1_source_backed_replay_witness_passed_zero_c2_credit
+    method: b1_b7_cone01_r53_o3_f4_c2_e1_source_backed_replay_witness_gate_v0
+    source_b1_r53_e1_source_backed_replay_witness: ../results/B1_B7_cone01_R53_o3_f4_c2_e1_source_backed_replay_witness_gate_v0.json
+    source_r52_evidence_triplet_route: ../results/B1_B7_cone01_R52_o3_f4_c2_evidence_triplet_route_gate_v0.json
+    e1_witness: ../results/B1_B7_cone01_o3_f4_numerical_refit_submissions/source_backed_rows/O3-F4-C01.e1_source_backed_replay_witness.json
+    e1_replay_stdout: ../results/B1_B7_cone01_o3_f4_numerical_refit_submissions/source_backed_rows/O3-F4-C01.e1_source_backed_replay.stdout.txt
+    e1_replacement_row: ../results/B1_B7_cone01_o3_f4_numerical_refit_submissions/source_backed_rows/O3-F4-C01.e1_replacement_presubmission.json
+    source_target_id: T-B1-004fc/T-B7-014l
+    upstream_target_id: T-B1-004fb/T-B7-014k
+    selected_challenge_id: O3-F4-C01
+    e1_witness_hash: 541b1f8aebfd944e1d407f98d4954a98756963680cdcf252ceb992ecb8ccc22d
+    e1_replacement_row_hash: f78eacf2d988b75147a110c644d65c7e885008bf9c618929ad60c772c30ffdd3
+    evidence_slot_count: 3
+    evidence_slots_satisfied: 1
+    e1_slot_satisfied: true
+    e2_slot_satisfied: false
+    e3_slot_satisfied: false
+    computed_unitary_distance: 0.0
+    strict_tolerance: 1.0e-08
+    hash_failure_count: 0
+    accepted_source_backed_row_count: 0
+    source_backed_replay: true
+    same_unitary_certificate: false
+    smoke_only_not_c2_acceptance: true
+    c2_strict_replay_rows_accepted: false
+    o3_closed: false
+    reroute_allowed: false
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    resource_saving_claimed: false
+    b7_ledger_improvement_claimed: false
+    requirements_passed: 8
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r53_satisfies_e1_only_e2_e3_r51_r47_c2_o3_reroute_b7_credit_still_open
+    report: ../results/B1_B7_cone01_R53_o3_f4_c2_e1_source_backed_replay_witness_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R53_o3_f4_c2_e1_source_backed_replay_witness_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0

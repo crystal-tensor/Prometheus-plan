@@ -1628,6 +1628,19 @@ route packet hash `f447c154a88e83744de319ce50802c3997efe00dc2931dd5becd395e0deaf
 C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
 claims remain 0/false.
 
+`T-B1-004fc` / `T-B7-014l` satisfies the first R52 evidence slot for
+`O3-F4-C01`: `E1-source-backed-replay-witness`. R53 binds the R39 source
+dataset, source trace, replay environment, OpenQASM 3.0 source/candidate files,
+replay command, and replay stdout hash into a new E1 witness. The replay parses
+the source and candidate `rz(0.125)` circuits and computes unitary distance
+`0.0` under strict tolerance `1e-08`. E1 is now true, while E2 and E3 remain
+false; accepted source-backed rows remain `0`. E1 witness hash
+`541b1f8aebfd944e1d407f98d4954a98756963680cdcf252ceb992ecb8ccc22d`;
+E1 replacement row hash
+`f78eacf2d988b75147a110c644d65c7e885008bf9c618929ad60c772c30ffdd3`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
