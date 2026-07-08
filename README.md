@@ -1831,6 +1831,22 @@ remain 0/false. The next useful PR must supply an accepted exit route or
 full-circuit rewrite artifact with a nonzero occurrence/proxy-T delta before any
 nonzero B7 ledger retest.
 
+`T-B1-004fq` / `T-B7-014z` now turns that next step into a hash-bound accepted
+exit-route submission contract. R67 emits three admissible route classes:
+`R1-line1381-resolution`, `R2-line1378-overlap-recovery`, and
+`R3-thirty-certificate-batch`. The contract requires 29 submission fields,
+including source and candidate OpenQASM 3.0 paths and hashes, machine-check
+replay command and stdout, semantic or symbolic equivalence evidence,
+no-double-counting ledger evidence, line1381/line1378 evidence, occurrence and
+proxy-T ledgers, nonzero deltas, and an explicit claim boundary. The placeholder
+template is rejected with 23 placeholder fields, so accepted exit routes remain
+`0`, accepted occurrence removal remains `0`, accepted proxy-T reduction remains
+`0`, `b7_nonzero_retest_allowed=false`, and B7 credit remains `0`. R67 contract
+hash `99e50d8c04bbb0b7435f4867d965b20376fd5c0685319a0b87a0ba9dad61f0a0`.
+This is a contract gate, not an accepted route. The next useful PR must fill the
+R67 template with source-backed replay, no-double-counting, line1381/line1378,
+occurrence-delta, and proxy-T-delta evidence before any nonzero B7 ledger retest.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
