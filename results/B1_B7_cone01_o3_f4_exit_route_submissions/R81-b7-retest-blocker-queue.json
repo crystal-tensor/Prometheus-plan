@@ -1,0 +1,26 @@
+{
+  "accepted_exit_route_count": 1,
+  "accepted_occurrence_removal": 1,
+  "accepted_proxy_t_reduction": 1,
+  "artifact": "R81 downstream B7 retest blocker queue",
+  "b7_credit_delta": 0,
+  "blocker_queue_hash": "0dba74a99e4000b28ecfb279be22f2d57e78b96e5e7c604146a8bc409dfcc522",
+  "method": "b1_b7_cone01_r81_positive_route_promotion_gate_v0",
+  "positive_route_preflight_accepted": true,
+  "queue": [
+    {
+      "blocker_id": "R81-B7-1",
+      "needed_artifact": "rerun B7 resource/FT ledger using the R81 accepted B1 route packet",
+      "priority": 1,
+      "target_gate": "downstream_b7_nonzero_retest"
+    },
+    {
+      "blocker_id": "R81-B7-2",
+      "needed_artifact": "prove any B7/STV credit is derived only from the downstream retest, not from R81 packet acceptance alone",
+      "priority": 2,
+      "target_gate": "claim_boundary_audit"
+    }
+  ],
+  "source_target_id": "T-B1-004ge/T-B7-015n",
+  "upstream_target_id": "T-B1-004gd/T-B7-015m"
+}

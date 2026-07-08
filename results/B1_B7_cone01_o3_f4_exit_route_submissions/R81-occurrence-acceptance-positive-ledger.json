@@ -1,0 +1,36 @@
+{
+  "acceptance_checks": {
+    "candidate_same_line_not_cx": true,
+    "line1378_not_double_counted": true,
+    "r74_prefill_verdict_passed": true,
+    "r76_intake_accepted": true,
+    "source_line1381_is_cx": true
+  },
+  "accepted": true,
+  "accepted_occurrence_removal": 1,
+  "artifact": "R81 occurrence acceptance positive ledger",
+  "candidate_line1381": "U(0.42054081161117135,pi/4,0) q[14];",
+  "claim_boundary": "This ledger accepts exactly one occurrence removal for the B1 R78 packet. It cannot close O3, permit reroute, claim B7 credit, or count line1378 as a second positive occurrence.",
+  "ledger_hash": "d542dacf61a9ee308f16ab3f91fcb9dfac3c15768a56fe6d177aa7e4ee8b880a",
+  "ledger_id": "B1-B7-cone01-R81-occurrence-acceptance-positive-ledger",
+  "method": "b1_b7_cone01_r81_positive_route_promotion_gate_v0",
+  "occurrence_removed_lines": [
+    1381
+  ],
+  "route_id": "R1-line1381-resolution",
+  "source_line1381": "cx q[3],q[15];",
+  "source_r74_artifact_hash": "155efc8897e5de44636ef573a025518bf523ea74358f90a8c798afffd676018c",
+  "source_r74_artifact_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R74-r1-line1381-occurrence-replay-artifact.json",
+  "source_r74_artifact_sha256": "4a3eb2ea8c1cd6e31402b73074db4eb4f90230a75ac94f422fbcdb24fd4f1482",
+  "source_r74_verdict_hash": "f28f915172bf37a2f231aedc305c7347dcf383fa755699bc8fcbce74800376be",
+  "source_r74_verdict_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R74-r1-line1381-occurrence-replay.verdict.json",
+  "source_r74_verdict_sha256": "df15d374e1bba4c68510174946e20f748b2e92b6ed0ff39fe7b86c42315a3a1f",
+  "source_r76_intake_verdict_hash": "1e62802e2bc3a494382ca1ac1e33db489b495c817d4b9c9c42610efd4e447033",
+  "source_r76_intake_verdict_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R76-r1-d1-d2-d3-source-closure-intake.verdict.json",
+  "source_r76_intake_verdict_sha256": "68c85114e434b9b34b0cb122c294f1efb0dab0a890973778467487461598aa5b",
+  "source_r76_no_double_counting_ledger_hash": "08eb3bcaf8758dc5c63486b0f911e13045a4596a72bd3dfd29ede251bd8c21b3",
+  "source_r76_no_double_counting_ledger_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R76-line1378-no-double-counting-ledger.json",
+  "source_r76_no_double_counting_ledger_sha256": "fb0200b36c68f2481a3873d2dbc18d5e6c3e1ab3eab92a427e569c2c00e4dc83",
+  "source_target_id": "T-B1-004ge/T-B7-015n",
+  "upstream_target_id": "T-B1-004gd/T-B7-015m"
+}

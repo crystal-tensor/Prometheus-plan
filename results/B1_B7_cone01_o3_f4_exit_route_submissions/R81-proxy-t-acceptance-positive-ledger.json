@@ -1,0 +1,32 @@
+{
+  "acceptance_checks": {
+    "line1378_not_double_counted": true,
+    "proxy_t_arithmetic_positive": true,
+    "r75_prefill_verdict_passed": true,
+    "r76_intake_accepted": true
+  },
+  "accepted": true,
+  "accepted_proxy_t_reduction": 1,
+  "artifact": "R81 proxy-T acceptance positive ledger",
+  "claim_boundary": "This ledger accepts the R75 one-unit proxy-T reduction for the B1 R78 packet after R76 source closure. It cannot close O3, permit reroute, claim resource saving at the B7 ledger, or grant B7 credit.",
+  "ledger_hash": "4b2c401cdbba601c80faf19d956a8e7c316176b6828fb7ceffc2fda128a9bed6",
+  "ledger_id": "B1-B7-cone01-R81-proxy-t-acceptance-positive-ledger",
+  "method": "b1_b7_cone01_r81_positive_route_promotion_gate_v0",
+  "proxy_t_after": 99,
+  "proxy_t_before": 100,
+  "route_id": "R1-line1381-resolution",
+  "source_r75_derivation_hash": "a945c5e790ae2bce5c99c7b2d08b90e9ce3a0e3763d7a739f4d79af6597872a1",
+  "source_r75_derivation_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R75-proxy-t-pricing-derivation-artifact.json",
+  "source_r75_derivation_sha256": "8833c591993acc62aa3446d05d843bc7dc99bd454e4191773a4d69b1c699b0fc",
+  "source_r75_verdict_hash": "40ee5dda31afff9a2054147bba52778ba762dfa3cb81cadc7e4d1dfb770b27d1",
+  "source_r75_verdict_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R75-proxy-t-pricing-replay.verdict.json",
+  "source_r75_verdict_sha256": "edbe393f95ed316b1980ee8962afc0d634da1bc5cdc7d76928f73b442c4a5ff4",
+  "source_r76_intake_verdict_hash": "1e62802e2bc3a494382ca1ac1e33db489b495c817d4b9c9c42610efd4e447033",
+  "source_r76_intake_verdict_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R76-r1-d1-d2-d3-source-closure-intake.verdict.json",
+  "source_r76_intake_verdict_sha256": "68c85114e434b9b34b0cb122c294f1efb0dab0a890973778467487461598aa5b",
+  "source_r76_no_double_counting_ledger_hash": "08eb3bcaf8758dc5c63486b0f911e13045a4596a72bd3dfd29ede251bd8c21b3",
+  "source_r76_no_double_counting_ledger_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R76-line1378-no-double-counting-ledger.json",
+  "source_r76_no_double_counting_ledger_sha256": "fb0200b36c68f2481a3873d2dbc18d5e6c3e1ab3eab92a427e569c2c00e4dc83",
+  "source_target_id": "T-B1-004ge/T-B7-015n",
+  "upstream_target_id": "T-B1-004gd/T-B7-015m"
+}

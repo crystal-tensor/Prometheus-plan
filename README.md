@@ -2081,3 +2081,14 @@ artifacts match, but the packet remains rejected exactly on
 `accepted_proxy_t_positive`. Accepted exit routes, occurrence removal, accepted
 proxy-T reduction, and B7 credit remain 0; the next work must produce a real
 positive occurrence/proxy-T ledger rather than another surface-completion patch.
+
+`T-B1-004ge` / `T-B7-015n` now promotes that completed packet into one accepted
+B1 route without granting B7 credit. R81 replaces the R80 zero ledgers with
+source-backed positive ledgers: R74 proves line 1381 is a source `cx` while the
+candidate same line is not a CNOT, R75 binds the replayed proxy-T delta
+`100 -> 99`, and R76 preserves the no-double-counting decision that excludes
+line 1378 from a second count. The R78 packet preflight now passes all gates:
+accepted exit routes `1`, accepted occurrence removal `1`, accepted proxy-T
+reduction `1`. O3 closure, reroute permission, resource saving, and B7 credit
+remain blocked until a downstream B7 resource/FT ledger retest accepts the
+R81 packet.
