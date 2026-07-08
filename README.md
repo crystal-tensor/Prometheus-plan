@@ -1393,6 +1393,20 @@ credit/STV/resource-saving claims remain 0/false. The next useful PR must
 replace smoke files with source-backed replay outputs and same-unitary witness
 files before C3-C7 can count.
 
+`T-B1-004en` / `T-B7-013w` now turns that next step into a hard discriminator.
+It emits the O3-F4 C2 source-backed replacement contract and reruns the current
+R37 all-row fixture against stricter source-backed evidence rules. The result is
+intentionally negative but useful: all 8 rows remain materialized, all 8 are
+rejected as smoke-only, 0 rows pass the source-backed discriminator, source-backed
+flag failures are `8`, source-provenance failures are `8`, witness-schema
+failures are `8`, and provenance-binding mismatches remain `0`. Replacement
+contract hash `906da61aa3c205ebefe1caf001e3e2b86aeb74abcf89d1bbc6441f8c1137186f`;
+discriminator hash `e23f694cdb37f985e30b15ead907bbf4772db2260398c773c7e5e3777d00c852`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false. The next useful PR is now narrower: submit at least one
+row that satisfies the source-backed replacement contract before scaling to all
+8 rows and then moving to C3-C7.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
