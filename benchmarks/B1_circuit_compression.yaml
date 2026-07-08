@@ -7148,6 +7148,38 @@ current_results:
     caveat: r101_clean_local_rerun_not_third_party_external_reproduction
     report: ../results/B1_B7_cone01_R101_clean_clone_rerun_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R101_clean_clone_rerun_gate.md
+  b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0:
+    circuits: 1
+    status: cone01_r102_external_reviewer_identity_contract_ready_no_counter_move
+    model_status: r101_clean_rerun_ready_but_independent_external_identity_missing
+    method: b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0
+    source_target_id: T-B1-004gz/T-B7-016i
+    upstream_target_id: T-B1-004gy/T-B7-016h
+    source_b1_r101_clean_clone_rerun: ../results/B1_B7_cone01_R101_clean_clone_rerun_gate_v0.json
+    r102_identity_contract: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-reviewer-identity-contract.json
+    r102_decision_template: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-counter-decision.template.json
+    r102_surrogate_decision: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-local-surrogate-counter-decision.json
+    r102_preflight: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-counter-decision-preflight.verdict.json
+    r102_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-post-external-identity-blocker-queue.json
+    surrogate_decision_rejected: true
+    external_reviewer_identity_accepted: false
+    counter_transition_accepted: false
+    passed_gate_count: 5
+    failed_gate_count: 3
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    identity_contract_hash: 4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c
+    decision_template_hash: 14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3
+    preflight_hash: 005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5
+    blocker_queue_hash: 548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1
+    requirements_passed: 5
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r102_contract_ready_but_local_surrogate_not_external_reviewer
+    report: ../results/B1_B7_cone01_R102_external_reviewer_identity_contract_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R102_external_reviewer_identity_contract_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

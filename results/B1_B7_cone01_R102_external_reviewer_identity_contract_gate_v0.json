@@ -1,0 +1,112 @@
+{
+  "artifact": "B1/B7 cone01 R102 external reviewer identity contract gate",
+  "blocker_queue_hash": "548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-post-external-identity-blocker-queue.json",
+  "decision_template_hash": "14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3",
+  "decision_template_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-counter-decision.template.json",
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783552728,
+  "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+  "identity_contract_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-reviewer-identity-contract.json",
+  "method": "b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0",
+  "model_status": "r101_clean_rerun_ready_but_independent_external_identity_missing",
+  "payload_hash": "4654ab7597327340ffa82fa78d9fc554e674e7405a2a7785aac2414ca23a1c66",
+  "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5",
+  "preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-counter-decision-preflight.verdict.json",
+  "requirement_count": 5,
+  "requirements": [
+    {
+      "evidence": {
+        "r101_comparison_hash": "21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900",
+        "r101_payload_hash": "8e11e072172f2daf97c5f453b3036d5881473f5d6c1597823652e0d5d5070237"
+      },
+      "label": "R102 binds the accepted R101 clean-clone rerun and blocker queue",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "decision_template_hash": "14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3",
+        "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c"
+      },
+      "label": "R102 emits an external reviewer identity contract and decision template",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "failed_gates": [
+          "required_independence_fields_complete",
+          "reviewer_identity_independent",
+          "independent_replay_artifacts_present"
+        ],
+        "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5"
+      },
+      "label": "R102 rejects the local surrogate reviewer as not independent",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "accepted_external_falsification_count": 0,
+        "accepted_external_reproduction_count": 0,
+        "counter_delta": 0,
+        "new_credit_delta": 0
+      },
+      "label": "R102 keeps external counters and new credit at zero",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R102-G1-1",
+          "R102-G1-2",
+          "R102-G1-3"
+        ],
+        "blocker_queue_hash": "548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1"
+      },
+      "label": "R102 emits blockers for real identity, independent transcript, and single-counter audit",
+      "passed": true,
+      "requirement_id": "A5"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 5,
+  "source_target_id": "T-B1-004gz/T-B7-016i",
+  "status": "cone01_r102_external_reviewer_identity_contract_ready_no_counter_move",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-external-reviewer-identity.stdout.txt",
+  "stdout_sha256": "41085fe19ba5e90f1f42865f0d548a4717d389ae915ef6ee2bafdb45faefa711",
+  "summary": {
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "blocker_queue_hash": "548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1",
+    "counter_delta": 0,
+    "counter_transition_accepted": false,
+    "decision_template_hash": "14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3",
+    "external_reviewer_identity_accepted": false,
+    "failed_gate_count": 3,
+    "failed_requirement_ids": [],
+    "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+    "method": "b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0",
+    "model_status": "r101_clean_rerun_ready_but_independent_external_identity_missing",
+    "new_credit_delta": 0,
+    "passed_gate_count": 5,
+    "payload_hash": "4654ab7597327340ffa82fa78d9fc554e674e7405a2a7785aac2414ca23a1c66",
+    "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5",
+    "requirements_failed": 0,
+    "requirements_passed": 5,
+    "source_target_id": "T-B1-004gz/T-B7-016i",
+    "status": "cone01_r102_external_reviewer_identity_contract_ready_no_counter_move",
+    "stdout_sha256": "41085fe19ba5e90f1f42865f0d548a4717d389ae915ef6ee2bafdb45faefa711",
+    "surrogate_decision_rejected": true,
+    "upstream_target_id": "T-B1-004gy/T-B7-016h",
+    "validation_error_count": 0
+  },
+  "surrogate_decision_hash": "6e8a315a2a6f5acdee6fd7891ec3ecc9230b6f8e7501805788cabc6446d56463",
+  "surrogate_decision_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R102-G1-local-surrogate-counter-decision.json",
+  "upstream_target_id": "T-B1-004gy/T-B7-016h",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1"
+}

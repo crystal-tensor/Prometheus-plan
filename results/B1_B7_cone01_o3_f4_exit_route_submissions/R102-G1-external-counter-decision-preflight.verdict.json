@@ -1,0 +1,40 @@
+{
+  "accepted_external_falsification_count": 0,
+  "accepted_external_reproduction_count": 0,
+  "artifact": "R102 external counter-decision preflight verdict",
+  "claim_boundary": "R102 defines the external reviewer identity contract and rejects the local surrogate negative control. It does not move external counters.",
+  "counter_delta": 0,
+  "counter_transition_accepted": false,
+  "external_reviewer_identity_accepted": false,
+  "failed_gate_count": 3,
+  "failed_gates": [
+    "required_independence_fields_complete",
+    "reviewer_identity_independent",
+    "independent_replay_artifacts_present"
+  ],
+  "gates": {
+    "claim_boundary_safe": true,
+    "decision_mode_allowed": true,
+    "independent_replay_artifacts_present": false,
+    "r101_clean_clone_rerun_reproduced": true,
+    "required_independence_fields_complete": false,
+    "reviewer_identity_independent": false,
+    "safe_no_counter_decision": true,
+    "source_r101_comparison_hash_matches": true
+  },
+  "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+  "method": "b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0",
+  "missing_required_fields": [
+    "independent_environment_manifest_path",
+    "independent_environment_manifest_sha256",
+    "clean_checkout_transcript_path",
+    "clean_checkout_transcript_sha256"
+  ],
+  "new_credit_delta": 0,
+  "passed_gate_count": 5,
+  "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5",
+  "source_target_id": "T-B1-004gz/T-B7-016i",
+  "surrogate_decision_hash": "6e8a315a2a6f5acdee6fd7891ec3ecc9230b6f8e7501805788cabc6446d56463",
+  "surrogate_decision_rejected": true,
+  "upstream_target_id": "T-B1-004gy/T-B7-016h"
+}

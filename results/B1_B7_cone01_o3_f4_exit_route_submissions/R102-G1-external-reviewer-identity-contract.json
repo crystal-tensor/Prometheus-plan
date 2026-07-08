@@ -1,0 +1,80 @@
+{
+  "allowed_counter_targets": [
+    "accepted_external_reproduction_count",
+    "accepted_external_falsification_count",
+    "no_counter_change"
+  ],
+  "allowed_decision_modes": [
+    "external_reproduction_counter_increment",
+    "external_falsification_counter_increment",
+    "insufficient_independence_no_counter"
+  ],
+  "artifact": "R102 external reviewer identity and counter-decision contract",
+  "counter_transition_rules": {
+    "accepted_external_falsification_count": {
+      "allowed_delta": [
+        1
+      ],
+      "requires": [
+        "independent_reviewer_identity",
+        "independent_clean_checkout_transcript",
+        "explicit_falsification_reason",
+        "double_count_decision_no_duplicate",
+        "claim_boundary_safe"
+      ]
+    },
+    "accepted_external_reproduction_count": {
+      "allowed_delta": [
+        1
+      ],
+      "requires": [
+        "independent_reviewer_identity",
+        "independent_clean_checkout_transcript",
+        "same_stable_hashes_reproduced",
+        "double_count_decision_no_duplicate",
+        "claim_boundary_safe"
+      ]
+    },
+    "no_counter_change": {
+      "allowed_delta": [
+        0
+      ],
+      "requires": [
+        "explicit_no_counter_reason"
+      ]
+    }
+  },
+  "forbidden_direct_claims": [
+    "new_b7_credit",
+    "1_25x_closure",
+    "o3_closure",
+    "physical_layout_claim",
+    "resource_saving_claim"
+  ],
+  "identity_contract_hash": "4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c",
+  "method": "b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0",
+  "pre_r102_external_falsification_count": 0,
+  "pre_r102_external_reproduction_count": 0,
+  "pre_r102_new_credit_delta": 0,
+  "required_field_count": 14,
+  "required_fields": [
+    "reviewer_id",
+    "reviewer_affiliation_or_agent_context",
+    "independence_statement",
+    "independent_environment_manifest_path",
+    "independent_environment_manifest_sha256",
+    "clean_checkout_transcript_path",
+    "clean_checkout_transcript_sha256",
+    "source_r101_comparison_hash",
+    "decision_mode",
+    "counter_target",
+    "counter_delta",
+    "double_count_decision",
+    "claim_boundary",
+    "signature_hash"
+  ],
+  "source_r101_comparison_hash": "21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900",
+  "source_r101_payload_hash": "8e11e072172f2daf97c5f453b3036d5881473f5d6c1597823652e0d5d5070237",
+  "source_target_id": "T-B1-004gz/T-B7-016i",
+  "upstream_target_id": "T-B1-004gy/T-B7-016h"
+}

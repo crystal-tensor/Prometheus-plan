@@ -2426,3 +2426,21 @@ comparison hash
 blocker queue hash `459d9c4cfdafa7be6d41bbb7196b4d59e91b38d09d5d8e4a5140814c7732b9da`.
 R101 is still not a third-party external reproduction. The next real gate needs
 an independent reviewer identity and an explicit counter-transition decision.
+
+`T-B1-004gz` / `T-B7-016i` now adds the R102 external reviewer identity
+contract gate. R102 turns the R101 blocker into a concrete identity and
+counter-decision contract, emits a fillable external counter-decision template,
+and tests it with a local surrogate reviewer negative control. The surrogate is
+rejected because it is not independent and does not attach independent replay
+artifacts. Requirements pass `5/5`; preflight gates pass `5` and fail `3`;
+external reviewer identity accepted is `false`; counter transition accepted is
+`false`; counter delta remains `0`; accepted external reproductions remain `0`;
+accepted external falsifications remain `0`; and `new_credit_delta` remains
+`0`. Identity-contract hash
+`4a69fde0559dc679fb54ae666aae172f8824500710dbcb0ec27930978c78cd2c`;
+decision-template hash
+`14a6524224be397c1149ab28a913d7c6e130f3142bc46d9104b1fef213ee2bb3`;
+preflight hash `005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5`;
+blocker queue hash `548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1`.
+The next real gate is a real independent reviewer packet with environment,
+clean-checkout transcript, and exactly one audited external counter transition.

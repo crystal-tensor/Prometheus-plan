@@ -1,0 +1,28 @@
+{
+  "artifact": "R102 post external identity blocker queue",
+  "blocker_queue_hash": "548a368637e12a9d9e2fef78c6eea955688144f082b8cb104da301ad89ff4df1",
+  "method": "b1_b7_cone01_r102_external_reviewer_identity_contract_gate_v0",
+  "preflight_hash": "005c4c0c3a9890aa7947ef7f9db04ea13c8057e4e56ea2e3dc21fc674bdc13b5",
+  "queue": [
+    {
+      "blocker_id": "R102-G1-1",
+      "needed_artifact": "reviewer identity and independence statement outside maintainer context",
+      "priority": 1,
+      "target_gate": "real_independent_reviewer_identity"
+    },
+    {
+      "blocker_id": "R102-G1-2",
+      "needed_artifact": "environment manifest and clean checkout rerun transcript with hashes",
+      "priority": 2,
+      "target_gate": "independent_environment_and_checkout_transcript"
+    },
+    {
+      "blocker_id": "R102-G1-3",
+      "needed_artifact": "audit that moves exactly one external counter and no strong claim",
+      "priority": 3,
+      "target_gate": "single_counter_transition_audit"
+    }
+  ],
+  "source_target_id": "T-B1-004gz/T-B7-016i",
+  "upstream_target_id": "T-B1-004gy/T-B7-016h"
+}
