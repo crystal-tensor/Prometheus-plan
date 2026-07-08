@@ -1,0 +1,160 @@
+{
+  "artifact": "B1/B7 cone01 R83 B7 gap-closure contract gate",
+  "blocker_queue_hash": "6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-blocker-queue.json",
+  "contract_hash": "3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43",
+  "contract_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure.contract.json",
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783541074,
+  "method": "b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0",
+  "model_status": "r82_591_t_ledger_gap_converted_to_fillable_b7_closure_contract",
+  "payload_hash": "5277295694acf0904c33fefff8c8e17f621000f49918d3526f663c430f07c7a8",
+  "requirement_count": 8,
+  "requirements": [
+    {
+      "evidence": {
+        "min_t_ledger_gap_after_r81": 591,
+        "r82_payload_hash": "3c8e36f084a397d81df2e2cc6870588e07c3b2eff6aabb54ea0fd1f7e062259a",
+        "r82_result": "results/B1_B7_cone01_R82_b7_downstream_retest_gate_v0.json"
+      },
+      "label": "R82 downstream B7 retest is complete and zero-credit",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "minimum_accepted_t_ledger_reduction": 591,
+        "target_1_25_t_ledger_gap_after_r81": 823
+      },
+      "label": "R83 contract encodes the 591-unit 1.20x gap and 823-unit 1.25x gap",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "acceptance_gate_count": 10,
+        "contract_hash": "3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43",
+        "production_required_field_count": 33
+      },
+      "label": "R83 production contract has concrete required fields and gates",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "failed_gates": [
+          "all_required_fields_complete",
+          "all_hash_bound_artifacts_match",
+          "claimed_t_ledger_reduction_at_least_591",
+          "candidate_after_t_ledger_at_or_below_5632",
+          "stv_reprice_ledger_present",
+          "logical_t_mapping_ledger_present",
+          "no_double_counting_ledger_present",
+          "replay_stdout_hash_matches"
+        ],
+        "preflight_hash": "baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb",
+        "template_hash": "b9ba25d8a3610baa2c7432cd1a691918ea0eb3fcc5d2128ab10d8000457867e2"
+      },
+      "label": "R83 placeholder template is rejected without granting credit",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "packet_ids": [
+          "R83-G1-30-arbitrary-rotation-batch",
+          "R83-G2-591-proxy-t-row-batch",
+          "R83-G3-full-b7-reprice"
+        ],
+        "work_packet_hash": "ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a"
+      },
+      "label": "R83 emits three PR-sized work packets",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "source_b7_boundary_sha256": "e1a37664da13d8f8f05120101d0d6c477027fe94c161c7a5cf9da12131197db5",
+        "source_r82_result_sha256": "00be0899104d4707f6d084579265ee019ec5c202c00b9668bfa6a77cfceb516a"
+      },
+      "label": "R83 source artifacts are hash-bound",
+      "passed": true,
+      "requirement_id": "A6"
+    },
+    {
+      "evidence": {
+        "accepted_b7_credit_delta": 0,
+        "template_flags": {
+          "b7_credit_requested": false,
+          "o3_closed": false,
+          "reroute_allowed": false,
+          "resource_saving_claimed": false
+        }
+      },
+      "label": "R83 preserves zero B7 credit and no O3/reroute/resource claim",
+      "passed": true,
+      "requirement_id": "A7"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R83-B7-1",
+          "R83-B7-2",
+          "R83-B7-3"
+        ],
+        "blocker_queue_hash": "6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0"
+      },
+      "label": "R83 emits next blockers for submitted evidence, reprice, and audit",
+      "passed": true,
+      "requirement_id": "A8"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 8,
+  "source_target_id": "T-B1-004gg/T-B7-015p",
+  "status": "cone01_r83_b7_gap_closure_contract_ready_no_credit",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-contract.stdout.txt",
+  "stdout_sha256": "75840b8177bd6d8068491b6d153457079df97e3b44155da0676bc3ef27c01303",
+  "summary": {
+    "acceptance_gate_count": 10,
+    "accepted_b7_credit_delta": 0,
+    "accepted_b7_space_time_volume_credit": 0,
+    "blocker_queue_hash": "6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0",
+    "contract_hash": "3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43",
+    "current_after_t_ledger": 6224,
+    "failed_requirement_ids": [],
+    "method": "b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0",
+    "minimum_accepted_t_ledger_reduction": 591,
+    "model_status": "r82_591_t_ledger_gap_converted_to_fillable_b7_closure_contract",
+    "o3_closed": false,
+    "payload_hash": "5277295694acf0904c33fefff8c8e17f621000f49918d3526f663c430f07c7a8",
+    "production_required_field_count": 33,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "reroute_allowed": false,
+    "resource_saving_claimed": false,
+    "source_r82_payload_hash": "3c8e36f084a397d81df2e2cc6870588e07c3b2eff6aabb54ea0fd1f7e062259a",
+    "source_target_id": "T-B1-004gg/T-B7-015p",
+    "status": "cone01_r83_b7_gap_closure_contract_ready_no_credit",
+    "target_1_20_max_after_t_ledger": 5632,
+    "target_1_20_t_ledger_gap_after_r81": 591,
+    "target_1_25_t_ledger_gap_after_r81": 823,
+    "template_failed_gate_count": 8,
+    "template_preflight_accepted": false,
+    "template_preflight_hash": "baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb",
+    "upstream_target_id": "T-B1-004gf/T-B7-015o",
+    "validation_error_count": 0,
+    "work_packet_count": 3,
+    "work_packet_hash": "ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a"
+  },
+  "template_hash": "b9ba25d8a3610baa2c7432cd1a691918ea0eb3fcc5d2128ab10d8000457867e2",
+  "template_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure.template.json",
+  "template_preflight_hash": "baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb",
+  "template_preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-template.verdict.json",
+  "upstream_target_id": "T-B1-004gf/T-B7-015o",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1",
+  "work_packet_hash": "ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a",
+  "work_packets_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-work-packets.json"
+}

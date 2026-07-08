@@ -1,0 +1,54 @@
+{
+  "artifact": "R83 B7 gap-closure work packets",
+  "claim_boundary": "Work packets are invitations for future PRs, not accepted B7 credit.",
+  "contract_hash": "3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43",
+  "method": "b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0",
+  "minimum_accepted_t_ledger_reduction": 591,
+  "packets": [
+    {
+      "can_close_1_20_gap_if_accepted": true,
+      "candidate_t_ledger_reduction": 600,
+      "packet_id": "R83-G1-30-arbitrary-rotation-batch",
+      "priority": 1,
+      "required_evidence": [
+        "source-backed rotation rows",
+        "replay stdout",
+        "logical-T mapping ledger",
+        "STV reprice ledger",
+        "no-double-counting ledger"
+      ],
+      "target": "remove or reprice 30 arbitrary numeric rotations at cost 20 each"
+    },
+    {
+      "can_close_1_20_gap_if_accepted": true,
+      "candidate_t_ledger_reduction": 591,
+      "packet_id": "R83-G2-591-proxy-t-row-batch",
+      "priority": 2,
+      "required_evidence": [
+        "row-level source/candidate artifacts",
+        "machine-check replay transcripts",
+        "logical-T mapping ledger",
+        "STV reprice ledger",
+        "claim-boundary audit"
+      ],
+      "target": "submit at least 591 source-backed proxy-T units of reduction"
+    },
+    {
+      "can_close_1_20_gap_if_accepted": true,
+      "candidate_t_ledger_reduction": null,
+      "packet_id": "R83-G3-full-b7-reprice",
+      "priority": 3,
+      "required_evidence": [
+        "complete B7 reprice ledger",
+        "same-access assumptions",
+        "factory/path bottleneck audit",
+        "independent reproduction command",
+        "negative-overclaim checklist"
+      ],
+      "target": "provide an equivalent full B7 resource reprice that reaches 1.20x STV"
+    }
+  ],
+  "source_target_id": "T-B1-004gg/T-B7-015p",
+  "upstream_target_id": "T-B1-004gf/T-B7-015o",
+  "work_packet_hash": "ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a"
+}

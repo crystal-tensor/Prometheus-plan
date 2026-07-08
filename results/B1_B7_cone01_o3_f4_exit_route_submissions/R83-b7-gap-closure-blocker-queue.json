@@ -1,0 +1,30 @@
+{
+  "accepted_b7_credit_delta": 0,
+  "artifact": "R83 B7 gap-closure blocker queue",
+  "blocker_queue_hash": "6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0",
+  "contract_hash": "3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43",
+  "method": "b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0",
+  "queue": [
+    {
+      "blocker_id": "R83-B7-1",
+      "needed_artifact": "fill all R83 production fields with source-backed replay evidence",
+      "priority": 1,
+      "target_gate": "submitted_gap_closure_evidence"
+    },
+    {
+      "blocker_id": "R83-B7-2",
+      "needed_artifact": "prove claimed T-ledger reduction maps into logical-T and STV accounting",
+      "priority": 2,
+      "target_gate": "logical_t_and_stv_reprice"
+    },
+    {
+      "blocker_id": "R83-B7-3",
+      "needed_artifact": "audit that no O3, reroute, or B7 credit is claimed before R83 acceptance",
+      "priority": 3,
+      "target_gate": "independent_claim_boundary_audit"
+    }
+  ],
+  "source_target_id": "T-B1-004gg/T-B7-015p",
+  "template_preflight_hash": "baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb",
+  "upstream_target_id": "T-B1-004gf/T-B7-015o"
+}

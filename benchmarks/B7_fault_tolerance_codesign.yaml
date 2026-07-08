@@ -3395,6 +3395,43 @@ current_results:
     caveat: r82_downstream_b7_retest_complete_but_current_ft_threshold_gap_remains_positive_no_b7_credit
     report: ../results/B1_B7_cone01_R82_b7_downstream_retest_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R82_b7_downstream_retest_gate.md
+  b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0:
+    method: b1_b7_cone01_r83_b7_gap_closure_contract_gate_v0
+    source_b1_r83_b7_gap_closure_contract: ../results/B1_B7_cone01_R83_b7_gap_closure_contract_gate_v0.json
+    source_b1_r82_b7_downstream_retest: ../results/B1_B7_cone01_R82_b7_downstream_retest_gate_v0.json
+    r83_contract: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure.contract.json
+    r83_template_preflight: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-template.verdict.json
+    r83_work_packets: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R83-b7-gap-closure-work-packets.json
+    source_target_id: T-B1-004gg/T-B7-015p
+    upstream_target_id: T-B1-004gf/T-B7-015o
+    minimum_accepted_t_ledger_reduction: 591
+    target_1_20_t_ledger_gap_after_r81: 591
+    target_1_25_t_ledger_gap_after_r81: 823
+    target_1_20_max_after_t_ledger: 5632
+    current_after_t_ledger: 6224
+    production_required_field_count: 33
+    acceptance_gate_count: 10
+    template_preflight_accepted: false
+    template_failed_gate_count: 8
+    work_packet_count: 3
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: false
+    b7_credit_delta: 0
+    b7_space_time_volume_credit: 0
+    o3_closed: false
+    reroute_allowed: false
+    resource_saving_claimed: false
+    contract_hash: 3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43
+    template_preflight_hash: baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb
+    work_packet_hash: ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a
+    blocker_queue_hash: 6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0
+    requirements_passed: 8
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r83_gap_closure_contract_has_no_filled_submission_no_b7_credit
+    report: ../results/B1_B7_cone01_R83_b7_gap_closure_contract_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R83_b7_gap_closure_contract_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0

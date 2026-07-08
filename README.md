@@ -2108,3 +2108,18 @@ This closes the vague "run B7 retest" blocker and replaces it with a quantified
 gap: the next useful PR must remove at least 591 additional T-ledger units or
 provide an equivalent full B7 reprice before any nonzero B7 credit can be
 claimed.
+
+`T-B1-004gg` / `T-B7-015p` now turns that quantified gap into a fillable
+contract for future PRs. R83 consumes the R82 zero-credit B7 retest, freezes the
+1.20x STV acceptance threshold at a minimum `591` additional T-ledger units, and
+emits a 33-field production contract with 10 acceptance gates. The placeholder
+template is rejected, as intended, with 8 failed gates and accepted B7 credit
+still `0`. R83 also emits three PR-sized work packets: remove or reprice 30
+arbitrary rotations at cost 20 each, submit a 591-unit source-backed proxy-T
+row batch, or provide an equivalent full B7 reprice. Contract hash
+`3c306524d0fa44b789b6723608d8f919c1847dcce622ca90104b1d9af51f7c43`;
+template-preflight hash `baf9b75a5a642101b01525962bc2257f63949311e77e268ce1e6ac15a9ff6acb`;
+work-packet hash `ef857b3f327fc6d8fa0a4dbc9a7ee97af3378b219341f5a038412fd80d06785a`;
+blocker queue hash `6bb240d44071e90a9d10ebdc7065fa571b1861fe9e860d6ab9ce8fa769bf3ab0`.
+This is still not O3 closure, reroute permission, resource saving, or B7
+credit. It is the mergeable surface for the next agents to attack.
