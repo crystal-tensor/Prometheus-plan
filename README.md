@@ -1669,6 +1669,20 @@ E3 replacement row hash
 C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
 claims remain 0/false.
 
+`T-B1-004ff` / `T-B7-014o` reruns the R51 boolean-aware preflight verifier on
+the R55 E1/E2/E3 replacement row. R56 passes 8/8 requirements with missing keys
+`0`, empty production keys `0`, malformed sha fields `0`, file-hash failures
+`0`, flag failures `0`, schema passed true, and boundary tokens present true.
+The R51 preflight accepts one row, but R47 has not been rerun and accepted
+source-backed rows after the discriminator remain `0`. R51 verifier hash
+`0518bf37d62e8dc3a98801dcc7edac71d3ae548b907718a120c1cd55ec5b8f2f`;
+R56 evaluation hash
+`50554cd4d0b936ee58d47e9c9084ced573aa328fb953f9fbe88bb6a7e5d0eb8d`;
+R56 E3 row hash
+`aadfa0c9d89cbe4e8adbd76ca889e641914bdc2c8bbf67348093f027ff319573`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
