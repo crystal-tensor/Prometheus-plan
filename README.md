@@ -2410,3 +2410,19 @@ blocker queue hash `81456ba48b081cf12135caa94e9789e782dfacfe796f675ed76d218051c4
 The next real gate is an independent clean-clone rerun and an explicit external
 reproduction or falsification decision that can move exactly one external
 counter without touching B7/O3/resource/layout claims.
+
+`T-B1-004gy` / `T-B7-016h` now adds the R101 clean-clone rerun gate. R101
+checks out the current project into a clean local clone, reruns the R100
+maintainer no-counter verdict script, and compares stable verdict, validation,
+and blocker hashes. The clean-clone rerun reproduces those stable hashes and
+keeps the no-counter boundary intact. Requirements pass `5/5`; clean-clone
+comparison gates pass `8/8`; maintainer verdict accepted remains `true`;
+counter delta remains `0`; accepted external reproductions remain `0`;
+accepted external falsifications remain `0`; and `new_credit_delta` remains
+`0`. Manifest hash
+`dd4efc1db388f83e83e9e4353c46400e4817f29dd1c340a01ceb2df07a718540`;
+comparison hash
+`21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900`;
+blocker queue hash `459d9c4cfdafa7be6d41bbb7196b4d59e91b38d09d5d8e4a5140814c7732b9da`.
+R101 is still not a third-party external reproduction. The next real gate needs
+an independent reviewer identity and an explicit counter-transition decision.

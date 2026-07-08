@@ -7118,6 +7118,36 @@ current_results:
     caveat: r100_accepts_no_counter_maintainer_verdict_but_no_external_counter_or_new_credit
     report: ../results/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate.md
+  b1_b7_cone01_r101_clean_clone_rerun_gate_v0:
+    circuits: 1
+    status: cone01_r101_clean_clone_rerun_reproduces_r100_stable_hashes
+    model_status: r100_no_counter_verdict_replayed_in_clean_local_checkout
+    method: b1_b7_cone01_r101_clean_clone_rerun_gate_v0
+    source_target_id: T-B1-004gy/T-B7-016h
+    upstream_target_id: T-B1-004gx/T-B7-016g
+    source_b1_r100_maintainer_verdict_no_counter: ../results/B1_B7_cone01_R100_maintainer_verdict_no_counter_gate_v0.json
+    r101_manifest: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-clean-clone-rerun-manifest.json
+    r101_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-clean-clone-rerun-transcript.txt
+    r101_comparison: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-clean-clone-rerun-comparison.verdict.json
+    r101_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R101-G1-post-clean-rerun-blocker-queue.json
+    clean_clone_rerun_reproduced: true
+    passed_gate_count: 8
+    failed_gate_count: 0
+    maintainer_verdict_accepted: true
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    external_counter_moved: false
+    manifest_hash: dd4efc1db388f83e83e9e4353c46400e4817f29dd1c340a01ceb2df07a718540
+    comparison_hash: 21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900
+    blocker_queue_hash: 459d9c4cfdafa7be6d41bbb7196b4d59e91b38d09d5d8e4a5140814c7732b9da
+    requirements_passed: 5
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r101_clean_local_rerun_not_third_party_external_reproduction
+    report: ../results/B1_B7_cone01_R101_clean_clone_rerun_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R101_clean_clone_rerun_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

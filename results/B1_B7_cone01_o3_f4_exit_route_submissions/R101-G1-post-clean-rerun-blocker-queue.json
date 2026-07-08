@@ -1,0 +1,28 @@
+{
+  "artifact": "R101 post clean-clone rerun blocker queue",
+  "blocker_queue_hash": "459d9c4cfdafa7be6d41bbb7196b4d59e91b38d09d5d8e4a5140814c7732b9da",
+  "comparison_hash": "21eb86eb046bb392f47d183f7b9a7690e8e127d01b1ff545d206a8629f553900",
+  "method": "b1_b7_cone01_r101_clean_clone_rerun_gate_v0",
+  "queue": [
+    {
+      "blocker_id": "R101-G1-1",
+      "needed_artifact": "reviewer identity and environment outside the maintainer agent",
+      "priority": 1,
+      "target_gate": "independent_reviewer_identity"
+    },
+    {
+      "blocker_id": "R101-G1-2",
+      "needed_artifact": "one explicit reproduction or falsification counter decision",
+      "priority": 2,
+      "target_gate": "external_counter_decision"
+    },
+    {
+      "blocker_id": "R101-G1-3",
+      "needed_artifact": "audit proving exactly one counter moved and no B7/O3/resource/layout claim moved",
+      "priority": 3,
+      "target_gate": "counter_transition_audit"
+    }
+  ],
+  "source_target_id": "T-B1-004gy/T-B7-016h",
+  "upstream_target_id": "T-B1-004gx/T-B7-016g"
+}
