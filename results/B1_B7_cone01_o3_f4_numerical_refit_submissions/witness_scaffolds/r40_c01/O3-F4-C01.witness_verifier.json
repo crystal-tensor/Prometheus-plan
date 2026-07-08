@@ -1,0 +1,18 @@
+{
+  "acceptance_disabled_until": [
+    "source_backed_replay_true",
+    "same_unitary_certificate_true",
+    "non_smoke_witness_file",
+    "replay_command_executable"
+  ],
+  "artifact": "R40 dry-run witness verifier scaffold",
+  "challenge_id": "O3-F4-C01",
+  "dry_run_checks": [
+    "schema string present",
+    "verifier name present",
+    "source provenance hashes match files",
+    "zero-credit claim boundary remains present"
+  ],
+  "scope": "checks_schema_shape_only_not_unitary_equivalence",
+  "verifier": "r40_schema_dry_run_verifier_not_certificate"
+}

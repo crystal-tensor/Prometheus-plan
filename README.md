@@ -1421,6 +1421,19 @@ claims remain 0/false. The next useful PR should add real source-backed replay
 flags and a same-unitary witness schema/verifier for the enriched row, then
 repeat source-provenance packets for the remaining 7 rows.
 
+`T-B1-004ep` / `T-B7-013y` now adds the first witness-schema scaffold for
+`O3-F4-C01` without converting it into a same-unitary certificate. It creates a
+hash-verifiable witness schema file and dry-run verifier file, preserving the
+R39 source-provenance packet. Source-provenance rows pass `1`; witness-schema
+rows pass `1`; witness-schema failures drop from `8` to `7`; source-backed rows
+remain `0`; source-backed flag failures remain `8`. Single-row witness-scaffold
+fixture hash `b9c02595fface2f8c1f51b4f627ad893bfb9c88a5fac92c9966e6f31ecb38fea`;
+evaluation hash `1d6e5ce62e04b2c1bfd5532b5acff3684a075f3faec4303cee89be6a5a10518b`.
+C2 remains unaccepted; O3, reroute, B7 credit, STV credit, and resource-saving
+claims remain 0/false. The next useful PR must turn the dry-run scaffold into a
+real same-unitary verifier and replace the smoke flags with source-backed replay
+flags for `O3-F4-C01`.
+
 B4/B8 now has a formal verifier-private challenge protocol model:
 `T-B4-002b` / `T-B8-003f` turns the previous private-predicate pressure gate
 into a commit-challenge-response-verify protocol over 36 shared challenge rows.
