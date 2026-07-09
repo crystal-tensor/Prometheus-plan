@@ -1,0 +1,128 @@
+{
+  "artifact": "B1/B7 cone01 R107 material evidence packet contract gate",
+  "blocker_queue_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-post-material-evidence-contract-blocker-queue.json",
+  "contract_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/external-material-evidence-packet-contract.json",
+  "empty_template_preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/empty-template-preflight.verdict.json",
+  "generated_at_unix": 1783556210,
+  "method": "b1_b7_cone01_r107_material_evidence_packet_contract_gate_v0",
+  "model_status": "r106_materiality_blockers_converted_to_fillable_external_evidence_packet",
+  "payload_hash": "94e6f15e2b9295e8fd11410ea614ed312392055c1076b84b7677c5323b30e80f",
+  "requirement_count": 6,
+  "requirements": [
+    {
+      "evidence": {
+        "r106_blocker_queue_hash": "409e093e4343a901debbc1701065919e6bdeb4971b50419e68316b459dd2e265",
+        "r106_materiality_audit_hash": "f9b520d2fbc43860bcc74f6a23a76b85cacdc4fbbc171e17a048af31b41dc20a"
+      },
+      "label": "R107 binds R106 materiality audit and blocker queue",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "acceptance_gate_count": 22,
+        "contract_hash": "922ff2fd88cc03fba5a073d5273d9d89f4d2a60790843cc3a87759acf139acfb",
+        "required_field_count": 30,
+        "template_hash": "6112970d00936f01422ac75a3b7be44f1274b29661e7990fee2f2896cc8629ba"
+      },
+      "label": "R107 emits a fillable material evidence packet contract and template",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "empty_template_failed_gate_count": 18,
+        "empty_template_preflight_hash": "66e69a29eaa3a2e080e5b86a10ad29cfec8fc600e9cfe99b630eb4e3c9a63584"
+      },
+      "label": "R107 rejects the empty template before any counter audit",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "self_declared_failed_gates": [
+          "reviewer_key_fingerprint_format",
+          "signature_verification_transcript_says_valid",
+          "remote_artifact_fetch_transcript_says_fetched_from_github",
+          "not_self_attestation_only",
+          "material_evidence_packet_accepted"
+        ],
+        "self_declared_preflight_hash": "6683c248ee5c3cbaa34a111c10db0216eb3d53549ebb68478d4cd1899556fba4"
+      },
+      "label": "R107 rejects self-declared reuse of the R106 negative-control packet",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "accepted_external_falsification_count": 0,
+        "accepted_external_reproduction_count": 0,
+        "counter_delta": 0,
+        "new_credit_delta": 0
+      },
+      "label": "R107 keeps counters and new credit at zero",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "blocker_ids": [
+          "R107-G1-1",
+          "R107-G1-2",
+          "R107-G1-3",
+          "R107-G1-4",
+          "R107-G1-5"
+        ],
+        "blocker_queue_hash": "b9fbd3e09273a83ccea2ce23f323b6bd56a425946805a7cd871069de4fb56734"
+      },
+      "label": "R107 emits blockers for key registry, signature, CI, fetch transcript, and contact verification",
+      "passed": true,
+      "requirement_id": "A6"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 6,
+  "self_declared_packet_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/self-declared-materiality-negative-control.json",
+  "self_declared_preflight_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/self-declared-packet-preflight.verdict.json",
+  "source_target_id": "T-B1-004he/T-B7-016n",
+  "status": "cone01_r107_material_evidence_packet_contract_ready_no_external_counter",
+  "stdout_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-material-evidence-contract.stdout.txt",
+  "stdout_sha256": "6ab4daac0e22c1453f96d3f463af7f9f56b121418360b261f383d59d3e170d06",
+  "summary": {
+    "acceptance_gate_count": 22,
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "blocker_queue_hash": "b9fbd3e09273a83ccea2ce23f323b6bd56a425946805a7cd871069de4fb56734",
+    "contract_hash": "922ff2fd88cc03fba5a073d5273d9d89f4d2a60790843cc3a87759acf139acfb",
+    "contract_required_field_count": 30,
+    "counter_delta": 0,
+    "counter_transition_accepted": false,
+    "empty_template_accepted": false,
+    "empty_template_failed_gate_count": 18,
+    "empty_template_passed_gate_count": 5,
+    "empty_template_preflight_hash": "66e69a29eaa3a2e080e5b86a10ad29cfec8fc600e9cfe99b630eb4e3c9a63584",
+    "failed_requirement_ids": [],
+    "method": "b1_b7_cone01_r107_material_evidence_packet_contract_gate_v0",
+    "model_status": "r106_materiality_blockers_converted_to_fillable_external_evidence_packet",
+    "new_credit_delta": 0,
+    "payload_hash": "94e6f15e2b9295e8fd11410ea614ed312392055c1076b84b7677c5323b30e80f",
+    "requirements_failed": 0,
+    "requirements_passed": 6,
+    "self_declared_failed_gate_count": 5,
+    "self_declared_packet_accepted": false,
+    "self_declared_packet_hash": "fe614b8ad10010630bc4dce70ab2eb0fc0aa9ad97cdf156e9b751b4db04f1261",
+    "self_declared_passed_gate_count": 18,
+    "self_declared_preflight_hash": "6683c248ee5c3cbaa34a111c10db0216eb3d53549ebb68478d4cd1899556fba4",
+    "source_target_id": "T-B1-004he/T-B7-016n",
+    "status": "cone01_r107_material_evidence_packet_contract_ready_no_external_counter",
+    "stdout_sha256": "6ab4daac0e22c1453f96d3f463af7f9f56b121418360b261f383d59d3e170d06",
+    "template_hash": "6112970d00936f01422ac75a3b7be44f1274b29661e7990fee2f2896cc8629ba",
+    "upstream_target_id": "T-B1-004hd/T-B7-016m",
+    "validation_error_count": 0
+  },
+  "template_path": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/external-material-evidence-packet.template.json",
+  "upstream_target_id": "T-B1-004hd/T-B7-016m",
+  "validation_error_count": 0,
+  "validation_errors": [],
+  "version": "0.1"
+}

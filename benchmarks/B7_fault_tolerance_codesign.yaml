@@ -4303,6 +4303,46 @@ current_results:
     caveat: r106_remote_looking_packet_rejected_no_new_b7_claim
     report: ../results/B1_B7_cone01_R106_remote_origin_materiality_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R106_remote_origin_materiality_gate.md
+  b1_b7_cone01_r107_material_evidence_packet_contract_gate_v0:
+    method: b1_b7_cone01_r107_material_evidence_packet_contract_gate_v0
+    source_b1_r107_material_evidence_packet_contract: ../results/B1_B7_cone01_R107_material_evidence_packet_contract_gate_v0.json
+    source_b1_r106_remote_origin_materiality: ../results/B1_B7_cone01_R106_remote_origin_materiality_gate_v0.json
+    r107_contract: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/external-material-evidence-packet-contract.json
+    r107_template: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/external-material-evidence-packet.template.json
+    r107_empty_template_preflight: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/empty-template-preflight.verdict.json
+    r107_self_declared_preflight: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-external-material-evidence-packet-contract/self-declared-packet-preflight.verdict.json
+    r107_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R107-G1-post-material-evidence-contract-blocker-queue.json
+    source_target_id: T-B1-004he/T-B7-016n
+    upstream_target_id: T-B1-004hd/T-B7-016m
+    contract_required_field_count: 30
+    acceptance_gate_count: 22
+    empty_template_accepted: false
+    empty_template_passed_gate_count: 5
+    empty_template_failed_gate_count: 18
+    self_declared_packet_accepted: false
+    self_declared_passed_gate_count: 18
+    self_declared_failed_gate_count: 5
+    counter_transition_accepted: false
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    b7_dependency_credit_allowed: false
+    b7_resource_credit_allowed: false
+    b7_ft_ledger_credit_allowed: true
+    b7_credit_delta: 1
+    b7_space_time_volume_credit: 1
+    new_credit_delta: 0
+    contract_hash: 922ff2fd88cc03fba5a073d5273d9d89f4d2a60790843cc3a87759acf139acfb
+    template_hash: 6112970d00936f01422ac75a3b7be44f1274b29661e7990fee2f2896cc8629ba
+    empty_template_preflight_hash: 66e69a29eaa3a2e080e5b86a10ad29cfec8fc600e9cfe99b630eb4e3c9a63584
+    self_declared_preflight_hash: 6683c248ee5c3cbaa34a111c10db0216eb3d53549ebb68478d4cd1899556fba4
+    blocker_queue_hash: b9fbd3e09273a83ccea2ce23f323b6bd56a425946805a7cd871069de4fb56734
+    requirements_passed: 6
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r107_material_evidence_contract_no_new_b7_claim
+    report: ../results/B1_B7_cone01_R107_material_evidence_packet_contract_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R107_material_evidence_packet_contract_gate.md
   b2_calibrated_dependency_credit_gate_v0:
     status: b2_calibrated_dependency_credit_rejected_missing_hardware_evidence
     method: b7_b2_calibrated_dependency_credit_gate_v0

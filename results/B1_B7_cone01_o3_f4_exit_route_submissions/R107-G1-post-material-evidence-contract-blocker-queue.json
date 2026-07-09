@@ -1,0 +1,58 @@
+{
+  "accepted_external_falsification_count": 0,
+  "accepted_external_reproduction_count": 0,
+  "artifact": "R107 post-material-evidence-contract blocker queue",
+  "blocker_queue_hash": "b9fbd3e09273a83ccea2ce23f323b6bd56a425946805a7cd871069de4fb56734",
+  "blockers": [
+    {
+      "blocker_id": "R107-G1-1",
+      "label": "Submit a public reviewer-key registry artifact and fingerprint.",
+      "required_artifacts": [
+        "reviewer_key_registry_path",
+        "reviewer_key_fingerprint"
+      ]
+    },
+    {
+      "blocker_id": "R107-G1-2",
+      "label": "Submit detached signature plus verification transcript with signature_valid=true.",
+      "required_artifacts": [
+        "signed_payload_path",
+        "detached_signature_path",
+        "signature_verification_transcript_path"
+      ]
+    },
+    {
+      "blocker_id": "R107-G1-3",
+      "label": "Submit public third-party CI run and log artifact bound to a 40-char commit.",
+      "required_artifacts": [
+        "third_party_ci_run_url",
+        "third_party_ci_commit_sha",
+        "third_party_ci_log_path"
+      ]
+    },
+    {
+      "blocker_id": "R107-G1-4",
+      "label": "Submit remote artifact-fetch transcript and fetched artifact manifest.",
+      "required_artifacts": [
+        "remote_artifact_fetch_transcript_path",
+        "fetched_artifact_manifest_path"
+      ]
+    },
+    {
+      "blocker_id": "R107-G1-5",
+      "label": "Submit reviewer contact verification and only then run a separate single-counter audit.",
+      "required_artifacts": [
+        "reviewer_contact_verification_path"
+      ]
+    }
+  ],
+  "contract_hash": "922ff2fd88cc03fba5a073d5273d9d89f4d2a60790843cc3a87759acf139acfb",
+  "counter_delta": 0,
+  "counter_transition_accepted": false,
+  "empty_template_preflight_hash": "66e69a29eaa3a2e080e5b86a10ad29cfec8fc600e9cfe99b630eb4e3c9a63584",
+  "method": "b1_b7_cone01_r107_material_evidence_packet_contract_gate_v0",
+  "new_credit_delta": 0,
+  "self_declared_preflight_hash": "6683c248ee5c3cbaa34a111c10db0216eb3d53549ebb68478d4cd1899556fba4",
+  "source_target_id": "T-B1-004he/T-B7-016n",
+  "upstream_target_id": "T-B1-004hd/T-B7-016m"
+}

@@ -2516,3 +2516,25 @@ blocker queue hash `409e093e4343a901debbc1701065919e6bdeb4971b50419e68316b459dd2
 The next real gate must attach reviewer-key registration, detached signature
 verification, public third-party CI evidence, and remote artifact-fetch
 transcripts before a counter audit can move.
+
+`T-B1-004he` / `T-B7-016n` now adds the R107 material evidence packet contract
+gate. R107 converts the R106 materiality blockers into a fillable external
+evidence packet contract with `30` required fields and `22` acceptance gates.
+It rejects the empty template with `5` gates passing and `18` gates failing,
+and rejects a self-declared packet that reuses the R106 negative-control
+artifact with `18` gates passing and `5` gates failing. Requirements pass
+`6/6`; counter transition accepted is `false`; counter delta remains `0`;
+accepted external reproductions remain `0`; accepted external falsifications
+remain `0`; and `new_credit_delta` remains `0`. Contract hash
+`922ff2fd88cc03fba5a073d5273d9d89f4d2a60790843cc3a87759acf139acfb`;
+template hash `6112970d00936f01422ac75a3b7be44f1274b29661e7990fee2f2896cc8629ba`;
+empty-template preflight hash
+`66e69a29eaa3a2e080e5b86a10ad29cfec8fc600e9cfe99b630eb4e3c9a63584`;
+self-declared preflight hash
+`6683c248ee5c3cbaa34a111c10db0216eb3d53549ebb68478d4cd1899556fba4`;
+blocker queue hash `b9fbd3e09273a83ccea2ce23f323b6bd56a425946805a7cd871069de4fb56734`.
+The next real gate must submit a filled material evidence packet with public
+reviewer-key registry, detached signature verification transcript, public
+third-party CI log, remote artifact-fetch transcript, fetched artifact
+manifest, environment manifest, and reviewer-contact verification before a
+separate single-counter audit can move.
