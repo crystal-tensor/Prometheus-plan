@@ -2538,3 +2538,26 @@ reviewer-key registry, detached signature verification transcript, public
 third-party CI log, remote artifact-fetch transcript, fetched artifact
 manifest, environment manifest, and reviewer-contact verification before a
 separate single-counter audit can move.
+
+`T-B1-004hf` / `T-B7-016o` now adds the R108 material evidence preflight
+verifier gate. R108 turns the R107 contract into hardened verifier rules with
+`24` gates, materializes a field-complete near-pass packet with `10` evidence
+files and matching hashes, then rejects it because the evidence is explicitly
+local synthetic rather than public third-party material. Requirements pass
+`6/6`; near-pass packet accepted is `false`; near-pass gates pass `23` and
+fail `2`; failed gates are `local_synthetic_marker_absent` and
+`material_evidence_packet_accepted`; counter transition accepted is `false`;
+counter delta remains `0`; accepted external reproductions remain `0`;
+accepted external falsifications remain `0`; and `new_credit_delta` remains
+`0`. Verifier-rules hash
+`4edf2f0114ed4854db58e1a20ce5276f1be7090503600a3f4c3a89a9d8aa692e`;
+near-pass packet hash
+`14466067f86a077da82a0d31b9ddb41739ee523b797f42fc1550b62dc4f04f9a`;
+preflight-verdict hash
+`e310d3948c9ead61a44383ec5e80da78cbe493c09964169cf2ad3703dee989a1`;
+evidence-manifest hash
+`017ee34db31ca2c5dd8f1505a42f40cbdcb99b46f1d100abb3d04b3f8d8f43a2`;
+blocker queue hash `7ff0fa3784990b1d005f05d4e5a1349cd127913b7b24bebfbbb2888fb9754033`.
+The next real gate must replace the local-synthetic support files with public
+third-party artifacts and rerun the R108 verifier before any separate
+single-counter audit.

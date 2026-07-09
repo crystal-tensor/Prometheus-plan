@@ -7346,6 +7346,41 @@ current_results:
     caveat: r107_contract_only_no_external_counter_or_b7_resource_claim
     report: ../results/B1_B7_cone01_R107_material_evidence_packet_contract_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R107_material_evidence_packet_contract_gate.md
+  b1_b7_cone01_r108_material_evidence_preflight_verifier_gate_v0:
+    circuits: 1
+    status: cone01_r108_near_pass_material_packet_rejected_local_synthetic
+    model_status: r107_contract_has_hardened_preflight_verifier_and_near_pass_negative_control
+    method: b1_b7_cone01_r108_material_evidence_preflight_verifier_gate_v0
+    source_target_id: T-B1-004hf/T-B7-016o
+    upstream_target_id: T-B1-004he/T-B7-016n
+    source_b1_r107_material_evidence_packet_contract: ../results/B1_B7_cone01_R107_material_evidence_packet_contract_gate_v0.json
+    r108_verifier_rules: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R108-G1-material-evidence-preflight-verifier/material-evidence-preflight-verifier-rules.json
+    r108_near_pass_packet: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R108-G1-material-evidence-preflight-verifier/near-pass-local-synthetic-packet/near-pass-local-synthetic-material-evidence-packet.json
+    r108_near_pass_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R108-G1-material-evidence-preflight-verifier/near-pass-local-synthetic-packet/near-pass-local-synthetic-preflight.verdict.json
+    r108_evidence_manifest: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R108-G1-material-evidence-preflight-verifier/near-pass-local-synthetic-packet/near-pass-local-synthetic-evidence-manifest.json
+    r108_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R108-G1-post-preflight-verifier-blocker-queue.json
+    verifier_gate_count: 24
+    evidence_file_count: 10
+    near_pass_packet_accepted: false
+    near_pass_passed_gate_count: 23
+    near_pass_failed_gate_count: 2
+    near_pass_failed_gates: [local_synthetic_marker_absent, material_evidence_packet_accepted]
+    counter_transition_accepted: false
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    verifier_rules_hash: 4edf2f0114ed4854db58e1a20ce5276f1be7090503600a3f4c3a89a9d8aa692e
+    near_pass_packet_hash: 14466067f86a077da82a0d31b9ddb41739ee523b797f42fc1550b62dc4f04f9a
+    preflight_verdict_hash: e310d3948c9ead61a44383ec5e80da78cbe493c09964169cf2ad3703dee989a1
+    evidence_manifest_hash: 017ee34db31ca2c5dd8f1505a42f40cbdcb99b46f1d100abb3d04b3f8d8f43a2
+    blocker_queue_hash: 7ff0fa3784990b1d005f05d4e5a1349cd127913b7b24bebfbbb2888fb9754033
+    requirements_passed: 6
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r108_preflight_verifier_rejects_local_synthetic_material_no_counter
+    report: ../results/B1_B7_cone01_R108_material_evidence_preflight_verifier_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R108_material_evidence_preflight_verifier_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate
