@@ -7438,7 +7438,7 @@ current_results:
     r110_probe_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/live-public-dereference-probe.verdict.json
     r110_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/post-live-public-dereference-probe-blocker-queue.json
     public_fetch_attempt_count: 3
-    completed_fetch_count: 1
+    completed_fetch_count: 2
     http_2xx_fetch_count: 0
     nonce_bound_transcript_count: 0
     requested_url_bound_count: 3
@@ -7453,9 +7453,43 @@ current_results:
     requirements_passed: 6
     requirements_failed: 0
     validation_error_count: 0
-    caveat: r110_live_probe_records_public_404_transcripts_no_nonce_no_counter
+    caveat: r110_live_probe_records_mixed_404_and_transport_failure_no_nonce_no_counter
     report: ../results/B1_B7_cone01_R110_live_public_dereference_probe_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R110_live_public_dereference_probe_gate.md
+  b1_b7_cone01_r111_independent_origin_materiality_gate_v0:
+    circuits: 1
+    status: cone01_r111_public_fetch_passed_independent_origin_rejected
+    model_status: public_fetchability_is_not_independent_materiality
+    method: b1_b7_cone01_r111_independent_origin_materiality_gate_v0
+    source_target_id: T-B1-004hi/T-B7-016r
+    upstream_target_id: T-B1-004hh/T-B7-016q
+    source_b1_r111_independent_origin_materiality: ../results/B1_B7_cone01_R111_independent_origin_materiality_gate_v0.json
+    source_b1_r110_live_public_dereference_probe: ../results/B1_B7_cone01_R110_live_public_dereference_probe_gate_v0.json
+    r111_reviewer_key_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/reviewer_key.live-http-transcript.json
+    r111_ci_run_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/ci_run.live-http-transcript.json
+    r111_artifact_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/artifact.live-http-transcript.json
+    r111_probe_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/independent-origin-materiality.verdict.json
+    r111_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/post-independent-origin-materiality-blocker-queue.json
+    public_fetch_attempt_count: 3
+    live_public_fetch_count: 3
+    http_2xx_fetch_count: 3
+    nonce_bound_transcript_count: 3
+    requested_url_bound_count: 3
+    same_repository_origin_count: 3
+    materiality_accepted: false
+    counter_transition_accepted: false
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    verdict_hash: d770967e949d18682a3f5aba20a09dba5ed43c6b204847cf1388d2a463cb2461
+    blocker_queue_hash: 9b6b707ea3d984b62bcf8a41d7fc5c9aee22d91fd72d5da42c2d28a0e514e81b
+    requirements_passed: 8
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r111_public_fetchability_passes_but_same_repository_origin_blocks_independent_materiality
+    report: ../results/B1_B7_cone01_R111_independent_origin_materiality_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R111_independent_origin_materiality_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

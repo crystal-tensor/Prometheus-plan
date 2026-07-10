@@ -1,0 +1,155 @@
+{
+  "artifacts": {
+    "artifact_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/artifact.live-http-transcript.json",
+    "blocker_queue": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/post-independent-origin-materiality-blocker-queue.json",
+    "ci_run_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/ci_run.live-http-transcript.json",
+    "reviewer_key_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/reviewer_key.live-http-transcript.json",
+    "stdout": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/R111-independent-origin-materiality.stdout.txt",
+    "verdict": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R111-G1-independent-origin-materiality/independent-origin-materiality.verdict.json"
+  },
+  "claim_boundary": {
+    "next_gate": "Supply independent reviewer key, third-party CI transcript, and externally attested artifact transcript, then rerun R109/R110 and the single-counter audit.",
+    "what_is_not_supported": "No independent material evidence, external reproduction, or B7 credit is accepted.",
+    "what_is_supported": "Public raw files were fetched live with HTTP 2xx, nonce binding, and requested-url binding, but they are same-repository self-attested material."
+  },
+  "generated_at_unix": 1783684991,
+  "method": "b1_b7_cone01_r111_independent_origin_materiality_gate_v0",
+  "model_status": "public_fetchability_is_not_independent_materiality",
+  "payload_hash": "b7d1338eee9576ddaf052770868a540e08cf486c96c584a1f84eba867fe49f91",
+  "requirement_count": 8,
+  "requirements": [
+    {
+      "evidence": {
+        "contract_hash": "85fada945943cce2e57ac18e82670cc44d8cc5c8ac038fe998e9cf82deb6700e",
+        "immutable_commit_sha": "d8b6b309d2a08aeed185c6b824d57c088f2688a6",
+        "source_contract_hash": "85fada945943cce2e57ac18e82670cc44d8cc5c8ac038fe998e9cf82deb6700e"
+      },
+      "label": "R111 binds the R109 contract and immutable source commit",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "roles": [
+          "artifact",
+          "ci_run",
+          "reviewer_key"
+        ]
+      },
+      "label": "R111 attempts unauthenticated public fetches for all three roles",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "http_2xx": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ],
+        "live": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ],
+        "nonce_bound": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ],
+        "requested_url_bound": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ]
+      },
+      "label": "R111 records live HTTP 2xx nonce-bound requested-url-bound transcripts",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "external_origin": [],
+        "same_repository": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ]
+      },
+      "label": "R111 identifies same-repository public origins",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "blockers": [
+          "all public URLs resolve to the project repository rather than an independent origin",
+          "public bodies retain synthetic or negative-control markers",
+          "reviewer independence is not externally attested",
+          "external-origin attestation is absent"
+        ],
+        "synthetic_markers": [
+          "cached-transcript-negative-control",
+          "local-cache-no-live-fetch"
+        ]
+      },
+      "label": "R111 rejects self-attested or synthetic public materiality",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "counter_delta": 0,
+        "new_credit_delta": 0
+      },
+      "label": "R111 keeps counters and new credit at zero",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "blocker_queue_hash": "9b6b707ea3d984b62bcf8a41d7fc5c9aee22d91fd72d5da42c2d28a0e514e81b"
+      },
+      "label": "R111 emits a four-item independent-origin blocker queue",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "model_status": "public_fetchability_is_not_independent_materiality"
+      },
+      "label": "R111 states the public-fetchability claim boundary",
+      "passed": true,
+      "requirement_id": "P8"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 8,
+  "source_target_id": "T-B1-004hi/T-B7-016r",
+  "status": "cone01_r111_public_fetch_passed_independent_origin_rejected",
+  "summary": {
+    "blocker_queue_hash": "9b6b707ea3d984b62bcf8a41d7fc5c9aee22d91fd72d5da42c2d28a0e514e81b",
+    "counter_delta": 0,
+    "counter_transition_accepted": false,
+    "failed_requirement_ids": [],
+    "fetch_attempt_count": 3,
+    "http_2xx_fetch_count": 3,
+    "live_public_fetch_count": 3,
+    "materiality_accepted": false,
+    "method": "b1_b7_cone01_r111_independent_origin_materiality_gate_v0",
+    "model_status": "public_fetchability_is_not_independent_materiality",
+    "new_credit_delta": 0,
+    "nonce_bound_transcript_count": 3,
+    "requested_url_bound_count": 3,
+    "requirements_failed": 0,
+    "requirements_passed": 8,
+    "same_repository_origin_count": 3,
+    "source_target_id": "T-B1-004hi/T-B7-016r",
+    "status": "cone01_r111_public_fetch_passed_independent_origin_rejected",
+    "upstream_target_id": "T-B1-004hh/T-B7-016q",
+    "verdict_hash": "d770967e949d18682a3f5aba20a09dba5ed43c6b204847cf1388d2a463cb2461"
+  },
+  "title": "B1/B7 cone01 R111 independent-origin materiality gate",
+  "upstream_target_id": "T-B1-004hh/T-B7-016q",
+  "version": "0.1"
+}

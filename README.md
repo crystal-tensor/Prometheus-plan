@@ -2602,3 +2602,16 @@ blocker queue hash `f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af2
 The next real gate must replace those public-looking placeholder URLs with
 real public HTTP `2xx` reviewer-key, CI-run, and artifact transcripts that bind
 the R109 challenge nonce before R109/R108 or any single-counter audit can pass.
+
+`T-B1-004hi` / `T-B7-016r` now adds the R111 independent-origin materiality
+gate. R111 fetches three immutable raw URLs that all return HTTP `2xx`, bind the
+R109 challenge nonce, and bind their requested URLs. It still rejects the packet
+because all three origins are the same project repository and the bodies remain
+self-attested or synthetic. Requirements pass `8/8`; materiality accepted is
+`false`; counter transition accepted is `false`; counter delta remains `0`;
+accepted external reproductions remain `0`; accepted external falsifications
+remain `0`; and `new_credit_delta` remains `0`. Verdict hash
+`d770967e949d18682a3f5aba20a09dba5ed43c6b204847cf1388d2a463cb2461`;
+blocker queue hash `9b6b707ea3d984b62bcf8a41d7fc5c9aee22d91fd72d5da42c2d28a0e514e81b`.
+The next gate requires an independent reviewer key, third-party CI transcript,
+and externally attested artifact transcript outside the project repository.

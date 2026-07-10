@@ -1,0 +1,37 @@
+{
+  "artifact": "R111 post-independent-origin-materiality blocker queue",
+  "blocker_queue_hash": "9b6b707ea3d984b62bcf8a41d7fc5c9aee22d91fd72d5da42c2d28a0e514e81b",
+  "blockers": [
+    {
+      "blocker_id": "R111-B1",
+      "needed_artifact": "independent reviewer identity and public key outside the project repository",
+      "priority": 1
+    },
+    {
+      "blocker_id": "R111-B2",
+      "needed_artifact": "third-party CI run or attested execution service outside the project repository",
+      "priority": 2
+    },
+    {
+      "blocker_id": "R111-B3",
+      "needed_artifact": "artifact host and transcript with external-origin attestation",
+      "priority": 3
+    },
+    {
+      "blocker_id": "R111-B4",
+      "needed_artifact": "rerun R109/R110 and the single-counter audit after all three independent sources are live",
+      "priority": 4
+    }
+  ],
+  "counter_delta": 0,
+  "counter_transition_accepted": false,
+  "new_credit_delta": 0,
+  "observed_blockers": [
+    "all public URLs resolve to the project repository rather than an independent origin",
+    "public bodies retain synthetic or negative-control markers",
+    "reviewer independence is not externally attested",
+    "external-origin attestation is absent"
+  ],
+  "source_target_id": "T-B1-004hi/T-B7-016r",
+  "upstream_target_id": "T-B1-004hh/T-B7-016q"
+}
