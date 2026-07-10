@@ -609,6 +609,29 @@ current_results:
     caveat: h1_access_closure_only_no_b10_t2_credit_or_bqp_boundary_claim
     result: ../results/B4_B8_B10_H1_provider_session_access_closure_gate_v0.json
     markdown_report: ../research/B4_B8_B10_H1_provider_session_access_closure_gate.md
+  b10_t2_b4_b8_r118_randomized_measurement_data_boundary_v0:
+    status: randomized_measurement_data_spoofer_boundary_not_bqp_or_soundness_claim
+    model_status: b8_shadow_like_measurement_boundary_feeds_b10_t2_zero_credit_route
+    method: b4_b8_r118_randomized_measurement_data_boundary_v0
+    source_b8_result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
+    source_target_id: T-B4-002s/T-B8-003w/T-B10-009k
+    upstream_target_id: T-B4-002r/T-B8-003v/T-B10-009j
+    dependency_benchmark: B4/B8
+    task_count: 3
+    trials: 60
+    shots_per_trial: 1024
+    minimum_honest_completeness: 0.8
+    maximum_adversary_soundness: 1.0
+    protocol_soundness_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    hardware_execution_performed: false
+    validation_error_count: 0
+    caveat: randomized_measurement_data_boundary_is_diagnostic_and_keeps_b10_zero_credit
+    result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
+    markdown_report: ../research/B4_B8_R118_randomized_measurement_data_boundary.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

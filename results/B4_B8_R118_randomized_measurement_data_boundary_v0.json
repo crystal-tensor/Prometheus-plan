@@ -1,0 +1,424 @@
+{
+  "adversary_rows": [
+    {
+      "adversary": "uniform_random",
+      "max_abs_error": 1.0400390625,
+      "mean_abs_error": 0.7448784473527129,
+      "pass_rate": 0.0,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_product_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "marginal_matching",
+      "max_abs_error": 0.2222222932779626,
+      "mean_abs_error": 0.05946542363796606,
+      "pass_rate": 1.0,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_product_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "public_basis_all_plus",
+      "max_abs_error": 0.4628906250000001,
+      "mean_abs_error": 0.2671477366213549,
+      "pass_rate": 0.8333333333333334,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_product_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "leaked_half",
+      "max_abs_error": 0.9082031249999999,
+      "mean_abs_error": 0.5599410398231357,
+      "pass_rate": 0.26666666666666666,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_product_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "uniform_random",
+      "max_abs_error": 2.423828125,
+      "mean_abs_error": 0.9820963541666665,
+      "pass_rate": 0.16666666666666666,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_ghz_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "marginal_matching",
+      "max_abs_error": 3.1357421875,
+      "mean_abs_error": 0.98173828125,
+      "pass_rate": 0.16666666666666666,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_ghz_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "public_basis_all_plus",
+      "max_abs_error": 2.5595703125,
+      "mean_abs_error": 1.3607584635416667,
+      "pass_rate": 0.15,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_ghz_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "leaked_half",
+      "max_abs_error": 2.423828125,
+      "mean_abs_error": 0.5890462239583333,
+      "pass_rate": 0.6666666666666666,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_ghz_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "uniform_random",
+      "max_abs_error": 1.1669921874999991,
+      "mean_abs_error": 0.7525179291434001,
+      "pass_rate": 0.08333333333333333,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_graph_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "marginal_matching",
+      "max_abs_error": 1.1933593749999991,
+      "mean_abs_error": 0.6985177994527276,
+      "pass_rate": 0.08333333333333333,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_graph_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "public_basis_all_plus",
+      "max_abs_error": 0.8974609375000002,
+      "mean_abs_error": 0.2559331130409269,
+      "pass_rate": 0.6666666666666666,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_graph_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    },
+    {
+      "adversary": "leaked_half",
+      "max_abs_error": 1.1933593749999991,
+      "mean_abs_error": 0.5279822921843269,
+      "pass_rate": 0.4166666666666667,
+      "shots_per_trial": 1024,
+      "task_id": "randomized_shadow_graph_n6",
+      "tolerance": 0.35,
+      "trials": 60
+    }
+  ],
+  "artifacts": {
+    "circuits": [
+      "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_ghz_n6.qasm",
+      "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_graph_n6.qasm",
+      "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_product_n6.qasm"
+    ]
+  },
+  "claim_boundary": {
+    "next_gate": "Add private late-bound target selection or a stronger shadow observable contract, then rerun adversarial holdout under the same data and claim boundaries.",
+    "what_is_not_supported": "Hardware execution, calibrated backend evidence, protocol or cryptographic soundness, sampling hardness, quantum advantage, BQP separation, or full-distribution verification.",
+    "what_is_supported": "Randomized Pauli measurement data with a classical-shadow-like estimator separates honest completeness from measured spoofer failure modes in three six-qubit simulations."
+  },
+  "generated_at_unix": 1783692515,
+  "method": "b4_b8_r118_randomized_measurement_data_boundary_v0",
+  "model_status": "classical_shadow_like_data_exposes_public_and_marginal_spoofer_boundary",
+  "payload_hash": "ba4024e6466822c0b8046276925599f43e8a30ccdc4b9db1625e2e3d8b38c8ef",
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "evidence": {
+        "files": [
+          "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_ghz_n6.qasm",
+          "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_graph_n6.qasm",
+          "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_product_n6.qasm"
+        ]
+      },
+      "label": "three randomized-measurement state-preparation circuits are materialized",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "basis_set": [
+          "X",
+          "Y",
+          "Z"
+        ],
+        "shots_per_trial": 1024,
+        "trials": 60
+      },
+      "label": "random Pauli basis schedules are sampled for every trial",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "selection_mode": "per_trial_hidden_target_index",
+        "target_observable_count": 8
+      },
+      "label": "hidden target observables are selected after basis schedules",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "minimum_honest_completeness": 0.8,
+        "target": 0.8
+      },
+      "label": "honest completeness remains above the 0.80 diagnostic floor",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "rows": 3
+      },
+      "label": "uniform random spoofer is measured rather than assumed",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "maximum_adversary_soundness": 1.0,
+        "soundness_target": 0.05
+      },
+      "label": "marginal and public-basis spoofer boundaries are surfaced",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "maximum_adversary_soundness": 1.0,
+        "protocol_soundness_claimed": false
+      },
+      "label": "the B8 soundness threshold is not overclaimed",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "adversary_rows": 12,
+        "expected_rows": 12
+      },
+      "label": "all spoofer rows and target expectations are materialized",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "hardware_execution_performed": false,
+        "quantum_advantage_claimed": false
+      },
+      "label": "hardware and advantage claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "evidence": {
+        "next_gate": "add private late-bound target selection or a stronger shadow observable contract, then rerun adversarial holdout"
+      },
+      "label": "the next design gate is explicit",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_target_id": "T-B4-002s/T-B8-003w/T-B10-009k",
+  "status": "randomized_measurement_data_spoofer_boundary_not_soundness",
+  "summary": {
+    "adversary_rows_below_soundness_target": 1,
+    "bqp_separation_claimed": false,
+    "circuit_file_count": 3,
+    "hardware_execution_performed": false,
+    "maximum_adversary_soundness": 1.0,
+    "minimum_honest_completeness": 0.8,
+    "protocol_soundness_claimed": false,
+    "quantum_advantage_claimed": false,
+    "sampling_hardness_proved": false,
+    "shots_per_trial": 1024,
+    "soundness_target": 0.05,
+    "target_observable_count": 8,
+    "task_count": 3,
+    "tolerance": 0.35,
+    "trials": 60
+  },
+  "tasks": [
+    {
+      "adversaries": {
+        "honest": {
+          "max_abs_error": 0.3984374999999999,
+          "mean_abs_error": 0.08637695312499998,
+          "pass_rate": 0.9833333333333333,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "leaked_half": {
+          "max_abs_error": 0.9082031249999999,
+          "mean_abs_error": 0.5599410398231357,
+          "pass_rate": 0.26666666666666666,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "marginal_matching": {
+          "max_abs_error": 0.2222222932779626,
+          "mean_abs_error": 0.05946542363796606,
+          "pass_rate": 1.0,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "public_basis_all_plus": {
+          "max_abs_error": 0.4628906250000001,
+          "mean_abs_error": 0.2671477366213549,
+          "pass_rate": 0.8333333333333334,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "uniform_random": {
+          "max_abs_error": 1.0400390625,
+          "mean_abs_error": 0.7448784473527129,
+          "pass_rate": 0.0,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        }
+      },
+      "circuit": "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_product_n6.qasm",
+      "circuit_sha256": "397b9ae994abadaf44e12ba61a328b8550bccf83b5bca246a2514cfeca8326ee",
+      "qubits": 6,
+      "target_expectations": [
+        0.7006292692220374,
+        0.7499999999999999,
+        0.7499999999999999
+      ],
+      "task_id": "randomized_shadow_product_n6"
+    },
+    {
+      "adversaries": {
+        "honest": {
+          "max_abs_error": 1.8476562500000002,
+          "mean_abs_error": 0.2960774739583333,
+          "pass_rate": 0.8,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "leaked_half": {
+          "max_abs_error": 2.423828125,
+          "mean_abs_error": 0.5890462239583333,
+          "pass_rate": 0.6666666666666666,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "marginal_matching": {
+          "max_abs_error": 3.1357421875,
+          "mean_abs_error": 0.98173828125,
+          "pass_rate": 0.16666666666666666,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "public_basis_all_plus": {
+          "max_abs_error": 2.5595703125,
+          "mean_abs_error": 1.3607584635416667,
+          "pass_rate": 0.15,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "uniform_random": {
+          "max_abs_error": 2.423828125,
+          "mean_abs_error": 0.9820963541666665,
+          "pass_rate": 0.16666666666666666,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        }
+      },
+      "circuit": "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "qubits": 6,
+      "target_expectations": [
+        -0.9999999999999998,
+        0.9999999999999998
+      ],
+      "task_id": "randomized_shadow_ghz_n6"
+    },
+    {
+      "adversaries": {
+        "honest": {
+          "max_abs_error": 0.4228515625000002,
+          "mean_abs_error": 0.09185946146044849,
+          "pass_rate": 0.9833333333333333,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "leaked_half": {
+          "max_abs_error": 1.1933593749999991,
+          "mean_abs_error": 0.5279822921843269,
+          "pass_rate": 0.4166666666666667,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "marginal_matching": {
+          "max_abs_error": 1.1933593749999991,
+          "mean_abs_error": 0.6985177994527276,
+          "pass_rate": 0.08333333333333333,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "public_basis_all_plus": {
+          "max_abs_error": 0.8974609375000002,
+          "mean_abs_error": 0.2559331130409269,
+          "pass_rate": 0.6666666666666666,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        },
+        "uniform_random": {
+          "max_abs_error": 1.1669921874999991,
+          "mean_abs_error": 0.7525179291434001,
+          "pass_rate": 0.08333333333333333,
+          "shots_per_trial": 1024,
+          "tolerance": 0.35,
+          "trials": 60
+        }
+      },
+      "circuit": "results/B4_B8_R118_randomized_measurement_data_boundary/circuits/randomized_shadow_graph_n6.qasm",
+      "circuit_sha256": "d35f0fde6ddf9483792e06c3f4c3f648959957b87a0dd48569a09e6fd291fcb1",
+      "qubits": 6,
+      "target_expectations": [
+        0.7071067811865469,
+        0.4999999999999998,
+        0.9999999999999991
+      ],
+      "task_id": "randomized_shadow_graph_n6"
+    }
+  ],
+  "title": "B4/B8 R118 randomized measurement-data boundary",
+  "upstream_target_id": "T-B4-002r/T-B8-003v/T-B10-009j",
+  "version": "0.1"
+}

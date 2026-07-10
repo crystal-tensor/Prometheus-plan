@@ -2164,6 +2164,17 @@ not an arbitrary-input unitary proof; hardware layout, T-resource, and B7
 credit remain outside the claim boundary. Requirements pass `10/10`; B7 credit
 remains `0`.
 
+`T-B4-002s` / `T-B8-003w` / `T-B10-009k` now adds the R118 randomized
+measurement-data boundary. R118 replaces toy parity samples with three
+six-qubit state-preparation circuits, randomized X/Y/Z measurement bases, 60
+trials per adversary, 1,024 shots per trial, and 8 hidden target observables.
+Honest completeness reaches the diagnostic floor `0.80`, but maximum adversary
+soundness is `1.0`: marginal matching and a public all-plus basis strategy can
+still pass some hidden-observable rows. This is an accepted negative boundary,
+not a protocol-soundness result; hardware execution, calibrated backend
+evidence, quantum advantage, BQP, and B10-T2 credit remain false. Requirements
+pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

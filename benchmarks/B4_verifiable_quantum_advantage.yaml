@@ -805,6 +805,36 @@ current_results:
     caveat: h1_access_closure_only_no_provider_session_artifact_no_hardware_rows_no_soundness_or_advantage_credit
     result: ../results/B4_B8_B10_H1_provider_session_access_closure_gate_v0.json
     markdown_report: ../research/B4_B8_B10_H1_provider_session_access_closure_gate.md
+  b4_b8_r118_randomized_measurement_data_boundary_v0:
+    status: randomized_measurement_data_spoofer_boundary_not_soundness
+    model_status: classical_shadow_like_data_exposes_public_and_marginal_spoofer_boundary
+    method: b4_b8_r118_randomized_measurement_data_boundary_v0
+    source_target_id: T-B4-002s/T-B8-003w/T-B10-009k
+    upstream_target_id: T-B4-002r/T-B8-003v/T-B10-009j
+    dependency_benchmark: B8
+    task_count: 3
+    qubits: 6
+    trials: 60
+    shots_per_trial: 1024
+    target_observable_count: 8
+    minimum_honest_completeness: 0.8
+    maximum_adversary_soundness: 1.0
+    protocol_soundness_claimed: false
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: randomized_measurement_data_diagnostic_no_hardware_no_soundness_or_advantage_credit
+    result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
+    markdown_report: ../research/B4_B8_R118_randomized_measurement_data_boundary.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim
