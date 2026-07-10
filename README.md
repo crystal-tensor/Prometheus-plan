@@ -2585,3 +2585,20 @@ The next real gate must attach live public HTTP transcripts for the reviewer
 key, CI run, and artifact URL, bind those transcripts to the R109 challenge
 nonce and requested URLs, rerun R109/R108, then run a separate single-counter
 audit.
+
+`T-B1-004hh` / `T-B7-016q` now adds the R110 live public dereference probe
+gate. R110 takes the R109 URL-only negative-control URLs and attempts
+unauthenticated public `curl` fetches for the reviewer key, CI run, and artifact
+URL. All three fetches produce requested-url-bound public transcripts, but only
+two complete with `404 Not Found`; no response is HTTP `2xx`, and none contains
+the R109 challenge nonce. Requirements pass `6/6`; public fetch attempts are
+`3`; completed fetches are `2`; HTTP `2xx` fetches are `0`; nonce-bound transcripts
+are `0`; dereference packet accepted is `false`; counter transition accepted is
+`false`; counter delta remains `0`; accepted external reproductions remain
+`0`; accepted external falsifications remain `0`; and `new_credit_delta`
+remains `0`. Verdict hash
+`73eb0190dbde80d22294d2699507b75010812047f681ffad8dd128fe99cd6b6a`;
+blocker queue hash `f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af21cd9`.
+The next real gate must replace those public-looking placeholder URLs with
+real public HTTP `2xx` reviewer-key, CI-run, and artifact transcripts that bind
+the R109 challenge nonce before R109/R108 or any single-counter audit can pass.

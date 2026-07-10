@@ -1,0 +1,118 @@
+{
+  "artifacts": {
+    "artifact_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/artifact.live-http-transcript.json",
+    "blocker_queue": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/post-live-public-dereference-probe-blocker-queue.json",
+    "ci_run_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/ci_run.live-http-transcript.json",
+    "reviewer_key_transcript": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/reviewer_key.live-http-transcript.json",
+    "stdout": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/R110-live-public-dereference-probe.stdout.txt",
+    "stdout_sha256": "103a240a12862608640907965369393a86ef9de0de3896adc345e8937a958029",
+    "verdict": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/live-public-dereference-probe.verdict.json"
+  },
+  "claim_boundary": {
+    "next_gate": "Provide real public HTTP 2xx transcripts for reviewer key, CI run, and artifact URLs that bind the R109 challenge nonce and requested URLs, then rerun R109/R108.",
+    "what_is_not_supported": "R110 does not accept the packet as live nonce-bound material evidence and does not move any counter or B7 credit.",
+    "what_is_supported": "R110 attempted unauthenticated public dereference of the R109 URL-only negative-control URLs and wrote hash-bound transcripts."
+  },
+  "generated_at_unix": 1783683641,
+  "method": "b1_b7_cone01_r110_live_public_dereference_probe_gate_v0",
+  "model_status": "r109_public_urls_live_probed_but_not_accepted_as_material_evidence",
+  "payload_hash": "14cad7de065e48f2afdf426223aba024a6f00480e2f1fc887c02bfb7ebcce608",
+  "requirement_count": 6,
+  "requirements": [
+    {
+      "evidence": {
+        "contract_hash": "85fada945943cce2e57ac18e82670cc44d8cc5c8ac038fe998e9cf82deb6700e",
+        "url_only_packet_hash": "7ac9a5cd48dedde5ddbd92fff4f4964334c207333fac816f14582c36bf2641da"
+      },
+      "label": "R110 binds the R109 contract and URL-only negative control",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "roles": [
+          "artifact",
+          "ci_run",
+          "reviewer_key"
+        ]
+      },
+      "label": "R110 attempts unauthenticated live public HTTP fetches for all required URL roles",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "artifact": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/artifact.live-http-transcript.json",
+        "ci_run": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/ci_run.live-http-transcript.json",
+        "reviewer_key": "results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/reviewer_key.live-http-transcript.json"
+      },
+      "label": "R110 records hash-bound transcript files",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "http_2xx_roles": [],
+        "nonce_bound_roles": [],
+        "requested_url_bound_roles": [
+          "reviewer_key",
+          "ci_run",
+          "artifact"
+        ]
+      },
+      "label": "R110 refuses to accept transcripts unless all are HTTP 2xx and nonce-bound",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "counter_delta": 0,
+        "new_credit_delta": 0
+      },
+      "label": "R110 keeps external counters and new credit at zero",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "blocker_queue_hash": "f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af21cd9"
+      },
+      "label": "R110 emits a next-blocker queue for live nonce-bound public transcripts",
+      "passed": true,
+      "requirement_id": "P6"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 6,
+  "source_target_id": "T-B1-004hh/T-B7-016q",
+  "status": "cone01_r110_live_public_dereference_probe_rejected_not_nonce_bound",
+  "summary": {
+    "accepted_external_falsification_count": 0,
+    "accepted_external_reproduction_count": 0,
+    "blocker_queue_hash": "f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af21cd9",
+    "completed_fetch_count": 2,
+    "counter_delta": 0,
+    "counter_transition_accepted": false,
+    "dereference_packet_accepted": false,
+    "failed_requirement_ids": [],
+    "fetch_attempt_count": 3,
+    "http_2xx_fetch_count": 0,
+    "method": "b1_b7_cone01_r110_live_public_dereference_probe_gate_v0",
+    "model_status": "r109_public_urls_live_probed_but_not_accepted_as_material_evidence",
+    "new_credit_delta": 0,
+    "nonce_bound_transcript_count": 0,
+    "payload_hash": "14cad7de065e48f2afdf426223aba024a6f00480e2f1fc887c02bfb7ebcce608",
+    "requested_url_bound_count": 3,
+    "requirements_failed": 0,
+    "requirements_passed": 6,
+    "source_target_id": "T-B1-004hh/T-B7-016q",
+    "status": "cone01_r110_live_public_dereference_probe_rejected_not_nonce_bound",
+    "stdout_sha256": "103a240a12862608640907965369393a86ef9de0de3896adc345e8937a958029",
+    "upstream_target_id": "T-B1-004hg/T-B7-016p",
+    "validation_error_count": 0,
+    "verdict_hash": "73eb0190dbde80d22294d2699507b75010812047f681ffad8dd128fe99cd6b6a"
+  },
+  "title": "B1/B7 cone01 R110 live public dereference probe gate",
+  "upstream_target_id": "T-B1-004hg/T-B7-016p",
+  "version": "0.1"
+}

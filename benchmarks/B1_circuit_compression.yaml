@@ -7423,6 +7423,39 @@ current_results:
     caveat: r109_public_dereference_contract_rejects_url_only_and_cached_transcripts_no_counter
     report: ../results/B1_B7_cone01_R109_public_artifact_dereference_contract_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R109_public_artifact_dereference_contract_gate.md
+  b1_b7_cone01_r110_live_public_dereference_probe_gate_v0:
+    circuits: 1
+    status: cone01_r110_live_public_dereference_probe_rejected_not_nonce_bound
+    model_status: r109_public_urls_live_probed_but_not_accepted_as_material_evidence
+    method: b1_b7_cone01_r110_live_public_dereference_probe_gate_v0
+    source_target_id: T-B1-004hh/T-B7-016q
+    upstream_target_id: T-B1-004hg/T-B7-016p
+    source_b1_r110_live_public_dereference_probe: ../results/B1_B7_cone01_R110_live_public_dereference_probe_gate_v0.json
+    source_b1_r109_public_artifact_dereference_contract: ../results/B1_B7_cone01_R109_public_artifact_dereference_contract_gate_v0.json
+    r110_reviewer_key_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/reviewer_key.live-http-transcript.json
+    r110_ci_run_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/ci_run.live-http-transcript.json
+    r110_artifact_transcript: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/artifact.live-http-transcript.json
+    r110_probe_verdict: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/live-public-dereference-probe.verdict.json
+    r110_blocker_queue: ../results/B1_B7_cone01_o3_f4_exit_route_submissions/R110-G1-live-public-dereference-probe/post-live-public-dereference-probe-blocker-queue.json
+    public_fetch_attempt_count: 3
+    completed_fetch_count: 1
+    http_2xx_fetch_count: 0
+    nonce_bound_transcript_count: 0
+    requested_url_bound_count: 3
+    dereference_packet_accepted: false
+    counter_transition_accepted: false
+    counter_delta: 0
+    accepted_external_reproduction_count: 0
+    accepted_external_falsification_count: 0
+    new_credit_delta: 0
+    verdict_hash: 73eb0190dbde80d22294d2699507b75010812047f681ffad8dd128fe99cd6b6a
+    blocker_queue_hash: f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af21cd9
+    requirements_passed: 6
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r110_live_probe_records_public_404_transcripts_no_nonce_no_counter
+    report: ../results/B1_B7_cone01_R110_live_public_dereference_probe_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R110_live_public_dereference_probe_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate

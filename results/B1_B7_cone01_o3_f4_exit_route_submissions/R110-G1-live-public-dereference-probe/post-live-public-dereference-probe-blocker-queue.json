@@ -1,0 +1,31 @@
+{
+  "artifact": "R110 post-probe blocker queue",
+  "blocker_queue_hash": "f888da6ab51011883e7ec74daf9f6963e54613cb5dd132266b835c718af21cd9",
+  "blockers": [
+    {
+      "blocker_id": "R110-B1",
+      "needed_artifact": "public reviewer key URL returning a live HTTP 2xx transcript bound to the R109 challenge nonce",
+      "priority": 1
+    },
+    {
+      "blocker_id": "R110-B2",
+      "needed_artifact": "public CI run URL returning a live HTTP 2xx transcript bound to the R109 challenge nonce",
+      "priority": 2
+    },
+    {
+      "blocker_id": "R110-B3",
+      "needed_artifact": "public artifact URL returning a live HTTP 2xx transcript bound to the R109 challenge nonce",
+      "priority": 3
+    },
+    {
+      "blocker_id": "R110-B4",
+      "needed_artifact": "rerun R109 and R108 after all transcripts are live, public, requested-url-bound, and nonce-bound",
+      "priority": 4
+    }
+  ],
+  "counter_delta": 0,
+  "counter_transition_accepted": false,
+  "new_credit_delta": 0,
+  "source_target_id": "T-B1-004hh/T-B7-016q",
+  "upstream_target_id": "T-B1-004hg/T-B7-016p"
+}
