@@ -978,6 +978,36 @@ current_results:
     caveat: randomized_measurement_data_diagnostic_public_and_marginal_spoofer_boundary_no_soundness_credit
     result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
     markdown_report: ../research/B4_B8_R118_randomized_measurement_data_boundary.md
+  b4_b8_r119_private_observable_bundle_v0:
+    status: private_signed_observable_bundle_scoped_positive_not_soundness
+    model_status: late_bound_signed_bundle_rejects_four_spoofer_families_on_two_entangled_tasks
+    method: b4_b8_r119_private_observable_bundle_gate_v0
+    source_target_id: T-B4-002t/T-B8-003x/T-B10-009l
+    upstream_target_id: T-B4-002s/T-B8-003w/T-B10-009k
+    task_count: 2
+    qubits: 6
+    trials: 60
+    shots_per_trial: 4096
+    bundle_size: 3
+    tolerance: 0.6
+    minimum_honest_completeness: 0.85
+    maximum_adversary_soundness: 0.03333333333333333
+    adversaries_at_or_below_soundness_target: 8
+    adversaries_tested: [uniform_random, marginal_matching, public_basis_all_plus, leaked_half]
+    late_bound_selection_after_data: true
+    protocol_soundness_claimed: false
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    sampling_hardness_proved: false
+    cryptographic_soundness_proved: false
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r119_scoped_ideal_entangled_tasks_no_general_soundness_or_hardware_credit
+    result: ../results/B4_B8_R119_private_observable_bundle_v0.json
+    markdown_report: ../research/B4_B8_R119_private_observable_bundle.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

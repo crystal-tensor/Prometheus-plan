@@ -632,6 +632,30 @@ current_results:
     caveat: randomized_measurement_data_boundary_is_diagnostic_and_keeps_b10_zero_credit
     result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
     markdown_report: ../research/B4_B8_R118_randomized_measurement_data_boundary.md
+  b10_t2_b4_b8_r119_private_observable_bundle_v0:
+    status: private_signed_observable_bundle_scoped_positive_not_bqp_or_soundness_claim
+    model_status: b8_private_bundle_route_feeds_b10_t2_zero_credit_boundary
+    method: b4_b8_r119_private_observable_bundle_gate_v0
+    source_b8_result: ../results/B4_B8_R119_private_observable_bundle_v0.json
+    source_target_id: T-B4-002t/T-B8-003x/T-B10-009l
+    upstream_target_id: T-B4-002s/T-B8-003w/T-B10-009k
+    dependency_benchmark: B4/B8
+    task_count: 2
+    trials: 60
+    shots_per_trial: 4096
+    bundle_size: 3
+    minimum_honest_completeness: 0.85
+    maximum_adversary_soundness: 0.03333333333333333
+    protocol_soundness_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    hardware_execution_performed: false
+    validation_error_count: 0
+    caveat: r119_scoped_ideal_entangled_tasks_keeps_b10_zero_credit
+    result: ../results/B4_B8_R119_private_observable_bundle_v0.json
+    markdown_report: ../research/B4_B8_R119_private_observable_bundle.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

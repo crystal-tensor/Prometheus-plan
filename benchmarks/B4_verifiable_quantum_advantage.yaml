@@ -835,6 +835,35 @@ current_results:
     caveat: randomized_measurement_data_diagnostic_no_hardware_no_soundness_or_advantage_credit
     result: ../results/B4_B8_R118_randomized_measurement_data_boundary_v0.json
     markdown_report: ../research/B4_B8_R118_randomized_measurement_data_boundary.md
+  b4_b8_r119_private_observable_bundle_v0:
+    status: private_signed_observable_bundle_scoped_positive_not_soundness
+    model_status: late_bound_signed_bundle_rejects_four_spoofer_families_on_two_entangled_tasks
+    method: b4_b8_r119_private_observable_bundle_gate_v0
+    source_target_id: T-B4-002t/T-B8-003x/T-B10-009l
+    upstream_target_id: T-B4-002s/T-B8-003w/T-B10-009k
+    dependency_benchmark: B8
+    task_count: 2
+    qubits: 6
+    trials: 60
+    shots_per_trial: 4096
+    bundle_size: 3
+    tolerance: 0.6
+    minimum_honest_completeness: 0.85
+    maximum_adversary_soundness: 0.03333333333333333
+    protocol_soundness_claimed: false
+    hardware_execution_performed: false
+    real_backend_properties_used: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r119_scoped_ideal_entangled_tasks_no_general_soundness_or_hardware_credit
+    result: ../results/B4_B8_R119_private_observable_bundle_v0.json
+    markdown_report: ../research/B4_B8_R119_private_observable_bundle.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

@@ -2175,6 +2175,16 @@ not a protocol-soundness result; hardware execution, calibrated backend
 evidence, quantum advantage, BQP, and B10-T2 credit remain false. Requirements
 pass `10/10`.
 
+`T-B4-002t` / `T-B8-003x` / `T-B10-009l` now adds the R119 private signed
+observable bundle. After collecting the randomized measurement data, the
+verifier selects a hidden bundle containing one negative correlation, one
+cross-half positive correlation, and one random positive correlation. On two
+ideal six-qubit entangled tasks, honest completeness is `0.85`, maximum
+adversary soundness is `0.0333`, and all `8/8` task/adversary rows are at or
+below the `0.05` target. This is scoped simulator evidence, not general
+protocol soundness; calibrated noise, hardware execution, quantum advantage,
+BQP separation, and B10 credit remain unclaimed. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

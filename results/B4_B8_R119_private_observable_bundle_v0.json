@@ -1,0 +1,357 @@
+{
+  "adversary_rows": [
+    {
+      "adversary": "uniform_random",
+      "bundle_size": 3,
+      "max_bundle_error": 1.7119140624999998,
+      "mean_bundle_error": 1.1620483398437498,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_ghz_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "marginal_matching",
+      "bundle_size": 3,
+      "max_bundle_error": 2.06787109375,
+      "mean_bundle_error": 1.20745849609375,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_ghz_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "public_basis_all_plus",
+      "bundle_size": 3,
+      "max_bundle_error": 2.09423828125,
+      "mean_bundle_error": 2.00631103515625,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_ghz_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "leaked_half",
+      "bundle_size": 3,
+      "max_bundle_error": 2.06787109375,
+      "mean_bundle_error": 1.1515380859374997,
+      "pass_rate": 0.03333333333333333,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_ghz_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "uniform_random",
+      "bundle_size": 3,
+      "max_bundle_error": 1.2043457031249996,
+      "mean_bundle_error": 1.0610473632812498,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_graph_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "marginal_matching",
+      "bundle_size": 3,
+      "max_bundle_error": 1.2373046874999996,
+      "mean_bundle_error": 1.0515258789062498,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_graph_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "public_basis_all_plus",
+      "bundle_size": 3,
+      "max_bundle_error": 2.2062988281249996,
+      "mean_bundle_error": 1.9908569335937498,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_graph_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    },
+    {
+      "adversary": "leaked_half",
+      "bundle_size": 3,
+      "max_bundle_error": 1.1977539062499996,
+      "mean_bundle_error": 1.0312011718749998,
+      "pass_rate": 0.0,
+      "shots_per_trial": 4096,
+      "task_id": "private_bundle_graph_n6",
+      "tolerance": 0.6,
+      "trials": 60
+    }
+  ],
+  "artifacts": {
+    "circuits": [
+      "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_ghz_n6.qasm",
+      "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_graph_n6.qasm"
+    ],
+    "r118_result": "results/B4_B8_R118_randomized_measurement_data_boundary_v0.json"
+  },
+  "claim_boundary": {
+    "next_gate": "Rerun the private bundle under calibrated noise or an independent backend transcript before any protocol credit.",
+    "what_is_not_supported": "General protocol soundness, arbitrary states, hardware execution, calibrated noise, cryptographic soundness, sampling hardness, quantum advantage, BQP separation, or full-distribution verification.",
+    "what_is_supported": "A late-bound signed observable bundle rejects four measured spoofer families on two ideal entangled six-qubit tasks while honest completeness stays above 0.80."
+  },
+  "generated_at_unix": 1783693752,
+  "method": "b4_b8_r119_private_observable_bundle_gate_v0",
+  "model_status": "late_bound_signed_bundle_rejects_four_spoofer_families_on_two_entangled_tasks",
+  "payload_hash": "557ae3f41f32407e06aba5f9fc821f297c5d3b896c55209e4675db6afd172816",
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "evidence": {
+        "r118_max_adversary_soundness": 1.0,
+        "r118_status": "randomized_measurement_data_spoofer_boundary_not_soundness"
+      },
+      "label": "R118 diagnostic boundary is consumed",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "files": [
+          "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_ghz_n6.qasm",
+          "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_graph_n6.qasm"
+        ]
+      },
+      "label": "two entangled state-preparation circuits are materialized",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "selection_order": "records_then_negative_and_positive_target_indices"
+      },
+      "label": "bundle selection occurs after measurement data collection",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "bundle_size": 3,
+        "signed_target_roles": [
+          "negative",
+          "cross_half_positive",
+          "random_positive"
+        ]
+      },
+      "label": "every bundle contains one negative and two positive targets including a cross-half anchor",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "minimum_honest_completeness": 0.85,
+        "target": 0.8
+      },
+      "label": "honest completeness stays above the 0.80 floor",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "maximum_adversary_soundness": 0.03333333333333333,
+        "target": 0.05
+      },
+      "label": "all four tested spoofer families stay at or below 0.05",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "expected": 8,
+        "rows": 8
+      },
+      "label": "target selection and per-task adversary rows are materialized",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "hardware_execution_performed": false,
+        "quantum_advantage_claimed": false
+      },
+      "label": "R119 remains scoped to ideal simulator data",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "protocol_soundness_claimed": false
+      },
+      "label": "B4/B8/B10 soundness and BQP credit remain unclaimed",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "evidence": {
+        "next_gate": "rerun the private bundle under calibrated noise or an independent backend transcript before protocol credit"
+      },
+      "label": "next cross-device and noise gate is explicit",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_target_id": "T-B4-002t/T-B8-003x/T-B10-009l",
+  "status": "private_signed_observable_bundle_scoped_positive_not_soundness",
+  "summary": {
+    "adversaries_at_or_below_soundness_target": 8,
+    "bqp_separation_claimed": false,
+    "bundle_size": 3,
+    "circuit_file_count": 2,
+    "hardware_execution_performed": false,
+    "maximum_adversary_soundness": 0.03333333333333333,
+    "minimum_honest_completeness": 0.85,
+    "protocol_soundness_claimed": false,
+    "quantum_advantage_claimed": false,
+    "shots_per_trial": 4096,
+    "soundness_target": 0.05,
+    "task_count": 2,
+    "tolerance": 0.6,
+    "trials": 60
+  },
+  "tasks": [
+    {
+      "adversaries": {
+        "honest": {
+          "bundle_size": 3,
+          "max_bundle_error": 0.9999999999999998,
+          "mean_bundle_error": 0.3472086588541667,
+          "pass_rate": 0.85,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "leaked_half": {
+          "bundle_size": 3,
+          "max_bundle_error": 2.06787109375,
+          "mean_bundle_error": 1.1515380859374997,
+          "pass_rate": 0.03333333333333333,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "marginal_matching": {
+          "bundle_size": 3,
+          "max_bundle_error": 2.06787109375,
+          "mean_bundle_error": 1.20745849609375,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "public_basis_all_plus": {
+          "bundle_size": 3,
+          "max_bundle_error": 2.09423828125,
+          "mean_bundle_error": 2.00631103515625,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "uniform_random": {
+          "bundle_size": 3,
+          "max_bundle_error": 1.7119140624999998,
+          "mean_bundle_error": 1.1620483398437498,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        }
+      },
+      "circuit": "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "negative_expectations": [
+        -0.9999999999999998,
+        -0.9999999999999998,
+        -0.9999999999999998,
+        -0.9999999999999998
+      ],
+      "positive_expectations": [
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9999999999999998
+      ],
+      "qubits": 6,
+      "task_id": "private_bundle_ghz_n6"
+    },
+    {
+      "adversaries": {
+        "honest": {
+          "bundle_size": 3,
+          "max_bundle_error": 0.21948242187500044,
+          "mean_bundle_error": 0.09163818359375006,
+          "pass_rate": 1.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "leaked_half": {
+          "bundle_size": 3,
+          "max_bundle_error": 1.1977539062499996,
+          "mean_bundle_error": 1.0312011718749998,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "marginal_matching": {
+          "bundle_size": 3,
+          "max_bundle_error": 1.2373046874999996,
+          "mean_bundle_error": 1.0515258789062498,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "public_basis_all_plus": {
+          "bundle_size": 3,
+          "max_bundle_error": 2.2062988281249996,
+          "mean_bundle_error": 1.9908569335937498,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        },
+        "uniform_random": {
+          "bundle_size": 3,
+          "max_bundle_error": 1.2043457031249996,
+          "mean_bundle_error": 1.0610473632812498,
+          "pass_rate": 0.0,
+          "shots_per_trial": 4096,
+          "tolerance": 0.6,
+          "trials": 60
+        }
+      },
+      "circuit": "results/B4_B8_R119_private_observable_bundle/circuits/private_bundle_graph_n6.qasm",
+      "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+      "negative_expectations": [
+        -0.9999999999999996
+      ],
+      "positive_expectations": [
+        0.9999999999999996,
+        0.9999999999999996,
+        0.9999999999999996,
+        0.9999999999999996
+      ],
+      "qubits": 6,
+      "task_id": "private_bundle_graph_n6"
+    }
+  ],
+  "title": "B4/B8 R119 private signed observable bundle",
+  "upstream_target_id": "T-B4-002s/T-B8-003w/T-B10-009k",
+  "version": "0.1"
+}
