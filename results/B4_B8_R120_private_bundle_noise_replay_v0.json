@@ -1,0 +1,364 @@
+{
+  "artifacts": {
+    "circuits": [
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_ghz_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_graph_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_ghz_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_graph_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_ghz_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_graph_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_ghz_n6.qasm",
+      "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_graph_n6.qasm"
+    ],
+    "r119_result": "results/B4_B8_R119_private_observable_bundle_v0.json"
+  },
+  "claim_boundary": {
+    "next_gate": "Replace synthetic Aer profiles with calibrated backend properties or an independent backend transcript.",
+    "what_is_not_supported": "Calibrated backend evidence, real hardware execution, general protocol soundness, cryptographic soundness, sampling hardness, quantum advantage, BQP separation, or full-distribution verification.",
+    "what_is_supported": "Explicit Aer noise-margin replay of the R119 private signed observable bundle over four synthetic profiles."
+  },
+  "generated_at_unix": 1783694767,
+  "method": "b4_b8_r120_private_bundle_noise_replay_v0",
+  "model_status": "r119_bundle_honest_noise_margin_replayed_with_explicit_aer_profiles",
+  "payload_hash": "ce48e16be20e84741b1af412c1e4efbe2154864ffb7821c755bc339bcfcb0f54",
+  "profile_rows": [
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "maximum_bundle_error": 1.1357421875000002,
+      "mean_bundle_error": 0.520361328125,
+      "pass_rate": 0.75,
+      "profile": "ideal",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_ghz_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_graph_n6.qasm",
+      "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+      "maximum_bundle_error": 0.44628906249999956,
+      "mean_bundle_error": 0.20678710937499992,
+      "pass_rate": 1.0,
+      "profile": "ideal",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_graph_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "maximum_bundle_error": 1.1357421875000002,
+      "mean_bundle_error": 0.720361328125,
+      "pass_rate": 0.45,
+      "profile": "light",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_ghz_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_graph_n6.qasm",
+      "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+      "maximum_bundle_error": 0.39355468749999956,
+      "mean_bundle_error": 0.1934082031249999,
+      "pass_rate": 1.0,
+      "profile": "light",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_graph_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "maximum_bundle_error": 1.1357421875000002,
+      "mean_bundle_error": 0.64072265625,
+      "pass_rate": 0.6,
+      "profile": "moderate",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_ghz_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_graph_n6.qasm",
+      "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+      "maximum_bundle_error": 0.39355468749999956,
+      "mean_bundle_error": 0.22143554687499972,
+      "pass_rate": 1.0,
+      "profile": "moderate",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_graph_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_ghz_n6.qasm",
+      "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+      "maximum_bundle_error": 1.7119140624999998,
+      "mean_bundle_error": 0.686083984375,
+      "pass_rate": 0.55,
+      "profile": "stress",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_ghz_n6",
+      "trials": 20
+    },
+    {
+      "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_graph_n6.qasm",
+      "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+      "maximum_bundle_error": 0.5517578124999996,
+      "mean_bundle_error": 0.3511230468749996,
+      "pass_rate": 1.0,
+      "profile": "stress",
+      "shots_per_trial": 1024,
+      "task_id": "private_bundle_graph_n6",
+      "trials": 20
+    }
+  ],
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "evidence": {
+        "r119_max_adversary_soundness": 0.03333333333333333,
+        "r119_status": "private_signed_observable_bundle_scoped_positive_not_soundness"
+      },
+      "label": "accepted R119 bundle is consumed",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "profiles": [
+          "ideal",
+          "light",
+          "moderate",
+          "stress"
+        ]
+      },
+      "label": "four explicit Aer noise profiles are replayed",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "bundle_size": 3
+      },
+      "label": "same three-observable bundle contract is retained",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "baseline_only": true,
+        "minimum_honest_completeness": 0.75,
+        "target": 0.8
+      },
+      "label": "noise-free profile is materialized as the sampling baseline",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "rows": 8
+      },
+      "label": "noise margin is reported per profile rather than averaged away",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "calibrated_backend_evidence": false,
+        "hardware_execution_performed": false
+      },
+      "label": "no noise profile is mislabeled as calibrated hardware evidence",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "protocol_soundness_claimed": false,
+        "r119_max_adversary_soundness": 0.03333333333333333
+      },
+      "label": "R119 adversary result is carried without a new soundness claim",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "circuit_file_count": 8
+      },
+      "label": "all profile circuits and rows are materialized",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "bqp_separation_claimed": false,
+        "quantum_advantage_claimed": false
+      },
+      "label": "B4/B8/B10 advantage and BQP claims remain false",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "evidence": {
+        "next_gate": "replace synthetic Aer profiles with calibrated backend properties or an independent backend transcript"
+      },
+      "label": "next gate is independent backend or calibrated transcript",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_target_id": "T-B4-002u/T-B8-003y/T-B10-009m",
+  "status": "private_signed_observable_bundle_noise_margin_boundary",
+  "summary": {
+    "bqp_separation_claimed": false,
+    "bundle_size": 3,
+    "calibrated_backend_evidence": false,
+    "hardware_execution_performed": false,
+    "minimum_profile_honest_completeness": 0.45,
+    "noise_profiles_above_honest_floor": 0,
+    "profiles": {
+      "ideal": {
+        "maximum_bundle_error": 1.1357421875000002,
+        "minimum_honest_completeness": 0.75,
+        "noise": {
+          "p1": 0.0,
+          "p2": 0.0,
+          "readout": 0.0
+        },
+        "task_rows": [
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_ghz_n6.qasm",
+            "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+            "maximum_bundle_error": 1.1357421875000002,
+            "mean_bundle_error": 0.520361328125,
+            "pass_rate": 0.75,
+            "profile": "ideal",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_ghz_n6",
+            "trials": 20
+          },
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/ideal_private_bundle_graph_n6.qasm",
+            "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+            "maximum_bundle_error": 0.44628906249999956,
+            "mean_bundle_error": 0.20678710937499992,
+            "pass_rate": 1.0,
+            "profile": "ideal",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_graph_n6",
+            "trials": 20
+          }
+        ]
+      },
+      "light": {
+        "maximum_bundle_error": 1.1357421875000002,
+        "minimum_honest_completeness": 0.45,
+        "noise": {
+          "p1": 0.001,
+          "p2": 0.005,
+          "readout": 0.005
+        },
+        "task_rows": [
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_ghz_n6.qasm",
+            "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+            "maximum_bundle_error": 1.1357421875000002,
+            "mean_bundle_error": 0.720361328125,
+            "pass_rate": 0.45,
+            "profile": "light",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_ghz_n6",
+            "trials": 20
+          },
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/light_private_bundle_graph_n6.qasm",
+            "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+            "maximum_bundle_error": 0.39355468749999956,
+            "mean_bundle_error": 0.1934082031249999,
+            "pass_rate": 1.0,
+            "profile": "light",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_graph_n6",
+            "trials": 20
+          }
+        ]
+      },
+      "moderate": {
+        "maximum_bundle_error": 1.1357421875000002,
+        "minimum_honest_completeness": 0.6,
+        "noise": {
+          "p1": 0.003,
+          "p2": 0.015,
+          "readout": 0.01
+        },
+        "task_rows": [
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_ghz_n6.qasm",
+            "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+            "maximum_bundle_error": 1.1357421875000002,
+            "mean_bundle_error": 0.64072265625,
+            "pass_rate": 0.6,
+            "profile": "moderate",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_ghz_n6",
+            "trials": 20
+          },
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/moderate_private_bundle_graph_n6.qasm",
+            "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+            "maximum_bundle_error": 0.39355468749999956,
+            "mean_bundle_error": 0.22143554687499972,
+            "pass_rate": 1.0,
+            "profile": "moderate",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_graph_n6",
+            "trials": 20
+          }
+        ]
+      },
+      "stress": {
+        "maximum_bundle_error": 1.7119140624999998,
+        "minimum_honest_completeness": 0.55,
+        "noise": {
+          "p1": 0.006,
+          "p2": 0.03,
+          "readout": 0.02
+        },
+        "task_rows": [
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_ghz_n6.qasm",
+            "circuit_sha256": "576498bfcfe1426bb163a27170e8852f47ebcf2a35c4cc1b8f2d09b9ae4188ef",
+            "maximum_bundle_error": 1.7119140624999998,
+            "mean_bundle_error": 0.686083984375,
+            "pass_rate": 0.55,
+            "profile": "stress",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_ghz_n6",
+            "trials": 20
+          },
+          {
+            "circuit": "results/B4_B8_R120_private_bundle_noise_replay/circuits/stress_private_bundle_graph_n6.qasm",
+            "circuit_sha256": "c73de7b5aaebdf59cbe6d3098d65b20ecbc05142730a0d58d946f8f725a22c3f",
+            "maximum_bundle_error": 0.5517578124999996,
+            "mean_bundle_error": 0.3511230468749996,
+            "pass_rate": 1.0,
+            "profile": "stress",
+            "shots_per_trial": 1024,
+            "task_id": "private_bundle_graph_n6",
+            "trials": 20
+          }
+        ]
+      }
+    },
+    "protocol_soundness_claimed": false,
+    "quantum_advantage_claimed": false,
+    "r119_max_adversary_soundness": 0.03333333333333333,
+    "shots_per_trial": 1024,
+    "task_count": 2,
+    "tolerance": 0.6,
+    "trials": 20
+  },
+  "title": "B4/B8 R120 private bundle noise replay",
+  "upstream_target_id": "T-B4-002t/T-B8-003x/T-B10-009l",
+  "version": "0.1"
+}

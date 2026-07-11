@@ -864,6 +864,37 @@ current_results:
     caveat: r119_scoped_ideal_entangled_tasks_no_general_soundness_or_hardware_credit
     result: ../results/B4_B8_R119_private_observable_bundle_v0.json
     markdown_report: ../research/B4_B8_R119_private_observable_bundle.md
+  b4_b8_r120_private_bundle_noise_replay_v0:
+    status: private_signed_observable_bundle_noise_margin_boundary
+    model_status: r119_bundle_honest_noise_margin_replayed_with_explicit_aer_profiles
+    method: b4_b8_r120_private_bundle_noise_replay_v0
+    source_target_id: T-B4-002u/T-B8-003y/T-B10-009m
+    upstream_target_id: T-B4-002t/T-B8-003x/T-B10-009l
+    dependency_benchmark: B8
+    task_count: 2
+    noise_profile_count: 4
+    noise_profiles: [ideal, light, moderate, stress]
+    trials_per_profile_task: 20
+    shots_per_trial: 1024
+    bundle_size: 3
+    tolerance: 0.6
+    minimum_profile_honest_completeness: 0.45
+    noise_profiles_above_honest_floor: 0
+    r119_max_adversary_soundness: 0.03333333333333333
+    hardware_execution_performed: false
+    calibrated_backend_evidence: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r120_synthetic_aer_noise_and_low_shot_margin_boundary_no_hardware_credit
+    result: ../results/B4_B8_R120_private_bundle_noise_replay_v0.json
+    markdown_report: ../research/B4_B8_R120_private_bundle_noise_replay.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

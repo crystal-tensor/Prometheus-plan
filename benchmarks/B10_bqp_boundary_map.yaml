@@ -656,6 +656,30 @@ current_results:
     caveat: r119_scoped_ideal_entangled_tasks_keeps_b10_zero_credit
     result: ../results/B4_B8_R119_private_observable_bundle_v0.json
     markdown_report: ../research/B4_B8_R119_private_observable_bundle.md
+  b10_t2_b4_b8_r120_private_bundle_noise_replay_v0:
+    status: private_signed_observable_bundle_noise_margin_boundary_not_bqp_claim
+    model_status: b8_bundle_noise_budget_blocks_b10_t2_credit
+    method: b4_b8_r120_private_bundle_noise_replay_v0
+    source_b8_result: ../results/B4_B8_R120_private_bundle_noise_replay_v0.json
+    source_target_id: T-B4-002u/T-B8-003y/T-B10-009m
+    upstream_target_id: T-B4-002t/T-B8-003x/T-B10-009l
+    dependency_benchmark: B4/B8
+    noise_profile_count: 4
+    trials_per_profile_task: 20
+    shots_per_trial: 1024
+    minimum_profile_honest_completeness: 0.45
+    noise_profiles_above_honest_floor: 0
+    protocol_soundness_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    explicit_not_bqp_separation: true
+    hardware_execution_performed: false
+    calibrated_backend_evidence: false
+    validation_error_count: 0
+    caveat: r120_low_shot_noise_boundary_keeps_b10_zero_credit
+    result: ../results/B4_B8_R120_private_bundle_noise_replay_v0.json
+    markdown_report: ../research/B4_B8_R120_private_bundle_noise_replay.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

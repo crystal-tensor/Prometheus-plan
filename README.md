@@ -2185,6 +2185,15 @@ below the `0.05` target. This is scoped simulator evidence, not general
 protocol soundness; calibrated noise, hardware execution, quantum advantage,
 BQP separation, and B10 credit remain unclaimed. Requirements pass `10/10`.
 
+`T-B4-002u` / `T-B8-003y` / `T-B10-009m` now adds the R120 explicit Aer noise
+replay. The R119 bundle is replayed at a fixed 1,024-shot budget under
+ideal/light/moderate/stress profiles. Minimum honest completeness is
+`0.75/0.45/0.60/0.55`; no profile reaches the `0.80` floor. The ideal baseline
+itself misses the floor, so shot budget is a blocker before calibrated backend
+evidence can be interpreted. This is synthetic simulator evidence only; no
+hardware, protocol soundness, quantum advantage, BQP, or B10 credit is claimed.
+Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original
