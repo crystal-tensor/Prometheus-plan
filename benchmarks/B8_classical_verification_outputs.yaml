@@ -1393,6 +1393,40 @@ current_results:
     caveat: r129_only_lagos_graph_survives_the_disjoint_seed_validation_gate
     result: ../results/B4_B8_R129_seed_robust_layout_ranking_v0.json
     markdown_report: ../research/B4_B8_R129_seed_robust_layout_ranking.md
+  b4_b8_r130_route_signature_candidate_expansion_v0:
+    status: route_signature_candidate_expansion_boundary
+    model_status: static_top10_expanded_with_route_signature_champions
+    method: b4_b8_r130_route_signature_candidate_expansion_v0
+    source_target_id: T-B4-002ae/T-B8-003ai/T-B10-009w
+    upstream_target_id: T-B4-002ad/T-B8-003ah/T-B10-009v
+    enumerated_mapping_count: 30240
+    available_route_signature_count: 6720
+    retained_candidate_count: 312
+    retained_unique_route_signature_count: 282
+    candidate_training_compilation_count: 2496
+    total_compilation_count: 2724
+    selector_changed_from_r129_count: 2
+    selected_from_expansion_count: 1
+    positive_validation_mean_count: 3
+    positive_validation_lower_quantile_count: 1
+    eight_of_ten_validation_win_count: 1
+    validation_improvement_over_r129_selector_count: 1
+    route_expansion_gate_passed: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r130_full_ghz_signature_coverage_still_fails_five_of_six_group_robustness
+    result: ../results/B4_B8_R130_route_signature_candidate_expansion_v0.json
+    markdown_report: ../research/B4_B8_R130_route_signature_candidate_expansion.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

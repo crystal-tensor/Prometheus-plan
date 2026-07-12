@@ -2320,6 +2320,21 @@ expansion rather than another weight adjustment. No R125 acceptance rows,
 verifier holdout, mitigation, current calibration, hardware, soundness,
 advantage, BQP, or B10 credit is used or claimed. Requirements pass `10/10`.
 
+`T-B4-002ae` / `T-B8-003ai` / `T-B10-009w` now adds the R130
+route-signature candidate expansion gate. It enumerates all `30240` injective
+mappings, identifies `6720` route signatures, and retains `312` candidates
+covering `282` signatures. Every GHZ snapshot covers all `42/42` available
+signatures, while each graph snapshot retains `52` distinct signatures. The
+expanded pool is trained and evaluated with new disjoint seed blocks across
+`2724` compilations. Two selectors change. Lagos GHZ moves to static rank
+`241`, improves unseen mean gain to `+0.0116`, and wins `5/10`, but its lower
+tail remains slightly negative at `-0.00015`. Only Lagos graph remains robust
+at `10/10`; the global route-expansion gate fails. This rejects the simple
+claim that Top-10 width alone caused R129 and moves the next gate to exact
+compiled-route-family analysis. No verifier holdout, mitigation, current
+calibration, hardware, soundness, advantage, BQP, or B10 credit is used or
+claimed. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

@@ -33961,6 +33961,199 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R129 claim boundary must exclude verifier holdout performance")
 
+    r130_result_path = results / "B4_B8_R130_route_signature_candidate_expansion_v0.json"
+    r130_report_path = research / "B4_B8_R130_route_signature_candidate_expansion.md"
+    r130_status = {
+        "path": str(r130_result_path),
+        "report_path": str(r130_report_path),
+        "exists": r130_result_path.exists(),
+        "report_exists": r130_report_path.exists(),
+    }
+    r130_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r130_route_signature_candidate_expansion_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r130_route_signature_candidate_expansion_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r130_route_signature_candidate_expansion_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r130_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R130 route-signature expansion")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R130 manifest missing existing {field}: {value}")
+    if not r130_result_path.exists():
+        errors.append(f"missing R130 route-signature result: {r130_result_path}")
+    elif not r130_report_path.exists():
+        errors.append(f"missing R130 route-signature report: {r130_report_path}")
+    else:
+        r130_payload = json.loads(read(r130_result_path))
+        r130_summary = r130_payload.get("summary", {})
+        r130_claims = r130_payload.get("claim_boundary", {})
+        r130_groups = r130_payload.get("group_expansion_rows", [])
+        r130_status.update(
+            {
+                "status": r130_payload.get("status"),
+                "method": r130_payload.get("method"),
+                "requirements_passed": r130_payload.get("requirements_passed"),
+                "requirements_failed": r130_payload.get("requirements_failed"),
+                "enumerated_mapping_count": r130_summary.get(
+                    "enumerated_mapping_count"
+                ),
+                "available_route_signature_count": r130_summary.get(
+                    "available_route_signature_count"
+                ),
+                "retained_candidate_count": r130_summary.get(
+                    "retained_candidate_count"
+                ),
+                "retained_unique_route_signature_count": r130_summary.get(
+                    "retained_unique_route_signature_count"
+                ),
+                "total_compilation_count": r130_summary.get("total_compilation_count"),
+                "selected_from_expansion_count": r130_summary.get(
+                    "selected_from_expansion_count"
+                ),
+                "positive_validation_lower_quantile_count": r130_summary.get(
+                    "positive_validation_lower_quantile_count"
+                ),
+                "eight_of_ten_validation_win_count": r130_summary.get(
+                    "eight_of_ten_validation_win_count"
+                ),
+                "route_expansion_gate_passed": r130_summary.get(
+                    "route_expansion_gate_passed"
+                ),
+                "validation_circuit_count": len(
+                    r130_payload.get("artifacts", {}).get("validation_circuits", [])
+                ),
+            }
+        )
+        expected_r130_summary = {
+            "enumerated_mapping_count": 30240,
+            "available_route_signature_count": 6720,
+            "retained_candidate_count": 312,
+            "retained_unique_route_signature_count": 282,
+            "candidate_training_compilation_count": 2496,
+            "training_default_compilation_count": 48,
+            "validation_selected_compilation_count": 60,
+            "validation_default_compilation_count": 60,
+            "validation_reference_compilation_count": 60,
+            "total_compilation_count": 2724,
+            "selector_changed_from_r129_count": 2,
+            "selected_from_expansion_count": 1,
+            "positive_validation_mean_count": 3,
+            "positive_validation_lower_quantile_count": 1,
+            "eight_of_ten_validation_win_count": 1,
+            "validation_improvement_over_r129_selector_count": 1,
+            "route_expansion_gate_passed": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r130_payload.get("status") != "route_signature_candidate_expansion_boundary":
+            errors.append("R130 route-signature status mismatch")
+        if r130_payload.get("method") != "b4_b8_r130_route_signature_candidate_expansion_v0":
+            errors.append("R130 route-signature method mismatch")
+        if r130_payload.get("source_target_id") != "T-B4-002ae/T-B8-003ai/T-B10-009w":
+            errors.append("R130 route-signature target mismatch")
+        if r130_payload.get("requirements_passed") != 10 or r130_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R130 route-signature requirements must pass 10/10")
+        if len(r130_payload.get("candidate_training_rows", [])) != 312:
+            errors.append("R130 route-signature result must contain 312 candidate rows")
+        if len(r130_payload.get("selected_layout_rows", [])) != 6:
+            errors.append("R130 route-signature result must select six layouts")
+        if len(r130_groups) != 6:
+            errors.append("R130 route-signature result must contain six group rows")
+        for row in r130_groups:
+            if row.get("retained_candidate_count") != 52:
+                errors.append("R130 each group must retain 52 candidates")
+            if row.get("task_id") == "private_bundle_ghz_n6":
+                if row.get("available_route_signature_count") != 42:
+                    errors.append("R130 each GHZ group must enumerate 42 signatures")
+                if row.get("retained_unique_route_signature_count") != 42:
+                    errors.append("R130 each GHZ group must retain all 42 signatures")
+                if row.get("all_available_signatures_covered") is not True:
+                    errors.append("R130 each GHZ group must cover all signatures")
+            elif row.get("retained_unique_route_signature_count") != 52:
+                errors.append("R130 each graph group must retain 52 unique signatures")
+        if set(r130_summary.get("training_seeds", [])) & set(
+            r130_summary.get("validation_seeds", [])
+        ):
+            errors.append("R130 training and validation seeds must be disjoint")
+        for field, expected in expected_r130_summary.items():
+            if r130_summary.get(field) != expected:
+                errors.append(f"R130 route-signature {field} mismatch")
+        for label, manifest_row in r130_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in [
+                "enumerated_mapping_count",
+                "available_route_signature_count",
+                "retained_candidate_count",
+                "retained_unique_route_signature_count",
+                "total_compilation_count",
+                "selector_changed_from_r129_count",
+                "selected_from_expansion_count",
+                "positive_validation_lower_quantile_count",
+                "eight_of_ten_validation_win_count",
+                "route_expansion_gate_passed",
+                "acceptance_holdout_executed",
+                "readout_mitigation_tested",
+                "current_backend_calibration_used",
+                "hardware_execution_performed",
+                "protocol_soundness_claimed",
+                "quantum_advantage_claimed",
+                "bqp_separation_claimed",
+                "new_credit_delta",
+            ]:
+                if manifest_row.get(field) != r130_summary.get(field):
+                    errors.append(f"{label} R130 manifest {field} mismatch")
+        payload_hash = r130_payload.get("payload_hash")
+        hash_payload = dict(r130_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R130 route-signature payload hash mismatch")
+        validation_circuits = r130_payload.get("artifacts", {}).get(
+            "validation_circuits", []
+        )
+        if len(validation_circuits) != 60:
+            errors.append("R130 route-signature result must emit 60 validation circuits")
+        for relative_path in validation_circuits:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R130 validation circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R130 validation circuit is not OpenQASM 3: {relative_path}")
+        if "Verifier holdout performance" not in r130_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R130 claim boundary must exclude verifier holdout performance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -34396,6 +34589,7 @@ def audit(root: Path) -> dict:
             "generative_spoofer_refresh": b8_generative_spoofer_status,
             "r128_transpiler_loop_layout_ranking": r128_status,
             "r129_seed_robust_layout_ranking": r129_status,
+            "r130_route_signature_candidate_expansion": r130_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -35727,6 +35921,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r129_seed_robust_layout_ranking": str(
                 research / "B4_B8_R129_seed_robust_layout_ranking.md"
+            ),
+            "b4_b8_r130_route_signature_candidate_expansion": str(
+                research / "B4_B8_R130_route_signature_candidate_expansion.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

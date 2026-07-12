@@ -968,6 +968,39 @@ current_results:
     caveat: r129_unseen_seed_failure_is_not_a_bqp_boundary_result
     result: ../results/B4_B8_R129_seed_robust_layout_ranking_v0.json
     markdown_report: ../research/B4_B8_R129_seed_robust_layout_ranking.md
+  b10_t2_b4_b8_r130_route_signature_candidate_expansion_v0:
+    status: route_signature_expansion_negative_boundary_not_bqp_claim
+    model_status: expanded_route_pool_keeps_b10_t2_credit_blocked
+    method: b4_b8_r130_route_signature_candidate_expansion_v0
+    source_b8_result: ../results/B4_B8_R130_route_signature_candidate_expansion_v0.json
+    source_target_id: T-B4-002ae/T-B8-003ai/T-B10-009w
+    upstream_target_id: T-B4-002ad/T-B8-003ah/T-B10-009v
+    dependency_benchmark: B4/B8
+    enumerated_mapping_count: 30240
+    available_route_signature_count: 6720
+    retained_candidate_count: 312
+    retained_unique_route_signature_count: 282
+    total_compilation_count: 2724
+    selector_changed_from_r129_count: 2
+    selected_from_expansion_count: 1
+    positive_validation_lower_quantile_count: 1
+    eight_of_ten_validation_win_count: 1
+    route_expansion_gate_passed: false
+    acceptance_holdout_executed: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    explicit_not_bqp_separation: true
+    new_credit_delta: 0
+    validation_error_count: 0
+    caveat: r130_route_signature_expansion_is_compiler_diagnostic_not_bqp_evidence
+    result: ../results/B4_B8_R130_route_signature_candidate_expansion_v0.json
+    markdown_report: ../research/B4_B8_R130_route_signature_candidate_expansion.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0
