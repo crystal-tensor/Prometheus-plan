@@ -1604,6 +1604,55 @@ current_results:
     caveat: r134_generic_mapping_reduces_losses_but_qft_and_no_loss_gate_still_fail
     result: ../results/B4_B8_R134_family_agnostic_mapping_rule_v0.json
     markdown_report: ../research/B4_B8_R134_family_agnostic_mapping_rule.md
+  b4_b8_r135_dense_interaction_fallback_v0:
+    status: dense_interaction_deterministic_fallback_boundary
+    model_status: seeded_mapping_portfolio_selected_without_validation_baseline_access
+    method: b4_b8_r135_dense_interaction_fallback_v0
+    source_target_id: T-B4-002aj/T-B8-003an/T-B10-009ab
+    upstream_target_id: T-B4-002ai/T-B8-003am/T-B10-009aa
+    validation_task_count: 4
+    validation_group_count: 12
+    candidate_seed_count: 80
+    candidate_generation_compilation_count: 960
+    unique_candidate_mapping_count: 538
+    portfolio_candidate_compilation_count: 1076
+    automatic_validation_compilation_count: 120
+    total_compilation_count: 2156
+    validation_seed_count: 10
+    validation_row_count: 120
+    source_circuit_count: 4
+    source_circuits_unseen_vs_r134_count: 4
+    temporal_rule_count: 5
+    temporal_top_k: 8
+    portfolio_policy_count: 2
+    portfolio_compile_seed: 13500
+    selected_default_policy_group_count: 10
+    selected_lookahead_policy_group_count: 2
+    candidate_selection_uses_compiled_exposure: true
+    validation_baseline_read_during_selection: false
+    selected_qasm_preexisting_count: 12
+    selected_qasm_replay_match_count: 12
+    win_tie_loss_counts_vs_automatic: [100, 13, 7]
+    no_loss_group_count_vs_automatic_default: 7
+    automatic_baseline_no_loss_gate_passed: false
+    exact_qasm_cross_process_replay_claimed: true
+    fresh_candidate_and_validation_seed_blocks_used: true
+    r134_seeds_reused: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r135_portfolio_reduces_dense_family_losses_to_seven_but_no_loss_gate_still_fails
+    result: ../results/B4_B8_R135_dense_interaction_fallback_v0.json
+    markdown_report: ../research/B4_B8_R135_dense_interaction_fallback.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

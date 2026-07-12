@@ -2398,6 +2398,22 @@ no-loss gate: QFT loses `10/10` on every backend, and Jakarta/Lagos RXX or K3,3
 rows retain losses. No verifier acceptance, hardware, soundness, advantage,
 BQP, or new B10 credit is claimed. Requirements pass `10/10`.
 
+`T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
+dense-interaction deterministic fallback boundary. For each new inverse-QFT,
+scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules
+contribute top mappings while `80` disjoint seeded automatic-layout runs add
+candidate initial mappings. The `538` unique group-level mappings are recompiled
+under default and lookahead policies; `1,076` portfolio candidates are ranked by
+historical compiled exposure before the validation baselines are opened. Across
+`2,156` total compilations, the isolated validation block records `100` wins,
+`13` ties, and `7` losses, reducing R134's `54` losses. Seven of twelve groups
+are loss-free, selected QASM replays `12/12` across a fresh process, and ten
+groups choose fixed-map default routing while two choose lookahead. The strict
+automatic-baseline no-loss gate still fails: inverse-QFT retains one loss each
+on Lagos and Oslo, complete Ising retains two on Jakarta and Oslo, and Lagos
+dense XY retains one. No verifier acceptance, hardware, soundness, advantage,
+BQP, or new B10 credit is claimed. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

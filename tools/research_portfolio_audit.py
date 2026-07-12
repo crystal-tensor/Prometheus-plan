@@ -34936,6 +34936,214 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R134 claim boundary must exclude verifier acceptance")
 
+    r135_result_path = results / "B4_B8_R135_dense_interaction_fallback_v0.json"
+    r135_report_path = research / "B4_B8_R135_dense_interaction_fallback.md"
+    r135_status = {
+        "path": str(r135_result_path),
+        "report_path": str(r135_report_path),
+        "exists": r135_result_path.exists(),
+        "report_exists": r135_report_path.exists(),
+    }
+    r135_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r135_dense_interaction_fallback_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r135_dense_interaction_fallback_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r135_dense_interaction_fallback_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r135_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R135 dense fallback")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R135 manifest missing existing {field}: {value}")
+    if not r135_result_path.exists():
+        errors.append(f"missing R135 dense fallback result: {r135_result_path}")
+    elif not r135_report_path.exists():
+        errors.append(f"missing R135 dense fallback report: {r135_report_path}")
+    else:
+        r135_payload = json.loads(read(r135_result_path))
+        r135_summary = r135_payload.get("summary", {})
+        r135_claims = r135_payload.get("claim_boundary", {})
+        r135_status.update(
+            {
+                "status": r135_payload.get("status"),
+                "method": r135_payload.get("method"),
+                "requirements_passed": r135_payload.get("requirements_passed"),
+                "requirements_failed": r135_payload.get("requirements_failed"),
+                "total_compilation_count": r135_summary.get(
+                    "total_compilation_count"
+                ),
+                "unique_candidate_mapping_count": r135_summary.get(
+                    "unique_candidate_mapping_count"
+                ),
+                "selected_qasm_replay_match_count": r135_summary.get(
+                    "selected_qasm_replay_match_count"
+                ),
+                "loss_count_vs_automatic_default": r135_summary.get(
+                    "loss_count_vs_automatic_default"
+                ),
+                "no_loss_group_count_vs_automatic_default": r135_summary.get(
+                    "no_loss_group_count_vs_automatic_default"
+                ),
+                "automatic_baseline_no_loss_gate_passed": r135_summary.get(
+                    "automatic_baseline_no_loss_gate_passed"
+                ),
+                "source_circuit_count": len(
+                    r135_payload.get("artifacts", {}).get("source_circuits", [])
+                ),
+                "selected_circuit_count": len(
+                    r135_payload.get("artifacts", {}).get("selected_circuits", [])
+                ),
+            }
+        )
+        expected_r135_summary = {
+            "validation_task_count": 4,
+            "validation_group_count": 12,
+            "candidate_seed_count": 80,
+            "candidate_generation_compilation_count": 960,
+            "unique_candidate_mapping_count": 538,
+            "portfolio_candidate_compilation_count": 1076,
+            "automatic_validation_compilation_count": 120,
+            "total_compilation_count": 2156,
+            "validation_seed_count": 10,
+            "validation_row_count": 120,
+            "source_circuit_count": 4,
+            "source_circuits_unseen_vs_r134_count": 4,
+            "temporal_rule_count": 5,
+            "temporal_top_k": 8,
+            "portfolio_policy_count": 2,
+            "portfolio_compile_seed": 13500,
+            "selected_default_policy_group_count": 10,
+            "selected_lookahead_policy_group_count": 2,
+            "candidate_selection_uses_compiled_exposure": True,
+            "validation_baseline_read_during_selection": False,
+            "selected_qasm_preexisting_count": 12,
+            "selected_qasm_replay_match_count": 12,
+            "win_count_vs_automatic_default": 100,
+            "tie_count_vs_automatic_default": 13,
+            "loss_count_vs_automatic_default": 7,
+            "no_loss_group_count_vs_automatic_default": 7,
+            "automatic_baseline_no_loss_gate_passed": False,
+            "exact_qasm_cross_process_replay_claimed": True,
+            "fresh_candidate_and_validation_seed_blocks_used": True,
+            "r134_seeds_reused": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r135_payload.get("status") != "dense_interaction_deterministic_fallback_boundary":
+            errors.append("R135 dense fallback status mismatch")
+        if r135_payload.get("method") != "b4_b8_r135_dense_interaction_fallback_v0":
+            errors.append("R135 dense fallback method mismatch")
+        if r135_payload.get("source_target_id") != "T-B4-002aj/T-B8-003an/T-B10-009ab":
+            errors.append("R135 dense fallback target mismatch")
+        if r135_payload.get("requirements_passed") != 10 or r135_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R135 dense fallback requirements must pass 10/10")
+        if len(r135_payload.get("source_circuit_rows", [])) != 4:
+            errors.append("R135 dense fallback result must contain four source rows")
+        if len(r135_payload.get("validation_group_rows", [])) != 12:
+            errors.append("R135 dense fallback result must contain 12 group rows")
+        if len(r135_payload.get("portfolio_candidate_rows", [])) != 1076:
+            errors.append("R135 dense fallback result must contain 1076 portfolio rows")
+        if len(r135_payload.get("validation_rows", [])) != 120:
+            errors.append("R135 dense fallback result must contain 120 validation rows")
+        for field, expected in expected_r135_summary.items():
+            if r135_summary.get(field) != expected:
+                errors.append(f"R135 dense fallback {field} mismatch")
+        manifest_fields = [
+            "validation_task_count",
+            "validation_group_count",
+            "candidate_seed_count",
+            "candidate_generation_compilation_count",
+            "unique_candidate_mapping_count",
+            "portfolio_candidate_compilation_count",
+            "automatic_validation_compilation_count",
+            "total_compilation_count",
+            "validation_seed_count",
+            "validation_row_count",
+            "source_circuit_count",
+            "source_circuits_unseen_vs_r134_count",
+            "temporal_rule_count",
+            "temporal_top_k",
+            "portfolio_policy_count",
+            "portfolio_compile_seed",
+            "selected_default_policy_group_count",
+            "selected_lookahead_policy_group_count",
+            "candidate_selection_uses_compiled_exposure",
+            "validation_baseline_read_during_selection",
+            "selected_qasm_preexisting_count",
+            "selected_qasm_replay_match_count",
+            "no_loss_group_count_vs_automatic_default",
+            "automatic_baseline_no_loss_gate_passed",
+            "exact_qasm_cross_process_replay_claimed",
+            "fresh_candidate_and_validation_seed_blocks_used",
+            "r134_seeds_reused",
+            "acceptance_holdout_executed",
+            "readout_mitigation_tested",
+            "current_backend_calibration_used",
+            "hardware_execution_performed",
+            "protocol_soundness_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "new_credit_delta",
+        ]
+        for label, manifest_row in r135_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in manifest_fields:
+                if manifest_row.get(field) != r135_summary.get(field):
+                    errors.append(f"{label} R135 manifest {field} mismatch")
+        payload_hash = r135_payload.get("payload_hash")
+        hash_payload = dict(r135_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R135 dense fallback payload hash mismatch")
+        source_circuits = r135_payload.get("artifacts", {}).get("source_circuits", [])
+        selected_circuits = r135_payload.get("artifacts", {}).get(
+            "selected_circuits", []
+        )
+        if len(source_circuits) != 4:
+            errors.append("R135 dense fallback result must emit four source circuits")
+        if len(selected_circuits) != 12:
+            errors.append("R135 dense fallback result must emit 12 selected circuits")
+        for relative_path in [*source_circuits, *selected_circuits]:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R135 circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R135 circuit is not OpenQASM 3: {relative_path}")
+        if "Verifier acceptance" not in r135_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R135 claim boundary must exclude verifier acceptance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -35376,6 +35584,7 @@ def audit(root: Path) -> dict:
             "r132_topology_constrained_route_policy": r132_status,
             "r133_unseen_circuit_family_holdout": r133_status,
             "r134_family_agnostic_mapping_rule": r134_status,
+            "r135_dense_interaction_fallback": r135_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -36722,6 +36931,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r134_family_agnostic_mapping_rule": str(
                 research / "B4_B8_R134_family_agnostic_mapping_rule.md"
+            ),
+            "b4_b8_r135_dense_interaction_fallback": str(
+                research / "B4_B8_R135_dense_interaction_fallback.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
