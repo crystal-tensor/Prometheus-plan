@@ -1141,6 +1141,53 @@ current_results:
     caveat: r125_historical_snapshot_replay_rejects_the_r124_candidate
     result: ../results/B4_B8_R125_historical_snapshot_replay_v0.json
     markdown_report: ../research/B4_B8_R125_historical_snapshot_replay.md
+  b4_b8_r126_calibration_attribution_ledger_v0:
+    status: historical_snapshot_failure_attribution_boundary
+    model_status: r125_failures_split_by_readout_routing_bundle_and_seed_block
+    method: b4_b8_r126_calibration_attribution_ledger_v0
+    source_target_id: T-B4-002aa/T-B8-003ae/T-B10-009s
+    upstream_target_id: T-B4-002z/T-B8-003ad/T-B10-009r
+    dependency_benchmark: B8
+    source_trial_row_count: 480
+    snapshot_count: 3
+    task_count: 2
+    task_attribution_row_count: 6
+    bundle_stratum_count: 60
+    block_stratum_count: 30
+    correlation_count: 7
+    candidate_shots: 8192
+    candidate_pass_rates:
+      FakeOslo: [0.8625, 1.0]
+      FakeJakartaV2: [0.8, 1.0]
+      FakeLagosV2: [0.0125, 0.0]
+    readout_any_error_proxy:
+      FakeOslo: 0.0782081772459865
+      FakeJakartaV2: 0.15530463903749403
+      FakeLagosV2: 0.6702439051034759
+    ghz_graph_cx_occurrence_counts: [11, 8]
+    routing_sensitive_snapshot_count: 2
+    descriptive_spearman_readout_any_error: -0.7463517925331651
+    descriptive_spearman_cx_any_error: -0.8696565534786727
+    descriptive_spearman_combined_any_error: -0.8406680016960503
+    correlations_are_causal: false
+    mitigation_packet_count: 4
+    mitigation_tested: false
+    holdout_reused_for_acceptance: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r126_attribution_is_descriptive_and_no_mitigation_was_tested
+    result: ../results/B4_B8_R126_calibration_attribution_ledger_v0.json
+    markdown_report: ../research/B4_B8_R126_calibration_attribution_ledger.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

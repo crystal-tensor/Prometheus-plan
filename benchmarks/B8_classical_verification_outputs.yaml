@@ -1250,6 +1250,47 @@ current_results:
     caveat: r125_extra_shots_do_not_repair_historical_snapshot_bias
     result: ../results/B4_B8_R125_historical_snapshot_replay_v0.json
     markdown_report: ../research/B4_B8_R125_historical_snapshot_replay.md
+  b4_b8_r126_calibration_attribution_ledger_v0:
+    status: historical_snapshot_failure_attribution_boundary
+    model_status: r125_failures_split_by_readout_routing_bundle_and_seed_block
+    method: b4_b8_r126_calibration_attribution_ledger_v0
+    source_target_id: T-B4-002aa/T-B8-003ae/T-B10-009s
+    upstream_target_id: T-B4-002z/T-B8-003ad/T-B10-009r
+    source_trial_row_count: 480
+    task_attribution_row_count: 6
+    bundle_stratum_count: 60
+    block_stratum_count: 30
+    candidate_pass_rates:
+      FakeOslo: [0.8625, 1.0]
+      FakeJakartaV2: [0.8, 1.0]
+      FakeLagosV2: [0.0125, 0.0]
+    task_order: [private_bundle_ghz_n6, private_bundle_graph_n6]
+    combined_any_error_proxy:
+      FakeOslo: [0.1584572760319789, 0.13602375813165046]
+      FakeJakartaV2: [0.22674446501126988, 0.21536988020153058]
+      FakeLagosV2: [0.7289784353863349, 0.7097061583399051]
+    routing_sensitive_snapshot_count: 2
+    descriptive_spearman_combined_any_error: -0.8406680016960503
+    descriptive_only: true
+    mitigation_packets:
+      - R127-P1-calibration-aware-physical-subset
+      - R127-P2-routing-readout-ablation
+      - R127-P3-disjoint-readout-mitigation
+      - R127-P4-current-provider-or-transcript
+    mitigation_tested: false
+    holdout_reused_for_acceptance: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r126_diagnostic_attribution_not_a_mitigation_or_causal_claim
+    result: ../results/B4_B8_R126_calibration_attribution_ledger_v0.json
+    markdown_report: ../research/B4_B8_R126_calibration_attribution_ledger.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

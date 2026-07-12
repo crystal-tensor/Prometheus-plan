@@ -2264,6 +2264,21 @@ frozen historical system properties for local Aer testing, not current
 calibration, provider access, hardware execution, soundness, advantage, BQP
 separation, or B10 credit. Requirements pass `13/13`.
 
+`T-B4-002aa` / `T-B8-003ae` / `T-B10-009s` now adds the R126 calibration
+attribution ledger. It consumes all `480` fixed R125 rows without rerunning or
+tuning the failed holdout, parses six representative OpenQASM 3 circuits, and
+emits six snapshot/task attribution rows, `60` hidden-bundle strata, `30`
+seed-block strata, seven descriptive correlations, and four mitigation
+packets. FakeOslo/FakeJakartaV2 graph tasks pass `80/80`, while their routed
+11-CX GHZ tasks pass `69/80` and `64/80`. FakeLagosV2 has readout-any-error
+proxy `0.6702`; its GHZ/graph tasks pass only `1/80` and `0/80`. Combined
+exposure versus candidate pass rate has descriptive Spearman rho `-0.8407`
+over only six rows, so R126 does not promote a causal claim. No mitigation is
+tested and the R125 holdout is not reused for acceptance. The next gate is a
+public preregistration for physical-qubit selection, routing/readout ablation,
+and disjoint readout mitigation; hardware, soundness, advantage, BQP, and B10
+credit remain unclaimed. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original
