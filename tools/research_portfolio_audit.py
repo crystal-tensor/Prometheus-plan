@@ -33792,6 +33792,175 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R128 claim boundary must exclude acceptance holdout performance")
 
+    r129_result_path = results / "B4_B8_R129_seed_robust_layout_ranking_v0.json"
+    r129_report_path = research / "B4_B8_R129_seed_robust_layout_ranking.md"
+    r129_status = {
+        "path": str(r129_result_path),
+        "report_path": str(r129_report_path),
+        "exists": r129_result_path.exists(),
+        "report_exists": r129_report_path.exists(),
+    }
+    r129_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r129_seed_robust_layout_ranking_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r129_seed_robust_layout_ranking_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r129_seed_robust_layout_ranking_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r129_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R129 seed-robust ranking")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R129 manifest missing existing {field}: {value}")
+    if not r129_result_path.exists():
+        errors.append(f"missing R129 seed-robust result: {r129_result_path}")
+    elif not r129_report_path.exists():
+        errors.append(f"missing R129 seed-robust report: {r129_report_path}")
+    else:
+        r129_payload = json.loads(read(r129_result_path))
+        r129_summary = r129_payload.get("summary", {})
+        r129_claims = r129_payload.get("claim_boundary", {})
+        r129_status.update(
+            {
+                "status": r129_payload.get("status"),
+                "method": r129_payload.get("method"),
+                "requirements_passed": r129_payload.get("requirements_passed"),
+                "requirements_failed": r129_payload.get("requirements_failed"),
+                "candidate_count": r129_summary.get("candidate_count"),
+                "training_seed_count": r129_summary.get("training_seed_count"),
+                "validation_seed_count": r129_summary.get("validation_seed_count"),
+                "total_compilation_count": r129_summary.get("total_compilation_count"),
+                "selector_changed_from_r128_count": r129_summary.get(
+                    "selector_changed_from_r128_count"
+                ),
+                "positive_validation_mean_count": r129_summary.get(
+                    "positive_validation_mean_count"
+                ),
+                "positive_validation_lower_quantile_count": r129_summary.get(
+                    "positive_validation_lower_quantile_count"
+                ),
+                "eight_of_ten_validation_win_count": r129_summary.get(
+                    "eight_of_ten_validation_win_count"
+                ),
+                "robust_unseen_seed_gate_passed": r129_summary.get(
+                    "robust_unseen_seed_gate_passed"
+                ),
+                "validation_circuit_count": len(
+                    r129_payload.get("artifacts", {}).get("validation_circuits", [])
+                ),
+            }
+        )
+        expected_r129_summary = {
+            "candidate_count": 60,
+            "training_seed_count": 8,
+            "validation_seed_count": 10,
+            "candidate_training_compilation_count": 480,
+            "training_default_compilation_count": 48,
+            "validation_selected_compilation_count": 60,
+            "validation_default_compilation_count": 60,
+            "validation_reference_compilation_count": 60,
+            "total_compilation_count": 708,
+            "selector_changed_from_r128_count": 1,
+            "positive_validation_mean_count": 4,
+            "positive_validation_lower_quantile_count": 1,
+            "eight_of_ten_validation_win_count": 1,
+            "validation_improvement_over_r128_selector_count": 1,
+            "robust_unseen_seed_gate_passed": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r129_payload.get("status") != "unseen_transpiler_seed_robustness_boundary":
+            errors.append("R129 seed-robust status mismatch")
+        if r129_payload.get("method") != "b4_b8_r129_seed_robust_layout_ranking_v0":
+            errors.append("R129 seed-robust method mismatch")
+        if r129_payload.get("source_target_id") != "T-B4-002ad/T-B8-003ah/T-B10-009v":
+            errors.append("R129 seed-robust target mismatch")
+        if r129_payload.get("requirements_passed") != 10 or r129_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R129 seed-robust requirements must pass 10/10")
+        if len(r129_payload.get("candidate_training_rows", [])) != 60:
+            errors.append("R129 seed-robust result must contain 60 candidate rows")
+        if len(r129_payload.get("selected_layout_rows", [])) != 6:
+            errors.append("R129 seed-robust result must select six layouts")
+        if set(r129_summary.get("training_seeds", [])) & set(
+            r129_summary.get("validation_seeds", [])
+        ):
+            errors.append("R129 training and validation seeds must be disjoint")
+        for field, expected in expected_r129_summary.items():
+            if r129_summary.get(field) != expected:
+                errors.append(f"R129 seed-robust {field} mismatch")
+        for label, manifest_row in r129_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in [
+                "candidate_count",
+                "training_seed_count",
+                "validation_seed_count",
+                "total_compilation_count",
+                "selector_changed_from_r128_count",
+                "positive_validation_mean_count",
+                "positive_validation_lower_quantile_count",
+                "eight_of_ten_validation_win_count",
+                "robust_unseen_seed_gate_passed",
+                "acceptance_holdout_executed",
+                "readout_mitigation_tested",
+                "current_backend_calibration_used",
+                "hardware_execution_performed",
+                "protocol_soundness_claimed",
+                "quantum_advantage_claimed",
+                "bqp_separation_claimed",
+                "new_credit_delta",
+            ]:
+                if manifest_row.get(field) != r129_summary.get(field):
+                    errors.append(f"{label} R129 manifest {field} mismatch")
+        payload_hash = r129_payload.get("payload_hash")
+        hash_payload = dict(r129_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R129 seed-robust payload hash mismatch")
+        validation_circuits = r129_payload.get("artifacts", {}).get(
+            "validation_circuits", []
+        )
+        if len(validation_circuits) != 60:
+            errors.append("R129 seed-robust result must emit 60 validation circuits")
+        for relative_path in validation_circuits:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R129 validation circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R129 validation circuit is not OpenQASM 3: {relative_path}")
+        if "Verifier holdout performance" not in r129_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R129 claim boundary must exclude verifier holdout performance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -34226,6 +34395,7 @@ def audit(root: Path) -> dict:
             "real_backend_packet_scout": b8_real_backend_packet_scout_status,
             "generative_spoofer_refresh": b8_generative_spoofer_status,
             "r128_transpiler_loop_layout_ranking": r128_status,
+            "r129_seed_robust_layout_ranking": r129_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -35554,6 +35724,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r128_transpiler_loop_layout_ranking": str(
                 research / "B4_B8_R128_transpiler_loop_layout_ranking.md"
+            ),
+            "b4_b8_r129_seed_robust_layout_ranking": str(
+                research / "B4_B8_R129_seed_robust_layout_ranking.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

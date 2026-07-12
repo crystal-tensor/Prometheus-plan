@@ -1361,6 +1361,38 @@ current_results:
     caveat: r128_only_one_of_six_groups_wins_at_least_four_of_five_transpiler_seeds
     result: ../results/B4_B8_R128_transpiler_loop_layout_ranking_v0.json
     markdown_report: ../research/B4_B8_R128_transpiler_loop_layout_ranking.md
+  b4_b8_r129_seed_robust_layout_ranking_v0:
+    status: unseen_transpiler_seed_robustness_boundary
+    model_status: r128_mean_selector_replaced_by_lower_tail_training_objective
+    method: b4_b8_r129_seed_robust_layout_ranking_v0
+    source_target_id: T-B4-002ad/T-B8-003ah/T-B10-009v
+    upstream_target_id: T-B4-002ac/T-B8-003ag/T-B10-009u
+    candidate_count: 60
+    training_seed_count: 8
+    validation_seed_count: 10
+    candidate_training_compilation_count: 480
+    total_compilation_count: 708
+    selector_changed_from_r128_count: 1
+    positive_validation_mean_count: 4
+    positive_validation_lower_quantile_count: 1
+    eight_of_ten_validation_win_count: 1
+    validation_improvement_over_r128_selector_count: 1
+    robust_unseen_seed_gate_passed: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r129_only_lagos_graph_survives_the_disjoint_seed_validation_gate
+    result: ../results/B4_B8_R129_seed_robust_layout_ranking_v0.json
+    markdown_report: ../research/B4_B8_R129_seed_robust_layout_ranking.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

@@ -2306,6 +2306,20 @@ R125 acceptance rows are not read, and no mitigation, current calibration,
 hardware, soundness, advantage, BQP, or B10 credit is claimed. Requirements
 pass `10/10`.
 
+`T-B4-002ad` / `T-B8-003ah` / `T-B10-009v` now adds the R129
+seed-robust layout ranking gate. The selector is trained on eight fixed
+transpiler seeds using the lower `20%` paired exposure gain before win count
+and mean gain, then evaluated on ten disjoint seeds that are not compiled until
+after selection. Across `708` compilations, the robust objective changes one
+of six R128 selectors. Four groups retain positive unseen mean gain, but only
+Lagos graph has positive unseen lower-tail gain and wins at least `8/10` seeds;
+it wins `10/10`. Jakarta GHZ improves over the R128 selector but remains
+negative on mean gain and wins only `3/10`. The robust unseen-seed gate fails,
+showing that the retained static Top-10 candidate set needs route-signature
+expansion rather than another weight adjustment. No R125 acceptance rows,
+verifier holdout, mitigation, current calibration, hardware, soundness,
+advantage, BQP, or B10 credit is used or claimed. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original
