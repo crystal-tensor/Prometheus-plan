@@ -36757,6 +36757,157 @@ def audit(root: Path) -> dict:
         ).get("what_is_not_supported", ""):
             errors.append("R141 holdout must exclude scalable pilot acquisition")
 
+    r142_design_result_path = results / "B4_B8_R142_seed_robust_lcb_mapping_design_v0.json"
+    r142_design_report_path = research / "B4_B8_R142_seed_robust_lcb_mapping_design.md"
+    r142_contract_path = benchmarks / "B4_B8_R142_seed_robust_lcb_mapping_holdout_contract_v0.json"
+    r142_contract_sha256 = (
+        hashlib.sha256(r142_contract_path.read_bytes()).hexdigest()
+        if r142_contract_path.exists()
+        else None
+    )
+    r142_status = {
+        "path": str(r142_design_result_path),
+        "report_path": str(r142_design_report_path),
+        "contract_path": str(r142_contract_path),
+        "exists": r142_design_result_path.exists(),
+        "report_exists": r142_design_report_path.exists(),
+        "contract_exists": r142_contract_path.exists(),
+        "contract_sha256": r142_contract_sha256,
+    }
+    r142_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r142_seed_robust_lcb_mapping_design_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r142_seed_robust_lcb_mapping_design_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r142_seed_robust_lcb_mapping_design_v0")),
+    ]
+    for label, manifest_row in r142_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R142 seed-robust LCB design")
+            continue
+        for field in ["result", "markdown_report", "holdout_contract"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R142 manifest missing existing {field}: {value}")
+        if manifest_row.get("holdout_contract_sha256") != r142_contract_sha256:
+            errors.append(f"{label} R142 contract hash mismatch")
+    if not all(
+        path.exists()
+        for path in [r142_design_result_path, r142_design_report_path, r142_contract_path]
+    ):
+        errors.append("R142 design result, report, or holdout contract missing")
+    else:
+        r142 = json.loads(read(r142_design_result_path))
+        r142_summary = r142.get("summary", {})
+        r142_status.update(
+            {
+                "status": r142.get("status"),
+                "method": r142.get("method"),
+                "requirements_passed": r142.get("requirements_passed"),
+                "requirements_failed": r142.get("requirements_failed"),
+                "positive_lcb_group_count": r142_summary.get(
+                    "positive_lcb_group_count"
+                ),
+                "lagos_ising_lcb_delta_vs_automatic": r142_summary.get(
+                    "lagos_ising_lcb_delta_vs_automatic"
+                ),
+            }
+        )
+        expected_r142 = {
+            "source_candidate_count": 1536,
+            "group_count": 12,
+            "shortlist_unique_qasm_count_per_group": 8,
+            "shortlist_candidate_count": 96,
+            "design_seed_count": 16,
+            "shots_per_execution": 2048,
+            "lcb_z": 1.96,
+            "simulated_circuit_execution_count": 1728,
+            "total_simulated_shots": 3538944,
+            "positive_lcb_group_count": 8,
+            "changed_from_r140_group_count": 10,
+            "minimum_selected_semantic_fidelity": 0.9999999999999956,
+            "selected_qasm_replay_match_count": 12,
+            "lagos_ising_selected_mapping": [5, 3, 6, 4, 1, 0],
+            "lagos_ising_selected_policy_id": "selected_o3_default",
+            "lagos_ising_selected_realization_seed": 13601,
+            "lagos_ising_mean_delta_vs_automatic": 0.01062520599853841,
+            "lagos_ising_lcb_delta_vs_automatic": 0.005234377251983724,
+            "lagos_ising_win_count_vs_automatic": 12,
+            "r141_holdout_rows_read_during_selection": 0,
+            "hidden_holdout_executed": False,
+            "new_credit_delta": 0,
+        }
+        if r142.get("status") != "seed_robust_lower_confidence_bound_mapping_frozen_before_holdout":
+            errors.append("R142 seed-robust LCB design status mismatch")
+        if r142.get("method") != "b4_b8_r142_seed_robust_lcb_mapping_design_v0":
+            errors.append("R142 seed-robust LCB method mismatch")
+        if r142.get("source_target_id") != "T-B4-002as/T-B8-003aw/T-B10-009ak":
+            errors.append("R142 seed-robust LCB target mismatch")
+        if r142.get("requirements_passed") != 10 or r142.get("requirements_failed") != 0:
+            errors.append("R142 seed-robust LCB requirements must pass 10/10")
+        for field, value in expected_r142.items():
+            if r142_summary.get(field) != value:
+                errors.append(f"R142 seed-robust LCB {field} mismatch")
+        if len(r142.get("design_rows", [])) != 96 or len(r142.get("group_rows", [])) != 12:
+            errors.append("R142 design shortlist or group ledger mismatch")
+        for row in r142.get("group_rows", []):
+            relative_path = row.get("selected_circuit_path")
+            if not relative_path or not (root / relative_path).exists():
+                errors.append(f"R142 selected QASM missing: {relative_path}")
+            elif "OPENQASM 3" not in read(root / relative_path):
+                errors.append(f"R142 selected circuit is not OpenQASM 3: {relative_path}")
+            elif hashlib.sha256((root / relative_path).read_bytes()).hexdigest() != row.get(
+                "selected_circuit_sha256"
+            ):
+                errors.append(f"R142 selected QASM hash mismatch: {relative_path}")
+        hash_payload = dict(r142)
+        payload_hash = hash_payload.pop("payload_hash", None)
+        if payload_hash != hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest():
+            errors.append("R142 design payload hash mismatch")
+        contract = json.loads(read(r142_contract_path))
+        if r142_contract_sha256 != "60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6":
+            errors.append("R142 holdout contract file hash mismatch")
+        if contract.get("contract_id") != "B4-B8-R142-seed-robust-lcb-mapping-holdout-v0":
+            errors.append("R142 holdout contract ID mismatch")
+        if contract.get("contract_status") != "public_preregistration_execution_unopened":
+            errors.append("R142 holdout contract must remain unopened")
+        if contract.get("target_id") != "T-B4-002at/T-B8-003ax/T-B10-009al":
+            errors.append("R142 holdout contract target mismatch")
+        if "challenge_secret" in contract or "trial_rows" in contract:
+            errors.append("R142 holdout contract must not contain secret or trial rows")
+        bindings = contract.get("source_bindings", {})
+        if bindings.get("r142_design_payload_hash") != payload_hash:
+            errors.append("R142 holdout contract payload binding mismatch")
+        if bindings.get("r142_design_sha256") != hashlib.sha256(
+            r142_design_result_path.read_bytes()
+        ).hexdigest():
+            errors.append("R142 holdout contract design file binding mismatch")
+        contract_artifacts = {
+            row.get("artifact_id"): row.get("sha256")
+            for row in contract.get("artifact_bindings", [])
+        }
+        result_artifacts = {
+            f"{row.get('snapshot')}::{row.get('task_id')}": row.get(
+                "selected_circuit_sha256"
+            )
+            for row in r142.get("group_rows", [])
+        }
+        if contract_artifacts != result_artifacts:
+            errors.append("R142 holdout artifact bindings drift from design")
+        design = contract.get("challenge_design", {})
+        if (
+            design.get("paired_trial_row_count") != 96
+            or design.get("simulated_circuit_execution_count") != 288
+            or design.get("total_simulated_shots") != 1179648
+        ):
+            errors.append("R142 holdout challenge design mismatch")
+        if len(contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R142 holdout contract must fix A1-A10")
+        if "hidden-seed acceptance" not in r142.get("claim_boundary", {}).get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R142 claim boundary must exclude hidden-seed acceptance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -37207,6 +37358,7 @@ def audit(root: Path) -> dict:
             "r140_output_aware_mapping_holdout": r140_holdout_status,
             "r141_hashed_output_sketch_design": r141_status,
             "r141_hashed_output_sketch_holdout": r141_holdout_status,
+            "r142_seed_robust_lcb_mapping_design": r142_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -38589,6 +38741,12 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r141_hashed_output_sketch_holdout": str(
                 research / "B4_B8_R141_hashed_output_sketch_holdout.md"
+            ),
+            "b4_b8_r142_seed_robust_lcb_mapping_design": str(
+                research / "B4_B8_R142_seed_robust_lcb_mapping_design.md"
+            ),
+            "b4_b8_r142_seed_robust_lcb_mapping_holdout_contract": str(
+                r142_contract_path
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

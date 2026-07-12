@@ -1980,6 +1980,46 @@ current_results:
     caveat: sketch_selection_and_portfolio_gates_pass_but_fresh_seed_Lagos_gate_A7_fails
     result: ../results/B4_B8_R141_hashed_output_sketch_holdout_v0.json
     markdown_report: ../research/B4_B8_R141_hashed_output_sketch_holdout.md
+  b4_b8_r142_seed_robust_lcb_mapping_design_v0:
+    status: seed_robust_lower_confidence_bound_mapping_frozen_before_holdout
+    model_status: r141_sketch_shortlist_ranked_on_disjoint_noisy_design_seeds
+    method: b4_b8_r142_seed_robust_lcb_mapping_design_v0
+    source_target_id: T-B4-002as/T-B8-003aw/T-B10-009ak
+    upstream_target_id: T-B4-002ar/T-B8-003av/T-B10-009aj
+    source_candidate_count: 1536
+    group_count: 12
+    shortlist_candidate_count: 96
+    design_seed_count: 16
+    shots_per_execution: 2048
+    lcb_z: 1.96
+    simulated_circuit_execution_count: 1728
+    total_simulated_shots: 3538944
+    positive_lcb_group_count: 8
+    changed_from_r140_group_count: 10
+    minimum_selected_semantic_fidelity: 0.9999999999999956
+    selected_qasm_preexisting_count: 12
+    selected_qasm_replay_match_count: 12
+    lagos_ising_selected_mapping: [5, 3, 6, 4, 1, 0]
+    lagos_ising_mean_delta_vs_automatic: 0.01062520599853841
+    lagos_ising_lcb_delta_vs_automatic: 0.005234377251983724
+    lagos_ising_win_count_vs_automatic: 12
+    r141_holdout_rows_read_during_selection: 0
+    hidden_holdout_executed: false
+    holdout_contract_sha256: 60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6
+    holdout_contract_status: public_preregistration_execution_unopened
+    efficient_production_mapper_claimed: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: lower_confidence_bound_design_is_not_hidden_seed_acceptance_or_efficient_production_mapping
+    result: ../results/B4_B8_R142_seed_robust_lcb_mapping_design_v0.json
+    markdown_report: ../research/B4_B8_R142_seed_robust_lcb_mapping_design.md
+    holdout_contract: B4_B8_R142_seed_robust_lcb_mapping_holdout_contract_v0.json
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

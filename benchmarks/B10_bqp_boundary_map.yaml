@@ -1566,6 +1566,40 @@ current_results:
     caveat: R141_rejected_on_fresh_seed_Lagos_A7_not_bqp_evidence
     result: ../results/B4_B8_R141_hashed_output_sketch_holdout_v0.json
     markdown_report: ../research/B4_B8_R141_hashed_output_sketch_holdout.md
+  b10_t2_b4_b8_r142_seed_robust_lcb_mapping_design_v0:
+    status: seed_robust_lcb_mapping_design_not_bqp_claim
+    model_status: disjoint_design_seed_LCB_selection_frozen_before_hidden_holdout_keeps_b10_credit_blocked
+    method: b4_b8_r142_seed_robust_lcb_mapping_design_v0
+    source_b8_result: ../results/B4_B8_R142_seed_robust_lcb_mapping_design_v0.json
+    source_target_id: T-B4-002as/T-B8-003aw/T-B10-009ak
+    upstream_target_id: T-B4-002ar/T-B8-003av/T-B10-009aj
+    dependency_benchmark: B4/B8
+    shortlist_candidate_count: 96
+    design_seed_count: 16
+    simulated_circuit_execution_count: 1728
+    positive_lcb_group_count: 8
+    changed_from_r140_group_count: 10
+    selected_qasm_replay_match_count: 12
+    lagos_ising_selected_mapping: [5, 3, 6, 4, 1, 0]
+    lagos_ising_lcb_delta_vs_automatic: 0.005234377251983724
+    lagos_ising_win_count_vs_automatic: 12
+    r141_holdout_rows_read_during_selection: 0
+    hidden_holdout_executed: false
+    holdout_contract_sha256: 60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6
+    efficient_production_mapper_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    explicit_not_bqp_separation: true
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: R142_LCB_design_is_not_hidden_acceptance_advantage_or_bqp_evidence
+    result: ../results/B4_B8_R142_seed_robust_lcb_mapping_design_v0.json
+    markdown_report: ../research/B4_B8_R142_seed_robust_lcb_mapping_design.md
+    holdout_contract: B4_B8_R142_seed_robust_lcb_mapping_holdout_contract_v0.json
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

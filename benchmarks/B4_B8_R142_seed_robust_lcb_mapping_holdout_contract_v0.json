@@ -1,0 +1,157 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition": "all design, shortlist, and selected-QASM bindings remain exact",
+      "condition_id": "A1"
+    },
+    {
+      "condition": "all 96 rows contain complete R142, R140, and automatic arms",
+      "condition_id": "A2"
+    },
+    {
+      "condition": "Lagos R142-minus-automatic mean noisy fidelity is nonnegative",
+      "condition_id": "A3"
+    },
+    {
+      "condition": "Lagos R142 wins at least 4 of 8 hidden rows against automatic",
+      "condition_id": "A4"
+    },
+    {
+      "condition": "Lagos R142-minus-R140 mean noisy fidelity is at least +0.005",
+      "condition_id": "A5"
+    },
+    {
+      "condition": "portfolio R142-minus-automatic bootstrap 95% lower bound is at least -0.005",
+      "condition_id": "A6"
+    },
+    {
+      "condition": "portfolio R142-minus-R140 mean noisy fidelity is at least -0.002",
+      "condition_id": "A7"
+    },
+    {
+      "condition": "at least 11 of 12 groups have mean R142-minus-R140 at least -0.01",
+      "condition_id": "A8"
+    },
+    {
+      "condition": "all phase artifacts replay and work equals 288 executions and 1,179,648 shots",
+      "condition_id": "A9"
+    },
+    {
+      "condition": "production efficiency, hardware, soundness, advantage, BQP, and new-credit claims remain false",
+      "condition_id": "A10"
+    }
+  ],
+  "algorithm_lock": {
+    "design_seed_count": 16,
+    "design_shots_per_execution": 2048,
+    "lcb_formula": "mean_delta_vs_automatic-1.96*standard_error",
+    "r141_holdout_rows_visible_to_design_selector": 0,
+    "shortlist_source": "R141 hashed-output-sketch score",
+    "shortlist_unique_qasm_count_per_group": 8
+  },
+  "artifact_bindings": [
+    {
+      "artifact_id": "FakeJakartaV2::dense_validation_complete_ising_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeJakartaV2_dense_validation_complete_ising_n6.qasm",
+      "sha256": "67dcb703349c5db53303eb12c6d7f487ca470b4d77472b1c7e4b18c1cbed99cc"
+    },
+    {
+      "artifact_id": "FakeJakartaV2::dense_validation_inverse_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeJakartaV2_dense_validation_inverse_qft_n6.qasm",
+      "sha256": "661bbbfa1d7719186f2091d95cb535866744c3aa1efa6570c110f39e31b2d209"
+    },
+    {
+      "artifact_id": "FakeJakartaV2::dense_validation_scrambled_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeJakartaV2_dense_validation_scrambled_qft_n6.qasm",
+      "sha256": "0f848be0b718708c31609094a944c019af8a5deacbfedf7a70d7492cad863f8a"
+    },
+    {
+      "artifact_id": "FakeJakartaV2::dense_validation_xy_network_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeJakartaV2_dense_validation_xy_network_n6.qasm",
+      "sha256": "6e2cfb6af8dd6a14987bd080cd44822e161532d622081d2fef7291ef42bd4e77"
+    },
+    {
+      "artifact_id": "FakeLagosV2::dense_validation_complete_ising_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeLagosV2_dense_validation_complete_ising_n6.qasm",
+      "sha256": "aaae4bfb346ae708feabe58035f076e9d523fc71de79d9629a73868a635f58e6"
+    },
+    {
+      "artifact_id": "FakeLagosV2::dense_validation_inverse_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeLagosV2_dense_validation_inverse_qft_n6.qasm",
+      "sha256": "f434cb802a697271caaac42a314be64ac6db15458f0070f8c984312bced4231f"
+    },
+    {
+      "artifact_id": "FakeLagosV2::dense_validation_scrambled_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeLagosV2_dense_validation_scrambled_qft_n6.qasm",
+      "sha256": "5d0c73f977140f25efde625751b9a4b0e49fde6788378f4e9d7317c1b2ce5156"
+    },
+    {
+      "artifact_id": "FakeLagosV2::dense_validation_xy_network_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeLagosV2_dense_validation_xy_network_n6.qasm",
+      "sha256": "f9053a99071f4190f2e37b4a53946f9bc99c45e3d28471fe16c8ee758f4be2df"
+    },
+    {
+      "artifact_id": "FakeOslo::dense_validation_complete_ising_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeOslo_dense_validation_complete_ising_n6.qasm",
+      "sha256": "ff417effd28ab7cb12b88d8e3676df50efcd3f2074e77704e2bfbb96f78d2d8f"
+    },
+    {
+      "artifact_id": "FakeOslo::dense_validation_inverse_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeOslo_dense_validation_inverse_qft_n6.qasm",
+      "sha256": "d89b75f913a2222d814e093cfcebe912ac8bc300970a2dc034970c128744c7e5"
+    },
+    {
+      "artifact_id": "FakeOslo::dense_validation_scrambled_qft_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeOslo_dense_validation_scrambled_qft_n6.qasm",
+      "sha256": "d8e23e9367b02bead7c540517566f73cf44828bb0d8d09c1650d02b515a177ee"
+    },
+    {
+      "artifact_id": "FakeOslo::dense_validation_xy_network_n6",
+      "path": "results/B4_B8_R142_seed_robust_lcb_mapping_design/selected_circuits/FakeOslo_dense_validation_xy_network_n6.qasm",
+      "sha256": "c1fe839f95fe96697877ad7beb3d5be5dfb20ac37a28a6ed0ca1e4618994ce4b"
+    }
+  ],
+  "challenge_design": {
+    "arms": [
+      "r142_lcb",
+      "r140_exact",
+      "automatic"
+    ],
+    "backend_task_group_count": 12,
+    "bootstrap_resample_count": 10000,
+    "hidden_transpiler_and_simulator_seeds_derived_after_preregistration": true,
+    "hidden_trial_count_per_group": 8,
+    "paired_trial_row_count": 96,
+    "shared_simulator_seed_within_three_arm_row": true,
+    "shots_per_circuit": 4096,
+    "simulated_circuit_execution_count": 288,
+    "total_simulated_shots": 1179648
+  },
+  "claim_boundary": {
+    "positive_result_requires_all_conditions": true,
+    "what_is_not_supported_even_if_accepted": "efficient production selection, current calibration, real hardware, mitigation, independent custody, protocol soundness, quantum advantage, BQP separation, or solved B4/B8/B10"
+  },
+  "contract_id": "B4-B8-R142-seed-robust-lcb-mapping-holdout-v0",
+  "contract_status": "public_preregistration_execution_unopened",
+  "phase_protocol": [
+    "commit a fresh secret after this contract is public",
+    "derive hidden transpiler, simulator, and bootstrap seeds",
+    "write all 96 three-arm rows before revealing the secret",
+    "reveal the secret and replay every row and verdict"
+  ],
+  "research_question": "Does lower-confidence-bound route selection repair the fresh-seed Lagos reversal without buying portfolio regressions?",
+  "source_bindings": {
+    "r140_design_path": "results/B4_B8_R140_output_aware_mapping_design_v0.json",
+    "r140_design_payload_hash": "29ec01e82e700fe817be0182320d5f5ddce33ba0520126adce2681da7ad6d1d3",
+    "r140_design_sha256": "0ae638367c5cd23ce50628798cef50a0cdd97a8c81cae90a5cdadd42e99f6c3f",
+    "r141_holdout_path": "results/B4_B8_R141_hashed_output_sketch_holdout_v0.json",
+    "r141_holdout_payload_hash": "97cfca5b29c2d36b8b1dcbd6d2842ae5901bf3801d6d0ae01f90273fc0916c3b",
+    "r141_holdout_sha256": "dd997d2a35b35727af984f172bb3bfdf9696f96090eb9a49cf1795a69e658132",
+    "r142_design_path": "results/B4_B8_R142_seed_robust_lcb_mapping_design_v0.json",
+    "r142_design_payload_hash": "e04572b3b92a4024d863d552f921d445c7b89faa4c435f2baa291979408dad15",
+    "r142_design_sha256": "883710ced7a5796232fafa4ca33ac577473ce6b09d4948713f6020ca2578204d",
+    "shortlist_identity_sha256": "b0e36d0d0a82a43005fee3179d922a35cb88de32055cbd1e3c847562860266d5"
+  },
+  "target_id": "T-B4-002at/T-B8-003ax/T-B10-009al",
+  "upstream_target_id": "T-B4-002as/T-B8-003aw/T-B10-009ak"
+}

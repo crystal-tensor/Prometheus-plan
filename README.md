@@ -2529,6 +2529,20 @@ portfolio noninferiority gates pass. The global verdict is nevertheless
 R140 local repair is not challenge-seed robust. Requirements pass `10/10`,
 phase replay passes `4/4`, and downstream credit remains zero.
 
+`T-B4-002as` / `T-B8-003aw` / `T-B10-009ak` now freezes the R142
+seed-robust lower-confidence-bound mapping design. R142 uses the R141 sketch to
+retain eight unique QASM candidates per group, then spends a disclosed design
+denominator of 1,728 synthetic executions and 3,538,944 shots across sixteen
+disjoint seeds. It selects by `mean_delta - 1.96 * standard_error` without
+reading any R141 holdout row. Eight of twelve groups achieve a positive LCB and
+ten selections change from R140. Lagos returns to mapping `[5,3,6,4,1,0]`,
+with design mean `+0.01062521`, LCB `+0.00523438`, and `12/16` wins. All twelve
+selected OpenQASM 3 files replay exactly. The unopened holdout contract hash is
+`60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6`;
+it fixes 96 fresh three-arm rows, 288 executions, 1,179,648 shots, and A1-A10.
+This is a frozen robustness design, not hidden-seed acceptance, an efficient
+production mapper, hardware evidence, advantage, BQP evidence, or new credit.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules
