@@ -2398,6 +2398,21 @@ no-loss gate: QFT loses `10/10` on every backend, and Jakarta/Lagos RXX or K3,3
 rows retain losses. No verifier acceptance, hardware, soundness, advantage,
 BQP, or new B10 credit is claimed. Requirements pass `10/10`.
 
+`T-B4-002ak` / `T-B8-003ao` / `T-B10-009ac` now adds the R136
+route-realization lower-tail margin boundary and records the first dense-family
+automatic-layout no-loss pass in this line. R135's seven residual loss margins
+range from `2.77e-5` to `5.64e-3`. Without reading those loss rows, R136 takes
+the top eight R135 mapping/policy candidates per group and recompiles each under
+`16` fresh route-realization seeds. The resulting `1,536` realizations are
+ranked before a disjoint ten-seed automatic baseline is opened. Across `1,656`
+total compilations, eight of twelve groups improve over the R135 selected
+exposure, all `12/12` groups are loss-free, outcomes are `116` wins, `4` ties,
+and `0` losses, and selected QASM replays `12/12` byte-for-byte in a fresh
+process. The compiler-level no-loss gate passes. This is not yet verifier
+acceptance: no private-challenge execution, transcript soundness test, current
+calibration, hardware, quantum advantage, BQP separation, or new B10 credit is
+claimed. Requirements pass `10/10`.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules

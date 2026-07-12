@@ -35144,6 +35144,205 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R135 claim boundary must exclude verifier acceptance")
 
+    r136_result_path = results / "B4_B8_R136_route_realization_margin_v0.json"
+    r136_report_path = research / "B4_B8_R136_route_realization_margin.md"
+    r136_status = {
+        "path": str(r136_result_path),
+        "report_path": str(r136_report_path),
+        "exists": r136_result_path.exists(),
+        "report_exists": r136_report_path.exists(),
+    }
+    r136_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r136_route_realization_margin_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r136_route_realization_margin_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r136_route_realization_margin_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r136_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R136 route-realization margin")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R136 manifest missing existing {field}: {value}")
+    if not r136_result_path.exists():
+        errors.append(f"missing R136 route-realization result: {r136_result_path}")
+    elif not r136_report_path.exists():
+        errors.append(f"missing R136 route-realization report: {r136_report_path}")
+    else:
+        r136_payload = json.loads(read(r136_result_path))
+        r136_summary = r136_payload.get("summary", {})
+        r136_claims = r136_payload.get("claim_boundary", {})
+        r136_status.update(
+            {
+                "status": r136_payload.get("status"),
+                "method": r136_payload.get("method"),
+                "requirements_passed": r136_payload.get("requirements_passed"),
+                "requirements_failed": r136_payload.get("requirements_failed"),
+                "route_realization_compilation_count": r136_summary.get(
+                    "route_realization_compilation_count"
+                ),
+                "total_compilation_count": r136_summary.get(
+                    "total_compilation_count"
+                ),
+                "selected_qasm_replay_match_count": r136_summary.get(
+                    "selected_qasm_replay_match_count"
+                ),
+                "win_count_vs_automatic_default": r136_summary.get(
+                    "win_count_vs_automatic_default"
+                ),
+                "loss_count_vs_automatic_default": r136_summary.get(
+                    "loss_count_vs_automatic_default"
+                ),
+                "no_loss_group_count_vs_automatic_default": r136_summary.get(
+                    "no_loss_group_count_vs_automatic_default"
+                ),
+                "automatic_baseline_no_loss_gate_passed": r136_summary.get(
+                    "automatic_baseline_no_loss_gate_passed"
+                ),
+                "selected_circuit_count": len(
+                    r136_payload.get("artifacts", {}).get("selected_circuits", [])
+                ),
+            }
+        )
+        expected_r136_summary = {
+            "r135_residual_loss_count": 7,
+            "r135_minimum_loss_margin": 0.000027747003060074604,
+            "r135_mean_loss_margin": 0.002894811033242739,
+            "r135_maximum_loss_margin": 0.005636318296743159,
+            "validation_task_count": 4,
+            "validation_group_count": 12,
+            "top_candidate_count_per_group": 8,
+            "realization_seed_count": 16,
+            "route_realization_compilation_count": 1536,
+            "automatic_validation_compilation_count": 120,
+            "total_compilation_count": 1656,
+            "validation_seed_count": 10,
+            "improved_over_r135_group_count": 8,
+            "selected_default_policy_group_count": 11,
+            "selected_lookahead_policy_group_count": 1,
+            "candidate_selection_uses_r135_validation_losses": False,
+            "validation_baseline_read_during_selection": False,
+            "selected_qasm_preexisting_count": 12,
+            "selected_qasm_replay_match_count": 12,
+            "win_count_vs_automatic_default": 116,
+            "tie_count_vs_automatic_default": 4,
+            "loss_count_vs_automatic_default": 0,
+            "no_loss_group_count_vs_automatic_default": 12,
+            "automatic_baseline_no_loss_gate_passed": True,
+            "exact_qasm_cross_process_replay_claimed": True,
+            "fresh_realization_and_validation_seed_blocks_used": True,
+            "r135_seeds_reused": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r136_payload.get("status") != "route_realization_lower_tail_margin_boundary":
+            errors.append("R136 route-realization status mismatch")
+        if r136_payload.get("method") != "b4_b8_r136_route_realization_margin_v0":
+            errors.append("R136 route-realization method mismatch")
+        if r136_payload.get("source_target_id") != "T-B4-002ak/T-B8-003ao/T-B10-009ac":
+            errors.append("R136 route-realization target mismatch")
+        if r136_payload.get("requirements_passed") != 10 or r136_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R136 route-realization requirements must pass 10/10")
+        if len(r136_payload.get("r135_residual_loss_rows", [])) != 7:
+            errors.append("R136 route-realization result must contain seven residual rows")
+        if len(r136_payload.get("route_realization_rows", [])) != 1536:
+            errors.append("R136 route-realization result must contain 1536 realization rows")
+        if len(r136_payload.get("validation_group_rows", [])) != 12:
+            errors.append("R136 route-realization result must contain 12 group rows")
+        if len(r136_payload.get("validation_rows", [])) != 120:
+            errors.append("R136 route-realization result must contain 120 validation rows")
+        for field, expected in expected_r136_summary.items():
+            if r136_summary.get(field) != expected:
+                errors.append(f"R136 route-realization {field} mismatch")
+        manifest_fields = [
+            "r135_residual_loss_count",
+            "r135_minimum_loss_margin",
+            "r135_mean_loss_margin",
+            "r135_maximum_loss_margin",
+            "validation_task_count",
+            "validation_group_count",
+            "top_candidate_count_per_group",
+            "realization_seed_count",
+            "route_realization_compilation_count",
+            "automatic_validation_compilation_count",
+            "total_compilation_count",
+            "validation_seed_count",
+            "improved_over_r135_group_count",
+            "selected_default_policy_group_count",
+            "selected_lookahead_policy_group_count",
+            "candidate_selection_uses_r135_validation_losses",
+            "validation_baseline_read_during_selection",
+            "selected_qasm_preexisting_count",
+            "selected_qasm_replay_match_count",
+            "no_loss_group_count_vs_automatic_default",
+            "automatic_baseline_no_loss_gate_passed",
+            "exact_qasm_cross_process_replay_claimed",
+            "fresh_realization_and_validation_seed_blocks_used",
+            "r135_seeds_reused",
+            "acceptance_holdout_executed",
+            "readout_mitigation_tested",
+            "current_backend_calibration_used",
+            "hardware_execution_performed",
+            "protocol_soundness_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "new_credit_delta",
+        ]
+        for label, manifest_row in r136_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in manifest_fields:
+                if manifest_row.get(field) != r136_summary.get(field):
+                    errors.append(f"{label} R136 manifest {field} mismatch")
+        payload_hash = r136_payload.get("payload_hash")
+        hash_payload = dict(r136_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R136 route-realization payload hash mismatch")
+        selected_circuits = r136_payload.get("artifacts", {}).get(
+            "selected_circuits", []
+        )
+        if len(selected_circuits) != 12:
+            errors.append("R136 route-realization result must emit 12 selected circuits")
+        for relative_path in selected_circuits:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R136 selected circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R136 selected circuit is not OpenQASM 3: {relative_path}")
+        if "Verifier acceptance" not in r136_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R136 claim boundary must exclude verifier acceptance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -35585,6 +35784,7 @@ def audit(root: Path) -> dict:
             "r133_unseen_circuit_family_holdout": r133_status,
             "r134_family_agnostic_mapping_rule": r134_status,
             "r135_dense_interaction_fallback": r135_status,
+            "r136_route_realization_margin": r136_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -36934,6 +37134,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r135_dense_interaction_fallback": str(
                 research / "B4_B8_R135_dense_interaction_fallback.md"
+            ),
+            "b4_b8_r136_route_realization_margin": str(
+                research / "B4_B8_R136_route_realization_margin.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
