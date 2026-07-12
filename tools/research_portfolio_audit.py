@@ -36908,6 +36908,142 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R142 claim boundary must exclude hidden-seed acceptance")
 
+    r142_holdout_result_path = results / "B4_B8_R142_seed_robust_lcb_mapping_holdout_v0.json"
+    r142_holdout_report_path = research / "B4_B8_R142_seed_robust_lcb_mapping_holdout.md"
+    r142_holdout_status = {
+        "path": str(r142_holdout_result_path),
+        "report_path": str(r142_holdout_report_path),
+        "exists": r142_holdout_result_path.exists(),
+        "report_exists": r142_holdout_report_path.exists(),
+    }
+    r142_holdout_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r142_seed_robust_lcb_mapping_holdout_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r142_seed_robust_lcb_mapping_holdout_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r142_seed_robust_lcb_mapping_holdout_v0")),
+    ]
+    for label, manifest_row in r142_holdout_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R142 seed-robust LCB holdout")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R142 holdout missing existing {field}: {value}")
+    if not r142_holdout_result_path.exists() or not r142_holdout_report_path.exists():
+        errors.append("R142 seed-robust LCB holdout result or report missing")
+    else:
+        r142_holdout = json.loads(read(r142_holdout_result_path))
+        r142_hs = r142_holdout.get("summary", {})
+        r142_holdout_status.update(
+            {
+                "status": r142_holdout.get("status"),
+                "method": r142_holdout.get("method"),
+                "requirements_passed": r142_holdout.get("requirements_passed"),
+                "requirements_failed": r142_holdout.get("requirements_failed"),
+                "acceptance_conditions_passed": r142_hs.get(
+                    "acceptance_conditions_passed"
+                ),
+                "acceptance_conditions_failed": r142_hs.get(
+                    "acceptance_conditions_failed"
+                ),
+                "global_acceptance": r142_hs.get("global_acceptance"),
+                "lagos_ising_mean_r142_minus_automatic": r142_hs.get(
+                    "lagos_ising_mean_r142_minus_automatic"
+                ),
+                "lagos_ising_mean_r142_minus_r140": r142_hs.get(
+                    "lagos_ising_mean_r142_minus_r140"
+                ),
+            }
+        )
+        expected_r142_holdout = {
+            "artifact_count": 12,
+            "trial_row_count": 96,
+            "group_count": 12,
+            "lagos_ising_mean_r142_minus_automatic": 0.020639625973707568,
+            "lagos_ising_r142_win_count_vs_automatic": 7,
+            "lagos_ising_mean_r142_minus_r140": 0.012903163880568516,
+            "portfolio_mean_r142_minus_automatic": 0.009087059212815765,
+            "portfolio_r142_minus_automatic_bootstrap_95_lower": 0.006693946708449767,
+            "portfolio_mean_r142_minus_r140": 0.002605983648935379,
+            "portfolio_r142_minus_r140_bootstrap_95_lower": 0.0015889796398494767,
+            "groups_with_mean_r142_minus_r140_at_least_negative_0_01": 12,
+            "severe_r142_minus_r140_regression_count_below_negative_0_05": 0,
+            "simulated_circuit_execution_count": 288,
+            "total_simulated_shots": 1179648,
+            "acceptance_conditions_passed": 10,
+            "acceptance_conditions_failed": 0,
+            "failed_acceptance_condition_ids": [],
+            "global_acceptance": True,
+            "phase_artifact_count": 4,
+            "phase_artifact_preexisting_count": 4,
+            "phase_artifact_replay_match_count": 4,
+            "new_credit_delta": 0,
+        }
+        if r142_holdout.get("status") != "seed_robust_lcb_mapping_preregistered_holdout_acceptance":
+            errors.append("R142 seed-robust LCB holdout status must remain acceptance")
+        if r142_holdout.get("method") != "b4_b8_r142_seed_robust_lcb_mapping_holdout_v0":
+            errors.append("R142 seed-robust LCB holdout method mismatch")
+        if r142_holdout.get("source_target_id") != "T-B4-002at/T-B8-003ax/T-B10-009al":
+            errors.append("R142 seed-robust LCB holdout target mismatch")
+        if r142_holdout.get("requirements_passed") != 10 or r142_holdout.get("requirements_failed") != 0:
+            errors.append("R142 seed-robust LCB holdout requirements must pass 10/10")
+        for field, value in expected_r142_holdout.items():
+            if r142_hs.get(field) != value:
+                errors.append(f"R142 seed-robust LCB holdout {field} mismatch")
+        conditions = r142_holdout.get("acceptance_conditions", [])
+        if len(conditions) != 10 or any(not row.get("passed") for row in conditions):
+            errors.append("R142 seed-robust LCB holdout must pass A1-A10")
+        if len(r142_holdout.get("three_arm_trial_rows", [])) != 96 or len(
+            r142_holdout.get("group_rows", [])
+        ) != 12:
+            errors.append("R142 seed-robust LCB holdout row counts mismatch")
+        for label, manifest_row in r142_holdout_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in [
+                "artifact_count",
+                "trial_row_count",
+                "simulated_circuit_execution_count",
+                "total_simulated_shots",
+                "lagos_ising_mean_r142_minus_automatic",
+                "lagos_ising_r142_win_count_vs_automatic",
+                "lagos_ising_mean_r142_minus_r140",
+                "portfolio_mean_r142_minus_automatic",
+                "portfolio_r142_minus_automatic_bootstrap_95_lower",
+                "portfolio_mean_r142_minus_r140",
+                "portfolio_r142_minus_r140_bootstrap_95_lower",
+                "groups_with_mean_r142_minus_r140_at_least_negative_0_01",
+                "severe_r142_minus_r140_regression_count_below_negative_0_05",
+                "acceptance_conditions_passed",
+                "acceptance_conditions_failed",
+                "failed_acceptance_condition_ids",
+                "global_acceptance",
+                "phase_artifact_replay_match_count",
+                "new_credit_delta",
+            ]:
+                if field in manifest_row and manifest_row.get(field) != r142_hs.get(field):
+                    errors.append(f"{label} R142 holdout manifest {field} mismatch")
+        hash_payload = dict(r142_holdout)
+        payload_hash = hash_payload.pop("payload_hash", None)
+        if payload_hash != hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest():
+            errors.append("R142 seed-robust LCB holdout payload hash mismatch")
+        phase_artifacts = r142_holdout.get("artifacts", {})
+        for phase_key in [
+            "challenge_commitment",
+            "three_arm_trial_rows",
+            "challenge_reveal",
+            "verifier_transcript",
+        ]:
+            relative_path = phase_artifacts.get(phase_key)
+            if not relative_path or not (root / relative_path).exists():
+                errors.append(f"R142 seed-robust LCB phase missing: {phase_key}")
+        if "efficient production selection" not in r142_holdout.get(
+            "claim_boundary", {}
+        ).get("what_is_not_supported", ""):
+            errors.append("R142 holdout must exclude efficient production selection")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -37359,6 +37495,7 @@ def audit(root: Path) -> dict:
             "r141_hashed_output_sketch_design": r141_status,
             "r141_hashed_output_sketch_holdout": r141_holdout_status,
             "r142_seed_robust_lcb_mapping_design": r142_status,
+            "r142_seed_robust_lcb_mapping_holdout": r142_holdout_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -38747,6 +38884,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r142_seed_robust_lcb_mapping_holdout_contract": str(
                 r142_contract_path
+            ),
+            "b4_b8_r142_seed_robust_lcb_mapping_holdout": str(
+                research / "B4_B8_R142_seed_robust_lcb_mapping_holdout.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

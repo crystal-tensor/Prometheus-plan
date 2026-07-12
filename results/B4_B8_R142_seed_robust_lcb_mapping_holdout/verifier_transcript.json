@@ -1,0 +1,90 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "design and selected-QASM bindings remain exact",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "all groups contain eight complete three-arm rows",
+      "passed": true,
+      "threshold": [
+        96,
+        12
+      ],
+      "value": [
+        96,
+        12
+      ]
+    },
+    {
+      "condition_id": "A3",
+      "label": "Lagos R142-auto mean is nonnegative",
+      "passed": true,
+      "threshold": ">= 0",
+      "value": 0.020639625973707568
+    },
+    {
+      "condition_id": "A4",
+      "label": "Lagos R142 wins at least half against automatic",
+      "passed": true,
+      "threshold": ">= 4",
+      "value": 7
+    },
+    {
+      "condition_id": "A5",
+      "label": "Lagos R142 materially improves over R140",
+      "passed": true,
+      "threshold": ">= 0.005",
+      "value": 0.012903163880568516
+    },
+    {
+      "condition_id": "A6",
+      "label": "portfolio R142-auto bootstrap lower bound",
+      "passed": true,
+      "threshold": ">= -0.005",
+      "value": 0.006693946708449767
+    },
+    {
+      "condition_id": "A7",
+      "label": "portfolio R142-R140 mean noninferiority",
+      "passed": true,
+      "threshold": ">= -0.002",
+      "value": 0.002605983648935379
+    },
+    {
+      "condition_id": "A8",
+      "label": "cross-group improvement avoids broad regressions",
+      "passed": true,
+      "threshold": ">= 11",
+      "value": 12
+    },
+    {
+      "condition_id": "A9",
+      "label": "disclosed execution and shot budget matches contract",
+      "passed": true,
+      "threshold": [
+        288,
+        1179648
+      ],
+      "value": [
+        288,
+        1179648
+      ]
+    },
+    {
+      "condition_id": "A10",
+      "label": "production, hardware, soundness, advantage, BQP, and credit claims remain false",
+      "passed": true,
+      "threshold": 0,
+      "value": 0
+    }
+  ],
+  "challenge_secret_commitment_sha256": "811c1d2908f39d299ecc193ad159ea78f29794daa841327ebe0f61e1fed98a5a",
+  "contract_sha256": "60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6",
+  "global_acceptance": true,
+  "trial_rows_sha256": "9ff8961730f7c431007eb5ded2c480513683cd164d5489b2d360a2d6de86e9f9"
+}

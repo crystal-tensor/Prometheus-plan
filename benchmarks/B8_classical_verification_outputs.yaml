@@ -2020,6 +2020,41 @@ current_results:
     result: ../results/B4_B8_R142_seed_robust_lcb_mapping_design_v0.json
     markdown_report: ../research/B4_B8_R142_seed_robust_lcb_mapping_design.md
     holdout_contract: B4_B8_R142_seed_robust_lcb_mapping_holdout_contract_v0.json
+  b4_b8_r142_seed_robust_lcb_mapping_holdout_v0:
+    status: seed_robust_lcb_mapping_preregistered_holdout_acceptance
+    method: b4_b8_r142_seed_robust_lcb_mapping_holdout_v0
+    source_target_id: T-B4-002at/T-B8-003ax/T-B10-009al
+    upstream_target_id: T-B4-002as/T-B8-003aw/T-B10-009ak
+    contract_sha256: 60d62422c35b4f9b2f3339faefc7512c81c3f8049a1ce7291dacb2c6853ba4b6
+    preregistration_commit: b550327b6e3a4acc15a52acebaaf6e512c00849c
+    artifact_count: 12
+    trial_row_count: 96
+    simulated_circuit_execution_count: 288
+    total_simulated_shots: 1179648
+    lagos_ising_mean_r142_minus_automatic: 0.020639625973707568
+    lagos_ising_r142_win_count_vs_automatic: 7
+    lagos_ising_mean_r142_minus_r140: 0.012903163880568516
+    portfolio_mean_r142_minus_automatic: 0.009087059212815765
+    portfolio_r142_minus_automatic_bootstrap_95_lower: 0.006693946708449767
+    portfolio_mean_r142_minus_r140: 0.002605983648935379
+    portfolio_r142_minus_r140_bootstrap_95_lower: 0.0015889796398494767
+    groups_with_mean_r142_minus_r140_at_least_negative_0_01: 12
+    severe_r142_minus_r140_regression_count_below_negative_0_05: 0
+    acceptance_conditions_passed: 10
+    acceptance_conditions_failed: 0
+    failed_acceptance_condition_ids: []
+    global_acceptance: true
+    phase_artifact_replay_match_count: 4
+    efficient_production_mapper_claimed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    caveat: synthetic_hidden_seed_transfer_accepted_but_production_hardware_advantage_and_bqp_claims_remain_blocked
+    result: ../results/B4_B8_R142_seed_robust_lcb_mapping_holdout_v0.json
+    markdown_report: ../research/B4_B8_R142_seed_robust_lcb_mapping_holdout.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

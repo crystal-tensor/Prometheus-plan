@@ -2543,6 +2543,19 @@ it fixes 96 fresh three-arm rows, 288 executions, 1,179,648 shots, and A1-A10.
 This is a frozen robustness design, not hidden-seed acceptance, an efficient
 production mapper, hardware evidence, advantage, BQP evidence, or new credit.
 
+The R142 holdout at `T-B4-002at` / `T-B8-003ax` / `T-B10-009al`
+then executes 96 hidden three-arm rows and 1,179,648 shots after public commit
+`b550327...` and Discussion #147. The preregistered verdict is `ACCEPT`: all
+A1-A10 pass. Lagos R142-minus-automatic is `+0.02063963` with `7/8` wins, and
+R142-minus-R140 is `+0.01290316`, above the fixed `+0.005` materiality floor.
+Portfolio R142-minus-automatic is `+0.00908706` with bootstrap lower
+`+0.00669395`; R142-minus-R140 is `+0.00260598` with bootstrap lower
+`+0.00158898`; all 12/12 groups stay above `-0.01` versus R140 and severe
+regressions are zero. Requirements pass `10/10` and phase replay passes `4/4`.
+This validates synthetic challenge-seed transfer for the LCB portfolio, not an
+efficient production mapper, current-calibration result, hardware result,
+soundness result, advantage, BQP separation, solved frontier, or new credit.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules
