@@ -173,9 +173,9 @@ executed and no mitigation performance claim is made.
 
 ## Next Gate
 
-Publicly preregister a disjoint-seed layout/readout ablation using the selected
-mappings, calibration rows isolated from evaluation rows, and the unchanged
-A1-A5 acceptance conditions.
+Rank the retained candidates with the transpiler in the optimization loop so
+the objective accounts for routing-induced CX overhead. Only after that ranking
+passes should a disjoint-seed layout/readout holdout be preregistered.
 
 ## Requirements
 
@@ -455,8 +455,8 @@ def run_gate(root: Path) -> dict[str, Any]:
                 "soundness, quantum advantage, BQP separation, or B10 credit."
             ),
             "next_gate": (
-                "Publicly preregister a disjoint-seed layout/readout ablation using "
-                "the selected mappings and calibration rows isolated from evaluation."
+                "Rank the retained candidates with the transpiler in the optimization "
+                "loop before preregistering a new disjoint-seed layout/readout holdout."
             ),
         },
     }
