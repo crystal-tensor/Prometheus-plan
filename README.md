@@ -2352,6 +2352,21 @@ ordered-route reproducibility. It opens no new seed block and performs no select
 or acceptance. It is post-hoc compiler attribution, not a causal hardware,
 soundness, advantage, BQP, or B10 claim. Requirements pass `10/10`.
 
+`T-B4-002ag` / `T-B8-003ak` / `T-B10-009y` now adds the R132
+topology-constrained route-policy boundary. Four policies are compared over `240`
+fresh training compilations; the global training-only selector chooses
+`selected_o3_lookahead`. A disjoint block then performs `180` validation
+compilations against the original selected-layout route and Qiskit's automatic
+layout. The constrained route occupies one route-exposure class and one exact
+QASM hash in all `6/6` groups, and all `60/60` frozen validation circuits replay
+byte-for-byte in a fresh process. Mean and lower-tail exposure do not regress
+against the original selected-layout reference in `6/6` groups. This resolves
+the R131 reproducibility defect, but not the baseline-quality problem: only
+`3/6` groups avoid every loss against automatic layout, and aggregate outcomes
+are `27` wins, `19` ties, and `14` losses. The compiler stability gate passes;
+verifier acceptance, mitigation, current calibration, hardware, soundness,
+advantage, BQP, and new B10 credit remain excluded. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

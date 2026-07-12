@@ -1042,6 +1042,52 @@ current_results:
     caveat: r131_compiled_route_attribution_is_diagnostic_not_bqp_evidence
     result: ../results/B4_B8_R131_compiled_route_family_attribution_v0.json
     markdown_report: ../research/B4_B8_R131_compiled_route_family_attribution.md
+  b10_t2_b4_b8_r132_topology_constrained_route_policy_v0:
+    status: topology_constrained_route_policy_not_bqp_claim
+    model_status: deterministic_compilation_keeps_b10_t2_credit_blocked
+    method: b4_b8_r132_topology_constrained_route_policy_v0
+    source_b8_result: ../results/B4_B8_R132_topology_constrained_route_policy_v0.json
+    source_target_id: T-B4-002ag/T-B8-003ak/T-B10-009y
+    upstream_target_id: T-B4-002af/T-B8-003aj/T-B10-009x
+    dependency_benchmark: B4/B8
+    candidate_policy_count: 4
+    training_compilation_count: 240
+    validation_compilation_count: 180
+    total_compilation_count: 420
+    selected_policy_id: selected_o3_lookahead
+    selected_policy_routing_method: lookahead
+    selected_policy_optimization_level: 3
+    route_family_invariant_group_count: 6
+    exact_qasm_seed_invariant_group_count: 6
+    frozen_qasm_preexisting_count: 60
+    frozen_qasm_replay_match_count: 60
+    mean_nonregression_vs_selected_group_count: 6
+    lower_tail_nonregression_vs_selected_group_count: 6
+    robust_win_or_tie_vs_automatic_group_count: 3
+    validation_win_tie_loss_counts_vs_automatic: [27, 19, 14]
+    topology_constraint_stability_gate_passed: true
+    exact_qasm_cross_process_replay_claimed: true
+    fresh_training_validation_seed_blocks_used: true
+    validation_read_during_policy_selection: false
+    r130_layout_mappings_reused: true
+    r131_diagnostic_seeds_reused: false
+    acceptance_holdout_executed: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    b10_t2_credit_allowed: false
+    b10_bqp_separation_credit_allowed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    explicit_not_bqp_separation: true
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r132_compiler_stability_is_not_soundness_advantage_or_bqp_evidence
+    result: ../results/B4_B8_R132_topology_constrained_route_policy_v0.json
+    markdown_report: ../research/B4_B8_R132_topology_constrained_route_policy.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

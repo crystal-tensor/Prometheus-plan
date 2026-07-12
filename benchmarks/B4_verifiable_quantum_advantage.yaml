@@ -1384,6 +1384,52 @@ current_results:
     caveat: r131_exact_route_families_are_posthoc_compiler_attribution_not_acceptance
     result: ../results/B4_B8_R131_compiled_route_family_attribution_v0.json
     markdown_report: ../research/B4_B8_R131_compiled_route_family_attribution.md
+  b4_b8_r132_topology_constrained_route_policy_v0:
+    status: topology_constrained_route_policy_boundary
+    model_status: fresh_seed_route_policy_stability_without_verifier_acceptance
+    method: b4_b8_r132_topology_constrained_route_policy_v0
+    source_target_id: T-B4-002ag/T-B8-003ak/T-B10-009y
+    upstream_target_id: T-B4-002af/T-B8-003aj/T-B10-009x
+    dependency_benchmark: B8
+    candidate_policy_count: 4
+    training_compilation_count: 240
+    validation_compilation_count: 180
+    total_compilation_count: 420
+    selected_policy_id: selected_o3_lookahead
+    selected_policy_routing_method: lookahead
+    selected_policy_optimization_level: 3
+    route_family_invariant_group_count: 6
+    exact_qasm_seed_invariant_group_count: 6
+    frozen_qasm_preexisting_count: 60
+    frozen_qasm_replay_match_count: 60
+    mean_nonregression_vs_selected_group_count: 6
+    lower_tail_nonregression_vs_selected_group_count: 6
+    robust_win_or_tie_vs_automatic_group_count: 3
+    validation_win_tie_loss_counts_vs_automatic: [27, 19, 14]
+    topology_constraint_stability_gate_passed: true
+    exact_qasm_cross_process_replay_claimed: true
+    fresh_training_validation_seed_blocks_used: true
+    validation_read_during_policy_selection: false
+    r130_layout_mappings_reused: true
+    r131_diagnostic_seeds_reused: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r132_stabilizes_compilation_but_only_three_of_six_groups_avoid_automatic_baseline_losses
+    result: ../results/B4_B8_R132_topology_constrained_route_policy_v0.json
+    markdown_report: ../research/B4_B8_R132_topology_constrained_route_policy.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

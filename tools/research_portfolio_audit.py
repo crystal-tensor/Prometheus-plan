@@ -34341,6 +34341,199 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R131 claim boundary must exclude new selector acceptance")
 
+    r132_result_path = results / "B4_B8_R132_topology_constrained_route_policy_v0.json"
+    r132_report_path = research / "B4_B8_R132_topology_constrained_route_policy.md"
+    r132_status = {
+        "path": str(r132_result_path),
+        "report_path": str(r132_report_path),
+        "exists": r132_result_path.exists(),
+        "report_exists": r132_report_path.exists(),
+    }
+    r132_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r132_topology_constrained_route_policy_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r132_topology_constrained_route_policy_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r132_topology_constrained_route_policy_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r132_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R132 topology-constrained route policy")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R132 manifest missing existing {field}: {value}")
+    if not r132_result_path.exists():
+        errors.append(f"missing R132 topology-constrained result: {r132_result_path}")
+    elif not r132_report_path.exists():
+        errors.append(f"missing R132 topology-constrained report: {r132_report_path}")
+    else:
+        r132_payload = json.loads(read(r132_result_path))
+        r132_summary = r132_payload.get("summary", {})
+        r132_claims = r132_payload.get("claim_boundary", {})
+        r132_status.update(
+            {
+                "status": r132_payload.get("status"),
+                "method": r132_payload.get("method"),
+                "requirements_passed": r132_payload.get("requirements_passed"),
+                "requirements_failed": r132_payload.get("requirements_failed"),
+                "training_compilation_count": r132_summary.get(
+                    "training_compilation_count"
+                ),
+                "validation_compilation_count": r132_summary.get(
+                    "validation_compilation_count"
+                ),
+                "selected_policy_id": r132_summary.get("selected_policy_id"),
+                "route_family_invariant_group_count": r132_summary.get(
+                    "route_family_invariant_group_count"
+                ),
+                "exact_qasm_seed_invariant_group_count": r132_summary.get(
+                    "exact_qasm_seed_invariant_group_count"
+                ),
+                "frozen_qasm_replay_match_count": r132_summary.get(
+                    "frozen_qasm_replay_match_count"
+                ),
+                "robust_win_or_tie_vs_automatic_group_count": r132_summary.get(
+                    "robust_win_or_tie_vs_automatic_group_count"
+                ),
+                "topology_constraint_stability_gate_passed": r132_summary.get(
+                    "topology_constraint_stability_gate_passed"
+                ),
+                "constrained_circuit_count": len(
+                    r132_payload.get("artifacts", {}).get("constrained_circuits", [])
+                ),
+            }
+        )
+        expected_r132_summary = {
+            "candidate_policy_count": 4,
+            "training_seed_count": 8,
+            "validation_seed_count": 10,
+            "training_compilation_count": 240,
+            "validation_compilation_count": 180,
+            "total_compilation_count": 420,
+            "selected_policy_id": "selected_o3_lookahead",
+            "selected_policy_routing_method": "lookahead",
+            "selected_policy_optimization_level": 3,
+            "route_family_invariant_group_count": 6,
+            "exact_qasm_seed_invariant_group_count": 6,
+            "frozen_qasm_preexisting_count": 60,
+            "frozen_qasm_replay_match_count": 60,
+            "mean_nonregression_vs_selected_group_count": 6,
+            "lower_tail_nonregression_vs_selected_group_count": 6,
+            "robust_win_or_tie_vs_automatic_group_count": 3,
+            "validation_win_count_vs_automatic_default": 27,
+            "validation_tie_count_vs_automatic_default": 19,
+            "validation_loss_count_vs_automatic_default": 14,
+            "topology_constraint_stability_gate_passed": True,
+            "route_family_semantics": "cx_edge_multiset_and_exposure_equivalence_class",
+            "exact_qasm_cross_process_replay_claimed": True,
+            "fresh_training_validation_seed_blocks_used": True,
+            "validation_read_during_policy_selection": False,
+            "r130_layout_mappings_reused": True,
+            "r131_diagnostic_seeds_reused": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r132_payload.get("status") != "topology_constrained_route_policy_boundary":
+            errors.append("R132 topology-constrained status mismatch")
+        if r132_payload.get("method") != "b4_b8_r132_topology_constrained_route_policy_v0":
+            errors.append("R132 topology-constrained method mismatch")
+        if r132_payload.get("source_target_id") != "T-B4-002ag/T-B8-003ak/T-B10-009y":
+            errors.append("R132 topology-constrained target mismatch")
+        if r132_payload.get("requirements_passed") != 10 or r132_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R132 topology-constrained requirements must pass 10/10")
+        if len(r132_payload.get("training_rows", [])) != 240:
+            errors.append("R132 topology-constrained result must contain 240 training rows")
+        if len(r132_payload.get("validation_rows", [])) != 60:
+            errors.append("R132 topology-constrained result must contain 60 validation rows")
+        if len(r132_payload.get("validation_group_rows", [])) != 6:
+            errors.append("R132 topology-constrained result must contain six group rows")
+        for field, expected in expected_r132_summary.items():
+            if r132_summary.get(field) != expected:
+                errors.append(f"R132 topology-constrained {field} mismatch")
+        manifest_fields = [
+            "candidate_policy_count",
+            "training_compilation_count",
+            "validation_compilation_count",
+            "total_compilation_count",
+            "selected_policy_id",
+            "selected_policy_routing_method",
+            "selected_policy_optimization_level",
+            "route_family_invariant_group_count",
+            "exact_qasm_seed_invariant_group_count",
+            "frozen_qasm_preexisting_count",
+            "frozen_qasm_replay_match_count",
+            "mean_nonregression_vs_selected_group_count",
+            "lower_tail_nonregression_vs_selected_group_count",
+            "robust_win_or_tie_vs_automatic_group_count",
+            "topology_constraint_stability_gate_passed",
+            "exact_qasm_cross_process_replay_claimed",
+            "fresh_training_validation_seed_blocks_used",
+            "validation_read_during_policy_selection",
+            "r130_layout_mappings_reused",
+            "r131_diagnostic_seeds_reused",
+            "acceptance_holdout_executed",
+            "readout_mitigation_tested",
+            "current_backend_calibration_used",
+            "hardware_execution_performed",
+            "protocol_soundness_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "new_credit_delta",
+        ]
+        for label, manifest_row in r132_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in manifest_fields:
+                if manifest_row.get(field) != r132_summary.get(field):
+                    errors.append(f"{label} R132 manifest {field} mismatch")
+        payload_hash = r132_payload.get("payload_hash")
+        hash_payload = dict(r132_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R132 topology-constrained payload hash mismatch")
+        constrained_circuits = r132_payload.get("artifacts", {}).get(
+            "constrained_circuits", []
+        )
+        if len(constrained_circuits) != 60:
+            errors.append("R132 topology-constrained result must emit 60 circuits")
+        for relative_path in constrained_circuits:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R132 constrained circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R132 constrained circuit is not OpenQASM 3: {relative_path}")
+        if "Verifier holdout acceptance" not in r132_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R132 claim boundary must exclude verifier holdout acceptance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -34778,6 +34971,7 @@ def audit(root: Path) -> dict:
             "r129_seed_robust_layout_ranking": r129_status,
             "r130_route_signature_candidate_expansion": r130_status,
             "r131_compiled_route_family_attribution": r131_status,
+            "r132_topology_constrained_route_policy": r132_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -36115,6 +36309,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r131_compiled_route_family_attribution": str(
                 research / "B4_B8_R131_compiled_route_family_attribution.md"
+            ),
+            "b4_b8_r132_topology_constrained_route_policy": str(
+                research / "B4_B8_R132_topology_constrained_route_policy.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
