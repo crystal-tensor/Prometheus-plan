@@ -2335,6 +2335,23 @@ compiled-route-family analysis. No verifier holdout, mitigation, current
 calibration, hardware, soundness, advantage, BQP, or B10 credit is used or
 claimed. Requirements pass `10/10`.
 
+`T-B4-002af` / `T-B8-003aj` / `T-B10-009x` now adds the R131 exact
+compiled route-family attribution boundary. It recompiles selected and
+automatic layouts on the `60` already-used R130 compiler-diagnostic rows,
+byte-matches selected QASM `60/60`, and replays exposure deltas `60/60`.
+Stable directed CX-edge-multiset and exposure equivalence identifies `9`
+selected and `33` automatic route-exposure classes. Automatic layout switches classes in
+all `6/6` groups. Selected layout remains in one family in `4/6` groups, and
+their outcome instability is attributable to automatic-family switching;
+Jakarta GHZ and graph also switch selected families and need a separate route
+determinism constraint. Cross-process replay also shows that exact ordered
+default routes can drift despite fixed transpiler, Python-hash, and native-thread
+settings, while the route-exposure class ledger remains identical. R131 therefore
+freezes default QASM as observed samples and explicitly does not claim exact
+ordered-route reproducibility. It opens no new seed block and performs no selection
+or acceptance. It is post-hoc compiler attribution, not a causal hardware,
+soundness, advantage, BQP, or B10 claim. Requirements pass `10/10`.
+
 `T-B1-004gj` / `T-B7-015s` now closes the first R85 blocker without
 promoting the candidate. R86 emits source-binding replay stdout for all `30`
 selected G1 rows and verifies that every row still binds to the original

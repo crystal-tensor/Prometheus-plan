@@ -34154,6 +34154,193 @@ def audit(root: Path) -> dict:
         ):
             errors.append("R130 claim boundary must exclude verifier holdout performance")
 
+    r131_result_path = results / "B4_B8_R131_compiled_route_family_attribution_v0.json"
+    r131_report_path = research / "B4_B8_R131_compiled_route_family_attribution.md"
+    r131_status = {
+        "path": str(r131_result_path),
+        "report_path": str(r131_report_path),
+        "exists": r131_result_path.exists(),
+        "report_exists": r131_report_path.exists(),
+    }
+    r131_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get(
+                "b4_b8_r131_compiled_route_family_attribution_v0"
+            ),
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get(
+                "b4_b8_r131_compiled_route_family_attribution_v0"
+            ),
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get(
+                "b10_t2_b4_b8_r131_compiled_route_family_attribution_v0"
+            ),
+        ),
+    ]
+    for label, manifest_row in r131_manifest_rows:
+        if not manifest_row:
+            errors.append(f"{label} manifest missing R131 route-family attribution")
+            continue
+        for field in ["result", "markdown_report"]:
+            value = manifest_row.get(field)
+            if not value or not path_exists_from(benchmarks, value):
+                errors.append(f"{label} R131 manifest missing existing {field}: {value}")
+    if not r131_result_path.exists():
+        errors.append(f"missing R131 route-family result: {r131_result_path}")
+    elif not r131_report_path.exists():
+        errors.append(f"missing R131 route-family report: {r131_report_path}")
+    else:
+        r131_payload = json.loads(read(r131_result_path))
+        r131_summary = r131_payload.get("summary", {})
+        r131_claims = r131_payload.get("claim_boundary", {})
+        r131_status.update(
+            {
+                "status": r131_payload.get("status"),
+                "method": r131_payload.get("method"),
+                "requirements_passed": r131_payload.get("requirements_passed"),
+                "requirements_failed": r131_payload.get("requirements_failed"),
+                "diagnostic_compilation_count": r131_summary.get(
+                    "diagnostic_compilation_count"
+                ),
+                "selected_qasm_replay_match_count": r131_summary.get(
+                    "selected_qasm_replay_match_count"
+                ),
+                "r130_delta_replay_match_count": r131_summary.get(
+                    "r130_delta_replay_match_count"
+                ),
+                "selected_unique_route_family_count": r131_summary.get(
+                    "selected_unique_route_family_count"
+                ),
+                "default_unique_route_family_count": r131_summary.get(
+                    "default_unique_route_family_count"
+                ),
+                "selected_family_invariant_group_count": r131_summary.get(
+                    "selected_family_invariant_group_count"
+                ),
+                "default_family_switching_group_count": r131_summary.get(
+                    "default_family_switching_group_count"
+                ),
+                "default_switch_attribution_group_count": r131_summary.get(
+                    "default_switch_attribution_group_count"
+                ),
+                "default_circuit_count": len(
+                    r131_payload.get("artifacts", {}).get("default_circuits", [])
+                ),
+            }
+        )
+        expected_r131_summary = {
+            "seed_row_count": 60,
+            "diagnostic_compilation_count": 120,
+            "python_hash_seed": 0,
+            "deterministic_process_hash_seed_enforced": True,
+            "deterministic_process_environment_enforced": True,
+            "native_thread_count": 1,
+            "selected_qasm_replay_match_count": 60,
+            "r130_delta_replay_match_count": 60,
+            "selected_unique_route_family_count": 9,
+            "default_unique_route_family_count": 33,
+            "route_family_semantics": "cx_edge_multiset_and_exposure_equivalence_class",
+            "exact_ordered_route_reproducibility_claimed": False,
+            "default_qasm_artifacts_are_frozen_observations": True,
+            "route_family_pair_count": 37,
+            "selected_family_invariant_group_count": 4,
+            "default_family_switching_group_count": 6,
+            "default_switch_attribution_group_count": 4,
+            "selected_win_count": 15,
+            "selected_tie_count": 23,
+            "selected_loss_count": 22,
+            "r130_validation_seeds_reused_for_diagnostic": True,
+            "new_seed_block_opened": False,
+            "selection_or_acceptance_performed": False,
+            "acceptance_holdout_executed": False,
+            "r125_acceptance_rows_read": False,
+            "readout_mitigation_tested": False,
+            "current_backend_calibration_used": False,
+            "hardware_execution_performed": False,
+            "protocol_soundness_claimed": False,
+            "quantum_advantage_claimed": False,
+            "bqp_separation_claimed": False,
+            "new_credit_delta": 0,
+        }
+        if r131_payload.get("status") != "compiled_route_family_attribution_boundary":
+            errors.append("R131 route-family status mismatch")
+        if r131_payload.get("method") != "b4_b8_r131_compiled_route_family_attribution_v0":
+            errors.append("R131 route-family method mismatch")
+        if r131_payload.get("source_target_id") != "T-B4-002af/T-B8-003aj/T-B10-009x":
+            errors.append("R131 route-family target mismatch")
+        if r131_payload.get("requirements_passed") != 10 or r131_payload.get(
+            "requirements_failed"
+        ) != 0:
+            errors.append("R131 route-family requirements must pass 10/10")
+        if len(r131_payload.get("seed_attribution_rows", [])) != 60:
+            errors.append("R131 route-family result must contain 60 seed rows")
+        if len(r131_payload.get("group_attribution_rows", [])) != 6:
+            errors.append("R131 route-family result must contain six group rows")
+        for field, expected in expected_r131_summary.items():
+            if r131_summary.get(field) != expected:
+                errors.append(f"R131 route-family {field} mismatch")
+        for label, manifest_row in r131_manifest_rows:
+            if not manifest_row:
+                continue
+            for field in [
+                "diagnostic_compilation_count",
+                "python_hash_seed",
+                "deterministic_process_hash_seed_enforced",
+                "deterministic_process_environment_enforced",
+                "native_thread_count",
+                "selected_qasm_replay_match_count",
+                "r130_delta_replay_match_count",
+                "selected_unique_route_family_count",
+                "default_unique_route_family_count",
+                "route_family_semantics",
+                "exact_ordered_route_reproducibility_claimed",
+                "default_qasm_artifacts_are_frozen_observations",
+                "selected_family_invariant_group_count",
+                "default_family_switching_group_count",
+                "default_switch_attribution_group_count",
+                "r130_validation_seeds_reused_for_diagnostic",
+                "new_seed_block_opened",
+                "selection_or_acceptance_performed",
+                "acceptance_holdout_executed",
+                "readout_mitigation_tested",
+                "current_backend_calibration_used",
+                "hardware_execution_performed",
+                "protocol_soundness_claimed",
+                "quantum_advantage_claimed",
+                "bqp_separation_claimed",
+                "new_credit_delta",
+            ]:
+                if manifest_row.get(field) != r131_summary.get(field):
+                    errors.append(f"{label} R131 manifest {field} mismatch")
+        payload_hash = r131_payload.get("payload_hash")
+        hash_payload = dict(r131_payload)
+        hash_payload.pop("payload_hash", None)
+        expected_payload_hash = hashlib.sha256(
+            json.dumps(hash_payload, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if payload_hash != expected_payload_hash:
+            errors.append("R131 route-family payload hash mismatch")
+        default_circuits = r131_payload.get("artifacts", {}).get(
+            "default_circuits", []
+        )
+        if len(default_circuits) != 60:
+            errors.append("R131 route-family result must emit 60 default circuits")
+        for relative_path in default_circuits:
+            circuit_path = root / relative_path
+            if not circuit_path.exists():
+                errors.append(f"R131 default circuit missing: {relative_path}")
+            elif not read(circuit_path).startswith("OPENQASM 3.0;"):
+                errors.append(f"R131 default circuit is not OpenQASM 3: {relative_path}")
+        if "new selector acceptance" not in r131_claims.get(
+            "what_is_not_supported", ""
+        ):
+            errors.append("R131 claim boundary must exclude new selector acceptance")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -34590,6 +34777,7 @@ def audit(root: Path) -> dict:
             "r128_transpiler_loop_layout_ranking": r128_status,
             "r129_seed_robust_layout_ranking": r129_status,
             "r130_route_signature_candidate_expansion": r130_status,
+            "r131_compiled_route_family_attribution": r131_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -35924,6 +36112,9 @@ def audit(root: Path) -> dict:
             ),
             "b4_b8_r130_route_signature_candidate_expansion": str(
                 research / "B4_B8_R130_route_signature_candidate_expansion.md"
+            ),
+            "b4_b8_r131_compiled_route_family_attribution": str(
+                research / "B4_B8_R131_compiled_route_family_attribution.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

@@ -1338,6 +1338,52 @@ current_results:
     caveat: r130_route_diversity_improves_lagos_ghz_but_only_one_group_is_seed_robust
     result: ../results/B4_B8_R130_route_signature_candidate_expansion_v0.json
     markdown_report: ../research/B4_B8_R130_route_signature_candidate_expansion.md
+  b4_b8_r131_compiled_route_family_attribution_v0:
+    status: compiled_route_family_attribution_boundary
+    model_status: r130_seed_outcomes_attributed_to_exact_cx_route_families
+    method: b4_b8_r131_compiled_route_family_attribution_v0
+    source_target_id: T-B4-002af/T-B8-003aj/T-B10-009x
+    upstream_target_id: T-B4-002ae/T-B8-003ai/T-B10-009w
+    dependency_benchmark: B8
+    diagnostic_compilation_count: 120
+    python_hash_seed: 0
+    deterministic_process_hash_seed_enforced: true
+    deterministic_process_environment_enforced: true
+    native_thread_count: 1
+    seed_row_count: 60
+    selected_qasm_replay_match_count: 60
+    r130_delta_replay_match_count: 60
+    selected_unique_route_family_count: 9
+    default_unique_route_family_count: 33
+    route_family_semantics: cx_edge_multiset_and_exposure_equivalence_class
+    exact_ordered_route_reproducibility_claimed: false
+    default_qasm_artifacts_are_frozen_observations: true
+    route_family_pair_count: 37
+    selected_family_invariant_group_count: 4
+    default_family_switching_group_count: 6
+    default_switch_attribution_group_count: 4
+    selected_win_tie_loss_counts: [15, 23, 22]
+    r130_validation_seeds_reused_for_diagnostic: true
+    new_seed_block_opened: false
+    selection_or_acceptance_performed: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    b4_verifiable_advantage_credit_allowed: false
+    b8_protocol_soundness_credit_allowed: false
+    b10_t2_credit_allowed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r131_exact_route_families_are_posthoc_compiler_attribution_not_acceptance
+    result: ../results/B4_B8_R131_compiled_route_family_attribution_v0.json
+    markdown_report: ../research/B4_B8_R131_compiled_route_family_attribution.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

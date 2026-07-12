@@ -1427,6 +1427,48 @@ current_results:
     caveat: r130_full_ghz_signature_coverage_still_fails_five_of_six_group_robustness
     result: ../results/B4_B8_R130_route_signature_candidate_expansion_v0.json
     markdown_report: ../research/B4_B8_R130_route_signature_candidate_expansion.md
+  b4_b8_r131_compiled_route_family_attribution_v0:
+    status: compiled_route_family_attribution_boundary
+    model_status: r130_seed_outcomes_attributed_to_exact_cx_route_families
+    method: b4_b8_r131_compiled_route_family_attribution_v0
+    source_target_id: T-B4-002af/T-B8-003aj/T-B10-009x
+    upstream_target_id: T-B4-002ae/T-B8-003ai/T-B10-009w
+    diagnostic_compilation_count: 120
+    python_hash_seed: 0
+    deterministic_process_hash_seed_enforced: true
+    deterministic_process_environment_enforced: true
+    native_thread_count: 1
+    seed_row_count: 60
+    selected_qasm_replay_match_count: 60
+    r130_delta_replay_match_count: 60
+    selected_unique_route_family_count: 9
+    default_unique_route_family_count: 33
+    route_family_semantics: cx_edge_multiset_and_exposure_equivalence_class
+    exact_ordered_route_reproducibility_claimed: false
+    default_qasm_artifacts_are_frozen_observations: true
+    route_family_pair_count: 37
+    selected_family_invariant_group_count: 4
+    default_family_switching_group_count: 6
+    default_switch_attribution_group_count: 4
+    selected_win_tie_loss_counts: [15, 23, 22]
+    r130_validation_seeds_reused_for_diagnostic: true
+    new_seed_block_opened: false
+    selection_or_acceptance_performed: false
+    acceptance_holdout_executed: false
+    r125_acceptance_rows_read: false
+    readout_mitigation_tested: false
+    current_backend_calibration_used: false
+    hardware_execution_performed: false
+    protocol_soundness_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r131_default_routes_switch_in_all_groups_but_no_causal_or_soundness_claim
+    result: ../results/B4_B8_R131_compiled_route_family_attribution_v0.json
+    markdown_report: ../research/B4_B8_R131_compiled_route_family_attribution.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py
