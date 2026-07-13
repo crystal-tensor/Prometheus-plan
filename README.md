@@ -2704,6 +2704,25 @@ adaptation while isolating task-conditioned channel risk as the next gate.
 Temporal transfer, cross-machine transfer, hardware, advantage, BQP,
 solved-frontier status, and new credit remain unclaimed.
 
+`T-B4-002be` / `T-B8-003bi` / `T-B10-009aw` now freezes the R148
+task-conditioned channel-risk design and hidden holdout before challenge. The
+rule has zero fitted weights and reads zero R147 hidden rows. For the six task
+groups whose ideal output is nonuniform, it prioritizes exact output-aware
+readout fidelity and uses CX survival as a tie break; for the six uniform-output
+groups, whose distribution is invariant under symmetric readout flips, it
+prioritizes CX survival. Target-specific R143 routes remain excluded from all
+selector pools. All `24/24` foreign candidates preserve semantics, and the rule
+changes four R147 selections: Jakarta complete Ising, Jakarta dense XY, Lagos
+complete Ising, and Oslo scrambled QFT. The preregistered challenge fixes `96`
+three-arm rows, `288` executions, and `589,824` shots. Acceptance retains the
+R147 portfolio, group, severe-row, and each-target floors and additionally
+requires simultaneous repair of Jakarta complete Ising, Jakarta dense XY, and
+Lagos complete Ising. Contract hash
+`fa2c21ca88e6f08ec65c689c44d065e00ca00a5182846ec74ca70177b7103132`.
+No R148 holdout, scalable exact-output method, temporal transfer, cross-machine
+transfer, hardware, advantage, BQP, solved-frontier status, or new credit is
+claimed.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules

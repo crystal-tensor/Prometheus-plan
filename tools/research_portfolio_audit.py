@@ -37672,6 +37672,120 @@ def audit(root: Path) -> dict:
             if transcript.get("trial_rows_sha256") != hashlib.sha256(trials_path.read_bytes()).hexdigest():
                 errors.append("R147 adaptation trial row transcript hash mismatch")
 
+    r148_design_path = results / "B4_B8_R148_task_conditioned_channel_risk_design_v0.json"
+    r148_design_report_path = research / "B4_B8_R148_task_conditioned_channel_risk_design.md"
+    r148_protocol_path = results / "B4_B8_R148_task_conditioned_channel_risk_protocol_v0.json"
+    r148_protocol_report_path = research / "B4_B8_R148_task_conditioned_channel_risk_protocol.md"
+    r148_contract_path = benchmarks / "B4_B8_R148_task_conditioned_channel_risk_contract_v0.json"
+    r148_contract_sha256 = hashlib.sha256(r148_contract_path.read_bytes()).hexdigest() if r148_contract_path.exists() else None
+    r148_status = {
+        "design_path": str(r148_design_path), "design_report_path": str(r148_design_report_path),
+        "protocol_path": str(r148_protocol_path), "protocol_report_path": str(r148_protocol_report_path),
+        "contract_path": str(r148_contract_path), "contract_sha256": r148_contract_sha256,
+        "design_exists": r148_design_path.exists(), "protocol_exists": r148_protocol_path.exists(),
+        "contract_exists": r148_contract_path.exists(),
+    }
+    r148_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}), "b4_b8_r148_task_conditioned_channel_risk_design_v0", "b4_b8_r148_task_conditioned_channel_risk_protocol_v0"),
+        ("B8", b8_manifest.get("current_results", {}), "b4_b8_r148_task_conditioned_channel_risk_design_v0", "b4_b8_r148_task_conditioned_channel_risk_protocol_v0"),
+        ("B10", b10_manifest.get("current_results", {}), "b10_t2_b4_b8_r148_task_conditioned_channel_risk_design_v0", "b10_t2_b4_b8_r148_task_conditioned_channel_risk_protocol_v0"),
+    ]
+    for label, manifest, design_key, protocol_key in r148_manifest_rows:
+        design_row = manifest.get(design_key)
+        protocol_row = manifest.get(protocol_key)
+        if not design_row:
+            errors.append(f"{label} manifest missing R148 channel-risk design")
+        else:
+            for field in ["result", "markdown_report"]:
+                if not design_row.get(field) or not path_exists_from(benchmarks, design_row[field]):
+                    errors.append(f"{label} R148 channel-risk design missing {field}")
+        if not protocol_row:
+            errors.append(f"{label} manifest missing R148 channel-risk protocol")
+        else:
+            for field in ["result", "markdown_report", "holdout_contract"]:
+                if not protocol_row.get(field) or not path_exists_from(benchmarks, protocol_row[field]):
+                    errors.append(f"{label} R148 channel-risk protocol missing {field}")
+            if protocol_row.get("contract_sha256") != r148_contract_sha256:
+                errors.append(f"{label} R148 channel-risk contract hash mismatch")
+    required_r148_paths = [r148_design_path, r148_design_report_path, r148_protocol_path, r148_protocol_report_path, r148_contract_path]
+    if not all(path.exists() for path in required_r148_paths):
+        errors.append("R148 channel-risk design, protocol, report, or contract missing")
+    else:
+        design = json.loads(read(r148_design_path)); ds = design.get("summary", {})
+        protocol_payload = json.loads(read(r148_protocol_path)); protocol = protocol_payload.get("protocol", {})
+        contract = json.loads(read(r148_contract_path))
+        r148_status.update({
+            "design_status": design.get("status"), "protocol_status": protocol_payload.get("status"),
+            "design_requirements_passed": design.get("requirements_passed"),
+            "protocol_requirements_passed": protocol_payload.get("requirements_passed"),
+            "selection_change_count_from_r147": ds.get("selection_change_count_from_r147"),
+            "r147_hidden_trial_rows_read_count": ds.get("r147_hidden_trial_rows_read_count"),
+            "challenge_executed": protocol_payload.get("challenge_executed"),
+        })
+        if design.get("status") != "task_conditioned_channel_risk_design_frozen_before_holdout" or design.get("method") != "b4_b8_r148_task_conditioned_channel_risk_design_v0":
+            errors.append("R148 channel-risk design status or method mismatch")
+        if design.get("requirements_passed") != 10 or design.get("requirements_failed") != 0:
+            errors.append("R148 channel-risk design requirements must pass 10/10")
+        expected_design = {
+            "adaptation_group_count": 12, "foreign_candidate_count": 24,
+            "readout_first_group_count": 6, "cx_first_group_count": 6,
+            "selection_change_count_from_r147": 4,
+            "changed_group_ids": [
+                "FakeJakartaV2::dense_validation_complete_ising_n6",
+                "FakeJakartaV2::dense_validation_xy_network_n6",
+                "FakeLagosV2::dense_validation_complete_ising_n6",
+                "FakeOslo::dense_validation_scrambled_qft_n6",
+            ],
+            "target_specific_routes_in_selector_count": 0,
+            "r147_hidden_trial_rows_read_count": 0, "fitted_weight_count": 0,
+            "semantic_fidelity_pass_count": 24, "challenge_executed": False,
+            "new_credit_delta": 0,
+        }
+        for field, value in expected_design.items():
+            if ds.get(field) != value:
+                errors.append(f"R148 channel-risk design {field} mismatch")
+        if len(design.get("candidate_rows", [])) != 24 or len(design.get("selection_rows", [])) != 12:
+            errors.append("R148 channel-risk design row counts mismatch")
+        if any(not row.get("target_specific_route_excluded_from_selector") for row in design.get("selection_rows", [])):
+            errors.append("R148 channel-risk selector includes a target-specific route")
+        for row in design.get("candidate_rows", []):
+            candidate_path = root / row.get("candidate_circuit_path", "")
+            if not candidate_path.exists() or hashlib.sha256(candidate_path.read_bytes()).hexdigest() != row.get("candidate_circuit_sha256"):
+                errors.append(f"R148 channel-risk candidate hash mismatch: {row.get('candidate_circuit_path')}")
+        hp = dict(design); ph = hp.pop("payload_hash", None)
+        if ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R148 channel-risk design payload hash mismatch")
+        if protocol_payload.get("status") != "task_conditioned_channel_risk_protocol_frozen_before_challenge" or protocol_payload.get("method") != "b4_b8_r148_task_conditioned_channel_risk_protocol_v0":
+            errors.append("R148 channel-risk protocol status or method mismatch")
+        if protocol_payload.get("requirements_passed") != 10 or protocol_payload.get("requirements_failed") != 0 or protocol_payload.get("challenge_executed") is not False:
+            errors.append("R148 channel-risk protocol requirements or unopened boundary mismatch")
+        expected_protocol = {
+            "adaptation_group_count": 12, "hidden_trial_count_per_group": 8,
+            "trial_row_count": 96, "simulated_circuit_execution_count": 288,
+            "shots_per_execution": 2048, "total_simulated_shots": 589824,
+            "minimum_portfolio_conditioned_minus_target_mean": -0.005,
+            "minimum_portfolio_conditioned_minus_target_bootstrap_lower": -0.01,
+            "minimum_group_count_above_negative_0_02_vs_target": 11,
+            "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+            "minimum_each_target_mean_conditioned_minus_target": -0.01,
+            "minimum_each_r147_failure_group_mean_conditioned_minus_target": -0.02,
+            "maximum_r147_failure_group_severe_regression_count": 0,
+        }
+        for field, value in expected_protocol.items():
+            if protocol.get(field) != value:
+                errors.append(f"R148 channel-risk protocol {field} mismatch")
+        hp = dict(protocol_payload); ph = hp.pop("payload_hash", None)
+        if ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R148 channel-risk protocol payload hash mismatch")
+        if r148_contract_sha256 != "fa2c21ca88e6f08ec65c689c44d065e00ca00a5182846ec74ca70177b7103132":
+            errors.append("R148 channel-risk contract file hash mismatch")
+        if contract.get("contract_id") != "B4-B8-R148-task-conditioned-channel-risk-contract-v0" or contract.get("contract_status") != "public_preregistration_challenge_unopened":
+            errors.append("R148 channel-risk contract ID or status mismatch")
+        if contract.get("target_id") != "T-B4-002bf/T-B8-003bj/T-B10-009ax" or "challenge_secret" in contract or "trial_rows" in contract:
+            errors.append("R148 channel-risk contract target or unopened boundary mismatch")
+        if contract.get("source_bindings", {}).get("protocol_payload_hash") != ph or len(contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R148 channel-risk contract binding or acceptance count mismatch")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -38134,6 +38248,7 @@ def audit(root: Path) -> dict:
             "r146_cross_snapshot_transfer_holdout": r146_result_status,
             "r147_target_descriptor_adaptation": r147_status,
             "r147_target_descriptor_adaptation_holdout": r147_result_status,
+            "r148_task_conditioned_channel_risk": r148_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -39566,6 +39681,13 @@ def audit(root: Path) -> dict:
             "b4_b8_r147_target_descriptor_adaptation_holdout": str(
                 research / "B4_B8_R147_target_descriptor_adaptation_holdout.md"
             ),
+            "b4_b8_r148_task_conditioned_channel_risk_design": str(
+                research / "B4_B8_R148_task_conditioned_channel_risk_design.md"
+            ),
+            "b4_b8_r148_task_conditioned_channel_risk_protocol": str(
+                research / "B4_B8_R148_task_conditioned_channel_risk_protocol.md"
+            ),
+            "b4_b8_r148_task_conditioned_channel_risk_contract": str(r148_contract_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),

@@ -2292,6 +2292,43 @@ current_results:
     requirements_failed: 0
     result: ../results/B4_B8_R147_target_descriptor_adaptation_holdout_v0.json
     markdown_report: ../research/B4_B8_R147_target_descriptor_adaptation_holdout.md
+  b4_b8_r148_task_conditioned_channel_risk_design_v0:
+    status: task_conditioned_channel_risk_design_frozen_before_holdout
+    method: b4_b8_r148_task_conditioned_channel_risk_design_v0
+    source_target_id: T-B4-002be/T-B8-003bi/T-B10-009aw
+    adaptation_group_count: 12
+    foreign_candidate_count: 24
+    readout_first_group_count: 6
+    cx_first_group_count: 6
+    selection_change_count_from_r147: 4
+    target_specific_routes_in_selector_count: 0
+    r147_hidden_trial_rows_read_count: 0
+    fitted_weight_count: 0
+    semantic_fidelity_pass_count: 24
+    challenge_executed: false
+    protocol_soundness_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R148_task_conditioned_channel_risk_design_v0.json
+    markdown_report: ../research/B4_B8_R148_task_conditioned_channel_risk_design.md
+  b4_b8_r148_task_conditioned_channel_risk_protocol_v0:
+    status: task_conditioned_channel_risk_protocol_frozen_before_challenge
+    method: b4_b8_r148_task_conditioned_channel_risk_protocol_v0
+    source_target_id: T-B4-002be/T-B8-003bi/T-B10-009aw
+    adaptation_group_count: 12
+    trial_row_count: 96
+    simulated_circuit_execution_count: 288
+    shots_per_execution: 2048
+    challenge_executed: false
+    contract_sha256: fa2c21ca88e6f08ec65c689c44d065e00ca00a5182846ec74ca70177b7103132
+    protocol_soundness_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R148_task_conditioned_channel_risk_protocol_v0.json
+    markdown_report: ../research/B4_B8_R148_task_conditioned_channel_risk_protocol.md
+    holdout_contract: B4_B8_R148_task_conditioned_channel_risk_contract_v0.json
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py
