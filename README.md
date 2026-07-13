@@ -3432,3 +3432,20 @@ circuit hashes and serial Aer execution in the next gate. It is not causal
 proof, temporal or real-device transfer, hardware performance, general
 route-generation advantage, quantum advantage, BQP separation, solved-frontier
 status, or new credit.
+
+`T-B4-002bp` / `T-B8-003bt` / `T-B10-009bh` now preregisters R154 as a
+fail-closed deterministic replay of the R153 execution surface. It creates no
+new hidden statistical evidence and changes no route. Instead, two separate
+operating-system processes must replay the same 96 public R153 seed rows under
+serial Aer controls, for 576 total circuit executions and 1,179,648 shots.
+Every fresh automatic circuit receives a normalized OpenQASM 3 hash; every arm
+count vector, scientific row, backend target, and fixed route receives an
+independent canonical hash. Acceptance requires `96/96` automatic QASM,
+`288/288` arm-count, `96/96` row, `3/3` backend-target, and `6/6` fixed-route
+hash matches with zero mismatches. Python, Qiskit, Aer, runtime, deterministic
+environment variables, and one-thread/experiment/shot Aer settings are frozen.
+Protocol requirements pass `10/10`; contract `1ef1f7be...`; execution remains
+unopened. This does not yet close the R153 replay caveat and does not support
+new statistical evidence, hardware performance, temporal or real-device
+transfer, general route-generation advantage, quantum advantage, BQP
+separation, solved-frontier status, or new credit.

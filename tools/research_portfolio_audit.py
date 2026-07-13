@@ -38666,6 +38666,97 @@ def audit(root: Path) -> dict:
             if transcript.get("trial_rows_sha256") != hashlib.sha256(trials_path.read_bytes()).hexdigest():
                 errors.append("R153 independent-seed trial row transcript hash mismatch")
 
+    r154_protocol_path = results / "B4_B8_R154_deterministic_automatic_replay_protocol_v0.json"
+    r154_protocol_report_path = research / "B4_B8_R154_deterministic_automatic_replay_protocol.md"
+    r154_contract_path = benchmarks / "B4_B8_R154_deterministic_automatic_replay_contract_v0.json"
+    r154_status = {
+        "protocol_path": str(r154_protocol_path),
+        "contract_path": str(r154_contract_path),
+        "protocol_exists": r154_protocol_path.exists(),
+        "contract_exists": r154_contract_path.exists(),
+        "report_exists": r154_protocol_report_path.exists(),
+    }
+    r154_contract_sha256 = hashlib.sha256(r154_contract_path.read_bytes()).hexdigest() if r154_contract_path.exists() else None
+    r154_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r154_deterministic_automatic_replay_protocol_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r154_deterministic_automatic_replay_protocol_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r154_deterministic_automatic_replay_protocol_v0")),
+    ]
+    for label, row in r154_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R154 deterministic-replay preregistration")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R154 deterministic-replay protocol missing {field}")
+        if row.get("contract_sha256") != r154_contract_sha256:
+            errors.append(f"{label} R154 deterministic-replay contract hash mismatch")
+        if row.get("execution_started") is not False or row.get("replay_caveat_open") is not True:
+            errors.append(f"{label} R154 deterministic-replay unopened or caveat boundary mismatch")
+    if not all(path.exists() for path in [r154_protocol_path, r154_protocol_report_path, r154_contract_path]):
+        errors.append("R154 deterministic-replay protocol, report, or contract missing")
+    else:
+        r154_payload = json.loads(read(r154_protocol_path))
+        r154_protocol = r154_payload.get("protocol", {})
+        r154_contract = json.loads(read(r154_contract_path))
+        r154_status.update({
+            "status": r154_payload.get("status"),
+            "method": r154_payload.get("method"),
+            "requirements_passed": r154_payload.get("requirements_passed"),
+            "requirements_failed": r154_payload.get("requirements_failed"),
+            "execution_started": r154_payload.get("execution_started"),
+            "process_pass_count": r154_protocol.get("process_pass_count"),
+            "row_count_per_pass": r154_protocol.get("row_count_per_pass"),
+            "automatic_qasm_hash_match_required": r154_protocol.get("automatic_qasm_hash_match_required"),
+            "maximum_replay_mismatch_count": r154_protocol.get("maximum_replay_mismatch_count"),
+        })
+        if r154_payload.get("status") != "deterministic_automatic_replay_protocol_frozen_before_execution" or r154_payload.get("method") != "b4_b8_r154_deterministic_automatic_replay_protocol_v0":
+            errors.append("R154 deterministic-replay protocol status or method mismatch")
+        if r154_payload.get("requirements_passed") != 10 or r154_payload.get("requirements_failed") != 0 or r154_payload.get("execution_started") is not False:
+            errors.append("R154 deterministic-replay requirements or unopened boundary mismatch")
+        expected_protocol = {
+            "source_trial_row_count": 96,
+            "process_pass_count": 2,
+            "row_count_per_pass": 96,
+            "circuit_execution_count_per_pass": 288,
+            "total_circuit_execution_count": 576,
+            "shots_per_execution": 2048,
+            "total_simulated_shots": 1179648,
+            "automatic_qasm_hash_match_required": 96,
+            "arm_counts_hash_match_required": 288,
+            "scientific_row_hash_match_required": 96,
+            "backend_target_hash_match_required": 3,
+            "fixed_route_hash_match_required": 6,
+            "r153_acceptance_condition_match_required": 10,
+            "maximum_replay_mismatch_count": 0,
+            "new_hidden_seed_count": 0,
+            "candidate_selection_performed": False,
+            "route_change_performed": False,
+        }
+        for field, value in expected_protocol.items():
+            if r154_protocol.get(field) != value:
+                errors.append(f"R154 deterministic-replay protocol {field} mismatch")
+        environment = r154_protocol.get("execution_environment", {})
+        if set(environment.get("aer_simulator_options", {}).values()) != {1} or len(environment.get("aer_simulator_options", {})) != 3:
+            errors.append("R154 deterministic-replay serial Aer options mismatch")
+        if any(not environment.get(field) for field in ["python", "qiskit", "qiskit_aer", "qiskit_ibm_runtime"]):
+            errors.append("R154 deterministic-replay software-version binding missing")
+        hp = dict(r154_payload)
+        protocol_ph = hp.pop("payload_hash", None)
+        if protocol_ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R154 deterministic-replay protocol payload hash mismatch")
+        if protocol_ph != "a035707430c3074baef53e6a3d20eaf88defae4d0a5194a7f967348dd62a49b8":
+            errors.append("R154 deterministic-replay frozen payload hash mismatch")
+        if r154_contract_sha256 != "1ef1f7bec268f84a863bc46b786f4a2c3d92e4be93318ba1a399c4e582a17162":
+            errors.append("R154 deterministic-replay contract file hash mismatch")
+        if r154_contract.get("contract_id") != "B4-B8-R154-deterministic-automatic-replay-contract-v0" or r154_contract.get("contract_status") != "public_preregistration_execution_unopened":
+            errors.append("R154 deterministic-replay contract ID or status mismatch")
+        if r154_contract.get("target_id") != "T-B4-002bp/T-B8-003bt/T-B10-009bh" or "reference_rows" in r154_contract or "replay_rows" in r154_contract:
+            errors.append("R154 deterministic-replay target or unopened boundary mismatch")
+        bindings = r154_contract.get("source_bindings", {})
+        if bindings.get("protocol_payload_hash") != protocol_ph or bindings.get("protocol_sha256") != hashlib.sha256(r154_protocol_path.read_bytes()).hexdigest() or len(r154_contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R154 deterministic-replay protocol binding or acceptance count mismatch")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -39139,6 +39230,7 @@ def audit(root: Path) -> dict:
             "r152_edge_signature_expansion_holdout": r152_result_status,
             "r153_independent_seed_replication": r153_status,
             "r153_independent_seed_replication_holdout": r153_result_status,
+            "r154_deterministic_automatic_replay": r154_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -40617,6 +40709,8 @@ def audit(root: Path) -> dict:
             "b4_b8_r153_independent_seed_replication_protocol": str(r153_protocol_report_path),
             "b4_b8_r153_independent_seed_replication_contract": str(r153_contract_path),
             "b4_b8_r153_independent_seed_replication_holdout": str(r153_result_report_path),
+            "b4_b8_r154_deterministic_automatic_replay_protocol": str(r154_protocol_report_path),
+            "b4_b8_r154_deterministic_automatic_replay_contract": str(r154_contract_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),

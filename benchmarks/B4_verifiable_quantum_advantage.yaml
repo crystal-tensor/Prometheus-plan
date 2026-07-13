@@ -2504,6 +2504,29 @@ current_results:
     requirements_failed: 0
     result: ../results/B4_B8_R153_independent_seed_replication_holdout_v0.json
     markdown_report: ../research/B4_B8_R153_independent_seed_replication_holdout.md
+  b4_b8_r154_deterministic_automatic_replay_protocol_v0:
+    status: deterministic_automatic_replay_protocol_frozen_before_execution
+    method: b4_b8_r154_deterministic_automatic_replay_protocol_v0
+    source_target_id: T-B4-002bp/T-B8-003bt/T-B10-009bh
+    upstream_target_id: T-B4-002bo/T-B8-003bs/T-B10-009bg
+    process_pass_count: 2
+    row_count_per_pass: 96
+    total_circuit_execution_count: 576
+    total_simulated_shots: 1179648
+    automatic_qasm_hash_match_required: 96
+    arm_counts_hash_match_required: 288
+    scientific_row_hash_match_required: 96
+    maximum_replay_mismatch_count: 0
+    new_hidden_seed_count: 0
+    contract: B4_B8_R154_deterministic_automatic_replay_contract_v0.json
+    contract_sha256: 1ef1f7bec268f84a863bc46b786f4a2c3d92e4be93318ba1a399c4e582a17162
+    execution_started: false
+    replay_caveat_open: true
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R154_deterministic_automatic_replay_protocol_v0.json
+    markdown_report: ../research/B4_B8_R154_deterministic_automatic_replay_protocol.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim
