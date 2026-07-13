@@ -1,0 +1,216 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "contract, protocol, R153 result, seeds, routes, and sources remain exact",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "two separate processes each execute 96 rows and 288 circuits",
+      "passed": true,
+      "threshold": [
+        96,
+        96,
+        288,
+        288,
+        true
+      ],
+      "value": [
+        96,
+        96,
+        288,
+        288,
+        true
+      ]
+    },
+    {
+      "condition_id": "A3",
+      "label": "automatic OpenQASM 3 hashes",
+      "passed": true,
+      "threshold": 96,
+      "value": 96
+    },
+    {
+      "condition_id": "A4",
+      "label": "fixed repaired and denominator route hashes",
+      "passed": true,
+      "threshold": 6,
+      "value": 6
+    },
+    {
+      "condition_id": "A5",
+      "label": "canonical arm-count hashes",
+      "passed": true,
+      "threshold": 288,
+      "value": 288
+    },
+    {
+      "condition_id": "A6",
+      "label": "canonical scientific-row hashes",
+      "passed": true,
+      "threshold": 96,
+      "value": 96
+    },
+    {
+      "condition_id": "A7",
+      "label": "backend-target descriptor hashes",
+      "passed": true,
+      "threshold": 3,
+      "value": 3
+    },
+    {
+      "condition_id": "A8",
+      "label": "serial environment and simulator options",
+      "passed": true,
+      "threshold": [
+        true,
+        true
+      ],
+      "value": [
+        true,
+        true
+      ]
+    },
+    {
+      "condition_id": "A9",
+      "label": "R153 decisions reproduce and total mismatch count is zero",
+      "passed": true,
+      "threshold": [
+        10,
+        0
+      ],
+      "value": [
+        10,
+        0
+      ]
+    },
+    {
+      "condition_id": "A10",
+      "label": "new evidence and forbidden claims remain false",
+      "passed": true,
+      "threshold": 0,
+      "value": 0
+    }
+  ],
+  "artifacts": {
+    "comparison": "results/B4_B8_R154_deterministic_automatic_replay/comparison.json",
+    "contract": "benchmarks/B4_B8_R154_deterministic_automatic_replay_contract_v0.json",
+    "markdown_report": "research/B4_B8_R154_deterministic_automatic_replay.md",
+    "protocol": "results/B4_B8_R154_deterministic_automatic_replay_protocol_v0.json",
+    "reference_manifest": "results/B4_B8_R154_deterministic_automatic_replay/reference_manifest.json",
+    "reference_rows": "results/B4_B8_R154_deterministic_automatic_replay/reference_rows.json",
+    "replay_manifest": "results/B4_B8_R154_deterministic_automatic_replay/replay_manifest.json",
+    "replay_rows": "results/B4_B8_R154_deterministic_automatic_replay/replay_rows.json",
+    "result": "results/B4_B8_R154_deterministic_automatic_replay_v0.json",
+    "verifier_transcript": "results/B4_B8_R154_deterministic_automatic_replay/verifier_transcript.json"
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "determinism of the original default-parallel R153 path, new hidden statistical evidence, causal repair, temporal or real-device transfer, hardware performance, general route-generation advantage, quantum advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "one fail-closed byte-stable replay verdict for the R153 execution surface under newly frozen serial Aer controls"
+  },
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783948589,
+  "method": "b4_b8_r154_deterministic_automatic_replay_v0",
+  "model_status": "serial_control_replacement_replay_with_original_default_parallel_caveat_open",
+  "payload_hash": "dacd880f931c2be810d2ffd4282d62f0c2a08d5fed4a793c4c5fab5b8369d34b",
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "label": "public preregistration precedes both processes",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "label": "contract, protocol, R153 evidence, routes, and seeds are hash-bound",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "label": "reference and replay use distinct process identities",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "label": "all automatic QASM hashes match",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "label": "all arm-count and scientific-row hashes match",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "label": "all target and fixed-route hashes match",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "label": "serial environment and simulator controls match",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "label": "all R153 acceptance decisions reproduce",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "label": "comparison transcript records zero or explicit mismatches",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "label": "no new evidence, selection, route change, forbidden claim, or credit",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_target_id": "T-B4-002bq/T-B8-003bu/T-B10-009bi",
+  "status": "deterministic_automatic_replay_preregistered_acceptance",
+  "summary": {
+    "acceptance_conditions_failed": 0,
+    "acceptance_conditions_passed": 10,
+    "arm_counts_hash_match_count": 288,
+    "automatic_qasm_hash_match_count": 96,
+    "backend_target_hash_match_count": 3,
+    "bqp_separation_claimed": false,
+    "candidate_selection_performed": false,
+    "environment_matches_frozen_protocol": true,
+    "failed_acceptance_condition_ids": [],
+    "fixed_route_hash_match_count": 6,
+    "general_route_generation_advantage_claimed": false,
+    "global_acceptance": true,
+    "hardware_execution_claimed": false,
+    "mismatch_row_count": 0,
+    "new_credit_delta": 0,
+    "new_hidden_seed_count": 0,
+    "process_instances_distinct": true,
+    "quantum_advantage_claimed": false,
+    "r153_acceptance_condition_match_count": 10,
+    "r153_original_default_parallel_caveat_closed": false,
+    "real_device_transfer_claimed": false,
+    "reference_core_row_match_count_vs_r153_stored_rows": 96,
+    "reference_manifest_sha256": "ddc74ce4aba47f70c179cfd1f8047812603790e9ecd2e7652142d9271805d164",
+    "reference_process_started_at_unix": 1783948571,
+    "reference_rows_sha256": "1aff25a53e1b93306bde4bf0744bee218852d5172359f5441e669bb839693749",
+    "replay_manifest_sha256": "241ffeb6e00d5625a9fd9ae24d7c9da40214d657454b0982b24ac5708d9f87e7",
+    "replay_process_started_at_unix": 1783948589,
+    "replay_rows_sha256": "1aff25a53e1b93306bde4bf0744bee218852d5172359f5441e669bb839693749",
+    "route_change_performed": false,
+    "scientific_row_hash_match_count": 96,
+    "serial_control_replay_caveat_closed": true,
+    "simulator_options_match_frozen_protocol": true,
+    "solved_frontier_claimed": false,
+    "temporal_transfer_claimed": false,
+    "total_replay_mismatch_count": 0
+  },
+  "title": "B4/B8 R154 deterministic automatic replay",
+  "upstream_target_id": "T-B4-002bp/T-B8-003bt/T-B10-009bh",
+  "version": 0
+}

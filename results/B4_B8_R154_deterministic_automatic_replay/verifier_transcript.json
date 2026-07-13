@@ -1,0 +1,155 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "contract, protocol, R153 result, seeds, routes, and sources remain exact",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "two separate processes each execute 96 rows and 288 circuits",
+      "passed": true,
+      "threshold": [
+        96,
+        96,
+        288,
+        288,
+        true
+      ],
+      "value": [
+        96,
+        96,
+        288,
+        288,
+        true
+      ]
+    },
+    {
+      "condition_id": "A3",
+      "label": "automatic OpenQASM 3 hashes",
+      "passed": true,
+      "threshold": 96,
+      "value": 96
+    },
+    {
+      "condition_id": "A4",
+      "label": "fixed repaired and denominator route hashes",
+      "passed": true,
+      "threshold": 6,
+      "value": 6
+    },
+    {
+      "condition_id": "A5",
+      "label": "canonical arm-count hashes",
+      "passed": true,
+      "threshold": 288,
+      "value": 288
+    },
+    {
+      "condition_id": "A6",
+      "label": "canonical scientific-row hashes",
+      "passed": true,
+      "threshold": 96,
+      "value": 96
+    },
+    {
+      "condition_id": "A7",
+      "label": "backend-target descriptor hashes",
+      "passed": true,
+      "threshold": 3,
+      "value": 3
+    },
+    {
+      "condition_id": "A8",
+      "label": "serial environment and simulator options",
+      "passed": true,
+      "threshold": [
+        true,
+        true
+      ],
+      "value": [
+        true,
+        true
+      ]
+    },
+    {
+      "condition_id": "A9",
+      "label": "R153 decisions reproduce and total mismatch count is zero",
+      "passed": true,
+      "threshold": [
+        10,
+        0
+      ],
+      "value": [
+        10,
+        0
+      ]
+    },
+    {
+      "condition_id": "A10",
+      "label": "new evidence and forbidden claims remain false",
+      "passed": true,
+      "threshold": 0,
+      "value": 0
+    }
+  ],
+  "comparison_payload_hash": "ede25cbb4e53153c1489f07ca52030ffd13d3320ca2696774860be98b355ec9f",
+  "contract_sha256": "1ef1f7bec268f84a863bc46b786f4a2c3d92e4be93318ba1a399c4e582a17162",
+  "global_acceptance": true,
+  "protocol_payload_hash": "a035707430c3074baef53e6a3d20eaf88defae4d0a5194a7f967348dd62a49b8",
+  "requirements": [
+    {
+      "label": "public preregistration precedes both processes",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "label": "contract, protocol, R153 evidence, routes, and seeds are hash-bound",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "label": "reference and replay use distinct process identities",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "label": "all automatic QASM hashes match",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "label": "all arm-count and scientific-row hashes match",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "label": "all target and fixed-route hashes match",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "label": "serial environment and simulator controls match",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "label": "all R153 acceptance decisions reproduce",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "label": "comparison transcript records zero or explicit mismatches",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "label": "no new evidence, selection, route change, forbidden claim, or credit",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "result_payload_hash": "dacd880f931c2be810d2ffd4282d62f0c2a08d5fed4a793c4c5fab5b8369d34b"
+}

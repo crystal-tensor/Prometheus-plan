@@ -2142,6 +2142,32 @@ current_results:
     requirements_failed: 0
     result: ../results/B4_B8_R154_deterministic_automatic_replay_protocol_v0.json
     markdown_report: ../research/B4_B8_R154_deterministic_automatic_replay_protocol.md
+  b10_t2_b4_b8_r154_deterministic_automatic_replay_v0:
+    status: deterministic_automatic_replay_acceptance_not_bqp_claim
+    method: b4_b8_r154_deterministic_automatic_replay_v0
+    source_target_id: T-B4-002bq/T-B8-003bu/T-B10-009bi
+    upstream_target_id: T-B4-002bp/T-B8-003bt/T-B10-009bh
+    process_pass_count: 2
+    row_count_per_pass: 96
+    total_circuit_execution_count: 576
+    total_simulated_shots: 1179648
+    automatic_qasm_hash_match_count: 96
+    arm_counts_hash_match_count: 288
+    scientific_row_hash_match_count: 96
+    backend_target_hash_match_count: 3
+    fixed_route_hash_match_count: 6
+    r153_acceptance_condition_match_count: 10
+    total_replay_mismatch_count: 0
+    reference_core_row_match_count_vs_r153_stored_rows: 96
+    serial_control_replay_caveat_closed: true
+    r153_original_default_parallel_caveat_closed: false
+    b10_t2_credit_allowed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R154_deterministic_automatic_replay_v0.json
+    markdown_report: ../research/B4_B8_R154_deterministic_automatic_replay.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

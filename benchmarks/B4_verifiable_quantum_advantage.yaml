@@ -2527,6 +2527,30 @@ current_results:
     requirements_failed: 0
     result: ../results/B4_B8_R154_deterministic_automatic_replay_protocol_v0.json
     markdown_report: ../research/B4_B8_R154_deterministic_automatic_replay_protocol.md
+  b4_b8_r154_deterministic_automatic_replay_v0:
+    status: deterministic_automatic_replay_preregistered_acceptance
+    method: b4_b8_r154_deterministic_automatic_replay_v0
+    source_target_id: T-B4-002bq/T-B8-003bu/T-B10-009bi
+    upstream_target_id: T-B4-002bp/T-B8-003bt/T-B10-009bh
+    process_pass_count: 2
+    row_count_per_pass: 96
+    total_circuit_execution_count: 576
+    total_simulated_shots: 1179648
+    automatic_qasm_hash_match_count: 96
+    arm_counts_hash_match_count: 288
+    scientific_row_hash_match_count: 96
+    backend_target_hash_match_count: 3
+    fixed_route_hash_match_count: 6
+    r153_acceptance_condition_match_count: 10
+    total_replay_mismatch_count: 0
+    reference_core_row_match_count_vs_r153_stored_rows: 96
+    serial_control_replay_caveat_closed: true
+    r153_original_default_parallel_caveat_closed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R154_deterministic_automatic_replay_v0.json
+    markdown_report: ../research/B4_B8_R154_deterministic_automatic_replay.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

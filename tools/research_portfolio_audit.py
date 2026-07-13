@@ -38757,6 +38757,150 @@ def audit(root: Path) -> dict:
         if bindings.get("protocol_payload_hash") != protocol_ph or bindings.get("protocol_sha256") != hashlib.sha256(r154_protocol_path.read_bytes()).hexdigest() or len(r154_contract.get("acceptance_conditions", [])) != 10:
             errors.append("R154 deterministic-replay protocol binding or acceptance count mismatch")
 
+    r154_result_path = results / "B4_B8_R154_deterministic_automatic_replay_v0.json"
+    r154_result_report_path = research / "B4_B8_R154_deterministic_automatic_replay.md"
+    r154_result_status = {
+        "result_path": str(r154_result_path),
+        "report_path": str(r154_result_report_path),
+        "result_exists": r154_result_path.exists(),
+        "report_exists": r154_result_report_path.exists(),
+    }
+    r154_result_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get("b4_b8_r154_deterministic_automatic_replay_v0"),
+            "deterministic_automatic_replay_preregistered_acceptance",
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get("b4_b8_r154_deterministic_automatic_replay_v0"),
+            "deterministic_automatic_replay_preregistered_acceptance",
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r154_deterministic_automatic_replay_v0"),
+            "deterministic_automatic_replay_acceptance_not_bqp_claim",
+        ),
+    ]
+    for label, row, expected_status in r154_result_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R154 deterministic-replay result")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R154 deterministic-replay result missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r154_deterministic_automatic_replay_v0":
+            errors.append(f"{label} R154 deterministic-replay result status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002bq/T-B8-003bu/T-B10-009bi" or row.get("upstream_target_id") != "T-B4-002bp/T-B8-003bt/T-B10-009bh":
+            errors.append(f"{label} R154 deterministic-replay result target chain mismatch")
+        if row.get("serial_control_replay_caveat_closed") is not True or row.get("r153_original_default_parallel_caveat_closed") is not False:
+            errors.append(f"{label} R154 deterministic-replay caveat boundary mismatch")
+        if row.get("new_credit_delta") != 0 or row.get("requirements_passed") != 10 or row.get("requirements_failed") != 0:
+            errors.append(f"{label} R154 deterministic-replay credit or requirement mismatch")
+    if not r154_result_path.exists() or not r154_result_report_path.exists():
+        errors.append("R154 deterministic-replay result or report missing")
+    else:
+        r154_result = json.loads(read(r154_result_path))
+        r154_summary = r154_result.get("summary", {})
+        r154_result_status.update({
+            "status": r154_result.get("status"),
+            "method": r154_result.get("method"),
+            "requirements_passed": r154_result.get("requirements_passed"),
+            "requirements_failed": r154_result.get("requirements_failed"),
+            "automatic_qasm_hash_match_count": r154_summary.get("automatic_qasm_hash_match_count"),
+            "arm_counts_hash_match_count": r154_summary.get("arm_counts_hash_match_count"),
+            "scientific_row_hash_match_count": r154_summary.get("scientific_row_hash_match_count"),
+            "total_replay_mismatch_count": r154_summary.get("total_replay_mismatch_count"),
+            "serial_control_replay_caveat_closed": r154_summary.get("serial_control_replay_caveat_closed"),
+            "r153_original_default_parallel_caveat_closed": r154_summary.get("r153_original_default_parallel_caveat_closed"),
+        })
+        if r154_result.get("status") != "deterministic_automatic_replay_preregistered_acceptance" or r154_result.get("method") != "b4_b8_r154_deterministic_automatic_replay_v0":
+            errors.append("R154 deterministic-replay result status or method mismatch")
+        if r154_result.get("source_target_id") != "T-B4-002bq/T-B8-003bu/T-B10-009bi" or r154_result.get("upstream_target_id") != "T-B4-002bp/T-B8-003bt/T-B10-009bh":
+            errors.append("R154 deterministic-replay result target chain mismatch")
+        if r154_result.get("requirements_passed") != 10 or r154_result.get("requirements_failed") != 0:
+            errors.append("R154 deterministic-replay result requirements must pass 10/10")
+        expected_r154_summary = {
+            "acceptance_conditions_passed": 10,
+            "acceptance_conditions_failed": 0,
+            "automatic_qasm_hash_match_count": 96,
+            "arm_counts_hash_match_count": 288,
+            "scientific_row_hash_match_count": 96,
+            "backend_target_hash_match_count": 3,
+            "fixed_route_hash_match_count": 6,
+            "r153_acceptance_condition_match_count": 10,
+            "reference_core_row_match_count_vs_r153_stored_rows": 96,
+            "total_replay_mismatch_count": 0,
+            "mismatch_row_count": 0,
+            "environment_matches_frozen_protocol": True,
+            "simulator_options_match_frozen_protocol": True,
+            "process_instances_distinct": True,
+            "serial_control_replay_caveat_closed": True,
+            "r153_original_default_parallel_caveat_closed": False,
+            "new_hidden_seed_count": 0,
+            "candidate_selection_performed": False,
+            "route_change_performed": False,
+            "new_credit_delta": 0,
+            "global_acceptance": True,
+        }
+        for field, value in expected_r154_summary.items():
+            if r154_summary.get(field) != value:
+                errors.append(f"R154 deterministic-replay result {field} mismatch")
+        forbidden_claims = [
+            "hardware_execution_claimed",
+            "temporal_transfer_claimed",
+            "real_device_transfer_claimed",
+            "general_route_generation_advantage_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "solved_frontier_claimed",
+        ]
+        if any(r154_summary.get(field) is not False for field in forbidden_claims):
+            errors.append("R154 deterministic-replay forbidden claim boundary mismatch")
+        acceptance = r154_result.get("acceptance_conditions", [])
+        if [row.get("condition_id") for row in acceptance] != [f"A{i}" for i in range(1, 11)] or any(row.get("passed") is not True for row in acceptance):
+            errors.append("R154 deterministic-replay result must preserve A1-A10 acceptance")
+        rhp = dict(r154_result)
+        result_ph = rhp.pop("payload_hash", None)
+        if result_ph != hashlib.sha256(json.dumps(rhp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R154 deterministic-replay result payload hash mismatch")
+        if result_ph != "dacd880f931c2be810d2ffd4282d62f0c2a08d5fed4a793c4c5fab5b8369d34b":
+            errors.append("R154 deterministic-replay final payload hash mismatch")
+        artifact_paths = {}
+        for artifact_key in [
+            "reference_rows",
+            "reference_manifest",
+            "replay_rows",
+            "replay_manifest",
+            "comparison",
+            "verifier_transcript",
+        ]:
+            rel = r154_result.get("artifacts", {}).get(artifact_key)
+            artifact_path = root / rel if rel else None
+            if not artifact_path or not artifact_path.exists():
+                errors.append(f"R154 deterministic-replay result artifact missing: {artifact_key}")
+            else:
+                artifact_paths[artifact_key] = artifact_path
+        if len(artifact_paths) == 6:
+            reference_rows_sha = hashlib.sha256(artifact_paths["reference_rows"].read_bytes()).hexdigest()
+            replay_rows_sha = hashlib.sha256(artifact_paths["replay_rows"].read_bytes()).hexdigest()
+            reference_manifest_sha = hashlib.sha256(artifact_paths["reference_manifest"].read_bytes()).hexdigest()
+            replay_manifest_sha = hashlib.sha256(artifact_paths["replay_manifest"].read_bytes()).hexdigest()
+            expected_rows_sha = "1aff25a53e1b93306bde4bf0744bee218852d5172359f5441e669bb839693749"
+            if reference_rows_sha != expected_rows_sha or replay_rows_sha != expected_rows_sha:
+                errors.append("R154 deterministic-replay row file hash mismatch")
+            if r154_summary.get("reference_rows_sha256") != reference_rows_sha or r154_summary.get("replay_rows_sha256") != replay_rows_sha:
+                errors.append("R154 deterministic-replay summary row hash mismatch")
+            if r154_summary.get("reference_manifest_sha256") != reference_manifest_sha or r154_summary.get("replay_manifest_sha256") != replay_manifest_sha:
+                errors.append("R154 deterministic-replay summary manifest hash mismatch")
+            comparison = json.loads(read(artifact_paths["comparison"]))
+            transcript = json.loads(read(artifact_paths["verifier_transcript"]))
+            if transcript.get("result_payload_hash") != result_ph or transcript.get("comparison_payload_hash") != comparison.get("comparison_payload_hash"):
+                errors.append("R154 deterministic-replay transcript binding mismatch")
+        report_text = read(r154_result_report_path)
+        if "closes only the serial-control replacement replay gate" not in report_text or "does not\nprove that the original R153 default-parallel path is deterministic" not in report_text:
+            errors.append("R154 deterministic-replay original default-parallel caveat missing from report")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -39231,6 +39375,7 @@ def audit(root: Path) -> dict:
             "r153_independent_seed_replication": r153_status,
             "r153_independent_seed_replication_holdout": r153_result_status,
             "r154_deterministic_automatic_replay": r154_status,
+            "r154_deterministic_automatic_replay_result": r154_result_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -40711,6 +40856,7 @@ def audit(root: Path) -> dict:
             "b4_b8_r153_independent_seed_replication_holdout": str(r153_result_report_path),
             "b4_b8_r154_deterministic_automatic_replay_protocol": str(r154_protocol_report_path),
             "b4_b8_r154_deterministic_automatic_replay_contract": str(r154_contract_path),
+            "b4_b8_r154_deterministic_automatic_replay": str(r154_result_report_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),

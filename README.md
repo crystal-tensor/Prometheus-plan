@@ -3449,3 +3449,18 @@ unopened. This does not yet close the R153 replay caveat and does not support
 new statistical evidence, hardware performance, temporal or real-device
 transfer, general route-generation advantage, quantum advantage, BQP
 separation, solved-frontier status, or new credit.
+
+The R154 execution at `T-B4-002bq` / `T-B8-003bu` / `T-B10-009bi` is
+ACCEPTED under the newly frozen serial controls. Two independent operating-
+system processes replayed all 96 public R153 rows, producing exact matches for
+`96/96` automatic OpenQASM 3 hashes, `288/288` arm-count hashes, `96/96`
+scientific-row hashes, `3/3` backend-target hashes, `6/6` fixed-route hashes,
+and all `10/10` R153 acceptance decisions. The reference pass also matched
+`96/96` stored R153 scientific rows, and the cross-process comparison recorded
+zero total mismatches. Requirements and acceptance conditions pass `10/10`;
+payload hash `dacd880f...`. This closes the serial replacement-replay caveat
+for this finite execution surface. It does not explain or prove deterministic
+the original R153 default-parallel path, whose transient drift remains open,
+and it adds no new hidden statistical evidence. It is not hardware evidence,
+temporal or real-device transfer, general route-generation advantage, quantum
+advantage, BQP separation, solved-frontier status, or new credit.
