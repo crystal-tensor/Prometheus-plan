@@ -2741,6 +2741,28 @@ identity rather than tune channel weights. Scalable exact-output evaluation,
 temporal transfer, cross-machine transfer, hardware, advantage, BQP,
 solved-frontier status, and new credit remain unclaimed.
 
+`T-B4-002bg` / `T-B8-003bk` / `T-B10-009ay` now freezes the R149
+Jakarta dense-XY candidate-generation design before any new holdout is opened.
+The generator enumerates all `5,040` six-logical-to-seven-physical mappings,
+excludes the target-specific R143 identity and both foreign R148 identities,
+and statically ranks the remaining `5,037` mappings from public calibration,
+output-sensitive readout risk, and circuit interaction structure. Three ranking
+views produce a 12-mapping shortlist; two routing policies and two realization
+seeds produce `48` compiled candidates. Fixed public design seeds successively
+halve them `48 -> 12 -> 3 -> 1`. The selected mapping `[5, 6, 1, 0, 3, 2]`
+copies no frozen identity and reads zero R148 hidden rows. Post-selection
+diagnostics, excluded from selection, place it `-0.00115322` below the R143
+target-specific route and `+0.02465309` above the old R148 foreign route.
+The immutable challenge at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az`
+will run `96` rows, `296` circuit executions, and `606,208` shots across all
+12 portfolio groups. It requires all `12/12` groups to clear `-0.02`, zero
+severe rows, every target to clear `-0.01`, and the replacement to improve at
+least `+0.01` over the R148 route. Contract hash
+`4efbda7920ec5b7cc9486145076f4550d109f6db32c730904e9fc406c4a80552`.
+No R149 holdout, general route-generation advantage, temporal or cross-machine
+transfer, hardware result, quantum advantage, BQP separation, solved-frontier
+status, or new credit is claimed.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules

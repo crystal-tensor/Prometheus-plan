@@ -37869,6 +37869,102 @@ def audit(root: Path) -> dict:
             if transcript.get("trial_rows_sha256") != hashlib.sha256(trials_path.read_bytes()).hexdigest():
                 errors.append("R148 channel-risk trial row transcript hash mismatch")
 
+    r149_design_path = results / "B4_B8_R149_jakarta_xy_candidate_generation_design_v0.json"
+    r149_design_report_path = research / "B4_B8_R149_jakarta_xy_candidate_generation_design.md"
+    r149_protocol_path = results / "B4_B8_R149_jakarta_xy_candidate_generation_protocol_v0.json"
+    r149_protocol_report_path = research / "B4_B8_R149_jakarta_xy_candidate_generation_protocol.md"
+    r149_contract_path = benchmarks / "B4_B8_R149_jakarta_xy_candidate_generation_contract_v0.json"
+    r149_status = {
+        "design_path": str(r149_design_path), "protocol_path": str(r149_protocol_path),
+        "contract_path": str(r149_contract_path),
+        "design_exists": r149_design_path.exists(), "protocol_exists": r149_protocol_path.exists(),
+        "contract_exists": r149_contract_path.exists(),
+    }
+    r149_contract_sha256 = hashlib.sha256(r149_contract_path.read_bytes()).hexdigest() if r149_contract_path.exists() else None
+    r149_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}), "b4_b8_r149_jakarta_xy_candidate_generation_design_v0", "b4_b8_r149_jakarta_xy_candidate_generation_protocol_v0"),
+        ("B8", b8_manifest.get("current_results", {}), "b4_b8_r149_jakarta_xy_candidate_generation_design_v0", "b4_b8_r149_jakarta_xy_candidate_generation_protocol_v0"),
+        ("B10", b10_manifest.get("current_results", {}), "b10_t2_b4_b8_r149_jakarta_xy_candidate_generation_design_v0", "b10_t2_b4_b8_r149_jakarta_xy_candidate_generation_protocol_v0"),
+    ]
+    for label, manifest, design_key, protocol_key in r149_manifest_rows:
+        design_row = manifest.get(design_key)
+        protocol_row = manifest.get(protocol_key)
+        if not design_row or not protocol_row:
+            errors.append(f"{label} manifest missing R149 candidate-generation preregistration")
+            continue
+        for row_name, row in [("design", design_row), ("protocol", protocol_row)]:
+            for field in ["result", "markdown_report"]:
+                if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                    errors.append(f"{label} R149 {row_name} missing {field}")
+        if protocol_row.get("contract_sha256") != r149_contract_sha256:
+            errors.append(f"{label} R149 contract hash mismatch")
+    required_r149_paths = [r149_design_path, r149_design_report_path, r149_protocol_path, r149_protocol_report_path, r149_contract_path]
+    if not all(path.exists() for path in required_r149_paths):
+        errors.append("R149 candidate-generation design, protocol, report, or contract missing")
+    else:
+        r149_design = json.loads(read(r149_design_path)); r149_summary = r149_design.get("summary", {})
+        r149_protocol_payload = json.loads(read(r149_protocol_path)); r149_protocol = r149_protocol_payload.get("protocol", {})
+        r149_contract = json.loads(read(r149_contract_path))
+        r149_status.update({
+            "design_status": r149_design.get("status"), "protocol_status": r149_protocol_payload.get("status"),
+            "design_requirements_passed": r149_design.get("requirements_passed"),
+            "protocol_requirements_passed": r149_protocol_payload.get("requirements_passed"),
+            "selected_mapping": r149_summary.get("selected_mapping"),
+            "challenge_executed": r149_protocol_payload.get("challenge_executed"),
+        })
+        if r149_design.get("status") != "jakarta_xy_candidate_generation_design_frozen_before_holdout" or r149_design.get("method") != "b4_b8_r149_jakarta_xy_candidate_generation_design_v0":
+            errors.append("R149 candidate-generation design status or method mismatch")
+        if r149_design.get("requirements_passed") != 10 or r149_design.get("requirements_failed") != 0:
+            errors.append("R149 candidate-generation design requirements must pass 10/10")
+        expected_design = {
+            "enumerated_mapping_count": 5040, "excluded_mapping_count": 3,
+            "eligible_mapping_count": 5037, "shortlist_mapping_count": 12,
+            "compiled_candidate_count": 48, "charged_design_execution_count": 264,
+            "diagnostic_execution_count": 32, "total_design_execution_count": 296,
+            "selected_mapping": [5, 6, 1, 0, 3, 2],
+            "selected_mapping_matches_target_r143": False,
+            "selected_mapping_matches_foreign_r148": False,
+            "r148_hidden_trial_rows_read_count": 0, "challenge_executed": False,
+        }
+        for field, value in expected_design.items():
+            if r149_summary.get(field) != value:
+                errors.append(f"R149 candidate-generation design {field} mismatch")
+        for row in r149_design.get("candidate_rows", []):
+            candidate_path = root / row.get("circuit_path", "")
+            if not candidate_path.is_file() or hashlib.sha256(candidate_path.read_bytes()).hexdigest() != row.get("circuit_sha256"):
+                errors.append(f"R149 candidate hash mismatch: {row.get('circuit_path')}")
+        hp = dict(r149_design); r149_design_ph = hp.pop("payload_hash", None)
+        if r149_design_ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R149 candidate-generation design payload hash mismatch")
+        if r149_protocol_payload.get("status") != "jakarta_xy_generated_route_protocol_frozen_before_challenge" or r149_protocol_payload.get("method") != "b4_b8_r149_jakarta_xy_candidate_generation_protocol_v0":
+            errors.append("R149 candidate-generation protocol status or method mismatch")
+        if r149_protocol_payload.get("requirements_passed") != 10 or r149_protocol_payload.get("requirements_failed") != 0 or r149_protocol_payload.get("challenge_executed") is not False:
+            errors.append("R149 candidate-generation protocol requirements or unopened boundary mismatch")
+        expected_protocol = {
+            "portfolio_group_count": 12, "hidden_trial_count_per_group": 8,
+            "trial_row_count": 96, "simulated_circuit_execution_count": 296,
+            "shots_per_execution": 2048, "total_simulated_shots": 606208,
+            "minimum_group_count_above_negative_0_02_vs_target": 12,
+            "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+            "minimum_each_target_mean_repaired_minus_target": -0.01,
+            "minimum_replacement_group_mean_repaired_minus_target": -0.02,
+            "minimum_replacement_group_mean_repaired_minus_r148_foreign": 0.01,
+        }
+        for field, value in expected_protocol.items():
+            if r149_protocol.get(field) != value:
+                errors.append(f"R149 candidate-generation protocol {field} mismatch")
+        hp = dict(r149_protocol_payload); r149_protocol_ph = hp.pop("payload_hash", None)
+        if r149_protocol_ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R149 candidate-generation protocol payload hash mismatch")
+        if r149_contract_sha256 != "4efbda7920ec5b7cc9486145076f4550d109f6db32c730904e9fc406c4a80552":
+            errors.append("R149 candidate-generation contract file hash mismatch")
+        if r149_contract.get("contract_id") != "B4-B8-R149-jakarta-xy-candidate-generation-contract-v0" or r149_contract.get("contract_status") != "public_preregistration_challenge_unopened":
+            errors.append("R149 candidate-generation contract ID or status mismatch")
+        if r149_contract.get("target_id") != "T-B4-002bh/T-B8-003bl/T-B10-009az" or "challenge_secret" in r149_contract or "trial_rows" in r149_contract:
+            errors.append("R149 candidate-generation contract target or unopened boundary mismatch")
+        if r149_contract.get("source_bindings", {}).get("protocol_payload_hash") != r149_protocol_ph or len(r149_contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R149 candidate-generation contract binding or acceptance count mismatch")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -38333,6 +38429,7 @@ def audit(root: Path) -> dict:
             "r147_target_descriptor_adaptation_holdout": r147_result_status,
             "r148_task_conditioned_channel_risk": r148_status,
             "r148_task_conditioned_channel_risk_holdout": r148_result_status,
+            "r149_jakarta_xy_candidate_generation": r149_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -39775,6 +39872,13 @@ def audit(root: Path) -> dict:
             "b4_b8_r148_task_conditioned_channel_risk_holdout": str(
                 research / "B4_B8_R148_task_conditioned_channel_risk_holdout.md"
             ),
+            "b4_b8_r149_jakarta_xy_candidate_generation_design": str(
+                research / "B4_B8_R149_jakarta_xy_candidate_generation_design.md"
+            ),
+            "b4_b8_r149_jakarta_xy_candidate_generation_protocol": str(
+                research / "B4_B8_R149_jakarta_xy_candidate_generation_protocol.md"
+            ),
+            "b4_b8_r149_jakarta_xy_candidate_generation_contract": str(r149_contract_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),

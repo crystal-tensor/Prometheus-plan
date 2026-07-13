@@ -1,0 +1,121 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition": "protocol, generated route, frozen portfolio routes, and all source hashes remain exact",
+      "condition_id": "A1"
+    },
+    {
+      "condition": "12 groups produce 96 rows, 296 executions, and the extra R148 arm appears only on the replacement group",
+      "condition_id": "A2"
+    },
+    {
+      "condition": "all repaired-portfolio and target-specific routes retain semantic fidelity at least 0.9999999999",
+      "condition_id": "A3"
+    },
+    {
+      "condition": "portfolio repaired-automatic mean is at least -0.005 and bootstrap lower is at least -0.01",
+      "condition_id": "A4"
+    },
+    {
+      "condition": "portfolio repaired-target mean is at least -0.005 and bootstrap lower is at least -0.01",
+      "condition_id": "A5"
+    },
+    {
+      "condition": "all 12 groups have mean repaired-target delta at least -0.02",
+      "condition_id": "A6"
+    },
+    {
+      "condition": "zero rows have repaired-target regression below -0.05",
+      "condition_id": "A7"
+    },
+    {
+      "condition": "each target mean is at least -0.01; replacement mean versus target is at least -0.02 and versus R148 foreign is at least +0.01 with zero severe rows",
+      "condition_id": "A8"
+    },
+    {
+      "condition": "challenge commitment, hidden seeds, row hashes, reveal, and transcript replay",
+      "condition_id": "A9"
+    },
+    {
+      "condition": "general generation, temporal, cross-machine, hardware, advantage, BQP, solved-frontier, and credit claims remain false",
+      "condition_id": "A10"
+    }
+  ],
+  "challenge_protocol": {
+    "automatic_rule": "fresh optimization-level-3 compile with a hidden transpiler seed",
+    "challenge_seed_derivation": "HMAC-SHA256 from post-preregistration secret",
+    "hidden_trial_count_per_group": 8,
+    "maximum_replacement_group_severe_regression_count": 0,
+    "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+    "minimum_each_target_mean_repaired_minus_target": -0.01,
+    "minimum_group_count_above_negative_0_02_vs_target": 12,
+    "minimum_portfolio_repaired_minus_automatic_bootstrap_lower": -0.01,
+    "minimum_portfolio_repaired_minus_automatic_mean": -0.005,
+    "minimum_portfolio_repaired_minus_target_bootstrap_lower": -0.01,
+    "minimum_portfolio_repaired_minus_target_mean": -0.005,
+    "minimum_replacement_group_mean_repaired_minus_r148_foreign": 0.01,
+    "minimum_replacement_group_mean_repaired_minus_target": -0.02,
+    "minimum_semantic_fidelity": 0.9999999999,
+    "portfolio_arms": [
+      "r149_repaired_portfolio",
+      "target_specific",
+      "automatic"
+    ],
+    "portfolio_group_count": 12,
+    "portfolio_rule": "use the R149 generated route only for Jakarta dense XY and preserve frozen R148 routes for the other 11 groups",
+    "replacement_diagnostic_arm": "r148_foreign",
+    "replacement_diagnostic_rule": "recompile the frozen R148 foreign route only for Jakarta dense XY",
+    "replacement_group_id": "FakeJakartaV2::dense_validation_xy_network_n6",
+    "shared_seed_rule": "all arms in one row share one simulator seed",
+    "shots_per_execution": 2048,
+    "simulated_circuit_execution_count": 296,
+    "snapshot_names": [
+      "FakeJakartaV2",
+      "FakeLagosV2",
+      "FakeOslo"
+    ],
+    "target_rule": "recompile the target-specific R143 route only as a denominator",
+    "task_ids": [
+      "dense_validation_complete_ising_n6",
+      "dense_validation_inverse_qft_n6",
+      "dense_validation_scrambled_qft_n6",
+      "dense_validation_xy_network_n6"
+    ],
+    "total_simulated_shots": 606208,
+    "trial_row_count": 96
+  },
+  "claim_boundary": {
+    "positive_result_requires_all_conditions": true,
+    "what_is_not_supported_even_if_accepted": "general route-generation advantage, temporal same-device transfer, cross-machine transfer, real hardware, mitigation, protocol soundness, quantum advantage, BQP separation, or solved B4/B8/B10"
+  },
+  "contract_id": "B4-B8-R149-jakarta-xy-candidate-generation-contract-v0",
+  "contract_status": "public_preregistration_challenge_unopened",
+  "phase_protocol": [
+    "commit a fresh secret after public preregistration",
+    "derive hidden transpiler, simulator, and bootstrap seeds",
+    "replay one generated replacement plus eleven frozen R148 routes",
+    "execute target and automatic denominators plus the replacement-only R148 diagnostic arm",
+    "write 96 rows before secret reveal",
+    "reveal and verify the acceptance transcript"
+  ],
+  "research_question": "Can a newly generated Jakarta dense-XY route close the sole R148 gap without copying frozen identities or regressing the other 11 groups?",
+  "source_bindings": {
+    "protocol_path": "results/B4_B8_R149_jakarta_xy_candidate_generation_protocol_v0.json",
+    "protocol_payload_hash": "6150ba1f8f79a5ea9f811ccb0ea7ac00ff0744df746a44b57a53e1a7e9707032",
+    "protocol_sha256": "646a41bd1ee6116fbfbac98bb67483024ac6a72951b3979db7a49023670ea441",
+    "r143_design_path": "results/B4_B8_R143_successive_halving_lcb_design_v0.json",
+    "r143_design_payload_hash": "1a7bac658ec807d22d2407545973de22d280aab530f3672a3ffdafa8b37ef754",
+    "r143_design_sha256": "61340c0b242925be77a391552af62927af0fd66855d337daf955e36ae8f4bf34",
+    "r148_design_path": "results/B4_B8_R148_task_conditioned_channel_risk_design_v0.json",
+    "r148_design_payload_hash": "9e42a8393520a123e0b09e9698e7d2b984059b6aa0e800458bdadde454cab15d",
+    "r148_design_sha256": "db4aa2da5f6a0c25107872a4ac050df6578fbf3ef5ce1d559ee72383de4fa74a",
+    "r148_result_path": "results/B4_B8_R148_task_conditioned_channel_risk_holdout_v0.json",
+    "r148_result_sha256_provenance_only": "2c4772c57d75fa7143ff852deac378e5b0b9d6f1060c59ec24d773bf27896170",
+    "r148_trial_rows_consumed": false,
+    "r149_design_path": "results/B4_B8_R149_jakarta_xy_candidate_generation_design_v0.json",
+    "r149_design_payload_hash": "4f41020dd999387dc0e356928ba131f0648de5091cb4f06b0b7ab14dae909d23",
+    "r149_design_sha256": "90bf21e06a2a29de85797c7ccf20b6a5a09936f6f2c9110b0348fbca42512c16"
+  },
+  "target_id": "T-B4-002bh/T-B8-003bl/T-B10-009az",
+  "upstream_target_id": "T-B4-002bg/T-B8-003bk/T-B10-009ay"
+}

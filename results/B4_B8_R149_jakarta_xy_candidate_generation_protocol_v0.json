@@ -1,0 +1,129 @@
+{
+  "challenge_executed": false,
+  "claim_boundary": {
+    "what_is_not_supported": "a holdout repair, general route-generation advantage, temporal transfer, cross-machine transfer, real hardware, mitigation, soundness, quantum advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "an immutable one-route replacement protocol with a full 12-group regression portfolio"
+  },
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1783937965,
+  "method": "b4_b8_r149_jakarta_xy_candidate_generation_protocol_v0",
+  "model_status": "one_generated_replacement_plus_eleven_frozen_r148_routes",
+  "payload_hash": "6150ba1f8f79a5ea9f811ccb0ea7ac00ff0744df746a44b57a53e1a7e9707032",
+  "protocol": {
+    "automatic_rule": "fresh optimization-level-3 compile with a hidden transpiler seed",
+    "challenge_seed_derivation": "HMAC-SHA256 from post-preregistration secret",
+    "hidden_trial_count_per_group": 8,
+    "maximum_replacement_group_severe_regression_count": 0,
+    "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+    "minimum_each_target_mean_repaired_minus_target": -0.01,
+    "minimum_group_count_above_negative_0_02_vs_target": 12,
+    "minimum_portfolio_repaired_minus_automatic_bootstrap_lower": -0.01,
+    "minimum_portfolio_repaired_minus_automatic_mean": -0.005,
+    "minimum_portfolio_repaired_minus_target_bootstrap_lower": -0.01,
+    "minimum_portfolio_repaired_minus_target_mean": -0.005,
+    "minimum_replacement_group_mean_repaired_minus_r148_foreign": 0.01,
+    "minimum_replacement_group_mean_repaired_minus_target": -0.02,
+    "minimum_semantic_fidelity": 0.9999999999,
+    "portfolio_arms": [
+      "r149_repaired_portfolio",
+      "target_specific",
+      "automatic"
+    ],
+    "portfolio_group_count": 12,
+    "portfolio_rule": "use the R149 generated route only for Jakarta dense XY and preserve frozen R148 routes for the other 11 groups",
+    "replacement_diagnostic_arm": "r148_foreign",
+    "replacement_diagnostic_rule": "recompile the frozen R148 foreign route only for Jakarta dense XY",
+    "replacement_group_id": "FakeJakartaV2::dense_validation_xy_network_n6",
+    "shared_seed_rule": "all arms in one row share one simulator seed",
+    "shots_per_execution": 2048,
+    "simulated_circuit_execution_count": 296,
+    "snapshot_names": [
+      "FakeJakartaV2",
+      "FakeLagosV2",
+      "FakeOslo"
+    ],
+    "target_rule": "recompile the target-specific R143 route only as a denominator",
+    "task_ids": [
+      "dense_validation_complete_ising_n6",
+      "dense_validation_inverse_qft_n6",
+      "dense_validation_scrambled_qft_n6",
+      "dense_validation_xy_network_n6"
+    ],
+    "total_simulated_shots": 606208,
+    "trial_row_count": 96
+  },
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "label": "R149 design, R148 portfolio/result provenance, and R143 denominator hashes are bound",
+      "passed": true,
+      "requirement_id": "R1"
+    },
+    {
+      "label": "generated mapping copies neither target R143 nor foreign R148 identities",
+      "passed": true,
+      "requirement_id": "R2"
+    },
+    {
+      "label": "R148 hidden rows remain unused for candidate generation and selection",
+      "passed": true,
+      "requirement_id": "R3"
+    },
+    {
+      "label": "one generated replacement and eleven frozen R148 routes form 12 portfolio groups",
+      "passed": true,
+      "requirement_id": "R4"
+    },
+    {
+      "label": "eight hidden trials produce 96 rows and 296 executions",
+      "passed": true,
+      "requirement_id": "R5"
+    },
+    {
+      "label": "portfolio and each-target noninferiority floors remain unchanged",
+      "passed": true,
+      "requirement_id": "R6"
+    },
+    {
+      "label": "all 12 groups must clear -0.02 with zero severe rows",
+      "passed": true,
+      "requirement_id": "R7"
+    },
+    {
+      "label": "replacement must clear target noninferiority and improve at least +0.01 over R148 foreign",
+      "passed": true,
+      "requirement_id": "R8"
+    },
+    {
+      "label": "no R149 holdout has run during protocol design",
+      "passed": true,
+      "requirement_id": "R9"
+    },
+    {
+      "label": "general generation, temporal, cross-machine, hardware, advantage, BQP, solved-frontier, and credit claims remain false",
+      "passed": true,
+      "requirement_id": "R10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_bindings": {
+    "r143_design_path": "results/B4_B8_R143_successive_halving_lcb_design_v0.json",
+    "r143_design_payload_hash": "1a7bac658ec807d22d2407545973de22d280aab530f3672a3ffdafa8b37ef754",
+    "r143_design_sha256": "61340c0b242925be77a391552af62927af0fd66855d337daf955e36ae8f4bf34",
+    "r148_design_path": "results/B4_B8_R148_task_conditioned_channel_risk_design_v0.json",
+    "r148_design_payload_hash": "9e42a8393520a123e0b09e9698e7d2b984059b6aa0e800458bdadde454cab15d",
+    "r148_design_sha256": "db4aa2da5f6a0c25107872a4ac050df6578fbf3ef5ce1d559ee72383de4fa74a",
+    "r148_result_path": "results/B4_B8_R148_task_conditioned_channel_risk_holdout_v0.json",
+    "r148_result_sha256_provenance_only": "2c4772c57d75fa7143ff852deac378e5b0b9d6f1060c59ec24d773bf27896170",
+    "r148_trial_rows_consumed": false,
+    "r149_design_path": "results/B4_B8_R149_jakarta_xy_candidate_generation_design_v0.json",
+    "r149_design_payload_hash": "4f41020dd999387dc0e356928ba131f0648de5091cb4f06b0b7ab14dae909d23",
+    "r149_design_sha256": "90bf21e06a2a29de85797c7ccf20b6a5a09936f6f2c9110b0348fbca42512c16"
+  },
+  "source_target_id": "T-B4-002bg/T-B8-003bk/T-B10-009ay",
+  "status": "jakarta_xy_generated_route_protocol_frozen_before_challenge",
+  "title": "B4/B8 R149 Jakarta dense-XY generated-route portfolio protocol",
+  "upstream_target_id": "T-B4-002bf/T-B8-003bj/T-B10-009ax",
+  "version": 0
+}
