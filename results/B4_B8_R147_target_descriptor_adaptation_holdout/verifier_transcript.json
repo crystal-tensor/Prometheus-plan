@@ -1,0 +1,112 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "protocol, selector, route identities, and source bindings remain exact",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "adaptation groups, rows, and executions",
+      "passed": true,
+      "threshold": [
+        12,
+        96,
+        288
+      ],
+      "value": [
+        12,
+        96,
+        288
+      ]
+    },
+    {
+      "condition_id": "A3",
+      "label": "all adapted and target routes retain semantic fidelity",
+      "passed": true,
+      "threshold": [
+        24,
+        0.9999999999
+      ],
+      "value": [
+        24,
+        0.9999999999999973
+      ]
+    },
+    {
+      "condition_id": "A4",
+      "label": "portfolio adapted versus automatic noninferiority",
+      "passed": true,
+      "threshold": [
+        -0.005,
+        -0.01
+      ],
+      "value": [
+        -0.0013396737855319804,
+        -0.0037589604826970776
+      ]
+    },
+    {
+      "condition_id": "A5",
+      "label": "portfolio adapted versus target-specific noninferiority",
+      "passed": false,
+      "threshold": [
+        -0.005,
+        -0.01
+      ],
+      "value": [
+        -0.009455671490667228,
+        -0.012331639895526514
+      ]
+    },
+    {
+      "condition_id": "A6",
+      "label": "groups above negative 0.02 versus target",
+      "passed": false,
+      "threshold": 11,
+      "value": 9
+    },
+    {
+      "condition_id": "A7",
+      "label": "severe row regressions below negative 0.05",
+      "passed": false,
+      "threshold": 0,
+      "value": 2
+    },
+    {
+      "condition_id": "A8",
+      "label": "each-target and Lagos dense-XY guards",
+      "passed": false,
+      "threshold": [
+        -0.01,
+        -0.02,
+        0
+      ],
+      "value": [
+        -0.014823600146504386,
+        -0.014967446962026586,
+        0
+      ]
+    },
+    {
+      "condition_id": "A9",
+      "label": "commitment, hidden rows, reveal, and transcript",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A10",
+      "label": "forbidden claims and credit remain false",
+      "passed": true,
+      "threshold": 0,
+      "value": 0
+    }
+  ],
+  "challenge_secret_commitment_sha256": "c1ec0b29ed4cb9d1cf3903227d5da91d0360abf5879381af28d3d9a21b1b4d25",
+  "contract_sha256": "7dc1d668848ef18524979ff161f46031a8658ba15e91870cea0b6f2743e77394",
+  "global_acceptance": false,
+  "trial_rows_sha256": "7eecfd173f35a9443178dec1e4f9b11434154ec33b84c26d925e778d02ff314d"
+}

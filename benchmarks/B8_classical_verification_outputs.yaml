@@ -2268,6 +2268,30 @@ current_results:
     result: ../results/B4_B8_R147_target_descriptor_adaptation_protocol_v0.json
     markdown_report: ../research/B4_B8_R147_target_descriptor_adaptation_protocol.md
     holdout_contract: B4_B8_R147_target_descriptor_adaptation_contract_v0.json
+  b4_b8_r147_target_descriptor_adaptation_holdout_v0:
+    status: target_descriptor_adaptation_preregistered_rejection
+    method: b4_b8_r147_target_descriptor_adaptation_holdout_v0
+    source_target_id: T-B4-002bd/T-B8-003bh/T-B10-009av
+    adaptation_group_count: 12
+    trial_row_count: 96
+    portfolio_mean_adapted_minus_automatic: -0.0013396737855319804
+    portfolio_mean_adapted_minus_target: -0.009455671490667228
+    portfolio_adapted_minus_target_bootstrap_95_lower: -0.012331639895526514
+    groups_above_negative_0_02_vs_target: 9
+    severe_regression_count_below_negative_0_05: 2
+    minimum_target_snapshot_mean_adapted_minus_target: -0.014823600146504386
+    lagos_dense_xy_mean_adapted_minus_target: -0.014967446962026586
+    lagos_dense_xy_severe_regression_count: 0
+    semantic_fidelity_pass_count: 24
+    acceptance_conditions_passed: 6
+    acceptance_conditions_failed: 4
+    global_acceptance: false
+    protocol_soundness_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R147_target_descriptor_adaptation_holdout_v0.json
+    markdown_report: ../research/B4_B8_R147_target_descriptor_adaptation_holdout.md
 prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

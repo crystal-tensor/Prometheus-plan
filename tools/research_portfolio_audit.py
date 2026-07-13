@@ -37590,6 +37590,88 @@ def audit(root: Path) -> dict:
         if contract.get("source_bindings", {}).get("protocol_payload_hash") != ph or len(contract.get("acceptance_conditions", [])) != 10:
             errors.append("R147 adaptation contract binding or acceptance count mismatch")
 
+    r147_result_path = results / "B4_B8_R147_target_descriptor_adaptation_holdout_v0.json"
+    r147_result_report_path = research / "B4_B8_R147_target_descriptor_adaptation_holdout.md"
+    r147_result_status = {
+        "path": str(r147_result_path), "report_path": str(r147_result_report_path),
+        "exists": r147_result_path.exists(), "report_exists": r147_result_report_path.exists(),
+    }
+    r147_result_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r147_target_descriptor_adaptation_holdout_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r147_target_descriptor_adaptation_holdout_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r147_target_descriptor_adaptation_holdout_v0")),
+    ]
+    for label, row in r147_result_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R147 adaptation result")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R147 adaptation result missing {field}")
+    if not r147_result_path.exists() or not r147_result_report_path.exists():
+        errors.append("R147 adaptation result or report missing")
+    else:
+        result = json.loads(read(r147_result_path)); summary = result.get("summary", {})
+        r147_result_status.update({
+            "status": result.get("status"), "method": result.get("method"),
+            "requirements_passed": result.get("requirements_passed"),
+            "requirements_failed": result.get("requirements_failed"),
+            "global_acceptance": summary.get("global_acceptance"),
+            "portfolio_mean_adapted_minus_target": summary.get("portfolio_mean_adapted_minus_target"),
+            "groups_above_negative_0_02": summary.get("groups_with_mean_adapted_minus_target_at_least_negative_0_02"),
+            "severe_regression_count": summary.get("severe_adapted_minus_target_regression_count_below_negative_0_05"),
+            "lagos_dense_xy_mean_adapted_minus_target": summary.get("lagos_dense_xy_mean_adapted_minus_target"),
+        })
+        expected = {
+            "adaptation_group_count": 12, "trial_row_count": 96,
+            "simulated_circuit_execution_count": 288, "total_simulated_shots": 589824,
+            "portfolio_mean_adapted_minus_automatic": -0.0013396737855319804,
+            "portfolio_adapted_minus_automatic_bootstrap_95_lower": -0.0037589604826970776,
+            "portfolio_adapted_minus_automatic_bootstrap_95_upper": 0.001013308936706436,
+            "portfolio_mean_adapted_minus_target": -0.009455671490667228,
+            "portfolio_adapted_minus_target_bootstrap_95_lower": -0.012331639895526514,
+            "portfolio_adapted_minus_target_bootstrap_95_upper": -0.006800285660422599,
+            "groups_with_mean_adapted_minus_target_at_least_negative_0_02": 9,
+            "severe_adapted_minus_target_regression_count_below_negative_0_05": 2,
+            "minimum_target_snapshot_mean_adapted_minus_target": -0.014823600146504386,
+            "lagos_dense_xy_mean_adapted_minus_target": -0.014967446962026586,
+            "lagos_dense_xy_severe_regression_count": 0,
+            "minimum_semantic_fidelity": 0.9999999999999973,
+            "semantic_fidelity_pass_count": 24,
+            "phase_artifact_count": 4, "phase_artifact_preexisting_count": 4,
+            "phase_artifact_replay_match_count": 4,
+            "r146_hidden_trial_rows_read_count": 0,
+            "target_specific_routes_in_selector_count": 0,
+            "acceptance_conditions_passed": 6, "acceptance_conditions_failed": 4,
+            "failed_acceptance_condition_ids": ["A5", "A6", "A7", "A8"],
+            "global_acceptance": False, "new_credit_delta": 0,
+        }
+        if result.get("status") != "target_descriptor_adaptation_preregistered_rejection" or result.get("method") != "b4_b8_r147_target_descriptor_adaptation_holdout_v0":
+            errors.append("R147 adaptation result status or method mismatch")
+        if result.get("requirements_passed") != 10 or result.get("requirements_failed") != 0:
+            errors.append("R147 adaptation result requirements must pass 10/10")
+        for field, value in expected.items():
+            if summary.get(field) != value:
+                errors.append(f"R147 adaptation result {field} mismatch")
+        conditions = result.get("acceptance_conditions", [])
+        if len(conditions) != 10 or sum(row.get("passed", False) for row in conditions) != 6:
+            errors.append("R147 adaptation result must preserve 6/10 rejection")
+        if len(result.get("compiled_route_rows", [])) != 12 or len(result.get("group_rows", [])) != 12 or len(result.get("target_snapshot_rows", [])) != 3:
+            errors.append("R147 adaptation result row counts mismatch")
+        hp = dict(result); ph = hp.pop("payload_hash", None)
+        if ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R147 adaptation result payload hash mismatch")
+        for phase_key in ["challenge_commitment", "three_arm_trial_rows", "challenge_reveal", "verifier_transcript"]:
+            rel = result.get("artifacts", {}).get(phase_key)
+            if not rel or not (root / rel).exists():
+                errors.append(f"R147 adaptation result phase missing: {phase_key}")
+        trials_path = root / result.get("artifacts", {}).get("three_arm_trial_rows", "")
+        transcript_path = root / result.get("artifacts", {}).get("verifier_transcript", "")
+        if trials_path.exists() and transcript_path.exists():
+            transcript = json.loads(read(transcript_path))
+            if transcript.get("trial_rows_sha256") != hashlib.sha256(trials_path.read_bytes()).hexdigest():
+                errors.append("R147 adaptation trial row transcript hash mismatch")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -38051,6 +38133,7 @@ def audit(root: Path) -> dict:
             "r146_cross_snapshot_transfer_protocol": r146_status,
             "r146_cross_snapshot_transfer_holdout": r146_result_status,
             "r147_target_descriptor_adaptation": r147_status,
+            "r147_target_descriptor_adaptation_holdout": r147_result_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -39472,6 +39555,16 @@ def audit(root: Path) -> dict:
             "b4_b8_r146_cross_snapshot_transfer_contract": str(r146_contract_path),
             "b4_b8_r146_cross_snapshot_transfer_holdout": str(
                 research / "B4_B8_R146_cross_snapshot_transfer_holdout.md"
+            ),
+            "b4_b8_r147_target_descriptor_adaptation_design": str(
+                research / "B4_B8_R147_target_descriptor_adaptation_design.md"
+            ),
+            "b4_b8_r147_target_descriptor_adaptation_protocol": str(
+                research / "B4_B8_R147_target_descriptor_adaptation_protocol.md"
+            ),
+            "b4_b8_r147_target_descriptor_adaptation_contract": str(r147_contract_path),
+            "b4_b8_r147_target_descriptor_adaptation_holdout": str(
+                research / "B4_B8_R147_target_descriptor_adaptation_holdout.md"
             ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),

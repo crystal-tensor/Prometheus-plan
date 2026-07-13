@@ -2687,6 +2687,23 @@ guard of `-0.02` / `0`. Contract hash
 No R147 holdout result, temporal transfer, cross-machine transfer, hardware,
 advantage, BQP, solved-frontier status, or new credit is claimed.
 
+The R147 holdout at `T-B4-002bd` / `T-B8-003bh` / `T-B10-009av` is
+then preregistered REJECT with A5-A8 failed. Requirements and phase replay pass
+`10/10` and `4/4`, and all `24/24` adapted and target-specific compiled routes
+preserve semantics. Adapted versus automatic remains noninferior with portfolio
+mean `-0.00133967` and bootstrap lower `-0.00375896`, but adapted versus the
+target-specific R143 route has mean `-0.00945567` and bootstrap lower
+`-0.01233164`. Only `9/12` groups remain above `-0.02`, two rows fall below
+`-0.05`, and the weakest target mean is FakeLagosV2 at `-0.01482360`.
+The descriptor rule does repair the former dominant Lagos dense-XY failure:
+its group mean moves from R146's `-0.07489771` to `-0.01496745`, with severe
+rows falling from eight to zero. The bottleneck moves to Lagos complete Ising,
+whose mean is `-0.04314811` with two severe rows; Jakarta complete Ising and
+dense XY also miss the group floor. This rejects calibration-proxy-only
+adaptation while isolating task-conditioned channel risk as the next gate.
+Temporal transfer, cross-machine transfer, hardware, advantage, BQP,
+solved-frontier status, and new credit remain unclaimed.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules
