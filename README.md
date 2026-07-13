@@ -2763,6 +2763,21 @@ No R149 holdout, general route-generation advantage, temporal or cross-machine
 transfer, hardware result, quantum advantage, BQP separation, solved-frontier
 status, or new credit is claimed.
 
+The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
+then preregistered ACCEPT with A1-A10, requirements, and phase replay all
+passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific
+routes preserve semantics. The repaired portfolio beats the automatic arm by
+mean `+0.00360133` with bootstrap lower `+0.00142312`; against the
+target-specific denominator it has mean `-0.00391072` and bootstrap lower
+`-0.00542965`. All `12/12` groups clear `-0.02`, no row falls below `-0.05`,
+and every target mean clears `-0.01`. The generated Jakarta dense-XY route has
+mean `-0.00565709` versus the target-specific route and `+0.02424579` versus
+the frozen R148 foreign route, with zero severe rows. This closes the sole R148
+portfolio gap under the preregistered finite simulated-noise contract, but it
+does not establish general candidate-generation advantage, temporal or
+cross-machine transfer, hardware performance, quantum advantage, BQP
+separation, solved B4/B8/B10, or new credit.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules
