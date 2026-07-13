@@ -39407,6 +39407,246 @@ def audit(root: Path) -> dict:
             if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
                 errors.append(f"R156 variant-capture source binding mismatch: {binding_id}")
 
+    r156_result_path = results / "B4_B8_R156_transpiler_variant_capture_v0.json"
+    r156_result_report_path = research / "B4_B8_R156_transpiler_variant_capture.md"
+    r156_result_status = {
+        "result_path": str(r156_result_path),
+        "report_path": str(r156_result_report_path),
+        "result_exists": r156_result_path.exists(),
+        "report_exists": r156_result_report_path.exists(),
+    }
+    r156_result_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get("b4_b8_r156_transpiler_variant_capture_v0"),
+            "transpiler_variant_capture_diagnostic_complete",
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get("b4_b8_r156_transpiler_variant_capture_v0"),
+            "transpiler_variant_capture_diagnostic_complete",
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r156_transpiler_variant_capture_v0"),
+            "transpiler_variant_capture_diagnostic_not_bqp_claim",
+        ),
+    ]
+    for label, row, expected_status in r156_result_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R156 variant-capture result")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R156 variant-capture result missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r156_transpiler_variant_capture_v0":
+            errors.append(f"{label} R156 variant-capture result status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002bu/T-B8-003by/T-B10-009bm" or row.get("upstream_target_id") != "T-B4-002bt/T-B8-003bx/T-B10-009bl":
+            errors.append(f"{label} R156 variant-capture result target chain mismatch")
+        expected_manifest_values = {
+            "process_count": 32,
+            "compilation_count": 32,
+            "callback_trace_row_count": 1600,
+            "final_variant_count": 2,
+            "variant_process_counts": [20, 12],
+            "known_r155_variants_reproduced": True,
+            "first_property_divergence_pass": "VF2PostLayout",
+            "first_property_divergence_count": 17,
+            "first_circuit_divergence_pass": "ApplyLayout",
+            "first_circuit_divergence_count": 18,
+            "differing_property_key": "post_layout",
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "compiler_mechanism_claimed": False,
+            "qiskit_bug_claimed": False,
+            "new_credit_delta": 0,
+            "requirements_passed": 10,
+            "requirements_failed": 0,
+        }
+        for field, value in expected_manifest_values.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R156 variant-capture manifest {field} mismatch")
+    if not r156_result_path.exists() or not r156_result_report_path.exists():
+        errors.append("R156 variant-capture result or report missing")
+    else:
+        r156_result = json.loads(read(r156_result_path))
+        r156_summary = r156_result.get("summary", {})
+        r156_variants = r156_result.get("variant_summary", {})
+        r156_divergence = r156_result.get("pass_divergence", {})
+        r156_result_status.update({
+            "status": r156_result.get("status"),
+            "method": r156_result.get("method"),
+            "requirements_passed": r156_result.get("requirements_passed"),
+            "requirements_failed": r156_result.get("requirements_failed"),
+            "process_count": r156_summary.get("process_count"),
+            "callback_trace_row_count": r156_summary.get("callback_trace_row_count"),
+            "final_variant_count": r156_summary.get("final_variant_count"),
+            "variant_process_counts": [row.get("process_count") for row in r156_variants.get("variant_rows", [])],
+            "known_r155_variants_reproduced": r156_summary.get("known_r155_variants_reproduced"),
+            "first_property_divergence_pass": r156_summary.get("first_property_divergence_pass"),
+            "first_property_divergence_count": r156_summary.get("first_property_divergence_count"),
+            "first_circuit_divergence_pass": r156_summary.get("first_circuit_divergence_pass"),
+            "first_circuit_divergence_count": r156_summary.get("first_circuit_divergence_count"),
+            "simulation_execution_count": r156_summary.get("simulation_execution_count"),
+            "total_simulated_shots": r156_summary.get("total_simulated_shots"),
+        })
+        if r156_result.get("status") != "transpiler_variant_capture_diagnostic_complete" or r156_result.get("method") != "b4_b8_r156_transpiler_variant_capture_v0":
+            errors.append("R156 variant-capture result status or method mismatch")
+        if r156_result.get("source_target_id") != "T-B4-002bu/T-B8-003by/T-B10-009bm" or r156_result.get("upstream_target_id") != "T-B4-002bt/T-B8-003bx/T-B10-009bl":
+            errors.append("R156 variant-capture result target chain mismatch")
+        if r156_result.get("requirements_passed") != 10 or r156_result.get("requirements_failed") != 0:
+            errors.append("R156 variant-capture result requirements must pass 10/10")
+        expected_r156_summary = {
+            "acceptance_conditions_passed": 10,
+            "acceptance_conditions_failed": 0,
+            "process_count": 32,
+            "process_id_count": 32,
+            "process_instance_uuid_count": 32,
+            "process_started_after_preregistration_count": 32,
+            "compilation_count": 32,
+            "callback_trace_count": 32,
+            "callback_trace_row_count": 1600,
+            "minimum_trace_row_count": 50,
+            "maximum_trace_row_count": 50,
+            "final_variant_count": 2,
+            "known_r155_variant_count_observed": 2,
+            "unknown_variant_count_observed": 0,
+            "known_r155_variants_reproduced": True,
+            "single_variant_nonreproduction": False,
+            "pass_sequence_variant_count": 1,
+            "all_pass_sequences_identical": True,
+            "first_circuit_divergence_count": 18,
+            "first_circuit_divergence_pass": "ApplyLayout",
+            "first_property_divergence_count": 17,
+            "first_property_divergence_pass": "VF2PostLayout",
+            "gate_level_diff_comparison_count": 1,
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "new_hidden_seed_count": 0,
+            "new_credit_delta": 0,
+            "global_acceptance": True,
+        }
+        for field, value in expected_r156_summary.items():
+            if r156_summary.get(field) != value:
+                errors.append(f"R156 variant-capture result {field} mismatch")
+        forbidden_claims = [
+            "candidate_selection_performed",
+            "route_change_performed",
+            "sampling_performed",
+            "compiler_mechanism_claimed",
+            "qiskit_bug_claimed",
+            "hardware_execution_claimed",
+            "temporal_transfer_claimed",
+            "real_device_transfer_claimed",
+            "general_route_generation_advantage_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "solved_frontier_claimed",
+        ]
+        if any(r156_summary.get(field) is not False for field in forbidden_claims):
+            errors.append("R156 variant-capture forbidden claim boundary mismatch")
+        expected_hashes = [
+            "56eb5fac162b05c918164e4850b71c0665fa139c5b3c81646d2d8d7f5119d658",
+            "fc4ab12a8f5204895c93d1320899e6b4f64f489b87adccbc7a16d7fa79a8d1f1",
+        ]
+        variant_rows = r156_variants.get("variant_rows", [])
+        if [row.get("final_qasm_sha256") for row in variant_rows] != expected_hashes or [row.get("process_count") for row in variant_rows] != [20, 12]:
+            errors.append("R156 variant-capture final variant classes mismatch")
+        if [row.get("circuit_size") for row in variant_rows] != [305, 307] or [row.get("circuit_depth") for row in variant_rows] != [133, 133]:
+            errors.append("R156 variant-capture final circuit shape mismatch")
+        first_property = r156_divergence.get("first_property_divergence", {})
+        first_circuit = r156_divergence.get("first_circuit_divergence", {})
+        if first_property.get("count") != 17 or first_property.get("pass_name") != "VF2PostLayout":
+            errors.append("R156 variant-capture first property divergence mismatch")
+        if first_circuit.get("count") != 18 or first_circuit.get("pass_name") != "ApplyLayout":
+            errors.append("R156 variant-capture first circuit divergence mismatch")
+        if r156_divergence.get("all_pass_sequences_identical") is not True or r156_divergence.get("all_variant_pair_pass_sequences_aligned") is not True:
+            errors.append("R156 variant-capture pass alignment mismatch")
+        acceptance = r156_result.get("acceptance_conditions", [])
+        requirements = r156_result.get("requirements", [])
+        if [row.get("condition_id") for row in acceptance] != [f"A{i}" for i in range(1, 11)] or any(row.get("passed") is not True for row in acceptance):
+            errors.append("R156 variant-capture result must preserve A1-A10 acceptance")
+        if [row.get("requirement_id") for row in requirements] != [f"P{i}" for i in range(1, 11)] or any(row.get("passed") is not True for row in requirements):
+            errors.append("R156 variant-capture result must preserve P1-P10 requirements")
+        rhp = dict(r156_result)
+        result_ph = rhp.pop("payload_hash", None)
+        if result_ph != hashlib.sha256(json.dumps(rhp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R156 variant-capture result payload hash mismatch")
+        if result_ph != "3cf4927f418c918a21d83991f73a3fd77683cd8f359ddb68de45765bef12457e":
+            errors.append("R156 variant-capture final payload hash mismatch")
+        artifact_paths = {}
+        for artifact_key in ["variant_summary", "pass_divergence", "gate_level_diff", "verifier_transcript"]:
+            rel = r156_result.get("artifacts", {}).get(artifact_key)
+            path = root / rel if rel else None
+            if path is None or not path.exists():
+                errors.append(f"R156 variant-capture {artifact_key} artifact missing")
+            else:
+                artifact_paths[artifact_key] = path
+        process_artifacts = r156_result.get("artifacts", {}).get("process_artifacts", [])
+        if len(process_artifacts) != 32:
+            errors.append("R156 variant-capture process artifact count mismatch")
+        observed_processes = []
+        observed_pids = set()
+        observed_uuids = set()
+        required_trace_fields = {
+            "count", "pass_name", "pass_module", "pass_kind", "elapsed_seconds",
+            "circuit_qasm_sha256", "circuit_size", "circuit_depth", "operation_counts",
+            "property_set_keys", "property_set_summary_sha256",
+        }
+        for artifact in process_artifacts:
+            process_index = artifact.get("process_index")
+            observed_processes.append(process_index)
+            paths = {
+                "manifest": root / artifact.get("manifest_path", ""),
+                "trace": root / artifact.get("trace_path", ""),
+                "qasm": root / artifact.get("final_qasm_path", ""),
+            }
+            if any(not path.exists() for path in paths.values()):
+                errors.append(f"R156 variant-capture worker artifact missing: {process_index}")
+                continue
+            if hashlib.sha256(paths["manifest"].read_bytes()).hexdigest() != artifact.get("manifest_sha256") or hashlib.sha256(paths["trace"].read_bytes()).hexdigest() != artifact.get("trace_sha256") or hashlib.sha256(paths["qasm"].read_bytes()).hexdigest() != artifact.get("final_qasm_sha256"):
+                errors.append(f"R156 variant-capture worker hash mismatch: {process_index}")
+            manifest = json.loads(read(paths["manifest"]))
+            trace = json.loads(read(paths["trace"]))
+            observed_pids.add(manifest.get("process_id"))
+            observed_uuids.add(manifest.get("process_instance_uuid"))
+            if manifest.get("process_index") != process_index or manifest.get("trace_row_count") != 50 or len(trace) != 50:
+                errors.append(f"R156 variant-capture worker identity or trace count mismatch: {process_index}")
+            if any(not required_trace_fields.issubset(row) for row in trace):
+                errors.append(f"R156 variant-capture worker trace fields missing: {process_index}")
+            if manifest.get("simulation_execution_count") != 0 or manifest.get("total_simulated_shots") != 0:
+                errors.append(f"R156 variant-capture worker simulation boundary mismatch: {process_index}")
+        if observed_processes != list(range(32)) or len(observed_pids) != 32 or len(observed_uuids) != 32:
+            errors.append("R156 variant-capture worker process coverage mismatch")
+        if len(artifact_paths) == 4:
+            variant_artifact = json.loads(read(artifact_paths["variant_summary"]))
+            divergence_artifact = json.loads(read(artifact_paths["pass_divergence"]))
+            diff_artifact = json.loads(read(artifact_paths["gate_level_diff"]))
+            transcript = json.loads(read(artifact_paths["verifier_transcript"]))
+            if variant_artifact.get("final_variant_count") != 2 or [row.get("process_count") for row in variant_artifact.get("variant_rows", [])] != [20, 12]:
+                errors.append("R156 variant-capture variant artifact mismatch")
+            if divergence_artifact.get("first_property_divergence", {}).get("pass_name") != "VF2PostLayout" or divergence_artifact.get("first_circuit_divergence", {}).get("pass_name") != "ApplyLayout":
+                errors.append("R156 variant-capture divergence artifact mismatch")
+            comparisons = diff_artifact.get("comparisons", [])
+            if len(comparisons) != 1 or comparisons[0].get("left_operation_count") != 306 or comparisons[0].get("right_operation_count") != 308 or comparisons[0].get("diff_hunk_count") != 26:
+                errors.append("R156 variant-capture gate-level diff mismatch")
+            if transcript.get("result_payload_hash") != result_ph or transcript.get("global_acceptance") is not True:
+                errors.append("R156 variant-capture transcript result binding mismatch")
+        trace_0 = results / "B4_B8_R156_transpiler_variant_capture/process_00_trace.json"
+        trace_1 = results / "B4_B8_R156_transpiler_variant_capture/process_01_trace.json"
+        if trace_0.exists() and trace_1.exists():
+            left_trace = json.loads(read(trace_0))
+            right_trace = json.loads(read(trace_1))
+            differing_keys = sorted(
+                key for key in set(left_trace[17].get("property_set_summary", {})) | set(right_trace[17].get("property_set_summary", {}))
+                if left_trace[17].get("property_set_summary", {}).get(key) != right_trace[17].get("property_set_summary", {}).get(key)
+            )
+            if differing_keys != ["post_layout"] or left_trace[17].get("circuit_qasm_sha256") != right_trace[17].get("circuit_qasm_sha256") or left_trace[18].get("circuit_qasm_sha256") == right_trace[18].get("circuit_qasm_sha256"):
+                errors.append("R156 variant-capture raw first-divergence boundary mismatch")
+        report_text = read(r156_result_report_path)
+        if "only bounded property-set key" not in report_text or "not proof of the lower-level source" not in report_text:
+            errors.append("R156 variant-capture report localization boundary missing")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -39885,6 +40125,7 @@ def audit(root: Path) -> dict:
             "r155_execution_mode_attribution": r155_status,
             "r155_execution_mode_attribution_result": r155_result_status,
             "r156_transpiler_variant_capture": r156_status,
+            "r156_transpiler_variant_capture_result": r156_result_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -41371,6 +41612,7 @@ def audit(root: Path) -> dict:
             "b4_b8_r155_execution_mode_attribution": str(r155_result_report_path),
             "b4_b8_r156_transpiler_variant_capture_protocol": str(r156_protocol_report_path),
             "b4_b8_r156_transpiler_variant_capture_contract": str(r156_contract_path),
+            "b4_b8_r156_transpiler_variant_capture": str(r156_result_report_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),
@@ -43678,6 +43920,17 @@ def markdown_report(report: dict) -> str:
             f"- Expected R155 variants: {report['b8']['r156_transpiler_variant_capture'].get('expected_r155_variant_count')}",
             f"- Execution started: {report['b8']['r156_transpiler_variant_capture'].get('execution_started')}",
             f"- Requirements passed/failed: {report['b8']['r156_transpiler_variant_capture'].get('requirements_passed')} / {report['b8']['r156_transpiler_variant_capture'].get('requirements_failed')}",
+            "",
+            "### R156 Transpiler Variant Capture",
+            "",
+            f"- Status: {report['b8']['r156_transpiler_variant_capture_result'].get('status')}",
+            f"- Processes / callback rows / final variants: {report['b8']['r156_transpiler_variant_capture_result'].get('process_count')} / {report['b8']['r156_transpiler_variant_capture_result'].get('callback_trace_row_count')} / {report['b8']['r156_transpiler_variant_capture_result'].get('final_variant_count')}",
+            f"- Variant process counts / known R155 variants reproduced: {report['b8']['r156_transpiler_variant_capture_result'].get('variant_process_counts')} / {report['b8']['r156_transpiler_variant_capture_result'].get('known_r155_variants_reproduced')}",
+            f"- First property divergence: {report['b8']['r156_transpiler_variant_capture_result'].get('first_property_divergence_pass')} at callback {report['b8']['r156_transpiler_variant_capture_result'].get('first_property_divergence_count')}",
+            f"- First circuit divergence: {report['b8']['r156_transpiler_variant_capture_result'].get('first_circuit_divergence_pass')} at callback {report['b8']['r156_transpiler_variant_capture_result'].get('first_circuit_divergence_count')}",
+            f"- Simulation executions / shots: {report['b8']['r156_transpiler_variant_capture_result'].get('simulation_execution_count')} / {report['b8']['r156_transpiler_variant_capture_result'].get('total_simulated_shots')}",
+            f"- Requirements passed/failed: {report['b8']['r156_transpiler_variant_capture_result'].get('requirements_passed')} / {report['b8']['r156_transpiler_variant_capture_result'].get('requirements_failed')}",
+            f"- Result/report exists: {report['b8']['r156_transpiler_variant_capture_result'].get('result_exists')} / {report['b8']['r156_transpiler_variant_capture_result'].get('report_exists')}",
             "",
             f"- Status: {report['b8']['output_invariant_verifier'].get('status')}",
             f"- Model status: {report['b8']['output_invariant_verifier'].get('model_status')}",

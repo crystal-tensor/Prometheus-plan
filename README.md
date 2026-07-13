@@ -3518,3 +3518,21 @@ an observed localization boundary, not a compiler mechanism or Qiskit-bug
 claim. No hidden evidence, hardware performance, temporal or real-device
 transfer, general route-generation advantage, quantum advantage, BQP
 separation, solved-frontier status, or new credit is claimed.
+
+The R156 execution at `T-B4-002bu` / `T-B8-003by` / `T-B10-009bm` is
+diagnostically complete with A1-A10 and P1-P10 passing. All 32 independent
+operating-system processes completed one seeded compilation and retained 50
+callback rows each, for 1,600 total pass records and zero simulations or
+shots. Both R155 OpenQASM 3 variants reappeared without unknown variants: the
+305-operation class occurred in 20 processes and the 307-operation class in
+12. Every pass sequence is identical. The bounded property sets first diverge
+after callback 17 `VF2PostLayout`, where only `post_layout` differs: logical
+qubits 4 and 6 exchange the physical endpoints 0 and 2. Callback 18
+`ApplyLayout` is the first point where the circuit hashes differ. Both final
+circuits have depth 133 and 63 CX gates; their RZ counts are 132 and 134. This
+is a reproducible pass-level localization boundary, not proof that
+`VF2PostLayout` is the lower-level source of nondeterminism or that Qiskit has
+a confirmed bug. Payload `3cf4927f...`; no hidden evidence, simulation or
+hardware performance, temporal or real-device transfer, general route-
+generation advantage, quantum advantage, BQP separation, solved-frontier
+status, or new credit is claimed.

@@ -2287,6 +2287,17 @@ Overall audit: PASS
 - Execution started: False
 - Requirements passed/failed: 10 / 0
 
+### R156 Transpiler Variant Capture
+
+- Status: transpiler_variant_capture_diagnostic_complete
+- Processes / callback rows / final variants: 32 / 1600 / 2
+- Variant process counts / known R155 variants reproduced: [20, 12] / True
+- First property divergence: VF2PostLayout at callback 17
+- First circuit divergence: ApplyLayout at callback 18
+- Simulation executions / shots: 0 / 0
+- Requirements passed/failed: 10 / 0
+- Result/report exists: True / True
+
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification
 - Tasks: 3
