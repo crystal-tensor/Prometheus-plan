@@ -2636,6 +2636,22 @@ replays without remeasurement. This accepts one same-machine repeated-order
 runtime result, not cross-machine or cross-calibration transfer, hardware or
 cloud billing savings, advantage, BQP, solved-frontier status, or new credit.
 
+`T-B4-002ba` / `T-B8-003be` / `T-B10-009as` now freezes the R146
+cross-backend calibration-snapshot transfer protocol before challenge. It
+tests all six directed pairs among FakeJakartaV2, FakeLagosV2, and FakeOslo on
+all four dense validation tasks. Each source R143 winner carries its mapping,
+route policy, and realization seed unchanged but is recompiled on the target
+snapshot; the target-specific R143 winner and a hidden-seed automatic layout
+form the denominators. Eight hidden trials per transfer group fix `192`
+three-arm rows, `576` executions, and `1,179,648` shots. Acceptance requires
+portfolio noninferiority versus both automatic and target-specific routes, at
+least `20/24` groups above `-0.02` versus target-specific, zero row regressions
+below `-0.05`, and every target snapshot mean above `-0.01`. Contract hash
+`5e29e68eefcb6809a4df6cc86916b76f299267f36eeabc4d44fd22754cfaceb3`.
+No R146 challenge, temporal same-device calibration transfer, cross-machine
+transfer, hardware, advantage, BQP, solved-frontier, or new-credit claim has
+opened.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules

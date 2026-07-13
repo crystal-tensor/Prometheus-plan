@@ -1,0 +1,138 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition": "protocol, route identities, task builder, and source hashes remain exact",
+      "condition_id": "A1"
+    },
+    {
+      "condition": "24 transfer groups produce 192 three-arm rows and 576 executions",
+      "condition_id": "A2"
+    },
+    {
+      "condition": "all transferred and target-specific compiled routes retain semantic fidelity at least 0.9999999999",
+      "condition_id": "A3"
+    },
+    {
+      "condition": "portfolio transfer-automatic mean is at least -0.005 and bootstrap lower is at least -0.01",
+      "condition_id": "A4"
+    },
+    {
+      "condition": "portfolio transfer-target mean is at least -0.005 and bootstrap lower is at least -0.01",
+      "condition_id": "A5"
+    },
+    {
+      "condition": "at least 20 of 24 groups have mean transfer-target delta at least -0.02",
+      "condition_id": "A6"
+    },
+    {
+      "condition": "zero rows have transfer-target regression below -0.05",
+      "condition_id": "A7"
+    },
+    {
+      "condition": "each target snapshot has mean transfer-target delta at least -0.01",
+      "condition_id": "A8"
+    },
+    {
+      "condition": "challenge commitment, hidden seeds, row hashes, reveal, and transcript replay",
+      "condition_id": "A9"
+    },
+    {
+      "condition": "temporal calibration, cross-machine, hardware, advantage, BQP, solved-frontier, and credit claims remain false",
+      "condition_id": "A10"
+    }
+  ],
+  "challenge_protocol": {
+    "arms": [
+      "source_transfer",
+      "target_specific",
+      "automatic"
+    ],
+    "automatic_rule": "fresh optimization-level-3 compile on target snapshot with hidden transpiler seed",
+    "challenge_seed_derivation": "HMAC-SHA256 from post-preregistration secret",
+    "directional_snapshot_pair_count": 6,
+    "directional_snapshot_pairs": [
+      {
+        "source_snapshot": "FakeJakartaV2",
+        "target_snapshot": "FakeLagosV2"
+      },
+      {
+        "source_snapshot": "FakeJakartaV2",
+        "target_snapshot": "FakeOslo"
+      },
+      {
+        "source_snapshot": "FakeLagosV2",
+        "target_snapshot": "FakeJakartaV2"
+      },
+      {
+        "source_snapshot": "FakeLagosV2",
+        "target_snapshot": "FakeOslo"
+      },
+      {
+        "source_snapshot": "FakeOslo",
+        "target_snapshot": "FakeJakartaV2"
+      },
+      {
+        "source_snapshot": "FakeOslo",
+        "target_snapshot": "FakeLagosV2"
+      }
+    ],
+    "hidden_trial_count_per_group": 8,
+    "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+    "minimum_each_target_mean_transfer_minus_target": -0.01,
+    "minimum_group_count_above_negative_0_02_vs_target": 20,
+    "minimum_portfolio_transfer_minus_automatic_bootstrap_lower": -0.01,
+    "minimum_portfolio_transfer_minus_automatic_mean": -0.005,
+    "minimum_portfolio_transfer_minus_target_bootstrap_lower": -0.01,
+    "minimum_portfolio_transfer_minus_target_mean": -0.005,
+    "minimum_semantic_fidelity": 0.9999999999,
+    "shared_seed_rule": "all three arms in one row share one simulator seed",
+    "shots_per_execution": 2048,
+    "simulated_circuit_execution_count": 576,
+    "snapshot_names": [
+      "FakeJakartaV2",
+      "FakeLagosV2",
+      "FakeOslo"
+    ],
+    "target_rule": "recompile target R143 mapping, policy_id, and realization_seed on target snapshot",
+    "task_ids": [
+      "dense_validation_complete_ising_n6",
+      "dense_validation_inverse_qft_n6",
+      "dense_validation_scrambled_qft_n6",
+      "dense_validation_xy_network_n6"
+    ],
+    "total_simulated_shots": 1179648,
+    "transfer_group_count": 24,
+    "transfer_rule": "carry source R143 mapping, policy_id, and realization_seed; recompile on target snapshot",
+    "trial_row_count": 192
+  },
+  "claim_boundary": {
+    "positive_result_requires_all_conditions": true,
+    "what_is_not_supported_even_if_accepted": "temporal same-device calibration transfer, cross-machine transfer, real hardware, mitigation, protocol soundness, quantum advantage, BQP separation, or solved B4/B8/B10"
+  },
+  "contract_id": "B4-B8-R146-cross-snapshot-transfer-contract-v0",
+  "contract_status": "public_preregistration_challenge_unopened",
+  "phase_protocol": [
+    "commit a fresh secret after public preregistration",
+    "derive hidden transpiler, simulator, and bootstrap seeds",
+    "compile both frozen route identities on each target snapshot",
+    "execute all three arms with one shared simulator seed per row",
+    "write 192 rows before secret reveal",
+    "reveal and verify the acceptance transcript"
+  ],
+  "research_question": "Can every R143 route transfer to both other fake-backend calibration snapshots without material portfolio or target-specific regression?",
+  "source_bindings": {
+    "protocol_path": "results/B4_B8_R146_cross_snapshot_transfer_protocol_v0.json",
+    "protocol_payload_hash": "374cb60ce9cee7dbeb2e7dfad05058d7c5bb612dd29f477a7924fe5828e1e206",
+    "protocol_sha256": "e9b9861bde76289f999cdfb359e31262c64c253ced003066727dd1de0ea8caa0",
+    "r143_design_path": "results/B4_B8_R143_successive_halving_lcb_design_v0.json",
+    "r143_design_payload_hash": "1a7bac658ec807d22d2407545973de22d280aab530f3672a3ffdafa8b37ef754",
+    "r143_design_sha256": "61340c0b242925be77a391552af62927af0fd66855d337daf955e36ae8f4bf34",
+    "r145_runtime_path": "results/B4_B8_R145_counterbalanced_runtime_benchmark_v0.json",
+    "r145_runtime_payload_hash": "fd411f4d080747f3dce79b5f64d2f8bacbbd8ff22a1d70ca8b4886e8355cb36c",
+    "r145_runtime_sha256": "d9aa935698d1261875d6cce8b996fd4f3cd6674c90c5064e0a4fdb114dc354b3",
+    "task_builder_path": "tools/b4_b8_r135_dense_interaction_fallback.py",
+    "task_builder_sha256": "7a83e0eb03967eeb3410f26cbc74e7a290d8fd5e42937fce9fad381b1aaa2247"
+  },
+  "target_id": "T-B4-002bb/T-B8-003bf/T-B10-009at",
+  "upstream_target_id": "T-B4-002ba/T-B8-003be/T-B10-009as"
+}

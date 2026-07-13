@@ -37368,6 +37368,60 @@ def audit(root: Path) -> dict:
             if not rel or not (root / rel).exists():
                 errors.append(f"R145 counterbalanced runtime phase missing: {phase_key}")
 
+    r146_protocol_path = results / "B4_B8_R146_cross_snapshot_transfer_protocol_v0.json"
+    r146_report_path = research / "B4_B8_R146_cross_snapshot_transfer_protocol.md"
+    r146_contract_path = benchmarks / "B4_B8_R146_cross_snapshot_transfer_contract_v0.json"
+    r146_contract_sha256 = hashlib.sha256(r146_contract_path.read_bytes()).hexdigest() if r146_contract_path.exists() else None
+    r146_status = {"path": str(r146_protocol_path), "report_path": str(r146_report_path), "contract_path": str(r146_contract_path), "exists": r146_protocol_path.exists(), "report_exists": r146_report_path.exists(), "contract_exists": r146_contract_path.exists(), "contract_sha256": r146_contract_sha256}
+    r146_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r146_cross_snapshot_transfer_protocol_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r146_cross_snapshot_transfer_protocol_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r146_cross_snapshot_transfer_protocol_v0")),
+    ]
+    for label, row in r146_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R146 cross-snapshot protocol")
+            continue
+        for field in ["result", "markdown_report", "holdout_contract"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R146 cross-snapshot protocol missing {field}")
+        if row.get("contract_sha256") != r146_contract_sha256:
+            errors.append(f"{label} R146 contract hash mismatch")
+    if not all(path.exists() for path in [r146_protocol_path, r146_report_path, r146_contract_path]):
+        errors.append("R146 protocol, report, or contract missing")
+    else:
+        p = json.loads(read(r146_protocol_path)); protocol = p.get("protocol", {})
+        r146_status.update({"status": p.get("status"), "method": p.get("method"), "requirements_passed": p.get("requirements_passed"), "requirements_failed": p.get("requirements_failed"), "challenge_executed": p.get("challenge_executed")})
+        if p.get("status") != "cross_snapshot_transfer_protocol_frozen_before_challenge" or p.get("method") != "b4_b8_r146_cross_snapshot_transfer_protocol_v0":
+            errors.append("R146 protocol status or method mismatch")
+        if p.get("requirements_passed") != 10 or p.get("requirements_failed") != 0 or p.get("challenge_executed") is not False:
+            errors.append("R146 protocol requirements or unopened boundary mismatch")
+        expected_protocol = {
+            "directional_snapshot_pair_count": 6, "transfer_group_count": 24,
+            "hidden_trial_count_per_group": 8, "trial_row_count": 192,
+            "simulated_circuit_execution_count": 576, "shots_per_execution": 2048,
+            "minimum_portfolio_transfer_minus_target_mean": -0.005,
+            "minimum_portfolio_transfer_minus_target_bootstrap_lower": -0.01,
+            "minimum_group_count_above_negative_0_02_vs_target": 20,
+            "maximum_severe_regression_count_below_negative_0_05_vs_target": 0,
+            "minimum_each_target_mean_transfer_minus_target": -0.01,
+        }
+        for field, value in expected_protocol.items():
+            if protocol.get(field) != value:
+                errors.append(f"R146 protocol {field} mismatch")
+        hp = dict(p); ph = hp.pop("payload_hash", None)
+        if ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R146 protocol payload hash mismatch")
+        contract = json.loads(read(r146_contract_path))
+        if r146_contract_sha256 != "5e29e68eefcb6809a4df6cc86916b76f299267f36eeabc4d44fd22754cfaceb3":
+            errors.append("R146 contract file hash mismatch")
+        if contract.get("contract_id") != "B4-B8-R146-cross-snapshot-transfer-contract-v0" or contract.get("contract_status") != "public_preregistration_challenge_unopened":
+            errors.append("R146 contract ID or status mismatch")
+        if contract.get("target_id") != "T-B4-002bb/T-B8-003bf/T-B10-009at" or "challenge_secret" in contract or "trial_rows" in contract:
+            errors.append("R146 contract target or unopened boundary mismatch")
+        if contract.get("source_bindings", {}).get("protocol_payload_hash") != ph or len(contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R146 contract binding or acceptance count mismatch")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -37826,6 +37880,7 @@ def audit(root: Path) -> dict:
             "r144_live_runtime_benchmark": r144_result_status,
             "r145_counterbalanced_runtime_protocol": r145_status,
             "r145_counterbalanced_runtime_benchmark": r145_result_status,
+            "r146_cross_snapshot_transfer_protocol": r146_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -39241,6 +39296,10 @@ def audit(root: Path) -> dict:
             "b4_b8_r145_counterbalanced_runtime_benchmark": str(
                 research / "B4_B8_R145_counterbalanced_runtime_benchmark.md"
             ),
+            "b4_b8_r146_cross_snapshot_transfer_protocol": str(
+                research / "B4_B8_R146_cross_snapshot_transfer_protocol.md"
+            ),
+            "b4_b8_r146_cross_snapshot_transfer_contract": str(r146_contract_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),
