@@ -1,0 +1,152 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition": "contract, protocol, R155 evidence, and source hashes remain exact",
+      "condition_id": "A1"
+    },
+    {
+      "condition": "32 distinct post-preregistration operating-system processes each compile the frozen row once",
+      "condition_id": "A2"
+    },
+    {
+      "condition": "every process emits a complete callback trace, final OpenQASM 3 file, environment, and identity manifest",
+      "condition_id": "A3"
+    },
+    {
+      "condition": "every callback row records the frozen pass, circuit, timing, shape, and bounded property-set fields",
+      "condition_id": "A4"
+    },
+    {
+      "condition": "all final hashes are retained and classified as known R155, new, or single-variant evidence",
+      "condition_id": "A5"
+    },
+    {
+      "condition": "all pass sequences and aligned circuit/property hashes are compared across final-variant classes",
+      "condition_id": "A6"
+    },
+    {
+      "condition": "if multiple variants occur, representative final QASM artifacts receive a structured gate-level diff",
+      "condition_id": "A7"
+    },
+    {
+      "condition": "the first observed circuit and property-set divergence rows are emitted when identifiable",
+      "condition_id": "A8"
+    },
+    {
+      "condition": "all raw process artifacts, comparisons, classifications, and transcript bindings are complete and replayable",
+      "condition_id": "A9"
+    },
+    {
+      "condition": "no hidden seed, selection, route change, sampling, mechanism, hardware, transfer, advantage, BQP, solved-frontier, or credit claim occurs",
+      "condition_id": "A10"
+    }
+  ],
+  "claim_boundary": {
+    "what_is_not_supported": "a compiler mechanism claim from pass correlation alone, proof of a Qiskit bug, new hidden statistical evidence, simulation or hardware performance, temporal or real-device transfer, route advantage, quantum advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "an immutable pass-level diagnostic of the public R155 FakeNairobiV2 trial-21 automatic-compilation transient"
+  },
+  "contract_id": "B4-B8-R156-transpiler-variant-capture-contract-v0",
+  "contract_status": "public_preregistration_execution_unopened",
+  "execution_protocol": {
+    "block_index": 2,
+    "callback_fields": [
+      "count",
+      "pass_name",
+      "pass_module",
+      "pass_kind",
+      "elapsed_seconds",
+      "circuit_qasm_sha256",
+      "circuit_size",
+      "circuit_depth",
+      "operation_counts",
+      "property_set_keys",
+      "property_set_summary_sha256"
+    ],
+    "candidate_selection_performed": false,
+    "capture_rule": "record every callback pass row, normalized circuit hash and shape, bounded property-set summary, final OpenQASM 3, process identity, and runtime",
+    "classification_rule": {
+      "first_circuit_divergence": "first aligned callback count whose circuit hash differs across final-variant classes",
+      "first_property_divergence": "first aligned callback count whose bounded property-set summary differs",
+      "known_variants_reproduced": "both R155 final OpenQASM 3 hashes occur in the 32 immutable processes",
+      "new_variant_observed": "any final OpenQASM 3 hash falls outside the two R155 hashes",
+      "single_variant_nonreproduction": "all 32 final OpenQASM 3 hashes are identical"
+    },
+    "compilation_count_per_process": 1,
+    "diagnostic_completion_rule": "completion requires all 32 processes and all comparison artifacts; one, two, or more final variants are retained without exclusion",
+    "frozen_software": {
+      "python": "3.12.6",
+      "qiskit": "2.4.1",
+      "qiskit_aer": "0.17.2",
+      "qiskit_ibm_runtime": "0.46.1"
+    },
+    "full_final_qasm_retained_per_process": true,
+    "new_hidden_seed_count": 0,
+    "official_qiskit_callback_reference": "https://qiskit.qotlabs.org/docs/api/qiskit/compiler",
+    "official_qiskit_transpiler_reference": "https://qiskit.qotlabs.org/docs/api/qiskit/transpiler",
+    "optimization_level": 3,
+    "process_count": 32,
+    "process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "QISKIT_PARALLEL": "FALSE",
+      "RAYON_NUM_THREADS": "1"
+    },
+    "process_rule": "each compilation executes in a distinct operating-system process after public preregistration",
+    "r155_expected_variant_count": 2,
+    "r155_expected_variant_hashes": [
+      "56eb5fac162b05c918164e4850b71c0665fa139c5b3c81646d2d8d7f5119d658",
+      "fc4ab12a8f5204895c93d1320899e6b4f64f489b87adccbc7a16d7fa79a8d1f1"
+    ],
+    "r155_unique_mismatch_key": [
+      "FakeNairobiV2",
+      21
+    ],
+    "research_question": "At which named Qiskit pass does the seeded FakeNairobiV2 trial-21 automatic compilation first split into the R155 OpenQASM 3 variants?",
+    "route_change_performed": false,
+    "sampling_performed": false,
+    "simulation_execution_count": 0,
+    "snapshot_name": "FakeNairobiV2",
+    "task_id": "dense_validation_xy_network_n6",
+    "total_compilation_count": 32,
+    "total_simulated_shots": 0,
+    "transpiler_seed": 105203961,
+    "trial": 21,
+    "trial_in_block": 5
+  },
+  "research_question": "At which named Qiskit pass does the seeded FakeNairobiV2 trial-21 automatic compilation first split into the R155 OpenQASM 3 variants?",
+  "source_bindings": {
+    "protocol_path": "results/B4_B8_R156_transpiler_variant_capture_protocol_v0.json",
+    "protocol_payload_hash": "e01668bdcb20dacf6cfb47e8c5cadfce16ccd7a19f2dea5f3ef0f1a9565d1aed",
+    "protocol_sha256": "18211b6c6d5bdf00b4b9a20c389f26d35ce44d75b5fa3e4efb9c26bac6aa16fb",
+    "r153_trials": {
+      "path": "results/B4_B8_R153_independent_seed_replication_holdout/three_arm_trial_rows.json",
+      "sha256": "716466cebd25638e82584b66d2f7893a84cdc529d4df258e5f80be3faaab725f"
+    },
+    "r155_classification": {
+      "path": "results/B4_B8_R155_execution_mode_attribution/classification.json",
+      "sha256": "45fa24ae2dfe70aaef50414e28a59ac360e746bde0138ffd39645a0c76ccb4ff"
+    },
+    "r155_comparison": {
+      "path": "results/B4_B8_R155_execution_mode_attribution/comparison_matrix.json",
+      "sha256": "b1f20b91b7985be6c273cbcdddb042782112835450af642ace2dd81f953a847b"
+    },
+    "r155_contract": {
+      "path": "benchmarks/B4_B8_R155_execution_mode_attribution_contract_v0.json",
+      "sha256": "76f7939cdac7aa3b89cfb5f90a89e8d424a28cef5ec849434b4dc5858a4dfc9a"
+    },
+    "r155_protocol": {
+      "path": "results/B4_B8_R155_execution_mode_attribution_protocol_v0.json",
+      "payload_hash": "bcfc9860af9bb6dccf8715a35c98060ffe714a2629f3d8e443c6be8a5c35ad81",
+      "sha256": "23260a7b9b1d8643744d809096467330393af1d53ab521567d7a14e38983847b"
+    },
+    "r155_result": {
+      "path": "results/B4_B8_R155_execution_mode_attribution_v0.json",
+      "payload_hash": "4b4556c8204a2dee34eebc1f5c1fb12c809c5b9ccc6330906367f636eacbe470",
+      "sha256": "96cd36efbe8aebd1f9d0f7dabb4ae0707b6399ef8126c860c61f227abbff015a"
+    }
+  },
+  "target_id": "T-B4-002bt/T-B8-003bx/T-B10-009bl",
+  "upstream_target_id": "T-B4-002bs/T-B8-003bw/T-B10-009bk"
+}

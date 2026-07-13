@@ -39268,6 +39268,145 @@ def audit(root: Path) -> dict:
         if "automatic_transpilation" not in report_text or "Aer-sampling-only" not in report_text or "before causal attribution" not in report_text:
             errors.append("R155 execution-mode report causal boundary missing")
 
+    r156_protocol_path = results / "B4_B8_R156_transpiler_variant_capture_protocol_v0.json"
+    r156_protocol_report_path = research / "B4_B8_R156_transpiler_variant_capture_protocol.md"
+    r156_contract_path = benchmarks / "B4_B8_R156_transpiler_variant_capture_contract_v0.json"
+    r156_status = {
+        "protocol_path": str(r156_protocol_path),
+        "contract_path": str(r156_contract_path),
+        "protocol_exists": r156_protocol_path.exists(),
+        "contract_exists": r156_contract_path.exists(),
+        "report_exists": r156_protocol_report_path.exists(),
+    }
+    r156_contract_sha256 = hashlib.sha256(r156_contract_path.read_bytes()).hexdigest() if r156_contract_path.exists() else None
+    r156_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get("b4_b8_r156_transpiler_variant_capture_protocol_v0"),
+            "transpiler_variant_capture_protocol_frozen_before_execution",
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get("b4_b8_r156_transpiler_variant_capture_protocol_v0"),
+            "transpiler_variant_capture_protocol_frozen_before_execution",
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r156_transpiler_variant_capture_protocol_v0"),
+            "transpiler_variant_capture_protocol_not_bqp_claim",
+        ),
+    ]
+    for label, row, expected_status in r156_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R156 variant-capture preregistration")
+            continue
+        for field in ["result", "markdown_report", "contract"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R156 variant-capture protocol missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r156_transpiler_variant_capture_protocol_v0":
+            errors.append(f"{label} R156 variant-capture status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002bt/T-B8-003bx/T-B10-009bl" or row.get("upstream_target_id") != "T-B4-002bs/T-B8-003bw/T-B10-009bk":
+            errors.append(f"{label} R156 variant-capture target chain mismatch")
+        if row.get("contract_sha256") != r156_contract_sha256:
+            errors.append(f"{label} R156 variant-capture contract hash mismatch")
+        if row.get("execution_started") is not False or row.get("compiler_mechanism_claimed") is not False or row.get("causal_attribution_claimed") is not False:
+            errors.append(f"{label} R156 variant-capture unopened boundary mismatch")
+        if row.get("new_credit_delta") != 0 or row.get("requirements_passed") != 10 or row.get("requirements_failed") != 0:
+            errors.append(f"{label} R156 variant-capture credit or requirement mismatch")
+    if not all(path.exists() for path in [r156_protocol_path, r156_protocol_report_path, r156_contract_path]):
+        errors.append("R156 variant-capture protocol, report, or contract missing")
+    else:
+        r156_payload = json.loads(read(r156_protocol_path))
+        r156_protocol = r156_payload.get("protocol", {})
+        r156_contract = json.loads(read(r156_contract_path))
+        r156_status.update({
+            "status": r156_payload.get("status"),
+            "method": r156_payload.get("method"),
+            "requirements_passed": r156_payload.get("requirements_passed"),
+            "requirements_failed": r156_payload.get("requirements_failed"),
+            "execution_started": r156_payload.get("execution_started"),
+            "snapshot_name": r156_protocol.get("snapshot_name"),
+            "trial": r156_protocol.get("trial"),
+            "transpiler_seed": r156_protocol.get("transpiler_seed"),
+            "process_count": r156_protocol.get("process_count"),
+            "total_compilation_count": r156_protocol.get("total_compilation_count"),
+            "simulation_execution_count": r156_protocol.get("simulation_execution_count"),
+            "total_simulated_shots": r156_protocol.get("total_simulated_shots"),
+            "expected_r155_variant_count": r156_protocol.get("r155_expected_variant_count"),
+        })
+        if r156_payload.get("status") != "transpiler_variant_capture_protocol_frozen_before_execution" or r156_payload.get("method") != "b4_b8_r156_transpiler_variant_capture_protocol_v0":
+            errors.append("R156 variant-capture protocol status or method mismatch")
+        if r156_payload.get("source_target_id") != "T-B4-002bt/T-B8-003bx/T-B10-009bl" or r156_payload.get("upstream_target_id") != "T-B4-002bs/T-B8-003bw/T-B10-009bk":
+            errors.append("R156 variant-capture protocol target chain mismatch")
+        if r156_payload.get("requirements_passed") != 10 or r156_payload.get("requirements_failed") != 0 or r156_payload.get("execution_started") is not False:
+            errors.append("R156 variant-capture requirements or unopened boundary mismatch")
+        expected_r156_protocol = {
+            "snapshot_name": "FakeNairobiV2",
+            "task_id": "dense_validation_xy_network_n6",
+            "trial": 21,
+            "block_index": 2,
+            "trial_in_block": 5,
+            "transpiler_seed": 105203961,
+            "optimization_level": 3,
+            "process_count": 32,
+            "compilation_count_per_process": 1,
+            "total_compilation_count": 32,
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "full_final_qasm_retained_per_process": True,
+            "r155_expected_variant_count": 2,
+            "r155_expected_variant_hashes": [
+                "56eb5fac162b05c918164e4850b71c0665fa139c5b3c81646d2d8d7f5119d658",
+                "fc4ab12a8f5204895c93d1320899e6b4f64f489b87adccbc7a16d7fa79a8d1f1",
+            ],
+            "r155_unique_mismatch_key": ["FakeNairobiV2", 21],
+            "new_hidden_seed_count": 0,
+            "candidate_selection_performed": False,
+            "route_change_performed": False,
+            "sampling_performed": False,
+        }
+        for field, value in expected_r156_protocol.items():
+            if r156_protocol.get(field) != value:
+                errors.append(f"R156 variant-capture protocol {field} mismatch")
+        expected_environment = {
+            "PYTHONHASHSEED": "0",
+            "RAYON_NUM_THREADS": "1",
+            "OMP_NUM_THREADS": "1",
+            "OPENBLAS_NUM_THREADS": "1",
+            "MKL_NUM_THREADS": "1",
+            "QISKIT_PARALLEL": "FALSE",
+        }
+        if r156_protocol.get("process_environment") != expected_environment:
+            errors.append("R156 variant-capture process environment mismatch")
+        if len(r156_protocol.get("callback_fields", [])) != 11 or len(r156_protocol.get("classification_rule", {})) != 5:
+            errors.append("R156 variant-capture callback or classification matrix mismatch")
+        if "one, two, or more" not in r156_protocol.get("diagnostic_completion_rule", ""):
+            errors.append("R156 variant-capture non-selection completion rule missing")
+        frozen_software = r156_protocol.get("frozen_software", {})
+        if any(not frozen_software.get(field) for field in ["python", "qiskit", "qiskit_aer", "qiskit_ibm_runtime"]):
+            errors.append("R156 variant-capture software binding missing")
+        hp = dict(r156_payload)
+        protocol_ph = hp.pop("payload_hash", None)
+        if protocol_ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R156 variant-capture protocol payload hash mismatch")
+        if protocol_ph != "e01668bdcb20dacf6cfb47e8c5cadfce16ccd7a19f2dea5f3ef0f1a9565d1aed":
+            errors.append("R156 variant-capture frozen payload hash mismatch")
+        if r156_contract_sha256 != "04911bf4f81e568b67380990f2a8b3e18fe6ed50930d258fa12cd99996bbaf76":
+            errors.append("R156 variant-capture contract file hash mismatch")
+        if r156_contract.get("contract_id") != "B4-B8-R156-transpiler-variant-capture-contract-v0" or r156_contract.get("contract_status") != "public_preregistration_execution_unopened":
+            errors.append("R156 variant-capture contract ID or status mismatch")
+        if r156_contract.get("target_id") != "T-B4-002bt/T-B8-003bx/T-B10-009bl" or "process_artifacts" in r156_contract or "classification" in r156_contract:
+            errors.append("R156 variant-capture target or unopened boundary mismatch")
+        bindings = r156_contract.get("source_bindings", {})
+        if bindings.get("protocol_payload_hash") != protocol_ph or bindings.get("protocol_sha256") != hashlib.sha256(r156_protocol_path.read_bytes()).hexdigest() or len(r156_contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R156 variant-capture protocol binding or acceptance count mismatch")
+        for binding_id, binding in bindings.items():
+            if binding_id in {"protocol_path", "protocol_payload_hash", "protocol_sha256"}:
+                continue
+            path = root / binding.get("path", "")
+            if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                errors.append(f"R156 variant-capture source binding mismatch: {binding_id}")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -39745,6 +39884,7 @@ def audit(root: Path) -> dict:
             "r154_deterministic_automatic_replay_result": r154_result_status,
             "r155_execution_mode_attribution": r155_status,
             "r155_execution_mode_attribution_result": r155_result_status,
+            "r156_transpiler_variant_capture": r156_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -41229,6 +41369,8 @@ def audit(root: Path) -> dict:
             "b4_b8_r155_execution_mode_attribution_protocol": str(r155_protocol_report_path),
             "b4_b8_r155_execution_mode_attribution_contract": str(r155_contract_path),
             "b4_b8_r155_execution_mode_attribution": str(r155_result_report_path),
+            "b4_b8_r156_transpiler_variant_capture_protocol": str(r156_protocol_report_path),
+            "b4_b8_r156_transpiler_variant_capture_contract": str(r156_contract_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),
@@ -43526,6 +43668,16 @@ def markdown_report(report: dict) -> str:
             f"- Causal attribution supported: {report['b8']['r155_execution_mode_attribution_result'].get('causal_attribution_supported')}",
             f"- Requirements passed/failed: {report['b8']['r155_execution_mode_attribution_result'].get('requirements_passed')} / {report['b8']['r155_execution_mode_attribution_result'].get('requirements_failed')}",
             f"- Result/report exists: {report['b8']['r155_execution_mode_attribution_result'].get('result_exists')} / {report['b8']['r155_execution_mode_attribution_result'].get('report_exists')}",
+            "",
+            "### R156 Transpiler Variant-Capture Protocol",
+            "",
+            f"- Status: {report['b8']['r156_transpiler_variant_capture'].get('status')}",
+            f"- Frozen row / trial / seed: {report['b8']['r156_transpiler_variant_capture'].get('snapshot_name')} / {report['b8']['r156_transpiler_variant_capture'].get('trial')} / {report['b8']['r156_transpiler_variant_capture'].get('transpiler_seed')}",
+            f"- Processes / compilations: {report['b8']['r156_transpiler_variant_capture'].get('process_count')} / {report['b8']['r156_transpiler_variant_capture'].get('total_compilation_count')}",
+            f"- Simulation executions / shots: {report['b8']['r156_transpiler_variant_capture'].get('simulation_execution_count')} / {report['b8']['r156_transpiler_variant_capture'].get('total_simulated_shots')}",
+            f"- Expected R155 variants: {report['b8']['r156_transpiler_variant_capture'].get('expected_r155_variant_count')}",
+            f"- Execution started: {report['b8']['r156_transpiler_variant_capture'].get('execution_started')}",
+            f"- Requirements passed/failed: {report['b8']['r156_transpiler_variant_capture'].get('requirements_passed')} / {report['b8']['r156_transpiler_variant_capture'].get('requirements_failed')}",
             "",
             f"- Status: {report['b8']['output_invariant_verifier'].get('status')}",
             f"- Model status: {report['b8']['output_invariant_verifier'].get('model_status')}",

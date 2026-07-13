@@ -3501,3 +3501,20 @@ expanded repeated-transpile block for the one affected row. No new hidden
 evidence, temporal or real-device transfer, hardware performance, general
 route-generation advantage, quantum advantage, BQP separation, solved-
 frontier status, or new credit is claimed.
+
+`T-B4-002bt` / `T-B8-003bx` / `T-B10-009bl` now preregisters R156 as a
+pass-level capture of the sole R155 mismatch row: `FakeNairobiV2` trial 21.
+Thirty-two independent operating-system processes must each compile that
+public row once under Qiskit 2.4.1, optimization level 3, transpiler seed
+`105203961`, and the same one-thread environment. Every process must retain its
+complete pass callback trace, bounded property-set summaries, final OpenQASM 3
+artifact, process identity, and runtime; no simulation or sampling is run.
+Diagnostic completion does not require the two R155 variants to reappear: one,
+two, or more final hashes must be retained without exclusion. If multiple
+variants occur, the gate must emit the first aligned circuit and property-set
+divergence plus a structured final-circuit diff. Requirements pass `10/10`;
+contract `04911bf4...`; execution remains unopened. A first divergent pass is
+an observed localization boundary, not a compiler mechanism or Qiskit-bug
+claim. No hidden evidence, hardware performance, temporal or real-device
+transfer, general route-generation advantage, quantum advantage, BQP
+separation, solved-frontier status, or new credit is claimed.

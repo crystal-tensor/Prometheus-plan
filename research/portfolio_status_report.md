@@ -2277,6 +2277,16 @@ Overall audit: PASS
 - Requirements passed/failed: 10 / 0
 - Result/report exists: True / True
 
+### R156 Transpiler Variant-Capture Protocol
+
+- Status: transpiler_variant_capture_protocol_frozen_before_execution
+- Frozen row / trial / seed: FakeNairobiV2 / 21 / 105203961
+- Processes / compilations: 32 / 32
+- Simulation executions / shots: 0 / 0
+- Expected R155 variants: 2
+- Execution started: False
+- Requirements passed/failed: 10 / 0
+
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification
 - Tasks: 3
