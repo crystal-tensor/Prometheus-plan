@@ -37422,6 +37422,66 @@ def audit(root: Path) -> dict:
         if contract.get("source_bindings", {}).get("protocol_payload_hash") != ph or len(contract.get("acceptance_conditions", [])) != 10:
             errors.append("R146 contract binding or acceptance count mismatch")
 
+    r146_result_path = results / "B4_B8_R146_cross_snapshot_transfer_holdout_v0.json"
+    r146_result_report_path = research / "B4_B8_R146_cross_snapshot_transfer_holdout.md"
+    r146_result_status = {"path": str(r146_result_path), "report_path": str(r146_result_report_path), "exists": r146_result_path.exists(), "report_exists": r146_result_report_path.exists()}
+    r146_result_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r146_cross_snapshot_transfer_holdout_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r146_cross_snapshot_transfer_holdout_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r146_cross_snapshot_transfer_holdout_v0")),
+    ]
+    for label, row in r146_result_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R146 cross-snapshot result")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R146 cross-snapshot result missing {field}")
+    if not r146_result_path.exists() or not r146_result_report_path.exists():
+        errors.append("R146 cross-snapshot result or report missing")
+    else:
+        h = json.loads(read(r146_result_path)); s = h.get("summary", {})
+        r146_result_status.update({"status": h.get("status"), "method": h.get("method"), "requirements_passed": h.get("requirements_passed"), "requirements_failed": h.get("requirements_failed"), "global_acceptance": s.get("global_acceptance"), "portfolio_mean_transfer_minus_target": s.get("portfolio_mean_transfer_minus_target"), "groups_above_negative_0_02": s.get("groups_with_mean_transfer_minus_target_at_least_negative_0_02"), "severe_regression_count": s.get("severe_transfer_minus_target_regression_count_below_negative_0_05")})
+        expected = {
+            "transfer_group_count": 24, "trial_row_count": 192,
+            "simulated_circuit_execution_count": 576, "total_simulated_shots": 1179648,
+            "portfolio_mean_transfer_minus_automatic": -0.0029352762347639345,
+            "portfolio_transfer_minus_automatic_bootstrap_95_lower": -0.005392437521615902,
+            "portfolio_transfer_minus_automatic_bootstrap_95_upper": -0.0006643731028565182,
+            "portfolio_mean_transfer_minus_target": -0.011459211718280767,
+            "portfolio_transfer_minus_target_bootstrap_95_lower": -0.014109302241723028,
+            "portfolio_transfer_minus_target_bootstrap_95_upper": -0.008969669974309175,
+            "groups_with_mean_transfer_minus_target_at_least_negative_0_02": 19,
+            "severe_transfer_minus_target_regression_count_below_negative_0_05": 9,
+            "minimum_target_snapshot_mean_transfer_minus_target": -0.01799629482163365,
+            "minimum_semantic_fidelity": 0.9999999999999971,
+            "semantic_fidelity_pass_count": 48,
+            "phase_artifact_count": 4, "phase_artifact_preexisting_count": 4,
+            "phase_artifact_replay_match_count": 4,
+            "acceptance_conditions_passed": 6, "acceptance_conditions_failed": 4,
+            "failed_acceptance_condition_ids": ["A5", "A6", "A7", "A8"],
+            "global_acceptance": False, "new_credit_delta": 0,
+        }
+        if h.get("status") != "cross_snapshot_transfer_preregistered_rejection" or h.get("method") != "b4_b8_r146_cross_snapshot_transfer_holdout_v0":
+            errors.append("R146 cross-snapshot result status or method mismatch")
+        if h.get("requirements_passed") != 10 or h.get("requirements_failed") != 0:
+            errors.append("R146 cross-snapshot result requirements must pass 10/10")
+        for field, value in expected.items():
+            if s.get(field) != value:
+                errors.append(f"R146 cross-snapshot result {field} mismatch")
+        conditions = h.get("acceptance_conditions", [])
+        if len(conditions) != 10 or sum(row.get("passed", False) for row in conditions) != 6:
+            errors.append("R146 cross-snapshot result must preserve 6/10 rejection")
+        if len(h.get("compiled_route_rows", [])) != 24 or len(h.get("group_rows", [])) != 24 or len(h.get("target_snapshot_rows", [])) != 3:
+            errors.append("R146 cross-snapshot result row counts mismatch")
+        hp = dict(h); ph = hp.pop("payload_hash", None)
+        if ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest():
+            errors.append("R146 cross-snapshot result payload hash mismatch")
+        for phase_key in ["challenge_commitment", "three_arm_trial_rows", "challenge_reveal", "verifier_transcript"]:
+            rel = h.get("artifacts", {}).get(phase_key)
+            if not rel or not (root / rel).exists():
+                errors.append(f"R146 cross-snapshot phase missing: {phase_key}")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -37881,6 +37941,7 @@ def audit(root: Path) -> dict:
             "r145_counterbalanced_runtime_protocol": r145_status,
             "r145_counterbalanced_runtime_benchmark": r145_result_status,
             "r146_cross_snapshot_transfer_protocol": r146_status,
+            "r146_cross_snapshot_transfer_holdout": r146_result_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -39300,6 +39361,9 @@ def audit(root: Path) -> dict:
                 research / "B4_B8_R146_cross_snapshot_transfer_protocol.md"
             ),
             "b4_b8_r146_cross_snapshot_transfer_contract": str(r146_contract_path),
+            "b4_b8_r146_cross_snapshot_transfer_holdout": str(
+                research / "B4_B8_R146_cross_snapshot_transfer_holdout.md"
+            ),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),

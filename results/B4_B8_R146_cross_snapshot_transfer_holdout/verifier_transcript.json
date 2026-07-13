@@ -1,0 +1,104 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "protocol and source bindings remain exact",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "transfer groups, rows, and executions",
+      "passed": true,
+      "threshold": [
+        24,
+        192,
+        576
+      ],
+      "value": [
+        24,
+        192,
+        576
+      ]
+    },
+    {
+      "condition_id": "A3",
+      "label": "all transferred and target routes retain semantic fidelity",
+      "passed": true,
+      "threshold": [
+        48,
+        0.9999999999
+      ],
+      "value": [
+        48,
+        0.9999999999999971
+      ]
+    },
+    {
+      "condition_id": "A4",
+      "label": "portfolio transfer versus automatic noninferiority",
+      "passed": true,
+      "threshold": [
+        -0.005,
+        -0.01
+      ],
+      "value": [
+        -0.0029352762347639345,
+        -0.005392437521615902
+      ]
+    },
+    {
+      "condition_id": "A5",
+      "label": "portfolio transfer versus target-specific noninferiority",
+      "passed": false,
+      "threshold": [
+        -0.005,
+        -0.01
+      ],
+      "value": [
+        -0.011459211718280767,
+        -0.014109302241723028
+      ]
+    },
+    {
+      "condition_id": "A6",
+      "label": "groups above negative 0.02 versus target",
+      "passed": false,
+      "threshold": 20,
+      "value": 19
+    },
+    {
+      "condition_id": "A7",
+      "label": "severe row regressions below negative 0.05",
+      "passed": false,
+      "threshold": 0,
+      "value": 9
+    },
+    {
+      "condition_id": "A8",
+      "label": "each target snapshot mean transfer-target",
+      "passed": false,
+      "threshold": -0.01,
+      "value": -0.01799629482163365
+    },
+    {
+      "condition_id": "A9",
+      "label": "commitment, hidden rows, reveal, and transcript replay",
+      "passed": true,
+      "threshold": true,
+      "value": true
+    },
+    {
+      "condition_id": "A10",
+      "label": "forbidden claims and credit remain false",
+      "passed": true,
+      "threshold": 0,
+      "value": 0
+    }
+  ],
+  "challenge_secret_commitment_sha256": "a14660838df3a18092b6291cbf0a0e0ef0ca9ed8e635ae7434cb875be53d6ddd",
+  "contract_sha256": "5e29e68eefcb6809a4df6cc86916b76f299267f36eeabc4d44fd22754cfaceb3",
+  "global_acceptance": false,
+  "trial_rows_sha256": "bcf7f2185006e9fa5eedfc66f84c4b8f3f64d628040fd3c711c2e696f85a22f8"
+}

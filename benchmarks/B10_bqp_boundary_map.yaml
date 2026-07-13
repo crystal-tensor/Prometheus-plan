@@ -1769,6 +1769,24 @@ current_results:
     result: ../results/B4_B8_R146_cross_snapshot_transfer_protocol_v0.json
     markdown_report: ../research/B4_B8_R146_cross_snapshot_transfer_protocol.md
     holdout_contract: B4_B8_R146_cross_snapshot_transfer_contract_v0.json
+  b10_t2_b4_b8_r146_cross_snapshot_transfer_holdout_v0:
+    status: cross_snapshot_transfer_rejection_not_bqp_claim
+    method: b4_b8_r146_cross_snapshot_transfer_holdout_v0
+    source_b8_result: ../results/B4_B8_R146_cross_snapshot_transfer_holdout_v0.json
+    source_target_id: T-B4-002bb/T-B8-003bf/T-B10-009at
+    portfolio_mean_transfer_minus_target: -0.011459211718280767
+    groups_above_negative_0_02_vs_target: 19
+    severe_regression_count_below_negative_0_05: 9
+    acceptance_conditions_passed: 6
+    acceptance_conditions_failed: 4
+    global_acceptance: false
+    b10_t2_credit_allowed: false
+    bqp_separation_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R146_cross_snapshot_transfer_holdout_v0.json
+    markdown_report: ../research/B4_B8_R146_cross_snapshot_transfer_holdout.md
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

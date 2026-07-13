@@ -2652,6 +2652,22 @@ No R146 challenge, temporal same-device calibration transfer, cross-machine
 transfer, hardware, advantage, BQP, solved-frontier, or new-credit claim has
 opened.
 
+The R146 holdout at `T-B4-002bb` / `T-B8-003bf` / `T-B10-009at` is
+then preregistered REJECT with A5-A8 failed. All `48/48` compiled source and
+target routes preserve semantics, and transfer versus automatic remains close
+to noninferior with portfolio mean `-0.00293528` and bootstrap lower
+`-0.00539244`. Transfer versus the target-specific R143 route is materially
+worse: portfolio mean `-0.01145921`, bootstrap lower `-0.01410930`, only
+`19/24` groups above `-0.02`, and `9` rows below `-0.05`. FakeLagosV2 is the
+weakest target at mean `-0.01799629`. The dominant failure is
+FakeJakartaV2-to-FakeLagosV2 dense XY: all `8/8` rows are severe and the group
+mean is `-0.07489771`; FakeOslo-to-FakeLagosV2 complete Ising contributes the
+remaining severe row. Requirements and phase replay pass `10/10` and `4/4`.
+This rejects unconditioned cross-backend snapshot transfer and motivates a
+target-calibration adaptation gate; temporal same-device transfer,
+cross-machine transfer, hardware, advantage, BQP, solved-frontier status, and
+new credit remain unclaimed.
+
 `T-B4-002aj` / `T-B8-003an` / `T-B10-009ab` now adds the R135
 dense-interaction deterministic fallback boundary. For each new inverse-QFT,
 scrambled-QFT, complete-Ising, and dense-XY input, five temporal graph rules

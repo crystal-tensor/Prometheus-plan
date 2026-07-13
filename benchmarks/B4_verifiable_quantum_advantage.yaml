@@ -2150,6 +2150,27 @@ current_results:
     result: ../results/B4_B8_R146_cross_snapshot_transfer_protocol_v0.json
     markdown_report: ../research/B4_B8_R146_cross_snapshot_transfer_protocol.md
     holdout_contract: B4_B8_R146_cross_snapshot_transfer_contract_v0.json
+  b4_b8_r146_cross_snapshot_transfer_holdout_v0:
+    status: cross_snapshot_transfer_preregistered_rejection
+    method: b4_b8_r146_cross_snapshot_transfer_holdout_v0
+    source_target_id: T-B4-002bb/T-B8-003bf/T-B10-009at
+    transfer_group_count: 24
+    trial_row_count: 192
+    portfolio_mean_transfer_minus_automatic: -0.0029352762347639345
+    portfolio_mean_transfer_minus_target: -0.011459211718280767
+    portfolio_transfer_minus_target_bootstrap_95_lower: -0.014109302241723028
+    groups_above_negative_0_02_vs_target: 19
+    severe_regression_count_below_negative_0_05: 9
+    minimum_target_snapshot_mean_transfer_minus_target: -0.01799629482163365
+    semantic_fidelity_pass_count: 48
+    acceptance_conditions_passed: 6
+    acceptance_conditions_failed: 4
+    global_acceptance: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R146_cross_snapshot_transfer_holdout_v0.json
+    markdown_report: ../research/B4_B8_R146_cross_snapshot_transfer_holdout.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim
