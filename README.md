@@ -2879,6 +2879,21 @@ accepted upstream fix, confirmed Qiskit bug, cross-platform theorem, hardware,
 route-advantage, quantum-advantage, BQP, solved-frontier, or new-credit claim is
 made.
 
+`T-B4-002cc` / `T-B8-003cg` / `T-B10-009bu` executes all 16 processes,
+33 cases, and 1,056 direct calls. All four methods stabilize the untouched tie
+to `[6,5,4,3,0,1,2]`; 12 cases clear the `1e-16` protected-margin gate and all
+12 select the shared exact optimum. The executor initially reported
+`deterministic_external_map_remediation_supported`, but its own summary showed
+that not every replay belonged to the exact-oracle minimum set. The independent
+`T-B4-002cd` / `T-B8-003ch` / `T-B10-009bv` adjudication therefore
+overrules that label under the public support rule. Exactly `224/1,056` calls
+across seven 1-8 ULP near-tie cases return mapping A while the exact rational
+oracle prefers mapping B; exact-oracle passes are `832/1,056`. The audited
+classification is `tie_stabilized_but_non_tied_guardrail_failed`. Raw execution
+integrity remains valid, but complete remediation is rejected. No source patch,
+confirmed Qiskit bug, cross-platform theorem, hardware, route-advantage,
+quantum-advantage, BQP, solved-frontier, or new-credit claim is made.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

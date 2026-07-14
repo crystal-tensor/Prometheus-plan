@@ -2829,6 +2829,57 @@ current_results:
     result: ../results/B4_B8_R160_deterministic_error_map_remediation_protocol_v0.json
     markdown_report: ../research/B4_B8_R160_deterministic_error_map_remediation_protocol.md
     contract: B4_B8_R160_deterministic_error_map_remediation_contract_v0.json
+  b4_b8_r160_deterministic_error_map_remediation_v0:
+    status: deterministic_error_map_remediation_raw_execution_classification_overruled
+    method: b4_b8_r160_deterministic_error_map_remediation_v0
+    source_target_id: T-B4-002cc/T-B8-003cg/T-B10-009bu
+    upstream_target_id: T-B4-002cb/T-B8-003cf/T-B10-009bt
+    executor_classification: deterministic_external_map_remediation_supported
+    audited_classification: tie_stabilized_but_non_tied_guardrail_failed
+    profile_count: 4
+    process_count: 16
+    case_count: 33
+    direct_replay_count: 1056
+    tie_baseline_all_modes_stable: true
+    tie_baseline_cross_mode_agreement: true
+    margin_protected_case_count: 12
+    margin_protected_failure_count: 0
+    all_replays_within_exact_oracle: false
+    exact_oracle_pass_count: 832
+    exact_oracle_failure_count: 224
+    exact_oracle_failure_case_count: 7
+    support_rule_passed: false
+    source_patch_performed: false
+    qiskit_bug_claimed: false
+    quantum_advantage_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R160_deterministic_error_map_remediation_v0.json
+    markdown_report: ../research/B4_B8_R160_deterministic_error_map_remediation.md
+    trace_directory: ../results/B4_B8_R160_deterministic_error_map_remediation
+    adjudication: ../results/B4_B8_R160_deterministic_error_map_remediation_adjudication_v0.json
+    adjudication_report: ../research/B4_B8_R160_deterministic_error_map_remediation_adjudication.md
+  b4_b8_r160_deterministic_error_map_remediation_adjudication_v0:
+    status: frozen_support_rule_adjudication_complete
+    method: b4_b8_r160_deterministic_error_map_remediation_adjudication_v0
+    source_target_id: T-B4-002cd/T-B8-003ch/T-B10-009bv
+    upstream_target_id: T-B4-002cc/T-B8-003cg/T-B10-009bu
+    audited_classification: tie_stabilized_but_non_tied_guardrail_failed
+    support_rule_passed: false
+    direct_replay_count: 1056
+    exact_oracle_pass_count: 832
+    exact_oracle_failure_count: 224
+    exact_oracle_failure_case_count: 7
+    margin_protected_case_count: 12
+    margin_protected_failure_count: 0
+    raw_execution_integrity_passed: true
+    post_execution_adjudication_preregistered: false
+    qiskit_bug_claimed: false
+    quantum_advantage_claimed: false
+    new_credit_delta: 0
+    result: ../results/B4_B8_R160_deterministic_error_map_remediation_adjudication_v0.json
+    markdown_report: ../research/B4_B8_R160_deterministic_error_map_remediation_adjudication.md
   toy_hidden_trap_protocol_sim_v0:
     status: toy_statistical_protocol
     model_status: toy_statistical_protocol_not_quantum_advantage_claim

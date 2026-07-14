@@ -1,0 +1,585 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "label": "all frozen source and protocol bindings validate",
+      "passed": true
+    },
+    {
+      "condition_id": "A2",
+      "label": "four modes, sixteen processes, thirty-three cases, and 1056 calls complete",
+      "passed": true
+    },
+    {
+      "condition_id": "A3",
+      "label": "all process identities are unique and post-registration",
+      "passed": true
+    },
+    {
+      "condition_id": "A4",
+      "label": "every worker and replay payload validates",
+      "passed": true
+    },
+    {
+      "condition_id": "A5",
+      "label": "every replay is checked against an exact rational mapping oracle",
+      "passed": true
+    },
+    {
+      "condition_id": "A6",
+      "label": "tie stability and cross-mode agreement are retained regardless of outcome",
+      "passed": true
+    },
+    {
+      "condition_id": "A7",
+      "label": "all protected non-tied rows and failures are retained",
+      "passed": true
+    },
+    {
+      "condition_id": "A8",
+      "label": "classification follows the frozen decision order",
+      "passed": true
+    },
+    {
+      "condition_id": "A9",
+      "label": "no source patch, simulation, shots, hidden selection, or route change occurs",
+      "passed": true
+    },
+    {
+      "condition_id": "A10",
+      "label": "forbidden bug, hardware, advantage, BQP, solved-frontier, and credit claims remain false",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "case_analysis": "results/B4_B8_R160_deterministic_error_map_remediation/case_analysis.json",
+    "contract": "benchmarks/B4_B8_R160_deterministic_error_map_remediation_contract_v0.json",
+    "markdown_report": "research/B4_B8_R160_deterministic_error_map_remediation.md",
+    "process_artifacts": [
+      {
+        "manifest_payload_hash": "a514b1a6c1b49d83726058c3b9675557e143b70f1060c46bfdfddf889086388f",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_ascending_f64_00.json",
+        "profile_id": "ascending_f64",
+        "replica": 0,
+        "sha256": "aa1efbdcd3db670f7e0568ea6ba7dde58018c3432fce225c0d7c96977aa2b9af"
+      },
+      {
+        "manifest_payload_hash": "3f81e0932e7b63397c614591a0673eedaee2d2eb8ad29dc59bd765f734229426",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_ascending_f64_01.json",
+        "profile_id": "ascending_f64",
+        "replica": 1,
+        "sha256": "5f5024488237dbf1a598abab3d9e056cfe39bb980361b7fa2e552144392f4a7e"
+      },
+      {
+        "manifest_payload_hash": "47390b84ef4d070b54824787080b2d165e1de54ccf5920f4eded07185f580c11",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_ascending_f64_02.json",
+        "profile_id": "ascending_f64",
+        "replica": 2,
+        "sha256": "0aa67eefb1f9e271954168eda336bd19c4dfc23570c3b63f030352da45a91c36"
+      },
+      {
+        "manifest_payload_hash": "2454f83e1690be6d5060b6f2bbbb1ef9f60a41d7c0a2432c9b467f2b4401bdb7",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_ascending_f64_03.json",
+        "profile_id": "ascending_f64",
+        "replica": 3,
+        "sha256": "8a93039218093bfca071c4d49a409c4dac7f72a30a810e027e3ff035783a9644"
+      },
+      {
+        "manifest_payload_hash": "7ff49d0451bfa39ba319c39c55ba2d6c65d99e8b5961278662ffd89a330d294b",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_descending_f64_00.json",
+        "profile_id": "descending_f64",
+        "replica": 0,
+        "sha256": "ccafcbbbe1132c98f55e506c7290b3949489c147bf06e06fef7ba7d030216e37"
+      },
+      {
+        "manifest_payload_hash": "d204be4065e7e82ccf7e339815177b79da07878c3473c6521e701e18b99d34f5",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_descending_f64_01.json",
+        "profile_id": "descending_f64",
+        "replica": 1,
+        "sha256": "cfc11fe217b88a780d0575d47f76cdf74d92a8e87e4389c73751e9b0b7dc4454"
+      },
+      {
+        "manifest_payload_hash": "7b1897babf766b05736322bb7e930b226ed33169017d32e743d9a7388c4be328",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_descending_f64_02.json",
+        "profile_id": "descending_f64",
+        "replica": 2,
+        "sha256": "0cd435d9a49f5967323cfc4de3bfd1ec94932ea0c0821e9288d9b3b64cc1a484"
+      },
+      {
+        "manifest_payload_hash": "bb571fb9d72043d285e605a9e6c5d708eb46a0bbf94333d8aff0863b3febca0e",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_descending_f64_03.json",
+        "profile_id": "descending_f64",
+        "replica": 3,
+        "sha256": "35675390d2f839e58ee4a439f65049033204cee02059221d0f3d45c11e3fac6e"
+      },
+      {
+        "manifest_payload_hash": "7301e1856c2a1eecf0c4a097f31fe33877871d6d31acf4d01661edc5d628d250",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_math_fsum_00.json",
+        "profile_id": "math_fsum",
+        "replica": 0,
+        "sha256": "bfed85e1bbc802d98e4a271f39400f9bbb252cb5c2e950afdd6575c6dc3dcbeb"
+      },
+      {
+        "manifest_payload_hash": "3995841ff688d8338813a734ca790826b82074e55b1882b2ae179c603f6bb6f5",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_math_fsum_01.json",
+        "profile_id": "math_fsum",
+        "replica": 1,
+        "sha256": "d6ecba0e8ca1ce2898466b5318b5c973e94bbbf3a9a92a31b83bdf828123417f"
+      },
+      {
+        "manifest_payload_hash": "1f7fe012ed66fcb4c90a5247bd249d0a41299895ffed010fc31a629f7a5dfe66",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_math_fsum_02.json",
+        "profile_id": "math_fsum",
+        "replica": 2,
+        "sha256": "a63dc894e2fb12c657a84bb1c4b718ddb1828f96fc7210c42178812a1108d4f6"
+      },
+      {
+        "manifest_payload_hash": "a3af5246afd3a022aaee66c119bb20f04fe2504f9138bd74ca0c3c416f71c768",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_math_fsum_03.json",
+        "profile_id": "math_fsum",
+        "replica": 3,
+        "sha256": "ec2eb798608bebd4347e204c862e71e4fa563de0596d88f224048ac1167d684a"
+      },
+      {
+        "manifest_payload_hash": "ae9c7b42f0dec25fceb1829ea4889edcdb4a4ec09893d924aa6ef3884615837b",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_exact_binary_fraction_00.json",
+        "profile_id": "exact_binary_fraction",
+        "replica": 0,
+        "sha256": "e70fa56558cf7d805fd7ef0a4e1eaecc6441f179b585dad9b2aee37683efc880"
+      },
+      {
+        "manifest_payload_hash": "234eba73f8aa547b17a72c5a0baca3402024b6722f0c7f5d44f098922410b38c",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_exact_binary_fraction_01.json",
+        "profile_id": "exact_binary_fraction",
+        "replica": 1,
+        "sha256": "1ce40a575bd2fe96c4029035ce0431133aac507696f7e1ac150a846e39dd6b81"
+      },
+      {
+        "manifest_payload_hash": "e9a0628f139f25ac462d7fbce2cfb5b19ed5bd29c2131fa973698f5a0bc431df",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_exact_binary_fraction_02.json",
+        "profile_id": "exact_binary_fraction",
+        "replica": 2,
+        "sha256": "f3732580aa578418157b1880da041a426e99ebf67964a73ea726ee533c357ea6"
+      },
+      {
+        "manifest_payload_hash": "f0e2ec294e6eda059007b035b7e81a658dbd0dd8a3e5226b25a2dc570c83adc7",
+        "path": "results/B4_B8_R160_deterministic_error_map_remediation/worker_exact_binary_fraction_03.json",
+        "profile_id": "exact_binary_fraction",
+        "replica": 3,
+        "sha256": "f6b6baec3d5479ec1d75e75e752ca54f4fb1e89e3a88552c83917ba745acfeed"
+      }
+    ],
+    "profile_summary": "results/B4_B8_R160_deterministic_error_map_remediation/profile_summary.json",
+    "protocol": "results/B4_B8_R160_deterministic_error_map_remediation_protocol_v0.json",
+    "result": "results/B4_B8_R160_deterministic_error_map_remediation_v0.json",
+    "verifier_transcript": "results/B4_B8_R160_deterministic_error_map_remediation/verifier_transcript.json"
+  },
+  "case_analysis": {
+    "case_analysis_payload_hash": "1cd2c353e5545c1a2a84c8ef1ac41a2eff4783696f4ee5a372df5a8c92a9dcb7",
+    "case_count": 33,
+    "classification": "deterministic_external_map_remediation_supported",
+    "confirmed_qiskit_bug_claimed": false,
+    "margin_protected_case_count": 12,
+    "margin_protected_failure_count": 0,
+    "source_patch_performed": false,
+    "tie_baseline": {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "tie_baseline",
+      "case_payload_hash": "5a1ce801a4e429007f4f98f2e336dbf326d5cdee50f178acdd9530b605fa2f21",
+      "cross_mode_output_agreement": true,
+      "key": null,
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 0.0018527902845866186,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866247,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400441/1152921504606846976",
+            "second_distinct_score_fraction": "407589083108054001/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": null,
+      "shared_unique_oracle": false,
+      "ulp_shift": 0
+    }
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "an accepted upstream patch, confirmed Qiskit bug, cross-platform theorem, hardware result, route advantage, quantum advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "a source-bound external ErrorMap determinism and non-tied ranking guardrail diagnostic on the frozen R157 input"
+  },
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1784016800,
+  "method": "b4_b8_r160_deterministic_error_map_remediation_v0",
+  "model_status": "external_error_map_remediation_diagnostic_without_upstream_bug_claim",
+  "payload_hash": "950c426711df1fcc9d744febadec21ad06b81e3884412c391f61d2a994f18c50",
+  "preregistration": {
+    "commit": "8179b066729c0148144f34dad029e250277d06a3",
+    "created_at": "2026-07-14T08:12:51Z",
+    "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/182"
+  },
+  "profile_summary": {
+    "process_count": 16,
+    "profile_count": 4,
+    "profile_rows": [
+      {
+        "all_replays_within_oracle": false,
+        "baseline_selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "baseline_stable": true,
+        "case_count": 33,
+        "process_count": 4,
+        "process_instance_uuid_count": 4,
+        "profile_id": "ascending_f64",
+        "replay_count": 264,
+        "unique_error_map_payload_hash_count": 33
+      },
+      {
+        "all_replays_within_oracle": false,
+        "baseline_selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "baseline_stable": true,
+        "case_count": 33,
+        "process_count": 4,
+        "process_instance_uuid_count": 4,
+        "profile_id": "descending_f64",
+        "replay_count": 264,
+        "unique_error_map_payload_hash_count": 33
+      },
+      {
+        "all_replays_within_oracle": false,
+        "baseline_selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "baseline_stable": true,
+        "case_count": 33,
+        "process_count": 4,
+        "process_instance_uuid_count": 4,
+        "profile_id": "math_fsum",
+        "replay_count": 264,
+        "unique_error_map_payload_hash_count": 33
+      },
+      {
+        "all_replays_within_oracle": false,
+        "baseline_selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "baseline_stable": true,
+        "case_count": 33,
+        "process_count": 4,
+        "process_instance_uuid_count": 4,
+        "profile_id": "exact_binary_fraction",
+        "replay_count": 264,
+        "unique_error_map_payload_hash_count": 33
+      }
+    ],
+    "profile_summary_payload_hash": "5763fada8be2d0e49374c1a8459dffd6ce89c7052da9505e285747cf9ba4932b",
+    "replay_count": 1056
+  },
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "label": "all frozen source and protocol bindings validate",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "label": "four modes, sixteen processes, thirty-three cases, and 1056 calls complete",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "label": "all process identities are unique and post-registration",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "label": "every worker and replay payload validates",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "label": "every replay is checked against an exact rational mapping oracle",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "label": "tie stability and cross-mode agreement are retained regardless of outcome",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "label": "all protected non-tied rows and failures are retained",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "label": "classification follows the frozen decision order",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "label": "no source patch, simulation, shots, hidden selection, or route change occurs",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "label": "forbidden bug, hardware, advantage, BQP, solved-frontier, and credit claims remain false",
+      "passed": true,
+      "requirement_id": "P10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_target_id": "T-B4-002cc/T-B8-003cg/T-B10-009bu",
+  "status": "deterministic_error_map_remediation_complete",
+  "summary": {
+    "all_replay_hashes_valid": true,
+    "all_replays_within_exact_oracle": false,
+    "bqp_separation_claimed": false,
+    "candidate_selection_performed": false,
+    "case_count": 33,
+    "classification": "deterministic_external_map_remediation_supported",
+    "confirmed_qiskit_bug_claimed": false,
+    "direct_replay_count": 1056,
+    "global_acceptance": true,
+    "hardware_execution_claimed": false,
+    "margin_protected_case_count": 12,
+    "margin_protected_failure_count": 0,
+    "new_credit_delta": 0,
+    "process_count": 16,
+    "process_instance_uuid_count": 16,
+    "process_started_after_preregistration_count": 16,
+    "profile_count": 4,
+    "quantum_advantage_claimed": false,
+    "route_change_performed": false,
+    "sampling_performed": false,
+    "simulation_execution_count": 0,
+    "solved_frontier_claimed": false,
+    "source_patch_performed": false,
+    "tie_baseline_all_modes_stable": true,
+    "tie_baseline_cross_mode_agreement": true,
+    "tie_baseline_selected_vector": [
+      6,
+      5,
+      4,
+      3,
+      0,
+      1,
+      2
+    ],
+    "total_simulated_shots": 0
+  },
+  "title": "B4/B8 R160 deterministic ErrorMap remediation",
+  "upstream_target_id": "T-B4-002cb/T-B8-003cf/T-B10-009bt",
+  "version": 0
+}

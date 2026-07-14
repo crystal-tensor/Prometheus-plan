@@ -40961,6 +40961,240 @@ def audit(root: Path) -> dict:
         if "`4` / `16` / `33` / `1056`" not in report_text or "all `7! = 5040` mappings" not in report_text or "R160 does not reuse that numeric score" not in report_text or "frozen R157 input was not loaded" not in report_text:
             errors.append("R160 deterministic remediation protocol report boundary missing")
 
+    r160_result_path = results / "B4_B8_R160_deterministic_error_map_remediation_v0.json"
+    r160_result_report_path = research / "B4_B8_R160_deterministic_error_map_remediation.md"
+    r160_trace_dir = results / "B4_B8_R160_deterministic_error_map_remediation"
+    r160_adjudication_path = results / "B4_B8_R160_deterministic_error_map_remediation_adjudication_v0.json"
+    r160_adjudication_report_path = research / "B4_B8_R160_deterministic_error_map_remediation_adjudication.md"
+    r160_adjudication_tool_path = root / "tools/b4_b8_r160_deterministic_error_map_remediation_adjudication.py"
+    r160_result_status = {
+        "result_path": str(r160_result_path),
+        "report_path": str(r160_result_report_path),
+        "trace_directory": str(r160_trace_dir),
+        "adjudication_path": str(r160_adjudication_path),
+        "adjudication_report_path": str(r160_adjudication_report_path),
+        "result_exists": r160_result_path.exists(),
+        "report_exists": r160_result_report_path.exists(),
+        "trace_directory_exists": r160_trace_dir.exists(),
+        "adjudication_exists": r160_adjudication_path.exists(),
+        "adjudication_report_exists": r160_adjudication_report_path.exists(),
+        "adjudication_tool_exists": r160_adjudication_tool_path.exists(),
+    }
+    r160_raw_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r160_deterministic_error_map_remediation_v0"), "deterministic_error_map_remediation_raw_execution_classification_overruled"),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r160_deterministic_error_map_remediation_v0"), "deterministic_error_map_remediation_raw_execution_classification_overruled"),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r160_deterministic_error_map_remediation_v0"), "deterministic_error_map_remediation_raw_execution_not_bqp_claim"),
+    ]
+    expected_r160_raw_values = {
+        "executor_classification": "deterministic_external_map_remediation_supported",
+        "audited_classification": "tie_stabilized_but_non_tied_guardrail_failed",
+        "profile_count": 4,
+        "process_count": 16,
+        "case_count": 33,
+        "direct_replay_count": 1056,
+        "tie_baseline_all_modes_stable": True,
+        "tie_baseline_cross_mode_agreement": True,
+        "margin_protected_case_count": 12,
+        "margin_protected_failure_count": 0,
+        "all_replays_within_exact_oracle": False,
+        "exact_oracle_pass_count": 832,
+        "exact_oracle_failure_count": 224,
+        "exact_oracle_failure_case_count": 7,
+        "support_rule_passed": False,
+        "source_patch_performed": False,
+        "qiskit_bug_claimed": False,
+        "new_credit_delta": 0,
+        "requirements_passed": 10,
+        "requirements_failed": 0,
+    }
+    for label, row, expected_status in r160_raw_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R160 raw remediation result")
+            continue
+        for field in ["result", "markdown_report", "trace_directory", "adjudication", "adjudication_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R160 raw remediation missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r160_deterministic_error_map_remediation_v0":
+            errors.append(f"{label} R160 raw remediation status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002cc/T-B8-003cg/T-B10-009bu" or row.get("upstream_target_id") != "T-B4-002cb/T-B8-003cf/T-B10-009bt":
+            errors.append(f"{label} R160 raw remediation target chain mismatch")
+        for field, value in expected_r160_raw_values.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R160 raw remediation manifest {field} mismatch")
+    r160_adjudication_manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r160_deterministic_error_map_remediation_adjudication_v0"), "frozen_support_rule_adjudication_complete"),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r160_deterministic_error_map_remediation_adjudication_v0"), "frozen_support_rule_adjudication_complete"),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r160_deterministic_error_map_remediation_adjudication_v0"), "frozen_support_rule_adjudication_not_bqp_claim"),
+    ]
+    expected_r160_adjudication_values = {
+        "audited_classification": "tie_stabilized_but_non_tied_guardrail_failed",
+        "support_rule_passed": False,
+        "direct_replay_count": 1056,
+        "exact_oracle_pass_count": 832,
+        "exact_oracle_failure_count": 224,
+        "exact_oracle_failure_case_count": 7,
+        "margin_protected_case_count": 12,
+        "margin_protected_failure_count": 0,
+        "raw_execution_integrity_passed": True,
+        "post_execution_adjudication_preregistered": False,
+        "qiskit_bug_claimed": False,
+        "new_credit_delta": 0,
+    }
+    for label, row, expected_status in r160_adjudication_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R160 remediation adjudication")
+            continue
+        for field in ["result", "markdown_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R160 remediation adjudication missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r160_deterministic_error_map_remediation_adjudication_v0":
+            errors.append(f"{label} R160 remediation adjudication status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002cd/T-B8-003ch/T-B10-009bv" or row.get("upstream_target_id") != "T-B4-002cc/T-B8-003cg/T-B10-009bu":
+            errors.append(f"{label} R160 remediation adjudication target chain mismatch")
+        for field, value in expected_r160_adjudication_values.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R160 remediation adjudication manifest {field} mismatch")
+    r160_result_required_paths = [
+        r160_result_path,
+        r160_result_report_path,
+        r160_trace_dir / "profile_summary.json",
+        r160_trace_dir / "case_analysis.json",
+        r160_trace_dir / "verifier_transcript.json",
+        r160_adjudication_path,
+        r160_adjudication_report_path,
+        r160_adjudication_tool_path,
+    ]
+    if not all(path.exists() for path in r160_result_required_paths):
+        errors.append("R160 remediation raw result, adjudication, report, tool, or summary artifact missing")
+    else:
+        raw_result = json.loads(read(r160_result_path))
+        profile_summary = json.loads(read(r160_trace_dir / "profile_summary.json"))
+        case_analysis = json.loads(read(r160_trace_dir / "case_analysis.json"))
+        transcript = json.loads(read(r160_trace_dir / "verifier_transcript.json"))
+        adjudication = json.loads(read(r160_adjudication_path))
+
+        def r160_payload_hash(payload, key):
+            body = dict(payload)
+            payload_hash = body.pop(key, None)
+            computed = hashlib.sha256(
+                json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest()
+            return payload_hash, computed
+
+        expected_payloads = [
+            (raw_result, "payload_hash", "950c426711df1fcc9d744febadec21ad06b81e3884412c391f61d2a994f18c50", "raw result"),
+            (profile_summary, "profile_summary_payload_hash", "5763fada8be2d0e49374c1a8459dffd6ce89c7052da9505e285747cf9ba4932b", "profile summary"),
+            (case_analysis, "case_analysis_payload_hash", "1cd2c353e5545c1a2a84c8ef1ac41a2eff4783696f4ee5a372df5a8c92a9dcb7", "case analysis"),
+            (transcript, "verifier_transcript_payload_hash", "e129028d186601fa76d9f375b06b0367901532409c66d1231d4e30f4a0fca293", "transcript"),
+            (adjudication, "payload_hash", "0293a8f7165a0df5e73e072fd096ae89350f8f82339da9e1a67eb772bf3512f7", "adjudication"),
+        ]
+        for payload, key, expected_hash, label in expected_payloads:
+            payload_hash, computed = r160_payload_hash(payload, key)
+            if payload_hash != computed or payload_hash != expected_hash:
+                errors.append(f"R160 remediation {label} payload mismatch")
+        raw_summary = raw_result.get("summary", {})
+        r160_result_status.update({
+            "status": raw_result.get("status"),
+            "executor_classification": raw_summary.get("classification"),
+            "audited_classification": adjudication.get("audited_classification"),
+            "support_rule_passed": adjudication.get("support_rule_passed"),
+            "profile_count": raw_summary.get("profile_count"),
+            "process_count": raw_summary.get("process_count"),
+            "case_count": raw_summary.get("case_count"),
+            "direct_replay_count": raw_summary.get("direct_replay_count"),
+            "exact_oracle_pass_count": adjudication.get("exact_oracle_pass_count"),
+            "exact_oracle_failure_count": adjudication.get("exact_oracle_failure_count"),
+            "exact_oracle_failure_case_count": adjudication.get("exact_oracle_failure_case_count"),
+            "margin_protected_case_count": raw_summary.get("margin_protected_case_count"),
+            "margin_protected_failure_count": raw_summary.get("margin_protected_failure_count"),
+            "raw_execution_integrity_passed": adjudication.get("raw_execution_integrity_passed"),
+            "requirements_passed": raw_result.get("requirements_passed"),
+            "requirements_failed": raw_result.get("requirements_failed"),
+        })
+        if raw_result.get("status") != "deterministic_error_map_remediation_complete" or raw_result.get("method") != "b4_b8_r160_deterministic_error_map_remediation_v0":
+            errors.append("R160 remediation raw result status or method mismatch")
+        if raw_result.get("source_target_id") != "T-B4-002cc/T-B8-003cg/T-B10-009bu" or raw_result.get("upstream_target_id") != "T-B4-002cb/T-B8-003cf/T-B10-009bt":
+            errors.append("R160 remediation raw result target chain mismatch")
+        if raw_result.get("preregistration") != {"commit": "8179b066729c0148144f34dad029e250277d06a3", "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/182", "created_at": "2026-07-14T08:12:51Z"}:
+            errors.append("R160 remediation public preregistration binding mismatch")
+        expected_raw_summary = {
+            "classification": "deterministic_external_map_remediation_supported",
+            "profile_count": 4,
+            "process_count": 16,
+            "process_instance_uuid_count": 16,
+            "process_started_after_preregistration_count": 16,
+            "case_count": 33,
+            "direct_replay_count": 1056,
+            "tie_baseline_all_modes_stable": True,
+            "tie_baseline_cross_mode_agreement": True,
+            "tie_baseline_selected_vector": [6, 5, 4, 3, 0, 1, 2],
+            "margin_protected_case_count": 12,
+            "margin_protected_failure_count": 0,
+            "all_replays_within_exact_oracle": False,
+            "all_replay_hashes_valid": True,
+            "source_patch_performed": False,
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "new_credit_delta": 0,
+        }
+        for field, value in expected_raw_summary.items():
+            if raw_summary.get(field) != value:
+                errors.append(f"R160 remediation raw summary {field} mismatch")
+        if raw_result.get("requirements_passed") != 10 or raw_result.get("requirements_failed") != 0 or len(raw_result.get("acceptance_conditions", [])) != 10:
+            errors.append("R160 remediation raw execution integrity conditions mismatch")
+        if profile_summary.get("profile_count") != 4 or profile_summary.get("process_count") != 16 or profile_summary.get("replay_count") != 1056 or any(row.get("all_replays_within_oracle") is not False for row in profile_summary.get("profile_rows", [])):
+            errors.append("R160 remediation profile result mismatch")
+        if case_analysis.get("classification") != "deterministic_external_map_remediation_supported" or case_analysis.get("margin_protected_case_count") != 12 or case_analysis.get("margin_protected_failure_count") != 0:
+            errors.append("R160 remediation raw case analysis mismatch")
+        process_artifacts = raw_result.get("artifacts", {}).get("process_artifacts", [])
+        replay_count = 0
+        oracle_failure_count = 0
+        oracle_failure_cases = set()
+        worker_uuids = set()
+        if len(process_artifacts) != 16:
+            errors.append("R160 remediation process artifact count mismatch")
+        for artifact in process_artifacts:
+            path = root / artifact.get("path", "")
+            if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != artifact.get("sha256"):
+                errors.append(f"R160 remediation worker file mismatch: {artifact.get('path')}")
+                continue
+            worker = json.loads(read(path))
+            worker_hash, worker_computed = r160_payload_hash(worker, "manifest_payload_hash")
+            if worker_hash != worker_computed or worker_hash != artifact.get("manifest_payload_hash"):
+                errors.append(f"R160 remediation worker payload mismatch: {artifact.get('path')}")
+            worker_uuids.add(worker.get("process_instance_uuid"))
+            for replay in worker.get("replay_rows", []):
+                replay_count += 1
+                replay_hash, replay_computed = r160_payload_hash(replay, "replay_payload_hash")
+                if replay_hash != replay_computed:
+                    errors.append(f"R160 remediation replay payload mismatch: {artifact.get('path')}")
+                    break
+                if replay.get("within_exact_oracle_minimizers") is False:
+                    oracle_failure_count += 1
+                    oracle_failure_cases.add(replay.get("case_id"))
+        if replay_count != 1056 or len(worker_uuids) != 16 or oracle_failure_count != 224 or len(oracle_failure_cases) != 7:
+            errors.append("R160 remediation retained replay or exact-oracle failure count mismatch")
+        if transcript.get("result_payload_hash") != raw_result.get("payload_hash") or transcript.get("process_artifact_count") != 16 or transcript.get("direct_replay_count") != 1056 or transcript.get("global_acceptance") is not True:
+            errors.append("R160 remediation transcript binding mismatch")
+        if adjudication.get("status") != "frozen_support_rule_adjudication_complete" or adjudication.get("audited_classification") != "tie_stabilized_but_non_tied_guardrail_failed" or adjudication.get("support_rule_passed") is not False:
+            errors.append("R160 remediation adjudication status or verdict mismatch")
+        if adjudication.get("executor_classification_overruled") is not True or adjudication.get("exact_oracle_pass_count") != 832 or adjudication.get("exact_oracle_failure_count") != 224 or adjudication.get("exact_oracle_failure_case_count") != 7:
+            errors.append("R160 remediation adjudication count or override mismatch")
+        if [row.get("passed") for row in adjudication.get("frozen_support_conditions", [])] != [True, True, True, False, True]:
+            errors.append("R160 remediation frozen support condition mismatch")
+        if adjudication.get("post_execution_adjudication_preregistered") is not False or adjudication.get("raw_execution_integrity_passed") is not True:
+            errors.append("R160 remediation adjudication disclosure mismatch")
+        for binding_id, binding in adjudication.get("source_bindings", {}).items():
+            path = root / binding.get("path", "")
+            if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                errors.append(f"R160 remediation adjudication source binding mismatch: {binding_id}")
+        raw_report_text = read(r160_result_report_path)
+        adjudication_report_text = read(r160_adjudication_report_path)
+        if "**Adjudication:**" not in raw_report_text or "`224/1056`" not in raw_report_text or "tie_stabilized_but_non_tied_guardrail_failed" not in raw_report_text:
+            errors.append("R160 remediation raw report override warning missing")
+        if "`1056` / `832` / `224`" not in adjudication_report_text or "| `S4` | `False`" not in adjudication_report_text or "seven 1-8 ULP near-tie cases" not in adjudication_report_text or "not separately preregistered" not in adjudication_report_text:
+            errors.append("R160 remediation adjudication report boundary missing")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -41447,6 +41681,7 @@ def audit(root: Path) -> dict:
             "r159_error_map_accumulation_trace": r159_status,
             "r159_error_map_accumulation_trace_result": r159_result_status,
             "r160_deterministic_error_map_remediation": r160_status,
+            "r160_deterministic_error_map_remediation_result": r160_result_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -42946,6 +43181,8 @@ def audit(root: Path) -> dict:
             "b4_b8_r159_error_map_accumulation_trace": str(r159_result_report_path),
             "b4_b8_r160_deterministic_error_map_remediation_protocol": str(r160_report_path),
             "b4_b8_r160_deterministic_error_map_remediation_contract": str(r160_contract_path),
+            "b4_b8_r160_deterministic_error_map_remediation": str(r160_result_report_path),
+            "b4_b8_r160_deterministic_error_map_remediation_adjudication": str(r160_adjudication_report_path),
             "qiskit_2_4_1_r159_instrumented_build_manifest": str(r159_build_manifest_path),
             "qiskit_2_4_1_r159_error_map_trace_patch": str(r159_patch_path),
             "qiskit_2_4_1_vf2_source_manifest": str(r158_source_manifest_path),
@@ -45343,6 +45580,17 @@ def markdown_report(report: dict) -> str:
             f"- Execution started: {report['b8']['r160_deterministic_error_map_remediation'].get('execution_started')}",
             f"- Requirements passed/failed: {report['b8']['r160_deterministic_error_map_remediation'].get('requirements_passed')} / {report['b8']['r160_deterministic_error_map_remediation'].get('requirements_failed')}",
             f"- Protocol/contract/report/executor/generator exists: {report['b8']['r160_deterministic_error_map_remediation'].get('protocol_exists')} / {report['b8']['r160_deterministic_error_map_remediation'].get('contract_exists')} / {report['b8']['r160_deterministic_error_map_remediation'].get('report_exists')} / {report['b8']['r160_deterministic_error_map_remediation'].get('executor_exists')} / {report['b8']['r160_deterministic_error_map_remediation'].get('protocol_generator_exists')}",
+            "",
+            "### R160 Deterministic ErrorMap Remediation Adjudication",
+            "",
+            f"- Raw status / executor classification: {report['b8']['r160_deterministic_error_map_remediation_result'].get('status')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('executor_classification')}",
+            f"- Audited classification / support rule passed: {report['b8']['r160_deterministic_error_map_remediation_result'].get('audited_classification')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('support_rule_passed')}",
+            f"- Profiles / processes / cases / direct calls: {report['b8']['r160_deterministic_error_map_remediation_result'].get('profile_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('process_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('case_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('direct_replay_count')}",
+            f"- Exact-oracle pass / fail / failure cases: {report['b8']['r160_deterministic_error_map_remediation_result'].get('exact_oracle_pass_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('exact_oracle_failure_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('exact_oracle_failure_case_count')}",
+            f"- Margin-protected cases / failures: {report['b8']['r160_deterministic_error_map_remediation_result'].get('margin_protected_case_count')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('margin_protected_failure_count')}",
+            f"- Raw execution integrity passed: {report['b8']['r160_deterministic_error_map_remediation_result'].get('raw_execution_integrity_passed')}",
+            f"- Requirements passed/failed: {report['b8']['r160_deterministic_error_map_remediation_result'].get('requirements_passed')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('requirements_failed')}",
+            f"- Result/report/trace/adjudication/report/tool exists: {report['b8']['r160_deterministic_error_map_remediation_result'].get('result_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('report_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('trace_directory_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_report_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_tool_exists')}",
             "",
             f"- Status: {report['b8']['output_invariant_verifier'].get('status')}",
             f"- Model status: {report['b8']['output_invariant_verifier'].get('model_status')}",

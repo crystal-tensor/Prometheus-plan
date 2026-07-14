@@ -1,0 +1,5875 @@
+{
+  "case_analysis_payload_hash": "1cd2c353e5545c1a2a84c8ef1ac41a2eff4783696f4ee5a372df5a8c92a9dcb7",
+  "case_count": 33,
+  "case_rows": [
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "tie_baseline",
+      "case_payload_hash": "5a1ce801a4e429007f4f98f2e336dbf326d5cdee50f178acdd9530b605fa2f21",
+      "cross_mode_output_agreement": true,
+      "key": null,
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 0.0018527902845866186,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866247,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400441/1152921504606846976",
+            "second_distinct_score_fraction": "407589083108054001/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 2,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ],
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 0.0018527902845866186,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800903/2305843009213693952",
+            "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": null,
+      "shared_unique_oracle": false,
+      "ulp_shift": 0
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_m512ulp",
+      "case_payload_hash": "f8feced5b45a84a753ef0b152d7beea7f020cf6fe30cd2f89a846d1eab990600",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 8.881784197001252e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "201658419791398905/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791399929/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_m064ulp",
+      "case_payload_hash": "657eff2637ef1029368ab95a0a7ea4f35ce85a40f695eaabaadfaa78a92e54d0",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 1.1102230246251565e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "201658419791400249/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400377/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_0_1_m008ulp",
+      "case_payload_hash": "e0dfc122d3e811e0394412e12f30dcd607af436cc6ce7772970768ae7a497986",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.3877787807814457e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "201658419791400417/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400433/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_0_1_m001ulp",
+      "case_payload_hash": "689ad92c9a3539f9e9107892e88963a95a5aae0743747bf42d10a6ad3fe88f23",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.734723475976807e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700219/576460752303423488",
+            "second_distinct_score_fraction": "25207302473925055/144115188075855872"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_p001ulp",
+      "case_payload_hash": "bcef198ca7f8c2a0a5683e5fd2171c63f2e5a1176acee6a07e15d97717af124b",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.734723475976807e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700221/576460752303423488",
+            "second_distinct_score_fraction": "50414604947850111/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_p008ulp",
+      "case_payload_hash": "564078289b82bc72c0d661e9c60d2719d27ac6a12a72f104f7e8b50f7bdd36be",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.3877787807814457e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400449/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400465/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_p064ulp",
+      "case_payload_hash": "4667e2f1e7e98bb17de49f1cac0cb54f72ba0c7a4341a97b51ec93d877586b69",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 1.1102230246251565e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "201658419791400505/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400633/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_0_1_p512ulp",
+      "case_payload_hash": "85109d605c9d723f6af49056ca14f08631c80474020eecdc46662afa1aea2322",
+      "cross_mode_output_agreement": true,
+      "key": [
+        0,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 8.881784197001252e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "201658419791400953/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791401977/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_m512ulp",
+      "case_payload_hash": "8b9c934ca7cd653be5a0d7b96458b8efa566e30655d7e096b0d88e1973540ef9",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 8.881784197001252e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "201658419791398905/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791399929/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.17491079747026284,
+            "minimum_score_fraction": "403316839582797831/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582799879/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_m064ulp",
+      "case_payload_hash": "26c2a888f541e99cc87a0c5a75261134b16a19451e7c9126e6a06b6963c45798",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 1.1102230246251565e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "201658419791400249/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400377/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.174910797470264,
+            "minimum_score_fraction": "403316839582800519/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800775/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_m008ulp",
+      "case_payload_hash": "cd949152df461e3fa928c21a5c430db01d4821502f16f1003eb9b280e44c75ab",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.3877787807814457e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "201658419791400417/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400433/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "403316839582800855/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800887/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_m001ulp",
+      "case_payload_hash": "b1704e582b4bf54955d4cf908e21ca9ae1a58e1ae0667e58a20e1ff21fcd9d54",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.734723475976807e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700219/576460752303423488",
+            "second_distinct_score_fraction": "25207302473925055/144115188075855872"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800897/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800901/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_1_0_p001ulp",
+      "case_payload_hash": "bce1ab99d31578ca061f5b976b2e23cf2eb63fae9b6a31579a5792fd89d30c01",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.734723475976807e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700221/576460752303423488",
+            "second_distinct_score_fraction": "50414604947850111/288230376151711744"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.734723475976807e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800905/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800909/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_1_0_p008ulp",
+      "case_payload_hash": "664d15590422b81f858c62ac3d0930899eb3b1f25c12cbd644f9e4f802138e43",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 1.3877787807814457e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400449/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400465/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.3877787807814457e-17,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800919/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800951/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_p064ulp",
+      "case_payload_hash": "f641917d98015be1912378406948396c2899a2281207ff509a65101811b3375d",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 1.1102230246251565e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "201658419791400505/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400633/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 1.1102230246251565e-16,
+            "minimum_score_float": 0.17491079747026422,
+            "minimum_score_fraction": "403316839582801031/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801287/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_0_p512ulp",
+      "case_payload_hash": "66eb36da7eecc0e61ff275ebf088fb3b8010751fa2b5dac512f122d289849959",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        0
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 8.881784197001252e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "201658419791400953/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791401977/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.881784197001252e-16,
+            "minimum_score_float": 0.1749107974702646,
+            "minimum_score_fraction": "403316839582801927/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582803975/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_m512ulp",
+      "case_payload_hash": "b08280fc7c9e6d6dbbd0d304637a80c1fff1dd80dbc4e2fb1c065693ab0baf3d",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 4.440892098500626e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "201658419791399673/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400185/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_m064ulp",
+      "case_payload_hash": "b261d4501b9a7f36e71c8d7483699eac0d71ce9efbb70efb0c3a3880647c99e6",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 5.551115123125783e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "201658419791400345/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400409/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_m008ulp",
+      "case_payload_hash": "8fdefe708d02cb22c3bd7a910cb1398317485b81d5d7b0a05867427efa911331",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 6.938893903907228e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "201658419791400429/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400437/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_1_2_m001ulp",
+      "case_payload_hash": "df8cb3bb822ea179fb8db9cbe75d83c76e31b6312ef3f8e7c5c2890086447ccb",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 8.673617379884035e-19,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800881/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_p001ulp",
+      "case_payload_hash": "36e1292cbbe82cb0314e344c5bb61c400bfedb9f5f948d031305799f0c37130c",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 8.673617379884035e-19,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800883/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800885/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_p008ulp",
+      "case_payload_hash": "2c2cbf43bd8543507f206b8df6e94f59e271cbf7fa87fe8e90c87f7a3025d813",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 6.938893903907228e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400445/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_p064ulp",
+      "case_payload_hash": "84599edeec3639be0c78fd667ec9b8b25ce658cafdbfd79894101af64641bfe5",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 5.551115123125783e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "201658419791400473/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400537/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_1_2_p512ulp",
+      "case_payload_hash": "806e16c7e846921cc4bd6d5bca1782f3efc1d12f31fd1e9256a2c4c4f233c819",
+      "cross_mode_output_agreement": true,
+      "key": [
+        1,
+        2
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 4.440892098500626e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "201658419791400697/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791401209/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_m512ulp",
+      "case_payload_hash": "c6af6b1e81579ce85adebf7d73152ddd50bee3a8adbc57a53b586345dbb72532",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 4.440892098500626e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "201658419791399673/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400185/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702635,
+            "minimum_score_fraction": "403316839582799367/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800391/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -512
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_m064ulp",
+      "case_payload_hash": "93614aa4ea098dad5ce433c4734c3d707613142f1eaddd87b2b81caf4b967fc6",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 5.551115123125783e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "201658419791400345/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400409/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.17491079747026408,
+            "minimum_score_fraction": "403316839582800711/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800839/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_m008ulp",
+      "case_payload_hash": "53d784389fb572e5eefeaf2b17dbe7b24f467e802e8b22ec1b69813bac97a10a",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 6.938893903907228e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026414,
+            "minimum_score_fraction": "201658419791400429/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400437/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800895/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_m001ulp",
+      "case_payload_hash": "d88ea1daadfe6d90edcd42bb5e4d5489840d5a94ea991f6bf9103d9bfd798d61",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 8.673617379884035e-19,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800879/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800881/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                0,
+                1,
+                2
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "100829209895700225/576460752303423488",
+            "second_distinct_score_fraction": "201658419791400451/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": -1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_2_1_p001ulp",
+      "case_payload_hash": "de7227dbc1895c9e68b11f3c5d2ace89d631c37cd24470ebe1392a9b3ba313ad",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 8.673617379884035e-19,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800883/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800885/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 8.673617379884035e-19,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "50414604947850113/288230376151711744",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 1
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": false,
+      "case_id": "edge_2_1_p008ulp",
+      "case_payload_hash": "ee2b2564ee193ee905e2b09d99781d6e6fabfd94d5cd23206a57f91ae582b770",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 6.938893903907228e-18,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": false,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "201658419791400445/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400453/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": false,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 6.938893903907228e-18,
+            "minimum_score_float": 0.17491079747026417,
+            "minimum_score_fraction": "403316839582800911/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582800927/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 8
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_p064ulp",
+      "case_payload_hash": "a29094c1131a0251e4a8497e1b8b3bfe4e7fde1d9e5868471d41c14394e1062a",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": false,
+      "minimum_cross_mode_gap": 5.551115123125783e-17,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "201658419791400473/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791400537/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 5.551115123125783e-17,
+            "minimum_score_float": 0.1749107974702642,
+            "minimum_score_fraction": "403316839582800967/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582801095/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": false,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 64
+    },
+    {
+      "all_modes_stable": true,
+      "all_replays_within_oracle": true,
+      "case_id": "edge_2_1_p512ulp",
+      "case_payload_hash": "2159fc4d3a012fff00a2da26c25362b5b8e1112916316d87eb1ddbbc9172ab99",
+      "cross_mode_output_agreement": true,
+      "key": [
+        2,
+        1
+      ],
+      "margin_protected": true,
+      "minimum_cross_mode_gap": 4.440892098500626e-16,
+      "mode_rows": [
+        {
+          "all_replays_within_oracle": true,
+          "mode": "ascending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "201658419791400697/1152921504606846976",
+            "second_distinct_score_fraction": "201658419791401209/1152921504606846976"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "descending_f64",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "math_fsum",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        },
+        {
+          "all_replays_within_oracle": true,
+          "mode": "exact_binary_fraction",
+          "oracle": {
+            "feasible_mapping_count": 8,
+            "minimizer_count": 1,
+            "minimizer_vectors": [
+              [
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+              ]
+            ],
+            "minimum_gap_float": 4.440892098500626e-16,
+            "minimum_score_float": 0.1749107974702644,
+            "minimum_score_fraction": "403316839582801415/2305843009213693952",
+            "second_distinct_score_fraction": "403316839582802439/2305843009213693952"
+          },
+          "selected_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "stable": true,
+          "worker_oracle_hash_count": 1
+        }
+      ],
+      "protected_oracle_selected": true,
+      "shared_oracle_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "shared_unique_oracle": true,
+      "ulp_shift": 512
+    }
+  ],
+  "classification": "deterministic_external_map_remediation_supported",
+  "confirmed_qiskit_bug_claimed": false,
+  "margin_protected_case_count": 12,
+  "margin_protected_failure_count": 0,
+  "source_patch_performed": false,
+  "tie_baseline": {
+    "all_modes_stable": true,
+    "all_replays_within_oracle": true,
+    "case_id": "tie_baseline",
+    "case_payload_hash": "5a1ce801a4e429007f4f98f2e336dbf326d5cdee50f178acdd9530b605fa2f21",
+    "cross_mode_output_agreement": true,
+    "key": null,
+    "margin_protected": false,
+    "minimum_cross_mode_gap": 0.0018527902845866186,
+    "mode_rows": [
+      {
+        "all_replays_within_oracle": true,
+        "mode": "ascending_f64",
+        "oracle": {
+          "feasible_mapping_count": 8,
+          "minimizer_count": 2,
+          "minimizer_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ],
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "minimum_gap_float": 0.0018527902845866247,
+          "minimum_score_float": 0.17491079747026417,
+          "minimum_score_fraction": "201658419791400441/1152921504606846976",
+          "second_distinct_score_fraction": "407589083108054001/2305843009213693952"
+        },
+        "selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "stable": true,
+        "worker_oracle_hash_count": 1
+      },
+      {
+        "all_replays_within_oracle": true,
+        "mode": "descending_f64",
+        "oracle": {
+          "feasible_mapping_count": 8,
+          "minimizer_count": 2,
+          "minimizer_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ],
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "minimum_gap_float": 0.0018527902845866186,
+          "minimum_score_float": 0.17491079747026417,
+          "minimum_score_fraction": "403316839582800903/2305843009213693952",
+          "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+        },
+        "selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "stable": true,
+        "worker_oracle_hash_count": 1
+      },
+      {
+        "all_replays_within_oracle": true,
+        "mode": "math_fsum",
+        "oracle": {
+          "feasible_mapping_count": 8,
+          "minimizer_count": 2,
+          "minimizer_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ],
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "minimum_gap_float": 0.0018527902845866186,
+          "minimum_score_float": 0.17491079747026417,
+          "minimum_score_fraction": "403316839582800903/2305843009213693952",
+          "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+        },
+        "selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "stable": true,
+        "worker_oracle_hash_count": 1
+      },
+      {
+        "all_replays_within_oracle": true,
+        "mode": "exact_binary_fraction",
+        "oracle": {
+          "feasible_mapping_count": 8,
+          "minimizer_count": 2,
+          "minimizer_vectors": [
+            [
+              6,
+              5,
+              4,
+              3,
+              0,
+              1,
+              2
+            ],
+            [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          "minimum_gap_float": 0.0018527902845866186,
+          "minimum_score_float": 0.17491079747026417,
+          "minimum_score_fraction": "403316839582800903/2305843009213693952",
+          "second_distinct_score_fraction": "50948635388506751/288230376151711744"
+        },
+        "selected_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            0,
+            1,
+            2
+          ]
+        ],
+        "stable": true,
+        "worker_oracle_hash_count": 1
+      }
+    ],
+    "protected_oracle_selected": false,
+    "shared_oracle_vector": null,
+    "shared_unique_oracle": false,
+    "ulp_shift": 0
+  }
+}

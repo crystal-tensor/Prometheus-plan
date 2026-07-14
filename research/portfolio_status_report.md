@@ -2374,6 +2374,17 @@ Overall audit: PASS
 - Requirements passed/failed: 10 / 0
 - Protocol/contract/report/executor/generator exists: True / True / True / True / True
 
+### R160 Deterministic ErrorMap Remediation Adjudication
+
+- Raw status / executor classification: deterministic_error_map_remediation_complete / deterministic_external_map_remediation_supported
+- Audited classification / support rule passed: tie_stabilized_but_non_tied_guardrail_failed / False
+- Profiles / processes / cases / direct calls: 4 / 16 / 33 / 1056
+- Exact-oracle pass / fail / failure cases: 832 / 224 / 7
+- Margin-protected cases / failures: 12 / 0
+- Raw execution integrity passed: True
+- Requirements passed/failed: 10 / 0
+- Result/report/trace/adjudication/report/tool exists: True / True / True / True / True / True
+
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification
 - Tasks: 3
