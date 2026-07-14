@@ -2984,6 +2984,16 @@ establish a production mapping change, alternate search path, confirmed bug,
 hardware relevance, quantum advantage, BQP separation, solved B4/B8/B10, or
 new credit. Requirements pass `10/10`.
 
+`T-B4-002ck` / `T-B8-003co` / `T-B10-009ca-r167` preregisters the next
+candidate-level test on a new input. R167 uses a hash-bound six-active-qubit
+path-with-chord OpenQASM 3 interaction graph rather than the R157 input, with
+three operation-order profiles and `192` fixed calls. It retains complete VF2
+candidates and replays the same four arithmetic policies, while leaving the
+candidate count, source-return matches, and policy-change counts open until
+execution. The protocol explicitly disallows cross-input generality, alternate
+search-path, production-mapping, bug, hardware, advantage, BQP, solved-frontier,
+and credit claims.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific
