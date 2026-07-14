@@ -2894,6 +2894,19 @@ integrity remains valid, but complete remediation is rejected. No source patch,
 confirmed Qiskit bug, cross-platform theorem, hardware, route-advantage,
 quantum-advantage, BQP, solved-frontier, or new-credit claim is made.
 
+`T-B4-002ce` / `T-B8-003ci` / `T-B10-009bw` then executes R161 as a
+source-faithful score audit over the immutable R160 workers. It applies the
+same `neg_log_fidelity` transform used by the Qiskit VF2 source, scores all
+`5,040` enumerated mappings with an exact rational shadow oracle, and rebuilds
+the source-order binary64 fold. The transformed exact oracle still rejects the
+same `224/1,056` rows, but every one of those rows is a minimum under the
+reconstructed binary64 path. A further `32` rows on `edge_1_2_m008ulp` sit one
+`2.7755575615628914e-17` score unit above that reconstruction. The resulting
+classification is `source_f64_consistent_but_exact_rational_gap_remains`:
+this is a numerical diagnostic boundary, not a compiler-bug claim or a fix.
+Requirements pass `10/10`; no source patch, hardware, quantum advantage, BQP,
+solved-frontier, or new-credit claim is made.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

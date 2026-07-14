@@ -2529,6 +2529,33 @@ current_results:
     new_credit_delta: 0
     result: ../results/B4_B8_R160_deterministic_error_map_remediation_adjudication_v0.json
     markdown_report: ../research/B4_B8_R160_deterministic_error_map_remediation_adjudication.md
+  b10_t2_b4_b8_r161_source_faithful_score_audit_v0:
+    status: source_f64_consistent_but_exact_rational_gap_remains
+    method: b4_b8_r161_source_faithful_score_audit_v0
+    source_target_id: T-B4-002ce/T-B8-003ci/T-B10-009bw
+    upstream_target_id: T-B4-002cd/T-B8-003ch/T-B10-009bv
+    profile_count: 4
+    process_count: 16
+    case_count: 33
+    replay_count: 1056
+    mapping_count_per_row: 5040
+    r160_exact_failure_count: 224
+    source_exact_failure_count: 224
+    r160_failures_source_f64_minimum_count: 224
+    source_f64_nonminimum_count: 32
+    source_transform: neg_log_fidelity
+    source_patch_performed: false
+    qiskit_bug_claimed: false
+    b10_t2_credit_allowed: false
+    bqp_separation_claimed: false
+    quantum_advantage_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R161_source_faithful_score_audit_v0.json
+    markdown_report: ../research/B4_B8_R161_source_faithful_score_audit.md
+    protocol: ../results/B4_B8_R161_source_faithful_score_audit_protocol_v0.json
+    contract: B4_B8_R161_source_faithful_score_audit_contract_v0.json
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

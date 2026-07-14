@@ -1,6 +1,6 @@
 # Portfolio Status Report
 
-Last updated: 2026-06-17
+Last updated: 2026-07-14
 
 Overall audit: PASS
 
@@ -2384,6 +2384,16 @@ Overall audit: PASS
 - Raw execution integrity passed: True
 - Requirements passed/failed: 10 / 0
 - Result/report/trace/adjudication/report/tool exists: True / True / True / True / True / True
+
+### R161 Source-Faithful VF2 Score Audit
+
+- Status / classification: source_faithful_score_audit_complete / source_f64_consistent_but_exact_rational_gap_remains
+- Profiles / processes / cases / replays: 4 / 16 / 33 / 1056
+- R160 exact failures / source-faithful exact failures: 224 / 224
+- R160 failures that remain source-f64 minima: 224 / 224
+- Source-f64 nonminimum rows: 32
+- Requirements passed/failed: 10 / 0
+- Protocol/contract/executor/result/report exists: True / True / True / True / True
 
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification

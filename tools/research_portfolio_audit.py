@@ -106,6 +106,142 @@ def path_exists_from(base: Path, maybe_relative: str) -> bool:
     return (base / maybe_relative).resolve().exists()
 
 
+def audit_r161(
+    root: Path,
+    b4_manifest: dict,
+    b8_manifest: dict,
+    b10_manifest: dict,
+    errors: list[str],
+) -> dict:
+    """Validate the source-faithful R161 diagnostic and its B-track bindings."""
+    research = root / "research"
+    benchmarks = root / "benchmarks"
+    results = root / "results"
+    protocol_path = results / "B4_B8_R161_source_faithful_score_audit_protocol_v0.json"
+    contract_path = benchmarks / "B4_B8_R161_source_faithful_score_audit_contract_v0.json"
+    executor_path = root / "tools/b4_b8_r161_source_faithful_score_audit.py"
+    result_path = results / "B4_B8_R161_source_faithful_score_audit_v0.json"
+    report_path = research / "B4_B8_R161_source_faithful_score_audit.md"
+    status = {
+        "protocol_path": str(protocol_path),
+        "contract_path": str(contract_path),
+        "executor_path": str(executor_path),
+        "result_path": str(result_path),
+        "report_path": str(report_path),
+        "protocol_exists": protocol_path.exists(),
+        "contract_exists": contract_path.exists(),
+        "executor_exists": executor_path.exists(),
+        "result_exists": result_path.exists(),
+        "report_exists": report_path.exists(),
+    }
+    required = [protocol_path, contract_path, executor_path, result_path, report_path]
+    if not all(path.exists() for path in required):
+        errors.append("R161 source-faithful score audit artifact missing")
+        return status
+
+    def payload_ok(payload: dict, key: str) -> bool:
+        body = dict(payload)
+        observed = body.pop(key, None)
+        expected = hashlib.sha256(
+            json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        return observed == expected
+
+    protocol = json.loads(read(protocol_path))
+    contract = json.loads(read(contract_path))
+    result = json.loads(read(result_path))
+    if not payload_ok(protocol, "payload_hash"):
+        errors.append("R161 protocol payload mismatch")
+    if not payload_ok(contract, "payload_hash"):
+        errors.append("R161 contract payload mismatch")
+    if not payload_ok(result, "payload_hash"):
+        errors.append("R161 result payload mismatch")
+    if protocol.get("status") != "source_faithful_score_audit_protocol_frozen_before_execution":
+        errors.append("R161 protocol status mismatch")
+    if contract.get("contract_id") != "B4-B8-R161-source-faithful-score-audit-contract-v0":
+        errors.append("R161 contract identity mismatch")
+    if result.get("method") != "b4_b8_r161_source_faithful_score_audit_v0" or result.get("status") != "source_faithful_score_audit_complete":
+        errors.append("R161 result method or status mismatch")
+    summary = result.get("summary", {})
+    expected_summary = {
+        "profile_count": 4,
+        "process_count": 16,
+        "case_count": 33,
+        "replay_count": 1056,
+        "mapping_count_per_row": 5040,
+        "r160_exact_failure_count": 224,
+        "source_exact_failure_count": 224,
+        "r160_failures_source_f64_minimum_count": 224,
+        "source_f64_nonminimum_count": 32,
+        "new_credit_delta": 0,
+    }
+    for field, value in expected_summary.items():
+        if summary.get(field) != value:
+            errors.append(f"R161 summary {field} mismatch")
+    if result.get("classification") != "source_f64_consistent_but_exact_rational_gap_remains":
+        errors.append("R161 classification mismatch")
+    if result.get("requirements_passed") != 10 or result.get("requirements_failed") != 0 or len(result.get("requirements", [])) != 10:
+        errors.append("R161 requirement ledger mismatch")
+    rows = result.get("profile_case_rows", [])
+    if len(rows) != 132:
+        errors.append("R161 profile-case row count mismatch")
+    for row in rows:
+        body = dict(row)
+        observed = body.pop("row_payload_hash", None)
+        expected = hashlib.sha256(
+            json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if observed != expected:
+            errors.append(f"R161 profile-case payload mismatch: {row.get('profile_id')}/{row.get('case_id')}")
+            break
+        if row.get("source_exact_oracle", {}).get("enumerated_mapping_count") != 5040 or row.get("source_f64_oracle", {}).get("enumerated_mapping_count") != 5040:
+            errors.append(f"R161 mapping enumeration mismatch: {row.get('profile_id')}/{row.get('case_id')}")
+            break
+    manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r161_source_faithful_score_audit_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r161_source_faithful_score_audit_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r161_source_faithful_score_audit_v0")),
+    ]
+    for label, row in manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R161 source-faithful audit")
+            continue
+        for field in ["result", "markdown_report", "protocol", "contract"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R161 manifest missing {field}")
+        if row.get("method") != "b4_b8_r161_source_faithful_score_audit_v0" or row.get("status") != "source_f64_consistent_but_exact_rational_gap_remains":
+            errors.append(f"{label} R161 manifest status or method mismatch")
+        for field, value in expected_summary.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R161 manifest {field} mismatch")
+    report_text = read(report_path)
+    for marker in [
+        "source_f64_consistent_but_exact_rational_gap_remains",
+        "`224`",
+        "`1024` / `32`",
+        "neg_log_fidelity",
+        "does not prove that the implementation is wrong",
+    ]:
+        if marker not in report_text:
+            errors.append(f"R161 report boundary missing: {marker}")
+    status.update(
+        {
+            "status": result.get("status"),
+            "classification": result.get("classification"),
+            "profile_count": summary.get("profile_count"),
+            "process_count": summary.get("process_count"),
+            "case_count": summary.get("case_count"),
+            "replay_count": summary.get("replay_count"),
+            "r160_exact_failure_count": summary.get("r160_exact_failure_count"),
+            "source_exact_failure_count": summary.get("source_exact_failure_count"),
+            "source_f64_nonminimum_count": summary.get("source_f64_nonminimum_count"),
+            "requirements_passed": result.get("requirements_passed"),
+            "requirements_failed": result.get("requirements_failed"),
+        }
+    )
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -41195,6 +41331,8 @@ def audit(root: Path) -> dict:
         if "`1056` / `832` / `224`" not in adjudication_report_text or "| `S4` | `False`" not in adjudication_report_text or "seven 1-8 ULP near-tie cases" not in adjudication_report_text or "not separately preregistered" not in adjudication_report_text:
             errors.append("R160 remediation adjudication report boundary missing")
 
+    r161_status = audit_r161(root, b4_manifest, b8_manifest, b10_manifest, errors)
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -41545,6 +41683,7 @@ def audit(root: Path) -> dict:
             "real_backend_transcript_readiness_gate": b4_real_backend_transcript_readiness_status,
             "real_backend_transcript_contract_gate": b4_real_backend_transcript_contract_status,
             "real_backend_packet_scout": b4_real_backend_packet_scout_status,
+            "r161_source_faithful_score_audit": r161_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -41682,6 +41821,7 @@ def audit(root: Path) -> dict:
             "r159_error_map_accumulation_trace_result": r159_result_status,
             "r160_deterministic_error_map_remediation": r160_status,
             "r160_deterministic_error_map_remediation_result": r160_result_status,
+            "r161_source_faithful_score_audit": r161_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -41710,6 +41850,7 @@ def audit(root: Path) -> dict:
             "t1_negative_boundary_proof": b10_t1_proof_status,
             "t1_source_backed_boundaries": b10_t1_source_backed_status,
             "t1_numerical_denominator_table": b10_t1_numerical_table_status,
+            "r161_source_faithful_score_audit": r161_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -43198,7 +43339,7 @@ def markdown_report(report: dict) -> str:
     lines = [
         "# Portfolio Status Report",
         "",
-        "Last updated: 2026-06-17",
+        "Last updated: 2026-07-14",
         "",
         f"Overall audit: {'PASS' if report['passed'] else 'FAIL'}",
         "",
@@ -45591,6 +45732,16 @@ def markdown_report(report: dict) -> str:
             f"- Raw execution integrity passed: {report['b8']['r160_deterministic_error_map_remediation_result'].get('raw_execution_integrity_passed')}",
             f"- Requirements passed/failed: {report['b8']['r160_deterministic_error_map_remediation_result'].get('requirements_passed')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('requirements_failed')}",
             f"- Result/report/trace/adjudication/report/tool exists: {report['b8']['r160_deterministic_error_map_remediation_result'].get('result_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('report_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('trace_directory_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_report_exists')} / {report['b8']['r160_deterministic_error_map_remediation_result'].get('adjudication_tool_exists')}",
+            "",
+            "### R161 Source-Faithful VF2 Score Audit",
+            "",
+            f"- Status / classification: {report['b8']['r161_source_faithful_score_audit'].get('status')} / {report['b8']['r161_source_faithful_score_audit'].get('classification')}",
+            f"- Profiles / processes / cases / replays: {report['b8']['r161_source_faithful_score_audit'].get('profile_count')} / {report['b8']['r161_source_faithful_score_audit'].get('process_count')} / {report['b8']['r161_source_faithful_score_audit'].get('case_count')} / {report['b8']['r161_source_faithful_score_audit'].get('replay_count')}",
+            f"- R160 exact failures / source-faithful exact failures: {report['b8']['r161_source_faithful_score_audit'].get('r160_exact_failure_count')} / {report['b8']['r161_source_faithful_score_audit'].get('source_exact_failure_count')}",
+            f"- R160 failures that remain source-f64 minima: {report['b8']['r161_source_faithful_score_audit'].get('r160_exact_failure_count')} / {report['b8']['r161_source_faithful_score_audit'].get('r160_exact_failure_count')}",
+            f"- Source-f64 nonminimum rows: {report['b8']['r161_source_faithful_score_audit'].get('source_f64_nonminimum_count')}",
+            f"- Requirements passed/failed: {report['b8']['r161_source_faithful_score_audit'].get('requirements_passed')} / {report['b8']['r161_source_faithful_score_audit'].get('requirements_failed')}",
+            f"- Protocol/contract/executor/result/report exists: {report['b8']['r161_source_faithful_score_audit'].get('protocol_exists')} / {report['b8']['r161_source_faithful_score_audit'].get('contract_exists')} / {report['b8']['r161_source_faithful_score_audit'].get('executor_exists')} / {report['b8']['r161_source_faithful_score_audit'].get('result_exists')} / {report['b8']['r161_source_faithful_score_audit'].get('report_exists')}",
             "",
             f"- Status: {report['b8']['output_invariant_verifier'].get('status')}",
             f"- Model status: {report['b8']['output_invariant_verifier'].get('model_status')}",
