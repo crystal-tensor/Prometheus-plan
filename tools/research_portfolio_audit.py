@@ -40073,6 +40073,178 @@ def audit(root: Path) -> dict:
         if "Five unretained implementation-smoke" not in report_text or "Profile collapse / variation: `0` / `5`" not in report_text or "does not prove" not in report_text:
             errors.append("R157 VF2 tie-isolation result report boundary missing")
 
+    r158_protocol_path = results / "B4_B8_R158_vf2_accelerator_boundary_protocol_v0.json"
+    r158_protocol_report_path = research / "B4_B8_R158_vf2_accelerator_boundary_protocol.md"
+    r158_contract_path = benchmarks / "B4_B8_R158_vf2_accelerator_boundary_contract_v0.json"
+    r158_source_manifest_path = research / "source_lineage/Qiskit_2_4_1_vf2_source_manifest.json"
+    r158_status = {
+        "protocol_path": str(r158_protocol_path),
+        "contract_path": str(r158_contract_path),
+        "source_manifest_path": str(r158_source_manifest_path),
+        "protocol_exists": r158_protocol_path.exists(),
+        "contract_exists": r158_contract_path.exists(),
+        "source_manifest_exists": r158_source_manifest_path.exists(),
+        "report_exists": r158_protocol_report_path.exists(),
+    }
+    r158_contract_sha256 = hashlib.sha256(r158_contract_path.read_bytes()).hexdigest() if r158_contract_path.exists() else None
+    r158_manifest_rows = [
+        (
+            "B4",
+            b4_manifest.get("current_results", {}).get("b4_b8_r158_vf2_accelerator_boundary_protocol_v0"),
+            "vf2_accelerator_boundary_protocol_frozen_before_execution",
+        ),
+        (
+            "B8",
+            b8_manifest.get("current_results", {}).get("b4_b8_r158_vf2_accelerator_boundary_protocol_v0"),
+            "vf2_accelerator_boundary_protocol_frozen_before_execution",
+        ),
+        (
+            "B10",
+            b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r158_vf2_accelerator_boundary_protocol_v0"),
+            "vf2_accelerator_boundary_protocol_not_bqp_claim",
+        ),
+    ]
+    for label, row, expected_status in r158_manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R158 accelerator-boundary preregistration")
+            continue
+        for field in ["result", "markdown_report", "contract", "source_manifest"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R158 accelerator-boundary protocol missing {field}")
+        if row.get("status") != expected_status or row.get("method") != "b4_b8_r158_vf2_accelerator_boundary_protocol_v0":
+            errors.append(f"{label} R158 accelerator-boundary status or method mismatch")
+        if row.get("source_target_id") != "T-B4-002bx/T-B8-003cb/T-B10-009bp" or row.get("upstream_target_id") != "T-B4-002bw/T-B8-003ca/T-B10-009bo":
+            errors.append(f"{label} R158 accelerator-boundary target chain mismatch")
+        expected_manifest_values = {
+            "qiskit_source_commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+            "source_manifest_payload_hash": "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2",
+            "installed_accelerator_sha256": "a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007",
+            "profile_count": 4,
+            "total_process_count": 4,
+            "total_direct_replay_count": 256,
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "execution_started": False,
+            "lower_level_mechanism_claimed": False,
+            "qiskit_bug_claimed": False,
+            "new_credit_delta": 0,
+            "requirements_passed": 10,
+            "requirements_failed": 0,
+        }
+        for field, value in expected_manifest_values.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R158 accelerator-boundary manifest {field} mismatch")
+        if row.get("contract_sha256") != r158_contract_sha256:
+            errors.append(f"{label} R158 accelerator-boundary contract hash mismatch")
+    if not all(path.exists() for path in [r158_protocol_path, r158_protocol_report_path, r158_contract_path, r158_source_manifest_path]):
+        errors.append("R158 accelerator-boundary protocol, report, contract, or source manifest missing")
+    else:
+        r158_payload = json.loads(read(r158_protocol_path))
+        r158_protocol = r158_payload.get("protocol", {})
+        r158_contract = json.loads(read(r158_contract_path))
+        r158_source_manifest = json.loads(read(r158_source_manifest_path))
+        r158_status.update({
+            "status": r158_payload.get("status"),
+            "method": r158_payload.get("method"),
+            "requirements_passed": r158_payload.get("requirements_passed"),
+            "requirements_failed": r158_payload.get("requirements_failed"),
+            "execution_started": r158_payload.get("execution_started"),
+            "profile_count": r158_protocol.get("profile_count"),
+            "total_process_count": r158_protocol.get("total_process_count"),
+            "total_direct_replay_count": r158_protocol.get("total_direct_replay_count"),
+            "qiskit_source_commit": r158_source_manifest.get("commit"),
+            "installed_accelerator_sha256": r158_protocol.get("installed_accelerator_sha256"),
+            "simulation_execution_count": r158_protocol.get("simulation_execution_count"),
+            "total_simulated_shots": r158_protocol.get("total_simulated_shots"),
+        })
+        if r158_payload.get("status") != "vf2_accelerator_boundary_protocol_frozen_before_execution" or r158_payload.get("method") != "b4_b8_r158_vf2_accelerator_boundary_protocol_v0":
+            errors.append("R158 accelerator-boundary protocol status or method mismatch")
+        if r158_payload.get("source_target_id") != "T-B4-002bx/T-B8-003cb/T-B10-009bp" or r158_payload.get("upstream_target_id") != "T-B4-002bw/T-B8-003ca/T-B10-009bo":
+            errors.append("R158 accelerator-boundary protocol target chain mismatch")
+        if r158_payload.get("requirements_passed") != 10 or r158_payload.get("requirements_failed") != 0 or r158_payload.get("execution_started") is not False:
+            errors.append("R158 accelerator-boundary requirements or unopened boundary mismatch")
+        expected_r158_protocol = {
+            "snapshot_name": "FakeNairobiV2",
+            "input_path": "benchmarks/B4_B8_R157_vf2_post_layout_input_v0.qasm",
+            "input_qasm_sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98",
+            "target_descriptor_sha256": "702c8fd9dcf67a069e7af63e31a57c74c17aaa5e3c5b6d8c2e28ec0c049c0de7",
+            "source_manifest_path": "research/source_lineage/Qiskit_2_4_1_vf2_source_manifest.json",
+            "source_manifest_payload_hash": "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2",
+            "installed_accelerator_sha256": "a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007",
+            "shared_tied_score": 0.45894321220828727,
+            "profile_count": 4,
+            "total_process_count": 4,
+            "total_direct_replay_count": 256,
+            "simulation_execution_count": 0,
+            "total_simulated_shots": 0,
+            "new_hidden_seed_count": 0,
+            "candidate_selection_performed": False,
+            "route_change_performed": False,
+            "sampling_performed": False,
+        }
+        for field, value in expected_r158_protocol.items():
+            if r158_protocol.get(field) != value:
+                errors.append(f"R158 accelerator-boundary protocol {field} mismatch")
+        expected_profiles = [
+            ("python_pass_fresh_dag_fresh_config_internal_error_map", "VF2PostLayout.run", False, False, True, "internal_fresh"),
+            ("accelerator_fresh_dag_fresh_config_internal_error_map", "qiskit._accelerate.vf2_layout.vf2_layout_pass_average", False, False, True, "internal_fresh"),
+            ("accelerator_shared_dag_shared_config_internal_error_map", "qiskit._accelerate.vf2_layout.vf2_layout_pass_average", True, True, True, "internal_fresh"),
+            ("accelerator_shared_dag_shared_config_shared_error_map", "qiskit._accelerate.vf2_layout.vf2_layout_pass_average", True, True, True, "external_shared_sorted_construction"),
+        ]
+        observed_profiles = [
+            (
+                row.get("profile_id"), row.get("entry_point"), row.get("dag_reused"),
+                row.get("config_reused"), row.get("target_reused"), row.get("error_map_mode"),
+            )
+            for row in r158_protocol.get("profiles", [])
+        ]
+        if observed_profiles != expected_profiles or any(row.get("process_count") != 1 or row.get("replays_per_process") != 64 for row in r158_protocol.get("profiles", [])):
+            errors.append("R158 accelerator-boundary profile matrix mismatch")
+        if r158_protocol.get("vf2_configuration") != {
+            "call_limit": 30000000,
+            "max_trials": 250000,
+            "shuffle_seed": -1,
+            "strict_direction": False,
+            "time_limit": None,
+            "score_initial_layout": True,
+        }:
+            errors.append("R158 accelerator-boundary pass configuration mismatch")
+        source_rows = r158_source_manifest.get("source_rows", [])
+        expected_source_hashes = {
+            "python_vf2_post_layout": "8208553a3b3a1e76272240271395294ca82a6b4d5a002ab800a809c18345c81d",
+            "rust_vf2_layout_pass": "267810aaddb8ac9336f4404e7da34c31e07eec725eb1baa4ed6bf32ff7448ca4",
+            "rust_vf2_core": "f81df7792208dd0c0949b873b6b75f8ceedcde18e4e436d321435a3a9765db06",
+            "rust_target": "737ac77f827adbcfd5e33cab2af8607a604f3a79bdfdf925131702926b1df7f8",
+            "rust_error_map": "0f7bb297274b2f6997f7cbf33848af750b57832a365827187d8a8d80edec2320",
+        }
+        if r158_source_manifest.get("commit") != "0fd015a22b84c9082173597a5d2304dc0aaec08c" or {row.get("source_id"): row.get("sha256") for row in source_rows} != expected_source_hashes:
+            errors.append("R158 accelerator-boundary Qiskit source lineage mismatch")
+        installed = r158_source_manifest.get("installed_accelerator", {})
+        if installed.get("sha256") != "a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007" or installed.get("size_bytes") != 14677376:
+            errors.append("R158 accelerator-boundary installed binary binding mismatch")
+        shp = dict(r158_source_manifest)
+        source_ph = shp.pop("payload_hash", None)
+        if source_ph != hashlib.sha256(json.dumps(shp, sort_keys=True, separators=(",", ":")).encode()).hexdigest() or source_ph != "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2":
+            errors.append("R158 accelerator-boundary source manifest payload mismatch")
+        hp = dict(r158_payload)
+        protocol_ph = hp.pop("payload_hash", None)
+        if protocol_ph != hashlib.sha256(json.dumps(hp, sort_keys=True, separators=(",", ":")).encode()).hexdigest() or protocol_ph != "088054a2e0ae46638675e18c97f9f585edb930895ccb0c42891ccf89fc74abe2":
+            errors.append("R158 accelerator-boundary protocol payload mismatch")
+        if r158_contract_sha256 != "c8ac00cb607174fa6d200c942810548f0b48e5efedf5a8bd119c56c230cfb8f8":
+            errors.append("R158 accelerator-boundary contract file hash mismatch")
+        if r158_contract.get("contract_id") != "B4-B8-R158-vf2-accelerator-boundary-contract-v0" or r158_contract.get("contract_status") != "public_preregistration_execution_unopened" or r158_contract.get("target_id") != "T-B4-002bx/T-B8-003cb/T-B10-009bp":
+            errors.append("R158 accelerator-boundary contract identity mismatch")
+        bindings = r158_contract.get("source_bindings", {})
+        if bindings.get("protocol_payload_hash") != protocol_ph or bindings.get("protocol_sha256") != hashlib.sha256(r158_protocol_path.read_bytes()).hexdigest() or len(r158_contract.get("acceptance_conditions", [])) != 10:
+            errors.append("R158 accelerator-boundary contract binding mismatch")
+        for binding_id, binding in r158_payload.get("source_bindings", {}).items():
+            path = root / binding.get("path", "")
+            if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                errors.append(f"R158 accelerator-boundary source binding mismatch: {binding_id}")
+        report_text = read(r158_protocol_report_path)
+        if "`4` / `4` / `256`" not in report_text or "one shared DAG, Target, configuration object" not in report_text or "no particular hash" not in report_text:
+            errors.append("R158 accelerator-boundary report boundary missing")
+
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
             errors.append(f"missing status artifact: {path}")
@@ -40554,6 +40726,7 @@ def audit(root: Path) -> dict:
             "r156_transpiler_variant_capture_result": r156_result_status,
             "r157_vf2_tie_isolation": r157_status,
             "r157_vf2_tie_isolation_result": r157_result_status,
+            "r158_vf2_accelerator_boundary": r158_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -42045,6 +42218,9 @@ def audit(root: Path) -> dict:
             "b4_b8_r157_vf2_tie_isolation_contract": str(r157_contract_path),
             "b4_b8_r157_vf2_tie_isolation_input": str(r157_input_path),
             "b4_b8_r157_vf2_tie_isolation": str(r157_result_report_path),
+            "b4_b8_r158_vf2_accelerator_boundary_protocol": str(r158_protocol_report_path),
+            "b4_b8_r158_vf2_accelerator_boundary_contract": str(r158_contract_path),
+            "qiskit_2_4_1_vf2_source_manifest": str(r158_source_manifest_path),
             "b8_generative_spoofer_refresh": str(research / "B8_generative_spoofer_refresh.md"),
             "b8_adaptive_leakage_spoofer": str(research / "B8_adaptive_leakage_spoofer.md"),
             "b8_challenge_refresh_repair": str(research / "B8_challenge_refresh_repair.md"),
@@ -44385,6 +44561,17 @@ def markdown_report(report: dict) -> str:
             f"- Simulation executions / shots: {report['b8']['r157_vf2_tie_isolation_result'].get('simulation_execution_count')} / {report['b8']['r157_vf2_tie_isolation_result'].get('total_simulated_shots')}",
             f"- Requirements passed/failed: {report['b8']['r157_vf2_tie_isolation_result'].get('requirements_passed')} / {report['b8']['r157_vf2_tie_isolation_result'].get('requirements_failed')}",
             f"- Result/report exists: {report['b8']['r157_vf2_tie_isolation_result'].get('result_exists')} / {report['b8']['r157_vf2_tie_isolation_result'].get('report_exists')}",
+            "",
+            "### R158 VF2 Accelerator-Boundary Protocol",
+            "",
+            f"- Status: {report['b8']['r158_vf2_accelerator_boundary'].get('status')}",
+            f"- Profiles / processes / direct replays: {report['b8']['r158_vf2_accelerator_boundary'].get('profile_count')} / {report['b8']['r158_vf2_accelerator_boundary'].get('total_process_count')} / {report['b8']['r158_vf2_accelerator_boundary'].get('total_direct_replay_count')}",
+            f"- Qiskit source commit: {report['b8']['r158_vf2_accelerator_boundary'].get('qiskit_source_commit')}",
+            f"- Installed accelerator SHA-256: {report['b8']['r158_vf2_accelerator_boundary'].get('installed_accelerator_sha256')}",
+            f"- Simulation executions / shots: {report['b8']['r158_vf2_accelerator_boundary'].get('simulation_execution_count')} / {report['b8']['r158_vf2_accelerator_boundary'].get('total_simulated_shots')}",
+            f"- Execution started: {report['b8']['r158_vf2_accelerator_boundary'].get('execution_started')}",
+            f"- Requirements passed/failed: {report['b8']['r158_vf2_accelerator_boundary'].get('requirements_passed')} / {report['b8']['r158_vf2_accelerator_boundary'].get('requirements_failed')}",
+            f"- Protocol/contract/source/report exists: {report['b8']['r158_vf2_accelerator_boundary'].get('protocol_exists')} / {report['b8']['r158_vf2_accelerator_boundary'].get('contract_exists')} / {report['b8']['r158_vf2_accelerator_boundary'].get('source_manifest_exists')} / {report['b8']['r158_vf2_accelerator_boundary'].get('report_exists')}",
             "",
             f"- Status: {report['b8']['output_invariant_verifier'].get('status')}",
             f"- Model status: {report['b8']['output_invariant_verifier'].get('model_status')}",

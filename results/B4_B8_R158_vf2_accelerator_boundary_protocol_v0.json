@@ -1,0 +1,215 @@
+{
+  "claim_boundary": {
+    "what_is_not_supported": "candidate-order instrumentation, a lower-level random or iteration mechanism, a confirmed Qiskit bug, general determinism, hardware or simulation performance, advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "a source-bound preregistration that removes four call-boundary reconstruction layers in stages"
+  },
+  "execution_started": false,
+  "failed_requirement_ids": [],
+  "generated_at_unix": 1784013347,
+  "method": "b4_b8_r158_vf2_accelerator_boundary_protocol_v0",
+  "model_status": "source_bound_call_boundary_matrix_unopened",
+  "payload_hash": "088054a2e0ae46638675e18c97f9f585edb930895ccb0c42891ccf89fc74abe2",
+  "protocol": {
+    "candidate_selection_performed": false,
+    "classification_rule": {
+      "boundary_nonreproduction": "all four profiles collapse to the same mapping class",
+      "dag_or_config_boundary": "profile 2 varies but profile 3 collapses",
+      "internal_error_map_boundary": "profile 3 varies but profile 4 collapses",
+      "python_wrapper_boundary": "profile 1 varies but profiles 2-4 collapse",
+      "rust_internal_variation_survives": "the fully shared accelerator profile contains more than one mapping class"
+    },
+    "diagnostic_completion_rule": "retain all 4 process artifacts and all 256 rows; collapse, variation, new mappings, and no-solution outcomes are admissible",
+    "frozen_software": {
+      "python": "3.12.6",
+      "qiskit": "2.4.1",
+      "qiskit_aer": "0.17.2",
+      "qiskit_ibm_runtime": "0.46.1"
+    },
+    "input_path": "benchmarks/B4_B8_R157_vf2_post_layout_input_v0.qasm",
+    "input_qasm_sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98",
+    "installed_accelerator_sha256": "a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007",
+    "known_mapping_classes": {
+      "endpoint_4_to_0": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "endpoint_4_to_2": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "no_solution": "accelerator reports no mapping",
+      "other_mapping": "any mapping outside the two R157 vectors"
+    },
+    "new_hidden_seed_count": 0,
+    "process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "QISKIT_PARALLEL": "FALSE",
+      "RAYON_NUM_THREADS": "1"
+    },
+    "profile_count": 4,
+    "profiles": [
+      {
+        "config_reused": false,
+        "dag_reused": false,
+        "entry_point": "VF2PostLayout.run",
+        "error_map_mode": "internal_fresh",
+        "process_count": 1,
+        "profile_id": "python_pass_fresh_dag_fresh_config_internal_error_map",
+        "replays_per_process": 64,
+        "target_reused": true
+      },
+      {
+        "config_reused": false,
+        "dag_reused": false,
+        "entry_point": "qiskit._accelerate.vf2_layout.vf2_layout_pass_average",
+        "error_map_mode": "internal_fresh",
+        "process_count": 1,
+        "profile_id": "accelerator_fresh_dag_fresh_config_internal_error_map",
+        "replays_per_process": 64,
+        "target_reused": true
+      },
+      {
+        "config_reused": true,
+        "dag_reused": true,
+        "entry_point": "qiskit._accelerate.vf2_layout.vf2_layout_pass_average",
+        "error_map_mode": "internal_fresh",
+        "process_count": 1,
+        "profile_id": "accelerator_shared_dag_shared_config_internal_error_map",
+        "replays_per_process": 64,
+        "target_reused": true
+      },
+      {
+        "config_reused": true,
+        "dag_reused": true,
+        "entry_point": "qiskit._accelerate.vf2_layout.vf2_layout_pass_average",
+        "error_map_mode": "external_shared_sorted_construction",
+        "process_count": 1,
+        "profile_id": "accelerator_shared_dag_shared_config_shared_error_map",
+        "replays_per_process": 64,
+        "target_reused": true
+      }
+    ],
+    "research_question": "Does the exactly tied R157 mapping variation survive after the Python pass wrapper, DAG reconstruction, configuration reconstruction, and internal average-error-map reconstruction are removed in stages?",
+    "route_change_performed": false,
+    "sampling_performed": false,
+    "shared_tied_score": 0.45894321220828727,
+    "simulation_execution_count": 0,
+    "snapshot_name": "FakeNairobiV2",
+    "source_manifest_path": "research/source_lineage/Qiskit_2_4_1_vf2_source_manifest.json",
+    "source_manifest_payload_hash": "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2",
+    "target_descriptor_sha256": "702c8fd9dcf67a069e7af63e31a57c74c17aaa5e3c5b6d8c2e28ec0c049c0de7",
+    "total_direct_replay_count": 256,
+    "total_process_count": 4,
+    "total_simulated_shots": 0,
+    "vf2_configuration": {
+      "call_limit": 30000000,
+      "max_trials": 250000,
+      "score_initial_layout": true,
+      "shuffle_seed": -1,
+      "strict_direction": false,
+      "time_limit": null
+    }
+  },
+  "requirement_count": 10,
+  "requirements": [
+    {
+      "label": "R157 protocol, contract, result, distributions, and input are hash-bound",
+      "passed": true,
+      "requirement_id": "R1"
+    },
+    {
+      "label": "Qiskit release commit, five source paths and hashes, and installed accelerator binary are frozen",
+      "passed": true,
+      "requirement_id": "R2"
+    },
+    {
+      "label": "the exact R157 QASM, target descriptor, tied score, and pass configuration are preserved",
+      "passed": true,
+      "requirement_id": "R3"
+    },
+    {
+      "label": "four profiles remove wrapper, DAG, config, and error-map reconstruction in stages",
+      "passed": true,
+      "requirement_id": "R4"
+    },
+    {
+      "label": "four post-registration processes retain 256 replay rows",
+      "passed": true,
+      "requirement_id": "R5"
+    },
+    {
+      "label": "the final profile reuses DAG, Target, configuration, and external ErrorMap",
+      "passed": true,
+      "requirement_id": "R6"
+    },
+    {
+      "label": "all mapping, new-mapping, no-solution, collapse, and variation outcomes remain admissible",
+      "passed": true,
+      "requirement_id": "R7"
+    },
+    {
+      "label": "software and one-thread process environment are frozen",
+      "passed": true,
+      "requirement_id": "R8"
+    },
+    {
+      "label": "no hidden seed, selection, route change, simulation, sampling, or post-hoc replacement is introduced",
+      "passed": true,
+      "requirement_id": "R9"
+    },
+    {
+      "label": "call-boundary localization is separated from lower-level mechanism, bug, hardware, advantage, BQP, and credit claims",
+      "passed": true,
+      "requirement_id": "R10"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_bindings": {
+    "direct_replay_input": {
+      "path": "benchmarks/B4_B8_R157_vf2_post_layout_input_v0.qasm",
+      "sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98"
+    },
+    "qiskit_source_manifest": {
+      "path": "research/source_lineage/Qiskit_2_4_1_vf2_source_manifest.json",
+      "payload_hash": "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2",
+      "sha256": "d57f7b039a232047aa1189a1594f8da4eff14c7688e55d77d27b81d625efd276"
+    },
+    "r157_contract": {
+      "path": "benchmarks/B4_B8_R157_vf2_tie_isolation_contract_v0.json",
+      "sha256": "f45f7e7fe285dc86307201063a3351a40293d888625f7bd790446f25a7d50dc4"
+    },
+    "r157_distributions": {
+      "path": "results/B4_B8_R157_vf2_tie_isolation/profile_distributions.json",
+      "sha256": "8616312bcca5672703391dd9b6594f2104c67e8fc5db01f65f8a0d378e3227c0"
+    },
+    "r157_protocol": {
+      "path": "results/B4_B8_R157_vf2_tie_isolation_protocol_v0.json",
+      "payload_hash": "4c56c1bc1e3c54d7f6ef186cfe41592a288f8c534441657afc58bbf9c7a3c82a",
+      "sha256": "e315f28be4eab9b2663e1eae29e8108f8a144554f35adfff786b2073a7a22417"
+    },
+    "r157_result": {
+      "path": "results/B4_B8_R157_vf2_tie_isolation_v0.json",
+      "payload_hash": "1800fe86ce7a085e4ca73da37c6c77c94865979d77b59deb73cee50c83279688",
+      "sha256": "d2c90f08fcdb2b0c890f99a6f24c17d560ae2c9f1c92e8f2c19b28ef0e01a504"
+    }
+  },
+  "source_target_id": "T-B4-002bx/T-B8-003cb/T-B10-009bp",
+  "status": "vf2_accelerator_boundary_protocol_frozen_before_execution",
+  "title": "B4/B8 R158 VF2 accelerator-boundary protocol",
+  "upstream_target_id": "T-B4-002bw/T-B8-003ca/T-B10-009bo",
+  "version": 0
+}

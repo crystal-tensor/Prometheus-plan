@@ -1,0 +1,60 @@
+{
+  "claim_boundary": "source inspection identifies intervention boundaries, not the causal source of R157 variation",
+  "commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+  "installed_accelerator": {
+    "path": "/Users/avalok/Library/Python/3.12/lib/python/site-packages/qiskit/_accelerate.abi3.so",
+    "sha256": "a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007",
+    "size_bytes": 14677376
+  },
+  "observed_control_flow": [
+    "VF2PostLayout.run",
+    "vf2_layout_pass_average",
+    "build_average_error_map_or_reuse_external_map",
+    "build_average_coupling_map",
+    "Vf2.with_scoring",
+    "Restriction.Decreasing",
+    "minimize_vf2_last_improvement",
+    "Vf2PassReturn.Solution"
+  ],
+  "payload_hash": "aa50b224ae244f25fbf0fcfa61ee844d7fca298efd7420bc6b70a838f08e2ed2",
+  "release": "2.4.1",
+  "repository": "https://github.com/Qiskit/qiskit",
+  "source_rows": [
+    {
+      "path": "qiskit/transpiler/passes/layout/vf2_post_layout.py",
+      "relevant_boundary": "Python pass constructs the legacy configuration and calls vf2_layout_pass_average when strict_direction is false",
+      "sha256": "8208553a3b3a1e76272240271395294ca82a6b4d5a002ab800a809c18345c81d",
+      "source_id": "python_vf2_post_layout",
+      "url": "https://github.com/Qiskit/qiskit/blob/0fd015a22b84c9082173597a5d2304dc0aaec08c/qiskit/transpiler/passes/layout/vf2_post_layout.py"
+    },
+    {
+      "path": "crates/transpiler/src/passes/vf2/vf2_layout.rs",
+      "relevant_boundary": "build_average_error_map, average coupling graph construction, decreasing restriction, minimize_vf2, and last-improvement return",
+      "sha256": "267810aaddb8ac9336f4404e7da34c31e07eec725eb1baa4ed6bf32ff7448ca4",
+      "source_id": "rust_vf2_layout_pass",
+      "url": "https://github.com/Qiskit/qiskit/blob/0fd015a22b84c9082173597a5d2304dc0aaec08c/crates/transpiler/src/passes/vf2/vf2_layout.rs"
+    },
+    {
+      "path": "crates/circuit/src/vf2.rs",
+      "relevant_boundary": "VF2++ ordering, f64 score combination, strict-less restriction, per-call state maps, candidate iteration, and best-score update",
+      "sha256": "f81df7792208dd0c0949b873b6b75f8ceedcde18e4e436d321435a3a9765db06",
+      "source_id": "rust_vf2_core",
+      "url": "https://github.com/Qiskit/qiskit/blob/0fd015a22b84c9082173597a5d2304dc0aaec08c/crates/circuit/src/vf2.rs"
+    },
+    {
+      "path": "crates/transpiler/src/target/mod.rs",
+      "relevant_boundary": "Rust Target owns insertion-preserving maps plus randomized hash sets for operation membership",
+      "sha256": "737ac77f827adbcfd5e33cab2af8607a604f3a79bdfdf925131702926b1df7f8",
+      "source_id": "rust_target",
+      "url": "https://github.com/Qiskit/qiskit/blob/0fd015a22b84c9082173597a5d2304dc0aaec08c/crates/transpiler/src/target/mod.rs"
+    },
+    {
+      "path": "crates/transpiler/src/passes/vf2/error_map.rs",
+      "relevant_boundary": "ErrorMap is a Rust hashbrown HashMap that can be constructed internally or supplied and reused from Python",
+      "sha256": "0f7bb297274b2f6997f7cbf33848af750b57832a365827187d8a8d80edec2320",
+      "source_id": "rust_error_map",
+      "url": "https://github.com/Qiskit/qiskit/blob/0fd015a22b84c9082173597a5d2304dc0aaec08c/crates/transpiler/src/passes/vf2/error_map.rs"
+    }
+  ],
+  "title": "Qiskit 2.4.1 VF2 source and binary lineage"
+}

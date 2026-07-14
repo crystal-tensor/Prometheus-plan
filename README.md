@@ -2799,6 +2799,22 @@ simulations and zero shots were used. No compiler-mechanism, confirmed-bug,
 hardware, transfer, route-advantage, quantum-advantage, BQP, solved-frontier,
 or new-credit claim is made.
 
+`T-B4-002bx` / `T-B8-003cb` / `T-B10-009bp` now preregisters R158 as a
+source-bound accelerator-call boundary experiment. Qiskit release commit
+`0fd015a2...`, five Python/Rust source-file hashes, and the installed 2.4.1
+accelerator binary hash `a299d48f...` are frozen. Four one-process profiles
+retain 64 calls each: the Python pass with fresh DAG/config/internal ErrorMap;
+the Rust accelerator with fresh DAG/config/internal ErrorMap; the accelerator
+with shared DAG/config and internal ErrorMap; and the accelerator with one
+shared DAG, Target, config, and externally constructed ErrorMap. The matrix
+therefore fixes 4 processes and 256 direct calls. If the final profile still
+varies, the observation boundary moves inside per-call Rust VF2 graph/state/
+scoring construction, but no particular hash, iterator, floating-point, or
+retention mechanism is proved. Requirements pass `10/10`; contract
+`c8ac00cb...`; execution remains unopened. No lower-level mechanism,
+confirmed Qiskit bug, hardware, transfer, route-advantage, quantum-advantage,
+BQP, solved-frontier, or new-credit claim is made.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

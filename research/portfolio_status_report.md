@@ -2320,6 +2320,17 @@ Overall audit: PASS
 - Requirements passed/failed: 10 / 0
 - Result/report exists: True / True
 
+### R158 VF2 Accelerator-Boundary Protocol
+
+- Status: vf2_accelerator_boundary_protocol_frozen_before_execution
+- Profiles / processes / direct replays: 4 / 4 / 256
+- Qiskit source commit: 0fd015a22b84c9082173597a5d2304dc0aaec08c
+- Installed accelerator SHA-256: a299d48f8d174481d389b30f1fd240a845144922f32ef918925b17243fc5f007
+- Simulation executions / shots: 0 / 0
+- Execution started: False
+- Requirements passed/failed: 10 / 0
+- Protocol/contract/source/report exists: True / True / True / True
+
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification
 - Tasks: 3
