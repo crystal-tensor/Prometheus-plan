@@ -2404,6 +2404,15 @@ Overall audit: PASS
 - Requirements passed/failed: 10 / 0
 - Protocol/contract/build/patch/executor/result/report exists: True / True / True / True / True / True / True
 
+### R163 Comparison-Policy Shadow
+
+- Status / classification: comparison_policy_shadow_complete / comparison_policies_agree_on_reconstructable_events
+- Profiles / replays: 3 / 256
+- Source comparisons / reconstructable / skipped: 6912 / 1180 / 5732
+- Tie-aware ties: 24
+- Requirements passed/failed: 10 / 0
+- Protocol/contract/executor/result/profile/transcript/report exists: True / True / True / True / True / True / True
+
 - Status: toy_invariant_property_test
 - Model status: toy_invariant_property_test_not_full_distribution_verification
 - Tasks: 3

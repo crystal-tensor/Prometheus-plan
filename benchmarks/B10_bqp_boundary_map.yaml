@@ -2583,6 +2583,36 @@ current_results:
     contract: B4_B8_R162_score_trace_contract_v0.json
     build_manifest: ../research/source_lineage/Qiskit_2_4_1_R162_score_trace_build_manifest.json
     instrumentation_patch: ../research/source_lineage/Qiskit_2_4_1_R162_score_trace.patch
+  b10_t2_b4_b8_r163_comparison_policy_v0:
+    status: comparison_policy_shadow_complete
+    method: b4_b8_r163_comparison_policy_v0
+    source_target_id: T-B4-002cg/T-B8-003ck/T-B10-009by
+    upstream_target_id: T-B4-002cf/T-B8-003cj/T-B10-009bx
+    profile_count: 3
+    replay_count: 256
+    source_compare_event_count: 6912
+    reconstructable_compare_event_count: 1180
+    skipped_compare_event_count: 5732
+    tie_aware_tie_count: 24
+    qiskit_calls_performed: 0
+    candidate_selection_performed: false
+    route_change_performed: false
+    simulation_execution_count: 0
+    total_simulated_shots: 0
+    new_credit_delta: 0
+    qiskit_bug_claimed: false
+    numerical_remedy_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    b10_t2_credit_allowed: false
+    solved_frontier_claimed: false
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R163_comparison_policy_v0.json
+    markdown_report: ../research/B4_B8_R163_comparison_policy.md
+    protocol: ../results/B4_B8_R163_comparison_policy_protocol_v0.json
+    contract: B4_B8_R163_comparison_policy_contract_v0.json
+    executor: ../tools/b4_b8_r163_comparison_policy.py
   b10_t3_b9_checked_transcript_acceptance_packet_gate_v0:
     status: checked_transcript_acceptance_packet_open_missing_artifact
     method: b9_checked_transcript_acceptance_packet_gate_v0

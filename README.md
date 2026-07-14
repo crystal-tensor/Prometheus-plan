@@ -2919,6 +2919,19 @@ confirmed Qiskit bug, numerical remedy, cross-platform theorem, hardware
 result, route advantage, quantum advantage, BQP separation, solved B4/B8/B10,
 or new credit. Requirements pass `10/10`.
 
+`T-B4-002cg` / `T-B8-003ck` / `T-B10-009by` executes R163 as a comparison-policy
+shadow over the hash-bound R162 traces. It replays 3 profiles and 256 calls
+under source binary64, compensated `math.fsum`, exact retained-binary64 leaves,
+and a declared 1-ULP tie-aware rule. Of `6,912` source comparisons, `1,180`
+are uniquely reconstructable and `5,732` are explicitly skipped because their
+operands are not yet recoverable without ambiguity. All four policies agree
+with the source on every reconstructable event; `24` tie-aware ties appear but
+no source decision changes. The result is a comparison-level negative boundary:
+it does not establish a production remedy, changed mapping, confirmed Qiskit
+bug, hardware result, quantum advantage, BQP separation, solved B4/B8/B10, or
+new credit. Requirements pass `10/10`; complete operand provenance is the next
+gate.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific
