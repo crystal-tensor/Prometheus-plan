@@ -95,7 +95,7 @@ def execute_worker(root: Path, protocol_payload: dict[str, Any], profile_id: str
     from qiskit._accelerate.vf2_layout import vf2_layout_pass_average_score_traced
     from qiskit.converters import circuit_to_dag
 
-    protocol = protocol_payload["protocol"]
+    protocol = protocol_payload
     profile = next(row for row in protocol["profiles"] if row["profile_id"] == profile_id)
     path = root / f"{OUT_DIR}/{profile_id}.json"
     if path.exists():
@@ -177,7 +177,7 @@ def launch_worker(root: Path, script: Path, profile_id: str, preregistration: di
 
 
 def aggregate(root: Path, protocol_payload: dict[str, Any], contract: dict[str, Any], preregistration: dict[str, str]) -> dict[str, Any]:
-    protocol = protocol_payload["protocol"]
+    protocol = protocol_payload
     manifests = [json.loads((root / f"{OUT_DIR}/{profile['profile_id']}.json").read_text()) for profile in protocol["profiles"]]
     rows = [row for manifest in manifests for row in manifest["replay_rows"]]
     source_return_matches = sum(row["source_return_match"] for row in rows)
@@ -301,7 +301,7 @@ def main() -> int:
         raise ValueError("R167 execution evidence already exists; refusing to overwrite")
     script = Path(__file__).resolve()
     with ThreadPoolExecutor(max_workers=3) as executor:
-        futures = [executor.submit(launch_worker, root, script, profile["profile_id"], preregistration) for profile in protocol_payload["protocol"]["profiles"]]
+        futures = [executor.submit(launch_worker, root, script, profile["profile_id"], preregistration) for profile in protocol_payload["profiles"]]
         for future in as_completed(futures):
             future.result()
     result = aggregate(root, protocol_payload, contract, preregistration)
