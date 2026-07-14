@@ -148,6 +148,7 @@ def source_exact_oracle(
     minimizers = [list(vector) for score, vector in scored if score == best]
     second = next((score for score, _ in scored if score > best), None)
     return {
+        "enumerated_mapping_count": math.factorial(num_qubits),
         "feasible_mapping_count": len(scored),
         "minimum_score_fraction": f"{best.numerator}/{best.denominator}",
         "minimum_score_float": float(best),
@@ -202,6 +203,7 @@ def source_f64_oracle(
     best = min(score for score, _ in scored)
     minimizers = [list(vector) for score, vector in scored if score == best]
     return {
+        "enumerated_mapping_count": math.factorial(num_qubits),
         "feasible_mapping_count": len(scored),
         "minimum_score_float": best,
         "minimizer_count": len(minimizers),
@@ -356,7 +358,7 @@ def execute(root: Path, preregistration: dict[str, str]) -> dict[str, Any]:
         condition("A1", "R160 result and all worker payloads validate", True, len(manifests)),
         condition("A2", "frozen profile/process/case/replay inventory is complete", len(all_replays) == 1056, len(all_replays)),
         condition("A3", "source transform and lineage binding are explicit", protocol["source_score_transform"]["name"] == "neg_log_fidelity", protocol["source_score_transform"]["name"]),
-        condition("A4", "all 5040 mappings are scored per profile/case", all(row["source_exact_oracle"]["feasible_mapping_count"] == 5040 for row in profile_case_rows), 5040),
+        condition("A4", "all 5040 mappings are enumerated per profile/case", all(row["source_exact_oracle"]["enumerated_mapping_count"] == 5040 and row["source_f64_oracle"]["enumerated_mapping_count"] == 5040 for row in profile_case_rows), 5040),
         condition("A5", "rational and source-order binary64 models are retained", all("source_f64_oracle" in row for row in profile_case_rows), True),
         condition("A6", "every selected vector is classified against both models", all("source_exact_selected_count" in row and "source_f64_selected_count" in row for row in profile_case_rows), True),
         condition("A7", "R160 exact failures remain visible under the source-faithful oracle", source_exact_failure_count == r160_failure_count == 224, {"source_exact_failure_count": source_exact_failure_count, "r160_failure_count": r160_failure_count}),
