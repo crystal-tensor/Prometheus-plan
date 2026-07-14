@@ -1,0 +1,88 @@
+{
+  "method": "b4_b8_r165_candidate_selection_protocol_v0",
+  "status": "candidate_selection_protocol_frozen_before_execution",
+  "title": "B4/B8 R165 complete-candidate selection replay protocol",
+  "version": 0,
+  "protocol": {
+    "qiskit_source_commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+    "input_path": "benchmarks/B4_B8_R157_vf2_post_layout_input_v0.qasm",
+    "input_qasm_sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98",
+    "snapshot_name": "FakeNairobiV2",
+    "source_manifest_path": "research/source_lineage/Qiskit_2_4_1_vf2_source_manifest.json",
+    "build_manifest_path": "research/source_lineage/Qiskit_2_4_1_R165_candidate_selection_build_manifest.json",
+    "instrumentation_patch_path": "research/source_lineage/Qiskit_2_4_1_R165_candidate_selection.patch",
+    "instrumentation_patch_sha256": "bf0a27e812d173c15b9874294ed2809221fce18528f4524461cedfb4bc23fec5",
+    "patched_vf2_layout_sha256": "ba132bac50a91dc62635e74d44bd5c633208071b95f681f41886332306e09360",
+    "instrumented_binary_sha256": "56101c7bedbaa157c341542d18b95e60b9d37acb9f29d6305fa2f7337cb8fd69",
+    "instrumented_binary_size_bytes": 15574816,
+    "process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "QISKIT_PARALLEL": "FALSE",
+      "RAYON_NUM_THREADS": "1"
+    },
+    "frozen_software": {"python": "3.12.6", "qiskit": "2.4.1"},
+    "vf2_configuration": {
+      "call_limit": 30000000,
+      "max_trials": 250000,
+      "score_initial_layout": true,
+      "shuffle_seed": -1,
+      "strict_direction": false,
+      "time_limit": null
+    },
+    "profiles": [
+      {"profile_id": "native_hashset_order", "operation_order": "native", "process_count": 1, "replay_count": 128},
+      {"profile_id": "ascending_sorted_order", "operation_order": "ascending", "process_count": 1, "replay_count": 64},
+      {"profile_id": "descending_sorted_order", "operation_order": "descending", "process_count": 1, "replay_count": 64}
+    ],
+    "profile_count": 3,
+    "total_process_count": 3,
+    "total_trace_replay_count": 256,
+    "candidate_event_schema": {
+      "yielded_candidate": "every complete mapping yielded by the VF2 iterator, with candidate_index, mapping labels, source score bits, source leaf bits, and enumeration order",
+      "returned_candidate": "the final mapping and score returned by minimize_vf2_with_score; retained separately for source replay validation",
+      "candidate_set_boundary": "only candidates yielded by the frozen source iterator are replayed; alternate search traversal is not claimed"
+    },
+    "selection_rule": {
+      "enumeration": "preserve observed candidate_index order",
+      "incumbent": "first yielded complete candidate",
+      "replace": "replace incumbent when the policy comparison is Less",
+      "tie": "retain first-seen incumbent",
+      "source_f64": "left-to-right binary64 sum of retained score leaves",
+      "compensated_fsum": "math.fsum over retained binary64 score leaves",
+      "exact_binary64_leaf": "exact rational sum of retained binary64 leaves, compared exactly",
+      "tie_aware_1ulp": "exact comparison returns Equal when the exact gap is at most one ULP of the larger-magnitude source candidate score; otherwise use exact comparison"
+    },
+    "execution_boundary": {
+      "qiskit_calls_performed": 256,
+      "candidate_selection_performed": true,
+      "route_change_performed": false,
+      "simulation_execution_count": 0,
+      "total_simulated_shots": 0,
+      "sampling_performed": false,
+      "new_hidden_seed_count": 0
+    },
+    "claim_boundary": {
+      "what_is_supported": "candidate-level replay of the frozen VF2 iterator output under four declared arithmetic selection policies, with source-return validation",
+      "what_is_not_supported": "an alternate search path, a production remedy, a confirmed Qiskit bug, cross-platform determinism, hardware relevance, route advantage, quantum advantage, BQP separation, solved B4/B8/B10, or new credit"
+    }
+  },
+  "requirements": [
+    {"requirement_id": "P1", "label": "source commit, input, patch, patched source, binary, and build manifest are hash-bound"},
+    {"requirement_id": "P2", "label": "candidate and score-trace APIs pass pre-registration smoke"},
+    {"requirement_id": "P3", "label": "native, ascending, and descending profiles are frozen"},
+    {"requirement_id": "P4", "label": "three processes and 256 post-registration calls are fixed"},
+    {"requirement_id": "P5", "label": "every complete yielded candidate retains mapping, score, leaves, index, and row hash"},
+    {"requirement_id": "P6", "label": "first-seen incumbent and four arithmetic policy rules are fixed before execution"},
+    {"requirement_id": "P7", "label": "source-return validation is required before interpreting any policy difference"},
+    {"requirement_id": "P8", "label": "no simulation, shots, route change, sampling, hidden seed, or hardware claim is allowed"},
+    {"requirement_id": "P9", "label": "candidate-enumeration boundary is disclosed and alternate search is not claimed"},
+    {"requirement_id": "P10", "label": "forbidden bug, advantage, BQP, solved-frontier, and credit claims remain false"}
+  ],
+  "requirements_passed": 10,
+  "requirements_failed": 0,
+  "execution_started": false,
+  "payload_hash": "10bad3ce12cfbd26d8ccd023c7805320c5c418b7ef9c67eba05157c7e021413a"
+}

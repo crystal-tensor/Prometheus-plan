@@ -1,0 +1,35 @@
+{
+  "contract_id": "B4-B8-R165-candidate-selection-contract-v0",
+  "contract_status": "public_preregistration_execution_unopened",
+  "execution_started": false,
+  "target_id": "T-B4-002ci/T-B8-003cm/T-B10-009ca",
+  "upstream_target_id": "T-B4-002ch/T-B8-003cl/T-B10-009bz",
+  "protocol_path": "results/B4_B8_R165_candidate_selection_protocol_v0.json",
+  "acceptance_conditions": [
+    {"condition_id": "A1", "label": "all source, patch, build, binary, input, target, protocol, and R164 bindings remain exact"},
+    {"condition_id": "A2", "label": "three post-registration process artifacts retain 256 candidate-traced calls"},
+    {"condition_id": "A3", "label": "all calls import the hash-bound R165 accelerator binary under the frozen environment"},
+    {"condition_id": "A4", "label": "every complete yielded candidate retains index, mapping, source score, and leaf evidence"},
+    {"condition_id": "A5", "label": "source candidate selection reproduces the returned mapping and score on every call"},
+    {"condition_id": "A6", "label": "the four policy replays use the frozen first-seen replacement and tie rules"},
+    {"condition_id": "A7", "label": "candidate-level differences are reported without claiming an alternate search path"},
+    {"condition_id": "A8", "label": "zero simulations, shots, sampling, route changes, and hidden seeds are recorded"},
+    {"condition_id": "A9", "label": "the frozen R157 input, target, source lineage, and R164 boundary remain bound"},
+    {"condition_id": "A10", "label": "forbidden bug, hardware, advantage, BQP, solved-frontier, and credit claims remain false"}
+  ],
+  "source_bindings": {
+    "executor": {"path": "tools/b4_b8_r165_candidate_selection_replay.py", "sha256": "b02f450e399f987705d0eea9870d607a46feb2986618658c761974470b42829f"},
+    "protocol": {"path": "results/B4_B8_R165_candidate_selection_protocol_v0.json", "payload_hash": "10bad3ce12cfbd26d8ccd023c7805320c5c418b7ef9c67eba05157c7e021413a", "sha256": "08c783183480125a81656b926c03c779b559da14a6ac62f52cce8d3fbfd351ec"},
+    "instrumentation_patch": {"path": "research/source_lineage/Qiskit_2_4_1_R165_candidate_selection.patch", "sha256": "bf0a27e812d173c15b9874294ed2809221fce18528f4524461cedfb4bc23fec5"},
+    "build_manifest": {"path": "research/source_lineage/Qiskit_2_4_1_R165_candidate_selection_build_manifest.json", "payload_hash": "defd69aae44840537e63b4a317ab63a75dd0387d1970db512c0e6ec5284669af", "sha256": "7d18d4ee5ea006d8d33e280b573c4709e7e36d82e5e410f5689e7a0bd0a14c63"},
+    "instrumented_binary": {"path": "research/source_lineage/Qiskit_2_4_1_R165_candidate_selection_accelerate.cpython-312-darwin.so", "sha256": "56101c7bedbaa157c341542d18b95e60b9d37acb9f29d6305fa2f7337cb8fd69"},
+    "qiskit_source_manifest": {"path": "research/source_lineage/Qiskit_2_4_1_vf2_source_manifest.json", "sha256": "d57f7b039a232047aa1189a1594f8da4eff14c7688e55d77d27b81d625efd276"},
+    "r157_input": {"path": "benchmarks/B4_B8_R157_vf2_post_layout_input_v0.qasm", "sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98"},
+    "r164_result": {"path": "results/B4_B8_R164_combine_bound_comparison_v0.json", "payload_hash": "0462b54c2678102531e5f46ac4b10f220ee547b6d9f04636785a52d6509b70f8", "sha256": "1eb46df2ef26c9afe3cade9780840d015a61eaa0f389d3fa8aeba31d85bd1539"}
+  },
+  "claim_boundary": {
+    "what_is_supported": "candidate-level replay over complete candidates yielded by the frozen VF2 iterator",
+    "what_is_not_supported": "an alternate search path, a production remedy, a confirmed Qiskit bug, cross-platform determinism, hardware performance, route advantage, quantum advantage, BQP separation, solved B4/B8/B10, or new credit"
+  },
+  "payload_hash": "7fee246b7fe4c26639efab4f70027d0e07bd16f4a72a39949a31cc2afd6c44af"
+}
