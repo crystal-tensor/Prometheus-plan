@@ -3085,6 +3085,17 @@ This is an evidence-integrity and arithmetic-recomputation gate, not a new
 numerical remedy, production mapping change, confirmed bug, hardware result,
 quantum advantage, BQP separation, solved B4/B8/B10, or new credit.
 
+R171 completes with requirements `10/10`. A standard-library-only oracle
+verifies `192/192` replay-row hashes, reconstructs `576` candidate records,
+reproduces `192/192` source-return matches, and exactly matches the R170 policy
+split: source `0`, compensated `192`, exact leaf `192`, tie-aware `192`. It
+performs zero Qiskit calls, simulations, shots, route changes, or hidden seeds.
+This strengthens evidence integrity and arithmetic recomputation for the frozen
+input, but does not establish a new Qiskit execution, cross-input theorem,
+production mapping change, numerical remedy, confirmed bug, hardware result,
+quantum advantage, BQP separation, solved B4/B8/B10, or new credit. The next
+gate is a second near-tie graph with an independent oracle.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

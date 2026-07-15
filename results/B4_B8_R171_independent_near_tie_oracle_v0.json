@@ -1,0 +1,91 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "passed": true
+    },
+    {
+      "condition_id": "A2",
+      "passed": true
+    },
+    {
+      "condition_id": "A3",
+      "passed": true
+    },
+    {
+      "condition_id": "A4",
+      "passed": true
+    },
+    {
+      "condition_id": "A5",
+      "passed": true
+    },
+    {
+      "condition_id": "A6",
+      "passed": true
+    },
+    {
+      "condition_id": "A7",
+      "passed": true
+    },
+    {
+      "condition_id": "A8",
+      "passed": true
+    },
+    {
+      "condition_id": "A9",
+      "passed": true
+    },
+    {
+      "condition_id": "A10",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "contract": "benchmarks/B4_B8_R171_independent_near_tie_oracle_contract_v0.json",
+    "markdown_report": "research/B4_B8_R171_independent_near_tie_oracle.md",
+    "protocol": "results/B4_B8_R171_independent_near_tie_oracle_protocol_v0.json",
+    "result": "results/B4_B8_R171_independent_near_tie_oracle_v0.json",
+    "source_result": "results/B4_B8_R170_near_tie_candidate_replay_v0.json",
+    "source_worker_directory": "results/B4_B8_R170_near_tie_candidate_replay"
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "a new Qiskit execution, a production mapping change, an alternate search path, a confirmed Qiskit bug, cross-input generality, hardware relevance, quantum advantage, BQP separation, solved B4/B8/B10, or new credit",
+    "what_is_supported": "independent standard-library recomputation of the committed R170 candidate records and policy split"
+  },
+  "classification": "independent_reproduction_confirmed_policy_split",
+  "method": "b4_b8_r171_independent_near_tie_oracle_v0",
+  "payload_hash": "e18d1a9206a1ee794fcab5cfd688cb5e643ae4a3e5d65c68ea64c7903e7ecd55",
+  "preregistration": {
+    "commit": "e41128e",
+    "created_at": "2026-07-15T02:43:46Z",
+    "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/204"
+  },
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "status": "independent_near_tie_oracle_complete",
+  "summary": {
+    "candidate_order_profiles_recomputed": 3,
+    "candidate_record_count": 576,
+    "new_credit_delta": 0,
+    "policy_changed_mapping_count": {
+      "compensated_fsum": 192,
+      "exact_binary64_leaf": 192,
+      "source_f64": 0,
+      "tie_aware_1ulp": 192
+    },
+    "profile_count": 3,
+    "qiskit_calls_performed": 0,
+    "r170_result_aggregate_match": true,
+    "replay_count": 192,
+    "returned_candidate_record_count": 192,
+    "row_payload_hash_match_count": 192,
+    "simulation_execution_count": 0,
+    "source_return_match_count": 192,
+    "source_return_mismatch_count": 0,
+    "total_simulated_shots": 0
+  },
+  "title": "B4/B8 R171 independent near-tie score oracle",
+  "upstream_target_id": "T-B4-002cn/T-B8-003cr/T-B10-009cd-r170",
+  "version": 0
+}

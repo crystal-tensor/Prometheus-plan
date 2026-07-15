@@ -1516,6 +1516,127 @@ def audit_r170_near_tie_candidate_replay(
     return status
 
 
+def audit_r171_independent_near_tie_oracle(
+    root: Path,
+    b4_manifest: dict,
+    b8_manifest: dict,
+    b10_manifest: dict,
+    errors: list[str],
+) -> dict:
+    """Validate the R171 standard-library oracle against committed R170 evidence."""
+    benchmarks = root / "benchmarks"
+    results = root / "results"
+    research = root / "research"
+    result_path = results / "B4_B8_R171_independent_near_tie_oracle_v0.json"
+    report_path = research / "B4_B8_R171_independent_near_tie_oracle.md"
+    protocol_path = results / "B4_B8_R171_independent_near_tie_oracle_protocol_v0.json"
+    contract_path = benchmarks / "B4_B8_R171_independent_near_tie_oracle_contract_v0.json"
+    executor_path = root / "tools/b4_b8_r171_independent_near_tie_oracle.py"
+    upstream_result_path = results / "B4_B8_R170_near_tie_candidate_replay_v0.json"
+    worker_dir = results / "B4_B8_R170_near_tie_candidate_replay"
+    status = {
+        "result_path": str(result_path),
+        "report_path": str(report_path),
+        "protocol_path": str(protocol_path),
+        "contract_path": str(contract_path),
+        "executor_path": str(executor_path),
+        "upstream_result_path": str(upstream_result_path),
+        "worker_directory": str(worker_dir),
+        "result_exists": result_path.exists(),
+        "report_exists": report_path.exists(),
+        "protocol_exists": protocol_path.exists(),
+        "contract_exists": contract_path.exists(),
+        "executor_exists": executor_path.exists(),
+        "upstream_result_exists": upstream_result_path.exists(),
+        "worker_directory_exists": worker_dir.exists(),
+    }
+    required = [result_path, report_path, protocol_path, contract_path, executor_path, upstream_result_path]
+    if not all(path.exists() for path in required) or not worker_dir.exists():
+        errors.append("R171 independent oracle artifact missing")
+        return status
+
+    def payload_ok(payload: dict) -> bool:
+        body = dict(payload)
+        observed = body.pop("payload_hash", None)
+        return observed == hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+    protocol = json.loads(read(protocol_path))
+    contract = json.loads(read(contract_path))
+    result = json.loads(read(result_path))
+    upstream = json.loads(read(upstream_result_path))
+    if not payload_ok(protocol) or protocol.get("method") != "b4_b8_r171_independent_near_tie_oracle_protocol_v0":
+        errors.append("R171 protocol identity or payload mismatch")
+    if not payload_ok(contract) or contract.get("contract_id") != "B4-B8-R171-independent-near-tie-oracle-contract-v0" or contract.get("execution_started") is not False:
+        errors.append("R171 contract identity, payload, or unopened-boundary mismatch")
+    if contract.get("protocol_payload_hash") != protocol.get("payload_hash"):
+        errors.append("R171 contract protocol binding mismatch")
+    if not payload_ok(upstream) or not payload_ok(result) or result.get("method") != "b4_b8_r171_independent_near_tie_oracle_v0":
+        errors.append("R171 upstream or result payload mismatch")
+    if result.get("status") != "independent_near_tie_oracle_complete" or result.get("classification") != "independent_reproduction_confirmed_policy_split":
+        errors.append("R171 result status or classification mismatch")
+    if result.get("preregistration", {}).get("commit") != "e41128e":
+        errors.append("R171 preregistration commit binding mismatch")
+    if not result.get("preregistration", {}).get("discussion", "").startswith("https://github.com/crystal-tensor/Prometheus-plan/discussions/"):
+        errors.append("R171 preregistration discussion binding missing")
+    if protocol.get("upstream_result_payload_hash") != upstream.get("payload_hash"):
+        errors.append("R171 upstream result binding mismatch")
+    for binding_id, binding in contract.get("source_bindings", {}).items():
+        path = root / binding.get("path", "")
+        if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+            errors.append(f"R171 source binding mismatch: {binding_id}")
+        if binding.get("payload_hash") and path.exists():
+            payload = json.loads(read(path))
+            if payload.get("payload_hash") != binding.get("payload_hash"):
+                errors.append(f"R171 source payload binding mismatch: {binding_id}")
+
+    summary = result.get("summary", {})
+    expected_summary = {
+        "profile_count": 3,
+        "replay_count": 192,
+        "row_payload_hash_match_count": 192,
+        "candidate_record_count": 576,
+        "returned_candidate_record_count": 192,
+        "source_return_match_count": 192,
+        "source_return_mismatch_count": 0,
+        "policy_changed_mapping_count": {"source_f64": 0, "compensated_fsum": 192, "exact_binary64_leaf": 192, "tie_aware_1ulp": 192},
+        "r170_result_aggregate_match": True,
+        "candidate_order_profiles_recomputed": 3,
+        "qiskit_calls_performed": 0,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "new_credit_delta": 0,
+    }
+    for field, value in expected_summary.items():
+        if summary.get(field) != value:
+            errors.append(f"R171 summary {field} mismatch")
+    if result.get("requirements_passed") != 10 or result.get("requirements_failed") != 0 or len(result.get("acceptance_conditions", [])) != 10:
+        errors.append("R171 requirement ledger mismatch")
+    report_text = read(report_path)
+    for marker in ["standard-library", "576", "192` / `192", "without calling Qiskit", "Claim boundary"]:
+        if marker not in report_text:
+            errors.append(f"R171 report boundary missing: {marker}")
+
+    manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r171_independent_near_tie_oracle_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r171_independent_near_tie_oracle_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r171_independent_near_tie_oracle_v0")),
+    ]
+    for label, row in manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R171 independent oracle")
+            continue
+        for field in ["result", "markdown_report", "protocol", "contract", "executor", "source_result", "source_worker_directory"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R171 manifest missing {field}")
+        if row.get("status") != "independent_near_tie_oracle_complete" or row.get("method") not in {"b4_b8_r171_independent_near_tie_oracle_v0", "b10_t2_b4_b8_r171_independent_near_tie_oracle_v0"}:
+            errors.append(f"{label} R171 manifest status or method mismatch")
+        for field, value in {"profile_count": 3, "replay_count": 192, "row_payload_hash_match_count": 192, "candidate_record_count": 576, "source_return_match_count": 192, "source_return_mismatch_count": 0, "qiskit_calls_performed": 0, "simulation_execution_count": 0, "total_simulated_shots": 0, "new_credit_delta": 0, "requirements_passed": 10, "requirements_failed": 0}.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R171 manifest {field} mismatch")
+    status.update({"status": result.get("status"), "classification": result.get("classification"), "profile_count": summary.get("profile_count"), "replay_count": summary.get("replay_count"), "row_payload_hash_match_count": summary.get("row_payload_hash_match_count"), "candidate_record_count": summary.get("candidate_record_count"), "source_return_match_count": summary.get("source_return_match_count"), "policy_changed_mapping_count": summary.get("policy_changed_mapping_count"), "qiskit_calls_performed": summary.get("qiskit_calls_performed"), "requirements_passed": result.get("requirements_passed"), "requirements_failed": result.get("requirements_failed")})
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -42615,6 +42736,7 @@ def audit(root: Path) -> dict:
     r168_candidate_feasibility_status = audit_r168_candidate_feasibility(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r169_target_compatible_candidate_status = audit_r169_target_compatible_candidate_replay(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r170_near_tie_candidate_status = audit_r170_near_tie_candidate_replay(root, b4_manifest, b8_manifest, b10_manifest, errors)
+    r171_independent_oracle_status = audit_r171_independent_near_tie_oracle(root, b4_manifest, b8_manifest, b10_manifest, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -42976,6 +43098,7 @@ def audit(root: Path) -> dict:
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
             "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
+            "r171_independent_near_tie_oracle": r171_independent_oracle_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -43123,6 +43246,7 @@ def audit(root: Path) -> dict:
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
             "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
+            "r171_independent_near_tie_oracle": r171_independent_oracle_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -43161,6 +43285,7 @@ def audit(root: Path) -> dict:
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
             "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
+            "r171_independent_near_tie_oracle": r171_independent_oracle_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
