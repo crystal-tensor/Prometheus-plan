@@ -191,6 +191,18 @@ removal, proxy-T reduction, and B7 credit remain 0. The next route is a longer
 fixed Clifford word or a genuinely different nonlocal skeleton with exact
 arbitrary-input replay and resource pricing.
 
+The next B1/B7 experiment lengthens that local word without changing its
+nonlocal or arbitrary-parameter budget. It inserts two fixed control-side
+`+/- pi/2` frames in two distinct local layers, exhausts all layer pairs,
+axes, signs, and CX direction sequences, and tests 432 families per context.
+Across seven source-bound contexts, 6,048 deterministic optimizer runs produce
+zero exact five-angle replays; the best residual is `0.2301426459717444`.
+The best word is a pair of opposite `Rz` frames, so it degenerates to the
+already-known same-skeleton boundary rather than creating a new absorption
+mechanism. This closes only the declared two-frame family, not a global KAK
+lower bound, an exhaustive Clifford-word search, or a full-circuit rewrite.
+Occurrence removal, proxy-T reduction, and B7 credit remain 0.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness
