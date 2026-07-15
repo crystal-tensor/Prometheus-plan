@@ -2013,3 +2013,13 @@ candidates. Best residuals by packet are `0.7803612880646379`,
 `0.6724979699119589`, and `0.7653668647301796`. This is a seeded finite
 Clifford+T grid pressure boundary, not an exhaustive Clifford+T search; accepted
 occurrence removal, proxy-T reduction, exit routes, and B7 credit remain `0`.
+
+`T-B1-004fy` / `T-B7-015h` strengthens that discrete route with a complete
+one-CNOT pair-class enumeration. It covers 512 single-qubit grid parameterizations,
+43,264 unique pair-local global-phase classes, both CNOT orientations, and
+524,288 raw right-layer parameterizations per semantic packet. Line 1378 yields
+384 exact matches; the best local candidate uses 1 CNOT, has grid rotation cost
+`3` against source cost `5`, residual `9.048319093514786e-13`, local cost
+improvement `2`, and CNOT reduction `3`. Lines 1381 and 268 yield no exact
+one-CNOT grid match. This is a concrete source-aligned replay candidate, not yet
+a full-circuit rewrite, B7 ledger acceptance, or solved B1/B7 result.
