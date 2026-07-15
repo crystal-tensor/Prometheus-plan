@@ -2309,6 +2309,16 @@ not an arbitrary-input unitary proof; hardware layout, T-resource, and B7
 credit remain outside the claim boundary. Requirements pass `10/10`; B7 credit
 remains `0`.
 
+`T-B1-004hp` / `T-B7-016y` now adds the R118 randomized channel fingerprint
+gate. An independent NumPy engine replays the R116 source/candidate pair over
+160 cross-type inputs: 32 computational-basis, 64 Haar-like, 32 product,
+16 endpoint-entangled, and 16 biased states. All `160/160` candidate probes
+pass with maximum fidelity deficit `2.44e-15`; a deliberately inserted `X`
+negative control fails `16/16`, showing that the harness detects a semantic
+perturbation. CX remains `762 -> 528`, but this is still finite numerical
+evidence, not an exact arbitrary-input unitary proof, hardware result,
+T-resource reduction, or B7 credit.
+
 `T-B4-002s` / `T-B8-003w` / `T-B10-009k` now adds the R118 randomized
 measurement-data boundary. R118 replaces toy parity samples with three
 six-qubit state-preparation circuits, randomized X/Y/Z measurement bases, 60

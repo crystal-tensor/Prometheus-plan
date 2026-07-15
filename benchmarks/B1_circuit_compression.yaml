@@ -7685,6 +7685,45 @@ current_results:
     caveat: r117_independent_numpy_finite_probe_only_no_arbitrary_unitary_proof_or_b7_credit
     report: ../results/B1_B7_cone01_R117_independent_numpy_replay_gate_v0.json
     markdown_report: ../research/B1_B7_cone01_R117_independent_numpy_replay_gate.md
+  b1_b7_cone01_r118_randomized_channel_fingerprint_gate_v0:
+    circuits: 1
+    status: cone01_r118_randomized_channel_fingerprint_160_probe_accepted
+    model_status: independent_numpy_fingerprint_passes_cross_type_probes_negative_control_detected
+    method: b1_b7_cone01_r118_randomized_channel_fingerprint_gate_v0
+    source_target_id: T-B1-004hp/T-B7-016y
+    upstream_target_id: T-B1-004ho/T-B7-016x
+    source_qasm: ../benchmarks/qasmbench_medium_exact/gcm_h6.qasm
+    candidate_qasm: ../results/B1_B7_cone01_R116_measurement_detached_exact_2q_gate/measurement_detached_candidate.qasm
+    source_b1_r118_randomized_channel_fingerprint: ../results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate_v0.json
+    source_two_qubit_gate_count: 762
+    candidate_two_qubit_gate_count: 528
+    two_qubit_gate_delta: -234
+    two_qubit_reduction_pct: 30.708661417322837
+    independent_engine: numpy_independent_statevector_v0
+    probe_count: 160
+    probe_passed: 160
+    probe_failed: 0
+    probe_family_counts: {basis: 32, haar: 64, product: 32, ghz_endpoint: 16, biased: 16}
+    max_fidelity_deficit: 2.4424906541753444e-15
+    negative_control_count: 16
+    negative_control_failed: 16
+    negative_control_max_fidelity_deficit: 1.0
+    source_measurement_count: 1
+    candidate_measurement_count: 1
+    measurement_map_preserved: true
+    finite_fingerprint_acceptance: true
+    arbitrary_input_unitary_proof_claimed: false
+    b7_resource_credit_allowed: false
+    b7_credit_delta: 0
+    counter_transition_accepted: false
+    counter_delta: 0
+    new_credit_delta: 0
+    requirements_passed: 12
+    requirements_failed: 0
+    validation_error_count: 0
+    caveat: r118_cross_type_finite_fingerprint_only_no_exact_arbitrary_unitary_proof_or_b7_credit
+    report: ../results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate_v0.json
+    markdown_report: ../research/B1_B7_cone01_R118_randomized_channel_fingerprint_gate.md
   b1_b7_cone01_full_statevector_replay_probe_gate_v0:
     circuits: 1
     status: cone01_default_input_statevector_replay_probe_passed_not_symbolic_certificate
@@ -9361,4 +9400,5 @@ prototype_artifacts:
   b1_b7_cone01_r20_o3_f3_artifact_intake_preflight_gate: ../tools/b1_b7_cone01_r20_o3_f3_artifact_intake_preflight_gate.py
   b1_b7_cone01_r21_o3_f3_overclaim_sentinel_gate: ../tools/b1_b7_cone01_r21_o3_f3_overclaim_sentinel_gate.py
   b1_b7_cone01_r22_o3_f3_a6_claim_boundary_polarity_gate: ../tools/b1_b7_cone01_r22_o3_f3_a6_claim_boundary_polarity_gate.py
+  b1_b7_cone01_r118_randomized_channel_fingerprint_gate: ../tools/b1_b7_cone01_r118_randomized_channel_fingerprint_gate.py
   synthetic_noise_proxy: ../tools/b1_synthetic_noise_proxy.py

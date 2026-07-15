@@ -1,0 +1,173 @@
+{
+  "artifacts": {
+    "channel_fingerprint": "results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate/channel_fingerprint.json",
+    "negative_control": "results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate/negative_control.json",
+    "r116_result": "results/B1_B7_cone01_R116_measurement_detached_exact_2q_gate_v0.json"
+  },
+  "candidate_path": "results/B1_B7_cone01_R116_measurement_detached_exact_2q_gate/measurement_detached_candidate.qasm",
+  "claim_boundary": {
+    "next_gate": "Obtain a symbolic/compositional certificate or an externally generated compiler candidate before any broader B1/B7 promotion.",
+    "what_is_not_supported": "Exact arbitrary-input unitary proof, mid-circuit measurement semantics, hardware layout improvement, T-resource reduction, or B7 credit.",
+    "what_is_supported": "R116 survives a 160-probe cross-type independent NumPy channel fingerprint and the same harness detects an inserted-X negative control."
+  },
+  "generated_at_unix": 1784121394,
+  "method": "b1_b7_cone01_r118_randomized_channel_fingerprint_gate_v0",
+  "model_status": "independent_numpy_fingerprint_passes_cross_type_probes_negative_control_detected",
+  "payload_hash": "dd5a913a742c6b3a4ddbaba2767e99319a560a4ae1f12f60ddc636418ee72aa8",
+  "requirement_count": 12,
+  "requirements": [
+    {
+      "evidence": {
+        "r116_status": "cone01_r116_measurement_detached_exact_2q_accepted_finite_probe"
+      },
+      "label": "accepted R116 artifact is the input",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "engine": "numpy_independent_statevector_v0",
+        "qiskit_compiler_called": false
+      },
+      "label": "independent NumPy engine is used without Qiskit compilation",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "candidate": 528,
+        "source": 762
+      },
+      "label": "candidate has a nonzero two-qubit reduction",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "count": 160,
+        "families": {
+          "basis": 32,
+          "biased": 16,
+          "ghz_endpoint": 16,
+          "haar": 64,
+          "product": 32
+        }
+      },
+      "label": "cross-type probe set has the declared 160 rows",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "failed": 0,
+        "passed": 160
+      },
+      "label": "all candidate fingerprint probes pass",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "max_deficit": 2.4424906541753444e-15,
+        "tolerance": 1e-09
+      },
+      "label": "candidate fingerprint stays within tolerance",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "count": 16,
+        "failed": 16
+      },
+      "label": "negative control is detected by the same harness",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "candidate": [
+          "measure q[0] -> c[0];"
+        ],
+        "source": [
+          "measure q[0] -> c[0];"
+        ]
+      },
+      "label": "source terminal measurement map is preserved",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "fingerprint": "results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate/channel_fingerprint.json",
+        "negative_control": "results/B1_B7_cone01_R118_randomized_channel_fingerprint_gate/negative_control.json"
+      },
+      "label": "fingerprint and negative-control artifacts are materialized",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "evidence": {
+        "b7_credit_delta": 0
+      },
+      "label": "B7 credit remains zero",
+      "passed": true,
+      "requirement_id": "P10"
+    },
+    {
+      "evidence": {
+        "model_status": "independent_numpy_fingerprint_passes_cross_type_probes_negative_control_detected"
+      },
+      "label": "claim boundary excludes formal arbitrary-input proof",
+      "passed": true,
+      "requirement_id": "P11"
+    },
+    {
+      "evidence": {
+        "candidate": 13,
+        "source": 13
+      },
+      "label": "source and candidate have the same qubit count",
+      "passed": true,
+      "requirement_id": "P12"
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 12,
+  "source_path": "benchmarks/qasmbench_medium_exact/gcm_h6.qasm",
+  "source_target_id": "T-B1-004hp/T-B7-016y",
+  "status": "cone01_r118_randomized_channel_fingerprint_160_probe_accepted",
+  "summary": {
+    "b7_credit_delta": 0,
+    "candidate_two_qubit_gate_count": 528,
+    "counter_delta": 0,
+    "engine": "numpy_independent_statevector_v0",
+    "max_fidelity_deficit": 2.4424906541753444e-15,
+    "measurement_map_preserved": true,
+    "method": "b1_b7_cone01_r118_randomized_channel_fingerprint_gate_v0",
+    "model_status": "independent_numpy_fingerprint_passes_cross_type_probes_negative_control_detected",
+    "negative_control_count": 16,
+    "negative_control_failed": 16,
+    "negative_control_max_fidelity_deficit": 1.0,
+    "new_credit_delta": 0,
+    "probe_count": 160,
+    "probe_failed": 0,
+    "probe_family_counts": {
+      "basis": 32,
+      "biased": 16,
+      "ghz_endpoint": 16,
+      "haar": 64,
+      "product": 32
+    },
+    "probe_passed": 160,
+    "source_target_id": "T-B1-004hp/T-B7-016y",
+    "source_two_qubit_gate_count": 762,
+    "status": "cone01_r118_randomized_channel_fingerprint_160_probe_accepted",
+    "two_qubit_gate_delta": -234,
+    "two_qubit_reduction_pct": 30.708661417322837,
+    "upstream_target_id": "T-B1-004ho/T-B7-016x"
+  },
+  "title": "B1/B7 cone01 R118 randomized channel fingerprint gate",
+  "upstream_target_id": "T-B1-004ho/T-B7-016x",
+  "version": "0.1"
+}
