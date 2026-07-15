@@ -159,6 +159,17 @@ globally necessary, and occurrence removal, proxy-T reduction, and B7 credit
 remain 0. The next high-value route is symbolic invariant analysis or a
 genuinely different Clifford scaffold.
 
+The next B1/B7 artifact converts that numerical boundary into a scoped exact
+phase-ratio obstruction. For the same relative-block parameter branch, the
+post-context left dressing is `Rz(theta) Ry(e) Rz(d)`, while the retained
+five-parameter form offers only `Ry(ep) Rz(dp)`. With generic source `e`, the
+off-diagonal and diagonal phase ratios force `exp(2*i*theta)=1`, or
+`theta=0 mod pi` for real angles. The seven source-bound contexts all have
+generic dressing and sit at distance `0.5692420427088251` from that condition;
+same-branch absorption is therefore allowed in `0/7` rows. This is an exact
+same-branch obstruction, not a global six-parameter lower bound, alternate
+Clifford-frame theorem, full-circuit rewrite, or B7 credit.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness
