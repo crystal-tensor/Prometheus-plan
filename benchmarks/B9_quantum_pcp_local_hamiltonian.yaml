@@ -545,6 +545,33 @@ current_results:
     result: ../results/B9_term_family_locality_gate_v0.json
     transcript: ../results/B9_R97_term_family_locality_transcript.txt
     markdown_report: ../research/B9_term_family_locality_gate.md
+  pauli_term_family_gate_v0:
+    status: pauli_term_family_checked_not_hamiltonian_spectral_proof
+    method: b9_pauli_term_family_gate_v0
+    model_status: fin_indexed_pauli_labelled_term_family_checked_under_pinned_lean_lake
+    source: B9/ClusterStabilizer/WidthLocality.lean
+    fresh_command_count: 3
+    fresh_zero_returncode_count: 3
+    fresh_no_warning: true
+    requirement_count: 10
+    requirements_passed: 10
+    requirements_failed: 0
+    checked_pauli_term_family_bridge: true
+    index_domain: Fin n
+    factor_alphabet: [X, Z]
+    support_sizes: [2, 3]
+    max_locality: 3
+    proof_assistant_checked: true
+    formal_theorem_proved: false
+    explicit_not_hamiltonian_spectral_proof: true
+    quantum_pcp_theorem_claimed: false
+    nlts_theorem_claimed: false
+    bqp_separation_claimed: false
+    validation_error_count: 0
+    caveat: pauli_labelled_term_descriptors_only_not_operator_algebra_or_spectral_theorem
+    result: ../results/B9_pauli_term_family_gate_v0.json
+    transcript: ../results/B9_R98_pauli_term_family_transcript.txt
+    markdown_report: ../research/B9_pauli_term_family_gate.md
 prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -566,4 +593,5 @@ prototype_artifacts:
   spectral_width_formalization_gate: ../tools/b9_spectral_width_formalization_gate.py
   support_locality_formalization_gate: ../tools/b9_support_locality_formalization_gate.py
   term_family_locality_gate: ../tools/b9_term_family_locality_gate.py
+  pauli_term_family_gate: ../tools/b9_pauli_term_family_gate.py
   prototype_notes: ../research/B9_prototype_notes.md

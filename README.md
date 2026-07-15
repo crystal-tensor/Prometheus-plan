@@ -4064,3 +4064,14 @@ passes 10/10 requirements, with 3/3 fresh Lean/Lake commands returning zero
 and no warnings. This remains a term-family guardrail: no Pauli operator sum,
 Hamiltonian spectrum, Quantum PCP/NLTS theorem, global impossibility result,
 or BQP credit is claimed.
+
+## Latest Research Update: R98
+
+R98 maps every canonical term to an explicit Pauli-labelled descriptor. Interior
+terms carry `Z-X-Z` factors, boundary terms carry two `X/Z` factors, and every
+factor site is indexed by `Fin n`. Lean checks that factor-list locality equals
+the source `ClusterTerm` locality and lifts the result to a canonical
+Hamiltonian term family. The gate passes 10/10 requirements, with 3/3 fresh
+Lean/Lake commands returning zero and no warnings. These are descriptors, not
+matrices or an operator algebra; no Hamiltonian spectrum, Quantum PCP/NLTS
+theorem, global impossibility result, or BQP credit is claimed.

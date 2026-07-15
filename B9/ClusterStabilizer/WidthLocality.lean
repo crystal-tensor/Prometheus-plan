@@ -145,6 +145,75 @@ theorem canonical_cluster_term_family_is_total
   intro i
   exact ⟨canonicalClusterTermFamily hN i, rfl⟩
 
+inductive PauliAxis where
+  | x
+  | z
+deriving DecidableEq, Repr
+
+structure PauliFactor (n : Nat) where
+  site : Fin n
+  axis : PauliAxis
+
+structure PauliTerm (n : Nat) where
+  factors : List (PauliFactor n)
+
+def PauliTerm.locality {n : Nat} (term : PauliTerm n) : Nat :=
+  term.factors.length
+
+def ClusterTerm.toPauliTerm {n : Nat} : ClusterTerm n → PauliTerm n
+  | .interior i left right =>
+      { factors := [
+          { site := ⟨i - 1, by omega⟩, axis := .z },
+          { site := ⟨i, by omega⟩, axis := .x },
+          { site := ⟨i + 1, by omega⟩, axis := .z }
+        ] }
+  | .leftBoundary size =>
+      { factors := [
+          { site := ⟨0, by omega⟩, axis := .x },
+          { site := ⟨1, by omega⟩, axis := .z }
+        ] }
+  | .rightBoundary size =>
+      { factors := [
+          { site := ⟨n - 2, by omega⟩, axis := .z },
+          { site := ⟨n - 1, by omega⟩, axis := .x }
+        ] }
+
+theorem cluster_term_to_pauli_term_locality
+    {n : Nat} (term : ClusterTerm n) :
+    term.toPauliTerm.locality = term.locality := by
+  cases term <;> simp [ClusterTerm.toPauliTerm, PauliTerm.locality, ClusterTerm.locality]
+
+def HamiltonianTermFamily (n : Nat) := Fin n → PauliTerm n
+
+def canonicalHamiltonianTermFamily {n : Nat} (hN : 2 ≤ n) : HamiltonianTermFamily n :=
+  fun i => (ClusterTerm.at hN i).toPauliTerm
+
+theorem canonical_hamiltonian_term_family_locality
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (canonicalHamiltonianTermFamily hN i).locality =
+      (canonicalClusterTermFamily hN i).locality := by
+  exact cluster_term_to_pauli_term_locality (ClusterTerm.at hN i)
+
+theorem canonical_hamiltonian_term_family_locality_in_support_set
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (canonicalHamiltonianTermFamily hN i).locality = 2 ∨
+      (canonicalHamiltonianTermFamily hN i).locality = 3 := by
+  rw [canonical_hamiltonian_term_family_locality hN i]
+  exact canonical_cluster_term_family_locality_in_support_set hN i
+
+theorem canonical_hamiltonian_term_family_max_locality
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (canonicalHamiltonianTermFamily hN i).locality ≤ 3 := by
+  rw [canonical_hamiltonian_term_family_locality hN i]
+  exact canonical_cluster_term_family_max_locality hN i
+
+theorem canonical_hamiltonian_term_family_is_total
+    {n : Nat} (hN : 2 ≤ n) :
+    ∀ i : Fin n, ∃ term : PauliTerm n,
+      canonicalHamiltonianTermFamily hN i = term := by
+  intro i
+  exact ⟨canonicalHamiltonianTermFamily hN i, rfl⟩
+
 theorem locality_in_support_set (summary : SpectralSummary) (hLoc : HasSupportSize summary) :
     summary.locality = 2 ∨ summary.locality = 3 := hLoc
 
