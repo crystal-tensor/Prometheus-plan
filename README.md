@@ -1975,3 +1975,13 @@ The structural CNOT delta remains 795 -> 789, but this is still not an accepted
 exit route: accepted route count, occurrence removal, proxy-T reduction, and B7
 credit all remain 0. The next required PR is a positive occurrence/proxy-T
 delta ledger that can survive the R67 accepted-exit-route contract.
+
+`T-B1-004fu` / `T-B7-015d` now prices that R70 candidate across the full
+fault-tolerant rotation-family ledger. The candidate keeps its six-CNOT
+structural reduction, but logical T ledger worsens from `6245` to `6835`, and
+logical T depth worsens from `964` to `1018`; operation count also increases by
+`240`. This is a useful negative result: structural CNOT reduction alone is
+not a B7 resource improvement. Accepted exit routes, occurrence removal,
+proxy-T reduction, and B7 credit remain `0`. The next algorithmic PR must
+reduce the full-circuit FT ledger or provide an exact certificate that absorbs
+the added rotation burden.
