@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import hmac
 import json
+import math
 import re
 from pathlib import Path
 
@@ -1323,6 +1324,195 @@ def audit_r169_target_compatible_candidate_replay(
             if row.get(field) != value:
                 errors.append(f"{label} R169 manifest {field} mismatch")
     status.update({"status": result.get("status"), "classification": result.get("classification"), "profile_count": summary.get("profile_count"), "replay_count": summary.get("replay_count"), "yielded_candidate_count": summary.get("yielded_candidate_count"), "source_return_match_count": summary.get("source_return_match_count"), "policy_changed_mapping_count": summary.get("policy_changed_mapping_count"), "requirements_passed": result.get("requirements_passed"), "requirements_failed": result.get("requirements_failed")})
+    return status
+
+
+def audit_r170_near_tie_candidate_replay(
+    root: Path,
+    b4_manifest: dict,
+    b8_manifest: dict,
+    b10_manifest: dict,
+    errors: list[str],
+) -> dict:
+    """Validate the R170 near-tie replay and its design preflight."""
+    benchmarks = root / "benchmarks"
+    results = root / "results"
+    research = root / "research"
+    result_path = results / "B4_B8_R170_near_tie_candidate_replay_v0.json"
+    report_path = research / "B4_B8_R170_near_tie_candidate_replay.md"
+    protocol_path = results / "B4_B8_R170_near_tie_candidate_protocol_v0.json"
+    contract_path = benchmarks / "B4_B8_R170_near_tie_candidate_contract_v0.json"
+    preflight_path = results / "B4_B8_R170_near_tie_design_preflight_v0.json"
+    preflight_report_path = research / "B4_B8_R170_near_tie_design_preflight.md"
+    input_path = benchmarks / "B4_B8_R170_near_tie_candidate_v0.qasm"
+    executor_path = root / "tools/b4_b8_r170_near_tie_candidate_replay.py"
+    preflight_executor_path = root / "tools/b4_b8_r170_near_tie_design_preflight.py"
+    worker_dir = results / "B4_B8_R170_near_tie_candidate_replay"
+    status = {
+        "result_path": str(result_path),
+        "report_path": str(report_path),
+        "protocol_path": str(protocol_path),
+        "contract_path": str(contract_path),
+        "preflight_path": str(preflight_path),
+        "preflight_report_path": str(preflight_report_path),
+        "executor_path": str(executor_path),
+        "preflight_executor_path": str(preflight_executor_path),
+        "worker_directory": str(worker_dir),
+        "result_exists": result_path.exists(),
+        "report_exists": report_path.exists(),
+        "protocol_exists": protocol_path.exists(),
+        "contract_exists": contract_path.exists(),
+        "preflight_exists": preflight_path.exists(),
+        "preflight_report_exists": preflight_report_path.exists(),
+        "executor_exists": executor_path.exists(),
+        "preflight_executor_exists": preflight_executor_path.exists(),
+        "worker_directory_exists": worker_dir.exists(),
+    }
+    required = [result_path, report_path, protocol_path, contract_path, preflight_path, preflight_report_path, input_path, executor_path, preflight_executor_path]
+    if not all(path.exists() for path in required) or not worker_dir.exists():
+        errors.append("R170 near-tie candidate replay artifact missing")
+        return status
+
+    def payload_ok(payload: dict, hash_field: str = "payload_hash") -> bool:
+        body = dict(payload)
+        observed = body.pop(hash_field, None)
+        expected = hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        return observed == expected
+
+    protocol = json.loads(read(protocol_path))
+    contract = json.loads(read(contract_path))
+    preflight = json.loads(read(preflight_path))
+    result = json.loads(read(result_path))
+    if not payload_ok(protocol) or protocol.get("method") != "b4_b8_r170_near_tie_candidate_protocol_v0":
+        errors.append("R170 protocol identity or payload mismatch")
+    if not payload_ok(contract) or contract.get("contract_id") != "B4-B8-R170-near-tie-candidate-contract-v0" or contract.get("execution_started") is not False:
+        errors.append("R170 contract identity, payload, or unopened-boundary mismatch")
+    if contract.get("protocol_payload_hash") != protocol.get("payload_hash"):
+        errors.append("R170 contract protocol binding mismatch")
+    if not payload_ok(preflight) or preflight.get("method") != "b4_b8_r170_near_tie_design_preflight_v0" or preflight.get("status") != "near_tie_design_preflight_complete" or preflight.get("classification") != "one_ulp_source_gap_observed":
+        errors.append("R170 design preflight identity, status, or payload mismatch")
+    if not payload_ok(result) or result.get("method") != "b4_b8_r170_near_tie_candidate_replay_v0":
+        errors.append("R170 result identity or payload mismatch")
+    if result.get("status") != "new_input_candidate_replay_complete" or result.get("classification") != "new_input_candidate_replay_complete":
+        errors.append("R170 result status or classification mismatch")
+    if not result.get("preregistration", {}).get("discussion", "").startswith("https://github.com/crystal-tensor/Prometheus-plan/discussions/"):
+        errors.append("R170 preregistration discussion binding missing")
+    if result.get("preregistration", {}).get("commit") != "1b42103":
+        errors.append("R170 preregistration commit binding mismatch")
+    if protocol.get("design_preflight", {}).get("payload_hash") != preflight.get("payload_hash"):
+        errors.append("R170 design preflight protocol binding mismatch")
+
+    for binding_id, binding in contract.get("source_bindings", {}).items():
+        path = root / binding.get("path", "")
+        if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+            errors.append(f"R170 source binding mismatch: {binding_id}")
+        if binding.get("payload_hash") and path.exists():
+            payload = json.loads(read(path))
+            if payload.get("payload_hash") != binding.get("payload_hash"):
+                errors.append(f"R170 source payload binding mismatch: {binding_id}")
+    if protocol.get("input_sha256") != hashlib.sha256(input_path.read_bytes()).hexdigest() or preflight.get("input_sha256") != protocol.get("input_sha256"):
+        errors.append("R170 input hash mismatch")
+
+    preflight_summary = preflight.get("summary", {})
+    for field, value in {"candidate_event_count": 3, "candidate_count": 3, "best_two_source_score_gap_ulp_ratio": 1.0, "source_score_gap_is_one_ulp": True, "qiskit_calls_performed": 1, "simulation_execution_count": 0, "total_simulated_shots": 0}.items():
+        if preflight_summary.get(field) != value:
+            errors.append(f"R170 preflight summary {field} mismatch")
+
+    summary = result.get("summary", {})
+    expected_summary = {
+        "profile_count": 3,
+        "replay_count": 192,
+        "yielded_candidate_count": 576,
+        "candidate_count_distribution": {"3": 192},
+        "source_return_match_count": 192,
+        "source_return_mismatch_count": 0,
+        "qiskit_calls_performed": 192,
+        "candidate_selection_performed": True,
+        "route_change_performed": False,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "new_credit_delta": 0,
+        "policy_changed_mapping_count": {"source_f64": 0, "compensated_fsum": 192, "exact_binary64_leaf": 192, "tie_aware_1ulp": 192},
+        "confirmed_qiskit_bug_claimed": False,
+        "numerical_remedy_claimed": False,
+        "mapping_changed_claimed": False,
+        "quantum_advantage_claimed": False,
+        "bqp_separation_claimed": False,
+        "solved_frontier_claimed": False,
+    }
+    for field, value in expected_summary.items():
+        if summary.get(field) != value:
+            errors.append(f"R170 summary {field} mismatch")
+    if result.get("requirements_passed") != 10 or result.get("requirements_failed") != 0 or len(result.get("requirements", [])) != 10:
+        errors.append("R170 requirement ledger mismatch")
+
+    protocol_profiles = {profile["profile_id"]: profile["replay_count"] for profile in protocol.get("profiles", [])}
+    manifests = []
+    for profile_id, expected_count in protocol_profiles.items():
+        path = worker_dir / f"{profile_id}.json"
+        if not path.exists():
+            errors.append(f"R170 worker manifest missing: {profile_id}")
+            continue
+        manifest = json.loads(read(path))
+        manifests.append(manifest)
+        if not payload_ok(manifest, "manifest_payload_hash"):
+            errors.append(f"R170 worker manifest payload mismatch: {profile_id}")
+        if manifest.get("profile_id") != profile_id or manifest.get("replay_count") != expected_count or len(manifest.get("replay_rows", [])) != expected_count:
+            errors.append(f"R170 worker count/profile mismatch: {profile_id}")
+        if manifest.get("input_qasm_sha256") != protocol.get("input_sha256") or manifest.get("protocol_payload_hash") != protocol.get("payload_hash"):
+            errors.append(f"R170 worker binding mismatch: {profile_id}")
+        for row in manifest.get("replay_rows", []):
+            if not payload_ok(row, "replay_payload_hash"):
+                errors.append(f"R170 replay row payload mismatch: {profile_id}")
+                break
+            replay = row.get("replay", {})
+            if row.get("candidate_event_count") != 4 or replay.get("yielded_candidate_count") != 3 or not replay.get("returned_candidate_present") or not replay.get("source_return_match"):
+                errors.append(f"R170 candidate/source invariant failed: {profile_id}")
+                break
+            if replay.get("selected_candidate_index") != {"source_f64": 2, "compensated_fsum": 1, "exact_binary64_leaf": 1, "tie_aware_1ulp": 1}:
+                errors.append(f"R170 policy selection invariant failed: {profile_id}")
+                break
+            candidates = replay.get("candidates", [])
+            if len(candidates) != 3:
+                errors.append(f"R170 candidate cardinality invariant failed: {profile_id}")
+                break
+            scores = sorted(candidate.get("source_score") for candidate in candidates)
+            if len(scores) != 3 or scores[1] - scores[0] != math.ulp(max(abs(scores[0]), abs(scores[1]))):
+                errors.append(f"R170 one-ULP score-gap invariant failed: {profile_id}")
+                break
+            if row.get("simulation_execution_count") != 0 or row.get("total_simulated_shots") != 0:
+                errors.append(f"R170 simulation invariant failed: {profile_id}")
+                break
+    if len(manifests) == len(protocol_profiles) and sum(len(manifest.get("replay_rows", [])) for manifest in manifests) != 192:
+        errors.append("R170 worker aggregate replay count mismatch")
+
+    for path, markers, label in [
+        (report_path, ["near-tie", "576", "192` / `192", "compensated", "does not establish cross-input generality"], "R170 replay report"),
+        (preflight_report_path, ["one-ULP", "Candidate count", "full candidate-level replay remains separately preregistered"], "R170 preflight report"),
+    ]:
+        text = read(path)
+        for marker in markers:
+            if marker not in text:
+                errors.append(f"{label} boundary missing: {marker}")
+
+    manifest_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r170_near_tie_candidate_replay_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r170_near_tie_candidate_replay_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r170_near_tie_candidate_replay_v0")),
+    ]
+    for label, row in manifest_rows:
+        if not row:
+            errors.append(f"{label} manifest missing R170 near-tie replay")
+            continue
+        for field in ["result", "markdown_report", "protocol", "contract", "input", "executor", "worker_directory", "design_preflight", "design_preflight_report"]:
+            if not row.get(field) or not path_exists_from(benchmarks, row[field]):
+                errors.append(f"{label} R170 manifest missing {field}")
+        if row.get("status") != "new_input_candidate_replay_complete" or row.get("method") not in {"b4_b8_r170_near_tie_candidate_replay_v0", "b10_t2_b4_b8_r170_near_tie_candidate_replay_v0"}:
+            errors.append(f"{label} R170 manifest status or method mismatch")
+        for field, value in {"profile_count": 3, "replay_count": 192, "yielded_candidate_count": 576, "source_return_match_count": 192, "source_return_mismatch_count": 0, "simulation_execution_count": 0, "total_simulated_shots": 0, "new_credit_delta": 0, "requirements_passed": 10, "requirements_failed": 0}.items():
+            if row.get(field) != value:
+                errors.append(f"{label} R170 manifest {field} mismatch")
+    status.update({"status": result.get("status"), "classification": result.get("classification"), "profile_count": summary.get("profile_count"), "replay_count": summary.get("replay_count"), "yielded_candidate_count": summary.get("yielded_candidate_count"), "source_return_match_count": summary.get("source_return_match_count"), "policy_changed_mapping_count": summary.get("policy_changed_mapping_count"), "preflight_source_gap_ulp_ratio": preflight_summary.get("best_two_source_score_gap_ulp_ratio"), "requirements_passed": result.get("requirements_passed"), "requirements_failed": result.get("requirements_failed")})
     return status
 
 
@@ -42424,6 +42614,7 @@ def audit(root: Path) -> dict:
     r167_candidate_free_status = audit_r167_candidate_free(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r168_candidate_feasibility_status = audit_r168_candidate_feasibility(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r169_target_compatible_candidate_status = audit_r169_target_compatible_candidate_replay(root, b4_manifest, b8_manifest, b10_manifest, errors)
+    r170_near_tie_candidate_status = audit_r170_near_tie_candidate_replay(root, b4_manifest, b8_manifest, b10_manifest, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -42784,6 +42975,7 @@ def audit(root: Path) -> dict:
             "r167_candidate_free_boundary": r167_candidate_free_status,
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
+            "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -42930,6 +43122,7 @@ def audit(root: Path) -> dict:
             "r167_candidate_free_boundary": r167_candidate_free_status,
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
+            "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -42967,6 +43160,7 @@ def audit(root: Path) -> dict:
             "r167_candidate_free_boundary": r167_candidate_free_status,
             "r168_input_target_candidate_feasibility": r168_candidate_feasibility_status,
             "r169_target_compatible_candidate_replay": r169_target_compatible_candidate_status,
+            "r170_near_tie_candidate_replay": r170_near_tie_candidate_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,

@@ -3062,6 +3062,19 @@ pressure, not to claim a numerical remedy, production mapping change, confirmed
 Qiskit bug, hardware result, quantum advantage, BQP separation, solved B4/B8/B10,
 or new credit.
 
+R170 then completes with requirements `10/10`. All `192/192` calls produce
+exactly `3` candidates, yielding `576` candidates; source-return validation
+matches `192/192`. The source binary64 policy changes `0` mappings, while
+compensated `math.fsum`, exact retained-binary64 leaves, and tie-aware 1-ULP
+selection each change `192` mappings. The same split appears under all three
+operation-order profiles, with simulation and shots remaining `0/0`. This is
+strong evidence that a one-ULP candidate gap can expose a policy-dependent
+selection boundary in this frozen input, but it is not yet an independent score
+oracle, a cross-input theorem, a numerical remedy, a production mapping change,
+a confirmed Qiskit bug, a hardware result, quantum advantage, BQP separation,
+solved B4/B8/B10, or new credit. The next gate is a second near-tie graph and
+an independent score oracle.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific
