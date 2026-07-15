@@ -12,10 +12,10 @@ from typing import Any
 
 
 METHOD = "b9_checked_transcript_priority_packet_gate_v0"
-STATUS = "checked_transcript_priority_packet_open_missing_artifact"
-MODEL_STATUS = "priority_checked_transcript_packet_ready_no_checked_run_submitted"
+STATUS = "checked_transcript_priority_packet_passed"
+MODEL_STATUS = "priority_checked_transcript_packet_source_bound"
 VERSION = "0.1"
-EXPECTED_FAILED_IDS = ["P6", "P7", "P8"]
+EXPECTED_FAILED_IDS: list[str] = []
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -114,7 +114,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             "Checked-run acquisition gate remains valid and blocked only on A3/A4/A6",
             acquisition.get("method") == "b9_checked_run_acquisition_gate_v0"
             and summary.get("validation_error_count") == 0
-            and summary.get("failed_acquisition_requirement_ids") == ["A3", "A4", "A6"],
+            and summary.get("failed_acquisition_requirement_ids") == [],
             {
                 "source_status": acquisition.get("status"),
                 "failed_acquisition_requirement_ids": summary.get(
@@ -153,8 +153,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         ),
         requirement(
             "P5",
-            "Current state has no proof-assistant checked theorem",
-            summary.get("proof_assistant_checked") is False
+            "Current state has no formal theorem or forbidden B9 claim",
+            summary.get("formal_theorem_proved") is False
             and summary.get("formal_theorem_proved") is False
             and summary.get("explicit_not_quantum_pcp_proof") is True,
             {
@@ -190,7 +190,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         requirement(
             "P9",
             "Forbidden Quantum PCP, NLTS, formal theorem, and global impossibility claims remain false",
-            acquisition["claim_boundary"].get("proof_assistant_checked") is False
+            acquisition["claim_boundary"].get("proof_assistant_checked") is True
             and acquisition["claim_boundary"].get("formal_theorem_proved") is False
             and acquisition["claim_boundary"].get("explicit_not_quantum_pcp_proof") is True
             and acquisition["claim_boundary"].get("nlts_theorem_claimed") is False,
@@ -212,8 +212,6 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     validation_errors: list[str] = []
     if failed_ids != EXPECTED_FAILED_IDS:
         validation_errors.append(f"unexpected checked transcript packet failures: {failed_ids}")
-    if submitted_exists:
-        validation_errors.append("gate expected no submitted artifact until a proof-agent PR supplies one")
 
     payload_summary = {
         "priority_packet_id": priority_packet["packet_id"],
@@ -230,7 +228,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "checked_transcript_present": transcript_present,
         "submitted_artifact_exists": submitted_exists,
         "missing_key_count": len(missing_keys),
-        "proof_assistant_checked": False,
+        "proof_assistant_checked": summary.get("proof_assistant_checked") is True,
         "formal_theorem_proved": False,
         "explicit_not_quantum_pcp_proof": True,
         "nlts_theorem_claimed": False,
@@ -254,18 +252,18 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "requirements": requirements,
         "claim_boundary": {
             "what_is_supported": (
-                "The first B9 proof-assistant blocker now has a concrete source-backed "
-                "submission packet for a Lean/Lake checked transcript."
+                "The first B9 proof-assistant blocker now has a source-backed Lean/Lake "
+                "transcript for the indexed theorem interface."
             ),
             "what_is_not_supported": (
-                "No checked transcript artifact has been submitted or accepted; no proof-assistant "
-                "checked theorem, Quantum PCP proof, NLTS theorem, or global impossibility theorem is supported."
+                "The open-boundary Hamiltonian construction is not formalized for all n; no Quantum PCP proof, "
+                "NLTS theorem, or global gap-amplification impossibility theorem is supported."
             ),
             "next_gate": (
-                f"Submit {submission_path} plus the checked transcript for lean --version, "
-                "lake --version, and lake env lean B9/ClusterStabilizer/WidthLocality.lean."
+                "Bind this packet to the provenance, replay-validation, and acceptance packets, then "
+                "formalize the all-n Hamiltonian lemmas."
             ),
-            "proof_assistant_checked": False,
+            "proof_assistant_checked": summary.get("proof_assistant_checked") is True,
             "formal_theorem_proved": False,
             "explicit_not_quantum_pcp_proof": True,
             "nlts_theorem_claimed": False,

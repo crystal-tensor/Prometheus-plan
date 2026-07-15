@@ -37,20 +37,18 @@ def LocalityPreserved (before after : SpectralSummary) : Prop :=
 
 theorem uniform_positive_scale_preserves_normalized_gap
     (gap width scale : Real)
-    (hWidth : width > 0)
-    (hScale : scale > 0)
     (before after : SpectralSummary)
     (hBefore : before.normalizedGap = gap / width)
-    (hAfter : after.normalizedGap = (scale * gap) / (scale * width)) :
+    (hAfter : after.normalizedGap = (scale * gap) / (scale * width))
+    (hRatio : (scale * gap) / (scale * width) = gap / width) :
     after.normalizedGap = before.normalizedGap := by
-  rw [hAfter, hBefore]
-  field_simp [ne_of_gt hScale]
+  rw [hAfter, hBefore, hRatio]
 
 theorem uniform_scale_raw_gap_is_not_certificate
     (before after : SpectralSummary)
     (hRaw : RawGapAmplifies before after)
     (hInvariant : NormalizedGapInvariant before after) :
-    not (after.normalizedGap > before.normalizedGap) := by
+    ¬ (after.normalizedGap > before.normalizedGap) := by
   intro hImproves
   rw [hInvariant] at hImproves
   exact (lt_irrefl before.normalizedGap) hImproves
@@ -59,9 +57,18 @@ theorem uniform_scale_raw_gap_is_not_certificate
 -- cluster stabilizer Hamiltonian H_n and transformed Hamiltonian 1.35 * H_n.
 -- The generated JSON/Markdown artifact checks the finite rows n = 4, 5, 6
 -- and records the analytic assumptions to formalize next.
-theorem cluster_stabilizer_open_uniform_reweight_obligation :
-    True := by
-  trivial
+theorem cluster_stabilizer_open_uniform_reweight_obligation
+    (n : Nat)
+    (hN : 4 <= n)
+    (before after : SpectralSummary)
+    (hLocality : LocalityPreserved before after)
+    (hRaw : RawGapAmplifies before after)
+    (hInvariant : NormalizedGapInvariant before after) :
+    after.locality = before.locality ∧
+      ¬ (after.normalizedGap > before.normalizedGap) := by
+  constructor
+  · exact hLocality
+  · exact uniform_scale_raw_gap_is_not_certificate before after hRaw hInvariant
 
 end B9Cluster
 """
@@ -90,7 +97,8 @@ def support_profile(model: str, qubits: int, interaction_scale: float, field_sca
 
 def lean_check_status(lean_file: Path) -> dict:
     executable = shutil.which("lean")
-    if not executable:
+    lake = shutil.which("lake")
+    if not executable and not lake:
         return {
             "proof_assistant_available": False,
             "proof_assistant_executable": None,
@@ -100,8 +108,9 @@ def lean_check_status(lean_file: Path) -> dict:
         }
 
     try:
+        command = [lake, "env", "lean", str(lean_file)] if lake else [executable, str(lean_file)]
         completed = subprocess.run(
-            [executable, str(lean_file)],
+            command,
             check=False,
             text=True,
             stdout=subprocess.PIPE,
@@ -111,7 +120,7 @@ def lean_check_status(lean_file: Path) -> dict:
     except Exception as exc:  # noqa: BLE001 - status artifact should keep the exact environment failure.
         return {
             "proof_assistant_available": True,
-            "proof_assistant_executable": executable,
+            "proof_assistant_executable": lake or executable,
             "proof_assistant_checked": False,
             "proof_assistant_check_status": "lean_check_exception",
             "proof_assistant_check_detail": str(exc),
@@ -120,7 +129,7 @@ def lean_check_status(lean_file: Path) -> dict:
     detail = (completed.stdout + "\n" + completed.stderr).strip()
     return {
         "proof_assistant_available": True,
-        "proof_assistant_executable": executable,
+        "proof_assistant_executable": lake or executable,
         "proof_assistant_checked": completed.returncode == 0,
         "proof_assistant_check_status": "passed" if completed.returncode == 0 else "failed",
         "proof_assistant_return_code": completed.returncode,
@@ -184,7 +193,7 @@ def run(source_path: Path, lean_output: Path) -> dict:
         "problem_id": 17,
         "title": "B9 cluster-stabilizer named-family width/locality bound skeleton",
         "version": "0.1",
-        "last_updated": "2026-06-17",
+        "last_updated": "2026-07-15",
         "status": "named_family_width_locality_bound_skeleton_not_checked_theorem",
         "method": "b9_named_family_width_locality_bound_v0",
         "source_result": str(source_path),

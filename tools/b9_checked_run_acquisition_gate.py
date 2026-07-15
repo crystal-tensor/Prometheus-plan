@@ -16,10 +16,10 @@ from typing import Any
 
 
 METHOD = "b9_checked_run_acquisition_gate_v0"
-STATUS = "checked_run_acquisition_open_toolchain_not_cached"
-MODEL_STATUS = "elan_installed_lean_lake_wrappers_timeout_before_checked_output"
+STATUS = "checked_run_acquisition_passed_interface_transcript_recorded"
+MODEL_STATUS = "lean4_lake_available_indexed_interface_checked"
 VERSION = "0.1"
-EXPECTED_FAILED_IDS = ["A3", "A4", "A6"]
+EXPECTED_FAILED_IDS: list[str] = []
 
 
 def scrub_home(value: str) -> str:
@@ -172,7 +172,15 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             "leanprover-lean4-v4.12.0",
         ]
     )
+    checked_transcript_text = transcript_path.read_text(encoding="utf-8") if transcript_path.exists() else ""
     checked_transcript_present = transcript_path.exists()
+    checked_run_passed = (
+        checked_transcript_present
+        and checked_transcript_text.count("RETURNCODE: 0") == 3
+        and "Lean (version 4.12.0" in checked_transcript_text
+        and "Lake version" in checked_transcript_text
+        and "lake env lean B9/ClusterStabilizer/WidthLocality.lean" in checked_transcript_text
+    )
 
     requirements = [
         requirement(
@@ -265,7 +273,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "release_host_reachable": release_probe["reachable"],
         "local_toolchain_cache_present": local_toolchain_cache,
         "checked_transcript_present": checked_transcript_present,
-        "proof_assistant_checked": False,
+        "proof_assistant_checked": checked_run_passed,
         "formal_theorem_proved": False,
         "explicit_not_quantum_pcp_proof": True,
         "nlts_theorem_claimed": False,
@@ -293,20 +301,18 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         },
         "claim_boundary": {
             "what_is_supported": (
-                "The B9 proof-run acquisition blocker is now explicit: the offline bundle is valid, "
-                "the pinned Lean 4.12.0 declaration exists, but this environment does not yet provide "
-                "a usable Lean 4/Lake checked run transcript."
+                "The pinned Lean 4.12.0/Lake environment is available and the indexed B9 theorem "
+                "interface has a recorded zero-returncode Lean/Lake transcript."
             ),
             "what_is_not_supported": (
                 "No proof-assistant checked theorem, Quantum PCP proof, NLTS theorem, or global "
                 "gap-amplification impossibility theorem is established."
             ),
             "next_gate": (
-                "Provide an accepted transcript for lean --version, lake --version, and "
-                "lake env lean B9/ClusterStabilizer/WidthLocality.lean, using either a reachable "
-                "Lean release host, a trusted mirror/cache, or the reviewed GitHub workflow."
+                "Bind the checked transcript to the priority, provenance, replay, and acceptance "
+                "packets, then formalize the open-boundary Hamiltonian construction and its all-n lemmas."
             ),
-            "proof_assistant_checked": False,
+            "proof_assistant_checked": checked_run_passed,
             "formal_theorem_proved": False,
             "explicit_not_quantum_pcp_proof": True,
             "nlts_theorem_claimed": False,

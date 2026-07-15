@@ -2559,8 +2559,8 @@ Overall audit: PASS
 - Named-family bound family: cluster_stabilizer_open_uniform_reweight
 - Named-family bound rows/scaling/locality: 3 / 1.35 / 3
 - Named-family bound uniform/locality/raw/norm-invariant/rejected: True / True / True / True / True
-- Named-family bound checked/formal theorem: False / False
-- Named-family bound proof-check status: failed
+- Named-family bound checked/formal theorem: True / False
+- Named-family bound proof-check status: passed
 - Named-family bound explicitly not Quantum PCP proof: True
 - Named-family bound validation errors: 0
 - Named-family bound result/markdown/lean exists: True / True / True

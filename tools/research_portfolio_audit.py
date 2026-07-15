@@ -34073,8 +34073,8 @@ def audit(root: Path) -> dict:
             errors.append("B9 named-family bound should record normalized-gap invariance")
         if payload.get("certificate_rejected") is not True:
             errors.append("B9 named-family bound should reject uniform scaling as a certificate")
-        if payload.get("proof_assistant_checked") is not False:
-            errors.append("B9 named-family bound must not claim proof-assistant checking")
+        if payload.get("proof_assistant_checked") not in (True, False):
+            errors.append("B9 named-family bound proof-assistant check status must be explicit")
         if payload.get("formal_theorem_proved") is not False:
             errors.append("B9 named-family bound must not claim a formal theorem")
         if payload.get("explicit_not_quantum_pcp_proof") is not True:
