@@ -1,0 +1,158 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "passed": true
+    },
+    {
+      "condition_id": "A2",
+      "passed": true
+    },
+    {
+      "condition_id": "A3",
+      "passed": true
+    },
+    {
+      "condition_id": "A4",
+      "passed": true
+    },
+    {
+      "condition_id": "A5",
+      "passed": true
+    },
+    {
+      "condition_id": "A6",
+      "passed": true
+    },
+    {
+      "condition_id": "A7",
+      "passed": true
+    },
+    {
+      "condition_id": "A8",
+      "passed": true
+    },
+    {
+      "condition_id": "A9",
+      "passed": true
+    },
+    {
+      "condition_id": "A10",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "markdown_report": "research/B7_w8_21_kak_invariant_packet.md",
+    "result": "results/B7_w8_21_kak_invariant_packet_v0.json",
+    "source_reports": [
+      "results/B7_w8_21_small_block_synthesis_v0.json",
+      "results/B7_w8_21_broad_skeleton_search_v0.json",
+      "results/B7_w8_21_euler_local_search_v0.json",
+      "results/B7_w8_21_three_cnot_search_v0.json"
+    ]
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "a symbolic KAK theorem, a global two-CNOT lower bound, an all-Clifford scaffold exclusion, an occurrence-removing rewrite, a proxy-T reduction, B7 credit, or a solved B1/B7 frontier",
+    "what_is_supported": "a source-bound magic-basis invariant record and analytic local-rank witness for the five-parameter w8_21 role block"
+  },
+  "classification": "local_invariant_and_rank_witness_recorded",
+  "local_rank_witness": {
+    "analytic_derivative": true,
+    "coordinate_count": 32,
+    "global_phase_direction_projected": true,
+    "largest_5x5_minor_determinant": 0.023711677101274878,
+    "largest_5x5_minor_rows": [
+      1,
+      11,
+      16,
+      26,
+      27
+    ],
+    "numerical_rank": 5,
+    "numerical_rank_threshold": 1e-10,
+    "parameter_names": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "singular_values": [
+      1.3656979118908799,
+      1.1334112322340968,
+      0.9999999999999999,
+      0.8458007913484042,
+      0.3672454403486733
+    ]
+  },
+  "magic_basis_spectrum": {
+    "determinant_unitary_abs_error": 1.1102230246251565e-16,
+    "m_matrix_unitarity_residual": 1.1243065982202428e-15,
+    "m_trace": {
+      "imag": -2.220446049250313e-16,
+      "real": 2.0
+    },
+    "magic_basis_eigenphases_radians": [
+      -1.0471975511965976,
+      -1.0471975511965976,
+      1.0471975511965974,
+      1.0471975511965976
+    ],
+    "magic_basis_eigenvalues": [
+      {
+        "imag": -0.8660254037844384,
+        "real": 0.5
+      },
+      {
+        "imag": -0.8660254037844386,
+        "real": 0.5000000000000001
+      },
+      {
+        "imag": 0.8660254037844384,
+        "real": 0.5000000000000001
+      },
+      {
+        "imag": 0.8660254037844386,
+        "real": 0.5000000000000002
+      }
+    ],
+    "magic_basis_matrix_shape": [
+      4,
+      4
+    ]
+  },
+  "method": "b7_w8_21_kak_invariant_packet_v0",
+  "payload_hash": "dfcf50857d603c9fd6638516b62c963959bbcfabfc56bac26a3f40ae34ef8018",
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_bindings": {
+    "results/B7_w8_21_broad_skeleton_search_v0.json": {
+      "path": "results/B7_w8_21_broad_skeleton_search_v0.json",
+      "sha256": "481201c1150eba5d4b5de2a5861790b36003d6c6a4cb743bfb74554ecf383eea"
+    },
+    "results/B7_w8_21_euler_local_search_v0.json": {
+      "path": "results/B7_w8_21_euler_local_search_v0.json",
+      "sha256": "b9c16bd712f9dca3e39fe6bb6a92dc3919492ebb2d004b59a4f0b748b92afa28"
+    },
+    "results/B7_w8_21_small_block_synthesis_v0.json": {
+      "path": "results/B7_w8_21_small_block_synthesis_v0.json",
+      "sha256": "f2019e24ec84e4a105994cb30a88364526792a49885a8e8a6140a9fefce5c524"
+    },
+    "results/B7_w8_21_three_cnot_search_v0.json": {
+      "path": "results/B7_w8_21_three_cnot_search_v0.json",
+      "sha256": "4465af0aab474b94967b6cae28083030b4cd30b15a7aff2161455dfdeb97b630"
+    }
+  },
+  "source_parameters": {
+    "a": 1.4922506383856682,
+    "b": 2.18700743192748,
+    "c": 0.5253852471287274,
+    "d": 2.538142068316358,
+    "e": 1.1254377896453873
+  },
+  "status": "kak_invariant_packet_complete_scoped_not_global_lower_bound",
+  "template_id": "w8_21",
+  "title": "B7 w8_21 local KAK invariant packet",
+  "unitary_frobenius_residual": 1.159339140064253e-16,
+  "version": 0
+}

@@ -79,6 +79,14 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
+The latest B1/B7 evidence adds a source-bound local KAK invariant packet for
+the repeated `w8_21` block. An analytic, global-phase-projected derivative
+witness records local rank 5 and a largest 5-by-5 minor determinant of
+`0.023711677101274878`; the magic-basis invariant eigenphases are numerically
+`[-pi/3, -pi/3, pi/3, pi/3]`. This makes the next symbolic route concrete, but
+it is not a symbolic KAK theorem, a global two-CNOT lower bound, an
+occurrence-removing rewrite, a resource reduction, or B7 credit.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness

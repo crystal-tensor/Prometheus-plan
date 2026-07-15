@@ -5487,6 +5487,27 @@ current_results:
     interpretation: t_b7_009_closed_as_claim_boundary_fragment
     caveat: paper_fragment_not_symbolic_kak_or_global_minimality_theorem
     markdown_report: ../research/B7_w8_21_claim_boundary_fragment.md
+  w8_21_kak_invariant_packet_v0:
+    status: kak_invariant_packet_complete_scoped_not_global_lower_bound
+    method: b7_w8_21_kak_invariant_packet_v0
+    source_small_block_report: w8_21_small_block_synthesis_v0
+    source_broad_skeleton_report: w8_21_broad_skeleton_search_v0
+    source_euler_local_report: w8_21_euler_local_search_v0
+    source_three_cnot_report: w8_21_three_cnot_search_v0
+    template_id: w8_21
+    analytic_derivative: true
+    global_phase_direction_projected: true
+    local_rank: 5
+    largest_5x5_minor_determinant: 0.023711677101274878
+    magic_basis_eigenphases_radians: [-1.0471975511965976, -1.0471975511965976, 1.0471975511965974, 1.0471975511965976]
+    requirements_passed: 10
+    requirements_failed: 0
+    global_two_cnot_lower_bound_claimed: false
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    caveat: local_invariant_and_rank_witness_only_not_symbolic_kak_theorem
+    result: ../results/B7_w8_21_kak_invariant_packet_v0.json
+    markdown_report: ../research/B7_w8_21_kak_invariant_packet.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
