@@ -118,6 +118,31 @@ section SpectralWidth
 def SpectralWidthPreserved (before after : SpectralSummary) : Prop :=
   after.width / after.gap = before.width / before.gap
 
+theorem spectral_width_ratio_scale_cancel
+    (width gap scale : Real)
+    (hScale : scale ≠ 0) :
+    (scale * width) / (scale * gap) = width / gap := by
+  exact normalized_gap_scale_cancel width gap scale hScale
+
+theorem uniform_scale_preserves_spectral_width_ratio_from_nonzero_scale
+    (before after : SpectralSummary)
+    (scale : Real)
+    (hScale : scale ≠ 0)
+    (hGap : after.gap = scale * before.gap)
+    (hWidth : after.width = scale * before.width) :
+    SpectralWidthPreserved before after := by
+  unfold SpectralWidthPreserved
+  rw [hWidth, hGap]
+  exact spectral_width_ratio_scale_cancel before.width before.gap scale hScale
+
+theorem uniform_scale_preserves_spectral_width_ratio_concrete
+    (before after : SpectralSummary)
+    (hScale : IsUniformlyScaled before after) :
+    SpectralWidthPreserved before after := by
+  rcases hScale with ⟨hGap, hWidth⟩
+  exact uniform_scale_preserves_spectral_width_ratio_from_nonzero_scale
+    before after UniformScaleFactor uniform_scale_factor_ne_zero hGap hWidth
+
 theorem uniform_scale_preserves_spectral_width_ratio
     (before after : SpectralSummary)
     (hScale : IsUniformlyScaled before after)

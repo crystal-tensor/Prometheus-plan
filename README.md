@@ -4034,3 +4034,13 @@ This is a checked scalar lemma, not an all-n Hamiltonian theorem, Quantum PCP
 proof, NLTS theorem, global gap-amplification impossibility result, or BQP
 separation. The next formal gate must prove locality and spectral statements
 for the indexed construction without injecting those conclusions as premises.
+
+## Latest Research Update: R95
+
+R95 removes a second assumption-injection point in the B9 formal interface.
+Lean now checks spectral-width ratio cancellation from an explicit nonzero
+uniform scale, and checks the concrete `UniformScaleFactor` wrapper. The gate
+passes 10/10 requirements, 3/3 fresh Lean/Lake commands return zero, and the
+transcript has no warnings. This remains a scalar formal guardrail, not an
+all-n Hamiltonian theorem, Quantum PCP proof, NLTS theorem, global
+gap-amplification impossibility result, or BQP separation.
