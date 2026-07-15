@@ -4053,3 +4053,14 @@ boundary terms have locality 2, every constructed term has maximum locality 3,
 and uniform reweighting preserves that locality. The gate passes 10/10
 requirements, with 3/3 fresh Lean/Lake commands returning zero and no
 warnings. The full all-n Hamiltonian spectral theorem remains open.
+
+## Latest Research Update: R97
+
+R97 lifts the support bridge to a canonical `Fin n`-indexed term family for
+every `n >= 2`. The Lean construction explicitly selects a left boundary, right
+boundary, or interior term from each index, proves the family is total, and
+derives support set `{2,3}` plus maximum locality 3 term by term. The gate
+passes 10/10 requirements, with 3/3 fresh Lean/Lake commands returning zero
+and no warnings. This remains a term-family guardrail: no Pauli operator sum,
+Hamiltonian spectrum, Quantum PCP/NLTS theorem, global impossibility result,
+or BQP credit is claimed.

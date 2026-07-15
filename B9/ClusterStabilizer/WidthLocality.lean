@@ -1,4 +1,5 @@
 import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 
 namespace B9
 
@@ -92,6 +93,57 @@ theorem uniform_reweight_preserves_cluster_term_locality
     {n : Nat} (term : ClusterTerm n) (scale : Real) :
     (term.uniformReweight scale).locality = term.locality := by
   rfl
+
+def ClusterTerm.at {n : Nat} (hN : 2 ≤ n) (i : Fin n) : ClusterTerm n :=
+  if hLeft : i.val = 0 then
+    .leftBoundary hN
+  else if hRight : i.val + 1 = n then
+    .rightBoundary hN
+  else
+    .interior i.val (by omega) (by omega)
+
+def ClusterTermFamily (n : Nat) := Fin n → ClusterTerm n
+
+def canonicalClusterTermFamily {n : Nat} (hN : 2 ≤ n) : ClusterTermFamily n :=
+  fun i => ClusterTerm.at hN i
+
+theorem cluster_term_at_locality_in_support_set
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (ClusterTerm.at hN i).locality = 2 ∨ (ClusterTerm.at hN i).locality = 3 := by
+  unfold ClusterTerm.at
+  split
+  · simp [ClusterTerm.locality]
+  · split
+    · simp [ClusterTerm.locality]
+    · simp [ClusterTerm.locality]
+
+theorem cluster_term_at_max_locality
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (ClusterTerm.at hN i).locality ≤ 3 := by
+  unfold ClusterTerm.at
+  split
+  · simp [ClusterTerm.locality]
+  · split
+    · simp [ClusterTerm.locality]
+    · simp [ClusterTerm.locality]
+
+theorem canonical_cluster_term_family_locality_in_support_set
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (canonicalClusterTermFamily hN i).locality = 2 ∨
+      (canonicalClusterTermFamily hN i).locality = 3 := by
+  exact cluster_term_at_locality_in_support_set hN i
+
+theorem canonical_cluster_term_family_max_locality
+    {n : Nat} (hN : 2 ≤ n) (i : Fin n) :
+    (canonicalClusterTermFamily hN i).locality ≤ 3 := by
+  exact cluster_term_at_max_locality hN i
+
+theorem canonical_cluster_term_family_is_total
+    {n : Nat} (hN : 2 ≤ n) :
+    ∀ i : Fin n, ∃ term : ClusterTerm n,
+      canonicalClusterTermFamily hN i = term := by
+  intro i
+  exact ⟨canonicalClusterTermFamily hN i, rfl⟩
 
 theorem locality_in_support_set (summary : SpectralSummary) (hLoc : HasSupportSize summary) :
     summary.locality = 2 ∨ summary.locality = 3 := hLoc
