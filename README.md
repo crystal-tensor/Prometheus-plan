@@ -179,6 +179,18 @@ source-bound context/branch pairs retains the phase-ratio product
 discrete branch set only. Continuous alternate Clifford scaffolds, global KAK
 minimality, full-circuit rewrites, and B7 credit remain open.
 
+The newest B1/B7 experiment tests a continuous escape around that boundary: one
+fixed control-side `+/- pi/2` Clifford frame is inserted at every local layer
+and Euler axis, with both signs and all four CX direction sequences. The search
+keeps two CX gates and five arbitrary target angles, covering 72 families across
+each of seven real source-bound contexts and 1,008 deterministic optimizer runs.
+Exact replays are `0/7`; the best residual is `0.7886609149859014`. This closes
+only the declared bounded control-side frame family, not a global KAK lower
+bound, exhaustive Clifford-word search, or full-circuit rewrite. Occurrence
+removal, proxy-T reduction, and B7 credit remain 0. The next route is a longer
+fixed Clifford word or a genuinely different nonlocal skeleton with exact
+arbitrary-input replay and resource pricing.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness

@@ -1,0 +1,423 @@
+{
+  "artifacts": {
+    "markdown_report": "research/B7_w8_21_control_frame_search.md",
+    "result": "results/B7_w8_21_control_frame_search_v0.json"
+  },
+  "candidate_family": {
+    "cnot_direction_count": 4,
+    "description": "one fixed control-side +/- pi/2 Euler rotation at any layer/axis, five arbitrary source target-side angles, and both two-CX direction sequences",
+    "family_count": 72,
+    "family_selection": "exhaustive",
+    "fixed_frame_angle_set": [
+      "-pi/2",
+      "+pi/2"
+    ],
+    "fixed_frame_qubit": 0,
+    "free_slot_labels": [
+      "pre:q1:rz0",
+      "mid:q1:rz0",
+      "mid:q1:ry",
+      "post:q1:rz0",
+      "post:q1:ry"
+    ],
+    "max_nfev_per_seed": 400,
+    "seed_count_per_family": 2,
+    "total_family_count": 72
+  },
+  "claim_boundary": {
+    "global_lower_bound_claimed": false,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "supported_claim": "No exact five-arbitrary-angle replay was found in the declared 72-family control-side +/- pi/2 Clifford-frame search across all seven source-bound contexts.",
+    "unsupported_claims": [
+      "No global lower bound is claimed.",
+      "Other fixed Clifford words, continuous control-side frames, ancillas, measurements, and full-circuit rewrites are not excluded.",
+      "No occurrence removal, proxy-T reduction, or B7 credit is accepted."
+    ]
+  },
+  "classification": "bounded_control_side_fixed_clifford_frame_boundary",
+  "contexts": [
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 1,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 63,
+        "qubits": [
+          13
+        ],
+        "text": "rz(0.28861107553559073) q[13];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        55,
+        62
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 2,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 221,
+        "qubits": [
+          2
+        ],
+        "text": "rz(0.28861107553559073) q[2];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        213,
+        220
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 3,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 314,
+        "qubits": [
+          10
+        ],
+        "text": "rz(0.28861107553559073) q[10];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        306,
+        313
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 4,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 898,
+        "qubits": [
+          2
+        ],
+        "text": "rz(0.28861107553559073) q[2];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        890,
+        897
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 5,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 984,
+        "qubits": [
+          10
+        ],
+        "text": "rz(0.28861107553559073) q[10];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        976,
+        983
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 6,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 1512,
+        "qubits": [
+          8
+        ],
+        "text": "rz(0.28861107553559073) q[8];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        1504,
+        1511
+      ],
+      "tested_family_count": 72
+    },
+    {
+      "accepted_occurrence_removal": 0,
+      "accepted_proxy_t_reduction": 0,
+      "b7_credit": 0,
+      "best_candidate": {
+        "cnot_directions": [
+          "10",
+          "10"
+        ],
+        "family_index": 28,
+        "fit": {
+          "fitted_parameters": [
+            -98.3973050743104,
+            101.0495521745051,
+            -1.8566602834825155e-18,
+            1.5197198265107592,
+            1.0303742721945823
+          ],
+          "max_abs_entry_error": 0.38217183804918015,
+          "optimizer_nfev": 26,
+          "optimizer_status": 3,
+          "optimizer_success": true,
+          "residual_norm": 0.7886609149859014,
+          "seed_index": 0
+        },
+        "fixed_angle": -1.5707963267948966,
+        "fixed_angle_label": "-pi/2",
+        "fixed_slot": 6,
+        "fixed_slot_label": "mid:q0:rz0"
+      },
+      "context_index": 7,
+      "context_operation": {
+        "angle": 0.28861107553559073,
+        "gate": "rz",
+        "line": 1681,
+        "qubits": [
+          14
+        ],
+        "text": "rz(0.28861107553559073) q[14];"
+      },
+      "direction": "after",
+      "exact_family_count": 0,
+      "line_span": [
+        1673,
+        1680
+      ],
+      "tested_family_count": 72
+    }
+  ],
+  "fit_configuration": {
+    "exact_tolerance": 1e-10,
+    "max_nfev": 400,
+    "objective": "global-phase-aligned 4x4 unitary residual",
+    "seed_count": 2
+  },
+  "last_updated": "2026-07-15",
+  "method": "b7_w8_21_control_frame_search_v0",
+  "payload_hash": "c1e7b114d501ecbb13d17872e7793dcfc8622a2eae2f233825e0c849a13a5389",
+  "question": "Can a single fixed control-side +/- pi/2 Clifford frame preserve two CX gates and five arbitrary target angles while absorbing the external target-local Rz?",
+  "source_bindings": {
+    "results/B7_nonlocal_template_block_scan_v0.json": {
+      "path": "results/B7_nonlocal_template_block_scan_v0.json",
+      "sha256": "935891545a932cb2a436dff6c1dcd10dcbcc771cfed779c4371eecd877d502c5"
+    },
+    "results/B7_w8_21_neighborhood_transfer_v0.json": {
+      "path": "results/B7_w8_21_neighborhood_transfer_v0.json",
+      "sha256": "9680c4bb43cdf68c4b22431344893e84754a44d13995222c653ed23cc687e38d"
+    },
+    "results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm": {
+      "path": "results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm",
+      "sha256": "b0788a68e501faa55d1627a8f98e9c8ce009eaba5bee2a8a921122a1af070e9e"
+    }
+  },
+  "status": "control_frame_search_complete_no_exact_context_replay",
+  "summary": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "attempted_optimizer_runs": 1008,
+    "b7_credit": 0,
+    "baseline_arbitrary_parameter_count": 6,
+    "baseline_cnot_count": 2,
+    "best_residual_norm": 0.7886609149859014,
+    "candidate_arbitrary_parameter_count": 5,
+    "candidate_cnot_count": 2,
+    "exact_context_count": 0,
+    "global_lower_bound_claimed": false,
+    "resource_saving_claimed": false,
+    "rewrite_claimed": false,
+    "tested_context_count": 7,
+    "total_exact_family_count": 0,
+    "validation_error_count": 0
+  },
+  "template_id": "w8_21",
+  "title": "B7 w8_21 control-side Clifford-frame search",
+  "version": 0
+}

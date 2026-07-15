@@ -5738,6 +5738,28 @@ current_results:
     caveat: finite_discrete_branch_closure_not_global_continuous_kak_lower_bound
     result: ../results/B7_w8_21_discrete_branch_enumeration_v0.json
     markdown_report: ../research/B7_w8_21_discrete_branch_enumeration.md
+  w8_21_control_frame_search_v0:
+    status: control_frame_search_complete_no_exact_context_replay
+    method: b7_w8_21_control_frame_search_v0
+    template_id: w8_21
+    classification: bounded_control_side_fixed_clifford_frame_boundary
+    family_count: 72
+    tested_context_count: 7
+    exact_context_count: 0
+    total_exact_family_count: 0
+    attempted_optimizer_runs: 1008
+    best_residual_norm: 0.7886609149859014
+    baseline_cnot_count: 2
+    candidate_cnot_count: 2
+    baseline_arbitrary_parameter_count: 6
+    candidate_arbitrary_parameter_count: 5
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit: 0
+    interpretation: declared_control_side_fixed_clifford_frames_do_not_absorb_external_rz
+    caveat: bounded_control_side_fixed_clifford_frame_search_not_global_kak_lower_bound
+    result: ../results/B7_w8_21_control_frame_search_v0.json
+    markdown_report: ../research/B7_w8_21_control_frame_search.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
@@ -5802,4 +5824,5 @@ prototype_artifacts:
   w8_21_parameter_relocation_search: ../tools/b7_w8_21_parameter_relocation_search.py
   w8_21_context_symbolic_obstruction: ../tools/b7_w8_21_context_symbolic_obstruction.py
   w8_21_discrete_branch_enumeration: ../tools/b7_w8_21_discrete_branch_enumeration.py
+  w8_21_control_frame_search: ../tools/b7_w8_21_control_frame_search.py
   prototype_notes: ../research/B7_prototype_notes.md
