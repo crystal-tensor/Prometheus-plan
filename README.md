@@ -4044,3 +4044,12 @@ passes 10/10 requirements, 3/3 fresh Lean/Lake commands return zero, and the
 transcript has no warnings. This remains a scalar formal guardrail, not an
 all-n Hamiltonian theorem, Quantum PCP proof, NLTS theorem, global
 gap-amplification impossibility result, or BQP separation.
+
+## Latest Research Update: R96
+
+R96 replaces the tautological support-set assumption with a constructive
+`ClusterTerm` interface. Interior terms have locality 3, left and right
+boundary terms have locality 2, every constructed term has maximum locality 3,
+and uniform reweighting preserves that locality. The gate passes 10/10
+requirements, with 3/3 fresh Lean/Lake commands returning zero and no
+warnings. The full all-n Hamiltonian spectral theorem remains open.

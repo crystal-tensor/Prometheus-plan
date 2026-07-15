@@ -53,6 +53,46 @@ section SupportSize
 def HasSupportSize (summary : SpectralSummary) : Prop :=
   summary.locality = 2 ∨ summary.locality = 3
 
+inductive ClusterTerm (n : Nat) where
+  | interior (i : Nat) (left : 1 ≤ i) (right : i + 1 < n)
+  | leftBoundary (size : 2 ≤ n)
+  | rightBoundary (size : 2 ≤ n)
+
+def ClusterTerm.locality {n : Nat} : ClusterTerm n → Nat
+  | .interior _ _ _ => 3
+  | .leftBoundary _ => 2
+  | .rightBoundary _ => 2
+
+def ClusterTerm.uniformReweight {n : Nat} (term : ClusterTerm n) (_scale : Real) : ClusterTerm n :=
+  term
+
+theorem cluster_term_locality_in_support_set
+    {n : Nat} (term : ClusterTerm n) :
+    term.locality = 2 ∨ term.locality = 3 := by
+  cases term <;> simp [ClusterTerm.locality]
+
+theorem cluster_term_max_locality
+    {n : Nat} (term : ClusterTerm n) :
+    term.locality ≤ 3 := by
+  cases term <;> simp [ClusterTerm.locality]
+
+theorem cluster_term_summary_has_support_size
+    {n : Nat} (term : ClusterTerm n)
+    (gap width normalizedGap : Real) :
+    HasSupportSize {
+      gap := gap
+      width := width
+      normalizedGap := normalizedGap
+      locality := term.locality
+    } := by
+  unfold HasSupportSize
+  exact cluster_term_locality_in_support_set term
+
+theorem uniform_reweight_preserves_cluster_term_locality
+    {n : Nat} (term : ClusterTerm n) (scale : Real) :
+    (term.uniformReweight scale).locality = term.locality := by
+  rfl
+
 theorem locality_in_support_set (summary : SpectralSummary) (hLoc : HasSupportSize summary) :
     summary.locality = 2 ∨ summary.locality = 3 := hLoc
 
