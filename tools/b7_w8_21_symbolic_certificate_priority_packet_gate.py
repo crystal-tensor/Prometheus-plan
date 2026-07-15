@@ -221,10 +221,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     passed = sum(row["passed"] for row in requirements)
     failed_ids = [row["requirement_id"] for row in requirements if not row["passed"]]
     validation_errors: list[str] = []
-    if failed_ids != EXPECTED_FAILED_IDS:
+    if failed_ids not in (EXPECTED_FAILED_IDS, []):
         validation_errors.append(f"unexpected symbolic certificate packet failures: {failed_ids}")
-    if submitted_exists:
-        validation_errors.append("gate expected no submitted artifact until a theory PR supplies one")
 
     payload_summary = {
         "priority_packet_id": EXPECTED_PACKET_ID,
@@ -264,7 +262,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "version": VERSION,
         "last_updated": args.last_updated,
         "method": METHOD,
-        "status": STATUS,
+        "status": STATUS if failed_ids else "w8_21_symbolic_certificate_priority_packet_source_backed",
         "model_status": MODEL_STATUS,
         "source_intake_gate": str(args.intake_gate),
         "summary": payload_summary,

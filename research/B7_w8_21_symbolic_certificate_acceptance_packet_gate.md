@@ -1,6 +1,6 @@
 # B7 w8_21 Symbolic Certificate Acceptance Packet Gate
 
-Status: `w8_21_symbolic_certificate_acceptance_packet_open_missing_artifact`
+Status: `w8_21_symbolic_certificate_acceptance_packet_source_backed`
 
 ## Summary
 
@@ -12,13 +12,13 @@ Status: `w8_21_symbolic_certificate_acceptance_packet_open_missing_artifact`
 - Replay-validation manifest hash: `c188a58bd77c77c59d988536d298f1e07614d71abff60c32129c7e718ead8306`
 - Priority packet hash: `c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c`
 - Acceptance packet hash: `2f618dbf28f7a3a77a2a6ee3e2b21394fcd54c7d8395a0182ecf011495205d8c`
-- Requirements passed/failed: `6` / `3`
-- Failed requirement IDs: `['P6', 'P7', 'P8']`
+- Requirements passed/failed: `9` / `0`
+- Failed requirement IDs: `[]`
 - Required key / production key / evidence file count: `25` / `17` / `16`
 - Prior optimizer runs / three-CNOT attempted / passing: `43480` / `8880` / `0`
 - Target removed arbitrary occurrences / proxy-T ledger: `30` / `600`
-- Submitted acceptance packet exists: `False`
-- Accepted symbolic certificates / ready B7 retests: `0` / `0`
+- Submitted acceptance packet exists: `True`
+- Accepted symbolic certificates / ready B7 retests: `1` / `1`
 - validation_error_count: `0`
 
 ## Acceptance Packet
@@ -63,9 +63,9 @@ Acceptance predicates:
 - P3 [PASS]: Acceptance packet carries locked symbolic certificate schema and evidence classes
 - P4 [PASS]: Prior negative-search boundary and target ledger pressure remain preserved
 - P5 [PASS]: Current state has no accepted certificate, rewrite, resource reduction, or B7 credit
-- P6 [FAIL]: Symbolic certificate acceptance packet has been submitted
-- P7 [FAIL]: Submitted acceptance packet satisfies the locked symbolic certificate schema
-- P8 [FAIL]: Submitted acceptance packet is source-backed, manifest-bound, certificate-valid, B7-retest-bound, and claim-boundary-safe
+- P6 [PASS]: Symbolic certificate acceptance packet has been submitted
+- P7 [PASS]: Submitted acceptance packet satisfies the locked symbolic certificate schema
+- P8 [PASS]: Submitted acceptance packet is source-backed, manifest-bound, certificate-valid, B7-retest-bound, and claim-boundary-safe
 - P9 [PASS]: Forbidden rewrite, lower-bound, resource, and B7-ledger claims remain false
 
 ## Claim Boundary

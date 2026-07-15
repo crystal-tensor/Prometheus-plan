@@ -119,6 +119,16 @@ The exact rewrite still preserves 2 CNOTs and 5 arbitrary parameters; accepted
 occurrence removal, proxy-T reduction, and B7 credit remain 0. This is a
 real-circuit context boundary, not a full-circuit rewrite or a B7 solution.
 
+The newest B1/B7 step turns the fixed-skeleton invariant into a machine-checked
+symbolic certificate. SymPy proves the control-target block form, the closed
+relative block, `tau=-cos(b)cos(c)`, unitarity, independence from `d/e`, and the
+exact quadratic identity `W^2-2*tau*W+I=0`; all 6 exact checks pass. The
+priority, provenance, replay-validation, and acceptance gates each pass 9/9,
+and the accepted certificate is then retested against the resource ledger. The
+result is precise but not a compression win: CNOTs remain `2 -> 2`, arbitrary
+parameters remain `5 -> 5`, occurrence removal is 0, proxy-T reduction is 0,
+and B7 credit remains 0.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness

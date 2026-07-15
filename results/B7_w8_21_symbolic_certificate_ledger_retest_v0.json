@@ -1,0 +1,106 @@
+{
+  "acceptance_binding": {
+    "acceptance_packet_hash": "2f618dbf28f7a3a77a2a6ee3e2b21394fcd54c7d8395a0182ecf011495205d8c",
+    "acceptance_packet_id": "B7S1-w8-21-symbolic-certificate-acceptance-packet",
+    "accepted_symbolic_certificate_count": 1,
+    "ready_for_b7_ledger_retest_count": 1
+  },
+  "artifacts": {
+    "markdown_report": "research/B7_w8_21_symbolic_certificate_ledger_retest.md",
+    "result": "results/B7_w8_21_symbolic_certificate_ledger_retest_v0.json"
+  },
+  "certificate_checks": {
+    "candidate_hash": "1db53e9e6be5fd2dda830ca53a583f1e72dd45b92295bede5f783800c24fbed3",
+    "exact_checks_failed": 0,
+    "exact_checks_passed": 6,
+    "machine_checked": true
+  },
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "global_lower_bound_claimed": false,
+    "new_rewrite_claimed": false,
+    "physical_resource_reduction_claimed": false,
+    "what_is_not_supported": "a compression rewrite, CNOT reduction, arbitrary-rotation reduction, occurrence removal, proxy-T reduction, physical-layout gain, global lower bound, or solved B1/B7 frontier",
+    "what_is_supported": "the accepted scoped symbolic certificate is replayed into the B7 ledger and produces a transparent zero resource delta for the fixed w8_21 skeleton"
+  },
+  "classification": "exact_symbolic_certificate_accepted_zero_resource_delta",
+  "method": "b7_w8_21_symbolic_certificate_ledger_retest_v0",
+  "payload_hash": "fc244f8ff2be86520e2796c83971a5b38e660168e358719f87089d9b82a30d95",
+  "requirements": [
+    {
+      "condition_id": "L1",
+      "passed": true
+    },
+    {
+      "condition_id": "L2",
+      "passed": true
+    },
+    {
+      "condition_id": "L3",
+      "passed": true
+    },
+    {
+      "condition_id": "L4",
+      "passed": true
+    },
+    {
+      "condition_id": "L5",
+      "passed": true
+    },
+    {
+      "condition_id": "L6",
+      "passed": true
+    },
+    {
+      "condition_id": "L7",
+      "passed": true
+    },
+    {
+      "condition_id": "L8",
+      "passed": true
+    },
+    {
+      "condition_id": "L9",
+      "passed": true
+    },
+    {
+      "condition_id": "L10",
+      "passed": true
+    }
+  ],
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "resource_accounting": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_credit": 0,
+    "baseline_arbitrary_parameter_count": 5,
+    "baseline_cnot_count": 2,
+    "certificate_arbitrary_parameter_count": 5,
+    "certificate_cnot_count": 2,
+    "target_occurrence_removal_required": 30,
+    "target_proxy_t_reduction_required": 600
+  },
+  "source_bindings": {
+    "results/B7_w8_21_context_absorption_v0.json": {
+      "path": "results/B7_w8_21_context_absorption_v0.json",
+      "sha256": "fadf36000f1297365e3bc966b20f35d77cc8f76d21e139fefa060917c089ab7c"
+    },
+    "results/B7_w8_21_symbolic_certificate_acceptance_packet_gate_v0.json": {
+      "path": "results/B7_w8_21_symbolic_certificate_acceptance_packet_gate_v0.json",
+      "sha256": "c5197b96c4745a301a2b910f28a3f496b48715833a6d38b7deb74650d51fee96"
+    },
+    "results/B7_w8_21_symbolic_certificate_candidate_v0.json": {
+      "path": "results/B7_w8_21_symbolic_certificate_candidate_v0.json",
+      "sha256": "96cd3693d5cb1db63d9cd82eaed6c31cc7ff5edb8981bccb696131dd8c366661"
+    },
+    "results/B7_w8_21_symbolic_certificate_v0.json": {
+      "path": "results/B7_w8_21_symbolic_certificate_v0.json",
+      "sha256": "0e1622d156658e42129aa6d89883632ccf83e5905920fc8041485d9de25f211a"
+    }
+  },
+  "status": "symbolic_certificate_retest_complete_no_ledger_gain",
+  "template_id": "w8_21",
+  "title": "B7 w8_21 symbolic certificate ledger retest",
+  "version": 0
+}

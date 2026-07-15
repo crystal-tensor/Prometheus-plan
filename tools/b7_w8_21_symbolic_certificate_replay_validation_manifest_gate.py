@@ -182,7 +182,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             "Symbolic certificate provenance manifest remains valid and blocked only on P6/P7/P8",
             provenance.get("method") == "b7_w8_21_symbolic_certificate_provenance_manifest_gate_v0"
             and provenance_summary.get("validation_error_count") == 0
-            and provenance_summary.get("failed_manifest_requirement_ids") == ["P6", "P7", "P8"],
+            and provenance_summary.get("failed_manifest_requirement_ids") in (["P6", "P7", "P8"], []),
             {
                 "source_status": provenance.get("status"),
                 "failed_manifest_requirement_ids": provenance_summary.get("failed_manifest_requirement_ids"),
@@ -312,10 +312,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     passed = sum(row["passed"] for row in requirements)
     failed_ids = [row["requirement_id"] for row in requirements if not row["passed"]]
     validation_errors: list[str] = []
-    if failed_ids != EXPECTED_FAILED_IDS:
+    if failed_ids not in (EXPECTED_FAILED_IDS, []):
         validation_errors.append(f"unexpected symbolic replay-validation manifest failures: {failed_ids}")
-    if submitted_exists:
-        validation_errors.append("gate expected no submitted replay-validation manifest until a theory PR supplies one")
 
     payload_summary = {
         "manifest_id": EXPECTED_REPLAY_MANIFEST_ID,
@@ -364,7 +362,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "version": VERSION,
         "last_updated": args.last_updated,
         "method": METHOD,
-        "status": STATUS,
+        "status": STATUS if failed_ids else "w8_21_symbolic_certificate_replay_validation_manifest_source_backed",
         "model_status": MODEL_STATUS,
         "source_provenance_manifest_gate": str(args.provenance_manifest_gate),
         "summary": payload_summary,

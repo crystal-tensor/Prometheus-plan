@@ -1,6 +1,6 @@
 # B7 w8_21 Symbolic Certificate Replay-Validation Manifest Gate
 
-Status: `w8_21_symbolic_certificate_replay_validation_manifest_open_missing_artifact`
+Status: `w8_21_symbolic_certificate_replay_validation_manifest_source_backed`
 
 ## Summary
 
@@ -9,13 +9,13 @@ Status: `w8_21_symbolic_certificate_replay_validation_manifest_open_missing_arti
 - Provenance manifest: `B7S1-w8-21-symbolic-certificate-provenance-manifest`
 - Priority packet: `B7-S1-w8-21-symbolic-kak-obstruction`
 - Manifest hash: `c188a58bd77c77c59d988536d298f1e07614d71abff60c32129c7e718ead8306`
-- Requirements passed/failed: `6` / `3`
-- Failed requirement IDs: `['P6', 'P7', 'P8']`
+- Requirements passed/failed: `9` / `0`
+- Failed requirement IDs: `[]`
 - Required keys / production keys / evidence files: `18` / `12` / `14`
 - Prior optimizer runs: `43480`
 - Three-CNOT attempted runs / passing candidates: `8880` / `0`
 - Target arbitrary removals / proxy-T ledger: `30` / `600`
-- Submitted manifest exists: `False`
+- Submitted manifest exists: `True`
 - Accepted symbolic certificates: `0`
 - validation_error_count: `0`
 
@@ -61,9 +61,9 @@ Acceptance predicates:
 - P3 [PASS]: Replay manifest packet carries locked replay schema and evidence file classes
 - P4 [PASS]: Prior numerical negative boundary and B7 target pressure remain preserved
 - P5 [PASS]: No accepted symbolic certificate, rewrite, resource reduction, or B7 ledger credit exists
-- P6 [FAIL]: Symbolic certificate replay-validation manifest artifact has been submitted
-- P7 [FAIL]: Submitted replay manifest satisfies the locked replay schema
-- P8 [FAIL]: Submitted replay manifest is source-backed, gate-bound, replay-hash-bound, and claim-boundary-safe
+- P6 [PASS]: Symbolic certificate replay-validation manifest artifact has been submitted
+- P7 [PASS]: Submitted replay manifest satisfies the locked replay schema
+- P8 [PASS]: Submitted replay manifest is source-backed, gate-bound, replay-hash-bound, and claim-boundary-safe
 - P9 [PASS]: Forbidden symbolic-proof and B7 resource claims remain false
 
 ## Claim Boundary

@@ -1,0 +1,151 @@
+{
+  "artifacts": {
+    "candidate": "results/B7_w8_21_symbolic_certificate_candidate_v0.json",
+    "markdown_report": "research/B7_w8_21_symbolic_certificate.md",
+    "result": "results/B7_w8_21_symbolic_certificate_v0.json"
+  },
+  "certificate_candidate": "results/B7_w8_21_symbolic_certificate_candidate_v0.json",
+  "certificate_candidate_hash": "1db53e9e6be5fd2dda830ca53a583f1e72dd45b92295bede5f783800c24fbed3",
+  "claim_boundary": {
+    "b7_ledger_improvement_claimed": false,
+    "global_lower_bound_claimed": false,
+    "new_rewrite_claimed": false,
+    "physical_resource_reduction_claimed": false,
+    "what_is_not_supported": "a global KAK theorem, CNOT lower bound, arbitrary-rotation lower bound, occurrence-removing rewrite, proxy-T reduction, B7 credit, or solved B1/B7 frontier",
+    "what_is_supported": "exact symbolic control-block, relative-block, half-trace, and quadratic identities for the fixed w8_21 role skeleton, plus machine-checked source-point binding"
+  },
+  "classification": "exact_fixed_skeleton_symbolic_invariant_certificate",
+  "machine_checked": true,
+  "method": "b7_w8_21_symbolic_certificate_v0",
+  "numeric_search_digest": {
+    "prior_optimizer_runs": 43480,
+    "tested_scaffold_artifacts": [
+      {
+        "artifact": "results/B7_w8_21_small_block_synthesis_v0.json",
+        "claim_boundary": "numeric or bounded scaffold exclusion only; not a global theorem",
+        "requirements_passed": null,
+        "status": "w8_21_small_block_synthesis_negative_boundary_not_physical_layout"
+      },
+      {
+        "artifact": "results/B7_w8_21_broad_skeleton_search_v0.json",
+        "claim_boundary": "numeric or bounded scaffold exclusion only; not a global theorem",
+        "requirements_passed": null,
+        "status": "w8_21_broad_skeleton_search_negative_boundary_not_global_lower_bound"
+      },
+      {
+        "artifact": "results/B7_w8_21_euler_local_search_v0.json",
+        "claim_boundary": "numeric or bounded scaffold exclusion only; not a global theorem",
+        "requirements_passed": null,
+        "status": "w8_21_euler_local_search_negative_boundary_not_global_lower_bound"
+      },
+      {
+        "artifact": "results/B7_w8_21_three_cnot_search_v0.json",
+        "claim_boundary": "numeric or bounded scaffold exclusion only; not a global theorem",
+        "requirements_passed": null,
+        "status": "w8_21_three_cnot_search_negative_boundary_not_global_lower_bound"
+      }
+    ],
+    "three_cnot_attempted_optimizer_runs": 8880,
+    "three_cnot_passing_candidate_count": 0
+  },
+  "payload_hash": "89fb12d301b06418d73f0553559e17589e98670f04825a5253ffad87a3e98080",
+  "source_bindings": {
+    "results/B7_w8_21_broad_skeleton_search_v0.json": {
+      "path": "results/B7_w8_21_broad_skeleton_search_v0.json",
+      "sha256": "481201c1150eba5d4b5de2a5861790b36003d6c6a4cb743bfb74554ecf383eea"
+    },
+    "results/B7_w8_21_constructive_dressing_v0.json": {
+      "path": "results/B7_w8_21_constructive_dressing_v0.json",
+      "sha256": "66f1d40c1f06a959b8cbeb567f309e9af054a0da04adc4782579efbb800f00f1"
+    },
+    "results/B7_w8_21_controlled_invariant_closure_v0.json": {
+      "path": "results/B7_w8_21_controlled_invariant_closure_v0.json",
+      "sha256": "dc6685b11c71fb58ff0c999460923c805d027833718a8cee89dd401042de416b"
+    },
+    "results/B7_w8_21_euler_local_search_v0.json": {
+      "path": "results/B7_w8_21_euler_local_search_v0.json",
+      "sha256": "b9c16bd712f9dca3e39fe6bb6a92dc3919492ebb2d004b59a4f0b748b92afa28"
+    },
+    "results/B7_w8_21_kak_invariant_packet_v0.json": {
+      "path": "results/B7_w8_21_kak_invariant_packet_v0.json",
+      "sha256": "bd0e04726e84667778b79c553723fb75e53f9c27d1f108ffb2872a55b7c01d97"
+    },
+    "results/B7_w8_21_small_block_synthesis_v0.json": {
+      "path": "results/B7_w8_21_small_block_synthesis_v0.json",
+      "sha256": "f2019e24ec84e4a105994cb30a88364526792a49885a8e8a6140a9fefce5c524"
+    },
+    "results/B7_w8_21_three_cnot_search_v0.json": {
+      "path": "results/B7_w8_21_three_cnot_search_v0.json",
+      "sha256": "4465af0aab474b94967b6cae28083030b4cd30b15a7aff2161455dfdeb97b630"
+    },
+    "results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm": {
+      "path": "results/b1_u3_phase_factored_optimizer/qasmbench_medium_exact/gcm_h6.qasm",
+      "sha256": "b0788a68e501faa55d1627a8f98e9c8ce009eaba5bee2a8a921122a1af070e9e"
+    }
+  },
+  "status": "symbolic_certificate_complete_scoped_no_resource_claim",
+  "template_id": "w8_21",
+  "theorem": {
+    "exact_checks": [
+      {
+        "check_id": "control_target_block_form",
+        "passed": true
+      },
+      {
+        "check_id": "relative_block_closed_form",
+        "passed": true
+      },
+      {
+        "check_id": "relative_half_trace",
+        "passed": true
+      },
+      {
+        "check_id": "relative_unitarity",
+        "passed": true
+      },
+      {
+        "check_id": "quadratic_identity",
+        "passed": true
+      },
+      {
+        "check_id": "relative_invariant_independent_of_d_e",
+        "passed": true
+      }
+    ],
+    "exact_checks_failed": 0,
+    "exact_checks_passed": 6,
+    "magic_characteristic_polynomial_candidate": "(lambda**2 - 2*tau*lambda + 1)**2",
+    "relative_block_expected_expression": [
+      [
+        "-exp(I*b)*cos(c)",
+        "-exp(I*a)*sin(c)"
+      ],
+      [
+        "exp(-I*a)*sin(c)",
+        "-exp(-I*b)*cos(c)"
+      ]
+    ],
+    "relative_block_expression": [
+      [
+        "-exp(I*b)*cos(c)",
+        "-exp(I*a)*sin(c)"
+      ],
+      [
+        "exp(-I*a)*sin(c)",
+        "-exp(-I*b)*cos(c)"
+      ]
+    ],
+    "relative_half_trace_expression": "-cos(b)*cos(c)",
+    "relative_quadratic_expression": "W**2 - 2*tau*W + I2",
+    "symbol_names": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "unitary_block_form": "U = |0><0| tensor U0 + |1><1| tensor U1"
+  },
+  "title": "B7 w8_21 machine-checked symbolic certificate",
+  "version": 0
+}

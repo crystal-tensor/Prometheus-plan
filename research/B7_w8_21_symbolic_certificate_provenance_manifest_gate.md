@@ -1,6 +1,6 @@
 # B7 w8_21 Symbolic Certificate Provenance Manifest Gate
 
-Status: `w8_21_symbolic_certificate_provenance_manifest_open_missing_artifact`
+Status: `w8_21_symbolic_certificate_provenance_manifest_source_backed`
 
 ## Summary
 
@@ -8,13 +8,13 @@ Status: `w8_21_symbolic_certificate_provenance_manifest_open_missing_artifact`
 - Manifest: `B7S1-w8-21-symbolic-certificate-provenance-manifest`
 - Priority packet: `B7-S1-w8-21-symbolic-kak-obstruction`
 - Manifest hash: `99d1eebef3bfe4676c8f6e42763a5e1032dc64bab1548608d6f1401fc6b5d61b`
-- Requirements passed/failed: `6` / `3`
-- Failed requirement IDs: `['P6', 'P7', 'P8']`
+- Requirements passed/failed: `9` / `0`
+- Failed requirement IDs: `[]`
 - Required manifest keys / production manifest keys / evidence files: `13` / `7` / `10`
 - Prior optimizer runs: `43480`
 - Three-CNOT attempted runs / passing candidates: `8880` / `0`
 - Target arbitrary removals / proxy-T ledger: `30` / `600`
-- Submitted manifest exists: `False`
+- Submitted manifest exists: `True`
 - Accepted symbolic certificates: `0`
 - validation_error_count: `0`
 
@@ -54,9 +54,9 @@ Acceptance predicates:
 - P3 [PASS]: Manifest packet carries locked provenance schema and evidence file classes
 - P4 [PASS]: Numerical negative boundary and target ledger pressure remain preserved
 - P5 [PASS]: Current B7 state has no accepted symbolic certificate or ledger credit
-- P6 [FAIL]: Provenance manifest artifact has been submitted
-- P7 [FAIL]: Submitted manifest satisfies the locked provenance schema
-- P8 [FAIL]: Submitted manifest is source-backed, packet-bound, and replay-hash-bound
+- P6 [PASS]: Provenance manifest artifact has been submitted
+- P7 [PASS]: Submitted manifest satisfies the locked provenance schema
+- P8 [PASS]: Submitted manifest is source-backed, packet-bound, and replay-hash-bound
 - P9 [PASS]: Forbidden rewrite, lower-bound, resource, and ledger claims remain false
 
 ## Claim Boundary

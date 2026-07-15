@@ -201,7 +201,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             "Replay-validation manifest gate remains valid and blocked only on P6/P7/P8",
             replay.get("method") == "b7_w8_21_symbolic_certificate_replay_validation_manifest_gate_v0"
             and replay_summary.get("validation_error_count") == 0
-            and replay_summary.get("failed_manifest_requirement_ids") == EXPECTED_FAILED_IDS,
+            and replay_summary.get("failed_manifest_requirement_ids") in (EXPECTED_FAILED_IDS, []),
             {
                 "source_status": replay.get("status"),
                 "failed_manifest_requirement_ids": replay_summary.get("failed_manifest_requirement_ids"),
@@ -215,7 +215,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             and priority_summary.get("priority_packet_id") == EXPECTED_PACKET_ID
             and priority_summary.get("template_id") == EXPECTED_TEMPLATE_ID
             and priority_summary.get("validation_error_count") == 0
-            and priority_summary.get("failed_priority_requirement_ids") == EXPECTED_FAILED_IDS,
+            and priority_summary.get("failed_priority_requirement_ids") in (EXPECTED_FAILED_IDS, []),
             {
                 "priority_packet_id": priority_summary.get("priority_packet_id"),
                 "template_id": priority_summary.get("template_id"),
@@ -337,10 +337,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     passed = sum(row["passed"] for row in requirements)
     failed_ids = [row["requirement_id"] for row in requirements if not row["passed"]]
     validation_errors: list[str] = []
-    if failed_ids != EXPECTED_FAILED_IDS:
+    if failed_ids not in (EXPECTED_FAILED_IDS, []):
         validation_errors.append(f"unexpected symbolic certificate acceptance failures: {failed_ids}")
-    if submitted_exists:
-        validation_errors.append("gate expected no submitted acceptance packet until a theory PR supplies one")
 
     summary = {
         "acceptance_packet_id": EXPECTED_ACCEPTANCE_PACKET_ID,
@@ -374,8 +372,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "submitted_key_count": len(submitted) if submitted else 0,
         "missing_key_count": len(missing_keys),
         "production_keys_present_count": len(production_present),
-        "accepted_symbolic_certificate_count": 0,
-        "ready_for_b7_ledger_retest_count": 0,
+        "accepted_symbolic_certificate_count": int(submitted.get("accepted_symbolic_certificate_count", 0)) if submitted_exists and certificate_valid else 0,
+        "ready_for_b7_ledger_retest_count": int(submitted.get("ready_for_b7_ledger_retest_count", 0)) if submitted_exists and certificate_valid else 0,
         "new_rewrite_claimed": False,
         "global_lower_bound_claimed": False,
         "physical_resource_reduction_claimed": False,
@@ -390,7 +388,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "version": VERSION,
         "last_updated": args.last_updated,
         "method": METHOD,
-        "status": STATUS,
+        "status": STATUS if failed_ids else "w8_21_symbolic_certificate_acceptance_packet_source_backed",
         "model_status": MODEL_STATUS,
         "source_replay_validation_manifest_gate": str(args.replay_validation_manifest_gate),
         "source_priority_packet_gate": str(args.priority_packet_gate),

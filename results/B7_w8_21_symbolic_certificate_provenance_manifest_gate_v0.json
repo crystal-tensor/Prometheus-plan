@@ -9,7 +9,7 @@
     "what_is_not_supported": "No provenance manifest or symbolic certificate has been submitted or accepted; no occurrence-removing rewrite, global lower bound, resource reduction, or B7 ledger improvement is supported.",
     "what_is_supported": "The first B7 w8_21 symbolic certificate route now has a provenance manifest packet that must bind target matrix, symbolic coordinates, local invariants, exclusion tables, notebook environment, and replay hashes before a theory artifact can be accepted."
   },
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-15",
   "linked_benchmark_id": "B1",
   "method": "b7_w8_21_symbolic_certificate_provenance_manifest_gate_v0",
   "model_status": "w8_21_symbolic_certificate_manifest_required_before_theory_artifact_acceptance",
@@ -77,12 +77,8 @@
   "requirements": [
     {
       "evidence": {
-        "failed_priority_requirement_ids": [
-          "P6",
-          "P7",
-          "P8"
-        ],
-        "source_status": "w8_21_symbolic_certificate_priority_packet_open_missing_artifact",
+        "failed_priority_requirement_ids": [],
+        "source_status": "w8_21_symbolic_certificate_priority_packet_source_backed",
         "validation_error_count": 0
       },
       "label": "Priority symbolic certificate packet remains valid and blocked only on P6/P7/P8",
@@ -132,31 +128,25 @@
     },
     {
       "evidence": {
-        "exists": false,
+        "exists": true,
         "submission_artifact_path": "results/B7_w8_21_symbolic_certificate_provenance_manifest_submissions/B7S1-w8-21-symbolic-certificate-provenance-manifest.json"
       },
       "label": "Provenance manifest artifact has been submitted",
-      "passed": false,
+      "passed": true,
       "requirement_id": "P6"
     },
     {
       "evidence": {
-        "missing_keys": [
-          "manifest_id",
-          "packet_id",
-          "template_id",
-          "priority_packet_hash",
+        "missing_keys": [],
+        "production_keys_present": [
           "normalized_target_matrix_source_hash",
           "symbolic_coordinate_system_source_hash",
           "local_invariant_expression_source_hash",
           "tested_scaffold_exclusion_source_hash",
           "uncovered_route_statement_source_hash",
-          "numeric_search_digest_source_hash",
           "theorem_or_notebook_environment_hash",
-          "reproduction_command_hash",
-          "claim_boundary"
+          "reproduction_command_hash"
         ],
-        "production_keys_present": [],
         "production_manifest_keys": [
           "normalized_target_matrix_source_hash",
           "symbolic_coordinate_system_source_hash",
@@ -166,20 +156,20 @@
           "theorem_or_notebook_environment_hash",
           "reproduction_command_hash"
         ],
-        "submitted_key_count": 0
+        "submitted_key_count": 16
       },
       "label": "Submitted manifest satisfies the locked provenance schema",
-      "passed": false,
+      "passed": true,
       "requirement_id": "P7"
     },
     {
       "evidence": {
-        "manifest_bound": false,
-        "replay_bound": false,
-        "source_evidence_files_present": false
+        "manifest_bound": true,
+        "replay_bound": true,
+        "source_evidence_files_present": true
       },
       "label": "Submitted manifest is source-backed, packet-bound, and replay-hash-bound",
-      "passed": false,
+      "passed": true,
       "requirement_id": "P8"
     },
     {
@@ -194,36 +184,32 @@
       "requirement_id": "P9"
     }
   ],
-  "runtime_seconds": 0.000141,
+  "runtime_seconds": 0.000183,
   "source_priority_packet_gate": "results/B7_w8_21_symbolic_certificate_priority_packet_gate_v0.json",
-  "status": "w8_21_symbolic_certificate_provenance_manifest_open_missing_artifact",
+  "status": "w8_21_symbolic_certificate_provenance_manifest_source_backed",
   "summary": {
     "accepted_symbolic_certificate_count": 0,
     "b7_ledger_improvement_claimed": false,
-    "failed_manifest_requirement_ids": [
-      "P6",
-      "P7",
-      "P8"
-    ],
+    "failed_manifest_requirement_ids": [],
     "global_lower_bound_claimed": false,
     "manifest_hash": "99d1eebef3bfe4676c8f6e42763a5e1032dc64bab1548608d6f1401fc6b5d61b",
     "manifest_id": "B7S1-w8-21-symbolic-certificate-provenance-manifest",
     "manifest_requirement_count": 9,
-    "manifest_requirements_failed": 3,
-    "manifest_requirements_passed": 6,
-    "missing_key_count": 13,
+    "manifest_requirements_failed": 0,
+    "manifest_requirements_passed": 9,
+    "missing_key_count": 0,
     "new_rewrite_claimed": false,
     "physical_resource_reduction_claimed": false,
     "prior_optimizer_runs": 43480,
     "priority_packet_hash": "c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c",
     "priority_packet_id": "B7-S1-w8-21-symbolic-kak-obstruction",
-    "production_keys_present_count": 0,
+    "production_keys_present_count": 7,
     "production_manifest_key_count": 7,
     "ready_for_b7_ledger_retest_count": 0,
     "required_evidence_file_count": 10,
     "required_manifest_key_count": 13,
-    "submitted_key_count": 0,
-    "submitted_manifest_exists": false,
+    "submitted_key_count": 16,
+    "submitted_manifest_exists": true,
     "target_removed_arbitrary_occurrences": 30,
     "target_removed_t_ledger": 600,
     "template_id": "w8_21",

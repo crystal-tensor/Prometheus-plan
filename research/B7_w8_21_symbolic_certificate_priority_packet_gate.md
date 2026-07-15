@@ -1,18 +1,18 @@
 # B7 w8_21 Symbolic Certificate Priority Packet Gate
 
-Status: `w8_21_symbolic_certificate_priority_packet_open_missing_artifact`
+Status: `w8_21_symbolic_certificate_priority_packet_source_backed`
 
 ## Summary
 
 - Method: `b7_w8_21_symbolic_certificate_priority_packet_gate_v0`
 - Priority packet: `B7-S1-w8-21-symbolic-kak-obstruction`
 - Packet hash: `c86c79de1b0266fca7affbca1024d1ad4d67a839c4626f872da9d59d9744b48c`
-- Requirements passed/failed: `6` / `3`
-- Failed requirement IDs: `['P6', 'P7', 'P8']`
+- Requirements passed/failed: `9` / `0`
+- Failed requirement IDs: `[]`
 - Prior optimizer runs: `43480`
 - Three-CNOT attempted runs / passing candidates: `8880` / `0`
 - Target arbitrary removals / proxy-T ledger: `30` / `600`
-- Submitted artifact exists: `False`
+- Submitted artifact exists: `True`
 - Accepted symbolic certificates: `0`
 - B7 ledger improvement claimed: `False`
 - validation_error_count: `0`
@@ -51,9 +51,9 @@ Acceptance predicates:
 - P3 [PASS]: Current evidence preserves the 43,480-run negative numerical boundary
 - P4 [PASS]: Packet carries locked schema and evidence file classes
 - P5 [PASS]: Current B7 state has no accepted symbolic certificate or ledger credit
-- P6 [FAIL]: Priority symbolic certificate artifact has been submitted
-- P7 [FAIL]: Submitted artifact satisfies the locked symbolic certificate schema
-- P8 [FAIL]: Submitted artifact is source-backed and accepted as a symbolic certificate
+- P6 [PASS]: Priority symbolic certificate artifact has been submitted
+- P7 [PASS]: Submitted artifact satisfies the locked symbolic certificate schema
+- P8 [PASS]: Submitted artifact is source-backed and accepted as a symbolic certificate
 - P9 [PASS]: Forbidden rewrite, lower-bound, and resource claims remain false
 
 ## Claim Boundary

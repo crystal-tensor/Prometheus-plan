@@ -31246,6 +31246,10 @@ def audit(root: Path) -> dict:
     )
     b7_w8_21_constructive_dressing = b7_results.get("w8_21_constructive_dressing_v0")
     b7_w8_21_context_absorption = b7_results.get("w8_21_context_absorption_v0")
+    b7_w8_21_symbolic_certificate = b7_results.get("w8_21_symbolic_certificate_v0")
+    b7_w8_21_symbolic_certificate_ledger_retest = b7_results.get(
+        "w8_21_symbolic_certificate_ledger_retest_v0"
+    )
     b7_status = {}
     if not b7_codesign:
         warnings.append("B7 manifest has no fault-tolerance co-design resource result")
@@ -32710,6 +32714,91 @@ def audit(root: Path) -> dict:
             errors.append("B7 w8_21 context absorption must keep B7 credit at zero")
         if claims.get("what_is_supported") is None or claims.get("what_is_not_supported") is None:
             errors.append("B7 w8_21 context absorption must include a claim boundary")
+
+    b7_w8_21_symbolic_certificate_status = {}
+    if not b7_w8_21_symbolic_certificate:
+        warnings.append("B7 manifest missing w8_21 symbolic certificate")
+    else:
+        result_path = b7_w8_21_symbolic_certificate.get("result")
+        candidate_path = b7_w8_21_symbolic_certificate.get("candidate")
+        markdown_path = b7_w8_21_symbolic_certificate.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        candidate_exists = bool(candidate_path and path_exists_from(benchmarks, candidate_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        for label, exists, path in [
+            ("result", result_exists, result_path),
+            ("candidate", candidate_exists, candidate_path),
+            ("markdown", markdown_exists, markdown_path),
+        ]:
+            if not exists:
+                errors.append(f"B7 w8_21 symbolic certificate {label} missing: {path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        theorem = payload.get("theorem", {})
+        b7_w8_21_symbolic_certificate_status = {
+            "status": payload.get("status"),
+            "method": payload.get("method"),
+            "template_id": payload.get("template_id"),
+            "classification": payload.get("classification"),
+            "machine_checked": payload.get("machine_checked"),
+            "exact_checks_passed": theorem.get("exact_checks_passed"),
+            "exact_checks_failed": theorem.get("exact_checks_failed"),
+            "accepted_symbolic_certificate_count": b7_w8_21_symbolic_certificate.get("accepted_symbolic_certificate_count"),
+            "result_exists": result_exists,
+            "candidate_exists": candidate_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "candidate": candidate_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != "symbolic_certificate_complete_scoped_no_resource_claim":
+            errors.append("B7 w8_21 symbolic certificate status mismatch")
+        if payload.get("method") != "b7_w8_21_symbolic_certificate_v0" or payload.get("template_id") != "w8_21":
+            errors.append("B7 w8_21 symbolic certificate identity mismatch")
+        if payload.get("machine_checked") is not True or theorem.get("exact_checks_passed") != 6 or theorem.get("exact_checks_failed") != 0:
+            errors.append("B7 w8_21 symbolic certificate exact-check ledger mismatch")
+        if payload.get("claim_boundary", {}).get("physical_resource_reduction_claimed") is not False:
+            errors.append("B7 w8_21 symbolic certificate must keep resource claim false")
+
+    b7_w8_21_symbolic_certificate_ledger_retest_status = {}
+    if not b7_w8_21_symbolic_certificate_ledger_retest:
+        warnings.append("B7 manifest missing w8_21 symbolic certificate ledger retest")
+    else:
+        result_path = b7_w8_21_symbolic_certificate_ledger_retest.get("result")
+        markdown_path = b7_w8_21_symbolic_certificate_ledger_retest.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B7 w8_21 symbolic certificate ledger retest result missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B7 w8_21 symbolic certificate ledger retest markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        resources = payload.get("resource_accounting", {})
+        b7_w8_21_symbolic_certificate_ledger_retest_status = {
+            "status": payload.get("status"),
+            "method": payload.get("method"),
+            "classification": payload.get("classification"),
+            "requirements_passed": payload.get("requirements_passed"),
+            "requirements_failed": payload.get("requirements_failed"),
+            "accepted_occurrence_removal": resources.get("accepted_occurrence_removal"),
+            "accepted_proxy_t_reduction": resources.get("accepted_proxy_t_reduction"),
+            "b7_credit": resources.get("b7_credit"),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != "symbolic_certificate_retest_complete_no_ledger_gain":
+            errors.append("B7 w8_21 symbolic certificate ledger retest status mismatch")
+        if payload.get("method") != "b7_w8_21_symbolic_certificate_ledger_retest_v0":
+            errors.append("B7 w8_21 symbolic certificate ledger retest method mismatch")
+        if payload.get("requirements_passed") != 10 or payload.get("requirements_failed") != 0:
+            errors.append("B7 w8_21 symbolic certificate ledger retest must pass 10/10")
+        if resources.get("baseline_cnot_count") != 2 or resources.get("certificate_cnot_count") != 2:
+            errors.append("B7 w8_21 symbolic certificate ledger retest CNOT delta mismatch")
+        if resources.get("baseline_arbitrary_parameter_count") != 5 or resources.get("certificate_arbitrary_parameter_count") != 5:
+            errors.append("B7 w8_21 symbolic certificate ledger retest parameter delta mismatch")
+        if resources.get("accepted_occurrence_removal") != 0 or resources.get("accepted_proxy_t_reduction") != 0 or resources.get("b7_credit") != 0:
+            errors.append("B7 w8_21 symbolic certificate ledger retest must keep resource delta at zero")
 
     b8_manifest = yaml.safe_load(read(b8_manifest_path))
     b8_results = b8_manifest.get("current_results", {})
@@ -43359,6 +43448,8 @@ def audit(root: Path) -> dict:
             "w8_21_controlled_invariant_closure": b7_w8_21_controlled_invariant_status,
             "w8_21_constructive_dressing": b7_w8_21_constructive_dressing_status,
             "w8_21_context_absorption": b7_w8_21_context_absorption_status,
+            "w8_21_symbolic_certificate": b7_w8_21_symbolic_certificate_status,
+            "w8_21_symbolic_certificate_ledger_retest": b7_w8_21_symbolic_certificate_ledger_retest_status,
         },
         "b8": {
             "manifest": str(b8_manifest_path),
@@ -44693,6 +44784,12 @@ def audit(root: Path) -> dict:
             ),
             "b7_w8_21_context_absorption": str(
                 research / "B7_w8_21_context_absorption.md"
+            ),
+            "b7_w8_21_symbolic_certificate": str(
+                research / "B7_w8_21_symbolic_certificate.md"
+            ),
+            "b7_w8_21_symbolic_certificate_ledger_retest": str(
+                research / "B7_w8_21_symbolic_certificate_ledger_retest.md"
             ),
             "b4_b8_circuit_refresh_task": str(research / "B4_B8_circuit_refresh_task.md"),
             "b4_b8_openqasm3_randomized_measurement_packet": str(

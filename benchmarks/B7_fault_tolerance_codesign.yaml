@@ -5596,6 +5596,46 @@ current_results:
     caveat: selected_context_boundary_only_not_full_circuit_rewrite_or_physical_layout_claim
     result: ../results/B7_w8_21_context_absorption_v0.json
     markdown_report: ../research/B7_w8_21_context_absorption.md
+  w8_21_symbolic_certificate_v0:
+    status: symbolic_certificate_complete_scoped_no_resource_claim
+    method: b7_w8_21_symbolic_certificate_v0
+    template_id: w8_21
+    classification: exact_fixed_skeleton_symbolic_invariant_certificate
+    machine_checked: true
+    exact_checks_passed: 6
+    exact_checks_failed: 0
+    prior_optimizer_runs: 43480
+    three_cnot_attempted_optimizer_runs: 8880
+    three_cnot_passing_candidate_count: 0
+    accepted_symbolic_certificate_count: 1
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit: 0
+    interpretation: exact_symbolic_relative_block_certificate_accepted_without_resource_delta
+    caveat: fixed_skeleton_certificate_not_global_kak_obstruction_or_compression_theorem
+    result: ../results/B7_w8_21_symbolic_certificate_v0.json
+    candidate: ../results/B7_w8_21_symbolic_certificate_candidate_v0.json
+    markdown_report: ../research/B7_w8_21_symbolic_certificate.md
+  w8_21_symbolic_certificate_ledger_retest_v0:
+    status: symbolic_certificate_retest_complete_no_ledger_gain
+    method: b7_w8_21_symbolic_certificate_ledger_retest_v0
+    template_id: w8_21
+    classification: exact_symbolic_certificate_accepted_zero_resource_delta
+    requirements_passed: 10
+    requirements_failed: 0
+    baseline_cnot_count: 2
+    certificate_cnot_count: 2
+    baseline_arbitrary_parameter_count: 5
+    certificate_arbitrary_parameter_count: 5
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    target_occurrence_removal_required: 30
+    target_proxy_t_reduction_required: 600
+    b7_credit: 0
+    interpretation: accepted_symbolic_certificate_retested_with_zero_resource_delta
+    caveat: no_full_circuit_rewrite_or_physical_layout_claim
+    result: ../results/B7_w8_21_symbolic_certificate_ledger_retest_v0.json
+    markdown_report: ../research/B7_w8_21_symbolic_certificate_ledger_retest.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
@@ -5652,4 +5692,7 @@ prototype_artifacts:
   w8_21_three_cnot_search: ../tools/b7_w8_21_three_cnot_search.py
   w8_21_controlled_invariant_closure: ../tools/b7_w8_21_controlled_invariant_closure.py
   w8_21_constructive_dressing: ../tools/b7_w8_21_constructive_dressing.py
+  w8_21_symbolic_certificate: ../tools/b7_w8_21_symbolic_certificate.py
+  w8_21_symbolic_submission_builder: ../tools/b7_w8_21_symbolic_submission_builder.py
+  w8_21_symbolic_certificate_ledger_retest: ../tools/b7_w8_21_symbolic_certificate_ledger_retest.py
   prototype_notes: ../research/B7_prototype_notes.md
