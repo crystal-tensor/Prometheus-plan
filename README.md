@@ -215,6 +215,17 @@ CX for a potential one-angle saving, but no rewrite, occurrence removal,
 proxy-T reduction, or B7 credit is accepted. This closes only the declared
 target-side family, not a global three-CX lower bound or a solved B1/B7 frontier.
 
+The follow-up B1/B7 mixed-support search moves one arbitrary angle across the
+local support boundary: four source target-side angles are retained, while
+the fifth is placed on each of 18 other local Euler slots. Three CX gates and
+all eight CX direction sequences are retained, giving 720 families per
+context. Across seven source-bound contexts, 10,080 deterministic optimizer
+runs produce exact replays `0/7`; the best residual is `1.033550478227691`.
+The best family consistently returns to `pre:q0:rz0` plus four target-side
+slots, but still fails exact replay. No rewrite, occurrence removal,
+proxy-T reduction, or B7 credit is accepted; this closes only the declared
+mixed-support family, not a global three-CX lower bound.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness

@@ -5805,9 +5805,35 @@ current_results:
     caveat: bounded_three_cnot_five_angle_search_not_global_synthesis_lower_bound
     result: ../results/B7_w8_21_three_cnot_five_angle_search_v0.json
     markdown_report: ../research/B7_w8_21_three_cnot_five_angle_search.md
+  w8_21_three_cnot_five_angle_mixed_support_search_v0:
+    status: three_cnot_five_angle_mixed_support_search_complete_no_exact_context_replay
+    method: b7_w8_21_three_cnot_five_angle_mixed_support_search_v0
+    template_id: w8_21
+    classification: bounded_three_cnot_five_angle_mixed_support_frontier
+    family_count: 720
+    tested_context_count: 7
+    exact_context_count: 0
+    total_exact_family_count: 0
+    attempted_optimizer_runs: 10080
+    best_residual_norm: 1.033550478227691
+    baseline_cnot_count: 2
+    candidate_cnot_count: 3
+    baseline_arbitrary_parameter_count: 6
+    candidate_arbitrary_parameter_count: 5
+    potential_arbitrary_parameter_saving_if_exact: 1
+    source_slot_overlap: 4
+    external_slot_count: 18
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit: 0
+    interpretation: moving_one_angle_off_target_side_did_not_open_a_new_absorption_route_in_declared_mixed_support_family
+    caveat: bounded_three_cnot_five_angle_mixed_support_search_not_global_synthesis_lower_bound
+    result: ../results/B7_w8_21_three_cnot_five_angle_mixed_support_search_v0.json
+    markdown_report: ../research/B7_w8_21_three_cnot_five_angle_mixed_support_search.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
+  w8_21_three_cnot_five_angle_mixed_support_search: ../tools/b7_w8_21_three_cnot_five_angle_mixed_support_search.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
   b2_calibrated_dependency_credit_gate: ../tools/b7_b2_calibrated_dependency_credit_gate.py
   b7_b2_calibrated_trace_acceptance_boundary: ../tools/b7_b2_calibrated_trace_acceptance_boundary.py
