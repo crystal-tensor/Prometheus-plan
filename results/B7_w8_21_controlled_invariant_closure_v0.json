@@ -1,0 +1,116 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "passed": true
+    },
+    {
+      "condition_id": "A2",
+      "passed": true
+    },
+    {
+      "condition_id": "A3",
+      "passed": true
+    },
+    {
+      "condition_id": "A4",
+      "passed": true
+    },
+    {
+      "condition_id": "A5",
+      "passed": true
+    },
+    {
+      "condition_id": "A6",
+      "passed": true
+    },
+    {
+      "condition_id": "A7",
+      "passed": true
+    },
+    {
+      "condition_id": "A8",
+      "passed": true
+    },
+    {
+      "condition_id": "A9",
+      "passed": true
+    },
+    {
+      "condition_id": "A10",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "markdown_report": "research/B7_w8_21_controlled_invariant_closure.md",
+    "result": "results/B7_w8_21_controlled_invariant_closure_v0.json",
+    "source_bindings": [
+      "benchmarks/qasmbench_medium_exact/gcm_h6.qasm",
+      "results/B7_w8_21_kak_invariant_packet_v0.json"
+    ]
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "an occurrence-removing rewrite, fewer CNOTs, fewer arbitrary rotations, a global two-CNOT lower bound, exclusion of other Clifford scaffolds, proxy-T reduction, B7 credit, hardware advantage, or a solved B1/B7 frontier",
+    "what_is_supported": "a family-level controlled-unitary decomposition and source-bound symbolic relative-block/magic-polynomial closure for the fixed w8_21 two-CNOT role skeleton"
+  },
+  "classification": "family_level_symbolic_invariant_closure",
+  "derived_structure": {
+    "control_target_basis": true,
+    "independent_of_relative_half_trace": [
+      "d",
+      "e"
+    ],
+    "magic_characteristic_polynomial": "(lambda^2 - 2*tau*lambda + 1)^2",
+    "magic_minimal_polynomial": "lambda^2 - 2*tau*lambda + 1",
+    "relative_block": "W = U0^dagger U1 = [[-exp(i*b)*cos(c), -exp(i*a)*sin(c)], [exp(-i*a)*sin(c), -exp(-i*b)*cos(c)]]",
+    "relative_half_trace": "tau = -cos(b)*cos(c)",
+    "unitary_block_form": "U = |0><0| tensor U0 + |1><1| tensor U1"
+  },
+  "family_validation": {
+    "max_residuals": {
+      "characteristic_coefficient_residual": 6.672757098137052e-15,
+      "control_block_reconstruction_residual": 6.094585005555204e-16,
+      "magic_quadratic_residual": 3.609270141867322e-15,
+      "relative_closed_form_residual": 8.874191536472157e-16,
+      "relative_unitary_residual": 1.4138919764093306e-15,
+      "unitary_residual": 1.0201653243557119e-15
+    },
+    "sample_count": 65
+  },
+  "method": "b7_w8_21_controlled_invariant_closure_v0",
+  "payload_hash": "f778ad7583c83420cbca6eb420fc2c153d92293fa08d6a66973bc18fda046f3c",
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "source_bindings": {
+    "benchmarks/qasmbench_medium_exact/gcm_h6.qasm": {
+      "path": "benchmarks/qasmbench_medium_exact/gcm_h6.qasm",
+      "sha256": "2519fdb644635c9f21671c725c23d83893e2b62ccfd926fe2d85b868a01e2bcd"
+    },
+    "results/B7_w8_21_kak_invariant_packet_v0.json": {
+      "path": "results/B7_w8_21_kak_invariant_packet_v0.json",
+      "sha256": "bd0e04726e84667778b79c553723fb75e53f9c27d1f108ffb2872a55b7c01d97"
+    }
+  },
+  "source_evidence": {
+    "characteristic_coefficient_residual": 2.2452871135843694e-15,
+    "control_block_reconstruction_residual": 2.9176378038049177e-16,
+    "magic_quadratic_residual": 1.0322430583536726e-15,
+    "relative_closed_form_residual": 3.6188843062238402e-16,
+    "relative_unitary_residual": 5.307973375416775e-16,
+    "tau": 0.5000000000000002,
+    "tau_from_relative_half_trace": 0.5000000000000003,
+    "unitary_residual": 1.159339140064253e-16
+  },
+  "source_parameters": {
+    "a": 1.4922506383856682,
+    "b": 2.18700743192748,
+    "c": 0.5253852471287274,
+    "d": 2.538142068316358,
+    "e": 1.1254377896453873
+  },
+  "source_tau_error_from_one_half": 2.220446049250313e-16,
+  "status": "controlled_invariant_closure_complete_scoped_no_compression_claim",
+  "template_id": "w8_21",
+  "title": "B7 w8_21 controlled-unitary invariant closure",
+  "version": 0
+}

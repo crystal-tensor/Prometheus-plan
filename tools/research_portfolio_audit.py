@@ -31241,6 +31241,9 @@ def audit(root: Path) -> dict:
     b7_w8_21_three_cnot_search = b7_results.get("w8_21_three_cnot_search_v0")
     b7_w8_21_scoped_minimality_note = b7_results.get("w8_21_scoped_minimality_note_v0")
     b7_w8_21_claim_boundary_fragment = b7_results.get("w8_21_claim_boundary_fragment_v0")
+    b7_w8_21_controlled_invariant_closure = b7_results.get(
+        "w8_21_controlled_invariant_closure_v0"
+    )
     b7_status = {}
     if not b7_codesign:
         warnings.append("B7 manifest has no fault-tolerance co-design resource result")
@@ -32513,8 +32516,64 @@ def audit(root: Path) -> dict:
             errors.append("B7 w8_21 claim-boundary fragment must keep removed T ledger at 0")
         if b7_w8_21_claim_boundary_fragment.get("global_minimality_theorem_claimed") is not False:
             errors.append("B7 w8_21 claim-boundary fragment must not claim a global minimality theorem")
-        if b7_w8_21_claim_boundary_fragment.get("total_optimizer_runs_across_searches") != 43480:
+    if b7_w8_21_claim_boundary_fragment.get("total_optimizer_runs_across_searches") != 43480:
             errors.append("B7 w8_21 claim-boundary fragment optimizer-run total must remain 43480")
+
+    b7_w8_21_controlled_invariant_status = {}
+    if not b7_w8_21_controlled_invariant_closure:
+        warnings.append("B7 manifest missing w8_21 controlled-invariant closure")
+    else:
+        result_path = b7_w8_21_controlled_invariant_closure.get("result")
+        markdown_path = b7_w8_21_controlled_invariant_closure.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B7 w8_21 controlled-invariant closure result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B7 w8_21 controlled-invariant closure markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        family = payload.get("family_validation", {})
+        claims = payload.get("claim_boundary", {})
+        b7_w8_21_controlled_invariant_status = {
+            "status": b7_w8_21_controlled_invariant_closure.get("status"),
+            "method": b7_w8_21_controlled_invariant_closure.get("method"),
+            "template_id": payload.get("template_id"),
+            "classification": payload.get("classification"),
+            "source_tau": payload.get("source_evidence", {}).get("tau"),
+            "family_sample_count": family.get("sample_count"),
+            "family_max_residuals": family.get("max_residuals"),
+            "requirements_passed": payload.get("requirements_passed"),
+            "requirements_failed": payload.get("requirements_failed"),
+            "compression_rewrite_claimed": b7_w8_21_controlled_invariant_closure.get(
+                "compression_rewrite_claimed"
+            ),
+            "global_two_cnot_lower_bound_claimed": b7_w8_21_controlled_invariant_closure.get(
+                "global_two_cnot_lower_bound_claimed"
+            ),
+            "b7_credit_claimed": b7_w8_21_controlled_invariant_closure.get("b7_credit_claimed"),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != "controlled_invariant_closure_complete_scoped_no_compression_claim":
+            errors.append("B7 w8_21 controlled-invariant closure status mismatch")
+        if payload.get("method") != b7_w8_21_controlled_invariant_closure.get("method"):
+            errors.append("B7 w8_21 controlled-invariant closure method mismatch")
+        if payload.get("template_id") != "w8_21":
+            errors.append("B7 w8_21 controlled-invariant closure template mismatch")
+        if payload.get("requirements_passed") != 10 or payload.get("requirements_failed") != 0:
+            errors.append("B7 w8_21 controlled-invariant closure must pass 10/10 requirements")
+        if family.get("sample_count") != 65:
+            errors.append("B7 w8_21 controlled-invariant closure family sample count mismatch")
+        if b7_w8_21_controlled_invariant_closure.get("compression_rewrite_claimed") is not False:
+            errors.append("B7 w8_21 controlled-invariant closure must not claim a rewrite")
+        if b7_w8_21_controlled_invariant_closure.get("global_two_cnot_lower_bound_claimed") is not False:
+            errors.append("B7 w8_21 controlled-invariant closure must not claim a global lower bound")
+        if b7_w8_21_controlled_invariant_closure.get("b7_credit_claimed") is not False:
+            errors.append("B7 w8_21 controlled-invariant closure must not claim B7 credit")
+        if claims.get("what_is_supported") is None or claims.get("what_is_not_supported") is None:
+            errors.append("B7 w8_21 controlled-invariant closure must include a claim boundary")
 
     b8_manifest = yaml.safe_load(read(b8_manifest_path))
     b8_results = b8_manifest.get("current_results", {})
@@ -43161,6 +43220,7 @@ def audit(root: Path) -> dict:
             "w8_21_three_cnot_search": b7_w8_21_three_cnot_status,
             "w8_21_scoped_minimality_note": b7_w8_21_minimality_note_status,
             "w8_21_claim_boundary_fragment": b7_w8_21_claim_boundary_status,
+            "w8_21_controlled_invariant_closure": b7_w8_21_controlled_invariant_status,
         },
         "b8": {
             "manifest": str(b8_manifest_path),
@@ -44487,6 +44547,9 @@ def audit(root: Path) -> dict:
             "b7_w8_21_three_cnot_search": str(research / "B7_w8_21_three_cnot_search.md"),
             "b7_w8_21_scoped_minimality_note": str(research / "B7_w8_21_scoped_minimality_note.md"),
             "b7_w8_21_claim_boundary_fragment": str(research / "B7_w8_21_claim_boundary_fragment.md"),
+            "b7_w8_21_controlled_invariant_closure": str(
+                research / "B7_w8_21_controlled_invariant_closure.md"
+            ),
             "b4_b8_circuit_refresh_task": str(research / "B4_B8_circuit_refresh_task.md"),
             "b4_b8_openqasm3_randomized_measurement_packet": str(
                 research / "B4_B8_openqasm3_randomized_measurement_packet.md"

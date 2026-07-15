@@ -5508,6 +5508,36 @@ current_results:
     caveat: local_invariant_and_rank_witness_only_not_symbolic_kak_theorem
     result: ../results/B7_w8_21_kak_invariant_packet_v0.json
     markdown_report: ../research/B7_w8_21_kak_invariant_packet.md
+  w8_21_controlled_invariant_closure_v0:
+    status: controlled_invariant_closure_complete_scoped_no_compression_claim
+    method: b7_w8_21_controlled_invariant_closure_v0
+    source_kak_packet: ../results/B7_w8_21_kak_invariant_packet_v0.json
+    source_qasm: ../benchmarks/qasmbench_medium_exact/gcm_h6.qasm
+    template_id: w8_21
+    classification: family_level_symbolic_invariant_closure
+    control_target_basis_block_diagonal: true
+    relative_half_trace_formula: "tau = -cos(b)*cos(c)"
+    magic_minimal_polynomial: "lambda^2 - 2*tau*lambda + 1"
+    magic_characteristic_polynomial: "(lambda^2 - 2*tau*lambda + 1)^2"
+    relative_half_trace_independent_parameters: [d, e]
+    source_tau: 0.5000000000000002
+    source_tau_error_from_one_half: 2.220446049250313e-16
+    source_magic_quadratic_residual: 1.0322430583536726e-15
+    source_characteristic_coefficient_residual: 2.2452871135843694e-15
+    family_sample_count: 65
+    family_max_relative_closed_form_residual: 8.874191536472157e-16
+    family_max_characteristic_coefficient_residual: 6.672757098137052e-15
+    requirements_passed: 10
+    requirements_failed: 0
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    compression_rewrite_claimed: false
+    global_two_cnot_lower_bound_claimed: false
+    b7_credit_claimed: false
+    interpretation: fixed_w8_21_skeleton_has_family_level_one_parameter_nonlocal_invariant_and_local_dressing_route
+    caveat: symbolic_family_closure_and_numeric_validation_only_not_compression_or_minimality_theorem
+    result: ../results/B7_w8_21_controlled_invariant_closure_v0.json
+    markdown_report: ../research/B7_w8_21_controlled_invariant_closure.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
@@ -5562,4 +5592,5 @@ prototype_artifacts:
   w8_21_broad_skeleton_search: ../tools/b7_w8_21_broad_skeleton_search.py
   w8_21_euler_local_search: ../tools/b7_w8_21_euler_local_search.py
   w8_21_three_cnot_search: ../tools/b7_w8_21_three_cnot_search.py
+  w8_21_controlled_invariant_closure: ../tools/b7_w8_21_controlled_invariant_closure.py
   prototype_notes: ../research/B7_prototype_notes.md

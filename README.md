@@ -87,6 +87,19 @@ witness records local rank 5 and a largest 5-by-5 minor determinant of
 it is not a symbolic KAK theorem, a global two-CNOT lower bound, an
 occurrence-removing rewrite, a resource reduction, or B7 credit.
 
+The newest B1/B7 artifact upgrades that pointwise observation into a family-level
+controlled-unitary invariant closure for the fixed `w8_21` two-CNOT skeleton.
+In the control-target basis, the relative block has the explicit form
+`W = U0^dagger U1` with `tau = trace(W)/2 = -cos(b)cos(c)`, independent of the
+`d` and `e` dressing angles. The magic-basis matrix satisfies the candidate
+quadratic identity `m^2 - 2*tau*m + I = 0` and characteristic polynomial
+`(lambda^2 - 2*tau*lambda + 1)^2`. The source point has `tau=0.5000000000000002`;
+65 deterministic family points pass with maximum closed-form residual
+`8.875e-16` and characteristic-coefficient residual `6.673e-15`. This is a
+family-level invariant and a route to local-dressing synthesis, not yet an
+occurrence-removing rewrite, fewer arbitrary rotations, a global lower bound,
+or B7 credit.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness
