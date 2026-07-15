@@ -100,6 +100,16 @@ family-level invariant and a route to local-dressing synthesis, not yet an
 occurrence-removing rewrite, fewer arbitrary rotations, a global lower bound,
 or B7 credit.
 
+The follow-up B1/B7 artifact now gives an explicit constructive normal form for
+the same fixed `w8_21` skeleton:
+`U = (I tensor Ry(e) Rz(d)) CX (I tensor Ry(-c) Rz(b+pi)) CX (I tensor Rz(a))`.
+The source residual is `4.074e-16`; 65 deterministic family points pass with
+maximum constructive residual `5.895e-16` and controlled-relative residual
+`8.243e-16`. The factorization preserves 2 CNOTs and all 5 arbitrary
+parameters. It is a reusable synthesis scaffold, but it does not remove an
+occurrence, lower arbitrary-rotation count, reduce proxy-T cost, or add B7
+credit.
+
 The current B5/B10 line has recently moved from small-cluster denominators to
 seeded MPS pressure, non-seeded one-site MPS/ALS pressure, and a two-site
 finite-DMRG-style pressure prototype. B5 now has a canonical-DMRG readiness

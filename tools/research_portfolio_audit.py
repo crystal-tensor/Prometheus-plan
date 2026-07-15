@@ -31244,6 +31244,7 @@ def audit(root: Path) -> dict:
     b7_w8_21_controlled_invariant_closure = b7_results.get(
         "w8_21_controlled_invariant_closure_v0"
     )
+    b7_w8_21_constructive_dressing = b7_results.get("w8_21_constructive_dressing_v0")
     b7_status = {}
     if not b7_codesign:
         warnings.append("B7 manifest has no fault-tolerance co-design resource result")
@@ -32574,6 +32575,73 @@ def audit(root: Path) -> dict:
             errors.append("B7 w8_21 controlled-invariant closure must not claim B7 credit")
         if claims.get("what_is_supported") is None or claims.get("what_is_not_supported") is None:
             errors.append("B7 w8_21 controlled-invariant closure must include a claim boundary")
+
+    b7_w8_21_constructive_dressing_status = {}
+    if not b7_w8_21_constructive_dressing:
+        warnings.append("B7 manifest missing w8_21 constructive dressing")
+    else:
+        result_path = b7_w8_21_constructive_dressing.get("result")
+        markdown_path = b7_w8_21_constructive_dressing.get("markdown_report")
+        result_exists = bool(result_path and path_exists_from(benchmarks, result_path))
+        markdown_exists = bool(markdown_path and path_exists_from(benchmarks, markdown_path))
+        if not result_exists:
+            errors.append(f"B7 w8_21 constructive dressing result path missing: {result_path}")
+        if not markdown_exists:
+            errors.append(f"B7 w8_21 constructive dressing markdown missing: {markdown_path}")
+        payload = json.loads(read((benchmarks / result_path).resolve())) if result_exists else {}
+        family = payload.get("family_validation", {})
+        factor = payload.get("derived_factorization", {})
+        resources = payload.get("resource_accounting", {})
+        claims = payload.get("claim_boundary", {})
+        b7_w8_21_constructive_dressing_status = {
+            "status": b7_w8_21_constructive_dressing.get("status"),
+            "method": b7_w8_21_constructive_dressing.get("method"),
+            "template_id": payload.get("template_id"),
+            "classification": payload.get("classification"),
+            "absorbed_normal_form": factor.get("absorbed_normal_form"),
+            "family_sample_count": family.get("sample_count"),
+            "family_max_constructive_unitary_residual": family.get("max_residuals", {}).get(
+                "constructive_unitary_residual"
+            ),
+            "family_max_euler_controlled_relative_residual": family.get("max_residuals", {}).get(
+                "euler_controlled_relative_residual"
+            ),
+            "requirements_passed": payload.get("requirements_passed"),
+            "requirements_failed": payload.get("requirements_failed"),
+            "cnot_count": resources.get("normal_form_cnot_count"),
+            "arbitrary_parameter_count": resources.get("normal_form_arbitrary_parameter_count"),
+            "accepted_occurrence_removal": resources.get("accepted_occurrence_removal"),
+            "accepted_proxy_t_reduction": resources.get("accepted_proxy_t_reduction"),
+            "b7_credit": resources.get("b7_credit"),
+            "result_exists": result_exists,
+            "markdown_exists": markdown_exists,
+            "result": result_path,
+            "markdown_report": markdown_path,
+        }
+        if payload.get("status") != "constructive_dressing_complete_no_resource_reduction_claim":
+            errors.append("B7 w8_21 constructive dressing status mismatch")
+        if payload.get("method") != b7_w8_21_constructive_dressing.get("method"):
+            errors.append("B7 w8_21 constructive dressing method mismatch")
+        if payload.get("template_id") != "w8_21":
+            errors.append("B7 w8_21 constructive dressing template mismatch")
+        if payload.get("requirements_passed") != 10 or payload.get("requirements_failed") != 0:
+            errors.append("B7 w8_21 constructive dressing must pass 10/10 requirements")
+        if family.get("sample_count") != 65:
+            errors.append("B7 w8_21 constructive dressing family sample count mismatch")
+        if resources.get("baseline_cnot_count") != 2 or resources.get("normal_form_cnot_count") != 2:
+            errors.append("B7 w8_21 constructive dressing must preserve two CNOTs")
+        if resources.get("baseline_arbitrary_parameter_count") != 5 or resources.get(
+            "normal_form_arbitrary_parameter_count"
+        ) != 5:
+            errors.append("B7 w8_21 constructive dressing must preserve five arbitrary parameters")
+        if resources.get("accepted_occurrence_removal") != 0:
+            errors.append("B7 w8_21 constructive dressing must keep occurrence removal at zero")
+        if resources.get("accepted_proxy_t_reduction") != 0:
+            errors.append("B7 w8_21 constructive dressing must keep proxy-T reduction at zero")
+        if resources.get("b7_credit") != 0:
+            errors.append("B7 w8_21 constructive dressing must keep B7 credit at zero")
+        if claims.get("what_is_supported") is None or claims.get("what_is_not_supported") is None:
+            errors.append("B7 w8_21 constructive dressing must include a claim boundary")
 
     b8_manifest = yaml.safe_load(read(b8_manifest_path))
     b8_results = b8_manifest.get("current_results", {})
@@ -43221,6 +43289,7 @@ def audit(root: Path) -> dict:
             "w8_21_scoped_minimality_note": b7_w8_21_minimality_note_status,
             "w8_21_claim_boundary_fragment": b7_w8_21_claim_boundary_status,
             "w8_21_controlled_invariant_closure": b7_w8_21_controlled_invariant_status,
+            "w8_21_constructive_dressing": b7_w8_21_constructive_dressing_status,
         },
         "b8": {
             "manifest": str(b8_manifest_path),
@@ -44549,6 +44618,9 @@ def audit(root: Path) -> dict:
             "b7_w8_21_claim_boundary_fragment": str(research / "B7_w8_21_claim_boundary_fragment.md"),
             "b7_w8_21_controlled_invariant_closure": str(
                 research / "B7_w8_21_controlled_invariant_closure.md"
+            ),
+            "b7_w8_21_constructive_dressing": str(
+                research / "B7_w8_21_constructive_dressing.md"
             ),
             "b4_b8_circuit_refresh_task": str(research / "B4_B8_circuit_refresh_task.md"),
             "b4_b8_openqasm3_randomized_measurement_packet": str(

@@ -5538,6 +5538,36 @@ current_results:
     caveat: symbolic_family_closure_and_numeric_validation_only_not_compression_or_minimality_theorem
     result: ../results/B7_w8_21_controlled_invariant_closure_v0.json
     markdown_report: ../research/B7_w8_21_controlled_invariant_closure.md
+  w8_21_constructive_dressing_v0:
+    status: constructive_dressing_complete_no_resource_reduction_claim
+    method: b7_w8_21_constructive_dressing_v0
+    source_controlled_invariant: ../results/B7_w8_21_controlled_invariant_closure_v0.json
+    source_qasm: ../benchmarks/qasmbench_medium_exact/gcm_h6.qasm
+    template_id: w8_21
+    classification: exact_two_cnot_local_dressing_normal_form
+    absorbed_normal_form: "U = (I tensor Ry(e) Rz(d)) CX (I tensor Ry(-c) Rz(b+pi)) CX (I tensor Rz(a))"
+    cnot_count: 2
+    arbitrary_parameter_count: 5
+    fixed_pi_rotation_count: 1
+    source_constructive_unitary_residual: 4.0744958118297253e-16
+    source_euler_controlled_relative_residual: 4.47545209131181e-16
+    family_sample_count: 65
+    family_max_constructive_unitary_residual: 5.895304025466618e-16
+    family_max_euler_controlled_relative_residual: 8.242985408089819e-16
+    requirements_passed: 10
+    requirements_failed: 0
+    baseline_cnot_count: 2
+    baseline_arbitrary_parameter_count: 5
+    accepted_occurrence_removal: 0
+    accepted_proxy_t_reduction: 0
+    b7_credit: 0
+    compression_rewrite_claimed: false
+    fewer_arbitrary_rotations_claimed: false
+    global_two_cnot_lower_bound_claimed: false
+    interpretation: exact_constructive_two_cnot_normal_form_preserves_five_continuous_parameters
+    caveat: constructive_identity_and_family_replay_only_not_resource_reduction_or_minimality_theorem
+    result: ../results/B7_w8_21_constructive_dressing_v0.json
+    markdown_report: ../research/B7_w8_21_constructive_dressing.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   dependency_schedule_bridge: ../tools/b7_dependency_schedule_bridge.py
@@ -5593,4 +5623,5 @@ prototype_artifacts:
   w8_21_euler_local_search: ../tools/b7_w8_21_euler_local_search.py
   w8_21_three_cnot_search: ../tools/b7_w8_21_three_cnot_search.py
   w8_21_controlled_invariant_closure: ../tools/b7_w8_21_controlled_invariant_closure.py
+  w8_21_constructive_dressing: ../tools/b7_w8_21_constructive_dressing.py
   prototype_notes: ../research/B7_prototype_notes.md

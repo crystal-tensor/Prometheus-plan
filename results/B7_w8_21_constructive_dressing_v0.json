@@ -1,0 +1,134 @@
+{
+  "acceptance_conditions": [
+    {
+      "condition_id": "A1",
+      "passed": true
+    },
+    {
+      "condition_id": "A2",
+      "passed": true
+    },
+    {
+      "condition_id": "A3",
+      "passed": true
+    },
+    {
+      "condition_id": "A4",
+      "passed": true
+    },
+    {
+      "condition_id": "A5",
+      "passed": true
+    },
+    {
+      "condition_id": "A6",
+      "passed": true
+    },
+    {
+      "condition_id": "A7",
+      "passed": true
+    },
+    {
+      "condition_id": "A8",
+      "passed": true
+    },
+    {
+      "condition_id": "A9",
+      "passed": true
+    },
+    {
+      "condition_id": "A10",
+      "passed": true
+    }
+  ],
+  "artifacts": {
+    "markdown_report": "research/B7_w8_21_constructive_dressing.md",
+    "result": "results/B7_w8_21_constructive_dressing_v0.json",
+    "source_bindings": [
+      "benchmarks/qasmbench_medium_exact/gcm_h6.qasm",
+      "results/B7_w8_21_controlled_invariant_closure_v0.json"
+    ]
+  },
+  "claim_boundary": {
+    "what_is_not_supported": "fewer CNOTs, fewer arbitrary rotations, an occurrence-removing rewrite, a global lower bound, exclusion of all other Clifford scaffolds, proxy-T reduction, B7 credit, or a solved B1/B7 frontier",
+    "what_is_supported": "an exact constructive two-CNOT local-dressing normal form for the fixed w8_21 role skeleton, with a deterministic 65-point replay validation"
+  },
+  "classification": "exact_two_cnot_local_dressing_normal_form",
+  "derived_factorization": {
+    "absorbed_normal_form": "U = (I tensor Ry(e) Rz(d)) CX (I tensor Ry(-c) Rz(b+pi)) CX (I tensor Rz(a))",
+    "arbitrary_parameter_count": 5,
+    "cnot_count": 2,
+    "controlled_u_identity": "controlled(W) = (I tensor A) CX (I tensor B) CX (I tensor C)",
+    "euler_layers": {
+      "A": "Rz(-a-b-pi) Ry(c)",
+      "B": "Ry(-c) Rz(b+pi)",
+      "C": "Rz(a)"
+    },
+    "fixed_pi_rotation_count": 1,
+    "relative_block_euler": "W = Rz(alpha) Ry(2c) Rz(gamma), alpha=-a-b-pi, gamma=a-b-pi",
+    "source_form": "U = (I tensor U0) controlled(W)"
+  },
+  "family_validation": {
+    "max_residuals": {
+      "constructive_unitary_residual": 5.895304025466618e-16,
+      "controlled_block_reconstruction_residual": 8.441528768080325e-16,
+      "controlled_reconstruction_unitarity_residual": 1.4138919764093306e-15,
+      "euler_abc_identity_residual": 4.952685803010899e-16,
+      "euler_controlled_relative_residual": 8.242985408089819e-16,
+      "left_layer_unitarity_residual": 3.1629854792699655e-16,
+      "middle_layer_unitarity_residual": 3.166578841841434e-16,
+      "relative_closed_form_residual": 8.874191536472157e-16,
+      "right_layer_unitarity_residual": 3.1401849173675503e-16,
+      "source_block_unitarity_residual": 7.850653145160358e-16,
+      "source_unitary_residual": 1.0201653243557119e-15
+    },
+    "sample_count": 65
+  },
+  "method": "b7_w8_21_constructive_dressing_v0",
+  "payload_hash": "c850d553eb0a1ec5338314f2bbe7f656035f56270dcc9a956cb9991ec7b1988e",
+  "requirements_failed": 0,
+  "requirements_passed": 10,
+  "resource_accounting": {
+    "accepted_occurrence_removal": 0,
+    "accepted_proxy_t_reduction": 0,
+    "b7_credit": 0,
+    "baseline_arbitrary_parameter_count": 5,
+    "baseline_cnot_count": 2,
+    "normal_form_arbitrary_parameter_count": 5,
+    "normal_form_cnot_count": 2
+  },
+  "source_bindings": {
+    "benchmarks/qasmbench_medium_exact/gcm_h6.qasm": {
+      "path": "benchmarks/qasmbench_medium_exact/gcm_h6.qasm",
+      "sha256": "2519fdb644635c9f21671c725c23d83893e2b62ccfd926fe2d85b868a01e2bcd"
+    },
+    "results/B7_w8_21_controlled_invariant_closure_v0.json": {
+      "path": "results/B7_w8_21_controlled_invariant_closure_v0.json",
+      "sha256": "dc6685b11c71fb58ff0c999460923c805d027833718a8cee89dd401042de416b"
+    }
+  },
+  "source_evidence": {
+    "constructive_unitary_residual": 4.0744958118297253e-16,
+    "controlled_block_reconstruction_residual": 5.523289809442722e-16,
+    "controlled_reconstruction_unitarity_residual": 5.307973375416775e-16,
+    "euler_abc_identity_residual": 5.748126825283149e-17,
+    "euler_controlled_relative_residual": 4.47545209131181e-16,
+    "left_layer_unitarity_residual": 1.6101609261524754e-16,
+    "middle_layer_unitarity_residual": 1.497932552195259e-17,
+    "relative_closed_form_residual": 3.6188843062238402e-16,
+    "right_layer_unitarity_residual": 0.0,
+    "source_block_unitarity_residual": 5.485868329643117e-16,
+    "source_unitary_residual": 1.159339140064253e-16
+  },
+  "source_parameters": {
+    "a": 1.4922506383856682,
+    "b": 2.18700743192748,
+    "c": 0.5253852471287274,
+    "d": 2.538142068316358,
+    "e": 1.1254377896453873
+  },
+  "status": "constructive_dressing_complete_no_resource_reduction_claim",
+  "template_id": "w8_21",
+  "title": "B7 w8_21 constructive local dressing",
+  "version": 0
+}
