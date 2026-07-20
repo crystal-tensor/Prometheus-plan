@@ -3438,6 +3438,72 @@ current_results:
     markdown_report: ../research/B4_B8_R173_independent_divergence_oracle.md
     executor: ../tools/b4_b8_r173_independent_divergence_oracle.py
     source_result: ../results/B4_B8_R173_first_divergent_combine_trace_v0.json
+  b4_b8_r174_exact_score_comparator_v0:
+    status: shadow_comparator_matrix_passed
+    method: b4_b8_r174_exact_score_comparator_v0
+    source_target_id: T-B4-002ct/T-B8-003cx/T-B10-009cj-r174
+    upstream_target_id: T-B4-002cs/T-B8-003cw/T-B10-009ci-r174-protocol
+    dataset_count: 3
+    worker_file_count: 9
+    replay_rows_validated: 576
+    candidate_totals_validated: 1728
+    permutation_checks_passed: 3456
+    permutation_check_count: 3456
+    r169_non_tie_source_preserved: 192
+    r170_true_tie_repaired: 192
+    r172_true_tie_repaired: 192
+    r160_tie_controls_passed: 4
+    r160_non_tie_controls_passed: 28
+    qiskit_calls_performed: 0
+    simulation_execution_count: 0
+    total_simulated_shots: 0
+    qiskit_source_changed: false
+    production_policy_changed: false
+    qiskit_bug_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    solved_frontier_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R174_exact_score_comparator_v0.json
+    markdown_report: ../research/B4_B8_R174_exact_score_comparator.md
+    protocol: ../results/B4_B8_R174_exact_score_comparator_protocol_v0.json
+    contract: B4_B8_R174_exact_score_comparator_contract_v0.json
+    comparator: ../tools/b4_b8_r174_exact_score_comparator.py
+    executor: ../tools/b4_b8_r174_exact_score_comparator_replay.py
+  b4_b8_r174_independent_exact_score_oracle_v0:
+    status: independent_exact_score_oracle_complete
+    method: b4_b8_r174_independent_exact_score_oracle_v0
+    source_target_id: T-B4-002cu/T-B8-003cy/T-B10-009ck-r174-oracle
+    upstream_target_id: T-B4-002ct/T-B8-003cx/T-B10-009cj-r174
+    row_count: 576
+    row_record_matches: 576
+    primary_row_hashes_valid: 576
+    candidate_count: 1728
+    candidate_total_matches: 1728
+    permutation_checks_passed: 3456
+    permutation_check_count: 3456
+    r160_tie_controls_passed: 4
+    r160_non_tie_controls_passed: 28
+    qiskit_imported: false
+    comparator_imported: false
+    qiskit_calls_performed: 0
+    simulation_execution_count: 0
+    total_simulated_shots: 0
+    source_patch_performed: false
+    production_policy_changed: false
+    qiskit_bug_claimed: false
+    quantum_advantage_claimed: false
+    bqp_separation_claimed: false
+    solved_frontier_claimed: false
+    new_credit_delta: 0
+    requirements_passed: 10
+    requirements_failed: 0
+    result: ../results/B4_B8_R174_independent_exact_score_oracle_v0.json
+    markdown_report: ../research/B4_B8_R174_independent_exact_score_oracle.md
+    executor: ../tools/b4_b8_r174_independent_exact_score_oracle.py
+    source_result: ../results/B4_B8_R174_exact_score_comparator_v0.json
   prototype_artifacts:
   output_invariant_verifier: ../tools/b8_output_invariant_verifier.py
   adaptive_leakage_spoofer: ../tools/b8_adaptive_spoofer_leakage.py

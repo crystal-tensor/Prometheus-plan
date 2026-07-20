@@ -3298,6 +3298,23 @@ shadow-comparator protocol, not an integrated Qiskit source patch, production
 remedy, performance result, confirmed bug, hardware result, quantum advantage,
 BQP separation, solved B4/B8/B10, or new credit.
 
+`T-B4-002ct` / `T-B8-003cx` / `T-B10-009cj-r174` completes the frozen shadow
+matrix with requirements `10/10`. The fixed-grid comparator validates all
+`576/576` replay rows and `1,728/1,728` candidate totals. It preserves every
+R169 non-tie selection (`192/192`) while replacing every R170 and R172 source
+one-ULP false winner (`192/192` on each graph) with the first member of the
+exact tie. All `3,456/3,456` candidate permutations select the first exact
+minimizer in the presented order, and the R160 guardrail passes `4/4` ties plus
+`28/28` non-ties. `T-B4-002cu` / `T-B8-003cy` /
+`T-B10-009ck-r174-oracle` independently reproduces all `576` row records and
+`1,728` totals with standard-library `Fraction`, importing neither Qiskit nor
+the comparator. This is a positive shadow-policy result, not an integrated
+source patch, acceptable production-overhead result, confirmed bug, hardware
+result, quantum advantage, BQP separation, solved B4/B8/B10, or new credit.
+The next gate is a separately preregistered Rust-level comparator integration
+with unchanged candidate generation, source-return replay, runtime and memory
+ledgers, and a third graph carrying a small genuinely nonzero exact gap.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

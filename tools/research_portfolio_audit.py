@@ -2073,6 +2073,251 @@ def audit_r173_first_divergent_combine(
     return status
 
 
+def audit_r174_exact_score_comparator(
+    root: Path,
+    b4_manifest: dict,
+    b8_manifest: dict,
+    b10_manifest: dict,
+    errors: list[str],
+) -> dict:
+    """Validate R174's fixed-grid comparator and independent Fraction oracle."""
+    paths = {
+        "protocol": root / "results/B4_B8_R174_exact_score_comparator_protocol_v0.json",
+        "contract": root / "benchmarks/B4_B8_R174_exact_score_comparator_contract_v0.json",
+        "result": root / "results/B4_B8_R174_exact_score_comparator_v0.json",
+        "report": root / "research/B4_B8_R174_exact_score_comparator.md",
+        "oracle_result": root / "results/B4_B8_R174_independent_exact_score_oracle_v0.json",
+        "oracle_report": root / "research/B4_B8_R174_independent_exact_score_oracle.md",
+        "comparator": root / "tools/b4_b8_r174_exact_score_comparator.py",
+        "executor": root / "tools/b4_b8_r174_exact_score_comparator_replay.py",
+        "oracle_executor": root / "tools/b4_b8_r174_independent_exact_score_oracle.py",
+    }
+    status = {f"{key}_path": str(path) for key, path in paths.items()}
+    status.update({f"{key}_exists": path.exists() for key, path in paths.items()})
+    if not all(path.exists() for path in paths.values()):
+        errors.append("R174 exact-score comparator artifact missing")
+        return status
+
+    def canonical(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+        ).hexdigest()
+
+    def payload_ok(payload: dict, field: str = "payload_hash") -> bool:
+        body = dict(payload)
+        observed = body.pop(field, None)
+        return observed == canonical(body)
+
+    def bits_to_grid(bits: int) -> int:
+        raw = int(bits)
+        exponent = (raw >> 52) & 0x7FF
+        fraction = raw & ((1 << 52) - 1)
+        if exponent == 0x7FF:
+            raise ValueError("R174 audit rejects non-finite score leaves")
+        coefficient = fraction if exponent == 0 else ((1 << 52) | fraction) << (exponent - 1)
+        return -coefficient if raw & (1 << 63) else coefficient
+
+    protocol = json.loads(read(paths["protocol"]))
+    contract = json.loads(read(paths["contract"]))
+    result = json.loads(read(paths["result"]))
+    oracle = json.loads(read(paths["oracle_result"]))
+    identities = [
+        (protocol, "b4_b8_r174_exact_score_comparator_protocol_v0", "protocol"),
+        (result, "b4_b8_r174_exact_score_comparator_v0", "result"),
+        (oracle, "b4_b8_r174_independent_exact_score_oracle_v0", "oracle"),
+    ]
+    for payload, expected_method, label in identities:
+        if not payload_ok(payload) or payload.get("method") != expected_method:
+            errors.append(f"R174 {label} identity or payload mismatch")
+    if (
+        not payload_ok(contract)
+        or contract.get("contract_id") != "B4-B8-R174-exact-score-comparator-contract-v0"
+        or contract.get("execution_started") is not False
+        or contract.get("protocol_payload_hash") != protocol.get("payload_hash")
+    ):
+        errors.append("R174 contract identity, payload, or unopened boundary mismatch")
+    for section in ("source_bindings", "tool_bindings"):
+        for binding_id, binding in contract.get(section, {}).items():
+            path = root / binding.get("path", "")
+            if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                errors.append(f"R174 {section} mismatch: {binding_id}")
+
+    expected_preregistration = {
+        "commit": "c5195069",
+        "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/260",
+        "created_at": "2026-07-20T13:03:34Z",
+    }
+    if result.get("preregistration") != expected_preregistration or oracle.get("preregistration") != expected_preregistration:
+        errors.append("R174 public preregistration binding mismatch")
+
+    summary = result.get("summary", {})
+    expected_summary = {
+        "dataset_count": 3,
+        "worker_file_count": 9,
+        "replay_rows_validated": 576,
+        "candidate_totals_validated": 1728,
+        "permutation_checks_passed": 3456,
+        "permutation_check_count": 3456,
+        "r169_non_tie_source_preserved": 192,
+        "r170_true_tie_repaired": 192,
+        "r172_true_tie_repaired": 192,
+        "r160_tie_controls_passed": 4,
+        "r160_non_tie_controls_passed": 28,
+        "qiskit_calls_performed": 0,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "qiskit_source_changed": False,
+        "production_policy_changed": False,
+        "confirmed_qiskit_bug_claimed": False,
+        "new_credit_delta": 0,
+    }
+    if (
+        result.get("status") != "shadow_comparator_matrix_passed"
+        or result.get("classification") != "cross_graph_exact_tie_repair_with_non_tie_preservation"
+        or result.get("requirements_passed") != 10
+        or result.get("requirements_failed") != 0
+    ):
+        errors.append("R174 result status or requirement ledger mismatch")
+    for field, value in expected_summary.items():
+        if summary.get(field) != value:
+            errors.append(f"R174 result summary {field} mismatch")
+
+    records = result.get("row_records", [])
+    if len(records) != 576 or canonical(records) != result.get("row_record_set_hash"):
+        errors.append("R174 row record set count or hash mismatch")
+    record_map = {
+        (row.get("dataset_id"), row.get("profile_id"), row.get("replay_index")): row
+        for row in records
+    }
+    if len(record_map) != 576:
+        errors.append("R174 row record key cardinality mismatch")
+    raw_row_count = 0
+    raw_candidate_count = 0
+    dataset_counts: dict[str, int] = {}
+    for dataset in protocol.get("datasets", []):
+        dataset_id = dataset.get("dataset_id")
+        dataset_count = 0
+        worker_dir = root / dataset.get("worker_directory", "")
+        for worker in sorted(worker_dir.glob("*.json")):
+            payload = json.loads(read(worker))
+            profile_id = payload.get("profile_id")
+            for replay_index, replay_row in enumerate(payload.get("replay_rows", [])):
+                candidates = replay_row.get("replay", {}).get("candidates", [])
+                keys = [sum(bits_to_grid(bits) for bits in candidate.get("source_leaf_bits", [])) for candidate in candidates]
+                if len(keys) != 3:
+                    errors.append(f"R174 candidate cardinality mismatch: {dataset_id}/{profile_id}/{replay_index}")
+                    continue
+                stored_keys = []
+                for candidate in candidates:
+                    exact = Fraction(int(candidate["exact_score_numerator"]), int(candidate["exact_score_denominator"]))
+                    scaled = exact * (1 << 1074)
+                    stored_keys.append(scaled.numerator if scaled.denominator == 1 else None)
+                if keys != stored_keys:
+                    errors.append(f"R174 exact-grid total mismatch: {dataset_id}/{profile_id}/{replay_index}")
+                minimum = min(keys)
+                tied = [index for index, key in enumerate(keys) if key == minimum]
+                record = record_map.get((dataset_id, profile_id, replay_index))
+                expected_hashes = [hashlib.sha256(str(key).encode("ascii")).hexdigest() for key in keys]
+                if (
+                    not record
+                    or record.get("comparator_selected_candidate_index") != tied[0]
+                    or record.get("exact_minimizer_indices") != tied
+                    or record.get("candidate_total_grid_hashes") != expected_hashes
+                    or record.get("permutation_checks_passed") != 6
+                    or record.get("permutation_check_count") != 6
+                ):
+                    errors.append(f"R174 recomputed row mismatch: {dataset_id}/{profile_id}/{replay_index}")
+                elif canonical({key: value for key, value in record.items() if key != "row_hash"}) != record.get("row_hash"):
+                    errors.append(f"R174 row payload hash mismatch: {dataset_id}/{profile_id}/{replay_index}")
+                dataset_count += 1
+                raw_row_count += 1
+                raw_candidate_count += len(candidates)
+        dataset_counts[str(dataset_id)] = dataset_count
+    if raw_row_count != 576 or raw_candidate_count != 1728 or dataset_counts != {
+        "r169_non_tie": 192,
+        "r170_path_true_tie": 192,
+        "r172_t_tree_true_tie": 192,
+    }:
+        errors.append("R174 raw replay matrix count mismatch")
+
+    oracle_summary = oracle.get("summary", {})
+    oracle_expected = {
+        "row_count": 576,
+        "row_record_matches": 576,
+        "primary_row_hashes_valid": 576,
+        "candidate_count": 1728,
+        "candidate_total_matches": 1728,
+        "permutation_checks_passed": 3456,
+        "permutation_check_count": 3456,
+        "r160_tie_controls_passed": 4,
+        "r160_non_tie_controls_passed": 28,
+        "qiskit_imported": False,
+        "comparator_imported": False,
+        "qiskit_calls_performed": 0,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "source_patch_performed": False,
+        "production_policy_changed": False,
+        "confirmed_qiskit_bug_claimed": False,
+        "new_credit_delta": 0,
+    }
+    if (
+        oracle.get("status") != "independent_exact_score_oracle_complete"
+        or oracle.get("classification") != "independent_fraction_reproduction_of_fixed_grid_comparator"
+        or oracle.get("source_result_payload_hash") != result.get("payload_hash")
+        or oracle.get("row_record_set_hash") != result.get("row_record_set_hash")
+        or oracle.get("requirements_passed") != 10
+        or oracle.get("requirements_failed") != 0
+    ):
+        errors.append("R174 oracle status, binding, or requirement ledger mismatch")
+    for field, value in oracle_expected.items():
+        if oracle_summary.get(field) != value:
+            errors.append(f"R174 oracle summary {field} mismatch")
+
+    for path, markers, label in [
+        (paths["report"], ["576/576", "3456/3456", "192", "Claim Boundary"], "result"),
+        (paths["oracle_report"], ["Fraction", "576/576", "1728/1728", "Claim Boundary"], "oracle"),
+    ]:
+        report_text = read(path)
+        for marker in markers:
+            if marker not in report_text:
+                errors.append(f"R174 {label} report boundary missing: {marker}")
+
+    result_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r174_exact_score_comparator_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r174_exact_score_comparator_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r174_exact_score_comparator_v0")),
+    ]
+    oracle_rows = [
+        ("B4", b4_manifest.get("current_results", {}).get("b4_b8_r174_independent_exact_score_oracle_v0")),
+        ("B8", b8_manifest.get("current_results", {}).get("b4_b8_r174_independent_exact_score_oracle_v0")),
+        ("B10", b10_manifest.get("current_results", {}).get("b10_t2_b4_b8_r174_independent_exact_score_oracle_v0")),
+    ]
+    for label, row in result_rows:
+        if not row or row.get("status") != "shadow_comparator_matrix_passed" or row.get("replay_rows_validated") != 576 or row.get("permutation_checks_passed") != 3456:
+            errors.append(f"{label} manifest missing or invalid R174 comparator")
+    for label, row in oracle_rows:
+        if not row or row.get("status") != "independent_exact_score_oracle_complete" or row.get("row_record_matches") != 576 or row.get("candidate_total_matches") != 1728:
+            errors.append(f"{label} manifest missing or invalid R174 oracle")
+
+    status.update(
+        {
+            "status": result.get("status"),
+            "classification": result.get("classification"),
+            "replay_rows_validated": summary.get("replay_rows_validated"),
+            "candidate_totals_validated": summary.get("candidate_totals_validated"),
+            "permutation_checks_passed": summary.get("permutation_checks_passed"),
+            "r169_non_tie_source_preserved": summary.get("r169_non_tie_source_preserved"),
+            "r170_true_tie_repaired": summary.get("r170_true_tie_repaired"),
+            "r172_true_tie_repaired": summary.get("r172_true_tie_repaired"),
+            "oracle_status": oracle.get("status"),
+            "oracle_row_record_matches": oracle_summary.get("row_record_matches"),
+            "new_credit_delta": summary.get("new_credit_delta"),
+        }
+    )
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -44102,6 +44347,7 @@ def audit(root: Path) -> dict:
     r171_independent_oracle_status = audit_r171_independent_near_tie_oracle(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r172_second_near_tie_status = audit_r172_second_near_tie_replay(root, b4_manifest, b8_manifest, b10_manifest, errors)
     r173_first_divergent_combine_status = audit_r173_first_divergent_combine(root, b4_manifest, b8_manifest, b10_manifest, errors)
+    r174_exact_score_comparator_status = audit_r174_exact_score_comparator(root, b4_manifest, b8_manifest, b10_manifest, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -44466,6 +44712,7 @@ def audit(root: Path) -> dict:
             "r171_independent_near_tie_oracle": r171_independent_oracle_status,
             "r172_second_near_tie_replay": r172_second_near_tie_status,
             "r173_first_divergent_combine": r173_first_divergent_combine_status,
+            "r174_exact_score_comparator": r174_exact_score_comparator_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -44630,6 +44877,7 @@ def audit(root: Path) -> dict:
             "r171_independent_near_tie_oracle": r171_independent_oracle_status,
             "r172_second_near_tie_replay": r172_second_near_tie_status,
             "r173_first_divergent_combine": r173_first_divergent_combine_status,
+            "r174_exact_score_comparator": r174_exact_score_comparator_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -44671,6 +44919,7 @@ def audit(root: Path) -> dict:
             "r171_independent_near_tie_oracle": r171_independent_oracle_status,
             "r172_second_near_tie_replay": r172_second_near_tie_status,
             "r173_first_divergent_combine": r173_first_divergent_combine_status,
+            "r174_exact_score_comparator": r174_exact_score_comparator_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
