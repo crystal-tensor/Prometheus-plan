@@ -1,0 +1,3482 @@
+{
+  "accelerator_path": "/tmp/prometheus-r184-overlay-85b89b99de562279/qiskit/_accelerate.abi3.so",
+  "accelerator_sha256": "85b89b99de5622799a0bdabac5b7b936c440a0e80afd6af9d5b8d5cf3673bde7",
+  "arm_order_counts": {
+    "baseline>candidate>reference": 6,
+    "baseline>reference>candidate": 6,
+    "candidate>baseline>reference": 6,
+    "candidate>reference>baseline": 6,
+    "reference>baseline>candidate": 6,
+    "reference>candidate>baseline": 6
+  },
+  "cell": {
+    "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+    "dataset_id": "r169_non_tie",
+    "kind": "standard",
+    "profile_id": "ascending_sorted_order"
+  },
+  "contract_payload_hash": "afd219391029c7e39eacffd185d3bf1402147ad713564aaba053e38ee3bc4280",
+  "counter_probe_call_count": 36,
+  "design_contract_payload_hash": "e0c226bf419da94dc9e5afa3a249eabd085505c6b5328b7a2b3af1a8f6a4d108",
+  "environment": {
+    "machine": "x86_64",
+    "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "python": "3.12.13",
+    "pythonpath_head": "/home/runner/work/Prometheus-plan/Prometheus-plan/tools",
+    "qiskit": "2.4.1",
+    "qiskit_aer": "0.17.2",
+    "qiskit_ibm_runtime": "0.46.1",
+    "system": "Linux"
+  },
+  "input_path": "benchmarks/B4_B8_R169_target_compatible_candidate_v0.qasm",
+  "input_sha256": "d6895b30e27cc9f75e93edffef348d1701526c077ba1121094c394b38fb68fb7",
+  "manifest_hash": "54cd6da0b2f63b7b539f9099e3a837572470395b3cc06b02d1e7b47dbd85cb3a",
+  "measurement_triplet_order_rule": "all_six_permutations_repeated_six_times_then_window_probe",
+  "method": "b4_b8_r184_window_exact_score_replay_v0",
+  "preregistration": {
+    "commit": "51f3c595e990ea83d998dd951b2f6059951b0365",
+    "created_at": "2026-07-20T21:01:33Z",
+    "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/278"
+  },
+  "process_id": 10213,
+  "process_instance_uuid": "8157fe4e-2254-4a74-96bc-d74b8f2739d3",
+  "protocol_payload_hash": "6282eebdfa41ff94dfbe4eed4b61fc2030f02bec5eea6bb360b9fa27c890a999",
+  "recorded_triplet_count": 36,
+  "replay_rows": [
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28884,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22632,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 30617,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7835479850436228,
+      "candidate_to_reference_elapsed_ratio": 0.7391971780383447,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "7bc421c38dfb919664d6f5d7c66cfd6fab667f8a134d54ba090532ae33a8e020",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 0
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 34574,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 25067,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 30857,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.725024584948227,
+      "candidate_to_reference_elapsed_ratio": 0.8123602424085297,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "ad16500aa881f1de9a7ea8e19757e14a51a9764be652af04eef3781610eab8a6",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 1
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 29335,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23664,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 33673,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8066814385546276,
+      "candidate_to_reference_elapsed_ratio": 0.7027588869420605,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "ce84a576f42ace51379ef1acfb677de785f3aabc570cd7cbef1c76d9f3fde384",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 2
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28032,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23664,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 33222,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8441780821917808,
+      "candidate_to_reference_elapsed_ratio": 0.7122990789236049,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "cc547268d7eab506204a2d9aa02f4a9e83d5fc8538966dde5a7b06449faa4cb3",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 3
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28343,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 26058,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29695,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9193804466711357,
+      "candidate_to_reference_elapsed_ratio": 0.8775214682606499,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "3111242c58bc5d700b63c6152cfb2aeea6210aba70f469b41e44c8a9ae39cc23",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 4
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28683,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 29586,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31459,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 1.0314820625457588,
+      "candidate_to_reference_elapsed_ratio": 0.9404621888807655,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "8709532a08fae9420ee64df2a6df7be6c5a47281135437d05547ebf4d0252e2e",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 5
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 30157,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23153,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29304,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.767748781377458,
+      "candidate_to_reference_elapsed_ratio": 0.790096915096915,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "9c4e9063e3dc2d4cc1cd46828dc977324f32462fd0e1ed87f03d1a8e529c0600",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 6
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 30326,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23253,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29556,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7667677900151685,
+      "candidate_to_reference_elapsed_ratio": 0.786743808363784,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "c83ac09f9b4409c6ed0d0337e1b479401aa1d5443c840b2821aa71fae76e40fa",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 7
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27602,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22902,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31198,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8297224838779799,
+      "candidate_to_reference_elapsed_ratio": 0.7340855183024553,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "a199542dc1d66def693037c3c5761047b529bd76c4a2a435be740b8934faecf8",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 8
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27201,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23193,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 32281,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8526524760119113,
+      "candidate_to_reference_elapsed_ratio": 0.718472166289768,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "8c2f37e8fa8f86a72e35c41c0c4440e8c6cd16154ea84d6cd0d4c5135d8c5a4d",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 9
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27541,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 26019,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29314,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9447369376565847,
+      "candidate_to_reference_elapsed_ratio": 0.8875963703349935,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "49a1ec0df264e964ebc6330fd3aeac4aaacdd76825bc06c205b016d14ef76b2a",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 10
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 31960,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 25829,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 51446,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8081664580725907,
+      "candidate_to_reference_elapsed_ratio": 0.5020604128600863,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "98ef8fbac1d301c0e09a1d3889e54415fd91e9753cbebb7b57d435b1cb6e723a",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 11
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 30597,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23223,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 30047,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.758995979998039,
+      "candidate_to_reference_elapsed_ratio": 0.77288914034679,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "214590e050be6c3a630022eb94855da503fa0ef6299c15e898e9cc6139fc102d",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 12
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 30336,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22933,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29996,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7559665084388185,
+      "candidate_to_reference_elapsed_ratio": 0.7645352713695159,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "0aacb4ba8ad974d48f3b161176008d05cd7924bb99b5f457ce9b01312b13e7dd",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 13
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27712,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23033,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31158,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8311561778290993,
+      "candidate_to_reference_elapsed_ratio": 0.7392322998908788,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "6a02dc68cc0142ce6f8e629f4e2d50af486f5322e739ef5c6b9114b3e03bb540",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 14
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27090,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23113,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31399,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8531930601698043,
+      "candidate_to_reference_elapsed_ratio": 0.7361062454218287,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "8ea74a5d9b609623040152b4ba05da269b63086f9c081490ded2380fa97d9dba",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 15
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27471,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 25037,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29274,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9113974736995377,
+      "candidate_to_reference_elapsed_ratio": 0.855264056842249,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "38b963dd10ff55a82b4fa7d797071f350383d8f9022973e407be7f1f5d1ade9a",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 16
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27280,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24886,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29034,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9122434017595308,
+      "candidate_to_reference_elapsed_ratio": 0.8571330164634566,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "ad4f3486d24c08738b7f9237a724b6ef707a89e0855c3f64c6627d3234802a14",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 17
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 51266,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24095,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 32480,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.4699996098778918,
+      "candidate_to_reference_elapsed_ratio": 0.7418411330049262,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "402a61cd7ef001ee67e29407ba5cd235dc8ad3995bda89e3663f441eff62c9bd",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 18
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 30858,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23433,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29605,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7593816838421155,
+      "candidate_to_reference_elapsed_ratio": 0.7915217024151325,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "61366a23395ee8ed694141cb918169075bc0a956ed8e941b86bbcbe137f2e8e6",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 19
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27541,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22542,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 32020,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8184887985185723,
+      "candidate_to_reference_elapsed_ratio": 0.7039975015615241,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "c5d60093485570261bdcd38994e85701afa05540e3477045838d48a3a6fc673c",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 20
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27411,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22933,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31929,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8366349275838167,
+      "candidate_to_reference_elapsed_ratio": 0.718249866892167,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "02eaf9daed2f56e841afe42c6b84858dc8ad4767257fcbebc4ca52eb31619630",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 21
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27471,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24877,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29575,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9055731498671327,
+      "candidate_to_reference_elapsed_ratio": 0.8411496196111581,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "e686dd2b6220067bd44c9fb8116f3159550e232e880260d89e04ac62d95a5b4b",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 22
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27441,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 25046,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29125,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9127218395831056,
+      "candidate_to_reference_elapsed_ratio": 0.8599484978540772,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "03cb581ebb0c9c5e4a3cf93dcfe7ad70d1cf02ffe8158a916b405ae347387ccf",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 23
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 29896,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22822,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29736,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7633797163500133,
+      "candidate_to_reference_elapsed_ratio": 0.7674872208770513,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "3ab0e06af9e798a87a94b67bfbc37eec844a568e2a7add73fb64139930b1f155",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 24
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 35226,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24175,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 30256,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.6862828592516891,
+      "candidate_to_reference_elapsed_ratio": 0.7990150713907985,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "ca0d1c4e770d3bb65cf4a759ec843a06c57b9dd5e8413c1eafe3012d4e4f243b",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 25
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28103,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22742,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31469,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8092374479592926,
+      "candidate_to_reference_elapsed_ratio": 0.7226794623280053,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "529aaa0c1f1744fa7d559b4100780c47d298f22b79983998abe859fbc126e626",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 26
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 26910,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23073,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 32511,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8574136008918618,
+      "candidate_to_reference_elapsed_ratio": 0.7096982559749008,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "a4b88ce304860a30e4918ab56e82ef244fbbc62fb4b05e374e9f2bb210734c31",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 27
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27150,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 25147,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 28844,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9262246777163904,
+      "candidate_to_reference_elapsed_ratio": 0.8718277631396477,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "9cf85998b50b5d5f45cfa0c39b014381ecddb855b324d630d5f7cf667734ad18",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 28
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 26920,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24576,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29104,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.912927191679049,
+      "candidate_to_reference_elapsed_ratio": 0.8444200109950523,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "e0995eadf964df174e5f169628e47c2eeb1d0ca52bc81b630002c5a87a551dad",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 29
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28744,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22652,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29135,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.7880601168939605,
+      "candidate_to_reference_elapsed_ratio": 0.777484125622104,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "reference",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "e3043e493f8c8dbe69c8181a354bd9cfdb0156772733841d6d79e873d440e627",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 30
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 29815,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 22953,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29525,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.769847392252222,
+      "candidate_to_reference_elapsed_ratio": 0.7774089754445386,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "baseline",
+        "candidate",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "a964fe665faec0026330fb4ff4efb1dc8a513e8aea0f3e80ba91e4aff9635e7a",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 31
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 28383,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23634,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 35406,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8326815347214882,
+      "candidate_to_reference_elapsed_ratio": 0.6675139806812405,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "baseline",
+        "candidate"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "976f02cef4d55de07b0237f73dbccd85492196accf8ab677521cec0f32ecd7cb",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 32
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27501,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 23574,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 31499,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.8572051925384532,
+      "candidate_to_reference_elapsed_ratio": 0.748404711260675,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "reference",
+        "candidate",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "76ffd6cf885171f8fbbf734287ffb3d007094ad6abf05bc4c6565713dcdf3fc4",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 33
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27551,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 26650,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29335,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.967297012812602,
+      "candidate_to_reference_elapsed_ratio": 0.9084711095960457,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "baseline",
+        "reference"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "e9403ff29d706f5f3ad1d5bc144f9c16c9ff86ab583ae92f58c34ea58cc98a1b",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 34
+    },
+    {
+      "arms": {
+        "baseline": {
+          "elapsed_nanoseconds": 27331,
+          "policy": "rust_biguint_exact_retained_binary64",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        },
+        "candidate": {
+          "cost_counters": {
+            "compact_result_count": 330,
+            "fallback_transition_count": 0,
+            "leaf_construction_count": 98,
+            "maximum_window_limb_count": 2,
+            "score_object_size_bytes": 40,
+            "wide_combine_count": 0,
+            "window_combine_count": 158,
+            "window_compare_count": 27
+          },
+          "elapsed_nanoseconds": 24736,
+          "policy": "rust_windowed_4_limb_exact_with_biguint_fallback",
+          "probe_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "probe_matches_expected": true,
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true,
+          "timing_probe_mapping_match": true
+        },
+        "reference": {
+          "elapsed_nanoseconds": 29345,
+          "policy": "rust_prefix_initialized_34_limb_exact",
+          "timing_mapping_vector": [
+            0,
+            6,
+            5,
+            4,
+            3,
+            1,
+            2
+          ],
+          "timing_matches_expected": true
+        }
+      },
+      "candidate_probe_matches_timing": true,
+      "candidate_to_baseline_elapsed_ratio": 0.9050528703669826,
+      "candidate_to_reference_elapsed_ratio": 0.8429374680524792,
+      "case_id": null,
+      "cell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "counter_probe_call_count": 1,
+      "cross_arm_timing_mapping_match": true,
+      "execution_order": [
+        "candidate",
+        "reference",
+        "baseline"
+      ],
+      "expected_mapping_vector": [
+        0,
+        6,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "kind": "standard",
+      "row_hash": "572f4c4348be3ad292391e29a016fb858278e548b2c9743003474c70c8e426ba",
+      "simulation_execution_count": 0,
+      "subcell_id": "standard__r169_non_tie__ascending_sorted_order",
+      "timing_call_count": 3,
+      "total_simulated_shots": 0,
+      "triplet_index": 35
+    }
+  ],
+  "simulation_execution_count": 0,
+  "source_worker_path": "results/B4_B8_R169_target_compatible_candidate_replay/ascending_sorted_order.json",
+  "started_at_unix": 1784582175,
+  "status": "isolated_triplet_worker_complete",
+  "target_descriptor_sha256": "702c8fd9dcf67a069e7af63e31a57c74c17aaa5e3c5b6d8c2e28ec0c049c0de7",
+  "timing_call_count": 108,
+  "title": "R184 windowed exact-score isolated triplet worker",
+  "total_simulated_shots": 0,
+  "version": 0,
+  "warmup_call_count": 27,
+  "warmup_matches_expected": {
+    "baseline": 9,
+    "candidate": 9,
+    "reference": 9
+  }
+}

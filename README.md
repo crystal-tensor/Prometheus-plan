@@ -79,21 +79,28 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The next B4/B8/B10 step is the preregistered, unopened R184 windowed exact-score
-experiment. It replaces the 34-limb prefix representation with an exact
-four-limb exponent window plus a global offset and a non-truncating BigUint
-fallback. The frozen three-arm Linux matrix compares BigUint exact, R183
-prefix-initialized exact, and the R184 window candidate over 13 workload cells,
-468 triplets, 1,404 timing calls, 468 separate probes, 351 warmups, and 2,223
-total Qiskit calls. H1 requires exact mapping integrity; H2 requires at most
-four compact limbs, at most 64 bytes per score object, and zero fallback or
-wide combine on the frozen workload; H3 requires a window/prefix median ratio
-of at most `0.90`; H4 requires a window/BigUint ratio of at most `1.00` with
-all six execution orders represented. No measurement has run yet, and no
-performance remedy, hardware result, quantum advantage, BQP separation,
-solved frontier, or new credit is claimed.
+The latest completed B4/B8/B10 step is the independently audited R184
+windowed exact-score experiment. Public Actions run `29778806963` executed 13
+isolated Linux x86-64 workers, 468 order-balanced three-arm triplets, 1,404
+timing calls, 468 separate probes, 351 warmups, and 2,223 total Qiskit calls.
+Every BigUint, R183 prefix, R184 window, and probe mapping agrees. The compact
+path uses at most two limbs and 40 bytes per score object, with zero fallback
+transitions and zero wide combines on the frozen workload. The paired
+window/prefix median ratio is `0.771535x`, below the frozen `0.90x` threshold;
+the window/BigUint ratio is `0.814726x`, below the frozen `1.00x` threshold,
+with complete six-order coverage. The standard-library oracle validates all 13
+worker manifests and 468 row hashes and passes `12/12` without importing Qiskit
+or the executor. The first public attempt, run `29778646175`, stopped before
+source build or measurement because the design commit was supplied where the
+runner commit was required; it contributes zero scientific evidence. Result
+`5b9d5e7f...`; oracle `88996be1...`; build `3f1ed26a...`; 49-artifact bundle
+`378f1e1b...`. This is a frozen-workload source-representation result, not a
+full-domain performance theorem, upstream remedy, hardware result, quantum
+advantage, BQP separation, solved frontier, or new credit. Next: independently
+replicate the compact exact path on another architecture and measure its effect
+inside the complete VF2 workflow.
 
-The latest completed B4/B8/B10 step is the independently audited R183
+The preceding B4/B8/B10 step is the independently audited R183
 prefix-initialization micro-ablation. Public Actions run `29774774401`
 executed 13 isolated Linux x86-64 workers, 416 same-process AB/BA pairs, 832
 timing calls, 832 separate probes, 208 warmups, and 1,872 total Qiskit calls.
@@ -3651,10 +3658,40 @@ separately test exact mapping integrity, compact/fallback invariants,
 window-versus-prefix performance, and window-versus-BigUint performance with
 complete order coverage. Protocol `6282eebd...`; design contract `e0c226bf...`;
 Qiskit patch `a3a3f02b...`. Public Discussion #278 and design commit
-`84e3d910...` predate execution contract `afd21939...`, which binds 13 source
-artifacts and six execution tools. Scientific measurement remains unopened:
-result, oracle, accelerator, performance classifications, and new credit remain
-absent.
+  `84e3d910...` predate execution contract `afd21939...`, which binds 13 source
+  artifacts and six execution tools. Scientific measurement remains unopened:
+  result, oracle, accelerator, performance classifications, and new credit remain
+  absent.
+
+The first public R184 execution attempt, Actions run `29778646175`, stopped at
+the runner-commit binding guard before source build, workers, warmups, or
+measurement because the design commit was supplied to the runner-commit input.
+The frozen design, thresholds, workload, patch, and execution tools were not
+changed. This attempt contributes zero scientific evidence and zero credit.
+
+Public Actions run `29778806963` then executes the unchanged R184 matrix at
+runner commit `51f3c595...`. All `468/468` three-arm triplets preserve the
+expected mapping, and all 37 counter-determinism groups pass. The compact window
+uses at most two limbs and 40 bytes per score object, with zero fallback
+transitions and zero wide combines. H1 classifies all timing and probe mappings
+as exact; H2 observes the compact path without fallback. The paired
+window/prefix median ratio is `0.771535x`, so H3 accepts a material improvement
+over the R183 34-limb prefix reference. The paired window/BigUint median ratio
+is `0.814726x`, and every one of the six arm orders is represented, so H4
+classifies the window path as competitive with BigUint on the frozen workload.
+Result hash `5b9d5e7f...`; build hash `3f1ed26a...`.
+
+The R184 standard-library oracle imports neither Qiskit nor the executor and
+passes `12/12`. It validates `13/13` worker manifests and `468/468` triplet-row
+hashes, then independently recomputes mappings, eight-counter completeness,
+compactness, fallback boundaries, paired timing ratios, workload counts,
+six-order balance, and all H1-H4 classifications. Oracle hash `88996be1...`;
+49-artifact bundle hash `378f1e1b...`. This establishes a reproducible
+source-bound representation result under the frozen Linux x86-64 workload. It
+does not establish full-domain performance, an upstream Qiskit remedy, hardware
+behavior, quantum advantage, BQP separation, solved B4/B8/B10, or new credit.
+Next: cross-architecture replication and a complete VF2 workflow benchmark with
+the same exact-mapping and independent-oracle discipline.
 
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
