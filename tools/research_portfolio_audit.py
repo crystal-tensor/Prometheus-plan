@@ -3019,6 +3019,106 @@ def audit_r176_fixed_superaccumulator(
     return status
 
 
+def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
+    """Validate the sealed R177 failure and unopened corrected R178 protocol."""
+    paths = {
+        "r177_result": root / "results/B4_B8_R177_linux_x86_64_build_failure_v0.json",
+        "r177_report": root / "research/B4_B8_R177_linux_x86_64_build_failure.md",
+        "r177_logs": root / "research/source_lineage/R177_linux_x86_64_build_logs",
+        "r178_protocol": root / "results/B4_B8_R178_linux_x86_64_protocol_v0.json",
+        "r178_contract": root / "benchmarks/B4_B8_R178_linux_x86_64_contract_v0.json",
+        "r178_report": root / "research/B4_B8_R178_linux_x86_64_protocol.md",
+    }
+    status = {f"{key}_exists": path.exists() for key, path in paths.items()}
+    if not all(status.values()):
+        errors.append("R177/R178 Linux transition artifact missing")
+        return status
+
+    def canonical(value: object) -> str:
+        return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+    def payload_ok(payload: dict) -> bool:
+        body = dict(payload)
+        return body.pop("payload_hash", None) == canonical(body)
+
+    r177 = json.loads(read(paths["r177_result"]))
+    protocol = json.loads(read(paths["r178_protocol"]))
+    contract = json.loads(read(paths["r178_contract"]))
+    if (
+        not payload_ok(r177)
+        or r177.get("method") != "b4_b8_r177_build_failure_adjudication_v0"
+        or r177.get("status") != "build_artifact_discovery_failed_before_scientific_replay"
+        or r177.get("payload_hash") != "815b1af1756f23fc9280c411de37543fcaeed73fc31c0d0552284460c09a7222"
+    ):
+        errors.append("R177 build-failure identity or payload mismatch")
+    failure = r177.get("failure", {})
+    forbidden_claim = any(r177.get(field) is not False for field in (
+        "hardware_result_claimed", "quantum_advantage_claimed",
+        "bqp_separation_claimed", "solved_frontier_claimed",
+    ))
+    if (
+        failure.get("scientific_matrix_started") is not False
+        or failure.get("worker_count_started") != 0
+        or failure.get("warmup_call_count") != 0
+        or failure.get("recorded_call_count") != 0
+        or failure.get("oracle_started") is not False
+        or r177.get("downloaded_log_count") != 22
+        or r177.get("new_credit_delta") != 0
+        or forbidden_claim
+    ):
+        errors.append("R177 pre-science failure or zero-credit boundary mismatch")
+    log_rows = r177.get("downloaded_logs", [])
+    for row in log_rows:
+        path = root / row.get("path", "")
+        if (
+            not path.is_file()
+            or hashlib.sha256(path.read_bytes()).hexdigest() != row.get("sha256")
+            or path.stat().st_size != row.get("size_bytes")
+        ):
+            errors.append(f"R177 build log binding mismatch: {row.get('path')}")
+    if len(log_rows) != 22:
+        errors.append("R177 build log count mismatch")
+
+    if (
+        not payload_ok(protocol)
+        or protocol.get("method") != "b4_b8_r178_linux_x86_64_protocol_v0"
+        or protocol.get("status") != "preregistered_unopened"
+        or protocol.get("payload_hash") != "b278733c9a6a68fb18bf75629f4b2c93ba5cca3d9753205f344596c479e89f70"
+        or protocol.get("upstream_target_id") != r177.get("source_target_id")
+    ):
+        errors.append("R178 protocol identity, payload, or upstream binding mismatch")
+    if (
+        not payload_ok(contract)
+        or contract.get("contract_id") != "B4-B8-R178-linux-x86-64-contract-v0"
+        or contract.get("execution_started") is not False
+        or contract.get("protocol_payload_hash") != protocol.get("payload_hash")
+        or contract.get("payload_hash") != "8b821aff5fe196a123e8b143252593b3001a3321968dff04fa3d841b9196d208"
+    ):
+        errors.append("R178 contract identity, payload, or unopened boundary mismatch")
+    for section in ("source_bindings", "tool_bindings"):
+        for binding_id, binding in contract.get(section, {}).items():
+            path = root / binding.get("path", "")
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                errors.append(f"R178 {section} mismatch: {binding_id}")
+    result_present = any((root / path).exists() for path in contract["result_paths_must_be_absent"])
+    if result_present:
+        errors.append("R178 result evidence exists before registered execution")
+    report_text = read(paths["r178_report"])
+    if not all(marker in report_text for marker in ("preregistered_unopened", "39", "2400", "Claim Boundary")):
+        errors.append("R178 protocol report boundary missing")
+    status.update({
+        "r177_status": r177.get("status"),
+        "r177_log_count": len(log_rows),
+        "r177_scientific_matrix_started": failure.get("scientific_matrix_started"),
+        "r178_status": protocol.get("status"),
+        "r178_protocol_payload_hash": protocol.get("payload_hash"),
+        "r178_contract_payload_hash": contract.get("payload_hash"),
+        "r178_result_evidence_present": result_present,
+        "new_credit_delta": 0,
+    })
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -45053,6 +45153,7 @@ def audit(root: Path) -> dict:
     r176_fixed_superaccumulator_status = audit_r176_fixed_superaccumulator(
         root, b4_manifest, b8_manifest, b10_manifest, errors
     )
+    r177_r178_linux_transition_status = audit_r177_r178_linux_transition(root, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -45420,6 +45521,7 @@ def audit(root: Path) -> dict:
             "r174_exact_score_comparator": r174_exact_score_comparator_status,
             "r175_rust_exact_score": r175_rust_exact_score_status,
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
+            "r177_r178_linux_transition": r177_r178_linux_transition_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -45587,6 +45689,7 @@ def audit(root: Path) -> dict:
             "r174_exact_score_comparator": r174_exact_score_comparator_status,
             "r175_rust_exact_score": r175_rust_exact_score_status,
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
+            "r177_r178_linux_transition": r177_r178_linux_transition_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -45631,6 +45734,7 @@ def audit(root: Path) -> dict:
             "r174_exact_score_comparator": r174_exact_score_comparator_status,
             "r175_rust_exact_score": r175_rust_exact_score_status,
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
+            "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,

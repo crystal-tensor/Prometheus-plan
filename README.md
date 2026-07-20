@@ -3405,6 +3405,33 @@ classical implementation used to analyze quantum-compilation behavior. It is
 not quantum-hardware evidence, an upstream patch, production remedy, confirmed
 bug, quantum advantage, BQP separation, solved B4/B8/B10, or new credit.
 
+`T-B4-002dd` / `T-B8-003dh` / `T-B10-009ct-r177-build-failure` now preserves
+the first public Linux attempt as an explicit pre-science failure. GitHub
+Actions run `29753174310` successfully checked out official Qiskit, applied the
+R176 patch, reproduced the patched-source hashes, passed cargo format/check,
+passed all three fixed-accumulator tests, passed the diff check, and completed
+the optimized `qiskit-pyext` release build. The wrapper then searched for
+`libqiskit_accelerate.so`, while the source metadata declares the cdylib name
+`qiskit_pyext`; it therefore rejected the run before any worker began. The
+adjudication binds 22 build logs and records 0 workers, 0 warmups, 0 recorded
+calls, no oracle, and `new_credit_delta=0`. R177 is neither positive nor
+negative evidence about the scientific matrix. It is a reproducible
+build-integration defect, not quantum-hardware evidence or a solved frontier.
+
+`T-B4-002de` / `T-B8-003di` / `T-B10-009cu-r178-protocol` now freezes the
+corrected cross-platform attempt before execution. R178 binds the official
+`crates/pyext/Cargo.toml` hash, requires `[lib].name = "qiskit_pyext"` with a
+`cdylib` crate type, resolves exactly `target/release/libqiskit_pyext.so`, and
+copies it into an isolated Qiskit overlay. A separate Python process must
+import that exact binary as `qiskit._accelerate`, match its SHA-256, and import
+`VF2PassConfiguration` before the 39-worker matrix may start. The scientific
+matrix and every R176 correctness, performance, RSS, and independent-oracle
+gate remain unchanged. Protocol hash `b278733c...`; contract hash
+`8b821aff...`; execution is unopened. This can test one classical compiler
+component on a second architecture. It cannot replace quantum hardware,
+device noise evidence, or a hardware-level experiment, and grants no new
+credit before execution.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific
