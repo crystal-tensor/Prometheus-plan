@@ -4393,6 +4393,158 @@ def audit_r182_score_cost_attribution_preregistration(
     return status
 
 
+def audit_r183_prefix_initialization_ablation(root: Path, errors: list[str]) -> dict:
+    """Validate the unopened R183 micro-ablation and its staged evidence chain."""
+    paths = {
+        "protocol": root / "results/B4_B8_R183_prefix_initialization_ablation_protocol_v0.json",
+        "design_contract": root / "benchmarks/B4_B8_R183_prefix_initialization_ablation_contract_v0.json",
+        "report": root / "research/B4_B8_R183_prefix_initialization_ablation_protocol.md",
+        "design_tool": root / "tools/b4_b8_r183_prefix_init_preregister.py",
+        "execution_contract": root / "benchmarks/B4_B8_R183_prefix_initialization_execution_contract_v0.json",
+        "execution_report": root / "research/B4_B8_R183_prefix_initialization_execution_contract.md",
+    }
+    required_design = ("protocol", "design_contract", "report", "design_tool")
+    status = {f"{key}_exists": path.exists() for key, path in paths.items()}
+    if not all(status[f"{key}_exists"] for key in required_design):
+        errors.append("R183 prefix-initialization design artifact missing")
+        return status
+
+    def canonical(value: object) -> str:
+        return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+    def payload_ok(payload: dict) -> bool:
+        body = dict(payload)
+        return body.pop("payload_hash", None) == canonical(body)
+
+    protocol = json.loads(read(paths["protocol"]))
+    design = json.loads(read(paths["design_contract"]))
+    workload = protocol.get("frozen_workload", {})
+    hypotheses = {row.get("hypothesis_id"): row for row in protocol.get("frozen_hypotheses", [])}
+    expected_sources = {
+        "results/B4_B8_R182_score_cost_attribution_v0.json": "de7cbb2dacf90e2134764f63ae44355f87ecfe9b4416b8d0af7d2ca662a5e10b",
+        "results/B4_B8_R182_independent_cost_oracle_v0.json": "ab88bd4f3dbb372ab7ff752a7ca86d4f33f5b3409d09407e1523f032c579188f",
+        "results/B4_B8_R182_score_cost_attribution_bundle_v0.json": "11cfa8d82b291f313d33d84bc35d30bdbd66fb34332cc71297db8d8f7d2e7faf",
+    }
+    required_tools = {
+        "research/source_lineage/Qiskit_2_4_1_R183_prefix_initialization_ablation.patch",
+        "tools/b4_b8_r183_prefix_init_replay.py",
+        "tools/b4_b8_r183_independent_oracle.py",
+        "tools/b4_b8_r183_linux_x86_64_build.py",
+        "tools/b4_b8_r183_linux_x86_64_bundle.py",
+        ".github/workflows/r183-prefix-initialization-ablation-linux-x86-64.yml",
+    }
+    if (
+        not payload_ok(protocol)
+        or protocol.get("payload_hash") != "9057160630b687f79a25f3c02ff45e1974d187393d06d0321297726db7255d67"
+        or protocol.get("method") != "b4_b8_r183_prefix_initialization_ablation_protocol_v0"
+        or protocol.get("status") != "preregistered_design_unopened"
+        or protocol.get("source_result_payload_hashes") != expected_sources
+        or protocol.get("frozen_arms", {}).get("baseline") != "rust_active_limb_exact_full_width_initialized"
+        or protocol.get("frozen_arms", {}).get("candidate") != "rust_active_limb_exact_prefix_initialized"
+        or workload.get("storage_limb_width") != 34
+        or workload.get("workload_cell_count") != 13
+        or workload.get("worker_count") != 13
+        or workload.get("measured_pairs_per_cell") != 32
+        or workload.get("ab_pairs_per_cell") != 16
+        or workload.get("ba_pairs_per_cell") != 16
+        or workload.get("warmups_per_arm_per_cell") != 8
+        or workload.get("measured_pair_count") != 416
+        or workload.get("timing_call_count") != 832
+        or workload.get("counter_probe_call_count") != 832
+        or workload.get("warmup_call_count") != 208
+        or workload.get("total_qiskit_function_call_count") != 1872
+        or len(protocol.get("required_counter_keys", [])) != 7
+        or len(protocol.get("non_initialization_counter_keys", [])) != 5
+        or len(protocol.get("acceptance_requirements", [])) != 12
+        or set(hypotheses) != {"H1-isolated-initialization-write", "H2-unused-tail-dominance", "H3-workload-heterogeneity"}
+        or hypotheses["H1-isolated-initialization-write"].get("minimum_initialized_limb_write_reduction_fraction") != 0.4
+        or hypotheses["H2-unused-tail-dominance"].get("maximum_candidate_to_baseline_paired_median_ratio") != 0.9
+        or hypotheses["H3-workload-heterogeneity"].get("required_cell_count") != 13
+    ):
+        errors.append("R183 protocol identity, matrix, source, or threshold mismatch")
+    claim_boundary = protocol.get("claim_boundary", {})
+    if any(value is not False for key, value in claim_boundary.items() if key != "new_credit_delta") or claim_boundary.get("new_credit_delta") != 0:
+        errors.append("R183 unopened protocol makes a forbidden positive claim")
+
+    if (
+        not payload_ok(design)
+        or design.get("payload_hash") != "09cc7e5084b163cc2660c8b77e085bb41cd3d146be9aac147657df7429ce26b3"
+        or design.get("contract_id") != "B4-B8-R183-prefix-initialization-design-contract-v0"
+        or design.get("status") != "design_frozen_execution_tooling_unbound"
+        or design.get("execution_started") is not False
+        or design.get("execution_tooling_bound") is not False
+        or design.get("protocol_payload_hash") != protocol.get("payload_hash")
+        or design.get("required_before_execution_count") != 6
+        or set(design.get("required_before_execution", [])) != required_tools
+        or len(design.get("planned_result_paths", [])) != 5
+        or len(design.get("source_bindings", {})) != 7
+    ):
+        errors.append("R183 design contract or unopened execution boundary mismatch")
+    for binding_id, binding in design.get("source_bindings", {}).items():
+        path = root / binding.get("path", "")
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+            errors.append(f"R183 source binding mismatch: {binding_id}")
+    design_tool_binding = design.get("design_tool_binding", {})
+    if design_tool_binding.get("path") != "tools/b4_b8_r183_prefix_init_preregister.py" or hashlib.sha256(paths["design_tool"].read_bytes()).hexdigest() != design_tool_binding.get("sha256"):
+        errors.append("R183 design-tool binding mismatch")
+    for relative in required_tools:
+        if not (root / relative).is_file():
+            errors.append(f"R183 required execution tool missing: {relative}")
+    report_text = read(paths["report"])
+    if not all(marker in report_text for marker in ("preregistered_design_unopened", "52.1362%", "Each of `13` cells runs `32` same-process AB/BA pairs", "Claim Boundary")):
+        errors.append("R183 protocol report boundary missing")
+
+    execution_exists = paths["execution_contract"].is_file()
+    if execution_exists != paths["execution_report"].is_file():
+        errors.append("R183 execution contract and report presence mismatch")
+    execution = None
+    if execution_exists:
+        execution = json.loads(read(paths["execution_contract"]))
+        measurement = execution.get("measurement_pair_contract", {})
+        public = execution.get("public_preregistration", {})
+        if (
+            not payload_ok(execution)
+            or execution.get("contract_id") != "B4-B8-R183-prefix-initialization-execution-contract-v0"
+            or execution.get("status") != "execution_tooling_bound_unopened"
+            or execution.get("execution_tooling_bound") is not True
+            or execution.get("execution_started") is not False
+            or execution.get("scientific_measurement_started") is not False
+            or execution.get("protocol_payload_hash") != protocol.get("payload_hash")
+            or execution.get("design_contract_payload_hash") != design.get("payload_hash")
+            or not str(public.get("discussion", "")).startswith("https://github.com/crystal-tensor/Prometheus-plan/discussions/")
+            or len(str(public.get("public_design_commit", ""))) != 40
+            or measurement.get("workload_cell_count") != 13
+            or measurement.get("expected_worker_count") != 13
+            or measurement.get("measured_pair_count") != 416
+            or measurement.get("timing_call_count") != 832
+            or measurement.get("counter_probe_call_count") != 832
+            or measurement.get("warmup_call_count") != 208
+            or measurement.get("total_qiskit_function_call_count") != 1872
+            or len(execution.get("tool_bindings", {})) != 6
+        ):
+            errors.append("R183 execution contract or public preregistration mismatch")
+        for section in ("source_bindings", "tool_bindings"):
+            for binding_id, binding in execution.get(section, {}).items():
+                path = root / binding.get("path", "")
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != binding.get("sha256"):
+                    errors.append(f"R183 execution {section} mismatch: {binding_id}")
+
+    status.update({
+        "protocol_status": protocol.get("status"),
+        "protocol_payload_hash": protocol.get("payload_hash"),
+        "design_contract_status": design.get("status"),
+        "design_contract_payload_hash": design.get("payload_hash"),
+        "workload_cell_count": workload.get("workload_cell_count"),
+        "measured_pair_count": workload.get("measured_pair_count"),
+        "total_qiskit_function_calls": workload.get("total_qiskit_function_call_count"),
+        "execution_contract_status": execution.get("status") if execution is not None else "not_submitted",
+        "execution_contract_payload_hash": execution.get("payload_hash") if execution is not None else None,
+        "scientific_execution_started": False,
+        "new_credit_delta": 0,
+    })
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -46432,6 +46584,7 @@ def audit(root: Path) -> dict:
     r182_score_cost_attribution_status = (
         audit_r182_score_cost_attribution_preregistration(root, errors)
     )
+    r183_prefix_initialization_status = audit_r183_prefix_initialization_ablation(root, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -46802,6 +46955,7 @@ def audit(root: Path) -> dict:
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
+            "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -46972,6 +47126,7 @@ def audit(root: Path) -> dict:
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
+            "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -47019,6 +47174,7 @@ def audit(root: Path) -> dict:
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
+            "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,

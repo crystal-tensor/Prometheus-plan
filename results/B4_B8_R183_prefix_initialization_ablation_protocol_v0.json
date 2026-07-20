@@ -1,0 +1,106 @@
+{
+  "acceptance_requirements": [
+    "P1 all accepted R182 payloads and source bindings validate",
+    "P2 the public Discussion and design commit predate every R183 build and worker",
+    "P3 a second-stage execution contract hash-binds the patch, runner, oracle, build, bundle, and workflow",
+    "P4 cargo format, check, R180/R182/R183 tests, release build, ELF validation, and isolated import smoke pass",
+    "P5 baseline and candidate timing/probe mappings equal the frozen expected mapping for every pair",
+    "P6 all seven counters are present, nonnegative, and deterministic by arm and subcell",
+    "P7 all five non-initialization counters agree exactly between arms for every pair",
+    "P8 all 13 cells contain 32 measured pairs, 16 AB and 16 BA orders, plus 8 warmups per arm",
+    "P9 H1, H2, and H3 follow the frozen thresholds without relaxation",
+    "P10 a stdlib-only oracle recomputes hashes, counts, paired ratios, and classifications",
+    "P11 simulation execution count and quantum shot count remain zero",
+    "P12 production remedy, hardware, advantage, BQP, solved-frontier, and new-credit fields remain false or zero"
+  ],
+  "claim_boundary": {
+    "bqp_separation_claimed": false,
+    "causal_bottleneck_claimed": false,
+    "hardware_result_claimed": false,
+    "initialization_dominance_claimed_before_execution": false,
+    "new_credit_delta": 0,
+    "production_qiskit_remedy_claimed": false,
+    "quantum_advantage_claimed": false,
+    "solved_frontier_claimed": false,
+    "upstream_patch_accepted": false
+  },
+  "frozen_arms": {
+    "baseline": "rust_active_limb_exact_full_width_initialized",
+    "candidate": "rust_active_limb_exact_prefix_initialized"
+  },
+  "frozen_hypotheses": [
+    {
+      "hypothesis_id": "H1-isolated-initialization-write",
+      "minimum_initialized_limb_write_reduction_fraction": 0.4,
+      "required_candidate_full_width_destination_count": 0,
+      "statement": "The candidate removes full-width destination initialization while preserving storage width, mapping outcomes, and every non-initialization counter."
+    },
+    {
+      "hypothesis_id": "H2-unused-tail-dominance",
+      "maximum_candidate_to_baseline_paired_median_ratio": 0.9,
+      "statement": "Unused-tail initialization is a dominant source-bound cost only if the candidate/baseline paired median elapsed ratio is at most 0.90 after H1 passes."
+    },
+    {
+      "hypothesis_id": "H3-workload-heterogeneity",
+      "required_ab_pairs_per_cell": 16,
+      "required_ba_pairs_per_cell": 16,
+      "required_cell_count": 13,
+      "statement": "The result reports all 13 cells and equal AB/BA order counts rather than promoting an aggregate-only timing claim."
+    }
+  ],
+  "frozen_workload": {
+    "ab_pairs_per_cell": 16,
+    "ba_pairs_per_cell": 16,
+    "counter_probe_call_count": 832,
+    "measured_pair_count": 416,
+    "measured_pairs_per_cell": 32,
+    "small_gap_policy_cells": 4,
+    "standard_dataset_profile_cells": 9,
+    "storage_limb_width": 34,
+    "timing_call_count": 832,
+    "total_qiskit_function_call_count": 1872,
+    "warmup_call_count": 208,
+    "warmups_per_arm_per_cell": 8,
+    "worker_count": 13,
+    "workload_cell_count": 13
+  },
+  "method": "b4_b8_r183_prefix_initialization_ablation_protocol_v0",
+  "non_initialization_counter_keys": [
+    "leaf_construction_count",
+    "arithmetic_limb_visit_count",
+    "comparison_limb_visit_count",
+    "carry_extension_count",
+    "maximum_used_limb_count"
+  ],
+  "payload_hash": "9057160630b687f79a25f3c02ff45e1974d187393d06d0321297726db7255d67",
+  "platform_contract": {
+    "machine": "x86_64",
+    "python": "3.12",
+    "qiskit": "2.4.1",
+    "requires_public_discussion_before_execution": true,
+    "runner": "github_hosted_ubuntu_24_04",
+    "source_commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+    "system": "Linux",
+    "workflow_dispatch_only": true
+  },
+  "required_counter_keys": [
+    "leaf_construction_count",
+    "destination_initialized_limb_count",
+    "full_width_destination_count",
+    "arithmetic_limb_visit_count",
+    "comparison_limb_visit_count",
+    "carry_extension_count",
+    "maximum_used_limb_count"
+  ],
+  "research_question": "R182 cut arithmetic-limb visits by 52.1362% but improved the median end-to-end time by only about 1.25%. Is initializing the unused suffix of the fixed-width exact-score destination the missing dominant cost, or is the remaining time elsewhere in object copies and VF2 control flow?",
+  "source_result_payload_hashes": {
+    "results/B4_B8_R182_independent_cost_oracle_v0.json": "ab88bd4f3dbb372ab7ff752a7ca86d4f33f5b3409d09407e1523f032c579188f",
+    "results/B4_B8_R182_score_cost_attribution_bundle_v0.json": "11cfa8d82b291f313d33d84bc35d30bdbd66fb34332cc71297db8d8f7d2e7faf",
+    "results/B4_B8_R182_score_cost_attribution_v0.json": "de7cbb2dacf90e2134764f63ae44355f87ecfe9b4416b8d0af7d2ca662a5e10b"
+  },
+  "source_target_id": "T-B4-002dv/T-B8-003dz/T-B10-009dl-r183-prefix-initialization-ablation",
+  "status": "preregistered_design_unopened",
+  "title": "B4/B8/B10 R183 prefix-initialization micro-ablation protocol",
+  "upstream_target_id": "T-B4-002dq/T-B8-003du/T-B10-009dg-r182-cost-attribution",
+  "version": 0
+}

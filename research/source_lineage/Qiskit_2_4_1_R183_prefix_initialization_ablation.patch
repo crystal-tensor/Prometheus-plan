@@ -1,0 +1,3801 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index f48c0d1..a70ba6f 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2288,6 +2288,7 @@ dependencies = [
+  "itertools 0.14.0",
+  "nalgebra",
+  "ndarray",
++ "num-bigint",
+  "num-complex",
+  "numpy",
+  "pyo3",
+diff --git a/crates/transpiler/Cargo.toml b/crates/transpiler/Cargo.toml
+index e8639fc..6e5398b 100644
+--- a/crates/transpiler/Cargo.toml
++++ b/crates/transpiler/Cargo.toml
+@@ -22,6 +22,7 @@ nalgebra.workspace = true
+ rand.workspace = true
+ rand_pcg.workspace = true
+ num-complex.workspace = true
++num-bigint.workspace = true
+ rustworkx-core.workspace = true
+ qiskit-circuit.workspace = true
+ qiskit-synthesis.workspace = true
+diff --git a/crates/transpiler/src/passes/vf2/vf2_layout.rs b/crates/transpiler/src/passes/vf2/vf2_layout.rs
+index 52acd91..cd06a7d 100644
+--- a/crates/transpiler/src/passes/vf2/vf2_layout.rs
++++ b/crates/transpiler/src/passes/vf2/vf2_layout.rs
+@@ -10,17 +10,23 @@
+ // copyright notice, and modified files need to carry a notice indicating
+ // that they have been altered from the originals.
+
++use std::alloc::{GlobalAlloc, Layout, System};
++use std::cell::{Cell, RefCell};
+ use std::convert::Infallible;
++use std::mem::MaybeUninit;
++use std::rc::Rc;
+ use std::time::Instant;
+
+ use hashbrown::HashMap;
+ use indexmap::{IndexMap, IndexSet};
++use num_bigint::BigUint;
+ use rand::prelude::*;
+ use rand_pcg::Pcg64Mcg;
+ use rayon::prelude::*;
+ use rustworkx_core::petgraph::data::Create;
+ use rustworkx_core::petgraph::prelude::*;
+
++use pyo3::exceptions::PyValueError;
+ use pyo3::prelude::*;
+ use pyo3::{IntoPyObjectExt, create_exception, wrap_pyfunction};
+
+@@ -28,6 +34,7 @@ use qiskit_circuit::dag_circuit::DAGCircuit;
+ use qiskit_circuit::interner::{Interned, Interner};
+ use qiskit_circuit::operations::{ControlFlowView, Operation};
+ use qiskit_circuit::packed_instruction::PackedInstruction;
++use qiskit_circuit::vf2::Vf2Score;
+ use qiskit_circuit::{PhysicalQubit, VirtualQubit, vf2};
+
+ use super::error_map::ErrorMap;
+@@ -35,700 +42,2444 @@ use crate::target::{Qargs, QargsRef, Target, TargetOperation};
+
+ create_exception!(qiskit, MultiQEncountered, pyo3::exceptions::PyException);
+
+-#[pyclass(name = "VF2PassConfiguration", skip_from_py_object)]
+-#[derive(Clone, Debug)]
+-pub struct Vf2PassConfiguration {
+-    /// The maximum numbers of times VF2 is allowed to extend the mapping (before, after) the first
+-    /// match.  In both cases, `None` means "no limit".  Steps taken before the first match is found
+-    /// still count against the "after" limit.
+-    pub call_limit: (Option<usize>, Option<usize>),
+-    /// Time in seconds to spend optimizing.  This is not a tight limit; control only returns to the
+-    /// iterator to check for the time limit when a successful _improved_ match is found.
+-    pub time_limit: Option<f64>,
+-    /// In `max_trials`, `None` means "based on the number of graph edges" and `0` means
+-    /// "unbounded".
+-    pub max_trials: Option<usize>,
+-    /// If set, shuffle the node indices of the input graphs using a specified random seed.  If
+-    /// `None`, perform no shuffling.  You probably want this to be `None`.
+-    pub shuffle_seed: Option<u64>,
+-    /// Whether the initial "trivial" layout should be immediately scored, as used as the base.  If
+-    /// true, the result will return [Vf2PassReturn::NoImprovement] if the initial layout was the
+-    /// best-scoring match.  Scoring the initial layout is useful for seeding the tree-pruner
+-    /// component of the search, if the incoming layout is expected to already be valid.
+-    pub score_initial_layout: bool,
++#[derive(Default, Clone, Copy, Debug, Eq, PartialEq)]
++struct R182ScoreCostCounters {
++    leaf_construction_count: u64,
++    destination_zeroed_limb_count: u64,
++    arithmetic_limb_visit_count: u64,
++    comparison_limb_visit_count: u64,
++    carry_extension_count: u64,
++    maximum_used_limb_count: u64,
++    biguint_heap_allocation_count: u64,
++    biguint_heap_allocated_bytes: u64,
++    r183_destination_initialized_limb_count: u64,
++    r183_full_width_destination_count: u64,
+ }
+-impl Vf2PassConfiguration {
+-    /// A set of defaults that just runs everything completely unbounded.
+-    pub fn default_unbounded() -> Self {
+-        Self {
+-            call_limit: (None, None),
+-            time_limit: None,
+-            max_trials: Some(0),
+-            shuffle_seed: None,
+-            score_initial_layout: false,
++
++impl R182ScoreCostCounters {
++    fn as_vector(self) -> Vec<u64> {
++        vec![
++            self.leaf_construction_count,
++            self.destination_zeroed_limb_count,
++            self.arithmetic_limb_visit_count,
++            self.comparison_limb_visit_count,
++            self.carry_extension_count,
++            self.maximum_used_limb_count,
++            self.biguint_heap_allocation_count,
++            self.biguint_heap_allocated_bytes,
++        ]
++    }
++
++    fn as_r183_vector(self) -> Vec<u64> {
++        vec![
++            self.leaf_construction_count,
++            self.r183_destination_initialized_limb_count,
++            self.r183_full_width_destination_count,
++            self.arithmetic_limb_visit_count,
++            self.comparison_limb_visit_count,
++            self.carry_extension_count,
++            self.maximum_used_limb_count,
++        ]
++    }
++}
++
++thread_local! {
++    static R182_COUNTERS: RefCell<R182ScoreCostCounters> =
++        RefCell::new(R182ScoreCostCounters::default());
++    static R182_BIGUINT_ALLOCATION_SCOPE: Cell<bool> = const { Cell::new(false) };
++}
++
++struct R182TrackingAllocator;
++
++fn r182_record_allocation(size: usize) {
++    R182_BIGUINT_ALLOCATION_SCOPE.with(|enabled| {
++        if enabled.get() {
++            R182_COUNTERS.with(|counters| {
++                let mut counters = counters.borrow_mut();
++                counters.biguint_heap_allocation_count += 1;
++                counters.biguint_heap_allocated_bytes += size as u64;
++            });
++        }
++    });
++}
++
++unsafe impl GlobalAlloc for R182TrackingAllocator {
++    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
++        let output = unsafe { System.alloc(layout) };
++        if !output.is_null() {
++            r182_record_allocation(layout.size());
+         }
++        output
+     }
+
+-    /// A set of defaults suitable for calling the VF2 layout passes in "search" mode for a circuit
+-    /// that has not been lowered to hardware instructions.
+-    pub fn default_abstract() -> Self {
+-        Self {
+-            call_limit: (None, None),
+-            time_limit: None,
+-            // There's no need to attempt to improve the layout, since everything's so approximate
+-            // anyway.
+-            max_trials: Some(1),
+-            shuffle_seed: None,
+-            score_initial_layout: false,
++    unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
++        let output = unsafe { System.alloc_zeroed(layout) };
++        if !output.is_null() {
++            r182_record_allocation(layout.size());
+         }
++        output
+     }
+
+-    /// A set of defaults for calling VF2 passes on circuits that are already lowered to hardware,
+-    /// and we want to find the _best_ layout.
+-    pub fn default_concrete() -> Self {
+-        Self {
+-            call_limit: (None, None),
+-            time_limit: None,
+-            // Unbounded trials.
+-            max_trials: Some(0),
+-            shuffle_seed: None,
+-            score_initial_layout: true,
++    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
++        unsafe { System.dealloc(ptr, layout) };
++    }
++
++    unsafe fn realloc(&self, ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8 {
++        let output = unsafe { System.realloc(ptr, layout, new_size) };
++        if !output.is_null() {
++            r182_record_allocation(new_size);
+         }
++        output
+     }
+ }
+-#[pymethods]
+-impl Vf2PassConfiguration {
+-    #[new]
+-    #[pyo3(signature = (*, call_limit=(None, None), time_limit=None, max_trials=None, shuffle_seed=None, score_initial_layout=false))]
+-    fn py_new(
+-        call_limit: (Option<usize>, Option<usize>),
+-        time_limit: Option<f64>,
+-        max_trials: Option<usize>,
+-        shuffle_seed: Option<u64>,
+-        score_initial_layout: bool,
+-    ) -> Self {
+-        Self {
+-            call_limit,
+-            time_limit,
+-            max_trials,
+-            shuffle_seed,
+-            score_initial_layout,
+-        }
++
++#[global_allocator]
++static R182_ALLOCATOR: R182TrackingAllocator = R182TrackingAllocator;
++
++struct R182BigUintAllocationGuard;
++
++impl R182BigUintAllocationGuard {
++    fn enter() -> Self {
++        R182_BIGUINT_ALLOCATION_SCOPE.with(|enabled| {
++            assert!(!enabled.replace(true), "nested R182 allocation scope");
++        });
++        Self
+     }
++}
+
+-    /// Construct the VF2 configuration from the legacy interface to the Python passes.
+-    #[staticmethod]
+-    #[pyo3(signature = (*, call_limit=None, time_limit=None, max_trials=None, shuffle_seed=None, score_initial_layout=false))]
+-    fn from_legacy_api(
+-        call_limit: Option<Bound<PyAny>>,
+-        time_limit: Option<f64>,
+-        max_trials: Option<isize>,
+-        shuffle_seed: Option<i64>,
+-        score_initial_layout: bool,
+-    ) -> PyResult<Self> {
+-        let call_limit = match call_limit {
+-            Some(call_limit) => {
+-                if let Ok(call_limit) = call_limit.extract::<usize>() {
+-                    (Some(call_limit), Some(call_limit))
+-                } else {
+-                    call_limit.extract()?
+-                }
+-            }
+-            None => (None, None),
+-        };
+-        // In the legacy API, negative `max_trials` means unbounded (which we represent as 0) and
+-        // `None` means "choose some values based on the size of the graph structures".
+-        let max_trials = max_trials.map(|value| value.try_into().unwrap_or(0));
+-        let shuffle_seed = match shuffle_seed {
+-            None => {
+-                // In Python space, `None` means "seed with OS entropy" because seeding was expected
+-                // to be the default.
+-                Some(Pcg64Mcg::from_os_rng().next_u64())
+-            }
+-            Some(-1) => None,
+-            Some(seed) => {
+-                // Python accepted negative seeds other than -1.  Since we're working with
+-                // fixed-size integers, we'll just reinterpret the bits as a `u64`.
+-                Some(u64::from_ne_bytes(seed.to_ne_bytes()))
+-            }
+-        };
+-        Ok(Self {
+-            call_limit,
+-            time_limit,
+-            max_trials,
+-            shuffle_seed,
+-            score_initial_layout,
+-        })
++impl Drop for R182BigUintAllocationGuard {
++    fn drop(&mut self) {
++        R182_BIGUINT_ALLOCATION_SCOPE.with(|enabled| enabled.set(false));
+     }
+ }
+
+-/// The possible success-path returns from a VF2-layout based path.
+-#[derive(Clone, Debug, PartialEq, Eq)]
+-pub enum Vf2PassReturn {
+-    /// No solution could be found.
+-    NoSolution,
+-    /// The configuration asked us to score the identity layout, it resulted in a valid mapping, and
+-    /// it was the best mapping seen (or at least tied for the best).
+-    NoImprovement,
+-    /// A solution was found (other than `NoImprovement`, if relevant).
+-    Solution(HashMap<VirtualQubit, PhysicalQubit>),
++fn r182_reset_counters() {
++    R182_COUNTERS.with(|counters| {
++        *counters.borrow_mut() = R182ScoreCostCounters::default();
++    });
+ }
+-impl<'py> IntoPyObject<'py> for Vf2PassReturn {
+-    type Target = VF2PassReturn;
+-    type Output = <Self::Target as IntoPyObject<'py>>::Output;
+-    type Error = <Self::Target as IntoPyObject<'py>>::Error;
+
+-    fn into_pyobject(self, py: Python<'py>) -> Result<Self::Output, Self::Error> {
+-        VF2PassReturn(self).into_pyobject(py)
++fn r182_take_counters() -> R182ScoreCostCounters {
++    R182_COUNTERS.with(|counters| *counters.borrow())
++}
++
++fn r182_update_counters(update: impl FnOnce(&mut R182ScoreCostCounters)) {
++    R182_COUNTERS.with(|counters| update(&mut counters.borrow_mut()));
++}
++
++fn r182_biguint_used_limbs(value: &BigUint) -> usize {
++    value.bits().div_ceil(u64::BITS as u64) as usize
++}
++
++fn r182_biguint_comparison_visits(left: &BigUint, right: &BigUint) -> usize {
++    let left_used = r182_biguint_used_limbs(left);
++    let right_used = r182_biguint_used_limbs(right);
++    if left_used != right_used {
++        return 0;
+     }
++    left.iter_u64_digits()
++        .zip(right.iter_u64_digits())
++        .collect::<Vec<_>>()
++        .iter()
++        .rev()
++        .position(|(left_limb, right_limb)| left_limb != right_limb)
++        .map_or(left_used, |index| index + 1)
+ }
+
+-#[pyclass]
+-pub struct VF2PassReturn(Vf2PassReturn);
+-#[pymethods]
+-impl VF2PassReturn {
+-    /// True iff there exists a valid solution.  If ``True``, ``new_mapping`` can still be ``None``
+-    /// if there was no improvement over the trivial mapping.
+-    #[getter]
+-    fn has_solution(&self) -> bool {
+-        match &self.0 {
+-            Vf2PassReturn::NoSolution => false,
+-            Vf2PassReturn::NoImprovement | Vf2PassReturn::Solution(_) => true,
++#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
++enum ExactF64Score {
++    Finite(BigUint),
++    PositiveInfinity,
++}
++
++impl ExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        assert!(!value.is_nan(), "exact VF2 scores must not be NaN");
++        assert!(value >= 0.0, "exact VF2 scores must not be negative");
++        if value.is_infinite() {
++            return Self::PositiveInfinity;
++        }
++        if value == 0.0 {
++            return Self::Finite(BigUint::from(0u8));
+         }
++        let bits = value.to_bits();
++        let exponent = ((bits >> 52) & 0x7ff) as usize;
++        let fraction = bits & ((1u64 << 52) - 1);
++        let coefficient = if exponent == 0 {
++            BigUint::from(fraction)
++        } else {
++            BigUint::from((1u64 << 52) | fraction) << (exponent - 1)
++        };
++        Self::Finite(coefficient)
+     }
+-    /// Get the improved mapping, if one exists.  Returns ``None`` if there was no solution or no
+-    /// improvement.
+-    fn new_mapping<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
+-        match &self.0 {
+-            Vf2PassReturn::NoSolution | Vf2PassReturn::NoImprovement => {
+-                Ok(py.None().into_bound(py))
++}
++
++impl vf2::Vf2Score for ExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        match (left, right) {
++            (Self::Finite(left), Self::Finite(right)) => Self::Finite(left + right),
++            _ => Self::PositiveInfinity,
++        }
++    }
++
++    fn id() -> Self {
++        Self::Finite(BigUint::from(0u8))
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
++}
++
++// A finite binary64 value is an integer multiple of 2^-1074. The largest
++// finite coefficient occupies bits 0..=2097 on that grid. Thirty-four limbs
++// leave 78 carry bits, enough to sum more leaves than a <=64-bit usize can
++// address without heap allocation in the VF2 scoring loop.
++const FIXED_EXACT_F64_LIMBS: usize = 34;
++const _: () = assert!(usize::BITS <= 64);
++
++#[derive(Clone, Debug, Eq, PartialEq)]
++enum FixedExactF64Score {
++    Finite([u64; FIXED_EXACT_F64_LIMBS]),
++    PositiveInfinity,
++}
++
++impl FixedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        assert!(!value.is_nan(), "exact VF2 scores must not be NaN");
++        assert!(value >= 0.0, "exact VF2 scores must not be negative");
++        if value.is_infinite() {
++            return Self::PositiveInfinity;
++        }
++
++        let mut limbs = [0u64; FIXED_EXACT_F64_LIMBS];
++        if value == 0.0 {
++            return Self::Finite(limbs);
++        }
++
++        let bits = value.to_bits();
++        let exponent = ((bits >> 52) & 0x7ff) as usize;
++        let fraction = bits & ((1u64 << 52) - 1);
++        let coefficient = if exponent == 0 {
++            fraction
++        } else {
++            (1u64 << 52) | fraction
++        };
++        let shift = exponent.saturating_sub(1);
++        let limb = shift / u64::BITS as usize;
++        let offset = shift % u64::BITS as usize;
++        limbs[limb] = coefficient << offset;
++        if offset != 0 {
++            limbs[limb + 1] = coefficient >> (u64::BITS as usize - offset);
++        }
++        Self::Finite(limbs)
++    }
++}
++
++impl Ord for FixedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        match (self, other) {
++            (Self::PositiveInfinity, Self::PositiveInfinity) => std::cmp::Ordering::Equal,
++            (Self::PositiveInfinity, _) => std::cmp::Ordering::Greater,
++            (_, Self::PositiveInfinity) => std::cmp::Ordering::Less,
++            (Self::Finite(left), Self::Finite(right)) => {
++                for index in (0..FIXED_EXACT_F64_LIMBS).rev() {
++                    match left[index].cmp(&right[index]) {
++                        std::cmp::Ordering::Equal => {}
++                        ordering => return ordering,
++                    }
++                }
++                std::cmp::Ordering::Equal
+             }
+-            Vf2PassReturn::Solution(mapping) => mapping.into_bound_py_any(py),
+         }
+     }
+ }
+
+-/// Build an average error map for a given target.
+-///
+-/// Returns `None` if there is a global 2q operation to avoid attempting to construct a meaningless
+-/// all-to-all connectivity graph.
+-fn build_average_error_map(target: &Target) -> Option<ErrorMap> {
+-    if let Ok(mut globals) = target.operations_for_qargs(QargsRef::Global) {
+-        if globals.any(|op| op.operation.num_qubits() == 2) {
+-            return None;
++impl PartialOrd for FixedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
++    }
++}
++
++impl vf2::Vf2Score for FixedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        match (left, right) {
++            (Self::Finite(left), Self::Finite(right)) => {
++                let mut limbs = [0u64; FIXED_EXACT_F64_LIMBS];
++                let mut carry = false;
++                for index in 0..FIXED_EXACT_F64_LIMBS {
++                    let (partial, left_overflow) = left[index].overflowing_add(right[index]);
++                    let (sum, carry_overflow) = partial.overflowing_add(u64::from(carry));
++                    limbs[index] = sum;
++                    carry = left_overflow || carry_overflow;
++                }
++                assert!(
++                    !carry,
++                    "fixed exact VF2 score exceeded its address-space bound"
++                );
++                Self::Finite(limbs)
++            }
++            _ => Self::PositiveInfinity,
+         }
+     }
+-    let mut error_map = ErrorMap::new(Some(target.num_qargs()));
+-    let mut target_without_errors = true;
+-    for qargs in target.qargs()? {
+-        let Qargs::Concrete(qargs) = qargs else {
+-            // TODO: limitations in the Rust-space `Target` don't let us handle errors on
+-            // globally-defined 1q operations well, and we already handled the case of a 2q global,
+-            // so we can skip from here.
+-            continue;
++
++    fn id() -> Self {
++        Self::Finite([0u64; FIXED_EXACT_F64_LIMBS])
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
++}
++
++#[derive(Clone, Debug, Eq, PartialEq)]
++enum ActiveFixedExactF64Score {
++    Finite {
++        limbs: [u64; FIXED_EXACT_F64_LIMBS],
++        used: u8,
++    },
++    PositiveInfinity,
++}
++
++impl ActiveFixedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        assert!(!value.is_nan(), "exact VF2 scores must not be NaN");
++        assert!(value >= 0.0, "exact VF2 scores must not be negative");
++        if value.is_infinite() {
++            return Self::PositiveInfinity;
++        }
++
++        let mut limbs = [0u64; FIXED_EXACT_F64_LIMBS];
++        if value == 0.0 {
++            return Self::Finite { limbs, used: 0 };
++        }
++
++        let bits = value.to_bits();
++        let exponent = ((bits >> 52) & 0x7ff) as usize;
++        let fraction = bits & ((1u64 << 52) - 1);
++        let coefficient = if exponent == 0 {
++            fraction
++        } else {
++            (1u64 << 52) | fraction
+         };
+-        let mut qarg_error: f64 = 0.;
+-        let mut count: usize = 0;
+-        for op in target
+-            .operation_names_for_qargs(QargsRef::Concrete(qargs))
+-            .expect("these qargs came from `target.qargs()`")
+-        {
+-            count += 1;
+-            // If the `target` has no error recorded for an operation, we treat it as errorless.
+-            qarg_error += target
+-                .get_error(op, qargs)
+-                .inspect(|_| target_without_errors = false)
+-                .unwrap_or(0.);
++        let shift = exponent.saturating_sub(1);
++        let limb = shift / u64::BITS as usize;
++        let offset = shift % u64::BITS as usize;
++        limbs[limb] = coefficient << offset;
++        let mut used = limb + 1;
++        if offset != 0 {
++            let spill = coefficient >> (u64::BITS as usize - offset);
++            if spill != 0 {
++                limbs[limb + 1] = spill;
++                used += 1;
++            }
+         }
+-        if count > 0 {
+-            let out_qargs = if qargs.len() == 1 {
+-                [qargs[0], qargs[0]]
+-            } else {
+-                [qargs[0], qargs[1]]
+-            };
+-            error_map
+-                .error_map
+-                .insert(out_qargs, qarg_error / count as f64);
++        Self::Finite {
++            limbs,
++            used: used as u8,
+         }
+     }
+-    if target_without_errors {
+-        // Legacy back-up condition, which penalises high-degree nodes.  This was originally part of
+-        // VF2Layout to better support old IBM devices, like the bowties, which were unreliable at
+-        // reporting their error rates, but typically had significantly worse performance on the
+-        // high-degree nodes.
+-        let num_qubits = target.num_qubits.unwrap() as usize;
+-        // Using an undirected graph because we don't want to double-count neighbors in directed
+-        // graphs.  Most directed graphs likely have no reversed edges or are totally symmetric, but
+-        // this avoids making any assumptions.
+-        let mut coupling =
+-            Graph::<(), (), Undirected>::with_capacity(num_qubits, error_map.error_map.len());
+-        for _ in 0..num_qubits {
+-            coupling.add_node(());
+-        }
+-        for qargs in target.qargs()? {
+-            let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
+-                continue;
+-            };
+-            coupling.update_edge(
+-                NodeIndex::new(left.index()),
+-                NodeIndex::new(right.index()),
+-                (),
+-            );
++}
++
++impl Ord for ActiveFixedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        match (self, other) {
++            (Self::PositiveInfinity, Self::PositiveInfinity) => std::cmp::Ordering::Equal,
++            (Self::PositiveInfinity, _) => std::cmp::Ordering::Greater,
++            (_, Self::PositiveInfinity) => std::cmp::Ordering::Less,
++            (
++                Self::Finite {
++                    limbs: left,
++                    used: left_used,
++                },
++                Self::Finite {
++                    limbs: right,
++                    used: right_used,
++                },
++            ) => match left_used.cmp(right_used) {
++                std::cmp::Ordering::Equal => {
++                    for index in (0..usize::from(*left_used)).rev() {
++                        match left[index].cmp(&right[index]) {
++                            std::cmp::Ordering::Equal => {}
++                            ordering => return ordering,
++                        }
++                    }
++                    std::cmp::Ordering::Equal
++                }
++                ordering => ordering,
++            },
+         }
+-        for index in coupling.node_indices() {
+-            let qubit = PhysicalQubit::new(index.index() as u32);
+-            let degree = coupling.neighbors(index).count();
+-            error_map
+-                .error_map
+-                .entry([qubit, qubit])
+-                .insert(degree as f64 / num_qubits as f64);
++    }
++}
++
++impl PartialOrd for ActiveFixedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
++    }
++}
++
++impl vf2::Vf2Score for ActiveFixedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        match (left, right) {
++            (
++                Self::Finite {
++                    limbs: left,
++                    used: left_used,
++                },
++                Self::Finite {
++                    limbs: right,
++                    used: right_used,
++                },
++            ) => {
++                let mut limbs = [0u64; FIXED_EXACT_F64_LIMBS];
++                let active = usize::from((*left_used).max(*right_used));
++                let mut carry = false;
++                for index in 0..active {
++                    let (partial, left_overflow) = left[index].overflowing_add(right[index]);
++                    let (sum, carry_overflow) = partial.overflowing_add(u64::from(carry));
++                    limbs[index] = sum;
++                    carry = left_overflow || carry_overflow;
++                }
++                let used = if carry {
++                    assert!(
++                        active < FIXED_EXACT_F64_LIMBS,
++                        "active fixed exact VF2 score exceeded its address-space bound"
++                    );
++                    limbs[active] = 1;
++                    active + 1
++                } else {
++                    active
++                };
++                Self::Finite {
++                    limbs,
++                    used: used as u8,
++                }
++            }
++            _ => Self::PositiveInfinity,
+         }
+-        // We use the `target` here rather than the graph edges because we want the directionality.
+-        for qargs in target.qargs()? {
+-            let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
+-                continue;
+-            };
+-            let avg =
+-                0.5 * (error_map.error_map[&[left, left]] + error_map.error_map[&[right, right]]);
+-            error_map.error_map.entry([left, right]).insert(avg);
++    }
++
++    fn id() -> Self {
++        Self::Finite {
++            limbs: [0u64; FIXED_EXACT_F64_LIMBS],
++            used: 0,
+         }
+     }
+-    Some(error_map)
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
+ }
+
+-/// A full set of a virtual interaction graph, and any loose 1q qubits.
+-#[derive(Default, Debug, Clone)]
+-struct VirtualInteractions<T> {
+-    /// The graph of actual interactions.  Nodes each correspond to 1q operations on a single
+-    /// virtual qubit (the mapping `nodes` stores _which_ qubits), and edges between virtual qubits
+-    /// correspond to 2q operations.  Edges are always directed, even for when `strict_direction` is
+-    /// unset; we handle the fuzzy directional matching by setting the edge weights of the coupling
+-    /// graph appropriately.
+-    graph: Graph<T, T>,
+-    /// Map of node index to the qubit it represents.  We could store this on the nodes themselves,
+-    /// but then all the scorers would need different weight types between the nodes and the edges.
+-    nodes: IndexSet<VirtualQubit>,
+-    /// The qubits that have only single-qubit operations on them, mapped to the interaction summary
+-    /// associated with them.  We iterate through this at the end, so need a consistent order.
+-    uncoupled: IndexMap<VirtualQubit, T>,
+-    /// The qubits that have no operations on them at all.
+-    idle: IndexSet<VirtualQubit>,
++// Keep the same 34-limb storage and active-prefix arithmetic as
++// `ActiveFixedExactF64Score`, but initialize only the prefix that may be read.
++// The suffix remains wrapped in `MaybeUninit`, so moving or cloning the score
++// retains the same object width without forcing zero writes to unused limbs.
++#[derive(Clone, Debug)]
++enum PrefixInitializedExactF64Score {
++    Finite {
++        limbs: [MaybeUninit<u64>; FIXED_EXACT_F64_LIMBS],
++        used: u8,
++    },
++    PositiveInfinity,
+ }
+-impl<T: Default> VirtualInteractions<T> {
+-    /// Create a set of virtual interactions from a DAG, and a weighter function for a single
+-    /// interaction.  The weighter should return `true` on success, or `false` if no weight could be
+-    /// created (indicating a necessary failure of the layout pass).
+-    fn from_dag<W>(dag: &DAGCircuit, weighter: W) -> PyResult<Option<Self>>
+-    where
+-        W: Fn(&mut T, &PackedInstruction, usize) -> bool,
+-    {
+-        let id_qubit_map = (0..dag.num_qubits())
+-            .map(|q| VirtualQubit(q as u32))
+-            .collect::<Vec<_>>();
+-        let mut out = Self::default();
+-        if !out.add_interactions_from(dag, &id_qubit_map, 1, &weighter)? {
+-            return Ok(None);
++
++impl PrefixInitializedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        assert!(!value.is_nan(), "exact VF2 scores must not be NaN");
++        assert!(value >= 0.0, "exact VF2 scores must not be negative");
++        if value.is_infinite() {
++            return Self::PositiveInfinity;
++        }
++
++        let mut limbs = [MaybeUninit::uninit(); FIXED_EXACT_F64_LIMBS];
++        if value == 0.0 {
++            return Self::Finite { limbs, used: 0 };
++        }
++
++        let bits = value.to_bits();
++        let exponent = ((bits >> 52) & 0x7ff) as usize;
++        let fraction = bits & ((1u64 << 52) - 1);
++        let coefficient = if exponent == 0 {
++            fraction
++        } else {
++            (1u64 << 52) | fraction
++        };
++        let shift = exponent.saturating_sub(1);
++        let limb = shift / u64::BITS as usize;
++        let offset = shift % u64::BITS as usize;
++        let spill = if offset == 0 {
++            0
++        } else {
++            coefficient >> (u64::BITS as usize - offset)
++        };
++        let used = limb + 1 + usize::from(spill != 0);
++        for slot in limbs.iter_mut().take(used) {
++            slot.write(0);
++        }
++        limbs[limb].write(coefficient << offset);
++        if spill != 0 {
++            limbs[limb + 1].write(spill);
++        }
++        Self::Finite {
++            limbs,
++            used: used as u8,
+         }
+-        out.idle.extend(
+-            (0..dag.num_qubits() as u32)
+-                .map(VirtualQubit)
+-                .filter(|q| !(out.nodes.contains(q) || out.uncoupled.contains_key(q))),
+-        );
+-        Ok(Some(out))
+     }
+
+-    /// Add interactions from a given DAG.  Returns `false` if the weighter ever returned `false`.
+-    fn add_interactions_from<W>(
+-        &mut self,
+-        dag: &DAGCircuit,
+-        wire_map: &[VirtualQubit],
+-        repeats: usize,
+-        weighter: &W,
+-    ) -> PyResult<bool>
+-    where
+-        W: Fn(&mut T, &PackedInstruction, usize) -> bool,
+-    {
+-        for (_, inst) in dag.op_nodes(false) {
+-            let qubits = dag.get_qargs(inst.qubits);
+-            if let Some(control_flow) = dag.try_view_control_flow(inst) {
+-                let repeats = if let ControlFlowView::ForLoop { collection, .. } = control_flow {
+-                    repeats * collection.len()
+-                } else {
+-                    repeats
+-                };
+-                let wire_map: Vec<_> = qubits.iter().map(|i| wire_map[i.index()]).collect();
+-                for block in control_flow.blocks() {
+-                    if !self.add_interactions_from(block, &wire_map, repeats, weighter)? {
+-                        return Ok(false);
++    fn finite_limb(
++        limbs: &[MaybeUninit<u64>; FIXED_EXACT_F64_LIMBS],
++        used: u8,
++        index: usize,
++    ) -> u64 {
++        assert!(index < usize::from(used));
++        // SAFETY: constructors, `combine`, and `id` initialize every element
++        // in `0..used`, and no method exposes or reads the suffix.
++        unsafe { limbs[index].assume_init() }
++    }
++}
++
++impl Ord for PrefixInitializedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        match (self, other) {
++            (Self::PositiveInfinity, Self::PositiveInfinity) => std::cmp::Ordering::Equal,
++            (Self::PositiveInfinity, _) => std::cmp::Ordering::Greater,
++            (_, Self::PositiveInfinity) => std::cmp::Ordering::Less,
++            (
++                Self::Finite {
++                    limbs: left,
++                    used: left_used,
++                },
++                Self::Finite {
++                    limbs: right,
++                    used: right_used,
++                },
++            ) => {
++                match left_used.cmp(right_used) {
++                    std::cmp::Ordering::Equal => {
++                        for index in (0..usize::from(*left_used)).rev() {
++                            match Self::finite_limb(left, *left_used, index)
++                                .cmp(&Self::finite_limb(right, *right_used, index))
++                            {
++                                std::cmp::Ordering::Equal => {}
++                                ordering => return ordering,
++                            }
++                        }
++                        std::cmp::Ordering::Equal
+                     }
++                    ordering => ordering,
+                 }
+-                continue;
+             }
+-            match qubits {
+-                [] => (),
+-                [q] => {
+-                    let q = wire_map[q.index()];
+-                    if let Some(index) = self.nodes.get_index_of(&q) {
+-                        let weight = self
+-                            .graph
+-                            .node_weight_mut(NodeIndex::new(index))
+-                            .expect("node must be in graph if tracked in 'nodes'");
+-                        if !weighter(weight, inst, repeats) {
+-                            return Ok(false);
+-                        };
++        }
++    }
++}
++
++impl PartialOrd for PrefixInitializedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
++    }
++}
++
++impl PartialEq for PrefixInitializedExactF64Score {
++    fn eq(&self, other: &Self) -> bool {
++        self.cmp(other) == std::cmp::Ordering::Equal
++    }
++}
++
++impl Eq for PrefixInitializedExactF64Score {}
++
++impl vf2::Vf2Score for PrefixInitializedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        match (left, right) {
++            (
++                Self::Finite {
++                    limbs: left,
++                    used: left_used,
++                },
++                Self::Finite {
++                    limbs: right,
++                    used: right_used,
++                },
++            ) => {
++                let mut limbs = [MaybeUninit::uninit(); FIXED_EXACT_F64_LIMBS];
++                let active = usize::from((*left_used).max(*right_used));
++                let mut carry = false;
++                for index in 0..active {
++                    let left_value = if index < usize::from(*left_used) {
++                        Self::finite_limb(left, *left_used, index)
+                     } else {
+-                        let weight = self.uncoupled.entry(q).or_default();
+-                        weighter(weight, inst, repeats);
+-                    }
+-                }
+-                [q0, q1] => {
+-                    let q0 = wire_map[q0.index()];
+-                    let q1 = wire_map[q1.index()];
+-                    let node0 = self.ensure_1q_in_graph(q0);
+-                    let node1 = self.ensure_1q_in_graph(q1);
+-                    if let Some(edge) = self.graph.find_edge(node0, node1) {
+-                        let weight = self
+-                            .graph
+-                            .edge_weight_mut(edge)
+-                            .expect("this index came from a call to 'find_edge'");
+-                        if !weighter(weight, inst, repeats) {
+-                            return Ok(false);
+-                        };
++                        0
++                    };
++                    let right_value = if index < usize::from(*right_used) {
++                        Self::finite_limb(right, *right_used, index)
+                     } else {
+-                        let mut weight = T::default();
+-                        if !weighter(&mut weight, inst, repeats) {
+-                            return Ok(false);
+-                        };
+-                        self.graph.add_edge(node0, node1, weight);
+-                    }
++                        0
++                    };
++                    let (partial, left_overflow) = left_value.overflowing_add(right_value);
++                    let (sum, carry_overflow) = partial.overflowing_add(u64::from(carry));
++                    limbs[index].write(sum);
++                    carry = left_overflow || carry_overflow;
++                }
++                let used = if carry {
++                    assert!(
++                        active < FIXED_EXACT_F64_LIMBS,
++                        "prefix-initialized exact VF2 score exceeded its address-space bound"
++                    );
++                    limbs[active].write(1);
++                    active + 1
++                } else {
++                    active
++                };
++                Self::Finite {
++                    limbs,
++                    used: used as u8,
+                 }
+-                _ => return Err(MultiQEncountered::new_err("")),
+             }
++            _ => Self::PositiveInfinity,
+         }
+-        Ok(true)
+     }
+
+-    fn ensure_1q_in_graph(&mut self, q: VirtualQubit) -> NodeIndex {
+-        if let Some(index) = self.nodes.get_index_of(&q) {
+-            return NodeIndex::new(index);
++    fn id() -> Self {
++        Self::Finite {
++            limbs: [MaybeUninit::uninit(); FIXED_EXACT_F64_LIMBS],
++            used: 0,
+         }
+-        assert!(self.nodes.insert(q));
+-        self.graph
+-            .add_node(self.uncoupled.swap_remove(&q).unwrap_or_default())
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
+     }
+ }
+-impl<T> VirtualInteractions<T> {
+-    /// Move all the uncoupled qubits into the graph.
+-    ///
+-    /// This is useful for the case that the interaction weights have sufficient semantics that we
+-    /// wouldn't be able to reliably match them separately to the rest of the interactions.
+-    fn move_all_uncoupled_to_graph(&mut self) {
+-        for (qubit, interactions) in self.uncoupled.drain(..) {
+-            assert!(self.nodes.insert(qubit));
+-            self.graph.add_node(interactions);
++
++fn r182_fixed_used_limbs(limbs: &[u64; FIXED_EXACT_F64_LIMBS]) -> usize {
++    limbs
++        .iter()
++        .rposition(|limb| *limb != 0)
++        .map_or(0, |index| index + 1)
++}
++
++fn r182_fixed_comparison_visits(
++    left: &[u64; FIXED_EXACT_F64_LIMBS],
++    right: &[u64; FIXED_EXACT_F64_LIMBS],
++    upper_bound: usize,
++) -> usize {
++    (0..upper_bound)
++        .rev()
++        .position(|index| left[index] != right[index])
++        .map_or(upper_bound, |index| index + 1)
++}
++
++#[derive(Clone, Debug, Eq, PartialEq)]
++struct R182InstrumentedExactF64Score(ExactF64Score);
++
++impl R182InstrumentedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        r182_update_counters(|counters| counters.leaf_construction_count += 1);
++        let guard = R182BigUintAllocationGuard::enter();
++        let score = ExactF64Score::from_f64(value);
++        drop(guard);
++        if let ExactF64Score::Finite(value) = &score {
++            let used = r182_biguint_used_limbs(value) as u64;
++            r182_update_counters(|counters| {
++                counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used);
++            });
+         }
++        Self(score)
+     }
+ }
+
+-fn neg_log_fidelity(error: f64) -> f64 {
+-    if error.is_nan() || error <= 0. {
+-        0.0
+-    } else if error >= 1. {
+-        f64::INFINITY
+-    } else {
+-        -((-error).ln_1p())
++impl Ord for R182InstrumentedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        if let (ExactF64Score::Finite(left), ExactF64Score::Finite(right)) = (&self.0, &other.0) {
++            let visits = r182_biguint_comparison_visits(left, right) as u64;
++            r182_update_counters(|counters| {
++                counters.comparison_limb_visit_count += visits;
++            });
++        }
++        self.0.cmp(&other.0)
+     }
+ }
+
+-fn build_average_coupling_map(target: &Target, errors: &ErrorMap) -> Option<Graph<f64, f64>> {
+-    let num_qubits = target.num_qubits.unwrap_or_default() as usize;
+-    if target.num_qargs() == 0 {
+-        return None;
++impl PartialOrd for R182InstrumentedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
+     }
+-    let mut cm_graph =
+-        Graph::with_capacity(num_qubits, target.num_qargs().saturating_sub(num_qubits));
+-    for qubit in 0..num_qubits as u32 {
+-        let qubit = PhysicalQubit::new(qubit);
+-        cm_graph.add_node(neg_log_fidelity(
+-            *errors.error_map.get(&[qubit, qubit]).unwrap_or(&0.0),
+-        ));
++}
++
++impl vf2::Vf2Score for R182InstrumentedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let (left_used, right_used) = match (&left.0, &right.0) {
++            (ExactF64Score::Finite(left), ExactF64Score::Finite(right)) => (
++                r182_biguint_used_limbs(left),
++                r182_biguint_used_limbs(right),
++            ),
++            _ => (0, 0),
++        };
++        r182_update_counters(|counters| {
++            counters.arithmetic_limb_visit_count += left_used.max(right_used) as u64;
++        });
++        let guard = R182BigUintAllocationGuard::enter();
++        let score = <ExactF64Score as vf2::Vf2Score>::combine(&left.0, &right.0);
++        drop(guard);
++        if let ExactF64Score::Finite(value) = &score {
++            let used = r182_biguint_used_limbs(value);
++            r182_update_counters(|counters| {
++                counters.carry_extension_count += u64::from(used > left_used.max(right_used));
++                counters.maximum_used_limb_count =
++                    counters.maximum_used_limb_count.max(used as u64);
++            });
++        }
++        Self(score)
+     }
+-    for qargs in target.qargs()? {
+-        let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
+-            // We just ignore globals; we're assuming that somewhere else has eagerly terminated in
+-            // the case of global 2q operations.  We also don't care about non-2q operations in this
+-            // loop (since we already did the single-qubit bits).
+-            continue;
++
++    fn id() -> Self {
++        let guard = R182BigUintAllocationGuard::enter();
++        let score = <ExactF64Score as vf2::Vf2Score>::id();
++        drop(guard);
++        Self(score)
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
++}
++
++#[derive(Clone, Debug, Eq, PartialEq)]
++struct R182InstrumentedFixedExactF64Score(FixedExactF64Score);
++
++impl R182InstrumentedFixedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        let score = FixedExactF64Score::from_f64(value);
++        let used = match &score {
++            FixedExactF64Score::Finite(limbs) => r182_fixed_used_limbs(limbs),
++            FixedExactF64Score::PositiveInfinity => 0,
+         };
+-        let error = errors.error_map.get(&[left, right]).unwrap_or(&0.0);
+-        cm_graph.add_edge(
+-            NodeIndex::new(left.index()),
+-            NodeIndex::new(right.index()),
+-            neg_log_fidelity(*error),
+-        );
++        r182_update_counters(|counters| {
++            counters.leaf_construction_count += 1;
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
+     }
+-    Some(cm_graph)
+ }
+
+-#[allow(clippy::type_complexity)]
+-fn build_exact_coupling_map(
+-    target: &Target,
+-) -> Option<(
+-    Graph<HashMap<Interned<str>, f64>, HashMap<Interned<str>, f64>>,
+-    Interner<str>,
+-)> {
+-    let num_qubits = target.num_qubits.unwrap_or_default() as usize;
+-    if target.num_qargs() == 0 {
+-        return None;
++impl Ord for R182InstrumentedFixedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        if let (FixedExactF64Score::Finite(left), FixedExactF64Score::Finite(right)) =
++            (&self.0, &other.0)
++        {
++            let visits = r182_fixed_comparison_visits(left, right, FIXED_EXACT_F64_LIMBS) as u64;
++            r182_update_counters(|counters| {
++                counters.comparison_limb_visit_count += visits;
++            });
++        }
++        self.0.cmp(&other.0)
+     }
+-    let mut cm_graph: Graph<HashMap<_, _>, HashMap<_, _>> =
+-        Graph::with_capacity(num_qubits, target.num_qargs().saturating_sub(num_qubits));
+-    let mut interner = Interner::new();
+-    for _ in 0..num_qubits {
+-        cm_graph.add_node(Default::default());
++}
++
++impl PartialOrd for R182InstrumentedFixedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
+     }
+-    // If there's _only_ global operations in the target, then either any mapping is valid (with the
+-    // same score) or no mapping is valid.  Rather than adding a bunch of extra logic to handle
+-    // that, we just give up; it doesn't make much sense to call VF2Layout/VF2PostLayout in those
+-    // situations.
+-    for qargs in target.qargs()? {
+-        let QargsRef::Concrete(qargs) = qargs.as_ref() else {
+-            // We'll handle globals afterwards, so we can match the Python-space version's unusual
+-            // handling of "global" operations.
+-            continue;
++}
++
++impl vf2::Vf2Score for R182InstrumentedFixedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let left_used = match &left.0 {
++            FixedExactF64Score::Finite(limbs) => r182_fixed_used_limbs(limbs),
++            FixedExactF64Score::PositiveInfinity => 0,
+         };
+-        let instructions = match qargs {
+-            [qubit] => cm_graph
+-                .node_weight_mut(NodeIndex::new(qubit.index()))
+-                .expect("previous loop added all nodes"),
+-            [left, right] => {
+-                let (left, right) = (NodeIndex::new(left.index()), NodeIndex::new(right.index()));
+-                let edge = cm_graph
+-                    .find_edge(left, right)
+-                    .unwrap_or_else(|| cm_graph.add_edge(left, right, Default::default()));
+-                cm_graph
+-                    .edge_weight_mut(edge)
+-                    .expect("edge created in previous statement")
+-            }
+-            _ => continue,
++        let right_used = match &right.0 {
++            FixedExactF64Score::Finite(limbs) => r182_fixed_used_limbs(limbs),
++            FixedExactF64Score::PositiveInfinity => 0,
+         };
+-        for name in target
+-            .operation_names_for_qargs(QargsRef::Concrete(qargs))
+-            .expect("these qargs come from `Target::qargs`")
++        let score = <FixedExactF64Score as vf2::Vf2Score>::combine(&left.0, &right.0);
++        let used = match &score {
++            FixedExactF64Score::Finite(limbs) => r182_fixed_used_limbs(limbs),
++            FixedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.arithmetic_limb_visit_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.carry_extension_count += u64::from(used > left_used.max(right_used));
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
++
++    fn id() -> Self {
++        r182_update_counters(|counters| {
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++        });
++        Self(<FixedExactF64Score as vf2::Vf2Score>::id())
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
++}
++
++#[derive(Clone, Debug, Eq, PartialEq)]
++struct R182InstrumentedActiveFixedExactF64Score(ActiveFixedExactF64Score);
++
++impl R182InstrumentedActiveFixedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        let score = ActiveFixedExactF64Score::from_f64(value);
++        let used = match &score {
++            ActiveFixedExactF64Score::Finite { used, .. } => usize::from(*used),
++            ActiveFixedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.leaf_construction_count += 1;
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
++}
++
++impl Ord for R182InstrumentedActiveFixedExactF64Score {
++    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
++        if let (
++            ActiveFixedExactF64Score::Finite {
++                limbs: left,
++                used: left_used,
++            },
++            ActiveFixedExactF64Score::Finite {
++                limbs: right,
++                used: right_used,
++            },
++        ) = (&self.0, &other.0)
+         {
+-            instructions.insert(
+-                interner.insert(name),
+-                neg_log_fidelity(target.get_error(name, qargs).unwrap_or(0.)),
+-            );
++            let visits = if left_used == right_used {
++                r182_fixed_comparison_visits(left, right, usize::from(*left_used))
++            } else {
++                0
++            } as u64;
++            r182_update_counters(|counters| {
++                counters.comparison_limb_visit_count += visits;
++            });
+         }
++        self.0.cmp(&other.0)
+     }
+-    for name in target
+-        .operation_names_for_qargs(QargsRef::Global)
+-        .into_iter()
+-        .flatten()
+-    {
+-        let TargetOperation::Normal(operation) = target
+-            .operation_from_name(name)
+-            .expect("name comes from target")
+-        else {
+-            // A variadic that's valid globally on both 1q and 2q would have the same effect on
+-            // the score even if it had an error, regardless of the isomorphism.
+-            continue;
++}
++
++impl PartialOrd for R182InstrumentedActiveFixedExactF64Score {
++    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
++        Some(self.cmp(other))
++    }
++}
++
++impl vf2::Vf2Score for R182InstrumentedActiveFixedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let (left_used, right_used) = match (&left.0, &right.0) {
++            (
++                ActiveFixedExactF64Score::Finite {
++                    used: left_used, ..
++                },
++                ActiveFixedExactF64Score::Finite {
++                    used: right_used, ..
++                },
++            ) => (usize::from(*left_used), usize::from(*right_used)),
++            _ => (0, 0),
+         };
+-        // TODO: the `Target` API currently doesn't let us access the error of a global, assuming
+-        // that it's ideal.  We treat things the same here for now.
+-        let score = neg_log_fidelity(0.0);
+-        match operation.operation.num_qubits() {
+-            1 => {
+-                let key = interner.insert(name);
+-                for weight in cm_graph.node_weights_mut() {
+-                    weight.insert(key, score);
+-                }
+-            }
+-            2 => {
+-                // TODO: the Python-space version of `VF2PostLayout` in strict mode has an unusual
+-                // interpretation of "global" 2q operations; it defines the operation on all 2q
+-                // links that _also_ have concrete instructions.  For now, we replicate that.
+-                let key = interner.insert(name);
+-                for weight in cm_graph.edge_weights_mut() {
+-                    weight.insert(key, score);
+-                }
+-            }
+-            _ => (),
++        let score = <ActiveFixedExactF64Score as vf2::Vf2Score>::combine(&left.0, &right.0);
++        let used = match &score {
++            ActiveFixedExactF64Score::Finite { used, .. } => usize::from(*used),
++            ActiveFixedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.arithmetic_limb_visit_count += left_used.max(right_used) as u64;
++            counters.carry_extension_count += u64::from(used > left_used.max(right_used));
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
++
++    fn id() -> Self {
++        r182_update_counters(|counters| {
++            counters.destination_zeroed_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++        });
++        Self(<ActiveFixedExactF64Score as vf2::Vf2Score>::id())
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        left.cmp(right)
++    }
++}
++
++#[derive(Clone)]
++struct R183InstrumentedActiveFixedExactF64Score(ActiveFixedExactF64Score);
++
++impl R183InstrumentedActiveFixedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        let score = ActiveFixedExactF64Score::from_f64(value);
++        let used = match &score {
++            ActiveFixedExactF64Score::Finite { used, .. } => usize::from(*used),
++            ActiveFixedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.leaf_construction_count += 1;
++            counters.r183_destination_initialized_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.r183_full_width_destination_count += 1;
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
++}
++
++impl vf2::Vf2Score for R183InstrumentedActiveFixedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let (left_used, right_used) = match (&left.0, &right.0) {
++            (
++                ActiveFixedExactF64Score::Finite {
++                    used: left_used, ..
++                },
++                ActiveFixedExactF64Score::Finite {
++                    used: right_used, ..
++                },
++            ) => (usize::from(*left_used), usize::from(*right_used)),
++            _ => (0, 0),
++        };
++        let score = <ActiveFixedExactF64Score as vf2::Vf2Score>::combine(&left.0, &right.0);
++        let used = match &score {
++            ActiveFixedExactF64Score::Finite { used, .. } => usize::from(*used),
++            ActiveFixedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.r183_destination_initialized_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.r183_full_width_destination_count += 1;
++            counters.arithmetic_limb_visit_count += left_used.max(right_used) as u64;
++            counters.carry_extension_count += u64::from(used > left_used.max(right_used));
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
++
++    fn id() -> Self {
++        r182_update_counters(|counters| {
++            counters.r183_destination_initialized_limb_count += FIXED_EXACT_F64_LIMBS as u64;
++            counters.r183_full_width_destination_count += 1;
++        });
++        Self(<ActiveFixedExactF64Score as vf2::Vf2Score>::id())
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        if let (
++            ActiveFixedExactF64Score::Finite {
++                limbs: left_limbs,
++                used: left_used,
++            },
++            ActiveFixedExactF64Score::Finite {
++                limbs: right_limbs,
++                used: right_used,
++            },
++        ) = (&left.0, &right.0)
++        {
++            let visits = if left_used == right_used {
++                r182_fixed_comparison_visits(left_limbs, right_limbs, usize::from(*left_used))
++            } else {
++                0
++            } as u64;
++            r182_update_counters(|counters| counters.comparison_limb_visit_count += visits);
+         }
++        left.0.cmp(&right.0)
+     }
+-    Some((cm_graph, interner))
+ }
+
+-/// If an edge does not have a parallel but reversed counterpart, add one with the same weight.
+-fn loosen_directionality<S, T: Clone>(graph: &mut Graph<S, T>) {
+-    graph
+-        .edge_references()
+-        .filter(|edge| graph.find_edge(edge.target(), edge.source()).is_none())
+-        .map(|edge| (edge.target(), edge.source(), edge.weight().clone()))
+-        .collect::<Vec<_>>()
+-        .into_iter()
+-        .for_each(|(source, target, weight)| {
+-            graph.add_edge(source, target, weight);
+-        })
++#[derive(Clone)]
++struct R183InstrumentedPrefixInitializedExactF64Score(PrefixInitializedExactF64Score);
++
++impl R183InstrumentedPrefixInitializedExactF64Score {
++    fn from_f64(value: f64) -> Self {
++        let score = PrefixInitializedExactF64Score::from_f64(value);
++        let used = match &score {
++            PrefixInitializedExactF64Score::Finite { used, .. } => usize::from(*used),
++            PrefixInitializedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.leaf_construction_count += 1;
++            counters.r183_destination_initialized_limb_count += used as u64;
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
++    }
+ }
+
+-// This function assumes that there's a way of "sorting" the 1q interactions relative to each other,
+-// so it only really makes sense for the VF2 averaging, not VF2Post exact matching.
+-/// Assign the free isolated qubits to the physical qubits with the best error rates.
+-fn map_free_qubits(
+-    num_physical_qubits: usize,
+-    interactions: VirtualInteractions<usize>,
+-    mut partial_layout: HashMap<VirtualQubit, PhysicalQubit>,
+-    avg_error_map: &ErrorMap,
+-) -> Option<HashMap<VirtualQubit, PhysicalQubit>> {
+-    if num_physical_qubits
+-        < partial_layout.len() + interactions.uncoupled.len() + interactions.idle.len()
+-    {
+-        return None;
++impl vf2::Vf2Score for R183InstrumentedPrefixInitializedExactF64Score {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let (left_used, right_used) = match (&left.0, &right.0) {
++            (
++                PrefixInitializedExactF64Score::Finite {
++                    used: left_used, ..
++                },
++                PrefixInitializedExactF64Score::Finite {
++                    used: right_used, ..
++                },
++            ) => (usize::from(*left_used), usize::from(*right_used)),
++            _ => (0, 0),
++        };
++        let score = <PrefixInitializedExactF64Score as vf2::Vf2Score>::combine(&left.0, &right.0);
++        let used = match &score {
++            PrefixInitializedExactF64Score::Finite { used, .. } => usize::from(*used),
++            PrefixInitializedExactF64Score::PositiveInfinity => 0,
++        };
++        r182_update_counters(|counters| {
++            counters.r183_destination_initialized_limb_count += used as u64;
++            counters.arithmetic_limb_visit_count += left_used.max(right_used) as u64;
++            counters.carry_extension_count += u64::from(used > left_used.max(right_used));
++            counters.maximum_used_limb_count = counters.maximum_used_limb_count.max(used as u64);
++        });
++        Self(score)
+     }
+
+-    let normalize = |err: Option<&f64>| -> f64 {
+-        let err = err.copied().unwrap_or(f64::INFINITY);
+-        if err.is_nan() { 0.0 } else { err }
+-    };
++    fn id() -> Self {
++        Self(<PrefixInitializedExactF64Score as vf2::Vf2Score>::id())
++    }
+
+-    let mut free_physical = (0..num_physical_qubits)
+-        .map(|qubit| PhysicalQubit::new(qubit as u32))
+-        .collect::<IndexSet<_>>();
+-    partial_layout.values().for_each(|phys| {
+-        free_physical.swap_remove(phys);
+-    });
+-    free_physical.par_sort_by(|a, b| {
+-        let score_a = normalize(avg_error_map.error_map.get(&[*a, *a]));
+-        let score_b = normalize(avg_error_map.error_map.get(&[*b, *b]));
+-        score_a.partial_cmp(&score_b).expect("NaNs treated as zero")
+-    });
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        if let (
++            PrefixInitializedExactF64Score::Finite {
++                limbs: left_limbs,
++                used: left_used,
++            },
++            PrefixInitializedExactF64Score::Finite {
++                limbs: right_limbs,
++                used: right_used,
++            },
++        ) = (&left.0, &right.0)
++        {
++            let visits = if left_used == right_used {
++                let upper = usize::from(*left_used);
++                (0..upper)
++                    .rev()
++                    .position(|index| {
++                        PrefixInitializedExactF64Score::finite_limb(left_limbs, *left_used, index)
++                            != PrefixInitializedExactF64Score::finite_limb(
++                                right_limbs,
++                                *right_used,
++                                index,
++                            )
++                    })
++                    .map_or(upper, |index| index + 1)
++            } else {
++                0
++            } as u64;
++            r182_update_counters(|counters| counters.comparison_limb_visit_count += visits);
++        }
++        left.0.cmp(&right.0)
++    }
++}
+
+-    let mut uncoupled_virtual = interactions.uncoupled.into_iter().collect::<Vec<_>>();
+-    uncoupled_virtual.par_sort_by_key(|(_, interactions)| *interactions);
+-    partial_layout.extend(
+-        uncoupled_virtual
+-            .into_iter()
+-            .rev() // We want the most used virtuals to get first pick.
+-            .map(|(virt, _)| virt)
+-            .chain(interactions.idle)
+-            .zip(free_physical),
+-    );
+-    Some(partial_layout)
++// R162 keeps a compact, source-local witness of score formation.  The labels
++// are carried by the graph weights so the trace can reconstruct partial
++// candidate mappings without changing the production f64 path.
++type ScoreTraceEvent = (String, u64, u64, u64, String, String, String);
++
++#[derive(Clone)]
++struct TraceScore {
++    value: f64,
++    terms: String,
++    leaves: Vec<(String, u64)>,
++    events: Option<Rc<RefCell<Vec<ScoreTraceEvent>>>>,
+ }
+
+-fn minimize_vf2<N, H, NG, HG, NO, HO, NS, ES>(
+-    vf2: vf2::Vf2<N, H, NG, HG, NO, HO, NS, ES>,
+-    config: &Vf2PassConfiguration,
+-) -> Option<IndexMap<N::NodeId, H::NodeId, ::ahash::RandomState>>
+-where
+-    N: vf2::alias::IntoVf2Graph,
+-    H: vf2::alias::IntoVf2Graph<EdgeType = N::EdgeType>,
+-    NG: for<'a> vf2::alias::Vf2Graph<
+-            'a,
+-            NodeWeight = N::NodeWeight,
+-            EdgeWeight = N::EdgeWeight,
+-            EdgeType = N::EdgeType,
+-        > + Create,
+-    HG: for<'a> vf2::alias::Vf2Graph<
+-            'a,
+-            NodeWeight = H::NodeWeight,
+-            EdgeWeight = H::EdgeWeight,
+-            EdgeType = H::EdgeType,
+-        > + Create,
+-    NO: vf2::NodeSorter<N>,
+-    HO: vf2::NodeSorter<H>,
+-    NS: vf2::Semantics<N::NodeWeight, H::NodeWeight, Error = Infallible>,
+-    ES: vf2::Semantics<N::EdgeWeight, H::EdgeWeight, Score = NS::Score, Error = Infallible>,
+-{
+-    let start_time = Instant::now();
+-    let mut times_up = false;
+-    let mut trials: usize = 0;
+-    let max_trials = config
+-        .max_trials
+-        .unwrap_or_else(|| 15 + vf2.needle().edge_count().max(vf2.haystack().edge_count()));
+-    let time_limit = config.time_limit.unwrap_or(f64::INFINITY);
+-    let mut can_continue = || {
+-        if times_up {
+-            return false;
++fn encode_score_leaves(leaves: &[(String, u64)]) -> String {
++    leaves
++        .iter()
++        .map(|(label, bits)| format!("{}={}", label, bits))
++        .collect::<Vec<_>>()
++        .join(";")
++}
++
++impl TraceScore {
++    fn leaf(value: f64, terms: String, events: Rc<RefCell<Vec<ScoreTraceEvent>>>) -> Self {
++        let leaves = vec![(terms.clone(), value.to_bits())];
++        Self {
++            value,
++            terms,
++            leaves,
++            events: Some(events),
+         }
+-        times_up = start_time.elapsed().as_secs_f64() >= time_limit;
+-        trials += 1;
+-        max_trials == 0 || trials <= max_trials
+-    };
+-    let mut vf2 = vf2.with_call_limit(config.call_limit.0).into_iter();
+-    let (mut mapping, _score) = vf2.next()?.expect("error is infallible");
+-    if can_continue() {
+-        vf2.call_limit = config.call_limit.1;
+-        if let Some((new_mapping, _score)) = vf2
+-            .take_while(|_| can_continue())
+-            .last()
+-            .map(|v| v.expect("error is infallible"))
+-        {
+-            mapping = new_mapping;
++    }
++
++    fn zero(events: Rc<RefCell<Vec<ScoreTraceEvent>>>) -> Self {
++        Self {
++            value: 0.0,
++            terms: String::new(),
++            leaves: Vec::new(),
++            events: Some(events),
++        }
++    }
++}
++
++impl vf2::Vf2Score for TraceScore {
++    fn combine(left: &Self, right: &Self) -> Self {
++        let value = left.value + right.value;
++        let terms = match (left.terms.is_empty(), right.terms.is_empty()) {
++            (true, true) => String::new(),
++            (true, false) => right.terms.clone(),
++            (false, true) => left.terms.clone(),
++            (false, false) => format!("{}|{}", left.terms, right.terms),
++        };
++        let mut leaves = left.leaves.clone();
++        leaves.extend(right.leaves.iter().cloned());
++        let events = left.events.clone().or_else(|| right.events.clone());
++        if let Some(events_ref) = &events {
++            events_ref.borrow_mut().push((
++                "combine".to_string(),
++                left.value.to_bits(),
++                right.value.to_bits(),
++                value.to_bits(),
++                left.terms.clone(),
++                right.terms.clone(),
++                encode_score_leaves(&leaves),
++            ));
++        }
++        Self {
++            value,
++            terms,
++            leaves,
++            events,
+         }
+     }
+-    Some(mapping)
+-}
+-
+-/// Produce an initial score for the identity mapping of the interaction graph onto the coupling
+-/// graph.
+-///
+-///
+-/// This assumes that the input graphs are not multigraphs; the results will certainly be incorrect
+-/// if the virtual-interactions graph is a multigraph.
+-fn score_identity_layout<S, T, W>(
+-    interactions: &VirtualInteractions<S>,
+-    coupling: &Graph<T, T>,
+-    scorer: W,
+-) -> Option<W::Score>
+-where
+-    W: vf2::Semantics<S, T, Error = Infallible>,
+-{
+-    use vf2::Vf2Score;
+
+-    // Map from nodes in the interactions graph to the coupling graph.
+-    let node_map = |node: NodeIndex| -> NodeIndex {
+-        NodeIndex::new(
+-            interactions
+-                .nodes
+-                .get_index(node.index())
+-                .expect("all nodes should have an entry")
+-                .index(),
+-        )
++    fn id() -> Self {
++        Self {
++            value: 0.0,
++            terms: String::new(),
++            leaves: Vec::new(),
++            events: None,
++        }
++    }
++
++    fn cmp(left: &Self, right: &Self) -> std::cmp::Ordering {
++        let ordering = left
++            .value
++            .partial_cmp(&right.value)
++            .expect("trace scores must not return nan");
++        if let Some(events_ref) = left.events.as_ref().or(right.events.as_ref()) {
++            let code = match ordering {
++                std::cmp::Ordering::Less => 0,
++                std::cmp::Ordering::Equal => 1,
++                std::cmp::Ordering::Greater => 2,
++            };
++            events_ref.borrow_mut().push((
++                "compare".to_string(),
++                left.value.to_bits(),
++                right.value.to_bits(),
++                code,
++                left.terms.clone(),
++                right.terms.clone(),
++                String::new(),
++            ));
++        }
++        ordering
++    }
++}
++
++#[derive(Clone)]
++struct TraceWeight {
++    value: f64,
++    label: String,
++}
++
++#[pyclass(name = "VF2PassConfiguration", skip_from_py_object)]
++#[derive(Clone, Debug)]
++pub struct Vf2PassConfiguration {
++    /// The maximum numbers of times VF2 is allowed to extend the mapping (before, after) the first
++    /// match.  In both cases, `None` means "no limit".  Steps taken before the first match is found
++    /// still count against the "after" limit.
++    pub call_limit: (Option<usize>, Option<usize>),
++    /// Time in seconds to spend optimizing.  This is not a tight limit; control only returns to the
++    /// iterator to check for the time limit when a successful _improved_ match is found.
++    pub time_limit: Option<f64>,
++    /// In `max_trials`, `None` means "based on the number of graph edges" and `0` means
++    /// "unbounded".
++    pub max_trials: Option<usize>,
++    /// If set, shuffle the node indices of the input graphs using a specified random seed.  If
++    /// `None`, perform no shuffling.  You probably want this to be `None`.
++    pub shuffle_seed: Option<u64>,
++    /// Whether the initial "trivial" layout should be immediately scored, as used as the base.  If
++    /// true, the result will return [Vf2PassReturn::NoImprovement] if the initial layout was the
++    /// best-scoring match.  Scoring the initial layout is useful for seeding the tree-pruner
++    /// component of the search, if the incoming layout is expected to already be valid.
++    pub score_initial_layout: bool,
++}
++impl Vf2PassConfiguration {
++    /// A set of defaults that just runs everything completely unbounded.
++    pub fn default_unbounded() -> Self {
++        Self {
++            call_limit: (None, None),
++            time_limit: None,
++            max_trials: Some(0),
++            shuffle_seed: None,
++            score_initial_layout: false,
++        }
++    }
++
++    /// A set of defaults suitable for calling the VF2 layout passes in "search" mode for a circuit
++    /// that has not been lowered to hardware instructions.
++    pub fn default_abstract() -> Self {
++        Self {
++            call_limit: (None, None),
++            time_limit: None,
++            // There's no need to attempt to improve the layout, since everything's so approximate
++            // anyway.
++            max_trials: Some(1),
++            shuffle_seed: None,
++            score_initial_layout: false,
++        }
++    }
++
++    /// A set of defaults for calling VF2 passes on circuits that are already lowered to hardware,
++    /// and we want to find the _best_ layout.
++    pub fn default_concrete() -> Self {
++        Self {
++            call_limit: (None, None),
++            time_limit: None,
++            // Unbounded trials.
++            max_trials: Some(0),
++            shuffle_seed: None,
++            score_initial_layout: true,
++        }
++    }
++}
++#[pymethods]
++impl Vf2PassConfiguration {
++    #[new]
++    #[pyo3(signature = (*, call_limit=(None, None), time_limit=None, max_trials=None, shuffle_seed=None, score_initial_layout=false))]
++    fn py_new(
++        call_limit: (Option<usize>, Option<usize>),
++        time_limit: Option<f64>,
++        max_trials: Option<usize>,
++        shuffle_seed: Option<u64>,
++        score_initial_layout: bool,
++    ) -> Self {
++        Self {
++            call_limit,
++            time_limit,
++            max_trials,
++            shuffle_seed,
++            score_initial_layout,
++        }
++    }
++
++    /// Construct the VF2 configuration from the legacy interface to the Python passes.
++    #[staticmethod]
++    #[pyo3(signature = (*, call_limit=None, time_limit=None, max_trials=None, shuffle_seed=None, score_initial_layout=false))]
++    fn from_legacy_api(
++        call_limit: Option<Bound<PyAny>>,
++        time_limit: Option<f64>,
++        max_trials: Option<isize>,
++        shuffle_seed: Option<i64>,
++        score_initial_layout: bool,
++    ) -> PyResult<Self> {
++        let call_limit = match call_limit {
++            Some(call_limit) => {
++                if let Ok(call_limit) = call_limit.extract::<usize>() {
++                    (Some(call_limit), Some(call_limit))
++                } else {
++                    call_limit.extract()?
++                }
++            }
++            None => (None, None),
++        };
++        // In the legacy API, negative `max_trials` means unbounded (which we represent as 0) and
++        // `None` means "choose some values based on the size of the graph structures".
++        let max_trials = max_trials.map(|value| value.try_into().unwrap_or(0));
++        let shuffle_seed = match shuffle_seed {
++            None => {
++                // In Python space, `None` means "seed with OS entropy" because seeding was expected
++                // to be the default.
++                Some(Pcg64Mcg::from_os_rng().next_u64())
++            }
++            Some(-1) => None,
++            Some(seed) => {
++                // Python accepted negative seeds other than -1.  Since we're working with
++                // fixed-size integers, we'll just reinterpret the bits as a `u64`.
++                Some(u64::from_ne_bytes(seed.to_ne_bytes()))
++            }
++        };
++        Ok(Self {
++            call_limit,
++            time_limit,
++            max_trials,
++            shuffle_seed,
++            score_initial_layout,
++        })
++    }
++}
++
++/// The possible success-path returns from a VF2-layout based path.
++#[derive(Clone, Debug, PartialEq, Eq)]
++pub enum Vf2PassReturn {
++    /// No solution could be found.
++    NoSolution,
++    /// The configuration asked us to score the identity layout, it resulted in a valid mapping, and
++    /// it was the best mapping seen (or at least tied for the best).
++    NoImprovement,
++    /// A solution was found (other than `NoImprovement`, if relevant).
++    Solution(HashMap<VirtualQubit, PhysicalQubit>),
++}
++impl<'py> IntoPyObject<'py> for Vf2PassReturn {
++    type Target = VF2PassReturn;
++    type Output = <Self::Target as IntoPyObject<'py>>::Output;
++    type Error = <Self::Target as IntoPyObject<'py>>::Error;
++
++    fn into_pyobject(self, py: Python<'py>) -> Result<Self::Output, Self::Error> {
++        VF2PassReturn(self).into_pyobject(py)
++    }
++}
++
++#[pyclass]
++pub struct VF2PassReturn(Vf2PassReturn);
++#[pymethods]
++impl VF2PassReturn {
++    /// True iff there exists a valid solution.  If ``True``, ``new_mapping`` can still be ``None``
++    /// if there was no improvement over the trivial mapping.
++    #[getter]
++    fn has_solution(&self) -> bool {
++        match &self.0 {
++            Vf2PassReturn::NoSolution => false,
++            Vf2PassReturn::NoImprovement | Vf2PassReturn::Solution(_) => true,
++        }
++    }
++    /// Get the improved mapping, if one exists.  Returns ``None`` if there was no solution or no
++    /// improvement.
++    fn new_mapping<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
++        match &self.0 {
++            Vf2PassReturn::NoSolution | Vf2PassReturn::NoImprovement => {
++                Ok(py.None().into_bound(py))
++            }
++            Vf2PassReturn::Solution(mapping) => mapping.into_bound_py_any(py),
++        }
++    }
++}
++
++#[derive(Clone, Copy)]
++enum ErrorMapOperationOrder {
++    Native,
++    Ascending,
++    Descending,
++}
++
++type ErrorMapTraceStep = (String, u64, u64);
++type ErrorMapTraceRow = (Vec<u32>, Vec<ErrorMapTraceStep>, u64);
++
++/// Build an average error map for a given target and optionally retain the
++/// exact operation order and floating-point accumulation bits.
++///
++/// Returns `None` if there is a global 2q operation to avoid attempting to construct a meaningless
++/// all-to-all connectivity graph.
++fn build_average_error_map_traced(
++    target: &Target,
++    operation_order: ErrorMapOperationOrder,
++) -> Option<(ErrorMap, Vec<ErrorMapTraceRow>)> {
++    if let Ok(mut globals) = target.operations_for_qargs(QargsRef::Global) {
++        if globals.any(|op| op.operation.num_qubits() == 2) {
++            return None;
++        }
++    }
++    let mut error_map = ErrorMap::new(Some(target.num_qargs()));
++    let mut trace_rows = Vec::with_capacity(target.num_qargs());
++    let mut target_without_errors = true;
++    for qargs in target.qargs()? {
++        let Qargs::Concrete(qargs) = qargs else {
++            // TODO: limitations in the Rust-space `Target` don't let us handle errors on
++            // globally-defined 1q operations well, and we already handled the case of a 2q global,
++            // so we can skip from here.
++            continue;
++        };
++        let mut qarg_error: f64 = 0.;
++        let mut operation_names = target
++            .operation_names_for_qargs(QargsRef::Concrete(qargs))
++            .expect("these qargs came from `target.qargs()`")
++            .into_iter()
++            .collect::<Vec<_>>();
++        match operation_order {
++            ErrorMapOperationOrder::Native => (),
++            ErrorMapOperationOrder::Ascending => operation_names.sort_unstable(),
++            ErrorMapOperationOrder::Descending => {
++                operation_names.sort_unstable_by(|left, right| right.cmp(left))
++            }
++        }
++        let count = operation_names.len();
++        let mut trace_steps = Vec::with_capacity(count);
++        for op in operation_names {
++            // If the `target` has no error recorded for an operation, we treat it as errorless.
++            let error = target
++                .get_error(op, qargs)
++                .inspect(|_| target_without_errors = false)
++                .unwrap_or(0.);
++            qarg_error += error;
++            trace_steps.push((op.to_owned(), error.to_bits(), qarg_error.to_bits()));
++        }
++        if count > 0 {
++            let out_qargs = if qargs.len() == 1 {
++                [qargs[0], qargs[0]]
++            } else {
++                [qargs[0], qargs[1]]
++            };
++            let average_error = qarg_error / count as f64;
++            error_map.error_map.insert(out_qargs, average_error);
++            trace_rows.push((
++                qargs.iter().map(|qubit| qubit.index() as u32).collect(),
++                trace_steps,
++                average_error.to_bits(),
++            ));
++        }
++    }
++    if target_without_errors {
++        // Legacy back-up condition, which penalises high-degree nodes.  This was originally part of
++        // VF2Layout to better support old IBM devices, like the bowties, which were unreliable at
++        // reporting their error rates, but typically had significantly worse performance on the
++        // high-degree nodes.
++        let num_qubits = target.num_qubits.unwrap() as usize;
++        // Using an undirected graph because we don't want to double-count neighbors in directed
++        // graphs.  Most directed graphs likely have no reversed edges or are totally symmetric, but
++        // this avoids making any assumptions.
++        let mut coupling =
++            Graph::<(), (), Undirected>::with_capacity(num_qubits, error_map.error_map.len());
++        for _ in 0..num_qubits {
++            coupling.add_node(());
++        }
++        for qargs in target.qargs()? {
++            let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
++                continue;
++            };
++            coupling.update_edge(
++                NodeIndex::new(left.index()),
++                NodeIndex::new(right.index()),
++                (),
++            );
++        }
++        for index in coupling.node_indices() {
++            let qubit = PhysicalQubit::new(index.index() as u32);
++            let degree = coupling.neighbors(index).count();
++            error_map
++                .error_map
++                .entry([qubit, qubit])
++                .insert(degree as f64 / num_qubits as f64);
++        }
++        // We use the `target` here rather than the graph edges because we want the directionality.
++        for qargs in target.qargs()? {
++            let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
++                continue;
++            };
++            let avg =
++                0.5 * (error_map.error_map[&[left, left]] + error_map.error_map[&[right, right]]);
++            error_map.error_map.entry([left, right]).insert(avg);
++        }
++    }
++    Some((error_map, trace_rows))
++}
++
++fn build_average_error_map(target: &Target) -> Option<ErrorMap> {
++    build_average_error_map_traced(target, ErrorMapOperationOrder::Native)
++        .map(|(error_map, _)| error_map)
++}
++
++/// A full set of a virtual interaction graph, and any loose 1q qubits.
++#[derive(Default, Debug, Clone)]
++struct VirtualInteractions<T> {
++    /// The graph of actual interactions.  Nodes each correspond to 1q operations on a single
++    /// virtual qubit (the mapping `nodes` stores _which_ qubits), and edges between virtual qubits
++    /// correspond to 2q operations.  Edges are always directed, even for when `strict_direction` is
++    /// unset; we handle the fuzzy directional matching by setting the edge weights of the coupling
++    /// graph appropriately.
++    graph: Graph<T, T>,
++    /// Map of node index to the qubit it represents.  We could store this on the nodes themselves,
++    /// but then all the scorers would need different weight types between the nodes and the edges.
++    nodes: IndexSet<VirtualQubit>,
++    /// The qubits that have only single-qubit operations on them, mapped to the interaction summary
++    /// associated with them.  We iterate through this at the end, so need a consistent order.
++    uncoupled: IndexMap<VirtualQubit, T>,
++    /// The qubits that have no operations on them at all.
++    idle: IndexSet<VirtualQubit>,
++}
++impl<T: Default> VirtualInteractions<T> {
++    /// Create a set of virtual interactions from a DAG, and a weighter function for a single
++    /// interaction.  The weighter should return `true` on success, or `false` if no weight could be
++    /// created (indicating a necessary failure of the layout pass).
++    fn from_dag<W>(dag: &DAGCircuit, weighter: W) -> PyResult<Option<Self>>
++    where
++        W: Fn(&mut T, &PackedInstruction, usize) -> bool,
++    {
++        let id_qubit_map = (0..dag.num_qubits())
++            .map(|q| VirtualQubit(q as u32))
++            .collect::<Vec<_>>();
++        let mut out = Self::default();
++        if !out.add_interactions_from(dag, &id_qubit_map, 1, &weighter)? {
++            return Ok(None);
++        }
++        out.idle.extend(
++            (0..dag.num_qubits() as u32)
++                .map(VirtualQubit)
++                .filter(|q| !(out.nodes.contains(q) || out.uncoupled.contains_key(q))),
++        );
++        Ok(Some(out))
++    }
++
++    /// Add interactions from a given DAG.  Returns `false` if the weighter ever returned `false`.
++    fn add_interactions_from<W>(
++        &mut self,
++        dag: &DAGCircuit,
++        wire_map: &[VirtualQubit],
++        repeats: usize,
++        weighter: &W,
++    ) -> PyResult<bool>
++    where
++        W: Fn(&mut T, &PackedInstruction, usize) -> bool,
++    {
++        for (_, inst) in dag.op_nodes(false) {
++            let qubits = dag.get_qargs(inst.qubits);
++            if let Some(control_flow) = dag.try_view_control_flow(inst) {
++                let repeats = if let ControlFlowView::ForLoop { collection, .. } = control_flow {
++                    repeats * collection.len()
++                } else {
++                    repeats
++                };
++                let wire_map: Vec<_> = qubits.iter().map(|i| wire_map[i.index()]).collect();
++                for block in control_flow.blocks() {
++                    if !self.add_interactions_from(block, &wire_map, repeats, weighter)? {
++                        return Ok(false);
++                    }
++                }
++                continue;
++            }
++            match qubits {
++                [] => (),
++                [q] => {
++                    let q = wire_map[q.index()];
++                    if let Some(index) = self.nodes.get_index_of(&q) {
++                        let weight = self
++                            .graph
++                            .node_weight_mut(NodeIndex::new(index))
++                            .expect("node must be in graph if tracked in 'nodes'");
++                        if !weighter(weight, inst, repeats) {
++                            return Ok(false);
++                        };
++                    } else {
++                        let weight = self.uncoupled.entry(q).or_default();
++                        weighter(weight, inst, repeats);
++                    }
++                }
++                [q0, q1] => {
++                    let q0 = wire_map[q0.index()];
++                    let q1 = wire_map[q1.index()];
++                    let node0 = self.ensure_1q_in_graph(q0);
++                    let node1 = self.ensure_1q_in_graph(q1);
++                    if let Some(edge) = self.graph.find_edge(node0, node1) {
++                        let weight = self
++                            .graph
++                            .edge_weight_mut(edge)
++                            .expect("this index came from a call to 'find_edge'");
++                        if !weighter(weight, inst, repeats) {
++                            return Ok(false);
++                        };
++                    } else {
++                        let mut weight = T::default();
++                        if !weighter(&mut weight, inst, repeats) {
++                            return Ok(false);
++                        };
++                        self.graph.add_edge(node0, node1, weight);
++                    }
++                }
++                _ => return Err(MultiQEncountered::new_err("")),
++            }
++        }
++        Ok(true)
++    }
++
++    fn ensure_1q_in_graph(&mut self, q: VirtualQubit) -> NodeIndex {
++        if let Some(index) = self.nodes.get_index_of(&q) {
++            return NodeIndex::new(index);
++        }
++        assert!(self.nodes.insert(q));
++        self.graph
++            .add_node(self.uncoupled.swap_remove(&q).unwrap_or_default())
++    }
++}
++impl<T> VirtualInteractions<T> {
++    /// Move all the uncoupled qubits into the graph.
++    ///
++    /// This is useful for the case that the interaction weights have sufficient semantics that we
++    /// wouldn't be able to reliably match them separately to the rest of the interactions.
++    fn move_all_uncoupled_to_graph(&mut self) {
++        for (qubit, interactions) in self.uncoupled.drain(..) {
++            assert!(self.nodes.insert(qubit));
++            self.graph.add_node(interactions);
++        }
++    }
++}
++
++fn neg_log_fidelity(error: f64) -> f64 {
++    if error.is_nan() || error <= 0. {
++        0.0
++    } else if error >= 1. {
++        f64::INFINITY
++    } else {
++        -((-error).ln_1p())
++    }
++}
++
++fn build_average_coupling_map(target: &Target, errors: &ErrorMap) -> Option<Graph<f64, f64>> {
++    let num_qubits = target.num_qubits.unwrap_or_default() as usize;
++    if target.num_qargs() == 0 {
++        return None;
++    }
++    let mut cm_graph =
++        Graph::with_capacity(num_qubits, target.num_qargs().saturating_sub(num_qubits));
++    for qubit in 0..num_qubits as u32 {
++        let qubit = PhysicalQubit::new(qubit);
++        cm_graph.add_node(neg_log_fidelity(
++            *errors.error_map.get(&[qubit, qubit]).unwrap_or(&0.0),
++        ));
++    }
++    for qargs in target.qargs()? {
++        let QargsRef::Concrete(&[left, right]) = qargs.as_ref() else {
++            // We just ignore globals; we're assuming that somewhere else has eagerly terminated in
++            // the case of global 2q operations.  We also don't care about non-2q operations in this
++            // loop (since we already did the single-qubit bits).
++            continue;
++        };
++        let error = errors.error_map.get(&[left, right]).unwrap_or(&0.0);
++        cm_graph.add_edge(
++            NodeIndex::new(left.index()),
++            NodeIndex::new(right.index()),
++            neg_log_fidelity(*error),
++        );
++    }
++    Some(cm_graph)
++}
++
++#[allow(clippy::type_complexity)]
++fn build_exact_coupling_map(
++    target: &Target,
++) -> Option<(
++    Graph<HashMap<Interned<str>, f64>, HashMap<Interned<str>, f64>>,
++    Interner<str>,
++)> {
++    let num_qubits = target.num_qubits.unwrap_or_default() as usize;
++    if target.num_qargs() == 0 {
++        return None;
++    }
++    let mut cm_graph: Graph<HashMap<_, _>, HashMap<_, _>> =
++        Graph::with_capacity(num_qubits, target.num_qargs().saturating_sub(num_qubits));
++    let mut interner = Interner::new();
++    for _ in 0..num_qubits {
++        cm_graph.add_node(Default::default());
++    }
++    // If there's _only_ global operations in the target, then either any mapping is valid (with the
++    // same score) or no mapping is valid.  Rather than adding a bunch of extra logic to handle
++    // that, we just give up; it doesn't make much sense to call VF2Layout/VF2PostLayout in those
++    // situations.
++    for qargs in target.qargs()? {
++        let QargsRef::Concrete(qargs) = qargs.as_ref() else {
++            // We'll handle globals afterwards, so we can match the Python-space version's unusual
++            // handling of "global" operations.
++            continue;
++        };
++        let instructions = match qargs {
++            [qubit] => cm_graph
++                .node_weight_mut(NodeIndex::new(qubit.index()))
++                .expect("previous loop added all nodes"),
++            [left, right] => {
++                let (left, right) = (NodeIndex::new(left.index()), NodeIndex::new(right.index()));
++                let edge = cm_graph
++                    .find_edge(left, right)
++                    .unwrap_or_else(|| cm_graph.add_edge(left, right, Default::default()));
++                cm_graph
++                    .edge_weight_mut(edge)
++                    .expect("edge created in previous statement")
++            }
++            _ => continue,
++        };
++        for name in target
++            .operation_names_for_qargs(QargsRef::Concrete(qargs))
++            .expect("these qargs come from `Target::qargs`")
++        {
++            instructions.insert(
++                interner.insert(name),
++                neg_log_fidelity(target.get_error(name, qargs).unwrap_or(0.)),
++            );
++        }
++    }
++    for name in target
++        .operation_names_for_qargs(QargsRef::Global)
++        .into_iter()
++        .flatten()
++    {
++        let TargetOperation::Normal(operation) = target
++            .operation_from_name(name)
++            .expect("name comes from target")
++        else {
++            // A variadic that's valid globally on both 1q and 2q would have the same effect on
++            // the score even if it had an error, regardless of the isomorphism.
++            continue;
++        };
++        // TODO: the `Target` API currently doesn't let us access the error of a global, assuming
++        // that it's ideal.  We treat things the same here for now.
++        let score = neg_log_fidelity(0.0);
++        match operation.operation.num_qubits() {
++            1 => {
++                let key = interner.insert(name);
++                for weight in cm_graph.node_weights_mut() {
++                    weight.insert(key, score);
++                }
++            }
++            2 => {
++                // TODO: the Python-space version of `VF2PostLayout` in strict mode has an unusual
++                // interpretation of "global" 2q operations; it defines the operation on all 2q
++                // links that _also_ have concrete instructions.  For now, we replicate that.
++                let key = interner.insert(name);
++                for weight in cm_graph.edge_weights_mut() {
++                    weight.insert(key, score);
++                }
++            }
++            _ => (),
++        }
++    }
++    Some((cm_graph, interner))
++}
++
++/// If an edge does not have a parallel but reversed counterpart, add one with the same weight.
++fn loosen_directionality<S, T: Clone>(graph: &mut Graph<S, T>) {
++    graph
++        .edge_references()
++        .filter(|edge| graph.find_edge(edge.target(), edge.source()).is_none())
++        .map(|edge| (edge.target(), edge.source(), edge.weight().clone()))
++        .collect::<Vec<_>>()
++        .into_iter()
++        .for_each(|(source, target, weight)| {
++            graph.add_edge(source, target, weight);
++        })
++}
++
++// This function assumes that there's a way of "sorting" the 1q interactions relative to each other,
++// so it only really makes sense for the VF2 averaging, not VF2Post exact matching.
++/// Assign the free isolated qubits to the physical qubits with the best error rates.
++fn map_free_qubits(
++    num_physical_qubits: usize,
++    interactions: VirtualInteractions<usize>,
++    mut partial_layout: HashMap<VirtualQubit, PhysicalQubit>,
++    avg_error_map: &ErrorMap,
++) -> Option<HashMap<VirtualQubit, PhysicalQubit>> {
++    if num_physical_qubits
++        < partial_layout.len() + interactions.uncoupled.len() + interactions.idle.len()
++    {
++        return None;
++    }
++
++    let normalize = |err: Option<&f64>| -> f64 {
++        let err = err.copied().unwrap_or(f64::INFINITY);
++        if err.is_nan() { 0.0 } else { err }
++    };
++
++    let mut free_physical = (0..num_physical_qubits)
++        .map(|qubit| PhysicalQubit::new(qubit as u32))
++        .collect::<IndexSet<_>>();
++    partial_layout.values().for_each(|phys| {
++        free_physical.swap_remove(phys);
++    });
++    free_physical.par_sort_by(|a, b| {
++        let score_a = normalize(avg_error_map.error_map.get(&[*a, *a]));
++        let score_b = normalize(avg_error_map.error_map.get(&[*b, *b]));
++        score_a.partial_cmp(&score_b).expect("NaNs treated as zero")
++    });
++
++    let mut uncoupled_virtual = interactions.uncoupled.into_iter().collect::<Vec<_>>();
++    uncoupled_virtual.par_sort_by_key(|(_, interactions)| *interactions);
++    partial_layout.extend(
++        uncoupled_virtual
++            .into_iter()
++            .rev() // We want the most used virtuals to get first pick.
++            .map(|(virt, _)| virt)
++            .chain(interactions.idle)
++            .zip(free_physical),
++    );
++    Some(partial_layout)
++}
++
++fn minimize_vf2_with_score<N, H, NG, HG, NO, HO, NS, ES>(
++    vf2: vf2::Vf2<N, H, NG, HG, NO, HO, NS, ES>,
++    config: &Vf2PassConfiguration,
++) -> Option<(
++    IndexMap<N::NodeId, H::NodeId, ::ahash::RandomState>,
++    NS::Score,
++)>
++where
++    N: vf2::alias::IntoVf2Graph,
++    H: vf2::alias::IntoVf2Graph<EdgeType = N::EdgeType>,
++    NG: for<'a> vf2::alias::Vf2Graph<
++            'a,
++            NodeWeight = N::NodeWeight,
++            EdgeWeight = N::EdgeWeight,
++            EdgeType = N::EdgeType,
++        > + Create,
++    HG: for<'a> vf2::alias::Vf2Graph<
++            'a,
++            NodeWeight = H::NodeWeight,
++            EdgeWeight = H::EdgeWeight,
++            EdgeType = H::EdgeType,
++        > + Create,
++    NO: vf2::NodeSorter<N>,
++    HO: vf2::NodeSorter<H>,
++    NS: vf2::Semantics<N::NodeWeight, H::NodeWeight, Error = Infallible>,
++    ES: vf2::Semantics<N::EdgeWeight, H::EdgeWeight, Score = NS::Score, Error = Infallible>,
++{
++    let start_time = Instant::now();
++    let mut times_up = false;
++    let mut trials: usize = 0;
++    let max_trials = config
++        .max_trials
++        .unwrap_or_else(|| 15 + vf2.needle().edge_count().max(vf2.haystack().edge_count()));
++    let time_limit = config.time_limit.unwrap_or(f64::INFINITY);
++    let mut can_continue = || {
++        if times_up {
++            return false;
++        }
++        times_up = start_time.elapsed().as_secs_f64() >= time_limit;
++        trials += 1;
++        max_trials == 0 || trials <= max_trials
++    };
++    let mut vf2 = vf2.with_call_limit(config.call_limit.0).into_iter();
++    let (mut mapping, mut score) = vf2.next()?.expect("error is infallible");
++    if can_continue() {
++        vf2.call_limit = config.call_limit.1;
++        if let Some((new_mapping, new_score)) = vf2
++            .take_while(|_| can_continue())
++            .last()
++            .map(|v| v.expect("error is infallible"))
++        {
++            mapping = new_mapping;
++            score = new_score;
++        }
++    }
++    Some((mapping, score))
++}
++
++fn minimize_vf2<N, H, NG, HG, NO, HO, NS, ES>(
++    vf2: vf2::Vf2<N, H, NG, HG, NO, HO, NS, ES>,
++    config: &Vf2PassConfiguration,
++) -> Option<IndexMap<N::NodeId, H::NodeId, ::ahash::RandomState>>
++where
++    N: vf2::alias::IntoVf2Graph,
++    H: vf2::alias::IntoVf2Graph<EdgeType = N::EdgeType>,
++    NG: for<'a> vf2::alias::Vf2Graph<
++            'a,
++            NodeWeight = N::NodeWeight,
++            EdgeWeight = N::EdgeWeight,
++            EdgeType = N::EdgeType,
++        > + Create,
++    HG: for<'a> vf2::alias::Vf2Graph<
++            'a,
++            NodeWeight = H::NodeWeight,
++            EdgeWeight = H::EdgeWeight,
++            EdgeType = H::EdgeType,
++        > + Create,
++    NO: vf2::NodeSorter<N>,
++    HO: vf2::NodeSorter<H>,
++    NS: vf2::Semantics<N::NodeWeight, H::NodeWeight, Error = Infallible>,
++    ES: vf2::Semantics<N::EdgeWeight, H::EdgeWeight, Score = NS::Score, Error = Infallible>,
++{
++    minimize_vf2_with_score(vf2, config).map(|(mapping, _)| mapping)
++}
++
++/// Produce an initial score for the identity mapping of the interaction graph onto the coupling
++/// graph.
++///
++///
++/// This assumes that the input graphs are not multigraphs; the results will certainly be incorrect
++/// if the virtual-interactions graph is a multigraph.
++fn score_identity_layout<S, T, W>(
++    interactions: &VirtualInteractions<S>,
++    coupling: &Graph<T, T>,
++    scorer: W,
++) -> Option<W::Score>
++where
++    W: vf2::Semantics<S, T, Error = Infallible>,
++{
++    use vf2::Vf2Score;
++
++    // Map from nodes in the interactions graph to the coupling graph.
++    let node_map = |node: NodeIndex| -> NodeIndex {
++        NodeIndex::new(
++            interactions
++                .nodes
++                .get_index(node.index())
++                .expect("all nodes should have an entry")
++                .index(),
++        )
++    };
++    let mut score = W::Score::id();
++    for node in interactions.graph.node_indices() {
++        let needle = interactions.graph.node_weight(node)?;
++        let haystack = coupling.node_weight(node_map(node))?;
++        score = W::Score::combine(
++            &score,
++            &scorer
++                .score(needle, haystack)
++                .expect("error is infallible")?,
++        );
++    }
++    for edge in interactions.graph.edge_references() {
++        let needle = edge.weight();
++        // Making a strong assumption that the virtual interactions are not a multigraph here.
++        let haystack = coupling
++            .edges_connecting(node_map(edge.source()), node_map(edge.target()))
++            .next()?
++            .weight();
++        score = W::Score::combine(
++            &score,
++            &scorer
++                .score(needle, haystack)
++                .expect("error is infallible")?,
++        );
++    }
++    Some(score)
++}
++
++fn trace_graph_from_interactions(graph: &Graph<usize, usize>) -> Graph<TraceWeight, TraceWeight> {
++    let mut out = Graph::with_capacity(graph.node_count(), graph.edge_count());
++    for node in graph.node_indices() {
++        out.add_node(TraceWeight {
++            value: *graph.node_weight(node).expect("interaction node exists") as f64,
++            label: format!("v{}", node.index()),
++        });
++    }
++    for edge in graph.edge_references() {
++        out.add_edge(
++            edge.source(),
++            edge.target(),
++            TraceWeight {
++                value: *edge.weight() as f64,
++                label: format!("v{}->v{}", edge.source().index(), edge.target().index()),
++            },
++        );
++    }
++    out
++}
++
++fn trace_graph_from_coupling(graph: &Graph<f64, f64>) -> Graph<TraceWeight, TraceWeight> {
++    let mut out = Graph::with_capacity(graph.node_count(), graph.edge_count());
++    for node in graph.node_indices() {
++        out.add_node(TraceWeight {
++            value: *graph.node_weight(node).expect("coupling node exists"),
++            label: format!("p{}", node.index()),
++        });
++    }
++    for edge in graph.edge_references() {
++        out.add_edge(
++            edge.source(),
++            edge.target(),
++            TraceWeight {
++                value: *edge.weight(),
++                label: format!("p{}->p{}", edge.source().index(), edge.target().index()),
++            },
++        );
++    }
++    out
++}
++
++fn trace_score_identity_layout(
++    interactions: &Graph<TraceWeight, TraceWeight>,
++    coupling: &Graph<TraceWeight, TraceWeight>,
++    events: Rc<RefCell<Vec<ScoreTraceEvent>>>,
++) -> Option<TraceScore> {
++    let mut score = TraceScore::zero(events.clone());
++    for node in interactions.node_indices() {
++        let needle = interactions.node_weight(node)?;
++        let haystack = coupling.node_weight(node)?;
++        score = TraceScore::combine(
++            &score,
++            &TraceScore::leaf(
++                needle.value * haystack.value,
++                format!("node:{}=>{}", needle.label, haystack.label),
++                events.clone(),
++            ),
++        );
++    }
++    for edge in interactions.edge_references() {
++        let haystack = coupling
++            .edges_connecting(edge.source(), edge.target())
++            .next()?;
++        score = TraceScore::combine(
++            &score,
++            &TraceScore::leaf(
++                edge.weight().value * haystack.weight().value,
++                format!("edge:{}=>{}", edge.weight().label, haystack.weight().label),
++                events.clone(),
++            ),
++        );
++    }
++    Some(score)
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, operation_order="native"))]
++pub fn vf2_layout_pass_average_score_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    operation_order: &str,
++) -> PyResult<(Vf2PassReturn, Vec<ScoreTraceEvent>, Vec<ErrorMapTraceRow>)> {
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++    let Some((error_map, error_map_trace)) = build_average_error_map_traced(
++        target,
++        match operation_order {
++            "native" => ErrorMapOperationOrder::Native,
++            "ascending" => ErrorMapOperationOrder::Ascending,
++            "descending" => ErrorMapOperationOrder::Descending,
++            value => {
++                return Err(pyo3::exceptions::PyValueError::new_err(format!(
++                    "invalid ErrorMap operation order: {value}"
++                )));
++            }
++        },
++    ) else {
++        return Ok((Vf2PassReturn::NoSolution, Vec::new(), Vec::new()));
++    };
++    let Some(mut coupling_graph) = build_average_coupling_map(target, &error_map) else {
++        return Ok((Vf2PassReturn::NoSolution, Vec::new(), error_map_trace));
++    };
++    if !strict_direction {
++        loosen_directionality(&mut coupling_graph);
++    }
++
++    let events = Rc::new(RefCell::new(Vec::new()));
++    let trace_interactions = trace_graph_from_interactions(&interactions.graph);
++    let trace_coupling = trace_graph_from_coupling(&coupling_graph);
++    let node_score_events = events.clone();
++    let node_score = move |count: &TraceWeight, err: &TraceWeight| {
++        Ok::<TraceScore, Infallible>(TraceScore::leaf(
++            count.value * err.value,
++            format!("node:{}=>{}", count.label, err.label),
++            node_score_events.clone(),
++        ))
++    };
++    let edge_score_events = events.clone();
++    let edge_score = move |count: &TraceWeight, err: &TraceWeight| {
++        Ok::<TraceScore, Infallible>(TraceScore::leaf(
++            count.value * err.value,
++            format!("edge:{}=>{}", count.label, err.label),
++            edge_score_events.clone(),
++        ))
++    };
++    let best_score = if config.score_initial_layout {
++        trace_score_identity_layout(&trace_interactions, &trace_coupling, events.clone())
++    } else {
++        None
++    };
++    let num_physical_qubits = coupling_graph.node_count();
++    let mut coupling_qubits = (0..num_physical_qubits)
++        .map(|k| PhysicalQubit::new(k as u32))
++        .collect::<Vec<_>>();
++    if let Some(seed) = config.shuffle_seed {
++        coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++        let order = coupling_qubits
++            .iter()
++            .map(|qubit| NodeIndex::new(qubit.index()))
++            .collect::<Vec<_>>();
++        coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++    }
++    let trace_coupling = trace_graph_from_coupling(&coupling_graph);
++    let vf2 = vf2::Vf2::new(&trace_interactions, &trace_coupling, vf2::Problem::Subgraph)
++        .with_scoring(node_score, edge_score)
++        .with_restriction(vf2::Restriction::Decreasing(best_score))
++        .with_vf2pp_ordering();
++    let start_time = Instant::now();
++    let mut times_up = false;
++    let mut trials: usize = 0;
++    let max_trials = config
++        .max_trials
++        .unwrap_or_else(|| 15 + vf2.needle().edge_count().max(vf2.haystack().edge_count()));
++    let time_limit = config.time_limit.unwrap_or(f64::INFINITY);
++    let mut can_continue = || {
++        if times_up {
++            return false;
++        }
++        times_up = start_time.elapsed().as_secs_f64() >= time_limit;
++        trials += 1;
++        max_trials == 0 || trials <= max_trials
++    };
++    let mut vf2 = vf2.with_call_limit(config.call_limit.0).into_iter();
++    let Some(first) = vf2.next() else {
++        let output = if config.score_initial_layout {
++            Vf2PassReturn::NoImprovement
++        } else {
++            Vf2PassReturn::NoSolution
++        };
++        return Ok((output, events.borrow().clone(), error_map_trace));
++    };
++    let (mut mapping, mut score) = first.expect("error is infallible");
++    let mut candidate_index = 0usize;
++    let mut record_candidate =
++        |candidate_mapping: &IndexMap<NodeIndex, NodeIndex, ::ahash::RandomState>,
++         candidate_score: &TraceScore| {
++            let mapping_terms = candidate_mapping
++                .iter()
++                .map(|(virtual_qubit, physical_qubit)| {
++                    format!("v{}->p{}", virtual_qubit.index(), physical_qubit.index())
++                })
++                .collect::<Vec<_>>()
++                .join("|");
++            events.borrow_mut().push((
++                "candidate".to_string(),
++                candidate_score.value.to_bits(),
++                0,
++                0,
++                mapping_terms,
++                candidate_score.terms.clone(),
++                format!(
++                    "yielded_by_vf2;candidate_index={};leaves={}",
++                    candidate_index,
++                    encode_score_leaves(&candidate_score.leaves)
++                ),
++            ));
++            candidate_index += 1;
++        };
++    record_candidate(&mapping, &score);
++    if can_continue() {
++        vf2.call_limit = config.call_limit.1;
++        while can_continue() {
++            let Some(next) = vf2.next() else {
++                break;
++            };
++            let (new_mapping, new_score) = next.expect("error is infallible");
++            record_candidate(&new_mapping, &new_score);
++            mapping = new_mapping;
++            score = new_score;
++        }
++    }
++    let mapping_terms = mapping
++        .iter()
++        .map(|(virtual_qubit, physical_qubit)| {
++            format!("v{}->p{}", virtual_qubit.index(), physical_qubit.index())
++        })
++        .collect::<Vec<_>>()
++        .join("|");
++    events.borrow_mut().push((
++        "candidate".to_string(),
++        score.value.to_bits(),
++        0,
++        0,
++        mapping_terms,
++        score.terms.clone(),
++        format!(
++            "returned_by_minimize_vf2;leaves={}",
++            encode_score_leaves(&score.leaves)
++        ),
++    ));
++    let mapping = mapping
++        .iter()
++        .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++        .collect();
++    let output = match map_free_qubits(num_physical_qubits, interactions, mapping, &error_map) {
++        Some(mapping) => Vf2PassReturn::Solution(mapping),
++        None => Vf2PassReturn::NoSolution,
++    };
++    Ok((output, events.borrow().clone(), error_map_trace))
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<Vf2PassReturn> {
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++
++    let score =
++        |count: &usize, err: &f64| -> Result<f64, Infallible> { Ok(*err * (*count as f64)) };
++    let target_error_map = avg_error_map
++        .is_none()
++        .then(|| build_average_error_map(target))
++        .flatten();
++    let Some(avg_error_map) = avg_error_map.or(target_error_map.as_ref()) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    let Some(mut coupling_graph) = build_average_coupling_map(target, avg_error_map) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    if !strict_direction {
++        loosen_directionality(&mut coupling_graph);
++    }
++    let best_score = if config.score_initial_layout {
++        score_identity_layout(&interactions, &coupling_graph, vf2::Scorer(score))
++    } else {
++        None
++    };
++    let num_physical_qubits = coupling_graph.node_count();
++    let mut coupling_qubits = (0..num_physical_qubits)
++        .map(|k| PhysicalQubit::new(k as u32))
++        .collect::<Vec<_>>();
++    if let Some(seed) = config.shuffle_seed {
++        coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++        let order = coupling_qubits
++            .iter()
++            .map(|qubit| NodeIndex::new(qubit.index()))
++            .collect::<Vec<_>>();
++        coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++    }
++
++    let vf2 = vf2::Vf2::new(&interactions.graph, &coupling_graph, vf2::Problem::Subgraph)
++        .with_scoring(score, score)
++        .with_restriction(vf2::Restriction::Decreasing(best_score))
++        .with_vf2pp_ordering();
++    let Some(mapping) = minimize_vf2(vf2, config) else {
++        if best_score.is_some() {
++            return Ok(Vf2PassReturn::NoImprovement);
++        } else {
++            return Ok(Vf2PassReturn::NoSolution);
++        }
++    };
++    // Remap node indices back to virtual/physical qubits.
++    let mapping = mapping
++        .iter()
++        .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++        .collect();
++    match map_free_qubits(num_physical_qubits, interactions, mapping, avg_error_map) {
++        Some(mapping) => Ok(Vf2PassReturn::Solution(mapping)),
++        None => Ok(Vf2PassReturn::NoSolution),
++    }
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_exact_score(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<Vf2PassReturn> {
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++
++    let score = |count: &usize, err: &f64| -> Result<ExactF64Score, Infallible> {
++        Ok(ExactF64Score::from_f64(*err * (*count as f64)))
++    };
++    let target_error_map = avg_error_map
++        .is_none()
++        .then(|| build_average_error_map(target))
++        .flatten();
++    let Some(avg_error_map) = avg_error_map.or(target_error_map.as_ref()) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    let Some(mut coupling_graph) = build_average_coupling_map(target, avg_error_map) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    if !strict_direction {
++        loosen_directionality(&mut coupling_graph);
++    }
++    let best_score = if config.score_initial_layout {
++        score_identity_layout(&interactions, &coupling_graph, vf2::Scorer(score))
++    } else {
++        None
++    };
++    let had_best_score = best_score.is_some();
++    let num_physical_qubits = coupling_graph.node_count();
++    let mut coupling_qubits = (0..num_physical_qubits)
++        .map(|k| PhysicalQubit::new(k as u32))
++        .collect::<Vec<_>>();
++    if let Some(seed) = config.shuffle_seed {
++        coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++        let order = coupling_qubits
++            .iter()
++            .map(|qubit| NodeIndex::new(qubit.index()))
++            .collect::<Vec<_>>();
++        coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++    }
++
++    let vf2 = vf2::Vf2::new(&interactions.graph, &coupling_graph, vf2::Problem::Subgraph)
++        .with_scoring(score, score)
++        .with_restriction(vf2::Restriction::Decreasing(best_score))
++        .with_vf2pp_ordering();
++    let Some(mapping) = minimize_vf2(vf2, config) else {
++        if had_best_score {
++            return Ok(Vf2PassReturn::NoImprovement);
++        } else {
++            return Ok(Vf2PassReturn::NoSolution);
++        }
++    };
++    let mapping = mapping
++        .iter()
++        .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++        .collect();
++    match map_free_qubits(num_physical_qubits, interactions, mapping, avg_error_map) {
++        Some(mapping) => Ok(Vf2PassReturn::Solution(mapping)),
++        None => Ok(Vf2PassReturn::NoSolution),
++    }
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_fixed_exact_score(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<Vf2PassReturn> {
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++
++    let score = |count: &usize, err: &f64| -> Result<FixedExactF64Score, Infallible> {
++        Ok(FixedExactF64Score::from_f64(*err * (*count as f64)))
++    };
++    let target_error_map = avg_error_map
++        .is_none()
++        .then(|| build_average_error_map(target))
++        .flatten();
++    let Some(avg_error_map) = avg_error_map.or(target_error_map.as_ref()) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    let Some(mut coupling_graph) = build_average_coupling_map(target, avg_error_map) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    if !strict_direction {
++        loosen_directionality(&mut coupling_graph);
++    }
++    let best_score = if config.score_initial_layout {
++        score_identity_layout(&interactions, &coupling_graph, vf2::Scorer(score))
++    } else {
++        None
++    };
++    let had_best_score = best_score.is_some();
++    let num_physical_qubits = coupling_graph.node_count();
++    let mut coupling_qubits = (0..num_physical_qubits)
++        .map(|k| PhysicalQubit::new(k as u32))
++        .collect::<Vec<_>>();
++    if let Some(seed) = config.shuffle_seed {
++        coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++        let order = coupling_qubits
++            .iter()
++            .map(|qubit| NodeIndex::new(qubit.index()))
++            .collect::<Vec<_>>();
++        coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++    }
++
++    let vf2 = vf2::Vf2::new(&interactions.graph, &coupling_graph, vf2::Problem::Subgraph)
++        .with_scoring(score, score)
++        .with_restriction(vf2::Restriction::Decreasing(best_score))
++        .with_vf2pp_ordering();
++    let Some(mapping) = minimize_vf2(vf2, config) else {
++        if had_best_score {
++            return Ok(Vf2PassReturn::NoImprovement);
++        } else {
++            return Ok(Vf2PassReturn::NoSolution);
++        }
++    };
++    let mapping = mapping
++        .iter()
++        .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++        .collect();
++    match map_free_qubits(num_physical_qubits, interactions, mapping, avg_error_map) {
++        Some(mapping) => Ok(Vf2PassReturn::Solution(mapping)),
++        None => Ok(Vf2PassReturn::NoSolution),
++    }
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_active_fixed_exact_score(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<Vf2PassReturn> {
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++
++    let score = |count: &usize, err: &f64| -> Result<ActiveFixedExactF64Score, Infallible> {
++        Ok(ActiveFixedExactF64Score::from_f64(*err * (*count as f64)))
++    };
++    let target_error_map = avg_error_map
++        .is_none()
++        .then(|| build_average_error_map(target))
++        .flatten();
++    let Some(avg_error_map) = avg_error_map.or(target_error_map.as_ref()) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    let Some(mut coupling_graph) = build_average_coupling_map(target, avg_error_map) else {
++        return Ok(Vf2PassReturn::NoSolution);
++    };
++    if !strict_direction {
++        loosen_directionality(&mut coupling_graph);
++    }
++    let best_score = if config.score_initial_layout {
++        score_identity_layout(&interactions, &coupling_graph, vf2::Scorer(score))
++    } else {
++        None
++    };
++    let had_best_score = best_score.is_some();
++    let num_physical_qubits = coupling_graph.node_count();
++    let mut coupling_qubits = (0..num_physical_qubits)
++        .map(|k| PhysicalQubit::new(k as u32))
++        .collect::<Vec<_>>();
++    if let Some(seed) = config.shuffle_seed {
++        coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++        let order = coupling_qubits
++            .iter()
++            .map(|qubit| NodeIndex::new(qubit.index()))
++            .collect::<Vec<_>>();
++        coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++    }
++
++    let vf2 = vf2::Vf2::new(&interactions.graph, &coupling_graph, vf2::Problem::Subgraph)
++        .with_scoring(score, score)
++        .with_restriction(vf2::Restriction::Decreasing(best_score))
++        .with_vf2pp_ordering();
++    let Some(mapping) = minimize_vf2(vf2, config) else {
++        if had_best_score {
++            return Ok(Vf2PassReturn::NoImprovement);
++        } else {
++            return Ok(Vf2PassReturn::NoSolution);
++        }
+     };
+-    let mut score = W::Score::id();
+-    for node in interactions.graph.node_indices() {
+-        let needle = interactions.graph.node_weight(node)?;
+-        let haystack = coupling.node_weight(node_map(node))?;
+-        score = W::Score::combine(
+-            &score,
+-            &scorer
+-                .score(needle, haystack)
+-                .expect("error is infallible")?,
+-        );
+-    }
+-    for edge in interactions.graph.edge_references() {
+-        let needle = edge.weight();
+-        // Making a strong assumption that the virtual interactions are not a multigraph here.
+-        let haystack = coupling
+-            .edges_connecting(node_map(edge.source()), node_map(edge.target()))
+-            .next()?
+-            .weight();
+-        score = W::Score::combine(
+-            &score,
+-            &scorer
+-                .score(needle, haystack)
+-                .expect("error is infallible")?,
+-        );
++    let mapping = mapping
++        .iter()
++        .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++        .collect();
++    match map_free_qubits(num_physical_qubits, interactions, mapping, avg_error_map) {
++        Some(mapping) => Ok(Vf2PassReturn::Solution(mapping)),
++        None => Ok(Vf2PassReturn::NoSolution),
+     }
+-    Some(score)
+ }
+
+ #[pyfunction]
+ #[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
+-pub fn vf2_layout_pass_average(
++pub fn vf2_layout_pass_average_prefix_initialized_exact_score(
+     dag: &DAGCircuit,
+     target: &Target,
+     config: &Vf2PassConfiguration,
+@@ -742,8 +2493,11 @@ pub fn vf2_layout_pass_average(
+     let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
+         .expect("weighting function is infallible");
+
+-    let score =
+-        |count: &usize, err: &f64| -> Result<f64, Infallible> { Ok(*err * (*count as f64)) };
++    let score = |count: &usize, err: &f64| -> Result<PrefixInitializedExactF64Score, Infallible> {
++        Ok(PrefixInitializedExactF64Score::from_f64(
++            *err * (*count as f64),
++        ))
++    };
+     let target_error_map = avg_error_map
+         .is_none()
+         .then(|| build_average_error_map(target))
+@@ -762,6 +2516,7 @@ pub fn vf2_layout_pass_average(
+     } else {
+         None
+     };
++    let had_best_score = best_score.is_some();
+     let num_physical_qubits = coupling_graph.node_count();
+     let mut coupling_qubits = (0..num_physical_qubits)
+         .map(|k| PhysicalQubit::new(k as u32))
+@@ -780,13 +2535,12 @@ pub fn vf2_layout_pass_average(
+         .with_restriction(vf2::Restriction::Decreasing(best_score))
+         .with_vf2pp_ordering();
+     let Some(mapping) = minimize_vf2(vf2, config) else {
+-        if best_score.is_some() {
++        if had_best_score {
+             return Ok(Vf2PassReturn::NoImprovement);
+         } else {
+             return Ok(Vf2PassReturn::NoSolution);
+         }
+     };
+-    // Remap node indices back to virtual/physical qubits.
+     let mapping = mapping
+         .iter()
+         .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
+@@ -797,6 +2551,239 @@ pub fn vf2_layout_pass_average(
+     }
+ }
+
++fn r182_vf2_layout_pass_average_cost_traced<S, F>(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++    score: F,
++    counter_vector: fn(R182ScoreCostCounters) -> Vec<u64>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)>
++where
++    S: vf2::Vf2Score,
++    F: Fn(&usize, &f64) -> Result<S, Infallible> + Copy,
++{
++    r182_reset_counters();
++    let add_interaction = |count: &mut usize, _: &PackedInstruction, repeats: usize| {
++        *count += repeats;
++        true
++    };
++    let interactions = VirtualInteractions::from_dag(dag, add_interaction)?
++        .expect("weighting function is infallible");
++    let target_error_map = avg_error_map
++        .is_none()
++        .then(|| build_average_error_map(target))
++        .flatten();
++    let output = if let Some(avg_error_map) = avg_error_map.or(target_error_map.as_ref()) {
++        if let Some(mut coupling_graph) = build_average_coupling_map(target, avg_error_map) {
++            if !strict_direction {
++                loosen_directionality(&mut coupling_graph);
++            }
++            let best_score = if config.score_initial_layout {
++                score_identity_layout(&interactions, &coupling_graph, vf2::Scorer(score))
++            } else {
++                None
++            };
++            let had_best_score = best_score.is_some();
++            let num_physical_qubits = coupling_graph.node_count();
++            let mut coupling_qubits = (0..num_physical_qubits)
++                .map(|k| PhysicalQubit::new(k as u32))
++                .collect::<Vec<_>>();
++            if let Some(seed) = config.shuffle_seed {
++                coupling_qubits.shuffle(&mut Pcg64Mcg::seed_from_u64(seed));
++                let order = coupling_qubits
++                    .iter()
++                    .map(|qubit| NodeIndex::new(qubit.index()))
++                    .collect::<Vec<_>>();
++                coupling_graph = vf2::reorder_nodes(&coupling_graph, &order);
++            }
++            let vf2 = vf2::Vf2::new(&interactions.graph, &coupling_graph, vf2::Problem::Subgraph)
++                .with_scoring(score, score)
++                .with_restriction(vf2::Restriction::Decreasing(best_score))
++                .with_vf2pp_ordering();
++            if let Some(mapping) = minimize_vf2(vf2, config) {
++                let mapping = mapping
++                    .iter()
++                    .map(|(k, v)| (interactions.nodes[k.index()], coupling_qubits[v.index()]))
++                    .collect();
++                match map_free_qubits(num_physical_qubits, interactions, mapping, avg_error_map) {
++                    Some(mapping) => Vf2PassReturn::Solution(mapping),
++                    None => Vf2PassReturn::NoSolution,
++                }
++            } else if had_best_score {
++                Vf2PassReturn::NoImprovement
++            } else {
++                Vf2PassReturn::NoSolution
++            }
++        } else {
++            Vf2PassReturn::NoSolution
++        }
++    } else {
++        Vf2PassReturn::NoSolution
++    };
++    Ok((output, counter_vector(r182_take_counters())))
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_exact_score_cost_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)> {
++    let score = |count: &usize, err: &f64| -> Result<R182InstrumentedExactF64Score, Infallible> {
++        Ok(R182InstrumentedExactF64Score::from_f64(
++            *err * (*count as f64),
++        ))
++    };
++    r182_vf2_layout_pass_average_cost_traced(
++        dag,
++        target,
++        config,
++        strict_direction,
++        avg_error_map,
++        score,
++        R182ScoreCostCounters::as_vector,
++    )
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_fixed_exact_score_cost_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)> {
++    let score =
++        |count: &usize, err: &f64| -> Result<R182InstrumentedFixedExactF64Score, Infallible> {
++            Ok(R182InstrumentedFixedExactF64Score::from_f64(
++                *err * (*count as f64),
++            ))
++        };
++    r182_vf2_layout_pass_average_cost_traced(
++        dag,
++        target,
++        config,
++        strict_direction,
++        avg_error_map,
++        score,
++        R182ScoreCostCounters::as_vector,
++    )
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_active_fixed_exact_score_cost_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)> {
++    let score = |count: &usize,
++                 err: &f64|
++     -> Result<R182InstrumentedActiveFixedExactF64Score, Infallible> {
++        Ok(R182InstrumentedActiveFixedExactF64Score::from_f64(
++            *err * (*count as f64),
++        ))
++    };
++    r182_vf2_layout_pass_average_cost_traced(
++        dag,
++        target,
++        config,
++        strict_direction,
++        avg_error_map,
++        score,
++        R182ScoreCostCounters::as_vector,
++    )
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_active_fixed_exact_score_r183_cost_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)> {
++    let score = |count: &usize,
++                 err: &f64|
++     -> Result<R183InstrumentedActiveFixedExactF64Score, Infallible> {
++        Ok(R183InstrumentedActiveFixedExactF64Score::from_f64(
++            *err * (*count as f64),
++        ))
++    };
++    r182_vf2_layout_pass_average_cost_traced(
++        dag,
++        target,
++        config,
++        strict_direction,
++        avg_error_map,
++        score,
++        R182ScoreCostCounters::as_r183_vector,
++    )
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, avg_error_map=None))]
++pub fn vf2_layout_pass_average_prefix_initialized_exact_score_r183_cost_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    avg_error_map: Option<&ErrorMap>,
++) -> PyResult<(Vf2PassReturn, Vec<u64>)> {
++    let score = |count: &usize,
++                 err: &f64|
++     -> Result<R183InstrumentedPrefixInitializedExactF64Score, Infallible> {
++        Ok(R183InstrumentedPrefixInitializedExactF64Score::from_f64(
++            *err * (*count as f64),
++        ))
++    };
++    r182_vf2_layout_pass_average_cost_traced(
++        dag,
++        target,
++        config,
++        strict_direction,
++        avg_error_map,
++        score,
++        R182ScoreCostCounters::as_r183_vector,
++    )
++}
++
++#[pyfunction]
++#[pyo3(signature = (dag, target, config, *, strict_direction=false, operation_order="native"))]
++pub fn vf2_layout_pass_average_traced(
++    dag: &DAGCircuit,
++    target: &Target,
++    config: &Vf2PassConfiguration,
++    strict_direction: bool,
++    operation_order: &str,
++) -> PyResult<(Vf2PassReturn, Vec<ErrorMapTraceRow>)> {
++    let operation_order = match operation_order {
++        "native" => ErrorMapOperationOrder::Native,
++        "ascending" => ErrorMapOperationOrder::Ascending,
++        "descending" => ErrorMapOperationOrder::Descending,
++        value => {
++            return Err(PyValueError::new_err(format!(
++                "invalid ErrorMap operation order: {value}"
++            )));
++        }
++    };
++    let Some((error_map, trace_rows)) = build_average_error_map_traced(target, operation_order)
++    else {
++        return Ok((Vf2PassReturn::NoSolution, Vec::new()));
++    };
++    let result = vf2_layout_pass_average(dag, target, config, strict_direction, Some(&error_map))?;
++    Ok((result, trace_rows))
++}
++
+ #[pyfunction]
+ #[pyo3(signature = (dag, target, config))]
+ pub fn vf2_layout_pass_exact(
+@@ -893,6 +2880,31 @@ pub fn vf2_layout_pass_exact(
+
+ pub fn vf2_layout_mod(m: &Bound<PyModule>) -> PyResult<()> {
+     m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_average))?;
++    m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_average_exact_score))?;
++    m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_average_fixed_exact_score))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_active_fixed_exact_score
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_prefix_initialized_exact_score
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_exact_score_cost_traced
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_fixed_exact_score_cost_traced
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_active_fixed_exact_score_cost_traced
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_active_fixed_exact_score_r183_cost_traced
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(
++        vf2_layout_pass_average_prefix_initialized_exact_score_r183_cost_traced
++    ))?;
++    m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_average_traced))?;
++    m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_average_score_traced))?;
+     m.add_wrapped(wrap_pyfunction!(vf2_layout_pass_exact))?;
+     m.add("MultiQEncountered", m.py().get_type::<MultiQEncountered>())?;
+     m.add(
+@@ -902,3 +2914,391 @@ pub fn vf2_layout_mod(m: &Bound<PyModule>) -> PyResult<()> {
+     m.add("VF2PassReturn", m.py().get_type::<VF2PassReturn>())?;
+     Ok(())
+ }
++
++#[cfg(test)]
++mod r176_fixed_exact_score_tests {
++    use super::*;
++
++    fn fixed_as_biguint(score: &FixedExactF64Score) -> Option<BigUint> {
++        match score {
++            FixedExactF64Score::PositiveInfinity => None,
++            FixedExactF64Score::Finite(limbs) => Some(
++                limbs
++                    .iter()
++                    .enumerate()
++                    .fold(BigUint::from(0u8), |sum, (index, limb)| {
++                        sum + (BigUint::from(*limb) << (index * u64::BITS as usize))
++                    }),
++            ),
++        }
++    }
++
++    fn arbitrary_as_biguint(score: &ExactF64Score) -> Option<&BigUint> {
++        match score {
++            ExactF64Score::PositiveInfinity => None,
++            ExactF64Score::Finite(value) => Some(value),
++        }
++    }
++
++    #[test]
++    fn fixed_binary64_decode_matches_biguint() {
++        let samples = [
++            0.0,
++            -0.0,
++            f64::from_bits(1),
++            f64::from_bits((1u64 << 52) - 1),
++            f64::MIN_POSITIVE,
++            0.1,
++            1.0,
++            f64::MAX,
++        ];
++        for value in samples {
++            let fixed = FixedExactF64Score::from_f64(value);
++            let arbitrary = ExactF64Score::from_f64(value);
++            assert_eq!(
++                fixed_as_biguint(&fixed).as_ref(),
++                arbitrary_as_biguint(&arbitrary)
++            );
++        }
++    }
++
++    #[test]
++    fn fixed_addition_and_order_match_biguint() {
++        let values = [f64::from_bits(1), 0.1, 0.2, 0.3, 1.0, f64::MAX];
++        for left_value in values {
++            for right_value in values {
++                let fixed_left = FixedExactF64Score::from_f64(left_value);
++                let fixed_right = FixedExactF64Score::from_f64(right_value);
++                let fixed_sum =
++                    <FixedExactF64Score as vf2::Vf2Score>::combine(&fixed_left, &fixed_right);
++                let arbitrary_left = ExactF64Score::from_f64(left_value);
++                let arbitrary_right = ExactF64Score::from_f64(right_value);
++                let arbitrary_sum =
++                    <ExactF64Score as vf2::Vf2Score>::combine(&arbitrary_left, &arbitrary_right);
++                assert_eq!(
++                    fixed_as_biguint(&fixed_sum).as_ref(),
++                    arbitrary_as_biguint(&arbitrary_sum)
++                );
++                assert_eq!(
++                    fixed_left.cmp(&fixed_right),
++                    arbitrary_left.cmp(&arbitrary_right)
++                );
++            }
++        }
++    }
++
++    #[test]
++    fn infinity_is_larger_than_every_finite_score() {
++        let infinity = FixedExactF64Score::from_f64(f64::INFINITY);
++        let maximum = FixedExactF64Score::from_f64(f64::MAX);
++        assert!(infinity > maximum);
++        assert_eq!(
++            <FixedExactF64Score as vf2::Vf2Score>::combine(&infinity, &maximum),
++            infinity
++        );
++    }
++}
++
++#[cfg(test)]
++mod r180_active_fixed_exact_score_tests {
++    use super::*;
++
++    fn active_as_biguint(score: &ActiveFixedExactF64Score) -> Option<BigUint> {
++        match score {
++            ActiveFixedExactF64Score::PositiveInfinity => None,
++            ActiveFixedExactF64Score::Finite { limbs, used } => {
++                Some(limbs[..usize::from(*used)].iter().enumerate().fold(
++                    BigUint::from(0u8),
++                    |sum, (index, limb)| {
++                        sum + (BigUint::from(*limb) << (index * u64::BITS as usize))
++                    },
++                ))
++            }
++        }
++    }
++
++    fn arbitrary_as_biguint(score: &ExactF64Score) -> Option<&BigUint> {
++        match score {
++            ExactF64Score::PositiveInfinity => None,
++            ExactF64Score::Finite(value) => Some(value),
++        }
++    }
++
++    #[test]
++    fn active_binary64_decode_matches_biguint() {
++        let samples = [
++            0.0,
++            -0.0,
++            f64::from_bits(1),
++            f64::from_bits((1u64 << 52) - 1),
++            f64::MIN_POSITIVE,
++            0.1,
++            1.0,
++            f64::MAX,
++        ];
++        for value in samples {
++            let active = ActiveFixedExactF64Score::from_f64(value);
++            let arbitrary = ExactF64Score::from_f64(value);
++            assert_eq!(
++                active_as_biguint(&active).as_ref(),
++                arbitrary_as_biguint(&arbitrary)
++            );
++        }
++    }
++
++    #[test]
++    fn active_addition_and_order_match_biguint() {
++        let values = [f64::from_bits(1), 0.1, 0.2, 0.3, 1.0, f64::MAX];
++        for left_value in values {
++            for right_value in values {
++                let active_left = ActiveFixedExactF64Score::from_f64(left_value);
++                let active_right = ActiveFixedExactF64Score::from_f64(right_value);
++                let active_sum = <ActiveFixedExactF64Score as vf2::Vf2Score>::combine(
++                    &active_left,
++                    &active_right,
++                );
++                let arbitrary_left = ExactF64Score::from_f64(left_value);
++                let arbitrary_right = ExactF64Score::from_f64(right_value);
++                let arbitrary_sum =
++                    <ExactF64Score as vf2::Vf2Score>::combine(&arbitrary_left, &arbitrary_right);
++                assert_eq!(
++                    active_as_biguint(&active_sum).as_ref(),
++                    arbitrary_as_biguint(&arbitrary_sum)
++                );
++                assert_eq!(
++                    active_left.cmp(&active_right),
++                    arbitrary_left.cmp(&arbitrary_right)
++                );
++            }
++        }
++    }
++
++    #[test]
++    fn active_length_tracks_carry_and_zero() {
++        assert!(matches!(
++            ActiveFixedExactF64Score::from_f64(0.0),
++            ActiveFixedExactF64Score::Finite { used: 0, .. }
++        ));
++        let largest_subnormal = f64::from_bits((1u64 << 52) - 1);
++        let left = ActiveFixedExactF64Score::from_f64(largest_subnormal);
++        let sum = <ActiveFixedExactF64Score as vf2::Vf2Score>::combine(&left, &left);
++        assert_eq!(
++            active_as_biguint(&sum),
++            Some(BigUint::from((1u64 << 53) - 2))
++        );
++    }
++
++    #[test]
++    fn infinity_is_larger_than_every_active_finite_score() {
++        let infinity = ActiveFixedExactF64Score::from_f64(f64::INFINITY);
++        let maximum = ActiveFixedExactF64Score::from_f64(f64::MAX);
++        assert!(infinity > maximum);
++        assert_eq!(
++            <ActiveFixedExactF64Score as vf2::Vf2Score>::combine(&infinity, &maximum),
++            infinity
++        );
++    }
++}
++
++#[cfg(test)]
++mod r182_score_cost_counter_tests {
++    use super::*;
++
++    #[test]
++    fn fixed_and_active_counters_expose_the_full_width_initialization_gap() {
++        r182_reset_counters();
++        let fixed_left = R182InstrumentedFixedExactF64Score::from_f64(0.1);
++        let fixed_right = R182InstrumentedFixedExactF64Score::from_f64(0.2);
++        let fixed_sum = R182InstrumentedFixedExactF64Score::combine(&fixed_left, &fixed_right);
++        let _ = Ord::cmp(&fixed_sum, &fixed_left);
++        let fixed = r182_take_counters();
++
++        r182_reset_counters();
++        let active_left = R182InstrumentedActiveFixedExactF64Score::from_f64(0.1);
++        let active_right = R182InstrumentedActiveFixedExactF64Score::from_f64(0.2);
++        let active_sum =
++            R182InstrumentedActiveFixedExactF64Score::combine(&active_left, &active_right);
++        let _ = Ord::cmp(&active_sum, &active_left);
++        let active = r182_take_counters();
++
++        assert_eq!(fixed.leaf_construction_count, 2);
++        assert_eq!(active.leaf_construction_count, 2);
++        assert_eq!(fixed.destination_zeroed_limb_count, 3 * 34);
++        assert_eq!(active.destination_zeroed_limb_count, 3 * 34);
++        assert_eq!(fixed.arithmetic_limb_visit_count, 34);
++        assert!(active.arithmetic_limb_visit_count < fixed.arithmetic_limb_visit_count);
++        assert_eq!(fixed.biguint_heap_allocation_count, 0);
++        assert_eq!(active.biguint_heap_allocation_count, 0);
++    }
++
++    #[test]
++    fn biguint_scope_records_real_allocator_events() {
++        r182_reset_counters();
++        let left = R182InstrumentedExactF64Score::from_f64(0.1);
++        let right = R182InstrumentedExactF64Score::from_f64(0.2);
++        let sum = R182InstrumentedExactF64Score::combine(&left, &right);
++        let _ = Ord::cmp(&sum, &left);
++        let counters = r182_take_counters();
++
++        assert_eq!(counters.leaf_construction_count, 2);
++        assert_eq!(counters.destination_zeroed_limb_count, 0);
++        assert!(counters.arithmetic_limb_visit_count > 0);
++        assert!(counters.comparison_limb_visit_count > 0);
++        assert!(counters.maximum_used_limb_count > 0);
++        assert!(counters.biguint_heap_allocation_count > 0);
++        assert!(counters.biguint_heap_allocated_bytes > 0);
++    }
++}
++
++#[cfg(test)]
++mod r183_prefix_initialized_exact_score_tests {
++    use super::*;
++
++    fn prefix_as_biguint(score: &PrefixInitializedExactF64Score) -> Option<BigUint> {
++        match score {
++            PrefixInitializedExactF64Score::PositiveInfinity => None,
++            PrefixInitializedExactF64Score::Finite { limbs, used } => Some(
++                (0..usize::from(*used)).fold(BigUint::from(0u8), |sum, index| {
++                    sum + (BigUint::from(PrefixInitializedExactF64Score::finite_limb(
++                        limbs, *used, index,
++                    )) << (index * u64::BITS as usize))
++                }),
++            ),
++        }
++    }
++
++    fn arbitrary_as_biguint(score: &ExactF64Score) -> Option<&BigUint> {
++        match score {
++            ExactF64Score::PositiveInfinity => None,
++            ExactF64Score::Finite(value) => Some(value),
++        }
++    }
++
++    #[test]
++    fn prefix_binary64_decode_matches_biguint() {
++        let samples = [
++            0.0,
++            -0.0,
++            f64::from_bits(1),
++            f64::from_bits((1u64 << 52) - 1),
++            f64::MIN_POSITIVE,
++            0.1,
++            1.0,
++            f64::MAX,
++        ];
++        for value in samples {
++            let prefix = PrefixInitializedExactF64Score::from_f64(value);
++            let arbitrary = ExactF64Score::from_f64(value);
++            assert_eq!(
++                prefix_as_biguint(&prefix).as_ref(),
++                arbitrary_as_biguint(&arbitrary)
++            );
++        }
++    }
++
++    #[test]
++    fn prefix_addition_and_order_match_biguint() {
++        let values = [f64::from_bits(1), 0.1, 0.2, 0.3, 1.0, f64::MAX];
++        for left_value in values {
++            for right_value in values {
++                let prefix_left = PrefixInitializedExactF64Score::from_f64(left_value);
++                let prefix_right = PrefixInitializedExactF64Score::from_f64(right_value);
++                let prefix_sum = <PrefixInitializedExactF64Score as vf2::Vf2Score>::combine(
++                    &prefix_left,
++                    &prefix_right,
++                );
++                let arbitrary_left = ExactF64Score::from_f64(left_value);
++                let arbitrary_right = ExactF64Score::from_f64(right_value);
++                let arbitrary_sum =
++                    <ExactF64Score as vf2::Vf2Score>::combine(&arbitrary_left, &arbitrary_right);
++                assert_eq!(
++                    prefix_as_biguint(&prefix_sum).as_ref(),
++                    arbitrary_as_biguint(&arbitrary_sum)
++                );
++                assert_eq!(
++                    prefix_left.cmp(&prefix_right),
++                    arbitrary_left.cmp(&arbitrary_right)
++                );
++            }
++        }
++    }
++
++    #[test]
++    fn prefix_tracks_zero_carry_and_repeated_accumulation() {
++        assert!(matches!(
++            PrefixInitializedExactF64Score::from_f64(0.0),
++            PrefixInitializedExactF64Score::Finite { used: 0, .. }
++        ));
++        let value = f64::from_bits((1u64 << 52) - 1);
++        let leaf = PrefixInitializedExactF64Score::from_f64(value);
++        let mut prefix = <PrefixInitializedExactF64Score as vf2::Vf2Score>::id();
++        let mut arbitrary = <ExactF64Score as vf2::Vf2Score>::id();
++        let arbitrary_leaf = ExactF64Score::from_f64(value);
++        for _ in 0..257 {
++            prefix = <PrefixInitializedExactF64Score as vf2::Vf2Score>::combine(&prefix, &leaf);
++            arbitrary = <ExactF64Score as vf2::Vf2Score>::combine(&arbitrary, &arbitrary_leaf);
++        }
++        assert_eq!(
++            prefix_as_biguint(&prefix).as_ref(),
++            arbitrary_as_biguint(&arbitrary)
++        );
++    }
++
++    #[test]
++    fn prefix_infinity_is_larger_than_every_finite_score() {
++        let infinity = PrefixInitializedExactF64Score::from_f64(f64::INFINITY);
++        let maximum = PrefixInitializedExactF64Score::from_f64(f64::MAX);
++        assert!(infinity > maximum);
++        assert_eq!(
++            <PrefixInitializedExactF64Score as vf2::Vf2Score>::combine(&infinity, &maximum),
++            infinity
++        );
++    }
++
++    #[test]
++    fn r183_counter_pair_isolated_unused_tail_initialization() {
++        r182_reset_counters();
++        let active_left = R183InstrumentedActiveFixedExactF64Score::from_f64(0.1);
++        let active_right = R183InstrumentedActiveFixedExactF64Score::from_f64(0.2);
++        let active_sum =
++            R183InstrumentedActiveFixedExactF64Score::combine(&active_left, &active_right);
++        let _ = R183InstrumentedActiveFixedExactF64Score::cmp(&active_sum, &active_left);
++        let active = r182_take_counters();
++
++        r182_reset_counters();
++        let prefix_left = R183InstrumentedPrefixInitializedExactF64Score::from_f64(0.1);
++        let prefix_right = R183InstrumentedPrefixInitializedExactF64Score::from_f64(0.2);
++        let prefix_sum =
++            R183InstrumentedPrefixInitializedExactF64Score::combine(&prefix_left, &prefix_right);
++        let _ = R183InstrumentedPrefixInitializedExactF64Score::cmp(&prefix_sum, &prefix_left);
++        let prefix = r182_take_counters();
++
++        assert_eq!(
++            active.leaf_construction_count,
++            prefix.leaf_construction_count
++        );
++        assert_eq!(
++            active.arithmetic_limb_visit_count,
++            prefix.arithmetic_limb_visit_count
++        );
++        assert_eq!(
++            active.comparison_limb_visit_count,
++            prefix.comparison_limb_visit_count
++        );
++        assert_eq!(active.carry_extension_count, prefix.carry_extension_count);
++        assert_eq!(
++            active.maximum_used_limb_count,
++            prefix.maximum_used_limb_count
++        );
++        assert!(
++            prefix.r183_destination_initialized_limb_count
++                < active.r183_destination_initialized_limb_count
++        );
++        assert!(active.r183_full_width_destination_count > 0);
++        assert_eq!(prefix.r183_full_width_destination_count, 0);
++        assert_eq!(
++            std::mem::size_of::<PrefixInitializedExactF64Score>(),
++            std::mem::size_of::<ActiveFixedExactF64Score>()
++        );
++    }
++}
