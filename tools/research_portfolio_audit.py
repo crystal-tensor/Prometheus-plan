@@ -3814,6 +3814,157 @@ def audit_r180_r181_active_limb_transition(root: Path, errors: list[str]) -> dic
     return status
 
 
+def audit_r182_score_cost_attribution_preregistration(
+    root: Path, errors: list[str]
+) -> dict:
+    """Validate the unopened R182 cost-attribution design and source bindings."""
+    paths = {
+        "protocol": root
+        / "results/B4_B8_R182_score_cost_attribution_protocol_v0.json",
+        "contract": root
+        / "benchmarks/B4_B8_R182_score_cost_attribution_contract_v0.json",
+        "report": root / "research/B4_B8_R182_score_cost_attribution_protocol.md",
+        "tool": root / "tools/b4_b8_r182_score_cost_attribution_preregister.py",
+    }
+    status = {f"{key}_exists": path.exists() for key, path in paths.items()}
+    if not all(status.values()):
+        errors.append("R182 score cost-attribution preregistration artifact missing")
+        return status
+
+    def canonical(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    def payload_ok(payload: dict) -> bool:
+        body = dict(payload)
+        return body.pop("payload_hash", None) == canonical(body)
+
+    protocol = json.loads(read(paths["protocol"]))
+    contract = json.loads(read(paths["contract"]))
+    expected_sources = {
+        "result": "7a5f055dae4184e01e5c8bb8a18de7b9d09cde8db6b2415b24cb6c1ab9a0b38f",
+        "oracle": "a1de6b1b1eb57353bbf3968a2c8232ae6c41d8ee8ca4b398b7992a6b24d9d388",
+        "bundle": "34fc5330e263950dfd5ed1401c2a3ea532389014d555ad578d85feb5081e7fcf",
+    }
+    cells = protocol.get("frozen_workload_cells", {})
+    hypotheses = {
+        row.get("hypothesis_id"): row
+        for row in protocol.get("frozen_hypotheses", [])
+    }
+    if (
+        not payload_ok(protocol)
+        or protocol.get("method")
+        != "b4_b8_r182_score_cost_attribution_protocol_v0"
+        or protocol.get("status") != "preregistered_design_unopened"
+        or protocol.get("payload_hash")
+        != "c4108dd5cab9d33cfe6a69f7822892f8ae4a151d6d3c4b5f8f41c2bd297dbe03"
+        or protocol.get("source_result_payload_hashes") != expected_sources
+        or len(protocol.get("required_cost_channels", [])) != 9
+        or len(protocol.get("acceptance_requirements", [])) != 12
+        or cells.get("total_cells_per_exact_policy") != 13
+        or cells.get("measured_replays_per_cell") != 32
+        or cells.get("warmups_per_cell") != 8
+        or cells.get("exact_policy_measured_call_count") != 1248
+        or cells.get("exact_policy_warmup_call_count") != 312
+        or set(hypotheses)
+        != {
+            "H1-full-destination-initialization",
+            "H2-biguint-heap-cost",
+            "H3-candidate-shape",
+        }
+        or hypotheses["H1-full-destination-initialization"].get(
+            "minimum_arithmetic_visit_reduction_fraction"
+        )
+        != 0.25
+        or hypotheses["H1-full-destination-initialization"].get(
+            "maximum_end_to_end_active_to_fixed_ratio_for_speed_success"
+        )
+        != 0.90
+        or hypotheses["H2-biguint-heap-cost"].get(
+            "minimum_spearman_rank_correlation"
+        )
+        != 0.60
+        or hypotheses["H3-candidate-shape"].get("required_cell_coverage") != 13
+    ):
+        errors.append("R182 protocol identity, source, matrix, or threshold mismatch")
+    claim_boundary = protocol.get("claim_boundary", {})
+    false_claims = (
+        "cost_attribution_claimed_before_execution",
+        "causal_bottleneck_claimed",
+        "upstream_patch_accepted",
+        "production_qiskit_remedy_claimed",
+        "hardware_result_claimed",
+        "quantum_advantage_claimed",
+        "bqp_separation_claimed",
+        "solved_frontier_claimed",
+    )
+    if (
+        any(claim_boundary.get(field) is not False for field in false_claims)
+        or claim_boundary.get("new_credit_delta") != 0
+    ):
+        errors.append("R182 unopened protocol makes a forbidden positive claim")
+
+    if (
+        not payload_ok(contract)
+        or contract.get("contract_id")
+        != "B4-B8-R182-score-cost-attribution-design-contract-v0"
+        or contract.get("status") != "design_frozen_execution_tooling_unbound"
+        or contract.get("execution_started") is not False
+        or contract.get("execution_tooling_bound") is not False
+        or contract.get("protocol_payload_hash") != protocol.get("payload_hash")
+        or contract.get("payload_hash")
+        != "065799ba197dc8cd81a7138b1e821848540fe7f1d559da3f26fa1f1e604b700a"
+        or contract.get("required_before_execution_count") != 6
+        or len(contract.get("required_before_execution", [])) != 6
+        or len(contract.get("planned_result_paths", [])) != 5
+        or len(contract.get("source_bindings", {})) != 7
+    ):
+        errors.append("R182 design contract or unopened tooling boundary mismatch")
+    for binding_id, binding in contract.get("source_bindings", {}).items():
+        path = root / binding.get("path", "")
+        if not path.is_file() or hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest() != binding.get("sha256"):
+            errors.append(f"R182 source binding mismatch: {binding_id}")
+    tool_binding = contract.get("design_tool_binding", {})
+    if (
+        tool_binding.get("path")
+        != "tools/b4_b8_r182_score_cost_attribution_preregister.py"
+        or hashlib.sha256(paths["tool"].read_bytes()).hexdigest()
+        != tool_binding.get("sha256")
+    ):
+        errors.append("R182 design-tool binding mismatch")
+    report_text = read(paths["report"])
+    if not all(
+        marker in report_text
+        for marker in (
+            "preregistered_design_unopened",
+            "R182 separates retained-binary64 leaf construction",
+            "Execution remains blocked",
+            "Claim Boundary",
+        )
+    ):
+        errors.append("R182 protocol report boundary missing")
+    status.update(
+        {
+            "protocol_status": protocol.get("status"),
+            "protocol_payload_hash": protocol.get("payload_hash"),
+            "contract_status": contract.get("status"),
+            "contract_payload_hash": contract.get("payload_hash"),
+            "cost_channel_count": len(protocol.get("required_cost_channels", [])),
+            "workload_cell_count": cells.get("total_cells_per_exact_policy"),
+            "measured_call_count_per_exact_policy": cells.get(
+                "exact_policy_measured_call_count"
+            ),
+            "execution_tooling_bound": contract.get("execution_tooling_bound"),
+            "execution_started": contract.get("execution_started"),
+            "new_credit_delta": 0,
+        }
+    )
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -45850,6 +46001,9 @@ def audit(root: Path) -> dict:
     )
     r177_r178_linux_transition_status = audit_r177_r178_linux_transition(root, errors)
     r180_r181_active_limb_status = audit_r180_r181_active_limb_transition(root, errors)
+    r182_score_cost_attribution_status = (
+        audit_r182_score_cost_attribution_preregistration(root, errors)
+    )
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -46219,6 +46373,7 @@ def audit(root: Path) -> dict:
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
+            "r182_score_cost_attribution": r182_score_cost_attribution_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -46388,6 +46543,7 @@ def audit(root: Path) -> dict:
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
+            "r182_score_cost_attribution": r182_score_cost_attribution_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -46434,6 +46590,7 @@ def audit(root: Path) -> dict:
             "r176_fixed_superaccumulator": r176_fixed_superaccumulator_status,
             "r177_r178_linux_transition": r177_r178_linux_transition_status,
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
+            "r182_score_cost_attribution": r182_score_cost_attribution_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,

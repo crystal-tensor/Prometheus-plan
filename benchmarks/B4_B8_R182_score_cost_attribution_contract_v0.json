@@ -1,0 +1,65 @@
+{
+  "contract_id": "B4-B8-R182-score-cost-attribution-design-contract-v0",
+  "design_tool_binding": {
+    "path": "tools/b4_b8_r182_score_cost_attribution_preregister.py",
+    "sha256": "25b5d29fecf1d44c4c08c698995b1697c048f0342b79c429716cd9abedb6532e"
+  },
+  "execution_started": false,
+  "execution_tooling_bound": false,
+  "payload_hash": "065799ba197dc8cd81a7138b1e821848540fe7f1d559da3f26fa1f1e604b700a",
+  "planned_result_paths": [
+    "results/B4_B8_R182_score_cost_attribution_v0.json",
+    "results/B4_B8_R182_independent_cost_oracle_v0.json",
+    "results/B4_B8_R182_score_cost_attribution_bundle_v0.json",
+    "research/B4_B8_R182_score_cost_attribution.md",
+    "research/B4_B8_R182_independent_cost_oracle.md"
+  ],
+  "protocol_path": "results/B4_B8_R182_score_cost_attribution_protocol_v0.json",
+  "protocol_payload_hash": "c4108dd5cab9d33cfe6a69f7822892f8ae4a151d6d3c4b5f8f41c2bd297dbe03",
+  "required_before_execution": [
+    "research/source_lineage/Qiskit_2_4_1_R182_score_cost_attribution.patch",
+    "tools/b4_b8_r182_score_cost_attribution_replay.py",
+    "tools/b4_b8_r182_independent_cost_oracle.py",
+    "tools/b4_b8_r182_linux_x86_64_build.py",
+    "tools/b4_b8_r182_linux_x86_64_bundle.py",
+    ".github/workflows/r182-score-cost-attribution-linux-x86-64.yml"
+  ],
+  "required_before_execution_count": 6,
+  "source_bindings": {
+    "source_01": {
+      "path": "results/B4_B8_R181_active_limb_protocol_v0.json",
+      "payload_hash": "8393f0403e9644b06daa08935ede3c1b57c9c25dc36026a1509c4fb280c4bf5c",
+      "sha256": "18219f960cf4b74b186a01b9012ba4f81bcd7ac2b90ed336d4998c9a746de777"
+    },
+    "source_02": {
+      "path": "benchmarks/B4_B8_R181_active_limb_contract_v0.json",
+      "payload_hash": "c85d13b72418b37f53dcf6bb64352df128389299ac66587489899811a8e72b85",
+      "sha256": "bbb379900ce0e219cca0344c72524f3b2e41485925042a3d742788334a4195ed"
+    },
+    "source_03": {
+      "path": "results/B4_B8_R181_active_limb_replay_v0.json",
+      "payload_hash": "7a5f055dae4184e01e5c8bb8a18de7b9d09cde8db6b2415b24cb6c1ab9a0b38f",
+      "sha256": "4058ce2fd1e91d943070c7484a3d53158e2ccc37cb5a2908fd30e60b7adb6639"
+    },
+    "source_04": {
+      "path": "results/B4_B8_R181_independent_active_limb_oracle_v0.json",
+      "payload_hash": "a1de6b1b1eb57353bbf3968a2c8232ae6c41d8ee8ca4b398b7992a6b24d9d388",
+      "sha256": "ded0c0f8aaee5820458376678850b0802a5bb0ab45ab89bad97768b2c059c7ef"
+    },
+    "source_05": {
+      "path": "results/B4_B8_R181_active_limb_bundle_manifest_v0.json",
+      "payload_hash": "34fc5330e263950dfd5ed1401c2a3ea532389014d555ad578d85feb5081e7fcf",
+      "sha256": "2e4ca28508c313a0979c7ef065095dae176b7fc0b7a42d1e55e20bd1488867cf"
+    },
+    "source_06": {
+      "path": "research/source_lineage/Qiskit_2_4_1_R180_active_limb_superaccumulator.patch",
+      "sha256": "b06afaaad7ce6259e0b86aa919b7ea82d7194c0a011b323b36d9e682a250a0a6"
+    },
+    "source_07": {
+      "path": "research/source_lineage/Qiskit_2_4_1_R181_active_limb_linux_x86_64_build_manifest.json",
+      "payload_hash": "e1730cb090a45271175f38617cbd18a4409ea599d36ad4394f11f0247685cf3f",
+      "sha256": "9f2663e26f654af88145d680da6a49364d36ebd9db65950f55341b7c528c7ab7"
+    }
+  },
+  "status": "design_frozen_execution_tooling_unbound"
+}

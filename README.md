@@ -3509,6 +3509,23 @@ bundle hash `34fc5330...`; accelerator hash `fd52a3ae...`. This narrows the
 cost diagnosis but establishes no production remedy, hardware result,
 quantum advantage, BQP separation, solved B4/B8/B10 frontier, or new credit.
 
+`T-B4-002dq` / `T-B8-003du` / `T-B10-009dg-r182-cost-attribution-protocol`
+now freezes the next diagnostic before instrumentation. Source inspection
+shows that the R181 active-limb `combine` loop visits only the used prefix but
+still creates and zero-initializes the complete 34-limb, 272-byte destination
+array. R182 does not treat that observation as a causal explanation. It fixes
+nine cost channels across 13 workload cells, with 32 measured calls and 8
+warmups per cell for each of the three exact policies: 1,248 measured calls
+and 312 warmups in total. The design separates retained-binary64 leaf
+construction, destination initialization, arithmetic and comparison limb
+visits, carry extension, maximum used length, BigUint heap allocations and
+bytes, and elapsed time. Protocol hash `c4108dd5...`; design-contract hash
+`065799ba...`. Execution is unopened and remains blocked until six source-bound
+artifacts are supplied: the instrumentation patch, replay tool, independent
+oracle, Linux build tool, bundle tool, and public workflow. No cost
+attribution, causal bottleneck, production remedy, hardware result, quantum
+advantage, BQP separation, solved frontier, or new credit is claimed.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

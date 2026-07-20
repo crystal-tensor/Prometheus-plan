@@ -1,0 +1,96 @@
+{
+  "acceptance_requirements": [
+    "P1 all R181 source payloads and Qiskit source bindings validate",
+    "P2 the public Discussion predates every R182 build and measured worker",
+    "P3 the second-stage contract hash-binds the instrumentation patch, build, executor, oracle, bundle tool, and workflow",
+    "P4 cargo format, check, tests, release build, ELF validation, and isolated import smoke pass",
+    "P5 every instrumented policy preserves the frozen selected mapping for every measured replay",
+    "P6 every required counter is present, nonnegative, and internally reconciled",
+    "P7 repeated deterministic counter vectors agree within each cell and policy",
+    "P8 all 13 workload cells have 32 measurements and 8 warmups per exact policy",
+    "P9 the H1, H2, and H3 classifications follow the frozen thresholds without threshold relaxation",
+    "P10 an executor-free oracle recomputes hashes, counts, ratios, correlations, and classifications",
+    "P11 simulation execution count and quantum shot count remain zero",
+    "P12 production remedy, hardware, advantage, BQP, solved-frontier, and new-credit fields remain false or zero"
+  ],
+  "claim_boundary": {
+    "bqp_separation_claimed": false,
+    "causal_bottleneck_claimed": false,
+    "cost_attribution_claimed_before_execution": false,
+    "hardware_result_claimed": false,
+    "new_credit_delta": 0,
+    "production_qiskit_remedy_claimed": false,
+    "quantum_advantage_claimed": false,
+    "solved_frontier_claimed": false,
+    "upstream_patch_accepted": false
+  },
+  "frozen_hypotheses": [
+    {
+      "allowed_classification": "full_width_initialization_or_common_cost_pressure_consistent_not_causal",
+      "hypothesis_id": "H1-full-destination-initialization",
+      "maximum_end_to_end_active_to_fixed_ratio_for_speed_success": 0.9,
+      "minimum_arithmetic_visit_reduction_fraction": 0.25,
+      "statement": "Active-limb arithmetic visits fall materially below fixed-34 while destination zero-initialization remains full-width and the end-to-end speed gain remains below ten percent."
+    },
+    {
+      "allowed_classification": "biguint_heap_pressure_supported_or_rejected",
+      "hypothesis_id": "H2-biguint-heap-cost",
+      "minimum_spearman_rank_correlation": 0.6,
+      "statement": "BigUint heap activity explains the active-limb loss only if allocation pressure is positive and cell-level allocation pressure covaries with the active-to-BigUint timing gap under the frozen rule."
+    },
+    {
+      "allowed_classification": "cell_heterogeneity_reported",
+      "hypothesis_id": "H3-candidate-shape",
+      "required_cell_coverage": 13,
+      "statement": "Any cost diagnosis must report results by all 13 workload cells; an aggregate-only explanation is rejected."
+    }
+  ],
+  "frozen_policies": [
+    "rust_biguint_exact_retained_binary64",
+    "rust_fixed_exact_retained_binary64",
+    "rust_active_limb_exact_retained_binary64"
+  ],
+  "frozen_workload_cells": {
+    "exact_policy_measured_call_count": 1248,
+    "exact_policy_warmup_call_count": 312,
+    "measured_replays_per_cell": 32,
+    "small_gap_policy_cells": 4,
+    "standard_dataset_profile_cells": 9,
+    "total_cells_per_exact_policy": 13,
+    "warmups_per_cell": 8
+  },
+  "method": "b4_b8_r182_score_cost_attribution_protocol_v0",
+  "payload_hash": "c4108dd5cab9d33cfe6a69f7822892f8ae4a151d6d3c4b5f8f41c2bd297dbe03",
+  "platform_contract": {
+    "machine": "x86_64",
+    "python": "3.12",
+    "qiskit": "2.4.1",
+    "requires_public_discussion_before_execution": true,
+    "runner": "github_hosted_ubuntu_24_04",
+    "source_commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+    "system": "Linux",
+    "workflow_dispatch_only": true
+  },
+  "required_cost_channels": [
+    "leaf_construction_count",
+    "destination_zeroed_limb_count",
+    "arithmetic_limb_visit_count",
+    "comparison_limb_visit_count",
+    "carry_extension_count",
+    "maximum_used_limb_count",
+    "biguint_heap_allocation_count",
+    "biguint_heap_allocated_bytes",
+    "elapsed_nanoseconds"
+  ],
+  "research_question": "R181 reduced full-width arithmetic scans but missed both frozen speed gates. Are full-array destination initialization, retained-binary64 construction, comparison work, carry propagation, or BigUint heap behavior the dominant source-bound cost pressures?",
+  "source_result_payload_hashes": {
+    "bundle": "34fc5330e263950dfd5ed1401c2a3ea532389014d555ad578d85feb5081e7fcf",
+    "oracle": "a1de6b1b1eb57353bbf3968a2c8232ae6c41d8ee8ca4b398b7992a6b24d9d388",
+    "result": "7a5f055dae4184e01e5c8bb8a18de7b9d09cde8db6b2415b24cb6c1ab9a0b38f"
+  },
+  "source_target_id": "T-B4-002dq/T-B8-003du/T-B10-009dg-r182-cost-attribution-protocol",
+  "status": "preregistered_design_unopened",
+  "title": "B4/B8/B10 R182 exact-score cost-attribution protocol",
+  "upstream_target_id": "T-B4-002dp/T-B8-003dt/T-B10-009df-r181-independent-oracle",
+  "version": 0
+}
