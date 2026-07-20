@@ -79,7 +79,21 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The latest B4/B8/B10 step is the completed, independently audited R183
+The next B4/B8/B10 step is the preregistered, unopened R184 windowed exact-score
+experiment. It replaces the 34-limb prefix representation with an exact
+four-limb exponent window plus a global offset and a non-truncating BigUint
+fallback. The frozen three-arm Linux matrix compares BigUint exact, R183
+prefix-initialized exact, and the R184 window candidate over 13 workload cells,
+468 triplets, 1,404 timing calls, 468 separate probes, 351 warmups, and 2,223
+total Qiskit calls. H1 requires exact mapping integrity; H2 requires at most
+four compact limbs, at most 64 bytes per score object, and zero fallback or
+wide combine on the frozen workload; H3 requires a window/prefix median ratio
+of at most `0.90`; H4 requires a window/BigUint ratio of at most `1.00` with
+all six execution orders represented. No measurement has run yet, and no
+performance remedy, hardware result, quantum advantage, BQP separation,
+solved frontier, or new credit is claimed.
+
+The latest completed B4/B8/B10 step is the independently audited R183
 prefix-initialization micro-ablation. Public Actions run `29774774401`
 executed 13 isolated Linux x86-64 workers, 416 same-process AB/BA pairs, 832
 timing calls, 832 separate probes, 208 warmups, and 1,872 total Qiskit calls.
@@ -3624,6 +3638,20 @@ executor. Result `ecb901a7...`; oracle `4b1a6d2a...`; 47-artifact bundle
 `8a4b2372...`; accelerator `b62ca5ce...`. Next: isolate object-copy, stack,
 wrapper, and VF2 control-flow costs under the same paired and zero-credit
 discipline.
+
+`T-B4-002dy` / `T-B8-003ec` / `T-B10-009do-r184-windowed-exact-score-protocol`
+now freezes the next representation test before execution. The candidate stores
+an exact four-limb exponent window with one global offset and promotes to a full
+BigUint representation whenever a value cannot fit without truncation. The
+baseline is BigUint exact and the reference is the R183 prefix-initialized
+34-limb representation. The matrix fixes 13 workload cells, 36 triplets per
+cell, all six arm orders repeated six times per cell, 468 triplets, 1,404 timing
+calls, 468 candidate probes, 351 warmups, and 2,223 total Qiskit calls. H1-H4
+separately test exact mapping integrity, compact/fallback invariants,
+window-versus-prefix performance, and window-versus-BigUint performance with
+complete order coverage. Protocol `6282eebd...`; design contract `e0c226bf...`;
+Qiskit patch `a3a3f02b...`. The protocol is preregistered and unopened: result,
+oracle, accelerator, performance classifications, and new credit remain absent.
 
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all

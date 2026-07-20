@@ -1,0 +1,65 @@
+{
+  "contract_id": "B4-B8-R184-windowed-exact-score-design-contract-v0",
+  "design_tool_binding": {
+    "path": "tools/b4_b8_r184_window_exact_preregister.py",
+    "sha256": "ae676190cf15ce8885c3f4f95dfd162d4627a586ee9328c526dcc27741620028"
+  },
+  "execution_started": false,
+  "execution_tooling_bound": false,
+  "payload_hash": "e0c226bf419da94dc9e5afa3a249eabd085505c6b5328b7a2b3af1a8f6a4d108",
+  "planned_result_paths": [
+    "results/B4_B8_R184_window_exact_score_v0.json",
+    "results/B4_B8_R184_independent_oracle_v0.json",
+    "results/B4_B8_R184_window_exact_score_bundle_v0.json",
+    "research/B4_B8_R184_window_exact_score.md",
+    "research/B4_B8_R184_independent_oracle.md"
+  ],
+  "protocol_path": "results/B4_B8_R184_window_exact_score_protocol_v0.json",
+  "protocol_payload_hash": "6282eebdfa41ff94dfbe4eed4b61fc2030f02bec5eea6bb360b9fa27c890a999",
+  "required_before_execution": [
+    "research/source_lineage/Qiskit_2_4_1_R184_window_exact_score.patch",
+    "tools/b4_b8_r184_window_exact_replay.py",
+    "tools/b4_b8_r184_independent_oracle.py",
+    "tools/b4_b8_r184_linux_x86_64_build.py",
+    "tools/b4_b8_r184_linux_x86_64_bundle.py",
+    ".github/workflows/r184-windowed-exact-score-linux-x86-64.yml"
+  ],
+  "required_before_execution_count": 6,
+  "source_bindings": {
+    "source_01": {
+      "path": "results/B4_B8_R183_prefix_initialization_ablation_protocol_v0.json",
+      "payload_hash": "9057160630b687f79a25f3c02ff45e1974d187393d06d0321297726db7255d67",
+      "sha256": "189dcc012801e7a1d5619f7ea22990a09b6a8ed265d6d977c8eea5d42eec4952"
+    },
+    "source_02": {
+      "path": "benchmarks/B4_B8_R183_prefix_initialization_execution_contract_v0.json",
+      "payload_hash": "85e246e691fe4877bd0ed105cb5cbbe700e9b5eab0015e678a1b101008988576",
+      "sha256": "a4a26a846a496b798903ad93d09eb4ecef3b420b44e56e7c94b08dc68c083d40"
+    },
+    "source_03": {
+      "path": "results/B4_B8_R183_prefix_initialization_ablation_v0.json",
+      "payload_hash": "ecb901a7375013fdd8f58727227fe7e80d38c89570d646011790ddfa29bd0c84",
+      "sha256": "2b4807e88a6cbaa03142e486ef23b9ab5f38d781a099a98ddf01311198b63ea2"
+    },
+    "source_04": {
+      "path": "results/B4_B8_R183_independent_oracle_v0.json",
+      "payload_hash": "4b1a6d2a43e7011a96567ffe2839dadca04e02a84e29ff090ecc37f24c598360",
+      "sha256": "24fffb6af0f9b1e04bb14dd5f219d19d5e30283fa07d8cc4dd4708c7f6bb3ee6"
+    },
+    "source_05": {
+      "path": "results/B4_B8_R183_prefix_initialization_bundle_v0.json",
+      "payload_hash": "8a4b23726c8733248e039b90a776b040aab14976f229ddec145a0ddd4bb91f4d",
+      "sha256": "599a76437ad86855fb7a54617c8e9dfa462b773a68829b6f3d628f893b02fdba"
+    },
+    "source_06": {
+      "path": "research/source_lineage/Qiskit_2_4_1_R183_prefix_initialization_ablation.patch",
+      "sha256": "105e7e9f197714a536f5bbd3f62f54abfafce9be62ec72df4c735db7fad9fff8"
+    },
+    "source_07": {
+      "path": "research/source_lineage/Qiskit_2_4_1_R183_prefix_init_linux_x86_64_build_manifest.json",
+      "payload_hash": "a357f42fec36a42f402331307db58267ed0d76e2da5257896698c82b0343d52a",
+      "sha256": "b1fda3ab97328a84181b1258b50245021a386d2b35a36ba1937cac0a1bb62846"
+    }
+  },
+  "status": "design_frozen_execution_tooling_unbound"
+}

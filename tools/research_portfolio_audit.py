@@ -4837,6 +4837,251 @@ def audit_r183_prefix_initialization_ablation(root: Path, errors: list[str]) -> 
     return status
 
 
+def audit_r184_window_exact_score(root: Path, errors: list[str]) -> dict:
+    """Validate the staged R184 windowed exact-score evidence chain."""
+    paths = {
+        "protocol": root / "results/B4_B8_R184_window_exact_score_protocol_v0.json",
+        "design_contract": root / "benchmarks/B4_B8_R184_window_exact_score_contract_v0.json",
+        "protocol_report": root / "research/B4_B8_R184_window_exact_score_protocol.md",
+        "design_tool": root / "tools/b4_b8_r184_window_exact_preregister.py",
+        "execution_contract": root / "benchmarks/B4_B8_R184_window_exact_score_execution_contract_v0.json",
+        "execution_report": root / "research/B4_B8_R184_window_exact_score_execution_contract.md",
+        "result": root / "results/B4_B8_R184_window_exact_score_v0.json",
+        "result_report": root / "research/B4_B8_R184_window_exact_score.md",
+        "oracle": root / "results/B4_B8_R184_independent_oracle_v0.json",
+        "oracle_report": root / "research/B4_B8_R184_independent_oracle.md",
+        "bundle": root / "results/B4_B8_R184_window_exact_score_bundle_v0.json",
+        "build": root / "research/source_lineage/Qiskit_2_4_1_R184_window_exact_linux_x86_64_build_manifest.json",
+        "binary": root / "research/source_lineage/Qiskit_2_4_1_R184_window_exact_pyext.x86_64-linux-gnu.so",
+        "worker_dir": root / "results/B4_B8_R184_window_exact_score_replay",
+    }
+    status = {f"{key}_exists": path.exists() for key, path in paths.items()}
+    required_design = ("protocol", "design_contract", "protocol_report", "design_tool")
+    if not all(status[f"{key}_exists"] for key in required_design):
+        errors.append("R184 windowed exact-score design artifact missing")
+        return status
+
+    def canonical(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    def payload_ok(payload: dict) -> bool:
+        body = dict(payload)
+        return body.pop("payload_hash", None) == canonical(body)
+
+    def file_hash(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    protocol = json.loads(read(paths["protocol"]))
+    design = json.loads(read(paths["design_contract"]))
+    workload = protocol.get("frozen_workload", {})
+    hypothesis_ids = [
+        row.get("hypothesis_id") for row in protocol.get("frozen_hypotheses", [])
+    ]
+    expected_tools = {
+        "research/source_lineage/Qiskit_2_4_1_R184_window_exact_score.patch",
+        "tools/b4_b8_r184_window_exact_replay.py",
+        "tools/b4_b8_r184_independent_oracle.py",
+        "tools/b4_b8_r184_linux_x86_64_build.py",
+        "tools/b4_b8_r184_linux_x86_64_bundle.py",
+        ".github/workflows/r184-windowed-exact-score-linux-x86-64.yml",
+    }
+    forbidden_claims = (
+        "causal_bottleneck_claimed",
+        "upstream_patch_accepted",
+        "production_qiskit_remedy_claimed",
+        "hardware_result_claimed",
+        "quantum_advantage_claimed",
+        "bqp_separation_claimed",
+        "solved_frontier_claimed",
+    )
+    if (
+        not payload_ok(protocol)
+        or protocol.get("method") != "b4_b8_r184_window_exact_score_protocol_v0"
+        or protocol.get("status") != "preregistered_design_unopened"
+        or workload.get("workload_cell_count") != 13
+        or workload.get("worker_count") != 13
+        or workload.get("measured_triplet_count") != 468
+        or workload.get("timing_call_count") != 1404
+        or workload.get("counter_probe_call_count") != 468
+        or workload.get("warmup_call_count") != 351
+        or workload.get("total_qiskit_function_call_count") != 2223
+        or hypothesis_ids
+        != [
+            "H1-exact-integrity",
+            "H2-compact-common-path",
+            "H3-representation-speedup",
+            "H4-biguint-competitiveness",
+        ]
+        or any(protocol.get("claim_boundary", {}).get(field) is not False for field in forbidden_claims)
+        or protocol.get("claim_boundary", {}).get("new_credit_delta") != 0
+    ):
+        errors.append("R184 protocol identity, matrix, hypothesis, or claim boundary mismatch")
+    if (
+        not payload_ok(design)
+        or design.get("contract_id")
+        != "B4-B8-R184-windowed-exact-score-design-contract-v0"
+        or design.get("protocol_payload_hash") != protocol.get("payload_hash")
+        or design.get("execution_started") is not False
+        or design.get("execution_tooling_bound") is not False
+        or set(design.get("required_before_execution", [])) != expected_tools
+    ):
+        errors.append("R184 design contract or unopened boundary mismatch")
+    for binding in design.get("source_bindings", {}).values():
+        path = root / binding.get("path", "")
+        if not path.is_file() or file_hash(path) != binding.get("sha256"):
+            errors.append(f"R184 source binding mismatch: {binding.get('path')}")
+    design_tool_binding = design.get("design_tool_binding", {})
+    if (
+        design_tool_binding.get("path") != "tools/b4_b8_r184_window_exact_preregister.py"
+        or file_hash(paths["design_tool"]) != design_tool_binding.get("sha256")
+    ):
+        errors.append("R184 design-tool binding mismatch")
+    for relative in expected_tools:
+        if not (root / relative).is_file():
+            errors.append(f"R184 required execution tool missing: {relative}")
+    protocol_report = read(paths["protocol_report"])
+    if not all(
+        marker in protocol_report
+        for marker in (
+            "`468` same-process BigUint/prefix/window triplets",
+            "at or below 0.90",
+            "at or below 1.00",
+            "Scientific execution: unopened",
+        )
+    ):
+        errors.append("R184 protocol report boundary missing")
+
+    execution = None
+    execution_presence = paths["execution_contract"].exists()
+    if execution_presence != paths["execution_report"].exists():
+        errors.append("R184 execution contract and report presence mismatch")
+    if execution_presence:
+        execution = json.loads(read(paths["execution_contract"]))
+        public = execution.get("public_preregistration", {})
+        if (
+            not payload_ok(execution)
+            or execution.get("contract_id")
+            != "B4-B8-R184-windowed-exact-score-execution-contract-v0"
+            or execution.get("protocol_payload_hash") != protocol.get("payload_hash")
+            or execution.get("design_contract_payload_hash") != design.get("payload_hash")
+            or execution.get("execution_tooling_bound") is not True
+            or execution.get("execution_started") is not False
+            or not str(public.get("discussion", "")).startswith(
+                "https://github.com/crystal-tensor/Prometheus-plan/discussions/"
+            )
+            or len(str(public.get("public_design_commit", ""))) != 40
+        ):
+            errors.append("R184 execution contract or public preregistration mismatch")
+        for section in ("source_bindings", "tool_bindings"):
+            for binding in execution.get(section, {}).values():
+                path = root / binding.get("path", "")
+                if not path.is_file() or file_hash(path) != binding.get("sha256"):
+                    errors.append(
+                        f"R184 execution {section} mismatch: {binding.get('path')}"
+                    )
+
+    final_keys = (
+        "result",
+        "result_report",
+        "oracle",
+        "oracle_report",
+        "bundle",
+        "build",
+        "binary",
+        "worker_dir",
+    )
+    final_presence = [paths[key].exists() for key in final_keys]
+    final_complete = all(final_presence)
+    if any(final_presence) and not final_complete:
+        errors.append("R184 final evidence chain is incomplete")
+
+    result = oracle = bundle = build = None
+    summary: dict = {}
+    classifications: dict = {}
+    if final_complete:
+        result = json.loads(read(paths["result"]))
+        oracle = json.loads(read(paths["oracle"]))
+        bundle = json.loads(read(paths["bundle"]))
+        build = json.loads(read(paths["build"]))
+        summary = result.get("summary", {})
+        classifications = result.get("hypothesis_classifications", {})
+        result_false_claims = (
+            "hardware_result_claimed",
+            "quantum_advantage_claimed",
+            "bqp_separation_claimed",
+            "solved_frontier_claimed",
+            "production_qiskit_remedy_claimed",
+            "causal_bottleneck_claimed",
+        )
+        if (
+            not all(payload_ok(payload) for payload in (result, oracle, bundle, build))
+            or result.get("method") != "b4_b8_r184_window_exact_score_replay_v0"
+            or summary.get("worker_count") != 13
+            or summary.get("recorded_triplet_count") != 468
+            or summary.get("timing_call_count") != 1404
+            or summary.get("counter_probe_call_count") != 468
+            or summary.get("warmup_call_count") != 351
+            or summary.get("total_qiskit_function_call_count") != 2223
+            or set(classifications)
+            != {
+                "H1-exact-integrity",
+                "H2-compact-common-path",
+                "H3-representation-speedup",
+                "H4-biguint-competitiveness",
+            }
+            or any(result.get(field) is not False for field in result_false_claims)
+            or result.get("new_credit_delta") != 0
+            or oracle.get("status") != "independent_oracle_complete"
+            or oracle.get("requirements_passed") != 12
+            or oracle.get("requirements_failed") != 0
+            or bundle.get("worker_artifact_count") != 13
+            or not str(bundle.get("github_actions_run_url", "")).startswith(
+                "https://github.com/crystal-tensor/Prometheus-plan/actions/runs/"
+            )
+        ):
+            errors.append("R184 final result, oracle, bundle, or claim boundary mismatch")
+        for artifact in bundle.get("artifacts", []):
+            path = root / artifact.get("path", "")
+            if not path.is_file() or file_hash(path) != artifact.get("sha256"):
+                errors.append(f"R184 bundle artifact mismatch: {artifact.get('path')}")
+
+    status.update(
+        {
+            "protocol_status": protocol.get("status"),
+            "protocol_payload_hash": protocol.get("payload_hash"),
+            "design_contract_status": design.get("status"),
+            "design_contract_payload_hash": design.get("payload_hash"),
+            "execution_contract_status": execution.get("status")
+            if execution is not None
+            else "not_submitted",
+            "execution_contract_payload_hash": execution.get("payload_hash")
+            if execution is not None
+            else None,
+            "scientific_execution_started": final_complete,
+            "result_status": result.get("status") if result is not None else "not_submitted",
+            "result_payload_hash": result.get("payload_hash") if result is not None else None,
+            "measured_triplet_count": summary.get("recorded_triplet_count", 0),
+            "window_to_prefix_median_time_ratio": classifications.get(
+                "H3-representation-speedup", {}
+            ).get("median_paired_candidate_to_reference_ratio"),
+            "window_to_biguint_median_time_ratio": classifications.get(
+                "H4-biguint-competitiveness", {}
+            ).get("median_paired_candidate_to_baseline_ratio"),
+            "oracle_status": oracle.get("status") if oracle is not None else "not_submitted",
+            "oracle_payload_hash": oracle.get("payload_hash") if oracle is not None else None,
+            "build_payload_hash": build.get("payload_hash") if build is not None else None,
+            "bundle_payload_hash": bundle.get("payload_hash") if bundle is not None else None,
+            "github_actions_run_url": bundle.get("github_actions_run_url")
+            if bundle is not None
+            else None,
+            "new_credit_delta": 0,
+        }
+    )
+    return status
+
+
 def audit(root: Path) -> dict:
     research = root / "research"
     benchmarks = root / "benchmarks"
@@ -46877,6 +47122,7 @@ def audit(root: Path) -> dict:
         audit_r182_score_cost_attribution_preregistration(root, errors)
     )
     r183_prefix_initialization_status = audit_r183_prefix_initialization_ablation(root, errors)
+    r184_window_exact_score_status = audit_r184_window_exact_score(root, errors)
 
     for path in [roadmap_path, status_html_path]:
         if not path.exists():
@@ -47248,6 +47494,7 @@ def audit(root: Path) -> dict:
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
             "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
+            "r184_window_exact_score": r184_window_exact_score_status,
         },
         "b5": {
             "manifest": str(b5_manifest_path),
@@ -47419,6 +47666,7 @@ def audit(root: Path) -> dict:
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
             "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
+            "r184_window_exact_score": r184_window_exact_score_status,
         },
         "b9": {
             "manifest": str(b9_manifest_path),
@@ -47467,6 +47715,7 @@ def audit(root: Path) -> dict:
             "r180_r181_active_limb_transition": r180_r181_active_limb_status,
             "r182_score_cost_attribution": r182_score_cost_attribution_status,
             "r183_prefix_initialization_ablation": r183_prefix_initialization_status,
+            "r184_window_exact_score": r184_window_exact_score_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,

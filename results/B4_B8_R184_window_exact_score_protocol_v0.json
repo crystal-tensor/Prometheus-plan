@@ -1,0 +1,107 @@
+{
+  "acceptance_requirements": [
+    "P1 all accepted R183 payloads and source bindings validate",
+    "P2 the public Discussion and design commit predate every R184 build and worker",
+    "P3 a second-stage execution contract hash-binds the patch, runner, oracle, build, bundle, and workflow",
+    "P4 cargo format, check, R180/R182/R183/R184 tests, release build, ELF validation, and isolated import smoke pass",
+    "P5 all three timing mappings and the candidate probe mapping equal the expected mapping for every triplet",
+    "P6 all eight candidate counters are present, nonnegative, and deterministic by subcell",
+    "P7 candidate compactness, fallback, and object-size fields follow H2 without relaxation",
+    "P8 all 13 cells contain 36 triplets, six of every arm order, plus 9 warmups per arm",
+    "P9 H1 through H4 follow the frozen thresholds without relaxation",
+    "P10 a stdlib-only oracle recomputes hashes, counts, paired ratios, and classifications",
+    "P11 simulation execution count and quantum shot count remain zero",
+    "P12 production remedy, hardware, advantage, BQP, solved-frontier, and new-credit fields remain false or zero"
+  ],
+  "claim_boundary": {
+    "bqp_separation_claimed": false,
+    "causal_bottleneck_claimed": false,
+    "full_domain_compactness_claimed": false,
+    "hardware_result_claimed": false,
+    "new_credit_delta": 0,
+    "production_qiskit_remedy_claimed": false,
+    "quantum_advantage_claimed": false,
+    "representation_speedup_claimed_before_execution": false,
+    "solved_frontier_claimed": false,
+    "upstream_patch_accepted": false
+  },
+  "frozen_arms": {
+    "baseline": "rust_biguint_exact_retained_binary64",
+    "candidate": "rust_windowed_4_limb_exact_with_biguint_fallback",
+    "reference": "rust_prefix_initialized_34_limb_exact"
+  },
+  "frozen_hypotheses": [
+    {
+      "hypothesis_id": "H1-exact-integrity",
+      "statement": "BigUint, prefix, window timing, and window probe mappings equal the frozen expected mapping in every triplet."
+    },
+    {
+      "hypothesis_id": "H2-compact-common-path",
+      "maximum_score_object_size_bytes": 64,
+      "maximum_window_limb_count": 4,
+      "statement": "The window representation stays within four limbs and 64 bytes, with zero fallback transitions and zero wide combines on the frozen workload."
+    },
+    {
+      "hypothesis_id": "H3-representation-speedup",
+      "maximum_candidate_to_reference_paired_median_ratio": 0.9,
+      "statement": "The window candidate has an aggregate paired median elapsed ratio at most 0.90 against the prefix-initialized exact reference after H1 and H2 pass."
+    },
+    {
+      "hypothesis_id": "H4-biguint-competitiveness",
+      "maximum_candidate_to_baseline_paired_median_ratio": 1.0,
+      "required_cell_count": 13,
+      "required_count_per_order_per_cell": 6,
+      "statement": "The window candidate has an aggregate paired median elapsed ratio at most 1.00 against the BigUint exact denominator after H1 and H2 pass."
+    }
+  ],
+  "frozen_workload": {
+    "arm_order_permutation_count": 6,
+    "candidate_compact_limb_capacity": 4,
+    "candidate_maximum_object_size_bytes": 64,
+    "counter_probe_call_count": 468,
+    "measured_triplet_count": 468,
+    "measured_triplets_per_cell": 36,
+    "repetitions_per_order_per_cell": 6,
+    "small_gap_policy_cells": 4,
+    "standard_dataset_profile_cells": 9,
+    "timing_call_count": 1404,
+    "total_qiskit_function_call_count": 2223,
+    "warmup_call_count": 351,
+    "warmups_per_arm_per_cell": 9,
+    "worker_count": 13,
+    "workload_cell_count": 13
+  },
+  "method": "b4_b8_r184_window_exact_score_protocol_v0",
+  "payload_hash": "6282eebdfa41ff94dfbe4eed4b61fc2030f02bec5eea6bb360b9fa27c890a999",
+  "platform_contract": {
+    "machine": "x86_64",
+    "python": "3.12",
+    "qiskit": "2.4.1",
+    "requires_public_discussion_before_execution": true,
+    "runner": "github_hosted_ubuntu_24_04",
+    "source_commit": "0fd015a22b84c9082173597a5d2304dc0aaec08c",
+    "system": "Linux",
+    "workflow_dispatch_only": true
+  },
+  "required_counter_keys": [
+    "leaf_construction_count",
+    "window_combine_count",
+    "window_compare_count",
+    "compact_result_count",
+    "fallback_transition_count",
+    "wide_combine_count",
+    "maximum_window_limb_count",
+    "score_object_size_bytes"
+  ],
+  "research_question": "R183 removed 62.6724% of initialized limb writes yet reached only a 0.984288x paired median ratio. Can an exact score become materially faster by carrying only a four-limb exponent window, while falling back losslessly to BigUint whenever the exact span is wider?",
+  "source_result_payload_hashes": {
+    "results/B4_B8_R183_independent_oracle_v0.json": "4b1a6d2a43e7011a96567ffe2839dadca04e02a84e29ff090ecc37f24c598360",
+    "results/B4_B8_R183_prefix_initialization_ablation_v0.json": "ecb901a7375013fdd8f58727227fe7e80d38c89570d646011790ddfa29bd0c84",
+    "results/B4_B8_R183_prefix_initialization_bundle_v0.json": "8a4b23726c8733248e039b90a776b040aab14976f229ddec145a0ddd4bb91f4d"
+  },
+  "source_target_id": "T-B4-002dy/T-B8-003ec/T-B10-009do-r184-windowed-exact-score-protocol",
+  "status": "preregistered_design_unopened",
+  "title": "B4/B8/B10 R184 windowed exact-score protocol",
+  "upstream_target_id": "T-B4-002dw/T-B8-003ea/T-B10-009dm-r183-result",
+  "version": 0
+}
