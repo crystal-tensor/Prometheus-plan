@@ -3455,6 +3455,23 @@ unopened. This remains a classical compiler reproducibility experiment, not
 quantum-hardware evidence, a production patch, quantum advantage, BQP
 separation, solved B4/B8/B10, or new credit.
 
+`T-B4-002dj` / `T-B8-003dn` / `T-B10-009cz-r179-result` now records the
+public Linux execution without changing the frozen thresholds. GitHub Actions
+run `29757057658` builds and imports the hash-bound 21,621,400-byte x86-64
+accelerator, then completes 39 isolated workers, 624 warmups, and 2,400
+recorded calls. Source f64, BigUint exact, and fixed exact each match all
+`800/800` frozen outcomes; the fixed implementation preserves R169 `192/192`,
+repairs R170 and R172 `192/192` each, and repairs all `224/224` R160 small-gap
+cases. Correctness, aggregate fixed/source `2.152808x`, worst-cell
+fixed/source `2.459848x`, and peak-RSS `1.001142x` pass. The result is still
+rejected at `15/16`: P13 required fixed/BigUint at most `0.90x`, while Linux
+measured `1.129059x`. This separates exact-selection correctness from the
+unmet speedup claim. The independent standard-library oracle was skipped by
+the fail-fast workflow and remains the next evidence gate. No threshold is
+relaxed; cross-platform support, production readiness, hardware relevance,
+quantum advantage, BQP separation, solved B4/B8/B10, and new credit remain
+false or zero. Result hash `7fec1de6...`; accelerator hash `0469ab07...`.
+
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
 passing `10/10`, `10/10`, and `4/4`. All `24/24` repaired and target-specific

@@ -3020,7 +3020,7 @@ def audit_r176_fixed_superaccumulator(
 
 
 def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
-    """Validate the R177/R178 failures and unopened R179 correction."""
+    """Validate the R177/R178 failures and the executed R179 Linux matrix."""
     paths = {
         "r177_result": root / "results/B4_B8_R177_linux_x86_64_build_failure_v0.json",
         "r177_report": root / "research/B4_B8_R177_linux_x86_64_build_failure.md",
@@ -3035,6 +3035,12 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
         "r179_protocol": root / "results/B4_B8_R179_linux_x86_64_protocol_v0.json",
         "r179_contract": root / "benchmarks/B4_B8_R179_linux_x86_64_contract_v0.json",
         "r179_report": root / "research/B4_B8_R179_linux_x86_64_protocol.md",
+        "r179_result": root / "results/B4_B8_R179_linux_x86_64_replay_v0.json",
+        "r179_result_report": root / "research/B4_B8_R179_linux_x86_64_replay.md",
+        "r179_build": root / "research/source_lineage/Qiskit_2_4_1_R179_linux_x86_64_build_manifest.json",
+        "r179_binary": root / "research/source_lineage/Qiskit_2_4_1_R179_fixed_superaccumulator_pyext.x86_64-linux-gnu.so",
+        "r179_logs": root / "research/source_lineage/R179_linux_x86_64_build_logs",
+        "r179_workers": root / "results/B4_B8_R179_linux_x86_64_replay",
     }
     status = {f"{key}_exists": path.exists() for key, path in paths.items()}
     if not all(status.values()):
@@ -3054,6 +3060,8 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
     r178_adjudication = json.loads(read(paths["r178_failure"]))
     r179_protocol = json.loads(read(paths["r179_protocol"]))
     r179_contract = json.loads(read(paths["r179_contract"]))
+    r179_result = json.loads(read(paths["r179_result"]))
+    r179_build = json.loads(read(paths["r179_build"]))
     if (
         not payload_ok(r177)
         or r177.get("method") != "b4_b8_r177_build_failure_adjudication_v0"
@@ -3205,18 +3213,150 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
                 != binding.get("sha256")
             ):
                 errors.append(f"R179 {section} mismatch: {binding_id}")
-    r179_result_present = any(
-        (root / path).exists()
-        for path in r179_contract["result_paths_must_be_absent"]
-    )
-    if r179_result_present:
-        errors.append("R179 result evidence exists before registered execution")
     r179_report_text = read(paths["r179_report"])
     if not all(
         marker in r179_report_text
         for marker in ("preregistered_unopened", "39", "2400", "Claim Boundary")
     ):
         errors.append("R179 protocol report boundary missing")
+    failed_requirements = [
+        row.get("requirement_id")
+        for row in r179_result.get("requirements", [])
+        if row.get("passed") is not True
+    ]
+    r179_summary = r179_result.get("summary", {})
+    r179_platform = r179_result.get("platform_gate", {})
+    if (
+        not payload_ok(r179_result)
+        or r179_result.get("method") != "b4_b8_r179_linux_x86_64_replay_v0"
+        or r179_result.get("status")
+        != "linux_x86_64_fixed_superaccumulator_rejected_on_frozen_matrix"
+        or r179_result.get("classification")
+        != "linux_x86_64_compiled_comparator_replay_failed"
+        or r179_result.get("payload_hash")
+        != "7fec1de65dfe4655afff70ef600a14d1a26f7904ec00c1a6184d948a2de83274"
+        or r179_result.get("requirements_passed") != 15
+        or r179_result.get("requirements_failed") != 1
+        or failed_requirements != ["P13"]
+        or r179_result.get("protocol_payload_hash")
+        != r179_protocol.get("payload_hash")
+        or r179_result.get("contract_payload_hash")
+        != r179_contract.get("payload_hash")
+    ):
+        errors.append("R179 result identity, payload, or frozen P13 rejection mismatch")
+    expected_counts = {
+        "worker_count": 39,
+        "workers_started_after_preregistration": 39,
+        "qiskit_calls_performed": 3024,
+        "recorded_call_count": 2400,
+        "warmup_call_count": 624,
+        "source_expected_match_count": 800,
+        "biguint_expected_match_count": 800,
+        "fixed_expected_match_count": 800,
+        "biguint_fixed_mapping_agreement_count": 800,
+        "r169_fixed_preservation_count": 192,
+        "r170_fixed_repair_count": 192,
+        "r172_fixed_repair_count": 192,
+        "small_gap_source_prior_wrong_winner_reproduction_count": 224,
+        "small_gap_biguint_repair_count": 224,
+        "small_gap_fixed_repair_count": 224,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "new_credit_delta": 0,
+    }
+    if any(r179_summary.get(key) != value for key, value in expected_counts.items()):
+        errors.append("R179 replay counts, correctness outcomes, or zero-credit boundary mismatch")
+    thresholds = r179_protocol.get("performance_thresholds", {})
+    fixed_to_biguint = r179_summary.get(
+        "aggregate_fixed_to_biguint_median_time_ratio", float("inf")
+    )
+    if (
+        fixed_to_biguint
+        <= thresholds.get("maximum_aggregate_fixed_to_biguint_median_time_ratio", 0)
+        or r179_summary.get("aggregate_fixed_to_source_median_time_ratio", float("inf"))
+        > thresholds.get("maximum_aggregate_median_time_ratio", 0)
+        or r179_summary.get("maximum_cell_fixed_to_source_median_time_ratio", float("inf"))
+        > thresholds.get("maximum_cell_median_time_ratio", 0)
+        or r179_summary.get("maximum_worker_fixed_to_source_peak_rss_ratio", float("inf"))
+        > thresholds.get("maximum_worker_peak_rss_ratio", 0)
+    ):
+        errors.append("R179 performance boundary does not isolate the preregistered P13 failure")
+    forbidden_summary_claims = (
+        "production_qiskit_remedy_claimed",
+        "confirmed_qiskit_bug_claimed",
+        "route_quality_improvement_claimed",
+        "hardware_result_claimed",
+        "quantum_advantage_claimed",
+        "bqp_separation_claimed",
+        "solved_frontier_claimed",
+        "upstream_patch_accepted",
+        "cross_platform_replay_supported",
+    )
+    if any(r179_summary.get(field) is not False for field in forbidden_summary_claims):
+        errors.append("R179 rejected matrix makes a forbidden positive claim")
+    if (
+        r179_platform.get("requirements_passed") != 2
+        or r179_platform.get("requirements_failed") != 0
+        or r179_platform.get("linux_x86_64_worker_count") != 39
+    ):
+        errors.append("R179 Linux x86-64 platform gate mismatch")
+    if (
+        not payload_ok(r179_build)
+        or r179_build.get("status")
+        != "linux_x86_64_pyext_built_and_imported_after_preregistration"
+        or r179_build.get("payload_hash")
+        != r179_result.get("build_manifest_payload_hash")
+        or r179_build.get("preregistration") != r179_result.get("preregistration")
+        or r179_build.get("github_actions", {}).get("sha")
+        != r179_result.get("preregistration", {}).get("commit")
+        or not r179_build.get("github_actions", {}).get("run_url")
+    ):
+        errors.append("R179 build manifest, run, or preregistration binding mismatch")
+    binary_hash = hashlib.sha256(paths["r179_binary"].read_bytes()).hexdigest()
+    if (
+        binary_hash != r179_result.get("accelerator_sha256")
+        or binary_hash != r179_build.get("accelerator", {}).get("sha256")
+        or paths["r179_binary"].stat().st_size
+        != r179_build.get("accelerator", {}).get("size_bytes")
+    ):
+        errors.append("R179 Linux accelerator hash or size mismatch")
+    build_steps = r179_build.get("build_steps", [])
+    for step in build_steps:
+        for stream in ("stdout", "stderr"):
+            path = root / step.get(f"{stream}_path", "")
+            if (
+                not path.is_file()
+                or hashlib.sha256(path.read_bytes()).hexdigest()
+                != step.get(f"{stream}_sha256")
+            ):
+                errors.append(f"R179 build log binding mismatch: {step.get('step_id')} {stream}")
+    if len(build_steps) != 12 or any(step.get("returncode") != 0 for step in build_steps):
+        errors.append("R179 build-step count or return code mismatch")
+    worker_rows = r179_result.get("worker_artifacts", [])
+    for row in worker_rows:
+        path = root / row.get("path", "")
+        if not path.is_file():
+            errors.append(f"R179 worker artifact missing: {row.get('path')}")
+            continue
+        payload = json.loads(read(path))
+        body = dict(payload)
+        observed_manifest_hash = body.pop("manifest_hash", None)
+        if (
+            hashlib.sha256(path.read_bytes()).hexdigest() != row.get("sha256")
+            or observed_manifest_hash != row.get("manifest_hash")
+            or observed_manifest_hash != canonical(body)
+            or payload.get("environment", {}).get("system") != "Linux"
+            or payload.get("environment", {}).get("machine") not in {"x86_64", "amd64"}
+        ):
+            errors.append(f"R179 worker hash or platform mismatch: {row.get('path')}")
+    if len(worker_rows) != 39:
+        errors.append("R179 worker artifact count mismatch")
+    r179_result_report_text = read(paths["r179_result_report"])
+    if not all(
+        marker in r179_result_report_text
+        for marker in ("15/16", "800/800", "2.152808", "1.129059", "Claim Boundary")
+    ):
+        errors.append("R179 result report correctness or performance boundary missing")
     status.update({
         "r177_status": r177.get("status"),
         "r177_log_count": len(log_rows),
@@ -3227,10 +3367,15 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
         "r178_failure_status": r178_adjudication.get("status"),
         "r178_log_count": len(r178_log_rows),
         "r178_scientific_matrix_started": r178_failure.get("scientific_matrix_started"),
-        "r179_status": r179_protocol.get("status"),
+        "r179_status": r179_result.get("status"),
         "r179_protocol_payload_hash": r179_protocol.get("payload_hash"),
         "r179_contract_payload_hash": r179_contract.get("payload_hash"),
-        "r179_result_evidence_present": r179_result_present,
+        "r179_result_payload_hash": r179_result.get("payload_hash"),
+        "r179_failed_requirements": failed_requirements,
+        "r179_linux_worker_count": r179_summary.get("linux_x86_64_worker_count"),
+        "r179_recorded_call_count": r179_summary.get("recorded_call_count"),
+        "r179_fixed_expected_match_count": r179_summary.get("fixed_expected_match_count"),
+        "r179_fixed_to_biguint_median_ratio": fixed_to_biguint,
         "new_credit_delta": 0,
     })
     return status

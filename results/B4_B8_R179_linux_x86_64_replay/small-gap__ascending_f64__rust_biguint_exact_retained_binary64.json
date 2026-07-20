@@ -1,0 +1,4296 @@
+{
+  "accelerator_path": "/tmp/prometheus-r176-overlay-0469ab075ef40a84/qiskit/_accelerate.abi3.so",
+  "accelerator_sha256": "0469ab075ef40a841da017e2b9cebeac5fe2c1ac8fc95b77c99dc773ea3ff054",
+  "case_summaries": [
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "case_summary_hash": "96f7569cb468e824b6fff9be587273ca8fc1ec9daad3ad1fd38ff73e0dfee3e5",
+      "elapsed_ns_median": 32381.0,
+      "elapsed_ns_p95_nearest_rank": 50213,
+      "error_map_descriptor": {
+        "case_id": "edge_0_1_m008ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": true,
+            "value_bits": 4567100593048839608
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 1.3877787807814457e-17,
+        "minimum_gap_fraction": "1/72057594037927936",
+        "minimum_gap_ulp_ratio": 0.5,
+        "minimum_score_fraction": "25240825545996491/144115188075855872",
+        "second_distinct_score_fraction": "25240825545996493/144115188075855872"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "case_summary_hash": "320468234a128d01b7eb2e1df3c95f1d83dae270e232a942887f1fdcb3e5ed2b",
+      "elapsed_ns_median": 30817.5,
+      "elapsed_ns_p95_nearest_rank": 36278,
+      "error_map_descriptor": {
+        "case_id": "edge_0_1_m001ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": true,
+            "value_bits": 4567100593048839615
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 8.673617379884035e-19,
+        "minimum_gap_fraction": "1/1152921504606846976",
+        "minimum_gap_ulp_ratio": 0.03125,
+        "minimum_score_fraction": "100963302183985975/576460752303423488",
+        "second_distinct_score_fraction": "201926604367971951/1152921504606846976"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "case_summary_hash": "43e13fb7d2c7e548397f4274cfc7c2984945862cfd3d991727d929e383bcea65",
+      "elapsed_ns_median": 33031.5,
+      "elapsed_ns_p95_nearest_rank": 52889,
+      "error_map_descriptor": {
+        "case_id": "edge_1_0_p001ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": true,
+            "value_bits": 4567100593048839617
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 2.6020852139652106e-18,
+        "minimum_gap_fraction": "3/1152921504606846976",
+        "minimum_gap_ulp_ratio": 0.09375,
+        "minimum_score_fraction": "201926604367971953/1152921504606846976",
+        "second_distinct_score_fraction": "50481651091992989/288230376151711744"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "case_summary_hash": "c5869a4ab239cd64e85617bbf7ab28aeb7d3288eacde4dcd139dfdfaf945fe4b",
+      "elapsed_ns_median": 30387.0,
+      "elapsed_ns_p95_nearest_rank": 34004,
+      "error_map_descriptor": {
+        "case_id": "edge_1_0_p008ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": true,
+            "value_bits": 4567100593048839624
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 1.3877787807814457e-17,
+        "minimum_gap_fraction": "1/72057594037927936",
+        "minimum_gap_ulp_ratio": 0.5,
+        "minimum_score_fraction": "25240825545996495/144115188075855872",
+        "second_distinct_score_fraction": "25240825545996497/144115188075855872"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "case_summary_hash": "9a45ee4883c3cd825ea58eabaa1f335a4388e0486ac8086b01c57d51d9290981",
+      "elapsed_ns_median": 31107.5,
+      "elapsed_ns_p95_nearest_rank": 67075,
+      "error_map_descriptor": {
+        "case_id": "edge_1_2_m001ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": true,
+            "value_bits": 4565693368545587071
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 1.3010426069826053e-18,
+        "minimum_gap_fraction": "3/2305843009213693952",
+        "minimum_gap_ulp_ratio": 0.046875,
+        "minimum_score_fraction": "100963302183985975/576460752303423488",
+        "second_distinct_score_fraction": "403853208735943903/2305843009213693952"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "case_summary_hash": "a62145f3a14350c74c430b66ac4e67704c3a70a20f5bf490a64792ac95adb0d2",
+      "elapsed_ns_median": 30887.5,
+      "elapsed_ns_p95_nearest_rank": 33212,
+      "error_map_descriptor": {
+        "case_id": "edge_2_1_p001ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": true,
+            "value_bits": 4565693368545587073
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 1.3010426069826053e-18,
+        "minimum_gap_fraction": "3/2305843009213693952",
+        "minimum_gap_ulp_ratio": 0.046875,
+        "minimum_score_fraction": "403853208735943905/2305843009213693952",
+        "second_distinct_score_fraction": "100963302183985977/576460752303423488"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "case_summary_hash": "2ab2058a4558ef6afa299dd12575d77cb90cebe6989fff43e68c58ea6aab4e59",
+      "elapsed_ns_median": 30452.0,
+      "elapsed_ns_p95_nearest_rank": 35766,
+      "error_map_descriptor": {
+        "case_id": "edge_2_1_p008ulp",
+        "construction": "R159 operation-error bits, declared accumulation, optional declared ULP shift",
+        "mode": "ascending_f64",
+        "payload_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+        "rows": [
+          {
+            "base_bits": 4573474103581024861,
+            "key": [
+              0,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4573474103581024861
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              0,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4566947158837165288,
+            "key": [
+              1,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4566947158837165288
+          },
+          {
+            "base_bits": 4567100593048839616,
+            "key": [
+              1,
+              0
+            ],
+            "perturbed": false,
+            "value_bits": 4567100593048839616
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              1,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4565693368545587072
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              1,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4566736071831264125,
+            "key": [
+              2,
+              2
+            ],
+            "perturbed": false,
+            "value_bits": 4566736071831264125
+          },
+          {
+            "base_bits": 4565693368545587072,
+            "key": [
+              2,
+              1
+            ],
+            "perturbed": true,
+            "value_bits": 4565693368545587080
+          },
+          {
+            "base_bits": 4567570890438721934,
+            "key": [
+              3,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4567570890438721934
+          },
+          {
+            "base_bits": 4565472299965932064,
+            "key": [
+              3,
+              1
+            ],
+            "perturbed": false,
+            "value_bits": 4565472299965932064
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              3,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4566733819296185530,
+            "key": [
+              4,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4566733819296185530
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              4,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4567912515276044964,
+            "key": [
+              5,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4567912515276044964
+          },
+          {
+            "base_bits": 4569393841727551520,
+            "key": [
+              5,
+              3
+            ],
+            "perturbed": false,
+            "value_bits": 4569393841727551520
+          },
+          {
+            "base_bits": 4565718906690324480,
+            "key": [
+              5,
+              4
+            ],
+            "perturbed": false,
+            "value_bits": 4565718906690324480
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              5,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          },
+          {
+            "base_bits": 4568277749028269718,
+            "key": [
+              6,
+              6
+            ],
+            "perturbed": false,
+            "value_bits": 4568277749028269718
+          },
+          {
+            "base_bits": 4568291497957912992,
+            "key": [
+              6,
+              5
+            ],
+            "perturbed": false,
+            "value_bits": 4568291497957912992
+          }
+        ]
+      },
+      "exact_leaf_oracle": {
+        "feasible_mapping_count": 8,
+        "minimizer_count": 1,
+        "minimizer_vectors": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "minimum_gap_float": 6.938893903907228e-18,
+        "minimum_gap_fraction": "1/144115188075855872",
+        "minimum_gap_ulp_ratio": 0.25,
+        "minimum_score_fraction": "50481651091992989/288230376151711744",
+        "second_distinct_score_fraction": "50481651091992991/288230376151711744"
+      },
+      "matches_expected": 8,
+      "recorded_call_count": 8
+    }
+  ],
+  "contract_payload_hash": "1612b5140aecb82024f8db34a12df87fcdcc9e4989f013a82eac3b4cae6cd96e",
+  "elapsed_ns_median": 30953.0,
+  "elapsed_ns_p95_nearest_rank": 50213,
+  "environment": {
+    "github_run_attempt": "1",
+    "github_run_id": "29757057658",
+    "machine": "x86_64",
+    "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "python": "3.12.13",
+    "pythonpath_head": "/home/runner/work/Prometheus-plan/Prometheus-plan/tools",
+    "qiskit": "2.4.1",
+    "qiskit_aer": "0.17.2",
+    "qiskit_ibm_runtime": "0.46.1",
+    "system": "Linux"
+  },
+  "identity": "ascending_f64",
+  "input_qasm_sha256": "ce216610e995b4c8b4bd9de6547ac6069961e1eb8881997aa05e0068ea16ab98",
+  "kind": "small-gap",
+  "manifest_hash": "2e79392e4e2fbf8bbce4d3fcea8e49e88c9f57231c8f1fd7864f9c842e4a7916",
+  "mode": "ascending_f64",
+  "peak_rss": 216932,
+  "peak_rss_unit": "kibibytes",
+  "policy": "rust_biguint_exact_retained_binary64",
+  "preregistration": {
+    "commit": "f4e99da05d9e1211fcb3a239144d6355f5cd8055",
+    "created_at": "2026-07-20T15:50:41Z",
+    "discussion": "https://github.com/crystal-tensor/Prometheus-plan/discussions/268"
+  },
+  "process_id": 10865,
+  "process_instance_uuid": "772fbfc9-4df0-4d31-bf5b-26c6be69b184",
+  "protocol_payload_hash": "4c4899bb0e65de1387585ae034b884bb5508b5d01bf7775d670b65a7360b536d",
+  "recorded_call_count": 56,
+  "recorded_matches_expected": 56,
+  "replay_rows": [
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 50213,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "7dbd7aab372ba2b7962d02bafdf870a25f43c89360c02682abf3b454da80d0f5",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 39093,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "3b6eabfb519b8b1a56cb2511b7c0dc487bc1b820798b719cd270b2df4f530b7e",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 34554,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "03ce6502824fa374533774a469744a1601548b1fe9fd0b6e1c9ca962d9d7a98e",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 32882,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "327ccd6f4dabb645c85f71ee208812f0d135319e0ef4dc0e6d37e9af14da381c",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 31880,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "71fa01291762cc0eb66d2eb77539dd6272189b33eaeb8f3d43ca21b2ded27f78",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 30938,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "62e10ae215b48dfb69bcffade20628e4389e9d288dcb2c225ec3821b6f88a0d4",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 30707,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "09314968e8eda4e20c3827558c1cfd530138488d7760d87caae5979e76199977",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m008ulp",
+      "elapsed_ns": 30927,
+      "error_map_descriptor_hash": "51f5abc238150c7eda076c83373974e57db466fc39014e8b7b029114174214bc",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "7429dbadd5521e84efe463a3098b55003bec74237ea9a76db63506f75ed398de",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 36278,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "53c29e419f8c18b3742c11d48084d5ca25a11eb4a8b117c9c3ba32651881f06e",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 32521,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "a748ebd7ad287360e27521d45566461d1c0ceddc6381de8194d948465fe43261",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 32060,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "94605dbd88805709f19bdf2d20b23230dfb58a14fe93a3637e76538b8d34946c",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 30968,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "4bd6e94f10bea8ba50f53970a4bb532aac81301bbec8d5319f5e0cc29283b71d",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 30416,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "75367e2b1f2f66c1597407b7bbfe79f44a9502461e091ca71259ff3beb51db34",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 30126,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "6a8ffeb0e8aa386b9d43754254051308e8a3b7a73684450c36598a5cb848ace3",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 30106,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "5056993d39585161f17fc115f85e1feab67c05e6ba5b1b467495484da7299e1c",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_0_1_m001ulp",
+      "elapsed_ns": 30667,
+      "error_map_descriptor_hash": "1f5cd1840239c4bd5b2a43ddb7a25d0ce7c60681e6f4f81f434189048fbe4147",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.03125,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "6fc71472ee1c0199b91dda0285e7277d2feb214d89184990b21171c59de4ec8a",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 34554,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "29b5b50f3d98f98cd6676423a835d33a9abe599bb51c302e976b07f4e1ba3b41",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 52889,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "5c465d9e7e5a44c14ca78cb457d05db0402a47198dcf777b3c879298c20cf032",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 34785,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "dbe4ff2127027e3e7ae67b37d058e86a1ad2a1600d9f1341a3b21021f3ebb4dc",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 31509,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "cc24d8e47785b44cdb3c2f16283c88ef4f35572697397c573faa43da18a37550",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 30557,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "7eb8e6576d16012bd074a7c9ef0969030951e0cb4a50ddaa668114fff34c9eb6",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 30056,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "549e11ac89d19fed54e6ce349c1324b71b00ace339081418287c0f2157ed7c9b",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 39955,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "1f1a2416cae18c0468c5767973a0d59bac24886c62e5c7f71cc3bb7f8beed062",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p001ulp",
+      "elapsed_ns": 30357,
+      "error_map_descriptor_hash": "513a99c84edfc18c0062dfec3dd7ffa2a1efb9a50ec62d7107c104b11643f093",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.09375,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "881ac14ce2970d817bf53b10b1e1e8b227fe9c832163130a4fe43abf1d63911f",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 34004,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "4b41860cd3fda8eae0c7b214ebc744eb7460a3127963c110a7800e697f237bed",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 31158,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "50c9e17e4943b5aac6391d87dc411d89943ff2072567c3c5059a253e7343e787",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 30437,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "fe53d54bdf9f681f26067a6203de5ee9de2ba64f9e2cbb5d798f2ff5ecaecbb8",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 31539,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "1a3052684b4632ae01208d5a41b48ed9176da55611c19195a07c6a1bb7fecb11",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 30337,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "11d7d9fb150fb481bb7f0405bf89339adb99e91811c6df1ce72adc2ae10ef4c8",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 29354,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "1c91ef7ac919e66cd4b50de4759043ca47aa4b302a90931924a4bda2b527539e",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 29165,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "8ec02c545b74b84cd81aa208b791f5930610c508254d355c543e6310e82e18ac",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_0_p008ulp",
+      "elapsed_ns": 29495,
+      "error_map_descriptor_hash": "922b352b3d578b74cb3e8809341938c349fdc255c5b463e382917115a1ee1375",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.5,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "d48ef5ad4b59b864eeafa675221391e9b36d05a849c62c3226914ef11ee5a509",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 32821,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "0a99c91157d0ca9fcd4304253b1363be255201c9bf2d577d7755eb5f786728c3",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 30727,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "52ae2f39505711ae849025fad8b49cce0613e457473c56bb1ac58af826dbfeaa",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 30417,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "8903d78c7ba5424c00f93741e93367a1cfd34c1700d5b9ac2471e736bd6f280d",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 30246,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "770f6e76248a355e7f02b5d286e16257d0d41e967dc24af2183001431e7c3b6c",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 67075,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "fc932f7dfd9bb21679f34ae4166aaa707535f15c96117bada409f0473cef5a5e",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 34103,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "2c2576151f7053ac19822b21f66639eff39683d6b13d5a2de8d867e8d4b87a7b",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 31488,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "3aa3b43f2de36c438fe9d268a77911879c5ed9b68bbcd70ee8ced833ac563ec2",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_1_2_m001ulp",
+      "elapsed_ns": 30437,
+      "error_map_descriptor_hash": "58dd9a79ded12b9985cf2d3208c8e1de8d30465958931f3de72d0521b91c000a",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "bfcd4f6ffb92ceb1aaa4c489394f54c271f3437c024803d547f541de43db1472",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 33212,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "46b8b030a9cf94ddb8f254cc89e54d322682819399636bef10d2d2ff7c7634fa",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 31228,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "4b16751c328b09d0163004dfe0973fcd2ff8c7f39b619801cded44a60213fa28",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 30637,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "4ed089b7826eb479fcf9a6c25f56f9e40c1da7da16692faf60e4703b62177a85",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 31138,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "8fd46b2dd138b3a9f957d98d7ea2dbb8314890160d72e3e3c023296f4f551ff2",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 29835,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "8e0c5e2534ea75fdd80079b61c2c3581fd5f06fe250a66d8b2a252c261e2859d",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 29274,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "dc22575c017d3e6adf2f9a3184ed91b7c50f517eaf2018a137fe87411856ff6a",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 29465,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "8a4ce8e7fcb74536e73c1da45bcf23c20cfa852b9f2943f3d8c79bdc64174683",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p001ulp",
+      "elapsed_ns": 31198,
+      "error_map_descriptor_hash": "7bb7bfcb63d5fe5a0bb6bdd7533126ee27c29ac901e624fe2323d4e77f93afd1",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.046875,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "def17869cb316529d071485a7e179bd5e3cbbeef2b11ba98ce8eee53c5a4b329",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 32470,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 0,
+      "row_hash": "26de5d8e4e9130eca3fa6a009bd7b32f43d7671381a6e8d77d2ae02d58e2ffce",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 30848,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 1,
+      "row_hash": "07e6bcd43a784541d7ebec6bf8abaaceaaef16a5f2321b8e94a27642b24f573f",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 30056,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 2,
+      "row_hash": "e9295dbd2c07d9709ecf412cd557762fbbf79187ec6fa3c66af3351358681c16",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 29395,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 3,
+      "row_hash": "f4a2a52f4a1fd5de1be4095d4f06e6a520e84013d84d91b8fff1619466483340",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 29275,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 4,
+      "row_hash": "874ece46d3503b9a0b8f7245e86f04d166c8083542114c31bfd6bdbc3d94e9a1",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 29204,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 5,
+      "row_hash": "df70e0c69432826a8f3ee478ee175ca3e9f3519a2ffe1c59784b315457d396fa",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 33712,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 6,
+      "row_hash": "4a8e253e25ecdafba397ea2abf1838b7ef652c7107edb6aa39406c90780c8e5b",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    },
+    {
+      "case_id": "edge_2_1_p008ulp",
+      "elapsed_ns": 35766,
+      "error_map_descriptor_hash": "d29079744a5c7e09707e28b0a967139ad8404a9ba1d778283c3e2388ee1aef80",
+      "exact_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "exact_minimum_gap_ulp_ratio": 0.25,
+      "expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "kind": "small-gap",
+      "mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "matches_expected": true,
+      "mode": "ascending_f64",
+      "policy": "rust_biguint_exact_retained_binary64",
+      "replay_index": 7,
+      "row_hash": "9a62191ccd7bf2525a0124cdbd217a8a67d90a03373767f02f83fcf680a7d6e5",
+      "simulation_execution_count": 0,
+      "source_expected_mapping_vector": [
+        6,
+        5,
+        4,
+        3,
+        0,
+        1,
+        2
+      ],
+      "total_simulated_shots": 0
+    }
+  ],
+  "simulation_execution_count": 0,
+  "started_at_unix": 1784563355,
+  "target_descriptor_sha256": "702c8fd9dcf67a069e7af63e31a57c74c17aaa5e3c5b6d8c2e28ec0c049c0de7",
+  "total_simulated_shots": 0,
+  "warmup_call_count": 16,
+  "warmup_matches_expected": 16
+}
