@@ -5215,9 +5215,66 @@ def audit_r185_macos_arm64_replication(root: Path, errors: list[str]) -> dict:
     ):
         errors.append("R185 macOS arm64 protocol report boundary missing")
 
+    execution = None
     execution_presence = paths["execution_contract"].exists()
     if execution_presence != paths["execution_report"].exists():
         errors.append("R185 execution contract and report presence mismatch")
+    if execution_presence:
+        execution = json.loads(read(paths["execution_contract"]))
+        public = execution.get("public_preregistration", {})
+        measurement = execution.get("measurement_triplet_contract", {})
+        if (
+            not payload_ok(execution)
+            or execution.get("contract_id")
+            != "B4-B8-R185-macos-arm64-replication-execution-contract-v0"
+            or execution.get("status") != "execution_tooling_bound_unopened"
+            or execution.get("protocol_payload_hash") != protocol.get("payload_hash")
+            or execution.get("design_contract_payload_hash")
+            != design.get("payload_hash")
+            or execution.get("execution_tooling_bound") is not True
+            or execution.get("execution_started") is not False
+            or execution.get("scientific_measurement_started") is not False
+            or public.get("discussion")
+            != "https://github.com/crystal-tensor/Prometheus-plan/discussions/280"
+            or len(str(public.get("public_design_commit", ""))) != 40
+            or measurement.get("workload_cell_count") != 13
+            or measurement.get("expected_worker_count") != 13
+            or measurement.get("measured_triplet_count") != 468
+            or measurement.get("timing_call_count") != 1404
+            or measurement.get("counter_probe_call_count") != 468
+            or measurement.get("warmup_call_count") != 351
+            or measurement.get("total_qiskit_function_call_count") != 2223
+            or execution.get("aggregation_rules", {}).get(
+                "H5_cross_architecture_transfer"
+            )
+            != "committed_linux_and_new_macos_results_both_support_H1_through_H4_under_identical_patch_workload_and_thresholds"
+        ):
+            errors.append("R185 execution contract or public boundary mismatch")
+        for section in ("source_bindings", "tool_bindings"):
+            for binding in execution.get(section, {}).values():
+                path = root / binding.get("path", "")
+                if not path.is_file() or file_hash(path) != binding.get("sha256"):
+                    errors.append(
+                        f"R185 execution {section} mismatch: {binding.get('path')}"
+                    )
+        generator = execution.get("contract_generator_binding", {})
+        generator_path = root / generator.get("path", "")
+        if (
+            generator.get("path") != "tools/b4_b8_r185_execution_preregister.py"
+            or not generator_path.is_file()
+            or file_hash(generator_path) != generator.get("sha256")
+        ):
+            errors.append("R185 execution-contract generator binding mismatch")
+        execution_report = read(paths["execution_report"])
+        if not all(
+            marker in execution_report
+            for marker in (
+                "`execution_tooling_bound_unopened`",
+                "Scientific execution: unopened",
+                "clean commit already published as remote main",
+            )
+        ):
+            errors.append("R185 execution report boundary missing")
     final_keys = (
         "result",
         "result_report",
@@ -5238,9 +5295,12 @@ def audit_r185_macos_arm64_replication(root: Path, errors: list[str]) -> dict:
             "protocol_payload_hash": protocol.get("payload_hash"),
             "design_contract_status": design.get("status"),
             "design_contract_payload_hash": design.get("payload_hash"),
-            "execution_contract_status": "submitted"
-            if execution_presence
+            "execution_contract_status": execution.get("status")
+            if execution is not None
             else "not_submitted",
+            "execution_contract_payload_hash": execution.get("payload_hash")
+            if execution is not None
+            else None,
             "scientific_execution_started": all(final_presence),
             "result_status": "submitted" if paths["result"].exists() else "not_submitted",
             "oracle_status": "submitted" if paths["oracle"].exists() else "not_submitted",

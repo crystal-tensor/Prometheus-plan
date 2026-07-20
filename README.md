@@ -93,6 +93,14 @@ classification, cross-architecture transfer, and new credit remain unopened
 or zero. The design is not a universal platform theorem, production remedy,
 hardware result, quantum advantage, BQP separation, or solved frontier.
 
+The R185 second-stage execution contract is also frozen and unopened. Contract
+`19d56ee8...` binds 18 source artifacts, the unchanged R184 patch, five R185
+execution tools, Discussion #280, and public design commit `83c0741e...`. The
+13-cell measurement matrix and H1-H5 rules are unchanged. No accelerator,
+build manifest, worker row, timing, oracle output, transfer classification, or
+credit existed when the contract was created. The next allowed operation is a
+Darwin arm64 build from a clean commit that already equals public `main`.
+
 The latest completed B4/B8/B10 step is the independently audited R184
 windowed exact-score experiment. Public Actions run `29778806963` executed 13
 isolated Linux x86-64 workers, 468 order-balanced three-arm triplets, 1,404
@@ -3718,6 +3726,15 @@ The design audit passes with protocol hash `bd2f5c9a...` and design-contract
 hash `c8f8b7e8...`. Execution tooling is not yet bound, scientific execution is
 unopened, measured triplets remain 0, and no cross-platform, production,
 hardware, advantage, BQP, solved-frontier, or new-credit claim is made.
+
+`T-B4-002ed` / `T-B8-003eh` /
+`T-B10-009dt-r185-macos-arm64-execution-contract` now binds the R185 execution
+surface after Discussion #280 and before any build. Execution contract
+`19d56ee8...` binds 18 source artifacts and five tools, preserves the 468
+triplets and all H1-H5 rules, and requires the future build to start from a
+clean Darwin arm64 commit already published as remote `main`. Scientific
+measurement remains unopened; accelerator, build, workers, result, oracle,
+bundle, transfer support, and new credit remain absent or zero.
 
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
