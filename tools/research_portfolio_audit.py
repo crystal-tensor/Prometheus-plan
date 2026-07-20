@@ -3041,6 +3041,10 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
         "r179_binary": root / "research/source_lineage/Qiskit_2_4_1_R179_fixed_superaccumulator_pyext.x86_64-linux-gnu.so",
         "r179_logs": root / "research/source_lineage/R179_linux_x86_64_build_logs",
         "r179_workers": root / "results/B4_B8_R179_linux_x86_64_replay",
+        "r179_oracle": root / "results/B4_B8_R179_independent_linux_x86_64_oracle_v0.json",
+        "r179_oracle_report": root / "research/B4_B8_R179_independent_linux_x86_64_oracle.md",
+        "r179_adjudication": root / "results/B4_B8_R179_independent_linux_x86_64_oracle_adjudication_v0.json",
+        "r179_adjudication_report": root / "research/B4_B8_R179_independent_linux_x86_64_oracle_adjudication.md",
     }
     status = {f"{key}_exists": path.exists() for key, path in paths.items()}
     if not all(status.values()):
@@ -3062,6 +3066,8 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
     r179_contract = json.loads(read(paths["r179_contract"]))
     r179_result = json.loads(read(paths["r179_result"]))
     r179_build = json.loads(read(paths["r179_build"]))
+    r179_oracle = json.loads(read(paths["r179_oracle"]))
+    r179_adjudication = json.loads(read(paths["r179_adjudication"]))
     if (
         not payload_ok(r177)
         or r177.get("method") != "b4_b8_r177_build_failure_adjudication_v0"
@@ -3357,6 +3363,84 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
         for marker in ("15/16", "800/800", "2.152808", "1.129059", "Claim Boundary")
     ):
         errors.append("R179 result report correctness or performance boundary missing")
+    r179_oracle_failed = [
+        row.get("requirement_id")
+        for row in r179_oracle.get("requirements", [])
+        if row.get("passed") is not True
+    ]
+    r179_oracle_summary = r179_oracle.get("summary", {})
+    if (
+        not payload_ok(r179_oracle)
+        or r179_oracle.get("method")
+        != "b4_b8_r179_independent_linux_x86_64_oracle_v0"
+        or r179_oracle.get("status") != "independent_linux_x86_64_oracle_failed"
+        or r179_oracle.get("payload_hash")
+        != "006d1c6963130e879ba52b8d58fd82172c99b00cc877c80f06581b704c97a599"
+        or r179_oracle.get("source_result_payload_hash")
+        != r179_result.get("payload_hash")
+        or r179_oracle.get("requirements_passed") != 11
+        or r179_oracle.get("requirements_failed") != 1
+        or r179_oracle_failed != ["P10"]
+    ):
+        errors.append("R179 independent oracle identity or expected P10 boundary mismatch")
+    expected_oracle_counts = {
+        "worker_hashes_valid": 39,
+        "worker_artifacts_match": 39,
+        "row_hashes_valid": 2400,
+        "case_hashes_valid": 84,
+        "standard_outcomes_reproduced": 1728,
+        "small_gap_outcomes_reproduced": 672,
+        "small_gap_oracle_payload_matches": 84,
+        "qiskit_calls_performed": 0,
+        "simulation_execution_count": 0,
+        "total_simulated_shots": 0,
+        "new_credit_delta": 0,
+    }
+    if (
+        any(
+            r179_oracle_summary.get(key) != value
+            for key, value in expected_oracle_counts.items()
+        )
+        or r179_oracle_summary.get("summary_matches") is not True
+        or r179_oracle_summary.get("qiskit_imported") is not False
+        or r179_oracle_summary.get("r179_executor_imported") is not False
+        or r179_oracle.get("platform_audit", {}).get("requirements_passed") != 3
+        or r179_oracle.get("platform_audit", {}).get("requirements_failed") != 0
+    ):
+        errors.append("R179 independent oracle recomputation or platform evidence mismatch")
+    oracle_report_text = read(paths["r179_oracle_report"])
+    if not all(
+        marker in oracle_report_text
+        for marker in ("11/12", "39/39", "2400/2400", "84/84", "Claim Boundary")
+    ):
+        errors.append("R179 independent oracle report boundary missing")
+    adjudication_summary = r179_adjudication.get("summary", {})
+    if (
+        not payload_ok(r179_adjudication)
+        or r179_adjudication.get("method")
+        != "b4_b8_r179_independent_linux_oracle_adjudication_v0"
+        or r179_adjudication.get("status")
+        != "evidence_integrity_complete_source_performance_rejection_preserved"
+        or r179_adjudication.get("payload_hash")
+        != "46e6fc71b7d9013e49694c5d851c384f2fa02ff4c65721f57aa1a0a8f5fe3425"
+        or r179_adjudication.get("source_result_payload_hash")
+        != r179_result.get("payload_hash")
+        or r179_adjudication.get("source_oracle_payload_hash")
+        != r179_oracle.get("payload_hash")
+        or r179_adjudication.get("requirements_passed") != 10
+        or r179_adjudication.get("requirements_failed") != 0
+        or adjudication_summary.get("evidence_integrity_complete") is not True
+        or adjudication_summary.get("source_acceptance_preserved") is not False
+        or adjudication_summary.get("source_performance_rejection_preserved") is not True
+        or adjudication_summary.get("new_credit_delta") != 0
+    ):
+        errors.append("R179 oracle adjudication or preserved-rejection boundary mismatch")
+    adjudication_report_text = read(paths["r179_adjudication_report"])
+    if not all(
+        marker in adjudication_report_text
+        for marker in ("10/10", "Evidence integrity is complete", "1.129059", "Claim Boundary")
+    ):
+        errors.append("R179 oracle adjudication report boundary missing")
     status.update({
         "r177_status": r177.get("status"),
         "r177_log_count": len(log_rows),
@@ -3376,6 +3460,14 @@ def audit_r177_r178_linux_transition(root: Path, errors: list[str]) -> dict:
         "r179_recorded_call_count": r179_summary.get("recorded_call_count"),
         "r179_fixed_expected_match_count": r179_summary.get("fixed_expected_match_count"),
         "r179_fixed_to_biguint_median_ratio": fixed_to_biguint,
+        "r179_oracle_status": r179_oracle.get("status"),
+        "r179_oracle_failed_requirements": r179_oracle_failed,
+        "r179_oracle_payload_hash": r179_oracle.get("payload_hash"),
+        "r179_oracle_worker_hashes_valid": r179_oracle_summary.get("worker_hashes_valid"),
+        "r179_oracle_row_hashes_valid": r179_oracle_summary.get("row_hashes_valid"),
+        "r179_oracle_case_hashes_valid": r179_oracle_summary.get("case_hashes_valid"),
+        "r179_adjudication_status": r179_adjudication.get("status"),
+        "r179_adjudication_payload_hash": r179_adjudication.get("payload_hash"),
         "new_credit_delta": 0,
     })
     return status

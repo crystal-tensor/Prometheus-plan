@@ -3466,11 +3466,18 @@ cases. Correctness, aggregate fixed/source `2.152808x`, worst-cell
 fixed/source `2.459848x`, and peak-RSS `1.001142x` pass. The result is still
 rejected at `15/16`: P13 required fixed/BigUint at most `0.90x`, while Linux
 measured `1.129059x`. This separates exact-selection correctness from the
-unmet speedup claim. The independent standard-library oracle was skipped by
-the fail-fast workflow and remains the next evidence gate. No threshold is
-relaxed; cross-platform support, production readiness, hardware relevance,
-quantum advantage, BQP separation, solved B4/B8/B10, and new credit remain
-false or zero. Result hash `7fec1de6...`; accelerator hash `0469ab07...`.
+unmet speedup claim. The fail-fast workflow initially skipped the independent
+oracle, so public recovery run `29758790587` executes the already bound
+standard-library audit without importing Qiskit or the R179 executor. It
+validates 39/39 worker hashes, 2,400/2,400 row hashes, 84/84 case hashes, and
+reproduces 1,728/1,728 standard plus 672/672 small-gap outcomes. The oracle is
+`11/12` with only P10 false because the source result itself is rejected; a
+10/10 adjudication classifies evidence integrity as complete while preserving
+the P13 performance rejection. No threshold is relaxed; cross-platform
+support, production readiness, hardware relevance, quantum advantage, BQP
+separation, solved B4/B8/B10, and new credit remain false or zero. Result hash
+`7fec1de6...`; oracle hash `006d1c69...`; adjudication hash `46e6fc71...`;
+accelerator hash `0469ab07...`.
 
 The R149 holdout at `T-B4-002bh` / `T-B8-003bl` / `T-B10-009az` is
 then preregistered ACCEPT with A1-A10, requirements, and phase replay all
