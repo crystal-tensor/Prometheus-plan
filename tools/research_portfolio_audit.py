@@ -311,6 +311,285 @@ def audit_b9_r187(
     return status
 
 
+def audit_b9_r188(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R188 all-n structural certificate."""
+    expected_status = (
+        "checked_all_n_structural_hamiltonian_support_certificate_complete_"
+        "operator_spectral_bridge_open"
+    )
+    expected_method = "b9_r188_open_chain_all_n_structural_certificate_v1"
+    expected_protocol_hash = (
+        "f5590112fa045be63452a0ad9a70d8259812c524d45ffb63a42149cb0b78c591"
+    )
+    expected_payload_hash = (
+        "da2e1352dceeb6f075e67c3c0ff96078c235008164fdad1bcd9da8515404005e"
+    )
+    expected_module_hash = (
+        "7e9bd8fd997ed44dec568504dbdd0af8b9e7e1109f64c49be945eb2f28c775ee"
+    )
+    expected_r187_module_hash = (
+        "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3"
+    )
+    expected_transcript_hash = (
+        "f4bab92a511692c2803018745de4948d2335c47ce8351b03981a15d753d22052"
+    )
+    expected_profiles = {
+        4: [2, 3, 3, 2],
+        5: [2, 3, 3, 3, 2],
+        6: [2, 3, 3, 3, 3, 2],
+    }
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "formal_all_n_structural_hamiltonian_specification": False,
+        "all_n_support_and_locality_theorems": False,
+        "operator_matrix_semantics_formalized": False,
+        "spectral_gap_derived_from_operator": False,
+        "quantum_pcp_theorem": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R188 all-n structural certificate")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    r187_module_path = resolve(manifest_entry.get("r187_module"))
+    tool_path = root / "tools/b9_r188_open_chain_formal_certificate.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "r187_module": r187_module_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R188 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    source = payload.get("source", {})
+    execution = payload.get("execution", {})
+
+    protocol_hash = hashlib.sha256(
+        json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = hashlib.sha256(
+        json.dumps(
+            payload_without_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    module_hash = hashlib.sha256(module_path.read_bytes()).hexdigest()
+    r187_module_hash = hashlib.sha256(r187_module_path.read_bytes()).hexdigest()
+    transcript_hash = hashlib.sha256(transcript_path.read_bytes()).hexdigest()
+
+    if payload.get("status") != expected_status:
+        errors.append("B9 R188 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R188 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R188 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R188 manifest method mismatch")
+    if protocol_hash != expected_protocol_hash or payload.get(
+        "protocol_hash"
+    ) != expected_protocol_hash:
+        errors.append("B9 R188 protocol hash mismatch")
+    if payload_hash != expected_payload_hash or payload.get(
+        "payload_sha256"
+    ) != expected_payload_hash:
+        errors.append("B9 R188 payload hash mismatch")
+    if module_hash != expected_module_hash or source.get(
+        "lean_module_sha256"
+    ) != expected_module_hash:
+        errors.append("B9 R188 Lean module hash mismatch")
+    if r187_module_hash != expected_r187_module_hash or source.get(
+        "r187_module_sha256"
+    ) != expected_r187_module_hash:
+        errors.append("B9 R188 R187-module hash mismatch")
+    if transcript_hash != expected_transcript_hash or execution.get(
+        "transcript_sha256"
+    ) != expected_transcript_hash:
+        errors.append("B9 R188 transcript hash mismatch")
+    for field, expected in [
+        ("protocol_hash", expected_protocol_hash),
+        ("payload_sha256", expected_payload_hash),
+        ("lean_module_sha256", expected_module_hash),
+        ("r187_module_sha256", expected_r187_module_hash),
+        ("transcript_sha256", expected_transcript_hash),
+    ]:
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R188 manifest {field} mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 12
+        or summary.get("requirement_count") != 12
+        or summary.get("requirements_passed") != 12
+        or summary.get("requirements_failed") != 0
+        or failed_ids
+    ):
+        errors.append("B9 R188 must pass all 12 frozen requirements")
+    if re.search(r"\b(?:sorry|axiom)\b", module):
+        errors.append("B9 R188 source contains a forbidden escape hatch")
+
+    required_theorems = {
+        "open_chain_term_count",
+        "open_chain_support_subset_range",
+        "open_chain_support_card_le_three",
+        "open_chain_left_boundary_support",
+        "open_chain_interior_support",
+        "open_chain_right_boundary_support",
+        "open_chain_interior_one_attains_three",
+        "open_chain_support_card_profile_length",
+        "reweight_open_chain_term_support",
+        "open_chain_reweight_preserves_every_support",
+        "open_chain_summaries_are_uniformly_scaled",
+        "open_chain_summaries_preserve_locality",
+        "open_chain_uniform_reweight_instantiates_r187",
+    }
+    theorem_names = set(
+        re.findall(
+            r"(?m)^(?:@\[[^\n]+\]\s+)?theorem\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R188 required theorem set is incomplete")
+    if "B9.uniform_reweight_derived_rejection" not in module:
+        errors.append("B9 R188 does not bind the R187 theorem")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R188 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R188 transcript contains warnings or a timeout")
+
+    profile_pattern = re.compile(
+        r"^R188_PROFILE n=(\d+) support_cards=\[([0-9,\s]*)\]$",
+        re.MULTILINE,
+    )
+    transcript_profiles: dict[int, list[int]] = {}
+    for match in profile_pattern.finditer(transcript):
+        transcript_profiles[int(match.group(1))] = [
+            int(value.strip())
+            for value in match.group(2).split(",")
+            if value.strip()
+        ]
+    payload_profiles = {
+        int(key): value
+        for key, value in (payload.get("generated_profiles") or {}).items()
+    }
+    if transcript_profiles != expected_profiles or payload_profiles != expected_profiles:
+        errors.append("B9 R188 generated profile rows mismatch")
+    for n, cards in transcript_profiles.items():
+        if (
+            len(cards) != n
+            or cards[:1] != [2]
+            or cards[-1:] != [2]
+            or any(card != 3 for card in cards[1:-1])
+            or max(cards, default=0) != 3
+        ):
+            errors.append(f"B9 R188 profile invariant failed for n={n}")
+
+    if (
+        summary.get("formal_all_n_structural_hamiltonian_specification") is not True
+        or summary.get("all_n_support_and_locality_theorems") is not True
+        or summary.get("r187_instantiated_with_structural_locality") is not True
+        or summary.get("finite_rows_generated_by_lean") is not True
+        or summary.get("operator_matrix_semantics_formalized") is not False
+        or summary.get("spectral_gap_derived_from_operator") is not False
+        or summary.get("quantum_pcp_theorem") is not False
+        or summary.get("nlts_theorem") is not False
+        or summary.get("global_gap_amplification_impossibility") is not False
+        or summary.get("bqp_separation") is not False
+        or summary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R188 claim boundary mismatch")
+    required_report_phrases = [
+        "not yet interpreted as matrices",
+        "spectral gap and width are not yet derived",
+        "`new_credit_delta` remains `0`",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R188 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": module_hash,
+        "r187_module_sha256": r187_module_hash,
+        "transcript_sha256": transcript_hash,
+        "requirement_count": len(requirements),
+        "requirements_passed": summary.get("requirements_passed"),
+        "generated_profiles": payload.get("generated_profiles"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R188") for message in errors
+        ),
+        "formal_all_n_structural_hamiltonian_specification": summary.get(
+            "formal_all_n_structural_hamiltonian_specification"
+        ),
+        "all_n_support_and_locality_theorems": summary.get(
+            "all_n_support_and_locality_theorems"
+        ),
+        "r187_instantiated_with_structural_locality": summary.get(
+            "r187_instantiated_with_structural_locality"
+        ),
+        "finite_rows_generated_by_lean": summary.get(
+            "finite_rows_generated_by_lean"
+        ),
+        "operator_matrix_semantics_formalized": summary.get(
+            "operator_matrix_semantics_formalized"
+        ),
+        "spectral_gap_derived_from_operator": summary.get(
+            "spectral_gap_derived_from_operator"
+        ),
+        "quantum_pcp_theorem": summary.get("quantum_pcp_theorem"),
+        "nlts_theorem": summary.get("nlts_theorem"),
+        "global_gap_amplification_impossibility": summary.get(
+            "global_gap_amplification_impossibility"
+        ),
+        "bqp_separation": summary.get("bqp_separation"),
+        "new_credit_delta": summary.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+        "r187_module": manifest_entry.get("r187_module"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -38290,6 +38569,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r188 = b9_results.get("r188_open_chain_all_n_structural_certificate_v1")
+    b9_r188_status = audit_b9_r188(
+        root,
+        b9_r188,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -48686,6 +48972,7 @@ def audit(root: Path) -> dict:
             "proof_project_scaffold_gate": b9_proof_project_scaffold_status,
             "toolchain_ci_contract_gate": b9_toolchain_ci_contract_status,
             "r187_nonzero_scale_derived_certificate": b9_r187_status,
+            "r188_open_chain_all_n_structural_certificate": b9_r188_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -48726,6 +49013,7 @@ def audit(root: Path) -> dict:
             "r185_macos_arm64_replication": r185_macos_arm64_replication_status,
             "r186_full_vf2_workflow": r186_full_vf2_workflow_status,
             "r187_b9_nonzero_scale_derived_certificate": b9_r187_status,
+            "r188_b9_open_chain_all_n_structural_certificate": b9_r188_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -50256,7 +50544,7 @@ def markdown_report(report: dict) -> str:
     lines = [
         "# Portfolio Status Report",
         "",
-        "Last updated: 2026-07-14",
+        "Last updated: 2026-07-27",
         "",
         f"Overall audit: {'PASS' if report['passed'] else 'FAIL'}",
         "",
@@ -52863,6 +53151,14 @@ def markdown_report(report: dict) -> str:
             f"- Toolchain CI contract failed IDs: {report['b9']['toolchain_ci_contract_gate'].get('failed_ci_contract_requirement_ids')}",
             f"- Toolchain CI run artifact / formal theorem: {report['b9']['toolchain_ci_contract_gate'].get('remote_ci_run_artifact_present')} / {report['b9']['toolchain_ci_contract_gate'].get('formal_theorem_proved')}",
             f"- Toolchain CI template/result/markdown exists: {report['b9']['toolchain_ci_contract_gate'].get('workflow_exists')} / {report['b9']['toolchain_ci_contract_gate'].get('result_exists')} / {report['b9']['toolchain_ci_contract_gate'].get('markdown_exists')}",
+            f"- R187 derived-certificate status: {report['b9']['r187_nonzero_scale_derived_certificate'].get('status')}",
+            f"- R187 requirements / evidence integrity: {report['b9']['r187_nonzero_scale_derived_certificate'].get('requirements_passed')} / {report['b9']['r187_nonzero_scale_derived_certificate'].get('evidence_integrity_complete')}",
+            f"- R187 restricted theorem / all-n construction: {report['b9']['r187_nonzero_scale_derived_certificate'].get('restricted_checked_algebraic_theorem')} / {report['b9']['r187_nonzero_scale_derived_certificate'].get('formal_all_n_hamiltonian_theorem')}",
+            f"- R188 all-n structural status: {report['b9']['r188_open_chain_all_n_structural_certificate'].get('status')}",
+            f"- R188 requirements / evidence integrity: {report['b9']['r188_open_chain_all_n_structural_certificate'].get('requirements_passed')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('evidence_integrity_complete')}",
+            f"- R188 formal structure / support theorems / R187 bridge: {report['b9']['r188_open_chain_all_n_structural_certificate'].get('formal_all_n_structural_hamiltonian_specification')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('all_n_support_and_locality_theorems')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('r187_instantiated_with_structural_locality')}",
+            f"- R188 generated profiles: {report['b9']['r188_open_chain_all_n_structural_certificate'].get('generated_profiles')}",
+            f"- R188 operator semantics / spectral derivation / Quantum PCP / credit: {report['b9']['r188_open_chain_all_n_structural_certificate'].get('operator_matrix_semantics_formalized')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('spectral_gap_derived_from_operator')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('quantum_pcp_theorem')} / {report['b9']['r188_open_chain_all_n_structural_certificate'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

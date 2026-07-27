@@ -74,6 +74,19 @@ direction through a 30-day validation gate.
 | B9 | Quantum PCP / Local Hamiltonian hardness | Exact small-instance gap lab plus finite-instance failed gap-amplification negative lemma, Lean-style symbolic skeleton, named-family cluster-stabilizer width/locality skeleton, local parametric certificate checker, proof-environment readiness gate, contract gate, proof-project scaffold gate, and CI contract gate: n=4,5,6 all terms scale by 1.35, max locality stays 3, raw gap amplifies, normalized gap is invariant, exact scale 27/20 is checked for the n >= 4 formula family, the certificate is rejected, the placeholder `True` theorem has been replaced by an indexed theorem interface, formal readiness is blocked at 6/9 gates passed, the contract gate passes 5/8 while failing K4/K5/K8, the scaffold gate passes 6/8 while failing S7/S8, and the CI template handoff passes 7/8 while failing C8 for missing active remote run evidence. | Run the new B9 Lean/Lake CI template after activation under `.github/workflows/`, or use an equivalent local Lean4/Lake environment, record the run artifact, make the scaffolded module check, refresh the B9 gates under that toolchain, and then formalize support-size, uniform-scaling, spectral-width, and normalized-gap invariance lemmas for all n >= 4. | Keep only as a negative-result track unless a restricted theorem target becomes precise and independently proof-checked. |
 | B10 | Boundary of BQP | B10-T1 now has B3 negative boundary evidence plus B5 row-contract, W2, W3, W1 acceptance, W1 denominator-engine v0, and canonical residual blocker guardrails: B5 T-B5-006b production contract failure, T-B5-006d row-contract harness, T-B5-006e seeded-pressure replacement audit, T-B5-006f response-oracle ledger, T-B5-006g acceptance gate, T-B5-006h denominator-engine v0, and T-B5-006i canonical residual blocker. W2 finds 0 deployable replacements; W3 constructs no response oracle; W1 acceptance fails D3-D9; W1 denominator v0 fails E4-E7; canonical residual blocker fails C3/C4/C5/C7 and emits 4 PR packets; W1 implementation contract fails K5-K9 while declaring the 17-key solver row schema; W1 prototype environment scout maps 9 prototype trace rows but accepts 0 production canonical/residual rows; W1 production-row intake template gate emits 9 row templates, 8 production-required keys, 72 missing production keys, and 0 submitted/accepted rows. B10-T2 still lacks real backend or hardware verifier evidence. | Prioritize T-B10-014 through an actual B5 W1 production DMRG/MPS denominator preserving the row-contract hash and satisfying T-B5-006g/T-B5-006h/T-B5-006i/T-B5-006j/T-B5-006k/T-B5-006l; reopen B3 only if M5-M9 are replaced by same-access evidence, and reopen W3 only with a real response oracle. | Keep B10-T1 negative unless B5 production denominators or a response oracle beat the full ladder without hidden access advantages, or B3 overturns the negative boundary. |
 
+**B9 R188 update.** `T-B9-004o/T-B10-016g` replaces the stale
+all-`n` construction blocker with a checked structural result. Lean defines one
+open-chain term per `Fin n` center, proves all support indices in range,
+boundary support cardinality two, maximum locality three, an interior
+three-site support for every `n >= 4`, and support preservation under uniform
+`27/20` coefficient reweighting. Lean itself emits the `n=4,5,6` support
+profiles, and the certificate plus independent portfolio audit pass `12/12`
+with zero warnings. B9 maturity moves to `21`, but matrix semantics, the finite
+Hamiltonian operator, operator-derived gap/width, Quantum PCP, NLTS, BQP
+separation, solved-frontier status, and new credit all remain open or zero.
+The next gate is `T-B9-005`: construct the Pauli matrix semantics and spectral
+bridge without injecting the desired ratio as an assumption.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**

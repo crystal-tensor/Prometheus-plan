@@ -1006,14 +1006,25 @@ algebraic theorem, not the open-boundary Hamiltonian construction for every
 `n >= 4`, a Quantum PCP or NLTS theorem, a global no-go theorem, or a B9
 solution.
 
-**Remaining path to a serious solution:** formalize the open-boundary
-cluster-stabilizer Hamiltonian and support sets for all `n >= 4`; prove the
-family-level locality and uniform-reweight identities; instantiate R187 from
-that construction instead of abstract spectral summaries; connect the finite
-rows to generated formal objects; then decide whether the checked restricted
-statement informs the full conjecture.
+T-B9-004o/T-B10-016g adds R188, the checked all-`n` structural Hamiltonian
+certificate. The new Lean module defines one open-chain term per `Fin n`
+center with an explicit center `X` site, neighboring `Z` sites, and real
+coefficient. It proves term count `n`, support indices in `0..n-1`, locality at
+most 3 for every term, exact two-site boundary supports, an attained
+three-site interior support for every `n >= 4`, and support preservation under
+`27/20` reweighting. Lean itself emits the `n=4,5,6` support-card rows, and the
+same construction instantiates R187. The certificate and independent audit
+pass 12/12 requirements with zero module warnings. This is a formal structural
+Hamiltonian and locality theorem, not a matrix-level Pauli operator or an
+operator-derived spectral theorem.
 
-**Current internal maturity:** 18/100.
+**Remaining path to a serious solution:** define Pauli-word matrix semantics
+and the finite-dimensional Hamiltonian operator; prove that coefficient
+reweighting gives `H'_n = (27/20) H_n`; derive gap and width scaling from that
+operator rather than abstract spectral summaries; preserve the generated-row
+bridge; then decide whether the restricted result informs the full conjecture.
+
+**Current internal maturity:** 21/100.
 
 ## B10: Mapping the Boundary of BQP
 

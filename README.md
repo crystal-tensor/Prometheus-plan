@@ -95,9 +95,29 @@ audit passes all `10/10` requirements. Protocol `02eb72cb...`; Lean module
 proof-assistant-checked restricted algebraic theorem, not the open-boundary
 cluster-stabilizer Hamiltonian construction for every `n >= 4`, a Quantum PCP
 or NLTS theorem, a global gap-amplification no-go result, a BQP separation, or
-a solved B9 frontier. New credit remains zero. The next gate is to define the
-all-`n` Hamiltonian family and support sets in Lean and instantiate the
-certificate from that construction rather than from abstract spectral inputs.
+a solved B9 frontier. New credit remains zero.
+
+R188 crosses the next structural boundary. A new Lean module defines one
+open-chain term for every `Fin n` center, with an explicit center `X` site,
+neighboring `Z` sites, and a real coefficient. Lean proves that the family has
+exactly `n` terms, every support index lies in `0..n-1`, every support has
+cardinality at most three, the two boundary supports have cardinality two, and
+an interior support attains cardinality three for every `n >= 4`. Uniform
+coefficient reweighting by `27/20` preserves every support, and the structural
+locality facts instantiate the R187 rejection theorem.
+
+The R188 module emits its own finite support profiles: `n=4` gives
+`[2,3,3,2]`, `n=5` gives `[2,3,3,3,2]`, and `n=6` gives
+`[2,3,3,3,3,2]`. The certificate and independent portfolio audit pass all
+`12/12` requirements with three zero toolchain return codes and no warnings.
+Protocol `f5590112...`; Lean module `7e9bd8fd...`; transcript `f4bab92a...`;
+payload `da2e1352...`. This is a checked all-`n` structural Hamiltonian and
+locality certificate. Pauli terms are not yet interpreted as matrices, and the
+spectral gap and width are not derived from a formal operator. It is not a
+Quantum PCP or NLTS theorem, a global no-go result, a BQP separation, or a
+solved B9 frontier. New credit remains zero. The next gate is formal operator
+semantics and a proof that coefficient scaling induces the spectral inputs
+consumed by R187.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

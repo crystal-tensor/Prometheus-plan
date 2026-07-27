@@ -1,0 +1,606 @@
+{
+  "claim_boundary": {
+    "not_supported": [
+      "Pauli operators are not yet interpreted as matrices on a Hilbert space.",
+      "The spectral gap and width are not yet derived from the formal Hamiltonian operator.",
+      "No Quantum PCP, NLTS, global no-go, BQP separation, solved-frontier, or new-credit claim is supported."
+    ],
+    "supported": [
+      "Lean defines one open-chain term for each Fin n center.",
+      "Lean proves every support index is in range and every support has cardinality at most three.",
+      "For n >= 4, Lean proves an interior term attains locality three.",
+      "Lean proves 27/20 coefficient reweighting preserves every term support.",
+      "The formal object emits the frozen n=4,5,6 support-card rows.",
+      "The structural locality facts instantiate the checked R187 rejection."
+    ]
+  },
+  "execution": {
+    "module_warning_count": 0,
+    "probes": [
+      {
+        "command": [
+          "lean",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lean (version 4.12.0, arm64-apple-darwin23.6.0, commit dc2533473114, Release)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lake version 5.0.0-dc25334 (Lean version 4.12.0)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "B9/ClusterStabilizer/OpenChainHamiltonian.lean"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "R188_PROFILE n=4 support_cards=[2, 3, 3, 2]\nR188_PROFILE n=5 support_cards=[2, 3, 3, 3, 2]\nR188_PROFILE n=6 support_cards=[2, 3, 3, 3, 3, 2]\n",
+        "timed_out": false
+      }
+    ],
+    "transcript_path": "results/B9_R188_open_chain_formal_transcript_v1.txt",
+    "transcript_sha256": "f4bab92a511692c2803018745de4948d2335c47ce8351b03981a15d753d22052"
+  },
+  "experiment_id": "B9-R188-open-chain-all-n-structural-certificate",
+  "generated_profiles": {
+    "4": [
+      2,
+      3,
+      3,
+      2
+    ],
+    "5": [
+      2,
+      3,
+      3,
+      3,
+      2
+    ],
+    "6": [
+      2,
+      3,
+      3,
+      3,
+      3,
+      2
+    ]
+  },
+  "last_updated": "2026-07-27",
+  "method": "b9_r188_open_chain_all_n_structural_certificate_v1",
+  "payload_sha256": "da2e1352dceeb6f075e67c3c0ff96078c235008164fdad1bcd9da8515404005e",
+  "profile_checks": {
+    "all_rows_checked": true,
+    "rows": [
+      {
+        "boundary_cards": [
+          2,
+          2
+        ],
+        "checked": true,
+        "interior_cards": [
+          3,
+          3
+        ],
+        "max_locality": 3,
+        "n": 4,
+        "support_cards": [
+          2,
+          3,
+          3,
+          2
+        ],
+        "term_count": 4
+      },
+      {
+        "boundary_cards": [
+          2,
+          2
+        ],
+        "checked": true,
+        "interior_cards": [
+          3,
+          3,
+          3
+        ],
+        "max_locality": 3,
+        "n": 5,
+        "support_cards": [
+          2,
+          3,
+          3,
+          3,
+          2
+        ],
+        "term_count": 5
+      },
+      {
+        "boundary_cards": [
+          2,
+          2
+        ],
+        "checked": true,
+        "interior_cards": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "max_locality": 3,
+        "n": 6,
+        "support_cards": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          2
+        ],
+        "term_count": 6
+      }
+    ]
+  },
+  "protocol": {
+    "acceptance": {
+      "generated_profile_count": 3,
+      "lake_version_returncode": 0,
+      "lean_version_returncode": 0,
+      "module_check_returncode": 0,
+      "module_check_warning_count": 0,
+      "requirement_pass_count": 12
+    },
+    "claim_boundary": {
+      "all_n_support_and_locality_theorems": true,
+      "bqp_separation": false,
+      "finite_rows_generated_by_lean": true,
+      "formal_all_n_structural_hamiltonian_specification": true,
+      "global_gap_amplification_impossibility": false,
+      "new_credit_delta": 0,
+      "nlts_theorem": false,
+      "operator_matrix_semantics_formalized": false,
+      "quantum_pcp_theorem": false,
+      "r187_instantiated_with_structural_locality": true,
+      "spectral_gap_derived_from_operator": false
+    },
+    "domain": "integer n >= 4 for exact maximum locality and R187 instantiation",
+    "expected_profiles": {
+      "4": [
+        2,
+        3,
+        3,
+        2
+      ],
+      "5": [
+        2,
+        3,
+        3,
+        3,
+        2
+      ],
+      "6": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2
+      ]
+    },
+    "experiment_id": "B9-R188-open-chain-all-n-structural-certificate",
+    "forbidden_source_tokens": [
+      "sorry",
+      "axiom"
+    ],
+    "generated_profile_ns": [
+      4,
+      5,
+      6
+    ],
+    "pinned_toolchain": "leanprover/lean4:v4.12.0",
+    "r187_source_module": "B9/ClusterStabilizer/WidthLocality.lean",
+    "required_definitions": [
+      "openChainZSites",
+      "openChainTerm",
+      "openChainSupport",
+      "OpenChainHamiltonian",
+      "openChainHamiltonian",
+      "openChainSupportCardProfile",
+      "reweightOpenChainTerm",
+      "reweightedOpenChainHamiltonian",
+      "openChainBeforeSummary",
+      "openChainAfterSummary"
+    ],
+    "required_theorems": [
+      "open_chain_term_count",
+      "open_chain_support_subset_range",
+      "open_chain_support_card_le_three",
+      "open_chain_left_boundary_support",
+      "open_chain_interior_support",
+      "open_chain_right_boundary_support",
+      "open_chain_interior_one_attains_three",
+      "open_chain_support_card_profile_length",
+      "reweight_open_chain_term_support",
+      "open_chain_reweight_preserves_every_support",
+      "open_chain_summaries_are_uniformly_scaled",
+      "open_chain_summaries_preserve_locality",
+      "open_chain_uniform_reweight_instantiates_r187"
+    ],
+    "source_module": "B9/ClusterStabilizer/OpenChainHamiltonian.lean",
+    "target": "Construct the open-boundary cluster-stabilizer term family for every n, prove all-n support and locality facts, preserve support under 27/20 reweighting, and instantiate R187 while leaving operator spectra open.",
+    "track": [
+      "B9",
+      "B10"
+    ]
+  },
+  "protocol_hash": "f5590112fa045be63452a0ad9a70d8259812c524d45ffb63a42149cb0b78c591",
+  "requirements": [
+    {
+      "evidence": {
+        "claim_boundary": {
+          "all_n_support_and_locality_theorems": true,
+          "bqp_separation": false,
+          "finite_rows_generated_by_lean": true,
+          "formal_all_n_structural_hamiltonian_specification": true,
+          "global_gap_amplification_impossibility": false,
+          "new_credit_delta": 0,
+          "nlts_theorem": false,
+          "operator_matrix_semantics_formalized": false,
+          "quantum_pcp_theorem": false,
+          "r187_instantiated_with_structural_locality": true,
+          "spectral_gap_derived_from_operator": false
+        },
+        "protocol_hash": "f5590112fa045be63452a0ad9a70d8259812c524d45ffb63a42149cb0b78c591"
+      },
+      "label": "Protocol is content-addressed and broad frontier claims remain false",
+      "passed": true,
+      "requirement_id": "R1"
+    },
+    {
+      "evidence": {
+        "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+        "lakefile_sha256": "4d24f18967fce6e70b985da8aa6d9501297625642bfc945d629780d85b0993bd",
+        "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
+        "r187_module_sha256": "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3"
+      },
+      "label": "Pinned Lean toolchain, Lake project, manifest, and R187 source exist",
+      "passed": true,
+      "requirement_id": "R2"
+    },
+    {
+      "evidence": {
+        "forbidden_hits": {
+          "axiom": 0,
+          "sorry": 0
+        }
+      },
+      "label": "The new Lean source contains no sorry or axiom escape hatch",
+      "passed": true,
+      "requirement_id": "R3"
+    },
+    {
+      "evidence": {
+        "formal_object_fields_found": true,
+        "structure_names": [
+          "OpenChainTerm"
+        ]
+      },
+      "label": "The formal term object records center X, neighboring Z support, and coefficient",
+      "passed": true,
+      "requirement_id": "R4"
+    },
+    {
+      "evidence": {
+        "definition_names": [
+          "OpenChainTerm.support",
+          "openChainZSites",
+          "openChainTerm",
+          "openChainSupport",
+          "OpenChainHamiltonian",
+          "openChainHamiltonian",
+          "openChainSupportCardProfile",
+          "reweightOpenChainTerm",
+          "reweightedOpenChainHamiltonian",
+          "openChainBeforeSummary",
+          "openChainAfterSummary"
+        ],
+        "required_definitions": [
+          "openChainZSites",
+          "openChainTerm",
+          "openChainSupport",
+          "OpenChainHamiltonian",
+          "openChainHamiltonian",
+          "openChainSupportCardProfile",
+          "reweightOpenChainTerm",
+          "reweightedOpenChainHamiltonian",
+          "openChainBeforeSummary",
+          "openChainAfterSummary"
+        ]
+      },
+      "label": "All declared construction definitions are present",
+      "passed": true,
+      "requirement_id": "R5"
+    },
+    {
+      "evidence": {
+        "required_theorems": [
+          "open_chain_term_count",
+          "open_chain_support_subset_range",
+          "open_chain_support_card_le_three",
+          "open_chain_left_boundary_support",
+          "open_chain_interior_support",
+          "open_chain_right_boundary_support",
+          "open_chain_interior_one_attains_three",
+          "open_chain_support_card_profile_length",
+          "reweight_open_chain_term_support",
+          "open_chain_reweight_preserves_every_support",
+          "open_chain_summaries_are_uniformly_scaled",
+          "open_chain_summaries_preserve_locality",
+          "open_chain_uniform_reweight_instantiates_r187"
+        ],
+        "theorem_names": [
+          "open_chain_term_count",
+          "open_chain_support_subset_range",
+          "open_chain_support_card_le_three",
+          "open_chain_left_boundary_support",
+          "open_chain_interior_support",
+          "open_chain_right_boundary_support",
+          "open_chain_interior_one_attains_three",
+          "open_chain_support_card_profile_length",
+          "reweight_open_chain_term_support",
+          "open_chain_reweight_preserves_every_support",
+          "open_chain_summaries_are_uniformly_scaled",
+          "open_chain_summaries_preserve_locality",
+          "open_chain_uniform_reweight_instantiates_r187"
+        ]
+      },
+      "label": "All declared structural and bridge theorems are present",
+      "passed": true,
+      "requirement_id": "R6"
+    },
+    {
+      "evidence": {
+        "all_n_signatures_found": true
+      },
+      "label": "All-n support, locality upper bound, and attained-locality signatures are explicit",
+      "passed": true,
+      "requirement_id": "R7"
+    },
+    {
+      "evidence": {
+        "support_reweight_binding_found": true
+      },
+      "label": "The 27/20 reweighting changes coefficients while preserving every support",
+      "passed": true,
+      "requirement_id": "R8"
+    },
+    {
+      "evidence": {
+        "r187_bridge_binding_found": true
+      },
+      "label": "The structural family explicitly instantiates the checked R187 theorem",
+      "passed": true,
+      "requirement_id": "R9"
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0,
+          0,
+          0
+        ],
+        "timed_out": [
+          false,
+          false,
+          false
+        ],
+        "warning_count": 0
+      },
+      "label": "Lean, Lake, and the all-n module all return zero with no warnings",
+      "passed": true,
+      "requirement_id": "R10"
+    },
+    {
+      "evidence": {
+        "expected_profiles": {
+          "4": [
+            2,
+            3,
+            3,
+            2
+          ],
+          "5": [
+            2,
+            3,
+            3,
+            3,
+            2
+          ],
+          "6": [
+            2,
+            3,
+            3,
+            3,
+            3,
+            2
+          ]
+        },
+        "profiles": {
+          "4": [
+            2,
+            3,
+            3,
+            2
+          ],
+          "5": [
+            2,
+            3,
+            3,
+            3,
+            2
+          ],
+          "6": [
+            2,
+            3,
+            3,
+            3,
+            3,
+            2
+          ]
+        }
+      },
+      "label": "Lean emits exactly the frozen n=4,5,6 support-card profiles",
+      "passed": true,
+      "requirement_id": "R11"
+    },
+    {
+      "evidence": {
+        "all_rows_checked": true,
+        "rows": [
+          {
+            "boundary_cards": [
+              2,
+              2
+            ],
+            "checked": true,
+            "interior_cards": [
+              3,
+              3
+            ],
+            "max_locality": 3,
+            "n": 4,
+            "support_cards": [
+              2,
+              3,
+              3,
+              2
+            ],
+            "term_count": 4
+          },
+          {
+            "boundary_cards": [
+              2,
+              2
+            ],
+            "checked": true,
+            "interior_cards": [
+              3,
+              3,
+              3
+            ],
+            "max_locality": 3,
+            "n": 5,
+            "support_cards": [
+              2,
+              3,
+              3,
+              3,
+              2
+            ],
+            "term_count": 5
+          },
+          {
+            "boundary_cards": [
+              2,
+              2
+            ],
+            "checked": true,
+            "interior_cards": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "max_locality": 3,
+            "n": 6,
+            "support_cards": [
+              2,
+              3,
+              3,
+              3,
+              3,
+              2
+            ],
+            "term_count": 6
+          }
+        ]
+      },
+      "label": "Generated rows have n terms, boundary locality 2, interior locality 3, and maximum 3",
+      "passed": true,
+      "requirement_id": "R12"
+    }
+  ],
+  "source": {
+    "definition_names": [
+      "OpenChainTerm.support",
+      "openChainZSites",
+      "openChainTerm",
+      "openChainSupport",
+      "OpenChainHamiltonian",
+      "openChainHamiltonian",
+      "openChainSupportCardProfile",
+      "reweightOpenChainTerm",
+      "reweightedOpenChainHamiltonian",
+      "openChainBeforeSummary",
+      "openChainAfterSummary"
+    ],
+    "forbidden_hits": {
+      "axiom": 0,
+      "sorry": 0
+    },
+    "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+    "lakefile_sha256": "4d24f18967fce6e70b985da8aa6d9501297625642bfc945d629780d85b0993bd",
+    "lean_module": "B9/ClusterStabilizer/OpenChainHamiltonian.lean",
+    "lean_module_sha256": "7e9bd8fd997ed44dec568504dbdd0af8b9e7e1109f64c49be945eb2f28c775ee",
+    "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
+    "r187_module": "B9/ClusterStabilizer/WidthLocality.lean",
+    "r187_module_sha256": "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3",
+    "structure_names": [
+      "OpenChainTerm"
+    ],
+    "theorem_names": [
+      "open_chain_term_count",
+      "open_chain_support_subset_range",
+      "open_chain_support_card_le_three",
+      "open_chain_left_boundary_support",
+      "open_chain_interior_support",
+      "open_chain_right_boundary_support",
+      "open_chain_interior_one_attains_three",
+      "open_chain_support_card_profile_length",
+      "reweight_open_chain_term_support",
+      "open_chain_reweight_preserves_every_support",
+      "open_chain_summaries_are_uniformly_scaled",
+      "open_chain_summaries_preserve_locality",
+      "open_chain_uniform_reweight_instantiates_r187"
+    ]
+  },
+  "status": "checked_all_n_structural_hamiltonian_support_certificate_complete_operator_spectral_bridge_open",
+  "summary": {
+    "all_n_support_and_locality_theorems": true,
+    "bqp_separation": false,
+    "failed_requirement_ids": [],
+    "finite_rows_generated_by_lean": true,
+    "formal_all_n_structural_hamiltonian_specification": true,
+    "global_gap_amplification_impossibility": false,
+    "new_credit_delta": 0,
+    "nlts_theorem": false,
+    "operator_matrix_semantics_formalized": false,
+    "quantum_pcp_theorem": false,
+    "r187_instantiated_with_structural_locality": true,
+    "requirement_count": 12,
+    "requirements_failed": 0,
+    "requirements_passed": 12,
+    "spectral_gap_derived_from_operator": false
+  },
+  "version": "1.0"
+}
