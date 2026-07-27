@@ -993,14 +993,27 @@ output is recorded. This makes the next formalization work assignable and
 auditable, but it remains an open contract and scaffold, not a checked theorem
 or Quantum PCP result.
 
-**Remaining path to a serious solution:** activate the new CI template under
-GitHub Actions or run an equivalent local Lean4/Lake environment; record the
-run artifact; make the scaffolded theorem check inside that project; formalize the open-boundary
-cluster-stabilizer family for all n >= 4; prove support-size,
-uniform-scaling, spectral-width, and normalized-gap invariance lemmas; then
-decide whether the checked statement informs the full conjecture.
+T-B9-004n/T-B10-016f adds the R187 nonzero-scale derived certificate. The Lean
+source no longer accepts `hRatio`, the normalized-gap equality it is supposed
+to justify. Instead, Lean proves the concrete `27/20` scale is nonzero and
+greater than one, derives computed normalized-gap and spectral-width-ratio
+invariance from uniform scaling, derives raw-gap amplification from a positive
+source gap, and combines those facts with locality preservation. The pinned
+Lean/Lake transcript has three zero return codes and no warnings; the source
+contains zero `hRatio`, `sorry`, or `axiom` tokens; the certificate and
+portfolio audit pass 10/10 requirements. This is a checked restricted
+algebraic theorem, not the open-boundary Hamiltonian construction for every
+`n >= 4`, a Quantum PCP or NLTS theorem, a global no-go theorem, or a B9
+solution.
 
-**Current internal maturity:** 15/100.
+**Remaining path to a serious solution:** formalize the open-boundary
+cluster-stabilizer Hamiltonian and support sets for all `n >= 4`; prove the
+family-level locality and uniform-reweight identities; instantiate R187 from
+that construction instead of abstract spectral summaries; connect the finite
+rows to generated formal objects; then decide whether the checked restricted
+statement informs the full conjecture.
+
+**Current internal maturity:** 18/100.
 
 ## B10: Mapping the Boundary of BQP
 

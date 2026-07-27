@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 15, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 18, 'B10': 53}
 
 ## Technical Resolution Program
 

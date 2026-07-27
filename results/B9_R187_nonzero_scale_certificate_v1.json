@@ -1,0 +1,298 @@
+{
+  "claim_boundary": {
+    "not_supported": [
+      "The open-boundary cluster-stabilizer Hamiltonian is not yet constructed for all n in Lean.",
+      "The finite JSON rows are not yet generated from the formal construction.",
+      "No Quantum PCP, NLTS, global no-go, BQP separation, or solved-frontier claim is supported."
+    ],
+    "supported": [
+      "Lean derives normalized-gap invariance from nonzero uniform scaling.",
+      "Lean derives spectral-width-ratio invariance from the same nonzero scale.",
+      "Lean derives raw-gap amplification from scale > 1 and a positive source gap.",
+      "The restricted algebraic rejection theorem is proof-assistant checked."
+    ]
+  },
+  "execution": {
+    "module_warning_count": 0,
+    "probes": [
+      {
+        "command": [
+          "lean",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lean (version 4.12.0, arm64-apple-darwin23.6.0, commit dc2533473114, Release)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lake version 5.0.0-dc25334 (Lean version 4.12.0)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "B9/ClusterStabilizer/WidthLocality.lean"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "",
+        "timed_out": false
+      }
+    ],
+    "transcript_path": "results/B9_R187_nonzero_scale_transcript_v1.txt",
+    "transcript_sha256": "e00f06e295fa0c4e41955e78263de54656ed06fc4ae8e9e83a4700735c85bcac"
+  },
+  "experiment_id": "B9-R187-nonzero-scale-derived-certificate",
+  "last_updated": "2026-07-27",
+  "method": "b9_r187_nonzero_scale_derived_certificate_v1",
+  "payload_sha256": "af9bc4a9aeee7bb17d0c01e79e0a264730ef47b0dcd3ae34f0fe78601855bd7e",
+  "protocol": {
+    "acceptance": {
+      "lake_version_returncode": 0,
+      "lean_version_returncode": 0,
+      "module_check_returncode": 0,
+      "module_check_warning_count": 0,
+      "requirement_pass_count": 10
+    },
+    "claim_boundary": {
+      "bqp_separation": false,
+      "formal_all_n_hamiltonian_theorem": false,
+      "global_gap_amplification_impossibility": false,
+      "new_credit_delta": 0,
+      "nlts_theorem": false,
+      "quantum_pcp_theorem": false,
+      "restricted_checked_algebraic_theorem": true
+    },
+    "experiment_id": "B9-R187-nonzero-scale-derived-certificate",
+    "forbidden_source_tokens": [
+      "hRatio",
+      "sorry",
+      "axiom"
+    ],
+    "pinned_toolchain": "leanprover/lean4:v4.12.0",
+    "required_definitions": [
+      "UniformScaleFactor",
+      "IsUniformlyScaled",
+      "ComputedNormalizedGap",
+      "ComputedNormalizedGapInvariant",
+      "SpectralWidthPreserved"
+    ],
+    "required_theorems": [
+      "uniform_scale_factor_nonzero",
+      "uniform_scale_factor_gt_one",
+      "uniform_scale_preserves_computed_normalized_gap",
+      "uniform_scale_raw_gap_amplifies_from_positive_gap",
+      "uniform_scale_preserves_spectral_width_ratio",
+      "uniform_reweight_derived_rejection"
+    ],
+    "source_module": "B9/ClusterStabilizer/WidthLocality.lean",
+    "target": "Replace conclusion-shaped ratio assumptions with checked derivations from nonzero uniform scaling and positive source gap.",
+    "track": [
+      "B9",
+      "B10"
+    ]
+  },
+  "protocol_hash": "02eb72cbfd33da8a35bb9424114dfcaed54aca507255207282974d8e837e2cc8",
+  "requirements": [
+    {
+      "evidence": {
+        "claim_boundary": {
+          "bqp_separation": false,
+          "formal_all_n_hamiltonian_theorem": false,
+          "global_gap_amplification_impossibility": false,
+          "new_credit_delta": 0,
+          "nlts_theorem": false,
+          "quantum_pcp_theorem": false,
+          "restricted_checked_algebraic_theorem": true
+        },
+        "protocol_hash": "02eb72cbfd33da8a35bb9424114dfcaed54aca507255207282974d8e837e2cc8"
+      },
+      "label": "Protocol is content-addressed and keeps all broad frontier claims false",
+      "passed": true,
+      "requirement_id": "R1"
+    },
+    {
+      "evidence": {
+        "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+        "lakefile_sha256": "4d24f18967fce6e70b985da8aa6d9501297625642bfc945d629780d85b0993bd",
+        "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5"
+      },
+      "label": "Pinned Lean toolchain, Lake project, and manifest are present",
+      "passed": true,
+      "requirement_id": "R2"
+    },
+    {
+      "evidence": {
+        "forbidden_hits": {
+          "axiom": 0,
+          "hRatio": 0,
+          "sorry": 0
+        }
+      },
+      "label": "The Lean source contains no sorry or axiom escape hatch",
+      "passed": true,
+      "requirement_id": "R3"
+    },
+    {
+      "evidence": {
+        "hRatio_hits": 0
+      },
+      "label": "The conclusion-shaped hRatio assumption is absent",
+      "passed": true,
+      "requirement_id": "R4"
+    },
+    {
+      "evidence": {
+        "definition_names": [
+          "RawGapAmplifies",
+          "NormalizedGapInvariant",
+          "LocalityPreserved",
+          "HasSupportSize",
+          "MaxLocalityPreserved",
+          "UniformScaleFactor",
+          "IsUniformlyScaled",
+          "ComputedNormalizedGap",
+          "ComputedNormalizedGapInvariant",
+          "SpectralWidthPreserved"
+        ],
+        "required_definitions": [
+          "UniformScaleFactor",
+          "IsUniformlyScaled",
+          "ComputedNormalizedGap",
+          "ComputedNormalizedGapInvariant",
+          "SpectralWidthPreserved"
+        ]
+      },
+      "label": "All declared definitions are present",
+      "passed": true,
+      "requirement_id": "R5"
+    },
+    {
+      "evidence": {
+        "required_theorems": [
+          "uniform_scale_factor_nonzero",
+          "uniform_scale_factor_gt_one",
+          "uniform_scale_preserves_computed_normalized_gap",
+          "uniform_scale_raw_gap_amplifies_from_positive_gap",
+          "uniform_scale_preserves_spectral_width_ratio",
+          "uniform_reweight_derived_rejection"
+        ],
+        "theorem_names": [
+          "uniform_scale_raw_gap_is_not_certificate",
+          "cluster_stabilizer_open_uniform_reweight_obligation",
+          "locality_in_support_set",
+          "uniform_scale_preserves_max_locality",
+          "uniform_scale_factor_nonzero",
+          "uniform_scale_factor_gt_one",
+          "uniform_scale_preserves_computed_normalized_gap",
+          "uniform_scale_raw_gap_amplifies_from_positive_gap",
+          "uniform_scale_preserves_spectral_width_ratio",
+          "uniform_reweight_derived_rejection"
+        ]
+      },
+      "label": "All declared derived theorems are present",
+      "passed": true,
+      "requirement_id": "R6"
+    },
+    {
+      "evidence": {
+        "derived_signature_found": true
+      },
+      "label": "The final rejection theorem exposes scale, locality, and positive-gap inputs",
+      "passed": true,
+      "requirement_id": "R7"
+    },
+    {
+      "evidence": {
+        "returncode": 0,
+        "stdout": "Lean (version 4.12.0, arm64-apple-darwin23.6.0, commit dc2533473114, Release)"
+      },
+      "label": "Pinned Lean 4.12.0 reports successfully",
+      "passed": true,
+      "requirement_id": "R8"
+    },
+    {
+      "evidence": {
+        "returncode": 0,
+        "stdout": "Lake version 5.0.0-dc25334 (Lean version 4.12.0)"
+      },
+      "label": "Lake reports successfully",
+      "passed": true,
+      "requirement_id": "R9"
+    },
+    {
+      "evidence": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "",
+        "warning_count": 0
+      },
+      "label": "The source module checks with zero warnings",
+      "passed": true,
+      "requirement_id": "R10"
+    }
+  ],
+  "source": {
+    "definition_count": 10,
+    "definition_names": [
+      "RawGapAmplifies",
+      "NormalizedGapInvariant",
+      "LocalityPreserved",
+      "HasSupportSize",
+      "MaxLocalityPreserved",
+      "UniformScaleFactor",
+      "IsUniformlyScaled",
+      "ComputedNormalizedGap",
+      "ComputedNormalizedGapInvariant",
+      "SpectralWidthPreserved"
+    ],
+    "forbidden_hits": {
+      "axiom": 0,
+      "hRatio": 0,
+      "sorry": 0
+    },
+    "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+    "lakefile_sha256": "4d24f18967fce6e70b985da8aa6d9501297625642bfc945d629780d85b0993bd",
+    "lean_module": "B9/ClusterStabilizer/WidthLocality.lean",
+    "lean_module_sha256": "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3",
+    "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
+    "theorem_count": 10,
+    "theorem_names": [
+      "uniform_scale_raw_gap_is_not_certificate",
+      "cluster_stabilizer_open_uniform_reweight_obligation",
+      "locality_in_support_set",
+      "uniform_scale_preserves_max_locality",
+      "uniform_scale_factor_nonzero",
+      "uniform_scale_factor_gt_one",
+      "uniform_scale_preserves_computed_normalized_gap",
+      "uniform_scale_raw_gap_amplifies_from_positive_gap",
+      "uniform_scale_preserves_spectral_width_ratio",
+      "uniform_reweight_derived_rejection"
+    ]
+  },
+  "status": "checked_derived_algebraic_certificate_complete_all_n_hamiltonian_open",
+  "summary": {
+    "bqp_separation": false,
+    "failed_requirement_ids": [],
+    "formal_all_n_hamiltonian_theorem": false,
+    "global_gap_amplification_impossibility": false,
+    "hRatio_assumption_removed": true,
+    "new_credit_delta": 0,
+    "nlts_theorem": false,
+    "quantum_pcp_theorem": false,
+    "requirement_count": 10,
+    "requirements_failed": 0,
+    "requirements_passed": 10,
+    "restricted_checked_algebraic_theorem": true
+  },
+  "version": "1.0"
+}

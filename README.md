@@ -79,6 +79,26 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
+The newest B9 result is R187, a checked nonzero-scale derived certificate. The
+previous Lean interface accepted a conclusion-shaped `hRatio` equality as an
+input. R187 removes that assumption entirely. Under pinned Lean 4.12.0 and
+Lake 5.0.0, the module now proves that the concrete `27/20` scale is nonzero
+and greater than one, derives computed normalized-gap invariance and
+spectral-width-ratio invariance from uniform scaling, derives raw-gap
+amplification from a positive source gap, and combines those facts with
+locality preservation in one rejection theorem.
+
+The R187 source contains zero `hRatio`, `sorry`, or `axiom` tokens; all three
+toolchain commands return zero with no warnings, and the independent portfolio
+audit passes all `10/10` requirements. Protocol `02eb72cb...`; Lean module
+`2c759095...`; transcript `e00f06e2...`; payload `af9bc4a9...`. This is a
+proof-assistant-checked restricted algebraic theorem, not the open-boundary
+cluster-stabilizer Hamiltonian construction for every `n >= 4`, a Quantum PCP
+or NLTS theorem, a global gap-amplification no-go result, a BQP separation, or
+a solved B9 frontier. New credit remains zero. The next gate is to define the
+all-`n` Hamiltonian family and support sets in Lean and instantiate the
+certificate from that construction rather than from abstract spectral inputs.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

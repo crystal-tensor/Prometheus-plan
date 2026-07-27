@@ -415,6 +415,29 @@ current_results:
     caveat: acceptance_packet_only_no_checked_transcript_or_quantum_pcp_claim
     result: ../results/B9_checked_transcript_acceptance_packet_gate_v0.json
     markdown_report: ../research/B9_checked_transcript_acceptance_packet_gate.md
+  r187_nonzero_scale_derived_certificate_v1:
+    status: checked_derived_algebraic_certificate_complete_all_n_hamiltonian_open
+    method: b9_r187_nonzero_scale_derived_certificate_v1
+    source: checked_run_acquisition_gate_v0
+    experiment_id: B9-R187-nonzero-scale-derived-certificate
+    protocol_hash: 02eb72cbfd33da8a35bb9424114dfcaed54aca507255207282974d8e837e2cc8
+    payload_sha256: af9bc4a9aeee7bb17d0c01e79e0a264730ef47b0dcd3ae34f0fe78601855bd7e
+    lean_module_sha256: 2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3
+    transcript_sha256: e00f06e295fa0c4e41955e78263de54656ed06fc4ae8e9e83a4700735c85bcac
+    requirement_count: 10
+    requirements_passed: 10
+    hRatio_assumption_removed: true
+    restricted_checked_algebraic_theorem: true
+    formal_all_n_hamiltonian_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    global_gap_amplification_impossibility: false
+    bqp_separation: false
+    new_credit_delta: 0
+    result: ../results/B9_R187_nonzero_scale_certificate_v1.json
+    markdown_report: ../research/B9_R187_nonzero_scale_certificate.md
+    checked_transcript: ../results/B9_R187_nonzero_scale_transcript_v1.txt
+    lean_module: ../B9/ClusterStabilizer/WidthLocality.lean
 prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -431,4 +454,5 @@ prototype_artifacts:
   checked_transcript_provenance_manifest_gate: ../tools/b9_checked_transcript_provenance_manifest_gate.py
   checked_transcript_replay_validation_manifest_gate: ../tools/b9_checked_transcript_replay_validation_manifest_gate.py
   checked_transcript_acceptance_packet_gate: ../tools/b9_checked_transcript_acceptance_packet_gate.py
+  r187_nonzero_scale_derived_certificate: ../tools/b9_r187_nonzero_scale_certificate.py
   prototype_notes: ../research/B9_prototype_notes.md

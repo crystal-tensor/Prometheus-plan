@@ -109,6 +109,208 @@ def path_exists_from(base: Path, maybe_relative: str) -> bool:
     return (base / maybe_relative).resolve().exists()
 
 
+def audit_b9_r187(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R187 derived nonzero-scale certificate."""
+    expected_status = (
+        "checked_derived_algebraic_certificate_complete_all_n_hamiltonian_open"
+    )
+    expected_method = "b9_r187_nonzero_scale_derived_certificate_v1"
+    expected_protocol_hash = (
+        "02eb72cbfd33da8a35bb9424114dfcaed54aca507255207282974d8e837e2cc8"
+    )
+    expected_payload_hash = (
+        "af9bc4a9aeee7bb17d0c01e79e0a264730ef47b0dcd3ae34f0fe78601855bd7e"
+    )
+    expected_module_hash = (
+        "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3"
+    )
+    expected_transcript_hash = (
+        "e00f06e295fa0c4e41955e78263de54656ed06fc4ae8e9e83a4700735c85bcac"
+    )
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "restricted_checked_algebraic_theorem": False,
+        "formal_all_n_hamiltonian_theorem": False,
+        "quantum_pcp_theorem": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R187 nonzero-scale derived certificate")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    tool_path = root / "tools/b9_r187_nonzero_scale_certificate.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R187 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    source = payload.get("source", {})
+    execution = payload.get("execution", {})
+
+    protocol_hash = hashlib.sha256(
+        json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = hashlib.sha256(
+        json.dumps(
+            payload_without_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    module_hash = hashlib.sha256(module_path.read_bytes()).hexdigest()
+    transcript_hash = hashlib.sha256(transcript_path.read_bytes()).hexdigest()
+
+    if payload.get("status") != expected_status:
+        errors.append("B9 R187 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R187 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R187 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R187 manifest method mismatch")
+    if protocol_hash != expected_protocol_hash or payload.get(
+        "protocol_hash"
+    ) != expected_protocol_hash:
+        errors.append("B9 R187 protocol hash mismatch")
+    if payload_hash != expected_payload_hash or payload.get(
+        "payload_sha256"
+    ) != expected_payload_hash:
+        errors.append("B9 R187 payload hash mismatch")
+    if module_hash != expected_module_hash or source.get(
+        "lean_module_sha256"
+    ) != expected_module_hash:
+        errors.append("B9 R187 Lean module hash mismatch")
+    if transcript_hash != expected_transcript_hash or execution.get(
+        "transcript_sha256"
+    ) != expected_transcript_hash:
+        errors.append("B9 R187 transcript hash mismatch")
+    if manifest_entry.get("protocol_hash") != expected_protocol_hash:
+        errors.append("B9 R187 manifest protocol hash mismatch")
+    if manifest_entry.get("payload_sha256") != expected_payload_hash:
+        errors.append("B9 R187 manifest payload hash mismatch")
+    if manifest_entry.get("lean_module_sha256") != expected_module_hash:
+        errors.append("B9 R187 manifest module hash mismatch")
+    if manifest_entry.get("transcript_sha256") != expected_transcript_hash:
+        errors.append("B9 R187 manifest transcript hash mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 10
+        or summary.get("requirement_count") != 10
+        or summary.get("requirements_passed") != 10
+        or summary.get("requirements_failed") != 0
+        or failed_ids
+    ):
+        errors.append("B9 R187 must pass all 10 frozen requirements")
+    if re.search(r"\b(?:hRatio|sorry|axiom)\b", module):
+        errors.append("B9 R187 source contains a forbidden assumption or escape hatch")
+    required_theorems = {
+        "uniform_scale_factor_nonzero",
+        "uniform_scale_factor_gt_one",
+        "uniform_scale_preserves_computed_normalized_gap",
+        "uniform_scale_raw_gap_amplifies_from_positive_gap",
+        "uniform_scale_preserves_spectral_width_ratio",
+        "uniform_reweight_derived_rejection",
+    }
+    theorem_names = set(
+        re.findall(r"(?m)^theorem\s+([A-Za-z0-9_']+)", module)
+    )
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R187 required theorem set is incomplete")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R187 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R187 transcript contains warnings or a timeout")
+    if (
+        summary.get("hRatio_assumption_removed") is not True
+        or summary.get("restricted_checked_algebraic_theorem") is not True
+        or summary.get("formal_all_n_hamiltonian_theorem") is not False
+        or summary.get("quantum_pcp_theorem") is not False
+        or summary.get("nlts_theorem") is not False
+        or summary.get("global_gap_amplification_impossibility") is not False
+        or summary.get("bqp_separation") is not False
+        or summary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R187 claim boundary mismatch")
+    required_report_phrases = [
+        "does not formalize the",
+        "prove Quantum PCP or NLTS",
+        "`new_credit_delta` remains `0`",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R187 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": module_hash,
+        "transcript_sha256": transcript_hash,
+        "requirement_count": len(requirements),
+        "requirements_passed": summary.get("requirements_passed"),
+        "hRatio_assumption_removed": summary.get("hRatio_assumption_removed"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R187") for message in errors
+        ),
+        "restricted_checked_algebraic_theorem": summary.get(
+            "restricted_checked_algebraic_theorem"
+        ),
+        "formal_all_n_hamiltonian_theorem": summary.get(
+            "formal_all_n_hamiltonian_theorem"
+        ),
+        "quantum_pcp_theorem": summary.get("quantum_pcp_theorem"),
+        "nlts_theorem": summary.get("nlts_theorem"),
+        "global_gap_amplification_impossibility": summary.get(
+            "global_gap_amplification_impossibility"
+        ),
+        "bqp_separation": summary.get("bqp_separation"),
+        "new_credit_delta": summary.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -38081,6 +38283,13 @@ def audit(root: Path) -> dict:
     b9_proof_environment_contract = b9_results.get("proof_environment_contract_gate_v0")
     b9_proof_project_scaffold = b9_results.get("proof_project_scaffold_gate_v0")
     b9_toolchain_ci_contract = b9_results.get("toolchain_ci_contract_gate_v0")
+    b9_r187 = b9_results.get("r187_nonzero_scale_derived_certificate_v1")
+    b9_r187_status = audit_b9_r187(
+        root,
+        b9_r187,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -48476,6 +48685,7 @@ def audit(root: Path) -> dict:
             "proof_environment_contract_gate": b9_proof_environment_contract_status,
             "proof_project_scaffold_gate": b9_proof_project_scaffold_status,
             "toolchain_ci_contract_gate": b9_toolchain_ci_contract_status,
+            "r187_nonzero_scale_derived_certificate": b9_r187_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -48515,6 +48725,7 @@ def audit(root: Path) -> dict:
             "r184_window_exact_score": r184_window_exact_score_status,
             "r185_macos_arm64_replication": r185_macos_arm64_replication_status,
             "r186_full_vf2_workflow": r186_full_vf2_workflow_status,
+            "r187_b9_nonzero_scale_derived_certificate": b9_r187_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
