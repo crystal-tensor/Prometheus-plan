@@ -1,0 +1,311 @@
+{
+  "schema_version": "p049_p060_activation_gate_v1",
+  "scope": {
+    "problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "claim_level": "activation_gate_only",
+    "catalog_mutation": false,
+    "human_or_animal_intervention": false,
+    "scope_exclusions": [
+      "No problem outside catalog IDs 049-060.",
+      "No clinical, public-health, animal, or genome-editing intervention is executed.",
+      "No database size, retrospective fit, or protocol design is promoted as a solved-frontier result.",
+      "No causal, therapeutic, safety, or generalization claim is earned by this activation packet."
+    ]
+  },
+  "retrieved_on": "2026-07-29",
+  "required_fields": [
+    "id",
+    "title",
+    "heuristic_question",
+    "current_evidence_boundary",
+    "first_gate",
+    "denominator",
+    "primary_metric",
+    "acceptance_rule",
+    "falsifier",
+    "data_split",
+    "execution_readiness",
+    "safety_boundary",
+    "next_artifact",
+    "source"
+  ],
+  "problems": [
+    {
+      "id": 49,
+      "title": "Exact Molecular Reaction Dynamics",
+      "heuristic_question": "Can a reaction-dynamics solver predict an observable it was not tuned on before it asks for scale credit?",
+      "current_evidence_boundary": "QCArchive now standardizes large quantum-chemistry campaigns and includes reaction energies and nudged-elastic-band profiles, but stored electronic-structure records are not by themselves exact coupled electron-nuclear dynamics.",
+      "first_gate": "Freeze one low-dimensional reactive scattering model, three incident energies, the potential representation, grid, absorbing boundary, and observable definitions before any candidate output is opened.",
+      "denominator": "Grid-converged split-operator propagation on the identical potential, grid, time window, and observable extraction code.",
+      "primary_metric": "Maximum absolute error across preregistered state-to-state reaction probabilities, accompanied by norm-loss and grid-convergence diagnostics.",
+      "acceptance_rule": "All three unopened energies must have probability error <= 1e-3, norm-accounting error <= 1e-8, and a documented cost comparison against the same-access denominator.",
+      "falsifier": "Any unopened energy violates the probability or norm threshold, or the result depends on a changed grid, potential, time window, or observable extractor.",
+      "data_split": "One disclosed pilot energy for debugging; three unopened energies for acceptance.",
+      "execution_readiness": "ready_for_public_replay",
+      "safety_boundary": "Computational chemistry only; no wet-lab reaction recommendation or materials-safety claim.",
+      "next_artifact": "P049 frozen model specification plus an independently replayable split-operator denominator transcript.",
+      "source": {
+        "publisher": "Molecular Sciences Software Institute",
+        "title": "QCArchive record and computation types",
+        "url": "https://docs.qcarchive.molssi.org/user_guide/records/index.html",
+        "latest_update": "Current documentation includes reaction-energy and NEB reaction-profile records.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 50,
+      "title": "Programmable Self-Assembling Matter",
+      "heuristic_question": "If off-target interactions are part of the physics, can inverse design still win on structures it never saw?",
+      "current_evidence_boundary": "A 2026 DNA-origami study reports that scaffold sequences with fewer predicted off-target interactions fold more reliably across several 2D and 3D targets, making unseen-defect robustness a concrete denominator rather than a qualitative aspiration.",
+      "first_gate": "Freeze a library of target structures, an assembly simulator, a design-call budget, and a hidden panel of off-target binding and component-dropout conditions.",
+      "denominator": "Budget-matched random search and a target-only inverse-design baseline that does not model off-target interactions.",
+      "primary_metric": "Assembly yield on hidden defect conditions, with off-target structure rate reported separately.",
+      "acceptance_rule": "The preregistered design must improve median hidden-condition yield by at least 10 percentage points over both denominators without increasing the off-target structure rate.",
+      "falsifier": "The gain disappears on hidden defect conditions, requires more design calls, or trades yield for an increased off-target rate.",
+      "data_split": "Disclosed target topologies for development; held-out target topology and defect panel for acceptance.",
+      "execution_readiness": "ready_for_public_replay",
+      "safety_boundary": "In-silico assembly only; no biological delivery, environmental release, or autonomous active-matter experiment.",
+      "next_artifact": "P050 simulator contract with seeded target/defect splits and budget-matched baseline implementations.",
+      "source": {
+        "publisher": "Nature Communications",
+        "title": "Optimising DNA origami assembly by reducing off-target interactions",
+        "url": "https://www.nature.com/articles/s41467-026-73387-4",
+        "latest_update": "Published 2026-05-26; experimentally links predicted off-target reactions to folding yield.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 51,
+      "title": "Protein Dynamics and Function Prediction",
+      "heuristic_question": "Can an ensemble prediction explain held-out dynamics that a beautiful single structure cannot?",
+      "current_evidence_boundary": "AlphaFold DB expanded high-confidence complex predictions in 2026, while its own FAQ states that a prediction is not a Boltzmann sample and that known multiple conformations usually collapse to one output.",
+      "first_gate": "Select proteins with paired structural models and experimental dynamic observables; freeze observable preprocessing and exclude the acceptance observables from ensemble fitting.",
+      "denominator": "Best available single-structure prediction plus a short conventional molecular-dynamics ensemble under the same experimental restraints.",
+      "primary_metric": "Normalized error on held-out NMR or conformational-population observables, stratified by protein and observable type.",
+      "acceptance_rule": "The candidate ensemble must reduce median held-out normalized error by at least 20% versus both denominators and retain the gain under leave-one-protein-out replay.",
+      "falsifier": "The gain is confined to fitted restraints, vanishes under leave-one-protein-out replay, or is explained by a larger sampling budget.",
+      "data_split": "Restraint-level holdout within proteins plus a protein-level holdout.",
+      "execution_readiness": "ready_after_access",
+      "safety_boundary": "Public structural and biophysical data only; no clinical interpretation or protein-engineering safety claim.",
+      "next_artifact": "P051 small benchmark roster with explicit experimental observables, licensing, and single-structure/MD denominators.",
+      "source": {
+        "publisher": "EMBL-EBI and Google DeepMind",
+        "title": "AlphaFold Protein Structure Database FAQ",
+        "url": "https://www.alphafold.ebi.ac.uk/faq",
+        "latest_update": "May 2026 database release added large complex-prediction sets while retaining explicit ensemble limitations.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 52,
+      "title": "Genotype-to-Phenotype Mapping",
+      "heuristic_question": "Does a genotype-to-phenotype model survive a change of ancestry, environment, and measurement protocol?",
+      "current_evidence_boundary": "The NHGRI-EBI GWAS Catalog exposes harmonized summary statistics, ancestry metadata, and, from April 2026, standards for CNV and gene-based results; association resources still do not turn correlation into a general causal map.",
+      "first_gate": "Freeze one quantitative trait, harmonized studies from at least two ancestry groups, covariates, and a cohort-level external holdout before model selection.",
+      "denominator": "An additive polygenic-score model using the same variants, summary statistics, covariates, and training cohorts.",
+      "primary_metric": "External-cohort calibration slope and incremental explained variance over the additive denominator, reported by ancestry group.",
+      "acceptance_rule": "Every held-out ancestry group must have calibration slope in [0.9, 1.1] and positive incremental explained variance with a bootstrap interval excluding zero.",
+      "falsifier": "Any ancestry group fails calibration, the incremental interval includes zero, or hidden cohort information enters harmonization or feature selection.",
+      "data_split": "Study-level and ancestry-level holdout; no random row split across related samples or cohorts.",
+      "execution_readiness": "ready_after_access",
+      "safety_boundary": "Summary statistics only; no re-identification, individual prediction, reproductive selection, or clinical decision use.",
+      "next_artifact": "P052 trait-specific accession manifest and ancestry-aware leakage audit.",
+      "source": {
+        "publisher": "NHGRI-EBI",
+        "title": "GWAS Catalog summary statistics documentation",
+        "url": "https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics",
+        "latest_update": "April 2026 standards extend beyond SNP-only submissions and preserve ancestry/sample metadata.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 53,
+      "title": "General Early Cancer Detection and Personalized Cure",
+      "heuristic_question": "What evidence would distinguish an early-cancer signal from an expensive cascade of false positives?",
+      "current_evidence_boundary": "NCI's active Vanguard Study randomizes up to 24,000 cancer-free adults among two multi-cancer detection tests and a control arm to establish feasibility before a definitive mortality trial.",
+      "first_gate": "Adopt a prospective population-screening protocol that freezes eligibility, assay threshold, diagnostic-resolution pathway, cancer ascertainment, and follow-up before outcomes are opened.",
+      "denominator": "Standard-of-care screening in a randomized control arm, not a retrospective case-control sample.",
+      "primary_metric": "Cancer-specific positive predictive value and diagnostic-resolution burden, with stage distribution and false-negative cancers reported.",
+      "acceptance_rule": "No promotable detection claim until a prospective randomized study meets its preregistered predictive-value and diagnostic-burden thresholds; no cure claim without treatment-specific randomized outcomes.",
+      "falsifier": "Performance falls below the preregistered prospective thresholds, downstream diagnostic harm is excessive, or retrospective tuning enters the evaluation set.",
+      "data_split": "Prospective randomized arms and locked analysis plan; retrospective samples may be pilot-only.",
+      "execution_readiness": "protocol_only_high_stakes",
+      "safety_boundary": "No medical advice, assay recommendation, patient recruitment, treatment selection, or cure claim.",
+      "next_artifact": "P053 endpoint dictionary that separates detection feasibility, mortality benefit, and personalized-treatment evidence.",
+      "source": {
+        "publisher": "US National Cancer Institute",
+        "title": "The Vanguard Study on Multi-Cancer Detection Tests",
+        "url": "https://www.cancer.gov/research/areas/screening/vanguard-study",
+        "latest_update": "Active prospective feasibility study; posted 2025-09-10.",
+        "access": "public protocol information"
+      }
+    },
+    {
+      "id": 54,
+      "title": "Mechanisms and Safe Reversal of Aging",
+      "heuristic_question": "If lifespan moves, what would prove that function improved without merely changing how disease was counted?",
+      "current_evidence_boundary": "NIA's Interventions Testing Program runs standardized studies at three sites in genetically heterogeneous mice, uses pilot toxicity testing, and expands promising agents to health, pathology, and mechanism endpoints.",
+      "first_gate": "Use a blinded, multi-site, sex-stratified protocol with frozen dosing, pilot toxicity, survival, function, pathology, and tumor endpoints.",
+      "denominator": "Concurrent vehicle control under the same husbandry and a three-site protocol modeled on the NIA ITP.",
+      "primary_metric": "Site-pooled survival effect paired with prespecified late-life function and pathology outcomes.",
+      "acceptance_rule": "A candidate advances only if survival and at least one late-life functional endpoint improve, direction is not reversed at any site, and tumor/pathology safety guardrails do not worsen.",
+      "falsifier": "The survival effect is site-specific, functional outcomes do not improve, or any preregistered toxicity or tumor guardrail worsens.",
+      "data_split": "Pilot toxicity stage followed by independent multi-site efficacy stage; both sexes reported separately.",
+      "execution_readiness": "protocol_only_high_stakes",
+      "safety_boundary": "No animal experiment is executed here; no human anti-aging recommendation or extrapolation.",
+      "next_artifact": "P054 endpoint and adverse-event ontology aligned to public ITP outcomes.",
+      "source": {
+        "publisher": "US National Institute on Aging",
+        "title": "Interventions Testing Program",
+        "url": "https://www.nia.nih.gov/research/dab/interventions-testing-program-itp/about-itp",
+        "latest_update": "Updated 2026-05-12; documents three-site SOPs, pilot toxicity, and staged efficacy testing.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 55,
+      "title": "Neurodegenerative Disease Root Causes",
+      "heuristic_question": "Can a proposed mechanism predict who changes next, not merely describe who is already ill?",
+      "current_evidence_boundary": "ADNI provides longitudinal, multi-center observational data and aggregate views from more than 2,500 participants to validate biomarkers for Alzheimer's disease trials.",
+      "first_gate": "Freeze one mechanism-derived biomarker signature, a future clinical-change window, site-aware preprocessing, and an untouched acquisition-site holdout.",
+      "denominator": "Age, sex, APOE status, baseline diagnosis, and baseline cognition without the proposed mechanism-derived features.",
+      "primary_metric": "Calibration and time-dependent prediction error for prospective cognitive or diagnostic change on the site holdout.",
+      "acceptance_rule": "The mechanism signature must improve held-out prediction error with a bootstrap interval excluding zero and remain calibrated across site and sex strata.",
+      "falsifier": "No incremental predictive value remains, calibration fails in a prespecified stratum, or the signature uses post-baseline information.",
+      "data_split": "Participant-, family-, time-, and acquisition-site-separated holdout.",
+      "execution_readiness": "ready_after_access",
+      "safety_boundary": "Observational biomarker research only; prediction does not establish a root cause or treatment effect.",
+      "next_artifact": "P055 ADNI variable/timepoint manifest and post-baseline leakage sentinel.",
+      "source": {
+        "publisher": "Alzheimer's Disease Neuroimaging Initiative",
+        "title": "ADNI data portal",
+        "url": "https://adni.loni.usc.edu/",
+        "latest_update": "Current portal reports a longitudinal multi-center cohort with more than 2,500 participants.",
+        "access": "registration and data-use agreement"
+      }
+    },
+    {
+      "id": 56,
+      "title": "Programmable Immune Control",
+      "heuristic_question": "Can an immune controller hit its target state without borrowing success from cytokine toxicity?",
+      "current_evidence_boundary": "ImmPort exposes standardized clinical-trial, flow-cytometry, gene-expression, intervention, and adverse-event data, enabling donor-held-out retrospective control tests but not safe prospective immune programming.",
+      "first_gate": "Select a perturbation study with matched baseline, response, dose, and adverse-event measurements; freeze target and guardrail biomarkers before model fitting.",
+      "denominator": "No-treatment or standard-treatment arm plus a linear dose-response model using the same donor information.",
+      "primary_metric": "Held-out donor target-state error with separate cytokine, off-target-cell-state, and adverse-event guardrails.",
+      "acceptance_rule": "Target-state error must improve versus both denominators while every prespecified guardrail is non-inferior on donor-held-out data.",
+      "falsifier": "Apparent control requires donor leakage, a guardrail worsens, or benefit is confined to one study batch.",
+      "data_split": "Donor- and study-level holdouts; no cell-level random split across the same donor.",
+      "execution_readiness": "ready_after_access",
+      "safety_boundary": "Retrospective public-data analysis only; no dosing, immunotherapy, or clinical control recommendation.",
+      "next_artifact": "P056 ImmPort study shortlist with donor-key, intervention, assay, and adverse-event completeness checks.",
+      "source": {
+        "publisher": "NIH/NIAID ImmPort",
+        "title": "ImmPort Documentation",
+        "url": "https://docs.immport.org/",
+        "latest_update": "Current repository supports immunology, clinical-trial, flow-cytometry, gene-expression, intervention, and adverse-event data.",
+        "access": "free registration; controlled data may require approval"
+      }
+    },
+    {
+      "id": 57,
+      "title": "Global Reversal of Antimicrobial Resistance",
+      "heuristic_question": "Can an AMR forecast beat yesterday's resistance rate where surveillance is thinnest?",
+      "current_evidence_boundary": "WHO GLASS standardizes resistance and antimicrobial-use surveillance and its 2025 global report provides a current cross-country evidence base; surveillance coverage and comparability remain part of the problem.",
+      "first_gate": "Freeze one pathogen-drug pair, country-year eligibility rules, missingness policy, and future-year holdout before forecasting.",
+      "denominator": "Last-observation-carried-forward and a country-specific logistic time trend using the same GLASS rows.",
+      "primary_metric": "Calibration and weighted absolute error for held-out resistance prevalence, stratified by surveillance completeness.",
+      "acceptance_rule": "The candidate must beat both denominators overall and in the lowest-completeness prespecified stratum without excluding countries after outcomes are seen.",
+      "falsifier": "The gain disappears in sparse-surveillance settings, calibration fails, or post-outcome completeness filtering changes the cohort.",
+      "data_split": "Forward-chaining country-year holdout with country-level robustness replay.",
+      "execution_readiness": "ready_for_public_replay",
+      "safety_boundary": "Population-level surveillance analysis only; no antibiotic prescribing or pathogen-engineering guidance.",
+      "next_artifact": "P057 pathogen-drug-country coverage matrix and missing-not-at-random sensitivity plan.",
+      "source": {
+        "publisher": "World Health Organization",
+        "title": "Global Antimicrobial Resistance and Use Surveillance System",
+        "url": "https://www.who.int/initiatives/glass",
+        "latest_update": "GLASS lists the Global antibiotic resistance surveillance report 2025.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 58,
+      "title": "Pandemic Prediction and Interdiction",
+      "heuristic_question": "How early is an early warning after false alarms and reporting delays are charged to the score?",
+      "current_evidence_boundary": "CDC's 2026 wastewater program covers multiple viruses, updates public dashboards weekly, and describes wastewater as an early-warning signal that must be interpreted with clinical surveillance.",
+      "first_gate": "Freeze jurisdictions, pathogens, reporting-delay simulation, alert thresholds, and a future seasonal window before producing alerts.",
+      "denominator": "Seasonal historical average, last-value trend, and clinical-data-only alerting at the same false-alert budget.",
+      "primary_metric": "Median lead time before a clinical threshold, conditional on a prespecified false-alert rate and data-availability lag.",
+      "acceptance_rule": "Wastewater-plus-clinical alerting must gain at least seven median days over every denominator while staying within the frozen false-alert budget on unseen jurisdictions and weeks.",
+      "falsifier": "Lead time is below seven days, false alerts exceed budget, or the gain vanishes after realistic reporting delays.",
+      "data_split": "Geographic and forward-time holdout with vintage-aware data snapshots.",
+      "execution_readiness": "ready_for_public_replay",
+      "safety_boundary": "Retrospective forecasting only; no live public-health alert or interdiction action.",
+      "next_artifact": "P058 vintage-aware CDC data manifest and alert-score replay harness.",
+      "source": {
+        "publisher": "US Centers for Disease Control and Prevention",
+        "title": "About Wastewater Data",
+        "url": "https://www.cdc.gov/nwss/about-data.html",
+        "latest_update": "Updated 2026-04-10; documents multi-virus weekly data, early warning, and clinical-data complementarity.",
+        "access": "public"
+      }
+    },
+    {
+      "id": 59,
+      "title": "Human Brain Connectome and Cognition",
+      "heuristic_question": "Can a connectome predict cognition after family structure, head motion, and scanner artifacts are denied an escape route?",
+      "current_evidence_boundary": "The HCP-Young Adult 2025 release provides updated processed imaging for 1,071 subjects and phenotypic data for 1,206, with documented processing changes and quality-control exclusions.",
+      "first_gate": "Freeze one cognitive endpoint, motion and acquisition covariates, family groups, connectome construction, and an untouched family-level holdout.",
+      "denominator": "Demographics, motion, scanner/acquisition variables, and regional anatomy without functional-connectivity edges.",
+      "primary_metric": "Family-held-out prediction error and test-retest reliability, with incremental value over the full nuisance denominator.",
+      "acceptance_rule": "Connectivity must add reproducible held-out value with a bootstrap interval excluding zero and no material degradation after motion-matched replay.",
+      "falsifier": "The increment disappears after family-aware or motion-matched replay, or test-retest reliability is below the preregistered floor.",
+      "data_split": "Family-separated train/validation/test split; retest participants used only for reliability.",
+      "execution_readiness": "ready_after_access",
+      "safety_boundary": "Research-only neuroimaging; no individual cognitive diagnosis, identity inference, or causal cognition claim.",
+      "next_artifact": "P059 HCP-YA 2025 subject-family/QC manifest and nuisance-only denominator.",
+      "source": {
+        "publisher": "Human Connectome Project",
+        "title": "HCP Young Adult",
+        "url": "https://www.humanconnectome.org/study/hcp-young-adult",
+        "latest_update": "2025 release lists 1,071 processed imaging subjects and phenotypic data for 1,206 subjects.",
+        "access": "open and restricted tiers"
+      }
+    },
+    {
+      "id": 60,
+      "title": "Safe Scalable Gene Editing",
+      "heuristic_question": "What would make an editing result fail even when its on-target number looks excellent?",
+      "current_evidence_boundary": "FDA's 2024 final genome-editing guidance covers design, manufacturing, nonclinical safety, and trials; 2026 draft guidances separately address next-generation-sequencing safety assessment and reuse of prior knowledge.",
+      "first_gate": "Freeze one somatic-cell edit, manufacturing lot criteria, on-target assay, orthogonal off-target assays, chromosomal-integrity tests, and long-term follow-up triggers.",
+      "denominator": "Unedited cells, mock delivery, and the current standard editor/delivery system assessed with identical assays and sequencing depth.",
+      "primary_metric": "On-target functional correction reported jointly with off-target edits, structural variants, chromosomal integrity, viability, immunogenicity, and lot variability.",
+      "acceptance_rule": "No safety or scalability claim is promotable unless every assay-specific threshold is preregistered, met across independent lots, and non-inferior to the standard editor at matched sequencing sensitivity.",
+      "falsifier": "Any safety threshold fails, a signal is assay-specific and not orthogonally confirmed, or scale changes lot variability or detection sensitivity.",
+      "data_split": "Independent manufacturing lots and blinded assay laboratories; discovery and confirmation assays remain separate.",
+      "execution_readiness": "protocol_only_high_stakes",
+      "safety_boundary": "No sequence design, wet-lab editing, germline work, clinical recommendation, or claim of FDA compliance.",
+      "next_artifact": "P060 assay-and-lot evidence matrix aligned to final and draft FDA guidance.",
+      "source": {
+        "publisher": "US Food and Drug Administration",
+        "title": "Cellular & Gene Therapy Guidances",
+        "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances",
+        "latest_update": "April-June 2026 draft guidances add NGS safety assessment and prior-knowledge considerations to the 2024 final guidance.",
+        "access": "public"
+      }
+    }
+  ]
+}
