@@ -1,8 +1,13 @@
 {
   "contract_id": "B9-R196-extended-tail-charge-contract-v0",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "frozen_at": "2026-07-29",
-  "status": "preregistered_before_acceptance_execution",
+  "status": "preregistered_before_acceptance_execution_with_public_preflight_erratum",
+  "pre_execution_erratum": {
+    "superseded_contract_sha256": "0691883b354d5145773f4465bb16a53fb7b34d18304dd343b44276699ef3c0ca",
+    "reason": "The v0.1.0 positive-control text required two distinct one-site charges inside every candidate family, but a translation-summed family does not contain position-resolved one-site charges. No frozen-holdout acceptance row had been executed when this defect was found.",
+    "scientific_change": "Replace the impossible one-site wording with family-contained explicit independent kernels. Holdouts, sizes, ranges, primes, rank rules, and claim boundaries are unchanged."
+  },
   "model": {
     "boundary": "open",
     "hamiltonian": "sum_i[-X_i+(3/4)Z_i]+J*sum_{i=0}^{n-2}Z_i Z_{i+1}"
@@ -71,7 +76,7 @@
   },
   "positive_control_rule": {
     "coupling": "0",
-    "required_witness": "The candidate family must contain at least three linearly independent exact kernels, including identity and at least two distinct one-site tilted-field charges.",
+    "required_witness": "Each candidate family must contain at least three linearly independent exact kernels: identity, H, and one explicit family-contained extra conserved charge. Complete and boundary-dressed families may use a position-resolved tilted-field charge; the translation-summed family must use the open-chain translation sum of adjacent tilted-field products.",
     "full_control_rank_required": false
   },
   "claim_boundary": {
