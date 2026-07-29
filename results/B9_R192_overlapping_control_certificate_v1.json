@@ -1,0 +1,965 @@
+{
+  "claim_boundary": {
+    "false_claims": [
+      "all_n_overlapping_spectrum_theorem",
+      "nonintegrability_theorem",
+      "quantum_chaos_theorem",
+      "spectral_hardness_theorem",
+      "quantum_hardware_execution",
+      "quantum_pcp_theorem",
+      "nlts_theorem",
+      "global_gap_amplification_impossibility",
+      "bqp_separation",
+      "solved_frontier"
+    ],
+    "not_supported": [
+      "Finite degeneracy collapse is not an all-n spectrum theorem or a proof that no alternate integrable representation exists.",
+      "Reflection-resolved adjacent-gap ratios are finite-size diagnostics, not a nonintegrability or quantum-chaos theorem.",
+      "No spectral-hardness theorem, hardware execution, Quantum PCP theorem, NLTS theorem, BQP separation, solved frontier, or new credit is supported."
+    ],
+    "supported": [
+      "Lean checks connected two-local support, adjacent-bond overlap, Hermiticity, and exact local-bond noncommutation.",
+      "Independent integer bit-action and Kronecker implementations match exactly for n=4..10.",
+      "Every checked finite spectrum is simple, while the R191 product denominator has only n+1 distinct levels with binomial multiplicity.",
+      "Reflection symmetry is resolved before adjacent-gap statistics are computed.",
+      "The connected overlap normalized gap misses the 1.05x product target at every checked size, so promotion and new credit remain zero."
+    ],
+    "true_claims": [
+      "connected_two_local_support_formalized",
+      "adjacent_bond_overlap_formalized",
+      "local_bond_noncommutation_formalized",
+      "overlapping_operator_hermiticity_formalized",
+      "independent_matrix_replay_complete",
+      "reflection_symmetry_resolved",
+      "finite_spectrum_degeneracy_collapse_observed",
+      "normalized_gap_target_rejected"
+    ]
+  },
+  "evidence": {
+    "module_path": "B9/ClusterStabilizer/OverlappingControl.lean",
+    "module_sha256": "94d0d03dee01e39b53b841017dbdfcb29c28bc4301380fe0658223e3e7d6c4bf",
+    "tool_path": "tools/b9_r192_overlapping_control_certificate.py",
+    "tool_sha256": "dbcd58fe6cb17352bcbcf5fef3554252d2be007c69753356899dcd65c4131926"
+  },
+  "evidence_integrity_complete": true,
+  "execution": {
+    "module_warning_count": 0,
+    "probes": [
+      {
+        "command": [
+          "lean",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lean (version 4.12.0, arm64-apple-darwin23.6.0, commit dc2533473114, Release)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lake version 5.0.0-dc25334 (Lean version 4.12.0)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "B9/ClusterStabilizer/OverlappingControl.lean"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "",
+        "timed_out": false
+      }
+    ],
+    "transcript_path": "results/B9_R192_overlapping_control_transcript_v1.txt",
+    "transcript_sha256": "16c4d4d6f9d8403c7e133dc51795802acf0085c9f072affb6566b1350c7e550d"
+  },
+  "experiment_id": "B9-R192-connected-overlap-spectral-boundary",
+  "last_updated": "2026-07-29",
+  "local_exact_checks": {
+    "adjacent_bond_intersection_card": 1,
+    "bond_support_card": 2,
+    "common_denominator": 4,
+    "commutator_nonzero_exact": true,
+    "commutator_numerator": [
+      [
+        0,
+        0,
+        8,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        -8
+      ],
+      [
+        -8,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        8,
+        0,
+        0
+      ]
+    ],
+    "first_two_bonds_union_card": 3,
+    "physical_commutator_max_abs": 2.0,
+    "tilted_left_numerator": [
+      [
+        3,
+        0,
+        -4,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        -4
+      ],
+      [
+        -4,
+        0,
+        -3,
+        0
+      ],
+      [
+        0,
+        -4,
+        0,
+        -3
+      ]
+    ],
+    "zz_matrix": [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "method": "b9_r192_connected_overlap_spectral_boundary_v1",
+  "new_credit_delta": 0,
+  "payload_sha256": "79b6a21e9dd5813ca2e3ff42af22ee24a15291c79ce0dde20f33fcd1f3309e7e",
+  "protocol": {
+    "claim_boundary": {
+      "false_claims": [
+        "all_n_overlapping_spectrum_theorem",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_hardware_execution",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "global_gap_amplification_impossibility",
+        "bqp_separation",
+        "solved_frontier"
+      ],
+      "new_credit_delta": 0,
+      "true_claims": [
+        "connected_two_local_support_formalized",
+        "adjacent_bond_overlap_formalized",
+        "local_bond_noncommutation_formalized",
+        "overlapping_operator_hermiticity_formalized",
+        "independent_matrix_replay_complete",
+        "reflection_symmetry_resolved",
+        "finite_spectrum_degeneracy_collapse_observed",
+        "normalized_gap_target_rejected"
+      ]
+    },
+    "denominator": {
+      "distinct_levels": "n+1",
+      "gap": "5/2",
+      "hamiltonian": "sum_i[-X_i+(3/4)Z_i]",
+      "multiplicity": "choose(n,k)",
+      "name": "R191 disjoint-site tilted product control",
+      "normalized_gap": "1/n",
+      "width": "5n/2"
+    },
+    "experiment_id": "B9-R192-connected-overlap-spectral-boundary",
+    "independent_implementations": [
+      "integer bit-action matrix with common denominator four",
+      "integer Kronecker Pauli-word matrix with common denominator four"
+    ],
+    "lean": {
+      "module": "B9/ClusterStabilizer/OverlappingControl.lean",
+      "required_definitions": [
+        "overlapCoupling",
+        "nearestNeighborSupport",
+        "openChainBondSet",
+        "zzBondSitePauli",
+        "zzBondPauliWord",
+        "zzBondTermOperator",
+        "zzInteractionOperator",
+        "overlappingControlOperator",
+        "twoQubitLeftTiltedOperator",
+        "twoQubitZZOperator"
+      ],
+      "required_theorems": [
+        "nearest_neighbor_support_card",
+        "adjacent_bond_support_intersection",
+        "adjacent_bond_supports_overlap",
+        "first_two_bonds_cover_three_sites",
+        "zzBondSitePauli_isHermitian",
+        "zzBondPauliWord_isHermitian",
+        "zzBondTermOperator_isHermitian",
+        "zzInteractionOperator_isHermitian",
+        "overlappingControlOperator_isHermitian",
+        "twoQubitLeftTiltedOperator_isHermitian",
+        "twoQubitZZOperator_isHermitian",
+        "twoQubit_left_tilted_does_not_commute_with_zz",
+        "overlapCoupling_nonzero",
+        "overlapping_control_structural_boundary"
+      ]
+    },
+    "method": "b9_r192_connected_overlap_spectral_boundary_v1",
+    "model": {
+      "boundary": "open",
+      "checked_sizes": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "field": "3/4",
+      "hamiltonian": "sum_i[-X_i+(3/4)Z_i]+(1/2)sum_{i=0}^{n-2}Z_i Z_{i+1}",
+      "locality": 2,
+      "overlap_coupling": "1/2"
+    },
+    "promotion_target": {
+      "factor": 1.05,
+      "failure_action": "no promotion and no new credit",
+      "metric": "normalized_gap",
+      "rule": "overlap >= 1.05 * product denominator for every checked n"
+    },
+    "symmetry_policy": {
+      "central_trim_fraction": 0.1,
+      "declared_symmetry": "open-chain spatial reflection",
+      "interpretation": "finite-size diagnostic only",
+      "level_statistics": "separate even and odd reflection sectors"
+    },
+    "tolerances": {
+      "matrix": 1e-12,
+      "spectrum": 1e-10,
+      "symmetry": 1e-12
+    },
+    "version": "1.0"
+  },
+  "protocol_sha256": "82a4ecb46703068aa3b41a8db082f4b366208d5d6f61a2cdaa9c4eedc8476d56",
+  "requirements": [
+    {
+      "evidence": {
+        "protocol_sha256": "82a4ecb46703068aa3b41a8db082f4b366208d5d6f61a2cdaa9c4eedc8476d56"
+      },
+      "label": "Protocol freezes model, sizes, denominator, target, and tolerances.",
+      "passed": true,
+      "requirement_id": "R192-C01"
+    },
+    {
+      "evidence": {
+        "module_warning_count": 0,
+        "probe_count": 3,
+        "transcript_sha256": "16c4d4d6f9d8403c7e133dc51795802acf0085c9f072affb6566b1350c7e550d"
+      },
+      "label": "Pinned Lean and Lake probes complete without warnings or timeouts.",
+      "passed": true,
+      "requirement_id": "R192-C02"
+    },
+    {
+      "evidence": {
+        "definitions_present": {
+          "nearestNeighborSupport": true,
+          "openChainBondSet": true,
+          "overlapCoupling": true,
+          "overlappingControlOperator": true,
+          "twoQubitLeftTiltedOperator": true,
+          "twoQubitZZOperator": true,
+          "zzBondPauliWord": true,
+          "zzBondSitePauli": true,
+          "zzBondTermOperator": true,
+          "zzInteractionOperator": true
+        },
+        "theorems_present": {
+          "adjacent_bond_support_intersection": true,
+          "adjacent_bond_supports_overlap": true,
+          "first_two_bonds_cover_three_sites": true,
+          "nearest_neighbor_support_card": true,
+          "overlapCoupling_nonzero": true,
+          "overlappingControlOperator_isHermitian": true,
+          "overlapping_control_structural_boundary": true,
+          "twoQubitLeftTiltedOperator_isHermitian": true,
+          "twoQubitZZOperator_isHermitian": true,
+          "twoQubit_left_tilted_does_not_commute_with_zz": true,
+          "zzBondPauliWord_isHermitian": true,
+          "zzBondSitePauli_isHermitian": true,
+          "zzBondTermOperator_isHermitian": true,
+          "zzInteractionOperator_isHermitian": true
+        }
+      },
+      "label": "All required Lean definitions and theorems are present.",
+      "passed": true,
+      "requirement_id": "R192-C03"
+    },
+    {
+      "evidence": {
+        "common_denominator": 4,
+        "coupling": "1/2"
+      },
+      "label": "The overlap coupling is fixed to nonzero one half.",
+      "passed": true,
+      "requirement_id": "R192-C04"
+    },
+    {
+      "evidence": {
+        "adjacent_bond_intersection_card": 1,
+        "bond_support_card": 2,
+        "common_denominator": 4,
+        "commutator_nonzero_exact": true,
+        "commutator_numerator": [
+          [
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            -8
+          ],
+          [
+            -8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            8,
+            0,
+            0
+          ]
+        ],
+        "first_two_bonds_union_card": 3,
+        "physical_commutator_max_abs": 2.0,
+        "tilted_left_numerator": [
+          [
+            3,
+            0,
+            -4,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            -4
+          ],
+          [
+            -4,
+            0,
+            -3,
+            0
+          ],
+          [
+            0,
+            -4,
+            0,
+            -3
+          ]
+        ],
+        "zz_matrix": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      "label": "Two-site supports overlap on one site and connect three sites.",
+      "passed": true,
+      "requirement_id": "R192-C05"
+    },
+    {
+      "evidence": {
+        "commutator_numerator": [
+          [
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            -8
+          ],
+          [
+            -8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            8,
+            0,
+            0
+          ]
+        ],
+        "physical_commutator_max_abs": 2.0
+      },
+      "label": "The tilted local block and adjacent ZZ bond fail to commute exactly.",
+      "passed": true,
+      "requirement_id": "R192-C06"
+    },
+    {
+      "evidence": {
+        "checked_sizes": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "maximum_matrix_difference": 0
+      },
+      "label": "Bit-action and Kronecker implementations match exactly.",
+      "passed": true,
+      "requirement_id": "R192-C07"
+    },
+    {
+      "evidence": {
+        "maximum_hermitian_residual": 0.0
+      },
+      "label": "All finite Hamiltonians are Hermitian within the frozen tolerance.",
+      "passed": true,
+      "requirement_id": "R192-C08"
+    },
+    {
+      "evidence": {
+        "maximum_exact_reflection_commutator": 0,
+        "maximum_parity_spectrum_error": 2.0605739337042905e-13
+      },
+      "label": "Reflection symmetry is exact and parity blocks reassemble the spectrum.",
+      "passed": true,
+      "requirement_id": "R192-C09"
+    },
+    {
+      "evidence": {
+        "checked_sizes": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "minimum_spacing": 5.336527633126309e-06
+      },
+      "label": "Every checked full spectrum is simple under the declared threshold.",
+      "passed": true,
+      "requirement_id": "R192-C10"
+    },
+    {
+      "evidence": {
+        "checked_sizes": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "denominator": {
+          "distinct_levels": "n+1",
+          "gap": "5/2",
+          "hamiltonian": "sum_i[-X_i+(3/4)Z_i]",
+          "multiplicity": "choose(n,k)",
+          "name": "R191 disjoint-site tilted product control",
+          "normalized_gap": "1/n",
+          "width": "5n/2"
+        }
+      },
+      "label": "The R191 product denominator is replayed on the same finite sizes.",
+      "passed": true,
+      "requirement_id": "R192-C11"
+    },
+    {
+      "evidence": {
+        "new_credit_delta": 0,
+        "scientific_promotion_accepted": false,
+        "target_pass_count": 0
+      },
+      "label": "The preregistered normalized-gap target is classified without promotion.",
+      "passed": true,
+      "requirement_id": "R192-C12"
+    },
+    {
+      "evidence": {
+        "central_trim_fraction": 0.1,
+        "declared_symmetry": "reflection",
+        "interpretation": "diagnostic_only"
+      },
+      "label": "Level statistics are symmetry-resolved and retained as diagnostic only.",
+      "passed": true,
+      "requirement_id": "R192-C13"
+    },
+    {
+      "evidence": {
+        "false_claims": [
+          "all_n_overlapping_spectrum_theorem",
+          "nonintegrability_theorem",
+          "quantum_chaos_theorem",
+          "spectral_hardness_theorem",
+          "quantum_hardware_execution",
+          "quantum_pcp_theorem",
+          "nlts_theorem",
+          "global_gap_amplification_impossibility",
+          "bqp_separation",
+          "solved_frontier"
+        ],
+        "new_credit_delta": 0,
+        "true_claims": [
+          "connected_two_local_support_formalized",
+          "adjacent_bond_overlap_formalized",
+          "local_bond_noncommutation_formalized",
+          "overlapping_operator_hermiticity_formalized",
+          "independent_matrix_replay_complete",
+          "reflection_symmetry_resolved",
+          "finite_spectrum_degeneracy_collapse_observed",
+          "normalized_gap_target_rejected"
+        ]
+      },
+      "label": "Claim boundary keeps theorem, hardware, and frontier credit false.",
+      "passed": true,
+      "requirement_id": "R192-C14"
+    }
+  ],
+  "requirements_passed": 14,
+  "requirements_total": 14,
+  "spectrum_rows": [
+    {
+      "adjacent_bond_overlap_count": 2,
+      "bond_count": 3,
+      "checked": true,
+      "dimension": 16,
+      "even_sector_dimension": 10,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5068979277438675,
+        "minimum_central_spacing": 0.29926053256069374,
+        "ratio_count": 6,
+        "retained_eigenvalue_count": 8,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -3.248756534868197,
+      "gap": 1.516510183236906,
+      "ground_energy": -4.765266718105103,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 0.10180652684048841,
+      "n": 4,
+      "normalized_gap": 0.14364527125167703,
+      "normalized_gap_ratio_to_product": 0.5745810850067081,
+      "normalized_gap_target": 0.2625,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 6,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5135046192320109,
+        "minimum_central_spacing": 0.8640862197979371,
+        "ratio_count": 4,
+        "retained_eigenvalue_count": 6,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 16,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 4.4742286341514763e-17,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 5.329070518200751e-15,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.25,
+      "product_denominator_width": 10.0,
+      "product_distinct_level_count": 5,
+      "product_maximum_multiplicity": 6,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 5.792060857126171,
+      "width": 10.557327575231273
+    },
+    {
+      "adjacent_bond_overlap_count": 3,
+      "bond_count": 4,
+      "checked": true,
+      "dimension": 32,
+      "even_sector_dimension": 20,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.44818345790453545,
+        "minimum_central_spacing": 0.043522349226006396,
+        "ratio_count": 14,
+        "retained_eigenvalue_count": 16,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -4.497257608966551,
+      "gap": 1.4520114001035225,
+      "ground_energy": -5.949269009070074,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 0.02740442330913817,
+      "n": 5,
+      "normalized_gap": 0.10941842211292362,
+      "normalized_gap_ratio_to_product": 0.547092110564618,
+      "normalized_gap_target": 0.21000000000000002,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 12,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.48907749734068634,
+        "minimum_central_spacing": 0.26453577531336125,
+        "ratio_count": 8,
+        "retained_eigenvalue_count": 10,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 32,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 1.0108411945276394e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 7.105427357601002e-15,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.2,
+      "product_denominator_width": 12.5,
+      "product_distinct_level_count": 6,
+      "product_maximum_multiplicity": 10,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 7.320995468012187,
+      "width": 13.27026447708226
+    },
+    {
+      "adjacent_bond_overlap_count": 4,
+      "bond_count": 5,
+      "checked": true,
+      "dimension": 64,
+      "even_sector_dimension": 36,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5557955750369431,
+        "minimum_central_spacing": 0.06048622147660554,
+        "ratio_count": 28,
+        "retained_eigenvalue_count": 30,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -5.722570181510387,
+      "gap": 1.4074153754517758,
+      "ground_energy": -7.129985556962163,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 0.013005278050229219,
+      "n": 6,
+      "normalized_gap": 0.08807369694222184,
+      "normalized_gap_ratio_to_product": 0.528442181653331,
+      "normalized_gap_target": 0.175,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 28,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.49792211545335496,
+        "minimum_central_spacing": 0.055933240713199606,
+        "ratio_count": 22,
+        "retained_eigenvalue_count": 24,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 64,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 2.0216823890552788e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 1.5987211554602254e-14,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.16666666666666666,
+      "product_denominator_width": 15.0,
+      "product_distinct_level_count": 7,
+      "product_maximum_multiplicity": 20,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 8.84998830941328,
+      "width": 15.979973866375444
+    },
+    {
+      "adjacent_bond_overlap_count": 5,
+      "bond_count": 6,
+      "checked": true,
+      "dimension": 128,
+      "even_sector_dimension": 72,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5547910814427591,
+        "minimum_central_spacing": 0.018472713157834164,
+        "ratio_count": 56,
+        "retained_eigenvalue_count": 58,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -6.932283970743219,
+      "gap": 1.3796892027101872,
+      "ground_energy": -8.311973173453406,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 0.0007609969493325153,
+      "n": 7,
+      "normalized_gap": 0.07381585118894297,
+      "normalized_gap_ratio_to_product": 0.5167109583226008,
+      "normalized_gap_target": 0.15,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 56,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.4906212196310084,
+        "minimum_central_spacing": 0.01870535889830993,
+        "ratio_count": 44,
+        "retained_eigenvalue_count": 46,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 128,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 1.698589127250188e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 4.440892098500626e-14,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.14285714285714285,
+      "product_denominator_width": 17.5,
+      "product_distinct_level_count": 8,
+      "product_maximum_multiplicity": 35,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 10.378987920779071,
+      "width": 18.690961094232478
+    },
+    {
+      "adjacent_bond_overlap_count": 6,
+      "bond_count": 7,
+      "checked": true,
+      "dimension": 256,
+      "even_sector_dimension": 136,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.4844442048360977,
+        "minimum_central_spacing": 0.0056842022301037964,
+        "ratio_count": 108,
+        "retained_eigenvalue_count": 110,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -8.133842137896686,
+      "gap": 1.3596252672444002,
+      "ground_energy": -9.493467405141086,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 0.00013335641065173598,
+      "n": 8,
+      "normalized_gap": 0.06352956942539241,
+      "normalized_gap_ratio_to_product": 0.5082365554031393,
+      "normalized_gap_target": 0.13125,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 120,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.44894174598906245,
+        "minimum_central_spacing": 0.006532501368404664,
+        "ratio_count": 94,
+        "retained_eigenvalue_count": 96,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 256,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 2.0216823890552788e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 7.993605777301127e-14,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.125,
+      "product_denominator_width": 20.0,
+      "product_distinct_level_count": 9,
+      "product_maximum_multiplicity": 70,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 11.907988319206478,
+      "width": 21.401455724347564
+    },
+    {
+      "adjacent_bond_overlap_count": 7,
+      "bond_count": 8,
+      "checked": true,
+      "dimension": 512,
+      "even_sector_dimension": 272,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5071093179231396,
+        "minimum_central_spacing": 0.001019368284163047,
+        "ratio_count": 216,
+        "retained_eigenvalue_count": 218,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -9.32976488487284,
+      "gap": 1.3453880038991315,
+      "ground_energy": -10.675152888771972,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 7.01048395024273e-05,
+      "n": 9,
+      "normalized_gap": 0.05579711751676756,
+      "normalized_gap_ratio_to_product": 0.5021740576509081,
+      "normalized_gap_target": 0.11666666666666667,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 240,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.4934824326792988,
+        "minimum_central_spacing": 0.0015577400059894053,
+        "ratio_count": 190,
+        "retained_eigenvalue_count": 192,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 512,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 2.1127847154656815e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 1.1723955140041653e-13,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.1111111111111111,
+      "product_denominator_width": 22.5,
+      "product_distinct_level_count": 10,
+      "product_maximum_multiplicity": 126,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 13.436988809136166,
+      "width": 24.112141697908136
+    },
+    {
+      "adjacent_bond_overlap_count": 8,
+      "bond_count": 9,
+      "checked": true,
+      "dimension": 1024,
+      "even_sector_dimension": 528,
+      "even_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.5066925925155569,
+        "minimum_central_spacing": 0.0012391969561083016,
+        "ratio_count": 422,
+        "retained_eigenvalue_count": 424,
+        "trim_fraction": 0.1
+      },
+      "exact_integer_matrix_match": true,
+      "finite_degeneracy_collapse_observed": true,
+      "first_excited_energy": -10.522127999992621,
+      "gap": 1.3346361958370654,
+      "ground_energy": -11.856764195829687,
+      "hermitian_residual": 0.0,
+      "interaction_graph_connected": true,
+      "matrix_max_abs_difference": 0,
+      "minimum_full_spectrum_spacing": 5.336527633126309e-06,
+      "n": 10,
+      "normalized_gap": 0.04975761327269161,
+      "normalized_gap_ratio_to_product": 0.4975761327269161,
+      "normalized_gap_target": 0.10500000000000001,
+      "normalized_gap_target_passed": false,
+      "odd_sector_dimension": 496,
+      "odd_sector_level_statistics": {
+        "mean_adjacent_gap_ratio": 0.4968672377325694,
+        "minimum_central_spacing": 0.0017356029220225722,
+        "ratio_count": 396,
+        "retained_eigenvalue_count": 398,
+        "trim_fraction": 0.1
+      },
+      "overlap_distinct_level_count": 1024,
+      "overlap_full_spectrum_simple": true,
+      "parity_block_off_diagonal_residual": 2.916528115885574e-16,
+      "parity_cross_residual": 2.2371143170757382e-17,
+      "parity_orthogonality_residual": 2.220446049250313e-16,
+      "parity_spectrum_max_abs_error": 2.0605739337042905e-13,
+      "product_denominator_gap": 2.5,
+      "product_denominator_normalized_gap": 0.1,
+      "product_denominator_width": 25.0,
+      "product_distinct_level_count": 11,
+      "product_maximum_multiplicity": 252,
+      "reflection_commutator_max_abs_exact": 0,
+      "top_energy": 14.965989309703737,
+      "width": 26.822753505533424
+    }
+  ],
+  "status": "checked_connected_overlap_spectral_boundary",
+  "summary": {
+    "checked_row_count": 7,
+    "degeneracy_collapse_count": 7,
+    "level_statistics_interpretation": "diagnostic_only",
+    "normalized_gap_ratio_max": 0.5745810850067081,
+    "normalized_gap_ratio_min": 0.4975761327269161,
+    "normalized_gap_target_pass_count": 0,
+    "reflection_symmetry_resolved": true,
+    "row_count": 7,
+    "scientific_promotion_accepted": false
+  },
+  "version": "1.0"
+}

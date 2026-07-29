@@ -564,7 +564,46 @@ current_results:
     checked_transcript: ../results/B9_R191_noncommuting_control_transcript_v1.txt
     lean_module: ../B9/ClusterStabilizer/NoncommutingControl.lean
     spectrum_module: ../B9/ClusterStabilizer/SpectrumFormula.lean
-prototype_artifacts:
+  r192_overlapping_control_certificate_v1:
+    status: checked_connected_overlap_spectral_boundary
+    method: b9_r192_connected_overlap_spectral_boundary_v1
+    source: r191_noncommuting_control_certificate_v1
+    experiment_id: B9-R192-connected-overlap-spectral-boundary
+    protocol_hash: 82a4ecb46703068aa3b41a8db082f4b366208d5d6f61a2cdaa9c4eedc8476d56
+    payload_sha256: 79b6a21e9dd5813ca2e3ff42af22ee24a15291c79ce0dde20f33fcd1f3309e7e
+    lean_module_sha256: 94d0d03dee01e39b53b841017dbdfcb29c28bc4301380fe0658223e3e7d6c4bf
+    tool_sha256: dbcd58fe6cb17352bcbcf5fef3554252d2be007c69753356899dcd65c4131926
+    transcript_sha256: 16c4d4d6f9d8403c7e133dc51795802acf0085c9f072affb6566b1350c7e550d
+    requirement_count: 14
+    requirements_passed: 14
+    connected_two_local_support_formalized: true
+    adjacent_bond_overlap_formalized: true
+    local_bond_noncommutation_formalized: true
+    overlapping_operator_hermiticity_formalized: true
+    independent_matrix_replay_complete: true
+    reflection_symmetry_resolved: true
+    finite_spectrum_degeneracy_collapse_observed: true
+    normalized_gap_target_rejected: true
+    all_n_overlapping_spectrum_theorem: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_hardware_execution: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    global_gap_amplification_impossibility: false
+    bqp_separation: false
+    solved_frontier: false
+    new_credit_delta: 0
+    checked_size_count: 7
+    degeneracy_collapse_count: 7
+    normalized_gap_target_pass_count: 0
+    scientific_promotion_accepted: false
+    result: ../results/B9_R192_overlapping_control_certificate_v1.json
+    markdown_report: ../research/B9_R192_overlapping_control_certificate.md
+    checked_transcript: ../results/B9_R192_overlapping_control_transcript_v1.txt
+    lean_module: ../B9/ClusterStabilizer/OverlappingControl.lean
+  prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
   symbolic_gap_skeleton_builder: ../tools/b9_symbolic_gap_skeleton.py
@@ -585,4 +624,5 @@ prototype_artifacts:
   r189_open_chain_operator_semantics_certificate: ../tools/b9_r189_operator_semantics_certificate.py
   r190_open_chain_spectrum_formula_certificate: ../tools/b9_r190_spectrum_formula_certificate.py
   r191_noncommuting_control_certificate: ../tools/b9_r191_noncommuting_control_certificate.py
+  r192_overlapping_control_certificate: ../tools/b9_r192_overlapping_control_certificate.py
   prototype_notes: ../research/B9_prototype_notes.md

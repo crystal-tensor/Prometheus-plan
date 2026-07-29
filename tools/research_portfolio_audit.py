@@ -1397,6 +1397,290 @@ def audit_b9_r191(
     return status
 
 
+def audit_b9_r192(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R192 connected-overlap boundary."""
+    expected_status = "checked_connected_overlap_spectral_boundary"
+    expected_method = "b9_r192_connected_overlap_spectral_boundary_v1"
+    expected_hashes = {
+        "protocol_hash": (
+            "82a4ecb46703068aa3b41a8db082f4b366208d5d6f61a2cdaa9c4eedc8476d56"
+        ),
+        "payload_sha256": (
+            "79b6a21e9dd5813ca2e3ff42af22ee24a15291c79ce0dde20f33fcd1f3309e7e"
+        ),
+        "lean_module_sha256": (
+            "94d0d03dee01e39b53b841017dbdfcb29c28bc4301380fe0658223e3e7d6c4bf"
+        ),
+        "tool_sha256": (
+            "dbcd58fe6cb17352bcbcf5fef3554252d2be007c69753356899dcd65c4131926"
+        ),
+        "transcript_sha256": (
+            "16c4d4d6f9d8403c7e133dc51795802acf0085c9f072affb6566b1350c7e550d"
+        ),
+    }
+    true_fields = [
+        "connected_two_local_support_formalized",
+        "adjacent_bond_overlap_formalized",
+        "local_bond_noncommutation_formalized",
+        "overlapping_operator_hermiticity_formalized",
+        "independent_matrix_replay_complete",
+        "reflection_symmetry_resolved",
+        "finite_spectrum_degeneracy_collapse_observed",
+        "normalized_gap_target_rejected",
+    ]
+    false_fields = [
+        "all_n_overlapping_spectrum_theorem",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_hardware_execution",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "global_gap_amplification_impossibility",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R192 overlapping control certificate")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    tool_path = root / "tools/b9_r192_overlapping_control_certificate.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R192 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    rows = payload.get("spectrum_rows", [])
+    evidence = payload.get("evidence", {})
+    execution = payload.get("execution", {})
+    local = payload.get("local_exact_checks", {})
+    claim_boundary = payload.get("claim_boundary", {})
+
+    protocol_hash = hashlib.sha256(
+        json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = hashlib.sha256(
+        json.dumps(
+            payload_without_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    observed_hashes = {
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": hashlib.sha256(
+            module_path.read_bytes()
+        ).hexdigest(),
+        "tool_sha256": hashlib.sha256(tool_path.read_bytes()).hexdigest(),
+        "transcript_sha256": hashlib.sha256(
+            transcript_path.read_bytes()
+        ).hexdigest(),
+    }
+    if payload.get("status") != expected_status:
+        errors.append("B9 R192 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R192 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R192 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R192 manifest method mismatch")
+    payload_hash_values = {
+        "protocol_hash": payload.get("protocol_sha256"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "lean_module_sha256": evidence.get("module_sha256"),
+        "tool_sha256": evidence.get("tool_sha256"),
+        "transcript_sha256": execution.get("transcript_sha256"),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes[field] != expected:
+            errors.append(f"B9 R192 {field} mismatch")
+        if payload_hash_values.get(field) != expected:
+            errors.append(f"B9 R192 payload {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R192 manifest {field} mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 14
+        or payload.get("requirements_total") != 14
+        or payload.get("requirements_passed") != 14
+        or failed_ids
+        or payload.get("evidence_integrity_complete") is not True
+    ):
+        errors.append("B9 R192 must pass all 14 frozen requirements")
+    if re.search(r"\b(?:sorry|axiom)\b", module):
+        errors.append("B9 R192 source contains a forbidden escape hatch")
+
+    required_theorems = {
+        "nearest_neighbor_support_card",
+        "adjacent_bond_support_intersection",
+        "adjacent_bond_supports_overlap",
+        "first_two_bonds_cover_three_sites",
+        "zzBondSitePauli_isHermitian",
+        "zzBondPauliWord_isHermitian",
+        "zzBondTermOperator_isHermitian",
+        "zzInteractionOperator_isHermitian",
+        "overlappingControlOperator_isHermitian",
+        "twoQubitLeftTiltedOperator_isHermitian",
+        "twoQubitZZOperator_isHermitian",
+        "twoQubit_left_tilted_does_not_commute_with_zz",
+        "overlapCoupling_nonzero",
+        "overlapping_control_structural_boundary",
+    }
+    theorem_names = set(
+        re.findall(
+            r"(?m)^(?:@\[[^\n]+\]\s+)?theorem\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R192 required theorem set is incomplete")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R192 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R192 transcript contains warnings or a timeout")
+
+    if (
+        local.get("bond_support_card") != 2
+        or local.get("adjacent_bond_intersection_card") != 1
+        or local.get("first_two_bonds_union_card") != 3
+        or local.get("commutator_nonzero_exact") is not True
+        or local.get("physical_commutator_max_abs") != 2.0
+    ):
+        errors.append("B9 R192 exact local overlap checks failed")
+
+    if {row.get("n") for row in rows} != set(range(4, 11)) or len(rows) != 7:
+        errors.append("B9 R192 independent row set mismatch")
+    for row in rows:
+        n = row.get("n")
+        if not isinstance(n, int):
+            errors.append(f"B9 R192 spectrum row failed for n={n}")
+            continue
+        if (
+            row.get("dimension") != 2**n
+            or row.get("bond_count") != n - 1
+            or row.get("interaction_graph_connected") is not True
+            or row.get("exact_integer_matrix_match") is not True
+            or row.get("matrix_max_abs_difference") != 0
+            or row.get("hermitian_residual", 1.0) > 1e-12
+            or row.get("reflection_commutator_max_abs_exact") != 0
+            or row.get("parity_block_off_diagonal_residual", 1.0) > 1e-12
+            or row.get("parity_spectrum_max_abs_error", 1.0) > 1e-10
+            or row.get("overlap_distinct_level_count") != 2**n
+            or row.get("overlap_full_spectrum_simple") is not True
+            or row.get("product_distinct_level_count") != n + 1
+            or not math.isclose(
+                row.get("product_denominator_normalized_gap", 0.0),
+                1.0 / n,
+            )
+            or row.get("normalized_gap_target_passed") is not False
+            or row.get("finite_degeneracy_collapse_observed") is not True
+            or row.get("checked") is not True
+        ):
+            errors.append(f"B9 R192 spectrum row failed for n={n}")
+
+    true_claims = set(claim_boundary.get("true_claims", []))
+    false_claims = set(claim_boundary.get("false_claims", []))
+    if (
+        not set(true_fields).issubset(true_claims)
+        or not set(false_fields).issubset(false_claims)
+        or summary.get("checked_row_count") != 7
+        or summary.get("degeneracy_collapse_count") != 7
+        or summary.get("normalized_gap_target_pass_count") != 0
+        or summary.get("scientific_promotion_accepted") is not False
+        or payload.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R192 claim boundary mismatch")
+    for field in true_fields:
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R192 manifest {field} must remain true")
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R192 manifest {field} must remain false")
+    required_report_phrases = [
+        "Full-spectrum degeneracy collapse: `7/7`",
+        "Normalized-gap target passes: `0/7`",
+        "not an all-n spectrum theorem",
+        "not a nonintegrability or quantum-chaos theorem",
+        "No spectral-hardness theorem",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R192 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": payload.get("requirements_passed"),
+        "spectrum_rows": rows,
+        "checked_size_count": len(rows),
+        "degeneracy_collapse_count": summary.get("degeneracy_collapse_count"),
+        "normalized_gap_target_pass_count": summary.get(
+            "normalized_gap_target_pass_count"
+        ),
+        "scientific_promotion_accepted": summary.get(
+            "scientific_promotion_accepted"
+        ),
+        "normalized_gap_ratio_min": summary.get("normalized_gap_ratio_min"),
+        "normalized_gap_ratio_max": summary.get("normalized_gap_ratio_max"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R192") for message in errors
+        ),
+        **{field: field in true_claims for field in true_fields},
+        **{field: field not in false_claims for field in false_fields},
+        "new_credit_delta": payload.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -39404,6 +39688,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r192 = b9_results.get("r192_overlapping_control_certificate_v1")
+    b9_r192_status = audit_b9_r192(
+        root,
+        b9_r192,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -49804,6 +50095,7 @@ def audit(root: Path) -> dict:
             "r189_open_chain_operator_semantics_certificate": b9_r189_status,
             "r190_open_chain_spectrum_formula_certificate": b9_r190_status,
             "r191_noncommuting_control_certificate": b9_r191_status,
+            "r192_overlapping_control_certificate": b9_r192_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -49848,6 +50140,7 @@ def audit(root: Path) -> dict:
             "r189_b9_open_chain_operator_semantics_certificate": b9_r189_status,
             "r190_b9_open_chain_spectrum_formula_certificate": b9_r190_status,
             "r191_b9_noncommuting_control_certificate": b9_r191_status,
+            "r192_b9_overlapping_control_certificate": b9_r192_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -54005,6 +54298,11 @@ def markdown_report(report: dict) -> str:
             f"- R191 requirements / evidence integrity: {report['b9']['r191_noncommuting_control_certificate'].get('requirements_passed')} / {report['b9']['r191_noncommuting_control_certificate'].get('evidence_integrity_complete')}",
             f"- R191 local eigenpairs / local spectrum / noncommutation / non-scalar-X: {report['b9']['r191_noncommuting_control_certificate'].get('exact_local_eigenpairs_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('exact_local_spectrum_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('local_noncommutation_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('not_scalar_x_formalized')}",
             f"- R191 finite product replay / cluster conjugation / integrable control / overlapping spectrum / hardness / credit: {report['b9']['r191_noncommuting_control_certificate'].get('finite_product_spectrum_replayed')} / {report['b9']['r191_noncommuting_control_certificate'].get('cluster_conjugation_replayed')} / {report['b9']['r191_noncommuting_control_certificate'].get('noncommuting_integrable_negative_control')} / {report['b9']['r191_noncommuting_control_certificate'].get('overlapping_noncommuting_spectrum_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('spectral_hardness_theorem')} / {report['b9']['r191_noncommuting_control_certificate'].get('new_credit_delta')}",
+            f"- R192 connected-overlap status: {report['b9']['r192_overlapping_control_certificate'].get('status')}",
+            f"- R192 requirements / evidence integrity: {report['b9']['r192_overlapping_control_certificate'].get('requirements_passed')} / {report['b9']['r192_overlapping_control_certificate'].get('evidence_integrity_complete')}",
+            f"- R192 support / overlap / local-bond noncommutation / Hermitian: {report['b9']['r192_overlapping_control_certificate'].get('connected_two_local_support_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('adjacent_bond_overlap_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('local_bond_noncommutation_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('overlapping_operator_hermiticity_formalized')}",
+            f"- R192 checked sizes / degeneracy collapse / normalized target passes / promotion: {report['b9']['r192_overlapping_control_certificate'].get('checked_size_count')} / {report['b9']['r192_overlapping_control_certificate'].get('degeneracy_collapse_count')} / {report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_target_pass_count')} / {report['b9']['r192_overlapping_control_certificate'].get('scientific_promotion_accepted')}",
+            f"- R192 normalized-gap ratio range / nonintegrability / chaos / hardness / credit: {report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_ratio_min')}..{report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_ratio_max')} / {report['b9']['r192_overlapping_control_certificate'].get('nonintegrability_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('quantum_chaos_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('spectral_hardness_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

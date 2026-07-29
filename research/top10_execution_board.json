@@ -135,18 +135,18 @@
       "title": "Classical verification of quantum outputs"
     },
     {
-      "30_day_gate": "Formalize the all-n R191 tensor-product spectrum, then add the smallest locality-explicit overlapping noncommuting term that destroys disjoint-site decomposition and test its normalized gap under a preregistered coupling interval.",
+      "30_day_gate": "Sweep a frozen bounded coupling interval around R192, resolve every declared spatial symmetry, and adversarially search for low-weight conserved operators, free-fermion structure, or other exact integrable escapes before considering any restricted hardness statement.",
       "b_id": "B9",
-      "current_maturity": "checked_noncommuting_integrable_negative_control",
+      "current_maturity": "checked_connected_overlap_spectral_boundary",
       "dependencies": [
         "B10"
       ],
       "downstream_translation_route": "Deferred until a restricted theorem or reusable negative lemma is formalized.",
       "kill_condition": "Keep only as a negative-result track unless a restricted theorem target becomes precise and independently proof-checked.",
-      "next_artifact": "B9 T-B9-006 overlapping noncommuting perturbation contract, all-n product theorem, and normalized-gap target.",
+      "next_artifact": "B9 T-B9-007 bounded coupling sweep and conserved-operator/free-fermion escape search.",
       "priority_lane": "theory_and_negative_results",
       "problem_id": 17,
-      "strongest_evidence": "R187-R191 form a pinned Lean 4.12.0/Mathlib proof chain. R190 solves the complete spectrum of one commuting open-chain control family. R191 defines A=-X+(3/4)Z and formally proves exact local eigenpairs and spectrum, Hermiticity, strict noncommutation with X, non-scalar-X structure, support, and normalized-boundary facts. Independent rational bit-action replays for n=4,5,6,7 match (5/4)(2k-n) with multiplicity choose(n,k), gap 5/2, width 5n/2, normalized gap 1/n, and exact cluster-phase conjugation. The certificate and audit pass 12/12. This is a noncommuting but integrable negative control because global X/Z pieces do not commute while disjoint-site regrouped blocks do. No overlapping-spectrum, spectral-hardness, hardware, Quantum PCP, NLTS, BQP, solved-frontier, or new-credit claim is made.",
+      "strongest_evidence": "R187-R192 form a pinned Lean 4.12.0/Mathlib and independent-replay chain. R191 is a noncommuting but disjoint-site-integrable negative control. R192 adds connected nearest-neighbor (1/2) Z_i Z_{i+1} overlap. Lean proves exact two-site support, adjacent-support overlap, three-site coverage, Hermiticity, and a concrete nonzero adjacent commutator, with no sorry or axiom. Independent exact integer bit-action and Kronecker Pauli-word constructions match for n=4..10; all seven complete spectra are simple and exact reflection sectors reassemble each full spectrum. The preregistered normalized-gap target passes 0/7, with overlap/product normalized-gap ratios 0.4976..0.5746. The certificate and audit pass 14/14. This is a finite-size connected-overlap negative boundary; no nonintegrability, chaos, all-n overlapping spectrum, spectral hardness, hardware, Quantum PCP, NLTS, BQP, solved-frontier, or new-credit claim is made.",
       "title": "Quantum PCP and local Hamiltonian hardness"
     },
     {

@@ -15,5 +15,6 @@ lean_lib B9 where
     `B9.ClusterStabilizer.OpenChainHamiltonian,
     `B9.ClusterStabilizer.OperatorSemantics,
     `B9.ClusterStabilizer.SpectrumFormula,
-    `B9.ClusterStabilizer.NoncommutingControl
+    `B9.ClusterStabilizer.NoncommutingControl,
+    `B9.ClusterStabilizer.OverlappingControl
   ]

@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R191. R187 is a checked
+The current B9 formal line spans R187 through R192. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -172,6 +172,32 @@ spectrum, overlapping noncommuting terms, spectral hardness, hardware,
 Quantum PCP, NLTS, BQP separation, or a solved frontier. New credit remains
 zero. The next gate is the smallest locality-explicit overlapping perturbation
 that destroys this disjoint-site decomposition.
+
+R192 executes that overlapping perturbation gate. It adds nearest-neighbor
+`(1/2) Z_i Z_{i+1}` terms to the R191 product control. Lean proves exact
+two-site supports, adjacent-support overlap, three-site coverage by consecutive
+bonds, Hermiticity of the bond and full operators, and a concrete nonzero
+commutator between a tilted one-site block and its adjacent `ZZ` bond. The
+formal module contains no `sorry` or `axiom`.
+
+Two independent integer constructions, one using direct bit actions and one
+using Kronecker Pauli words, build exactly identical matrices for `n=4..10`.
+All seven complete spectra are simple, so the R191 binomial degeneracy is
+destroyed. Exact reflection symmetry is resolved before adjacent-gap statistics
+are computed. The preregistered normalized-gap promotion target nevertheless
+passes `0/7`: the overlap-to-product normalized-gap ratio is only
+`0.4976..0.5746`. The certificate and audit pass `14/14`; protocol
+`82a4ecb4...`; Lean module `94d0d03d...`; transcript `16c4d4d6...`; payload
+`79b6a21e...`.
+
+R192 therefore establishes a checked finite-size boundary, not a hardness
+result: connected overlap destroys the easy product degeneracy but worsens the
+normalized gap under the frozen denominator. The adjacent-gap ratio remains a
+diagnostic, not a nonintegrability or chaos claim. No all-`n` overlapping
+spectrum theorem, spectral-hardness theorem, hardware evidence, Quantum PCP,
+NLTS, BQP separation, solved frontier, or new credit is claimed. The next gate
+is a bounded coupling sweep plus an adversarial search for low-weight conserved
+operators and free-fermion or other integrable escape routes.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

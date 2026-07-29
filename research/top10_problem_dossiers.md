@@ -1056,15 +1056,27 @@ certificate and audit pass 12/12. This is a noncommuting but integrable
 negative control because the global X/Z pieces do not commute while disjoint
 site blocks do.
 
-**Remaining path to a serious solution:** formalize the all-`n` R191
-tensor-product spectrum in Lean, then add the smallest locality-explicit
-overlapping noncommuting term that destroys disjoint-site decomposition.
-Preregister its coupling interval and normalized-gap target, independently
-replay the finite spectra, and seek a restricted bound, counterexample, or
-no-go statement. The present result is not a spectral-hardness theorem,
-arbitrary-local-Hamiltonian theorem, Quantum PCP result, or NLTS theorem.
+T-B9-006 adds R192, the first checked connected-overlap control. It augments
+the R191 product Hamiltonian with nearest-neighbor `(1/2) Z_i Z_{i+1}` bonds.
+Lean proves exact bond supports, adjacent-support overlap, three-site coverage,
+Hermiticity of the bond and full operators, and a concrete nonzero commutator
+between a tilted site block and its adjacent bond. Independent exact integer
+bit-action and Kronecker Pauli-word matrices agree for `n=4..10`. All seven
+complete spectra are simple, and exact reflection sectors reassemble each full
+spectrum. The preregistered normalized-gap target passes `0/7`; the
+overlap/product normalized-gap ratio is `0.4976..0.5746`. The certificate and
+audit pass `14/14`.
 
-**Current internal maturity:** 31/100.
+**Remaining path to a serious solution:** sweep a frozen bounded interval of
+overlap couplings, resolve all declared spatial symmetries, and search
+adversarially for low-weight conserved operators, Jordan-Wigner/free-fermion
+structure, or another exact integrable escape. Only a stable, independently
+replayed signal that survives those attacks can motivate a restricted
+nonintegrability or hardness statement. R192 is not an all-`n` overlapping
+spectrum theorem, spectral-hardness theorem, arbitrary-local-Hamiltonian
+theorem, Quantum PCP result, NLTS theorem, BQP separation, or solved frontier.
+
+**Current internal maturity:** 33/100.
 
 ## B10: Mapping the Boundary of BQP
 

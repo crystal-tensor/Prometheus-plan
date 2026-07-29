@@ -74,10 +74,10 @@
     },
     {
       "b_id": "B9",
-      "current_evidence": "R187-R190 form a checked Lean control chain for uniform scaling, all-n locality, explicit complex operators, and the complete commuting-family spectrum. T-B9-005/T-B10-016j completes R191 with the exact local block A=-X+(3/4)Z. Lean proves exact eigenpairs and local spectrum, Hermiticity, strict noncommutation with X, non-scalar-X structure, support, and normalized-boundary facts. Independent rational bit-action replays for n=4,5,6,7 match the complete product spectrum (5/4)(2k-n) with multiplicity choose(n,k), gap 5/2, width 5n/2, normalized gap 1/n, and exact cluster-phase conjugation. The certificate and audit pass 12/12. R191 is a noncommuting but integrable negative control because global X/Z pieces do not commute while disjoint-site regrouped blocks do.",
-      "gate_status": "checked_noncommuting_integrable_negative_control",
-      "main_blocker": "R191 proves that noncommutation alone does not imply spectral hardness. The all-n R191 product spectrum is not yet formalized in Lean, and no locality-explicit overlapping noncommuting perturbation has destroyed the disjoint-site block decomposition.",
-      "next_experiment": "Formalize the all-n R191 tensor-product spectrum, then preregister the smallest overlapping noncommuting perturbation with explicit support, coupling interval, denominator, finite sizes, and normalized-gap target.",
+      "current_evidence": "R187-R192 form a checked Lean and independent-replay control chain. R191 is a noncommuting but disjoint-site-integrable negative control. T-B9-006 completes R192 by adding nearest-neighbor (1/2) Z_i Z_{i+1} overlap. Lean proves exact two-site supports, adjacent-support overlap, three-site coverage, Hermiticity, and a concrete nonzero adjacent commutator, with no sorry or axiom. Independent exact integer bit-action and Kronecker Pauli-word constructions match for n=4..10; all seven complete spectra are simple and exact reflection sectors reassemble each full spectrum. The preregistered normalized-gap target passes 0/7, with overlap/product normalized-gap ratios 0.4976..0.5746. The certificate and audit pass 14/14.",
+      "gate_status": "checked_connected_overlap_spectral_boundary",
+      "main_blocker": "R192 destroys the R191 product degeneracy but fails the normalized-gap promotion target on all seven checked sizes. Adjacent-gap ratios remain finite-size diagnostics, and low-weight conserved operators, free-fermion structure, and other exact integrable escapes have not yet been excluded.",
+      "next_experiment": "Run T-B9-007: sweep a frozen bounded coupling interval, resolve all declared spatial symmetries, and adversarially search for low-weight conserved operators, Jordan-Wigner/free-fermion structure, or another exact integrable escape.",
       "technical_solution_target": "Formal restricted theorem or negative lemma about gap amplification/local-Hamiltonian hardness."
     },
     {
