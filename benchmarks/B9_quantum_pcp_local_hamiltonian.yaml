@@ -696,6 +696,56 @@ current_results:
     new_credit_delta: 0
     result: ../results/B9_R194_higher_range_charge_stress_v1.json
     markdown_report: ../research/B9_R194_higher_range_charge_stress.md
+  r195_multiscale_tail_charge_stress_v1:
+    status: checked_multiscale_tail_charge_boundary
+    method: b9_r195_multiscale_tail_charge_stress_v1
+    source: r194_higher_range_charge_stress_v1
+    experiment_id: B9-R195-multiscale-tail-charge-stress
+    protocol_hash: a03648ca52fba89b66f2ffaf065a69cfe8db22299a3aa82eb55f963721a05fb5
+    payload_sha256: 8d40e36ee574326cf6650ab686a8430ee824d24fd929cd5a49d7c1cdb9b95f9e
+    tool_sha256: 8b01836407d936e748ef1c7bf3eb1019201db63549fd6ce3a117abb15967975e
+    r193_dependency_sha256: 3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143
+    r194_dependency_sha256: 67918eb61c2ad58f429e6fc5aae3f4066f128b7a10bc461a9f0cfcd6550b9af8
+    r194_result_sha256: 0b1eaeb5b440bee70481b9945aeb24908f2f58c7f140ccba0374346ea07ad5ee
+    requirement_count: 16
+    requirements_passed: 16
+    r195_holdout_couplings_unseen_before_protocol_freeze: true
+    complete_range_six_nullity_two_on_four_holdout_rows: true
+    translation_summed_range_seven_nullity_two_on_four_holdout_rows: true
+    range_six_boundary_dressing_nullity_two_on_four_holdout_rows: true
+    zero_coupling_controls_detect_extra_conserved_charges: true
+    r194_candidate_survives_declared_multiscale_tail_adversaries: true
+    all_coupling_theorem: false
+    all_size_theorem: false
+    range_eight_or_longer_tail_exclusion: false
+    arbitrary_boundary_dressing_exclusion: false
+    complete_quasi_local_charge_exclusion: false
+    nonlocal_duality_exclusion: false
+    nonstandard_fermionization_exclusion: false
+    interacting_integrability_exclusion: false
+    complete_integrability_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    solved_frontier: false
+    complete_range_six_row_count: 4
+    complete_range_six_nullity_two_count: 4
+    translation_range_seven_row_count: 4
+    translation_range_seven_nullity_two_count: 4
+    boundary_dressed_row_count: 4
+    boundary_dressed_nullity_two_count: 4
+    complete_zero_control_nullity: 2268
+    translation_zero_control_nullity: 2509
+    boundary_zero_control_nullity: 701
+    positive_control_pass_count: 3
+    scoped_multiscale_tail_boundary_accepted: true
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    result: ../results/B9_R195_multiscale_tail_charge_stress_v1.json
+    markdown_report: ../research/B9_R195_multiscale_tail_charge_stress.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -720,4 +770,5 @@ current_results:
   r192_overlapping_control_certificate: ../tools/b9_r192_overlapping_control_certificate.py
   r193_coupling_integrability_stress: ../tools/b9_r193_coupling_integrability_stress.py
   r194_higher_range_charge_stress: ../tools/b9_r194_higher_range_charge_stress.py
+  r195_multiscale_tail_charge_stress: ../tools/b9_r195_multiscale_tail_charge_stress.py
   prototype_notes: ../research/B9_prototype_notes.md

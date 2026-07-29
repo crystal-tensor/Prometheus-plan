@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R194. R187 is a checked
+The current B9 formal line spans R187 through R195. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -244,6 +244,26 @@ charge surface, but does not exclude range-seven or longer quasi-local tails,
 site-dependent/nonlocal dualities, nonstandard fermionizations, interacting
 integrability, or finite-size drift. No nonintegrability, chaos, hardness,
 Quantum PCP, NLTS, BQP, solved-frontier, or new-credit claim is made.
+
+R195 expands that finite-charge boundary along three axes using two newly
+frozen couplings, `J=53/128` and `J=69/128`. Complete position-dependent
+range-six searches at `n=8,9` have exact nullity two on `4/4` rows.
+Translation-summed range-seven searches at `n=9,10` each contain `12,289`
+candidate columns and have exact nullity two on `4/4` rows. A third family
+adds independent left/right Pauli boundary corrections through range three
+to every bulk translation sum through range six; its `3,169`-column searches
+also have exact nullity two on `4/4` rows.
+
+The same three adversaries recover `J=0` nullities `2,268`, `2,509`, and
+`701`, so the null results are not detector blindness. Two complete
+executions are byte-identical, and an independent implementation rebuilds
+every basis, commutator matrix, digest, and modular rank. R195 passes
+`16/16`; protocol `a03648ca...`; payload `8d40e36e...`. It does not exclude
+range-eight or longer tails, boundary corrections beyond range three,
+size-dependent or nonlocal boundary structures, nonlocal dualities,
+nonstandard fermionizations, interacting integrability, or finite-size
+drift. Nonintegrability, chaos, hardness, Quantum PCP, NLTS, BQP,
+solved-frontier status, and new credit remain unclaimed.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

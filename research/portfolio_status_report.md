@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 38, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 42, 'B10': 53}
 
 ## Technical Resolution Program
 
@@ -2633,6 +2633,12 @@ Overall audit: PASS
 - R194 complete range-five rows / nullity-two / range-six challenge: 12 / 12 / 1
 - R194 translation range-six rows / nullity-two / positive controls: 12 / 12 / 2
 - R194 complete/translation J=0 nullity / scientific promotion / complete integrability exclusion / credit: 798 / 673 / False / False / 0
+- R195 multiscale tail-charge status: checked_multiscale_tail_charge_boundary
+- R195 requirements / evidence integrity: 16 / True
+- R195 complete range-six rows / nullity-two: 4 / 4
+- R195 translation range-seven rows / nullity-two: 4 / 4
+- R195 boundary-dressed rows / nullity-two / positive controls: 4 / 4 / 3
+- R195 complete/translation/boundary J=0 nullity / scientific promotion / complete integrability exclusion / credit: 2268 / 2509 / 701 / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

@@ -1101,17 +1101,31 @@ byte-deterministic, and the independent portfolio audit rebuilds all
 commutator matrices and ranks. The certificate passes `14/14`; protocol
 `9e2ad9df...`; payload `6349353a...`.
 
-**Remaining path to a serious solution:** extend the complete
-position-dependent range-six certificate beyond one size/coupling, then
-attack range-seven/eight and explicit quasi-local tails, site-dependent or
+T-B9-009 adds R195, a multiscale tail and finite-boundary stress. Two
+previously unseen couplings, `J=53/128` and `J=69/128`, are frozen before
+execution. Complete position-dependent range-six searches at `n=8,9` have
+exact nullity two on `4/4` rows. Translation-summed range-seven searches at
+`n=9,10` each contain `12,289` candidate columns and have exact nullity two
+on `4/4` rows. A boundary-dressed family adds independent left/right Pauli
+corrections through range three to every bulk translation sum through range
+six; its `3,169`-column searches also have exact nullity two on `4/4` rows.
+
+At `J=0`, the three adversaries recover modular nullities `2,268`, `2,509`,
+and `701`. Two complete executions are byte-identical, and an independent
+implementation rebuilds every basis, commutator matrix, digest, and modular
+rank. R195 passes `16/16`; protocol `a03648ca...`; payload `8d40e36e...`.
+
+**Remaining path to a serious solution:** extend complete range six to
+`n=10`, then attack range-eight and longer quasi-local tails, boundary
+corrections beyond range three, size-dependent/nonlocal boundary structures,
 nonlocal dualities, nonstandard fermionizations, interacting integrability,
-and larger sparse spectra under newly frozen holdouts. R194 narrows a
-finite-range conserved-charge surface; it is not a complete integrability
+and larger sparse spectra under newly frozen holdouts. R195 narrows three
+finite conserved-charge ansatz families; it is not a complete integrability
 exclusion, nonintegrability or chaos theorem, spectral-hardness theorem,
 arbitrary-local-Hamiltonian theorem, Quantum PCP result, NLTS theorem, BQP
 separation, or solved frontier.
 
-**Current internal maturity:** 38/100.
+**Current internal maturity:** 42/100.
 
 ## B10: Mapping the Boundary of BQP
 
