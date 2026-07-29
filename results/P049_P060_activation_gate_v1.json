@@ -1,0 +1,128 @@
+{
+  "schema_version": "p049_p060_activation_gate_result_v1",
+  "status": "pass",
+  "source": {
+    "packet": "benchmarks/P049_P060_activation_gate_v1.json",
+    "packet_sha256": "811e3f5a8f5d93e734969bda513411257dc4366f75cbf897ee95d2a65c65eb9a",
+    "canonical_packet_sha256": "ac6c0b025fb26fd3d4b5e8dffe66284d45d7dd66973d4e3ada8ee1cca66627e0",
+    "catalog": "research/problem_catalog_100.json",
+    "catalog_sha256": "f497e5fd6dfb8362ea4b23f6150cc0e1397f6dd8d8686aa5b0b189751dcf245b"
+  },
+  "scope": {
+    "problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "claim_level": "activation_gate_only",
+    "catalog_mutation": false,
+    "human_or_animal_intervention": false,
+    "scope_exclusions": [
+      "No problem outside catalog IDs 049-060.",
+      "No clinical, public-health, animal, or genome-editing intervention is executed.",
+      "No database size, retrospective fit, or protocol design is promoted as a solved-frontier result.",
+      "No causal, therapeutic, safety, or generalization claim is earned by this activation packet."
+    ]
+  },
+  "summary": {
+    "problem_count": 12,
+    "problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "check_count": 13,
+    "passed_checks": 13,
+    "failed_checks": 0,
+    "readiness_counts": {
+      "protocol_only_high_stakes": 3,
+      "ready_after_access": 5,
+      "ready_for_public_replay": 4
+    }
+  },
+  "checks": [
+    {
+      "name": "exact_scope_ids",
+      "passed": true,
+      "detail": "observed=[49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]"
+    },
+    {
+      "name": "declared_scope_ids",
+      "passed": true,
+      "detail": "declared=[49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]"
+    },
+    {
+      "name": "activation_claim_only",
+      "passed": true,
+      "detail": "claim_level=activation_gate_only"
+    },
+    {
+      "name": "catalog_not_mutated",
+      "passed": true,
+      "detail": "catalog_mutation=False"
+    },
+    {
+      "name": "no_intervention_executed",
+      "passed": true,
+      "detail": "human_or_animal_intervention=False"
+    },
+    {
+      "name": "required_fields_complete",
+      "passed": true,
+      "detail": "complete"
+    },
+    {
+      "name": "catalog_titles_match",
+      "passed": true,
+      "detail": "match"
+    },
+    {
+      "name": "heuristic_questions",
+      "passed": true,
+      "detail": "non_questions=[]"
+    },
+    {
+      "name": "readiness_enum",
+      "passed": true,
+      "detail": "valid"
+    },
+    {
+      "name": "source_fields_complete",
+      "passed": true,
+      "detail": "complete"
+    },
+    {
+      "name": "source_urls_https",
+      "passed": true,
+      "detail": "valid"
+    },
+    {
+      "name": "gate_fields_nonempty",
+      "passed": true,
+      "detail": "complete"
+    },
+    {
+      "name": "unique_ids",
+      "passed": true,
+      "detail": "count=12 unique=12"
+    }
+  ]
+}
