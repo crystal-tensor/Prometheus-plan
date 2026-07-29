@@ -1,0 +1,1258 @@
+{
+  "checks": [
+    {
+      "detail": "problem_ids=[49, 50]",
+      "name": "exact_scope",
+      "passed": true
+    },
+    {
+      "detail": "pilot=[1.1] holdout=[1.3, 1.5, 1.7]",
+      "name": "pilot_holdout_disjoint",
+      "passed": true
+    },
+    {
+      "detail": "max=3.34993e-07 threshold=1e-05",
+      "name": "p049_denominator_grid_converged",
+      "passed": true
+    },
+    {
+      "detail": "passed=3/3 max_error=2.407421e-06",
+      "name": "p049_candidate_holdouts_pass",
+      "passed": true
+    },
+    {
+      "detail": "max=1e-16 threshold=1e-08",
+      "name": "p049_norm_accounting",
+      "passed": true
+    },
+    {
+      "detail": "failed=2 required=1",
+      "name": "p049_negative_control_detected",
+      "passed": true
+    },
+    {
+      "detail": "total_calls={'budget_matched_random_search': 2048, 'target_only_local_search': 2048, 'off_target_aware_local_search': 2048}",
+      "name": "p050_equal_design_budgets",
+      "passed": true
+    },
+    {
+      "detail": "seeds=8 runs=8",
+      "name": "p050_seed_count",
+      "passed": true
+    },
+    {
+      "detail": "public=['nominal', 'public_dropout_2'] hidden=['hidden_dropout_1', 'hidden_dropout_4', 'hidden_dropout_6_high_crosstalk']",
+      "name": "p050_public_hidden_disjoint",
+      "passed": true
+    },
+    {
+      "detail": "hidden_conditions_available_to_search=false",
+      "name": "p050_hidden_outcomes_unavailable_to_search",
+      "passed": true
+    },
+    {
+      "detail": "candidate=0.203902422143",
+      "name": "p050_off_target_guardrail",
+      "passed": true
+    },
+    {
+      "detail": "candidate_passes=False yield=False off_target=True",
+      "name": "p050_decision_consistent",
+      "passed": true
+    },
+    {
+      "detail": "numerical preflight only",
+      "name": "no_intervention",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.12.6",
+    "scipy": "1.17.1"
+  },
+  "p049": {
+    "candidate_failed_holdout_momenta": [],
+    "candidate_passes": true,
+    "cost_proxy": {
+      "candidate_per_energy": {
+        "pentadiagonal_lu_solves_per_step": 1,
+        "sparse_matvecs_per_step": 1,
+        "steps": 4500
+      },
+      "denominator_per_energy": {
+        "fft_transforms_per_step": 2,
+        "steps": 9000
+      },
+      "negative_control_per_energy": {
+        "sparse_matvecs_per_step": 1,
+        "steps": 4500,
+        "tridiagonal_lu_solves_per_step": 1
+      }
+    },
+    "negative_control_failed_holdout_momenta": [
+      1.3,
+      1.5
+    ],
+    "pilot_excluded_from_acceptance": true,
+    "rows": [
+      {
+        "candidate_fourth_order_cn": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.0,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.937728250297,
+          "spatial_order": 4,
+          "steps": 4500,
+          "transmission_probability": 0.061597854535,
+          "unresolved_probability": 0.000673895167
+        },
+        "candidate_probability_error": 1.14581e-07,
+        "denominator": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.000000000002,
+          "grid_points": 4096,
+          "norm_accounting_error": 2.1074e-12,
+          "reflection_probability": 0.937728225168,
+          "steps": 9000,
+          "transmission_probability": 0.061597969116,
+          "unresolved_probability": 0.000673805717
+        },
+        "denominator_grid_error": 1.69986e-07,
+        "fine_reference": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.000000000005,
+          "grid_points": 8192,
+          "norm_accounting_error": 5.2742e-12,
+          "reflection_probability": 0.937732630285,
+          "steps": 18000,
+          "transmission_probability": 0.061598139102,
+          "unresolved_probability": 0.000669230619
+        },
+        "incident_energy": 0.605,
+        "momentum": 1.1,
+        "negative_control_probability_error": 0.000282160374,
+        "negative_control_second_order_cn": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.0,
+          "grid_points": 4096,
+          "norm_accounting_error": 4e-16,
+          "reflection_probability": 0.938003473225,
+          "spatial_order": 2,
+          "steps": 4500,
+          "transmission_probability": 0.061315808742,
+          "unresolved_probability": 0.000680718034
+        },
+        "split": "pilot"
+      },
+      {
+        "candidate_fourth_order_cn": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.0,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.698209456726,
+          "spatial_order": 4,
+          "steps": 4500,
+          "transmission_probability": 0.301789199778,
+          "unresolved_probability": 1.343496e-06
+        },
+        "candidate_probability_error": 1.29704e-06,
+        "denominator": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.000000000002,
+          "grid_points": 4096,
+          "norm_accounting_error": 2.1847e-12,
+          "reflection_probability": 0.698208159933,
+          "steps": 9000,
+          "transmission_probability": 0.301790496818,
+          "unresolved_probability": 1.343252e-06
+        },
+        "denominator_grid_error": 3.34993e-07,
+        "fine_reference": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.000000000005,
+          "grid_points": 8192,
+          "norm_accounting_error": 4.5144e-12,
+          "reflection_probability": 0.698207837068,
+          "steps": 18000,
+          "transmission_probability": 0.301790831811,
+          "unresolved_probability": 1.331125e-06
+        },
+        "incident_energy": 0.845,
+        "momentum": 1.3,
+        "negative_control_probability_error": 0.001213205919,
+        "negative_control_second_order_cn": {
+          "absorbed_probability": 0.0,
+          "final_norm": 1.0,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.699421345379,
+          "spatial_order": 2,
+          "steps": 4500,
+          "transmission_probability": 0.300577290899,
+          "unresolved_probability": 1.363722e-06
+        },
+        "split": "holdout"
+      },
+      {
+        "candidate_fourth_order_cn": {
+          "absorbed_probability": 3.3e-11,
+          "final_norm": 0.999999999967,
+          "grid_points": 4096,
+          "norm_accounting_error": 1e-16,
+          "reflection_probability": 0.288164024297,
+          "spatial_order": 4,
+          "steps": 4500,
+          "transmission_probability": 0.711835975378,
+          "unresolved_probability": 2.93e-10
+        },
+        "candidate_probability_error": 2.407421e-06,
+        "denominator": {
+          "absorbed_probability": 3.3e-11,
+          "final_norm": 0.999999999967,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.288161616875,
+          "steps": 9000,
+          "transmission_probability": 0.711838382799,
+          "unresolved_probability": 2.92e-10
+        },
+        "denominator_grid_error": 1.06269e-07,
+        "fine_reference": {
+          "absorbed_probability": 3.2e-11,
+          "final_norm": 0.999999999968,
+          "grid_points": 8192,
+          "norm_accounting_error": 1e-16,
+          "reflection_probability": 0.288161510611,
+          "steps": 18000,
+          "transmission_probability": 0.711838489068,
+          "unresolved_probability": 2.89e-10
+        },
+        "incident_energy": 1.125,
+        "momentum": 1.5,
+        "negative_control_probability_error": 0.001499957557,
+        "negative_control_second_order_cn": {
+          "absorbed_probability": 1.9e-11,
+          "final_norm": 0.999999999981,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.289661574441,
+          "spatial_order": 2,
+          "steps": 4500,
+          "transmission_probability": 0.710338425242,
+          "unresolved_probability": 2.98e-10
+        },
+        "split": "holdout"
+      },
+      {
+        "candidate_fourth_order_cn": {
+          "absorbed_probability": 2.29324e-07,
+          "final_norm": 0.999999770676,
+          "grid_points": 4096,
+          "norm_accounting_error": 1e-16,
+          "reflection_probability": 0.054226998994,
+          "spatial_order": 4,
+          "steps": 4500,
+          "transmission_probability": 0.945772771682,
+          "unresolved_probability": 0.0
+        },
+        "candidate_probability_error": 1.20937e-06,
+        "denominator": {
+          "absorbed_probability": 2.44118e-07,
+          "final_norm": 0.999999755882,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.05422577483,
+          "steps": 9000,
+          "transmission_probability": 0.945773981052,
+          "unresolved_probability": 0.0
+        },
+        "denominator_grid_error": 6.5109e-08,
+        "fine_reference": {
+          "absorbed_probability": 2.44113e-07,
+          "final_norm": 0.999999755887,
+          "grid_points": 8192,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.054225839944,
+          "steps": 18000,
+          "transmission_probability": 0.945773915943,
+          "unresolved_probability": 0.0
+        },
+        "incident_energy": 1.445,
+        "momentum": 1.7,
+        "negative_control_probability_error": 0.000559762886,
+        "negative_control_second_order_cn": {
+          "absorbed_probability": 1.43376e-07,
+          "final_norm": 0.999999856624,
+          "grid_points": 4096,
+          "norm_accounting_error": 0.0,
+          "reflection_probability": 0.054785638458,
+          "spatial_order": 2,
+          "steps": 4500,
+          "transmission_probability": 0.945214218166,
+          "unresolved_probability": 0.0
+        },
+        "split": "holdout"
+      }
+    ],
+    "status": "candidate_pass",
+    "summary": {
+      "candidate_passed_holdouts": 3,
+      "holdout_count": 3,
+      "max_candidate_norm_accounting_error": 1e-16,
+      "max_candidate_probability_error": 2.407421e-06,
+      "max_denominator_grid_error": 3.34993e-07,
+      "max_negative_control_probability_error": 0.001499957557,
+      "negative_control_failed_holdouts": 2
+    }
+  },
+  "p050": {
+    "candidate_passes": false,
+    "candidate_yield_gains": {
+      "over_budget_matched_random_search": 0.070323241598,
+      "over_target_only_local_search": 0.014930810326
+    },
+    "hidden_conditions_available_to_search": false,
+    "methods": {
+      "budget_matched_random_search": {
+        "median_hidden_off_target_rate": 0.209378173595,
+        "median_hidden_yield": 0.424070192075,
+        "runs": [
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.495448054995,
+                "assembly_yield": 0.419546112881,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.153198587317
+              },
+              {
+                "all_intended_bonds_probability": 0.53273984408,
+                "assembly_yield": 0.425496011411,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.201306198253
+              },
+              {
+                "all_intended_bonds_probability": 0.495448054995,
+                "assembly_yield": 0.365335585218,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.262615764591
+              }
+            ],
+            "median_hidden_off_target_rate": 0.201306198253,
+            "median_hidden_yield": 0.419546112881,
+            "public_objective": 0.522637037186,
+            "seed": 104729,
+            "tags": [
+              12,
+              43,
+              28,
+              10,
+              63,
+              14,
+              21,
+              58
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.509096303586,
+                "assembly_yield": 0.415108346794,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.184617244576
+              },
+              {
+                "all_intended_bonds_probability": 0.5474153802,
+                "assembly_yield": 0.420908960344,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.231097671771
+              },
+              {
+                "all_intended_bonds_probability": 0.509096303586,
+                "assembly_yield": 0.361062661717,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.290777286785
+              }
+            ],
+            "median_hidden_off_target_rate": 0.231097671771,
+            "median_hidden_yield": 0.415108346794,
+            "public_objective": 0.517373297603,
+            "seed": 130363,
+            "tags": [
+              24,
+              63,
+              9,
+              39,
+              44,
+              23,
+              10,
+              53
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.520682335195,
+                "assembly_yield": 0.439612254277,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.155699695261
+              },
+              {
+                "all_intended_bonds_probability": 0.559873478704,
+                "assembly_yield": 0.445623709516,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.204063549237
+              },
+              {
+                "all_intended_bonds_probability": 0.520682335195,
+                "assembly_yield": 0.382081994555,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.266189826832
+              }
+            ],
+            "median_hidden_off_target_rate": 0.204063549237,
+            "median_hidden_yield": 0.439612254277,
+            "public_objective": 0.54723381672,
+            "seed": 155921,
+            "tags": [
+              10,
+              57,
+              7,
+              46,
+              5,
+              43,
+              22,
+              33
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.514831446016,
+                "assembly_yield": 0.439128422035,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.147044289089
+              },
+              {
+                "all_intended_bonds_probability": 0.553582200017,
+                "assembly_yield": 0.445171923669,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.195834108006
+              },
+              {
+                "all_intended_bonds_probability": 0.514831446016,
+                "assembly_yield": 0.382310406959,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.257406652375
+              }
+            ],
+            "median_hidden_off_target_rate": 0.195834108006,
+            "median_hidden_yield": 0.439128422035,
+            "public_objective": 0.546841524536,
+            "seed": 181081,
+            "tags": [
+              27,
+              49,
+              27,
+              33,
+              31,
+              57,
+              14,
+              57
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.480275459315,
+                "assembly_yield": 0.40571260469,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.155250186491
+              },
+              {
+                "all_intended_bonds_probability": 0.51642522507,
+                "assembly_yield": 0.410967060854,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.204208003592
+              },
+              {
+                "all_intended_bonds_probability": 0.480275459315,
+                "assembly_yield": 0.352651886918,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.265729947099
+              }
+            ],
+            "median_hidden_off_target_rate": 0.204208003592,
+            "median_hidden_yield": 0.40571260469,
+            "public_objective": 0.504971495258,
+            "seed": 206369,
+            "tags": [
+              30,
+              43,
+              42,
+              17,
+              46,
+              50,
+              15,
+              18
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.498426623824,
+                "assembly_yield": 0.409708179081,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.177997001969
+              },
+              {
+                "all_intended_bonds_probability": 0.535942606262,
+                "assembly_yield": 0.415007309428,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.225649715885
+              },
+              {
+                "all_intended_bonds_probability": 0.498426623824,
+                "assembly_yield": 0.356372456999,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.285005174351
+              }
+            ],
+            "median_hidden_off_target_rate": 0.225649715885,
+            "median_hidden_yield": 0.409708179081,
+            "public_objective": 0.510133657901,
+            "seed": 232003,
+            "tags": [
+              61,
+              34,
+              15,
+              17,
+              42,
+              53,
+              0,
+              57
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.529013654397,
+                "assembly_yield": 0.437218653673,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.173521042342
+              },
+              {
+                "all_intended_bonds_probability": 0.568831886448,
+                "assembly_yield": 0.443941833774,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.21955529507
+              },
+              {
+                "all_intended_bonds_probability": 0.529013654397,
+                "assembly_yield": 0.380143110877,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.281411533109
+              }
+            ],
+            "median_hidden_off_target_rate": 0.21955529507,
+            "median_hidden_yield": 0.437218653673,
+            "public_objective": 0.544988865983,
+            "seed": 257591,
+            "tags": [
+              4,
+              46,
+              19,
+              44,
+              57,
+              6,
+              48,
+              46
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.514592252308,
+                "assembly_yield": 0.428594271269,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.167118686014
+              },
+              {
+                "all_intended_bonds_probability": 0.553325002482,
+                "assembly_yield": 0.434610039727,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.214548343599
+              },
+              {
+                "all_intended_bonds_probability": 0.514592252308,
+                "assembly_yield": 0.372560675736,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.276007996497
+              }
+            ],
+            "median_hidden_off_target_rate": 0.214548343599,
+            "median_hidden_yield": 0.428594271269,
+            "public_objective": 0.534060958423,
+            "seed": 283009,
+            "tags": [
+              41,
+              55,
+              30,
+              33,
+              13,
+              55,
+              25,
+              38
+            ]
+          }
+        ],
+        "total_design_calls": 2048
+      },
+      "off_target_aware_local_search": {
+        "median_hidden_off_target_rate": 0.203902422143,
+        "median_hidden_yield": 0.494393433673,
+        "runs": [
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.495724132833,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.156293904647
+              },
+              {
+                "all_intended_bonds_probability": 0.631780077099,
+                "assembly_yield": 0.502871309125,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.204040571469
+              },
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.431045249177,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.266375227639
+              }
+            ],
+            "median_hidden_off_target_rate": 0.204040571469,
+            "median_hidden_yield": 0.495724132833,
+            "public_objective": 0.608172847964,
+            "seed": 104729,
+            "tags": [
+              2,
+              63,
+              32,
+              30,
+              11,
+              52,
+              8,
+              55
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.584273668014,
+                "assembly_yield": 0.495748392582,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.151513375116
+              },
+              {
+                "all_intended_bonds_probability": 0.628251255929,
+                "assembly_yield": 0.502564456935,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.200058173872
+              },
+              {
+                "all_intended_bonds_probability": 0.584273668014,
+                "assembly_yield": 0.430786753848,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.262696956185
+              }
+            ],
+            "median_hidden_off_target_rate": 0.200058173872,
+            "median_hidden_yield": 0.495748392582,
+            "public_objective": 0.607737127637,
+            "seed": 130363,
+            "tags": [
+              55,
+              40,
+              21,
+              32,
+              31,
+              52,
+              3,
+              60
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.574481403683,
+                "assembly_yield": 0.488682741138,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.14934976484
+              },
+              {
+                "all_intended_bonds_probability": 0.617721939444,
+                "assembly_yield": 0.495361941062,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.198082649441
+              },
+              {
+                "all_intended_bonds_probability": 0.574481403683,
+                "assembly_yield": 0.425200695196,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.259852986589
+              }
+            ],
+            "median_hidden_off_target_rate": 0.198082649441,
+            "median_hidden_yield": 0.488682741138,
+            "public_objective": 0.600055879397,
+            "seed": 155921,
+            "tags": [
+              12,
+              63,
+              6,
+              57,
+              14,
+              63,
+              0,
+              15
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.590581193911,
+                "assembly_yield": 0.49564691335,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.160747212304
+              },
+              {
+                "all_intended_bonds_probability": 0.63503354184,
+                "assembly_yield": 0.502615512823,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.20852131469
+              },
+              {
+                "all_intended_bonds_probability": 0.590581193911,
+                "assembly_yield": 0.430556115095,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.27096202938
+              }
+            ],
+            "median_hidden_off_target_rate": 0.20852131469,
+            "median_hidden_yield": 0.49564691335,
+            "public_objective": 0.606965862334,
+            "seed": 181081,
+            "tags": [
+              32,
+              47,
+              53,
+              10,
+              20,
+              43,
+              16,
+              46
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.584273668014,
+                "assembly_yield": 0.493139953996,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.155977787478
+              },
+              {
+                "all_intended_bonds_probability": 0.628251255929,
+                "assembly_yield": 0.500236095619,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.203764272816
+              },
+              {
+                "all_intended_bonds_probability": 0.584273668014,
+                "assembly_yield": 0.429181436095,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.265444500428
+              }
+            ],
+            "median_hidden_off_target_rate": 0.203764272816,
+            "median_hidden_yield": 0.493139953996,
+            "public_objective": 0.604684570167,
+            "seed": 206369,
+            "tags": [
+              8,
+              53,
+              10,
+              33,
+              31,
+              32,
+              14,
+              56
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.498821810076,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.151021760327
+              },
+              {
+                "all_intended_bonds_probability": 0.631780077099,
+                "assembly_yield": 0.505870143485,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.199293928661
+              },
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.433719788064,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.261823250821
+              }
+            ],
+            "median_hidden_off_target_rate": 0.199293928661,
+            "median_hidden_yield": 0.498821810076,
+            "public_objective": 0.612361919426,
+            "seed": 232003,
+            "tags": [
+              9,
+              38,
+              29,
+              42,
+              19,
+              44,
+              57,
+              6
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.574481403683,
+                "assembly_yield": 0.482470694856,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.160163076188
+              },
+              {
+                "all_intended_bonds_probability": 0.617721939444,
+                "assembly_yield": 0.489520114052,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.207539699023
+              },
+              {
+                "all_intended_bonds_probability": 0.574481403683,
+                "assembly_yield": 0.419446074431,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.269870057165
+              }
+            ],
+            "median_hidden_off_target_rate": 0.207539699023,
+            "median_hidden_yield": 0.482470694856,
+            "public_objective": 0.590936885824,
+            "seed": 257591,
+            "tags": [
+              56,
+              11,
+              52,
+              59,
+              44,
+              19,
+              46,
+              17
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.562441377928,
+                "assembly_yield": 0.466602109452,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.170398680178
+              },
+              {
+                "all_intended_bonds_probability": 0.604775675192,
+                "assembly_yield": 0.47273801606,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.21832501628
+              },
+              {
+                "all_intended_bonds_probability": 0.562441377928,
+                "assembly_yield": 0.405438878813,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.279144645605
+              }
+            ],
+            "median_hidden_off_target_rate": 0.21832501628,
+            "median_hidden_yield": 0.466602109452,
+            "public_objective": 0.569507499058,
+            "seed": 283009,
+            "tags": [
+              42,
+              20,
+              59,
+              5,
+              40,
+              3,
+              60,
+              3
+            ]
+          }
+        ],
+        "total_design_calls": 2048
+      },
+      "target_only_local_search": {
+        "median_hidden_off_target_rate": 0.240941333314,
+        "median_hidden_yield": 0.479462623347,
+        "runs": [
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.568610006325,
+                "assembly_yield": 0.459316837331,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.192211124986
+              },
+              {
+                "all_intended_bonds_probability": 0.611408608952,
+                "assembly_yield": 0.466074887051,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.237703100305
+              },
+              {
+                "all_intended_bonds_probability": 0.568610006325,
+                "assembly_yield": 0.398901654068,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.298461775855
+              }
+            ],
+            "median_hidden_off_target_rate": 0.237703100305,
+            "median_hidden_yield": 0.459316837331,
+            "public_objective": 0.791666666667,
+            "seed": 104729,
+            "tags": [
+              1,
+              46,
+              18,
+              45,
+              1,
+              60,
+              1,
+              54
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.655936210877,
+                "assembly_yield": 0.52231895552,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.203704648624
+              },
+              {
+                "all_intended_bonds_probability": 0.705307753631,
+                "assembly_yield": 0.529996368263,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.248560127781
+              },
+              {
+                "all_intended_bonds_probability": 0.655936210877,
+                "assembly_yield": 0.45434395124,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.307335158959
+              }
+            ],
+            "median_hidden_off_target_rate": 0.248560127781,
+            "median_hidden_yield": 0.52231895552,
+            "public_objective": 0.895833333333,
+            "seed": 130363,
+            "tags": [
+              52,
+              10,
+              49,
+              12,
+              51,
+              12,
+              49,
+              14
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.568610006325,
+                "assembly_yield": 0.472334753129,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.169316846566
+              },
+              {
+                "all_intended_bonds_probability": 0.611408608952,
+                "assembly_yield": 0.478945834541,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.216651797948
+              },
+              {
+                "all_intended_bonds_probability": 0.568610006325,
+                "assembly_yield": 0.410638807591,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.277819941572
+              }
+            ],
+            "median_hidden_off_target_rate": 0.216651797948,
+            "median_hidden_yield": 0.472334753129,
+            "public_objective": 0.791666666667,
+            "seed": 155921,
+            "tags": [
+              1,
+              46,
+              0,
+              31,
+              24,
+              47,
+              16,
+              15
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.604021661523,
+                "assembly_yield": 0.470758097746,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.220627126916
+              },
+              {
+                "all_intended_bonds_probability": 0.649485657552,
+                "assembly_yield": 0.477675309266,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.264532936622
+              },
+              {
+                "all_intended_bonds_probability": 0.604021661523,
+                "assembly_yield": 0.4086507742,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.323450133942
+              }
+            ],
+            "median_hidden_off_target_rate": 0.264532936622,
+            "median_hidden_yield": 0.470758097746,
+            "public_objective": 0.833333333333,
+            "seed": 181081,
+            "tags": [
+              39,
+              42,
+              53,
+              10,
+              21,
+              10,
+              21,
+              46
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.492640362305,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.161542380199
+              },
+              {
+                "all_intended_bonds_probability": 0.631780077099,
+                "assembly_yield": 0.49931780675,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.20966515905
+              },
+              {
+                "all_intended_bonds_probability": 0.587555471703,
+                "assembly_yield": 0.428186894657,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.271240052593
+              }
+            ],
+            "median_hidden_off_target_rate": 0.20966515905,
+            "median_hidden_yield": 0.492640362305,
+            "public_objective": 0.8125,
+            "seed": 206369,
+            "tags": [
+              16,
+              63,
+              0,
+              43,
+              21,
+              40,
+              19,
+              44
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.659314071957,
+                "assembly_yield": 0.539943354182,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.181052889438
+              },
+              {
+                "all_intended_bonds_probability": 0.70893986232,
+                "assembly_yield": 0.547546267877,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.22765484496
+              },
+              {
+                "all_intended_bonds_probability": 0.659314071957,
+                "assembly_yield": 0.469428140883,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.28800527571
+              }
+            ],
+            "median_hidden_off_target_rate": 0.22765484496,
+            "median_hidden_yield": 0.539943354182,
+            "public_objective": 0.895833333333,
+            "seed": 232003,
+            "tags": [
+              58,
+              37,
+              27,
+              38,
+              25,
+              38,
+              26,
+              37
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.581280261127,
+                "assembly_yield": 0.444886644382,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.234643468678
+              },
+              {
+                "all_intended_bonds_probability": 0.625032538847,
+                "assembly_yield": 0.451244807812,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.278045893987
+              },
+              {
+                "all_intended_bonds_probability": 0.581280261127,
+                "assembly_yield": 0.38653439292,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.335029212637
+              }
+            ],
+            "median_hidden_off_target_rate": 0.278045893987,
+            "median_hidden_yield": 0.444886644382,
+            "public_objective": 0.8125,
+            "seed": 257591,
+            "tags": [
+              60,
+              2,
+              60,
+              17,
+              44,
+              7,
+              60,
+              3
+            ]
+          },
+          {
+            "design_calls": 256,
+            "hidden_conditions": [
+              {
+                "all_intended_bonds_probability": 0.607132179327,
+                "assembly_yield": 0.486590493564,
+                "condition": "hidden_dropout_1",
+                "off_target_structure_rate": 0.198542738909
+              },
+              {
+                "all_intended_bonds_probability": 0.652830300352,
+                "assembly_yield": 0.49342248073,
+                "condition": "hidden_dropout_4",
+                "off_target_structure_rate": 0.244179566323
+              },
+              {
+                "all_intended_bonds_probability": 0.607132179327,
+                "assembly_yield": 0.422654962112,
+                "condition": "hidden_dropout_6_high_crosstalk",
+                "off_target_structure_rate": 0.303850172165
+              }
+            ],
+            "median_hidden_off_target_rate": 0.244179566323,
+            "median_hidden_yield": 0.486590493564,
+            "public_objective": 0.833333333333,
+            "seed": 283009,
+            "tags": [
+              41,
+              20,
+              59,
+              4,
+              59,
+              54,
+              9,
+              22
+            ]
+          }
+        ],
+        "total_design_calls": 2048
+      }
+    },
+    "off_target_guardrail_passes": true,
+    "status": "candidate_fail",
+    "yield_margin_passes": false
+  },
+  "safety_boundary": [
+    "The P049 model is dimensionless numerical scattering, not a chemical prediction or quantum-advantage claim.",
+    "The P050 model is an independent-bond toy preflight, not molecular kinetics, DNA sequence design, or a wet-lab recommendation.",
+    "No biological delivery, environmental release, human or animal intervention, or autonomous active-matter experiment is performed.",
+    "Passing or failing either preflight does not solve catalog problem 049 or 050."
+  ],
+  "schema_version": "p049_p050_executable_preflight_v1",
+  "source": {
+    "benchmark": "benchmarks/P049_P050_executable_preflight_v1.json",
+    "benchmark_sha256": "6fbad4c35d87cfc9fdb79e28a4850ae297916bc2d541c9da4f42f455b5d9f8e8",
+    "tool": "tools/p049_p050_executable_preflight.py",
+    "tool_sha256": "1500bbcffb6e239cf149d2712524835b2173850dfb72d653a925f666af52a02c"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 13,
+    "failed_checks": 0,
+    "p049_decision": "candidate_pass",
+    "p050_decision": "candidate_fail",
+    "passed_checks": 13,
+    "scope_problem_ids": [
+      49,
+      50
+    ]
+  }
+}
