@@ -1,0 +1,225 @@
+{
+  "schema_version": "p049_p050_executable_preflight_v1",
+  "preregistered_at": "2026-07-29",
+  "scope": {
+    "problem_ids": [
+      49,
+      50
+    ],
+    "parent_packet": "benchmarks/P049_P060_activation_gate_v1.json",
+    "claim_level": "numerical_preflight_only",
+    "catalog_mutation": false,
+    "human_animal_or_environmental_intervention": false
+  },
+  "p049": {
+    "title": "Exact Molecular Reaction Dynamics",
+    "heuristic_question": "Can two numerically independent propagators agree on unopened reaction probabilities while a deliberately under-resolved control is rejected?",
+    "model": {
+      "description": "One-dimensional Gaussian-barrier wavepacket scattering in dimensionless atomic units.",
+      "hbar": 1.0,
+      "mass": 1.0,
+      "potential": {
+        "kind": "gaussian_barrier",
+        "height": 1.0,
+        "width": 2.0
+      },
+      "initial_wavepacket": {
+        "center": -55.0,
+        "position_sigma": 4.0
+      },
+      "absorber": {
+        "start_abs_x": 150.0,
+        "outer_abs_x": 160.0,
+        "strength": 1.2,
+        "power": 4
+      },
+      "measurement": {
+        "final_time": 90.0,
+        "separation_abs_x": 8.0,
+        "observable": "right-side transmission probability"
+      }
+    },
+    "working_grid": {
+      "x_min": -160.0,
+      "x_max": 160.0,
+      "points": 4096
+    },
+    "fine_grid": {
+      "x_min": -160.0,
+      "x_max": 160.0,
+      "points": 8192
+    },
+    "propagators": {
+      "denominator": {
+        "name": "strang_split_operator_fft",
+        "time_step": 0.01,
+        "grid": "working_grid"
+      },
+      "fine_reference": {
+        "name": "strang_split_operator_fft",
+        "time_step": 0.005,
+        "grid": "fine_grid"
+      },
+      "candidate": {
+        "name": "fourth_order_space_crank_nicolson",
+        "time_step": 0.02,
+        "grid": "working_grid"
+      },
+      "negative_control": {
+        "name": "second_order_space_crank_nicolson",
+        "time_step": 0.02,
+        "grid": "working_grid"
+      }
+    },
+    "pilot_momenta": [
+      1.1
+    ],
+    "holdout_momenta": [
+      1.3,
+      1.5,
+      1.7
+    ],
+    "acceptance": {
+      "max_probability_error": 0.001,
+      "max_norm_accounting_error": 1e-08,
+      "max_denominator_grid_error": 1e-05,
+      "negative_control_min_failed_holdouts": 1
+    },
+    "sources": [
+      {
+        "publisher": "Journal of Computational Physics",
+        "title": "Solution of the Schrödinger equation by a spectral method",
+        "url": "https://doi.org/10.1016/0021-9991(82)90091-2"
+      },
+      {
+        "publisher": "Molecular Sciences Software Institute",
+        "title": "QCArchive record and computation types",
+        "url": "https://docs.qcarchive.molssi.org/user_guide/records/index.html"
+      }
+    ]
+  },
+  "p050": {
+    "title": "Programmable Self-Assembling Matter",
+    "heuristic_question": "Does an off-target-aware design still clear a ten-point yield margin on an unseen topology and defect panel?",
+    "model": {
+      "description": "Dimensionless independent-bond assembly preflight; not a molecular DNA-origami simulator.",
+      "tag_bits": 6,
+      "node_count": 8,
+      "development_topologies": [
+        {
+          "name": "six_node_cycle",
+          "node_count": 6,
+          "edges": [
+            [0, 1],
+            [1, 2],
+            [2, 3],
+            [3, 4],
+            [4, 5],
+            [0, 5]
+          ]
+        },
+        {
+          "name": "six_node_ladder",
+          "node_count": 6,
+          "edges": [
+            [0, 1],
+            [1, 2],
+            [3, 4],
+            [4, 5],
+            [0, 3],
+            [1, 4],
+            [2, 5]
+          ]
+        }
+      ],
+      "acceptance_topology": {
+        "name": "eight_node_branched_path",
+        "edges": [
+          [0, 1],
+          [1, 2],
+          [2, 3],
+          [3, 4],
+          [4, 5],
+          [5, 6],
+          [6, 7],
+          [1, 6]
+        ]
+      },
+      "bond_model": {
+        "intended_base": 0.89,
+        "intended_specificity_weight": 0.105,
+        "intended_specificity_power": 2,
+        "off_target_base": 0.001,
+        "off_target_specificity_weight": 0.035,
+        "off_target_specificity_power": 4,
+        "dropout_concentration_factor": 0.93
+      },
+      "public_conditions": [
+        {
+          "name": "nominal",
+          "off_target_shift": 0.0,
+          "dropout_node": null
+        },
+        {
+          "name": "public_dropout_2",
+          "off_target_shift": 0.003,
+          "dropout_node": 2
+        }
+      ],
+      "hidden_conditions": [
+        {
+          "name": "hidden_dropout_1",
+          "off_target_shift": 0.005,
+          "dropout_node": 1
+        },
+        {
+          "name": "hidden_dropout_4",
+          "off_target_shift": 0.008,
+          "dropout_node": 4
+        },
+        {
+          "name": "hidden_dropout_6_high_crosstalk",
+          "off_target_shift": 0.012,
+          "dropout_node": 6
+        }
+      ]
+    },
+    "design_protocol": {
+      "runs": 8,
+      "calls_per_run": 256,
+      "paired_seeds": [
+        104729,
+        130363,
+        155921,
+        181081,
+        206369,
+        232003,
+        257591,
+        283009
+      ],
+      "exploration_accept_probability": 0.015,
+      "off_target_objective_weight": 0.1,
+      "methods": [
+        "budget_matched_random_search",
+        "target_only_local_search",
+        "off_target_aware_local_search"
+      ],
+      "hidden_conditions_available_to_search": false
+    },
+    "acceptance": {
+      "minimum_median_yield_gain_over_each_baseline": 0.1,
+      "maximum_off_target_rate_increase": 0.0
+    },
+    "source": {
+      "publisher": "Nature Communications",
+      "title": "Optimising DNA origami assembly by reducing off-target interactions",
+      "url": "https://www.nature.com/articles/s41467-026-73387-4"
+    }
+  },
+  "safety_boundary": [
+    "The P049 model is dimensionless numerical scattering, not a chemical prediction or quantum-advantage claim.",
+    "The P050 model is an independent-bond toy preflight, not molecular kinetics, DNA sequence design, or a wet-lab recommendation.",
+    "No biological delivery, environmental release, human or animal intervention, or autonomous active-matter experiment is performed.",
+    "Passing or failing either preflight does not solve catalog problem 049 or 050."
+  ]
+}
