@@ -2255,6 +2255,684 @@ def audit_b9_r193(
     return status
 
 
+def audit_b9_r194(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R194 higher-range charge stress."""
+    expected_status = "checked_higher_range_local_charge_boundary"
+    expected_method = "b9_r194_higher_range_charge_stress_v1"
+    expected_hashes = {
+        "protocol_hash": (
+            "9e2ad9df2022b6b34eada972666c0b6403aaef9ff217c8ba73cbc5c3130e6f4a"
+        ),
+        "payload_sha256": (
+            "6349353aa3ff0f9abd2ab6967f9c5fb75a6237cc85c85c17f256e2039c62eb35"
+        ),
+        "tool_sha256": (
+            "67918eb61c2ad58f429e6fc5aae3f4066f128b7a10bc461a9f0cfcd6550b9af8"
+        ),
+        "r193_dependency_sha256": (
+            "3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143"
+        ),
+    }
+    true_fields = [
+        "engineering_probe_excluded_from_acceptance",
+        "frozen_holdout_couplings_recorded_before_execution",
+        "complete_range_five_nullity_two_on_frozen_holdouts",
+        "complete_range_six_challenge_nullity_two",
+        "translation_summed_range_six_nullity_two_on_frozen_holdouts",
+        "zero_coupling_controls_detect_extra_conserved_charges",
+        "r193_candidate_survives_declared_higher_range_adversaries",
+    ]
+    false_fields = [
+        "all_coupling_theorem",
+        "all_size_theorem",
+        "complete_quasi_local_charge_exclusion",
+        "site_dependent_nonlocal_duality_exclusion",
+        "nonstandard_fermionization_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R194 higher-range charge stress")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    tool_path = root / "tools/b9_r194_higher_range_charge_stress.py"
+    r193_tool_path = root / "tools/b9_r193_coupling_integrability_stress.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "tool": tool_path,
+        "r193 dependency": r193_tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R194 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    protocol = payload.get("protocol", {})
+    requirements = payload.get("requirements", [])
+    summary = payload.get("summary", {})
+    complete_rows = payload.get("complete_range_five_rows", [])
+    challenge = payload.get("complete_range_six_challenge_row", {})
+    translation_rows = payload.get("translation_range_six_rows", [])
+    controls = payload.get("positive_controls", {})
+    claim_boundary = payload.get("claim_boundary", {})
+    evidence = payload.get("evidence", {})
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode(
+                "utf-8"
+            )
+        ).hexdigest()
+
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    observed_hashes = {
+        "protocol_hash": canonical_hash(protocol),
+        "payload_sha256": canonical_hash(payload_without_hash),
+        "tool_sha256": hashlib.sha256(tool_path.read_bytes()).hexdigest(),
+        "r193_dependency_sha256": hashlib.sha256(
+            r193_tool_path.read_bytes()
+        ).hexdigest(),
+    }
+    payload_hashes = {
+        "protocol_hash": payload.get("protocol_sha256"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "tool_sha256": evidence.get("tool_sha256"),
+        "r193_dependency_sha256": evidence.get("r193_dependency_sha256"),
+    }
+    if payload.get("status") != expected_status:
+        errors.append("B9 R194 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R194 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R194 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R194 manifest method mismatch")
+    for field, expected in expected_hashes.items():
+        if observed_hashes.get(field) != expected:
+            errors.append(f"B9 R194 {field} mismatch")
+        if payload_hashes.get(field) != expected:
+            errors.append(f"B9 R194 payload {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R194 manifest {field} mismatch")
+
+    failed_requirements = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 14
+        or payload.get("requirements_total") != 14
+        or payload.get("requirements_passed") != 14
+        or failed_requirements
+        or payload.get("evidence_integrity_complete") is not True
+    ):
+        errors.append("B9 R194 must pass all 14 frozen requirements")
+
+    model = protocol.get("model", {})
+    engineering = set(model.get("engineering_probe_couplings", []))
+    holdouts = set(model.get("frozen_holdout_couplings", []))
+    expected_holdouts = {"23/64", "27/64", "31/64", "35/64"}
+    if (
+        engineering != {"13/32"}
+        or holdouts != expected_holdouts
+        or engineering & holdouts
+        or protocol.get("engineering_probe_disclosure", {}).get(
+            "acceptance_use"
+        )
+        != "none"
+    ):
+        errors.append("B9 R194 preregistration boundary mismatch")
+
+    pauli_product = {
+        ("I", "I"): (1, "I"),
+        ("I", "X"): (1, "X"),
+        ("I", "Y"): (1, "Y"),
+        ("I", "Z"): (1, "Z"),
+        ("X", "I"): (1, "X"),
+        ("Y", "I"): (1, "Y"),
+        ("Z", "I"): (1, "Z"),
+        ("X", "X"): (1, "I"),
+        ("Y", "Y"): (1, "I"),
+        ("Z", "Z"): (1, "I"),
+        ("X", "Y"): (1j, "Z"),
+        ("Y", "X"): (-1j, "Z"),
+        ("Y", "Z"): (1j, "X"),
+        ("Z", "Y"): (-1j, "X"),
+        ("Z", "X"): (1j, "Y"),
+        ("X", "Z"): (-1j, "Y"),
+    }
+
+    def pauli_word(n: int, entries: dict[int, str]) -> str:
+        chars = ["I"] * n
+        for site, value in entries.items():
+            chars[site] = value
+        return "".join(chars)
+
+    def bounded_basis(n: int, max_range: int) -> list[str]:
+        basis = ["I" * n]
+        for span in range(1, max_range + 1):
+            for start in range(n - span + 1):
+                for local in product("IXYZ", repeat=span):
+                    if local[0] == "I" or local[-1] == "I":
+                        continue
+                    chars = ["I"] * n
+                    chars[start : start + span] = local
+                    basis.append("".join(chars))
+        return basis
+
+    def anticommutes(left: str, right: str) -> bool:
+        return (
+            sum(
+                a != "I" and b != "I" and a != b
+                for a, b in zip(left, right)
+            )
+            % 2
+            == 1
+        )
+
+    def multiply(left: str, right: str) -> tuple[complex, str]:
+        phase: complex = 1
+        output: list[str] = []
+        for a, b in zip(left, right):
+            local_phase, local_output = pauli_product[(a, b)]
+            phase *= local_phase
+            output.append(local_output)
+        return phase, "".join(output)
+
+    def hamiltonian_terms(
+        n: int,
+        coupling: Fraction,
+    ) -> tuple[list[tuple[int, str]], int]:
+        denominator = math.lcm(4, coupling.denominator)
+        terms: list[tuple[int, str]] = []
+        for site in range(n):
+            terms.append((-denominator, pauli_word(n, {site: "X"})))
+            terms.append(
+                (
+                    3 * denominator // 4,
+                    pauli_word(n, {site: "Z"}),
+                )
+            )
+        coupling_numerator = (
+            coupling.numerator * denominator // coupling.denominator
+        )
+        if coupling_numerator:
+            for site in range(n - 1):
+                terms.append(
+                    (
+                        coupling_numerator,
+                        pauli_word(n, {site: "Z", site + 1: "Z"}),
+                    )
+                )
+        return terms, denominator
+
+    def commutator_data(
+        n: int,
+        coupling: Fraction,
+        max_range: int,
+    ) -> tuple[list[str], list[dict[int, int]], list[str], int, str]:
+        candidate_basis = bounded_basis(n, max_range)
+        terms, _ = hamiltonian_terms(n, coupling)
+        raw_columns: list[dict[str, int]] = []
+        output_words: set[str] = set()
+        for candidate in candidate_basis:
+            column: dict[str, int] = {}
+            for coefficient, term in terms:
+                if not anticommutes(term, candidate):
+                    continue
+                phase, output = multiply(term, candidate)
+                sign = int(round((phase / 1j).real))
+                column[output] = column.get(output, 0) + coefficient * sign
+            column = {
+                word: value for word, value in column.items() if value
+            }
+            raw_columns.append(column)
+            output_words.update(column)
+        output_basis = sorted(output_words)
+        output_index = {
+            word: index for index, word in enumerate(output_basis)
+        }
+        columns = [
+            {output_index[word]: value for word, value in column.items()}
+            for column in raw_columns
+        ]
+        triples = [
+            (output_basis[row], column_index, value)
+            for column_index, column in enumerate(columns)
+            for row, value in sorted(column.items())
+        ]
+        matrix_hash = canonical_hash(
+            {
+                "candidate_basis": candidate_basis,
+                "output_basis": output_basis,
+                "triples": triples,
+            }
+        )
+        return (
+            candidate_basis,
+            columns,
+            output_basis,
+            len(triples),
+            matrix_hash,
+        )
+
+    def combine(
+        columns: list[dict[int, int]],
+        coefficients: dict[int, int],
+    ) -> dict[int, int]:
+        output: dict[int, int] = {}
+        for column_index, coefficient in coefficients.items():
+            for row, value in columns[column_index].items():
+                output[row] = output.get(row, 0) + coefficient * value
+        return {row: value for row, value in output.items() if value}
+
+    def sparse_rank(columns: list[dict[int, int]], prime: int) -> int:
+        active = {
+            column_index: {
+                row: value % prime
+                for row, value in column.items()
+                if value % prime
+            }
+            for column_index, column in enumerate(columns)
+        }
+        row_columns: dict[int, set[int]] = {}
+        for column_index, column in active.items():
+            for row in column:
+                row_columns.setdefault(row, set()).add(column_index)
+        rank = 0
+        while active:
+            pivot_column_index = min(
+                active,
+                key=lambda index: (len(active[index]), index),
+            )
+            pivot_column = active[pivot_column_index]
+            if not pivot_column:
+                active.pop(pivot_column_index)
+                continue
+            pivot_row = min(
+                pivot_column,
+                key=lambda row: (len(row_columns[row]), row),
+            )
+            inverse = pow(pivot_column[pivot_row], prime - 2, prime)
+            normalized = {
+                row: (value * inverse) % prime
+                for row, value in pivot_column.items()
+                if (value * inverse) % prime
+            }
+            affected_columns = sorted(
+                row_columns[pivot_row] - {pivot_column_index}
+            )
+            for affected_index in affected_columns:
+                affected = active[affected_index]
+                factor = affected[pivot_row]
+                for row, value in normalized.items():
+                    old_value = affected.get(row, 0)
+                    new_value = (old_value - factor * value) % prime
+                    if new_value:
+                        affected[row] = new_value
+                        if not old_value:
+                            row_columns.setdefault(row, set()).add(
+                                affected_index
+                            )
+                    elif old_value:
+                        affected.pop(row)
+                        row_columns[row].discard(affected_index)
+                        if not row_columns[row]:
+                            row_columns.pop(row)
+            for row in pivot_column:
+                row_columns[row].discard(pivot_column_index)
+                if not row_columns[row]:
+                    row_columns.pop(row)
+            active.pop(pivot_column_index)
+            rank += 1
+        return rank
+
+    def rebuild_complete(
+        n: int,
+        coupling: Fraction,
+        max_range: int,
+    ) -> dict[str, object]:
+        basis, columns, output_basis, nonzero_count, matrix_hash = (
+            commutator_data(n, coupling, max_range)
+        )
+        index = {word: position for position, word in enumerate(basis)}
+        terms, denominator = hamiltonian_terms(n, coupling)
+        h_vector: dict[int, int] = {}
+        for coefficient, word in terms:
+            h_vector[index[word]] = h_vector.get(index[word], 0) + coefficient
+        identity_kernel = not combine(columns, {index["I" * n]: 1})
+        hamiltonian_kernel = not combine(columns, h_vector)
+        ranks = {
+            str(prime): sparse_rank(columns, prime)
+            for prime in (1000003, 1000033)
+        }
+        return {
+            "candidate_basis_size": len(basis),
+            "output_basis_size": len(output_basis),
+            "commutator_nonzero_count": nonzero_count,
+            "commutator_matrix_sha256": matrix_hash,
+            "hamiltonian_common_denominator": denominator,
+            "identity_kernel_verified": identity_kernel,
+            "hamiltonian_kernel_verified": hamiltonian_kernel,
+            "modular_ranks": ranks,
+            "modular_nullities": {
+                prime: len(basis) - rank for prime, rank in ranks.items()
+            },
+        }
+
+    def local_patterns(max_range: int) -> list[tuple[int, str]]:
+        patterns: list[tuple[int, str]] = []
+        for span in range(1, max_range + 1):
+            for local in product("IXYZ", repeat=span):
+                if local[0] == "I" or local[-1] == "I":
+                    continue
+                patterns.append((span, "".join(local)))
+        return patterns
+
+    def rebuild_translation(
+        n: int,
+        coupling: Fraction,
+    ) -> dict[str, object]:
+        full_basis, full_columns, output_basis, _, _ = commutator_data(
+            n,
+            coupling,
+            6,
+        )
+        full_index = {
+            word: position for position, word in enumerate(full_basis)
+        }
+        labels = ["identity"]
+        coefficient_vectors: list[dict[int, int]] = [
+            {full_index["I" * n]: 1}
+        ]
+        for span, local in local_patterns(6):
+            labels.append(f"range_{span}:{local}")
+            vector = {}
+            for start in range(n - span + 1):
+                chars = ["I"] * n
+                chars[start : start + span] = local
+                vector[full_index["".join(chars)]] = 1
+            coefficient_vectors.append(vector)
+        columns = [
+            combine(full_columns, vector)
+            for vector in coefficient_vectors
+        ]
+        triples = [
+            (output_basis[row], column_index, value)
+            for column_index, column in enumerate(columns)
+            for row, value in sorted(column.items())
+        ]
+        matrix_hash = canonical_hash(
+            {
+                "candidate_labels": labels,
+                "output_basis": output_basis,
+                "triples": triples,
+            }
+        )
+        label_index = {
+            label: position for position, label in enumerate(labels)
+        }
+        denominator = math.lcm(4, coupling.denominator)
+        coupling_numerator = (
+            coupling.numerator * denominator // coupling.denominator
+        )
+        h_vector = {
+            label_index["range_1:X"]: -denominator,
+            label_index["range_1:Z"]: 3 * denominator // 4,
+        }
+        if coupling_numerator:
+            h_vector[label_index["range_2:ZZ"]] = coupling_numerator
+        identity_kernel = not combine(
+            columns,
+            {label_index["identity"]: 1},
+        )
+        hamiltonian_kernel = not combine(columns, h_vector)
+        ranks = {
+            str(prime): sparse_rank(columns, prime)
+            for prime in (1000003, 1000033)
+        }
+        return {
+            "candidate_basis_size": len(labels),
+            "complete_parent_basis_size": len(full_basis),
+            "output_basis_size": len(output_basis),
+            "commutator_nonzero_count": len(triples),
+            "commutator_matrix_sha256": matrix_hash,
+            "hamiltonian_common_denominator": denominator,
+            "identity_kernel_verified": identity_kernel,
+            "hamiltonian_kernel_verified": hamiltonian_kernel,
+            "modular_ranks": ranks,
+            "modular_nullities": {
+                prime: len(labels) - rank for prime, rank in ranks.items()
+            },
+        }
+
+    expected_complete_keys = {
+        (coupling, n) for coupling in expected_holdouts for n in (8, 9, 10)
+    }
+    complete_keys = {
+        (row.get("coupling"), row.get("n")) for row in complete_rows
+    }
+    if len(complete_rows) != 12 or complete_keys != expected_complete_keys:
+        errors.append("B9 R194 complete range-five row set mismatch")
+    else:
+        for row in complete_rows:
+            rebuilt = rebuild_complete(
+                int(row["n"]),
+                Fraction(row["coupling"]),
+                5,
+            )
+            for field, value in rebuilt.items():
+                if row.get(field) != value:
+                    errors.append(
+                        "B9 R194 independent complete range-five "
+                        f"{field} mismatch for J={row['coupling']}, "
+                        f"n={row['n']}"
+                    )
+            if (
+                row.get("rank_implementations_agree") is not True
+                or row.get("exact_nullity_two_certified") is not True
+                or row.get("checked") is not True
+            ):
+                errors.append(
+                    "B9 R194 complete range-five boundary failed for "
+                    f"J={row['coupling']}, n={row['n']}"
+                )
+
+    if (
+        challenge.get("coupling") != "31/64"
+        or challenge.get("n") != 8
+        or challenge.get("max_contiguous_support_range") != 6
+    ):
+        errors.append("B9 R194 complete range-six challenge identity mismatch")
+    else:
+        rebuilt_challenge = rebuild_complete(8, Fraction(31, 64), 6)
+        for field, value in rebuilt_challenge.items():
+            if challenge.get(field) != value:
+                errors.append(
+                    f"B9 R194 independent range-six {field} mismatch"
+                )
+        if (
+            challenge.get("legacy_modular_ranks") is not None
+            or challenge.get("rank_implementations_agree") is not True
+            or challenge.get("exact_nullity_two_certified") is not True
+            or challenge.get("checked") is not True
+        ):
+            errors.append("B9 R194 complete range-six boundary failed")
+
+    translation_keys = {
+        (row.get("coupling"), row.get("n")) for row in translation_rows
+    }
+    if len(translation_rows) != 12 or translation_keys != expected_complete_keys:
+        errors.append("B9 R194 translation range-six row set mismatch")
+    else:
+        for row in translation_rows:
+            rebuilt = rebuild_translation(
+                int(row["n"]),
+                Fraction(row["coupling"]),
+            )
+            for field, value in rebuilt.items():
+                if row.get(field) != value:
+                    errors.append(
+                        "B9 R194 independent translation range-six "
+                        f"{field} mismatch for J={row['coupling']}, "
+                        f"n={row['n']}"
+                    )
+            if (
+                row.get("finite_range_truncation_only") is not True
+                or row.get("exact_nullity_two_certified") is not True
+                or row.get("checked") is not True
+            ):
+                errors.append(
+                    "B9 R194 translation range-six boundary failed for "
+                    f"J={row['coupling']}, n={row['n']}"
+                )
+
+    complete_control = controls.get("complete_range_five", {})
+    translation_control = controls.get("translation_range_six", {})
+    rebuilt_complete_control = rebuild_complete(8, Fraction(0), 5)
+    rebuilt_translation_control = rebuild_translation(8, Fraction(0))
+    for field, value in rebuilt_complete_control.items():
+        if complete_control.get(field) != value:
+            errors.append(
+                f"B9 R194 complete zero-control {field} mismatch"
+            )
+    for field, value in rebuilt_translation_control.items():
+        if translation_control.get(field) != value:
+            errors.append(
+                f"B9 R194 translation zero-control {field} mismatch"
+            )
+    complete_control_nullity = min(
+        rebuilt_complete_control["modular_nullities"].values()
+    )
+    translation_control_nullity = min(
+        rebuilt_translation_control["modular_nullities"].values()
+    )
+    if complete_control_nullity != 798 or translation_control_nullity != 673:
+        errors.append("B9 R194 positive-control nullity mismatch")
+
+    true_claims = set(claim_boundary.get("true_claims", []))
+    false_claims = set(claim_boundary.get("false_claims", []))
+    if (
+        not set(true_fields).issubset(true_claims)
+        or not set(false_fields).issubset(false_claims)
+        or summary.get("engineering_probe_acceptance_count") != 0
+        or summary.get("frozen_holdout_coupling_count") != 4
+        or summary.get("complete_range_five_row_count") != 12
+        or summary.get("complete_range_five_nullity_two_count") != 12
+        or summary.get("complete_range_six_challenge_count") != 1
+        or summary.get(
+            "complete_range_six_challenge_nullity_two_count"
+        )
+        != 1
+        or summary.get("translation_range_six_row_count") != 12
+        or summary.get("translation_range_six_nullity_two_count") != 12
+        or summary.get("complete_zero_control_nullity_min") != 798
+        or summary.get("translation_zero_control_nullity_min") != 673
+        or summary.get("positive_control_pass_count") != 2
+        or summary.get("scoped_higher_range_boundary_accepted") is not True
+        or summary.get("scientific_promotion_accepted") is not False
+        or payload.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R194 claim boundary mismatch")
+    for field in true_fields:
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R194 manifest {field} must remain true")
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R194 manifest {field} must remain false")
+    required_report_phrases = [
+        "Exact-nullity-two rows: `12/12`",
+        "Candidate columns: `10240`",
+        "`J=0` complete range-five nullity: `798`",
+        "`J=0` translation-summed range-six nullity: `673`",
+        "it does not prove nonintegrability",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R194 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": payload.get("requirements_passed"),
+        "complete_range_five_row_count": summary.get(
+            "complete_range_five_row_count"
+        ),
+        "complete_range_five_nullity_two_count": summary.get(
+            "complete_range_five_nullity_two_count"
+        ),
+        "complete_range_six_challenge_count": summary.get(
+            "complete_range_six_challenge_count"
+        ),
+        "complete_range_six_challenge_nullity_two_count": summary.get(
+            "complete_range_six_challenge_nullity_two_count"
+        ),
+        "translation_range_six_row_count": summary.get(
+            "translation_range_six_row_count"
+        ),
+        "translation_range_six_nullity_two_count": summary.get(
+            "translation_range_six_nullity_two_count"
+        ),
+        "complete_zero_control_nullity_min": summary.get(
+            "complete_zero_control_nullity_min"
+        ),
+        "translation_zero_control_nullity_min": summary.get(
+            "translation_zero_control_nullity_min"
+        ),
+        "positive_control_pass_count": summary.get(
+            "positive_control_pass_count"
+        ),
+        "scoped_higher_range_boundary_accepted": summary.get(
+            "scoped_higher_range_boundary_accepted"
+        ),
+        "scientific_promotion_accepted": summary.get(
+            "scientific_promotion_accepted"
+        ),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R194") for message in errors
+        ),
+        **{field: field in true_claims for field in true_fields},
+        **{field: field not in false_claims for field in false_fields},
+        "new_credit_delta": payload.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -40276,6 +40954,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r194 = b9_results.get("r194_higher_range_charge_stress_v1")
+    b9_r194_status = audit_b9_r194(
+        root,
+        b9_r194,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -50678,6 +51363,7 @@ def audit(root: Path) -> dict:
             "r191_noncommuting_control_certificate": b9_r191_status,
             "r192_overlapping_control_certificate": b9_r192_status,
             "r193_coupling_integrability_stress": b9_r193_status,
+            "r194_higher_range_charge_stress": b9_r194_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -50724,6 +51410,7 @@ def audit(root: Path) -> dict:
             "r191_b9_noncommuting_control_certificate": b9_r191_status,
             "r192_b9_overlapping_control_certificate": b9_r192_status,
             "r193_b9_coupling_integrability_stress": b9_r193_status,
+            "r194_b9_higher_range_charge_stress": b9_r194_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -54891,6 +55578,11 @@ def markdown_report(report: dict) -> str:
             f"- R193 holdout rows / simple spectra / exact range-four nullity-two: {report['b9']['r193_coupling_integrability_stress'].get('holdout_row_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_simple_spectrum_row_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_local_charge_nullity_two_count')}",
             f"- R193 weak Poisson-like / strong GOE-like / transition acceptance / normalized-gap gains: {report['b9']['r193_coupling_integrability_stress'].get('weak_holdout_pass_count')} / {report['b9']['r193_coupling_integrability_stress'].get('strong_holdout_pass_count')} / {report['b9']['r193_coupling_integrability_stress'].get('transition_holdout_acceptance_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_normalized_gap_gain_count')}",
             f"- R193 scoped candidate / scientific promotion / complete integrability exclusion / credit: {report['b9']['r193_coupling_integrability_stress'].get('scoped_candidate_accepted')} / {report['b9']['r193_coupling_integrability_stress'].get('scientific_promotion_accepted')} / {report['b9']['r193_coupling_integrability_stress'].get('complete_integrability_exclusion')} / {report['b9']['r193_coupling_integrability_stress'].get('new_credit_delta')}",
+            f"- R194 higher-range charge status: {report['b9']['r194_higher_range_charge_stress'].get('status')}",
+            f"- R194 requirements / evidence integrity: {report['b9']['r194_higher_range_charge_stress'].get('requirements_passed')} / {report['b9']['r194_higher_range_charge_stress'].get('evidence_integrity_complete')}",
+            f"- R194 complete range-five rows / nullity-two / range-six challenge: {report['b9']['r194_higher_range_charge_stress'].get('complete_range_five_row_count')} / {report['b9']['r194_higher_range_charge_stress'].get('complete_range_five_nullity_two_count')} / {report['b9']['r194_higher_range_charge_stress'].get('complete_range_six_challenge_nullity_two_count')}",
+            f"- R194 translation range-six rows / nullity-two / positive controls: {report['b9']['r194_higher_range_charge_stress'].get('translation_range_six_row_count')} / {report['b9']['r194_higher_range_charge_stress'].get('translation_range_six_nullity_two_count')} / {report['b9']['r194_higher_range_charge_stress'].get('positive_control_pass_count')}",
+            f"- R194 complete/translation J=0 nullity / scientific promotion / complete integrability exclusion / credit: {report['b9']['r194_higher_range_charge_stress'].get('complete_zero_control_nullity_min')} / {report['b9']['r194_higher_range_charge_stress'].get('translation_zero_control_nullity_min')} / {report['b9']['r194_higher_range_charge_stress'].get('scientific_promotion_accepted')} / {report['b9']['r194_higher_range_charge_stress'].get('complete_integrability_exclusion')} / {report['b9']['r194_higher_range_charge_stress'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 35, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 38, 'B10': 53}
 
 ## Technical Resolution Program
 
@@ -2628,6 +2628,11 @@ Overall audit: PASS
 - R193 holdout rows / simple spectra / exact range-four nullity-two: 30 / 30 / 30
 - R193 weak Poisson-like / strong GOE-like / transition acceptance / normalized-gap gains: 1 / 4 / 0 / 0
 - R193 scoped candidate / scientific promotion / complete integrability exclusion / credit: True / False / False / 0
+- R194 higher-range charge status: checked_higher_range_local_charge_boundary
+- R194 requirements / evidence integrity: 14 / True
+- R194 complete range-five rows / nullity-two / range-six challenge: 12 / 12 / 1
+- R194 translation range-six rows / nullity-two / positive controls: 12 / 12 / 2
+- R194 complete/translation J=0 nullity / scientific promotion / complete integrability exclusion / credit: 798 / 673 / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

@@ -1086,15 +1086,32 @@ only the declared standard parity-preserving quadratic Jordan-Wigner axis
 alignment. The certificate and independent audit pass `17/17`, while
 normalized-gap gains remain `0/30`.
 
-**Remaining path to a serious solution:** attack R193 with complete
-range-five/six and quasi-local charges, site-dependent or nonlocal dualities,
-nonstandard fermionizations, and larger sparse spectra under newly frozen
-holdouts. R193 is a finite-size symmetry-resolved crossover candidate, not a
-complete integrability exclusion, nonintegrability or chaos theorem,
-spectral-hardness theorem, arbitrary-local-Hamiltonian theorem, Quantum PCP
-result, NLTS theorem, BQP separation, or solved frontier.
+T-B9-008 adds R194, the first higher-range conserved-charge stress. The
+observed `J=13/32` runtime probe is disclosed and excluded from acceptance.
+Four newly frozen `1/64`-grid couplings drive 12 complete
+position-dependent range-five searches for `n=8,9,10`; every row has explicit
+identity/H kernels and exact nullity two under two prime-field ranks. A
+complete range-six challenge at `J=31/64`, `n=8` spans 10,240 candidate
+columns and also has exact nullity two. Twelve six-shell open-chain
+translation-summed truncations have exact nullity two.
 
-**Current internal maturity:** 35/100.
+The `J=0` positive controls recover modular nullities 798 and 673, so the
+adversaries detect known extra conserved structure. Two executions are
+byte-deterministic, and the independent portfolio audit rebuilds all
+commutator matrices and ranks. The certificate passes `14/14`; protocol
+`9e2ad9df...`; payload `6349353a...`.
+
+**Remaining path to a serious solution:** extend the complete
+position-dependent range-six certificate beyond one size/coupling, then
+attack range-seven/eight and explicit quasi-local tails, site-dependent or
+nonlocal dualities, nonstandard fermionizations, interacting integrability,
+and larger sparse spectra under newly frozen holdouts. R194 narrows a
+finite-range conserved-charge surface; it is not a complete integrability
+exclusion, nonintegrability or chaos theorem, spectral-hardness theorem,
+arbitrary-local-Hamiltonian theorem, Quantum PCP result, NLTS theorem, BQP
+separation, or solved frontier.
+
+**Current internal maturity:** 38/100.
 
 ## B10: Mapping the Boundary of BQP
 

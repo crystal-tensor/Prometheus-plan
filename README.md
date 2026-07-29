@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R193. R187 is a checked
+The current B9 formal line spans R187 through R194. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -224,6 +224,26 @@ fermionizations. The normalized gap improves on `0/30` holdout rows, so there
 is no nonintegrability, chaos, spectral-hardness, hardware, Quantum PCP, NLTS,
 BQP, solved-frontier, or new-credit claim. Protocol `dadb6c6c...`; Lean module
 `9b7c00bf...`; transcript `facc611e...`; payload `80470427...`.
+
+R194 attacks the next conserved-charge escape route without reusing the
+observed engineering coupling. The runtime-only `J=13/32` probe is disclosed
+and excluded; acceptance uses four newly frozen `1/64`-grid couplings. A
+complete position-dependent Pauli search through range five has exact nullity
+two on `12/12` rows for `n=8,9,10`. One complete range-six challenge at
+`J=31/64`, `n=8` spans `10,240` candidate columns and also has exact nullity
+two under two prime-field ranks. A six-shell open-chain translation-summed
+truncation has exact nullity two on another `12/12` rows.
+
+The positive controls prevent a vacuous result: at `J=0`, the complete
+range-five and translation-summed range-six searches recover modular
+nullities `798` and `673`, respectively. The certificate is byte-deterministic
+across two executions, and an independent portfolio implementation rebuilds
+every commutator matrix and modular rank. R194 passes `14/14`; protocol
+`9e2ad9df...`; payload `6349353a...`. It narrows the finite-range conserved
+charge surface, but does not exclude range-seven or longer quasi-local tails,
+site-dependent/nonlocal dualities, nonstandard fermionizations, interacting
+integrability, or finite-size drift. No nonintegrability, chaos, hardness,
+Quantum PCP, NLTS, BQP, solved-frontier, or new-credit claim is made.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

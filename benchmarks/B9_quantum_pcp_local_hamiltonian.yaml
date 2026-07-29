@@ -650,6 +650,52 @@ current_results:
     markdown_report: ../research/B9_R193_coupling_integrability_stress.md
     checked_transcript: ../results/B9_R193_free_fermion_obstruction_transcript_v1.txt
     lean_module: ../B9/ClusterStabilizer/FreeFermionObstruction.lean
+  r194_higher_range_charge_stress_v1:
+    status: checked_higher_range_local_charge_boundary
+    method: b9_r194_higher_range_charge_stress_v1
+    source: r193_coupling_integrability_stress_v1
+    experiment_id: B9-R194-higher-range-charge-stress
+    protocol_hash: 9e2ad9df2022b6b34eada972666c0b6403aaef9ff217c8ba73cbc5c3130e6f4a
+    payload_sha256: 6349353aa3ff0f9abd2ab6967f9c5fb75a6237cc85c85c17f256e2039c62eb35
+    tool_sha256: 67918eb61c2ad58f429e6fc5aae3f4066f128b7a10bc461a9f0cfcd6550b9af8
+    r193_dependency_sha256: 3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143
+    requirement_count: 14
+    requirements_passed: 14
+    engineering_probe_excluded_from_acceptance: true
+    frozen_holdout_couplings_recorded_before_execution: true
+    complete_range_five_nullity_two_on_frozen_holdouts: true
+    complete_range_six_challenge_nullity_two: true
+    translation_summed_range_six_nullity_two_on_frozen_holdouts: true
+    zero_coupling_controls_detect_extra_conserved_charges: true
+    r193_candidate_survives_declared_higher_range_adversaries: true
+    all_coupling_theorem: false
+    all_size_theorem: false
+    complete_quasi_local_charge_exclusion: false
+    site_dependent_nonlocal_duality_exclusion: false
+    nonstandard_fermionization_exclusion: false
+    interacting_integrability_exclusion: false
+    complete_integrability_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    solved_frontier: false
+    complete_range_five_row_count: 12
+    complete_range_five_nullity_two_count: 12
+    complete_range_six_challenge_count: 1
+    complete_range_six_challenge_nullity_two_count: 1
+    translation_range_six_row_count: 12
+    translation_range_six_nullity_two_count: 12
+    complete_zero_control_nullity_min: 798
+    translation_zero_control_nullity_min: 673
+    positive_control_pass_count: 2
+    scoped_higher_range_boundary_accepted: true
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    result: ../results/B9_R194_higher_range_charge_stress_v1.json
+    markdown_report: ../research/B9_R194_higher_range_charge_stress.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -673,4 +719,5 @@ current_results:
   r191_noncommuting_control_certificate: ../tools/b9_r191_noncommuting_control_certificate.py
   r192_overlapping_control_certificate: ../tools/b9_r192_overlapping_control_certificate.py
   r193_coupling_integrability_stress: ../tools/b9_r193_coupling_integrability_stress.py
+  r194_higher_range_charge_stress: ../tools/b9_r194_higher_range_charge_stress.py
   prototype_notes: ../research/B9_prototype_notes.md
