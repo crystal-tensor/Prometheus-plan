@@ -1,0 +1,97 @@
+{
+  "contract_id": "B9-R196-extended-tail-charge-contract-v0",
+  "version": "0.1.0",
+  "frozen_at": "2026-07-29",
+  "status": "preregistered_before_acceptance_execution",
+  "model": {
+    "boundary": "open",
+    "hamiltonian": "sum_i[-X_i+(3/4)Z_i]+J*sum_{i=0}^{n-2}Z_i Z_{i+1}"
+  },
+  "engineering_only_probes": {
+    "couplings": [
+      "13/32"
+    ],
+    "acceptance_count": 0,
+    "purpose": "runtime and memory feasibility only"
+  },
+  "frozen_holdouts": {
+    "couplings": [
+      "73/128",
+      "77/128"
+    ],
+    "required_disjointness": "Neither coupling may occur in R193-R195 observed, engineering, or acceptance grids."
+  },
+  "acceptance_families": {
+    "complete_position_dependent_range_six": {
+      "couplings": [
+        "73/128",
+        "77/128"
+      ],
+      "sizes": [
+        10
+      ],
+      "max_contiguous_support_range": 6,
+      "required_rows": 2
+    },
+    "translation_summed_range_eight": {
+      "couplings": [
+        "73/128"
+      ],
+      "sizes": [
+        10
+      ],
+      "max_contiguous_support_range": 8,
+      "required_rows": 1
+    },
+    "range_six_with_independent_boundary_range_four": {
+      "couplings": [
+        "73/128",
+        "77/128"
+      ],
+      "sizes": [
+        9,
+        10
+      ],
+      "bulk_translation_range": 6,
+      "independent_boundary_correction_range": 4,
+      "required_rows": 4
+    }
+  },
+  "exact_acceptance_rule": {
+    "required_kernels": [
+      "identity",
+      "Hamiltonian"
+    ],
+    "modular_primes": [
+      1000003,
+      1000033
+    ],
+    "rank_rule": "Every nonzero-coupling row must have rank ncols-2 under both primes.",
+    "digest_rule": "Every accepted sparse commutator matrix must have a canonical SHA-256 digest."
+  },
+  "positive_control_rule": {
+    "coupling": "0",
+    "required_witness": "The candidate family must contain at least three linearly independent exact kernels, including identity and at least two distinct one-site tilted-field charges.",
+    "full_control_rank_required": false
+  },
+  "claim_boundary": {
+    "positive_result_requires": "An explicit additional conserved operator or alternate integrable structure.",
+    "negative_result_supports_only": "The declared finite-size, finite-range ansatz families have no kernel beyond identity and H.",
+    "forbidden_promotions": [
+      "all-size theorem",
+      "complete quasi-local charge exclusion",
+      "arbitrary boundary dressing exclusion",
+      "nonlocal duality exclusion",
+      "nonstandard fermionization exclusion",
+      "interacting integrability exclusion",
+      "nonintegrability theorem",
+      "quantum chaos theorem",
+      "spectral hardness theorem",
+      "Quantum PCP theorem",
+      "NLTS theorem",
+      "BQP separation",
+      "solved frontier",
+      "new research credit"
+    ]
+  }
+}
