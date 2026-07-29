@@ -872,6 +872,276 @@ def audit_b9_r189(
     return status
 
 
+def audit_b9_r190(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R190 complete-spectrum certificate."""
+    expected_status = (
+        "checked_all_n_spectrum_formula_multiplicity_gap_width_complete_"
+        "restricted_negative_boundary"
+    )
+    expected_method = "b9_r190_open_chain_spectrum_formula_certificate_v1"
+    expected_hashes = {
+        "protocol_hash": (
+            "ed258a84d49073f113a4d9e771c983ea6e99b22e94e3dc14e3182c6dca9d719a"
+        ),
+        "payload_sha256": (
+            "9611e00d228143627d2d146177b9c4dddcda7a72d7d8f106b5aace072db0f9db"
+        ),
+        "lean_module_sha256": (
+            "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2"
+        ),
+        "operator_module_sha256": (
+            "e0db84719b9f73036c0132657da1ec412ebd5fcff1cde09bc397c91be1f12d6e"
+        ),
+        "r187_module_sha256": (
+            "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3"
+        ),
+        "transcript_sha256": (
+            "9983640b9732ccb939a0a42f85df1f3fa75393fcfceaba7bb0cbe760b2eb720c"
+        ),
+    }
+    true_fields = [
+        "all_n_walsh_eigenbasis_formalized",
+        "all_n_cluster_conjugation_formalized",
+        "all_n_spectrum_formula_formalized",
+        "all_n_binomial_multiplicity_formalized",
+        "all_n_gap_width_normalized_formalized",
+        "r187_operator_derived_boundary_formalized",
+        "independent_finite_replay",
+    ]
+    false_fields = [
+        "quantum_hardware_execution",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "global_gap_amplification_impossibility",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R190 complete-spectrum certificate")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    operator_path = resolve(manifest_entry.get("operator_module"))
+    r187_path = resolve(manifest_entry.get("r187_module"))
+    tool_path = root / "tools/b9_r190_spectrum_formula_certificate.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "operator_module": operator_path,
+        "r187_module": r187_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R190 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    rows = payload.get("independent_spectrum_rows", [])
+    source = payload.get("source", {})
+    execution = payload.get("execution", {})
+
+    protocol_hash = hashlib.sha256(
+        json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = hashlib.sha256(
+        json.dumps(
+            payload_without_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    observed_hashes = {
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": hashlib.sha256(module_path.read_bytes()).hexdigest(),
+        "operator_module_sha256": hashlib.sha256(operator_path.read_bytes()).hexdigest(),
+        "r187_module_sha256": hashlib.sha256(r187_path.read_bytes()).hexdigest(),
+        "transcript_sha256": hashlib.sha256(transcript_path.read_bytes()).hexdigest(),
+    }
+
+    if payload.get("status") != expected_status:
+        errors.append("B9 R190 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R190 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R190 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R190 manifest method mismatch")
+    for field, expected in expected_hashes.items():
+        observed = observed_hashes[field]
+        if observed != expected:
+            errors.append(f"B9 R190 {field} mismatch")
+        payload_value = payload.get(field)
+        source_value = source.get(field)
+        execution_value = execution.get(field)
+        if expected not in {payload_value, source_value, execution_value}:
+            errors.append(f"B9 R190 payload {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R190 manifest {field} mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 14
+        or summary.get("requirement_count") != 14
+        or summary.get("requirements_passed") != 14
+        or summary.get("requirements_failed") != 0
+        or failed_ids
+    ):
+        errors.append("B9 R190 must pass all 14 frozen requirements")
+    if re.search(r"\b(?:sorry|axiom)\b", module):
+        errors.append("B9 R190 source contains a forbidden escape hatch")
+
+    required_theorems = {
+        "walshCharacter_injective",
+        "walsh_character_orthogonality",
+        "walshMatrix_conjTranspose_mul",
+        "walshMatrix_mul_inverse",
+        "xChainOperator_mulVec_walsh",
+        "xChainOperator_spectrum",
+        "clusterPhase_conjugates_xChainOperator",
+        "openChainOperator_spectrum_formula",
+        "labelWeight_eq_support_card",
+        "openChainEigenvalue_eq_weight",
+        "labelWeight_multiplicity",
+        "openChainEnergy_lower_bound",
+        "openChainEnergy_upper_bound",
+        "openChainEnergy_ground",
+        "openChainEnergy_top",
+        "openChainEnergy_first_excited",
+        "openChain_raw_gap_formula",
+        "openChain_width_formula",
+        "openChainExactBeforeSummary_normalized",
+        "openChain_exact_spectrum_reweight_boundary",
+    }
+    theorem_names = set(
+        re.findall(
+            r"(?m)^(?:@\[[^\n]+\]\s+)?theorem\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R190 required theorem set is incomplete")
+    required_bindings = [
+        "walshMatrixUnit",
+        "clusterPhaseMatrixUnit",
+        "labelSupportEquiv",
+        "Nat.choose n k",
+        "open_chain_uniform_reweight_instantiates_r187",
+    ]
+    if any(binding not in module for binding in required_bindings):
+        errors.append("B9 R190 eigenbasis, multiplicity, or R187 binding is incomplete")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R190 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R190 transcript contains warnings or a timeout")
+
+    if {row.get("n") for row in rows} != {4, 5, 6} or len(rows) != 3:
+        errors.append("B9 R190 independent row set mismatch")
+    for row in rows:
+        n = row.get("n")
+        expected_multiplicities = [
+            {
+                "weight": weight,
+                "energy": 2 * weight - n,
+                "observed": math.comb(n, weight),
+                "binomial": math.comb(n, weight),
+            }
+            for weight in range(n + 1)
+        ] if isinstance(n, int) else []
+        if (
+            not isinstance(n, int)
+            or row.get("dimension") != 2**n
+            or row.get("exact_cluster_conjugation") is not True
+            or row.get("walsh_orthogonal_exact") is not True
+            or row.get("cluster_eigenvector_max_abs_residual") != 0.0
+            or row.get("ordered_spectrum_max_abs_error", 1.0) > 1e-12
+            or row.get("ordered_spectrum_multiplicity_match") is not True
+            or row.get("binomial_multiplicity_match") is not True
+            or row.get("multiplicities") != expected_multiplicities
+            or row.get("ground_energy") != -n
+            or row.get("first_excited_energy") != 2 - n
+            or row.get("top_energy") != n
+            or row.get("gap") != "2"
+            or row.get("width") != str(2 * n)
+            or row.get("normalized_gap") != f"1/{n}"
+            or row.get("after_normalized_gap") != f"1/{n}"
+            or row.get("checked") is not True
+        ):
+            errors.append(f"B9 R190 independent spectrum row failed for n={n}")
+
+    if (
+        any(summary.get(field) is not True for field in true_fields)
+        or any(summary.get(field) is not False for field in false_fields)
+        or summary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R190 claim boundary mismatch")
+    required_report_phrases = [
+        "choose(n,k)",
+        "normalized gap are therefore",
+        "not arbitrary local Hamiltonians",
+        "No quantum hardware execution",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R190 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": summary.get("requirements_passed"),
+        "independent_spectrum_rows": rows,
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R190") for message in errors
+        ),
+        **{field: summary.get(field) for field in true_fields + false_fields},
+        "new_credit_delta": summary.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+        "operator_module": manifest_entry.get("operator_module"),
+        "r187_module": manifest_entry.get("r187_module"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -38865,6 +39135,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r190 = b9_results.get("r190_open_chain_spectrum_formula_certificate_v1")
+    b9_r190_status = audit_b9_r190(
+        root,
+        b9_r190,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -49263,6 +49540,7 @@ def audit(root: Path) -> dict:
             "r187_nonzero_scale_derived_certificate": b9_r187_status,
             "r188_open_chain_all_n_structural_certificate": b9_r188_status,
             "r189_open_chain_operator_semantics_certificate": b9_r189_status,
+            "r190_open_chain_spectrum_formula_certificate": b9_r190_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -49305,6 +49583,7 @@ def audit(root: Path) -> dict:
             "r187_b9_nonzero_scale_derived_certificate": b9_r187_status,
             "r188_b9_open_chain_all_n_structural_certificate": b9_r188_status,
             "r189_b9_open_chain_operator_semantics_certificate": b9_r189_status,
+            "r190_b9_open_chain_spectrum_formula_certificate": b9_r190_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -53454,6 +53733,10 @@ def markdown_report(report: dict) -> str:
             f"- R189 requirements / evidence integrity: {report['b9']['r189_open_chain_operator_semantics_certificate'].get('requirements_passed')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('evidence_integrity_complete')}",
             f"- R189 matrix semantics / Hermitian / operator scale / spectrum-set scale: {report['b9']['r189_open_chain_operator_semantics_certificate'].get('all_n_matrix_operator_semantics')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('all_n_hermitian_proof')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('all_n_operator_scaling_identity')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('all_n_spectrum_set_scaling')}",
             f"- R189 finite spectrum rows / all-n ordered formula / hardware / Quantum PCP / credit: {report['b9']['r189_open_chain_operator_semantics_certificate'].get('finite_ordered_spectra_independently_computed')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('all_n_ordered_spectrum_formula_formalized')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('quantum_hardware_execution')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('quantum_pcp_theorem')} / {report['b9']['r189_open_chain_operator_semantics_certificate'].get('new_credit_delta')}",
+            f"- R190 complete-spectrum status: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('status')}",
+            f"- R190 requirements / evidence integrity: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('requirements_passed')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('evidence_integrity_complete')}",
+            f"- R190 Walsh basis / cluster conjugation / spectrum / binomial multiplicity: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_walsh_eigenbasis_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_cluster_conjugation_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_spectrum_formula_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_binomial_multiplicity_formalized')}",
+            f"- R190 gap-width formulas / R187 bridge / independent replay / Quantum PCP / credit: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_gap_width_normalized_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('r187_operator_derived_boundary_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('independent_finite_replay')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('quantum_pcp_theorem')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

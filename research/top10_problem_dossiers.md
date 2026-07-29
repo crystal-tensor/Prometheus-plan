@@ -1032,13 +1032,26 @@ and width scale by `27/20`. The certificate and independent audit pass 13/13.
 This is not hardware evidence and does not formalize the ordered all-`n`
 spectrum formula.
 
-**Remaining path to a serious solution:** prove commutation and independence
-of the stabilizer generators; formalize the ordered all-`n` eigenvalue
-multiset and binomial multiplicities in Lean; derive gap, width, and normalized
-gap inside the proof assistant; bind those values into R187; then decide
-whether the restricted result yields a nontrivial hardness or no-go theorem.
+T-B9-004q/T-B10-016i adds R190, the checked all-`n` complete-spectrum
+certificate for this family. Lean constructs an invertible Walsh eigenbasis,
+proves exact cluster-phase conjugation to the R189 operator, derives energy
+`2k-n` for every Hamming-weight-`k` label, and proves binomial multiplicity
+`choose(n,k)` through a label/support equivalence. It then derives ground
+energy `-n`, first excited energy `2-n`, gap `2`, top energy `n`, width `2n`,
+normalized gap `1/n`, and the R187 uniform-scale rejection from those
+operator-derived values. An independent integer-matrix/Walsh oracle replays
+`n=4,5,6` with exact conjugation and orthogonality, zero eigenvector residual,
+matching binomial counts, and complete eigenspectrum error below `1e-12`. The
+certificate and portfolio audit pass 14/14.
 
-**Current internal maturity:** 25/100.
+**Remaining path to a serious solution:** use the solved commuting family as
+a control; define a restricted locality-explicit noncommuting perturbation;
+derive or bound its normalized gap without importing the conclusion; and
+decide whether the result yields a nontrivial restricted hardness theorem or
+scoped no-go lemma. The present result is not a theorem for arbitrary local
+Hamiltonians, Quantum PCP, or NLTS.
+
+**Current internal maturity:** 29/100.
 
 ## B10: Mapping the Boundary of BQP
 

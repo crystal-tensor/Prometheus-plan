@@ -498,6 +498,39 @@ current_results:
     lean_module: ../B9/ClusterStabilizer/OperatorSemantics.lean
     structure_module: ../B9/ClusterStabilizer/OpenChainHamiltonian.lean
     r187_module: ../B9/ClusterStabilizer/WidthLocality.lean
+  r190_open_chain_spectrum_formula_certificate_v1:
+    status: checked_all_n_spectrum_formula_multiplicity_gap_width_complete_restricted_negative_boundary
+    method: b9_r190_open_chain_spectrum_formula_certificate_v1
+    source: r189_open_chain_operator_semantics_certificate_v1
+    experiment_id: B9-R190-open-chain-spectrum-formula-certificate
+    protocol_hash: ed258a84d49073f113a4d9e771c983ea6e99b22e94e3dc14e3182c6dca9d719a
+    payload_sha256: 9611e00d228143627d2d146177b9c4dddcda7a72d7d8f106b5aace072db0f9db
+    lean_module_sha256: acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2
+    operator_module_sha256: e0db84719b9f73036c0132657da1ec412ebd5fcff1cde09bc397c91be1f12d6e
+    r187_module_sha256: 2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3
+    transcript_sha256: 9983640b9732ccb939a0a42f85df1f3fa75393fcfceaba7bb0cbe760b2eb720c
+    requirement_count: 14
+    requirements_passed: 14
+    all_n_walsh_eigenbasis_formalized: true
+    all_n_cluster_conjugation_formalized: true
+    all_n_spectrum_formula_formalized: true
+    all_n_binomial_multiplicity_formalized: true
+    all_n_gap_width_normalized_formalized: true
+    r187_operator_derived_boundary_formalized: true
+    independent_finite_replay: true
+    quantum_hardware_execution: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    global_gap_amplification_impossibility: false
+    bqp_separation: false
+    solved_frontier: false
+    new_credit_delta: 0
+    result: ../results/B9_R190_open_chain_spectrum_formula_certificate_v1.json
+    markdown_report: ../research/B9_R190_spectrum_formula_certificate.md
+    checked_transcript: ../results/B9_R190_open_chain_spectrum_formula_transcript_v1.txt
+    lean_module: ../B9/ClusterStabilizer/SpectrumFormula.lean
+    operator_module: ../B9/ClusterStabilizer/OperatorSemantics.lean
+    r187_module: ../B9/ClusterStabilizer/WidthLocality.lean
 prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -517,4 +550,5 @@ prototype_artifacts:
   r187_nonzero_scale_derived_certificate: ../tools/b9_r187_nonzero_scale_certificate.py
   r188_open_chain_all_n_structural_certificate: ../tools/b9_r188_open_chain_formal_certificate.py
   r189_open_chain_operator_semantics_certificate: ../tools/b9_r189_operator_semantics_certificate.py
+  r190_open_chain_spectrum_formula_certificate: ../tools/b9_r190_spectrum_formula_certificate.py
   prototype_notes: ../research/B9_prototype_notes.md

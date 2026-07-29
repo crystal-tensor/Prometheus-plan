@@ -13,5 +13,6 @@ lean_lib B9 where
   roots := #[
     `B9.ClusterStabilizer.WidthLocality,
     `B9.ClusterStabilizer.OpenChainHamiltonian,
-    `B9.ClusterStabilizer.OperatorSemantics
+    `B9.ClusterStabilizer.OperatorSemantics,
+    `B9.ClusterStabilizer.SpectrumFormula
   ]

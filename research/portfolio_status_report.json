@@ -5437,6 +5437,216 @@
       "structure_module_sha256": "7e9bd8fd997ed44dec568504dbdd0af8b9e7e1109f64c49be945eb2f28c775ee",
       "transcript_sha256": "227621753afc8ea6f8412bca7800501c71aa8a1feb6d41f18fd9ecbc52fd75dc"
     },
+    "r190_b9_open_chain_spectrum_formula_certificate": {
+      "all_n_binomial_multiplicity_formalized": true,
+      "all_n_cluster_conjugation_formalized": true,
+      "all_n_gap_width_normalized_formalized": true,
+      "all_n_spectrum_formula_formalized": true,
+      "all_n_walsh_eigenbasis_formalized": true,
+      "bqp_separation": false,
+      "checked_transcript": "../results/B9_R190_open_chain_spectrum_formula_transcript_v1.txt",
+      "evidence_integrity_complete": true,
+      "experiment_id": "B9-R190-open-chain-spectrum-formula-certificate",
+      "global_gap_amplification_impossibility": false,
+      "independent_finite_replay": true,
+      "independent_spectrum_rows": [
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/4",
+          "after_width": "54/5",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 16,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -2,
+          "gap": "2",
+          "ground_energy": -4,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -4,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 4,
+              "energy": -2,
+              "observed": 4,
+              "weight": 1
+            },
+            {
+              "binomial": 6,
+              "energy": 0,
+              "observed": 6,
+              "weight": 2
+            },
+            {
+              "binomial": 4,
+              "energy": 2,
+              "observed": 4,
+              "weight": 3
+            },
+            {
+              "binomial": 1,
+              "energy": 4,
+              "observed": 1,
+              "weight": 4
+            }
+          ],
+          "n": 4,
+          "normalized_gap": "1/4",
+          "ordered_spectrum_max_abs_error": 1.7763568394002505e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 4,
+          "walsh_orthogonal_exact": true,
+          "width": "8"
+        },
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/5",
+          "after_width": "27/2",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 32,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -3,
+          "gap": "2",
+          "ground_energy": -5,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -5,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 5,
+              "energy": -3,
+              "observed": 5,
+              "weight": 1
+            },
+            {
+              "binomial": 10,
+              "energy": -1,
+              "observed": 10,
+              "weight": 2
+            },
+            {
+              "binomial": 10,
+              "energy": 1,
+              "observed": 10,
+              "weight": 3
+            },
+            {
+              "binomial": 5,
+              "energy": 3,
+              "observed": 5,
+              "weight": 4
+            },
+            {
+              "binomial": 1,
+              "energy": 5,
+              "observed": 1,
+              "weight": 5
+            }
+          ],
+          "n": 5,
+          "normalized_gap": "1/5",
+          "ordered_spectrum_max_abs_error": 2.220446049250313e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 5,
+          "walsh_orthogonal_exact": true,
+          "width": "10"
+        },
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/6",
+          "after_width": "81/5",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 64,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -4,
+          "gap": "2",
+          "ground_energy": -6,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -6,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 6,
+              "energy": -4,
+              "observed": 6,
+              "weight": 1
+            },
+            {
+              "binomial": 15,
+              "energy": -2,
+              "observed": 15,
+              "weight": 2
+            },
+            {
+              "binomial": 20,
+              "energy": 0,
+              "observed": 20,
+              "weight": 3
+            },
+            {
+              "binomial": 15,
+              "energy": 2,
+              "observed": 15,
+              "weight": 4
+            },
+            {
+              "binomial": 6,
+              "energy": 4,
+              "observed": 6,
+              "weight": 5
+            },
+            {
+              "binomial": 1,
+              "energy": 6,
+              "observed": 1,
+              "weight": 6
+            }
+          ],
+          "n": 6,
+          "normalized_gap": "1/6",
+          "ordered_spectrum_max_abs_error": 6.826261106948657e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 6,
+          "walsh_orthogonal_exact": true,
+          "width": "12"
+        }
+      ],
+      "lean_module": "../B9/ClusterStabilizer/SpectrumFormula.lean",
+      "lean_module_sha256": "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2",
+      "markdown_report": "../research/B9_R190_spectrum_formula_certificate.md",
+      "method": "b9_r190_open_chain_spectrum_formula_certificate_v1",
+      "new_credit_delta": 0,
+      "nlts_theorem": false,
+      "operator_module": "../B9/ClusterStabilizer/OperatorSemantics.lean",
+      "operator_module_sha256": "e0db84719b9f73036c0132657da1ec412ebd5fcff1cde09bc397c91be1f12d6e",
+      "payload_sha256": "9611e00d228143627d2d146177b9c4dddcda7a72d7d8f106b5aace072db0f9db",
+      "protocol_hash": "ed258a84d49073f113a4d9e771c983ea6e99b22e94e3dc14e3182c6dca9d719a",
+      "quantum_hardware_execution": false,
+      "quantum_pcp_theorem": false,
+      "r187_module": "../B9/ClusterStabilizer/WidthLocality.lean",
+      "r187_module_sha256": "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3",
+      "r187_operator_derived_boundary_formalized": true,
+      "requirement_count": 14,
+      "requirements_passed": 14,
+      "result": "../results/B9_R190_open_chain_spectrum_formula_certificate_v1.json",
+      "solved_frontier": false,
+      "status": "checked_all_n_spectrum_formula_multiplicity_gap_width_complete_restricted_negative_boundary",
+      "transcript_sha256": "9983640b9732ccb939a0a42f85df1f3fa75393fcfceaba7bb0cbe760b2eb720c"
+    },
     "t1_asymptotic_access_contract": {
       "access_contract_count": 8,
       "b3_demoted": true,
@@ -13002,6 +13212,216 @@
       "structure_module_sha256": "7e9bd8fd997ed44dec568504dbdd0af8b9e7e1109f64c49be945eb2f28c775ee",
       "transcript_sha256": "227621753afc8ea6f8412bca7800501c71aa8a1feb6d41f18fd9ecbc52fd75dc"
     },
+    "r190_open_chain_spectrum_formula_certificate": {
+      "all_n_binomial_multiplicity_formalized": true,
+      "all_n_cluster_conjugation_formalized": true,
+      "all_n_gap_width_normalized_formalized": true,
+      "all_n_spectrum_formula_formalized": true,
+      "all_n_walsh_eigenbasis_formalized": true,
+      "bqp_separation": false,
+      "checked_transcript": "../results/B9_R190_open_chain_spectrum_formula_transcript_v1.txt",
+      "evidence_integrity_complete": true,
+      "experiment_id": "B9-R190-open-chain-spectrum-formula-certificate",
+      "global_gap_amplification_impossibility": false,
+      "independent_finite_replay": true,
+      "independent_spectrum_rows": [
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/4",
+          "after_width": "54/5",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 16,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -2,
+          "gap": "2",
+          "ground_energy": -4,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -4,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 4,
+              "energy": -2,
+              "observed": 4,
+              "weight": 1
+            },
+            {
+              "binomial": 6,
+              "energy": 0,
+              "observed": 6,
+              "weight": 2
+            },
+            {
+              "binomial": 4,
+              "energy": 2,
+              "observed": 4,
+              "weight": 3
+            },
+            {
+              "binomial": 1,
+              "energy": 4,
+              "observed": 1,
+              "weight": 4
+            }
+          ],
+          "n": 4,
+          "normalized_gap": "1/4",
+          "ordered_spectrum_max_abs_error": 1.7763568394002505e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 4,
+          "walsh_orthogonal_exact": true,
+          "width": "8"
+        },
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/5",
+          "after_width": "27/2",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 32,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -3,
+          "gap": "2",
+          "ground_energy": -5,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -5,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 5,
+              "energy": -3,
+              "observed": 5,
+              "weight": 1
+            },
+            {
+              "binomial": 10,
+              "energy": -1,
+              "observed": 10,
+              "weight": 2
+            },
+            {
+              "binomial": 10,
+              "energy": 1,
+              "observed": 10,
+              "weight": 3
+            },
+            {
+              "binomial": 5,
+              "energy": 3,
+              "observed": 5,
+              "weight": 4
+            },
+            {
+              "binomial": 1,
+              "energy": 5,
+              "observed": 1,
+              "weight": 5
+            }
+          ],
+          "n": 5,
+          "normalized_gap": "1/5",
+          "ordered_spectrum_max_abs_error": 2.220446049250313e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 5,
+          "walsh_orthogonal_exact": true,
+          "width": "10"
+        },
+        {
+          "after_gap": "27/10",
+          "after_normalized_gap": "1/6",
+          "after_width": "81/5",
+          "binomial_multiplicity_match": true,
+          "checked": true,
+          "cluster_eigenvector_max_abs_residual": 0.0,
+          "dimension": 64,
+          "exact_cluster_conjugation": true,
+          "first_excited_energy": -4,
+          "gap": "2",
+          "ground_energy": -6,
+          "multiplicities": [
+            {
+              "binomial": 1,
+              "energy": -6,
+              "observed": 1,
+              "weight": 0
+            },
+            {
+              "binomial": 6,
+              "energy": -4,
+              "observed": 6,
+              "weight": 1
+            },
+            {
+              "binomial": 15,
+              "energy": -2,
+              "observed": 15,
+              "weight": 2
+            },
+            {
+              "binomial": 20,
+              "energy": 0,
+              "observed": 20,
+              "weight": 3
+            },
+            {
+              "binomial": 15,
+              "energy": 2,
+              "observed": 15,
+              "weight": 4
+            },
+            {
+              "binomial": 6,
+              "energy": 4,
+              "observed": 6,
+              "weight": 5
+            },
+            {
+              "binomial": 1,
+              "energy": 6,
+              "observed": 1,
+              "weight": 6
+            }
+          ],
+          "n": 6,
+          "normalized_gap": "1/6",
+          "ordered_spectrum_max_abs_error": 6.826261106948657e-15,
+          "ordered_spectrum_multiplicity_match": true,
+          "top_energy": 6,
+          "walsh_orthogonal_exact": true,
+          "width": "12"
+        }
+      ],
+      "lean_module": "../B9/ClusterStabilizer/SpectrumFormula.lean",
+      "lean_module_sha256": "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2",
+      "markdown_report": "../research/B9_R190_spectrum_formula_certificate.md",
+      "method": "b9_r190_open_chain_spectrum_formula_certificate_v1",
+      "new_credit_delta": 0,
+      "nlts_theorem": false,
+      "operator_module": "../B9/ClusterStabilizer/OperatorSemantics.lean",
+      "operator_module_sha256": "e0db84719b9f73036c0132657da1ec412ebd5fcff1cde09bc397c91be1f12d6e",
+      "payload_sha256": "9611e00d228143627d2d146177b9c4dddcda7a72d7d8f106b5aace072db0f9db",
+      "protocol_hash": "ed258a84d49073f113a4d9e771c983ea6e99b22e94e3dc14e3182c6dca9d719a",
+      "quantum_hardware_execution": false,
+      "quantum_pcp_theorem": false,
+      "r187_module": "../B9/ClusterStabilizer/WidthLocality.lean",
+      "r187_module_sha256": "2c759095ccd90d65d3ab19e6d5ee12abb9062b0104baabeacb3aff7bd653b6e3",
+      "r187_operator_derived_boundary_formalized": true,
+      "requirement_count": 14,
+      "requirements_passed": 14,
+      "result": "../results/B9_R190_open_chain_spectrum_formula_certificate_v1.json",
+      "solved_frontier": false,
+      "status": "checked_all_n_spectrum_formula_multiplicity_gap_width_complete_restricted_negative_boundary",
+      "transcript_sha256": "9983640b9732ccb939a0a42f85df1f3fa75393fcfceaba7bb0cbe760b2eb720c"
+    },
     "symbolic_gap_skeleton": {
       "dense_locality_trap_count_inherited": 9,
       "explicit_not_quantum_pcp_proof": true,
@@ -13162,7 +13582,7 @@
       "B6": 24,
       "B7": 59,
       "B8": 41,
-      "B9": 25
+      "B9": 29
     },
     "path": "research/top10_problem_dossiers.json",
     "problem_ids_match_attack_pack": true

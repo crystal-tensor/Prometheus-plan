@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R189. R187 is a checked
+The current B9 formal line spans R187 through R190. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -131,11 +131,28 @@ changes from `2` to `27/10`, the width scales by `27/20`, and the normalized
 gap remains `1/n`. The certificate and portfolio audit pass `13/13`.
 Protocol `3e7e36c8...`; Lean module `e0db8471...`; transcript `22762175...`;
 payload `24afca7b...`. This is an all-`n` matrix/operator and spectrum-set
-scaling theorem plus finite spectrum cross-checks. The ordered all-`n`
-eigenvalue multiset and gap/width formulas are not yet formalized in Lean. It
-is not quantum-hardware evidence, a Quantum PCP or NLTS theorem, a global
-no-go result, a BQP separation, or a solved B9 frontier. New credit remains
-zero.
+scaling theorem plus finite spectrum cross-checks.
+
+R190 closes the ordered-spectrum gap for this exactly solvable family.
+`SpectrumFormula.lean` constructs an invertible Walsh eigenbasis for the
+independent `-sum X_i` chain and proves exact conjugation by the open-chain
+cluster phase. Every label of Hamming weight `k` therefore has energy
+`2k-n`; a checked equivalence between bit labels and finite supports proves
+that this level has multiplicity `choose(n,k)`. Lean derives ground energy
+`-n`, first excited energy `2-n`, raw gap `2`, top energy `n`, width `2n`,
+and normalized gap `1/n`, then binds those operator-derived values back into
+the R187 `27/20` uniform-reweight rejection.
+
+An independent integer-matrix and Walsh oracle replays `n=4,5,6`, with exact
+Walsh orthogonality, exact cluster-phase conjugation, zero eigenvector
+residual, matching binomial multiplicities, and complete eigenspectrum error
+below `1e-12`. The certificate and portfolio audit pass `14/14` with zero
+warnings. Protocol `ed258a84...`; Lean module `acfd7244...`; transcript
+`9983640b...`; payload `9611e00d...`. This is a complete all-`n` spectrum
+formula for one commuting stabilizer family and a restricted negative result
+about uniform rescaling. It is not quantum-hardware evidence, a theorem for
+arbitrary local Hamiltonians, a Quantum PCP or NLTS theorem, a global no-go
+result, a BQP separation, or a solved B9 frontier. New credit remains zero.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
