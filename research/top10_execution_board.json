@@ -135,18 +135,18 @@
       "title": "Classical verification of quantum outputs"
     },
     {
-      "30_day_gate": "Use the solved commuting family as a control and formalize a locality-explicit noncommuting perturbation. Derive or bound its normalized gap without importing the conclusion, then test whether it yields a nontrivial restricted hardness theorem or scoped no-go lemma beyond uniform scaling.",
+      "30_day_gate": "Formalize the all-n R191 tensor-product spectrum, then add the smallest locality-explicit overlapping noncommuting term that destroys disjoint-site decomposition and test its normalized gap under a preregistered coupling interval.",
       "b_id": "B9",
-      "current_maturity": "checked_all_n_spectrum_formula_multiplicity_gap_width_complete_restricted_negative_boundary",
+      "current_maturity": "checked_noncommuting_integrable_negative_control",
       "dependencies": [
         "B10"
       ],
       "downstream_translation_route": "Deferred until a restricted theorem or reusable negative lemma is formalized.",
       "kill_condition": "Keep only as a negative-result track unless a restricted theorem target becomes precise and independently proof-checked.",
-      "next_artifact": "B9 T-B9-005 locality-explicit noncommuting perturbation contract and normalized-gap theorem target.",
+      "next_artifact": "B9 T-B9-006 overlapping noncommuting perturbation contract, all-n product theorem, and normalized-gap target.",
       "priority_lane": "theory_and_negative_results",
       "problem_id": 17,
-      "strongest_evidence": "R187-R190 form a pinned Lean 4.12.0/Mathlib proof chain. R187 proves the 27/20 uniform-scale rejection without a conclusion-shaped ratio assumption; R188 proves the all-n open-chain locality structure; R189 supplies explicit complex matrix semantics, Hermiticity, exact operator scaling, and spectrum-set scaling. R190 constructs an invertible Walsh eigenbasis, proves exact cluster-phase conjugation, derives energy 2k-n with multiplicity choose(n,k), proves ground -n, first excitation 2-n, gap 2, top n, width 2n, and normalized gap 1/n, and reconnects those operator-derived values to R187. Independent integer-matrix/Walsh replays for n=4,5,6 have exact conjugation and orthogonality, zero eigenvector residual, matching binomial counts, and eigenspectrum error below 1e-12. R190 and the independent portfolio audit pass 14/14 with no arbitrary-local-Hamiltonian, hardware, Quantum PCP, NLTS, global no-go, BQP, solved-frontier, or new-credit claim.",
+      "strongest_evidence": "R187-R191 form a pinned Lean 4.12.0/Mathlib proof chain. R190 solves the complete spectrum of one commuting open-chain control family. R191 defines A=-X+(3/4)Z and formally proves exact local eigenpairs and spectrum, Hermiticity, strict noncommutation with X, non-scalar-X structure, support, and normalized-boundary facts. Independent rational bit-action replays for n=4,5,6,7 match (5/4)(2k-n) with multiplicity choose(n,k), gap 5/2, width 5n/2, normalized gap 1/n, and exact cluster-phase conjugation. The certificate and audit pass 12/12. This is a noncommuting but integrable negative control because global X/Z pieces do not commute while disjoint-site regrouped blocks do. No overlapping-spectrum, spectral-hardness, hardware, Quantum PCP, NLTS, BQP, solved-frontier, or new-credit claim is made.",
       "title": "Quantum PCP and local Hamiltonian hardness"
     },
     {

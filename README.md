@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R190. R187 is a checked
+The current B9 formal line spans R187 through R191. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -153,6 +153,25 @@ formula for one commuting stabilizer family and a restricted negative result
 about uniform rescaling. It is not quantum-hardware evidence, a theorem for
 arbitrary local Hamiltonians, a Quantum PCP or NLTS theorem, a global no-go
 result, a BQP separation, or a solved B9 frontier. New credit remains zero.
+
+R191 tests the first declared noncommuting control. The local block
+`A = -X + (3/4)Z` has exact eigenvalues `-5/4` and `5/4`; Lean proves its
+eigenpairs, Hermiticity, complete local spectrum, strict noncommutation with
+`X`, and that it is not a scalar rescaling of `X`. An independent rational
+matrix oracle then replays the full product spectrum for `n=4,5,6,7`:
+every level is `(5/4)(2k-n)` with multiplicity `choose(n,k)`, raw gap `5/2`,
+width `5n/2`, and normalized gap `1/n`.
+
+This is a useful negative control. The global `X` and `Z` sums do not commute,
+but regrouping by disjoint sites exposes pairwise-commuting local blocks, and
+exact cluster-phase conjugation produces the cluster Hamiltonian plus the same
+longitudinal `Z` field. The certificate and portfolio audit pass `12/12`.
+Protocol `8ab88e88...`; Lean module `5bfdaa75...`; transcript `cc800919...`;
+payload `dda7655c...`. R191 does not formalize the all-`n` tensor-product
+spectrum, overlapping noncommuting terms, spectral hardness, hardware,
+Quantum PCP, NLTS, BQP separation, or a solved frontier. New credit remains
+zero. The next gate is the smallest locality-explicit overlapping perturbation
+that destroys this disjoint-site decomposition.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

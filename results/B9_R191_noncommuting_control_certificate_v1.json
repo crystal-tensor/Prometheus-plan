@@ -1,0 +1,941 @@
+{
+  "claim_boundary": {
+    "not_supported": [
+      "The all-n product spectrum is independently replayed at finite sizes but is not yet formalized as a Lean tensor-product theorem.",
+      "This is a negative control showing that noncommutation alone does not imply hardness; overlapping noncommuting terms remain untested.",
+      "No spectral-hardness theorem, hardware execution, Quantum PCP theorem, NLTS theorem, BQP separation, solved frontier, or new credit is supported."
+    ],
+    "supported": [
+      "Lean checks the exact local eigenpairs, local spectrum, Hermiticity, noncommutation with X, and non-scalar-X boundary.",
+      "Independent n=4,5,6,7 product spectra match (5/4)(2k-n) with binomial multiplicities.",
+      "The raw gap is 5/2, width is 5n/2, and normalized gap remains 1/n.",
+      "The X and Z pieces do not commute, but regrouping by disjoint sites exposes pairwise-commuting local blocks.",
+      "Exact cluster-phase conjugation produces the cluster-stabilizer Hamiltonian plus the same longitudinal Z field."
+    ]
+  },
+  "execution": {
+    "module_warning_count": 0,
+    "probes": [
+      {
+        "command": [
+          "lean",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lean (version 4.12.0, arm64-apple-darwin23.6.0, commit dc2533473114, Release)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "--version"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Lake version 5.0.0-dc25334 (Lean version 4.12.0)\n",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "B9/ClusterStabilizer/NoncommutingControl.lean"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "",
+        "timed_out": false
+      }
+    ],
+    "transcript_path": "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/b9-r187/results/B9_R191_noncommuting_control_transcript_v1.txt",
+    "transcript_sha256": "cc800919aeef50a287518177ffbae80f539f039356637593a5d9d2be241c5715"
+  },
+  "experiment_id": "B9-R191-noncommuting-integrable-negative-control",
+  "independent_spectrum_rows": [
+    {
+      "binomial_multiplicity_match": true,
+      "checked": true,
+      "dimension": 16,
+      "exact_cluster_phase_conjugation": true,
+      "first_excited_energy": "-5/2",
+      "gap": "5/2",
+      "ground_energy": "-5",
+      "n": 4,
+      "normalized_gap": "1/4",
+      "not_uniform_x_scaling": true,
+      "ordered_spectrum_max_abs_error": 3.552713678800501e-15,
+      "ordered_spectrum_multiplicity_match": true,
+      "site_block_commutator_max_abs": 0.0,
+      "site_blocks_pairwise_commuting": true,
+      "top_energy": "5",
+      "width": "10",
+      "x_z_piece_commutator_max_abs": 1.5,
+      "x_z_pieces_noncommuting": true
+    },
+    {
+      "binomial_multiplicity_match": true,
+      "checked": true,
+      "dimension": 32,
+      "exact_cluster_phase_conjugation": true,
+      "first_excited_energy": "-15/4",
+      "gap": "5/2",
+      "ground_energy": "-25/4",
+      "n": 5,
+      "normalized_gap": "1/5",
+      "not_uniform_x_scaling": true,
+      "ordered_spectrum_max_abs_error": 4.440892098500626e-15,
+      "ordered_spectrum_multiplicity_match": true,
+      "site_block_commutator_max_abs": 0.0,
+      "site_blocks_pairwise_commuting": true,
+      "top_energy": "25/4",
+      "width": "25/2",
+      "x_z_piece_commutator_max_abs": 1.5,
+      "x_z_pieces_noncommuting": true
+    },
+    {
+      "binomial_multiplicity_match": true,
+      "checked": true,
+      "dimension": 64,
+      "exact_cluster_phase_conjugation": true,
+      "first_excited_energy": "-5",
+      "gap": "5/2",
+      "ground_energy": "-15/2",
+      "n": 6,
+      "normalized_gap": "1/6",
+      "not_uniform_x_scaling": true,
+      "ordered_spectrum_max_abs_error": 8.881784197001252e-15,
+      "ordered_spectrum_multiplicity_match": true,
+      "site_block_commutator_max_abs": 0.0,
+      "site_blocks_pairwise_commuting": true,
+      "top_energy": "15/2",
+      "width": "15",
+      "x_z_piece_commutator_max_abs": 1.5,
+      "x_z_pieces_noncommuting": true
+    },
+    {
+      "binomial_multiplicity_match": true,
+      "checked": true,
+      "dimension": 128,
+      "exact_cluster_phase_conjugation": true,
+      "first_excited_energy": "-25/4",
+      "gap": "5/2",
+      "ground_energy": "-35/4",
+      "n": 7,
+      "normalized_gap": "1/7",
+      "not_uniform_x_scaling": true,
+      "ordered_spectrum_max_abs_error": 1.7763568394002505e-14,
+      "ordered_spectrum_multiplicity_match": true,
+      "site_block_commutator_max_abs": 0.0,
+      "site_blocks_pairwise_commuting": true,
+      "top_energy": "35/4",
+      "width": "35/2",
+      "x_z_piece_commutator_max_abs": 1.5,
+      "x_z_pieces_noncommuting": true
+    }
+  ],
+  "last_updated": "2026-07-29",
+  "local_exact_checks": {
+    "basis_determinant": "-25/16",
+    "commutator": [
+      [
+        "0",
+        "-3/2"
+      ],
+      [
+        "3/2",
+        "0"
+      ]
+    ],
+    "commutator_nonzero_exact": true,
+    "excited_eigenpair_exact": true,
+    "excited_eigenvalue": "5/4",
+    "excited_vector": [
+      "2",
+      "-1"
+    ],
+    "ground_eigenpair_exact": true,
+    "ground_eigenvalue": "-5/4",
+    "ground_vector": [
+      "1",
+      "2"
+    ],
+    "local_matrix": [
+      [
+        "3/4",
+        "-1"
+      ],
+      [
+        "-1",
+        "-3/4"
+      ]
+    ],
+    "not_scalar_x_exact": true
+  },
+  "method": "b9_r191_noncommuting_integrable_negative_control_v1",
+  "payload_sha256": "dda7655cae660522f543ea6ca5e4be625df4e2c9d90ed1ed58d9f29c1bdc8c91",
+  "protocol": {
+    "acceptance": {
+      "independent_row_count": 4,
+      "lake_version_returncode": 0,
+      "lean_version_returncode": 0,
+      "module_check_returncode": 0,
+      "module_check_warning_count": 0,
+      "requirement_pass_count": 12
+    },
+    "checked_sizes": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "claim_boundary": {
+      "bqp_separation": false,
+      "cluster_conjugation_replayed": true,
+      "exact_local_eigenpairs_formalized": true,
+      "exact_local_spectrum_formalized": true,
+      "finite_product_spectrum_replayed": true,
+      "global_gap_amplification_impossibility": false,
+      "local_noncommutation_formalized": true,
+      "new_credit_delta": 0,
+      "nlts_theorem": false,
+      "noncommuting_integrable_negative_control": true,
+      "not_scalar_x_formalized": true,
+      "overlapping_noncommuting_spectrum_formalized": false,
+      "quantum_hardware_execution": false,
+      "quantum_pcp_theorem": false,
+      "solved_frontier": false,
+      "spectral_hardness_theorem": false
+    },
+    "experiment_id": "B9-R191-noncommuting-integrable-negative-control",
+    "field_strength": "3/4",
+    "forbidden_source_tokens": [
+      "sorry",
+      "axiom"
+    ],
+    "independent_oracle": "Python Fraction bit-action matrices plus NumPy Hermitian eigenspectra",
+    "local_spectral_scale": "5/4",
+    "pinned_toolchain": "leanprover/lean4:v4.12.0",
+    "required_definitions": [
+      "pythagoreanFieldStrength",
+      "pythagoreanSpectralScale",
+      "tiltedLocalOperator",
+      "tiltedGroundVector",
+      "tiltedExcitedVector",
+      "tiltedLocalEigenvalue",
+      "tiltedLocalBasisMatrix",
+      "zFieldOperator",
+      "tiltedProductOperator",
+      "integrableClusterControlOperator",
+      "pythagoreanControlSummary"
+    ],
+    "required_theorems": [
+      "tiltedLocalOperator_isHermitian",
+      "tilted_ground_eigenpair",
+      "tilted_excited_eigenpair",
+      "tiltedLocalBasis_diagonalizes",
+      "tiltedLocalOperator_spectrum",
+      "pauliX_does_not_commute_with_tiltedLocalOperator",
+      "tiltedLocalOperator_not_scalar_pauliX",
+      "pythagorean_field_support_card",
+      "pythagorean_field_support_subset_range",
+      "zFieldOperator_isHermitian",
+      "tiltedProductOperator_isHermitian",
+      "pythagoreanControlSummary_normalized",
+      "pythagorean_noncommuting_control_boundary"
+    ],
+    "source_module": "B9/ClusterStabilizer/NoncommutingControl.lean",
+    "spectrum_module": "B9/ClusterStabilizer/SpectrumFormula.lean",
+    "target": "Construct an exact local block -X+(3/4)Z that does not commute with X and is not a scalar X rescaling, then test whether its site-factorized chain remains exactly integrable after cluster-phase conjugation.",
+    "track": [
+      "B9",
+      "B10"
+    ]
+  },
+  "protocol_hash": "8ab88e880d797cd8aa39a804599325e0d641211531dfd201725b8dfca2442b6c",
+  "requirements": [
+    {
+      "evidence": {
+        "claim_boundary": {
+          "bqp_separation": false,
+          "cluster_conjugation_replayed": true,
+          "exact_local_eigenpairs_formalized": true,
+          "exact_local_spectrum_formalized": true,
+          "finite_product_spectrum_replayed": true,
+          "global_gap_amplification_impossibility": false,
+          "local_noncommutation_formalized": true,
+          "new_credit_delta": 0,
+          "nlts_theorem": false,
+          "noncommuting_integrable_negative_control": true,
+          "not_scalar_x_formalized": true,
+          "overlapping_noncommuting_spectrum_formalized": false,
+          "quantum_hardware_execution": false,
+          "quantum_pcp_theorem": false,
+          "solved_frontier": false,
+          "spectral_hardness_theorem": false
+        },
+        "protocol_hash": "8ab88e880d797cd8aa39a804599325e0d641211531dfd201725b8dfca2442b6c"
+      },
+      "label": "Protocol is content-addressed and broad frontier claims remain false",
+      "passed": true,
+      "requirement_id": "R1"
+    },
+    {
+      "evidence": {
+        "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+        "lakefile_sha256": "6e5632f007635578a9c3ef49739667fceea8d1f7e21e8dfc561d5c94fcb4ff8a",
+        "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
+        "spectrum_module_sha256": "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2"
+      },
+      "label": "Pinned Lean project and both formal source layers exist",
+      "passed": true,
+      "requirement_id": "R2"
+    },
+    {
+      "evidence": {
+        "forbidden_hits": {
+          "axiom": 0,
+          "sorry": 0
+        }
+      },
+      "label": "The control source contains no sorry or axiom escape hatch",
+      "passed": true,
+      "requirement_id": "R3"
+    },
+    {
+      "evidence": {
+        "definition_names": [
+          "pythagoreanFieldStrength",
+          "pythagoreanSpectralScale",
+          "tiltedLocalOperator",
+          "tiltedGroundVector",
+          "tiltedExcitedVector",
+          "tiltedLocalEigenvalue",
+          "tiltedLocalBasisMatrix",
+          "tiltedLocalBasisInverse",
+          "tiltedLocalBasisUnit",
+          "PythagoreanFieldTerm.support",
+          "pythagoreanFieldTerm",
+          "zFieldSitePauli",
+          "zFieldPauliWord",
+          "zFieldTermOperator",
+          "zFieldOperator",
+          "tiltedProductOperator",
+          "integrableClusterControlOperator",
+          "pythagoreanControlSummary"
+        ],
+        "required_definitions": [
+          "pythagoreanFieldStrength",
+          "pythagoreanSpectralScale",
+          "tiltedLocalOperator",
+          "tiltedGroundVector",
+          "tiltedExcitedVector",
+          "tiltedLocalEigenvalue",
+          "tiltedLocalBasisMatrix",
+          "zFieldOperator",
+          "tiltedProductOperator",
+          "integrableClusterControlOperator",
+          "pythagoreanControlSummary"
+        ]
+      },
+      "label": "All declared control definitions exist",
+      "passed": true,
+      "requirement_id": "R4"
+    },
+    {
+      "evidence": {
+        "required_theorems": [
+          "tiltedLocalOperator_isHermitian",
+          "tilted_ground_eigenpair",
+          "tilted_excited_eigenpair",
+          "tiltedLocalBasis_diagonalizes",
+          "tiltedLocalOperator_spectrum",
+          "pauliX_does_not_commute_with_tiltedLocalOperator",
+          "tiltedLocalOperator_not_scalar_pauliX",
+          "pythagorean_field_support_card",
+          "pythagorean_field_support_subset_range",
+          "zFieldOperator_isHermitian",
+          "tiltedProductOperator_isHermitian",
+          "pythagoreanControlSummary_normalized",
+          "pythagorean_noncommuting_control_boundary"
+        ],
+        "theorem_names": [
+          "tiltedLocalOperator_isHermitian",
+          "tilted_ground_eigenpair",
+          "tilted_excited_eigenpair",
+          "tiltedLocalBasis_mul_self",
+          "tiltedLocalBasis_mul_inverse",
+          "tiltedLocalBasis_inverse_mul",
+          "tiltedLocalOperator_mul_basis",
+          "tiltedLocalBasis_diagonalizes",
+          "tiltedLocalOperator_spectrum",
+          "pauliX_does_not_commute_with_tiltedLocalOperator",
+          "tiltedLocalOperator_not_scalar_pauliX",
+          "pythagorean_field_support_card",
+          "pythagorean_field_support_subset_range",
+          "xSitePauli_isHermitian",
+          "xPauliWord_isHermitian",
+          "xChainTermOperator_isHermitian",
+          "xChainOperator_isHermitian",
+          "zFieldSitePauli_isHermitian",
+          "zFieldPauliWord_isHermitian",
+          "zFieldTermOperator_isHermitian",
+          "zFieldOperator_isHermitian",
+          "tiltedProductOperator_isHermitian",
+          "pythagoreanControlSummary_gap",
+          "pythagoreanControlSummary_width",
+          "pythagoreanControlSummary_normalized",
+          "pythagorean_noncommuting_control_boundary"
+        ]
+      },
+      "label": "All declared exact control theorems exist",
+      "passed": true,
+      "requirement_id": "R5"
+    },
+    {
+      "evidence": {
+        "basis_determinant": "-25/16",
+        "commutator": [
+          [
+            "0",
+            "-3/2"
+          ],
+          [
+            "3/2",
+            "0"
+          ]
+        ],
+        "commutator_nonzero_exact": true,
+        "excited_eigenpair_exact": true,
+        "excited_eigenvalue": "5/4",
+        "excited_vector": [
+          "2",
+          "-1"
+        ],
+        "ground_eigenpair_exact": true,
+        "ground_eigenvalue": "-5/4",
+        "ground_vector": [
+          "1",
+          "2"
+        ],
+        "local_matrix": [
+          [
+            "3/4",
+            "-1"
+          ],
+          [
+            "-1",
+            "-3/4"
+          ]
+        ],
+        "not_scalar_x_exact": true
+      },
+      "label": "Local eigenpairs and noncommutation replay exactly over rationals",
+      "passed": true,
+      "requirement_id": "R6"
+    },
+    {
+      "evidence": {
+        "basis_determinant": "-25/16",
+        "commutator": [
+          [
+            "0",
+            "-3/2"
+          ],
+          [
+            "3/2",
+            "0"
+          ]
+        ],
+        "commutator_nonzero_exact": true,
+        "excited_eigenpair_exact": true,
+        "excited_eigenvalue": "5/4",
+        "excited_vector": [
+          "2",
+          "-1"
+        ],
+        "ground_eigenpair_exact": true,
+        "ground_eigenvalue": "-5/4",
+        "ground_vector": [
+          "1",
+          "2"
+        ],
+        "local_matrix": [
+          [
+            "3/4",
+            "-1"
+          ],
+          [
+            "-1",
+            "-3/4"
+          ]
+        ],
+        "not_scalar_x_exact": true
+      },
+      "label": "The local control is not a scalar multiple of Pauli X",
+      "passed": true,
+      "requirement_id": "R7"
+    },
+    {
+      "evidence": {
+        "eigenvalue_tolerance": 1e-12,
+        "rows": [
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 16,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5/2",
+            "gap": "5/2",
+            "ground_energy": "-5",
+            "n": 4,
+            "normalized_gap": "1/4",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 3.552713678800501e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "5",
+            "width": "10",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 32,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-15/4",
+            "gap": "5/2",
+            "ground_energy": "-25/4",
+            "n": 5,
+            "normalized_gap": "1/5",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 4.440892098500626e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "25/4",
+            "width": "25/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 64,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5",
+            "gap": "5/2",
+            "ground_energy": "-15/2",
+            "n": 6,
+            "normalized_gap": "1/6",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 8.881784197001252e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "15/2",
+            "width": "15",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 128,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-25/4",
+            "gap": "5/2",
+            "ground_energy": "-35/4",
+            "n": 7,
+            "normalized_gap": "1/7",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 1.7763568394002505e-14,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "35/4",
+            "width": "35/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          }
+        ]
+      },
+      "label": "Finite product spectra and binomial multiplicities match",
+      "passed": true,
+      "requirement_id": "R8"
+    },
+    {
+      "evidence": {
+        "rows": [
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 16,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5/2",
+            "gap": "5/2",
+            "ground_energy": "-5",
+            "n": 4,
+            "normalized_gap": "1/4",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 3.552713678800501e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "5",
+            "width": "10",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 32,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-15/4",
+            "gap": "5/2",
+            "ground_energy": "-25/4",
+            "n": 5,
+            "normalized_gap": "1/5",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 4.440892098500626e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "25/4",
+            "width": "25/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 64,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5",
+            "gap": "5/2",
+            "ground_energy": "-15/2",
+            "n": 6,
+            "normalized_gap": "1/6",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 8.881784197001252e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "15/2",
+            "width": "15",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 128,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-25/4",
+            "gap": "5/2",
+            "ground_energy": "-35/4",
+            "n": 7,
+            "normalized_gap": "1/7",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 1.7763568394002505e-14,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "35/4",
+            "width": "35/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          }
+        ]
+      },
+      "label": "Raw gap, width, and normalized ratio match 5/2, 5n/2, and 1/n",
+      "passed": true,
+      "requirement_id": "R9"
+    },
+    {
+      "evidence": {
+        "rows": [
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 16,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5/2",
+            "gap": "5/2",
+            "ground_energy": "-5",
+            "n": 4,
+            "normalized_gap": "1/4",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 3.552713678800501e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "5",
+            "width": "10",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 32,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-15/4",
+            "gap": "5/2",
+            "ground_energy": "-25/4",
+            "n": 5,
+            "normalized_gap": "1/5",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 4.440892098500626e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "25/4",
+            "width": "25/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 64,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5",
+            "gap": "5/2",
+            "ground_energy": "-15/2",
+            "n": 6,
+            "normalized_gap": "1/6",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 8.881784197001252e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "15/2",
+            "width": "15",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 128,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-25/4",
+            "gap": "5/2",
+            "ground_energy": "-35/4",
+            "n": 7,
+            "normalized_gap": "1/7",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 1.7763568394002505e-14,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "35/4",
+            "width": "35/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          }
+        ]
+      },
+      "label": "X and Z pieces do not commute while grouped site blocks do",
+      "passed": true,
+      "requirement_id": "R10"
+    },
+    {
+      "evidence": {
+        "rows": [
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 16,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5/2",
+            "gap": "5/2",
+            "ground_energy": "-5",
+            "n": 4,
+            "normalized_gap": "1/4",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 3.552713678800501e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "5",
+            "width": "10",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 32,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-15/4",
+            "gap": "5/2",
+            "ground_energy": "-25/4",
+            "n": 5,
+            "normalized_gap": "1/5",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 4.440892098500626e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "25/4",
+            "width": "25/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 64,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-5",
+            "gap": "5/2",
+            "ground_energy": "-15/2",
+            "n": 6,
+            "normalized_gap": "1/6",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 8.881784197001252e-15,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "15/2",
+            "width": "15",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          },
+          {
+            "binomial_multiplicity_match": true,
+            "checked": true,
+            "dimension": 128,
+            "exact_cluster_phase_conjugation": true,
+            "first_excited_energy": "-25/4",
+            "gap": "5/2",
+            "ground_energy": "-35/4",
+            "n": 7,
+            "normalized_gap": "1/7",
+            "not_uniform_x_scaling": true,
+            "ordered_spectrum_max_abs_error": 1.7763568394002505e-14,
+            "ordered_spectrum_multiplicity_match": true,
+            "site_block_commutator_max_abs": 0.0,
+            "site_blocks_pairwise_commuting": true,
+            "top_energy": "35/4",
+            "width": "35/2",
+            "x_z_piece_commutator_max_abs": 1.5,
+            "x_z_pieces_noncommuting": true
+          }
+        ]
+      },
+      "label": "Exact cluster-phase conjugation preserves the Z field and transfers X",
+      "passed": true,
+      "requirement_id": "R11"
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0,
+          0,
+          0
+        ],
+        "timed_out": [
+          false,
+          false,
+          false
+        ],
+        "warning_count": 0
+      },
+      "label": "Lean, Lake, and NoncommutingControl return zero with no warnings",
+      "passed": true,
+      "requirement_id": "R12"
+    }
+  ],
+  "source": {
+    "definition_names": [
+      "pythagoreanFieldStrength",
+      "pythagoreanSpectralScale",
+      "tiltedLocalOperator",
+      "tiltedGroundVector",
+      "tiltedExcitedVector",
+      "tiltedLocalEigenvalue",
+      "tiltedLocalBasisMatrix",
+      "tiltedLocalBasisInverse",
+      "tiltedLocalBasisUnit",
+      "PythagoreanFieldTerm.support",
+      "pythagoreanFieldTerm",
+      "zFieldSitePauli",
+      "zFieldPauliWord",
+      "zFieldTermOperator",
+      "zFieldOperator",
+      "tiltedProductOperator",
+      "integrableClusterControlOperator",
+      "pythagoreanControlSummary"
+    ],
+    "forbidden_hits": {
+      "axiom": 0,
+      "sorry": 0
+    },
+    "lake_manifest_sha256": "fa8f1499dbbcf33274bd8693b9d7d8c950e000991c248b491bf71177902dd3db",
+    "lakefile_sha256": "6e5632f007635578a9c3ef49739667fceea8d1f7e21e8dfc561d5c94fcb4ff8a",
+    "lean_module": "B9/ClusterStabilizer/NoncommutingControl.lean",
+    "lean_module_sha256": "5bfdaa756163782940fb4fbb5f3370e9502da46b455f031e3439a561a5bfbd99",
+    "lean_toolchain_sha256": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
+    "spectrum_module": "B9/ClusterStabilizer/SpectrumFormula.lean",
+    "spectrum_module_sha256": "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2",
+    "theorem_names": [
+      "tiltedLocalOperator_isHermitian",
+      "tilted_ground_eigenpair",
+      "tilted_excited_eigenpair",
+      "tiltedLocalBasis_mul_self",
+      "tiltedLocalBasis_mul_inverse",
+      "tiltedLocalBasis_inverse_mul",
+      "tiltedLocalOperator_mul_basis",
+      "tiltedLocalBasis_diagonalizes",
+      "tiltedLocalOperator_spectrum",
+      "pauliX_does_not_commute_with_tiltedLocalOperator",
+      "tiltedLocalOperator_not_scalar_pauliX",
+      "pythagorean_field_support_card",
+      "pythagorean_field_support_subset_range",
+      "xSitePauli_isHermitian",
+      "xPauliWord_isHermitian",
+      "xChainTermOperator_isHermitian",
+      "xChainOperator_isHermitian",
+      "zFieldSitePauli_isHermitian",
+      "zFieldPauliWord_isHermitian",
+      "zFieldTermOperator_isHermitian",
+      "zFieldOperator_isHermitian",
+      "tiltedProductOperator_isHermitian",
+      "pythagoreanControlSummary_gap",
+      "pythagoreanControlSummary_width",
+      "pythagoreanControlSummary_normalized",
+      "pythagorean_noncommuting_control_boundary"
+    ]
+  },
+  "status": "checked_noncommuting_integrable_negative_control",
+  "summary": {
+    "bqp_separation": false,
+    "cluster_conjugation_replayed": true,
+    "exact_local_eigenpairs_formalized": true,
+    "exact_local_spectrum_formalized": true,
+    "failed_requirement_ids": [],
+    "finite_product_spectrum_replayed": true,
+    "global_gap_amplification_impossibility": false,
+    "local_noncommutation_formalized": true,
+    "new_credit_delta": 0,
+    "nlts_theorem": false,
+    "noncommuting_integrable_negative_control": true,
+    "not_scalar_x_formalized": true,
+    "overlapping_noncommuting_spectrum_formalized": false,
+    "quantum_hardware_execution": false,
+    "quantum_pcp_theorem": false,
+    "requirement_count": 12,
+    "requirements_failed": 0,
+    "requirements_passed": 12,
+    "solved_frontier": false,
+    "spectral_hardness_theorem": false
+  },
+  "version": "1.0"
+}

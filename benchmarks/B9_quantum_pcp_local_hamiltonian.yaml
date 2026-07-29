@@ -531,6 +531,39 @@ current_results:
     lean_module: ../B9/ClusterStabilizer/SpectrumFormula.lean
     operator_module: ../B9/ClusterStabilizer/OperatorSemantics.lean
     r187_module: ../B9/ClusterStabilizer/WidthLocality.lean
+  r191_noncommuting_control_certificate_v1:
+    status: checked_noncommuting_integrable_negative_control
+    method: b9_r191_noncommuting_integrable_negative_control_v1
+    source: r190_open_chain_spectrum_formula_certificate_v1
+    experiment_id: B9-R191-noncommuting-integrable-negative-control
+    protocol_hash: 8ab88e880d797cd8aa39a804599325e0d641211531dfd201725b8dfca2442b6c
+    payload_sha256: dda7655cae660522f543ea6ca5e4be625df4e2c9d90ed1ed58d9f29c1bdc8c91
+    lean_module_sha256: 5bfdaa756163782940fb4fbb5f3370e9502da46b455f031e3439a561a5bfbd99
+    spectrum_module_sha256: acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2
+    transcript_sha256: cc800919aeef50a287518177ffbae80f539f039356637593a5d9d2be241c5715
+    requirement_count: 12
+    requirements_passed: 12
+    exact_local_eigenpairs_formalized: true
+    exact_local_spectrum_formalized: true
+    local_noncommutation_formalized: true
+    not_scalar_x_formalized: true
+    finite_product_spectrum_replayed: true
+    cluster_conjugation_replayed: true
+    noncommuting_integrable_negative_control: true
+    overlapping_noncommuting_spectrum_formalized: false
+    spectral_hardness_theorem: false
+    quantum_hardware_execution: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    global_gap_amplification_impossibility: false
+    bqp_separation: false
+    solved_frontier: false
+    new_credit_delta: 0
+    result: ../results/B9_R191_noncommuting_control_certificate_v1.json
+    markdown_report: ../research/B9_R191_noncommuting_control_certificate.md
+    checked_transcript: ../results/B9_R191_noncommuting_control_transcript_v1.txt
+    lean_module: ../B9/ClusterStabilizer/NoncommutingControl.lean
+    spectrum_module: ../B9/ClusterStabilizer/SpectrumFormula.lean
 prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -551,4 +584,5 @@ prototype_artifacts:
   r188_open_chain_all_n_structural_certificate: ../tools/b9_r188_open_chain_formal_certificate.py
   r189_open_chain_operator_semantics_certificate: ../tools/b9_r189_operator_semantics_certificate.py
   r190_open_chain_spectrum_formula_certificate: ../tools/b9_r190_spectrum_formula_certificate.py
+  r191_noncommuting_control_certificate: ../tools/b9_r191_noncommuting_control_certificate.py
   prototype_notes: ../research/B9_prototype_notes.md

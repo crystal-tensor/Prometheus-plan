@@ -1044,14 +1044,27 @@ operator-derived values. An independent integer-matrix/Walsh oracle replays
 matching binomial counts, and complete eigenspectrum error below `1e-12`. The
 certificate and portfolio audit pass 14/14.
 
-**Remaining path to a serious solution:** use the solved commuting family as
-a control; define a restricted locality-explicit noncommuting perturbation;
-derive or bound its normalized gap without importing the conclusion; and
-decide whether the result yields a nontrivial restricted hardness theorem or
-scoped no-go lemma. The present result is not a theorem for arbitrary local
-Hamiltonians, Quantum PCP, or NLTS.
+T-B9-005/T-B10-016j adds R191, the first checked noncommuting control. Lean
+defines `A=-X+(3/4)Z` and proves exact eigenpairs `[1,2] -> -5/4` and
+`[2,-1] -> 5/4`, Hermiticity, complete local spectrum, strict noncommutation
+with `X`, non-scalar-X structure, support, and normalized-boundary facts. An
+independent rational bit-action oracle replays the complete product spectra
+for `n=4,5,6,7`: energy `(5/4)(2k-n)`, multiplicity `choose(n,k)`, gap
+`5/2`, width `5n/2`, normalized gap `1/n`, and exact cluster-phase
+conjugation to the cluster Hamiltonian plus longitudinal Z field. The
+certificate and audit pass 12/12. This is a noncommuting but integrable
+negative control because the global X/Z pieces do not commute while disjoint
+site blocks do.
 
-**Current internal maturity:** 29/100.
+**Remaining path to a serious solution:** formalize the all-`n` R191
+tensor-product spectrum in Lean, then add the smallest locality-explicit
+overlapping noncommuting term that destroys disjoint-site decomposition.
+Preregister its coupling interval and normalized-gap target, independently
+replay the finite spectra, and seek a restricted bound, counterexample, or
+no-go statement. The present result is not a spectral-hardness theorem,
+arbitrary-local-Hamiltonian theorem, Quantum PCP result, or NLTS theorem.
+
+**Current internal maturity:** 31/100.
 
 ## B10: Mapping the Boundary of BQP
 

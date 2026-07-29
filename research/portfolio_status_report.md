@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 29, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 31, 'B10': 53}
 
 ## Technical Resolution Program
 
@@ -2614,6 +2614,10 @@ Overall audit: PASS
 - R190 requirements / evidence integrity: 14 / True
 - R190 Walsh basis / cluster conjugation / spectrum / binomial multiplicity: True / True / True / True
 - R190 gap-width formulas / R187 bridge / independent replay / Quantum PCP / credit: True / True / True / False / 0
+- R191 noncommuting-control status: checked_noncommuting_integrable_negative_control
+- R191 requirements / evidence integrity: 12 / True
+- R191 local eigenpairs / local spectrum / noncommutation / non-scalar-X: True / True / True / True
+- R191 finite product replay / cluster conjugation / integrable control / overlapping spectrum / hardness / credit: True / True / True / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

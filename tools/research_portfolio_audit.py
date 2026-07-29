@@ -1142,6 +1142,261 @@ def audit_b9_r190(
     return status
 
 
+def audit_b9_r191(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R191 noncommuting negative control."""
+    expected_status = "checked_noncommuting_integrable_negative_control"
+    expected_method = "b9_r191_noncommuting_integrable_negative_control_v1"
+    expected_hashes = {
+        "protocol_hash": (
+            "8ab88e880d797cd8aa39a804599325e0d641211531dfd201725b8dfca2442b6c"
+        ),
+        "payload_sha256": (
+            "dda7655cae660522f543ea6ca5e4be625df4e2c9d90ed1ed58d9f29c1bdc8c91"
+        ),
+        "lean_module_sha256": (
+            "5bfdaa756163782940fb4fbb5f3370e9502da46b455f031e3439a561a5bfbd99"
+        ),
+        "spectrum_module_sha256": (
+            "acfd724435dcf989db69076b0f8e191e714ad7d16273a4088350702c3e9cf5d2"
+        ),
+        "transcript_sha256": (
+            "cc800919aeef50a287518177ffbae80f539f039356637593a5d9d2be241c5715"
+        ),
+    }
+    true_fields = [
+        "exact_local_eigenpairs_formalized",
+        "exact_local_spectrum_formalized",
+        "local_noncommutation_formalized",
+        "not_scalar_x_formalized",
+        "finite_product_spectrum_replayed",
+        "cluster_conjugation_replayed",
+        "noncommuting_integrable_negative_control",
+    ]
+    false_fields = [
+        "overlapping_noncommuting_spectrum_formalized",
+        "spectral_hardness_theorem",
+        "quantum_hardware_execution",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "global_gap_amplification_impossibility",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R191 noncommuting control certificate")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    spectrum_path = resolve(manifest_entry.get("spectrum_module"))
+    tool_path = root / "tools/b9_r191_noncommuting_control_certificate.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "spectrum_module": spectrum_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R191 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    rows = payload.get("independent_spectrum_rows", [])
+    source = payload.get("source", {})
+    execution = payload.get("execution", {})
+    local = payload.get("local_exact_checks", {})
+
+    protocol_hash = hashlib.sha256(
+        json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = hashlib.sha256(
+        json.dumps(
+            payload_without_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    observed_hashes = {
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": hashlib.sha256(module_path.read_bytes()).hexdigest(),
+        "spectrum_module_sha256": hashlib.sha256(
+            spectrum_path.read_bytes()
+        ).hexdigest(),
+        "transcript_sha256": hashlib.sha256(
+            transcript_path.read_bytes()
+        ).hexdigest(),
+    }
+    if payload.get("status") != expected_status:
+        errors.append("B9 R191 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R191 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R191 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R191 manifest method mismatch")
+    for field, expected in expected_hashes.items():
+        observed = observed_hashes[field]
+        if observed != expected:
+            errors.append(f"B9 R191 {field} mismatch")
+        if expected not in {
+            payload.get(field),
+            source.get(field),
+            execution.get(field),
+        }:
+            errors.append(f"B9 R191 payload {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R191 manifest {field} mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 12
+        or summary.get("requirement_count") != 12
+        or summary.get("requirements_passed") != 12
+        or summary.get("requirements_failed") != 0
+        or failed_ids
+    ):
+        errors.append("B9 R191 must pass all 12 frozen requirements")
+    if re.search(r"\b(?:sorry|axiom)\b", module):
+        errors.append("B9 R191 source contains a forbidden escape hatch")
+
+    required_theorems = {
+        "tiltedLocalOperator_isHermitian",
+        "tilted_ground_eigenpair",
+        "tilted_excited_eigenpair",
+        "tiltedLocalBasis_diagonalizes",
+        "tiltedLocalOperator_spectrum",
+        "pauliX_does_not_commute_with_tiltedLocalOperator",
+        "tiltedLocalOperator_not_scalar_pauliX",
+        "pythagorean_field_support_card",
+        "pythagorean_field_support_subset_range",
+        "zFieldOperator_isHermitian",
+        "tiltedProductOperator_isHermitian",
+        "pythagoreanControlSummary_normalized",
+        "pythagorean_noncommuting_control_boundary",
+    }
+    theorem_names = set(
+        re.findall(
+            r"(?m)^(?:@\[[^\n]+\]\s+)?theorem\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R191 required theorem set is incomplete")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R191 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R191 transcript contains warnings or a timeout")
+    if (
+        local.get("ground_eigenpair_exact") is not True
+        or local.get("excited_eigenpair_exact") is not True
+        or local.get("commutator_nonzero_exact") is not True
+        or local.get("not_scalar_x_exact") is not True
+        or local.get("ground_eigenvalue") != "-5/4"
+        or local.get("excited_eigenvalue") != "5/4"
+    ):
+        errors.append("B9 R191 exact local control checks failed")
+
+    if {row.get("n") for row in rows} != {4, 5, 6, 7} or len(rows) != 4:
+        errors.append("B9 R191 independent row set mismatch")
+    for row in rows:
+        n = row.get("n")
+        if not isinstance(n, int):
+            errors.append(f"B9 R191 independent spectrum row failed for n={n}")
+            continue
+        ground = Fraction(-5 * n, 4)
+        first = ground + Fraction(5, 2)
+        top = Fraction(5 * n, 4)
+        if (
+            row.get("dimension") != 2**n
+            or row.get("ordered_spectrum_max_abs_error", 1.0) > 1e-12
+            or row.get("ordered_spectrum_multiplicity_match") is not True
+            or row.get("binomial_multiplicity_match") is not True
+            or row.get("ground_energy") != str(ground)
+            or row.get("first_excited_energy") != str(first)
+            or row.get("top_energy") != str(top)
+            or row.get("gap") != "5/2"
+            or row.get("width") != str(Fraction(5 * n, 2))
+            or row.get("normalized_gap") != f"1/{n}"
+            or row.get("x_z_pieces_noncommuting") is not True
+            or row.get("site_blocks_pairwise_commuting") is not True
+            or row.get("not_uniform_x_scaling") is not True
+            or row.get("exact_cluster_phase_conjugation") is not True
+            or row.get("checked") is not True
+        ):
+            errors.append(f"B9 R191 independent spectrum row failed for n={n}")
+
+    if (
+        any(summary.get(field) is not True for field in true_fields)
+        or any(summary.get(field) is not False for field in false_fields)
+        or summary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R191 claim boundary mismatch")
+    required_report_phrases = [
+        "nonzero diagonal entries",
+        "pairwise-commuting tensor-product structure",
+        "not yet formalized as a Lean tensor-product theorem",
+        "No spectral-hardness theorem",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R191 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": summary.get("requirements_passed"),
+        "independent_spectrum_rows": rows,
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R191") for message in errors
+        ),
+        **{field: summary.get(field) for field in true_fields + false_fields},
+        "new_credit_delta": summary.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+        "spectrum_module": manifest_entry.get("spectrum_module"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -39142,6 +39397,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r191 = b9_results.get("r191_noncommuting_control_certificate_v1")
+    b9_r191_status = audit_b9_r191(
+        root,
+        b9_r191,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -49541,6 +49803,7 @@ def audit(root: Path) -> dict:
             "r188_open_chain_all_n_structural_certificate": b9_r188_status,
             "r189_open_chain_operator_semantics_certificate": b9_r189_status,
             "r190_open_chain_spectrum_formula_certificate": b9_r190_status,
+            "r191_noncommuting_control_certificate": b9_r191_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -49584,6 +49847,7 @@ def audit(root: Path) -> dict:
             "r188_b9_open_chain_all_n_structural_certificate": b9_r188_status,
             "r189_b9_open_chain_operator_semantics_certificate": b9_r189_status,
             "r190_b9_open_chain_spectrum_formula_certificate": b9_r190_status,
+            "r191_b9_noncommuting_control_certificate": b9_r191_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -53737,6 +54001,10 @@ def markdown_report(report: dict) -> str:
             f"- R190 requirements / evidence integrity: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('requirements_passed')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('evidence_integrity_complete')}",
             f"- R190 Walsh basis / cluster conjugation / spectrum / binomial multiplicity: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_walsh_eigenbasis_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_cluster_conjugation_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_spectrum_formula_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_binomial_multiplicity_formalized')}",
             f"- R190 gap-width formulas / R187 bridge / independent replay / Quantum PCP / credit: {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('all_n_gap_width_normalized_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('r187_operator_derived_boundary_formalized')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('independent_finite_replay')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('quantum_pcp_theorem')} / {report['b9']['r190_open_chain_spectrum_formula_certificate'].get('new_credit_delta')}",
+            f"- R191 noncommuting-control status: {report['b9']['r191_noncommuting_control_certificate'].get('status')}",
+            f"- R191 requirements / evidence integrity: {report['b9']['r191_noncommuting_control_certificate'].get('requirements_passed')} / {report['b9']['r191_noncommuting_control_certificate'].get('evidence_integrity_complete')}",
+            f"- R191 local eigenpairs / local spectrum / noncommutation / non-scalar-X: {report['b9']['r191_noncommuting_control_certificate'].get('exact_local_eigenpairs_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('exact_local_spectrum_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('local_noncommutation_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('not_scalar_x_formalized')}",
+            f"- R191 finite product replay / cluster conjugation / integrable control / overlapping spectrum / hardness / credit: {report['b9']['r191_noncommuting_control_certificate'].get('finite_product_spectrum_replayed')} / {report['b9']['r191_noncommuting_control_certificate'].get('cluster_conjugation_replayed')} / {report['b9']['r191_noncommuting_control_certificate'].get('noncommuting_integrable_negative_control')} / {report['b9']['r191_noncommuting_control_certificate'].get('overlapping_noncommuting_spectrum_formalized')} / {report['b9']['r191_noncommuting_control_certificate'].get('spectral_hardness_theorem')} / {report['b9']['r191_noncommuting_control_certificate'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",
