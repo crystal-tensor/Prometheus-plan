@@ -11,6 +11,7 @@ import math
 import re
 import struct
 from fractions import Fraction
+from itertools import product
 from pathlib import Path
 
 import yaml
@@ -1669,6 +1670,579 @@ def audit_b9_r192(
         "normalized_gap_ratio_max": summary.get("normalized_gap_ratio_max"),
         "evidence_integrity_complete": not any(
             message.startswith("B9 R192") for message in errors
+        ),
+        **{field: field in true_claims for field in true_fields},
+        **{field: field not in false_claims for field in false_fields},
+        "new_credit_delta": payload.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+        "checked_transcript": manifest_entry.get("checked_transcript"),
+        "lean_module": manifest_entry.get("lean_module"),
+    }
+    return status
+
+
+def audit_b9_r193(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Independently verify the B9 R193 holdout integrability stress."""
+    expected_status = "checked_holdout_spectral_crossover_candidate"
+    expected_method = "b9_r193_coupling_integrability_stress_v1"
+    expected_hashes = {
+        "protocol_hash": (
+            "dadb6c6ca406e87ea59fa4acdb951d55e49a22e4be9f4b20dbb4dfef3fe2fe54"
+        ),
+        "payload_sha256": (
+            "804704276e368ad9d8d9471068ae0849261c79ffe63fe34e339cfca4dea4d9fd"
+        ),
+        "lean_module_sha256": (
+            "9b7c00bf594b3e91acb282ea29b221c954bb07144e782dee0ee8a1913b08791f"
+        ),
+        "tool_sha256": (
+            "3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143"
+        ),
+        "transcript_sha256": (
+            "facc611e38cae188d17cc81732014d26f6c2cf01729f2d386d4107ec98acf078"
+        ),
+    }
+    true_fields = [
+        "pilot_holdout_split_recorded",
+        "independent_exact_matrix_replay_complete",
+        "reflection_symmetry_resolved",
+        "nonzero_holdout_spectra_simple",
+        "range_four_local_charge_kernel_reduced_to_identity_and_hamiltonian",
+        "zero_coupling_control_has_extensive_local_charges",
+        "standard_jw_axis_obstruction_formalized",
+        "weak_to_strong_level_statistic_crossover_candidate",
+        "normalized_gap_not_improved_on_holdout",
+    ]
+    false_fields = [
+        "all_n_spectrum_theorem",
+        "complete_integrability_exclusion",
+        "site_dependent_nonlocal_duality_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_hardware_execution",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R193 coupling-integrability stress")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    transcript_path = resolve(manifest_entry.get("checked_transcript"))
+    module_path = resolve(manifest_entry.get("lean_module"))
+    tool_path = root / "tools/b9_r193_coupling_integrability_stress.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "transcript": transcript_path,
+        "module": module_path,
+        "tool": tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R193 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    transcript = read(transcript_path)
+    module = read(module_path)
+    protocol = payload.get("protocol", {})
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    spectrum_rows = payload.get("spectrum_rows", [])
+    local_rows = payload.get("local_charge_rows", [])
+    coupling_summaries = payload.get("coupling_summaries", [])
+    geometry = payload.get("free_fermion_geometry", {})
+    evidence = payload.get("evidence", {})
+    execution = payload.get("execution", {})
+    claim_boundary = payload.get("claim_boundary", {})
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode(
+                "utf-8"
+            )
+        ).hexdigest()
+
+    protocol_hash = canonical_hash(protocol)
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("payload_sha256", None)
+    payload_hash = canonical_hash(payload_without_hash)
+    observed_hashes = {
+        "protocol_hash": protocol_hash,
+        "payload_sha256": payload_hash,
+        "lean_module_sha256": hashlib.sha256(
+            module_path.read_bytes()
+        ).hexdigest(),
+        "tool_sha256": hashlib.sha256(tool_path.read_bytes()).hexdigest(),
+        "transcript_sha256": hashlib.sha256(
+            transcript_path.read_bytes()
+        ).hexdigest(),
+    }
+    if payload.get("status") != expected_status:
+        errors.append("B9 R193 status mismatch")
+    if payload.get("method") != expected_method:
+        errors.append("B9 R193 method mismatch")
+    if manifest_entry.get("status") != expected_status:
+        errors.append("B9 R193 manifest status mismatch")
+    if manifest_entry.get("method") != expected_method:
+        errors.append("B9 R193 manifest method mismatch")
+    payload_hash_values = {
+        "protocol_hash": payload.get("protocol_sha256"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "lean_module_sha256": evidence.get("module_sha256"),
+        "tool_sha256": evidence.get("tool_sha256"),
+        "transcript_sha256": execution.get("transcript_sha256"),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes[field] != expected:
+            errors.append(f"B9 R193 {field} mismatch")
+        if payload_hash_values.get(field) != expected:
+            errors.append(f"B9 R193 payload {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R193 manifest {field} mismatch")
+
+    failed_ids = [
+        row.get("requirement_id")
+        for row in requirements
+        if row.get("passed") is not True
+    ]
+    if (
+        len(requirements) != 17
+        or payload.get("requirements_total") != 17
+        or payload.get("requirements_passed") != 17
+        or failed_ids
+        or payload.get("evidence_integrity_complete") is not True
+    ):
+        errors.append("B9 R193 must pass all 17 frozen requirements")
+    if re.search(r"\b(?:sorry|axiom)\b", module):
+        errors.append("B9 R193 source contains a forbidden escape hatch")
+
+    required_definitions = {
+        "SpinVector",
+        "spinDot",
+        "tiltedFieldVector",
+        "isingCouplingAxis",
+        "standardJWQuadraticAxisCondition",
+        "fieldCouplingSquaredAlignment",
+    }
+    required_theorems = {
+        "tilted_field_dot_ising_axis",
+        "tilted_field_norm_squared",
+        "ising_axis_norm_squared",
+        "field_coupling_squared_alignment",
+        "dot_preserving_map_keeps_field_coupling_overlap",
+        "no_dot_preserving_rotation_satisfies_standard_jw_condition",
+        "standard_jw_rotation_obstruction_boundary",
+    }
+    definition_names = set(
+        re.findall(
+            r"(?m)^(?:noncomputable\s+)?(?:abbrev|def)\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    theorem_names = set(
+        re.findall(
+            r"(?m)^(?:@\[[^\n]+\]\s+)?theorem\s+([A-Za-z0-9_']+)",
+            module,
+        )
+    )
+    if not required_definitions.issubset(definition_names):
+        errors.append("B9 R193 required definition set is incomplete")
+    if not required_theorems.issubset(theorem_names):
+        errors.append("B9 R193 required theorem set is incomplete")
+    if transcript.count("RETURNCODE: 0") != 3:
+        errors.append("B9 R193 transcript must contain three successful commands")
+    if "warning:" in transcript.lower() or "TIMED_OUT: true" in transcript:
+        errors.append("B9 R193 transcript contains warnings or a timeout")
+
+    pilot = set(protocol.get("model", {}).get("pilot_couplings", []))
+    holdout = set(protocol.get("model", {}).get("holdout_couplings", []))
+    expected_pilot = {"0", "1/8", "1/4", "3/8", "1/2", "5/8", "3/4", "1"}
+    expected_holdout = {"3/16", "5/16", "7/16", "9/16", "11/16", "7/8"}
+    if pilot != expected_pilot or holdout != expected_holdout or pilot & holdout:
+        errors.append("B9 R193 pilot/holdout protocol split mismatch")
+
+    spectrum_keys = {
+        (row.get("phase"), row.get("coupling"), row.get("n"))
+        for row in spectrum_rows
+    }
+    expected_spectrum_keys = {
+        ("pilot", coupling, n)
+        for coupling in expected_pilot
+        for n in range(6, 11)
+    } | {
+        ("holdout", coupling, n)
+        for coupling in expected_holdout
+        for n in range(6, 11)
+    }
+    if len(spectrum_rows) != 70 or spectrum_keys != expected_spectrum_keys:
+        errors.append("B9 R193 spectrum row set mismatch")
+    holdout_simple_count = 0
+    for row in spectrum_rows:
+        n = row.get("n")
+        coupling = row.get("coupling")
+        if (
+            not isinstance(n, int)
+            or row.get("dimension") != 2**n
+            or row.get("exact_integer_matrix_match") is not True
+            or row.get("matrix_max_abs_difference") != 0
+            or row.get("hermitian_residual", 1.0) > 1e-12
+            or row.get("reflection_commutator_max_abs_exact") != 0
+            or row.get("parity_orthogonality_residual", 1.0) > 1e-12
+            or row.get("parity_cross_residual", 1.0) > 1e-12
+            or row.get("parity_block_off_diagonal_residual", 1.0) > 1e-12
+            or row.get("parity_spectrum_max_abs_error", 1.0) > 1e-10
+            or row.get("checked") is not True
+        ):
+            errors.append(
+                f"B9 R193 spectrum replay failed for J={coupling}, n={n}"
+            )
+        if row.get("phase") == "holdout":
+            if row.get("full_spectrum_simple") is True:
+                holdout_simple_count += 1
+            if row.get("normalized_gap_ratio_to_product", 1.0) >= 1.0:
+                errors.append(
+                    f"B9 R193 normalized-gap boundary failed for J={coupling}, n={n}"
+                )
+    if holdout_simple_count != 30:
+        errors.append("B9 R193 holdout simple-spectrum count mismatch")
+
+    summary_by_coupling = {
+        row.get("coupling"): row
+        for row in coupling_summaries
+        if row.get("phase") == "holdout"
+    }
+    if set(summary_by_coupling) != expected_holdout:
+        errors.append("B9 R193 holdout coupling-summary set mismatch")
+    else:
+        if (
+            summary_by_coupling["3/16"].get("reference_classification")
+            != "poisson_like_reference_closer"
+        ):
+            errors.append("B9 R193 weak holdout classification mismatch")
+        for coupling in {"7/16", "9/16", "11/16", "7/8"}:
+            if (
+                summary_by_coupling[coupling].get("reference_classification")
+                != "goe_like_reference_closer"
+            ):
+                errors.append(
+                    f"B9 R193 strong holdout classification mismatch for J={coupling}"
+                )
+
+    pauli_product = {
+        ("I", "I"): (1, "I"),
+        ("I", "X"): (1, "X"),
+        ("I", "Y"): (1, "Y"),
+        ("I", "Z"): (1, "Z"),
+        ("X", "I"): (1, "X"),
+        ("Y", "I"): (1, "Y"),
+        ("Z", "I"): (1, "Z"),
+        ("X", "X"): (1, "I"),
+        ("Y", "Y"): (1, "I"),
+        ("Z", "Z"): (1, "I"),
+        ("X", "Y"): (1j, "Z"),
+        ("Y", "X"): (-1j, "Z"),
+        ("Y", "Z"): (1j, "X"),
+        ("Z", "Y"): (-1j, "X"),
+        ("Z", "X"): (1j, "Y"),
+        ("X", "Z"): (-1j, "Y"),
+    }
+
+    def pauli_word(n: int, entries: dict[int, str]) -> str:
+        chars = ["I"] * n
+        for site, value in entries.items():
+            chars[site] = value
+        return "".join(chars)
+
+    def bounded_basis(n: int) -> list[str]:
+        basis = ["I" * n]
+        for span in range(1, 5):
+            for start in range(n - span + 1):
+                for local in product("IXYZ", repeat=span):
+                    if local[0] == "I" or local[-1] == "I":
+                        continue
+                    chars = ["I"] * n
+                    chars[start : start + span] = local
+                    basis.append("".join(chars))
+        return basis
+
+    def anticommutes(left: str, right: str) -> bool:
+        return (
+            sum(
+                a != "I" and b != "I" and a != b
+                for a, b in zip(left, right)
+            )
+            % 2
+            == 1
+        )
+
+    def multiply(left: str, right: str) -> tuple[complex, str]:
+        phase: complex = 1
+        output: list[str] = []
+        for a, b in zip(left, right):
+            local_phase, local_output = pauli_product[(a, b)]
+            phase *= local_phase
+            output.append(local_output)
+        return phase, "".join(output)
+
+    def sparse_rank(columns: list[dict[int, int]], prime: int) -> int:
+        pivots: dict[int, dict[int, int]] = {}
+        for column in columns:
+            vector = {
+                row: value % prime
+                for row, value in column.items()
+                if value % prime
+            }
+            while vector:
+                pivot = min(vector)
+                if pivot not in pivots:
+                    inverse = pow(vector[pivot], prime - 2, prime)
+                    pivots[pivot] = {
+                        row: (value * inverse) % prime
+                        for row, value in vector.items()
+                        if (value * inverse) % prime
+                    }
+                    break
+                factor = vector[pivot]
+                for row, value in pivots[pivot].items():
+                    updated = (vector.get(row, 0) - factor * value) % prime
+                    if updated:
+                        vector[row] = updated
+                    else:
+                        vector.pop(row, None)
+        return len(pivots)
+
+    def independently_rebuild_local_row(
+        n: int,
+        coupling: Fraction,
+    ) -> dict[str, object]:
+        denominator = math.lcm(4, coupling.denominator)
+        terms: list[tuple[int, str]] = []
+        for site in range(n):
+            terms.append((-denominator, pauli_word(n, {site: "X"})))
+            terms.append(
+                (
+                    3 * denominator // 4,
+                    pauli_word(n, {site: "Z"}),
+                )
+            )
+        coupling_numerator = (
+            coupling.numerator * denominator // coupling.denominator
+        )
+        if coupling_numerator:
+            for site in range(n - 1):
+                terms.append(
+                    (
+                        coupling_numerator,
+                        pauli_word(n, {site: "Z", site + 1: "Z"}),
+                    )
+                )
+        candidate_basis = bounded_basis(n)
+        raw_columns: list[dict[str, int]] = []
+        output_words: set[str] = set()
+        for candidate in candidate_basis:
+            column: dict[str, int] = {}
+            for coefficient, term in terms:
+                if not anticommutes(term, candidate):
+                    continue
+                phase, output = multiply(term, candidate)
+                sign = int(round((phase / 1j).real))
+                column[output] = column.get(output, 0) + coefficient * sign
+            column = {
+                word: value for word, value in column.items() if value
+            }
+            raw_columns.append(column)
+            output_words.update(column)
+        output_basis = sorted(output_words)
+        output_index = {
+            word: index for index, word in enumerate(output_basis)
+        }
+        columns = [
+            {output_index[word]: value for word, value in column.items()}
+            for column in raw_columns
+        ]
+        triples = [
+            (output_basis[row], column_index, value)
+            for column_index, column in enumerate(columns)
+            for row, value in sorted(column.items())
+        ]
+        ranks = {
+            str(prime): sparse_rank(columns, prime)
+            for prime in (1000003, 1000033)
+        }
+        return {
+            "candidate_basis_size": len(candidate_basis),
+            "output_basis_size": len(output_basis),
+            "commutator_nonzero_count": len(triples),
+            "commutator_matrix_sha256": canonical_hash(
+                {
+                    "candidate_basis": candidate_basis,
+                    "output_basis": output_basis,
+                    "triples": triples,
+                }
+            ),
+            "modular_ranks": ranks,
+            "modular_nullities": {
+                prime: len(candidate_basis) - rank
+                for prime, rank in ranks.items()
+            },
+        }
+
+    local_keys = {
+        (row.get("coupling"), row.get("n"))
+        for row in local_rows
+    }
+    expected_local_keys = {
+        (coupling, n)
+        for coupling in expected_holdout | {"0"}
+        for n in range(6, 11)
+    }
+    if len(local_rows) != 35 or local_keys != expected_local_keys:
+        errors.append("B9 R193 local-charge row set mismatch")
+    else:
+        for row in local_rows:
+            coupling = Fraction(row["coupling"])
+            n = int(row["n"])
+            rebuilt = independently_rebuild_local_row(n, coupling)
+            for field, value in rebuilt.items():
+                if row.get(field) != value:
+                    errors.append(
+                        f"B9 R193 independent {field} mismatch for J={coupling}, n={n}"
+                    )
+            if coupling == 0:
+                if (
+                    row.get("site_block_kernel_count") != n
+                    or row.get("zero_control_extensive_kernel_verified")
+                    is not True
+                    or row.get("checked") is not True
+                ):
+                    errors.append(
+                        f"B9 R193 zero-control kernel failed for n={n}"
+                    )
+            elif (
+                row.get("identity_kernel_verified") is not True
+                or row.get("hamiltonian_kernel_verified") is not True
+                or row.get("exact_nullity_two_certified") is not True
+                or row.get("checked") is not True
+            ):
+                errors.append(
+                    f"B9 R193 exact local-charge boundary failed for J={coupling}, n={n}"
+                )
+
+    if geometry != {
+        "tilted_field": ["-1", "0", "3/4"],
+        "ising_coupling_axis": ["0", "0", "1"],
+        "dot_product": "3/4",
+        "field_norm_squared": "25/16",
+        "coupling_axis_norm_squared": "1",
+        "squared_alignment": "9/25",
+        "standard_jw_orthogonality_condition_satisfied": False,
+        "scoped_obstruction": (
+            "No dot-product-preserving on-site rotation can make the tilted "
+            "field axis orthogonal to the Ising coupling axis, a necessary "
+            "condition for the declared standard parity-preserving quadratic "
+            "Jordan-Wigner alignment."
+        ),
+        "not_excluded": [
+            "site-dependent nonlocal dualities",
+            "interacting Bethe-ansatz integrability",
+            "quasi-local conserved charges above range four",
+            "auxiliary-mode or nonstandard fermionizations",
+        ],
+    }:
+        errors.append("B9 R193 standard Jordan-Wigner geometry mismatch")
+
+    true_claims = set(claim_boundary.get("true_claims", []))
+    false_claims = set(claim_boundary.get("false_claims", []))
+    if (
+        not set(true_fields).issubset(true_claims)
+        or not set(false_fields).issubset(false_claims)
+        or summary.get("pilot_row_count") != 40
+        or summary.get("holdout_row_count") != 30
+        or summary.get("holdout_simple_spectrum_row_count") != 30
+        or summary.get("holdout_local_charge_nullity_two_count") != 30
+        or summary.get("zero_control_extensive_kernel_count") != 5
+        or summary.get("weak_holdout_pass_count") != 1
+        or summary.get("strong_holdout_pass_count") != 4
+        or summary.get("transition_holdout_acceptance_count") != 0
+        or summary.get("holdout_normalized_gap_gain_count") != 0
+        or summary.get("scoped_candidate_accepted") is not True
+        or summary.get("scientific_promotion_accepted") is not False
+        or payload.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R193 claim boundary mismatch")
+    for field in true_fields:
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R193 manifest {field} must remain true")
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R193 manifest {field} must remain false")
+    required_report_phrases = [
+        "Nonzero holdout simple-spectrum rows: `30/30`",
+        "Nonzero holdout exact-nullity-two rows: `30/30`",
+        "Exact squared alignment: `9/25`",
+        "not a nonintegrability or quantum-chaos theorem",
+        "does not exclude every integrability mechanism",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R193 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": payload.get("requirements_passed"),
+        "spectrum_row_count": len(spectrum_rows),
+        "holdout_row_count": summary.get("holdout_row_count"),
+        "holdout_simple_spectrum_row_count": summary.get(
+            "holdout_simple_spectrum_row_count"
+        ),
+        "holdout_local_charge_nullity_two_count": summary.get(
+            "holdout_local_charge_nullity_two_count"
+        ),
+        "zero_control_extensive_kernel_count": summary.get(
+            "zero_control_extensive_kernel_count"
+        ),
+        "weak_holdout_pass_count": summary.get("weak_holdout_pass_count"),
+        "strong_holdout_pass_count": summary.get("strong_holdout_pass_count"),
+        "transition_holdout_acceptance_count": summary.get(
+            "transition_holdout_acceptance_count"
+        ),
+        "holdout_normalized_gap_gain_count": summary.get(
+            "holdout_normalized_gap_gain_count"
+        ),
+        "scoped_candidate_accepted": summary.get("scoped_candidate_accepted"),
+        "scientific_promotion_accepted": summary.get(
+            "scientific_promotion_accepted"
+        ),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R193") for message in errors
         ),
         **{field: field in true_claims for field in true_fields},
         **{field: field not in false_claims for field in false_fields},
@@ -39695,6 +40269,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r193 = b9_results.get("r193_coupling_integrability_stress_v1")
+    b9_r193_status = audit_b9_r193(
+        root,
+        b9_r193,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -50096,6 +50677,7 @@ def audit(root: Path) -> dict:
             "r190_open_chain_spectrum_formula_certificate": b9_r190_status,
             "r191_noncommuting_control_certificate": b9_r191_status,
             "r192_overlapping_control_certificate": b9_r192_status,
+            "r193_coupling_integrability_stress": b9_r193_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -50141,6 +50723,7 @@ def audit(root: Path) -> dict:
             "r190_b9_open_chain_spectrum_formula_certificate": b9_r190_status,
             "r191_b9_noncommuting_control_certificate": b9_r191_status,
             "r192_b9_overlapping_control_certificate": b9_r192_status,
+            "r193_b9_coupling_integrability_stress": b9_r193_status,
             "t1_d5_observable_denominator_table": b10_t1_d5_table_status,
             "t1_d5_b3_molecular_observable_table": b10_t1_d5_b3_table_status,
             "t1_d5_b3_reaction_observable_table": b10_t1_d5_b3_reaction_table_status,
@@ -54303,6 +54886,11 @@ def markdown_report(report: dict) -> str:
             f"- R192 support / overlap / local-bond noncommutation / Hermitian: {report['b9']['r192_overlapping_control_certificate'].get('connected_two_local_support_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('adjacent_bond_overlap_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('local_bond_noncommutation_formalized')} / {report['b9']['r192_overlapping_control_certificate'].get('overlapping_operator_hermiticity_formalized')}",
             f"- R192 checked sizes / degeneracy collapse / normalized target passes / promotion: {report['b9']['r192_overlapping_control_certificate'].get('checked_size_count')} / {report['b9']['r192_overlapping_control_certificate'].get('degeneracy_collapse_count')} / {report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_target_pass_count')} / {report['b9']['r192_overlapping_control_certificate'].get('scientific_promotion_accepted')}",
             f"- R192 normalized-gap ratio range / nonintegrability / chaos / hardness / credit: {report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_ratio_min')}..{report['b9']['r192_overlapping_control_certificate'].get('normalized_gap_ratio_max')} / {report['b9']['r192_overlapping_control_certificate'].get('nonintegrability_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('quantum_chaos_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('spectral_hardness_theorem')} / {report['b9']['r192_overlapping_control_certificate'].get('new_credit_delta')}",
+            f"- R193 coupling-integrability status: {report['b9']['r193_coupling_integrability_stress'].get('status')}",
+            f"- R193 requirements / evidence integrity: {report['b9']['r193_coupling_integrability_stress'].get('requirements_passed')} / {report['b9']['r193_coupling_integrability_stress'].get('evidence_integrity_complete')}",
+            f"- R193 holdout rows / simple spectra / exact range-four nullity-two: {report['b9']['r193_coupling_integrability_stress'].get('holdout_row_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_simple_spectrum_row_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_local_charge_nullity_two_count')}",
+            f"- R193 weak Poisson-like / strong GOE-like / transition acceptance / normalized-gap gains: {report['b9']['r193_coupling_integrability_stress'].get('weak_holdout_pass_count')} / {report['b9']['r193_coupling_integrability_stress'].get('strong_holdout_pass_count')} / {report['b9']['r193_coupling_integrability_stress'].get('transition_holdout_acceptance_count')} / {report['b9']['r193_coupling_integrability_stress'].get('holdout_normalized_gap_gain_count')}",
+            f"- R193 scoped candidate / scientific promotion / complete integrability exclusion / credit: {report['b9']['r193_coupling_integrability_stress'].get('scoped_candidate_accepted')} / {report['b9']['r193_coupling_integrability_stress'].get('scientific_promotion_accepted')} / {report['b9']['r193_coupling_integrability_stress'].get('complete_integrability_exclusion')} / {report['b9']['r193_coupling_integrability_stress'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

@@ -603,6 +603,53 @@ current_results:
     markdown_report: ../research/B9_R192_overlapping_control_certificate.md
     checked_transcript: ../results/B9_R192_overlapping_control_transcript_v1.txt
     lean_module: ../B9/ClusterStabilizer/OverlappingControl.lean
+  r193_coupling_integrability_stress_v1:
+    status: checked_holdout_spectral_crossover_candidate
+    method: b9_r193_coupling_integrability_stress_v1
+    source: r192_overlapping_control_certificate_v1
+    experiment_id: B9-R193-coupling-integrability-stress
+    protocol_hash: dadb6c6ca406e87ea59fa4acdb951d55e49a22e4be9f4b20dbb4dfef3fe2fe54
+    payload_sha256: 804704276e368ad9d8d9471068ae0849261c79ffe63fe34e339cfca4dea4d9fd
+    lean_module_sha256: 9b7c00bf594b3e91acb282ea29b221c954bb07144e782dee0ee8a1913b08791f
+    tool_sha256: 3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143
+    transcript_sha256: facc611e38cae188d17cc81732014d26f6c2cf01729f2d386d4107ec98acf078
+    requirement_count: 17
+    requirements_passed: 17
+    pilot_holdout_split_recorded: true
+    independent_exact_matrix_replay_complete: true
+    reflection_symmetry_resolved: true
+    nonzero_holdout_spectra_simple: true
+    range_four_local_charge_kernel_reduced_to_identity_and_hamiltonian: true
+    zero_coupling_control_has_extensive_local_charges: true
+    standard_jw_axis_obstruction_formalized: true
+    weak_to_strong_level_statistic_crossover_candidate: true
+    normalized_gap_not_improved_on_holdout: true
+    all_n_spectrum_theorem: false
+    complete_integrability_exclusion: false
+    site_dependent_nonlocal_duality_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_hardware_execution: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    solved_frontier: false
+    spectrum_row_count: 70
+    holdout_row_count: 30
+    holdout_simple_spectrum_row_count: 30
+    holdout_local_charge_nullity_two_count: 30
+    weak_holdout_pass_count: 1
+    strong_holdout_pass_count: 4
+    transition_holdout_acceptance_count: 0
+    holdout_normalized_gap_gain_count: 0
+    scoped_candidate_accepted: true
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    result: ../results/B9_R193_coupling_integrability_stress_v1.json
+    markdown_report: ../research/B9_R193_coupling_integrability_stress.md
+    checked_transcript: ../results/B9_R193_free_fermion_obstruction_transcript_v1.txt
+    lean_module: ../B9/ClusterStabilizer/FreeFermionObstruction.lean
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -625,4 +672,5 @@ current_results:
   r190_open_chain_spectrum_formula_certificate: ../tools/b9_r190_spectrum_formula_certificate.py
   r191_noncommuting_control_certificate: ../tools/b9_r191_noncommuting_control_certificate.py
   r192_overlapping_control_certificate: ../tools/b9_r192_overlapping_control_certificate.py
+  r193_coupling_integrability_stress: ../tools/b9_r193_coupling_integrability_stress.py
   prototype_notes: ../research/B9_prototype_notes.md

@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R192. R187 is a checked
+The current B9 formal line spans R187 through R193. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -198,6 +198,32 @@ spectrum theorem, spectral-hardness theorem, hardware evidence, Quantum PCP,
 NLTS, BQP separation, solved frontier, or new credit is claimed. The next gate
 is a bounded coupling sweep plus an adversarial search for low-weight conserved
 operators and free-fermion or other integrable escape routes.
+
+R193 executes that adversarial gate with an honest pilot/holdout split. The
+exploratory pilot couplings are disclosed and excluded from acceptance. On six
+previously unopened rational holdouts and `n=6..10`, two independent exact
+matrix constructions agree on all 30 rows, every full spectrum is simple, and
+reflection-sector reconstruction passes. The weak `J=3/16` holdout is closer
+to the Poisson adjacent-gap-ratio reference; all four preregistered strong
+holdouts are closer to GOE. The transition holdout is reported but excluded
+from acceptance.
+
+The stronger adversary is algebraic. For every nonzero holdout row, an
+independent audit rebuilds the complete Pauli ansatz with contiguous support
+range at most four. Identity and the Hamiltonian are explicit rational
+kernels, while two declared prime-field ranks certify exact nullity two on
+`30/30` rows. At `J=0`, the same search recovers identity plus all `n`
+tilted-site conserved blocks on `5/5` controls. A separate Lean module proves
+that the field-coupling squared alignment is exactly `9/25`, obstructing the
+declared standard parity-preserving quadratic Jordan-Wigner axis alignment.
+
+R193 passes `17/17` requirements and accepts only a finite-size,
+symmetry-resolved crossover candidate. It does not exclude nonlocal dualities,
+range-five or quasi-local charges, interacting integrability, or nonstandard
+fermionizations. The normalized gap improves on `0/30` holdout rows, so there
+is no nonintegrability, chaos, spectral-hardness, hardware, Quantum PCP, NLTS,
+BQP, solved-frontier, or new-credit claim. Protocol `dadb6c6c...`; Lean module
+`9b7c00bf...`; transcript `facc611e...`; payload `80470427...`.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

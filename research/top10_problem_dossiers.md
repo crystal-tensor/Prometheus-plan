@@ -1067,16 +1067,34 @@ spectrum. The preregistered normalized-gap target passes `0/7`; the
 overlap/product normalized-gap ratio is `0.4976..0.5746`. The certificate and
 audit pass `14/14`.
 
-**Remaining path to a serious solution:** sweep a frozen bounded interval of
-overlap couplings, resolve all declared spatial symmetries, and search
-adversarially for low-weight conserved operators, Jordan-Wigner/free-fermion
-structure, or another exact integrable escape. Only a stable, independently
-replayed signal that survives those attacks can motivate a restricted
-nonintegrability or hardness statement. R192 is not an all-`n` overlapping
-spectrum theorem, spectral-hardness theorem, arbitrary-local-Hamiltonian
-theorem, Quantum PCP result, NLTS theorem, BQP separation, or solved frontier.
+T-B9-007 adds R193, the first frozen coupling and integrability stress. The
+observed pilot grid is disclosed and excluded from acceptance; six unopened
+rational holdouts are checked for `n=6..10`. Independent exact bit-action and
+Kronecker matrices agree on all `30/30` holdout rows, every full spectrum is
+simple, and exact reflection sectors reassemble it. The weak `J=3/16` holdout
+is closer to the Poisson adjacent-gap-ratio reference, while all four strong
+holdouts are closer to GOE; the transition holdout contributes no acceptance
+decision.
 
-**Current internal maturity:** 33/100.
+The local-charge adversary spans identity plus every Pauli word whose minimal
+contiguous support has range at most four. Explicit identity and Hamiltonian
+kernels plus rank `ncols-2` modulo two primes certify exact rational nullity
+two on all `30/30` nonzero holdout rows. At `J=0`, the same search recovers
+identity plus all `n` tilted-site conserved blocks for `5/5` checked sizes.
+Lean separately proves field-coupling squared alignment `9/25`, obstructing
+only the declared standard parity-preserving quadratic Jordan-Wigner axis
+alignment. The certificate and independent audit pass `17/17`, while
+normalized-gap gains remain `0/30`.
+
+**Remaining path to a serious solution:** attack R193 with complete
+range-five/six and quasi-local charges, site-dependent or nonlocal dualities,
+nonstandard fermionizations, and larger sparse spectra under newly frozen
+holdouts. R193 is a finite-size symmetry-resolved crossover candidate, not a
+complete integrability exclusion, nonintegrability or chaos theorem,
+spectral-hardness theorem, arbitrary-local-Hamiltonian theorem, Quantum PCP
+result, NLTS theorem, BQP separation, or solved frontier.
+
+**Current internal maturity:** 35/100.
 
 ## B10: Mapping the Boundary of BQP
 

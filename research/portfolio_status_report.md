@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 33, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 35, 'B10': 53}
 
 ## Technical Resolution Program
 
@@ -2623,6 +2623,11 @@ Overall audit: PASS
 - R192 support / overlap / local-bond noncommutation / Hermitian: True / True / True / True
 - R192 checked sizes / degeneracy collapse / normalized target passes / promotion: 7 / 7 / 0 / False
 - R192 normalized-gap ratio range / nonintegrability / chaos / hardness / credit: 0.4975761327269161..0.5745810850067081 / False / False / False / 0
+- R193 coupling-integrability status: checked_holdout_spectral_crossover_candidate
+- R193 requirements / evidence integrity: 17 / True
+- R193 holdout rows / simple spectra / exact range-four nullity-two: 30 / 30 / 30
+- R193 weak Poisson-like / strong GOE-like / transition acceptance / normalized-gap gains: 1 / 4 / 0 / 0
+- R193 scoped candidate / scientific promotion / complete integrability exclusion / credit: True / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 
