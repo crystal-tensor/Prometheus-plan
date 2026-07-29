@@ -79,14 +79,14 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The newest B9 result is R187, a checked nonzero-scale derived certificate. The
-previous Lean interface accepted a conclusion-shaped `hRatio` equality as an
-input. R187 removes that assumption entirely. Under pinned Lean 4.12.0 and
-Lake 5.0.0, the module now proves that the concrete `27/20` scale is nonzero
-and greater than one, derives computed normalized-gap invariance and
-spectral-width-ratio invariance from uniform scaling, derives raw-gap
-amplification from a positive source gap, and combines those facts with
-locality preservation in one rejection theorem.
+The current B9 formal line spans R187 through R189. R187 is a checked
+nonzero-scale derived certificate. The previous Lean interface accepted a
+conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
+entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
+concrete `27/20` scale is nonzero and greater than one, derives computed
+normalized-gap invariance and spectral-width-ratio invariance from uniform
+scaling, derives raw-gap amplification from a positive source gap, and
+combines those facts with locality preservation in one rejection theorem.
 
 The R187 source contains zero `hRatio`, `sorry`, or `axiom` tokens; all three
 toolchain commands return zero with no warnings, and the independent portfolio
@@ -112,12 +112,30 @@ The R188 module emits its own finite support profiles: `n=4` gives
 `12/12` requirements with three zero toolchain return codes and no warnings.
 Protocol `f5590112...`; Lean module `7e9bd8fd...`; transcript `f4bab92a...`;
 payload `da2e1352...`. This is a checked all-`n` structural Hamiltonian and
-locality certificate. Pauli terms are not yet interpreted as matrices, and the
-spectral gap and width are not derived from a formal operator. It is not a
-Quantum PCP or NLTS theorem, a global no-go result, a BQP separation, or a
-solved B9 frontier. New credit remains zero. The next gate is formal operator
-semantics and a proof that coefficient scaling induces the spectral inputs
-consumed by R187.
+locality certificate. R188 alone did not interpret Pauli terms as matrices or
+derive spectral consequences from an operator.
+
+R189 closes that operator-semantics gap. `OperatorSemantics.lean` defines
+`I`, `X`, and `Z` as complex `2 x 2` matrices, builds each all-`n` Pauli word
+on the `2^n` computational basis, and sums the source and reweighted
+Hamiltonians independently from the R188 term family. Lean proves the basis
+dimension, center/neighbor/identity placement, Hermiticity of every local
+word, term, and Hamiltonian, the exact identity
+`H_reweighted = (27/20) * H`, and exact scaling of the full complex spectrum
+set through Mathlib's algebra spectrum theorem.
+
+An independent Python `Fraction` bit-action oracle rebuilds the nonzero
+matrices for `n=4,5,6`; all are exactly Hermitian and satisfy the operator
+identity. Independent NumPy eigenspectra agree within `8e-15`: the raw gap
+changes from `2` to `27/10`, the width scales by `27/20`, and the normalized
+gap remains `1/n`. The certificate and portfolio audit pass `13/13`.
+Protocol `3e7e36c8...`; Lean module `e0db8471...`; transcript `22762175...`;
+payload `24afca7b...`. This is an all-`n` matrix/operator and spectrum-set
+scaling theorem plus finite spectrum cross-checks. The ordered all-`n`
+eigenvalue multiset and gap/width formulas are not yet formalized in Lean. It
+is not quantum-hardware evidence, a Quantum PCP or NLTS theorem, a global
+no-go result, a BQP separation, or a solved B9 frontier. New credit remains
+zero.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

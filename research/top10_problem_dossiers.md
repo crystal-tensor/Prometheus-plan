@@ -1,6 +1,6 @@
 # Top 10 Problem Dossiers v0.1
 
-Last updated: 2026-06-22
+Last updated: 2026-07-29
 
 Purpose: turn the Top 10 attack directions into reviewable research dossiers.
 Each dossier states what we are trying to solve, why the problem remains hard,
@@ -1018,13 +1018,27 @@ pass 12/12 requirements with zero module warnings. This is a formal structural
 Hamiltonian and locality theorem, not a matrix-level Pauli operator or an
 operator-derived spectral theorem.
 
-**Remaining path to a serious solution:** define Pauli-word matrix semantics
-and the finite-dimensional Hamiltonian operator; prove that coefficient
-reweighting gives `H'_n = (27/20) H_n`; derive gap and width scaling from that
-operator rather than abstract spectral summaries; preserve the generated-row
-bridge; then decide whether the restricted result informs the full conjecture.
+T-B9-004p/T-B10-016h adds R189, the checked all-`n` operator-semantics and
+spectrum-set-scaling certificate. Lean defines `I/X/Z` as complex matrices,
+constructs each Pauli word on the `2^n` computational basis, binds every word
+to the R188 term family, and sums source and reweighted Hamiltonians
+independently. It proves basis dimension, local Pauli placement, Hermiticity
+of every word, term, and Hamiltonian, exact
+`H'_n = (27/20) H_n`, and exact scaling of the full complex spectrum set. A
+separate Python `Fraction` bit-action oracle rebuilds nonzero matrices for
+`n=4,5,6`; NumPy independently matches their ordered spectra within `8e-15`.
+The finite rows have gap `2`, width `2n`, normalized gap `1/n`, and both gap
+and width scale by `27/20`. The certificate and independent audit pass 13/13.
+This is not hardware evidence and does not formalize the ordered all-`n`
+spectrum formula.
 
-**Current internal maturity:** 21/100.
+**Remaining path to a serious solution:** prove commutation and independence
+of the stabilizer generators; formalize the ordered all-`n` eigenvalue
+multiset and binomial multiplicities in Lean; derive gap, width, and normalized
+gap inside the proof assistant; bind those values into R187; then decide
+whether the restricted result yields a nontrivial hardness or no-go theorem.
+
+**Current internal maturity:** 25/100.
 
 ## B10: Mapping the Boundary of BQP
 

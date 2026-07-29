@@ -10,4 +10,8 @@ require mathlib from git
 
 @[default_target]
 lean_lib B9 where
-  roots := #[`B9.ClusterStabilizer.WidthLocality]
+  roots := #[
+    `B9.ClusterStabilizer.WidthLocality,
+    `B9.ClusterStabilizer.OpenChainHamiltonian,
+    `B9.ClusterStabilizer.OperatorSemantics
+  ]

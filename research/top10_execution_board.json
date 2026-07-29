@@ -135,18 +135,18 @@
       "title": "Classical verification of quantum outputs"
     },
     {
-      "30_day_gate": "Formalize Pauli-word matrix semantics and the finite-dimensional open-chain Hamiltonian operator, prove coefficient reweighting gives H prime equals 27/20 H, and derive the spectral gap and width inputs consumed by R187.",
+      "30_day_gate": "Formalize the ordered all-n eigenvalue multiset and binomial multiplicities from commuting independent stabilizer generators, then derive gap, width, and normalized gap inside Lean and bind those operator-derived values into R187.",
       "b_id": "B9",
-      "current_maturity": "checked_restricted_algebraic_theorem_plus_all_n_structural_hamiltonian_support_certificate_operator_spectrum_open",
+      "current_maturity": "checked_all_n_matrix_operator_and_spectrum_set_scaling_complete_all_n_ordered_spectrum_formula_open",
       "dependencies": [
         "B10"
       ],
       "downstream_translation_route": "Deferred until a restricted theorem or reusable negative lemma is formalized.",
       "kill_condition": "Keep only as a negative-result track unless a restricted theorem target becomes precise and independently proof-checked.",
-      "next_artifact": "B9 T-B9-005 operator-semantic and spectral-scaling certificate bound to the R188 formal object.",
+      "next_artifact": "B9 T-B9-005 ordered all-n stabilizer spectrum and gap-width theorem bound to the R189 operator.",
       "priority_lane": "theory_and_negative_results",
       "problem_id": 17,
-      "strongest_evidence": "Exact small-instance gap lab plus finite-instance failed gap-amplification negative lemma, Lean-style symbolic skeleton, named-family cluster-stabilizer width/locality skeleton, local parametric certificate checker, proof-environment readiness gate, contract gate, and proof-project scaffold gate: 18 configurations, 9 locality-preserving candidates, 0 accepted local candidates, 4 strict width-trap counterexamples, 9 dense locality traps, 5 symbolic definitions, 3 theorem skeletons, 5 open proof obligations, n=4,5,6 cluster_stabilizer_open_uniform_reweight rows where all terms scale by 1.35, exact scale 27/20 checked for the n >= 4 formula family, normalized gap invariant, certificate rejected, readiness blocked at 6/9 gates passed, contract blocked at 5/8 requirements passed with K4/K5/K8 failing, and scaffold blocked at 6/8 requirements passed with S7/S8 failing. The old True placeholder is replaced by an indexed theorem interface, but actual Lean 4, Lake tooling, and checked formal output remain missing; T-B9-004e adds a B9-scoped Lean/Lake workflow template plus CI contract gate with 7/8 requirements passed and C8 failed because no active remote CI run artifact or checked theorem output is recorded. T-B9-004o/T-B10-016g completes R188: Lean defines one open-chain term for every Fin n center, proves exactly n terms, all support indices in range, all supports of size at most 3, exact two-site boundary supports, an attained three-site interior support for every n >= 4, and support preservation under 27/20 coefficient reweighting. Lean generates the n=4,5,6 support profiles from the formal object, R187 is instantiated with structural locality, and the certificate plus independent audit pass 12/12 with zero warnings. Pauli matrix semantics and operator-derived spectra remain open.",
+      "strongest_evidence": "R187-R189 form a pinned Lean 4.12.0/Mathlib proof chain. R187 derives raw-gap growth and normalized-gap/width-ratio invariance from nonzero 27/20 scaling without a conclusion-shaped ratio assumption. R188 defines the all-n open-chain term/support family, proves exactly n terms, in-range support, exact two-site boundaries, locality at most 3, an attained three-site interior for n >= 4, and support preservation. R189 defines I/X/Z complex matrices, constructs all-n Pauli words and independent source/reweighted Hamiltonians on the 2^n computational basis, proves every word, term, and Hamiltonian Hermitian, proves exact H_reweighted = (27/20) H, and derives exact full complex spectrum-set scaling. A separate Fraction bit-action oracle rebuilds nonzero n=4,5,6 matrices; NumPy matches their finite spectra within 8e-15, gap and width both scale by 27/20, and normalized gap remains 1/n. R189 and the independent portfolio audit pass 13/13 with no hardware, Quantum PCP, NLTS, global no-go, BQP, solved-frontier, or new-credit claim.",
       "title": "Quantum PCP and local Hamiltonian hardness"
     },
     {
@@ -189,7 +189,7 @@
       "B8"
     ]
   },
-  "last_updated": "2026-07-01",
+  "last_updated": "2026-07-29",
   "next_30_days": {
     "week_1": "Freeze B1 proof-log report outline; B2 T-B2-009d now closes as a negative hardware-like observation-model boundary, so the next B2 gate requires real calibrated leakage/flag observations or independent hardware traces; pair B4 and B8 into one verification lane.",
     "week_2": [

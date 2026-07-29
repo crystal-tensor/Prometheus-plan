@@ -40,7 +40,7 @@ Overall audit: PASS
 - B IDs are B1..B10: True
 - Problem IDs match attack pack: True
 - All required fields present: True
-- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 21, 'B10': 53}
+- Maturity scores: {'B1': 63, 'B2': 48, 'B3': 28, 'B4': 29, 'B5': 30, 'B6': 24, 'B7': 59, 'B8': 41, 'B9': 25, 'B10': 53}
 
 ## Technical Resolution Program
 
@@ -2606,6 +2606,10 @@ Overall audit: PASS
 - R188 formal structure / support theorems / R187 bridge: True / True / True
 - R188 generated profiles: {'4': [2, 3, 3, 2], '5': [2, 3, 3, 3, 2], '6': [2, 3, 3, 3, 3, 2]}
 - R188 operator semantics / spectral derivation / Quantum PCP / credit: False / False / False / 0
+- R189 operator-semantics status: checked_all_n_matrix_operator_and_spectrum_set_scaling_complete_all_n_ordered_spectrum_formula_open
+- R189 requirements / evidence integrity: 13 / True
+- R189 matrix semantics / Hermitian / operator scale / spectrum-set scale: True / True / True / True
+- R189 finite spectrum rows / all-n ordered formula / hardware / Quantum PCP / credit: True / False / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 
