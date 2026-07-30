@@ -1,0 +1,162 @@
+{
+  "schema_version": "p052_height_accession_manifest_v1",
+  "as_of_date": "2026-07-30",
+  "scope": {
+    "included_catalog_problem_ids": [
+      52
+    ],
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      51,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "claim": "public_accession_and_ancestry_leakage_preflight_only"
+  },
+  "question": "Do three ancestry-labelled height summary-statistic files constitute an external genotype-to-phenotype test, or only a source manifest?",
+  "trait": {
+    "name": "body height",
+    "ontology_id": "OBA_VT0001253",
+    "trait_query": "body height",
+    "quantitative": true
+  },
+  "sources": {
+    "gwas_catalog_v2": {
+      "name": "NHGRI-EBI GWAS Catalog REST API v2",
+      "query_url": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies?efo_trait=body%20height&show_child_traits=false&page=0&size=500",
+      "study_url_template": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/{accession}",
+      "required_page_size": 500,
+      "required_show_child_traits": false
+    },
+    "gwas_catalog_ftp": {
+      "name": "NHGRI-EBI GWAS Catalog summary-statistics FTP",
+      "base_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics",
+      "required_artifacts": [
+        "raw summary-statistics file",
+        "raw metadata YAML",
+        "harmonised summary-statistics file",
+        "harmonised metadata YAML"
+      ]
+    },
+    "documentation": {
+      "summary_statistics": "https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics",
+      "population_descriptors": "https://www.ebi.ac.uk/gwas/docs/population-descriptors",
+      "api_v2": "https://www.ebi.ac.uk/gwas/rest/api/v2/docs"
+    },
+    "pubmed": {
+      "summary_url_template": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id={pubmed_id}&retmode=json"
+    }
+  },
+  "frozen_accession_seed": [
+    {
+      "accession": "GCST90728584",
+      "intended_role": "training_summary_statistics",
+      "cohort": "UKB",
+      "ancestry_category": "European"
+    },
+    {
+      "accession": "GCST90727382",
+      "intended_role": "transfer_summary_statistics_sentinel",
+      "cohort": "CKB",
+      "ancestry_category": "East Asian"
+    },
+    {
+      "accession": "GCST90727327",
+      "intended_role": "transfer_summary_statistics_sentinel",
+      "cohort": "G&H",
+      "ancestry_category": "South Asian"
+    }
+  ],
+  "accession_requirements": {
+    "present_in_exact_trait_query": true,
+    "full_summary_stats_available": true,
+    "minimum_snp_count": 1000000,
+    "gxe": false,
+    "gxg": false,
+    "single_named_cohort": true,
+    "single_discovery_ancestry_category": true,
+    "harmonised": true,
+    "sorted": true,
+    "genome_assembly": "GRCh38",
+    "file_type": "GWAS-SSF v1.0",
+    "case_control_study": false,
+    "explicit_terms_of_license": true
+  },
+  "final_metric_requirements": {
+    "metrics": [
+      "external-cohort calibration slope",
+      "incremental explained variance over an additive polygenic-score denominator",
+      "ancestry-stratified bootstrap interval"
+    ],
+    "required_holdout_fields": [
+      "participant or family cluster key",
+      "held-out genotype or frozen polygenic score",
+      "measured height on a declared scale",
+      "ancestry descriptor and assignment method",
+      "age and sex covariates",
+      "cohort and recruitment identifier",
+      "relatedness or household grouping for resampling"
+    ],
+    "summary_statistics_alone_are_sufficient": false
+  },
+  "readiness_decision": {
+    "ready_if": "Every frozen accession passes the file manifest and a cohort-disjoint individual-level holdout supplies every required final-metric field under an approved data-use path.",
+    "ready_label": "ancestry_transfer_evaluation_ready",
+    "blocked_label": "blocked_no_individual_level_external_holdout",
+    "candidate_model_executed": false,
+    "polygenic_score_denominator_executed": false
+  },
+  "leakage_contract": {
+    "no_random_row_split": "No random row split may cross participant, family, household, or cohort boundaries.",
+    "cohort_disjointness": "Distinct accession IDs or ancestry labels do not prove participant-level or cohort-level disjointness; cohort lineage must be explicit.",
+    "publication_exposure": "A public study already analyzed within the same paper or used for locus selection is a retrospective sentinel, not an unopened confirmation holdout.",
+    "ancestry_semantics": "Catalog ancestry labels are metadata descriptors, not interchangeable biological categories or causal variables.",
+    "feature_selection": "No held-out cohort association, publication result, or phenotype transformation may guide variant filtering, weighting, calibration, or hyperparameter choice.",
+    "scale_alignment": "Raw height, residualized height, and inverse-normalized height are not treated as one response scale without a frozen transformation contract."
+  },
+  "frozen_source_retention": {
+    "directory": "results/P052_height_accession_source_v1",
+    "files": [
+      "complete one-page exact-trait GWAS Catalog v2 query",
+      "one GWAS Catalog v2 record per frozen accession",
+      "root and harmonised FTP directory listings per accession",
+      "raw and harmonised metadata YAML per accession",
+      "HTTP metadata for each large summary-statistics artifact",
+      "PubMed summary for each distinct publication",
+      "GWAS Catalog documentation pages"
+    ],
+    "large_data_policy": "Do not duplicate multi-gigabyte summary-statistics files in this repository; retain declared checksums, HTTP headers, metadata, filenames, and source URLs.",
+    "compression": "gzip with mtime=0 for deterministic bytes",
+    "hash": "SHA-256 over every retained small source file"
+  },
+  "pilot_disclosure": {
+    "inspected_during_protocol_design": [
+      "the exact body-height v2 query",
+      "GCST90728584",
+      "GCST90727382",
+      "GCST90727327",
+      "their public FTP directory listings and metadata YAML"
+    ],
+    "boundary": "Pilot inspection established current accessions, schemas, cohorts, ancestry labels, licenses, and file formats. No candidate prediction, calibration slope, explained variance, or bootstrap result was computed."
+  },
+  "controls": {
+    "positive": "A synthetic three-accession roster with distinct cohorts and ancestries, complete GWAS-SSF metadata, and all individual-level holdout fields must be evaluation-ready.",
+    "negative": "Three harmonised summary-statistic files without participant-level outcomes and cluster keys must remain blocked.",
+    "independent_reimplementation_required": true,
+    "byte_identical_replay_required": true
+  },
+  "next_gate_if_ready": "Freeze variant intersection, allele alignment, LD reference, phenotype transformation, participant/family/cohort split, additive denominator, covariates, bootstrap clusters, and calibration code before opening any held-out outcomes.",
+  "interpretation_boundaries": [
+    "This packet audits public accessions, ancestry/cohort metadata, file interoperability, and leakage risk only.",
+    "It does not estimate an individual's height, ancestry, disease risk, or clinical outcome.",
+    "It does not establish causal genotype-to-phenotype mapping or portability of a polygenic score.",
+    "No re-identification, reproductive selection, clinical decision, wet-lab, or solved-frontier claim is permitted."
+  ]
+}
