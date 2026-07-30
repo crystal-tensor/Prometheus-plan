@@ -803,6 +803,58 @@ current_results:
     result: ../results/B9_R196_extended_tail_charge_stress_v1.json
     independent_audit: ../results/B9_R196_independent_audit_v1.json
     markdown_report: ../research/B9_R196_extended_tail_charge_stress.md
+  r197_nonstandard_fermionization_stress_v1:
+    status: checked_nonstandard_fermionization_boundary
+    method: b9_r197_nonstandard_fermionization_stress_v1
+    source: r196_extended_tail_charge_stress_v1
+    experiment_id: B9-R197-nonstandard-fermionization-stress
+    contract_sha256: 6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e
+    protocol_hash: 19605d12028bc0205512904edb0ceac2f9cc50d548b1a5d80c15499b2343ee6d
+    payload_sha256: ae331194b20b5308be38dd4a6967783a209f194963dc7cf291f1c876cf9dbe06
+    tool_sha256: 139a4734dbe6cfdc55cba4a22cb8a42b68685acdf7a0a78f1c2c7693cb7498ec
+    independent_audit_tool_sha256: 1adcab7f570eb8223851690cb1fcd9003da9d47c285d124a5e8d7a4b13dd019e
+    independent_audit_sha256: f2f5f9030e3d9213a06df35b90504cfbdb820d689372e937a58a297f3c7f63e9
+    result_file_sha256: 8cc7e8586d0930c2a9a2ad2642646ef3b18bd0988a028ce7600e8d96cb2f2cf6
+    report_file_sha256: 5c4d02c647e95b1fc7dccb92ffa69148a2fa8cd7dc623f0ec688b9df5134372f
+    requirement_count: 11
+    requirements_passed: 11
+    r197_contract_publicly_frozen_before_acceptance_execution: true
+    r197_holdout_couplings_unseen_before_protocol_freeze: true
+    declared_single_frame_quadratic_majorana_plus_h_families_have_nullity_two: true
+    declared_five_frame_union_plus_h_family_has_nullity_two: true
+    zero_coupling_tilted_frame_controls_recover_extra_exact_charges: true
+    r196_candidate_survives_declared_r197_finite_fermionization_adversary: true
+    all_frame_fermionization_exclusion: false
+    nonlocal_duality_exclusion: false
+    nonstandard_fermionization_exclusion: false
+    interacting_integrability_exclusion: false
+    complete_integrability_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    hardware_relevance: false
+    solved_frontier: false
+    frozen_row_count: 36
+    single_frame_row_count: 30
+    union_row_count: 6
+    exact_nullity_two_row_count: 36
+    largest_union_operator_basis_size: 871
+    largest_union_commutator_nonzero_count: 196703
+    positive_control_nullities:
+      - 66
+      - 91
+    independent_audit_status: pass
+    independent_audit_prime: 1000037
+    independent_audit_error_count: 0
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    contract: B9_R197_nonstandard_fermionization_contract_v0.json
+    result: ../results/B9_R197_nonstandard_fermionization_stress_v1.json
+    independent_audit: ../results/B9_R197_independent_audit_v1.json
+    markdown_report: ../research/B9_R197_nonstandard_fermionization_stress.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -830,4 +882,6 @@ current_results:
   r195_multiscale_tail_charge_stress: ../tools/b9_r195_multiscale_tail_charge_stress.py
   r196_extended_tail_charge_stress: ../tools/b9_r196_extended_tail_charge_stress.py
   r196_independent_audit: ../tools/b9_r196_independent_audit.py
+  r197_nonstandard_fermionization_stress: ../tools/b9_r197_nonstandard_fermionization_stress.py
+  r197_independent_audit: ../tools/b9_r197_independent_audit.py
   prototype_notes: ../research/B9_prototype_notes.md

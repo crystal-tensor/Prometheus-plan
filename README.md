@@ -292,6 +292,32 @@ larger-size spectral drift remain open. It is not a nonintegrability, quantum
 chaos, spectral-hardness, Quantum PCP, NLTS, BQP, hardware, or solved-frontier
 result. Scientific promotion is false and new credit remains zero.
 
+R197 now attacks a different escape route: perhaps the R196 candidate is a
+free-fermion model in an overlooked Jordan-Wigner frame. The public contract
+freezes unseen `J=79/128` and `J=83/128` before acceptance execution and tests
+standard X/Y/Z frames plus rational tilted axes `A=(-4X+3Z)/5` and
+`B=(3X+4Z)/5` at `n=8,9,10`. Every frame contains identity, the exact
+Hamiltonian, all Majorana-linear operators, all Hermitian quadratic
+bilinears, and full parity; a sixth family takes the independent
+operator-space union of all five frames.
+
+All `30/30` single-frame and `6/6` union rows have exact nullity two under two
+declared primes. The largest union has `871` independent operators and
+`196,703` commutator nonzeros. At `J=0,n=8`, positive controls recover
+nullities `66` and `91`, with all eight onsite tilted charges explicitly
+in-span and commuting. A separate symplectic-bit implementation imports none
+of R193-R197, rebuilds all 36 bases and matrices, and reproduces every nullity
+under third prime `1,000,037` with zero errors. Requirements pass `11/11`;
+contract `6ab7640f...`; protocol `19605d12...`; payload `ae331194...`.
+
+R197 closes only five finite quadratic-Majorana-plus-H frames and their linear
+union. Continuously rotated frames, nonlinear frame mixtures,
+higher-than-quadratic Majorana charges, explicit nonlocal dualities, adaptive
+tails, interacting integrability, and larger-size drift remain open. It is
+not a complete fermionization exclusion, nonintegrability or chaos theorem,
+hardness result, Quantum PCP or NLTS theorem, BQP separation, hardware result,
+or solved frontier. Scientific promotion is false and new credit remains zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

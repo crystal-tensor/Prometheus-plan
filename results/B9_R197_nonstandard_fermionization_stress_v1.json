@@ -1,0 +1,1604 @@
+{
+  "claim_boundary": {
+    "new_credit_delta": 0,
+    "not_supported": [
+      "all_frame_fermionization_exclusion",
+      "nonlocal_duality_exclusion",
+      "nonstandard_fermionization_exclusion",
+      "interacting_integrability_exclusion",
+      "complete_integrability_exclusion",
+      "nonintegrability_theorem",
+      "quantum_chaos_theorem",
+      "spectral_hardness_theorem",
+      "quantum_pcp_theorem",
+      "nlts_theorem",
+      "bqp_separation",
+      "hardware_relevance",
+      "solved_frontier"
+    ],
+    "remaining_escape_routes": [
+      "arbitrary continuously rotated Jordan-Wigner frames",
+      "nonlinear combinations of distinct fermionization frames",
+      "interacting higher-than-quadratic Majorana charges",
+      "Kramers-Wannier and other nonlocal dualities outside the declared frames",
+      "size-dependent or adaptive nonlocal strings",
+      "range-nine and longer quasi-local tails",
+      "larger-size sparse-spectrum drift"
+    ],
+    "scientific_promotion_accepted": false,
+    "supported": [
+      "r197_contract_publicly_frozen_before_acceptance_execution",
+      "r197_holdout_couplings_unseen_before_protocol_freeze",
+      "declared_single_frame_quadratic_majorana_plus_h_families_have_nullity_two",
+      "declared_five_frame_union_plus_h_family_has_nullity_two",
+      "zero_coupling_tilted_frame_controls_recover_extra_exact_charges",
+      "r196_candidate_survives_declared_r197_finite_fermionization_adversary"
+    ]
+  },
+  "evidence": {
+    "contract_path": "benchmarks/B9_R197_nonstandard_fermionization_contract_v0.json",
+    "contract_sha256": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+    "tool_path": "tools/b9_r197_nonstandard_fermionization_stress.py"
+  },
+  "experiment_id": "B9-R197-nonstandard-fermionization-stress",
+  "last_updated": "2026-07-30",
+  "method": "b9_r197_nonstandard_fermionization_stress_v1",
+  "payload_sha256": "ae331194b20b5308be38dd4a6967783a209f194963dc7cf291f1c876cf9dbe06",
+  "positive_control_rows": [
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "0ff6ae7190083855274027a21af9809412af89996998b7abc762600c6839343c",
+      "commutator_nonzero_count": 5211,
+      "coupling": "0",
+      "exact_nullity_two_certified": false,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 138,
+      "modular_nullities": {
+        "1000003": 66,
+        "1000033": 66
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 72,
+        "1000033": 72
+      },
+      "n": 8,
+      "onsite_tilted_charge_commutes_count": 8,
+      "onsite_tilted_charge_in_span_count": 8,
+      "onsite_tilted_charge_witness_count": 8,
+      "onsite_tilted_charge_witnesses_checked": true,
+      "operator_basis_pauli_nonzero_count": 3275,
+      "operator_basis_sha256": "198120d28c4cd00d34a2bbe8d2854a0416808c3a37a5921a2d54cb790ab034d7",
+      "output_basis_size": 2226,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "f4ce0abe87c6c7d82ece5729a86f330db66e1590ab4db84cc0f162c83873b675",
+      "commutator_nonzero_count": 18133,
+      "coupling": "0",
+      "exact_nullity_two_certified": false,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 537,
+      "modular_nullities": {
+        "1000003": 91,
+        "1000033": 91
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 446,
+        "1000033": 446
+      },
+      "n": 8,
+      "onsite_tilted_charge_commutes_count": 8,
+      "onsite_tilted_charge_in_span_count": 8,
+      "onsite_tilted_charge_witness_count": 8,
+      "onsite_tilted_charge_witnesses_checked": true,
+      "operator_basis_pauli_nonzero_count": 6602,
+      "operator_basis_sha256": "d4f23b6dd57d4e14c0b20981bd95739f04fd429a822b3650b8416a7c690d5659",
+      "output_basis_size": 7434,
+      "raw_candidate_count": 687,
+      "search_family": "five_frame_operator_union_plus_h"
+    }
+  ],
+  "protocol": {
+    "basis_selection_prime": 1000003,
+    "claim_boundary": {
+      "false_claims": [
+        "all_frame_fermionization_exclusion",
+        "nonlocal_duality_exclusion",
+        "nonstandard_fermionization_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "hardware_relevance",
+        "solved_frontier"
+      ],
+      "new_credit_delta": 0,
+      "scientific_promotion_accepted": false,
+      "true_claims": [
+        "r197_contract_publicly_frozen_before_acceptance_execution",
+        "r197_holdout_couplings_unseen_before_protocol_freeze",
+        "declared_single_frame_quadratic_majorana_plus_h_families_have_nullity_two",
+        "declared_five_frame_union_plus_h_family_has_nullity_two",
+        "zero_coupling_tilted_frame_controls_recover_extra_exact_charges",
+        "r196_candidate_survives_declared_r197_finite_fermionization_adversary"
+      ]
+    },
+    "contract": {
+      "path": "benchmarks/B9_R197_nonstandard_fermionization_contract_v0.json",
+      "sha256": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+      "status": "public_preregistration_before_frozen_holdout_execution",
+      "version": "0.1.0"
+    },
+    "experiment_id": "B9-R197-nonstandard-fermionization-stress",
+    "frame_algebra": {
+      "checked": true,
+      "checked_frame_count": 5,
+      "frame_count": 5,
+      "rows": [
+        {
+          "checked": true,
+          "checks": {
+            "p_cross_q_equals_r": true,
+            "p_dot_q_zero": true,
+            "p_norm_one": true,
+            "q_cross_r_equals_p": true,
+            "q_dot_r_zero": true,
+            "q_norm_one": true,
+            "r_cross_p_equals_q": true,
+            "r_dot_p_zero": true,
+            "r_norm_one": true
+          },
+          "frame_id": "pauli_x"
+        },
+        {
+          "checked": true,
+          "checks": {
+            "p_cross_q_equals_r": true,
+            "p_dot_q_zero": true,
+            "p_norm_one": true,
+            "q_cross_r_equals_p": true,
+            "q_dot_r_zero": true,
+            "q_norm_one": true,
+            "r_cross_p_equals_q": true,
+            "r_dot_p_zero": true,
+            "r_norm_one": true
+          },
+          "frame_id": "pauli_y"
+        },
+        {
+          "checked": true,
+          "checks": {
+            "p_cross_q_equals_r": true,
+            "p_dot_q_zero": true,
+            "p_norm_one": true,
+            "q_cross_r_equals_p": true,
+            "q_dot_r_zero": true,
+            "q_norm_one": true,
+            "r_cross_p_equals_q": true,
+            "r_dot_p_zero": true,
+            "r_norm_one": true
+          },
+          "frame_id": "pauli_z"
+        },
+        {
+          "checked": true,
+          "checks": {
+            "p_cross_q_equals_r": true,
+            "p_dot_q_zero": true,
+            "p_norm_one": true,
+            "q_cross_r_equals_p": true,
+            "q_dot_r_zero": true,
+            "q_norm_one": true,
+            "r_cross_p_equals_q": true,
+            "r_dot_p_zero": true,
+            "r_norm_one": true
+          },
+          "frame_id": "tilted_a"
+        },
+        {
+          "checked": true,
+          "checks": {
+            "p_cross_q_equals_r": true,
+            "p_dot_q_zero": true,
+            "p_norm_one": true,
+            "q_cross_r_equals_p": true,
+            "q_dot_r_zero": true,
+            "q_norm_one": true,
+            "r_cross_p_equals_q": true,
+            "r_dot_p_zero": true,
+            "r_norm_one": true
+          },
+          "frame_id": "tilted_b"
+        }
+      ]
+    },
+    "frame_order": [
+      "pauli_x",
+      "pauli_y",
+      "pauli_z",
+      "tilted_a",
+      "tilted_b"
+    ],
+    "frozen_holdouts": [
+      "79/128",
+      "83/128"
+    ],
+    "frozen_sizes": [
+      8,
+      9,
+      10
+    ],
+    "method": "b9_r197_nonstandard_fermionization_stress_v1",
+    "modular_primes": [
+      1000003,
+      1000033
+    ],
+    "positive_control": {
+      "coupling": "0",
+      "families": [
+        "tilted_a",
+        "all_frames_union"
+      ],
+      "rule": "each family must have exact modular nullity strictly greater than two and must contain the explicit onsite tilted-field charges",
+      "size": 8
+    },
+    "single_frame_row_count": 30,
+    "union_row_count": 6,
+    "version": "1.0"
+  },
+  "protocol_sha256": "19605d12028bc0205512904edb0ceac2f9cc50d548b1a5d80c15499b2343ee6d",
+  "public_freeze": {
+    "contract_sha256_at_preregistration_commit": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+    "expected_contract_sha256": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+    "is_ancestor_of_execution_head": true,
+    "preregistration_commit": "ab944728d8bbc590b745b9a4682ca31b4f9ee83f",
+    "verified": true
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "contract_sha256_at_preregistration_commit": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+        "expected_contract_sha256": "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e",
+        "is_ancestor_of_execution_head": true,
+        "preregistration_commit": "ab944728d8bbc590b745b9a4682ca31b4f9ee83f",
+        "verified": true
+      },
+      "label": "Public preregistration commit is an ancestor and hash-binds the contract",
+      "passed": true,
+      "requirement_id": "P1"
+    },
+    {
+      "evidence": {
+        "holdouts": [
+          "79/128",
+          "83/128"
+        ],
+        "previous_count": 23
+      },
+      "label": "Frozen holdouts are disjoint from all previous coupling grids",
+      "passed": true,
+      "requirement_id": "P2"
+    },
+    {
+      "evidence": {
+        "acceptance_count": 0,
+        "engineering_coupling": "13/32"
+      },
+      "label": "Engineering probe contributes zero frozen decisions",
+      "passed": true,
+      "requirement_id": "P3"
+    },
+    {
+      "evidence": {
+        "checked": 5,
+        "total": 5
+      },
+      "label": "All five rational frames satisfy the exact Pauli-axis algebra",
+      "passed": true,
+      "requirement_id": "P4"
+    },
+    {
+      "evidence": {
+        "actual": 30,
+        "expected": 30
+      },
+      "label": "All 30 frozen single-frame rows execute",
+      "passed": true,
+      "requirement_id": "P5"
+    },
+    {
+      "evidence": {
+        "actual": 6,
+        "expected": 6
+      },
+      "label": "All six frozen five-frame union rows execute",
+      "passed": true,
+      "requirement_id": "P6"
+    },
+    {
+      "evidence": {
+        "row_count": 36
+      },
+      "label": "Every frozen row uses an independent operator basis led by identity and H",
+      "passed": true,
+      "requirement_id": "P7"
+    },
+    {
+      "evidence": {
+        "passed": 36,
+        "total": 36
+      },
+      "label": "Every frozen row has exact nullity two under both declared primes",
+      "passed": true,
+      "requirement_id": "P8"
+    },
+    {
+      "evidence": {
+        "nullities": [
+          {
+            "1000003": 66,
+            "1000033": 66
+          },
+          {
+            "1000003": 91,
+            "1000033": 91
+          }
+        ],
+        "onsite_witness_counts": [
+          {
+            "commutes": 8,
+            "in_span": 8,
+            "total": 8
+          },
+          {
+            "commutes": 8,
+            "in_span": 8,
+            "total": 8
+          }
+        ],
+        "passed": 2,
+        "total": 2
+      },
+      "label": "Tilted-frame and union J=0 controls recover extra exact charges",
+      "passed": true,
+      "requirement_id": "P9"
+    },
+    {
+      "evidence": {
+        "row_count": 36
+      },
+      "label": "Every frozen row carries operator and commutator digests",
+      "passed": true,
+      "requirement_id": "P10"
+    },
+    {
+      "evidence": {
+        "new_credit_delta": 0,
+        "scientific_promotion_accepted": false
+      },
+      "label": "Scientific promotion and new credit remain disabled",
+      "passed": true,
+      "requirement_id": "P11"
+    }
+  ],
+  "requirements_passed": 11,
+  "requirements_total": 11,
+  "rows": [
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "f0c388baf6b3631a6efdaff14adb73c1354a54370a37ecefaac4457274a2497f",
+      "commutator_nonzero_count": 866,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "89a03f1d4172bfe84eef765da170c1d4f01152afd1e68ddcfb7f46eff2f93003",
+      "output_basis_size": 520,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "449f773f2e0fe61baa9b8922af7de739355f27b79fcb934fdaeff5ee6d166719",
+      "commutator_nonzero_count": 1042,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "62793110406605b75542fa0e00d3033237ae5462e1b1e264019a6d332322165c",
+      "output_basis_size": 793,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "26cfff873765f1a52e4194d83837c27fe2d6e69f1e23475d01d9a46e19560f6f",
+      "commutator_nonzero_count": 1020,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "c3322feec4a58cb03f8a13524ce78eba2aaba2be1df87dd614738c033271dc97",
+      "output_basis_size": 837,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "3fe6cba188ac8172e5cefdd6e1969c822d533541b4bd976eaf65e72790c36434",
+      "commutator_nonzero_count": 15928,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 3284,
+      "operator_basis_sha256": "1e9a9a81e66c91a2ec07a8308a210e48eba71183bdb46d383b9ef5a268d19ad7",
+      "output_basis_size": 7988,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "e415e034d38d8bd2a1df6c02524e5406360bba0e8f8ad69df2609e9baea5f02a",
+      "commutator_nonzero_count": 22228,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 3284,
+      "operator_basis_sha256": "9c2409838de64a8f75acedb8af34f3729d688bdb2a5d4a2ffe0068e93f8b1550",
+      "output_basis_size": 11972,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "860fea97e5e4b682f2baa353811b4835afb5875816a0a9af18bcac64f9a6525d",
+      "commutator_nonzero_count": 39747,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 537,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 535,
+        "1000033": 535
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 6609,
+      "operator_basis_sha256": "c6515ad262e3a576a964dd13e2997b207a4531fd3285799ad3b2e3fcbef5e149",
+      "output_basis_size": 12508,
+      "raw_candidate_count": 687,
+      "search_family": "five_frame_operator_union_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "0f1e532f642c61ab621231ae867aa387112600cd0b3baa731f299f22f8b88bd2",
+      "commutator_nonzero_count": 1157,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "a88413c92725498dc9ba00d5fd934d5de172bfd0b6f989804a80c37afbaf728d",
+      "output_basis_size": 714,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "7c263ee8de74b0bb58ffaa3e1b35e3efe93acc994bcfc46cad37ad65a330d472",
+      "commutator_nonzero_count": 1430,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "ab821be2d9017cbc0ae00ada47328811c85397902517b6675d7a002303433535",
+      "output_basis_size": 1114,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "c6d2eb2c7f4a4c83caa1c7eb25356bb3319c7bf9ae554925e9a02c2b195f1b6e",
+      "commutator_nonzero_count": 1365,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "d69313e74f1b53b9a14bf2bf7dfc83ecb585fbfd40c2ce92126b512b98231bbd",
+      "output_basis_size": 1140,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "a25c4c05bb9f05567d70c24fbbc9832604a6a9c5563216e49eff8fb5e788bd07",
+      "commutator_nonzero_count": 35360,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 6608,
+      "operator_basis_sha256": "ba4d17cdaed378e7a757b52710dd97ec3ee9c254d8896731cc8f011c94058e5b",
+      "output_basis_size": 18344,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "20c8602d30db136b1798ba360692c693ccfbd5a5c05859cc8f5da798d512613d",
+      "commutator_nonzero_count": 51148,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 6608,
+      "operator_basis_sha256": "d21836207e97acfe4af406979f2431312cff939c34adceb9ab14deb75bdde6d7",
+      "output_basis_size": 28488,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "1f9ea113896eb62448648b4ca5d0a38944646e923ae08a285e2f311339fd8532",
+      "commutator_nonzero_count": 88941,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 694,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 692,
+        "1000033": 692
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 13318,
+      "operator_basis_sha256": "593c43a346f243c9db6e78e7dce986cf2a66e6499564f1a1c2477193d4e89130",
+      "output_basis_size": 29304,
+      "raw_candidate_count": 862,
+      "search_family": "five_frame_operator_union_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "e19c989baab0b7b696c230376ca814ec823a60277165c3a1176a721aef6770f2",
+      "commutator_nonzero_count": 1502,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "33080097933ec30ca3e620e57deeedfe2671e0d8a6c0063feb5013e74735a8f7",
+      "output_basis_size": 950,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "488b5857535ef927fe0635451a38a01e7685f93c044ae3b53661387bc75f7e53",
+      "commutator_nonzero_count": 1902,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "47a70f493173ddbd15fa09c5ca2a5a9f1f0e9a0374f0e717669b921f98e17a0a",
+      "output_basis_size": 1511,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "fbe5973a095d3392296dccc808f902cfc26a12935278d001855c61cbe490e9d4",
+      "commutator_nonzero_count": 1772,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "16e9e9a8c0ca107aae4308fc60692008a845476309a8d820df0e771d2c1275c3",
+      "output_basis_size": 1501,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "f299820e6d9913f4ae6a8021fd16d0e8ceca4b7e66e61b47cd94a66940f4cb48",
+      "commutator_nonzero_count": 77576,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 13260,
+      "operator_basis_sha256": "516256034aed3465119009583dabffd51c3d8a4cc7c6e72ffdb448dd007425f1",
+      "output_basis_size": 41372,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "ab0e648871456f07b2437178fa087e61ccc46d78e1f11cc1f9534fc70866625d",
+      "commutator_nonzero_count": 115652,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 13260,
+      "operator_basis_sha256": "7be1752cdd6795fb4225088f580374cefbdc4bccb10f83614750a6b1070f5e88",
+      "output_basis_size": 66124,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "243d892132e425a504b9b19a87369b724704ca1e66b2f979af102760ecb56636",
+      "commutator_nonzero_count": 196703,
+      "coupling": "79/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 871,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 869,
+        "1000033": 869
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 26695,
+      "operator_basis_sha256": "d2dd35c43e8aa0a9db8d502b4e482ea3ab27e7b9e4bc1edb9434fbc3e6eb0f0a",
+      "output_basis_size": 67296,
+      "raw_candidate_count": 1057,
+      "search_family": "five_frame_operator_union_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "828d71a05ac156888114e807ebc8aead6cc7ccc0cc5179b53c183c5f0885e7c7",
+      "commutator_nonzero_count": 866,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "6376f6c153ffe68026b8b1f50be27ed6016ad238702803cd937dc5df97aa05f8",
+      "output_basis_size": 520,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "723331483b5adbf14be7f2e75e2f1ddd35073146294f59184644e29d4be3ad76",
+      "commutator_nonzero_count": 1042,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "590b21d1f1aba8980e0f7cabca113095d1f8a639b60fe6db7f419a3cf452a42b",
+      "output_basis_size": 793,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "ad3c20e7709e360dfe01a36bd40209ff509be8ae543afd88000ceec804101e65",
+      "commutator_nonzero_count": 1020,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 161,
+      "operator_basis_sha256": "5f47e5f3b2e998b0656b321bb51c7eeefc7206b70943f0016a39eb92859d61c3",
+      "output_basis_size": 837,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "2945a09c2d643f54ffc47cd3fd5e74649821edc70a5afa6004326716f922a0c0",
+      "commutator_nonzero_count": 15928,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 3284,
+      "operator_basis_sha256": "258f9e6faec0f42ed428c72d982aaae0645a3e0600b2dddb304687168e80acb7",
+      "output_basis_size": 7988,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "229d50f612da08c551c847d1180a6e20f131ca460d5a1f6ce2d1a81c448b9e17",
+      "commutator_nonzero_count": 22228,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 139,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 137,
+        "1000033": 137
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 3284,
+      "operator_basis_sha256": "c36acf9aeed477bd3a62b630fe89fff9f7de874c631e63dfd3ddfef9ff6ec707",
+      "output_basis_size": 11972,
+      "raw_candidate_count": 139,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "3f4671080945059bb961c27770f856297c2eb0d2602cfc74bf839fcee6efd3d2",
+      "commutator_nonzero_count": 39747,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 537,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 535,
+        "1000033": 535
+      },
+      "n": 8,
+      "operator_basis_pauli_nonzero_count": 6609,
+      "operator_basis_sha256": "19db4f173efdada1207b597795d4f5838a4c2926d7bcf6861d439defbb325696",
+      "output_basis_size": 12508,
+      "raw_candidate_count": 687,
+      "search_family": "five_frame_operator_union_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "bbeab73ca2d67d48c8bf1f6a4b038f370c68e27d383755ebca1d6b2506082819",
+      "commutator_nonzero_count": 1157,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "e7177de23210c6cf55d223a5816a957ff1158047a146512e87c98a56152fdeca",
+      "output_basis_size": 714,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "d32a0604321aabf77409014cb582bd51be7320ce009475ffb0c2ba4f090179ad",
+      "commutator_nonzero_count": 1430,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "ccd9194e973e8d71ddfff782bf1fc1cd365037b489937ad7f148cfb1b9a444c7",
+      "output_basis_size": 1114,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "650314f0a8a87b1678f723555207c814321b50b08852036e4c2300775f5c96b7",
+      "commutator_nonzero_count": 1365,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 199,
+      "operator_basis_sha256": "594c9fba03b88a336cd25ad554e50b3592252db514e67340eaaa9956a1bd5c60",
+      "output_basis_size": 1140,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "e001ee3acf6f1e87b0b04961ab290da42707a21bc307499ea7aff4720b3a9c12",
+      "commutator_nonzero_count": 35360,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 6608,
+      "operator_basis_sha256": "1641946acc17960259da86ddaa0485fb655ca399a193028c1e6bf612a1fea132",
+      "output_basis_size": 18344,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "1d5f6b3ff4f623f7f9c1295d612e7fef1c145ff7536edbf5b529a6818f326eb2",
+      "commutator_nonzero_count": 51148,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 174,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 172,
+        "1000033": 172
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 6608,
+      "operator_basis_sha256": "d1fd890d3072f55ac30b7ea7710f96f39f613e05d54d6719b967144867041104",
+      "output_basis_size": 28488,
+      "raw_candidate_count": 174,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "cca83c1687dc19d4eb1161b33ab2e6e3c668e346191173f9949305f655c45704",
+      "commutator_nonzero_count": 88941,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 694,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 692,
+        "1000033": 692
+      },
+      "n": 9,
+      "operator_basis_pauli_nonzero_count": 13318,
+      "operator_basis_sha256": "c65fb967926636e4594a3d9292421538bc62f8c42eeb63d0a791c9be1ed3d4c7",
+      "output_basis_size": 29304,
+      "raw_candidate_count": 862,
+      "search_family": "five_frame_operator_union_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "23a0ef327320c24d51d28deb444449084b0a454b2e3559074f176b17312415f9",
+      "commutator_nonzero_count": 1502,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "98f4f93430ec87b8a993f57ebb5a77db4ee7bfdf875a538e6893319e3004e5ba",
+      "output_basis_size": 950,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "0483e9b4da3ad296fb2cdc7b39d81a64c97cdc76b98233c84b78078dd92c9110",
+      "commutator_nonzero_count": 1902,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_y"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "9c485f17464b4c441721ae582e834fda10b05a54ef1464e7b98f7e26936beaf8",
+      "output_basis_size": 1511,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "3877819a8802c0f1c84f739b69c0246616adaa479ab75d4a88868bfa40a53871",
+      "commutator_nonzero_count": 1772,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_z"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 241,
+      "operator_basis_sha256": "5ecbc1e1bc08ff150539e89ffa1780527db81f6099e6383f67cde49778b2e116",
+      "output_basis_size": 1501,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "9ab7f7420826112f0b98c6bd03b6a5331d724692e4dbfec3f2b9fc7e0010adba",
+      "commutator_nonzero_count": 77576,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_a"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 13260,
+      "operator_basis_sha256": "d22f0ea0ba0cd8b20fe01d7791b42e36b63b5128e5da3920b75be10a2b107c37",
+      "output_basis_size": 41372,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "d9cc71de4bbd9db995fdd3a3b64ecedea97e792a3425c73adf81407ff94e4a59",
+      "commutator_nonzero_count": 115652,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 213,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 211,
+        "1000033": 211
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 13260,
+      "operator_basis_sha256": "5de7037d15af43f1fd8ed66e71574f92ee6ad1c0e7b910fe7bcb593102e65913",
+      "output_basis_size": 66124,
+      "raw_candidate_count": 213,
+      "search_family": "single_fermionization_frame_plus_h"
+    },
+    {
+      "basis_selection_prime": 1000003,
+      "checked": true,
+      "commutator_matrix_sha256": "068bf24028f397483847d81f36841166d50678325328ddf232c7b66582c17296",
+      "commutator_nonzero_count": 196703,
+      "coupling": "83/128",
+      "exact_nullity_two_certified": true,
+      "frame_ids": [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b"
+      ],
+      "hamiltonian_kernel_verified": true,
+      "identity_kernel_verified": true,
+      "independent_operator_basis_size": 871,
+      "modular_nullities": {
+        "1000003": 2,
+        "1000033": 2
+      },
+      "modular_primes": [
+        1000003,
+        1000033
+      ],
+      "modular_ranks": {
+        "1000003": 869,
+        "1000033": 869
+      },
+      "n": 10,
+      "operator_basis_pauli_nonzero_count": 26695,
+      "operator_basis_sha256": "e59083f93063272b96ad8e11c311894a4ff9bd7d6c8640f7832eceb727f735ad",
+      "output_basis_size": 67296,
+      "raw_candidate_count": 1057,
+      "search_family": "five_frame_operator_union_plus_h"
+    }
+  ],
+  "status": "checked_nonstandard_fermionization_boundary",
+  "summary": {
+    "exact_nullity_two_row_count": 36,
+    "frozen_row_count": 36,
+    "new_credit_delta": 0,
+    "positive_control_pass_count": 2,
+    "positive_control_row_count": 2,
+    "scientific_promotion_accepted": false,
+    "single_frame_row_count": 30,
+    "union_row_count": 6
+  },
+  "version": "1.0"
+}
