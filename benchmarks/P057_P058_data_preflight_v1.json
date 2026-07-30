@@ -1,0 +1,224 @@
+{
+  "schema_version": "p057_p058_data_preflight_v1",
+  "preregistered_at": "2026-07-30",
+  "scope": {
+    "problem_ids": [
+      57,
+      58
+    ],
+    "parent_packet": "benchmarks/P049_P060_activation_gate_v1.json",
+    "claim_level": "public_data_readiness_preflight_only",
+    "catalog_mutation": false,
+    "clinical_or_public_health_alert": false,
+    "human_animal_or_environmental_intervention": false
+  },
+  "p057": {
+    "title": "Global Reversal of Antimicrobial Resistance",
+    "heuristic_question": "Can an AMR forecast be judged where reporting is sparse without silently treating missing surveillance as low resistance?",
+    "analysis_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "future_holdout_year": 2023,
+    "minimum_training_years": 3,
+    "indicators": [
+      {
+        "indicator_code": "AMR_INFECT_ECOLI",
+        "indicator_uuid": "745F475",
+        "pathogen": "Escherichia coli",
+        "drug_or_class": "third-generation cephalosporins",
+        "value_field": "VALUE_NUMERIC",
+        "unit": "percent of bloodstream infections",
+        "api_table": "RELAY_AMR",
+        "api_base_url": "https://xmart-api-public.who.int/DATA_/",
+        "indicator_page": "https://data.who.int/indicators/i/918081E/745F475",
+        "download_url": "https://srhdpeuwpubsa.blob.core.windows.net/whdh/DATADOT/INDICATOR/745F475_ALL_LATEST.csv"
+      },
+      {
+        "indicator_code": "AMR_INFECT_MRSA",
+        "indicator_uuid": "5DD9606",
+        "pathogen": "Staphylococcus aureus",
+        "drug_or_class": "methicillin",
+        "value_field": "VALUE_NUMERIC",
+        "unit": "percent of bloodstream infections",
+        "api_table": "RELAY_AMR",
+        "api_base_url": "https://xmart-api-public.who.int/DATA_/",
+        "indicator_page": "https://data.who.int/indicators/i/918081E/5DD9606",
+        "download_url": "https://srhdpeuwpubsa.blob.core.windows.net/whdh/DATADOT/INDICATOR/5DD9606_ALL_LATEST.csv"
+      }
+    ],
+    "reporting_universe": {
+      "api_table": "REF_GEO_WIDE",
+      "api_base_url": "https://xmart-api-public.who.int/DATA_/",
+      "filter": "GEO_TYPE eq 'ADMIN_0' and TERM_LANG eq 'en' and VALID_TO eq null",
+      "expected_entity_count": 245,
+      "note": "The matrix denominator is frozen before inspecting resistance values; it includes WHO's current English ADMIN_0 reference entities."
+    },
+    "completeness_strata": [
+      {
+        "name": "zero",
+        "minimum_observed_years": 0,
+        "maximum_observed_years": 0
+      },
+      {
+        "name": "sparse",
+        "minimum_observed_years": 1,
+        "maximum_observed_years": 2
+      },
+      {
+        "name": "partial",
+        "minimum_observed_years": 3,
+        "maximum_observed_years": 5
+      },
+      {
+        "name": "dense",
+        "minimum_observed_years": 6,
+        "maximum_observed_years": 8
+      }
+    ],
+    "forecast_eligibility": {
+      "requires_holdout_observation": true,
+      "minimum_observed_training_years": 3,
+      "post_outcome_exclusions_allowed": false
+    },
+    "mnar_sensitivity": {
+      "estimand": "all-entity 2023 mean resistance percentage",
+      "observed_entity_mean_weighting": "equal entity weight",
+      "missing_holdout_imputation": "clip(observed holdout mean + delta, 0, 100)",
+      "delta_percentage_points": [
+        -20,
+        -10,
+        0,
+        10,
+        20
+      ],
+      "manski_bounds": [
+        0,
+        100
+      ],
+      "claim_boundary": "Sensitivity values diagnose non-identification from missing reporting; they are not resistance estimates for non-reporting entities."
+    },
+    "source_consistency_gate": {
+      "require_dashboard_api_to_include_holdout": true,
+      "compare_indicator_download_years": true,
+      "fail_closed_on_unrecorded_source_divergence": true
+    }
+  },
+  "p058": {
+    "title": "Pandemic Prediction and Interdiction",
+    "heuristic_question": "How early is an early warning if every sample is replayed only after the date it first became public?",
+    "dataset": {
+      "publisher": "Centers for Disease Control and Prevention",
+      "name": "CDC Wastewater Data for SARS-CoV-2",
+      "dataset_id": "j9g8-acpt",
+      "about_url": "https://data.cdc.gov/Public-Health-Surveillance/CDC-Wastewater-Data-for-SARS-CoV-2/j9g8-acpt/about_data",
+      "metadata_url": "https://data.cdc.gov/api/views/j9g8-acpt",
+      "row_api_url": "https://data.cdc.gov/resource/j9g8-acpt.json",
+      "program_url": "https://www.cdc.gov/nwss/about-data.html",
+      "methods_url": "https://www.cdc.gov/nwss/data-methods.html",
+      "update_frequency": "weekly on Fridays"
+    },
+    "required_vintage_contract": {
+      "event_time_field": "sample_collect_date",
+      "required_first_publication_field": "first_publication_date",
+      "required_revision_identity_field": "revision_id",
+      "minimum_distinct_as_of_snapshots": 8,
+      "row_availability_rule": "A row may enter a replay only when first_publication_date is on or before the simulated decision time.",
+      "revision_rule": "Every historical correction must remain addressable by an immutable revision or archived weekly snapshot.",
+      "alert_execution_rule": "Do not calculate lead time, tune thresholds, or emit an alert unless both row availability and revision identity are satisfied."
+    },
+    "official_metadata_projection": {
+      "captured_at": "2026-07-30",
+      "capture_method": "read-only projection of the official metadata endpoint",
+      "row_count": 595138,
+      "column_count": 38,
+      "sample_collect_date": {
+        "non_null": 595138,
+        "minimum": "2020-01-14",
+        "maximum": "2026-07-21"
+      },
+      "date_updated": {
+        "description": "Timestamp of processing run used in posted data. \"As of\" stamp.",
+        "non_null": 595138,
+        "distinct_values": [
+          {
+            "value": "2026-07-24T11:01:00.000",
+            "count": 595138
+          }
+        ]
+      },
+      "field_names": [
+        "record_id",
+        "site",
+        "state_territory",
+        "source",
+        "county_fips",
+        "counties_served",
+        "population_served",
+        "sample_id",
+        "sample_collect_date",
+        "sample_type",
+        "sample_matrix",
+        "sample_location",
+        "flow_rate",
+        "concentration_method",
+        "pasteurized",
+        "pcr_type",
+        "extraction_method",
+        "major_lab_method",
+        "inhibition_detect",
+        "inhibition_adjust",
+        "ntc_amplify",
+        "pcr_target",
+        "pcr_gene_target_agg",
+        "pcr_target_avg_conc",
+        "pcr_target_units",
+        "lod_sewage",
+        "pcr_target_detect",
+        "pcr_target_avg_conc_lin",
+        "pcr_target_flowpop_lin",
+        "pcr_target_mic_lin",
+        "hum_frac_target_mic",
+        "hum_frac_mic_conc",
+        "hum_frac_mic_unit",
+        "rec_eff_percent",
+        "rec_eff_target_name",
+        "rec_eff_spike_matrix",
+        "rec_eff_spike_conc",
+        "date_updated"
+      ],
+      "revision_evidence": [
+        {
+          "source": "https://www.cdc.gov/nwss/rv/covid19-nationaltrend.html",
+          "statement": "Public wastewater data may change as more reports are received."
+        },
+        {
+          "source": "https://www.cdc.gov/nwss/data-methods.html",
+          "statement": "The August 2025 WVAL methodology update was applied to all historical data."
+        },
+        {
+          "source": "https://www.cdc.gov/nwss/data-methods.html",
+          "statement": "WVAL baselines are periodically recalculated and historical WVAL values are updated."
+        }
+      ]
+    },
+    "frozen_decision": {
+      "status_if_contract_unsatisfied": "blocked_missing_vintages",
+      "alert_model_may_run": false,
+      "current_snapshot_is_not_a_vintage_archive": true
+    }
+  },
+  "safety_boundary": [
+    "This packet audits public aggregate surveillance metadata and coverage only.",
+    "No diagnosis, treatment, clinical recommendation, outbreak declaration, or public-health alert is produced.",
+    "Country-level AMR reporting gaps are not interpreted as low resistance and are not filled with point estimates.",
+    "Wastewater sample dates are not treated as publication dates.",
+    "Passing this preflight does not solve catalog problem 057 or 058."
+  ]
+}
