@@ -1,0 +1,577 @@
+{
+  "as_of_date": "2026-07-30",
+  "catalog_query": {
+    "full_summary_statistics_available": 106,
+    "reported_total": 200,
+    "returned_studies": 200,
+    "url": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies?efo_trait=body%20height&show_child_traits=false&page=0&size=500"
+  },
+  "controls": {
+    "negative": {
+      "detail": "Three harmonised aggregate files without participant-level outcomes and cluster keys remain blocked.",
+      "passed": true
+    },
+    "positive": {
+      "detail": "Synthetic distinct-cohort/ancestry roster plus all seven individual-level fields is evaluation-ready.",
+      "passed": true
+    }
+  },
+  "decision": "blocked_no_individual_level_external_holdout",
+  "formal_checks": [
+    {
+      "detail": "Observed p052_height_accession_manifest_v1.",
+      "name": "schema_version",
+      "passed": true
+    },
+    {
+      "detail": "Only catalog problem #052 is included.",
+      "name": "scope_only_p052",
+      "passed": true
+    },
+    {
+      "detail": "332d1b42586c7b28a726925dc5f61c9233928e78",
+      "name": "protocol_commit",
+      "passed": true
+    },
+    {
+      "detail": "200 returned of 200 total.",
+      "name": "exact_trait_query_one_page",
+      "passed": true
+    },
+    {
+      "detail": "GCST90727327, GCST90727382, GCST90728584",
+      "name": "frozen_accessions_present",
+      "passed": true
+    },
+    {
+      "detail": "Observed 3.",
+      "name": "three_accessions",
+      "passed": true
+    },
+    {
+      "detail": "3/3 pass.",
+      "name": "all_accession_manifests_pass",
+      "passed": true
+    },
+    {
+      "detail": "CKB, G&H, UKB",
+      "name": "three_distinct_cohorts",
+      "passed": true
+    },
+    {
+      "detail": "East Asian, European, South Asian",
+      "name": "three_distinct_ancestry_categories",
+      "passed": true
+    },
+    {
+      "detail": "41861830, 41896352",
+      "name": "two_distinct_publications",
+      "passed": true
+    },
+    {
+      "detail": "GCST90727382, GCST90728584",
+      "name": "same_publication_pair_exposed",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"GCST90727327\": \"Height.residual\",\n  \"GCST90727382\": \"Standing height\",\n  \"GCST90728584\": \"Standing height (inverse-normalization-transformed)\"\n}",
+      "name": "response_scales_not_collapsed",
+      "passed": true
+    },
+    {
+      "detail": "200 exact-trait studies; 106 report full summary statistics.",
+      "name": "summary_query_inventory",
+      "passed": true
+    },
+    {
+      "detail": "0/7 required participant-level fields are public in the retained files.",
+      "name": "aggregate_only_holdout_fields",
+      "passed": true
+    },
+    {
+      "detail": "blocked_no_individual_level_external_holdout",
+      "name": "evaluation_blocked",
+      "passed": true
+    },
+    {
+      "detail": "No genotype-to-phenotype candidate was executed.",
+      "name": "candidate_not_executed",
+      "passed": true
+    },
+    {
+      "detail": "No additive polygenic-score denominator was executed.",
+      "name": "denominator_not_executed",
+      "passed": true
+    },
+    {
+      "detail": "Synthetic distinct-cohort/ancestry roster plus all seven individual-level fields is evaluation-ready.",
+      "name": "positive_control",
+      "passed": true
+    },
+    {
+      "detail": "Three harmonised aggregate files without participant-level outcomes and cluster keys remain blocked.",
+      "name": "negative_control",
+      "passed": true
+    },
+    {
+      "detail": "22 small source files retained.",
+      "name": "retained_sources",
+      "passed": true
+    }
+  ],
+  "interpretation_boundaries": [
+    "This packet audits public accessions, ancestry/cohort metadata, file interoperability, and leakage risk only.",
+    "It does not estimate an individual's height, ancestry, disease risk, or clinical outcome.",
+    "It does not establish causal genotype-to-phenotype mapping or portability of a polygenic score.",
+    "No re-identification, reproductive selection, clinical decision, wet-lab, or solved-frontier claim is permitted."
+  ],
+  "leakage_findings": [
+    {
+      "applies_to": [
+        "GCST90727382",
+        "GCST90728584"
+      ],
+      "finding": "UKB and CKB accessions come from one publication and are retrospective transfer sentinels, not unopened confirmation cohorts.",
+      "name": "same_publication_exposure"
+    },
+    {
+      "applies_to": [
+        "GCST90727327",
+        "GCST90727382",
+        "GCST90728584"
+      ],
+      "finding": "Standing height, inverse-normalized standing height, and residualized height require a frozen scale contract.",
+      "name": "response_scale_mismatch"
+    },
+    {
+      "applies_to": [
+        "GCST90727327",
+        "GCST90727382",
+        "GCST90728584"
+      ],
+      "finding": "Aggregate effect estimates cannot compute external calibration slope or incremental explained variance without participant-level scores and outcomes.",
+      "name": "summary_statistics_not_outcomes"
+    }
+  ],
+  "phenotype_transformations": {
+    "GCST90727327": "Height.residual",
+    "GCST90727382": "Standing height",
+    "GCST90728584": "Standing height (inverse-normalization-transformed)"
+  },
+  "question": "Do three ancestry-labelled height summary-statistic files constitute an external genotype-to-phenotype test, or only a source manifest?",
+  "required_holdout_field_matrix": {
+    "age and sex covariates": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "ancestry descriptor and assignment method": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "cohort and recruitment identifier": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "held-out genotype or frozen polygenic score": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "measured height on a declared scale": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "participant or family cluster key": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    },
+    "relatedness or household grouping for resampling": {
+      "available_for_participant_level_external_evaluation": false,
+      "reason": "The retained public artifact is aggregate summary statistics or study-level metadata, not participant-level evaluation data."
+    }
+  },
+  "roster": [
+    {
+      "accession": "GCST90728584",
+      "adjusted_covariates": [
+        "age",
+        "age2",
+        "sex",
+        "genotyping array",
+        "10 genetic PCs"
+      ],
+      "analysis_software": "BOLT-LMM v2.3.2",
+      "ancestry_category": "European",
+      "checks": {
+        "case_control_study_false": true,
+        "declared_harmonised_md5": true,
+        "explicit_terms_of_license": true,
+        "file_type": true,
+        "full_summary_stats_available": true,
+        "genome_assembly": true,
+        "harmonised": true,
+        "harmonised_artifact_accessible": true,
+        "harmonised_artifact_declared": true,
+        "interaction_study_excluded": true,
+        "minimum_snp_count": true,
+        "ontology_match": true,
+        "present_in_exact_trait_query": true,
+        "raw_artifact_accessible": true,
+        "raw_artifact_declared": true,
+        "single_discovery_ancestry_category": true,
+        "single_named_cohort": true,
+        "sorted": true
+      },
+      "cohort": "UKB",
+      "discovery_ancestry": [
+        "451921 European (U.K.)"
+      ],
+      "file_type": "GWAS-SSF v1.0",
+      "genome_assembly": "GRCh38",
+      "genotyping_technology": [
+        "Genome-wide genotyping array"
+      ],
+      "harmonised": true,
+      "harmonised_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 359596493,
+        "content_type": "application/x-gzip",
+        "etag": "\"156f01cd-6505fae363da5\"",
+        "filename": "GCST90728584.h.tsv.gz",
+        "last_modified": "Sun, 26 Apr 2026 16:42:15 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90728001-GCST90729000/GCST90728584/harmonised/GCST90728584.h.tsv.gz"
+      },
+      "harmonised_md5_declared": "958518564f3b9a787d8b6e594911290a",
+      "intended_role": "training_summary_statistics",
+      "interaction_metadata": {
+        "disease_trait": "Standing height (inverse-normalization-transformed)",
+        "gxe": false,
+        "gxg": false
+      },
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "passes_accession_manifest": true,
+      "publication_date": "2026 Apr 2",
+      "publication_title": "Genetics of skeletal proportions across two different populations.",
+      "pubmed_id": "41861830",
+      "raw_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 1014529359,
+        "content_type": "text/tab-separated-values",
+        "etag": "\"3c787d4f-6503e38c27228\"",
+        "filename": "GCST90728584.tsv",
+        "last_modified": "Sat, 25 Apr 2026 00:47:10 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90728001-GCST90729000/GCST90728584/GCST90728584.tsv"
+      },
+      "response_label": "Standing height (inverse-normalization-transformed)",
+      "sample_size": 451921,
+      "snp_count": 11164270,
+      "sorted": true,
+      "trait_description": [
+        "Standing height (inverse-normalization-transformed)"
+      ]
+    },
+    {
+      "accession": "GCST90727382",
+      "adjusted_covariates": [
+        "array_type",
+        "regional PC1-4",
+        "age",
+        "age^2"
+      ],
+      "analysis_software": "BOLT-LMM",
+      "ancestry_category": "East Asian",
+      "checks": {
+        "case_control_study_false": true,
+        "declared_harmonised_md5": true,
+        "explicit_terms_of_license": true,
+        "file_type": true,
+        "full_summary_stats_available": true,
+        "genome_assembly": true,
+        "harmonised": true,
+        "harmonised_artifact_accessible": true,
+        "harmonised_artifact_declared": true,
+        "interaction_study_excluded": true,
+        "minimum_snp_count": true,
+        "ontology_match": true,
+        "present_in_exact_trait_query": true,
+        "raw_artifact_accessible": true,
+        "raw_artifact_declared": true,
+        "single_discovery_ancestry_category": true,
+        "single_named_cohort": true,
+        "sorted": true
+      },
+      "cohort": "CKB",
+      "discovery_ancestry": [
+        "72471 East Asian (China)"
+      ],
+      "file_type": "GWAS-SSF v1.0",
+      "genome_assembly": "GRCh38",
+      "genotyping_technology": [
+        "Genome-wide genotyping array"
+      ],
+      "harmonised": true,
+      "harmonised_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 564195677,
+        "content_type": "application/x-gzip",
+        "etag": "\"21a0f15d-6505fafd97f67\"",
+        "filename": "GCST90727382.h.tsv.gz",
+        "last_modified": "Sun, 26 Apr 2026 16:42:42 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90727001-GCST90728000/GCST90727382/harmonised/GCST90727382.h.tsv.gz"
+      },
+      "harmonised_md5_declared": "b8ff47e2d9deb54c37d00eca9bc41853",
+      "intended_role": "transfer_summary_statistics_sentinel",
+      "interaction_metadata": {
+        "disease_trait": "Standing height",
+        "gxe": false,
+        "gxg": false
+      },
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "passes_accession_manifest": true,
+      "publication_date": "2026 Apr 2",
+      "publication_title": "Genetics of skeletal proportions across two different populations.",
+      "pubmed_id": "41861830",
+      "raw_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 462668392,
+        "content_type": "application/x-gzip",
+        "etag": "\"1b93c268-6503e107c49ec\"",
+        "filename": "GCST90727382.tsv.gz",
+        "last_modified": "Sat, 25 Apr 2026 00:35:55 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90727001-GCST90728000/GCST90727382/GCST90727382.tsv.gz"
+      },
+      "response_label": "Standing height",
+      "sample_size": 72471,
+      "snp_count": 21000000,
+      "sorted": true,
+      "trait_description": [
+        "Standing height"
+      ]
+    },
+    {
+      "accession": "GCST90727327",
+      "adjusted_covariates": [],
+      "analysis_software": "REGENIE",
+      "ancestry_category": "South Asian",
+      "checks": {
+        "case_control_study_false": true,
+        "declared_harmonised_md5": true,
+        "explicit_terms_of_license": true,
+        "file_type": true,
+        "full_summary_stats_available": true,
+        "genome_assembly": true,
+        "harmonised": true,
+        "harmonised_artifact_accessible": true,
+        "harmonised_artifact_declared": true,
+        "interaction_study_excluded": true,
+        "minimum_snp_count": true,
+        "ontology_match": true,
+        "present_in_exact_trait_query": true,
+        "raw_artifact_accessible": true,
+        "raw_artifact_declared": true,
+        "single_discovery_ancestry_category": true,
+        "single_named_cohort": true,
+        "sorted": true
+      },
+      "cohort": "G&H",
+      "discovery_ancestry": [
+        "33182 South Asian (U.K.)"
+      ],
+      "file_type": "GWAS-SSF v1.0",
+      "genome_assembly": "GRCh38",
+      "genotyping_technology": [
+        "Exome-wide sequencing"
+      ],
+      "harmonised": true,
+      "harmonised_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 40989573,
+        "content_type": "application/x-gzip",
+        "etag": "\"2717385-647e1c10823e8\"",
+        "filename": "GCST90727327.h.tsv.gz",
+        "last_modified": "Thu, 08 Jan 2026 15:06:32 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90727001-GCST90728000/GCST90727327/harmonised/GCST90727327.h.tsv.gz"
+      },
+      "harmonised_md5_declared": "9793287d07527d74e709b7e2ac8e47f8",
+      "intended_role": "transfer_summary_statistics_sentinel",
+      "interaction_metadata": {
+        "disease_trait": "Height",
+        "gxe": null,
+        "gxg": false
+      },
+      "license": "https://www.ebi.ac.uk/about/terms-of-use/",
+      "passes_accession_manifest": true,
+      "publication_date": "2026 Apr",
+      "publication_title": "Exome sequencing and analysis of 44,028 British South Asians enriched for high autozygosity.",
+      "pubmed_id": "41896352",
+      "raw_artifact": {
+        "accept_ranges": "bytes",
+        "content_length": 134216518,
+        "content_type": "text/tab-separated-values",
+        "etag": "\"7fffb46-65469df644da2\"",
+        "filename": "GCST90727327.tsv",
+        "last_modified": "Wed, 17 Jun 2026 02:32:36 GMT",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90727001-GCST90728000/GCST90727327/GCST90727327.tsv"
+      },
+      "response_label": "Height.residual",
+      "sample_size": 33182,
+      "snp_count": 1232514,
+      "sorted": true,
+      "trait_description": [
+        "Height"
+      ]
+    }
+  ],
+  "roster_summary": {
+    "accessions": 3,
+    "distinct_ancestry_categories": [
+      "East Asian",
+      "European",
+      "South Asian"
+    ],
+    "distinct_cohorts": [
+      "CKB",
+      "G&H",
+      "UKB"
+    ],
+    "distinct_publications": [
+      "41861830",
+      "41896352"
+    ],
+    "individual_level_external_evaluation_ready": false,
+    "same_publication_pair": [
+      "GCST90727382",
+      "GCST90728584"
+    ],
+    "summary_statistic_manifest_ready": true,
+    "total_discovery_sample_size": 557574
+  },
+  "schema_version": "p052_height_accession_manifest_result_v1",
+  "source": {
+    "benchmark": "benchmarks/P052_height_accession_manifest_v1.json",
+    "benchmark_sha256": "ec48c91b3cde1923ca7270853493391824dd307fe82c8ae82af7fc8e49cc683f",
+    "protocol_commit": "332d1b42586c7b28a726925dc5f61c9233928e78",
+    "python": "3.12.6",
+    "retained_files": [
+      {
+        "bytes": 573,
+        "path": "results/P052_height_accession_source_v1/GCST90727327_harmonised_index.html.gz",
+        "sha256": "058e579cf6f79dcce811d2a39b5f252c5c3abf755d174fc12bdf7fd76d455fc9"
+      },
+      {
+        "bytes": 1410,
+        "path": "results/P052_height_accession_source_v1/GCST90727327_harmonised_meta.yaml.gz",
+        "sha256": "3972984675ebc1b7633a793ed31c7527342353cd07080493f2f39fffb15f42f4"
+      },
+      {
+        "bytes": 1354,
+        "path": "results/P052_height_accession_source_v1/GCST90727327_raw_meta.yaml.gz",
+        "sha256": "417b69c1738201beaebf4abd310ad0aa76edc4bc0cc397e8fe656b92fed1df29"
+      },
+      {
+        "bytes": 531,
+        "path": "results/P052_height_accession_source_v1/GCST90727327_root_index.html.gz",
+        "sha256": "b2878114169274068d22bb372ad73019905fe0a6092810ed5461d1c3b124123d"
+      },
+      {
+        "bytes": 561,
+        "path": "results/P052_height_accession_source_v1/GCST90727327_study.json.gz",
+        "sha256": "cab23db04fefa4339e32fe71047849f577a090124e1dbe8db9db5e09ec5f7ae6"
+      },
+      {
+        "bytes": 563,
+        "path": "results/P052_height_accession_source_v1/GCST90727382_harmonised_index.html.gz",
+        "sha256": "95fd06db71238e76f41185589087ba79fb911c581ac9ffb6b7f5e780cfdee7ad"
+      },
+      {
+        "bytes": 579,
+        "path": "results/P052_height_accession_source_v1/GCST90727382_harmonised_meta.yaml.gz",
+        "sha256": "c4d45210eab24e2bbc2766aa59323ae2f680ba68504ae2550fca07715b7ce4c6"
+      },
+      {
+        "bytes": 594,
+        "path": "results/P052_height_accession_source_v1/GCST90727382_raw_meta.yaml.gz",
+        "sha256": "dd2c97e8e3819112ae6f64e016bcb68e7a14745fd4ddc4038b0ac3a41d5053e0"
+      },
+      {
+        "bytes": 545,
+        "path": "results/P052_height_accession_source_v1/GCST90727382_root_index.html.gz",
+        "sha256": "dc10a7ea1bb5cb190c34e1bc9cbca08bfc15b60fa23a1396289696a93c7f79fc"
+      },
+      {
+        "bytes": 568,
+        "path": "results/P052_height_accession_source_v1/GCST90727382_study.json.gz",
+        "sha256": "2cc36b0b30e2c21c4b7561d8e821891efea0e3c17c65a9ccc25e60904662d66b"
+      },
+      {
+        "bytes": 563,
+        "path": "results/P052_height_accession_source_v1/GCST90728584_harmonised_index.html.gz",
+        "sha256": "07898286b45900068291b461e3ee32abc7ac476933d4f62e0797f7cdfa6f3774"
+      },
+      {
+        "bytes": 552,
+        "path": "results/P052_height_accession_source_v1/GCST90728584_harmonised_meta.yaml.gz",
+        "sha256": "21ca7065d00d7da1785a21323f673a98e8145cb75715a76b9f93923a85f14bb3"
+      },
+      {
+        "bytes": 561,
+        "path": "results/P052_height_accession_source_v1/GCST90728584_raw_meta.yaml.gz",
+        "sha256": "6ca771633d8204715cd44f274ea300ab5f9060a06edca86da99d37d28138aea7"
+      },
+      {
+        "bytes": 539,
+        "path": "results/P052_height_accession_source_v1/GCST90728584_root_index.html.gz",
+        "sha256": "06e6ead46f38099ae0b7a7605444cafb1bc1d7892da466cd3a751ea60ad0ae94"
+      },
+      {
+        "bytes": 588,
+        "path": "results/P052_height_accession_source_v1/GCST90728584_study.json.gz",
+        "sha256": "925eaa6e651e042b6d6a501a0e3da9f407caa589cd7669ea7883b95cfbdeb7aa"
+      },
+      {
+        "bytes": 609,
+        "path": "results/P052_height_accession_source_v1/artifact_headers.json.gz",
+        "sha256": "e0f7d32d29174605f2ce23c2359375e58fbb1b32f98a864fee36fb7d1ce4b602"
+      },
+      {
+        "bytes": 16468,
+        "path": "results/P052_height_accession_source_v1/catalog_body_height.json.gz",
+        "sha256": "17a7de3a406a437b3f761913b1c43de5a1132ed75219bb5e44802f2a54684a20"
+      },
+      {
+        "bytes": 4411,
+        "path": "results/P052_height_accession_source_v1/docs_api_v2.html.gz",
+        "sha256": "69961b84f49e377f446bf599369f198f2741e773be7d66fb0627c7d6512cae88"
+      },
+      {
+        "bytes": 4438,
+        "path": "results/P052_height_accession_source_v1/docs_population_descriptors.html.gz",
+        "sha256": "81c49e4e1d849703352430512426c8de147212ce9133710df7eb70e2615567e4"
+      },
+      {
+        "bytes": 4438,
+        "path": "results/P052_height_accession_source_v1/docs_summary_statistics.html.gz",
+        "sha256": "81c49e4e1d849703352430512426c8de147212ce9133710df7eb70e2615567e4"
+      },
+      {
+        "bytes": 1170,
+        "path": "results/P052_height_accession_source_v1/pubmed_41861830.json.gz",
+        "sha256": "b31165510b2aaf78894fd431b63a839989247591d4f3ffb35aacfd2b79363394"
+      },
+      {
+        "bytes": 1281,
+        "path": "results/P052_height_accession_source_v1/pubmed_41896352.json.gz",
+        "sha256": "9309c790169fb9b91c840a9a5067ed236969317e7fc2749b0d6f7dd3e765fa93"
+      }
+    ],
+    "source_directory": "results/P052_height_accession_source_v1",
+    "tool": "tools/p052_height_accession_manifest.py"
+  },
+  "status": "pass",
+  "summary": {
+    "candidate_model_executed": false,
+    "check_count": 20,
+    "failed_checks": 0,
+    "passed_checks": 20,
+    "polygenic_score_denominator_executed": false
+  }
+}

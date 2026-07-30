@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "detail": "Only catalog problem #052 is included.",
+      "name": "scope_only_p052",
+      "passed": true
+    },
+    {
+      "detail": "200 rows.",
+      "name": "complete_query_replayed",
+      "passed": true
+    },
+    {
+      "detail": "106 rows.",
+      "name": "full_summary_count_replayed",
+      "passed": true
+    },
+    {
+      "detail": "GCST90728584, GCST90727382, GCST90727327",
+      "name": "frozen_ids_exact",
+      "passed": true
+    },
+    {
+      "detail": "3 rows.",
+      "name": "independent_roster_exact",
+      "passed": true
+    },
+    {
+      "detail": "3/3 pass.",
+      "name": "accession_metadata_ready",
+      "passed": true
+    },
+    {
+      "detail": "cohorts=['CKB', 'G&H', 'UKB']; ancestry=['East Asian', 'European', 'South Asian']",
+      "name": "three_cohorts_and_ancestries",
+      "passed": true
+    },
+    {
+      "detail": "557574",
+      "name": "sample_total_replayed",
+      "passed": true
+    },
+    {
+      "detail": "41861830, 41896352",
+      "name": "publication_grouping_replayed",
+      "passed": true
+    },
+    {
+      "detail": "0 participant-level fields marked available.",
+      "name": "all_holdout_fields_absent",
+      "passed": true
+    },
+    {
+      "detail": "blocked_no_individual_level_external_holdout",
+      "name": "blocked_without_execution",
+      "passed": true
+    },
+    {
+      "detail": "22 files.",
+      "name": "retained_source_hashes_exact",
+      "passed": true
+    }
+  ],
+  "decision_replayed": "blocked_no_individual_level_external_holdout",
+  "reconstructed_query": {
+    "full_summary_statistics_count": 106,
+    "study_count": 200
+  },
+  "reconstructed_roster": [
+    {
+      "accession": "GCST90728584",
+      "ancestry_category": "European",
+      "cohort": "UKB",
+      "metadata_ready": true,
+      "publication": "41861830",
+      "response_label": "Standing height (inverse-normalization-transformed)",
+      "role": "training_summary_statistics",
+      "sample_size": 451921,
+      "snp_count": 11164270
+    },
+    {
+      "accession": "GCST90727382",
+      "ancestry_category": "East Asian",
+      "cohort": "CKB",
+      "metadata_ready": true,
+      "publication": "41861830",
+      "response_label": "Standing height",
+      "role": "transfer_summary_statistics_sentinel",
+      "sample_size": 72471,
+      "snp_count": 21000000
+    },
+    {
+      "accession": "GCST90727327",
+      "ancestry_category": "South Asian",
+      "cohort": "G&H",
+      "metadata_ready": true,
+      "publication": "41896352",
+      "response_label": "Height.residual",
+      "role": "transfer_summary_statistics_sentinel",
+      "sample_size": 33182,
+      "snp_count": 1232514
+    }
+  ],
+  "reconstructed_sample_total": 557574,
+  "schema_version": "p052_height_accession_manifest_audit_v1",
+  "source": {
+    "benchmark": "benchmarks/P052_height_accession_manifest_v1.json",
+    "benchmark_sha256": "ec48c91b3cde1923ca7270853493391824dd307fe82c8ae82af7fc8e49cc683f",
+    "python": "3.12.6",
+    "result": "results/P052_height_accession_manifest_v1.json",
+    "result_sha256": "b44398ae0eff1548960961ecbad23d2cb483e9769dfa0004fe2cf991f12f12a1",
+    "tool": "tools/p052_height_accession_audit.py"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 12,
+    "failed_checks": 0,
+    "maximum_numeric_difference": 0,
+    "passed_checks": 12
+  }
+}
