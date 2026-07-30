@@ -1,0 +1,5324 @@
+{
+  "checks": [
+    {
+      "detail": "Observed p057_amr_baseline_eval_v1.",
+      "name": "schema_version",
+      "passed": true
+    },
+    {
+      "detail": "Only catalog problem #057 is included.",
+      "name": "exact_problem_scope",
+      "passed": true
+    },
+    {
+      "detail": "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/p049-p060/benchmarks/P057_AMR_baseline_eval_v1.json",
+      "name": "benchmark_is_current_file",
+      "passed": true
+    },
+    {
+      "detail": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9",
+      "name": "source_snapshot_hash",
+      "passed": true
+    },
+    {
+      "detail": "d1829f585d9e8657272c7fe1c1a5dc614e63ff01833402e1b34b76ba564ff877",
+      "name": "upstream_preflight_hash",
+      "passed": true
+    },
+    {
+      "detail": "pass / coverage_matrix_ready",
+      "name": "upstream_preflight_status",
+      "passed": true
+    },
+    {
+      "detail": "AMR_INFECT_ECOLI, AMR_INFECT_MRSA",
+      "name": "frozen_indicator_set",
+      "passed": true
+    },
+    {
+      "detail": "All targets are 2023.",
+      "name": "holdout_year_is_2023",
+      "passed": true
+    },
+    {
+      "detail": "No training row is later than 2022.",
+      "name": "training_stops_before_holdout",
+      "passed": true
+    },
+    {
+      "detail": "Every row has at least 3 observed training years.",
+      "name": "minimum_training_rows",
+      "passed": true
+    },
+    {
+      "detail": "Observed 141 rows with the frozen indicator/stratum counts.",
+      "name": "frozen_eligibility_counts",
+      "passed": true
+    },
+    {
+      "detail": "dense, partial",
+      "name": "eligible_strata_only",
+      "passed": true
+    },
+    {
+      "detail": "The frozen lowest eligible stratum is partial.",
+      "name": "partial_is_lowest_eligible_stratum",
+      "passed": true
+    },
+    {
+      "detail": "Every non-null matrix value matches the hashed source snapshot.",
+      "name": "matrix_matches_source_snapshot",
+      "passed": true
+    },
+    {
+      "detail": "Both baselines score the same 141 rows.",
+      "name": "same_rows_for_both_baselines",
+      "passed": true
+    },
+    {
+      "detail": "All predictions and errors are finite.",
+      "name": "finite_outputs",
+      "passed": true
+    },
+    {
+      "detail": "All predictions lie in [0, 100].",
+      "name": "bounded_predictions",
+      "passed": true
+    },
+    {
+      "detail": "Error 0.000e+00 pp.",
+      "name": "positive_control",
+      "passed": true
+    },
+    {
+      "detail": "Difference 0.000e+00 pp.",
+      "name": "negative_control",
+      "passed": true
+    },
+    {
+      "detail": "Observed 9 nonempty slices.",
+      "name": "all_declared_slices_present",
+      "passed": true
+    },
+    {
+      "detail": "This packet establishes denominators only.",
+      "name": "candidate_not_executed",
+      "passed": true
+    },
+    {
+      "detail": "Eligibility uses holdout presence, never the held-out value.",
+      "name": "no_post_outcome_exclusions",
+      "passed": true
+    }
+  ],
+  "claim_boundary": [
+    "The evaluation is conditional on entities that reported a 2023 value and had at least three observed training years.",
+    "It does not estimate performance for non-reporting entities or identify a 245-entity global mean.",
+    "The rates are not individual-level outcomes and do not support patient, prescribing, or treatment recommendations.",
+    "No candidate model, causal claim, clinical action, pathogen manipulation, or solved-frontier claim is produced."
+  ],
+  "controls": {
+    "negative_constant": {
+      "absolute_difference_pp": 0.0,
+      "country_logit_percent": 42.0,
+      "locf_percent": 42.0,
+      "passed": true
+    },
+    "positive_logit_linear": {
+      "absolute_error_pp": 0.0,
+      "expected_percent": 53.494294515821,
+      "observed_percent": 53.494294515821,
+      "passed": true
+    }
+  },
+  "environment": {
+    "python": "3.12.6"
+  },
+  "rows": [
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.038536179539,
+      "entity": "Argentina",
+      "errors_percent": {
+        "country_logit_absolute": 1.0167352384,
+        "country_logit_signed": 1.0167352384,
+        "locf_absolute": 1.13,
+        "locf_signed": 1.13
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "arG",
+      "m49": "032",
+      "observed_percent": 21.34,
+      "predictions_percent": {
+        "country_logit": 22.3567352384,
+        "locf": 22.47
+      },
+      "training_values_percent": [
+        18.4,
+        20.0,
+        18.98,
+        21.21,
+        19.76,
+        22.47
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.024206459785,
+      "entity": "Australia",
+      "errors_percent": {
+        "country_logit_absolute": 0.1241258261,
+        "country_logit_signed": -0.1241258261,
+        "locf_absolute": 0.28,
+        "locf_signed": 0.28
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "AUS",
+      "m49": "036",
+      "observed_percent": 12.4,
+      "predictions_percent": {
+        "country_logit": 12.2758741739,
+        "locf": 12.68
+      },
+      "training_values_percent": [
+        13.29,
+        13.36,
+        12.46,
+        12.68
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.045839366918,
+      "entity": "Austria",
+      "errors_percent": {
+        "country_logit_absolute": 8.3105378109,
+        "country_logit_signed": -8.3105378109,
+        "locf_absolute": 8.01,
+        "locf_signed": -8.01
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "AUT",
+      "m49": "040",
+      "observed_percent": 16.14,
+      "predictions_percent": {
+        "country_logit": 7.8294621891,
+        "locf": 8.13
+      },
+      "training_values_percent": [
+        9.6,
+        10.2,
+        9.06,
+        9.43,
+        8.16,
+        8.13
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.132350839857,
+      "entity": "Bahrain",
+      "errors_percent": {
+        "country_logit_absolute": 8.4493894467,
+        "country_logit_signed": 8.4493894467,
+        "locf_absolute": 5.82,
+        "locf_signed": 5.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BHR",
+      "m49": "048",
+      "observed_percent": 57.14,
+      "predictions_percent": {
+        "country_logit": 65.5893894467,
+        "locf": 62.96
+      },
+      "training_values_percent": [
+        50.0,
+        43.2,
+        53.81,
+        59.06,
+        57.81,
+        62.96
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.228452969002,
+      "entity": "Bangladesh",
+      "errors_percent": {
+        "country_logit_absolute": 14.1923797022,
+        "country_logit_signed": 14.1923797022,
+        "locf_absolute": 10.83,
+        "locf_signed": 10.83
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BGD",
+      "m49": "050",
+      "observed_percent": 79.17,
+      "predictions_percent": {
+        "country_logit": 93.3623797022,
+        "locf": 90.0
+      },
+      "training_values_percent": [
+        70.0,
+        93.1,
+        90.0
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.082411272848,
+      "entity": "Belgium",
+      "errors_percent": {
+        "country_logit_absolute": 2.5684583298,
+        "country_logit_signed": -2.5684583298,
+        "locf_absolute": 1.54,
+        "locf_signed": -1.54
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BEL",
+      "m49": "056",
+      "observed_percent": 10.44,
+      "predictions_percent": {
+        "country_logit": 7.8715416702,
+        "locf": 8.9
+      },
+      "training_values_percent": [
+        10.33,
+        8.33,
+        8.9
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.044927817812,
+      "entity": "Bosnia and Herzegovina",
+      "errors_percent": {
+        "country_logit_absolute": 4.887876506,
+        "country_logit_signed": 4.887876506,
+        "locf_absolute": 4.52,
+        "locf_signed": 4.52
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BIH",
+      "m49": "070",
+      "observed_percent": 22.29,
+      "predictions_percent": {
+        "country_logit": 27.177876506,
+        "locf": 26.81
+      },
+      "training_values_percent": [
+        22.7,
+        24.9,
+        20.2,
+        20.34,
+        23.46,
+        28.86,
+        26.81
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.209266209225,
+      "entity": "Brazil",
+      "errors_percent": {
+        "country_logit_absolute": 6.4798429865,
+        "country_logit_signed": 6.4798429865,
+        "locf_absolute": 1.88,
+        "locf_signed": 1.88
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BRA",
+      "m49": "076",
+      "observed_percent": 34.38,
+      "predictions_percent": {
+        "country_logit": 40.8598429865,
+        "locf": 36.26
+      },
+      "training_values_percent": [
+        15.9,
+        27.74,
+        32.46,
+        25.58,
+        36.26
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.073285443675,
+      "entity": "Brunei Darussalam",
+      "errors_percent": {
+        "country_logit_absolute": 10.6333664003,
+        "country_logit_signed": -10.6333664003,
+        "locf_absolute": 8.35,
+        "locf_signed": -8.35
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BRN",
+      "m49": "096",
+      "observed_percent": 23.95,
+      "predictions_percent": {
+        "country_logit": 13.3166335997,
+        "locf": 15.6
+      },
+      "training_values_percent": [
+        17.24,
+        17.3,
+        12.58,
+        15.6
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.179838100077,
+      "entity": "Myanmar",
+      "errors_percent": {
+        "country_logit_absolute": 9.3067604549,
+        "country_logit_signed": 9.3067604549,
+        "locf_absolute": 9.66,
+        "locf_signed": 9.66
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MMR",
+      "m49": "104",
+      "observed_percent": 81.25,
+      "predictions_percent": {
+        "country_logit": 90.5567604549,
+        "locf": 90.91
+      },
+      "training_values_percent": [
+        84.91,
+        77.78,
+        80.56,
+        90.91
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.018152453289,
+      "entity": "Cambodia",
+      "errors_percent": {
+        "country_logit_absolute": 2.8505232093,
+        "country_logit_signed": 2.8505232093,
+        "locf_absolute": 2.43,
+        "locf_signed": 2.43
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "KHM",
+      "m49": "116",
+      "observed_percent": 71.08,
+      "predictions_percent": {
+        "country_logit": 73.9305232093,
+        "locf": 73.51
+      },
+      "training_values_percent": [
+        72.8,
+        71.03,
+        73.72,
+        73.51
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.101873895418,
+      "entity": "Sri Lanka",
+      "errors_percent": {
+        "country_logit_absolute": 6.1826299557,
+        "country_logit_signed": -6.1826299557,
+        "locf_absolute": 1.74,
+        "locf_signed": -1.74
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "LKA",
+      "m49": "144",
+      "observed_percent": 60.5,
+      "predictions_percent": {
+        "country_logit": 54.3173700443,
+        "locf": 58.76
+      },
+      "training_values_percent": [
+        67.67,
+        63.0,
+        61.92,
+        57.02,
+        58.76
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.026000040333,
+      "entity": "Croatia",
+      "errors_percent": {
+        "country_logit_absolute": 3.6355299573,
+        "country_logit_signed": -3.6355299573,
+        "locf_absolute": 5.07,
+        "locf_signed": -5.07
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "HRV",
+      "m49": "191",
+      "observed_percent": 21.52,
+      "predictions_percent": {
+        "country_logit": 17.8844700427,
+        "locf": 16.45
+      },
+      "training_values_percent": [
+        16.5,
+        14.8,
+        15.58,
+        18.24,
+        18.18,
+        16.45
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.117189484704,
+      "entity": "Cyprus",
+      "errors_percent": {
+        "country_logit_absolute": 5.3889453028,
+        "country_logit_signed": 5.3889453028,
+        "locf_absolute": 0.05,
+        "locf_signed": -0.05
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "CYP",
+      "m49": "196",
+      "observed_percent": 40.57,
+      "predictions_percent": {
+        "country_logit": 45.9589453028,
+        "locf": 40.52
+      },
+      "training_values_percent": [
+        30.8,
+        37.1,
+        19.57,
+        51.61,
+        41.03,
+        40.52
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.008481836346,
+      "entity": "Czechia",
+      "errors_percent": {
+        "country_logit_absolute": 2.4537285598,
+        "country_logit_signed": -2.4537285598,
+        "locf_absolute": 2.06,
+        "locf_signed": -2.06
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "CZE",
+      "m49": "203",
+      "observed_percent": 16.51,
+      "predictions_percent": {
+        "country_logit": 14.0562714402,
+        "locf": 14.45
+      },
+      "training_values_percent": [
+        14.2,
+        15.2,
+        15.36,
+        13.09,
+        14.31,
+        14.45
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.003696690838,
+      "entity": "Denmark",
+      "errors_percent": {
+        "country_logit_absolute": 0.7298139661,
+        "country_logit_signed": 0.7298139661,
+        "locf_absolute": 1.05,
+        "locf_signed": 1.05
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "DNK",
+      "m49": "208",
+      "observed_percent": 6.27,
+      "predictions_percent": {
+        "country_logit": 6.9998139661,
+        "locf": 7.32
+      },
+      "training_values_percent": [
+        7.27,
+        6.31,
+        7.32
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.932368660452,
+      "entity": "Ethiopia",
+      "errors_percent": {
+        "country_logit_absolute": 40.8217044974,
+        "country_logit_signed": -40.8217044974,
+        "locf_absolute": 3.26,
+        "locf_signed": -3.26
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "ETH",
+      "m49": "231",
+      "observed_percent": 84.21,
+      "predictions_percent": {
+        "country_logit": 43.3882955026,
+        "locf": 80.95
+      },
+      "training_values_percent": [
+        100.0,
+        65.0,
+        86.21,
+        80.95
+      ],
+      "training_years": [
+        2018,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.002883126785,
+      "entity": "Finland",
+      "errors_percent": {
+        "country_logit_absolute": 1.9675543926,
+        "country_logit_signed": -1.9675543926,
+        "locf_absolute": 2.03,
+        "locf_signed": -2.03
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "FIN",
+      "m49": "246",
+      "observed_percent": 8.7,
+      "predictions_percent": {
+        "country_logit": 6.7324456074,
+        "locf": 6.67
+      },
+      "training_values_percent": [
+        6.66,
+        6.14,
+        7.59,
+        7.79,
+        6.62,
+        6.32,
+        6.67
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.089902126687,
+      "entity": "Georgia",
+      "errors_percent": {
+        "country_logit_absolute": 3.8966220192,
+        "country_logit_signed": -3.8966220192,
+        "locf_absolute": 2.86,
+        "locf_signed": 2.86
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "GEO",
+      "m49": "268",
+      "observed_percent": 43.59,
+      "predictions_percent": {
+        "country_logit": 39.6933779808,
+        "locf": 46.45
+      },
+      "training_values_percent": [
+        47.06,
+        55.77,
+        56.58,
+        43.65,
+        35.37,
+        46.45
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.040575726974,
+      "entity": "occupied Palestinian territory, including east Jerusalem",
+      "errors_percent": {
+        "country_logit_absolute": 3.551473449,
+        "country_logit_signed": 3.551473449,
+        "locf_absolute": 0.81,
+        "locf_signed": 0.81
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "PSE",
+      "m49": "275",
+      "observed_percent": 45.42,
+      "predictions_percent": {
+        "country_logit": 48.971473449,
+        "locf": 46.23
+      },
+      "training_values_percent": [
+        44.22,
+        47.37,
+        46.23
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.056921317618,
+      "entity": "Germany",
+      "errors_percent": {
+        "country_logit_absolute": 0.9757409143,
+        "country_logit_signed": -0.9757409143,
+        "locf_absolute": 0.36,
+        "locf_signed": -0.36
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "DEU",
+      "m49": "276",
+      "observed_percent": 9.77,
+      "predictions_percent": {
+        "country_logit": 8.7942590857,
+        "locf": 9.41
+      },
+      "training_values_percent": [
+        11.56,
+        12.28,
+        12.18,
+        11.46,
+        10.2,
+        8.96,
+        9.41
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.826102701379,
+      "entity": "Ghana",
+      "errors_percent": {
+        "country_logit_absolute": 4.6838030804,
+        "country_logit_signed": 4.6838030804,
+        "locf_absolute": 0.25,
+        "locf_signed": -0.25
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "GHA",
+      "m49": "288",
+      "observed_percent": 90.63,
+      "predictions_percent": {
+        "country_logit": 95.3138030804,
+        "locf": 90.38
+      },
+      "training_values_percent": [
+        64.29,
+        77.78,
+        90.38
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.067166568813,
+      "entity": "Greece",
+      "errors_percent": {
+        "country_logit_absolute": 2.9176691283,
+        "country_logit_signed": 2.9176691283,
+        "locf_absolute": 1.15,
+        "locf_signed": 1.15
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "GRC",
+      "m49": "300",
+      "observed_percent": 22.86,
+      "predictions_percent": {
+        "country_logit": 25.7776691283,
+        "locf": 24.01
+      },
+      "training_values_percent": [
+        18.3,
+        19.33,
+        21.73,
+        24.46,
+        21.93,
+        24.01
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.025662885844,
+      "entity": "India",
+      "errors_percent": {
+        "country_logit_absolute": 1.0545576706,
+        "country_logit_signed": 1.0545576706,
+        "locf_absolute": 2.57,
+        "locf_signed": -2.57
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "IND",
+      "m49": "356",
+      "observed_percent": 80.1,
+      "predictions_percent": {
+        "country_logit": 81.1545576706,
+        "locf": 77.53
+      },
+      "training_values_percent": [
+        75.11,
+        78.83,
+        80.81,
+        86.81,
+        77.59,
+        77.53
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.016181466446,
+      "entity": "Indonesia",
+      "errors_percent": {
+        "country_logit_absolute": 1.1774213043,
+        "country_logit_signed": -1.1774213043,
+        "locf_absolute": 2.2,
+        "locf_signed": -2.2
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "IDN",
+      "m49": "360",
+      "observed_percent": 71.93,
+      "predictions_percent": {
+        "country_logit": 70.7525786957,
+        "locf": 69.73
+      },
+      "training_values_percent": [
+        71.88,
+        70.14,
+        75.63,
+        71.1,
+        69.73
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.171396730329,
+      "entity": "Iran (Islamic Republic of)",
+      "errors_percent": {
+        "country_logit_absolute": 11.2487293572,
+        "country_logit_signed": -11.2487293572,
+        "locf_absolute": 1.48,
+        "locf_signed": -1.48
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "IRN",
+      "m49": "364",
+      "observed_percent": 72.12,
+      "predictions_percent": {
+        "country_logit": 60.8712706428,
+        "locf": 70.64
+      },
+      "training_values_percent": [
+        90.0,
+        65.54,
+        70.32,
+        69.23,
+        70.25,
+        70.64
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.562996180627,
+      "entity": "Iraq",
+      "errors_percent": {
+        "country_logit_absolute": 13.9750861435,
+        "country_logit_signed": -13.9750861435,
+        "locf_absolute": 2.06,
+        "locf_signed": -2.06
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "IRQ",
+      "m49": "368",
+      "observed_percent": 87.77,
+      "predictions_percent": {
+        "country_logit": 73.7949138565,
+        "locf": 85.71
+      },
+      "training_values_percent": [
+        94.87,
+        85.51,
+        85.71
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.052656294409,
+      "entity": "Ireland",
+      "errors_percent": {
+        "country_logit_absolute": 1.1531654219,
+        "country_logit_signed": -1.1531654219,
+        "locf_absolute": 0.26,
+        "locf_signed": -0.26
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "IRL",
+      "m49": "372",
+      "observed_percent": 10.77,
+      "predictions_percent": {
+        "country_logit": 9.6168345781,
+        "locf": 10.51
+      },
+      "training_values_percent": [
+        11.98,
+        12.88,
+        12.53,
+        10.64,
+        9.81,
+        10.51
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.065962096823,
+      "entity": "Italy",
+      "errors_percent": {
+        "country_logit_absolute": 5.4985372551,
+        "country_logit_signed": -5.4985372551,
+        "locf_absolute": 3.48,
+        "locf_signed": -3.48
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "ITA",
+      "m49": "380",
+      "observed_percent": 29.98,
+      "predictions_percent": {
+        "country_logit": 24.4814627449,
+        "locf": 26.5
+      },
+      "training_values_percent": [
+        28.7,
+        33.61,
+        28.66,
+        24.6,
+        26.5
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.015558151848,
+      "entity": "Japan",
+      "errors_percent": {
+        "country_logit_absolute": 0.9417345868,
+        "country_logit_signed": 0.9417345868,
+        "locf_absolute": 0.13,
+        "locf_signed": 0.13
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "JPN",
+      "m49": "392",
+      "observed_percent": 20.26,
+      "predictions_percent": {
+        "country_logit": 21.2017345868,
+        "locf": 20.39
+      },
+      "training_values_percent": [
+        18.94,
+        19.62,
+        20.12,
+        20.95,
+        20.66,
+        20.64,
+        20.39
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.065843011528,
+      "entity": "Jordan",
+      "errors_percent": {
+        "country_logit_absolute": 9.5900961322,
+        "country_logit_signed": -9.5900961322,
+        "locf_absolute": 9.82,
+        "locf_signed": -9.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "JOR",
+      "m49": "400",
+      "observed_percent": 67.05,
+      "predictions_percent": {
+        "country_logit": 57.4599038678,
+        "locf": 57.23
+      },
+      "training_values_percent": [
+        61.9,
+        66.67,
+        64.52,
+        60.42,
+        57.23
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.028072150025,
+      "entity": "Republic of Korea",
+      "errors_percent": {
+        "country_logit_absolute": 0.3484291177,
+        "country_logit_signed": 0.3484291177,
+        "locf_absolute": 0.08,
+        "locf_signed": -0.08
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "KOR",
+      "m49": "410",
+      "observed_percent": 38.92,
+      "predictions_percent": {
+        "country_logit": 39.2684291177,
+        "locf": 38.84
+      },
+      "training_values_percent": [
+        35.33,
+        32.39,
+        38.63,
+        37.08,
+        37.66,
+        36.63,
+        38.84
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.188614615327,
+      "entity": "Kosovo (in accordance with UN Security Council Resolution 1244 (1999))",
+      "errors_percent": {
+        "country_logit_absolute": 14.3307338092,
+        "country_logit_signed": 14.3307338092,
+        "locf_absolute": 0.96,
+        "locf_signed": 0.96
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "XKX",
+      "m49": "412",
+      "observed_percent": 37.5,
+      "predictions_percent": {
+        "country_logit": 51.8307338092,
+        "locf": 38.46
+      },
+      "training_values_percent": [
+        30.0,
+        60.0,
+        38.46
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.115648152889,
+      "entity": "Kuwait",
+      "errors_percent": {
+        "country_logit_absolute": 11.8457678231,
+        "country_logit_signed": -11.8457678231,
+        "locf_absolute": 7.45,
+        "locf_signed": -7.45
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "KWT",
+      "m49": "414",
+      "observed_percent": 52.96,
+      "predictions_percent": {
+        "country_logit": 41.1142321769,
+        "locf": 45.51
+      },
+      "training_values_percent": [
+        51.28,
+        43.66,
+        45.51
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.043193326592,
+      "entity": "Lao People's Democratic Republic",
+      "errors_percent": {
+        "country_logit_absolute": 3.5027973849,
+        "country_logit_signed": -3.5027973849,
+        "locf_absolute": 2.95,
+        "locf_signed": -2.95
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "LAO",
+      "m49": "418",
+      "observed_percent": 55.56,
+      "predictions_percent": {
+        "country_logit": 52.0572026151,
+        "locf": 52.61
+      },
+      "training_values_percent": [
+        45.28,
+        45.45,
+        50.0,
+        50.85,
+        45.52,
+        52.61
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.048310920675,
+      "entity": "Latvia",
+      "errors_percent": {
+        "country_logit_absolute": 4.6281029022,
+        "country_logit_signed": -4.6281029022,
+        "locf_absolute": 6.77,
+        "locf_signed": -6.77
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "LVA",
+      "m49": "428",
+      "observed_percent": 22.94,
+      "predictions_percent": {
+        "country_logit": 18.3118970978,
+        "locf": 16.17
+      },
+      "training_values_percent": [
+        28.24,
+        18.02,
+        20.4,
+        18.08,
+        33.33,
+        18.91,
+        16.17
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.077134594721,
+      "entity": "Lithuania",
+      "errors_percent": {
+        "country_logit_absolute": 1.3395893881,
+        "country_logit_signed": 1.3395893881,
+        "locf_absolute": 0.16,
+        "locf_signed": -0.16
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "LTU",
+      "m49": "440",
+      "observed_percent": 17.19,
+      "predictions_percent": {
+        "country_logit": 18.5295893881,
+        "locf": 17.03
+      },
+      "training_values_percent": [
+        9.7,
+        12.5,
+        15.33,
+        17.53,
+        16.35,
+        13.29,
+        17.03
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.119869301994,
+      "entity": "Luxembourg",
+      "errors_percent": {
+        "country_logit_absolute": 2.5151595113,
+        "country_logit_signed": -2.5151595113,
+        "locf_absolute": 0.84,
+        "locf_signed": -0.84
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "LUX",
+      "m49": "442",
+      "observed_percent": 11.71,
+      "predictions_percent": {
+        "country_logit": 9.1948404887,
+        "locf": 10.87
+      },
+      "training_values_percent": [
+        15.65,
+        10.75,
+        11.34,
+        10.87
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.19100817486,
+      "entity": "Malawi",
+      "errors_percent": {
+        "country_logit_absolute": 37.5587100318,
+        "country_logit_signed": -37.5587100318,
+        "locf_absolute": 24.21,
+        "locf_signed": -24.21
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MWI",
+      "m49": "454",
+      "observed_percent": 84.21,
+      "predictions_percent": {
+        "country_logit": 46.6512899682,
+        "locf": 60.0
+      },
+      "training_values_percent": [
+        78.52,
+        71.91,
+        56.46,
+        60.0
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.045879862384,
+      "entity": "Malaysia",
+      "errors_percent": {
+        "country_logit_absolute": 4.1917689834,
+        "country_logit_signed": -4.1917689834,
+        "locf_absolute": 3.2,
+        "locf_signed": -3.2
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MYS",
+      "m49": "458",
+      "observed_percent": 27.17,
+      "predictions_percent": {
+        "country_logit": 22.9782310166,
+        "locf": 23.97
+      },
+      "training_values_percent": [
+        27.37,
+        27.79,
+        27.13,
+        25.79,
+        23.97
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.265790842263,
+      "entity": "Mali",
+      "errors_percent": {
+        "country_logit_absolute": 21.2331240115,
+        "country_logit_signed": 21.2331240115,
+        "locf_absolute": 15.04,
+        "locf_signed": 15.04
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MLI",
+      "m49": "466",
+      "observed_percent": 45.83,
+      "predictions_percent": {
+        "country_logit": 67.0631240115,
+        "locf": 60.87
+      },
+      "training_values_percent": [
+        32.05,
+        39.74,
+        60.81,
+        46.38,
+        60.87
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.066128169361,
+      "entity": "Malta",
+      "errors_percent": {
+        "country_logit_absolute": 0.6902230193,
+        "country_logit_signed": -0.6902230193,
+        "locf_absolute": 0.67,
+        "locf_signed": 0.67
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MLT",
+      "m49": "470",
+      "observed_percent": 12.68,
+      "predictions_percent": {
+        "country_logit": 11.9897769807,
+        "locf": 13.35
+      },
+      "training_values_percent": [
+        15.89,
+        16.37,
+        18.16,
+        11.91,
+        13.04,
+        13.35
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.219907391285,
+      "entity": "Mauritius",
+      "errors_percent": {
+        "country_logit_absolute": 5.9826745028,
+        "country_logit_signed": 5.9826745028,
+        "locf_absolute": 1.59,
+        "locf_signed": 1.59
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MUS",
+      "m49": "480",
+      "observed_percent": 58.84,
+      "predictions_percent": {
+        "country_logit": 64.8226745028,
+        "locf": 60.43
+      },
+      "training_values_percent": [
+        49.59,
+        52.68,
+        60.43
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.53506102063,
+      "entity": "Mozambique",
+      "errors_percent": {
+        "country_logit_absolute": 34.082986146,
+        "country_logit_signed": 34.082986146,
+        "locf_absolute": 24.29,
+        "locf_signed": 24.29
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MOZ",
+      "m49": "508",
+      "observed_percent": 40.0,
+      "predictions_percent": {
+        "country_logit": 74.082986146,
+        "locf": 64.29
+      },
+      "training_values_percent": [
+        28.0,
+        31.58,
+        64.29
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.258649382018,
+      "entity": "Oman",
+      "errors_percent": {
+        "country_logit_absolute": 22.0574371418,
+        "country_logit_signed": 22.0574371418,
+        "locf_absolute": 18.82,
+        "locf_signed": 18.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "OMN",
+      "m49": "512",
+      "observed_percent": 59.34,
+      "predictions_percent": {
+        "country_logit": 81.3974371418,
+        "locf": 78.16
+      },
+      "training_values_percent": [
+        49.48,
+        52.28,
+        54.68,
+        78.91,
+        63.92,
+        78.16
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.134348128273,
+      "entity": "Nepal",
+      "errors_percent": {
+        "country_logit_absolute": 4.3018404988,
+        "country_logit_signed": 4.3018404988,
+        "locf_absolute": 0.36,
+        "locf_signed": -0.36
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "NPL",
+      "m49": "524",
+      "observed_percent": 77.42,
+      "predictions_percent": {
+        "country_logit": 81.7218404988,
+        "locf": 77.06
+      },
+      "training_values_percent": [
+        65.33,
+        77.27,
+        72.97,
+        80.39,
+        77.06
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.02151963076,
+      "entity": "Netherlands (The)",
+      "errors_percent": {
+        "country_logit_absolute": 0.7364893701,
+        "country_logit_signed": -0.7364893701,
+        "locf_absolute": 0.53,
+        "locf_signed": -0.53
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "NLD",
+      "m49": "528",
+      "observed_percent": 8.14,
+      "predictions_percent": {
+        "country_logit": 7.4035106299,
+        "locf": 7.61
+      },
+      "training_values_percent": [
+        6.16,
+        7.29,
+        7.22,
+        6.55,
+        6.69,
+        7.61
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.057707770884,
+      "entity": "Nigeria",
+      "errors_percent": {
+        "country_logit_absolute": 11.1752792624,
+        "country_logit_signed": 11.1752792624,
+        "locf_absolute": 8.04,
+        "locf_signed": 8.04
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "NGA",
+      "m49": "566",
+      "observed_percent": 72.73,
+      "predictions_percent": {
+        "country_logit": 83.9052792624,
+        "locf": 80.77
+      },
+      "training_values_percent": [
+        77.19,
+        81.63,
+        80.77
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2020
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.027575105319,
+      "entity": "Norway",
+      "errors_percent": {
+        "country_logit_absolute": 0.6334677582,
+        "country_logit_signed": -0.6334677582,
+        "locf_absolute": 0.55,
+        "locf_signed": -0.55
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "NOR",
+      "m49": "578",
+      "observed_percent": 5.68,
+      "predictions_percent": {
+        "country_logit": 5.0465322418,
+        "locf": 5.13
+      },
+      "training_values_percent": [
+        5.58,
+        5.87,
+        6.75,
+        5.52,
+        5.33,
+        5.13
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.034817050548,
+      "entity": "Pakistan",
+      "errors_percent": {
+        "country_logit_absolute": 0.2388070728,
+        "country_logit_signed": -0.2388070728,
+        "locf_absolute": 1.62,
+        "locf_signed": -1.62
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "PAK",
+      "m49": "586",
+      "observed_percent": 85.13,
+      "predictions_percent": {
+        "country_logit": 84.8911929272,
+        "locf": 83.51
+      },
+      "training_values_percent": [
+        86.21,
+        69.2,
+        88.87,
+        82.29,
+        85.16,
+        83.51
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.130070734291,
+      "entity": "Peru",
+      "errors_percent": {
+        "country_logit_absolute": 11.2990400147,
+        "country_logit_signed": 11.2990400147,
+        "locf_absolute": 13.24,
+        "locf_signed": 13.24
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "PER",
+      "m49": "604",
+      "observed_percent": 63.43,
+      "predictions_percent": {
+        "country_logit": 74.7290400147,
+        "locf": 76.67
+      },
+      "training_values_percent": [
+        71.7,
+        58.73,
+        76.67
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.038541364051,
+      "entity": "Philippines",
+      "errors_percent": {
+        "country_logit_absolute": 7.5191830571,
+        "country_logit_signed": 7.5191830571,
+        "locf_absolute": 8.13,
+        "locf_signed": 8.13
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "PHL",
+      "m49": "608",
+      "observed_percent": 35.76,
+      "predictions_percent": {
+        "country_logit": 43.2791830571,
+        "locf": 43.89
+      },
+      "training_values_percent": [
+        38.02,
+        39.56,
+        36.03,
+        39.93,
+        35.62,
+        44.03,
+        43.89
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.026575193446,
+      "entity": "Poland",
+      "errors_percent": {
+        "country_logit_absolute": 0.8333794958,
+        "country_logit_signed": -0.8333794958,
+        "locf_absolute": 1.36,
+        "locf_signed": -1.36
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "POL",
+      "m49": "616",
+      "observed_percent": 20.13,
+      "predictions_percent": {
+        "country_logit": 19.2966205042,
+        "locf": 18.77
+      },
+      "training_values_percent": [
+        16.68,
+        17.6,
+        18.02,
+        17.51,
+        18.83,
+        18.77
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.235034314867,
+      "entity": "Timor-Leste",
+      "errors_percent": {
+        "country_logit_absolute": 13.0585905134,
+        "country_logit_signed": 13.0585905134,
+        "locf_absolute": 19.57,
+        "locf_signed": 19.57
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "TLS",
+      "m49": "626",
+      "observed_percent": 30.43,
+      "predictions_percent": {
+        "country_logit": 43.4885905134,
+        "locf": 50.0
+      },
+      "training_values_percent": [
+        61.54,
+        53.85,
+        50.0
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.058384712309,
+      "entity": "Qatar",
+      "errors_percent": {
+        "country_logit_absolute": 6.6669624942,
+        "country_logit_signed": -6.6669624942,
+        "locf_absolute": 3.41,
+        "locf_signed": -3.41
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "QAT",
+      "m49": "634",
+      "observed_percent": 46.72,
+      "predictions_percent": {
+        "country_logit": 40.0530375058,
+        "locf": 43.31
+      },
+      "training_values_percent": [
+        48.92,
+        40.0,
+        42.28,
+        43.31
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.06751834246,
+      "entity": "Russian Federation",
+      "errors_percent": {
+        "country_logit_absolute": 4.7892638941,
+        "country_logit_signed": -4.7892638941,
+        "locf_absolute": 0.65,
+        "locf_signed": -0.65
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "ruS",
+      "m49": "643",
+      "observed_percent": 65.28,
+      "predictions_percent": {
+        "country_logit": 60.4907361059,
+        "locf": 64.63
+      },
+      "training_values_percent": [
+        73.08,
+        66.67,
+        58.26,
+        73.17,
+        58.47,
+        64.63
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.006304663987,
+      "entity": "Saudi Arabia",
+      "errors_percent": {
+        "country_logit_absolute": 2.7809563553,
+        "country_logit_signed": 2.7809563553,
+        "locf_absolute": 0.56,
+        "locf_signed": 0.56
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "SAU",
+      "m49": "682",
+      "observed_percent": 52.27,
+      "predictions_percent": {
+        "country_logit": 55.0509563553,
+        "locf": 52.83
+      },
+      "training_values_percent": [
+        50.85,
+        54.77,
+        57.26,
+        58.27,
+        52.97,
+        52.83
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.071044196377,
+      "entity": "Singapore",
+      "errors_percent": {
+        "country_logit_absolute": 0.4223198243,
+        "country_logit_signed": 0.4223198243,
+        "locf_absolute": 1.77,
+        "locf_signed": 1.77
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "SGP",
+      "m49": "702",
+      "observed_percent": 23.76,
+      "predictions_percent": {
+        "country_logit": 24.1823198243,
+        "locf": 25.53
+      },
+      "training_values_percent": [
+        28.69,
+        30.48,
+        25.83,
+        25.53
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.018595671319,
+      "entity": "South Africa",
+      "errors_percent": {
+        "country_logit_absolute": 7.1640811484,
+        "country_logit_signed": -7.1640811484,
+        "locf_absolute": 5.39,
+        "locf_signed": -5.39
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "ZAF",
+      "m49": "710",
+      "observed_percent": 35.43,
+      "predictions_percent": {
+        "country_logit": 28.2659188516,
+        "locf": 30.04
+      },
+      "training_values_percent": [
+        30.45,
+        30.74,
+        28.2,
+        27.7,
+        30.04
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.01708492949,
+      "entity": "Sweden",
+      "errors_percent": {
+        "country_logit_absolute": 0.7882990413,
+        "country_logit_signed": -0.7882990413,
+        "locf_absolute": 0.61,
+        "locf_signed": -0.61
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "SWE",
+      "m49": "752",
+      "observed_percent": 7.92,
+      "predictions_percent": {
+        "country_logit": 7.1317009587,
+        "locf": 7.31
+      },
+      "training_values_percent": [
+        7.36,
+        8.33,
+        7.62,
+        7.68,
+        6.99,
+        7.31
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.011311411702,
+      "entity": "Switzerland",
+      "errors_percent": {
+        "country_logit_absolute": 0.5984116965,
+        "country_logit_signed": -0.5984116965,
+        "locf_absolute": 1.17,
+        "locf_signed": -1.17
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "CHE",
+      "m49": "756",
+      "observed_percent": 10.95,
+      "predictions_percent": {
+        "country_logit": 10.3515883035,
+        "locf": 9.78
+      },
+      "training_values_percent": [
+        9.16,
+        9.45,
+        10.38,
+        10.27,
+        11.09,
+        9.56,
+        9.78
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.038409789314,
+      "entity": "Thailand",
+      "errors_percent": {
+        "country_logit_absolute": 4.2118159648,
+        "country_logit_signed": -4.2118159648,
+        "locf_absolute": 4.9,
+        "locf_signed": -4.9
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "THA",
+      "m49": "764",
+      "observed_percent": 38.67,
+      "predictions_percent": {
+        "country_logit": 34.4581840352,
+        "locf": 33.77
+      },
+      "training_values_percent": [
+        40.29,
+        41.72,
+        36.42,
+        37.26,
+        39.4,
+        37.4,
+        33.77
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.044919272116,
+      "entity": "United Arab Emirates",
+      "errors_percent": {
+        "country_logit_absolute": 3.0902707628,
+        "country_logit_signed": 3.0902707628,
+        "locf_absolute": 1.43,
+        "locf_signed": 1.43
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "arE",
+      "m49": "784",
+      "observed_percent": 50.95,
+      "predictions_percent": {
+        "country_logit": 54.0402707628,
+        "locf": 52.38
+      },
+      "training_values_percent": [
+        48.07,
+        48.43,
+        46.08,
+        54.08,
+        51.67,
+        52.38
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.046625100071,
+      "entity": "Tunisia",
+      "errors_percent": {
+        "country_logit_absolute": 0.5895544983,
+        "country_logit_signed": 0.5895544983,
+        "locf_absolute": 6.3,
+        "locf_signed": -6.3
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "TUN",
+      "m49": "788",
+      "observed_percent": 26.09,
+      "predictions_percent": {
+        "country_logit": 26.6795544983,
+        "locf": 19.79
+      },
+      "training_values_percent": [
+        25.46,
+        35.9,
+        33.86,
+        36.11,
+        31.08,
+        33.6,
+        19.79
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.370509921962,
+      "entity": "Uganda",
+      "errors_percent": {
+        "country_logit_absolute": 8.9268754182,
+        "country_logit_signed": 8.9268754182,
+        "locf_absolute": 0.57,
+        "locf_signed": 0.57
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "UGA",
+      "m49": "800",
+      "observed_percent": 81.25,
+      "predictions_percent": {
+        "country_logit": 90.1768754182,
+        "locf": 81.82
+      },
+      "training_values_percent": [
+        46.15,
+        60.0,
+        88.24,
+        80.0,
+        81.82
+      ],
+      "training_years": [
+        2017,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.091252445828,
+      "entity": "Ukraine",
+      "errors_percent": {
+        "country_logit_absolute": 6.4110037855,
+        "country_logit_signed": 6.4110037855,
+        "locf_absolute": 1.61,
+        "locf_signed": 1.61
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "UKR",
+      "m49": "804",
+      "observed_percent": 52.94,
+      "predictions_percent": {
+        "country_logit": 59.3510037855,
+        "locf": 54.55
+      },
+      "training_values_percent": [
+        50.0,
+        60.0,
+        54.55
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.110051839964,
+      "entity": "North Macedonia",
+      "errors_percent": {
+        "country_logit_absolute": 1.1823784074,
+        "country_logit_signed": -1.1823784074,
+        "locf_absolute": 1.76,
+        "locf_signed": -1.76
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "MKD",
+      "m49": "807",
+      "observed_percent": 61.76,
+      "predictions_percent": {
+        "country_logit": 60.5776215926,
+        "locf": 60.0
+      },
+      "training_values_percent": [
+        73.44,
+        71.05,
+        79.25,
+        64.29,
+        85.71,
+        51.22,
+        60.0
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.372825910708,
+      "entity": "Egypt",
+      "errors_percent": {
+        "country_logit_absolute": 11.4569835875,
+        "country_logit_signed": -11.4569835875,
+        "locf_absolute": 1.91,
+        "locf_signed": -1.91
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "EGY",
+      "m49": "818",
+      "observed_percent": 89.41,
+      "predictions_percent": {
+        "country_logit": 77.9530164125,
+        "locf": 87.5
+      },
+      "training_values_percent": [
+        97.87,
+        87.8,
+        89.58,
+        87.5
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.011992393896,
+      "entity": "United Kingdom of Great Britain And Northern Ireland",
+      "errors_percent": {
+        "country_logit_absolute": 1.986654787,
+        "country_logit_signed": -1.986654787,
+        "locf_absolute": 1.82,
+        "locf_signed": -1.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "GBR",
+      "m49": "826",
+      "observed_percent": 13.23,
+      "predictions_percent": {
+        "country_logit": 11.243345213,
+        "locf": 11.41
+      },
+      "training_values_percent": [
+        10.26,
+        10.97,
+        11.27,
+        10.44,
+        10.68,
+        11.41
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.156008048653,
+      "entity": "United Republic of Tanzania",
+      "errors_percent": {
+        "country_logit_absolute": 2.4966339258,
+        "country_logit_signed": -2.4966339258,
+        "locf_absolute": 1.44,
+        "locf_signed": -1.44
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "TZA",
+      "m49": "834",
+      "observed_percent": 70.15,
+      "predictions_percent": {
+        "country_logit": 67.6533660742,
+        "locf": 68.71
+      },
+      "training_values_percent": [
+        75.0,
+        77.98,
+        68.71
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.919279390817,
+      "entity": "Burkina Faso",
+      "errors_percent": {
+        "country_logit_absolute": 7.9930616298,
+        "country_logit_signed": 7.9930616298,
+        "locf_absolute": 3.21,
+        "locf_signed": 3.21
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "BFA",
+      "m49": "854",
+      "observed_percent": 88.46,
+      "predictions_percent": {
+        "country_logit": 96.4530616298,
+        "locf": 91.67
+      },
+      "training_values_percent": [
+        63.64,
+        80.77,
+        91.67
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.233893162652,
+      "entity": "Zambia",
+      "errors_percent": {
+        "country_logit_absolute": 7.7044115818,
+        "country_logit_signed": -7.7044115818,
+        "locf_absolute": 17.08,
+        "locf_signed": -17.08
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_ECOLI",
+      "iso3": "ZMB",
+      "m49": "894",
+      "observed_percent": 93.55,
+      "predictions_percent": {
+        "country_logit": 85.8455884182,
+        "locf": 76.47
+      },
+      "training_values_percent": [
+        61.9,
+        51.52,
+        63.38,
+        88.71,
+        76.47
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2019,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.107863611015,
+      "entity": "Argentina",
+      "errors_percent": {
+        "country_logit_absolute": 5.1638915575,
+        "country_logit_signed": -5.1638915575,
+        "locf_absolute": 2.92,
+        "locf_signed": -2.92
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "arG",
+      "m49": "032",
+      "observed_percent": 35.71,
+      "predictions_percent": {
+        "country_logit": 30.5461084425,
+        "locf": 32.79
+      },
+      "training_values_percent": [
+        45.0,
+        42.5,
+        42.03,
+        38.4,
+        34.33,
+        32.79
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.080817456303,
+      "entity": "Australia",
+      "errors_percent": {
+        "country_logit_absolute": 1.5495173602,
+        "country_logit_signed": -1.5495173602,
+        "locf_absolute": 0.88,
+        "locf_signed": -0.88
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "AUS",
+      "m49": "036",
+      "observed_percent": 15.85,
+      "predictions_percent": {
+        "country_logit": 14.3004826398,
+        "locf": 14.97
+      },
+      "training_values_percent": [
+        18.47,
+        17.65,
+        16.91,
+        14.97
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.132713598989,
+      "entity": "Austria",
+      "errors_percent": {
+        "country_logit_absolute": 1.2620726102,
+        "country_logit_signed": -1.2620726102,
+        "locf_absolute": 0.4,
+        "locf_signed": -0.4
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "AUT",
+      "m49": "040",
+      "observed_percent": 4.27,
+      "predictions_percent": {
+        "country_logit": 3.0079273898,
+        "locf": 3.87
+      },
+      "training_values_percent": [
+        5.9,
+        6.4,
+        5.26,
+        4.47,
+        3.12,
+        3.87
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.053886456383,
+      "entity": "Bahrain",
+      "errors_percent": {
+        "country_logit_absolute": 11.178904802,
+        "country_logit_signed": -11.178904802,
+        "locf_absolute": 11.22,
+        "locf_signed": -11.22
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BHR",
+      "m49": "048",
+      "observed_percent": 53.33,
+      "predictions_percent": {
+        "country_logit": 42.151095198,
+        "locf": 42.11
+      },
+      "training_values_percent": [
+        35.5,
+        40.0,
+        34.39,
+        42.11
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.21088554188,
+      "entity": "Belgium",
+      "errors_percent": {
+        "country_logit_absolute": 3.6138337156,
+        "country_logit_signed": -3.6138337156,
+        "locf_absolute": 2.44,
+        "locf_signed": -2.44
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BEL",
+      "m49": "056",
+      "observed_percent": 7.0,
+      "predictions_percent": {
+        "country_logit": 3.3861662844,
+        "locf": 4.56
+      },
+      "training_values_percent": [
+        6.79,
+        4.2,
+        4.56
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.049004147024,
+      "entity": "Bosnia and Herzegovina",
+      "errors_percent": {
+        "country_logit_absolute": 5.6200586937,
+        "country_logit_signed": -5.6200586937,
+        "locf_absolute": 1.94,
+        "locf_signed": -1.94
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BIH",
+      "m49": "070",
+      "observed_percent": 28.45,
+      "predictions_percent": {
+        "country_logit": 22.8299413063,
+        "locf": 26.51
+      },
+      "training_values_percent": [
+        18.0,
+        25.8,
+        16.3,
+        10.55,
+        23.21,
+        20.83,
+        26.51
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.137981696201,
+      "entity": "Brazil",
+      "errors_percent": {
+        "country_logit_absolute": 3.8141084257,
+        "country_logit_signed": -3.8141084257,
+        "locf_absolute": 4.09,
+        "locf_signed": 4.09
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BRA",
+      "m49": "076",
+      "observed_percent": 27.49,
+      "predictions_percent": {
+        "country_logit": 23.6758915743,
+        "locf": 31.58
+      },
+      "training_values_percent": [
+        11.1,
+        20.56,
+        24.41,
+        7.0,
+        31.58
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.014480701237,
+      "entity": "Brunei Darussalam",
+      "errors_percent": {
+        "country_logit_absolute": 8.006887107,
+        "country_logit_signed": 8.006887107,
+        "locf_absolute": 6.9,
+        "locf_signed": 6.9
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BRN",
+      "m49": "096",
+      "observed_percent": 5.26,
+      "predictions_percent": {
+        "country_logit": 13.266887107,
+        "locf": 12.16
+      },
+      "training_values_percent": [
+        12.3,
+        12.47,
+        14.62,
+        12.16
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.050164996707,
+      "entity": "Myanmar",
+      "errors_percent": {
+        "country_logit_absolute": 18.3976652376,
+        "country_logit_signed": 18.3976652376,
+        "locf_absolute": 26.67,
+        "locf_signed": 26.67
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MMR",
+      "m49": "104",
+      "observed_percent": 40.0,
+      "predictions_percent": {
+        "country_logit": 58.3976652376,
+        "locf": 66.67
+      },
+      "training_values_percent": [
+        74.1,
+        55.61,
+        50.97,
+        66.67
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.378586571995,
+      "entity": "Cambodia",
+      "errors_percent": {
+        "country_logit_absolute": 32.373357012,
+        "country_logit_signed": 32.373357012,
+        "locf_absolute": 27.08,
+        "locf_signed": 27.08
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "KHM",
+      "m49": "116",
+      "observed_percent": 54.17,
+      "predictions_percent": {
+        "country_logit": 86.543357012,
+        "locf": 81.25
+      },
+      "training_values_percent": [
+        48.8,
+        68.09,
+        81.25
+      ],
+      "training_years": [
+        2018,
+        2020,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.080853914941,
+      "entity": "Sri Lanka",
+      "errors_percent": {
+        "country_logit_absolute": 1.7216542642,
+        "country_logit_signed": -1.7216542642,
+        "locf_absolute": 2.68,
+        "locf_signed": 2.68
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "LKA",
+      "m49": "144",
+      "observed_percent": 48.63,
+      "predictions_percent": {
+        "country_logit": 46.9083457358,
+        "locf": 51.31
+      },
+      "training_values_percent": [
+        55.99,
+        53.29,
+        47.21,
+        51.31
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.332352045118,
+      "entity": "Croatia",
+      "errors_percent": {
+        "country_logit_absolute": 41.5212060029,
+        "country_logit_signed": 41.5212060029,
+        "locf_absolute": 26.46,
+        "locf_signed": 26.46
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "HRV",
+      "m49": "191",
+      "observed_percent": 27.39,
+      "predictions_percent": {
+        "country_logit": 68.9112060029,
+        "locf": 53.85
+      },
+      "training_values_percent": [
+        28.5,
+        26.4,
+        24.86,
+        50.0,
+        66.67,
+        53.85
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.004901380626,
+      "entity": "Cyprus",
+      "errors_percent": {
+        "country_logit_absolute": 13.598300072,
+        "country_logit_signed": 13.598300072,
+        "locf_absolute": 2.92,
+        "locf_signed": 2.92
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "CYP",
+      "m49": "196",
+      "observed_percent": 53.01,
+      "predictions_percent": {
+        "country_logit": 66.608300072,
+        "locf": 55.93
+      },
+      "training_values_percent": [
+        31.2,
+        40.2,
+        100.0,
+        49.52,
+        42.94,
+        55.93
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.131839108596,
+      "entity": "Czechia",
+      "errors_percent": {
+        "country_logit_absolute": 21.4392595277,
+        "country_logit_signed": -21.4392595277,
+        "locf_absolute": 20.85,
+        "locf_signed": -20.85
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "CZE",
+      "m49": "203",
+      "observed_percent": 28.49,
+      "predictions_percent": {
+        "country_logit": 7.0507404723,
+        "locf": 7.64
+      },
+      "training_values_percent": [
+        13.2,
+        13.6,
+        12.52,
+        9.33,
+        9.43,
+        7.64
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.024209859242,
+      "entity": "Denmark",
+      "errors_percent": {
+        "country_logit_absolute": 0.1796875632,
+        "country_logit_signed": 0.1796875632,
+        "locf_absolute": 0.34,
+        "locf_signed": 0.34
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "DNK",
+      "m49": "208",
+      "observed_percent": 1.51,
+      "predictions_percent": {
+        "country_logit": 1.6896875632,
+        "locf": 1.85
+      },
+      "training_values_percent": [
+        1.94,
+        1.55,
+        1.85
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.458526756989,
+      "entity": "Ethiopia",
+      "errors_percent": {
+        "country_logit_absolute": 24.2143547334,
+        "country_logit_signed": 24.2143547334,
+        "locf_absolute": 11.82,
+        "locf_signed": 11.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "ETH",
+      "m49": "231",
+      "observed_percent": 50.0,
+      "predictions_percent": {
+        "country_logit": 74.2143547334,
+        "locf": 61.82
+      },
+      "training_values_percent": [
+        39.29,
+        59.23,
+        61.82
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.037333126519,
+      "entity": "Finland",
+      "errors_percent": {
+        "country_logit_absolute": 1.2083102175,
+        "country_logit_signed": 1.2083102175,
+        "locf_absolute": 1.23,
+        "locf_signed": 1.23
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "FIN",
+      "m49": "246",
+      "observed_percent": 0.4,
+      "predictions_percent": {
+        "country_logit": 1.6083102175,
+        "locf": 1.63
+      },
+      "training_values_percent": [
+        2.2,
+        1.9,
+        2.0,
+        2.07,
+        1.19,
+        2.31,
+        1.63
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.411626753298,
+      "entity": "Georgia",
+      "errors_percent": {
+        "country_logit_absolute": 15.6992744957,
+        "country_logit_signed": 15.6992744957,
+        "locf_absolute": 1.65,
+        "locf_signed": 1.65
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "GEO",
+      "m49": "268",
+      "observed_percent": 26.67,
+      "predictions_percent": {
+        "country_logit": 42.3692744957,
+        "locf": 28.32
+      },
+      "training_values_percent": [
+        4.2,
+        11.6,
+        12.52,
+        20.14,
+        25.32,
+        28.32
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.245807889809,
+      "entity": "occupied Palestinian territory, including east Jerusalem",
+      "errors_percent": {
+        "country_logit_absolute": 57.8585939894,
+        "country_logit_signed": 57.8585939894,
+        "locf_absolute": 61.87,
+        "locf_signed": 61.87
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "PSE",
+      "m49": "275",
+      "observed_percent": 11.43,
+      "predictions_percent": {
+        "country_logit": 69.2885939894,
+        "locf": 73.3
+      },
+      "training_values_percent": [
+        81.78,
+        89.49,
+        73.3
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.15628969599,
+      "entity": "Germany",
+      "errors_percent": {
+        "country_logit_absolute": 1.6237408014,
+        "country_logit_signed": -1.6237408014,
+        "locf_absolute": 0.89,
+        "locf_signed": -0.89
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "DEU",
+      "m49": "276",
+      "observed_percent": 5.32,
+      "predictions_percent": {
+        "country_logit": 3.6962591986,
+        "locf": 4.43
+      },
+      "training_values_percent": [
+        10.3,
+        9.1,
+        7.6,
+        6.8,
+        5.58,
+        4.91,
+        4.43
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.037660420921,
+      "entity": "Greece",
+      "errors_percent": {
+        "country_logit_absolute": 2.4728196171,
+        "country_logit_signed": 2.4728196171,
+        "locf_absolute": 0.24,
+        "locf_signed": -0.24
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "GRC",
+      "m49": "300",
+      "observed_percent": 41.32,
+      "predictions_percent": {
+        "country_logit": 43.7928196171,
+        "locf": 41.08
+      },
+      "training_values_percent": [
+        38.4,
+        36.4,
+        43.41,
+        41.16,
+        43.18,
+        41.08
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.008010479064,
+      "entity": "India",
+      "errors_percent": {
+        "country_logit_absolute": 4.3761422359,
+        "country_logit_signed": 4.3761422359,
+        "locf_absolute": 1.27,
+        "locf_signed": 1.27
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "IND",
+      "m49": "356",
+      "observed_percent": 53.58,
+      "predictions_percent": {
+        "country_logit": 57.9561422359,
+        "locf": 54.85
+      },
+      "training_values_percent": [
+        52.5,
+        63.1,
+        60.61,
+        64.66,
+        55.67,
+        54.85
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.149698515732,
+      "entity": "Indonesia",
+      "errors_percent": {
+        "country_logit_absolute": 10.119571597,
+        "country_logit_signed": -10.119571597,
+        "locf_absolute": 4.91,
+        "locf_signed": -4.91
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "IDN",
+      "m49": "360",
+      "observed_percent": 40.09,
+      "predictions_percent": {
+        "country_logit": 29.970428403,
+        "locf": 35.18
+      },
+      "training_values_percent": [
+        52.3,
+        39.85,
+        36.24,
+        37.7,
+        35.18
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.06001582749,
+      "entity": "Iran (Islamic Republic of)",
+      "errors_percent": {
+        "country_logit_absolute": 0.7554328561,
+        "country_logit_signed": -0.7554328561,
+        "locf_absolute": 0.33,
+        "locf_signed": 0.33
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "IRN",
+      "m49": "364",
+      "observed_percent": 34.38,
+      "predictions_percent": {
+        "country_logit": 33.6245671439,
+        "locf": 34.71
+      },
+      "training_values_percent": [
+        38.5,
+        39.08,
+        44.06,
+        32.8,
+        34.71
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.062189292826,
+      "entity": "Iraq",
+      "errors_percent": {
+        "country_logit_absolute": 1.9675370882,
+        "country_logit_signed": -1.9675370882,
+        "locf_absolute": 1.91,
+        "locf_signed": -1.91
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "IRQ",
+      "m49": "368",
+      "observed_percent": 89.67,
+      "predictions_percent": {
+        "country_logit": 87.7024629118,
+        "locf": 87.76
+      },
+      "training_values_percent": [
+        86.36,
+        84.62,
+        87.76
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.086009332708,
+      "entity": "Ireland",
+      "errors_percent": {
+        "country_logit_absolute": 0.3880247641,
+        "country_logit_signed": 0.3880247641,
+        "locf_absolute": 0.93,
+        "locf_signed": 0.93
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "IRL",
+      "m49": "372",
+      "observed_percent": 9.61,
+      "predictions_percent": {
+        "country_logit": 9.9980247641,
+        "locf": 10.54
+      },
+      "training_values_percent": [
+        16.3,
+        12.4,
+        14.96,
+        13.99,
+        10.96,
+        10.54
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.0659087588,
+      "entity": "Italy",
+      "errors_percent": {
+        "country_logit_absolute": 0.3326687378,
+        "country_logit_signed": 0.3326687378,
+        "locf_absolute": 1.14,
+        "locf_signed": 1.14
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "ITA",
+      "m49": "380",
+      "observed_percent": 29.46,
+      "predictions_percent": {
+        "country_logit": 29.7926687378,
+        "locf": 30.6
+      },
+      "training_values_percent": [
+        34.0,
+        38.75,
+        36.55,
+        30.88,
+        30.6
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.06853451744,
+      "entity": "Japan",
+      "errors_percent": {
+        "country_logit_absolute": 0.7223534659,
+        "country_logit_signed": -0.7223534659,
+        "locf_absolute": 1.37,
+        "locf_signed": 1.37
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "JPN",
+      "m49": "392",
+      "observed_percent": 32.52,
+      "predictions_percent": {
+        "country_logit": 31.7976465341,
+        "locf": 33.89
+      },
+      "training_values_percent": [
+        41.7,
+        40.6,
+        36.42,
+        35.86,
+        35.05,
+        33.89
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.24249782492,
+      "entity": "Jordan",
+      "errors_percent": {
+        "country_logit_absolute": 1.0290908684,
+        "country_logit_signed": 1.0290908684,
+        "locf_absolute": 2.63,
+        "locf_signed": -2.63
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "JOR",
+      "m49": "400",
+      "observed_percent": 78.9,
+      "predictions_percent": {
+        "country_logit": 79.9290908684,
+        "locf": 76.27
+      },
+      "training_values_percent": [
+        47.9,
+        72.39,
+        58.39,
+        70.8,
+        76.27
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.055119881989,
+      "entity": "Republic of Korea",
+      "errors_percent": {
+        "country_logit_absolute": 1.9799642381,
+        "country_logit_signed": -1.9799642381,
+        "locf_absolute": 0.52,
+        "locf_signed": 0.52
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "KOR",
+      "m49": "410",
+      "observed_percent": 45.19,
+      "predictions_percent": {
+        "country_logit": 43.2100357619,
+        "locf": 45.71
+      },
+      "training_values_percent": [
+        53.3,
+        53.3,
+        47.1,
+        48.61,
+        47.55,
+        45.21,
+        45.71
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.1066246026,
+      "entity": "Kosovo (in accordance with UN Security Council Resolution 1244 (1999))",
+      "errors_percent": {
+        "country_logit_absolute": 5.2830664963,
+        "country_logit_signed": -5.2830664963,
+        "locf_absolute": 3.38,
+        "locf_signed": 3.38
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "XKX",
+      "m49": "412",
+      "observed_percent": 55.88,
+      "predictions_percent": {
+        "country_logit": 50.5969335037,
+        "locf": 59.26
+      },
+      "training_values_percent": [
+        64.29,
+        43.75,
+        59.26
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.500964086297,
+      "entity": "Lao People's Democratic Republic",
+      "errors_percent": {
+        "country_logit_absolute": 21.1297077362,
+        "country_logit_signed": -21.1297077362,
+        "locf_absolute": 21.9,
+        "locf_signed": -21.9
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "LAO",
+      "m49": "418",
+      "observed_percent": 77.78,
+      "predictions_percent": {
+        "country_logit": 56.6502922638,
+        "locf": 55.88
+      },
+      "training_values_percent": [
+        9.5,
+        11.4,
+        6.06,
+        22.22,
+        29.89,
+        55.88
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.445271618096,
+      "entity": "Lebanon",
+      "errors_percent": {
+        "country_logit_absolute": 13.8967364425,
+        "country_logit_signed": 13.8967364425,
+        "locf_absolute": 2.5,
+        "locf_signed": 2.5
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "LBN",
+      "m49": "422",
+      "observed_percent": 50.0,
+      "predictions_percent": {
+        "country_logit": 63.8967364425,
+        "locf": 52.5
+      },
+      "training_values_percent": [
+        8.3,
+        20.0,
+        25.0,
+        35.09,
+        37.21,
+        52.5
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.178358603824,
+      "entity": "Latvia",
+      "errors_percent": {
+        "country_logit_absolute": 6.4350895325,
+        "country_logit_signed": 6.4350895325,
+        "locf_absolute": 0.84,
+        "locf_signed": 0.84
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "LVA",
+      "m49": "428",
+      "observed_percent": 2.99,
+      "predictions_percent": {
+        "country_logit": 9.4250895325,
+        "locf": 3.83
+      },
+      "training_values_percent": [
+        2.0,
+        1.7,
+        5.7,
+        12.28,
+        13.64,
+        4.55,
+        3.83
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.017271225677,
+      "entity": "Lithuania",
+      "errors_percent": {
+        "country_logit_absolute": 0.2169071708,
+        "country_logit_signed": 0.2169071708,
+        "locf_absolute": 0.78,
+        "locf_signed": 0.78
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "LTU",
+      "m49": "440",
+      "observed_percent": 8.64,
+      "predictions_percent": {
+        "country_logit": 8.8569071708,
+        "locf": 9.42
+      },
+      "training_values_percent": [
+        11.6,
+        8.8,
+        8.4,
+        9.3,
+        9.8,
+        8.98,
+        9.42
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.077000338038,
+      "entity": "Madagascar",
+      "errors_percent": {
+        "country_logit_absolute": 0.645747508,
+        "country_logit_signed": -0.645747508,
+        "locf_absolute": 2.38,
+        "locf_signed": -2.38
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MDG",
+      "m49": "450",
+      "observed_percent": 35.71,
+      "predictions_percent": {
+        "country_logit": 35.064252492,
+        "locf": 33.33
+      },
+      "training_values_percent": [
+        30.0,
+        18.8,
+        33.33
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.118461545161,
+      "entity": "Malawi",
+      "errors_percent": {
+        "country_logit_absolute": 62.0769972787,
+        "country_logit_signed": -62.0769972787,
+        "locf_absolute": 60.0,
+        "locf_signed": -60.0
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MWI",
+      "m49": "454",
+      "observed_percent": 100.0,
+      "predictions_percent": {
+        "country_logit": 37.9230027213,
+        "locf": 40.0
+      },
+      "training_values_percent": [
+        82.0,
+        19.7,
+        61.19,
+        40.0
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.108170586443,
+      "entity": "Malaysia",
+      "errors_percent": {
+        "country_logit_absolute": 6.0262944614,
+        "country_logit_signed": -6.0262944614,
+        "locf_absolute": 3.15,
+        "locf_signed": -3.15
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MYS",
+      "m49": "458",
+      "observed_percent": 19.6,
+      "predictions_percent": {
+        "country_logit": 13.5737055386,
+        "locf": 16.45
+      },
+      "training_values_percent": [
+        21.9,
+        23.1,
+        19.53,
+        17.12,
+        16.45
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.67316173014,
+      "entity": "Mali",
+      "errors_percent": {
+        "country_logit_absolute": 12.804069129,
+        "country_logit_signed": 12.804069129,
+        "locf_absolute": 5.64,
+        "locf_signed": 5.64
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MLI",
+      "m49": "466",
+      "observed_percent": 8.0,
+      "predictions_percent": {
+        "country_logit": 20.804069129,
+        "locf": 13.64
+      },
+      "training_values_percent": [
+        0.0,
+        2.5,
+        10.42,
+        2.13,
+        13.64
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.234140051457,
+      "entity": "Malta",
+      "errors_percent": {
+        "country_logit_absolute": 2.3522943225,
+        "country_logit_signed": -2.3522943225,
+        "locf_absolute": 4.06,
+        "locf_signed": 4.06
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MLT",
+      "m49": "470",
+      "observed_percent": 15.79,
+      "predictions_percent": {
+        "country_logit": 13.4377056775,
+        "locf": 19.85
+      },
+      "training_values_percent": [
+        43.3,
+        36.4,
+        22.08,
+        19.57,
+        20.39,
+        19.85
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.005440393071,
+      "entity": "Mauritius",
+      "errors_percent": {
+        "country_logit_absolute": 0.5154953814,
+        "country_logit_signed": -0.5154953814,
+        "locf_absolute": 1.53,
+        "locf_signed": -1.53
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MUS",
+      "m49": "480",
+      "observed_percent": 40.89,
+      "predictions_percent": {
+        "country_logit": 40.3745046186,
+        "locf": 39.36
+      },
+      "training_values_percent": [
+        39.62,
+        42.96,
+        39.36
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.144306217608,
+      "entity": "Mozambique",
+      "errors_percent": {
+        "country_logit_absolute": 5.8506487674,
+        "country_logit_signed": -5.8506487674,
+        "locf_absolute": 10.0,
+        "locf_signed": -10.0
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MOZ",
+      "m49": "508",
+      "observed_percent": 16.67,
+      "predictions_percent": {
+        "country_logit": 10.8193512326,
+        "locf": 6.67
+      },
+      "training_values_percent": [
+        20.0,
+        10.34,
+        25.0,
+        25.0,
+        6.67
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.119273033761,
+      "entity": "Oman",
+      "errors_percent": {
+        "country_logit_absolute": 70.7272636214,
+        "country_logit_signed": -70.7272636214,
+        "locf_absolute": 71.43,
+        "locf_signed": -71.43
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "OMN",
+      "m49": "512",
+      "observed_percent": 100.0,
+      "predictions_percent": {
+        "country_logit": 29.2727363786,
+        "locf": 28.57
+      },
+      "training_values_percent": [
+        41.1,
+        50.0,
+        31.82,
+        41.46,
+        28.57
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.253404053997,
+      "entity": "Nepal",
+      "errors_percent": {
+        "country_logit_absolute": 4.3461719154,
+        "country_logit_signed": 4.3461719154,
+        "locf_absolute": 4.95,
+        "locf_signed": 4.95
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "NPL",
+      "m49": "524",
+      "observed_percent": 78.38,
+      "predictions_percent": {
+        "country_logit": 82.7261719154,
+        "locf": 83.33
+      },
+      "training_values_percent": [
+        55.6,
+        79.01,
+        57.89,
+        83.33
+      ],
+      "training_years": [
+        2018,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.08640860817,
+      "entity": "Netherlands (The)",
+      "errors_percent": {
+        "country_logit_absolute": 0.7584799785,
+        "country_logit_signed": 0.7584799785,
+        "locf_absolute": 0.91,
+        "locf_signed": 0.91
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "NLD",
+      "m49": "528",
+      "observed_percent": 1.4,
+      "predictions_percent": {
+        "country_logit": 2.1584799785,
+        "locf": 2.31
+      },
+      "training_values_percent": [
+        1.5,
+        1.2,
+        1.65,
+        1.54,
+        1.61,
+        2.31
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.029391814269,
+      "entity": "Nigeria",
+      "errors_percent": {
+        "country_logit_absolute": 0.6655661098,
+        "country_logit_signed": 0.6655661098,
+        "locf_absolute": 3.73,
+        "locf_signed": -3.73
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "NGA",
+      "m49": "566",
+      "observed_percent": 68.82,
+      "predictions_percent": {
+        "country_logit": 69.4855661098,
+        "locf": 65.09
+      },
+      "training_values_percent": [
+        62.8,
+        65.8,
+        75.41,
+        66.67,
+        65.09
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.04797928755,
+      "entity": "Norway",
+      "errors_percent": {
+        "country_logit_absolute": 0.6597925054,
+        "country_logit_signed": -0.6597925054,
+        "locf_absolute": 1.15,
+        "locf_signed": -1.15
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "NOR",
+      "m49": "578",
+      "observed_percent": 2.09,
+      "predictions_percent": {
+        "country_logit": 1.4302074946,
+        "locf": 0.94
+      },
+      "training_values_percent": [
+        1.1,
+        1.0,
+        0.9,
+        1.27,
+        2.01,
+        0.94
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.244902221029,
+      "entity": "Pakistan",
+      "errors_percent": {
+        "country_logit_absolute": 9.1717929861,
+        "country_logit_signed": 9.1717929861,
+        "locf_absolute": 4.13,
+        "locf_signed": -4.13
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "PAK",
+      "m49": "586",
+      "observed_percent": 71.19,
+      "predictions_percent": {
+        "country_logit": 80.3617929861,
+        "locf": 67.06
+      },
+      "training_values_percent": [
+        62.7,
+        28.6,
+        64.98,
+        69.49,
+        82.56,
+        67.06
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.041866268799,
+      "entity": "Peru",
+      "errors_percent": {
+        "country_logit_absolute": 24.1990103933,
+        "country_logit_signed": 24.1990103933,
+        "locf_absolute": 10.44,
+        "locf_signed": 10.44
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "PER",
+      "m49": "604",
+      "observed_percent": 38.71,
+      "predictions_percent": {
+        "country_logit": 62.9090103933,
+        "locf": 49.15
+      },
+      "training_values_percent": [
+        47.06,
+        81.54,
+        49.15
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.148270453677,
+      "entity": "Philippines",
+      "errors_percent": {
+        "country_logit_absolute": 2.6973265727,
+        "country_logit_signed": -2.6973265727,
+        "locf_absolute": 4.04,
+        "locf_signed": 4.04
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "PHL",
+      "m49": "608",
+      "observed_percent": 40.39,
+      "predictions_percent": {
+        "country_logit": 37.6926734273,
+        "locf": 44.43
+      },
+      "training_values_percent": [
+        66.1,
+        58.1,
+        55.4,
+        50.88,
+        45.69,
+        44.6,
+        44.43
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.014461740711,
+      "entity": "Poland",
+      "errors_percent": {
+        "country_logit_absolute": 0.7875936548,
+        "country_logit_signed": -0.7875936548,
+        "locf_absolute": 1.62,
+        "locf_signed": -1.62
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "POL",
+      "m49": "616",
+      "observed_percent": 15.28,
+      "predictions_percent": {
+        "country_logit": 14.4924063452,
+        "locf": 13.66
+      },
+      "training_values_percent": [
+        15.2,
+        15.9,
+        14.94,
+        14.7,
+        16.52,
+        13.66
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.406946120072,
+      "entity": "Timor-Leste",
+      "errors_percent": {
+        "country_logit_absolute": 29.2193170521,
+        "country_logit_signed": 29.2193170521,
+        "locf_absolute": 16.1,
+        "locf_signed": 16.1
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "TLS",
+      "m49": "626",
+      "observed_percent": 22.0,
+      "predictions_percent": {
+        "country_logit": 51.2193170521,
+        "locf": 38.1
+      },
+      "training_values_percent": [
+        21.43,
+        37.5,
+        38.1
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.053648365577,
+      "entity": "Qatar",
+      "errors_percent": {
+        "country_logit_absolute": 11.8010366867,
+        "country_logit_signed": -11.8010366867,
+        "locf_absolute": 10.77,
+        "locf_signed": -10.77
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "QAT",
+      "m49": "634",
+      "observed_percent": 40.83,
+      "predictions_percent": {
+        "country_logit": 29.0289633133,
+        "locf": 30.06
+      },
+      "training_values_percent": [
+        33.8,
+        32.05,
+        31.62,
+        30.06
+      ],
+      "training_years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.108761504358,
+      "entity": "Russian Federation",
+      "errors_percent": {
+        "country_logit_absolute": 4.0963816935,
+        "country_logit_signed": 4.0963816935,
+        "locf_absolute": 0.97,
+        "locf_signed": -0.97
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "ruS",
+      "m49": "643",
+      "observed_percent": 8.25,
+      "predictions_percent": {
+        "country_logit": 12.3463816935,
+        "locf": 7.28
+      },
+      "training_values_percent": [
+        16.5,
+        14.0,
+        26.67,
+        28.89,
+        17.04,
+        7.28
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.125738560808,
+      "entity": "Saudi Arabia",
+      "errors_percent": {
+        "country_logit_absolute": 8.0055611975,
+        "country_logit_signed": 8.0055611975,
+        "locf_absolute": 2.55,
+        "locf_signed": 2.55
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "SAU",
+      "m49": "682",
+      "observed_percent": 49.5,
+      "predictions_percent": {
+        "country_logit": 57.5055611975,
+        "locf": 52.05
+      },
+      "training_values_percent": [
+        33.1,
+        46.5,
+        48.94,
+        49.09,
+        50.38,
+        52.05
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.047458597532,
+      "entity": "Singapore",
+      "errors_percent": {
+        "country_logit_absolute": 9.5302707189,
+        "country_logit_signed": 9.5302707189,
+        "locf_absolute": 7.53,
+        "locf_signed": 7.53
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "SGP",
+      "m49": "702",
+      "observed_percent": 23.64,
+      "predictions_percent": {
+        "country_logit": 33.1702707189,
+        "locf": 31.17
+      },
+      "training_values_percent": [
+        28.65,
+        32.54,
+        31.17
+      ],
+      "training_years": [
+        2019,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.097900409257,
+      "entity": "South Africa",
+      "errors_percent": {
+        "country_logit_absolute": 2.6591968266,
+        "country_logit_signed": -2.6591968266,
+        "locf_absolute": 1.3,
+        "locf_signed": -1.3
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "ZAF",
+      "m49": "710",
+      "observed_percent": 17.78,
+      "predictions_percent": {
+        "country_logit": 15.1208031734,
+        "locf": 16.48
+      },
+      "training_values_percent": [
+        24.9,
+        23.8,
+        24.6,
+        21.35,
+        19.64,
+        16.64,
+        16.48
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.04640014921,
+      "entity": "Sweden",
+      "errors_percent": {
+        "country_logit_absolute": 0.047304586,
+        "country_logit_signed": 0.047304586,
+        "locf_absolute": 0.27,
+        "locf_signed": -0.27
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "SWE",
+      "m49": "752",
+      "observed_percent": 2.12,
+      "predictions_percent": {
+        "country_logit": 2.167304586,
+        "locf": 1.85
+      },
+      "training_values_percent": [
+        1.8,
+        1.2,
+        1.9,
+        1.8,
+        2.33,
+        1.97,
+        1.85
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.031487835478,
+      "entity": "Switzerland",
+      "errors_percent": {
+        "country_logit_absolute": 0.1669009653,
+        "country_logit_signed": 0.1669009653,
+        "locf_absolute": 0.11,
+        "locf_signed": 0.11
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "CHE",
+      "m49": "756",
+      "observed_percent": 3.96,
+      "predictions_percent": {
+        "country_logit": 4.1269009653,
+        "locf": 4.07
+      },
+      "training_values_percent": [
+        4.9,
+        4.7,
+        5.8,
+        3.91,
+        5.12,
+        4.34,
+        4.07
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.135694914896,
+      "entity": "Thailand",
+      "errors_percent": {
+        "country_logit_absolute": 1.4525265812,
+        "country_logit_signed": -1.4525265812,
+        "locf_absolute": 0.69,
+        "locf_signed": -0.69
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "THA",
+      "m49": "764",
+      "observed_percent": 8.16,
+      "predictions_percent": {
+        "country_logit": 6.7074734188,
+        "locf": 7.47
+      },
+      "training_values_percent": [
+        13.4,
+        16.7,
+        11.3,
+        12.43,
+        10.63,
+        7.61,
+        7.47
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.092618009821,
+      "entity": "United Arab Emirates",
+      "errors_percent": {
+        "country_logit_absolute": 1.3156156206,
+        "country_logit_signed": 1.3156156206,
+        "locf_absolute": 1.56,
+        "locf_signed": -1.56
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "arE",
+      "m49": "784",
+      "observed_percent": 41.44,
+      "predictions_percent": {
+        "country_logit": 42.7556156206,
+        "locf": 39.88
+      },
+      "training_values_percent": [
+        34.1,
+        23.7,
+        36.23,
+        42.52,
+        35.65,
+        39.88
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.12110974406,
+      "entity": "Tunisia",
+      "errors_percent": {
+        "country_logit_absolute": 2.9878470718,
+        "country_logit_signed": -2.9878470718,
+        "locf_absolute": 1.18,
+        "locf_signed": -1.18
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "TUN",
+      "m49": "788",
+      "observed_percent": 14.79,
+      "predictions_percent": {
+        "country_logit": 11.8021529282,
+        "locf": 13.61
+      },
+      "training_values_percent": [
+        24.5,
+        21.6,
+        21.1,
+        17.44,
+        12.1,
+        17.24,
+        13.61
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.100597399003,
+      "entity": "Ukraine",
+      "errors_percent": {
+        "country_logit_absolute": 3.4784542599,
+        "country_logit_signed": 3.4784542599,
+        "locf_absolute": 1.82,
+        "locf_signed": 1.82
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "UKR",
+      "m49": "804",
+      "observed_percent": 13.46,
+      "predictions_percent": {
+        "country_logit": 16.9384542599,
+        "locf": 15.28
+      },
+      "training_values_percent": [
+        18.07,
+        28.05,
+        15.28
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.296907180914,
+      "entity": "North Macedonia",
+      "errors_percent": {
+        "country_logit_absolute": 48.3736601735,
+        "country_logit_signed": 48.3736601735,
+        "locf_absolute": 12.39,
+        "locf_signed": 12.39
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "MKD",
+      "m49": "807",
+      "observed_percent": 41.46,
+      "predictions_percent": {
+        "country_logit": 89.8336601735,
+        "locf": 53.85
+      },
+      "training_values_percent": [
+        48.5,
+        54.4,
+        53.5,
+        45.0,
+        100.0,
+        80.77,
+        53.85
+      ],
+      "training_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": 0.103307262293,
+      "entity": "Egypt",
+      "errors_percent": {
+        "country_logit_absolute": 3.3487705297,
+        "country_logit_signed": 3.3487705297,
+        "locf_absolute": 19.45,
+        "locf_signed": -19.45
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "EGY",
+      "m49": "818",
+      "observed_percent": 88.89,
+      "predictions_percent": {
+        "country_logit": 92.2387705297,
+        "locf": 69.44
+      },
+      "training_values_percent": [
+        70.4,
+        79.59,
+        100.0,
+        92.31,
+        69.44
+      ],
+      "training_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "dense",
+      "country_logit_slope_per_year": -0.015407253904,
+      "entity": "United Kingdom of Great Britain And Northern Ireland",
+      "errors_percent": {
+        "country_logit_absolute": 3.2641375813,
+        "country_logit_signed": -3.2641375813,
+        "locf_absolute": 1.9,
+        "locf_signed": -1.9
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "GBR",
+      "m49": "826",
+      "observed_percent": 9.86,
+      "predictions_percent": {
+        "country_logit": 6.5958624187,
+        "locf": 7.96
+      },
+      "training_values_percent": [
+        6.9,
+        7.3,
+        10.4,
+        3.89,
+        6.74,
+        7.96
+      ],
+      "training_years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.187929662296,
+      "entity": "United Republic of Tanzania",
+      "errors_percent": {
+        "country_logit_absolute": 1.0303844693,
+        "country_logit_signed": -1.0303844693,
+        "locf_absolute": 8.61,
+        "locf_signed": -8.61
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "TZA",
+      "m49": "834",
+      "observed_percent": 68.1,
+      "predictions_percent": {
+        "country_logit": 67.0696155307,
+        "locf": 59.49
+      },
+      "training_values_percent": [
+        50.21,
+        64.88,
+        59.49
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": -0.807680918195,
+      "entity": "Burkina Faso",
+      "errors_percent": {
+        "country_logit_absolute": 5.4087030966,
+        "country_logit_signed": -5.4087030966,
+        "locf_absolute": 8.4,
+        "locf_signed": 8.4
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "BFA",
+      "m49": "854",
+      "observed_percent": 22.03,
+      "predictions_percent": {
+        "country_logit": 16.6212969034,
+        "locf": 30.43
+      },
+      "training_values_percent": [
+        68.75,
+        51.16,
+        30.43
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "completeness_stratum": "partial",
+      "country_logit_slope_per_year": 0.998276940937,
+      "entity": "Zambia",
+      "errors_percent": {
+        "country_logit_absolute": 36.6754587212,
+        "country_logit_signed": 36.6754587212,
+        "locf_absolute": 31.12,
+        "locf_signed": 31.12
+      },
+      "holdout_year": 2023,
+      "indicator_code": "AMR_INFECT_MRSA",
+      "iso3": "ZMB",
+      "m49": "894",
+      "observed_percent": 58.88,
+      "predictions_percent": {
+        "country_logit": 95.5554587212,
+        "locf": 90.0
+      },
+      "training_values_percent": [
+        55.0,
+        69.35,
+        90.0
+      ],
+      "training_years": [
+        2020,
+        2021,
+        2022
+      ]
+    }
+  ],
+  "schema_version": "p057_amr_baseline_eval_v1",
+  "scientific_status": "baseline_denominators_established",
+  "slices": {
+    "AMR_INFECT_ECOLI__dense": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 0.0728992506,
+          "equal_entity_weighted_absolute_error_pp": 4.4194490588,
+          "median_absolute_error_pp": 3.2965340739,
+          "n": 46,
+          "root_mean_squared_error_pp": 6.4245067742,
+          "signed_calibration_bias_pp": 0.0728992506
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 0.732173913,
+          "equal_entity_weighted_absolute_error_pp": 3.4586956522,
+          "median_absolute_error_pp": 1.79,
+          "n": 46,
+          "root_mean_squared_error_pp": 5.5264927159,
+          "signed_calibration_bias_pp": -0.732173913
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          0.0624234233,
+          1.8335639762
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 0.9607534066,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 15,
+          "locf_lower_error": 31,
+          "tie": 0
+        },
+        "seed": 4056688837
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 46
+    },
+    "AMR_INFECT_ECOLI__overall": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 0.0383451431,
+          "equal_entity_weighted_absolute_error_pp": 6.7226119253,
+          "median_absolute_error_pp": 4.2568282318,
+          "n": 72,
+          "root_mean_squared_error_pp": 10.4626138393,
+          "signed_calibration_bias_pp": 0.0383451431
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 0.1519444444,
+          "equal_entity_weighted_absolute_error_pp": 4.3494444444,
+          "median_absolute_error_pp": 1.895,
+          "n": 72,
+          "root_mean_squared_error_pp": 7.0734252272,
+          "signed_calibration_bias_pp": 0.1519444444
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          1.1681682497,
+          3.8386834488
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 2.3731674809,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 21,
+          "locf_lower_error": 51,
+          "tie": 0
+        },
+        "seed": 1313287665
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 72
+    },
+    "AMR_INFECT_ECOLI__partial": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 0.022789047,
+          "equal_entity_weighted_absolute_error_pp": 10.7974385354,
+          "median_absolute_error_pp": 8.6499110423,
+          "n": 26,
+          "root_mean_squared_error_pp": 15.1694981736,
+          "signed_calibration_bias_pp": -0.022789047
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 1.7161538462,
+          "equal_entity_weighted_absolute_error_pp": 5.9253846154,
+          "median_absolute_error_pp": 2.245,
+          "n": 26,
+          "root_mean_squared_error_pp": 9.1933571335,
+          "signed_calibration_bias_pp": 1.7161538462
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          2.179328946,
+          8.3335187174
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 4.87205392,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 6,
+          "locf_lower_error": 20,
+          "tie": 0
+        },
+        "seed": 4052935241
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 26
+    },
+    "AMR_INFECT_MRSA__dense": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 0.37407977,
+          "equal_entity_weighted_absolute_error_pp": 8.0671945912,
+          "median_absolute_error_pp": 2.9878470718,
+          "n": 45,
+          "root_mean_squared_error_pp": 15.8514113353,
+          "signed_calibration_bias_pp": 0.37407977
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 2.2995555556,
+          "equal_entity_weighted_absolute_error_pp": 5.6653333333,
+          "median_absolute_error_pp": 1.65,
+          "n": 45,
+          "root_mean_squared_error_pp": 12.9643514643,
+          "signed_calibration_bias_pp": -2.2995555556
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          0.5365241091,
+          4.6249379409
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 2.4018612578,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 19,
+          "locf_lower_error": 26,
+          "tie": 0
+        },
+        "seed": 1683400218
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 45
+    },
+    "AMR_INFECT_MRSA__overall": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 2.2973904378,
+          "equal_entity_weighted_absolute_error_pp": 10.4100849776,
+          "median_absolute_error_pp": 3.8141084257,
+          "n": 69,
+          "root_mean_squared_error_pp": 18.5710093201,
+          "signed_calibration_bias_pp": 2.2973904378
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 0.2591304348,
+          "equal_entity_weighted_absolute_error_pp": 8.3446376812,
+          "median_absolute_error_pp": 2.63,
+          "n": 69,
+          "root_mean_squared_error_pp": 16.3600937243,
+          "signed_calibration_bias_pp": 0.2591304348
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          0.6071448618,
+          3.7022641745
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 2.0654472964,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 29,
+          "locf_lower_error": 40,
+          "tie": 0
+        },
+        "seed": 812878137
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 69
+    },
+    "AMR_INFECT_MRSA__partial": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 5.9035979398,
+          "equal_entity_weighted_absolute_error_pp": 14.8030044521,
+          "median_absolute_error_pp": 6.7077951018,
+          "n": 24,
+          "root_mean_squared_error_pp": 22.8125137947,
+          "signed_calibration_bias_pp": 5.9035979398
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 5.0566666667,
+          "equal_entity_weighted_absolute_error_pp": 13.3683333333,
+          "median_absolute_error_pp": 7.965,
+          "n": 24,
+          "root_mean_squared_error_pp": 21.3157664652,
+          "signed_calibration_bias_pp": 5.0566666667
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          -0.6461331499,
+          3.6417615415
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 1.4346711188,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 10,
+          "locf_lower_error": 14,
+          "tie": 0
+        },
+        "seed": 449277095
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 24
+    },
+    "pooled_dense": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 0.2218346723,
+          "equal_entity_weighted_absolute_error_pp": 6.2232792671,
+          "median_absolute_error_pp": 3.0902707628,
+          "n": 91,
+          "root_mean_squared_error_pp": 12.0464499694,
+          "signed_calibration_bias_pp": 0.2218346723
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 1.5072527473,
+          "equal_entity_weighted_absolute_error_pp": 4.5498901099,
+          "median_absolute_error_pp": 1.76,
+          "n": 91,
+          "root_mean_squared_error_pp": 9.9273658846,
+          "signed_calibration_bias_pp": -1.5072527473
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          0.6175556511,
+          2.8531603432
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 1.6733891572,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 34,
+          "locf_lower_error": 57,
+          "tie": 0
+        },
+        "seed": 3141197363
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 91
+    },
+    "pooled_overall": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 1.1438353937,
+          "equal_entity_weighted_absolute_error_pp": 8.5271200147,
+          "median_absolute_error_pp": 4.1917689834,
+          "n": 141,
+          "root_mean_squared_error_pp": 14.9889930007,
+          "signed_calibration_bias_pp": 1.1438353937
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 0.2043971631,
+          "equal_entity_weighted_absolute_error_pp": 6.3045390071,
+          "median_absolute_error_pp": 2.2,
+          "n": 141,
+          "root_mean_squared_error_pp": 12.5111113169,
+          "signed_calibration_bias_pp": 0.2043971631
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          1.2555141627,
+          3.2994152753
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 2.2225810076,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 50,
+          "locf_lower_error": 91,
+          "tie": 0
+        },
+        "seed": 2557977325
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 141
+    },
+    "pooled_partial": {
+      "baselines": {
+        "country_logit": {
+          "absolute_calibration_bias_pp": 2.8218767067,
+          "equal_entity_weighted_absolute_error_pp": 12.7201101754,
+          "median_absolute_error_pp": 7.9999743684,
+          "n": 50,
+          "root_mean_squared_error_pp": 19.2212457458,
+          "signed_calibration_bias_pp": 2.8218767067
+        },
+        "locf": {
+          "absolute_calibration_bias_pp": 3.3196,
+          "equal_entity_weighted_absolute_error_pp": 9.498,
+          "median_absolute_error_pp": 3.395,
+          "n": 50,
+          "root_mean_squared_error_pp": 16.1877415349,
+          "signed_calibration_bias_pp": 3.3196
+        }
+      },
+      "paired_uncertainty": {
+        "confidence_interval_pp": [
+          1.3974744591,
+          5.286044624
+        ],
+        "confidence_level": 0.95,
+        "contrast": "country_logit_absolute_error_minus_locf_absolute_error",
+        "mean_difference_pp": 3.2221101754,
+        "resamples": 10000,
+        "row_level_counts": {
+          "country_logit_lower_error": 16,
+          "locf_lower_error": 34,
+          "tie": 0
+        },
+        "seed": 1561120989
+      },
+      "primary_metric_winner": "locf",
+      "row_count": 50
+    }
+  },
+  "source": {
+    "benchmark": "benchmarks/P057_AMR_baseline_eval_v1.json",
+    "benchmark_sha256": "01ac3aa8980252b6c2fd1993a2ba3732871099f0a6c3a33e618632658ada0127",
+    "protocol_commit": "cafabf703649eb5300dba18d5b22262326b81442",
+    "source_snapshot": "results/P057_P058_source_snapshot_v1.json",
+    "source_snapshot_sha256": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9",
+    "tool": "tools/p057_amr_baseline_eval.py",
+    "tool_sha256": "302165b31d8b046ac8330f0fc3b82a6ca4413ab74a69db46b739ae9f7550e31a",
+    "upstream_preflight": "results/P057_P058_data_preflight_v1.json",
+    "upstream_preflight_sha256": "d1829f585d9e8657272c7fe1c1a5dc614e63ff01833402e1b34b76ba564ff877"
+  },
+  "status": "pass",
+  "summary": {
+    "candidate_executed": false,
+    "check_count": 22,
+    "evaluated_row_count": 141,
+    "failed_checks": [],
+    "holdout_year": 2023,
+    "lowest_completeness_eligible_stratum": "partial",
+    "passed_checks": 22
+  }
+}

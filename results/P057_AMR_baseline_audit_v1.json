@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "detail": "Formal result status is pass.",
+      "name": "formal_result_passed",
+      "passed": true
+    },
+    {
+      "detail": "cafabf703649eb5300dba18d5b22262326b81442",
+      "name": "protocol_commit_recorded",
+      "passed": true
+    },
+    {
+      "detail": "Compared 141 ordered indicator-entity keys.",
+      "name": "row_identity_matches",
+      "passed": true
+    },
+    {
+      "detail": "Maximum numeric difference 0.000e+00.",
+      "name": "independent_row_values_match",
+      "passed": true
+    },
+    {
+      "detail": "Compared 9 slices.",
+      "name": "slice_counts_match",
+      "passed": true
+    },
+    {
+      "detail": "Maximum metric difference 0.000e+00.",
+      "name": "independent_metrics_match",
+      "passed": true
+    },
+    {
+      "detail": "Observed 141 rows.",
+      "name": "all_rows_retained",
+      "passed": true
+    },
+    {
+      "detail": "The result establishes denominators only.",
+      "name": "candidate_not_executed",
+      "passed": true
+    },
+    {
+      "detail": "All audited targets are 2023.",
+      "name": "holdout_is_2023",
+      "passed": true
+    },
+    {
+      "detail": "All audited training rows stop by 2022.",
+      "name": "training_precedes_holdout",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.12.6"
+  },
+  "schema_version": "p057_amr_baseline_audit_v1",
+  "source": {
+    "audit_tool": "tools/p057_amr_baseline_audit.py",
+    "audit_tool_sha256": "b3f4362accecb995d25d9290009d9a5b701fd713ba16c2bce42ae781512fad46",
+    "benchmark": "benchmarks/P057_AMR_baseline_eval_v1.json",
+    "benchmark_sha256": "01ac3aa8980252b6c2fd1993a2ba3732871099f0a6c3a33e618632658ada0127",
+    "formal_result": "results/P057_AMR_baseline_eval_v1.json",
+    "formal_result_sha256": "d1a449aa8f37def65af86cba0cd4fbd2cca6e61c75eb82a1006135e99a6bc9f5",
+    "source_snapshot": "results/P057_P058_source_snapshot_v1.json",
+    "source_snapshot_sha256": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9",
+    "upstream_preflight": "results/P057_P058_data_preflight_v1.json",
+    "upstream_preflight_sha256": "d1829f585d9e8657272c7fe1c1a5dc614e63ff01833402e1b34b76ba564ff877"
+  },
+  "status": "pass",
+  "summary": {
+    "audited_rows": 141,
+    "check_count": 10,
+    "failed_checks": [],
+    "max_metric_numeric_difference": 0.0,
+    "max_row_numeric_difference": 0.0,
+    "passed_checks": 10
+  }
+}
