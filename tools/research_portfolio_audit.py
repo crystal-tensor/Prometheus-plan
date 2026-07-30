@@ -3714,6 +3714,446 @@ def audit_b9_r195(
     return status
 
 
+def audit_b9_r196(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the B9 R196 certificate and its independent third-prime audit."""
+    expected_status = "checked_extended_tail_charge_boundary"
+    expected_method = "b9_r196_extended_tail_charge_stress_v1"
+    expected_hashes = {
+        "contract_sha256": (
+            "afc5a721320ccf2a73291b961e6c3c28e5029ebe9e783ef54ccda2d48223e668"
+        ),
+        "protocol_hash": (
+            "8f20eb86bd4e68950a699a0ebcd8bfaa0e4a4b9607b3a10731a123ce3ed54f8f"
+        ),
+        "payload_sha256": (
+            "0116a213e9d49bf5bc57b1e43069644f79b15932c8608bc56075bacbfc10ff0c"
+        ),
+        "tool_sha256": (
+            "697d69f049c35eaac97ac3103dcbece3b29aaadec02f09cf90ec9d92605d8ff5"
+        ),
+        "independent_audit_tool_sha256": (
+            "9f03ea0c7531636c00ef335e5bd68c1c73be52b9d460c4dd282caf2dd6d135cd"
+        ),
+        "independent_audit_sha256": (
+            "ce61a91465662f50aac5fddbee5b20a8c9a097ae508ad899d62e596bcb7f7a14"
+        ),
+        "r193_dependency_sha256": (
+            "3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143"
+        ),
+        "r194_dependency_sha256": (
+            "67918eb61c2ad58f429e6fc5aae3f4066f128b7a10bc461a9f0cfcd6550b9af8"
+        ),
+        "r195_dependency_sha256": (
+            "8b01836407d936e748ef1c7bf3eb1019201db63549fd6ce3a117abb15967975e"
+        ),
+        "r195_result_sha256": (
+            "e90e7c5c39fbfc89976b3fbb3afbf7974283346509fd54b7f9c5247ac6447ebe"
+        ),
+    }
+    expected_file_hashes = {
+        "result": (
+            "a6b6a0974bdca5f6e47acb3a408c7c8a9dfb9bce030ac4393b70abca59e26baf"
+        ),
+        "report": (
+            "c3aa92cff29bd2791d868500b547704e8549c6fc5f91271af0e3008131da7548"
+        ),
+    }
+    expected_matrix_hashes = {
+        "complete": [
+            "7f30eb1a5b5dd46fdd1b4c401fd603fb57477aed2e0af76a20e2c0fb21190f1d",
+            "afa472e55203f7cee52c0c18cb338684607ad72b8878e2532993e7f1579b20b9",
+        ],
+        "translation": [
+            "31f5982b31030efcead616249ea259c357f7148153ebccc9c9d5bd5ae52fb278",
+        ],
+        "boundary": [
+            "cf93fbc8e008ad545e3f3b642a3324c7a5f268bdc9f3b03909d28ed8d134a531",
+            "b146041fd93c83f876ae11598a6a283d73929a7afe758d0de2ae1296f0d5df01",
+            "4a4e6f43c709db187266c2b64da3eb298da402e49b77c864811c8257992fb026",
+            "38c8be21151a914dffadef3ed1dbe347349696cebc8ff9fca7c70dfb6b9acd0a",
+        ],
+    }
+    true_fields = [
+        "r196_contract_publicly_frozen_before_acceptance_execution",
+        "r196_holdout_couplings_unseen_before_protocol_freeze",
+        "complete_range_six_n10_nullity_two_on_two_holdout_rows",
+        "translation_summed_range_eight_nullity_two_on_one_holdout_row",
+        "range_six_boundary_range_four_nullity_two_on_four_holdout_rows",
+        "explicit_zero_coupling_witnesses_detect_extra_conserved_charges",
+        "r195_candidate_survives_declared_r196_finite_ansatz_adversaries",
+    ]
+    false_fields = [
+        "all_coupling_theorem",
+        "all_size_theorem",
+        "range_nine_or_longer_tail_exclusion",
+        "arbitrary_boundary_dressing_exclusion",
+        "complete_quasi_local_charge_exclusion",
+        "nonlocal_duality_exclusion",
+        "nonstandard_fermionization_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R196 extended tail-charge stress")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    def file_hash(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_digest(value: dict) -> str:
+        return hashlib.sha256(
+            json.dumps(
+                value,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    contract_path = resolve(manifest_entry.get("contract"))
+    independent_audit_path = resolve(
+        manifest_entry.get("independent_audit")
+    )
+    tool_path = root / "tools/b9_r196_extended_tail_charge_stress.py"
+    independent_tool_path = root / "tools/b9_r196_independent_audit.py"
+    dependency_paths = {
+        "r193_dependency_sha256": (
+            root / "tools/b9_r193_coupling_integrability_stress.py"
+        ),
+        "r194_dependency_sha256": (
+            root / "tools/b9_r194_higher_range_charge_stress.py"
+        ),
+        "r195_dependency_sha256": (
+            root / "tools/b9_r195_multiscale_tail_charge_stress.py"
+        ),
+        "r195_result_sha256": (
+            root / "results/B9_R195_multiscale_tail_charge_stress_v1.json"
+        ),
+    }
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "contract": contract_path,
+        "independent audit": independent_audit_path,
+        "tool": tool_path,
+        "independent audit tool": independent_tool_path,
+        **dependency_paths,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R196 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    report = read(report_path)
+    independent = json.loads(read(independent_audit_path))
+    summary = payload.get("summary", {})
+    requirements = payload.get("requirements", [])
+    complete_rows = payload.get("complete_range_six_n10_rows", [])
+    translation_rows = payload.get("translation_range_eight_rows", [])
+    boundary_rows = payload.get("boundary_range_four_rows", [])
+    controls = payload.get("positive_controls", {})
+    claim_boundary = payload.get("claim_boundary", {})
+    evidence = payload.get("evidence", {})
+
+    observed_hashes = {
+        "contract_sha256": file_hash(contract_path),
+        "protocol_hash": payload.get("protocol_sha256"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "tool_sha256": file_hash(tool_path),
+        "independent_audit_tool_sha256": file_hash(
+            independent_tool_path
+        ),
+        "independent_audit_sha256": file_hash(independent_audit_path),
+        **{
+            label: file_hash(path)
+            for label, path in dependency_paths.items()
+        },
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes.get(field) != expected:
+            errors.append(f"B9 R196 {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R196 manifest {field} mismatch")
+    if file_hash(result_path) != expected_file_hashes["result"]:
+        errors.append("B9 R196 result file hash mismatch")
+    if file_hash(report_path) != expected_file_hashes["report"]:
+        errors.append("B9 R196 report file hash mismatch")
+    if evidence.get("contract_sha256") != expected_hashes["contract_sha256"]:
+        errors.append("B9 R196 payload contract binding mismatch")
+    for field in (
+        "tool_sha256",
+        "r193_dependency_sha256",
+        "r194_dependency_sha256",
+        "r195_dependency_sha256",
+        "r195_result_sha256",
+    ):
+        if evidence.get(field) != expected_hashes[field]:
+            errors.append(f"B9 R196 payload {field} mismatch")
+
+    unhashed_payload = dict(payload)
+    stored_payload_hash = unhashed_payload.pop("payload_sha256", None)
+    if canonical_digest(unhashed_payload) != stored_payload_hash:
+        errors.append("B9 R196 payload self-hash mismatch")
+    if (
+        payload.get("status") != expected_status
+        or payload.get("method") != expected_method
+        or manifest_entry.get("status") != expected_status
+        or manifest_entry.get("method") != expected_method
+    ):
+        errors.append("B9 R196 status or method mismatch")
+    if (
+        len(requirements) != 15
+        or payload.get("requirements_total") != 15
+        or payload.get("requirements_passed") != 15
+        or any(row.get("passed") is not True for row in requirements)
+        or manifest_entry.get("requirement_count") != 15
+        or manifest_entry.get("requirements_passed") != 15
+    ):
+        errors.append("B9 R196 must pass all 15 frozen requirements")
+
+    expected_complete_keys = {("73/128", 10), ("77/128", 10)}
+    expected_boundary_keys = {
+        ("73/128", 9),
+        ("73/128", 10),
+        ("77/128", 9),
+        ("77/128", 10),
+    }
+    observed_complete_keys = {
+        (row.get("coupling"), row.get("n")) for row in complete_rows
+    }
+    observed_translation_keys = {
+        (row.get("coupling"), row.get("n")) for row in translation_rows
+    }
+    observed_boundary_keys = {
+        (row.get("coupling"), row.get("n")) for row in boundary_rows
+    }
+    if observed_complete_keys != expected_complete_keys:
+        errors.append("B9 R196 complete row set mismatch")
+    if observed_translation_keys != {("73/128", 10)}:
+        errors.append("B9 R196 translation row set mismatch")
+    if observed_boundary_keys != expected_boundary_keys:
+        errors.append("B9 R196 boundary row set mismatch")
+
+    row_groups = {
+        "complete": complete_rows,
+        "translation": translation_rows,
+        "boundary": boundary_rows,
+    }
+    expected_sizes = {
+        "complete": 16384,
+        "translation": 49153,
+        "boundary": 3457,
+    }
+    for label, rows in row_groups.items():
+        if [
+            row.get("commutator_matrix_sha256") for row in rows
+        ] != expected_matrix_hashes[label]:
+            errors.append(f"B9 R196 {label} matrix digest set mismatch")
+        for row in rows:
+            candidate_size = row.get("candidate_basis_size")
+            if candidate_size != expected_sizes[label]:
+                errors.append(
+                    f"B9 R196 {label} candidate basis size mismatch"
+                )
+            if (
+                row.get("identity_kernel_verified") is not True
+                or row.get("hamiltonian_kernel_verified") is not True
+                or row.get("exact_nullity_two_certified") is not True
+                or row.get("checked") is not True
+                or row.get("modular_ranks")
+                != {
+                    "1000003": candidate_size - 2,
+                    "1000033": candidate_size - 2,
+                }
+                or row.get("modular_nullities")
+                != {"1000003": 2, "1000033": 2}
+            ):
+                errors.append(
+                    f"B9 R196 {label} exact-rank boundary mismatch"
+                )
+    if any(
+        row.get("independent_boundary_correction_range") != 4
+        for row in boundary_rows
+    ):
+        errors.append("B9 R196 boundary correction range mismatch")
+
+    independent_groups = independent.get("independent_rows", {})
+    independent_lists = {
+        "complete": independent_groups.get(
+            "complete_range_six_n10",
+            [],
+        ),
+        "translation": independent_groups.get(
+            "translation_range_eight",
+            [],
+        ),
+        "boundary": independent_groups.get("boundary_range_four", []),
+    }
+    if (
+        independent.get("status") != "pass"
+        or independent.get("error_count") != 0
+        or independent.get("errors") != []
+        or independent.get("independent_prime") != 1_000_037
+        or independent.get("evidence_integrity_complete") is not True
+        or independent.get("result_payload_sha256")
+        != expected_hashes["payload_sha256"]
+        or independent.get("recomputed_payload_sha256")
+        != expected_hashes["payload_sha256"]
+    ):
+        errors.append("B9 R196 independent audit boundary mismatch")
+    for label, rows in independent_lists.items():
+        if len(rows) != len(row_groups[label]):
+            errors.append(
+                f"B9 R196 independent {label} row count mismatch"
+            )
+            continue
+        for observed, rebuilt in zip(row_groups[label], rows):
+            if (
+                rebuilt.get("commutator_matrix_sha256")
+                != observed.get("commutator_matrix_sha256")
+                or rebuilt.get("candidate_basis_size")
+                != observed.get("candidate_basis_size")
+                or rebuilt.get("independent_modular_prime") != 1_000_037
+                or rebuilt.get("independent_modular_rank")
+                != observed.get("candidate_basis_size") - 2
+                or rebuilt.get("independent_modular_nullity") != 2
+                or rebuilt.get("identity_kernel_verified") is not True
+                or rebuilt.get("hamiltonian_kernel_verified") is not True
+            ):
+                errors.append(
+                    f"B9 R196 independent {label} rebuild mismatch"
+                )
+    independent_control = independent.get("positive_control", {})
+    if (
+        controls.get("checked") is not True
+        or sum(controls.get("family_checks", {}).values()) != 3
+        or independent_control.get("checked") is not True
+        or independent_control.get(
+            "linearly_independent_by_disjoint_support_sectors"
+        )
+        is not True
+        or not all(
+            independent_control.get(
+                "witness_kernel_checks",
+                {},
+            ).values()
+        )
+    ):
+        errors.append("B9 R196 positive-control boundary mismatch")
+
+    true_claims = set(claim_boundary.get("true_claims", []))
+    false_claims = set(claim_boundary.get("false_claims", []))
+    if (
+        not set(true_fields).issubset(true_claims)
+        or not set(false_fields).issubset(false_claims)
+        or summary.get("complete_range_six_n10_row_count") != 2
+        or summary.get("complete_range_six_n10_nullity_two_count") != 2
+        or summary.get("translation_range_eight_row_count") != 1
+        or summary.get("translation_range_eight_nullity_two_count") != 1
+        or summary.get("boundary_range_four_row_count") != 4
+        or summary.get("boundary_range_four_nullity_two_count") != 4
+        or summary.get("positive_control_family_pass_count") != 3
+        or summary.get("scoped_extended_tail_boundary_accepted") is not True
+        or summary.get("scientific_promotion_accepted") is not False
+        or payload.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R196 claim boundary mismatch")
+    for field in true_fields:
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R196 manifest {field} must remain true")
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R196 manifest {field} must remain false")
+    required_report_phrases = [
+        "Exact-nullity-two rows: `2/2`",
+        "Candidate columns: `49153`",
+        "Exact-nullity-two rows: `4/4`",
+        "it does not prove nonintegrability",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R196 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": payload.get("requirements_passed"),
+        "complete_range_six_n10_row_count": summary.get(
+            "complete_range_six_n10_row_count"
+        ),
+        "complete_range_six_n10_nullity_two_count": summary.get(
+            "complete_range_six_n10_nullity_two_count"
+        ),
+        "translation_range_eight_row_count": summary.get(
+            "translation_range_eight_row_count"
+        ),
+        "translation_range_eight_nullity_two_count": summary.get(
+            "translation_range_eight_nullity_two_count"
+        ),
+        "translation_range_eight_candidate_basis_size": (
+            translation_rows[0].get("candidate_basis_size")
+            if translation_rows
+            else None
+        ),
+        "boundary_range_four_row_count": summary.get(
+            "boundary_range_four_row_count"
+        ),
+        "boundary_range_four_nullity_two_count": summary.get(
+            "boundary_range_four_nullity_two_count"
+        ),
+        "positive_control_family_pass_count": summary.get(
+            "positive_control_family_pass_count"
+        ),
+        "independent_audit_status": independent.get("status"),
+        "independent_audit_prime": independent.get("independent_prime"),
+        "independent_audit_error_count": independent.get("error_count"),
+        "scoped_extended_tail_boundary_accepted": summary.get(
+            "scoped_extended_tail_boundary_accepted"
+        ),
+        "scientific_promotion_accepted": summary.get(
+            "scientific_promotion_accepted"
+        ),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R196") for message in errors
+        ),
+        **{field: field in true_claims for field in true_fields},
+        **{field: field not in false_claims for field in false_fields},
+        "new_credit_delta": payload.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "independent_audit": manifest_entry.get("independent_audit"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -41749,6 +42189,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r196 = b9_results.get("r196_extended_tail_charge_stress_v1")
+    b9_r196_status = audit_b9_r196(
+        root,
+        b9_r196,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -52153,6 +52600,7 @@ def audit(root: Path) -> dict:
             "r193_coupling_integrability_stress": b9_r193_status,
             "r194_higher_range_charge_stress": b9_r194_status,
             "r195_multiscale_tail_charge_stress": b9_r195_status,
+            "r196_extended_tail_charge_stress": b9_r196_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -56378,6 +56826,12 @@ def markdown_report(report: dict) -> str:
             f"- R195 translation range-seven rows / nullity-two: {report['b9']['r195_multiscale_tail_charge_stress'].get('translation_range_seven_row_count')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('translation_range_seven_nullity_two_count')}",
             f"- R195 boundary-dressed rows / nullity-two / positive controls: {report['b9']['r195_multiscale_tail_charge_stress'].get('boundary_dressed_row_count')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('boundary_dressed_nullity_two_count')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('positive_control_pass_count')}",
             f"- R195 complete/translation/boundary J=0 nullity / scientific promotion / complete integrability exclusion / credit: {report['b9']['r195_multiscale_tail_charge_stress'].get('complete_zero_control_nullity')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('translation_zero_control_nullity')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('boundary_zero_control_nullity')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('scientific_promotion_accepted')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('complete_integrability_exclusion')} / {report['b9']['r195_multiscale_tail_charge_stress'].get('new_credit_delta')}",
+            f"- R196 extended tail-charge status: {report['b9']['r196_extended_tail_charge_stress'].get('status')}",
+            f"- R196 requirements / evidence integrity: {report['b9']['r196_extended_tail_charge_stress'].get('requirements_passed')} / {report['b9']['r196_extended_tail_charge_stress'].get('evidence_integrity_complete')}",
+            f"- R196 complete range-six n=10 rows / nullity-two: {report['b9']['r196_extended_tail_charge_stress'].get('complete_range_six_n10_row_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('complete_range_six_n10_nullity_two_count')}",
+            f"- R196 translation range-eight rows / nullity-two / candidate basis: {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_row_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_nullity_two_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_candidate_basis_size')}",
+            f"- R196 boundary range-four rows / nullity-two / positive-control families: {report['b9']['r196_extended_tail_charge_stress'].get('boundary_range_four_row_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('boundary_range_four_nullity_two_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('positive_control_family_pass_count')}",
+            f"- R196 independent audit / prime / errors / scientific promotion / complete integrability exclusion / credit: {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_status')} / {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_prime')} / {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_error_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('scientific_promotion_accepted')} / {report['b9']['r196_extended_tail_charge_stress'].get('complete_integrability_exclusion')} / {report['b9']['r196_extended_tail_charge_stress'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

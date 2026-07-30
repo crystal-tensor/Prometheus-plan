@@ -79,7 +79,7 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
-The current B9 formal line spans R187 through R195. R187 is a checked
+The current B9 formal line spans R187 through R196. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption
 entirely. Under pinned Lean 4.12.0 and Lake 5.0.0, the module proves that the
@@ -264,6 +264,33 @@ size-dependent or nonlocal boundary structures, nonlocal dualities,
 nonstandard fermionizations, interacting integrability, or finite-size
 drift. Nonintegrability, chaos, hardness, Quantum PCP, NLTS, BQP,
 solved-frontier status, and new credit remain unclaimed.
+
+R196 executes the preregistered `T-B9-010` extension on two further unseen
+couplings, `J=73/128` and `J=77/128`. Complete position-dependent range-six
+searches now reach `n=10`: both `16,384`-column rows have exact nullity two.
+The frozen `J=73/128,n=10` translation-summed range-eight row contains
+`49,153` candidate columns, a `163,840`-word complete parent basis, and a
+`253,951`-word output basis; its exact modular nullity is also two. Independent
+left/right boundary corrections advance from range three to range four:
+all `4/4` rows at `n=9,10` have exact nullity two in the `3,457`-column family.
+
+The public contract was committed before acceptance execution. Its impossible
+v0.1.0 positive-control wording was corrected transparently before any frozen
+holdout ran, while holdouts, sizes, ranges, primes, rank rules, and claim
+boundaries stayed unchanged. The main executor passes `15/15` under two
+declared primes. A separate integer-coded Pauli implementation imports none
+of the R193-R196 construction modules, rebuilds all seven matrices and
+digests, and obtains nullity two again under a third prime, `1,000,037`, with
+zero audit errors. Contract `afc5a721...`; protocol `8f20eb86...`; payload
+`0116a213...`.
+
+R196 closes only the declared finite `n=10` range-six, one range-eight
+translation, and range-four boundary ansatzes. Range nine and longer or
+adaptive tails, larger/size-dependent/nonlocal boundaries, nonlocal
+dualities, nonstandard fermionizations, interacting integrability, and
+larger-size spectral drift remain open. It is not a nonintegrability, quantum
+chaos, spectral-hardness, Quantum PCP, NLTS, BQP, hardware, or solved-frontier
+result. Scientific promotion is false and new credit remains zero.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

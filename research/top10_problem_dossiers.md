@@ -1115,17 +1115,38 @@ and `701`. Two complete executions are byte-identical, and an independent
 implementation rebuilds every basis, commutator matrix, digest, and modular
 rank. R195 passes `16/16`; protocol `a03648ca...`; payload `8d40e36e...`.
 
-**Remaining path to a serious solution:** extend complete range six to
-`n=10`, then attack range-eight and longer quasi-local tails, boundary
-corrections beyond range three, size-dependent/nonlocal boundary structures,
-nonlocal dualities, nonstandard fermionizations, interacting integrability,
-and larger sparse spectra under newly frozen holdouts. R195 narrows three
-finite conserved-charge ansatz families; it is not a complete integrability
-exclusion, nonintegrability or chaos theorem, spectral-hardness theorem,
+T-B9-010 adds R196, the preregistered extended-tail stress. The public
+contract freezes two further unseen couplings, `J=73/128` and `J=77/128`.
+Its v0.1.0 positive-control wording was corrected transparently before any
+frozen-holdout acceptance execution; holdouts, sizes, ranges, primes, rank
+rules, and claim boundaries remain unchanged.
+
+Complete position-dependent range-six searches now reach `n=10`; both
+`16,384`-column rows have exact nullity two. The frozen `J=73/128,n=10`
+translation-summed range-eight row has `49,153` candidates, a `163,840`-word
+complete parent basis, and a `253,951`-word output basis and also has exact
+nullity two. The boundary-dressed family advances to independent left/right
+corrections through range four: all `4/4` `3,457`-column rows at `n=9,10`
+have exact nullity two.
+
+Three explicit `J=0` family-contained witness sets commute exactly. The main
+executor passes `15/15` under two declared primes. A separate integer-coded
+Pauli implementation imports none of the R193-R196 construction modules,
+rebuilds all seven matrices and digests, and obtains nullity two under third
+prime `1,000,037` with zero errors. Contract `afc5a721...`; protocol
+`8f20eb86...`; payload `0116a213...`.
+
+**Remaining path to a serious solution:** attack range-nine or adaptive
+quasi-local tails, boundary corrections beyond range four,
+size-dependent/nonlocal boundary structures, nonlocal dualities, nonstandard
+fermionizations, interacting integrability, and larger sparse spectra under
+a new public frozen protocol. R196 narrows three finite conserved-charge
+ansatz families; it is not a complete integrability exclusion,
+nonintegrability or chaos theorem, spectral-hardness theorem,
 arbitrary-local-Hamiltonian theorem, Quantum PCP result, NLTS theorem, BQP
 separation, or solved frontier.
 
-**Current internal maturity:** 42/100.
+**Current internal maturity:** 46/100.
 
 ## B10: Mapping the Boundary of BQP
 

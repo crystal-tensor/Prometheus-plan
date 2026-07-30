@@ -746,6 +746,63 @@ current_results:
     new_credit_delta: 0
     result: ../results/B9_R195_multiscale_tail_charge_stress_v1.json
     markdown_report: ../research/B9_R195_multiscale_tail_charge_stress.md
+  r196_extended_tail_charge_stress_v1:
+    status: checked_extended_tail_charge_boundary
+    method: b9_r196_extended_tail_charge_stress_v1
+    source: r195_multiscale_tail_charge_stress_v1
+    experiment_id: B9-R196-extended-tail-charge-stress
+    contract_sha256: afc5a721320ccf2a73291b961e6c3c28e5029ebe9e783ef54ccda2d48223e668
+    protocol_hash: 8f20eb86bd4e68950a699a0ebcd8bfaa0e4a4b9607b3a10731a123ce3ed54f8f
+    payload_sha256: 0116a213e9d49bf5bc57b1e43069644f79b15932c8608bc56075bacbfc10ff0c
+    tool_sha256: 697d69f049c35eaac97ac3103dcbece3b29aaadec02f09cf90ec9d92605d8ff5
+    independent_audit_tool_sha256: 9f03ea0c7531636c00ef335e5bd68c1c73be52b9d460c4dd282caf2dd6d135cd
+    independent_audit_sha256: ce61a91465662f50aac5fddbee5b20a8c9a097ae508ad899d62e596bcb7f7a14
+    r193_dependency_sha256: 3e0c7279917828c353d31a7d60b878c024f140b3f8daab7c432fdbc00c7f9143
+    r194_dependency_sha256: 67918eb61c2ad58f429e6fc5aae3f4066f128b7a10bc461a9f0cfcd6550b9af8
+    r195_dependency_sha256: 8b01836407d936e748ef1c7bf3eb1019201db63549fd6ce3a117abb15967975e
+    r195_result_sha256: e90e7c5c39fbfc89976b3fbb3afbf7974283346509fd54b7f9c5247ac6447ebe
+    requirement_count: 15
+    requirements_passed: 15
+    r196_contract_publicly_frozen_before_acceptance_execution: true
+    r196_holdout_couplings_unseen_before_protocol_freeze: true
+    complete_range_six_n10_nullity_two_on_two_holdout_rows: true
+    translation_summed_range_eight_nullity_two_on_one_holdout_row: true
+    range_six_boundary_range_four_nullity_two_on_four_holdout_rows: true
+    explicit_zero_coupling_witnesses_detect_extra_conserved_charges: true
+    r195_candidate_survives_declared_r196_finite_ansatz_adversaries: true
+    all_coupling_theorem: false
+    all_size_theorem: false
+    range_nine_or_longer_tail_exclusion: false
+    arbitrary_boundary_dressing_exclusion: false
+    complete_quasi_local_charge_exclusion: false
+    nonlocal_duality_exclusion: false
+    nonstandard_fermionization_exclusion: false
+    interacting_integrability_exclusion: false
+    complete_integrability_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    solved_frontier: false
+    complete_range_six_n10_row_count: 2
+    complete_range_six_n10_nullity_two_count: 2
+    translation_range_eight_row_count: 1
+    translation_range_eight_nullity_two_count: 1
+    boundary_range_four_row_count: 4
+    boundary_range_four_nullity_two_count: 4
+    positive_control_family_pass_count: 3
+    independent_audit_status: pass
+    independent_audit_prime: 1000037
+    independent_audit_error_count: 0
+    scoped_extended_tail_boundary_accepted: true
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    contract: B9_R196_extended_tail_charge_contract_v0.json
+    result: ../results/B9_R196_extended_tail_charge_stress_v1.json
+    independent_audit: ../results/B9_R196_independent_audit_v1.json
+    markdown_report: ../research/B9_R196_extended_tail_charge_stress.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -771,4 +828,6 @@ current_results:
   r193_coupling_integrability_stress: ../tools/b9_r193_coupling_integrability_stress.py
   r194_higher_range_charge_stress: ../tools/b9_r194_higher_range_charge_stress.py
   r195_multiscale_tail_charge_stress: ../tools/b9_r195_multiscale_tail_charge_stress.py
+  r196_extended_tail_charge_stress: ../tools/b9_r196_extended_tail_charge_stress.py
+  r196_independent_audit: ../tools/b9_r196_independent_audit.py
   prototype_notes: ../research/B9_prototype_notes.md
