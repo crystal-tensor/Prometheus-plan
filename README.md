@@ -318,6 +318,33 @@ not a complete fermionization exclusion, nonintegrability or chaos theorem,
 hardness result, Quantum PCP or NLTS theorem, BQP separation, hardware result,
 or solved frontier. Scientific promotion is false and new credit remains zero.
 
+R198 is now publicly preregistered but not yet executed on its frozen
+holdouts. It attacks the first R197 escape route with every XZ-plane
+Jordan-Wigner parity axis
+`P(t)=((1-t^2)X+2tZ)/(1+t^2)`. At `n=4,5`, the executor expands the complete
+quadratic-Majorana commutator matrix over `ZZ[t]`, combines exact maximal
+minors selected at public anchors, and pressures each remaining real-root
+factor over its quotient field. The projective endpoint `t=infinity` is
+checked separately. At `n=6,8,10`, a frozen catalog of 72 exact rational
+frames will pressure the same hypothesis at larger sizes.
+
+Only `J=13/32` has been used for method engineering. Its `n=4` and `n=5`
+certificates both reduce their final common minor factor to a power of
+`1+t^2`, with zero finite real roots and full rank at the projective endpoint.
+The positive control at `J=0,n=6,t=3` recovers all six expected onsite
+charges. These engineering results carry zero acceptance. Contract
+`c1b68368...` freezes unseen `J=89/128` and `J=101/128`, 432 larger-size grid
+rows, a non-importing third-prime audit, and the exact claim boundary before
+holdout execution.
+
+Even if every R198 gate passes, the result will cover only the declared
+XZ-plane continuous quadratic-Majorana-plus-parity family at `n=4,5` and the
+72-frame grid at `n=6,8,10`. General Bloch-sphere frames, nonlinear frame
+mixtures, cubic or quartic Majorana charges, nonlocal dualities, interacting
+integrability, nonintegrability, quantum chaos, hardness, Quantum PCP, NLTS,
+BQP, hardware relevance, and solved-frontier status remain open. Scientific
+promotion and new credit remain zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
