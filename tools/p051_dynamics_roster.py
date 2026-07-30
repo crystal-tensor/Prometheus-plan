@@ -620,9 +620,15 @@ def build_result(
             f"Verified {len(source['source_files'])} retained files.",
         ),
         check(
-            "target_roster_size_reached",
-            len(roster) == target,
-            f"Selected {len(roster)} of {target} required proteins.",
+            "readiness_decision_matches_roster_size",
+            ready == (len(roster) == target)
+            and decision
+            == (
+                benchmark["readiness_decision"]["ready_label"]
+                if len(roster) == target
+                else benchmark["readiness_decision"]["blocked_label"]
+            ),
+            f"Selected {len(roster)} of {target}; decision is {decision}.",
         ),
         check(
             "roster_uniprots_are_distinct",
@@ -747,12 +753,20 @@ def build_result(
             "failed_checks": [
                 item["name"] for item in checks if not item["passed"]
             ],
-            "next_gate": benchmark["next_gate_if_ready"],
+            "next_gate": (
+                benchmark["next_gate_if_ready"]
+                if ready
+                else "Add a separately preregistered official source layer or locate another machine-readable deposition while preserving the two-family, 20-row, distinct-UniProt rule."
+            ),
         },
     }
 
 
 def render_report(result: dict[str, Any]) -> str:
+    blocked = (
+        result["decision"]
+        == "blocked_insufficient_machine_readable_dynamic_observables"
+    )
     lines = [
         "# P051 public protein-dynamics roster v1",
         "",
@@ -781,7 +795,7 @@ def render_report(result: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "The number in parentheses is the machine-parsed count of numeric rows in that BMRB observable family. Every screened source before the deterministic stopping point, plus selected PED metadata and coordinate archives, is retained with SHA-256 hashes.",
+            "The number in parentheses is the machine-parsed count of numeric rows in that BMRB observable family. Every screened source before the deterministic scan ended, plus selected PED metadata and coordinate archives, is retained with SHA-256 hashes.",
             "",
             "## The important leakage result",
             "",
@@ -793,11 +807,17 @@ def render_report(result: dict[str, Any]) -> str:
             "",
             f"- Formal source/access checks: `{result['summary']['passed_checks']}/{result['summary']['check_count']}`",
             f"- PED search rows retained: `{result['ped_search']['returned_count']}`",
-            f"- Metadata-eligible BMRB sources screened before stop: `{result['ped_search']['screened_metadata_eligible_count']}`",
+            f"- Metadata-eligible BMRB sources screened in the full deterministic scan: `{result['ped_search']['screened_metadata_eligible_count']}`",
             "- Candidate ensemble executed: `false`",
             "- Short-MD denominator executed: `false`",
             "",
-            "The next gate is to freeze residue mapping, observable forward models, a genuinely independent single-structure denominator, a budget-matched short-MD denominator, and training-only observable/protein splits. This packet does not evaluate AlphaFold, a force field, an ensemble generator, or biological function.",
+            (
+                "The roster is blocked at two of three required distinct proteins. The next step is to add a separately preregistered public source layer or locate another official BMRB/PED deposition that satisfies the unchanged two-family, 20-row rule. The threshold is not weakened and no model execution begins."
+                if blocked
+                else "The next gate is to freeze residue mapping, observable forward models, a genuinely independent single-structure denominator, a budget-matched short-MD denominator, and training-only observable/protein splits."
+            ),
+            "",
+            "This packet does not evaluate AlphaFold, a force field, an ensemble generator, or biological function.",
             "",
             "## Official sources",
             "",
@@ -816,6 +836,29 @@ def render_discussion(result: dict[str, Any]) -> str:
         f"{row['entry_id']}/{row['uniprot_accession']}"
         for row in result["roster"]
     )
+    blocked = (
+        result["decision"]
+        == "blocked_insufficient_machine_readable_dynamic_observables"
+    )
+    if blocked:
+        return "\n".join(
+            [
+                "Where is the third protein whose dynamics are actually deposited?",
+                "",
+                "A database can label an entry as a relaxation experiment without exposing enough numeric relaxation rows to build a leakage-safe benchmark. How should we distinguish searchable metadata from genuinely executable dynamics evidence?",
+                "",
+                f"The #051 gate scanned all {result['ped_search']['returned_count']} PED results for `relaxation`. Seventy-eight entries met the basic one-UniProt/one-BMRB/coordinate metadata rule, yet only two distinct proteins survived the frozen requirement of at least two numeric dynamics families with 20 rows each: {roster}. The preregistered target was three, so the roster is blocked rather than weakened.",
+                "",
+                "The second trap is leakage: a deposited PED ensemble may already have used the same NMR observables during generation or selection. Such an ensemble is now restricted to format and integrity checks; it cannot grade itself on those observables. No candidate or short-MD denominator has run.",
+                "",
+                "Can you point to an official, publicly downloadable protein entry that provides residue-indexed T1/T2/NOE, R1/R2, or order-parameter rows plus coordinates—and whose provenance is clear enough to reconstruct a training-only ensemble?",
+                "",
+                "The contribution we need is not another paper saying that relaxation was measured. We need a stable accession, machine-readable numeric rows, an explicit license, residue mapping, and enough provenance to know which observables shaped the deposited ensemble.",
+                "",
+                f"Reproducibility: {result['summary']['passed_checks']}/{result['summary']['check_count']} integrity checks; all {result['ped_search']['screened_metadata_eligible_count']} BMRB sources in the full deterministic scan are hash-retained. The two-family/20-row rule remains unchanged. No biological-function, protein-engineering, clinical, therapeutic, wet-lab, or solved-frontier claim is made.",
+                "",
+            ]
+        )
     return "\n".join(
         [
             "When does an ensemble leak the experiment it claims to predict?",

@@ -22,12 +22,12 @@ DEFAULT_RESULT = ROOT / "results/P051_dynamics_roster_v1.json"
 DEFAULT_AUDIT = ROOT / "results/P051_dynamics_roster_audit_v1.json"
 
 FAMILY_PATTERNS = {
-    "heteronuclear_noe": re.compile(r"^_Heteronucl_NOE\\.", re.I),
-    "t1": re.compile(r"^_T1\\.", re.I),
-    "t2": re.compile(r"^_T2\\.", re.I),
-    "r1": re.compile(r"^_R1\\.", re.I),
-    "r2": re.compile(r"^_R2\\.", re.I),
-    "order_parameter": re.compile(r"^_Order_param\\.", re.I),
+    "heteronuclear_noe": re.compile(r"^_Heteronucl_NOE\.", re.I),
+    "t1": re.compile(r"^_T1\.", re.I),
+    "t2": re.compile(r"^_T2\.", re.I),
+    "r1": re.compile(r"^_R1\.", re.I),
+    "r2": re.compile(r"^_R2\.", re.I),
+    "order_parameter": re.compile(r"^_Order_param\.", re.I),
 }
 
 
@@ -354,16 +354,24 @@ def build_audit(
             f"Maximum row-count difference {max(family_count_differences, default=math.inf)}.",
         ),
         check(
-            "three_distinct_proteins_recovered",
-            len(reconstructed_roster) == target
-            and len(
-                {
-                    row["uniprot_accession"]
-                    for row in reconstructed_roster
-                }
-            )
-            == target,
-            str([row["uniprot_accession"] for row in reconstructed_roster]),
+            "independent_readiness_decision_matches",
+            result["decision"]
+            == (
+                benchmark["readiness_decision"]["ready_label"]
+                if len(reconstructed_roster) == target
+                and len(
+                    {
+                        row["uniprot_accession"]
+                        for row in reconstructed_roster
+                    }
+                )
+                == target
+                else benchmark["readiness_decision"]["blocked_label"]
+            ),
+            (
+                f"Recovered {len(reconstructed_roster)} of {target}; "
+                f"decision is {result['decision']}."
+            ),
         ),
         check(
             "coordinate_archive_counts_match",

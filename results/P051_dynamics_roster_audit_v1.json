@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "detail": "pass",
+      "name": "formal_result_passed",
+      "passed": true
+    },
+    {
+      "detail": "cc1479bc056f53b75e3e23d56edc0ffb52a8685a",
+      "name": "protocol_commit_recorded",
+      "passed": true
+    },
+    {
+      "detail": "Verified 78 files.",
+      "name": "all_retained_file_hashes_match",
+      "passed": true
+    },
+    {
+      "detail": "Observed 129 rows.",
+      "name": "raw_search_count_matches",
+      "passed": true
+    },
+    {
+      "detail": "Rebuilt 78 screened entries.",
+      "name": "independent_screening_order_and_selection_match",
+      "passed": true
+    },
+    {
+      "detail": "[{'entry_id': 'PED00001', 'uniprot_accession': 'P38634', 'bmrb_id': '16659', 'families': ['heteronuclear_noe', 't1', 't2'], 'models': 11}, {'entry_id': 'PED00394', 'uniprot_accession': 'Q12983', 'bmrb_id': '7288', 'families': ['heteronuclear_noe', 't1', 't2'], 'models': 16}]",
+      "name": "independent_roster_matches",
+      "passed": true
+    },
+    {
+      "detail": "Maximum row-count difference 0.",
+      "name": "independent_observable_counts_match",
+      "passed": true
+    },
+    {
+      "detail": "Recovered 2 of 3; decision is blocked_insufficient_machine_readable_dynamic_observables.",
+      "name": "independent_readiness_decision_matches",
+      "passed": true
+    },
+    {
+      "detail": "{'PED00001': 11, 'PED00394': 16}",
+      "name": "coordinate_archive_counts_match",
+      "passed": true
+    },
+    {
+      "detail": "The audit covers access and leakage only.",
+      "name": "candidate_execution_remains_false",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "parser": "independent line-state NMR-STAR inventory",
+    "python": "3.12.6"
+  },
+  "independent_roster": [
+    {
+      "bmrb_id": "16659",
+      "entry_id": "PED00001",
+      "families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "models": 11,
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "7288",
+      "entry_id": "PED00394",
+      "families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "models": 16,
+      "uniprot_accession": "Q12983"
+    }
+  ],
+  "maximum_observable_row_count_difference": 0,
+  "schema_version": "p051_dynamics_roster_audit_v1",
+  "source": {
+    "audit_tool": "tools/p051_dynamics_roster_audit.py",
+    "audit_tool_sha256": "58b71c0467badbf4ed5f03268ac97d5bcb6ed219fd886cf29d93d152d11b2e42",
+    "benchmark": "benchmarks/P051_dynamics_roster_v1.json",
+    "benchmark_sha256": "0cc6b46859bc4015fa3751f318effcd0179e51cf2a437c14a1ab52c9dd7e8c85",
+    "formal_result": "results/P051_dynamics_roster_v1.json",
+    "formal_result_sha256": "241dd9430901727a8fa0703056133adfc97d39eb3399afaa399709bd0a7e4ed9",
+    "protocol_commit": "cc1479bc056f53b75e3e23d56edc0ffb52a8685a"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 10,
+    "failed_checks": [],
+    "passed_checks": 10
+  }
+}

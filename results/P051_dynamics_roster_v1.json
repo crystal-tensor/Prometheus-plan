@@ -1,0 +1,5369 @@
+{
+  "candidate_model_executed": false,
+  "checks": [
+    {
+      "detail": "Only catalog problem #051 is included.",
+      "name": "scope_is_exactly_p051",
+      "passed": true
+    },
+    {
+      "detail": "cc1479bc056f53b75e3e23d56edc0ffb52a8685a",
+      "name": "protocol_commit_recorded",
+      "passed": true
+    },
+    {
+      "detail": "5.0",
+      "name": "ped_api_version_frozen",
+      "passed": true
+    },
+    {
+      "detail": "Creative Commons Attribution 4.0 International License",
+      "name": "ped_license_verified",
+      "passed": true
+    },
+    {
+      "detail": "disseminates (worldwide in the public domain)",
+      "name": "bmrb_public_domain_policy_verified",
+      "passed": true
+    },
+    {
+      "detail": "129/129 rows.",
+      "name": "ped_search_is_complete_one_page",
+      "passed": true
+    },
+    {
+      "detail": "Screened PED IDs are ascending.",
+      "name": "screening_order_is_deterministic",
+      "passed": true
+    },
+    {
+      "detail": "Verified 78 retained files.",
+      "name": "every_retained_source_hash_matches",
+      "passed": true
+    },
+    {
+      "detail": "Selected 2 of 3; decision is blocked_insufficient_machine_readable_dynamic_observables.",
+      "name": "readiness_decision_matches_roster_size",
+      "passed": true
+    },
+    {
+      "detail": "['P38634', 'Q12983']",
+      "name": "roster_uniprots_are_distinct",
+      "passed": true
+    },
+    {
+      "detail": "['16659', '7288']",
+      "name": "each_roster_row_has_one_bmrb_source",
+      "passed": true
+    },
+    {
+      "detail": "{'PED00001': ['heteronuclear_noe', 't1', 't2'], 'PED00394': ['heteronuclear_noe', 't1', 't2']}",
+      "name": "each_roster_row_has_two_dynamic_families",
+      "passed": true
+    },
+    {
+      "detail": "Minimum is 20 numeric rows per qualifying family.",
+      "name": "dynamic_families_have_minimum_numeric_rows",
+      "passed": true
+    },
+    {
+      "detail": "{'PED00001': 11, 'PED00394': 16}",
+      "name": "coordinate_archives_have_minimum_models",
+      "passed": true
+    },
+    {
+      "detail": "This packet stops at source and leakage readiness.",
+      "name": "candidate_and_md_denominator_not_executed",
+      "passed": true
+    },
+    {
+      "detail": "A deposited ensemble that was generated or selected using an observable may not predict that observable as held-out evidence.",
+      "name": "deposited_ensemble_leakage_forbidden",
+      "passed": true
+    },
+    {
+      "detail": "These inspections established file formats and revealed that PED ontology labels do not guarantee deposited numeric relaxation loops. No prediction error, candidate ensemble, or acceptance outcome was inspected.",
+      "name": "pilot_inspection_disclosed",
+      "passed": true
+    },
+    {
+      "detail": "{'positive_numeric_loops': {'qualifying_families': ['t1', 't2'], 'passed': True}, 'negative_label_only': {'qualifying_families': [], 'passed': True}}",
+      "name": "synthetic_controls_pass",
+      "passed": true
+    }
+  ],
+  "controls": {
+    "negative_label_only": {
+      "passed": true,
+      "qualifying_families": []
+    },
+    "positive_numeric_loops": {
+      "passed": true,
+      "qualifying_families": [
+        "t1",
+        "t2"
+      ]
+    }
+  },
+  "decision": "blocked_insufficient_machine_readable_dynamic_observables",
+  "environment": {
+    "parser": "standard-library deterministic NMR-STAR loop inventory",
+    "python": "3.12.6"
+  },
+  "leakage_boundary": {
+    "deposited_ped_ensembles": "format and source-integrity references only",
+    "forbidden_use": "A deposited ensemble that was generated or selected using an observable may not predict that observable as held-out evidence.",
+    "future_denominator_rule": "Single-structure and short conventional-MD denominators must use the same public inputs, observable forward models, and sampling budget ledger.",
+    "future_protein_holdout": "Leave-one-protein-out evaluation must fit all model choices without any observable from the held-out UniProt accession.",
+    "future_training_rule": "Every candidate ensemble must be regenerated using training observables only; acceptance observables remain unopened until prediction files are frozen."
+  },
+  "ped_search": {
+    "reported_count": 129,
+    "returned_count": 129,
+    "screened_metadata_eligible_count": 78
+  },
+  "roster": [
+    {
+      "bmrb_id": "16659",
+      "bmrb_source_file": "bmrb_16659.str.gz",
+      "ensemble_archive_model_count": 11,
+      "ensemble_archive_source_file": "PED00001_e001_ensemble.tar.gz",
+      "entry_id": "PED00001",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 11
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "ped_entry_source_file": "PED00001.json.gz",
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "title": "Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76, Ser80",
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "7288",
+      "bmrb_source_file": "bmrb_7288.str.gz",
+      "ensemble_archive_model_count": 16,
+      "ensemble_archive_source_file": "PED00394_e001_ensemble.tar.gz",
+      "entry_id": "PED00394",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 16
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 38,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 38,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "ped_entry_source_file": "PED00394.json.gz",
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "title": "Structural ensemble of BNIP3 transmembrane domain in lipid bicelles",
+      "uniprot_accession": "Q12983"
+    }
+  ],
+  "schema_version": "p051_dynamics_roster_result_v1",
+  "screened_entries": [
+    {
+      "bmrb_id": "16659",
+      "bmrb_source_file": "bmrb_16659.str.gz",
+      "bmrb_uncompressed_bytes": 309124,
+      "bmrb_uncompressed_sha256": "38b95bb2d03bb9155dc4d319237b0d296dd9ef3cc3d7dea59e9d5eb98cc3df2f",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16659/bmr16659_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "ensemble_archive_bytes": 254520,
+      "ensemble_archive_members": [
+        "PED00001e001.pdb"
+      ],
+      "ensemble_archive_model_count": 11,
+      "ensemble_archive_source_file": "PED00001_e001_ensemble.tar.gz",
+      "ensemble_archive_uncompressed_sha256": "c3058a550fbbde7128dc9dd5e6225ab468738563ea307a6fae5a1fbfe869ca8f",
+      "ensemble_archive_url": "https://deposition.proteinensemble.org/api/v1/entries/PED00001/ensembles/e001/ensemble-pdb/",
+      "entry_id": "PED00001",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 11
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "ped_entry_source_file": "PED00001.json.gz",
+      "ped_entry_url": "https://deposition.proteinensemble.org/api/v1/entries/PED00001/",
+      "qualifies": true,
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "selected": true,
+      "title": "Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76, Ser80",
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "18841",
+      "bmrb_source_file": "bmrb_18841.str.gz",
+      "bmrb_uncompressed_bytes": 649993,
+      "bmrb_uncompressed_sha256": "48527a98d1e4201f7322af2c0cd4af833ebf09517751ae202b8fca685600e528",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18841/bmr18841_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00013",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 50
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of PaaA2 antitoxin from the human pathogen E. coli O157",
+      "uniprot_accession": "Q8XAD5"
+    },
+    {
+      "bmrb_id": "19332",
+      "bmrb_source_file": "bmrb_19332.str.gz",
+      "bmrb_uncompressed_bytes": 105941,
+      "bmrb_uncompressed_sha256": "cd2be71de670eae6386c2f2b26dc0a74fcfb11ccc085557924423c7763321448",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr19332/bmr19332_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00016",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 4939
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of p15PAF (2-111)",
+      "uniprot_accession": "Q15004"
+    },
+    {
+      "bmrb_id": "18426",
+      "bmrb_source_file": "bmrb_18426.str.gz",
+      "bmrb_uncompressed_bytes": 199549,
+      "bmrb_uncompressed_sha256": "dbe4d5c72ed18a3a382b005ae0b860217b9d50db28f880364eb7bc2b05328385",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18426/bmr18426_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00032",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Solution-state NMR structure of the human prion protein",
+      "uniprot_accession": "P04156"
+    },
+    {
+      "bmrb_id": "17780",
+      "bmrb_source_file": "bmrb_17780.str.gz",
+      "bmrb_uncompressed_bytes": 197657,
+      "bmrb_uncompressed_sha256": "9875e04a1aac8ffe8c19c2202282b694076de496558584e517629a56b056ad6c",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17780/bmr17780_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00033",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR structure of the human prion protein with E219K protective polymorphism",
+      "uniprot_accession": "P04156"
+    },
+    {
+      "bmrb_id": "4326",
+      "bmrb_source_file": "bmrb_4326.str.gz",
+      "bmrb_uncompressed_bytes": 178798,
+      "bmrb_uncompressed_sha256": "124d7076a83970db41bd2137504f3d5d2fc9cbebd669824d6b0dc9a634ff8f8c",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr4326/bmr4326_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00055",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 55
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "SOLUTION STRUCTURE OF THE N-TERMINAL DOMAIN OF DNA POLYMERASE BETA",
+      "uniprot_accession": "P06766"
+    },
+    {
+      "bmrb_id": "4326",
+      "bmrb_source_file": "bmrb_4326.str.gz",
+      "bmrb_uncompressed_bytes": 178798,
+      "bmrb_uncompressed_sha256": "124d7076a83970db41bd2137504f3d5d2fc9cbebd669824d6b0dc9a634ff8f8c",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr4326/bmr4326_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00056",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 25
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "SOLUTION STRUCTURE OF THE N-TERMINAL DOMAIN OF DNA POLYMERASE BETA",
+      "uniprot_accession": "P06766"
+    },
+    {
+      "bmrb_id": "25888",
+      "bmrb_source_file": "bmrb_25888.str.gz",
+      "bmrb_uncompressed_bytes": 331933,
+      "bmrb_uncompressed_sha256": "57a11959e38e00f274dd3d25003717a21ca96a16ed9bc23b64d1af01573cd869",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr25888/bmr25888_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00057",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 78
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Solution structure for PARP-1 F1F2 domains in complex with DNA",
+      "uniprot_accession": "P09874"
+    },
+    {
+      "bmrb_id": "17158",
+      "bmrb_source_file": "bmrb_17158.str.gz",
+      "bmrb_uncompressed_bytes": 157065,
+      "bmrb_uncompressed_sha256": "0793677a6b250d5d5b72fd8b6bbeeea39b9f7f73c82394186ea01bab4c657d42",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17158/bmr17158_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00058",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 30
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Solution structure of the human PARP-1 zinc finger 2",
+      "uniprot_accession": "P09874"
+    },
+    {
+      "bmrb_id": "17157",
+      "bmrb_source_file": "bmrb_17157.str.gz",
+      "bmrb_uncompressed_bytes": 157755,
+      "bmrb_uncompressed_sha256": "75999425146b73ab6a59812c915db2d51d654705ea790198e460bb924491a24d",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17157/bmr17157_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00059",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 30
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Solution structure of the human PARP-1 zinc finger 1",
+      "uniprot_accession": "P09874"
+    },
+    {
+      "bmrb_id": "5534",
+      "bmrb_source_file": "bmrb_5534.str.gz",
+      "bmrb_uncompressed_bytes": 88660,
+      "bmrb_uncompressed_sha256": "a6311d553b13e78a27cfccb9fe365db4697c8b120631fffd468d42be7ef19f50",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr5534/bmr5534_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00060",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 68
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structure and Dynamics of Human Apolipoprotein CII in Complex with Micelles",
+      "uniprot_accession": "P02655"
+    },
+    {
+      "bmrb_id": "6143",
+      "bmrb_source_file": "bmrb_6143.str.gz",
+      "bmrb_uncompressed_bytes": 63585,
+      "bmrb_uncompressed_sha256": "37fa77ba5fe98bf80d64955e064376a94527c95e8df6a51525a5779d3f5257c1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6143/bmr6143_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00061",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 25
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR STRUCTURE OF HUMAN APOLIPOPROTEIN C-II IN THE PRESENCE OF SDS",
+      "uniprot_accession": "P02655"
+    },
+    {
+      "bmrb_id": "6143",
+      "bmrb_source_file": "bmrb_6143.str.gz",
+      "bmrb_uncompressed_bytes": 63585,
+      "bmrb_uncompressed_sha256": "37fa77ba5fe98bf80d64955e064376a94527c95e8df6a51525a5779d3f5257c1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6143/bmr6143_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00062",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 18
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "The structure of human apolipoprotein C-II in dodecyl phosphocholine",
+      "uniprot_accession": "P02655"
+    },
+    {
+      "bmrb_id": "1543",
+      "bmrb_source_file": "bmrb_1543.str.gz",
+      "bmrb_uncompressed_bytes": 48362,
+      "bmrb_uncompressed_sha256": "857b15986841ef3251f5b5f6c32ff9faa1b91da7d62f7eab0e5116f070ecc814",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr1543/bmr1543_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00075",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 100
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of gamma subunit of cGMP phosphodiesterase (1-87)",
+      "uniprot_accession": "P04972"
+    },
+    {
+      "bmrb_id": "16249",
+      "bmrb_source_file": "bmrb_16249.str.gz",
+      "bmrb_uncompressed_bytes": 188084,
+      "bmrb_uncompressed_sha256": "9d2dca1c86e7662ad55bff0a14fc1d60373f21a5a7a1b6e2d3bcd530f0da5989",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16249/bmr16249_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00076",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 21
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR structure of the C-terminal non-repetitive domain of the spider dragline silk protein ADF-3",
+      "uniprot_accession": "Q16987"
+    },
+    {
+      "bmrb_id": "17040",
+      "bmrb_source_file": "bmrb_17040.str.gz",
+      "bmrb_uncompressed_bytes": 74512,
+      "bmrb_uncompressed_sha256": "88a545e111b6a655802ab0bfb62b481dbe9d913d2a58438260fa7d8cb9e82037",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17040/bmr17040_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00109",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 40
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of troponin I (148-164) in complex with troponin C (1-89)",
+      "uniprot_accession": "P19634"
+    },
+    {
+      "bmrb_id": "7279",
+      "bmrb_source_file": "bmrb_7279.str.gz",
+      "bmrb_uncompressed_bytes": 98779,
+      "bmrb_uncompressed_sha256": "2558acfee5b1347d0c47211c3ad3e5c86e579c9f7059a95ec037baf93aeb809f",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr7279/bmr7279_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00129",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 35
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the third binding domain of HMGA1 (80-89) in complex with a DNA dodecamer containing the PRDII site of the interferon-beta promoter.",
+      "uniprot_accession": "P17096"
+    },
+    {
+      "bmrb_id": "7279",
+      "bmrb_source_file": "bmrb_7279.str.gz",
+      "bmrb_uncompressed_bytes": 98779,
+      "bmrb_uncompressed_sha256": "2558acfee5b1347d0c47211c3ad3e5c86e579c9f7059a95ec037baf93aeb809f",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr7279/bmr7279_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00130",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 35
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the second binding domain of HMGA1 (80-89) in complex with a DNA dodecamer containing the PRDII site of the interferon-beta promoter.",
+      "uniprot_accession": "P17096"
+    },
+    {
+      "bmrb_id": "26935",
+      "bmrb_source_file": "bmrb_26935.str.gz",
+      "bmrb_uncompressed_bytes": 125461,
+      "bmrb_uncompressed_sha256": "30c7eeac1fc285cce381857b6ff04b9e4d78faf9f63cd69b785c57c89bc8425c",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr26935/bmr26935_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00142",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 50
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of KISS-1 (19-138)",
+      "uniprot_accession": "Q15726"
+    },
+    {
+      "bmrb_id": "16657",
+      "bmrb_source_file": "bmrb_16657.str.gz",
+      "bmrb_uncompressed_bytes": 321336,
+      "bmrb_uncompressed_sha256": "b878ad7a51ff949eace582a3d2f88eef10290cc8a252fa94e068c4fd2b4c096e",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16657/bmr16657_3.str",
+      "duplicate_uniprot_after_earlier_selection": true,
+      "entry_id": "PED00159",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 70,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 71,
+            "unique_sequence_id_count": 89,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 70,
+            "unique_sequence_id_count": 89,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": true,
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "selected": false,
+      "title": "Structural ensemble of the nonphosphorylated yeast Sic1 N-terminal targeting domain (1-90) defined with SAXS and NMR PRE restraints and validated with smFRET",
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "16657",
+      "bmrb_source_file": "bmrb_16657.str.gz",
+      "bmrb_uncompressed_bytes": 321336,
+      "bmrb_uncompressed_sha256": "b878ad7a51ff949eace582a3d2f88eef10290cc8a252fa94e068c4fd2b4c096e",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16657/bmr16657_3.str",
+      "duplicate_uniprot_after_earlier_selection": true,
+      "entry_id": "PED00160",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 70,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 71,
+            "unique_sequence_id_count": 89,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 70,
+            "unique_sequence_id_count": 89,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": true,
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "selected": false,
+      "title": "Structural ensemble of the nonphosphorylated yeast Sic1 N-terminal targeting domain (1-90) defined with SAXS, PRE and chemical shift restraints and validated with smFRET",
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "16659",
+      "bmrb_source_file": "bmrb_16659.str.gz",
+      "bmrb_uncompressed_bytes": 309124,
+      "bmrb_uncompressed_sha256": "38b95bb2d03bb9155dc4d319237b0d296dd9ef3cc3d7dea59e9d5eb98cc3df2f",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16659/bmr16659_3.str",
+      "duplicate_uniprot_after_earlier_selection": true,
+      "entry_id": "PED00161",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 74,
+            "unique_sequence_id_count": 91,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": true,
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "selected": false,
+      "title": "Structural ensemble of the yeast Sic1 N-terminal targeting domain (1-90), phosphorylated at residues Thr2, Thr5, Thr33, Thr45, Ser69, Ser76, and Ser80 and generated with SAXS and NMR PRE restraints and validated with smFRET",
+      "uniprot_accession": "P38634"
+    },
+    {
+      "bmrb_id": "50477",
+      "bmrb_source_file": "bmrb_50477.str.gz",
+      "bmrb_uncompressed_bytes": 146180,
+      "bmrb_uncompressed_sha256": "65cc7a3ea26b3edf4c453f4d2fc388497b8aab951bcc905019227d46fdde18de",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr50477/bmr50477_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00184",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of Tif2 NRID",
+      "uniprot_accession": "Q15596"
+    },
+    {
+      "bmrb_id": "30656",
+      "bmrb_source_file": "bmrb_30656.str.gz",
+      "bmrb_uncompressed_bytes": 213602,
+      "bmrb_uncompressed_sha256": "0db62f4b5ce99f1915f97e2a1ee855c8a28d6326d137535b0043c281d6664b51",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30656/bmr30656_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00209",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 60
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of DNAJB6b deltaST variant characterized with NMR",
+      "uniprot_accession": "O75190-2"
+    },
+    {
+      "bmrb_id": "28121",
+      "bmrb_source_file": "bmrb_28121.str.gz",
+      "bmrb_uncompressed_bytes": 293008,
+      "bmrb_uncompressed_sha256": "62156d8a8010509007840697eba9227a1225dff9695e175f1e0055b022d3cf37",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr28121/bmr28121_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00225",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 241
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "N-terminal domain of monomeric eIF4G1 (1-249) from S. cerevisieae",
+      "uniprot_accession": "P39935"
+    },
+    {
+      "bmrb_id": "28121",
+      "bmrb_source_file": "bmrb_28121.str.gz",
+      "bmrb_uncompressed_bytes": 293008,
+      "bmrb_uncompressed_sha256": "62156d8a8010509007840697eba9227a1225dff9695e175f1e0055b022d3cf37",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr28121/bmr28121_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00226",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 42
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "N-terminal domain of dimeric eIF4G1 (1-249) from S. cerevisieae",
+      "uniprot_accession": "P39935"
+    },
+    {
+      "bmrb_id": "17948",
+      "bmrb_source_file": "bmrb_17948.str.gz",
+      "bmrb_uncompressed_bytes": 119340,
+      "bmrb_uncompressed_sha256": "e12e021e842c4788aa5174184e74786e06275acf48f01b2811419347eb2c2ec2",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17948/bmr17948_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00242",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural Ensemble of Hsp12 in the presence of dodecylphosphocholine (DPC) (1-109)",
+      "uniprot_accession": "P22943"
+    },
+    {
+      "bmrb_id": "25159",
+      "bmrb_source_file": "bmrb_25159.str.gz",
+      "bmrb_uncompressed_bytes": 155213,
+      "bmrb_uncompressed_sha256": "2f5990e2607939422dd49685357b224c6e09b8c772eb8b4d17985dda77b13c5a",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr25159/bmr25159_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00247",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the La motif of human LARP6 (70-183)",
+      "uniprot_accession": "Q9BRS8"
+    },
+    {
+      "bmrb_id": "17737",
+      "bmrb_source_file": "bmrb_17737.str.gz",
+      "bmrb_uncompressed_bytes": 2595850,
+      "bmrb_uncompressed_sha256": "3cd8428e911b790faee0b7ebb6b8d3d5a1bfcf5badfcd72507b0758d21986353",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17737/bmr17737_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00252",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural esemble of HopPmal (281-305) from Pseudomonas syringae",
+      "uniprot_accession": "Q8RP04"
+    },
+    {
+      "bmrb_id": "5463",
+      "bmrb_source_file": "bmrb_5463.str.gz",
+      "bmrb_uncompressed_bytes": 46453,
+      "bmrb_uncompressed_sha256": "57765fd19e270585566ff191bfc5c5d79c83299fd8b18ec55691ea64226c7ad7",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr5463/bmr5463_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00255",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 25
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the human catestatin 21-mer (370-390) of chromogranin A",
+      "uniprot_accession": "P10645"
+    },
+    {
+      "bmrb_id": "6536",
+      "bmrb_source_file": "bmrb_6536.str.gz",
+      "bmrb_uncompressed_bytes": 138291,
+      "bmrb_uncompressed_sha256": "7b518689b56eb6727ed17da4c13a0ec01dfd04d8d9891a589b06d622dca7c8c1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6536/bmr6536_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00260",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of reduced form of human ADAP hSH3-N ",
+      "uniprot_accession": "O15117"
+    },
+    {
+      "bmrb_id": "6539",
+      "bmrb_source_file": "bmrb_6539.str.gz",
+      "bmrb_uncompressed_bytes": 107569,
+      "bmrb_uncompressed_sha256": "dce572019df1ccd7655034dc31bea46a9d00b3868af9f33df4f68a4278311240",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6539/bmr6539_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00261",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of oxidized form of human ADAP hSH3-N",
+      "uniprot_accession": "O15117"
+    },
+    {
+      "bmrb_id": "18221",
+      "bmrb_source_file": "bmrb_18221.str.gz",
+      "bmrb_uncompressed_bytes": 138901,
+      "bmrb_uncompressed_sha256": "740fc7496ad02c0eee6f76f5c353b6bf6890aadcd9032d2c7079f1a6befce9d4",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18221/bmr18221_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00269",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the human membrane protein FAM14B ",
+      "uniprot_accession": "Q96BM0"
+    },
+    {
+      "bmrb_id": "6612",
+      "bmrb_source_file": "bmrb_6612.str.gz",
+      "bmrb_uncompressed_bytes": 145151,
+      "bmrb_uncompressed_sha256": "48bc94fc4bafd7484756100f805e91e846d623b794a41fd33334f0983beae628",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6612/bmr6612_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00271",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 24
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of unliganded MDM2",
+      "uniprot_accession": "Q00987"
+    },
+    {
+      "bmrb_id": "30192",
+      "bmrb_source_file": "bmrb_30192.str.gz",
+      "bmrb_uncompressed_bytes": 141691,
+      "bmrb_uncompressed_sha256": "7668b54eee2d2c8d22048844588c95f158ec1062a13be158922a77026a318f89",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30192/bmr30192_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00273",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of of SinI, antagonist to the master biofilm-regulator SinR in Bacillus subtilis",
+      "uniprot_accession": "P23308"
+    },
+    {
+      "bmrb_id": "18218",
+      "bmrb_source_file": "bmrb_18218.str.gz",
+      "bmrb_uncompressed_bytes": 149161,
+      "bmrb_uncompressed_sha256": "ee3abe77fb1baa32a1540f1ecdf247873b1e98ce73381d8f3c87a2c88c4d41d1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18218/bmr18218_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00275",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the human membrane protein HIGD1B",
+      "uniprot_accession": "Q9P298"
+    },
+    {
+      "bmrb_id": "6655",
+      "bmrb_source_file": "bmrb_6655.str.gz",
+      "bmrb_uncompressed_bytes": 314950,
+      "bmrb_uncompressed_sha256": "1847e5d9ebcb67047393f0c5d44f9c1c710b05f8ccac5b76c5d5fba5b111550a",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6655/bmr6655_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00282",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the N-terminal Zinc Fingers of the Xenopus laevis double stranded RNA binding protein ZFa",
+      "uniprot_accession": "Q8AVN9"
+    },
+    {
+      "bmrb_id": "4506",
+      "bmrb_source_file": "bmrb_4506.str.gz",
+      "bmrb_uncompressed_bytes": 54201,
+      "bmrb_uncompressed_sha256": "b9d35a33856a037c136dc18bf5808e039990f7f10e0b25760874f42456796cbe",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr4506/bmr4506_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00285",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": " Structural ensemble of carnobacteriocin B2",
+      "uniprot_accession": "P38580"
+    },
+    {
+      "bmrb_id": "6846",
+      "bmrb_source_file": "bmrb_6846.str.gz",
+      "bmrb_uncompressed_bytes": 106710,
+      "bmrb_uncompressed_sha256": "2dcd795be9dc6d62fa5e6656167cd457a53ec37e8785ad197747f761f9290d13",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6846/bmr6846_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00287",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Nop10p from Saccharomyces cerevisiae",
+      "uniprot_accession": "Q6Q547"
+    },
+    {
+      "bmrb_id": "34404",
+      "bmrb_source_file": "bmrb_34404.str.gz",
+      "bmrb_uncompressed_bytes": 68131,
+      "bmrb_uncompressed_sha256": "35d0a4c259ff8d9db7e4e83daf96b77fcbfa57cbdd07fd82d61f01af39b08819",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34404/bmr34404_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00294",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 50
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of pleurocidin K-to-R mutant in SDS micelles",
+      "uniprot_accession": "Q90ZY0"
+    },
+    {
+      "bmrb_id": "19614",
+      "bmrb_source_file": "bmrb_19614.str.gz",
+      "bmrb_uncompressed_bytes": 193517,
+      "bmrb_uncompressed_sha256": "3d5e10bb904023c1debd2beb96c5b273afa8008ab9bcced276c8716b2438f2f0",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr19614/bmr19614_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00297",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the basic helix-loop-helix region of the transcriptional repressor HES-1",
+      "uniprot_accession": "Q14469"
+    },
+    {
+      "bmrb_id": "34303",
+      "bmrb_source_file": "bmrb_34303.str.gz",
+      "bmrb_uncompressed_bytes": 88633,
+      "bmrb_uncompressed_sha256": "40dd7e3f3015e8f9920052af0620e3b31b734087b865ebd794d9d05b40d7be39",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34303/bmr34303_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00300",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of G protein-coupled receptor-bound ghrelin",
+      "uniprot_accession": "Q9UBU3"
+    },
+    {
+      "bmrb_id": "25762",
+      "bmrb_source_file": "bmrb_25762.str.gz",
+      "bmrb_uncompressed_bytes": 217301,
+      "bmrb_uncompressed_sha256": "3b5da000fc6416887fadbd4cd77e6f7d17c09bacdbbd8cd1cef7d1415dae4e1f",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr25762/bmr25762_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00301",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of of Pleiotrophin (33-168)",
+      "uniprot_accession": "P21246"
+    },
+    {
+      "bmrb_id": "16608",
+      "bmrb_source_file": "bmrb_16608.str.gz",
+      "bmrb_uncompressed_bytes": 115858,
+      "bmrb_uncompressed_sha256": "74be2e87bb8e604156b0f2539101fcb75a09001bd82c33a69e0fdb203cf83701",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16608/bmr16608_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00304",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Proinsulin (25-110)",
+      "uniprot_accession": "P01308"
+    },
+    {
+      "bmrb_id": "16743",
+      "bmrb_source_file": "bmrb_16743.str.gz",
+      "bmrb_uncompressed_bytes": 214961,
+      "bmrb_uncompressed_sha256": "fd039ad6357552bb476c0d4d26522019c71c2ab3cf66b834fee25cf15696159d",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16743/bmr16743_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00310",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Major prion protein HuPrP (90-231 M129 Q212P)",
+      "uniprot_accession": "P04156"
+    },
+    {
+      "bmrb_id": "15528",
+      "bmrb_source_file": "bmrb_15528.str.gz",
+      "bmrb_uncompressed_bytes": 187811,
+      "bmrb_uncompressed_sha256": "5d734f911dfb92d23755cd42c03d122689ade8a6992e8f4d9738982cba8ca5de",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr15528/bmr15528_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00314",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the protease-resistent domain of Xenopus laevis ePABP2",
+      "uniprot_accession": "Q6TY21"
+    },
+    {
+      "bmrb_id": "30655",
+      "bmrb_source_file": "bmrb_30655.str.gz",
+      "bmrb_uncompressed_bytes": 213603,
+      "bmrb_uncompressed_sha256": "c9c96d13806962fe4db3b9f34ef35fc88dd42e5a2d595726cd96a23789ebaa39",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30655/bmr30655_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00319",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the DNAJB6b deltaST variant",
+      "uniprot_accession": "O75190-2"
+    },
+    {
+      "bmrb_id": "34005",
+      "bmrb_source_file": "bmrb_34005.str.gz",
+      "bmrb_uncompressed_bytes": 175447,
+      "bmrb_uncompressed_sha256": "f97fabe26f8358cb436e495030859632744b1230f26ad01a1107c7a32e498bdb",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34005/bmr34005_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00325",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Murin CXCL13",
+      "uniprot_accession": "O55038"
+    },
+    {
+      "bmrb_id": "19988",
+      "bmrb_source_file": "bmrb_19988.str.gz",
+      "bmrb_uncompressed_bytes": 232536,
+      "bmrb_uncompressed_sha256": "045e881cacca5088ca14e46db3da0a86257dadcb698135c1f224450529316ade",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr19988/bmr19988_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00335",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the PR domain of FOG-1",
+      "uniprot_accession": "O35615"
+    },
+    {
+      "bmrb_id": "11423",
+      "bmrb_source_file": "bmrb_11423.str.gz",
+      "bmrb_uncompressed_bytes": 230765,
+      "bmrb_uncompressed_sha256": "dbf68f1b30cf29951912b084077089826d4caa55ec31516b4200f59493c05807",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr11423/bmr11423_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00344",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 15
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the C-terminal domain of the FliK",
+      "uniprot_accession": "P26416"
+    },
+    {
+      "bmrb_id": "15192",
+      "bmrb_source_file": "bmrb_15192.str.gz",
+      "bmrb_uncompressed_bytes": 71400,
+      "bmrb_uncompressed_sha256": "65a12c0c84fc405bfbc0903885954d1ca7e97e8d1964f02abc90523196c71df2",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr15192/bmr15192_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00349",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Recombinant Bovine Fibrinogen alphaC-Domain Fragment",
+      "uniprot_accession": "P02672"
+    },
+    {
+      "bmrb_id": "17742",
+      "bmrb_source_file": "bmrb_17742.str.gz",
+      "bmrb_uncompressed_bytes": 193849,
+      "bmrb_uncompressed_sha256": "3be1beb3b5a077e46bde7ec134d1fa54ed1c81d784d0796e280075aebf6c32d2",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17742/bmr17742_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00350",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 19
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the ETS Domain within ETV6",
+      "uniprot_accession": "P97360"
+    },
+    {
+      "bmrb_id": "30782",
+      "bmrb_source_file": "bmrb_30782.str.gz",
+      "bmrb_uncompressed_bytes": 196522,
+      "bmrb_uncompressed_sha256": "cf2ea051bd1255e8bda239525e08d413602a530ac488dfd4f410b2433d6f1b67",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30782/bmr30782_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00352",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of human Brd3 ET domain",
+      "uniprot_accession": "Q15059"
+    },
+    {
+      "bmrb_id": "17365",
+      "bmrb_source_file": "bmrb_17365.str.gz",
+      "bmrb_uncompressed_bytes": 155126,
+      "bmrb_uncompressed_sha256": "c1b304176a87edf204893459506482c916d7e102386b3f2aff96e552bb6837cd",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17365/bmr17365_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00359",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Histone-lysine N-methyltransferase ASHH2 a CW domain",
+      "uniprot_accession": "Q2LAE1"
+    },
+    {
+      "bmrb_id": "18217",
+      "bmrb_source_file": "bmrb_18217.str.gz",
+      "bmrb_uncompressed_bytes": 100400,
+      "bmrb_uncompressed_sha256": "d7b9fb8c40a7ba04de5950f1a1abb34fdb520bead56a96893c2fad951cae8ec9",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18217/bmr18217_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00362",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of human membrane protein HIGD1A",
+      "uniprot_accession": "Q9Y241"
+    },
+    {
+      "bmrb_id": "30773",
+      "bmrb_source_file": "bmrb_30773.str.gz",
+      "bmrb_uncompressed_bytes": 292324,
+      "bmrb_uncompressed_sha256": "340705ca1905ca345dee17784e540a82963c2d5736d8c96d596cb70b83ed6fdc",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30773/bmr30773_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00366",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of bacterial polar organizing protein Z",
+      "uniprot_accession": "Q9A8N4"
+    },
+    {
+      "bmrb_id": "18219",
+      "bmrb_source_file": "bmrb_18219.str.gz",
+      "bmrb_uncompressed_bytes": 118388,
+      "bmrb_uncompressed_sha256": "2770b9f66ec28abe96d8b52d0a9070aeeac81a37fb0dbb23a2824ed4c7dbe406",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18219/bmr18219_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00380",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of human membrane protein TMEM14A from NOE data",
+      "uniprot_accession": "Q9Y6G1"
+    },
+    {
+      "bmrb_id": "30656",
+      "bmrb_source_file": "bmrb_30656.str.gz",
+      "bmrb_uncompressed_bytes": 213602,
+      "bmrb_uncompressed_sha256": "0db62f4b5ce99f1915f97e2a1ee855c8a28d6326d137535b0043c281d6664b51",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr30656/bmr30656_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00382",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the human DNAJB6b chaperone deltaST variant (Aligned on the CTD domain)",
+      "uniprot_accession": "O75190-2"
+    },
+    {
+      "bmrb_id": "18223",
+      "bmrb_source_file": "bmrb_18223.str.gz",
+      "bmrb_uncompressed_bytes": 105209,
+      "bmrb_uncompressed_sha256": "b4948ccebfc0a84e267256781f82a750cd1e7f3a1379fff8371759aa58caf529",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18223/bmr18223_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00384",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of human membrane protein TMEM14C",
+      "uniprot_accession": "Q9P0S9"
+    },
+    {
+      "bmrb_id": "17297",
+      "bmrb_source_file": "bmrb_17297.str.gz",
+      "bmrb_uncompressed_bytes": 49514,
+      "bmrb_uncompressed_sha256": "0b40fd9bda8f5a1a42c31c8df280160dcd89675823737e25d5b58b56dfd225d1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr17297/bmr17297_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00389",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "structural ensemble of GLP-2 in DHPC micelles",
+      "uniprot_accession": "P01275"
+    },
+    {
+      "bmrb_id": "19774",
+      "bmrb_source_file": "bmrb_19774.str.gz",
+      "bmrb_uncompressed_bytes": 67498,
+      "bmrb_uncompressed_sha256": "b468095063ae2c8ea7c26004a854b252392412d277b7c5b2a7e2da9406262e2c",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr19774/bmr19774_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00391",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the tandem UIMs of RAP80",
+      "uniprot_accession": "Q96RL1"
+    },
+    {
+      "bmrb_id": "34037",
+      "bmrb_source_file": "bmrb_34037.str.gz",
+      "bmrb_uncompressed_bytes": 418977,
+      "bmrb_uncompressed_sha256": "b50841cd38a34816ef1b1a6180bac9300ac425ef10fdd6a88fe224f3e6a69a36",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34037/bmr34037_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00392",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of recombinant mouse Nerve Growth Factor",
+      "uniprot_accession": "P01139"
+    },
+    {
+      "bmrb_id": "7288",
+      "bmrb_source_file": "bmrb_7288.str.gz",
+      "bmrb_uncompressed_bytes": 110021,
+      "bmrb_uncompressed_sha256": "5288be14c8ade16dddd28cbb17fe90a96a668ebe51a02b5c49edd9a1b4c67b08",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr7288/bmr7288_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "ensemble_archive_bytes": 301690,
+      "ensemble_archive_members": [
+        "pdbfile.pdb"
+      ],
+      "ensemble_archive_model_count": 16,
+      "ensemble_archive_source_file": "PED00394_e001_ensemble.tar.gz",
+      "ensemble_archive_uncompressed_sha256": "b9ca8f06a31e414ebe5401d3f15bee051a630a5bcc9f23873951744cb9e3c78b",
+      "ensemble_archive_url": "https://deposition.proteinensemble.org/api/v1/entries/PED00394/ensembles/e001/ensemble-pdb/",
+      "entry_id": "PED00394",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 16
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 0,
+            "value_tags": [
+              "_Heteronucl_NOE.Val"
+            ]
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 38,
+            "value_tags": [
+              "_T1.Val"
+            ]
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 38,
+            "unique_sequence_id_count": 38,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "ped_entry_source_file": "PED00394.json.gz",
+      "ped_entry_url": "https://deposition.proteinensemble.org/api/v1/entries/PED00394/",
+      "qualifies": true,
+      "qualifying_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2"
+      ],
+      "selected": true,
+      "title": "Structural ensemble of BNIP3 transmembrane domain in lipid bicelles",
+      "uniprot_accession": "Q12983"
+    },
+    {
+      "bmrb_id": "34160",
+      "bmrb_source_file": "bmrb_34160.str.gz",
+      "bmrb_uncompressed_bytes": 137273,
+      "bmrb_uncompressed_sha256": "361b05e178fe174edbb8b392ac4b6f9c13a12abb9d7fb79d12ccd12580b4b26e",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34160/bmr34160_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00403",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of putative active dimeric state of transmembrane domain of the human growth hormone receptor (GHR)",
+      "uniprot_accession": "P10912"
+    },
+    {
+      "bmrb_id": "34164",
+      "bmrb_source_file": "bmrb_34164.str.gz",
+      "bmrb_uncompressed_bytes": 137307,
+      "bmrb_uncompressed_sha256": "b89603896d8511e54770e490c87580d4a1176852e4a5d7d09bac8c601cddbb53",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr34164/bmr34164_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00404",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of putative inactive (dormant) dimeric state of ransmembrane domain of the human growth hormone receptor (GHR)",
+      "uniprot_accession": "P10912"
+    },
+    {
+      "bmrb_id": "6374",
+      "bmrb_source_file": "bmrb_6374.str.gz",
+      "bmrb_uncompressed_bytes": 193380,
+      "bmrb_uncompressed_sha256": "c76864d3a48a6c9ddcd29429a26fc589f8ce4cfee0dec0e77e236b71c6cae2e3",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr6374/bmr6374_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00408",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the first phd finger of autoimmune regulator protein (AIRE1)",
+      "uniprot_accession": "O43918"
+    },
+    {
+      "bmrb_id": "16510",
+      "bmrb_source_file": "bmrb_16510.str.gz",
+      "bmrb_uncompressed_bytes": 121049,
+      "bmrb_uncompressed_sha256": "89c8edc660eaff94ec4f53c4ed15da030084ebc066f7399b0d9e553a4bd9ae9e",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr16510/bmr16510_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00409",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 20
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the first PHD finger of autoimmune regulator in complex with non-modified histone H3 tail",
+      "uniprot_accession": "O43918"
+    },
+    {
+      "bmrb_id": "18374",
+      "bmrb_source_file": "bmrb_18374.str.gz",
+      "bmrb_uncompressed_bytes": 117349,
+      "bmrb_uncompressed_sha256": "4128fa5c181d273f6e33b08b49a81c5a713225e6170c9a5b5562becf9c118576",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18374/bmr18374_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00410",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 50
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the second PHD finger of AIRE ",
+      "uniprot_accession": "O43918"
+    },
+    {
+      "bmrb_id": "25750",
+      "bmrb_source_file": "bmrb_25750.str.gz",
+      "bmrb_uncompressed_bytes": 136080,
+      "bmrb_uncompressed_sha256": "60b3f7b1b4382a45e61252510392905538b67f05cdab1f646e3494900dae6e7a",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr25750/bmr25750_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00419",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 30
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 1,
+            "numeric_row_count": 60,
+            "unique_sequence_id_count": 120,
+            "value_tags": [
+              "_T2.Rex_val",
+              "_T2.T2_val"
+            ]
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [
+        "t2"
+      ],
+      "selected": false,
+      "title": " Structural ensemble of the C-terminal Coiled-Coil Domain of  Cbl-interacting protein of 85 kD (CIN85)",
+      "uniprot_accession": "Q96B97"
+    },
+    {
+      "bmrb_id": "19797",
+      "bmrb_source_file": "bmrb_19797.str.gz",
+      "bmrb_uncompressed_bytes": 71971,
+      "bmrb_uncompressed_sha256": "3df4c896f27fdf940e5aba86fb281047c583a506cd5e68a7e6aaec48b81e4975",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr19797/bmr19797_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00421",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the Na,K-ATPase regulatory protein FXYD2b ",
+      "uniprot_accession": "P54710-2"
+    },
+    {
+      "bmrb_id": "51318",
+      "bmrb_source_file": "bmrb_51318.str.gz",
+      "bmrb_uncompressed_bytes": 50849,
+      "bmrb_uncompressed_sha256": "5a0e73d6adc2c933a2378b21dde65a88890aab00e0cc3cebc4f766f00c6fc612",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51318/bmr51318_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00498",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of wild-type C-terminal domain of Vasopressin receptor",
+      "uniprot_accession": "P30518"
+    },
+    {
+      "bmrb_id": "51317",
+      "bmrb_source_file": "bmrb_51317.str.gz",
+      "bmrb_uncompressed_bytes": 51592,
+      "bmrb_uncompressed_sha256": "369ee791d287894096e40824a9c52b42498dc40d29f7aa82779ce37cbbf44214",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51317/bmr51317_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00499",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of wild-type C-terminal domain of Growth Hormone Secretagogue Receptor type 1a",
+      "uniprot_accession": "Q92847"
+    },
+    {
+      "bmrb_id": "51316",
+      "bmrb_source_file": "bmrb_51316.str.gz",
+      "bmrb_uncompressed_bytes": 82772,
+      "bmrb_uncompressed_sha256": "06d0885f20d6d05b9f7e9921499c74b2d2280bff37f4e54d905107a2c8cb0162",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51316/bmr51316_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00500",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of wild-type C-terminal domain of B2-adrenergic receptor",
+      "uniprot_accession": "P07550"
+    },
+    {
+      "bmrb_id": "51330",
+      "bmrb_source_file": "bmrb_51330.str.gz",
+      "bmrb_uncompressed_bytes": 51770,
+      "bmrb_uncompressed_sha256": "aa5292bfd027aceb99e692551a5fd22ead2d659fe261f77ec8b790aff86aad6a",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51330/bmr51330_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00501",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of phosphomimetic C-terminal domain of Vasopressin receptor ",
+      "uniprot_accession": "P30518"
+    },
+    {
+      "bmrb_id": "51328",
+      "bmrb_source_file": "bmrb_51328.str.gz",
+      "bmrb_uncompressed_bytes": 52248,
+      "bmrb_uncompressed_sha256": "9b84feb22fa7c86ffe34e9fcada648efc40c6e14c3ff2747b705759566d456ce",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51328/bmr51328_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00502",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of phosphomimetic C-terminal domain of Growth Hormone Secretagogue Receptor type 1a ",
+      "uniprot_accession": "Q92847"
+    },
+    {
+      "bmrb_id": "51319",
+      "bmrb_source_file": "bmrb_51319.str.gz",
+      "bmrb_uncompressed_bytes": 82852,
+      "bmrb_uncompressed_sha256": "7f976591a2a7a4cd8bce0fba5e45a334a0e2a66f890ad5c2eeda3cff680183c8",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr51319/bmr51319_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00503",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e002",
+        "models": 500
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "NMR RDC-refined ensemble of phosphomimetic C-terminal domain of B2-adrenergic receptor ",
+      "uniprot_accession": "P07550"
+    },
+    {
+      "bmrb_id": "15430",
+      "bmrb_source_file": "bmrb_15430.str.gz",
+      "bmrb_uncompressed_bytes": 118298,
+      "bmrb_uncompressed_sha256": "75618bc6667c587f58fd820ccf3be438c85b933856f05a8e7a4ccb036fba93c1",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr15430/bmr15430_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00511",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 100
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of the gamma subunit of cGMP phosphodiesterase (1-87)",
+      "uniprot_accession": "P04972"
+    },
+    {
+      "bmrb_id": "18802",
+      "bmrb_source_file": "bmrb_18802.str.gz",
+      "bmrb_uncompressed_bytes": 186023,
+      "bmrb_uncompressed_sha256": "e424720480e76fa76d9f5eef9e02c6f37b04edb4e29b6d79e1babff30b87c56e",
+      "bmrb_url": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr18802/bmr18802_3.str",
+      "duplicate_uniprot_after_earlier_selection": false,
+      "entry_id": "PED00513",
+      "metadata_ensemble_choice": {
+        "ensemble_id": "e001",
+        "models": 10
+      },
+      "observable_inventory": {
+        "families": {
+          "heteronuclear_noe": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "order_parameter": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "r2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t1": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          },
+          "t2": {
+            "loop_count": 0,
+            "numeric_row_count": 0,
+            "unique_sequence_id_count": 0,
+            "value_tags": []
+          }
+        },
+        "target_loop_parse_errors": 0
+      },
+      "qualifies": false,
+      "qualifying_families": [],
+      "selected": false,
+      "title": "Structural ensemble of Splicing Factor-1 (SF1) (27-145)",
+      "uniprot_accession": "Q15637"
+    }
+  ],
+  "short_md_denominator_executed": false,
+  "source": {
+    "benchmark": "benchmarks/P051_dynamics_roster_v1.json",
+    "benchmark_sha256": "0cc6b46859bc4015fa3751f318effcd0179e51cf2a437c14a1ab52c9dd7e8c85",
+    "protocol_commit": "cc1479bc056f53b75e3e23d56edc0ffb52a8685a",
+    "query_url": "https://deposition.proteinensemble.org/api/v1/entries/?free_text=relaxation&limit=200&offset=0",
+    "retained_files": [
+      {
+        "bytes": 3838,
+        "path": "results/P051_dynamics_roster_source_v1/PED00001.json.gz",
+        "sha256": "683a2f7f409954ff6fa312962fac44d2ff2fa66f1ae75cf814e62b9692fb159e"
+      },
+      {
+        "bytes": 254520,
+        "path": "results/P051_dynamics_roster_source_v1/PED00001_e001_ensemble.tar.gz",
+        "sha256": "c3058a550fbbde7128dc9dd5e6225ab468738563ea307a6fae5a1fbfe869ca8f"
+      },
+      {
+        "bytes": 4875,
+        "path": "results/P051_dynamics_roster_source_v1/PED00394.json.gz",
+        "sha256": "689426525a1601ecaf31ca169de342b3f297b325c084c4afd482ce743e8e4129"
+      },
+      {
+        "bytes": 301690,
+        "path": "results/P051_dynamics_roster_source_v1/PED00394_e001_ensemble.tar.gz",
+        "sha256": "b9ca8f06a31e414ebe5401d3f15bee051a630a5bcc9f23873951744cb9e3c78b"
+      },
+      {
+        "bytes": 31878,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_11423.str.gz",
+        "sha256": "6d2ce95d1a9fbb2648c1cf8d4ba4e6f29b7e81b0b1f83143cbc3c99fe1e91f47"
+      },
+      {
+        "bytes": 13380,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_15192.str.gz",
+        "sha256": "d335699375af88bf286b8ab9347b0379f7a404e448677ad215c3927d862821a7"
+      },
+      {
+        "bytes": 7965,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_1543.str.gz",
+        "sha256": "691a602406f7f45e9924f2837a2744566087425e789c2786a56a058bffa1cc50"
+      },
+      {
+        "bytes": 18831,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_15430.str.gz",
+        "sha256": "63e60ac6b39ccf7be33a49504d6d630f2a77b930861db7da383dd54b55aa2b71"
+      },
+      {
+        "bytes": 26122,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_15528.str.gz",
+        "sha256": "2cd12fa0580bb41107aa8c7b40029f07968390b92509c27f7adbb7a01fb7e9ff"
+      },
+      {
+        "bytes": 25663,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16249.str.gz",
+        "sha256": "a90604802e06a0d2a58104f70e2732b3ecaede7af8421852e426f7cbba0aea89"
+      },
+      {
+        "bytes": 20164,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16510.str.gz",
+        "sha256": "0cfcaf92dce6e84b54521e9d9c8ed2f6870491ede179d146c554f6dadf19b2c6"
+      },
+      {
+        "bytes": 17806,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16608.str.gz",
+        "sha256": "6ea6206fc1925d22ba75c13089fa0e7a8d95e0ecf8f8d7f2e5837245a2824228"
+      },
+      {
+        "bytes": 37802,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16657.str.gz",
+        "sha256": "a1e6c7ba7270fd801edf5c6f53efae90bfa14be70574724ee32b6e4662102015"
+      },
+      {
+        "bytes": 37443,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16659.str.gz",
+        "sha256": "ae9b2a16be27e20b13e20f7789c504f6133b6149974c72f84a69c16ed19ea628"
+      },
+      {
+        "bytes": 31870,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_16743.str.gz",
+        "sha256": "fd7b9072de3ade1c96f7241969ca3fb7a1da8c79ce043267208155ba90c1d52e"
+      },
+      {
+        "bytes": 13065,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17040.str.gz",
+        "sha256": "4d02c7bd08ab0472513a6ab49a927933d30880361a1bb849f457acff2fb43b7b"
+      },
+      {
+        "bytes": 24776,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17157.str.gz",
+        "sha256": "649fd44c419349522d76b42ba5dc002aa225a61add059aaa6e2dcee340e8d3f6"
+      },
+      {
+        "bytes": 26134,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17158.str.gz",
+        "sha256": "9146a77d0044d9c0bf4f4c9b4f8304a9be6c53f9621a57c18b50d2af796465ff"
+      },
+      {
+        "bytes": 8917,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17297.str.gz",
+        "sha256": "ebdf9d563629a4d0f76f39fc30641caa012bd41fa1cfd0d5fcb3e936d2982cea"
+      },
+      {
+        "bytes": 23156,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17365.str.gz",
+        "sha256": "39d1877c3d87fdb96e87193721c1903edd8952012076b57afa274e51a1ae8603"
+      },
+      {
+        "bytes": 160043,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17737.str.gz",
+        "sha256": "3a3943c41dc06df857bad4fe2268b7ca17833c126d064e0d3e5bb992e732e23a"
+      },
+      {
+        "bytes": 31898,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17742.str.gz",
+        "sha256": "d3b53479aa75898780fc150c0f34e274ef5e4130d05c3df5124a83406e9e2606"
+      },
+      {
+        "bytes": 30032,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17780.str.gz",
+        "sha256": "ca975a35d129e871e1ae7a477a3c6ca162aa0bff7958503bd17251ea6aff991f"
+      },
+      {
+        "bytes": 18738,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_17948.str.gz",
+        "sha256": "b538db59e1bd81c4eb4f0cd44fa10d5e705adcb24dd3719fe21ed20593e85b32"
+      },
+      {
+        "bytes": 15026,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18217.str.gz",
+        "sha256": "aa41ba4b552cb98763d4aba4d3020d1aef174324c18987a40d88f53ee0767f70"
+      },
+      {
+        "bytes": 20892,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18218.str.gz",
+        "sha256": "888986cb100ced3ef01aa4f958dbbfe3ec2f06881597e645ae75904f886f2d92"
+      },
+      {
+        "bytes": 19157,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18219.str.gz",
+        "sha256": "96877eb3ffae5906884a42a937b0cf18a9c2b01df621a69fdfd79ab7d4260fe1"
+      },
+      {
+        "bytes": 20490,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18221.str.gz",
+        "sha256": "5bb272c63c61ac06add96da503e0168a1aa7feae7c1c2cd49477a42eef5f4250"
+      },
+      {
+        "bytes": 16177,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18223.str.gz",
+        "sha256": "e640758fa259c7ab792945d172de2ac30038c546ac53739162d60bc352473791"
+      },
+      {
+        "bytes": 18387,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18374.str.gz",
+        "sha256": "da9e703e38d21b19d3f4e8272e5666b0373af13b7d497133b2401cfa3e92ce97"
+      },
+      {
+        "bytes": 29758,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18426.str.gz",
+        "sha256": "9c814c9c273fb5c0252563444f21ffec7992fb9e0e8ce6c9a73c45300b4e956e"
+      },
+      {
+        "bytes": 29318,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18802.str.gz",
+        "sha256": "c110768a6e10ce1c2ff938798a9a74d85fae8f4d6d0144197a142c5be4c10d1b"
+      },
+      {
+        "bytes": 81928,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_18841.str.gz",
+        "sha256": "1a879f53b022d2cff8d027d1f0f7465f77bbaee736d74190d3151d20ee33cae9"
+      },
+      {
+        "bytes": 17158,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_19332.str.gz",
+        "sha256": "4335ceaddfd68f179c66a5c11077b7de471f6f2a924998757f032b5d9ea0e08e"
+      },
+      {
+        "bytes": 31448,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_19614.str.gz",
+        "sha256": "83cbe9a9313b5c2d41eddcdef3852b43e03c43ca91ea2993bda0d22e010bfdc1"
+      },
+      {
+        "bytes": 11837,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_19774.str.gz",
+        "sha256": "af0ceba7988acbc47a061aba585988f3c74b7eab6146be10b5261921c173c14f"
+      },
+      {
+        "bytes": 12180,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_19797.str.gz",
+        "sha256": "be4560f545ce6516111956eaa3aae76fcbc1763dcf2d7ab254ef9e7a538a0901"
+      },
+      {
+        "bytes": 28696,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_19988.str.gz",
+        "sha256": "f6f91dd6fa786c7855719564022daaf94c697a813063570f1f36029b0ca03b54"
+      },
+      {
+        "bytes": 23662,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_25159.str.gz",
+        "sha256": "b5910f5e8f1e3891bd47227ef5785d9013c3a52b9595a09252793a847460cfcc"
+      },
+      {
+        "bytes": 19362,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_25750.str.gz",
+        "sha256": "7fda055d0193e73384e54f6de8500ec96db664b7bbe266a91d36a70d9ca53cff"
+      },
+      {
+        "bytes": 24973,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_25762.str.gz",
+        "sha256": "1c5d52584078acaf898898173134f62cf7bf622d056db68fdab369cc81248a3e"
+      },
+      {
+        "bytes": 36368,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_25888.str.gz",
+        "sha256": "83ef38e2aef14f7ae434533d1ea19707056e7cfc5868d53b673c2adb526169c3"
+      },
+      {
+        "bytes": 16739,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_26935.str.gz",
+        "sha256": "cb8cdcbecb17d64f6340422e4dbe24db7456ef95acbf627eb4c2950a9c2d1aab"
+      },
+      {
+        "bytes": 33406,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_28121.str.gz",
+        "sha256": "1db133db8ad006e15e26918d9274f805be33bf67e20d9b193b0d30d63e13b3d0"
+      },
+      {
+        "bytes": 16548,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_30192.str.gz",
+        "sha256": "70ec2f69e02a1ee20607d8a6bd61bd9ff21a421659ae9d37b60056cce3a0bff9"
+      },
+      {
+        "bytes": 26680,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_30655.str.gz",
+        "sha256": "cfb2d4ab7236099cc49477bba8dc51ed1b5f666515f198e68181d43ca4cd312b"
+      },
+      {
+        "bytes": 26675,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_30656.str.gz",
+        "sha256": "44c297684d6dc06b7d46a9e14afc92dcb7d2afd2b39284237aa9974b94600f04"
+      },
+      {
+        "bytes": 45546,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_30773.str.gz",
+        "sha256": "6028eca60f7b154bd77c68e336cac39b4e8c3f1b51221d1c26191bff64fda185"
+      },
+      {
+        "bytes": 21786,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_30782.str.gz",
+        "sha256": "e2bad0bde5b68be2a435b050f18c36f5b773f9b99c932d3cb756329d505f3621"
+      },
+      {
+        "bytes": 20361,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34005.str.gz",
+        "sha256": "5cd2a7d4d4d56b9ea28d0913de82210e6f0ae299c36ca54897c564e714d0bc0e"
+      },
+      {
+        "bytes": 44296,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34037.str.gz",
+        "sha256": "297e001784e588366f04ddfc995309c8f7dc69e4bee20e2080e676d585427a23"
+      },
+      {
+        "bytes": 16373,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34160.str.gz",
+        "sha256": "15261e8218c1ecacd16be7de8e46562148b09ea83cdc52fcec3034dcf26c8143"
+      },
+      {
+        "bytes": 16384,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34164.str.gz",
+        "sha256": "0e0f3c9821cc961851ec5c32eec61702786e81d4c77fe786a8c08c9298ced180"
+      },
+      {
+        "bytes": 12018,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34303.str.gz",
+        "sha256": "320cdf47bda48dc9696aca176b0838b503edd17da4c1df20dce8201992fd27fc"
+      },
+      {
+        "bytes": 12706,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_34404.str.gz",
+        "sha256": "a0741526b77bc6f96fc9883647bb3da609a2f6a5d696aaa3a72b4fe16f151b53"
+      },
+      {
+        "bytes": 22048,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_4326.str.gz",
+        "sha256": "ced792a75d0ddbc0cb201aa57d3e455875131f2de1fc5cc5c8a3e86c272e3f7f"
+      },
+      {
+        "bytes": 9004,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_4506.str.gz",
+        "sha256": "353d6fe50cbd51408e95a4a9e1e87a5699e2eb8c2a242778063ecacb5b55d835"
+      },
+      {
+        "bytes": 18575,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_50477.str.gz",
+        "sha256": "c28c2a2becfd0c540de0ff9c1fe328268ea261b0db8ee214e131df2f89dae4ca"
+      },
+      {
+        "bytes": 12096,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51316.str.gz",
+        "sha256": "7481fcb023a1b061aac9dfdac1d64a42815b248a67547a0ec9f55f12b070a546"
+      },
+      {
+        "bytes": 8333,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51317.str.gz",
+        "sha256": "2522f9a68409178ed1070e25fe696191b4c48ba23f77292be9efbb05b514e4d4"
+      },
+      {
+        "bytes": 8106,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51318.str.gz",
+        "sha256": "924fe07cd5aba2acf4bf5c4871598aabef49c4897f1367ac9830aeec3bdf72cd"
+      },
+      {
+        "bytes": 11981,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51319.str.gz",
+        "sha256": "fa5000a7612025c6e0b3d3cca56f58eb4b1661b9693a282d818fa82f69efff02"
+      },
+      {
+        "bytes": 8393,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51328.str.gz",
+        "sha256": "de6f418fe15fa675ac460b5ae9e26f0b197d478f6c44138d84ab48d1cac66092"
+      },
+      {
+        "bytes": 8272,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_51330.str.gz",
+        "sha256": "d3205e1b76592df96425376b4fe5cf7ff19aab9ff9ea56f8d3c6509778f42518"
+      },
+      {
+        "bytes": 7934,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_5463.str.gz",
+        "sha256": "32fb947405c58a2544ada18364d273a9e67f9de6eef9b326e98b95efe8aaa205"
+      },
+      {
+        "bytes": 13194,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_5534.str.gz",
+        "sha256": "7c72bd859463c1db7c67fcd6e6fbc163c1ac6c1b933204073f91e6dc6abfd5f1"
+      },
+      {
+        "bytes": 10704,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6143.str.gz",
+        "sha256": "ee580424cbc7a9b9bbb6dec1c164e99935abe1551d4ae2da77ac95a7397d4ce7"
+      },
+      {
+        "bytes": 20348,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6374.str.gz",
+        "sha256": "d6db7d74caa8e49fe787510236eee084b8b8adbf0abf87e7da4135ec2ce61a40"
+      },
+      {
+        "bytes": 17965,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6536.str.gz",
+        "sha256": "736fd0affe923454adb7f9b78b9f706875bea84961f96a8761816c08058ecd8a"
+      },
+      {
+        "bytes": 18140,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6539.str.gz",
+        "sha256": "d500ec9d78083528b578ffae207c5765a273efe193308afcca168fdbd8056ae9"
+      },
+      {
+        "bytes": 19584,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6612.str.gz",
+        "sha256": "23ffb0ca72bf5ff54ce584a1659626b22595637afef69b59e3dd515d69b0861a"
+      },
+      {
+        "bytes": 32455,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6655.str.gz",
+        "sha256": "811fd1d77fe7a287ee2dfbf3d8d66698426a222c18f15cc5efb520e35675732a"
+      },
+      {
+        "bytes": 15580,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_6846.str.gz",
+        "sha256": "c7ca7a206760e1e2abdbd62c16efbef80f76ad44d826056700f2af40a13384c8"
+      },
+      {
+        "bytes": 14801,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_7279.str.gz",
+        "sha256": "08a2f2497d265c2270f9dda05d7720e8d447767a9d1ffb973f840d968accb14c"
+      },
+      {
+        "bytes": 16451,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_7288.str.gz",
+        "sha256": "1637c47f442873ac49df99e9105622c5be4bd39d5c3fc777d04f1fed4316f47b"
+      },
+      {
+        "bytes": 4864,
+        "path": "results/P051_dynamics_roster_source_v1/bmrb_policy.html.gz",
+        "sha256": "f8f2902315d083266333bf2bd1af3c42be43fe2cb07b11dc433cf7e788d9a1a9"
+      },
+      {
+        "bytes": 4175,
+        "path": "results/P051_dynamics_roster_source_v1/ped_openapi.yaml.gz",
+        "sha256": "fc8684c4077f0dc3ce870d45a591ea169c857ff3c7edca454ea269a93e9b7469"
+      },
+      {
+        "bytes": 27484,
+        "path": "results/P051_dynamics_roster_source_v1/ped_relaxation_search.json.gz",
+        "sha256": "1431fab705b06ca921dc5b9078726d392533ac51cc0815b714991aa0eca08414"
+      }
+    ],
+    "source_directory": "results/P051_dynamics_roster_source_v1",
+    "tool": "tools/p051_dynamics_roster.py",
+    "tool_sha256": "9b04690538c8ddbef2479d1ad7e47657354e255c754160b4a964078b53ad6743"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 18,
+    "failed_checks": [],
+    "next_gate": "Add a separately preregistered official source layer or locate another machine-readable deposition while preserving the two-family, 20-row, distinct-UniProt rule.",
+    "passed_checks": 18,
+    "readiness_decision": "blocked_insufficient_machine_readable_dynamic_observables",
+    "selected_bmrb_entries": [
+      "16659",
+      "7288"
+    ],
+    "selected_ped_entries": [
+      "PED00001",
+      "PED00394"
+    ],
+    "selected_protein_count": 2,
+    "selected_uniprot_accessions": [
+      "P38634",
+      "Q12983"
+    ]
+  }
+}
