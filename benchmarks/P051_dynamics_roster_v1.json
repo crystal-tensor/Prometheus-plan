@@ -1,0 +1,117 @@
+{
+  "schema_version": "p051_dynamics_roster_v1",
+  "as_of_date": "2026-07-30",
+  "scope": {
+    "included_catalog_problem_ids": [
+      51
+    ],
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "claim": "public_data_access_and_leakage_preflight_only"
+  },
+  "question": "Can a protein-dynamics benchmark be assembled without letting an ensemble trained on every experimental restraint grade itself?",
+  "sources": {
+    "ped": {
+      "name": "Protein Ensemble Database",
+      "openapi_url": "https://proteinensemble.org/assets/openapi.yaml",
+      "search_url": "https://deposition.proteinensemble.org/api/v1/entries/",
+      "entry_url_template": "https://deposition.proteinensemble.org/api/v1/entries/{entry_id}/",
+      "ensemble_archive_url_template": "https://deposition.proteinensemble.org/api/v1/entries/{entry_id}/ensembles/{ensemble_id}/ensemble-pdb/",
+      "query": {
+        "free_text": "relaxation",
+        "limit": 200,
+        "offset": 0
+      },
+      "required_api_version": "5.0",
+      "required_license": "Creative Commons Attribution 4.0 International License"
+    },
+    "bmrb": {
+      "name": "Biological Magnetic Resonance Data Bank",
+      "policy_url": "https://bmrb.io/bmrb/data_accepted.shtml",
+      "entry_url_template": "https://bmrb.io/ftp/pub/bmrb/entry_directories/bmr{bmrb_id}/bmr{bmrb_id}_3.str",
+      "required_policy_phrase": "disseminates (worldwide in the public domain)"
+    }
+  },
+  "deterministic_roster_rule": {
+    "sort": "PED entry_id ascending",
+    "target_distinct_proteins": 3,
+    "entry_metadata_requirements": {
+      "exactly_one_non_null_uniprot_accession": true,
+      "exactly_one_bmrb_experimental_cross_reference": true,
+      "minimum_ensemble_models": 10
+    },
+    "bmrb_observable_requirements": {
+      "minimum_supported_families": 2,
+      "minimum_numeric_rows_per_family": 20,
+      "supported_loop_families": [
+        "heteronuclear_noe",
+        "t1",
+        "t2",
+        "r1",
+        "r2",
+        "order_parameter"
+      ]
+    },
+    "distinctness_key": "UniProt accession",
+    "ensemble_choice": "lexicographically first ensemble_id meeting minimum_ensemble_models",
+    "stop_rule": "stop after the first three qualifying distinct UniProt accessions; retain every screened BMRB source before the stop"
+  },
+  "frozen_source_retention": {
+    "directory": "results/P051_dynamics_roster_source_v1",
+    "files": [
+      "PED OpenAPI YAML",
+      "complete one-page PED relaxation search response",
+      "BMRB policy HTML",
+      "every BMRB NMR-STAR file screened before the deterministic stop",
+      "PED entry metadata and ensemble coordinate archive for each selected protein"
+    ],
+    "compression": "gzip with mtime=0 for deterministic bytes",
+    "hash": "SHA-256 over every retained file"
+  },
+  "readiness_decision": {
+    "ready_if": "three distinct proteins satisfy every metadata, observable, coordinate, license, and provenance requirement",
+    "ready_label": "experimental_observable_roster_ready",
+    "blocked_label": "blocked_insufficient_machine_readable_dynamic_observables",
+    "candidate_model_executed": false,
+    "short_md_denominator_executed": false
+  },
+  "leakage_contract": {
+    "deposited_ped_ensembles": "format and source-integrity references only",
+    "forbidden_use": "A deposited ensemble that was generated or selected using an observable may not predict that observable as held-out evidence.",
+    "future_training_rule": "Every candidate ensemble must be regenerated using training observables only; acceptance observables remain unopened until prediction files are frozen.",
+    "future_protein_holdout": "Leave-one-protein-out evaluation must fit all model choices without any observable from the held-out UniProt accession.",
+    "future_denominator_rule": "Single-structure and short conventional-MD denominators must use the same public inputs, observable forward models, and sampling budget ledger."
+  },
+  "pilot_disclosure": {
+    "inspected_during_protocol_design": [
+      "PED00001/BMRB 16659",
+      "PED00013/BMRB 18841",
+      "PED00032/BMRB 18426"
+    ],
+    "boundary": "These inspections established file formats and revealed that PED ontology labels do not guarantee deposited numeric relaxation loops. No prediction error, candidate ensemble, or acceptance outcome was inspected."
+  },
+  "controls": {
+    "positive": "a synthetic NMR-STAR payload containing T1 and T2 loops with 20 numeric rows each must qualify",
+    "negative": "an ontology-like label without numeric dynamic-observable loops must not qualify",
+    "independent_reimplementation_required": true,
+    "byte_identical_replay_required": true
+  },
+  "next_gate_if_ready": "Freeze residue mapping, observable forward models, a single-structure denominator, a budget-matched short-MD denominator, and training-only observable/protein splits before executing any candidate.",
+  "interpretation_boundaries": [
+    "This packet audits public data access, machine readability, provenance, licensing, and leakage risk only.",
+    "It does not evaluate an AlphaFold model, molecular-dynamics force field, ensemble generator, or biological function prediction.",
+    "It does not establish that a deposited ensemble predicts data it did not use.",
+    "No protein-engineering, clinical, therapeutic, wet-lab, or solved-frontier claim is permitted."
+  ]
+}
