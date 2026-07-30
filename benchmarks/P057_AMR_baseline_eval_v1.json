@@ -1,0 +1,153 @@
+{
+  "schema_version": "p057_amr_baseline_eval_v1",
+  "as_of_date": "2026-07-30",
+  "scope": {
+    "included_catalog_problem_ids": [
+      57
+    ],
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      58,
+      59,
+      60
+    ],
+    "claim": "baseline_denominator_evaluation_only"
+  },
+  "question": "Does a country-specific logit time trend improve on last observation carried forward when 2023 resistance is held out, especially in the lowest-completeness eligible stratum?",
+  "inputs": {
+    "source_snapshot": {
+      "path": "results/P057_P058_source_snapshot_v1.json",
+      "sha256": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9"
+    },
+    "upstream_preflight": {
+      "path": "results/P057_P058_data_preflight_v1.json",
+      "sha256": "d1829f585d9e8657272c7fe1c1a5dc614e63ff01833402e1b34b76ba564ff877",
+      "required_status": "pass",
+      "required_p057_status": "coverage_matrix_ready"
+    }
+  },
+  "data_contract": {
+    "training_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "holdout_year": 2023,
+    "indicator_codes": [
+      "AMR_INFECT_ECOLI",
+      "AMR_INFECT_MRSA"
+    ],
+    "unit": "percentage points",
+    "entity_weighting": "equal weight per eligible indicator-entity row",
+    "sample_size_weighting": "not used because the frozen public snapshot contains rates but not a comparable denominator for every entity-year",
+    "post_outcome_exclusions_allowed": false
+  },
+  "eligibility": {
+    "requires_observed_2023_holdout": true,
+    "minimum_observed_training_years": 3,
+    "uses_2023_value_for_selection_beyond_presence": false,
+    "expected_counts": {
+      "AMR_INFECT_ECOLI": {
+        "partial": 26,
+        "dense": 46,
+        "total": 72
+      },
+      "AMR_INFECT_MRSA": {
+        "partial": 24,
+        "dense": 45,
+        "total": 69
+      },
+      "pooled_total": 141
+    }
+  },
+  "completeness_strata": {
+    "source": "the frozen upstream coverage matrix",
+    "definition": "observed years across 2016-2023, including the required holdout-presence indicator but never its value",
+    "eligible_strata": [
+      "partial",
+      "dense"
+    ],
+    "lowest_completeness_eligible_stratum": "partial"
+  },
+  "baselines": {
+    "last_observation_carried_forward": {
+      "id": "locf",
+      "definition": "predict the 2023 percentage with the most recent observed value from 2016-2022"
+    },
+    "country_specific_logit_time_trend": {
+      "id": "country_logit",
+      "definition": "clip each training percentage divided by 100 to [0.005, 0.995], fit ordinary least squares to logit(value) against calendar year within one indicator-entity row, extrapolate to 2023, then apply the inverse logit and multiply by 100",
+      "probability_clip_epsilon": 0.005,
+      "slope_cap": null,
+      "minimum_points": 3
+    }
+  },
+  "metrics": {
+    "primary": {
+      "id": "equal_entity_weighted_absolute_error",
+      "formula": "mean(abs(predicted_percent - observed_percent))",
+      "lower_is_better": true
+    },
+    "calibration_in_the_large": {
+      "signed_bias_formula": "mean(predicted_percent - observed_percent)",
+      "absolute_bias_formula": "abs(signed_bias)",
+      "lower_absolute_bias_is_better": true
+    },
+    "secondary": [
+      {
+        "id": "root_mean_squared_error",
+        "formula": "sqrt(mean((predicted_percent - observed_percent)^2))"
+      },
+      {
+        "id": "median_absolute_error",
+        "formula": "median(abs(predicted_percent - observed_percent))"
+      }
+    ],
+    "rounding_decimal_places": 10,
+    "tie_tolerance": 1e-12
+  },
+  "evaluation_slices": [
+    "pooled_overall",
+    "pooled_partial",
+    "pooled_dense",
+    "indicator_overall",
+    "indicator_partial",
+    "indicator_dense"
+  ],
+  "uncertainty": {
+    "method": "paired nonparametric row bootstrap",
+    "resamples": 10000,
+    "confidence_level": 0.95,
+    "base_seed": 57057,
+    "reported_contrast": "country_logit absolute error minus locf absolute error",
+    "decision_use": "descriptive only; it does not create or relax an acceptance threshold"
+  },
+  "controls": {
+    "positive": "a synthetic exact logit-linear series must be extrapolated to 2023 within 1e-10 percentage points",
+    "negative": "a constant synthetic series must give identical locf and country_logit predictions within 1e-10 percentage points",
+    "independent_reimplementation_required": true
+  },
+  "future_candidate_gate": {
+    "executed_in_this_packet": false,
+    "required_primary_comparisons": "a future candidate must have strictly lower equal-entity weighted absolute error than both frozen baselines for each indicator overall and in that indicator's partial stratum",
+    "required_calibration_comparisons": "a future candidate's absolute calibration bias must not exceed the lower of the two baseline absolute biases by more than 2.0 percentage points on the same required slices",
+    "no_post_outcome_cohort_changes": true
+  },
+  "interpretation_boundaries": [
+    "The evaluation is conditional on entities that reported a 2023 value and had at least three observed training years.",
+    "It does not estimate performance for non-reporting entities or identify a 245-entity global mean.",
+    "The rates are not individual-level outcomes and do not support patient, prescribing, or treatment recommendations.",
+    "No candidate model, causal claim, clinical action, pathogen manipulation, or solved-frontier claim is produced."
+  ]
+}
