@@ -4154,6 +4154,379 @@ def audit_b9_r196(
     return status
 
 
+def audit_b9_r197(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify R197 and its independent symplectic third-prime rebuild."""
+    expected_status = "checked_nonstandard_fermionization_boundary"
+    expected_method = "b9_r197_nonstandard_fermionization_stress_v1"
+    expected_hashes = {
+        "contract_sha256": (
+            "6ab7640f7d2ab686f81c2da7519260c5950120352dc14e7f6e4b700829b6b39e"
+        ),
+        "protocol_hash": (
+            "19605d12028bc0205512904edb0ceac2f9cc50d548b1a5d80c15499b2343ee6d"
+        ),
+        "payload_sha256": (
+            "ae331194b20b5308be38dd4a6967783a209f194963dc7cf291f1c876cf9dbe06"
+        ),
+        "tool_sha256": (
+            "139a4734dbe6cfdc55cba4a22cb8a42b68685acdf7a0a78f1c2c7693cb7498ec"
+        ),
+        "independent_audit_tool_sha256": (
+            "1adcab7f570eb8223851690cb1fcd9003da9d47c285d124a5e8d7a4b13dd019e"
+        ),
+        "independent_audit_sha256": (
+            "f2f5f9030e3d9213a06df35b90504cfbdb820d689372e937a58a297f3c7f63e9"
+        ),
+        "result_file_sha256": (
+            "8cc7e8586d0930c2a9a2ad2642646ef3b18bd0988a028ce7600e8d96cb2f2cf6"
+        ),
+        "report_file_sha256": (
+            "5c4d02c647e95b1fc7dccb92ffa69148a2fa8cd7dc623f0ec688b9df5134372f"
+        ),
+    }
+    true_fields = [
+        "r197_contract_publicly_frozen_before_acceptance_execution",
+        "r197_holdout_couplings_unseen_before_protocol_freeze",
+        "declared_single_frame_quadratic_majorana_plus_h_families_have_nullity_two",
+        "declared_five_frame_union_plus_h_family_has_nullity_two",
+        "zero_coupling_tilted_frame_controls_recover_extra_exact_charges",
+        "r196_candidate_survives_declared_r197_finite_fermionization_adversary",
+    ]
+    false_fields = [
+        "all_frame_fermionization_exclusion",
+        "nonlocal_duality_exclusion",
+        "nonstandard_fermionization_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "hardware_relevance",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append(
+            "B9 manifest has no R197 nonstandard fermionization stress"
+        )
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    def file_hash(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    contract_path = resolve(manifest_entry.get("contract"))
+    independent_path = resolve(manifest_entry.get("independent_audit"))
+    tool_path = root / "tools/b9_r197_nonstandard_fermionization_stress.py"
+    independent_tool_path = root / "tools/b9_r197_independent_audit.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "contract": contract_path,
+        "independent audit": independent_path,
+        "tool": tool_path,
+        "independent audit tool": independent_tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R197 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    independent = json.loads(read(independent_path))
+    report = read(report_path)
+    rows = payload.get("rows", [])
+    controls = payload.get("positive_control_rows", [])
+    requirements = payload.get("requirements", [])
+    summary = payload.get("summary", {})
+    claim_boundary = payload.get("claim_boundary", {})
+    observed_hashes = {
+        "contract_sha256": file_hash(contract_path),
+        "protocol_hash": payload.get("protocol_sha256"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "tool_sha256": file_hash(tool_path),
+        "independent_audit_tool_sha256": file_hash(
+            independent_tool_path
+        ),
+        "independent_audit_sha256": file_hash(independent_path),
+        "result_file_sha256": file_hash(result_path),
+        "report_file_sha256": file_hash(report_path),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes.get(field) != expected:
+            errors.append(f"B9 R197 {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R197 manifest {field} mismatch")
+
+    if (
+        payload.get("status") != expected_status
+        or payload.get("method") != expected_method
+        or manifest_entry.get("status") != expected_status
+        or manifest_entry.get("method") != expected_method
+    ):
+        errors.append("B9 R197 status or method mismatch")
+    if (
+        len(requirements) != 11
+        or payload.get("requirements_total") != 11
+        or payload.get("requirements_passed") != 11
+        or any(item.get("passed") is not True for item in requirements)
+        or manifest_entry.get("requirement_count") != 11
+        or manifest_entry.get("requirements_passed") != 11
+    ):
+        errors.append("B9 R197 must pass all 11 frozen requirements")
+
+    expected_frame_order = [
+        "pauli_x",
+        "pauli_y",
+        "pauli_z",
+        "tilted_a",
+        "tilted_b",
+    ]
+    expected_keys = {
+        (coupling, n, (frame,))
+        for coupling in ("79/128", "83/128")
+        for n in (8, 9, 10)
+        for frame in expected_frame_order
+    }
+    expected_keys.update(
+        {
+            (coupling, n, tuple(expected_frame_order))
+            for coupling in ("79/128", "83/128")
+            for n in (8, 9, 10)
+        }
+    )
+    observed_keys = {
+        (
+            row.get("coupling"),
+            row.get("n"),
+            tuple(row.get("frame_ids", [])),
+        )
+        for row in rows
+    }
+    if observed_keys != expected_keys or len(rows) != 36:
+        errors.append("B9 R197 frozen row set mismatch")
+    for row in rows:
+        basis_size = row.get("independent_operator_basis_size")
+        if (
+            not isinstance(basis_size, int)
+            or row.get("identity_kernel_verified") is not True
+            or row.get("hamiltonian_kernel_verified") is not True
+            or row.get("exact_nullity_two_certified") is not True
+            or row.get("checked") is not True
+            or row.get("modular_ranks")
+            != {
+                "1000003": basis_size - 2,
+                "1000033": basis_size - 2,
+            }
+            or row.get("modular_nullities")
+            != {"1000003": 2, "1000033": 2}
+            or len(row.get("operator_basis_sha256", "")) != 64
+            or len(row.get("commutator_matrix_sha256", "")) != 64
+        ):
+            errors.append("B9 R197 frozen exact-rank row mismatch")
+            break
+    largest_union = [
+        row
+        for row in rows
+        if row.get("n") == 10
+        and len(row.get("frame_ids", [])) == 5
+    ]
+    if (
+        len(largest_union) != 2
+        or any(
+            row.get("independent_operator_basis_size") != 871
+            or row.get("commutator_nonzero_count") != 196_703
+            for row in largest_union
+        )
+    ):
+        errors.append("B9 R197 largest five-frame union boundary mismatch")
+
+    if len(controls) != 2:
+        errors.append("B9 R197 positive-control row count mismatch")
+    else:
+        expected_nullities = [66, 91]
+        for control, expected_nullity in zip(
+            controls, expected_nullities
+        ):
+            if (
+                control.get("modular_nullities")
+                != {
+                    "1000003": expected_nullity,
+                    "1000033": expected_nullity,
+                }
+                or control.get(
+                    "onsite_tilted_charge_witnesses_checked"
+                )
+                is not True
+                or control.get(
+                    "onsite_tilted_charge_witness_count"
+                )
+                != 8
+                or control.get(
+                    "onsite_tilted_charge_commutes_count"
+                )
+                != 8
+                or control.get(
+                    "onsite_tilted_charge_in_span_count"
+                )
+                != 8
+            ):
+                errors.append("B9 R197 positive-control boundary mismatch")
+
+    rebuilt_rows = independent.get("row_rebuilds", [])
+    if (
+        independent.get("status") != "pass"
+        or independent.get("audit_prime") != 1_000_037
+        or independent.get("row_count") != 36
+        or independent.get("third_prime_nullity_two_count") != 36
+        or independent.get("positive_control_nullities") != [66, 91]
+        or independent.get("evidence_integrity_complete") is not True
+        or independent.get("error_count") != 0
+        or independent.get("errors") != []
+        or independent.get("source_result", {}).get("payload_sha256")
+        != expected_hashes["payload_sha256"]
+        or independent.get("public_freeze", {}).get("verified") is not True
+        or independent.get("frame_algebra", {}).get("checked") is not True
+        or len(rebuilt_rows) != len(rows)
+    ):
+        errors.append("B9 R197 independent audit boundary mismatch")
+    exact_rebuild_fields = [
+        "frame_ids",
+        "coupling",
+        "n",
+        "raw_candidate_count",
+        "independent_operator_basis_size",
+        "operator_basis_pauli_nonzero_count",
+        "operator_basis_sha256",
+        "output_basis_size",
+        "commutator_nonzero_count",
+        "commutator_matrix_sha256",
+        "identity_kernel_verified",
+        "hamiltonian_kernel_verified",
+    ]
+    for source_row, rebuilt in zip(rows, rebuilt_rows):
+        if (
+            any(
+                source_row.get(field) != rebuilt.get(field)
+                for field in exact_rebuild_fields
+            )
+            or rebuilt.get("audit_prime") != 1_000_037
+            or rebuilt.get("audit_nullity") != 2
+            or rebuilt.get("audit_rank")
+            != source_row.get("independent_operator_basis_size") - 2
+        ):
+            errors.append("B9 R197 independent row rebuild mismatch")
+            break
+
+    freeze = payload.get("public_freeze", {})
+    if (
+        freeze.get("verified") is not True
+        or freeze.get("is_ancestor_of_execution_head") is not True
+        or freeze.get("preregistration_commit")
+        != "ab944728d8bbc590b745b9a4682ca31b4f9ee83f"
+        or freeze.get("contract_sha256_at_preregistration_commit")
+        != expected_hashes["contract_sha256"]
+    ):
+        errors.append("B9 R197 public-freeze ancestry mismatch")
+    if payload.get("protocol", {}).get("frame_algebra", {}).get(
+        "checked"
+    ) is not True:
+        errors.append("B9 R197 frame algebra mismatch")
+
+    true_claims = set(claim_boundary.get("supported", []))
+    false_claims = set(claim_boundary.get("not_supported", []))
+    if (
+        not set(true_fields).issubset(true_claims)
+        or not set(false_fields).issubset(false_claims)
+        or summary.get("frozen_row_count") != 36
+        or summary.get("single_frame_row_count") != 30
+        or summary.get("union_row_count") != 6
+        or summary.get("exact_nullity_two_row_count") != 36
+        or summary.get("positive_control_pass_count") != 2
+        or summary.get("scientific_promotion_accepted") is not False
+        or summary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R197 claim boundary mismatch")
+    for field in true_fields:
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R197 manifest {field} must remain true")
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R197 manifest {field} must remain false")
+    required_report_phrases = [
+        "Single-frame exact-nullity-two rows: `30/30`",
+        "Five-frame union exact-nullity-two rows: `6/6`",
+        "Scientific promotion accepted: `false`",
+        "continuous frames",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R197 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": payload.get("requirements_passed"),
+        "frozen_row_count": summary.get("frozen_row_count"),
+        "single_frame_row_count": summary.get(
+            "single_frame_row_count"
+        ),
+        "union_row_count": summary.get("union_row_count"),
+        "exact_nullity_two_row_count": summary.get(
+            "exact_nullity_two_row_count"
+        ),
+        "largest_union_operator_basis_size": (
+            largest_union[0].get("independent_operator_basis_size")
+            if largest_union
+            else None
+        ),
+        "largest_union_commutator_nonzero_count": (
+            largest_union[0].get("commutator_nonzero_count")
+            if largest_union
+            else None
+        ),
+        "positive_control_nullities": [66, 91],
+        "independent_audit_status": independent.get("status"),
+        "independent_audit_prime": independent.get("audit_prime"),
+        "independent_audit_error_count": independent.get("error_count"),
+        "scientific_promotion_accepted": summary.get(
+            "scientific_promotion_accepted"
+        ),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R197") for message in errors
+        ),
+        **{field: field in true_claims for field in true_fields},
+        **{field: field not in false_claims for field in false_fields},
+        "new_credit_delta": summary.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "independent_audit": manifest_entry.get("independent_audit"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -42196,6 +42569,15 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r197 = b9_results.get(
+        "r197_nonstandard_fermionization_stress_v1"
+    )
+    b9_r197_status = audit_b9_r197(
+        root,
+        b9_r197,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -52601,6 +52983,7 @@ def audit(root: Path) -> dict:
             "r194_higher_range_charge_stress": b9_r194_status,
             "r195_multiscale_tail_charge_stress": b9_r195_status,
             "r196_extended_tail_charge_stress": b9_r196_status,
+            "r197_nonstandard_fermionization_stress": b9_r197_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -56832,6 +57215,11 @@ def markdown_report(report: dict) -> str:
             f"- R196 translation range-eight rows / nullity-two / candidate basis: {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_row_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_nullity_two_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('translation_range_eight_candidate_basis_size')}",
             f"- R196 boundary range-four rows / nullity-two / positive-control families: {report['b9']['r196_extended_tail_charge_stress'].get('boundary_range_four_row_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('boundary_range_four_nullity_two_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('positive_control_family_pass_count')}",
             f"- R196 independent audit / prime / errors / scientific promotion / complete integrability exclusion / credit: {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_status')} / {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_prime')} / {report['b9']['r196_extended_tail_charge_stress'].get('independent_audit_error_count')} / {report['b9']['r196_extended_tail_charge_stress'].get('scientific_promotion_accepted')} / {report['b9']['r196_extended_tail_charge_stress'].get('complete_integrability_exclusion')} / {report['b9']['r196_extended_tail_charge_stress'].get('new_credit_delta')}",
+            f"- R197 nonstandard fermionization status: {report['b9']['r197_nonstandard_fermionization_stress'].get('status')}",
+            f"- R197 requirements / evidence integrity: {report['b9']['r197_nonstandard_fermionization_stress'].get('requirements_passed')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('evidence_integrity_complete')}",
+            f"- R197 frozen/single-frame/union/nullity-two rows: {report['b9']['r197_nonstandard_fermionization_stress'].get('frozen_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('single_frame_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('union_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('exact_nullity_two_row_count')}",
+            f"- R197 largest union basis/nonzeros / positive-control nullities: {report['b9']['r197_nonstandard_fermionization_stress'].get('largest_union_operator_basis_size')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('largest_union_commutator_nonzero_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('positive_control_nullities')}",
+            f"- R197 independent audit / prime / errors / promotion / nonstandard exclusion / credit: {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_status')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_prime')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_error_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('scientific_promotion_accepted')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('nonstandard_fermionization_exclusion')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

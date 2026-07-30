@@ -1136,17 +1136,38 @@ rebuilds all seven matrices and digests, and obtains nullity two under third
 prime `1,000,037` with zero errors. Contract `afc5a721...`; protocol
 `8f20eb86...`; payload `0116a213...`.
 
-**Remaining path to a serious solution:** attack range-nine or adaptive
-quasi-local tails, boundary corrections beyond range four,
-size-dependent/nonlocal boundary structures, nonlocal dualities, nonstandard
-fermionizations, interacting integrability, and larger sparse spectra under
-a new public frozen protocol. R196 narrows three finite conserved-charge
-ansatz families; it is not a complete integrability exclusion,
+T-B9-011 adds R197, the preregistered nonstandard-fermionization stress. The
+contract freezes unseen `J=79/128` and `J=83/128` before acceptance execution
+and defines five exact Jordan-Wigner frames: standard X/Y/Z plus rational
+tilted axes `A=(-4X+3Z)/5` and `B=(3X+4Z)/5`. Each frame contains identity,
+H, all Majorana-linear operators, every Hermitian quadratic bilinear, and full
+parity. A sixth family takes the independent operator-space union of all five
+frames.
+
+Across `n=8,9,10`, all `30/30` single-frame and `6/6` five-frame-union rows
+have exact nullity two under both declared primes. The largest union has `871`
+independent operators and `196,703` commutator nonzeros. At `J=0,n=8`, the
+tilted-A and union controls recover nullities `66` and `91`; all eight onsite
+tilted charges are explicitly in-span and commute.
+
+A separate symplectic-bit implementation imports none of the R193-R197
+construction modules, rebuilds every operator basis and commutator matrix, and
+reproduces all 36 nullities under third prime `1,000,037` with zero errors.
+Requirements pass `11/11`; contract `6ab7640f...`; protocol `19605d12...`;
+payload `ae331194...`.
+
+**Remaining path to a serious solution:** attack continuously rotated
+Jordan-Wigner frames, nonlinear mixtures of distinct frames, cubic/quartic
+Majorana charges, explicit Kramers-Wannier or other nonlocal dualities,
+range-nine adaptive tails, size-dependent nonlocal strings, interacting
+integrability, and larger sparse spectra under a new public frozen protocol.
+R197 narrows five finite quadratic-Majorana-plus-H frames and their linear
+union; it is not a complete fermionization or integrability exclusion,
 nonintegrability or chaos theorem, spectral-hardness theorem,
 arbitrary-local-Hamiltonian theorem, Quantum PCP result, NLTS theorem, BQP
 separation, or solved frontier.
 
-**Current internal maturity:** 46/100.
+**Current internal maturity:** 50/100.
 
 ## B10: Mapping the Boundary of BQP
 
