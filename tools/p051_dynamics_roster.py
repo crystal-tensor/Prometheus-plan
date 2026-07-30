@@ -11,6 +11,7 @@ import json
 import platform
 import re
 import shlex
+import ssl
 import tarfile
 import tempfile
 import time
@@ -18,6 +19,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
+
+import certifi
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +30,7 @@ DEFAULT_RESULT = ROOT / "results/P051_dynamics_roster_v1.json"
 DEFAULT_REPORT = ROOT / "research/P051_dynamics_roster_v1.md"
 DEFAULT_DISCUSSION = ROOT / "research/P051_dynamics_roster_discussion_v1.md"
 USER_AGENT = "Axiom-Horizon-P051-roster/1.0 (+public reproducibility audit)"
+SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 FAMILY_PREFIXES = {
     "heteronuclear_noe": ("_heteronucl_noe.",),
@@ -69,7 +73,9 @@ def fetch_bytes(url: str, attempts: int = 3, timeout: int = 45) -> bytes:
             },
         )
         try:
-            with urllib.request.urlopen(request, timeout=timeout) as response:
+            with urllib.request.urlopen(
+                request, timeout=timeout, context=SSL_CONTEXT
+            ) as response:
                 if response.status != 200:
                     raise RuntimeError(f"HTTP {response.status} for {url}")
                 return response.read()
