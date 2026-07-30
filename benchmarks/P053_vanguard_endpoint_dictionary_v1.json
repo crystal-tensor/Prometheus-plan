@@ -1,0 +1,212 @@
+{
+  "schema_version": "p053_vanguard_endpoint_dictionary_v1",
+  "as_of_date": "2026-07-30",
+  "scope": {
+    "included_catalog_problem_ids": [
+      53
+    ],
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "claim": "public_protocol_endpoint_and_claim_separation_only"
+  },
+  "question": "When does a registered cancer-screening outcome support feasibility, assay performance, mortality benefit, or personalized cure—and when does it support none of them yet?",
+  "study": {
+    "nct_id": "NCT06995898",
+    "name": "The Vanguard Study: Testing a New Way to Screen for Cancer",
+    "sponsor": "National Cancer Institute (NCI)",
+    "expected_status": "RECRUITING",
+    "expected_enrollment": 24000,
+    "expected_arms": 3,
+    "purpose": "SCREENING"
+  },
+  "sources": {
+    "clinicaltrials": {
+      "record_url": "https://clinicaltrials.gov/api/v2/studies/NCT06995898",
+      "public_page": "https://clinicaltrials.gov/study/NCT06995898"
+    },
+    "nci": {
+      "vanguard_program": "https://prevention.cancer.gov/research-areas/networks-consortia-programs/csrn/vanguard-study",
+      "vanguard_questions": "https://www.cancer.gov/research/areas/screening/vanguard-study",
+      "screening_overview": "https://www.cancer.gov/about-cancer/screening/hp-screening-overview-pdq",
+      "levels_of_evidence": "https://www.cancer.gov/publications/pdq/levels-evidence/screening-prevention",
+      "funded_grant": "https://prevention.cancer.gov/funding-and-grants/funded-grants/UG1CA286954"
+    }
+  },
+  "frozen_endpoint_mapping": {
+    "feasibility_primary": [
+      "Feasibility of enrollment onto study",
+      "Proportion of participants who complete baseline and follow-up questionnaires within 60 days of receipt",
+      "Proportion of participants who provide the required blood sample for year 1 for Multi-Cancer Detection (MCD) testing within 90 days of recommended time point",
+      "Proportion of participants considered lost to follow-up within 2 years of randomization",
+      "Representative enrollment",
+      "Staggered start of intervention arm 2"
+    ],
+    "pathway_and_harm_secondary": [
+      "Impact of participant blinding",
+      "Timely return of MCD test result",
+      "Factors contributing to lack of diagnostic resolution of an abnormal MCD test",
+      "Contamination",
+      "Effects of participant characteristics",
+      "Diagnostic resolution following an abnormal MCD test result",
+      "Time to diagnostic resolution",
+      "Participation in standard of care screening",
+      "Complications related to diagnostic evaluation of an abnormal MCD test result",
+      "Anxiety and Cancer Worry Questionnaire"
+    ],
+    "assay_performance_secondary": [
+      "Accuracy of tissue of origin prediction",
+      "Sensitivity of clinical diagnostic performance of each MCD assay",
+      "Specificity of each MCD assay",
+      "Test positive rates",
+      "False positives",
+      "(Targeted cancer) Positive predictive value (PPV)",
+      "(All cancer) PPV",
+      "Interval cancers",
+      "Detected cancers",
+      "(Targeted cancer) Negative predictive value"
+    ],
+    "long_term_other": [
+      "Cancer stage",
+      "Early and late stages cancer diagnosis",
+      "Targeted cancer-specific mortality of each MCD assay",
+      "Cancer-specific mortality",
+      "All-cause mortality",
+      "Estimated costs associated with MCD testing minus estimated costs associated with standard of care screening"
+    ],
+    "participant_burden_other": [
+      "Participant out of pocket costs",
+      "Participant work loss",
+      "Proportion of participants who complete the Military Exposure Questionnaire"
+    ]
+  },
+  "claim_ladder": [
+    {
+      "level": 0,
+      "name": "operational_feasibility",
+      "minimum_evidence": "completed registered primary feasibility outcomes with prespecified denominators and numeric success thresholds",
+      "does_not_imply": [
+        "assay accuracy",
+        "diagnostic benefit",
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ]
+    },
+    {
+      "level": 1,
+      "name": "diagnostic_pathway_and_harm",
+      "minimum_evidence": "resolved and unresolved abnormal-test pathways, time to resolution, procedures, complications, anxiety, contamination, and standard-screening participation",
+      "does_not_imply": [
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ]
+    },
+    {
+      "level": 2,
+      "name": "assay_performance",
+      "minimum_evidence": "prospective sensitivity, specificity, predictive values, interval cancers, false positives, tissue-of-origin accuracy, and complete cancer ascertainment",
+      "does_not_imply": [
+        "stage-shift benefit",
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ]
+    },
+    {
+      "level": 3,
+      "name": "clinical_utility_and_mortality",
+      "minimum_evidence": "completed randomized arm-specific estimand with adequate follow-up, prespecified multiplicity and power, mortality ascertainment, and joint benefit-harm accounting",
+      "does_not_imply": [
+        "treatment personalization",
+        "cure"
+      ]
+    },
+    {
+      "level": 4,
+      "name": "personalized_treatment_or_cure",
+      "minimum_evidence": "treatment-specific randomization, molecular assignment rule frozen before outcomes, comparative treatment outcomes, toxicity, recurrence, and survival",
+      "does_not_imply": []
+    }
+  ],
+  "go_no_go_threshold_rule": {
+    "definition": "A numeric go/no-go threshold must state an explicit cutoff or inequality for the endpoint measure itself. A measurement window, estimated enrollment, or reference to unspecified trial goals is not a success threshold.",
+    "expected_explicit_primary_thresholds": 0,
+    "promotion_rule": "Do not call the feasibility gate passed until denominators and numeric success thresholds are public and results are posted."
+  },
+  "mortality_rule": {
+    "registered_measure_is_not_a_result": true,
+    "other_outcome_is_not_primary_acceptance": true,
+    "stage_shift_is_not_mortality": true,
+    "required_before_promotion": [
+      "results posted",
+      "arm-specific randomized estimand",
+      "adequate power and multiplicity control",
+      "follow-up aligned to the registered time frame",
+      "cause-of-death ascertainment",
+      "false-positive, diagnostic-procedure, overdiagnosis, anxiety, and cost accounting"
+    ]
+  },
+  "timeline_sentinel": {
+    "compare": [
+      "actual study start",
+      "estimated study completion",
+      "maximum registered outcome time frame",
+      "passive follow-up duration in the detailed description"
+    ],
+    "rule": "A long-term outcome cannot be promoted while the registered completion calendar does not span its stated follow-up horizon."
+  },
+  "readiness_decision": {
+    "dictionary_ready_label": "endpoint_dictionary_ready_claims_separated",
+    "dictionary_blocked_label": "blocked_endpoint_mapping_mismatch",
+    "mortality_claim_ready": false,
+    "personalized_cure_claim_ready": false,
+    "participant_level_analysis_executed": false,
+    "assay_comparison_executed": false
+  },
+  "frozen_source_retention": {
+    "directory": "results/P053_vanguard_endpoint_source_v1",
+    "files": [
+      "current ClinicalTrials.gov API v2 record",
+      "NCI Vanguard program page",
+      "NCI Vanguard questions and answers",
+      "NCI professional cancer-screening overview",
+      "NCI screening levels-of-evidence page",
+      "NCI Vanguard funded-grant page"
+    ],
+    "compression": "gzip with mtime=0 for deterministic bytes",
+    "hash": "SHA-256 over every retained source file"
+  },
+  "pilot_disclosure": {
+    "inspected_during_protocol_design": [
+      "NCT06995898 current API record",
+      "NCI Vanguard program page",
+      "NCI screening overview"
+    ],
+    "boundary": "Pilot inspection established the current outcome titles, study status, arm structure, outcome categories, and timing fields. No participant data, assay result, diagnostic outcome, cancer stage, death, or treatment outcome was inspected."
+  },
+  "controls": {
+    "positive": "Every registered outcome must map exactly once to one frozen evidence class.",
+    "negative": "A synthetic claim that enrollment feasibility proves mortality reduction or personalized cure must be rejected.",
+    "independent_reimplementation_required": true,
+    "byte_identical_replay_required": true
+  },
+  "next_gate": "Publish numeric primary feasibility success thresholds and a timeline-aligned analysis plan; keep assay performance, diagnostic burden, mortality, and treatment claims in separate estimands.",
+  "interpretation_boundaries": [
+    "This packet audits public protocol semantics and endpoint-to-claim alignment only.",
+    "It does not recommend an MCD assay, screening decision, diagnostic procedure, treatment, or trial participation.",
+    "It does not analyze participant-level data or compare the two MCD assays.",
+    "It does not establish mortality benefit, personalized treatment, cure, regulatory authorization, or a solved frontier."
+  ]
+}
