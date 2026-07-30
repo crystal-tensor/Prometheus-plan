@@ -597,7 +597,7 @@ def build_result(
             },
             "decision": "use_hashed_dashboard_api_snapshot_and_record_the_download_lag",
         },
-        "forecast_model_executed": false,
+        "forecast_model_executed": False,
     }
     return {
         "schema_version": benchmark["schema_version"],
