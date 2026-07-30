@@ -1,0 +1,138 @@
+{
+  "schema_version": "p057_amr_shrinkage_candidate_v1",
+  "as_of_date": "2026-07-30",
+  "scope": {
+    "included_catalog_problem_ids": [
+      57
+    ],
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      58,
+      59,
+      60
+    ],
+    "claim": "retrospective_candidate_screen_only"
+  },
+  "question": "Can one shared logit-time slope plus ridge-shrunk entity intercepts beat both frozen P057 baselines without sacrificing calibration in the partial-completeness stratum?",
+  "inputs": {
+    "source_snapshot": {
+      "path": "results/P057_P058_source_snapshot_v1.json",
+      "sha256": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9"
+    },
+    "upstream_preflight": {
+      "path": "results/P057_P058_data_preflight_v1.json",
+      "sha256": "d1829f585d9e8657272c7fe1c1a5dc614e63ff01833402e1b34b76ba564ff877",
+      "required_status": "pass",
+      "required_p057_status": "coverage_matrix_ready"
+    },
+    "frozen_baseline_result": {
+      "path": "results/P057_AMR_baseline_eval_v1.json",
+      "sha256": "d1a449aa8f37def65af86cba0cd4fbd2cca6e61c75eb82a1006135e99a6bc9f5",
+      "required_status": "pass",
+      "required_protocol_commit": "cafabf703649eb5300dba18d5b22262326b81442"
+    }
+  },
+  "data_contract": {
+    "training_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "holdout_year": 2023,
+    "indicator_codes": [
+      "AMR_INFECT_ECOLI",
+      "AMR_INFECT_MRSA"
+    ],
+    "unit": "percentage points",
+    "candidate_training_pool": "all frozen public source rows for the fitted indicator whose year is in the permitted training window, including entities without a 2023 target",
+    "evaluation_rows": "the exact ordered 141 indicator-entity rows frozen by P057_AMR_baseline_eval_v1",
+    "entity_weighting": "equal weight per evaluation row",
+    "post_outcome_exclusions_allowed": false
+  },
+  "candidate": {
+    "id": "shared_logit_slope_ridge_entity_intercept",
+    "response_transform": "logit(clip(value_percent / 100, 0.005, 0.995))",
+    "probability_clip_epsilon": 0.005,
+    "time_center_year": 2019.0,
+    "model": "one unpenalized intercept and one unpenalized shared calendar-time slope plus one ridge-penalized intercept deviation per observed entity, fitted separately for each indicator",
+    "prediction_for_entity_absent_from_a_fold": "global intercept plus shared slope; entity deviation equals zero",
+    "slope_cap": null,
+    "minimum_target_training_points": 3
+  },
+  "hyperparameter_selection": {
+    "method": "rolling-origin validation using training-period outcomes only",
+    "validation_years": [
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "lambda_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ],
+    "selection_metric": "equal-row mean absolute error in percentage points pooled across every validation row in all four folds",
+    "selection_granularity": "one lambda selected independently per indicator",
+    "tie_tolerance": 1e-12,
+    "tie_break": "choose the larger lambda",
+    "holdout_year_used_for_selection": false,
+    "post_holdout_retuning_allowed": false
+  },
+  "frozen_gate": {
+    "required_slices": [
+      "AMR_INFECT_ECOLI__overall",
+      "AMR_INFECT_ECOLI__partial",
+      "AMR_INFECT_MRSA__overall",
+      "AMR_INFECT_MRSA__partial"
+    ],
+    "primary": "candidate equal-entity weighted absolute error must be strictly lower than both locf and country_logit on every required slice",
+    "calibration": "candidate absolute calibration bias must be no more than 2.0 percentage points above the lower of the two frozen baseline absolute biases on every required slice",
+    "primary_tie_tolerance": 1e-12,
+    "calibration_margin_pp": 2.0,
+    "all_comparisons_required": true,
+    "failure_action": "reject this candidate specification without post-hoc cohort changes or retuning",
+    "pass_action": "label only as a provisional candidate-screen pass and require replay on an untouched future year or data vintage"
+  },
+  "metrics": {
+    "primary": "equal-entity weighted absolute error",
+    "calibration": "absolute calibration bias",
+    "secondary": [
+      "root mean squared error",
+      "median absolute error"
+    ],
+    "rounding_decimal_places": 10
+  },
+  "controls": {
+    "constant_series": "a synthetic constant-percent panel must reproduce the constant 2023 percentage within 1e-10 percentage points",
+    "exact_unpenalized_shared_slope": "with zero ridge penalty, a synthetic exact shared-logit-slope panel must recover every 2023 percentage within 1e-10 percentage points",
+    "independent_reimplementation_required": true,
+    "byte_identical_replay_required": true
+  },
+  "confirmation_boundary": {
+    "holdout_exposure": "The 2023 outcomes were already summarized in the published baseline evaluation before this candidate protocol was frozen.",
+    "permitted_label_if_gate_passes": "provisional_retrospective_screen_pass",
+    "forbidden_label": "pristine_confirmatory_validation",
+    "required_next_confirmation": "an untouched future year or data vintage not used to choose, motivate, or report this candidate"
+  },
+  "interpretation_boundaries": [
+    "This is a forecasting-method screen over aggregate public rates, not a clinical or causal study.",
+    "The evaluation remains conditional on the 141 entities with a 2023 observation and at least three training observations.",
+    "No patient, prescribing, treatment, pathogen-manipulation, or public-health intervention recommendation is permitted.",
+    "A gate pass does not solve catalog problem #057 and does not establish performance on non-reporting entities."
+  ]
+}
