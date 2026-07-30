@@ -337,6 +337,27 @@ def sample_size(metadata: dict[str, Any]) -> int | None:
     return int(value) if value is not None else None
 
 
+def response_label(
+    accession: str,
+    raw_metadata: dict[str, Any],
+    harmonised_metadata: dict[str, Any],
+) -> str:
+    notes = str(raw_metadata.get("author_notes") or "")
+    residual_match = re.search(
+        r"(?:G&H\s+phenotype:\s*)?(Height\.residual)",
+        notes,
+        flags=re.IGNORECASE,
+    )
+    if residual_match:
+        return residual_match.group(1)
+    descriptions = harmonised_metadata.get("trait_description") or []
+    if len(descriptions) != 1:
+        raise RuntimeError(
+            f"{accession} has {len(descriptions)} trait descriptions"
+        )
+    return str(descriptions[0])
+
+
 def source_inventory(source_dir: Path) -> list[dict[str, Any]]:
     return [
         {
@@ -375,6 +396,7 @@ def build_result(
     for accession in seed_by_id:
         seed = seed_by_id[accession]
         record = source["records"][accession]
+        raw_metadata = source["raw_metadata"][accession]
         metadata = source["harmonised_metadata"][accession]
         publication = source["publications"][str(record["pubmed_id"])]
         cohort = record.get("cohort") or []
@@ -382,6 +404,10 @@ def build_result(
         ontology = metadata.get("ontology_mapping") or []
         samples = metadata.get("samples") or []
         first_sample = samples[0] if len(samples) == 1 else {}
+        disease_trait = str(record.get("disease_trait") or "")
+        interaction_label = bool(
+            re.search(r"\binteraction\b|\s[x×]\s", disease_trait, re.I)
+        )
         row_checks = {
             "present_in_exact_trait_query": accession in query_by_id,
             "full_summary_stats_available": bool(
@@ -389,8 +415,11 @@ def build_result(
             ),
             "minimum_snp_count": int(record.get("snp_count") or 0)
             >= int(requirements["minimum_snp_count"]),
-            "gxe_false": record.get("gxe") in {False, None},
-            "gxg_false": record.get("gxg") in {False, None},
+            "interaction_study_excluded": (
+                record.get("gxe") is not True
+                and record.get("gxg") is not True
+                and not interaction_label
+            ),
             "single_named_cohort": len(cohort) == 1
             and bool(str(cohort[0]).strip()),
             "single_discovery_ancestry_category": category is not None,
@@ -440,6 +469,14 @@ def build_result(
                 "sample_size": sample_size(metadata),
                 "snp_count": int(record.get("snp_count") or 0),
                 "trait_description": metadata.get("trait_description"),
+                "response_label": response_label(
+                    accession, raw_metadata, metadata
+                ),
+                "interaction_metadata": {
+                    "gxe": record.get("gxe"),
+                    "gxg": record.get("gxg"),
+                    "disease_trait": disease_trait,
+                },
                 "adjusted_covariates": metadata.get(
                     "adjusted_covariates", []
                 ),
@@ -485,7 +522,7 @@ def build_result(
     distinct_publications = sorted({row["pubmed_id"] for row in roster})
     total_sample_size = sum(int(row["sample_size"] or 0) for row in roster)
     transformations = {
-        row["accession"]: list(row["trait_description"] or [])
+        row["accession"]: row["response_label"]
         for row in roster
     }
     same_publication_pair = sorted(
@@ -611,10 +648,7 @@ def build_result(
         check(
             "response_scales_not_collapsed",
             len(
-                {
-                    tuple(value)
-                    for value in transformations.values()
-                }
+                set(transformations.values())
             )
             == 3,
             pretty_json(transformations).strip(),
@@ -759,7 +793,7 @@ def render_report(result: dict[str, Any]) -> str:
     rows = []
     for row in result["roster"]:
         covariates = ", ".join(row["adjusted_covariates"]) or "not listed"
-        trait = "; ".join(row["trait_description"] or [])
+        trait = row["response_label"]
         license_label = (
             "CC0"
             if "creativecommons.org/publicdomain/zero"

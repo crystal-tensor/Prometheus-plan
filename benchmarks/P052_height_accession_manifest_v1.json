@@ -78,8 +78,7 @@
     "present_in_exact_trait_query": true,
     "full_summary_stats_available": true,
     "minimum_snp_count": 1000000,
-    "gxe": false,
-    "gxg": false,
+    "interaction_study_excluded": "gxe and gxg are not true, and the disease-trait label contains neither an interaction marker nor an interaction term",
     "single_named_cohort": true,
     "single_discovery_ancestry_category": true,
     "harmonised": true,
@@ -144,7 +143,7 @@
       "GCST90727327",
       "their public FTP directory listings and metadata YAML"
     ],
-    "boundary": "Pilot inspection established current accessions, schemas, cohorts, ancestry labels, licenses, and file formats. No candidate prediction, calibration slope, explained variance, or bootstrap result was computed."
+    "boundary": "Pilot inspection established current accessions, schemas, cohorts, ancestry labels, licenses, file formats, and the missing G&H gxe flag. The frozen rule does not reinterpret a missing flag as false: it excludes records only when an interaction flag is true or the disease-trait label itself denotes an interaction. No candidate prediction, calibration slope, explained variance, or bootstrap result was computed."
   },
   "controls": {
     "positive": "A synthetic three-accession roster with distinct cohorts and ancestries, complete GWAS-SSF metadata, and all individual-level holdout fields must be evaluation-ready.",
