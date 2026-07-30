@@ -22,11 +22,14 @@ import io
 import json
 import math
 import platform
+import ssl
 import urllib.parse
 import urllib.request
 from collections import Counter
 from pathlib import Path
 from typing import Any
+
+import certifi
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +64,8 @@ def write_text(path: Path, value: str) -> None:
 
 def fetch_bytes(url: str) -> tuple[bytes, dict[str, str]]:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=60) as response:
+    context = ssl.create_default_context(cafile=certifi.where())
+    with urllib.request.urlopen(request, timeout=60, context=context) as response:
         body = response.read()
         headers = {
             key.lower(): value
