@@ -2650,6 +2650,11 @@ Overall audit: PASS
 - R197 frozen/single-frame/union/nullity-two rows: 36 / 30 / 6 / 36
 - R197 largest union basis/nonzeros / positive-control nullities: 871 / 196703 / [66, 91]
 - R197 independent audit / prime / errors / promotion / nonstandard exclusion / credit: pass / 1000037 / 0 / False / False / 0
+- R198 continuous XZ-frame status: checked_continuous_xz_frame_boundary
+- R198 requirements / evidence integrity: 12 / True
+- R198 continuous rows / passed / determinants / finite real common roots: 4 / 4 / 20 / 0
+- R198 rational frames / grid rows / full-rank rows / largest columns/nonzeros: 72 / 432 / 432 / 211 / 122753
+- R198 independent audit / prime / continuous matches / third-prime grid / errors / promotion / all-Bloch exclusion / credit: pass / 1000037 / 4 / 432 / 0 / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

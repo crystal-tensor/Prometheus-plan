@@ -318,8 +318,8 @@ not a complete fermionization exclusion, nonintegrability or chaos theorem,
 hardness result, Quantum PCP or NLTS theorem, BQP separation, hardware result,
 or solved frontier. Scientific promotion is false and new credit remains zero.
 
-R198 is now publicly preregistered but not yet executed on its frozen
-holdouts. It attacks the first R197 escape route with every XZ-plane
+R198 has completed its publicly preregistered frozen run and independent
+audit. It attacks the first R197 escape route with every XZ-plane
 Jordan-Wigner parity axis
 `P(t)=((1-t^2)X+2tZ)/(1+t^2)`. At `n=4,5`, the executor expands the complete
 quadratic-Majorana commutator matrix over `ZZ[t]`, combines exact maximal
@@ -328,14 +328,21 @@ factor over its quotient field. The projective endpoint `t=infinity` is
 checked separately. At `n=6,8,10`, a frozen catalog of 72 exact rational
 frames will pressure the same hypothesis at larger sizes.
 
-Only `J=13/32` has been used for method engineering. Its `n=4` and `n=5`
-certificates both reduce their final common minor factor to a power of
-`1+t^2`, with zero finite real roots and full rank at the projective endpoint.
-The positive control at `J=0,n=6,t=3` recovers all six expected onsite
-charges. These engineering results carry zero acceptance. Contract
-`c1b68368...` freezes unseen `J=89/128` and `J=101/128`, 432 larger-size grid
-rows, a non-importing third-prime audit, and the exact claim boundary before
-holdout execution.
+Contract `c1b68368...` froze unseen `J=89/128` and `J=101/128` before
+execution. All `4/4` continuous rows pass after 20 exact maximal-minor
+determinants and adaptive quotient-field pressure; the final common factors
+have zero finite real roots and every projective endpoint is full rank. All
+`432/432` larger-size rational-frame rows are full column rank. The positive
+control at `J=0,n=6,t=3` recovers all six expected onsite charges and nullity
+37.
+
+A separate sparse symplectic-bit and polynomial implementation imports none of
+the R193-R198 construction modules. It reproduces every continuous matrix,
+determinant digest, gcd, exact real-root count, and projective endpoint, then
+rebuilds all 432 rational-frame matrices under independent prime `1,000,037`.
+Continuous matches are `4/4`, third-prime full-rank grid rows are `432/432`,
+and audit errors are `0`. Requirements pass `12/12`; protocol
+`7ab964fa...`; result payload `eb8fc159...`; audit payload `f5afae5f...`.
 
 Even if every R198 gate passes, the result will cover only the declared
 XZ-plane continuous quadratic-Majorana-plus-parity family at `n=4,5` and the
@@ -343,7 +350,9 @@ XZ-plane continuous quadratic-Majorana-plus-parity family at `n=4,5` and the
 mixtures, cubic or quartic Majorana charges, nonlocal dualities, interacting
 integrability, nonintegrability, quantum chaos, hardness, Quantum PCP, NLTS,
 BQP, hardware relevance, and solved-frontier status remain open. Scientific
-promotion and new credit remain zero.
+promotion and new credit remain zero. The next adversary must use a new public
+freeze for a second Bloch-sphere chart, quartic Majorana charges, or an
+explicit nonlocal duality.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

@@ -4527,6 +4527,344 @@ def audit_b9_r197(
     return status
 
 
+def audit_b9_r198(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify R198 and its non-importing polynomial/third-prime rebuild."""
+    expected_status = "checked_continuous_xz_frame_boundary"
+    expected_method = "b9_r198_continuous_frame_stress_v1"
+    expected_hashes = {
+        "contract_sha256": (
+            "c1b68368dbf9ad577f84838b5a3dd77387c63b78f9f7a7c7e6fa334803f9d03c"
+        ),
+        "protocol_hash": (
+            "7ab964fa0224fe960f0a7764427e6709fdf89202ef990d11a4acae61b7f32586"
+        ),
+        "payload_sha256": (
+            "eb8fc1597cdefc709137f8864f129585a38d0ff2ac5b1945c2c829df900b571d"
+        ),
+        "tool_sha256": (
+            "c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13"
+        ),
+        "independent_audit_tool_sha256": (
+            "81ec598bd200a6edd5c66e2a1a34ef9618434f29895bf2d0ae4d7a7583b4a0b8"
+        ),
+        "independent_audit_sha256": (
+            "7376816e868b5f9d9f81ce1361d324667ad4223903c379534ab5ed6fc34b437f"
+        ),
+        "result_file_sha256": (
+            "4f0b6a69426de62c96416dcf9d0c3a8df009096805602623fa9d5ee4057253de"
+        ),
+        "report_file_sha256": (
+            "d6a024a2e8b89b3045124dd305da1d8780a6540b9557f4cf09372d88349d7121"
+        ),
+    }
+    true_fields = [
+        "r198_contract_publicly_frozen_before_acceptance_execution",
+        "r198_holdout_couplings_unseen_before_protocol_freeze",
+        "continuous_xz_plane_quadratic_majorana_pool_has_no_extra_charge_at_n4_n5",
+        "declared_72_frame_grid_has_no_extra_quadratic_majorana_charge_at_n6_n8_n10",
+        "zero_coupling_tilted_frame_control_recovers_extra_exact_charges",
+        "r197_candidate_survives_declared_r198_continuous_family_adversary",
+    ]
+    false_fields = [
+        "all_bloch_sphere_fermionization_exclusion",
+        "nonlinear_frame_mixture_exclusion",
+        "higher_order_majorana_charge_exclusion",
+        "nonlocal_duality_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "hardware_relevance",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        **{field: False for field in true_fields + false_fields},
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R198 continuous-frame stress")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        if not relative:
+            return None
+        return (root / "benchmarks" / relative).resolve()
+
+    def file_hash(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    result_path = resolve(manifest_entry.get("result"))
+    report_path = resolve(manifest_entry.get("markdown_report"))
+    contract_path = resolve(manifest_entry.get("contract"))
+    independent_path = resolve(manifest_entry.get("independent_audit"))
+    tool_path = root / "tools/b9_r198_continuous_frame_stress.py"
+    independent_tool_path = root / "tools/b9_r198_independent_audit.py"
+    paths = {
+        "result": result_path,
+        "report": report_path,
+        "contract": contract_path,
+        "independent audit": independent_path,
+        "tool": tool_path,
+        "independent audit tool": independent_tool_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R198 {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    payload = json.loads(read(result_path))
+    independent = json.loads(read(independent_path))
+    report = read(report_path)
+    requirements = payload.get("requirements", [])
+    summary = payload.get("summary", {})
+    claims = payload.get("claims", {})
+    continuous_rows = payload.get("continuous_rows", [])
+    grid_rows = payload.get("rational_grid_rows", [])
+    control = payload.get("positive_control", {})
+    observed_hashes = {
+        "contract_sha256": file_hash(contract_path),
+        "protocol_hash": payload.get("protocol_hash"),
+        "payload_sha256": payload.get("payload_sha256"),
+        "tool_sha256": file_hash(tool_path),
+        "independent_audit_tool_sha256": file_hash(
+            independent_tool_path
+        ),
+        "independent_audit_sha256": file_hash(independent_path),
+        "result_file_sha256": file_hash(result_path),
+        "report_file_sha256": file_hash(report_path),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes.get(field) != expected:
+            errors.append(f"B9 R198 {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R198 manifest {field} mismatch")
+
+    if (
+        payload.get("status") != expected_status
+        or payload.get("method") != expected_method
+        or manifest_entry.get("status") != expected_status
+        or manifest_entry.get("method") != expected_method
+    ):
+        errors.append("B9 R198 status or method mismatch")
+    if (
+        len(requirements) != 12
+        or any(item.get("passed") is not True for item in requirements)
+        or summary.get("requirement_count") != 12
+        or summary.get("requirement_pass_count") != 12
+        or manifest_entry.get("requirement_count") != 12
+        or manifest_entry.get("requirements_passed") != 12
+    ):
+        errors.append("B9 R198 must pass all 12 frozen requirements")
+
+    expected_continuous_keys = {
+        (coupling, n)
+        for coupling in ("89/128", "101/128")
+        for n in (4, 5)
+    }
+    observed_continuous_keys = {
+        (row.get("coupling"), row.get("n"))
+        for row in continuous_rows
+    }
+    if (
+        observed_continuous_keys != expected_continuous_keys
+        or len(continuous_rows) != 4
+        or sum(
+            row.get("determinant_count", 0)
+            for row in continuous_rows
+        )
+        != 20
+    ):
+        errors.append("B9 R198 continuous certificate row set mismatch")
+    for row in continuous_rows:
+        infinity = row.get("projective_infinity", {})
+        if (
+            row.get("checked") is not True
+            or row.get(
+                "continuous_projective_line_full_column_rank_certified"
+            )
+            is not True
+            or row.get("finite_real_common_root_count") != 0
+            or row.get("unresolved_factors") != []
+            or row.get("determinant_count") != 5
+            or len(row.get("polynomial_commutator_matrix_sha256", ""))
+            != 64
+            or infinity.get("checked") is not True
+            or infinity.get("commutator_full_column_rank") is not True
+        ):
+            errors.append("B9 R198 continuous certificate mismatch")
+            break
+
+    expected_grid_keys = {
+        (coupling, n, f"pxz_{index:03d}")
+        for coupling in ("89/128", "101/128")
+        for n in (6, 8, 10)
+        for index in range(72)
+    }
+    observed_grid_keys = {
+        (row.get("coupling"), row.get("n"), row.get("frame_id"))
+        for row in grid_rows
+    }
+    if observed_grid_keys != expected_grid_keys or len(grid_rows) != 432:
+        errors.append("B9 R198 rational-frame grid row set mismatch")
+    for row in grid_rows:
+        column_count = row.get("candidate_column_count")
+        if (
+            not isinstance(column_count, int)
+            or row.get("checked") is not True
+            or row.get("operator_basis_independent") is not True
+            or row.get("commutator_full_column_rank") is not True
+            or row.get("operator_basis_modular_ranks")
+            != {
+                "1000003": column_count,
+                "1000033": column_count,
+            }
+            or row.get("modular_ranks")
+            != {
+                "1000003": column_count,
+                "1000033": column_count,
+            }
+            or row.get("modular_nullities")
+            != {"1000003": 0, "1000033": 0}
+            or len(row.get("operator_basis_sha256", "")) != 64
+            or len(row.get("commutator_matrix_sha256", "")) != 64
+        ):
+            errors.append("B9 R198 frozen rational-frame row mismatch")
+            break
+
+    if (
+        control.get("checked") is not True
+        or control.get("modular_nullities")
+        != {"1000003": 37, "1000033": 37}
+        or control.get("onsite_tilted_charge_witness_count") != 6
+        or control.get("onsite_tilted_charge_commutes_count") != 6
+        or control.get("onsite_tilted_charge_in_span_count") != 6
+        or control.get("onsite_tilted_charge_witnesses_checked") is not True
+    ):
+        errors.append("B9 R198 positive-control boundary mismatch")
+
+    if (
+        independent.get("status") != "pass"
+        or independent.get("audit_prime") != 1_000_037
+        or independent.get("continuous_row_count") != 4
+        or independent.get("continuous_exact_match_count") != 4
+        or independent.get("rational_grid_row_count") != 432
+        or independent.get("third_prime_full_rank_grid_count") != 432
+        or independent.get("positive_control_third_prime_nullity") != 37
+        or independent.get("evidence_integrity_complete") is not True
+        or independent.get("error_count") != 0
+        or independent.get("errors") != []
+        or independent.get("source_result", {}).get("payload_sha256")
+        != expected_hashes["payload_sha256"]
+        or independent.get("public_freeze", {}).get("verified") is not True
+        or independent.get("forbidden_import_audit", {}).get("checked")
+        is not True
+    ):
+        errors.append("B9 R198 independent audit boundary mismatch")
+
+    freeze = payload.get("public_freeze", {})
+    if (
+        freeze.get("verified") is not True
+        or freeze.get("is_ancestor_of_execution_head") is not True
+        or freeze.get("preregistration_commit")
+        != "21e68f5198b19b347b4aa0f01f18e782ee8638c3"
+        or freeze.get("contract_sha256_at_preregistration_commit")
+        != expected_hashes["contract_sha256"]
+    ):
+        errors.append("B9 R198 public-freeze ancestry mismatch")
+
+    for field in true_fields:
+        if claims.get(field) is not True:
+            errors.append(f"B9 R198 claim {field} must remain true")
+        if manifest_entry.get(field) is not True:
+            errors.append(f"B9 R198 manifest {field} must remain true")
+    for field in false_fields:
+        if claims.get(field) is not False:
+            errors.append(f"B9 R198 claim {field} must remain false")
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R198 manifest {field} must remain false")
+    if (
+        claims.get("scientific_promotion_accepted") is not False
+        or claims.get("new_credit_delta") != 0
+        or manifest_entry.get("scientific_promotion_accepted") is not False
+        or manifest_entry.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R198 promotion or credit boundary mismatch")
+    required_report_phrases = [
+        "Continuous symbolic rows: `4/4`",
+        "Rational-frame rows: `432/432`",
+        "Independent third-prime full-rank grid rows: `432/432`",
+        "Scientific promotion: `false`",
+        "general Bloch-sphere frames",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R198 report claim boundary is incomplete")
+
+    status = {
+        "status": payload.get("status"),
+        "method": payload.get("method"),
+        "experiment_id": payload.get("experiment_id"),
+        **observed_hashes,
+        "requirement_count": len(requirements),
+        "requirements_passed": summary.get("requirement_pass_count"),
+        "continuous_row_count": summary.get("continuous_row_count"),
+        "continuous_pass_count": summary.get("continuous_pass_count"),
+        "continuous_determinant_count": summary.get(
+            "continuous_determinant_count"
+        ),
+        "continuous_finite_real_common_root_count": summary.get(
+            "continuous_finite_real_common_root_count"
+        ),
+        "rational_frame_count": summary.get("rational_frame_count"),
+        "rational_grid_row_count": summary.get(
+            "rational_grid_row_count"
+        ),
+        "rational_grid_pass_count": summary.get(
+            "rational_grid_pass_count"
+        ),
+        "largest_candidate_column_count": summary.get(
+            "largest_candidate_column_count"
+        ),
+        "largest_commutator_nonzero_count": summary.get(
+            "largest_commutator_nonzero_count"
+        ),
+        "positive_control_nullity": 37,
+        "independent_audit_status": independent.get("status"),
+        "independent_audit_prime": independent.get("audit_prime"),
+        "independent_continuous_exact_match_count": independent.get(
+            "continuous_exact_match_count"
+        ),
+        "independent_third_prime_full_rank_grid_count": independent.get(
+            "third_prime_full_rank_grid_count"
+        ),
+        "independent_audit_error_count": independent.get("error_count"),
+        "scientific_promotion_accepted": claims.get(
+            "scientific_promotion_accepted"
+        ),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R198") for message in errors
+        ),
+        **{field: claims.get(field) is True for field in true_fields},
+        **{field: claims.get(field) is True for field in false_fields},
+        "new_credit_delta": claims.get("new_credit_delta"),
+        "result": manifest_entry.get("result"),
+        "independent_audit": manifest_entry.get("independent_audit"),
+        "markdown_report": manifest_entry.get("markdown_report"),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -42578,6 +42916,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r198 = b9_results.get("r198_continuous_frame_stress_v1")
+    b9_r198_status = audit_b9_r198(
+        root,
+        b9_r198,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -52984,6 +53329,7 @@ def audit(root: Path) -> dict:
             "r195_multiscale_tail_charge_stress": b9_r195_status,
             "r196_extended_tail_charge_stress": b9_r196_status,
             "r197_nonstandard_fermionization_stress": b9_r197_status,
+            "r198_continuous_frame_stress": b9_r198_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -57220,6 +57566,11 @@ def markdown_report(report: dict) -> str:
             f"- R197 frozen/single-frame/union/nullity-two rows: {report['b9']['r197_nonstandard_fermionization_stress'].get('frozen_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('single_frame_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('union_row_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('exact_nullity_two_row_count')}",
             f"- R197 largest union basis/nonzeros / positive-control nullities: {report['b9']['r197_nonstandard_fermionization_stress'].get('largest_union_operator_basis_size')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('largest_union_commutator_nonzero_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('positive_control_nullities')}",
             f"- R197 independent audit / prime / errors / promotion / nonstandard exclusion / credit: {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_status')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_prime')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('independent_audit_error_count')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('scientific_promotion_accepted')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('nonstandard_fermionization_exclusion')} / {report['b9']['r197_nonstandard_fermionization_stress'].get('new_credit_delta')}",
+            f"- R198 continuous XZ-frame status: {report['b9']['r198_continuous_frame_stress'].get('status')}",
+            f"- R198 requirements / evidence integrity: {report['b9']['r198_continuous_frame_stress'].get('requirements_passed')} / {report['b9']['r198_continuous_frame_stress'].get('evidence_integrity_complete')}",
+            f"- R198 continuous rows / passed / determinants / finite real common roots: {report['b9']['r198_continuous_frame_stress'].get('continuous_row_count')} / {report['b9']['r198_continuous_frame_stress'].get('continuous_pass_count')} / {report['b9']['r198_continuous_frame_stress'].get('continuous_determinant_count')} / {report['b9']['r198_continuous_frame_stress'].get('continuous_finite_real_common_root_count')}",
+            f"- R198 rational frames / grid rows / full-rank rows / largest columns/nonzeros: {report['b9']['r198_continuous_frame_stress'].get('rational_frame_count')} / {report['b9']['r198_continuous_frame_stress'].get('rational_grid_row_count')} / {report['b9']['r198_continuous_frame_stress'].get('rational_grid_pass_count')} / {report['b9']['r198_continuous_frame_stress'].get('largest_candidate_column_count')} / {report['b9']['r198_continuous_frame_stress'].get('largest_commutator_nonzero_count')}",
+            f"- R198 independent audit / prime / continuous matches / third-prime grid / errors / promotion / all-Bloch exclusion / credit: {report['b9']['r198_continuous_frame_stress'].get('independent_audit_status')} / {report['b9']['r198_continuous_frame_stress'].get('independent_audit_prime')} / {report['b9']['r198_continuous_frame_stress'].get('independent_continuous_exact_match_count')} / {report['b9']['r198_continuous_frame_stress'].get('independent_third_prime_full_rank_grid_count')} / {report['b9']['r198_continuous_frame_stress'].get('independent_audit_error_count')} / {report['b9']['r198_continuous_frame_stress'].get('scientific_promotion_accepted')} / {report['b9']['r198_continuous_frame_stress'].get('all_bloch_sphere_fermionization_exclusion')} / {report['b9']['r198_continuous_frame_stress'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",
