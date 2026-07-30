@@ -162,7 +162,6 @@ def capture_snapshot(benchmark: dict[str, Any]) -> dict[str, Any]:
             normalize_amr_row(row)
             for row in source_rows
             if int(row["DIM_TIME"]) in years
-            and row["DIM_GEO_CODE_TYPE"] == "COUNTRY"
         ]
         normalized.sort(key=lambda row: (row["indicator_code"], row["m49"], row["year"]))
         records.extend(normalized)
@@ -198,6 +197,19 @@ def capture_snapshot(benchmark: dict[str, Any]) -> dict[str, Any]:
         (normalize_geo_row(row) for row in geo_source_rows),
         key=lambda row: row["m49"],
     )
+    allowed_m49 = {row["m49"] for row in geographies}
+    pre_universe_records = records
+    records = [row for row in pre_universe_records if row["m49"] in allowed_m49]
+    for query in source_queries:
+        if query["kind"] != "who_indicator_api":
+            continue
+        indicator_code = query["indicator_code"]
+        before = sum(
+            row["indicator_code"] == indicator_code for row in pre_universe_records
+        )
+        after = sum(row["indicator_code"] == indicator_code for row in records)
+        query["retained_row_count"] = after
+        query["excluded_outside_universe_row_count"] = before - after
     source_queries.append(
         {
             "kind": "who_geo_reference_api",
@@ -485,9 +497,10 @@ def validate(
             "Every reference entity has one M49 code.",
         ),
         check(
-            "p057_country_grain_only",
-            all(row["geo_type"] == "COUNTRY" for row in records),
-            "Global and regional aggregates are excluded from the entity matrix.",
+            "p057_admin0_membership_only",
+            {row["m49"] for row in records}
+            <= {row["m49"] for row in snapshot["p057"]["geographies"]},
+            "Only M49 codes in the frozen ADMIN_0 universe enter the matrix; global aggregates are excluded.",
         ),
         check(
             "p057_no_duplicate_country_years",
