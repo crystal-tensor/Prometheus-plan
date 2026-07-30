@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "detail": "pass",
+      "name": "formal_result_passed",
+      "passed": true
+    },
+    {
+      "detail": "4bf9192b5eb0272f08e1324455d1f4933388bef9",
+      "name": "protocol_commit_recorded",
+      "passed": true
+    },
+    {
+      "detail": "{'AMR_INFECT_ECOLI': 0.01, 'AMR_INFECT_MRSA': 0.01}",
+      "name": "independent_selected_lambdas_match",
+      "passed": true
+    },
+    {
+      "detail": "Maximum difference 5.567e-11.",
+      "name": "independent_validation_errors_match",
+      "passed": true
+    },
+    {
+      "detail": "Maximum numeric difference 0.000e+00.",
+      "name": "independent_row_predictions_match",
+      "passed": true
+    },
+    {
+      "detail": "Maximum metric difference 0.000e+00.",
+      "name": "independent_slice_metrics_match",
+      "passed": true
+    },
+    {
+      "detail": "reject_candidate",
+      "name": "independent_gate_decision_matches",
+      "passed": true
+    },
+    {
+      "detail": "Compared 141 ordered keys.",
+      "name": "ordered_rows_match_frozen_baseline",
+      "passed": true
+    },
+    {
+      "detail": "candidate_rejected",
+      "name": "holdout_exposure_is_explicit",
+      "passed": true
+    },
+    {
+      "detail": "Benchmark, snapshot, and baseline hashes rechecked.",
+      "name": "input_hashes_match",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.12.6"
+  },
+  "independent_gate_decision": "reject_candidate",
+  "independent_selected_lambdas": {
+    "AMR_INFECT_ECOLI": 0.01,
+    "AMR_INFECT_MRSA": 0.01
+  },
+  "maximum_differences": {
+    "row_values": 0.0,
+    "selection_mae_pp": 5.567e-11,
+    "slice_metrics": 0.0
+  },
+  "schema_version": "p057_amr_shrinkage_candidate_audit_v1",
+  "source": {
+    "audit_tool": "tools/p057_amr_shrinkage_audit.py",
+    "audit_tool_sha256": "2e521cbe300f18c9469c7f93fbb28a712d3dc9eec7df9983b897c60972a1055c",
+    "benchmark": "benchmarks/P057_AMR_shrinkage_candidate_v1.json",
+    "benchmark_sha256": "46e4dd5d07a8fe81aed78e2c76fa38f9559f1975a1608324f08e4e6c9e56512c",
+    "formal_result": "results/P057_AMR_shrinkage_candidate_v1.json",
+    "formal_result_sha256": "1d1d99fff548e9e35914336ad5c368ddb86853f5bfa6cbce788c6d1ffc21a83a",
+    "frozen_baseline_result": "results/P057_AMR_baseline_eval_v1.json",
+    "frozen_baseline_result_sha256": "d1a449aa8f37def65af86cba0cd4fbd2cca6e61c75eb82a1006135e99a6bc9f5",
+    "protocol_commit": "4bf9192b5eb0272f08e1324455d1f4933388bef9",
+    "source_snapshot": "results/P057_P058_source_snapshot_v1.json",
+    "source_snapshot_sha256": "7b840a328bdd59924b41d31dffcda035ef3019de2bc3716e47fe098721300dd9"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 10,
+    "failed_checks": [],
+    "passed_checks": 10
+  }
+}
