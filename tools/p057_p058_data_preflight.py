@@ -162,6 +162,7 @@ def capture_snapshot(benchmark: dict[str, Any]) -> dict[str, Any]:
             normalize_amr_row(row)
             for row in source_rows
             if int(row["DIM_TIME"]) in years
+            and row["DIM_GEO_CODE_TYPE"] == "COUNTRY"
         ]
         normalized.sort(key=lambda row: (row["indicator_code"], row["m49"], row["year"]))
         records.extend(normalized)
@@ -484,6 +485,11 @@ def validate(
             "Every reference entity has one M49 code.",
         ),
         check(
+            "p057_country_grain_only",
+            all(row["geo_type"] == "COUNTRY" for row in records),
+            "Global and regional aggregates are excluded from the entity matrix.",
+        ),
+        check(
             "p057_no_duplicate_country_years",
             len(record_keys) == len(set(record_keys))
             and not p057_summary["duplicates"],
@@ -499,6 +505,15 @@ def validate(
             len(matrix)
             == len(snapshot["p057"]["geographies"]) * len(config57["indicators"]),
             f"Coverage matrix has {len(matrix)} indicator-entity rows.",
+        ),
+        check(
+            "p057_records_fully_accounted",
+            sum(
+                summary["observed_country_year_cells"]
+                for summary in p057_summary["indicators"].values()
+            )
+            == len(records),
+            "Every retained country-year observation appears in the coverage matrix.",
         ),
         check(
             "p057_api_contains_holdout",
