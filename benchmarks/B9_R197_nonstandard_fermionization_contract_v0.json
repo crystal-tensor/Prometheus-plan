@@ -1,0 +1,141 @@
+{
+  "protocol_id": "B9-R197-nonstandard-fermionization-stress",
+  "version": "0.1.0",
+  "status": "public_preregistration_before_frozen_holdout_execution",
+  "frozen_at_utc": "2026-07-30T03:00:00Z",
+  "research_question": "Does the surviving R196 candidate admit an additional exact conserved operator after changing the Jordan-Wigner parity axis, including a rational frame aligned with the tilted onsite field?",
+  "model": {
+    "boundary": "open",
+    "hamiltonian": "sum_i[-X_i+(3/4)Z_i]+J sum_{i=0}^{n-2} Z_i Z_{i+1}",
+    "engineering_only_couplings": [
+      "13/32"
+    ],
+    "engineering_probe_acceptance_count": 0,
+    "frozen_holdout_couplings": [
+      "79/128",
+      "83/128"
+    ],
+    "frozen_sizes": [
+      8,
+      9,
+      10
+    ],
+    "previously_observed_couplings_must_be_disjoint": true
+  },
+  "fermionization_frames": [
+    {
+      "frame_id": "pauli_x",
+      "parity_axis": "X",
+      "endpoint_axes": [
+        "Y",
+        "Z"
+      ]
+    },
+    {
+      "frame_id": "pauli_y",
+      "parity_axis": "Y",
+      "endpoint_axes": [
+        "Z",
+        "X"
+      ]
+    },
+    {
+      "frame_id": "pauli_z",
+      "parity_axis": "Z",
+      "endpoint_axes": [
+        "X",
+        "Y"
+      ]
+    },
+    {
+      "frame_id": "tilted_a",
+      "parity_axis": "A=(-4X+3Z)/5",
+      "endpoint_axes": [
+        "B=(3X+4Z)/5",
+        "Y"
+      ]
+    },
+    {
+      "frame_id": "tilted_b",
+      "parity_axis": "B=(3X+4Z)/5",
+      "endpoint_axes": [
+        "Y",
+        "A=(-4X+3Z)/5"
+      ]
+    }
+  ],
+  "candidate_family": {
+    "per_frame": [
+      "identity",
+      "the exact Hamiltonian",
+      "all 2n Jordan-Wigner Majorana-linear operators",
+      "all choose(2n,2) Hermitian i-gamma-a-gamma-b bilinears",
+      "the full parity string"
+    ],
+    "union_family": "the operator-space union of all five frame families, with identity and the exact Hamiltonian retained first",
+    "operator_normalization": "expand every rational local axis in the Pauli-word basis, clear denominators, divide coefficient gcd, and choose the lexicographically first nonzero coefficient positive",
+    "independent_basis_rule": "retain identity and the exact Hamiltonian first, then select a modularly independent operator basis in frozen order under prime 1000003",
+    "commutator_rule": "construct the exact rational [H,O]/(2i) Pauli-word column and normalize each nonzero column by the same primitive-integer rule"
+  },
+  "acceptance_rows": {
+    "per_frame_rows": 30,
+    "union_rows": 6,
+    "total_frozen_rows": 36,
+    "row_rule": "for every nonzero frozen row, identity and H are explicit zero columns and rank equals independent_operator_basis_size-2 under both declared primes",
+    "declared_primes": [
+      1000003,
+      1000033
+    ],
+    "positive_control": {
+      "coupling": "0",
+      "size": 8,
+      "families": [
+        "tilted_a",
+        "all_frames_union"
+      ],
+      "rule": "each family must have exact modular nullity strictly greater than two and must contain the explicit onsite tilted-field charges"
+    }
+  },
+  "independent_audit": {
+    "required": true,
+    "must_not_import": [
+      "b9_r193_coupling_integrability_stress",
+      "b9_r194_higher_range_charge_stress",
+      "b9_r195_multiscale_tail_charge_stress",
+      "b9_r196_extended_tail_charge_stress",
+      "b9_r197_nonstandard_fermionization_stress"
+    ],
+    "representation": "independent sparse symplectic Pauli bit pairs with separately reconstructed rational frame expansions",
+    "audit_prime": 1000037,
+    "required_checks": [
+      "all row dimensions",
+      "all operator-basis digests",
+      "all commutator-matrix digests",
+      "all third-prime nullities",
+      "both positive-control nullities",
+      "the public-freeze ancestry and contract hash"
+    ]
+  },
+  "claim_boundary": {
+    "allowed_if_all_rows_pass": [
+      "no additional exact conserved operator exists inside any declared finite single-frame quadratic-Majorana-plus-H family",
+      "no additional exact conserved operator exists inside the declared five-frame union family",
+      "the R196 candidate survives this finite nonstandard-fermionization adversary"
+    ],
+    "forbidden": [
+      "all-frame fermionization exclusion",
+      "nonlocal-duality exclusion",
+      "interacting-integrability exclusion",
+      "nonintegrability theorem",
+      "quantum chaos theorem",
+      "spectral hardness theorem",
+      "Quantum PCP theorem",
+      "NLTS theorem",
+      "BQP separation",
+      "hardware relevance",
+      "solved frontier"
+    ],
+    "scientific_promotion_accepted": false,
+    "new_credit_delta": 0
+  }
+}
