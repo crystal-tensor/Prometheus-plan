@@ -1,0 +1,127 @@
+{
+  "protocol_id": "B9-R198-continuous-xz-fermionization-frame-stress",
+  "version": "0.1.0",
+  "status": "public_preregistration_before_frozen_holdout_execution",
+  "frozen_at_utc": "2026-07-30T04:00:00Z",
+  "research_question": "Can any continuously rotated XZ-plane Jordan-Wigner parity frame expose an additional exact quadratic-Majorana conserved operator that the five R197 frames missed?",
+  "model": {
+    "boundary": "open",
+    "hamiltonian": "sum_i[-X_i+(3/4)Z_i]+J sum_{i=0}^{n-2} Z_i Z_{i+1}",
+    "engineering_only_couplings": [
+      "13/32"
+    ],
+    "engineering_probe_acceptance_count": 0,
+    "frozen_holdout_couplings": [
+      "89/128",
+      "101/128"
+    ],
+    "previously_observed_couplings_must_be_disjoint": true
+  },
+  "continuous_frame": {
+    "parameter": "t in the real projective line",
+    "denominator": "D(t)=1+t^2",
+    "parity_axis": "P(t)=((1-t^2)X+2tZ)/D(t)",
+    "first_endpoint_axis": "Q(t)=(2tX+(t^2-1)Z)/D(t)",
+    "second_endpoint_axis": "R=Y",
+    "orientation_checks": [
+      "P dot P = Q dot Q = R dot R = 1",
+      "P dot Q = Q dot R = R dot P = 0",
+      "Q cross R = P"
+    ],
+    "finite_chart_sizes": [
+      4,
+      5
+    ],
+    "infinity_endpoint": {
+      "t": "infinity",
+      "frame": "P=-X,Q=Z,R=Y"
+    }
+  },
+  "symbolic_certificate": {
+    "candidate_columns": "all 2n Majorana-linear operators, all choose(2n,2) Hermitian quadratic bilinears, and full parity; identity and H are omitted because they are the two known commuting directions",
+    "column_scaling": "multiply every k-local-axis Jordan-Wigner monomial by D(t)^k, which is strictly positive for real t",
+    "commutator": "expand the exact integer-polynomial [H,O]/(2i) Pauli-word matrix",
+    "initial_minor_anchors": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "initial_row_selection_prime": 1000003,
+    "minor_rule": "at each anchor select the lexicographically first full-rank output-row basis, then compute its primitive exact ZZ[t] determinant",
+    "adaptive_factor_rule": "factor the primitive gcd of all accepted maximal minors; for each irreducible factor with a real root, row-reduce the complete matrix over QQ[t]/factor, add the lexicographically selected full-rank quotient-field minor, and repeat",
+    "maximum_adaptive_rounds": 12,
+    "finite_real_acceptance": "the square-free primitive final gcd has zero real roots by an exact Sturm/root-count calculation",
+    "projective_endpoint_acceptance": "the t=infinity frame has full candidate-column commutator rank under both declared primes",
+    "accepted_symbolic_rows": 4
+  },
+  "rational_frame_pressure": {
+    "catalog_rule": "enumerate all primitive integer pairs (u,v) in [-7,7]^2 excluding (0,0), map to c=(u^2-v^2)/(u^2+v^2), s=2uv/(u^2+v^2), deduplicate exact (c,s), sort lexicographically, and assign pxz_000 onward",
+    "catalog_count": 72,
+    "catalog_sha256": "be8464505e235cb1f4a1829211d768c56e35cdaffed469316432e8df6a4a83e3",
+    "sizes": [
+      6,
+      8,
+      10
+    ],
+    "frozen_row_count": 432,
+    "declared_primes": [
+      1000003,
+      1000033
+    ],
+    "row_acceptance": "the exact rational Clifford-monomial operator basis is independent and every commutator matrix has full candidate-column rank under both declared primes"
+  },
+  "positive_control": {
+    "coupling": "0",
+    "size": 6,
+    "parameter": "t=3",
+    "frame": "P=(-4X+3Z)/5,Q=(3X+4Z)/5,R=Y",
+    "rule": "the pool has nonzero commutator nullity and contains all six explicit onsite tilted-field charges as commuting in-span witnesses"
+  },
+  "independent_audit": {
+    "required": true,
+    "must_not_import": [
+      "b9_r193_coupling_integrability_stress",
+      "b9_r194_higher_range_charge_stress",
+      "b9_r195_multiscale_tail_charge_stress",
+      "b9_r196_extended_tail_charge_stress",
+      "b9_r197_nonstandard_fermionization_stress",
+      "b9_r198_continuous_frame_stress"
+    ],
+    "representation": "independent sparse symplectic Pauli bit pairs, separately reconstructed polynomial and rational axes, and an independently selected third-prime row reduction",
+    "audit_prime": 1000037,
+    "required_checks": [
+      "the public-freeze ancestry and contract hash",
+      "all continuous-certificate determinant and gcd digests",
+      "all exact real-root counts and projective endpoint ranks",
+      "all 432 rational-frame row dimensions and matrix digests",
+      "all 432 third-prime full-rank decisions",
+      "the positive-control nullity and six explicit witnesses"
+    ]
+  },
+  "claim_boundary": {
+    "allowed_if_all_rows_pass": [
+      "for both frozen couplings and n=4,5, no additional exact conserved operator exists inside the continuously rotated XZ-plane quadratic-Majorana-plus-parity family",
+      "for both frozen couplings and n=6,8,10, no additional exact conserved operator exists in any of the 72 declared rational XZ-plane frames",
+      "the R197 candidate survives this declared continuous-family and rational-grid adversary"
+    ],
+    "forbidden": [
+      "all Bloch-sphere fermionization exclusion",
+      "nonlinear frame-mixture exclusion",
+      "cubic or quartic Majorana-charge exclusion",
+      "nonlocal-duality exclusion",
+      "interacting-integrability exclusion",
+      "complete integrability exclusion",
+      "nonintegrability theorem",
+      "quantum chaos theorem",
+      "spectral hardness theorem",
+      "Quantum PCP theorem",
+      "NLTS theorem",
+      "BQP separation",
+      "hardware relevance",
+      "solved frontier"
+    ],
+    "scientific_promotion_accepted": false,
+    "new_credit_delta": 0
+  }
+}

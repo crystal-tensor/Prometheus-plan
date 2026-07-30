@@ -855,6 +855,41 @@ current_results:
     result: ../results/B9_R197_nonstandard_fermionization_stress_v1.json
     independent_audit: ../results/B9_R197_independent_audit_v1.json
     markdown_report: ../research/B9_R197_nonstandard_fermionization_stress.md
+  r198_continuous_frame_stress_v1:
+    status: public_preregistered_execution_unopened
+    method: b9_r198_continuous_frame_stress_v1
+    source: r197_nonstandard_fermionization_stress_v1
+    experiment_id: B9-R198-continuous-xz-fermionization-frame-stress
+    contract_sha256: c1b68368dbf9ad577f84838b5a3dd77387c63b78f9f7a7c7e6fa334803f9d03c
+    contract_publicly_frozen_before_acceptance_execution: false
+    frozen_holdout_execution_opened: false
+    engineering_only_coupling: 13/32
+    engineering_probe_acceptance_count: 0
+    frozen_holdout_couplings:
+      - 89/128
+      - 101/128
+    continuous_certificate_sizes:
+      - 4
+      - 5
+    rational_frame_catalog_count: 72
+    rational_frame_catalog_sha256: be8464505e235cb1f4a1829211d768c56e35cdaffed469316432e8df6a4a83e3
+    rational_frame_grid_sizes:
+      - 6
+      - 8
+      - 10
+    frozen_rational_grid_row_count: 432
+    engineering_n4_continuous_certificate_checked: true
+    engineering_n5_continuous_certificate_checked: true
+    engineering_continuous_finite_real_common_root_count: 0
+    frozen_continuous_certificate_pass_count: null
+    frozen_rational_grid_pass_count: null
+    independent_audit_status: pending
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    contract: B9_R198_continuous_frame_contract_v0.json
+    result: null
+    independent_audit: null
+    markdown_report: null
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -884,4 +919,5 @@ current_results:
   r196_independent_audit: ../tools/b9_r196_independent_audit.py
   r197_nonstandard_fermionization_stress: ../tools/b9_r197_nonstandard_fermionization_stress.py
   r197_independent_audit: ../tools/b9_r197_independent_audit.py
+  r198_continuous_frame_stress: ../tools/b9_r198_continuous_frame_stress.py
   prototype_notes: ../research/B9_prototype_notes.md
