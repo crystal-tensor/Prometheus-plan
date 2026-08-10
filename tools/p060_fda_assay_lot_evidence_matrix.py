@@ -485,8 +485,8 @@ def build_result(
                 [
                     "off-target edit site nomination",
                     "Confirmatory testing methods",
-                    "all the nominated off-target edit",
-                    "sites is recommended",
+                    "while performing confirmatory testing at all the",
+                    "nominated off-target edit sites is recommended",
                     "stringent filtering criteria",
                     "should be avoided",
                 ],
