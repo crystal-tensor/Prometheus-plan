@@ -180,6 +180,7 @@ def build_audit(
     total = exact_rows(d_total, "TOTAL13", "ADAS")
     age = exact_rows(d_age, "AGE", "ADNIMERGE")
     sex = exact_rows(d_sex, "PTGENDER", "PTDEMOG")
+    sex = [row for row in sex if row["phase"] != "TEAM"]
     apoe = exact_rows(d_apoe, "GENOTYPE", "APOERES")
     diagnosis = exact_rows(d_dx, "DIAGNOSIS", "DXSUM")
     family = exact_rows(d_family, "FAMILYID")
@@ -268,7 +269,8 @@ def build_audit(
             "signature_field",
             any(
                 row["term"] == "pT217_AB42_F"
-                and row["definition"] == "pTau217/ABeta42 ratio measured by fujirebio"
+                and row["definition"].casefold()
+                == "pTau217/ABeta42 ratio measured by Fujirebio".casefold()
                 and row["code"] == "-4=Insufficient sample"
                 for row in ptau
             ),

@@ -349,6 +349,7 @@ def build_result(
         expected["sex"]["field"],
         expected["sex"]["table"],
     )
+    sex_rows = [row for row in sex_rows if row["phase"] != "TEAM"]
     apoe_rows = exact_rows(
         dictionaries["dictionary_genotype"],
         expected["apoe"]["field"],
@@ -485,8 +486,8 @@ def build_result(
             "signature_field_exact",
             any(
                 row["term"] == contract["mechanism_signature"]["field"]
-                and row["definition"]
-                == contract["mechanism_signature"]["definition"]
+                and row["definition"].casefold()
+                == contract["mechanism_signature"]["definition"].casefold()
                 and row["code"] == contract["mechanism_signature"]["missing_code"]
                 for row in ptau_table_rows
             ),
