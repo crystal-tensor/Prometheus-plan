@@ -1,0 +1,243 @@
+{
+  "as_of_date": "2026-08-10",
+  "audit_checks": {
+    "all_passed": true,
+    "checks": [
+      {
+        "detail": "Independent audit is restricted to catalog problem #060.",
+        "name": "audit_scope",
+        "passed": true
+      },
+      {
+        "detail": "4113e20818d984c4123f5519953609b9d85022658c4c1fc13e6564e3558b702a",
+        "name": "benchmark_hash",
+        "passed": true
+      },
+      {
+        "detail": "9/9 sources independently verified.",
+        "name": "source_hashes_and_origins",
+        "passed": true
+      },
+      {
+        "detail": "One final and two draft documents independently classified.",
+        "name": "document_statuses",
+        "passed": true
+      },
+      {
+        "detail": "G01 lifecycle scope independently recovered.",
+        "name": "final_lifecycle_scope",
+        "passed": true
+      },
+      {
+        "detail": "Release and downstream potency anchors independently recovered.",
+        "name": "final_release_potency",
+        "passed": true
+      },
+      {
+        "detail": "Off-target, chromosomal, cellular, and immune guardrails recovered.",
+        "name": "final_safety_guardrails",
+        "passed": true
+      },
+      {
+        "detail": "Long-term follow-up boundary independently recovered.",
+        "name": "final_followup",
+        "passed": true
+      },
+      {
+        "detail": "NGS input, pipeline, criterion, and output fields recovered.",
+        "name": "ngs_reproducibility_fields",
+        "passed": true
+      },
+      {
+        "detail": "Read-strategy and biological-sample rules recovered.",
+        "name": "ngs_reads_and_samples",
+        "passed": true
+      },
+      {
+        "detail": "Nomination/confirmation split independently recovered.",
+        "name": "ngs_nomination_confirmation",
+        "passed": true
+      },
+      {
+        "detail": "Variation and translocation obligations recovered.",
+        "name": "ngs_variation_and_integrity",
+        "passed": true
+      },
+      {
+        "detail": "Site-level report schema independently recovered.",
+        "name": "ngs_reporting",
+        "passed": true
+      },
+      {
+        "detail": "Public/platform knowledge definitions recovered.",
+        "name": "prior_knowledge_definitions",
+        "passed": true
+      },
+      {
+        "detail": "Applicability and bridging boundary independently recovered.",
+        "name": "prior_knowledge_applicability",
+        "passed": true
+      },
+      {
+        "detail": "Product-specific result/stability/comparability boundary recovered.",
+        "name": "prior_product_specificity",
+        "passed": true
+      },
+      {
+        "detail": "15 ordered evidence rows independently reconstructed.",
+        "name": "matrix_shape_and_coverage",
+        "passed": true
+      },
+      {
+        "detail": "Four arms, three lots, two labs, and internal-floor boundary recovered.",
+        "name": "arms_lots_labs",
+        "passed": true
+      },
+      {
+        "detail": "No operational edit or universal FDA threshold; one-row failure rejects.",
+        "name": "fail_closed_and_nonoperational",
+        "passed": true
+      },
+      {
+        "detail": "Independent matrix and protocol counts agree with primary result.",
+        "name": "result_agreement",
+        "passed": true
+      },
+      {
+        "detail": "fda_guidance_evidence_matrix_ready_protocol_activation_blocked_by_product_specific_assays_thresholds_lot_data_and_blinded_lab_execution",
+        "name": "execution_and_decision",
+        "passed": true
+      }
+    ],
+    "passed": 21,
+    "total": 21
+  },
+  "decision": "fda_guidance_evidence_matrix_ready_protocol_activation_blocked_by_product_specific_assays_thresholds_lot_data_and_blinded_lab_execution",
+  "independent_observations": {
+    "arms": 4,
+    "control_coverage": {
+      "current standard editor and delivery system": 12,
+      "mock delivery": 10,
+      "pre-scale candidate lot": 1,
+      "unedited cells": 9
+    },
+    "evidence_ids": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05",
+      "E06",
+      "E07",
+      "E08",
+      "E09",
+      "E10",
+      "E11",
+      "E12",
+      "E13",
+      "E14",
+      "E15"
+    ],
+    "evidence_rows": 15,
+    "guidance_coverage": {
+      "G01": 14,
+      "G02": 5,
+      "G03": 6
+    },
+    "guidance_statuses": {
+      "G01": "final",
+      "G02": "draft_not_for_implementation",
+      "G03": "draft_not_for_implementation"
+    },
+    "labs": 2,
+    "lots": 3,
+    "source_snapshots": 9,
+    "wet_lab_executed": false,
+    "withheld_operational_details": 8
+  },
+  "schema_version": "p060_fda_assay_lot_evidence_independent_audit_v1",
+  "scope": {
+    "included_catalog_problem_ids": [
+      60
+    ]
+  },
+  "source": {
+    "benchmark_sha256": "4113e20818d984c4123f5519953609b9d85022658c4c1fc13e6564e3558b702a",
+    "capture_manifest_sha256": "0770966022d49b734c553494ecb7ab8379e8fd9098252bbc2866ff160ab9a353",
+    "result_sha256": "063ba3d5e02440c3f2526f2d09d012bd4233b1f99d6da9040e7ed2acbf00c3ae",
+    "snapshots": [
+      {
+        "gzip_sha256": "0d9ef5e5aa82ea6340fc8609f08b652a1e32d4a833d8db4e24b3438511b05a96",
+        "name": "guidance_index",
+        "normalized_sha256": "918e22b83afa469da481656b98159535574d227e674cbc308f612bb9486bfddd",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "cf0e1f1789de1c33d4024fdba7221986e1afc8404c085199b3944c5f221a9520",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "53e0599d17c040f9dbb8374c8b82cf0c6476791595b9a08008b46077889e4ffc",
+        "name": "final_2024_page",
+        "normalized_sha256": "3681e19abebc9c849d9180838928483061c68a6a6405f4276a4f392de9f5dd9c",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "9a12a4aaa07f6d12199ca3da703d71dfcfda8826d3e16a985527d6ed2618ac05",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "e1ba725ba193ace62acef57b604b6f6d0ccf8336958d652dfbd90188222f8b9f",
+        "name": "final_2024_pdf_text",
+        "normalized_sha256": "b28a6e36a56b70fae79e50156384e02c2d2801f64aa6218af761321d0021c6ed",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "ed31103018575a4cc74b75cf3b0e32fdfd60c687a2db9c54e1ff58700fc32a8e",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "a51711838d055b067694b9728ca5fd63c95d50c55d3f1d9221ddd0ba65adc693",
+        "name": "ngs_2026_page",
+        "normalized_sha256": "7553fdeb21086675743d5216aafde657bc573677e8c563c904482c4f2c7dd4d3",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "50c69cfdd214d89a7dd3e2f9dd62b61e2a3ef3f7d366507d449542f67e7f9c46",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "67ac6a4d2021b54279251e9fa452e058b8a6603b4250246dadba86010f22dfb4",
+        "name": "ngs_2026_pdf_text",
+        "normalized_sha256": "0f96c2a4309b08eea5727c8570937c10edbf1adda30bf6ea900454142f80a2ce",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "436a32227858bbdd73726a1845e4269e8066bf4e65cf359903f0dee4ed9157ac",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "10744da1c194a6955faa5de73af1e061d8f973530219dfc0c86403d4433530ec",
+        "name": "ngs_2026_press",
+        "normalized_sha256": "b3f0dd5eecff22dd09c819fb41de40a01d3570e8c6ea30dff226887250a76a50",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "b3f0dd5eecff22dd09c819fb41de40a01d3570e8c6ea30dff226887250a76a50",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "9835860ea0280af4d02f8ff5f46af92323de12d3f2ce7610e56512c6300689e5",
+        "name": "prior_2026_page",
+        "normalized_sha256": "d7f856757cb06561cc096c30daa00b08277acbfd36d6de12a2a3f1a299b37372",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "8b531187abaaa55beec1888820bc6ee485967b6ca19e6b864dc8189f468c3ef9",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "d3b08d7bd7d3af976835ba143ea09cd00b40f7a94dadd65c769a51f7c90299d8",
+        "name": "prior_2026_pdf_text",
+        "normalized_sha256": "c3380aa4afb43a8aef3c4c8cb9c37816b2076ada9dc15fee2f8b1d9589dcec60",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "8cf153fbdbd86c078f86b41a14d35c93bda3f58c4455f6e1a4cbb93929d88f30",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "abab14e9f23cda53612f2febb4f6259a3ac628032bb15831b79b01922bb85d2e",
+        "name": "prior_2026_press",
+        "normalized_sha256": "91e4858c88c21cca20a86e31a3f800ac2983cb4c48cfd57880c6910b8c2c022c",
+        "official_origin_marker": true,
+        "relay_raw_sha256": "91e4858c88c21cca20a86e31a3f800ac2983cb4c48cfd57880c6910b8c2c022c",
+        "valid": true
+      }
+    ]
+  }
+}

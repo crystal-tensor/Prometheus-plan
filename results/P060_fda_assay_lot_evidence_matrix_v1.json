@@ -1,0 +1,747 @@
+{
+  "acceptance_and_falsification": {
+    "falsifiers": [
+      "any required evidence row lacks a frozen assay, threshold, or matched-sensitivity justification",
+      "any lot fails any safety row",
+      "an off-target signal appears in only one assay and is not resolved by the frozen confirmation rule",
+      "a nominated off-target site is removed after its result is seen",
+      "scale-up changes a critical quality attribute beyond its frozen margin",
+      "prior knowledge is reused without a product-specific applicability and bridging file",
+      "the candidate passes on-target correction but fails any chromosomal, viability, immunogenicity, clonal, stability, or long-term guardrail"
+    ],
+    "promotion_target": "protocol readiness only",
+    "required_pass": "all 15 evidence rows pass in every one of three independent lots, confirmation agrees across two blinded laboratories, and every safety row is non-inferior to the standard editor at matched sensitivity",
+    "threshold_freeze_rule": "each assay-specific numeric or categorical acceptance criterion, sensitivity floor, noninferiority margin, timepoint, and analysis rule must be frozen before arm labels or outcome data are opened",
+    "universal_fda_numeric_threshold_claimed": false
+  },
+  "as_of_date": "2026-08-10",
+  "control_and_split_contract": {
+    "arms": [
+      "unedited cells",
+      "mock delivery",
+      "current standard editor and delivery system",
+      "P060-EXV-DSB-01 candidate"
+    ],
+    "blinded_assay_laboratories": 2,
+    "blinding": "coded aliquots conceal arm and lot from assay laboratories until all QC and analysis decisions are locked",
+    "discovery_confirmation_separation": "off-target nomination output is frozen before confirmation samples and labels are opened",
+    "failure_aggregation": "one failed required evidence row in any lot rejects safety/scalability promotion; no averaging away a failed guardrail",
+    "independent_manufacturing_lots": 3,
+    "lab_count_boundary": "two laboratories is an internal confirmation floor, not an FDA universal minimum",
+    "lot_count_boundary": "three lots is an internal preregistered engineering floor, not an FDA universal minimum",
+    "matched_assessment": "identical samples where feasible, assay versions, input amounts, sequencing depth/quality criteria, bioinformatics versions, reporting rules, and timepoints",
+    "randomization_unit": "manufacturing lot aliquot"
+  },
+  "evidence_matrix": [
+    {
+      "controls": [
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "product and component identity",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E01",
+      "required_evidence": "identity, composition, editing components, delivery class, intended edit type, and component persistence rationale",
+      "threshold_state": "product_specific_acceptance_criteria_required_before_results"
+    },
+    {
+      "controls": [
+        "current standard editor and delivery system"
+      ],
+      "domain": "manufacturing lot release",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E02",
+      "required_evidence": "identity, purity, safety, potency, on-target editing, total edited-cell frequency, residual components, and justified release criteria",
+      "threshold_state": "lot_specific_release_specifications_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "functional potency",
+      "guidance": [
+        "G01"
+      ],
+      "id": "E03",
+      "required_evidence": "intended sequence modification plus downstream biologically relevant cell function",
+      "threshold_state": "functional_correction_and_noninferiority_margins_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "on-target intended and unintended outcomes",
+      "guidance": [
+        "G01",
+        "G02"
+      ],
+      "id": "E04",
+      "required_evidence": "intended edit rate and the complete reported distribution of substitutions, insertions, deletions, and larger unintended on-target changes at matched sensitivity",
+      "threshold_state": "depth_quality_and_edit_rate_criteria_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery"
+      ],
+      "domain": "off-target nomination",
+      "guidance": [
+        "G01",
+        "G02"
+      ],
+      "id": "E05",
+      "required_evidence": "union of in silico, biochemical, cell-based, and genome-wide nomination methods in target-relevant human cells and multiple biological replicates",
+      "threshold_state": "nomination_parameters_and_candidate_union_rule_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "off-target confirmation",
+      "guidance": [
+        "G01",
+        "G02"
+      ],
+      "id": "E06",
+      "required_evidence": "confirmation of every nominated site or a prospectively justified subset using predetermined depth/quality and edited/unedited pairs",
+      "threshold_state": "sensitivity_filtering_and_subset_rules_required_before_nomination_results"
+    },
+    {
+      "controls": [
+        "unedited cells"
+      ],
+      "domain": "human genetic variation",
+      "guidance": [
+        "G02"
+      ],
+      "id": "E07",
+      "required_evidence": "variant-contributed off-target nomination using justified population and patient-relevant databases, ancestry/population stratification, and variant-frequency rules",
+      "threshold_state": "database_population_and_frequency_rules_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "chromosomal integrity",
+      "guidance": [
+        "G01",
+        "G02"
+      ],
+      "id": "E08",
+      "required_evidence": "sensitive assessment of large indels and on-target/on-target plus on-target/confirmed-off-target translocations",
+      "threshold_state": "event_definition_detection_and_noninferiority_rules_required_before_results"
+    },
+    {
+      "controls": [
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "residual editor and persistence",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E09",
+      "required_evidence": "residual genome-editing components and duration of functional activity, linked to the release and stability plan",
+      "threshold_state": "residual_and_persistence_limits_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "viability and cell function",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E10",
+      "required_evidence": "viability plus target-cell functions that could be harmed by on- or off-target editing",
+      "threshold_state": "viability_and_function_noninferiority_margins_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "immunogenicity",
+      "guidance": [
+        "G01"
+      ],
+      "id": "E11",
+      "required_evidence": "immune-response assessment for editing components and any expressed product, with a product-class-specific rationale",
+      "threshold_state": "assay_and_acceptance_criteria_required_before_results"
+    },
+    {
+      "controls": [
+        "unedited cells",
+        "mock delivery",
+        "current standard editor and delivery system"
+      ],
+      "domain": "oncogenicity and clonal behavior",
+      "guidance": [
+        "G01"
+      ],
+      "id": "E12",
+      "required_evidence": "aberrant growth, clonal expansion, unregulated proliferation, insertional mutagenesis, and tumorigenicity risk assessment",
+      "threshold_state": "observation_window_and_event_rules_required_before_results"
+    },
+    {
+      "controls": [
+        "current standard editor and delivery system"
+      ],
+      "domain": "stability",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E13",
+      "required_evidence": "real-time primary-lot stability for editing frequency, potency, viability, residuals, and other stability-indicating quality attributes",
+      "threshold_state": "timepoints_trends_and_acceptance_criteria_required_before_results"
+    },
+    {
+      "controls": [
+        "current standard editor and delivery system",
+        "pre-scale candidate lot"
+      ],
+      "domain": "scale change and comparability",
+      "guidance": [
+        "G01",
+        "G03"
+      ],
+      "id": "E14",
+      "required_evidence": "pre/post-scale process comparability for every relevant critical quality attribute, with product-specific potency and safety bridging",
+      "threshold_state": "quality_attribute_specific_equivalence_or_noninferiority_margins_required_before_results"
+    },
+    {
+      "controls": [],
+      "domain": "long-term follow-up trigger",
+      "guidance": [
+        "G01"
+      ],
+      "id": "E15",
+      "required_evidence": "prospective trigger and funded follow-up plan for delayed off-target, chromosomal, immunogenic, and tumorigenic risks; up to 15 years where applicable",
+      "threshold_state": "trigger_duration_and_reporting_plan_required_before_clinical_promotion"
+    }
+  ],
+  "formal_checks": {
+    "all_passed": true,
+    "checks": [
+      {
+        "detail": "Packet is restricted to catalog problem #060.",
+        "name": "schema_and_scope",
+        "passed": true
+      },
+      {
+        "detail": "4113e20818d984c4123f5519953609b9d85022658c4c1fc13e6564e3558b702a",
+        "name": "benchmark_hash",
+        "passed": true
+      },
+      {
+        "detail": "9/9 official-origin relay snapshots hash-verified.",
+        "name": "source_inventory",
+        "passed": true
+      },
+      {
+        "detail": "All three core documents and issue months recovered from the FDA index.",
+        "name": "guidance_index",
+        "passed": true
+      },
+      {
+        "detail": "G01 status/date/docket recovered.",
+        "name": "final_status",
+        "passed": true
+      },
+      {
+        "detail": "G02 draft boundary recovered.",
+        "name": "ngs_draft_status",
+        "passed": true
+      },
+      {
+        "detail": "G03 draft boundary recovered.",
+        "name": "prior_draft_status",
+        "passed": true
+      },
+      {
+        "detail": "Somatic-cell and development-lifecycle scope recovered.",
+        "name": "final_scope",
+        "passed": true
+      },
+      {
+        "detail": "Ex vivo release-testing obligations recovered.",
+        "name": "final_release_testing",
+        "passed": true
+      },
+      {
+        "detail": "Genetic edit plus downstream functional potency recovered.",
+        "name": "final_potency",
+        "passed": true
+      },
+      {
+        "detail": "Multi-method nomination and sensitive donor-level verification recovered.",
+        "name": "final_off_target_methods",
+        "passed": true
+      },
+      {
+        "detail": "Chromosomal and clonal-risk evidence recovered.",
+        "name": "final_genomic_integrity",
+        "passed": true
+      },
+      {
+        "detail": "Viability/function and immunogenicity guardrails recovered.",
+        "name": "final_biological_guardrails",
+        "passed": true
+      },
+      {
+        "detail": "Up-to-15-year and continuity-plan recommendation recovered.",
+        "name": "final_long_term_followup",
+        "passed": true
+      },
+      {
+        "detail": "G02 nonclinical NGS purpose recovered.",
+        "name": "ngs_purpose",
+        "passed": true
+      },
+      {
+        "detail": "Short/long-read and sensitivity justification recovered.",
+        "name": "ngs_read_strategy",
+        "passed": true
+      },
+      {
+        "detail": "Reproducible NGS metadata and tabular-output obligations recovered.",
+        "name": "ngs_metadata",
+        "passed": true
+      },
+      {
+        "detail": "Biological-replicate and product-relevant sample requirements recovered.",
+        "name": "ngs_sample_replicates",
+        "passed": true
+      },
+      {
+        "detail": "Nomination/confirmation separation and anti-filtering boundary recovered.",
+        "name": "ngs_nomination_confirmation",
+        "passed": true
+      },
+      {
+        "detail": "Predetermined sensitivity and paired-control confirmation recovered.",
+        "name": "ngs_confirmation_sensitivity",
+        "passed": true
+      },
+      {
+        "detail": "Human-variation and ancestry-aware nomination recovered.",
+        "name": "ngs_human_variation",
+        "passed": true
+      },
+      {
+        "detail": "On-target/off-target translocation assessment recovered.",
+        "name": "ngs_translocation",
+        "passed": true
+      },
+      {
+        "detail": "Annotated site-level reporting recovered.",
+        "name": "ngs_reporting",
+        "passed": true
+      },
+      {
+        "detail": "Public/platform/prior knowledge definitions recovered.",
+        "name": "prior_definitions",
+        "passed": true
+      },
+      {
+        "detail": "Applicability, granularity, and bridging boundary recovered.",
+        "name": "prior_applicability",
+        "passed": true
+      },
+      {
+        "detail": "Lot reuse and product-specific identity/potency boundary recovered.",
+        "name": "prior_lot_release",
+        "passed": true
+      },
+      {
+        "detail": "Platform knowledge cannot replace primary-lot long-term stability.",
+        "name": "prior_stability",
+        "passed": true
+      },
+      {
+        "detail": "Comparability remains quality-attribute and product specific.",
+        "name": "prior_comparability",
+        "passed": true
+      },
+      {
+        "detail": "Methods may transfer; product safety results do not transfer automatically.",
+        "name": "prior_bioinformatics",
+        "passed": true
+      },
+      {
+        "detail": "15 ordered evidence rows with valid guidance anchors.",
+        "name": "matrix_shape",
+        "passed": true
+      },
+      {
+        "detail": "All required identity, activity, safety, lot, scale, and follow-up domains present.",
+        "name": "matrix_required_domains",
+        "passed": true
+      },
+      {
+        "detail": "Four frozen arms recovered.",
+        "name": "control_arms",
+        "passed": true
+      },
+      {
+        "detail": "Three-lot/two-lab internal floors and non-FDA boundary frozen.",
+        "name": "lot_and_lab_split",
+        "passed": true
+      },
+      {
+        "detail": "Matched-sensitivity denominator frozen.",
+        "name": "matched_sensitivity",
+        "passed": true
+      },
+      {
+        "detail": "No sequence, editor, target, dose, recipe, condition, or procedure disclosed.",
+        "name": "no_operational_editing_details",
+        "passed": true
+      },
+      {
+        "detail": "Product/assay thresholds remain to be frozen prospectively.",
+        "name": "no_universal_fda_threshold",
+        "passed": true
+      },
+      {
+        "detail": "No safety-row or lot failure may be averaged away.",
+        "name": "fail_closed_aggregation",
+        "passed": true
+      },
+      {
+        "detail": "No assay outcome, lot, wet-lab execution, safety, scale, or compliance claim.",
+        "name": "execution_boundary",
+        "passed": true
+      },
+      {
+        "detail": "fda_guidance_evidence_matrix_ready_protocol_activation_blocked_by_product_specific_assays_thresholds_lot_data_and_blinded_lab_execution",
+        "name": "decision",
+        "passed": true
+      }
+    ],
+    "passed": 39,
+    "total": 39
+  },
+  "frozen_product_class": {
+    "delivery_class": "transient non-integrating delivery",
+    "disclosed_operational_details": false,
+    "editing_class": "single-locus nuclease-dependent double-strand-break editor",
+    "explicitly_withheld": [
+      "target gene or locus",
+      "guide or donor sequence",
+      "editor identity",
+      "disease or patient indication",
+      "dose",
+      "cell-culture conditions",
+      "delivery recipe",
+      "wet-lab procedure"
+    ],
+    "product_type": "conceptual ex vivo autologous human somatic-cell genome-editing product",
+    "protocol_code": "P060-EXV-DSB-01",
+    "reason": "A conceptual high-risk product class triggers the evidence obligations without publishing an executable editing protocol."
+  },
+  "guidance_status_contract": [
+    {
+      "docket": "FDA-2021-D-0398",
+      "id": "G01",
+      "issue_date": "2024-01",
+      "role": "product design, manufacturing/testing, nonclinical safety, and clinical/LTFU backbone",
+      "status": "final",
+      "title": "Human Gene Therapy Products Incorporating Human Genome Editing"
+    },
+    {
+      "docket": "FDA-2026-D-1255",
+      "id": "G02",
+      "issue_date": "2026-04",
+      "role": "NGS nomination, confirmation, human-variation, chromosomal-integrity, and reporting detail",
+      "status": "draft_not_for_implementation",
+      "title": "Safety Assessment of Genome Editing in Human Gene Therapy Products Using Next-Generation Sequencing"
+    },
+    {
+      "docket": "FDA-2026-D-1257",
+      "id": "G03",
+      "issue_date": "2026-06",
+      "role": "public/platform knowledge applicability, bridging, lot, stability, comparability, and bioinformatics reuse boundary",
+      "status": "draft_not_for_implementation",
+      "title": "Leveraging Prior Knowledge in the Development of Human Gene Therapy Products Incorporating Genome Editing"
+    }
+  ],
+  "interpretation_boundaries": [
+    "The 2024 document is final FDA guidance; both 2026 documents are drafts, not for implementation, and contain non-binding recommendations.",
+    "FDA guidance does not provide one universal numeric threshold that establishes genome-editing safety or scalability.",
+    "Three lots and two blinded laboratories are internal preregistered engineering floors, not FDA universal minima.",
+    "Prior knowledge may reduce duplicated work only after applicability, granularity, and bridging are justified; it is not permission to borrow another product's safety conclusion.",
+    "This artifact contains no sequence, target, editor identity, disease indication, dose, culture condition, delivery recipe, wet-lab instruction, clinical recommendation, or claim of FDA compliance.",
+    "No product, cell, participant, assay outcome, lot, animal, patient, editor, model, intervention, safety, efficacy, scalability, regulatory, or solved-frontier claim is produced."
+  ],
+  "ngs_and_reporting_contract": {
+    "confirmation_before_unblinding": true,
+    "machine_readable_output": "tabulated text, CSV, or spreadsheet plus immutable pipeline and parameter manifest",
+    "no_posthoc_filtering": true,
+    "required_metadata": [
+      "cell type and biological replicate",
+      "input cell count or nucleic-acid amount",
+      "extraction process",
+      "library preparation",
+      "primer or probe information where applicable",
+      "sequencing method",
+      "bioinformatics tools and versions",
+      "command-line invocation record",
+      "reference sequence and databases",
+      "quality, depth, alignment, filtering, and nomination/confirmation criteria",
+      "read counts and edit frequencies",
+      "annotated genomic coordinates and functional context"
+    ],
+    "short_long_read_rule": "short-read may be adequate for changes up to 50 bp; the frozen double-strand-break product requires a justified long-read strategy for larger unintended on-target changes in addition to targeted confirmation"
+  },
+  "observed": {
+    "execution": {
+      "blinded_lab_confirmation_available": false,
+      "manufacturing_lot_data_available": false,
+      "numeric_thresholds_frozen": false,
+      "product_specific_assays_frozen": false,
+      "wet_lab_experiment_executed": false
+    },
+    "guidance_status": {
+      "G01": {
+        "docket": "FDA-2021-D-0398",
+        "issue_date": "2024-01",
+        "status": "final"
+      },
+      "G02": {
+        "docket": "FDA-2026-D-1255",
+        "issue_date": "2026-04",
+        "status": "draft_not_for_implementation"
+      },
+      "G03": {
+        "docket": "FDA-2026-D-1257",
+        "issue_date": "2026-06",
+        "status": "draft_not_for_implementation"
+      }
+    },
+    "matrix": {
+      "control_coverage": {
+        "current standard editor and delivery system": 12,
+        "mock delivery": 10,
+        "pre-scale candidate lot": 1,
+        "unedited cells": 9
+      },
+      "domains": [
+        "product and component identity",
+        "manufacturing lot release",
+        "functional potency",
+        "on-target intended and unintended outcomes",
+        "off-target nomination",
+        "off-target confirmation",
+        "human genetic variation",
+        "chromosomal integrity",
+        "residual editor and persistence",
+        "viability and cell function",
+        "immunogenicity",
+        "oncogenicity and clonal behavior",
+        "stability",
+        "scale change and comparability",
+        "long-term follow-up trigger"
+      ],
+      "guidance_coverage": {
+        "G01": 14,
+        "G02": 5,
+        "G03": 6
+      },
+      "ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15"
+      ],
+      "rows": 15,
+      "unique_threshold_states": 15
+    },
+    "protocol": {
+      "arms": 4,
+      "blinded_assay_laboratories": 2,
+      "independent_manufacturing_lots": 3,
+      "operational_details_disclosed": false
+    }
+  },
+  "prior_knowledge_boundary": {
+    "applicability_file_required": true,
+    "bridging_or_confirmatory_data_required_as_appropriate": true,
+    "draft_is_not_a_compliance_standard": true,
+    "may_be_reused_with_justification": [
+      "analytical method design",
+      "method qualification or validation evidence",
+      "platform manufacturing knowledge",
+      "study design",
+      "sequencing technology",
+      "bioinformatics tools and pipeline structure",
+      "depth, quality, and alignment metrics when scientifically applicable"
+    ],
+    "must_remain_product_specific_or_bridged": [
+      "identity result",
+      "potency result",
+      "on-target result",
+      "off-target and genomic-integrity result unless the draft's strict identity conditions are met",
+      "lot release decision",
+      "stability of primary product lots",
+      "comparability impact on each relevant quality attribute",
+      "safety and clinical inference"
+    ],
+    "public_source_granularity_required": true
+  },
+  "question": "What would make a genome-editing result fail even when its on-target number looks excellent?",
+  "readiness_decision": {
+    "blinded_lab_confirmation_available": false,
+    "blocked_label": "blocked_official_guidance_mismatch",
+    "fda_compliance_claim_ready": false,
+    "guidance_mapping_complete": true,
+    "manufacturing_lot_data_available": false,
+    "numeric_thresholds_frozen": false,
+    "product_specific_assays_frozen": false,
+    "ready_label": "fda_guidance_evidence_matrix_ready_protocol_activation_blocked_by_product_specific_assays_thresholds_lot_data_and_blinded_lab_execution",
+    "safety_claim_ready": false,
+    "scalability_claim_ready": false,
+    "wet_lab_experiment_executed": false
+  },
+  "schema_version": "p060_fda_assay_lot_evidence_matrix_result_v1",
+  "scope": {
+    "claim": "public_fda_guidance_to_protocol_evidence_mapping_only",
+    "excluded_catalog_problem_ids": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "included_catalog_problem_ids": [
+      60
+    ]
+  },
+  "source": {
+    "benchmark": "benchmarks/P060_fda_assay_lot_evidence_matrix_v1.json",
+    "benchmark_sha256": "4113e20818d984c4123f5519953609b9d85022658c4c1fc13e6564e3558b702a",
+    "capture_manifest": "results/P060_fda_assay_lot_source_v1/capture_manifest.json",
+    "capture_manifest_sha256": "0770966022d49b734c553494ecb7ab8379e8fd9098252bbc2866ff160ab9a353",
+    "snapshots": [
+      {
+        "gzip_sha256": "0d9ef5e5aa82ea6340fc8609f08b652a1e32d4a833d8db4e24b3438511b05a96",
+        "name": "guidance_index",
+        "normalized_sha256": "918e22b83afa469da481656b98159535574d227e674cbc308f612bb9486bfddd",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances",
+        "relay_raw_sha256": "cf0e1f1789de1c33d4024fdba7221986e1afc8404c085199b3944c5f221a9520",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "53e0599d17c040f9dbb8374c8b82cf0c6476791595b9a08008b46077889e4ffc",
+        "name": "final_2024_page",
+        "normalized_sha256": "3681e19abebc9c849d9180838928483061c68a6a6405f4276a4f392de9f5dd9c",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/human-gene-therapy-products-incorporating-human-genome-editing",
+        "relay_raw_sha256": "9a12a4aaa07f6d12199ca3da703d71dfcfda8826d3e16a985527d6ed2618ac05",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "e1ba725ba193ace62acef57b604b6f6d0ccf8336958d652dfbd90188222f8b9f",
+        "name": "final_2024_pdf_text",
+        "normalized_sha256": "b28a6e36a56b70fae79e50156384e02c2d2801f64aa6218af761321d0021c6ed",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/media/156894/download",
+        "relay_raw_sha256": "ed31103018575a4cc74b75cf3b0e32fdfd60c687a2db9c54e1ff58700fc32a8e",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "a51711838d055b067694b9728ca5fd63c95d50c55d3f1d9221ddd0ba65adc693",
+        "name": "ngs_2026_page",
+        "normalized_sha256": "7553fdeb21086675743d5216aafde657bc573677e8c563c904482c4f2c7dd4d3",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/safety-assessment-genome-editing-human-gene-therapy-products-using-next-generation-sequencing",
+        "relay_raw_sha256": "50c69cfdd214d89a7dd3e2f9dd62b61e2a3ef3f7d366507d449542f67e7f9c46",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "67ac6a4d2021b54279251e9fa452e058b8a6603b4250246dadba86010f22dfb4",
+        "name": "ngs_2026_pdf_text",
+        "normalized_sha256": "0f96c2a4309b08eea5727c8570937c10edbf1adda30bf6ea900454142f80a2ce",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/media/191966/download",
+        "relay_raw_sha256": "436a32227858bbdd73726a1845e4269e8066bf4e65cf359903f0dee4ed9157ac",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "10744da1c194a6955faa5de73af1e061d8f973530219dfc0c86403d4433530ec",
+        "name": "ngs_2026_press",
+        "normalized_sha256": "b3f0dd5eecff22dd09c819fb41de40a01d3570e8c6ea30dff226887250a76a50",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/news-events/press-announcements/fda-issues-draft-guidance-genome-editing-safety-standards-advance-gene-therapy-development",
+        "relay_raw_sha256": "b3f0dd5eecff22dd09c819fb41de40a01d3570e8c6ea30dff226887250a76a50",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "9835860ea0280af4d02f8ff5f46af92323de12d3f2ce7610e56512c6300689e5",
+        "name": "prior_2026_page",
+        "normalized_sha256": "d7f856757cb06561cc096c30daa00b08277acbfd36d6de12a2a3f1a299b37372",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/leveraging-prior-knowledge-development-human-gene-therapy-products-incorporating-genome-editing",
+        "relay_raw_sha256": "8b531187abaaa55beec1888820bc6ee485967b6ca19e6b864dc8189f468c3ef9",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "d3b08d7bd7d3af976835ba143ea09cd00b40f7a94dadd65c769a51f7c90299d8",
+        "name": "prior_2026_pdf_text",
+        "normalized_sha256": "c3380aa4afb43a8aef3c4c8cb9c37816b2076ada9dc15fee2f8b1d9589dcec60",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/media/192810/download",
+        "relay_raw_sha256": "8cf153fbdbd86c078f86b41a14d35c93bda3f58c4455f6e1a4cbb93929d88f30",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "abab14e9f23cda53612f2febb4f6259a3ac628032bb15831b79b01922bb85d2e",
+        "name": "prior_2026_press",
+        "normalized_sha256": "91e4858c88c21cca20a86e31a3f800ac2983cb4c48cfd57880c6910b8c2c022c",
+        "official_origin_marker": true,
+        "official_url": "https://www.fda.gov/news-events/press-announcements/fda-issues-draft-guidance-help-accelerate-cell-and-gene-therapies-patients",
+        "relay_raw_sha256": "91e4858c88c21cca20a86e31a3f800ac2983cb4c48cfd57880c6910b8c2c022c",
+        "valid": true
+      }
+    ],
+    "transport_boundary": "Official FDA origins were retrieved through the r.jina.ai text relay because the shell transport was redirected to FDA abuse detection. These are normalized text snapshots, not raw FDA PDF-byte claims; official origin markers and relay hashes are retained."
+  }
+}
