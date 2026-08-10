@@ -11,13 +11,11 @@ import html
 import json
 import platform
 import re
-import ssl
 import time
-import urllib.request
 from pathlib import Path
 from typing import Any
 
-import certifi
+import requests
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +25,6 @@ DEFAULT_RESULT = ROOT / "results/P053_vanguard_endpoint_dictionary_v1.json"
 DEFAULT_REPORT = ROOT / "research/P053_vanguard_endpoint_dictionary_v1.md"
 DEFAULT_DISCUSSION = ROOT / "research/P053_vanguard_endpoint_discussion_v1.md"
 USER_AGENT = "Axiom-Horizon-P053-endpoints/1.0 (+public protocol audit)"
-SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -63,17 +60,17 @@ def fetch_bytes(
 ) -> bytes:
     last_error: Exception | None = None
     for attempt in range(attempts):
-        request = urllib.request.Request(
-            url,
-            headers={"User-Agent": USER_AGENT, "Accept": "*/*"},
-        )
         try:
-            with urllib.request.urlopen(
-                request, timeout=timeout, context=SSL_CONTEXT
-            ) as response:
-                if response.status != 200:
-                    raise RuntimeError(f"HTTP {response.status} for {url}")
-                return response.read()
+            response = requests.get(
+                url,
+                headers={
+                    "User-Agent": USER_AGENT,
+                    "Accept": "application/json,text/html,*/*",
+                },
+                timeout=timeout,
+            )
+            response.raise_for_status()
+            return response.content
         except Exception as exc:  # pragma: no cover - network path
             last_error = exc
             if attempt + 1 < attempts:
@@ -147,6 +144,19 @@ def phrase(text: str, value: str) -> bool:
     return value.casefold() in text.casefold()
 
 
+def has_numeric_go_no_go_threshold(measure: str, description: str) -> bool:
+    text = f"{measure} {description}"
+    patterns = [
+        r"(?:>=|<=|>|<|≥|≤)\s*\d+(?:\.\d+)?\s*(?:%|percent)?",
+        (
+            r"\b(?:at least|no less than|more than|greater than|"
+            r"minimum of|at most|no more than|less than|fewer than|"
+            r"maximum of)\s+\d+(?:\.\d+)?\s*(?:%|percent)?\b"
+        ),
+    ]
+    return any(re.search(pattern, text, flags=re.I) for pattern in patterns)
+
+
 def build_result(
     benchmark_path: Path,
     benchmark: dict[str, Any],
@@ -217,7 +227,11 @@ def build_result(
                     "evidence_class": evidence_class,
                     "description": row.get("description"),
                     "time_frame": row.get("timeFrame"),
-                    "explicit_numeric_go_no_go_threshold": False,
+                    "explicit_numeric_go_no_go_threshold": (
+                        has_numeric_go_no_go_threshold(
+                            measure, str(row.get("description") or "")
+                        )
+                    ),
                 }
             )
 

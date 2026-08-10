@@ -72,6 +72,25 @@ def max_years(values: list[str]) -> int:
     return max(years) if years else 0
 
 
+def independent_threshold_flag(measure: str, description: str) -> bool:
+    text = f"{measure} {description}"
+    symbol_cutoff = re.search(
+        r"(?:>=|<=|>|<|≥|≤)\s*\d+(?:\.\d+)?\s*(?:%|percent)?",
+        text,
+        flags=re.I,
+    )
+    word_cutoff = re.search(
+        (
+            r"\b(?:at least|no less than|more than|greater than|"
+            r"minimum of|at most|no more than|less than|fewer than|"
+            r"maximum of)\s+\d+(?:\.\d+)?\s*(?:%|percent)?\b"
+        ),
+        text,
+        flags=re.I,
+    )
+    return bool(symbol_cutoff or word_cutoff)
+
+
 def build_audit(
     benchmark_path: Path, result_path: Path
 ) -> dict[str, Any]:
@@ -142,7 +161,9 @@ def build_audit(
                 "registry_section": section,
                 "evidence_class": class_by_measure[row["measure"]],
                 "time_frame": row.get("timeFrame"),
-                "threshold": False,
+                "threshold": independent_threshold_flag(
+                    row["measure"], str(row.get("description") or "")
+                ),
             }
 
     status = protocol["statusModule"]
