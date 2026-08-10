@@ -1,0 +1,266 @@
+{
+  "as_of_date": "2026-08-10",
+  "audit_checks": {
+    "all_passed": true,
+    "checks": [
+      {
+        "detail": "Independent audit is restricted to catalog problem #059.",
+        "name": "audit_scope",
+        "passed": true
+      },
+      {
+        "detail": "d0674ec5a3ef78799cd1ef2b54cce1bb13615edfefaf40597a6b97df2ed9b36f",
+        "name": "benchmark_hash",
+        "passed": true
+      },
+      {
+        "detail": "15/15 sources independently hash-verified.",
+        "name": "source_hashes",
+        "passed": true
+      },
+      {
+        "detail": "{\"imaging\": 1113, \"phenotypic\": 1206, \"processed\": 1071, \"processed_retest\": 45}",
+        "name": "release_counts_and_nonmixing",
+        "passed": true
+      },
+      {
+        "detail": "Five 2025 processing changes independently recovered.",
+        "name": "release_processing",
+        "passed": true
+      },
+      {
+        "detail": "813 rows.",
+        "name": "dictionary_shape",
+        "passed": true
+      },
+      {
+        "detail": "17/17 required fields.",
+        "name": "endpoint_and_family_fields",
+        "passed": true
+      },
+      {
+        "detail": "Registration and restricted-family boundaries independently recovered.",
+        "name": "access_boundary",
+        "passed": true
+      },
+      {
+        "detail": "ICV plus 68 bilateral cortical-thickness fields.",
+        "name": "anatomy_denominator",
+        "passed": true
+      },
+      {
+        "detail": "QC A-E, non-completeness, and motion warning independently recovered.",
+        "name": "qc_semantics",
+        "passed": true
+      },
+      {
+        "detail": "Acquisition reconstruction signature independently recovered.",
+        "name": "reconstruction_signature",
+        "passed": true
+      },
+      {
+        "detail": "{\"11\": 3, \"2\": 5, \"3\": 9, \"4\": 6, \"5\": 14, \"6\": 4, \"7\": 3, \"8\": 2}",
+        "name": "legacy_retest",
+        "passed": true
+      },
+      {
+        "detail": "Legacy 46 and current processed 45 are kept distinct.",
+        "name": "current_retest_discrepancy",
+        "passed": true
+      },
+      {
+        "detail": "Current combined/run products and both motion files independently recovered.",
+        "name": "appendix_products",
+        "passed": true
+      },
+      {
+        "detail": "180 per hemisphere and 64,620 edges independently verified.",
+        "name": "parcellation_and_edges",
+        "passed": true
+      },
+      {
+        "detail": "Outcome and connectome remain outside the nuisance-only feature set.",
+        "name": "denominator_separation",
+        "passed": true
+      },
+      {
+        "detail": "Family split, reliability floor, and motion replay independently frozen.",
+        "name": "split_and_falsifiers",
+        "passed": true
+      },
+      {
+        "detail": "Independent counts agree with the primary result.",
+        "name": "result_agreement",
+        "passed": true
+      },
+      {
+        "detail": "hcp_ya2025_public_contract_ready_execution_blocked_by_registered_data_access_restricted_family_fields_and_current_processed_roster",
+        "name": "execution_and_decision",
+        "passed": true
+      }
+    ],
+    "passed": 19,
+    "total": 19
+  },
+  "decision": "hcp_ya2025_public_contract_ready_execution_blocked_by_registered_data_access_restricted_family_fields_and_current_processed_roster",
+  "independent_observations": {
+    "appendix_pages": 121,
+    "dictionary_columns": [
+      "fullDisplayName",
+      "category",
+      "assessment",
+      "columnHeader",
+      "description"
+    ],
+    "dictionary_rows": 813,
+    "legacy_retest_bins": {
+      "11": 3,
+      "2": 5,
+      "3": 9,
+      "4": 6,
+      "5": 14,
+      "6": 4,
+      "7": 3,
+      "8": 2
+    },
+    "legacy_retest_subjects": 46,
+    "model_executed": false,
+    "motion_file_counts": {
+      "Movement_AbsoluteRMS_mean.txt": 32,
+      "Movement_RelativeRMS_mean.txt": 32
+    },
+    "per_run_products": {
+      "rfMRI_REST1_LR_Atlas_MSMAll_hp2000_clean_rclean_tclean.dtseries.nii": true,
+      "rfMRI_REST1_RL_Atlas_MSMAll_hp2000_clean_rclean_tclean.dtseries.nii": true,
+      "rfMRI_REST2_LR_Atlas_MSMAll_hp2000_clean_rclean_tclean.dtseries.nii": true,
+      "rfMRI_REST2_RL_Atlas_MSMAll_hp2000_clean_rclean_tclean.dtseries.nii": true
+    },
+    "release_counts": {
+      "imaging": 1113,
+      "phenotypic": 1206,
+      "processed": 1071,
+      "processed_retest": 45
+    },
+    "required_fields_present": 17,
+    "thickness_fields": 68,
+    "undirected_edges": 64620
+  },
+  "schema_version": "p059_hcp_ya2025_family_qc_independent_audit_v1",
+  "scope": {
+    "included_catalog_problem_ids": [
+      59
+    ]
+  },
+  "source": {
+    "benchmark_sha256": "d0674ec5a3ef78799cd1ef2b54cce1bb13615edfefaf40597a6b97df2ed9b36f",
+    "capture_manifest_sha256": "57ae866adfce8b68b644811ca064e084a4c82e22d7c4ef77d539e36a232f8ca5",
+    "result_sha256": "7523106745a38bd049cd2942e349b0f1a2c990d1bee85dc181d158b0f655e186",
+    "snapshots": [
+      {
+        "gzip_sha256": "a7fa0fb4611f4871f332139490f57b2d1d819752dddc75d95ae9b073336e6505",
+        "name": "data_releases",
+        "normalized_sha256": "dc259057d378732c662f480f24980739a8bf6fd319c53caf908c0727844281c4",
+        "raw_sha256": "3085606bbc24525e31a75b0da959df01cea9d9dc205c0690354718aaef25508a",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "ad8a2a57ac581ec168fb94c9e21cd84621ee1b96f948d3fe4d9fb2f77597f824",
+        "name": "release_2025",
+        "normalized_sha256": "d11de29e682363fc3f832328b283820395b38cd84a838144cdfe13370617f1d3",
+        "raw_sha256": "2a93ab8ac8c9dd50532a03c7b9b34db159f073d1e508a7da93379ff0960beb0f",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "b334dea2a9a52bc7fd6230ddaf6d6144c2c26e40cc834d5a18978789d4a76b7b",
+        "name": "data_dictionary",
+        "normalized_sha256": "fbc301cf4f8edd2007c42c98e9e44538954ba7a9b2de35ebc7b8858d75841b4c",
+        "raw_sha256": "bed4ebdcbd99ad31781b2d640683640afc84c340134f5e68a5dc98e7cabf8bae",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "4db8c8a27634793981cfcad19411bc0cd46c3537e93040ff892c48e583505b30",
+        "name": "family_update",
+        "normalized_sha256": "638d0536f43e43e53d263cf2d8b7fc9b00397767a89112974eaf36b4fc78f8d0",
+        "raw_sha256": "4a5667c6f2ec7ab8ff2e30312befb59578efdd4b48f701bbb433467d75e66e93",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "294ceb228cbe5ed9f1dc4a5255dcb2f1ffdcc8c1c125219ac773ee29a1806eab",
+        "name": "qc_issues",
+        "normalized_sha256": "5ae6f182a112bad89875a10dcc76f6a10cd77e8f57c5f5a76b00633feb697b40",
+        "raw_sha256": "a176e08849c7bc0f27b2233a3699974d934ae3aded91b8cc39fc19407c7e1529",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "2c5cc249a01b7382f3a6fde1c2661b8caeecf9a4412bffe9d8daae0e9e4718ec",
+        "name": "known_issues",
+        "normalized_sha256": "644f4fec5d1743d99d2c19b00992b088e8b7214b09df4566912c2f29b08fef64",
+        "raw_sha256": "bb7570533744df7d0b63fed448e29e460d6e8cf891a723c84c6c060ceff7060a",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "196b31207efecedc36eed49a7df26787ebe8a7e6867429c08c0948f448be077e",
+        "name": "data_use_terms",
+        "normalized_sha256": "3ab4af33618acc88a457efa85fcdf50cd4f84f6bc41043b4fb691b3f9874cc7f",
+        "raw_sha256": "7604b08abad09bd519420fe3efb3d141a5ddc247233e0934067872a0925beb6a",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "a82c857494a441a605c1de7a36e608038441e90f24eeb9c37344a0603a0a77b0",
+        "name": "restricted_usage",
+        "normalized_sha256": "1c3166409c81375a9be1e2aa09bb6348afd56b5c810f588f89b200013d78e863",
+        "raw_sha256": "06e84354fae0a9fd4f193c61e3f5fdcb8afaf8e1691f3862f1df175baf4ad17e",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "b6fdc57b1b4250aa24a35fcdf0458e83597b57ed85aec9962a2bd1cb9c9d9e37",
+        "name": "quick_reference",
+        "normalized_sha256": "fd4a86b1aa7ce3f8d91cc031d87806413bc1c89cbb04fb120ed2be21b4eb72f0",
+        "raw_sha256": "54052ca33634c379f5f789f7f9b809af707ed3317a8afbd1d1e1a574c7e6495d",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "ad210b1bb596d8035a38de7ff63edcacd469673a081531329c2b5bc4205a1a17",
+        "name": "summary_demographics",
+        "normalized_sha256": "43ad7d32add6836b93c6b7863736ec5c03f4fa8769c6c05f284b6e0e67f41682",
+        "raw_sha256": "c18abf7106eb3c320b7d47e52d677894323a6bd337709816ef49f845546d5fc7",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "2d3d8c1ace199a95c765bedec36e69a80bc63e6591529cf8a17a2b1f1f14b170",
+        "name": "retest_interval",
+        "normalized_sha256": "92bf68ee8e5324454ddf09f051ab9269ea692d456ba7ce1f4e6ef6989248c138",
+        "raw_sha256": "074d07d092c30f1f71c8ed1903db923808eebdab9559433c942ec84b89d14cce",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "c3255c630f1915982ce7c8b6e13f3796c8d66b8aaa13fe675df07be259145052",
+        "name": "retest_interval_csv",
+        "normalized_sha256": "39936ad06b0bbc494745daf25f677179e9d710f983fd5131dc8d0a14ba362625",
+        "raw_sha256": "ff239c729b8116a0cd0af04fd12aff721b0840b9303cff6aea20fc9c511d7367",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "37404fa20f263c3ae9d819c86f0a10de6e2ec4200acb8fda8e2ef98e506f9ccc",
+        "name": "balsa_retest",
+        "normalized_sha256": "69caf44cc0e0ea1d94b67dcc951e9234cf185919fbe4de981f5fc1ff8a6dd77d",
+        "raw_sha256": "a036d6561420464ea9565e94dded6be5327374e715d0ef2517a89af5df1bfdc1",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "d73ac9b5b03fe0511d3bca55eb88878f458e7b979960d35826131c35c89de3bc",
+        "name": "mmp_article",
+        "normalized_sha256": "b1db1f7bf0271a5db56100a0e945e3945cde7ba3326d25df212a1c8267d679ad",
+        "raw_sha256": "8d32da51bfe96fe417ee248cfdd3f3b5f8f7eb3f99f772a09095c36f95ae9767",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "fbc21ea45db295edafb88358ed31eac60ed936c9bf4f1fedfe6effbce4825fcd",
+        "name": "appendix_iii",
+        "normalized_sha256": "720576062c4f37dc530d00fd8909b2b638be8d5ba32be733d8bf5ead9cc706f2",
+        "raw_sha256": "67dbbd43feb66bdec36570b4d6d0d8060e12aff01198cb84cd7960edfa9e2bb6",
+        "valid": true
+      }
+    ]
+  }
+}
