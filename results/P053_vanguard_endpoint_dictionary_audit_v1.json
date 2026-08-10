@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "detail": "Only catalog problem #053 is included.",
+      "name": "scope_only_p053",
+      "passed": true
+    },
+    {
+      "detail": "NCT06995898",
+      "name": "registry_identity_replayed",
+      "passed": true
+    },
+    {
+      "detail": "Recruiting / randomized / 24,000 / 3 arms.",
+      "name": "study_design_replayed",
+      "passed": true
+    },
+    {
+      "detail": "6/20/9.",
+      "name": "outcome_counts_replayed",
+      "passed": true
+    },
+    {
+      "detail": "35 measures.",
+      "name": "frozen_mapping_exact",
+      "passed": true
+    },
+    {
+      "detail": "35 unique memberships.",
+      "name": "mapping_once_only",
+      "passed": true
+    },
+    {
+      "detail": "35 exact rows.",
+      "name": "endpoint_rows_replayed",
+      "passed": true
+    },
+    {
+      "detail": "0/6 explicit numeric go/no-go thresholds.",
+      "name": "threshold_absence_replayed",
+      "passed": true
+    },
+    {
+      "detail": "No resultsSection; no treatment/cure endpoint.",
+      "name": "no_results_and_no_cure_replayed",
+      "passed": true
+    },
+    {
+      "detail": "1473 days / 12 years / passive 10.",
+      "name": "timeline_replayed",
+      "passed": true
+    },
+    {
+      "detail": "Feasibility, no head-to-head comparison, and mortality boundary found.",
+      "name": "nci_boundaries_replayed",
+      "passed": true
+    },
+    {
+      "detail": "6 source files.",
+      "name": "source_hashes_exact",
+      "passed": true
+    }
+  ],
+  "decision_replayed": "endpoint_dictionary_ready_claims_separated",
+  "reconstructed_outcome_counts": {
+    "other": 9,
+    "primary": 6,
+    "secondary": 20,
+    "total": 35
+  },
+  "reconstructed_timeline": {
+    "calendar_days": 1473,
+    "maximum_outcome_years": 12,
+    "passive_follow_up_years": 10
+  },
+  "schema_version": "p053_vanguard_endpoint_dictionary_audit_v1",
+  "source": {
+    "benchmark": "benchmarks/P053_vanguard_endpoint_dictionary_v1.json",
+    "benchmark_sha256": "bf05173fa3d5c9f56ed5cd72c66e1f73c33937882472dea2eb69a7af2e2c1e31",
+    "python": "3.12.6",
+    "result": "results/P053_vanguard_endpoint_dictionary_v1.json",
+    "result_sha256": "5f06026c62608fb407d5c41a45419fbe5608cd340317c8392051be8410a23d5b",
+    "tool": "tools/p053_vanguard_endpoint_audit.py"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 12,
+    "failed_checks": 0,
+    "maximum_numeric_difference": 0,
+    "passed_checks": 12
+  }
+}

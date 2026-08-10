@@ -1,0 +1,594 @@
+{
+  "as_of_date": "2026-08-10",
+  "claim_ladder": [
+    {
+      "does_not_imply": [
+        "assay accuracy",
+        "diagnostic benefit",
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ],
+      "level": 0,
+      "minimum_evidence": "completed registered primary feasibility outcomes with prespecified denominators and numeric success thresholds",
+      "name": "operational_feasibility"
+    },
+    {
+      "does_not_imply": [
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ],
+      "level": 1,
+      "minimum_evidence": "resolved and unresolved abnormal-test pathways, time to resolution, procedures, complications, anxiety, contamination, and standard-screening participation",
+      "name": "diagnostic_pathway_and_harm"
+    },
+    {
+      "does_not_imply": [
+        "stage-shift benefit",
+        "mortality reduction",
+        "personalized treatment",
+        "cure"
+      ],
+      "level": 2,
+      "minimum_evidence": "prospective sensitivity, specificity, predictive values, interval cancers, false positives, tissue-of-origin accuracy, and complete cancer ascertainment",
+      "name": "assay_performance"
+    },
+    {
+      "does_not_imply": [
+        "treatment personalization",
+        "cure"
+      ],
+      "level": 3,
+      "minimum_evidence": "completed randomized arm-specific estimand with adequate follow-up, prespecified multiplicity and power, mortality ascertainment, and joint benefit-harm accounting",
+      "name": "clinical_utility_and_mortality"
+    },
+    {
+      "does_not_imply": [],
+      "level": 4,
+      "minimum_evidence": "treatment-specific randomization, molecular assignment rule frozen before outcomes, comparative treatment outcomes, toxicity, recurrence, and survival",
+      "name": "personalized_treatment_or_cure"
+    }
+  ],
+  "claim_status": {
+    "assay_performance": "registered_not_scored",
+    "clinical_utility_and_mortality": "registered_as_other_not_scored_timeline_requires_alignment",
+    "diagnostic_pathway_and_harm": "registered_not_scored",
+    "operational_feasibility": "registered_not_scored_thresholds_missing",
+    "personalized_treatment_or_cure": "absent_from_protocol"
+  },
+  "controls": {
+    "negative": {
+      "detail": "Enrollment feasibility is forbidden from promoting mortality reduction or cure.",
+      "passed": true
+    },
+    "positive": {
+      "detail": "35 registered outcomes map exactly once to five frozen evidence classes.",
+      "passed": true
+    }
+  },
+  "decision": "endpoint_dictionary_ready_claims_separated",
+  "endpoint_counts": {
+    "other": 9,
+    "primary": 6,
+    "secondary": 20,
+    "total": 35
+  },
+  "endpoint_dictionary": [
+    {
+      "description": "The number of participants enrolled into the study compared to trial goals.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Feasibility of enrollment onto study",
+      "registry_section": "primary",
+      "time_frame": "At time of randomization"
+    },
+    {
+      "description": "The proportion of participants who are complete questionnaires and timing of completion.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Proportion of participants who complete baseline and follow-up questionnaires within 60 days of receipt",
+      "registry_section": "primary",
+      "time_frame": "Up to 3 years"
+    },
+    {
+      "description": "The proportion of participants who have a second blood draw and the timing of the blood draw.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Proportion of participants who provide the required blood sample for year 1 for Multi-Cancer Detection (MCD) testing within 90 days of recommended time point",
+      "registry_section": "primary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of participants who do not complete study procedures and are not able to be contacted.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Proportion of participants considered lost to follow-up within 2 years of randomization",
+      "registry_section": "primary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Meeting or exceeding the trial enrollment goals on a population basis.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Representative enrollment",
+      "registry_section": "primary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Advantages and challenges arising from trial activation with one intervention arm and later addition of a second intervention arm.",
+      "evidence_class": "feasibility_primary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Staggered start of intervention arm 2",
+      "registry_section": "primary",
+      "time_frame": "Up to 1 year"
+    },
+    {
+      "description": "Comparisons between blinded and unblinded sites on participation rates, adherence to protocol-required questionnaires and blood collection, and participation in standard of care screening.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Impact of participant blinding",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The time from receipt of the MCD test result at the Statistics and Data Management Center to the time of receipt of the MCD test result at the ACCESS Hub. The time from receipt of MCD test result at the ACCESS Hub to the time of participant receipt of the MCD test result.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Timely return of MCD test result",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Factors that contribute to the inability to determine if a participant has a cancer or rule out cancer.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Factors contributing to lack of diagnostic resolution of an abnormal MCD test",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Estimated as the number of participants receiving MCD testing outside the trial.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Contamination",
+      "registry_section": "secondary",
+      "time_frame": "Up to 3 years"
+    },
+    {
+      "description": "Feasibility outcomes will be reported by participant demographics and cancer risk factors.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Effects of participant characteristics",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of participants with a \"cancer diagnosis\" or \"no cancer diagnosis\" among all participants with an abnormal MCD test result",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Diagnostic resolution following an abnormal MCD test result",
+      "registry_section": "secondary",
+      "time_frame": "Within 12 months following an abnormal MCD test result"
+    },
+    {
+      "description": "The number of days from date of ACCESS Hub receipt of abnormal MCD test result to date of provider-reported diagnostic resolution.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Time to diagnostic resolution",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of participants that receive standard of care cancer screening in each arm.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Participation in standard of care screening",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Adverse events occurring in participants undergoing a diagnostic workup following receipt of an abnormal MCD test result.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Complications related to diagnostic evaluation of an abnormal MCD test result",
+      "registry_section": "secondary",
+      "time_frame": "Up to 1 year"
+    },
+    {
+      "description": "Participant anxiety will be assessed with the Patient Reported Outcomes Measurement Information System instrument. Cancer-related worry will be assessed using the Lehrman Cancer Worry Scale.",
+      "evidence_class": "pathway_and_harm_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Anxiety and Cancer Worry Questionnaire",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of diagnosed cancers that match the tissue of origin predicted by an abnormal (positive) MCD test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Accuracy of tissue of origin prediction",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Sensitivity will be estimated for each MCD assay. These sensitivities will also be calculated by early- versus late-stage, and for MCD test-targeted cancers and all cancers.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Sensitivity of clinical diagnostic performance of each MCD assay",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Specificity will be estimated for each MCD assay.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Specificity of each MCD assay",
+      "registry_section": "secondary",
+      "time_frame": "1 year"
+    },
+    {
+      "description": "The proportion of abnormal MCD tests at each screening episode, and the proportion of participants with at least one abnormal test.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Test positive rates",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The number of participants with an abnormal MCD test and no cancer diagnosis.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "False positives",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of abnormal MCD tests that result in diagnosis of one of the MCD test-targeted cancers among participants with at least one abnormal test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "(Targeted cancer) Positive predictive value (PPV)",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The proportion of abnormal MCD tests that result in diagnosis of any cancer among participants with at least one abnormal test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "(All cancer) PPV",
+      "registry_section": "secondary",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "The number of MCD test-targeted cancer cases diagnosed within 12 months of a normal MCD test result among participants who received an MCD test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Interval cancers",
+      "registry_section": "secondary",
+      "time_frame": "1 year"
+    },
+    {
+      "description": "The number of cancer cases diagnosed within a 12-month follow-up period of an abnormal test result among participants who received an MCD test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Detected cancers",
+      "registry_section": "secondary",
+      "time_frame": "1 year"
+    },
+    {
+      "description": "The proportion of normal MCD tests that did not result in diagnosis of one of the MCD test-targeted cancers among participants with a normal test, for each screening episode.",
+      "evidence_class": "assay_performance_secondary",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "(Targeted cancer) Negative predictive value",
+      "registry_section": "secondary",
+      "time_frame": "1 year"
+    },
+    {
+      "description": "The stage that a cancer was diagnosed (Surveillance, Epidemiology, and End Results \\[SEER\\]).",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Cancer stage",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "Counts of early and late-stage cancers by arm, separately for each cancer type. Early stage is defined as in situ or localized (SEER). Late stage is defined as regional or distant stage (SEER).",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Early and late stages cancer diagnosis",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "The fraction of MCD-targeted cancers diagnosed during trial participation that resulted in death.",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Targeted cancer-specific mortality of each MCD assay",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "The fraction of all cancers diagnosed during trial participation that resulted in death.",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Cancer-specific mortality",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "The probability of participant death by any cause during trial participation, by arm.",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "All-cause mortality",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "Will estimate average screening costs associated with MCD testing, evaluation of abnormal MCD tests, standard of care screening and evaluation of abnormal standard of care screening results (all MCD arm participants are encouraged to receive standard of care screening), plus cancer site and stage specific treatment costs sourced from the published literature.",
+      "evidence_class": "long_term_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Estimated costs associated with MCD testing minus estimated costs associated with standard of care screening",
+      "registry_section": "other",
+      "time_frame": "Up to 12 years"
+    },
+    {
+      "description": "Portions of direct medical care costs paid directly by participants (e.g., copays, deductibles and uncovered medical bills) and direct non-medical participant costs; for example, transportation costs, travel time and distance, accommodation costs, childcare or elder-care costs will be elicited through an adapted version of the Costs for Patients Questionnaire.",
+      "evidence_class": "participant_burden_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Participant out of pocket costs",
+      "registry_section": "other",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Participant and caregiver time spent away from work will be estimated using an adapted version of the Productivity Cost Questionnaire. The dollar value of hours recorded for participant work loss and caregiver time will be estimated using wages from the Bureau of Labor Statistics.",
+      "evidence_class": "participant_burden_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Participant work loss",
+      "registry_section": "other",
+      "time_frame": "Up to 2 years"
+    },
+    {
+      "description": "Will evaluate the proportion of participants who complete the Military Exposure Questionnaire, among those who reported military service.",
+      "evidence_class": "participant_burden_other",
+      "explicit_numeric_go_no_go_threshold": false,
+      "measure": "Proportion of participants who complete the Military Exposure Questionnaire",
+      "registry_section": "other",
+      "time_frame": "At baseline"
+    }
+  ],
+  "formal_checks": [
+    {
+      "detail": "p053_vanguard_endpoint_dictionary_v1",
+      "name": "schema_version",
+      "passed": true
+    },
+    {
+      "detail": "Only catalog problem #053 is included.",
+      "name": "scope_only_p053",
+      "passed": true
+    },
+    {
+      "detail": "24356ee18ada2ffb1d8f80c8625c719b7afc1515",
+      "name": "protocol_commit",
+      "passed": true
+    },
+    {
+      "detail": "NCT06995898 / National Cancer Institute (NCI)",
+      "name": "registry_identity",
+      "passed": true
+    },
+    {
+      "detail": "RECRUITING",
+      "name": "recruiting_status",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"allocation\": \"RANDOMIZED\",\n  \"interventionModel\": \"PARALLEL\",\n  \"maskingInfo\": {\n    \"masking\": \"SINGLE\",\n    \"maskingDescription\": \"Four ACCESS Hubs will institute participant blinding to their randomly assigned group. Participants recruited in the remaining ACCESS Hubs will be told the arm to which they have been assigned. The purpose of having some Hubs institute blinding and others unblinded is to assess the impact of blinding on recruitment, participation in standard of care cancer screening, and adherence to the study protocol.\",\n    \"whoMasked\": [\n      \"PARTICIPANT\"\n    ]\n  },\n  \"primaryPurpose\": \"SCREENING\"\n}",
+      "name": "randomized_parallel_screening",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"count\": 24000,\n  \"type\": \"ESTIMATED\"\n}",
+      "name": "estimated_enrollment",
+      "passed": true
+    },
+    {
+      "detail": "Arm I (Shield MCD test), Arm II (Avantect MCD test), Arm III (Control)",
+      "name": "three_arms",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"other\": 9,\n  \"primary\": 6,\n  \"secondary\": 20,\n  \"total\": 35\n}",
+      "name": "registered_outcome_counts",
+      "passed": true
+    },
+    {
+      "detail": "6 measures.",
+      "name": "primary_mapping_exact",
+      "passed": true
+    },
+    {
+      "detail": "20 measures.",
+      "name": "secondary_mapping_exact",
+      "passed": true
+    },
+    {
+      "detail": "9 measures.",
+      "name": "other_mapping_exact",
+      "passed": true
+    },
+    {
+      "detail": "35 mapped; overlap=0.",
+      "name": "mapping_exhaustive_nonoverlapping",
+      "passed": true
+    },
+    {
+      "detail": "0/6 explicit thresholds.",
+      "name": "primary_go_no_go_thresholds_absent",
+      "passed": true
+    },
+    {
+      "detail": "resultsSection present=False.",
+      "name": "no_results_posted",
+      "passed": true
+    },
+    {
+      "detail": "Targeted cancer-specific mortality of each MCD assay, Cancer-specific mortality, All-cause mortality",
+      "name": "mortality_registered_as_other",
+      "passed": true
+    },
+    {
+      "detail": "0 treatment/cure endpoints.",
+      "name": "personalized_treatment_absent",
+      "passed": true
+    },
+    {
+      "detail": "calendar=4.03 years; max outcome=12; passive=10.",
+      "name": "timeline_sentinel_detected",
+      "passed": true
+    },
+    {
+      "detail": "NCI pages identify Vanguard as a feasibility/pilot study.",
+      "name": "nci_feasibility_boundary",
+      "passed": true
+    },
+    {
+      "detail": "The two assays are not compared to each other.",
+      "name": "nci_no_head_to_head_boundary",
+      "passed": true
+    },
+    {
+      "detail": "NCI screening overview states that randomized mortality evidence is absent.",
+      "name": "nci_mortality_evidence_boundary",
+      "passed": true
+    },
+    {
+      "detail": "False positives, overdiagnosis, overtreatment, and anxiety remain explicit harms.",
+      "name": "screening_harms_retained",
+      "passed": true
+    },
+    {
+      "detail": "Positive and negative claim-mapping controls pass.",
+      "name": "controls",
+      "passed": true
+    },
+    {
+      "detail": "No participant analysis or assay comparison was executed.",
+      "name": "no_execution",
+      "passed": true
+    },
+    {
+      "detail": "6 source files retained.",
+      "name": "retained_sources",
+      "passed": true
+    }
+  ],
+  "interpretation_boundaries": [
+    "This packet audits public protocol semantics and endpoint-to-claim alignment only.",
+    "It does not recommend an MCD assay, screening decision, diagnostic procedure, treatment, or trial participation.",
+    "It does not analyze participant-level data or compare the two MCD assays.",
+    "It does not establish mortality benefit, personalized treatment, cure, regulatory authorization, or a solved frontier."
+  ],
+  "primary_threshold_audit": {
+    "definition": "A numeric go/no-go threshold must state an explicit cutoff or inequality for the endpoint measure itself. A measurement window, estimated enrollment, or reference to unspecified trial goals is not a success threshold.",
+    "explicit_thresholds": 0,
+    "primary_outcomes": 6,
+    "ready_for_numeric_go_no_go": false
+  },
+  "question": "When does a registered cancer-screening outcome support feasibility, assay performance, mortality benefit, or personalized cure—and when does it support none of them yet?",
+  "schema_version": "p053_vanguard_endpoint_dictionary_result_v1",
+  "source": {
+    "benchmark": "benchmarks/P053_vanguard_endpoint_dictionary_v1.json",
+    "benchmark_sha256": "bf05173fa3d5c9f56ed5cd72c66e1f73c33937882472dea2eb69a7af2e2c1e31",
+    "protocol_commit": "24356ee18ada2ffb1d8f80c8625c719b7afc1515",
+    "python": "3.12.6",
+    "retained_files": [
+      {
+        "bytes": 8829,
+        "path": "results/P053_vanguard_endpoint_source_v1/clinicaltrials_NCT06995898.json.gz",
+        "sha256": "46014f198aae1ddf226f7db268fb6982baf87f343e05ace10a4a92e0cfccf913"
+      },
+      {
+        "bytes": 8230,
+        "path": "results/P053_vanguard_endpoint_source_v1/nci_funded_grant.html.gz",
+        "sha256": "0523929511ca9924d3112ef3114f805bc10e092b92977f4a08b3661c8d5ec332"
+      },
+      {
+        "bytes": 14349,
+        "path": "results/P053_vanguard_endpoint_source_v1/nci_levels_of_evidence.html.gz",
+        "sha256": "1b82de47cd44a50ef2ddd94964bb0b5ae737d64e5afd4d119cb21702446d5b55"
+      },
+      {
+        "bytes": 26425,
+        "path": "results/P053_vanguard_endpoint_source_v1/nci_screening_overview.html.gz",
+        "sha256": "d26a5e06688f0e97bbf0ce043fb53b2477570564a255c661058331f310ddcee8"
+      },
+      {
+        "bytes": 7392,
+        "path": "results/P053_vanguard_endpoint_source_v1/nci_vanguard_program.html.gz",
+        "sha256": "f84eceda5c5c89b6e58b9f6106da1203dd08d397f37dd16adfb3dcf3f2a4eb4c"
+      },
+      {
+        "bytes": 9879,
+        "path": "results/P053_vanguard_endpoint_source_v1/nci_vanguard_questions.html.gz",
+        "sha256": "17a9378c222bad1dbfe63a2aaa8bedc266cbbaaa4f1798cc685a22d39c89f43a"
+      }
+    ],
+    "source_directory": "results/P053_vanguard_endpoint_source_v1",
+    "tool": "tools/p053_vanguard_endpoint_dictionary.py"
+  },
+  "status": "pass",
+  "study_snapshot": {
+    "allocation": "RANDOMIZED",
+    "arms": [
+      {
+        "label": "Arm I (Shield MCD test)",
+        "type": "EXPERIMENTAL"
+      },
+      {
+        "label": "Arm II (Avantect MCD test)",
+        "type": "EXPERIMENTAL"
+      },
+      {
+        "label": "Arm III (Control)",
+        "type": "ACTIVE_COMPARATOR"
+      }
+    ],
+    "completion_date": "2029-06-30",
+    "enrollment": {
+      "count": 24000,
+      "type": "ESTIMATED"
+    },
+    "intervention_model": "PARALLEL",
+    "last_update_posted": "2026-07-08",
+    "nct_id": "NCT06995898",
+    "overall_status": "RECRUITING",
+    "primary_completion_date": "2029-01-31",
+    "primary_purpose": "SCREENING",
+    "results_posted": false,
+    "sponsor": "National Cancer Institute (NCI)",
+    "start_date": "2025-06-18",
+    "status_verified_date": "2026-06",
+    "title": "The Vanguard Study: Testing a New Way to Screen for Cancer"
+  },
+  "summary": {
+    "assay_comparison_executed": false,
+    "check_count": 25,
+    "failed_checks": 0,
+    "mortality_claim_ready": false,
+    "participant_level_analysis_executed": false,
+    "passed_checks": 25,
+    "personalized_cure_claim_ready": false,
+    "registered_outcomes": 35
+  },
+  "timeline_sentinel": {
+    "calendar_days": 1473,
+    "calendar_spans_maximum_outcome": false,
+    "calendar_years": 4.032937,
+    "estimated_completion_date": "2029-06-30",
+    "maximum_registered_outcome_years": 12,
+    "passive_follow_up_years_in_description": 10,
+    "start_date": "2025-06-18",
+    "status": "requires_registry_alignment"
+  }
+}
