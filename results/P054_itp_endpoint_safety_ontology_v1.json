@@ -1,0 +1,2366 @@
+{
+  "acarbose_c2013_sentinel": {
+    "interpretation_boundary": "This page-level association is a safety sentinel, not a causal toxicity conclusion; multiplicity, necropsy denominators, and analysis-plan context must remain explicit.",
+    "male_lung_tumor": {
+      "odds_ratio": 2.851,
+      "organ_or_condition": "Lung tumor",
+      "p_value": 0.0334,
+      "sex": "male"
+    },
+    "pathology_rows": [
+      {
+        "odds_ratio": 4.4844,
+        "organ_or_condition": "Adrenal medullary vasodilation",
+        "p_value": 0.0211,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 2.1474,
+        "organ_or_condition": "Liver degeneration",
+        "p_value": 0.1829,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 1.1889,
+        "organ_or_condition": "Lung tumor",
+        "p_value": 0.7835,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 11.798,
+        "organ_or_condition": "Renal glomerulosclerosis",
+        "p_value": 0.0137,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 2.5475,
+        "organ_or_condition": "Adrenal medullary vasodilation",
+        "p_value": 0.1983,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 5.0807,
+        "organ_or_condition": "Liver degeneration",
+        "p_value": 0.0061,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 2.851,
+        "organ_or_condition": "Lung tumor",
+        "p_value": 0.0334,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 1.0395,
+        "organ_or_condition": "Renal glomerulosclerosis",
+        "p_value": 1.0,
+        "sex": "male"
+      }
+    ],
+    "portal_row": {
+      "age_at_initiation": "4 or 8 mo",
+      "cohort": "C2013",
+      "compound": "acarbose (ACA)",
+      "dose_in_food": "400 (lo), 1000 (mid), and 2500 (hi) ppm",
+      "lifespan_summary": "View survival analysis females 400 ppm p = 0.033 females 1000 ppm p = 0.0027 females 2500 ppm p = 0.0061 males 400 ppm p < 0.0001 males 1000 ppm p < 0.0001 males 2500 ppm p < 0.0001",
+      "other_phenotypes": [
+        {
+          "label": "body composition",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/body%20composition/C2013"
+        },
+        {
+          "label": "body weight",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/body%20weight/C2013"
+        },
+        {
+          "label": "fat pads",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/fat%20pads/C2013"
+        },
+        {
+          "label": "grip strength",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/grip%20force/C2013"
+        },
+        {
+          "label": "grip duration",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/grip%20duration/C2013"
+        },
+        {
+          "label": "pathology",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/pathology/C2013"
+        },
+        {
+          "label": "postprandial glucose",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/glucose%20meter/C2013"
+        },
+        {
+          "label": "rotarod",
+          "url": "https://phenome.jax.org/itp/othpheno/ACA/rotarod/C2013"
+        }
+      ],
+      "reference": "[12]",
+      "survival_url": "https://mpd.jax.org/survival?cohort=C2013&compound=ACA"
+    }
+  },
+  "as_of_date": "2026-08-10",
+  "controls": {
+    "negative": {
+      "detail": "52 rows retain an empty/not-linked other-phenotype state; none is recoded as no harm.",
+      "passed": true
+    },
+    "positive": {
+      "detail": "Acarbose C2013 links survival, physical function, physiology, and pathology.",
+      "passed": true
+    }
+  },
+  "coverage": {
+    "rows_with_any_other_phenotype": 22,
+    "rows_with_full_linked_gate": 0,
+    "rows_with_linked_pilot_toxicity": 0,
+    "rows_with_pathology": 1,
+    "rows_with_physical_function": 2,
+    "rows_with_physiology": 22,
+    "rows_with_survival": 74,
+    "rows_with_survival_function_pathology": 1
+  },
+  "coverage_rows": [
+    {
+      "cohort": "C2020",
+      "compound": "16-a-hydroxyestriol (OH-Est)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2009",
+      "compound": "17-a-estradiol (17aE2)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2011",
+      "compound": "17-a-estradiol (17aE2)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight",
+        "uterus weight (OVX)"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "17-a-estradiol (17aE2)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2015",
+      "compound": "17-dimethylaminoethylamino-17-demethoxygeldanamycin hydrochloride (DMAG)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2012",
+      "compound": "2-(2-Hydroxyphenyl)benzoxazole (HBX)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2020",
+      "compound": "2,4-dinitrophenol (DNP)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "2BAct (2BA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "3-(3-hydroxybenzyl)-5-methylbenzo[d]oxazol-2(3H)-one (MIF098)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2004",
+      "compound": "4-OH-a-phenyl-N-tert-butyl nitrone (4-OH-PBN)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "4-phenylbutyrate (PBA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2009",
+      "compound": "acarbose (ACA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2012",
+      "compound": "acarbose (ACA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2013",
+      "compound": "acarbose (ACA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "pathology_and_tumor",
+        "physical_function",
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body composition",
+        "body weight",
+        "fat pads",
+        "grip duration",
+        "grip strength",
+        "pathology",
+        "postprandial glucose",
+        "rotarod"
+      ],
+      "survival_function_pathology": true
+    },
+    {
+      "cohort": "C2020",
+      "compound": "a-Ketoglutarate (AKG)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2004",
+      "compound": "aspirin (Asp)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2014",
+      "compound": "aspirin (Asp)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "astaxanthin (Asta)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2015",
+      "compound": "b-guanidinopropionic acid (bGPA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2005",
+      "compound": "caffeic acid phenethyl ester (CAPE)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "canagliflozin (Cana)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2020",
+      "compound": "canagliflozin (Cana)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "candesartan cilexetil (CC)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "captopril (Capt)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2007",
+      "compound": "curcumin (Cur)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "Dichloroacetate (DCA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "dimethyl fumarate (DMF)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2005",
+      "compound": "enalapril (Enal)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "Epicatechin (Epi)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2018",
+      "compound": "fisetin (Fis)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2010",
+      "compound": "fish oil (FO)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "Forskolin (For)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "geranylgeranyl acetone (GGA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2014",
+      "compound": "glycine (Gly)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2007",
+      "compound": "green tea extract (GTE)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "Halofuginone (Hal)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2020",
+      "compound": "Hydralazine (HYD)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2012",
+      "compound": "INT-767 (I767d)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2014",
+      "compound": "inulin (Inu)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "L-Leucine (Leu)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "meclizine (Mec)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2007",
+      "compound": "medium-chain triglyceride (MCTO)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2011",
+      "compound": "metformin (Met)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2011",
+      "compound": "metformin plus rapamycin (MetRapa)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2009",
+      "compound": "methylene blue (MB)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2015",
+      "compound": "minocycline (Min)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2021",
+      "compound": "Mitoglitazone (M160)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2015",
+      "compound": "MitoQ (MitoQ)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "mycophenolic acid (MPA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2020",
+      "compound": "Nebivolol (NEBI)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2016",
+      "compound": "nicotinamide riboside (NR)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2004",
+      "compound": "nitroflurbiprofen (NFP)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2004",
+      "compound": "nordihydroguaiaretic acid (NDGA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2010",
+      "compound": "nordihydroguaiaretic acid (NDGA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physical_function",
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight",
+        "grip duration",
+        "grip strength",
+        "rotarod"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2007",
+      "compound": "oxaloacetic acid (OAA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "PB125 (PB125)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2011",
+      "compound": "protandim (Prot)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2005",
+      "compound": "rapamycin (Rapa)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2006",
+      "compound": "rapamycin (Rapa)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2009",
+      "compound": "rapamycin (Rapa)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2015",
+      "compound": "rapamycin (Rapa)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "rapamycin plus acarbose (RaAc)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2006",
+      "compound": "resveratrol (Res)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2007",
+      "compound": "resveratrol (Res)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "(R/S)-1,3-butanediol (BD)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2018",
+      "compound": "SG1002 (SG1002)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2019",
+      "compound": "SG1002 (SG1002)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2006",
+      "compound": "simvastatin (Sim)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2020",
+      "compound": "Sodium thiosulfate (THIO)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "sulindac (Sul)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2017",
+      "compound": "syringaresinol (Syr)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2014",
+      "compound": "TM5441 (TM5441)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2011",
+      "compound": "ursodeoxycholic acid (UDCA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "physiology_and_body_composition",
+        "survival_and_censoring"
+      ],
+      "linked_labels": [
+        "body weight"
+      ],
+      "survival_function_pathology": false
+    },
+    {
+      "cohort": "C2013",
+      "compound": "ursolic acid (UA)",
+      "full_linked_gate": false,
+      "linked_classes": [
+        "survival_and_censoring"
+      ],
+      "linked_labels": [],
+      "survival_function_pathology": false
+    }
+  ],
+  "decision": "endpoint_safety_ontology_ready_public_gate_not_executable",
+  "endpoint_ontology": [
+    {
+      "class": "survival_and_censoring",
+      "does_not_imply": [
+        "late-life function",
+        "pathology safety",
+        "mechanism",
+        "reversal of aging",
+        "human benefit"
+      ],
+      "minimum_executable_fields": [
+        "compound",
+        "dose",
+        "cohort",
+        "site",
+        "sex",
+        "treatment_start_age",
+        "event_or_censor_age",
+        "event_status",
+        "removal_reason"
+      ],
+      "public_evidence": "One survival-analysis link for every portal compound-cohort row plus the JAX lifespan protocol."
+    },
+    {
+      "class": "physical_function",
+      "does_not_imply": [
+        "global healthspan",
+        "pathology safety",
+        "reversal of aging",
+        "human benefit"
+      ],
+      "minimum_executable_fields": [
+        "assay",
+        "unit",
+        "measurement_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator",
+        "missingness_reason"
+      ],
+      "public_evidence": "Portal links labeled grip strength, grip duration, and rotarod."
+    },
+    {
+      "class": "physiology_and_body_composition",
+      "does_not_imply": [
+        "functional benefit",
+        "pathology safety",
+        "reversal of aging",
+        "human benefit"
+      ],
+      "minimum_executable_fields": [
+        "measure",
+        "unit",
+        "measurement_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator"
+      ],
+      "public_evidence": "Portal links labeled body weight, body composition, fat pads, postprandial glucose, and uterus weight."
+    },
+    {
+      "class": "pathology_and_tumor",
+      "does_not_imply": [
+        "causal toxicity",
+        "cause of death",
+        "reversal of aging",
+        "human benefit"
+      ],
+      "minimum_executable_fields": [
+        "organ_or_condition",
+        "lesion_or_tumor_class",
+        "severity",
+        "necropsy_denominator",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "effect_estimate",
+        "multiplicity_rule"
+      ],
+      "public_evidence": "One portal pathology link, for acarbose C2013, with sex-specific organ/condition odds ratios."
+    },
+    {
+      "class": "exposure_and_pilot_toxicity",
+      "does_not_imply": [
+        "long-term safety",
+        "pathology safety",
+        "reversal of aging",
+        "human safety"
+      ],
+      "minimum_executable_fields": [
+        "compound",
+        "dose",
+        "exposure_or_chow_stability",
+        "pilot_duration",
+        "adverse_sign",
+        "severity",
+        "count",
+        "denominator",
+        "sex",
+        "site",
+        "stopping_rule"
+      ],
+      "public_evidence": "NIA describes chow stability, plasma levels, eight-week toxicity, and occasional pharmacodynamic pilot testing; the portal table exposes no per-row pilot-toxicity link."
+    },
+    {
+      "class": "humane_removal_and_technical_loss",
+      "does_not_imply": [
+        "natural death",
+        "treatment toxicity",
+        "absence of harm"
+      ],
+      "minimum_executable_fields": [
+        "mouse_identifier",
+        "date_or_age",
+        "site",
+        "sex",
+        "clinical_signs",
+        "removal_reason",
+        "event_status",
+        "analysis_handling"
+      ],
+      "public_evidence": "The JAX protocol lists moribund signs and four non-natural-death removal categories."
+    },
+    {
+      "class": "biochemical_mechanism",
+      "does_not_imply": [
+        "causal mediation",
+        "reversal of aging",
+        "human benefit"
+      ],
+      "minimum_executable_fields": [
+        "frozen_mechanism_hypothesis",
+        "assay",
+        "tissue",
+        "collection_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator",
+        "multiplicity_rule"
+      ],
+      "public_evidence": "NIA and JAX describe biochemical mechanism as an expanded Stage II endpoint class, not as a universal portal result."
+    }
+  ],
+  "formal_checks": [
+    {
+      "detail": "p054_itp_endpoint_safety_ontology_v1",
+      "name": "schema_version",
+      "passed": true
+    },
+    {
+      "detail": "Only catalog problem #054 is included.",
+      "name": "scope_only_p054",
+      "passed": true
+    },
+    {
+      "detail": "c86b8f510787761c79b5e30ab00633058e25c368",
+      "name": "protocol_commit",
+      "passed": true
+    },
+    {
+      "detail": "5 official HTML snapshots retained.",
+      "name": "source_inventory",
+      "passed": true
+    },
+    {
+      "detail": "NIA three-site, both-sex, genetically heterogeneous design found.",
+      "name": "nia_three_site_um_het3",
+      "passed": true
+    },
+    {
+      "detail": "NIA pilot exposure/toxicity components found.",
+      "name": "nia_pilot_toxicity",
+      "passed": true
+    },
+    {
+      "detail": "Stage I power statement found.",
+      "name": "nia_power_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Stage II health/pathology/mechanism expansion found.",
+      "name": "nia_stage_two_expansion",
+      "passed": true
+    },
+    {
+      "detail": "Publication-dependent public release boundary found.",
+      "name": "nia_publication_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Application safety/toxicity disclosure requirement found.",
+      "name": "nia_application_safety",
+      "passed": true
+    },
+    {
+      "detail": "Portal absence is bounded as subset/release coverage.",
+      "name": "jax_subset_boundary",
+      "passed": true
+    },
+    {
+      "detail": "JAX Stage I/II endpoint distinction found.",
+      "name": "jax_two_stage_design",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"compound_cohort_rows\": 74,\n  \"other_phenotype_links\": 33,\n  \"rows_with_other_phenotype_links\": 22,\n  \"study_identifier\": \"ITP1\",\n  \"study_year_span\": \"2004-2026\",\n  \"supplementary_workbook_links\": 22,\n  \"survival_links\": 74,\n  \"unique_cohorts\": 17,\n  \"unique_compounds\": 62\n}",
+      "name": "portal_snapshot_exact",
+      "passed": true
+    },
+    {
+      "detail": "74/74 unique compound-cohort keys.",
+      "name": "portal_rows_unique",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"body composition\": 1,\n  \"body weight\": 22,\n  \"fat pads\": 1,\n  \"grip duration\": 2,\n  \"grip strength\": 2,\n  \"pathology\": 1,\n  \"postprandial glucose\": 1,\n  \"rotarod\": 2,\n  \"uterus weight (OVX)\": 1\n}",
+      "name": "portal_label_counts_exact",
+      "passed": true
+    },
+    {
+      "detail": "74/74 rows link survival.",
+      "name": "lifespan_coverage",
+      "passed": true
+    },
+    {
+      "detail": "22/74 rows link another phenotype.",
+      "name": "other_phenotype_coverage",
+      "passed": true
+    },
+    {
+      "detail": "2/74 rows link physical function.",
+      "name": "function_coverage",
+      "passed": true
+    },
+    {
+      "detail": "1/74 rows link pathology.",
+      "name": "pathology_coverage",
+      "passed": true
+    },
+    {
+      "detail": "0/74 portal rows expose a per-row pilot-toxicity link.",
+      "name": "pilot_toxicity_link_absent",
+      "passed": true
+    },
+    {
+      "detail": "survival+function+pathology=1/74; full linked gate=0/74.",
+      "name": "joint_public_gate",
+      "passed": true
+    },
+    {
+      "detail": "All five moribund clinical signs retained.",
+      "name": "humane_signs_retained",
+      "passed": true
+    },
+    {
+      "detail": "All four non-natural-death removal categories retained.",
+      "name": "removal_categories_retained",
+      "passed": true
+    },
+    {
+      "detail": "Acarbose C2013 links survival, physical function, physiology, and pathology.",
+      "name": "acarbose_positive_control",
+      "passed": true
+    },
+    {
+      "detail": "52 rows retain an empty/not-linked other-phenotype state; none is recoded as no harm.",
+      "name": "missing_not_no_harm_control",
+      "passed": true
+    },
+    {
+      "detail": "8 sex-condition rows / 4 conditions.",
+      "name": "pathology_conditions_exact",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"odds_ratio\": 2.851,\n  \"organ_or_condition\": \"Lung tumor\",\n  \"p_value\": 0.0334,\n  \"sex\": \"male\"\n}",
+      "name": "male_lung_tumor_sentinel",
+      "passed": true
+    },
+    {
+      "detail": "No animal experiment, individual-mouse analysis, or workbook parsing was executed.",
+      "name": "no_execution",
+      "passed": true
+    }
+  ],
+  "humane_endpoint_ontology": {
+    "moribund_signs": [
+      "Severe lethargy, as indicated by reluctance to move when gently prodded with forceps.",
+      "Inability to eat or drink.",
+      "Severe balance or gait disturbance.",
+      "Rapid weight loss over a period of 1 week or more.",
+      "An ulcerated or bleeding tumor."
+    ],
+    "non_natural_death_removal_categories": [
+      "Removed for fighting.",
+      "Removed for humane reasons.",
+      "Removed for physiological or behavioral testing.",
+      "Lost because of a technical mistake or accident."
+    ]
+  },
+  "interpretation_boundaries": [
+    "This packet audits public endpoint linkage and safety semantics only.",
+    "Portal-link absence is a data-release/coverage state, not evidence that an endpoint was not measured or that no harm occurred.",
+    "No animal experiment, individual-mouse analysis, compound ranking, efficacy recommendation, or causal toxicity analysis is performed.",
+    "No human anti-aging, dosing, treatment, prevention, safety, clinical, regulatory, rejuvenation, reversal, or solved-frontier claim is made."
+  ],
+  "missingness_rule": "A missing portal link means not linked in this public portal snapshot. It must never be recoded as no adverse event, no pathology, no functional decline, or not measured.",
+  "portal_label_mapping": {
+    "exposure_and_pilot_toxicity": [],
+    "pathology_and_tumor": [
+      "pathology"
+    ],
+    "physical_function": [
+      "grip strength",
+      "grip duration",
+      "rotarod"
+    ],
+    "physiology_and_body_composition": [
+      "body weight",
+      "uterus weight (OVX)",
+      "body composition",
+      "fat pads",
+      "postprandial glucose"
+    ]
+  },
+  "portal_snapshot": {
+    "compound_cohort_rows": 74,
+    "other_phenotype_label_counts": {
+      "body composition": 1,
+      "body weight": 22,
+      "fat pads": 1,
+      "grip duration": 2,
+      "grip strength": 2,
+      "pathology": 1,
+      "postprandial glucose": 1,
+      "rotarod": 2,
+      "uterus weight (OVX)": 1
+    },
+    "other_phenotype_links": 33,
+    "portal_rows": [
+      {
+        "age_at_initiation": "12 mo",
+        "cohort": "C2020",
+        "compound": "16-a-hydroxyestriol (OH-Est)",
+        "dose_in_food": "5 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0004",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144883"
+          }
+        ],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=OH-Est"
+      },
+      {
+        "age_at_initiation": "10 mo",
+        "cohort": "C2009",
+        "compound": "17-a-estradiol (17aE2)",
+        "dose_in_food": "4.8 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0025",
+        "other_phenotypes": [],
+        "reference": "[8]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2009&compound=17aE2"
+      },
+      {
+        "age_at_initiation": "10 mo",
+        "cohort": "C2011",
+        "compound": "17-a-estradiol (17aE2)",
+        "dose_in_food": "14.4 ppm",
+        "lifespan_summary": "View survival analysis males p < 0.0001",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/17aE2/body%20weight/C2011"
+          },
+          {
+            "label": "uterus weight (OVX)",
+            "url": "https://phenome.jax.org/itp/othpheno/17aE2/uterus%20wt/C2011"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2011&compound=17aE2"
+      },
+      {
+        "age_at_initiation": "16 or 20 mo",
+        "cohort": "C2016",
+        "compound": "17-a-estradiol (17aE2)",
+        "dose_in_food": "14.4 ppm",
+        "lifespan_summary": "View survival analysis males 16 mo p < 0.0001 males 20 mo p = 0.007",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/17aE2/body%20weight/C2016"
+          }
+        ],
+        "reference": "[16]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=17aE2"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2015",
+        "compound": "17-dimethylaminoethylamino-17-demethoxygeldanamycin hydrochloride (DMAG)",
+        "dose_in_food": "30 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[15]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2015&compound=DMAG"
+      },
+      {
+        "age_at_initiation": "15 mo",
+        "cohort": "C2012",
+        "compound": "2-(2-Hydroxyphenyl)benzoxazole (HBX)",
+        "dose_in_food": "1 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[12]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2012&compound=HBX"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2020",
+        "compound": "2,4-dinitrophenol (DNP)",
+        "dose_in_food": "3 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=DNP"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "2BAct (2BA)",
+        "dose_in_food": "30 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144715"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=2BA"
+      },
+      {
+        "age_at_initiation": "8 mo",
+        "cohort": "C2016",
+        "compound": "3-(3-hydroxybenzyl)-5-methylbenzo[d]oxazol-2(3H)-one (MIF098)",
+        "dose_in_food": "240 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/MIF098/body%20weight/C2016"
+          }
+        ],
+        "reference": "[16]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=MIF098"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2004",
+        "compound": "4-OH-a-phenyl-N-tert-butyl nitrone (4-OH-PBN)",
+        "dose_in_food": "350 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[2]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2004&compound=4-OH-PBN"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2019",
+        "compound": "4-phenylbutyrate (PBA)",
+        "dose_in_food": "1000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=PBA"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2009",
+        "compound": "acarbose (ACA)",
+        "dose_in_food": "1000 ppm",
+        "lifespan_summary": "View survival analysis males p < 0.0001 females p = 0.0048",
+        "other_phenotypes": [],
+        "reference": "[8]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2009&compound=ACA"
+      },
+      {
+        "age_at_initiation": "16 mo",
+        "cohort": "C2012",
+        "compound": "acarbose (ACA)",
+        "dose_in_food": "1000 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0001",
+        "other_phenotypes": [],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2012&compound=ACA"
+      },
+      {
+        "age_at_initiation": "4 or 8 mo",
+        "cohort": "C2013",
+        "compound": "acarbose (ACA)",
+        "dose_in_food": "400 (lo), 1000 (mid), and 2500 (hi) ppm",
+        "lifespan_summary": "View survival analysis females 400 ppm p = 0.033 females 1000 ppm p = 0.0027 females 2500 ppm p = 0.0061 males 400 ppm p < 0.0001 males 1000 ppm p < 0.0001 males 2500 ppm p < 0.0001",
+        "other_phenotypes": [
+          {
+            "label": "body composition",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/body%20composition/C2013"
+          },
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/body%20weight/C2013"
+          },
+          {
+            "label": "fat pads",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/fat%20pads/C2013"
+          },
+          {
+            "label": "grip strength",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/grip%20force/C2013"
+          },
+          {
+            "label": "grip duration",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/grip%20duration/C2013"
+          },
+          {
+            "label": "pathology",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/pathology/C2013"
+          },
+          {
+            "label": "postprandial glucose",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/glucose%20meter/C2013"
+          },
+          {
+            "label": "rotarod",
+            "url": "https://phenome.jax.org/itp/othpheno/ACA/rotarod/C2013"
+          }
+        ],
+        "reference": "[12]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2013&compound=ACA"
+      },
+      {
+        "age_at_initiation": "18 mo",
+        "cohort": "C2020",
+        "compound": "a-Ketoglutarate (AKG)",
+        "dose_in_food": "20,000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144859"
+          }
+        ],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=AKG"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2004",
+        "compound": "aspirin (Asp)",
+        "dose_in_food": "21 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0106",
+        "other_phenotypes": [],
+        "reference": "[2]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2004&compound=Asp"
+      },
+      {
+        "age_at_initiation": "11 mo",
+        "cohort": "C2014",
+        "compound": "aspirin (Asp)",
+        "dose_in_food": "60 and 200 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[13]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2014&compound=Asp"
+      },
+      {
+        "age_at_initiation": "12 mo",
+        "cohort": "C2019",
+        "compound": "astaxanthin (Asta)",
+        "dose_in_food": "4000 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.003",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=Asta"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2015",
+        "compound": "b-guanidinopropionic acid (bGPA)",
+        "dose_in_food": "3300 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[15]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2015&compound=bGPA"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2005",
+        "compound": "caffeic acid phenethyl ester (CAPE)",
+        "dose_in_food": "30 (lo) and 300 (hi) ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[4]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2005&compound=CAPE"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2016",
+        "compound": "canagliflozin (Cana)",
+        "dose_in_food": "180 ppm",
+        "lifespan_summary": "View survival analysis males p < 0.0001",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/Cana/body%20weight/C2016"
+          }
+        ],
+        "reference": "[14]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=Cana"
+      },
+      {
+        "age_at_initiation": "6 or 16 mo",
+        "cohort": "C2020",
+        "compound": "canagliflozin (Cana)",
+        "dose_in_food": "180 ppm",
+        "lifespan_summary": "View survival analysis males 6 mo p = 0.0209 males 16 mo p = 0.023",
+        "other_phenotypes": [],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=Cana"
+      },
+      {
+        "age_at_initiation": "8 mo",
+        "cohort": "C2016",
+        "compound": "candesartan cilexetil (CC)",
+        "dose_in_food": "30 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/CC/body%20weight/C2016"
+          }
+        ],
+        "reference": "[16]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=CC"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2017",
+        "compound": "captopril (Capt)",
+        "dose_in_food": "180 ppm",
+        "lifespan_summary": "View survival analysis females p = 0.002 males p = 0.001",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=Capt"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2007",
+        "compound": "curcumin (Cur)",
+        "dose_in_food": "2000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[6]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2007&compound=Cur"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "Dichloroacetate (DCA)",
+        "dose_in_food": "30 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144739"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=DCA"
+      },
+      {
+        "age_at_initiation": "9 or 16 mo",
+        "cohort": "C2019",
+        "compound": "dimethyl fumarate (DMF)",
+        "dose_in_food": "120 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=DMF"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2005",
+        "compound": "enalapril (Enal)",
+        "dose_in_food": "120 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[4]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2005&compound=Enal"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "Epicatechin (Epi)",
+        "dose_in_food": "60 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0370",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144763"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=Epi"
+      },
+      {
+        "age_at_initiation": "20 mo (3 days on/11 days off) and 20 mo (continuous)",
+        "cohort": "C2018",
+        "compound": "fisetin (Fis)",
+        "dose_in_food": "600 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2018&compound=Fis"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2010",
+        "compound": "fish oil (FO)",
+        "dose_in_food": "15,000 (lo) and 50,000 (hi) ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/FO/body%20weight/C2010"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2010&compound=FO"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "Forskolin (For)",
+        "dose_in_food": "5 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144787"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=For"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2016",
+        "compound": "geranylgeranyl acetone (GGA)",
+        "dose_in_food": "600 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/GGA/body%20weight/C2016"
+          }
+        ],
+        "reference": "[16]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=GGA"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2014",
+        "compound": "glycine (Gly)",
+        "dose_in_food": "80,000 ppm",
+        "lifespan_summary": "View survival analysis females p = 0.0167 males p = 0.0024",
+        "other_phenotypes": [],
+        "reference": "[13]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2014&compound=Gly"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2007",
+        "compound": "green tea extract (GTE)",
+        "dose_in_food": "2000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[6]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2007&compound=GTE"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "Halofuginone (Hal)",
+        "dose_in_food": "0.6 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0020",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144811"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=Hal"
+      },
+      {
+        "age_at_initiation": "6 or 16 mo",
+        "cohort": "C2020",
+        "compound": "Hydralazine (HYD)",
+        "dose_in_food": "30 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=HYD"
+      },
+      {
+        "age_at_initiation": "10 mo",
+        "cohort": "C2012",
+        "compound": "INT-767 (I767d)",
+        "dose_in_food": "180 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[12]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2012&compound=I767d"
+      },
+      {
+        "age_at_initiation": "11 mo",
+        "cohort": "C2014",
+        "compound": "inulin (Inu)",
+        "dose_in_food": "600 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[13]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2014&compound=Inu"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2017",
+        "compound": "L-Leucine (Leu)",
+        "dose_in_food": "40,000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=Leu"
+      },
+      {
+        "age_at_initiation": "12 mo",
+        "cohort": "C2019",
+        "compound": "meclizine (Mec)",
+        "dose_in_food": "800 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.027",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=Mec"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2007",
+        "compound": "medium-chain triglyceride (MCTO)",
+        "dose_in_food": "60,000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[6]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2007&compound=MCTO"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2011",
+        "compound": "metformin (Met)",
+        "dose_in_food": "1000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/Met/body%20weight/C2011"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2011&compound=Met"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2011",
+        "compound": "metformin plus rapamycin (MetRapa)",
+        "dose_in_food": "Met: 1000 ppm and Rapa: 14 ppm",
+        "lifespan_summary": "View survival analysis females p < 0.0001 males p < 0.0001",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/MetRapa/body%20weight/C2011"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2011&compound=MetRapa"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2009",
+        "compound": "methylene blue (MB)",
+        "dose_in_food": "28 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[8]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2009&compound=MB"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2015",
+        "compound": "minocycline (Min)",
+        "dose_in_food": "300 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[15]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2015&compound=Min"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2021",
+        "compound": "Mitoglitazone (M160)",
+        "dose_in_food": "300 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0150",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/measureset/144835"
+          }
+        ],
+        "reference": "[20]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2021&compound=M160"
+      },
+      {
+        "age_at_initiation": "7 mo",
+        "cohort": "C2015",
+        "compound": "MitoQ (MitoQ)",
+        "dose_in_food": "100 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[15]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2015&compound=MitoQ"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2019",
+        "compound": "mycophenolic acid (MPA)",
+        "dose_in_food": "6.7 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=MPA"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2020",
+        "compound": "Nebivolol (NEBI)",
+        "dose_in_food": "60 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=NEBI"
+      },
+      {
+        "age_at_initiation": "8 mo",
+        "cohort": "C2016",
+        "compound": "nicotinamide riboside (NR)",
+        "dose_in_food": "1000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/NR/body%20weight/C2016"
+          }
+        ],
+        "reference": "[16]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2016&compound=NR"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2004",
+        "compound": "nitroflurbiprofen (NFP)",
+        "dose_in_food": "200 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[2]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2004&compound=NFP"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2004",
+        "compound": "nordihydroguaiaretic acid (NDGA)",
+        "dose_in_food": "2500 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0006",
+        "other_phenotypes": [],
+        "reference": "[2]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2004&compound=NDGA"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2010",
+        "compound": "nordihydroguaiaretic acid (NDGA)",
+        "dose_in_food": "800 (lo), 2500 (mid), and 5000 (hi) ppm",
+        "lifespan_summary": "View survival analysis males 800 ppm p = 0.0228 males 2500 ppm p = 0.0147 males 5000 ppm p = 0.0028",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/NDGA/body%20weight/C2010"
+          },
+          {
+            "label": "grip strength",
+            "url": "https://phenome.jax.org/itp/othpheno/NDGA/grip%20force/C2010"
+          },
+          {
+            "label": "grip duration",
+            "url": "https://phenome.jax.org/itp/othpheno/NDGA/grip%20duration/C2010"
+          },
+          {
+            "label": "rotarod",
+            "url": "https://phenome.jax.org/itp/othpheno/NDGA/rotarod/C2010"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2010&compound=NDGA"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2007",
+        "compound": "oxaloacetic acid (OAA)",
+        "dose_in_food": "2200 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[6]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2007&compound=OAA"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2017",
+        "compound": "PB125 (PB125)",
+        "dose_in_food": "see publication",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=PB125"
+      },
+      {
+        "age_at_initiation": "10, then 17  mo",
+        "cohort": "C2011",
+        "compound": "protandim (Prot)",
+        "dose_in_food": "600, then 1200 ppm",
+        "lifespan_summary": "View survival analysis males p = 0.0095",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/Prot/body%20weight/C2011"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2011&compound=Prot"
+      },
+      {
+        "age_at_initiation": "20 mo",
+        "cohort": "C2005",
+        "compound": "rapamycin (Rapa)",
+        "dose_in_food": "14 ppm",
+        "lifespan_summary": "View survival analysis females p < 0.0001 males p < 0.0001",
+        "other_phenotypes": [],
+        "reference": "[4]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2005&compound=Rapa"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2006",
+        "compound": "rapamycin (Rapa)",
+        "dose_in_food": "14 ppm",
+        "lifespan_summary": "View survival analysis females p < 0.0001 males p < 0.0001",
+        "other_phenotypes": [],
+        "reference": "[5]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2006&compound=Rapa"
+      },
+      {
+        "age_at_initiation": "9 mo",
+        "cohort": "C2009",
+        "compound": "rapamycin (Rapa)",
+        "dose_in_food": "4.7 (lo), 14 (mid), and 42 (hi) ppm",
+        "lifespan_summary": "View survival analysis females 4.7 ppm p < 0.0001 females 14 ppm p < 0.0001 females 42 ppm p < 0.0001 males 14 ppm p = 0.0034 males 42 ppm p < 0.0001",
+        "other_phenotypes": [],
+        "reference": "[9]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2009&compound=Rapa"
+      },
+      {
+        "age_at_initiation": "20 mo (continuous); 20 mo but every other (cycle); 20 thru 23 mo (start_stop)",
+        "cohort": "C2015",
+        "compound": "rapamycin (Rapa)",
+        "dose_in_food": "42 ppm",
+        "lifespan_summary": "View survival analysis females continuous p < 0.0001 females cycle p = 0.0001 males continuous p = 0.0007 males cycle p = 0.0019 males start_stop p = 0.0243",
+        "other_phenotypes": [],
+        "reference": "[15]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2015&compound=Rapa"
+      },
+      {
+        "age_at_initiation": "9 or 16 mo",
+        "cohort": "C2017",
+        "compound": "rapamycin plus acarbose (RaAc)",
+        "dose_in_food": "Rapa: 14.7 ppm and ACA: 1000 ppm",
+        "lifespan_summary": "View survival analysis females 9 mo p < 0.0001 females 16 mo p < 0.0001 males 9 mo p < 0.0001 males 16 mo p < 0.0001",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=RaAc"
+      },
+      {
+        "age_at_initiation": "12 mo",
+        "cohort": "C2006",
+        "compound": "resveratrol (Res)",
+        "dose_in_food": "300 (lo) and 1200 (hi) ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[5]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2006&compound=Res"
+      },
+      {
+        "age_at_initiation": "4 mo",
+        "cohort": "C2007",
+        "compound": "resveratrol (Res)",
+        "dose_in_food": "300 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[6]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2007&compound=Res"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2017",
+        "compound": "(R/S)-1,3-butanediol (BD)",
+        "dose_in_food": "100,000 ppm",
+        "lifespan_summary": "View survival analysis females p = 0.0395",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=BD"
+      },
+      {
+        "age_at_initiation": "18 mo",
+        "cohort": "C2018",
+        "compound": "SG1002 (SG1002)",
+        "dose_in_food": "240 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2018&compound=SG1002"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2019",
+        "compound": "SG1002 (SG1002)",
+        "dose_in_food": "240 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[18]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2019&compound=SG1002"
+      },
+      {
+        "age_at_initiation": "10 mo",
+        "cohort": "C2006",
+        "compound": "simvastatin (Sim)",
+        "dose_in_food": "12 (lo) and 120 (hi) ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[5]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2006&compound=Sim"
+      },
+      {
+        "age_at_initiation": "6 mo",
+        "cohort": "C2020",
+        "compound": "Sodium thiosulfate (THIO)",
+        "dose_in_food": "10,000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[19]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2020&compound=THIO"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2017",
+        "compound": "sulindac (Sul)",
+        "dose_in_food": "5 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=Sul"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2017",
+        "compound": "syringaresinol (Syr)",
+        "dose_in_food": "300 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[17]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2017&compound=Syr"
+      },
+      {
+        "age_at_initiation": "11 mo",
+        "cohort": "C2014",
+        "compound": "TM5441 (TM5441)",
+        "dose_in_food": "60 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[13]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2014&compound=TM5441"
+      },
+      {
+        "age_at_initiation": "5 mo",
+        "cohort": "C2011",
+        "compound": "ursodeoxycholic acid (UDCA)",
+        "dose_in_food": "5000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [
+          {
+            "label": "body weight",
+            "url": "https://phenome.jax.org/itp/othpheno/UDCA/body%20weight/C2011"
+          }
+        ],
+        "reference": "[10]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2011&compound=UDCA"
+      },
+      {
+        "age_at_initiation": "10 mo",
+        "cohort": "C2013",
+        "compound": "ursolic acid (UA)",
+        "dose_in_food": "2000 ppm",
+        "lifespan_summary": "View survival analysis",
+        "other_phenotypes": [],
+        "reference": "[12]",
+        "survival_url": "https://mpd.jax.org/survival?cohort=C2013&compound=UA"
+      }
+    ],
+    "rows_with_other_phenotype_links": 22,
+    "study_identifier": "ITP1",
+    "study_title": "ITP:\n  Interventions Testing Program: Effects of various treatments on lifespan and related phenotypes in genetically heterogeneous mice (UM-HET3) (2004-2026)",
+    "study_year_span": "2004-2026",
+    "supplementary_workbook_links": 22,
+    "supplementary_workbooks": [
+      {
+        "label": "• Download ITP1 supplementary file, C2020_pheno_bw.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=849&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, C2021_pheno_bw.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=819&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, cohort_2013_fatpads.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=818&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2004_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=834&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2005_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=829&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2006_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=823&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2007_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=804&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2009_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=798&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2010_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=793&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2011_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=787&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2012_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=768&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2013_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=762&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2014_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=782&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2015_Lifespan w error.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=750&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2015_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=748&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2016_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=754&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2017_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=737&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2018_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=558&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2019_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=573&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2020_Lifespan w error.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=706&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2020_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=707&mode=download"
+      },
+      {
+        "label": "• Download ITP1 supplementary file, ITP_C2021_Lifespan.xlsx",
+        "url": "https://phenome.jax.org/getcurationfile?id=772&mode=download"
+      }
+    ],
+    "survival_links": 74,
+    "unique_cohorts": 17,
+    "unique_compounds": 62
+  },
+  "program_snapshot": {
+    "mouse_stock": "UM-HET3",
+    "pilot_components": [
+      "chow stability",
+      "plasma levels",
+      "eight-week toxicity",
+      "optional pharmacodynamic effects"
+    ],
+    "release_boundary": "Public following publication; all positive and negative lifespan results are submitted for publication.",
+    "sexes": [
+      "female",
+      "male"
+    ],
+    "stage_one_power": "80% power to detect a 10% lifespan increase for either sex pooling sites",
+    "stage_one_primary_endpoint": "lifespan",
+    "stage_two_expansion": [
+      "health",
+      "pathology",
+      "biochemical mechanism",
+      "lifespan"
+    ],
+    "three_test_sites": [
+      "The Jackson Laboratory",
+      "University of Michigan",
+      "University of Texas Health Science Center at San Antonio"
+    ]
+  },
+  "question": "If lifespan moves, what would prove that function improved without merely changing how disease was counted?",
+  "schema_version": "p054_itp_endpoint_safety_ontology_result_v1",
+  "source": {
+    "benchmark": "benchmarks/P054_itp_endpoint_safety_ontology_v1.json",
+    "benchmark_sha256": "ecea6829db30bb23e2cd8c89367b505377ff0a96e3106ddc65fccffa54ba680a",
+    "protocol_commit": "c86b8f510787761c79b5e30ab00633058e25c368",
+    "python": "3.12.6",
+    "retained_files": [
+      {
+        "bytes": 34945,
+        "path": "results/P054_itp_endpoint_safety_source_v1/jax_acarbose_pathology.html.gz",
+        "sha256": "860616e421a7603e5e730c7245246a701fa4bed234db9d96fdb292eb9f1b349f"
+      },
+      {
+        "bytes": 44016,
+        "path": "results/P054_itp_endpoint_safety_source_v1/jax_itp_portal.html.gz",
+        "sha256": "dc298685415bdbc5250ea43b512fe4780a900df89033ac3b50331b5f76213de1"
+      },
+      {
+        "bytes": 37058,
+        "path": "results/P054_itp_endpoint_safety_source_v1/jax_itp_protocol.html.gz",
+        "sha256": "9c9ce55ef33ffd84c4f16c31e3cc194ad0c991e61c0ec9cf0a77c93855591479"
+      },
+      {
+        "bytes": 13038,
+        "path": "results/P054_itp_endpoint_safety_source_v1/nia_about_itp.html.gz",
+        "sha256": "3ba2dd4e0fea9f629c36fe9830ae675dcbc5d18e9aac6a58092830e2d04a05df"
+      },
+      {
+        "bytes": 12755,
+        "path": "results/P054_itp_endpoint_safety_source_v1/nia_application_instructions.html.gz",
+        "sha256": "ebde44acbb3e84de567682c7f797fd00c046797c7aa34112770053de51e342ff"
+      }
+    ],
+    "source_directory": "results/P054_itp_endpoint_safety_source_v1",
+    "tool": "tools/p054_itp_endpoint_safety_ontology.py"
+  },
+  "status": "pass",
+  "subset_boundary": "The JAX protocol states that MPD houses data for a subset of ITP studies and that more data will be added over time.",
+  "summary": {
+    "animal_experiment_executed": false,
+    "check_count": 28,
+    "failed_checks": 0,
+    "human_anti_aging_claim_ready": false,
+    "individual_mouse_analysis_executed": false,
+    "passed_checks": 28,
+    "portal_rows": 74,
+    "public_gate_executable": false,
+    "supplementary_workbooks_parsed": false
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "as_of_date": "2026-08-10",
+  "decision": "endpoint_safety_ontology_ready_public_gate_not_executable",
+  "formal_checks": [
+    {
+      "detail": "Independent audit is restricted to catalog problem #054.",
+      "name": "audit_schema_and_scope",
+      "passed": true
+    },
+    {
+      "detail": "ecea6829db30bb23e2cd8c89367b505377ff0a96e3106ddc65fccffa54ba680a",
+      "name": "benchmark_hash",
+      "passed": true
+    },
+    {
+      "detail": "5/5 retained source files independently hashed.",
+      "name": "source_hashes",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"compound_cohort_rows\": 74,\n  \"other_phenotype_links\": 33,\n  \"rows_with_other_phenotype_links\": 22,\n  \"supplementary_workbook_links\": 22,\n  \"survival_links\": 74,\n  \"unique_cohorts\": 17,\n  \"unique_compounds\": 62\n}",
+      "name": "portal_counts_against_benchmark",
+      "passed": true
+    },
+    {
+      "detail": "Independent HTMLParser counts match the main result.",
+      "name": "portal_counts_against_result",
+      "passed": true
+    },
+    {
+      "detail": "74 unique compound-cohort rows.",
+      "name": "portal_row_keys_unique",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"body composition\": 1,\n  \"body weight\": 22,\n  \"fat pads\": 1,\n  \"grip duration\": 2,\n  \"grip strength\": 2,\n  \"pathology\": 1,\n  \"postprandial glucose\": 1,\n  \"rotarod\": 2,\n  \"uterus weight (OVX)\": 1\n}",
+      "name": "portal_label_counts",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"rows_with_any_other_phenotype\": 22,\n  \"rows_with_full_linked_gate\": 0,\n  \"rows_with_linked_pilot_toxicity\": 0,\n  \"rows_with_pathology\": 1,\n  \"rows_with_physical_function\": 2,\n  \"rows_with_survival\": 74,\n  \"rows_with_survival_function_pathology\": 1\n}",
+      "name": "coverage_exact",
+      "passed": true
+    },
+    {
+      "detail": "Independent coverage vector matches the main result.",
+      "name": "coverage_against_result",
+      "passed": true
+    },
+    {
+      "detail": "1/74 rows link survival+function+pathology; 0/74 link the full gate.",
+      "name": "joint_gate",
+      "passed": true
+    },
+    {
+      "detail": "8 expected other-phenotype labels.",
+      "name": "acarbose_c2013_labels",
+      "passed": true
+    },
+    {
+      "detail": "8 sex-condition rows independently parsed.",
+      "name": "pathology_rows_and_conditions",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"odds_ratio\": 2.851,\n  \"organ_or_condition\": \"Lung tumor\",\n  \"p_value\": 0.0334,\n  \"sex\": \"male\"\n}",
+      "name": "male_lung_tumor_sentinel",
+      "passed": true
+    },
+    {
+      "detail": "Acarbose C2013 is found; blank phenotype rows remain missing/not linked.",
+      "name": "positive_and_negative_controls",
+      "passed": true
+    },
+    {
+      "detail": "endpoint_safety_ontology_ready_public_gate_not_executable",
+      "name": "decision_boundary",
+      "passed": true
+    },
+    {
+      "detail": "No experiment, individual-level analysis, workbook parsing, or human claim.",
+      "name": "no_execution_or_human_claim",
+      "passed": true
+    }
+  ],
+  "interpretation_boundary": "This independently reconstructs public linkage coverage only. Missing links are not evidence of no harm or non-measurement.",
+  "observed_coverage": {
+    "rows_with_any_other_phenotype": 22,
+    "rows_with_full_linked_gate": 0,
+    "rows_with_linked_pilot_toxicity": 0,
+    "rows_with_pathology": 1,
+    "rows_with_physical_function": 2,
+    "rows_with_survival": 74,
+    "rows_with_survival_function_pathology": 1
+  },
+  "observed_label_counts": {
+    "body composition": 1,
+    "body weight": 22,
+    "fat pads": 1,
+    "grip duration": 2,
+    "grip strength": 2,
+    "pathology": 1,
+    "postprandial glucose": 1,
+    "rotarod": 2,
+    "uterus weight (OVX)": 1
+  },
+  "observed_pathology": {
+    "male_lung_tumor_sentinel": {
+      "odds_ratio": 2.851,
+      "organ_or_condition": "Lung tumor",
+      "p_value": 0.0334,
+      "sex": "male"
+    },
+    "rows": [
+      {
+        "odds_ratio": 4.4844,
+        "organ_or_condition": "Adrenal medullary vasodilation",
+        "p_value": 0.0211,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 2.1474,
+        "organ_or_condition": "Liver degeneration",
+        "p_value": 0.1829,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 1.1889,
+        "organ_or_condition": "Lung tumor",
+        "p_value": 0.7835,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 11.798,
+        "organ_or_condition": "Renal glomerulosclerosis",
+        "p_value": 0.0137,
+        "sex": "female"
+      },
+      {
+        "odds_ratio": 2.5475,
+        "organ_or_condition": "Adrenal medullary vasodilation",
+        "p_value": 0.1983,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 5.0807,
+        "organ_or_condition": "Liver degeneration",
+        "p_value": 0.0061,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 2.851,
+        "organ_or_condition": "Lung tumor",
+        "p_value": 0.0334,
+        "sex": "male"
+      },
+      {
+        "odds_ratio": 1.0395,
+        "organ_or_condition": "Renal glomerulosclerosis",
+        "p_value": 1.0,
+        "sex": "male"
+      }
+    ]
+  },
+  "observed_portal": {
+    "compound_cohort_rows": 74,
+    "other_phenotype_links": 33,
+    "rows_with_other_phenotype_links": 22,
+    "supplementary_workbook_links": 22,
+    "survival_links": 74,
+    "unique_cohorts": 17,
+    "unique_compounds": 62
+  },
+  "parser_independence": {
+    "audit_parser": "Python standard-library html.parser state machines",
+    "imports_main_tool": false,
+    "main_parser": "BeautifulSoup HTML parser"
+  },
+  "schema_version": "p054_itp_endpoint_safety_ontology_audit_v1",
+  "scope": {
+    "included_catalog_problem_ids": [
+      54
+    ]
+  },
+  "source": {
+    "benchmark": "benchmarks/P054_itp_endpoint_safety_ontology_v1.json",
+    "benchmark_sha256": "ecea6829db30bb23e2cd8c89367b505377ff0a96e3106ddc65fccffa54ba680a",
+    "main_result": "results/P054_itp_endpoint_safety_ontology_v1.json",
+    "main_result_sha256": "37e73c24773237f2226e33d6ed7394ba38524fa559b60fff4b7511aba7ecab88",
+    "protocol_commit": "c86b8f510787761c79b5e30ab00633058e25c368",
+    "source_directory": "results/P054_itp_endpoint_safety_source_v1",
+    "tool": "tools/p054_itp_endpoint_safety_audit.py"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 16,
+    "failed_checks": 0,
+    "passed_checks": 16
+  }
+}
