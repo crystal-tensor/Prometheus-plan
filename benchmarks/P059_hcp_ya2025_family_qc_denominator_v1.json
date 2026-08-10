@@ -1,0 +1,278 @@
+{
+  "schema_version": "p059_hcp_ya2025_family_qc_denominator_v1",
+  "as_of_date": "2026-08-10",
+  "scope": {
+    "included_catalog_problem_ids": [59],
+    "excluded_catalog_problem_ids": [49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 60],
+    "claim": "public_hcp_ya2025_family_qc_and_nuisance_denominator_readiness_only"
+  },
+  "question": "Can a resting-state connectome predict fluid cognition after family structure, head motion, acquisition signatures, and regional anatomy are denied an escape route?",
+  "sources": {
+    "data_releases": {
+      "url": "https://humanconnectome.org/study/hcp-young-adult/data-releases",
+      "format": "html"
+    },
+    "release_2025": {
+      "url": "https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-young-adult-2025-release",
+      "format": "html"
+    },
+    "data_dictionary": {
+      "url": "https://wiki.humanconnectome.org/docs/assets/HCP_S1200_DataDictionary_Oct_30_2023.csv",
+      "format": "csv"
+    },
+    "family_update": {
+      "url": "https://www.humanconnectome.org/study/hcp-young-adult/article/s1200-family-structure-test-retest-interval-updates",
+      "format": "html"
+    },
+    "qc_issues": {
+      "url": "https://wiki.humanconnectome.org/docs/HCP%20Subjects%20with%20Identified%20Quality%20Control%20Issues%20%28QC_Issue%20measure%20codes%20explained%29.html",
+      "format": "html"
+    },
+    "known_issues": {
+      "url": "https://wiki.humanconnectome.org/docs/HCP%20Data%20Release%20Updates%20Known%20Issues%20and%20Planned%20fixes.html",
+      "format": "html"
+    },
+    "data_use_terms": {
+      "url": "https://www.humanconnectome.org/study/hcp-young-adult/data-use-terms",
+      "format": "html"
+    },
+    "restricted_usage": {
+      "url": "https://www.humanconnectome.org/study/hcp-young-adult/document/restricted-data-usage",
+      "format": "html"
+    },
+    "quick_reference": {
+      "url": "https://www.humanconnectome.org/study/hcp-young-adult/document/quick-reference-open-access-vs-restricted-data",
+      "format": "html"
+    },
+    "summary_demographics": {
+      "url": "https://wiki.humanconnectome.org/docs/Summary%20Demographic%20Data%20for%20HCP%20Young%20Adult.html",
+      "format": "html"
+    },
+    "retest_interval": {
+      "url": "https://wiki.humanconnectome.org/docs/Interval%20between%20Test%20and%20Retest%20Visits%20for%20HCP%20Retest%20Subjects.html",
+      "format": "html"
+    },
+    "retest_interval_csv": {
+      "url": "https://wiki.humanconnectome.org/docs/assets/HCP_Test_Retest_Interval_Binned_Months_2017Mar31.csv",
+      "format": "csv"
+    },
+    "balsa_retest": {
+      "url": "https://balsa.wustl.edu/project?project=HCP_Retest",
+      "format": "html"
+    },
+    "mmp_article": {
+      "url": "https://humanconnectome.org/study/hcp-young-adult/article/nature-article-cortical-brain-maps-at-the-highest-resolution-to-date",
+      "format": "html"
+    },
+    "appendix_iii": {
+      "url": "https://humanconnectome.org/storage/app/media/documentation/HCP-YA2025/HCP-YA_2025_Release_Appendix_III.pdf",
+      "format": "pdf"
+    }
+  },
+  "official_release_expectations": {
+    "release_date": "2025-08-11",
+    "processed_subjects": 1071,
+    "unprocessed_imaging_subjects": 1113,
+    "phenotypic_subjects": 1206,
+    "processed_retest_subjects": 45,
+    "release_has_no_new_subjects": true,
+    "required_processing_changes": [
+      "SEBASED bias correction",
+      "Elimination of the regression of movement regressors",
+      "multi-run FIX",
+      "Reclean",
+      "temporal ICA"
+    ],
+    "mix_with_s1200_2017_processing": false
+  },
+  "dictionary_expectations": {
+    "row_count": 813,
+    "columns": [
+      "fullDisplayName",
+      "category",
+      "assessment",
+      "columnHeader",
+      "description"
+    ],
+    "required_fields": [
+      "Subject",
+      "Family_ID",
+      "Mother_ID",
+      "Father_ID",
+      "HasGT",
+      "ZygosityGT",
+      "Gender",
+      "Age",
+      "Age_in_Yrs",
+      "SSAGA_Educ",
+      "TestRetestInterval",
+      "QC_Issue",
+      "fMRI_3T_ReconVrs",
+      "3T_RS-fMRI_PctCompl",
+      "CogFluidComp_Unadj",
+      "CogFluidComp_AgeAdj",
+      "FS_IntraCranial_Vol"
+    ],
+    "family_id_required_description_tokens": [
+      "share at least one parent",
+      "does not indicate that siblings grew up in the same household"
+    ],
+    "endpoint_required_description_tokens": [
+      "Fluid Cognition Composite",
+      "Higher scores indicate higher levels of functioning",
+      "Unadjusted Scale Score"
+    ],
+    "cortical_thickness_field_count": 68
+  },
+  "frozen_manifest": {
+    "subject_key": {
+      "field": "Subject",
+      "role": "join_only_never_a_feature"
+    },
+    "family_group": {
+      "primary_field": "Family_ID",
+      "verification_fields": ["Mother_ID", "Father_ID", "HasGT", "ZygosityGT"],
+      "access": "restricted",
+      "missing_rule": "reject_unresolved_family_group_never_assign_a_synthetic_singleton",
+      "semantic_boundary": "biological sibling grouping does not establish a shared rearing environment"
+    },
+    "endpoint": {
+      "field": "CogFluidComp_Unadj",
+      "label": "NIH Toolbox Fluid Cognition Composite unadjusted scale score",
+      "direction": "higher_is_better",
+      "reason": "Keep age adjustment explicit in the denominator instead of embedding it in the outcome."
+    },
+    "nuisance_only_denominator": {
+      "demographics": ["Age_in_Yrs", "Gender", "SSAGA_Educ"],
+      "motion_per_run": [
+        "Movement_AbsoluteRMS_mean.txt",
+        "Movement_RelativeRMS_mean.txt"
+      ],
+      "motion_summary": [
+        "four_run_availability_mask",
+        "mean_and_max_absolute_rms_across_retained_runs",
+        "mean_and_max_relative_rms_across_retained_runs"
+      ],
+      "acquisition_and_qc": [
+        "fMRI_3T_ReconVrs",
+        "3T_RS-fMRI_PctCompl",
+        "QC_Issue_A",
+        "QC_Issue_B",
+        "QC_Issue_C",
+        "QC_Issue_D",
+        "QC_Issue_E"
+      ],
+      "anatomy": {
+        "intracranial_volume_field": "FS_IntraCranial_Vol",
+        "regional_thickness_rule": "all 68 FS_L_*_Thck and FS_R_*_Thck fields",
+        "regional_thickness_count": 68
+      },
+      "forbidden": [
+        "every functional-connectivity edge",
+        "age-adjusted cognition outcome",
+        "subject identifier",
+        "family identifier",
+        "retest-derived feature",
+        "test-family outcome"
+      ]
+    },
+    "qc_rules": {
+      "primary_exclusions": ["QC_Issue_A", "QC_Issue_B", "QC_Issue_C"],
+      "conditional_inclusions": {
+        "QC_Issue_D": "retain only with the frozen 2025 cleaned rs-fMRI product and retain the D indicator in the denominator",
+        "QC_Issue_E": "retain only with the frozen 2025 cleaned rs-fMRI product and retain the E indicator in the denominator"
+      },
+      "sensitivity": "repeat after excluding every subject carrying any QC_Issue A-E code",
+      "absence_boundary": "absence of a public QC code is not evidence that the subject has no data-quality issue"
+    },
+    "current_roster_rules": {
+      "primary_imaging_requirement": "all four 3T resting-state runs must expose the frozen 2025 cleaned product and both mean motion files",
+      "processed_release_ceiling": 1071,
+      "eligible_count_publicly_known": false,
+      "legacy_2017_session_summary_is_current_roster": false
+    }
+  },
+  "frozen_connectome_candidate": {
+    "input_product": "rfMRI_REST_Atlas_MSMAll_hp2000_clean_rclean_tclean.dtseries.nii",
+    "runs": ["REST1_LR", "REST1_RL", "REST2_LR", "REST2_RL"],
+    "parcellation": "HCP_MMP1.0",
+    "cortical_parcels_per_hemisphere": 180,
+    "total_cortical_parcels": 360,
+    "edge_construction": "average grayordinate time series within each parcel, concatenate retained runs after run-wise demeaning, compute Pearson correlations, and apply Fisher z",
+    "undirected_edge_count": 64620,
+    "candidate_model": "ridge regression over frozen nuisance fields plus all 64,620 edges",
+    "denominator_model": "ridge regression over frozen nuisance fields only",
+    "training_boundary": "all imputation, scaling, motion thresholds, and ridge penalties are fit inside training families only"
+  },
+  "split_and_evaluation_contract": {
+    "primary_partition": {
+      "group": "Family_ID",
+      "algorithm": "u = int(first 16 hex digits of SHA256('P059-v1|' + Family_ID), 16) / 2^64; u < 0.70 train, 0.70 <= u < 0.85 validation, otherwise test",
+      "proportions": [0.70, 0.15, 0.15],
+      "family_crossing_allowed": false
+    },
+    "retest_role": {
+      "exclude_from_primary_prediction": true,
+      "use_for_reliability_only": true,
+      "legacy_public_roster_subjects": 46,
+      "current_processed_release_subjects": 45,
+      "exact_current_crosswalk_publicly_resolved": false,
+      "legacy_month_bin_counts": {
+        "2": 5,
+        "3": 9,
+        "4": 6,
+        "5": 14,
+        "6": 4,
+        "7": 3,
+        "8": 2,
+        "11": 3
+      }
+    },
+    "primary_metric": {
+      "name": "delta_mae",
+      "definition": "MAE(nuisance-only) minus MAE(nuisance-plus-connectome) on untouched test families",
+      "better_direction": "positive",
+      "uncertainty": "95% family-clustered bootstrap interval",
+      "acceptance": "lower interval bound is greater than zero"
+    },
+    "reliability_floor": {
+      "edge_metric": "ICC(2,1) over test and retest edge values",
+      "edge_acceptance": "median edgewise ICC(2,1) is at least 0.40",
+      "identity_free_metric": "within-subject connectome-vector correlation minus the between-subject correlation distribution",
+      "identity_free_acceptance": "family-clustered bootstrap lower bound is greater than zero",
+      "threshold_boundary": "0.40 is a preregistered engineering floor, not a clinical reliability standard"
+    },
+    "motion_matched_replay": {
+      "matching_inputs": "motion, run availability, reconstruction version, and QC fields only; no cognition or connectivity",
+      "acceptance": "delta_mae lower interval bound remains above zero and point estimate remains at least 80% of the primary delta_mae"
+    },
+    "additional_falsifiers": [
+      "The incremental value disappears after family separation.",
+      "The incremental value disappears or degrades by more than 20% under motion-matched replay.",
+      "Median edgewise retest ICC is below 0.40.",
+      "Within-subject connectome similarity does not exceed between-subject similarity.",
+      "Any S1200 2017 processed image is mixed with a 2025 processed image.",
+      "Any family, participant, preprocessing statistic, or outcome crosses the frozen split."
+    ]
+  },
+  "readiness_decision": {
+    "ready_label": "hcp_ya2025_public_contract_ready_execution_blocked_by_registered_data_access_restricted_family_fields_and_current_processed_roster",
+    "blocked_label": "blocked_public_evidence_mismatch",
+    "registered_open_access_available": false,
+    "restricted_family_access_available": false,
+    "current_processed_subject_roster_available": false,
+    "eligible_participant_count_known": false,
+    "model_executed": false,
+    "participant_analysis_executed": false,
+    "cognitive_prediction_claim_ready": false,
+    "causal_cognition_claim_ready": false
+  },
+  "interpretation_boundaries": [
+    "This packet freezes a public field, QC, connectome, split, and nuisance-denominator contract only.",
+    "The 1,071 processed-subject count is a release ceiling, not an eligible four-run family-separated cohort size.",
+    "The public 2017 list of 46 retest subjects must not be substituted for the 45 processed retest subjects in the 2025 release.",
+    "Family_ID represents biological sibling grouping and does not prove a shared rearing environment.",
+    "A positive delta_mae would be incremental prediction, not neural causation, diagnosis, identity inference, or clinical utility.",
+    "No participant row, image, connectome, cognition outcome, model, diagnosis, identity inference, intervention, or solved-frontier claim is produced."
+  ]
+}
