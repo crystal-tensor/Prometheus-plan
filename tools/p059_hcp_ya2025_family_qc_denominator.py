@@ -91,7 +91,9 @@ def normalize_html(payload: bytes) -> bytes:
     soup = BeautifulSoup(payload, "html.parser")
     for tag in soup.find_all(["script", "style", "noscript", "svg", "img", "video", "audio", "canvas", "iframe"]):
         tag.decompose()
-    root = soup.find("main") or soup.body or soup
+    # Several legacy HCP article templates render the article body beside, rather
+    # than inside, the first <main> element. Retain all body-visible text.
+    root = soup.body or soup
     text = "\n".join(root.stripped_strings)
     return (re.sub(r"[ \t]+", " ", text).strip() + "\n").encode("utf-8")
 
@@ -397,7 +399,7 @@ def build_result(
         ),
         check(
             "release_date",
-            contains_all(sources["data_releases"], ["August 11, 2025", "HCP-YA 2025"]),
+            contains_all(sources["data_releases"], ["Aug 11, 2025", "HCP-YA 2025"]),
             "2025 release date recovered from the official release index.",
         ),
         check(
@@ -471,7 +473,20 @@ def build_result(
         ),
         check(
             "qc_codes_and_count",
-            contains_all(qc_text, ["157 subjects", "focal anatomical anomaly", "focal segmentation", "head coil", "manual reclassification"]),
+            contains_all(
+                qc_text,
+                [
+                    "157 subjects",
+                    "Issue code A: Anatomical anomalies",
+                    "Issue code B: Segmentation and Surface QC",
+                    "Issue code C",
+                    "head coil",
+                    "Issue code D",
+                    "prominent artifact",
+                    "Issue code E",
+                    "Manual reclassification",
+                ],
+            ),
             "QC A-E semantics and 157 coded S1200 imaging subjects recovered.",
         ),
         check(
