@@ -1,0 +1,226 @@
+{
+  "schema_version": "p054_itp_endpoint_safety_ontology_v1",
+  "as_of_date": "2026-08-10",
+  "scope": {
+    "included_catalog_problem_ids": [54],
+    "excluded_catalog_problem_ids": [49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60],
+    "claim": "public_itp_endpoint_safety_coverage_only"
+  },
+  "question": "If lifespan moves, what would prove that function improved without merely changing how disease was counted?",
+  "sources": {
+    "nia_about_itp": "https://www.nia.nih.gov/research/dab/interventions-testing-program-itp/about-itp",
+    "nia_application_instructions": "https://www.nia.nih.gov/research/dab/interventions-testing-program-itp/application-instructions",
+    "jax_itp_portal": "https://phenome.jax.org/centers/ITP",
+    "jax_itp_protocol": "https://phenome.jax.org/projects/ITP1/protocol",
+    "jax_acarbose_pathology": "https://phenome.jax.org/itp/othpheno/ACA/pathology/C2013"
+  },
+  "expected_public_portal": {
+    "study_identifier": "ITP1",
+    "study_year_span": "2004-2026",
+    "compound_cohort_rows": 74,
+    "unique_compounds": 62,
+    "unique_cohorts": 17,
+    "survival_links": 74,
+    "rows_with_other_phenotype_links": 22,
+    "other_phenotype_links": 33,
+    "supplementary_workbook_links": 22,
+    "other_phenotype_label_counts": {
+      "body weight": 22,
+      "uterus weight (OVX)": 1,
+      "body composition": 1,
+      "fat pads": 1,
+      "grip strength": 2,
+      "grip duration": 2,
+      "pathology": 1,
+      "postprandial glucose": 1,
+      "rotarod": 2
+    }
+  },
+  "endpoint_ontology": [
+    {
+      "class": "survival_and_censoring",
+      "public_evidence": "One survival-analysis link for every portal compound-cohort row plus the JAX lifespan protocol.",
+      "minimum_executable_fields": [
+        "compound",
+        "dose",
+        "cohort",
+        "site",
+        "sex",
+        "treatment_start_age",
+        "event_or_censor_age",
+        "event_status",
+        "removal_reason"
+      ],
+      "does_not_imply": ["late-life function", "pathology safety", "mechanism", "reversal of aging", "human benefit"]
+    },
+    {
+      "class": "physical_function",
+      "public_evidence": "Portal links labeled grip strength, grip duration, and rotarod.",
+      "minimum_executable_fields": [
+        "assay",
+        "unit",
+        "measurement_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator",
+        "missingness_reason"
+      ],
+      "does_not_imply": ["global healthspan", "pathology safety", "reversal of aging", "human benefit"]
+    },
+    {
+      "class": "physiology_and_body_composition",
+      "public_evidence": "Portal links labeled body weight, body composition, fat pads, postprandial glucose, and uterus weight.",
+      "minimum_executable_fields": [
+        "measure",
+        "unit",
+        "measurement_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator"
+      ],
+      "does_not_imply": ["functional benefit", "pathology safety", "reversal of aging", "human benefit"]
+    },
+    {
+      "class": "pathology_and_tumor",
+      "public_evidence": "One portal pathology link, for acarbose C2013, with sex-specific organ/condition odds ratios.",
+      "minimum_executable_fields": [
+        "organ_or_condition",
+        "lesion_or_tumor_class",
+        "severity",
+        "necropsy_denominator",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "effect_estimate",
+        "multiplicity_rule"
+      ],
+      "does_not_imply": ["causal toxicity", "cause of death", "reversal of aging", "human benefit"]
+    },
+    {
+      "class": "exposure_and_pilot_toxicity",
+      "public_evidence": "NIA describes chow stability, plasma levels, eight-week toxicity, and occasional pharmacodynamic pilot testing; the portal table exposes no per-row pilot-toxicity link.",
+      "minimum_executable_fields": [
+        "compound",
+        "dose",
+        "exposure_or_chow_stability",
+        "pilot_duration",
+        "adverse_sign",
+        "severity",
+        "count",
+        "denominator",
+        "sex",
+        "site",
+        "stopping_rule"
+      ],
+      "does_not_imply": ["long-term safety", "pathology safety", "reversal of aging", "human safety"]
+    },
+    {
+      "class": "humane_removal_and_technical_loss",
+      "public_evidence": "The JAX protocol lists moribund signs and four non-natural-death removal categories.",
+      "minimum_executable_fields": [
+        "mouse_identifier",
+        "date_or_age",
+        "site",
+        "sex",
+        "clinical_signs",
+        "removal_reason",
+        "event_status",
+        "analysis_handling"
+      ],
+      "does_not_imply": ["natural death", "treatment toxicity", "absence of harm"]
+    },
+    {
+      "class": "biochemical_mechanism",
+      "public_evidence": "NIA and JAX describe biochemical mechanism as an expanded Stage II endpoint class, not as a universal portal result.",
+      "minimum_executable_fields": [
+        "frozen_mechanism_hypothesis",
+        "assay",
+        "tissue",
+        "collection_age",
+        "compound",
+        "cohort",
+        "site",
+        "sex",
+        "denominator",
+        "multiplicity_rule"
+      ],
+      "does_not_imply": ["causal mediation", "reversal of aging", "human benefit"]
+    }
+  ],
+  "portal_label_mapping": {
+    "physical_function": ["grip strength", "grip duration", "rotarod"],
+    "physiology_and_body_composition": ["body weight", "uterus weight (OVX)", "body composition", "fat pads", "postprandial glucose"],
+    "pathology_and_tumor": ["pathology"],
+    "exposure_and_pilot_toxicity": []
+  },
+  "humane_endpoint_ontology": {
+    "moribund_signs": [
+      "Severe lethargy, as indicated by reluctance to move when gently prodded with forceps.",
+      "Inability to eat or drink.",
+      "Severe balance or gait disturbance.",
+      "Rapid weight loss over a period of 1 week or more.",
+      "An ulcerated or bleeding tumor."
+    ],
+    "non_natural_death_removal_categories": [
+      "Removed for fighting.",
+      "Removed for humane reasons.",
+      "Removed for physiological or behavioral testing.",
+      "Lost because of a technical mistake or accident."
+    ]
+  },
+  "coverage_gate": {
+    "required_linked_classes": ["survival_and_censoring", "physical_function", "pathology_and_tumor", "exposure_and_pilot_toxicity"],
+    "expected_rows_with_survival_function_pathology": 1,
+    "expected_rows_with_full_linked_gate": 0,
+    "missing_semantics": "A missing portal link means not linked in this public portal snapshot. It must never be recoded as no adverse event, no pathology, no functional decline, or not measured.",
+    "subset_boundary": "The JAX protocol states that MPD houses data for a subset of ITP studies and that more data will be added over time."
+  },
+  "acarbose_c2013_sentinel": {
+    "compound": "acarbose (ACA)",
+    "cohort": "C2013",
+    "expected_other_phenotype_labels": [
+      "body composition",
+      "body weight",
+      "fat pads",
+      "grip strength",
+      "grip duration",
+      "pathology",
+      "postprandial glucose",
+      "rotarod"
+    ],
+    "expected_pathology_conditions": [
+      "Adrenal medullary vasodilation",
+      "Liver degeneration",
+      "Lung tumor",
+      "Renal glomerulosclerosis"
+    ],
+    "expected_pathology_rows": 8,
+    "male_lung_tumor_odds_ratio": 2.851,
+    "male_lung_tumor_p_value": 0.0334,
+    "interpretation_boundary": "This page-level association is a safety sentinel, not a causal toxicity conclusion; multiplicity, necropsy denominators, and analysis-plan context must remain explicit."
+  },
+  "controls": {
+    "positive": "Acarbose C2013 must map to survival, function, physiology, and pathology classes.",
+    "negative": "A compound-cohort row without other-phenotype links must remain missing/not linked, never no harm."
+  },
+  "readiness_decision": {
+    "ontology_ready_label": "endpoint_safety_ontology_ready_public_gate_not_executable",
+    "ontology_blocked_label": "blocked_public_endpoint_mapping_mismatch",
+    "public_gate_executable": false,
+    "animal_experiment_executed": false,
+    "individual_mouse_analysis_executed": false,
+    "supplementary_workbooks_parsed": false,
+    "human_anti_aging_claim_ready": false
+  },
+  "interpretation_boundaries": [
+    "This packet audits public endpoint linkage and safety semantics only.",
+    "Portal-link absence is a data-release/coverage state, not evidence that an endpoint was not measured or that no harm occurred.",
+    "No animal experiment, individual-mouse analysis, compound ranking, efficacy recommendation, or causal toxicity analysis is performed.",
+    "No human anti-aging, dosing, treatment, prevention, safety, clinical, regulatory, rejuvenation, reversal, or solved-frontier claim is made."
+  ]
+}
