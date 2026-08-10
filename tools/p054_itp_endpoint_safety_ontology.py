@@ -158,7 +158,7 @@ def parse_portal(payload: bytes, base_url: str) -> dict[str, Any]:
         if "supplementary file" in anchor.get_text(" ", strip=True)
     ]
     protocol_title = soup.find(
-        lambda tag: tag.name == "h4"
+        lambda tag: tag.name in {"h3", "h4"}
         and "Interventions Testing Program: Effects" in tag.get_text(" ", strip=True)
     )
     title_text = protocol_title.get_text(" ", strip=True) if protocol_title else ""
