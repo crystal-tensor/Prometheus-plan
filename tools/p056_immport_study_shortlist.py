@@ -617,10 +617,8 @@ def build_result(
     checks.append(
         formal_check(
             "safety_boundary_forbids_clinical_control_claims",
-            all(
-                phrase in benchmark["safety_boundary"].casefold()
-                for phrase in ["no dose", "no vaccine", "no treatment recommendation"]
-            ),
+            "no dose, vaccine, immunotherapy, clinical-control, or treatment recommendation"
+            in benchmark["safety_boundary"].casefold(),
             benchmark["safety_boundary"],
         )
     )
