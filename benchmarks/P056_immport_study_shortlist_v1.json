@@ -1,0 +1,250 @@
+{
+  "schema_version": "p056_immport_study_shortlist_v1",
+  "as_of_date": "2026-08-10",
+  "scope": {
+    "included_catalog_problem_ids": [56],
+    "excluded_catalog_problem_ids": [49, 50, 51, 52, 53, 54, 55, 57, 58, 59, 60],
+    "claim": "unauthenticated_immport_study_shortlist_and_completeness_only"
+  },
+  "question": "Can one ImmPort perturbation study support donor-held-out target-state prediction while keeping cytokine, off-target-cell-state, and adverse-event guardrails inside the same donor and study?",
+  "sources": {
+    "docs_search_api": {
+      "url": "https://docs.immport.org/apidocumentation/shareddataapi/search/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "docs_study_api": {
+      "url": "https://docs.immport.org/apidocumentation/shareddataapi/study/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "docs_data_model": {
+      "url": "https://docs.immport.org/datamodel/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "docs_adverse_event": {
+      "url": "https://docs.immport.org/datamodel/adverse_event/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "docs_registration": {
+      "url": "https://docs.immport.org/help/user-registration/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "docs_download": {
+      "url": "https://docs.immport.org/download/",
+      "format": "html",
+      "expected_status": 200
+    },
+    "search_sdy113": {
+      "url": "https://www.immport.org/data/query/api/search/study?term=SDY113&pageSize=10",
+      "format": "json",
+      "expected_status": 200
+    },
+    "search_sdy180": {
+      "url": "https://www.immport.org/data/query/api/search/study?term=SDY180&pageSize=10",
+      "format": "json",
+      "expected_status": 200
+    },
+    "search_sdy1058": {
+      "url": "https://www.immport.org/data/query/api/search/study?term=SDY1058&pageSize=10",
+      "format": "json",
+      "expected_status": 200
+    },
+    "search_sdy1439": {
+      "url": "https://www.immport.org/data/query/api/search/study?term=SDY1439&pageSize=10",
+      "format": "json",
+      "expected_status": 200
+    },
+    "sdy113_demographic": {
+      "url": "https://www.immport.org/data/query/api/study/demographic/SDY113",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy113_biosample": {
+      "url": "https://www.immport.org/data/query/api/study/biosample/SDY113",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy113_intervention": {
+      "url": "https://www.immport.org/data/query/api/study/intervention/SDY113",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy113_planned_visit": {
+      "url": "https://www.immport.org/data/query/api/study/plannedVisit/SDY113",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy113_adverse_event": {
+      "url": "https://www.immport.org/data/query/api/study/adverseEvent/SDY113",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy180_demographic": {
+      "url": "https://www.immport.org/data/query/api/study/demographic/SDY180",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy180_biosample": {
+      "url": "https://www.immport.org/data/query/api/study/biosample/SDY180",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy180_intervention": {
+      "url": "https://www.immport.org/data/query/api/study/intervention/SDY180",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy180_planned_visit": {
+      "url": "https://www.immport.org/data/query/api/study/plannedVisit/SDY180",
+      "format": "json",
+      "expected_status": 401
+    },
+    "sdy180_adverse_event": {
+      "url": "https://www.immport.org/data/query/api/study/adverseEvent/SDY180",
+      "format": "json",
+      "expected_status": 401
+    }
+  },
+  "candidate_contract": [
+    {
+      "study_accession": "SDY113",
+      "role": "shortlist",
+      "expected_title": "Plasmablast response to inactivated and live attenuated influenza vaccines (TIV3/TIV3 ID/LAIV) SLVP021 2011",
+      "expected_clinical_trial": "Y",
+      "expected_species": "Homo sapiens",
+      "expected_minimum_visits": 3,
+      "required_arm_tokens": ["LAIV group", "TIV group", "ID TIV group"],
+      "required_positive_assays": ["Flow Cytometry", "Luminex xMAP"],
+      "expected_release": "DR58",
+      "expected_decision": "shortlisted_access_blocked"
+    },
+    {
+      "study_accession": "SDY180",
+      "role": "shortlist",
+      "expected_title": "Systems scale interactive exploration reveals quantitative and qualitative differences in response to 2009-2010 Fluzone influenza vaccine and pneumococcal vaccine",
+      "expected_clinical_trial": "N",
+      "expected_species": "Homo sapiens",
+      "expected_minimum_visits": 17,
+      "required_arm_tokens": ["Saline", "Pneunomax23", "Fluzone"],
+      "required_positive_assays": ["Flow Cytometry", "Luminex xMAP"],
+      "expected_release": "DR58",
+      "expected_decision": "shortlisted_access_blocked"
+    },
+    {
+      "study_accession": "SDY1058",
+      "role": "screened_reject",
+      "expected_title": "H5N1 Vaccine with and without AS03 adjuvant",
+      "expected_clinical_trial": "Y",
+      "expected_species": "Homo sapiens",
+      "expected_minimum_visits": 12,
+      "required_arm_tokens": ["Vax010_H5N1", "Vax010_H5N1_AS03"],
+      "required_zero_result_assays": ["Flow Cytometry", "CyTOF"],
+      "expected_release": "DR63",
+      "expected_decision": "rejected_zero_cell_state_results"
+    },
+    {
+      "study_accession": "SDY1439",
+      "role": "no_cross_study_safety_anchor",
+      "expected_title": "Adjuvanted influenza-H1N1 vaccination reveals lymphoid signatures of age-dependent early responses and of clinical adverse events.",
+      "expected_clinical_trial": "N",
+      "expected_species": "Homo sapiens",
+      "expected_minimum_visits": 6,
+      "required_absent_assay_methods": ["Flow Cytometry", "CyTOF", "Luminex xMAP", "ELISA"],
+      "expected_release": "DR58",
+      "expected_decision": "near_miss_no_cross_study_borrowing"
+    }
+  ],
+  "documentation_assertions": {
+    "docs_search_api": [
+      "search API is a semi-stable endpoint",
+      "Study Search",
+      "study/download"
+    ],
+    "docs_study_api": [
+      "DO require an authentication/authorization token",
+      "adverseEvent/{StudyAccession}",
+      "demographic/{StudyAccession}",
+      "intervention/{StudyAccession}",
+      "plannedVisit/{SudyAccession}"
+    ],
+    "docs_data_model": [
+      "relational database",
+      "Study Design",
+      "Subject",
+      "Results"
+    ],
+    "docs_adverse_event": [
+      "adverse_event_accession",
+      "causality",
+      "severity",
+      "subject_accession",
+      "relation_to_study_treatment",
+      "start_study_day"
+    ],
+    "docs_registration": [
+      "won't need an ImmPort account to search",
+      "download the study",
+      "need to register for ImmPort access"
+    ],
+    "docs_download": [
+      "Authentication is required to download data from ImmPort",
+      "programmatic access"
+    ]
+  },
+  "required_completeness_dimensions": [
+    {
+      "id": "donor_key",
+      "confirmation_rule": "A stable subject/donor key must link every retained intervention, visit, assay result, and adverse event inside one study; study accession or arm name is not a donor key."
+    },
+    {
+      "id": "intervention_and_dose",
+      "confirmation_rule": "Per-subject intervention identity, route, timing, and dose must be present; public arm labels establish only a contrast and therefore count as partial."
+    },
+    {
+      "id": "baseline_response_link",
+      "confirmation_rule": "The same donor must have an actual baseline and at least one post-intervention response time; a study-level planned-visit count is partial only."
+    },
+    {
+      "id": "target_cell_state",
+      "confirmation_rule": "At least one public Flow Cytometry or CyTOF result count must be positive, and authenticated rows must later support the frozen target phenotype."
+    },
+    {
+      "id": "cytokine_guardrail",
+      "confirmation_rule": "At least one public Luminex xMAP, ELISA, Meso Scale Discovery ECL, or Cytokine Bead Array result count must be positive, and authenticated rows must later support a frozen cytokine panel."
+    },
+    {
+      "id": "off_target_cell_state_guardrail",
+      "confirmation_rule": "At least one public Flow Cytometry or CyTOF result count must be positive, and a phenotype distinct from the target must be frozen before modeling."
+    },
+    {
+      "id": "adverse_event_guardrail",
+      "confirmation_rule": "Subject-linked adverse-event rows, including severity, causality/relation, and study-day timing, must be available in the same study; a title mentioning adverse events is not evidence for another study."
+    }
+  ],
+  "status_vocabulary": {
+    "confirmed_public": "The unauthenticated search snapshot contains positive row-count evidence for this assay layer.",
+    "partial_public_detail_locked": "The public search snapshot establishes study-level structure, but not the required per-subject linkage.",
+    "unavailable_authenticated_detail": "The documented detail endpoint requires authentication and returned HTTP 401 in this capture; unavailable is not absent.",
+    "not_confirmed_zero_result_rows": "The search snapshot names the assay method but reports zero result rows; the layer cannot count as available.",
+    "not_confirmed_method_absent": "The search snapshot does not list a qualifying assay method; this is a public-screening rejection, not proof that no other data exist."
+  },
+  "selection_rule": {
+    "shortlist": ["SDY113", "SDY180"],
+    "screened_reject": ["SDY1058"],
+    "no_cross_study_safety_anchor": ["SDY1439"],
+    "activation_ready_if": "All seven completeness dimensions are confirmed within the same study and donor, with no cross-study borrowing and no cell-level donor leakage.",
+    "model_opening_rule": "Do not open an outcome or fit a model until one candidate has authenticated donor, intervention/dose, actual visit, assay-result, and adverse-event rows and the target/guardrail panels are frozen."
+  },
+  "expected_decision": {
+    "label": "immport_public_shortlist_ready_activation_blocked_by_authenticated_subject_intervention_visit_and_adverse_event_detail",
+    "shortlist": ["SDY113", "SDY180"],
+    "activation_ready": false,
+    "model_opened": false,
+    "cross_study_join_allowed": false
+  },
+  "safety_boundary": "Retrospective metadata and data-readiness research only. No dose, vaccine, immunotherapy, clinical-control, or treatment recommendation; unavailable data never imply safety."
+}
