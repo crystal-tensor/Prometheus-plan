@@ -89,8 +89,13 @@ def fetch_bytes(url: str, attempts: int = 5, timeout: int = 120) -> tuple[bytes,
 
 def normalize_html(payload: bytes) -> bytes:
     soup = BeautifulSoup(payload, "html.parser")
-    for tag in soup.find_all(["script", "style", "noscript", "svg", "img", "video", "audio", "canvas", "iframe"]):
+    for tag in soup.find_all(["script", "style", "noscript"]):
         tag.decompose()
+    # Some legacy HCP pages contain malformed void <img> markup whose parsed
+    # descendants include the article body. Unwrap media tags so visible text
+    # survives instead of decomposing an accidentally nested subtree.
+    for tag in soup.find_all(["svg", "img", "video", "audio", "canvas", "iframe"]):
+        tag.unwrap()
     # Several legacy HCP article templates render the article body beside, rather
     # than inside, the first <main> element. Retain all body-visible text.
     root = soup.body or soup
@@ -399,7 +404,10 @@ def build_result(
         ),
         check(
             "release_date",
-            contains_all(sources["data_releases"], ["Aug 11, 2025", "HCP-YA 2025"]),
+            contains_all(
+                sources["data_releases"],
+                ["Aug 11, 2025", "HCP-Young Adult 2025"],
+            ),
             "2025 release date recovered from the official release index.",
         ),
         check(
