@@ -1,0 +1,249 @@
+{
+  "benchmark": "benchmarks/P056_immport_study_shortlist_v1.json",
+  "benchmark_sha256": "9aa01078adacc359af35d7c159f2bde1382127ef07664debb96c354804b30347",
+  "capture_manifest": "results/P056_immport_study_shortlist_source_v1/capture_manifest.json",
+  "capture_manifest_sha256": "bf794021fb6512f8d3f29a8fd3eda4c7de6b7ce1f06ddf98dd575a14b8a9ca21",
+  "checks": [
+    {
+      "detail": "{'included_catalog_problem_ids': [56], 'excluded_catalog_problem_ids': [49, 50, 51, 52, 53, 54, 55, 57, 58, 59, 60], 'claim': 'unauthenticated_immport_study_shortlist_and_completeness_only'}",
+      "name": "scope_reconstructs_as_only_056",
+      "passed": true
+    },
+    {
+      "detail": "9aa01078adacc359af35d7c159f2bde1382127ef07664debb96c354804b30347",
+      "name": "benchmark_hash_matches_result_and_manifest",
+      "passed": true
+    },
+    {
+      "detail": "bf794021fb6512f8d3f29a8fd3eda4c7de6b7ce1f06ddf98dd575a14b8a9ca21",
+      "name": "capture_manifest_hash_matches_result",
+      "passed": true
+    },
+    {
+      "detail": "20/20 valid",
+      "name": "all_source_files_and_http_statuses_reconstruct",
+      "passed": true
+    },
+    {
+      "detail": "visits=3; assays={'CyTOF': 61, 'ELISA': 60, 'ELISPOT': 60, 'Flow Cytometry': 358, 'Hemagglutination Inhibition': 128, 'Luminex xMAP': 374, 'Transcription profiling by array': 57}",
+      "name": "SDY113_exact_public_record_reconstructs",
+      "passed": true
+    },
+    {
+      "detail": "visits=17; assays={'Flow Cytometry': 2208, 'Hemagglutination Inhibition': 66, 'Luminex xMAP': 229, 'Nanostring': 18, 'Neutralizing Antibody Titer Assay': 27, 'Transcription profiling by array': 703, 'Virus Neutralization': 89}",
+      "name": "SDY180_exact_public_record_reconstructs",
+      "passed": true
+    },
+    {
+      "detail": "visits=12; assays={'CyTOF': 0, 'ELISPOT': 276, 'Flow Cytometry': 0, 'Hemagglutination Inhibition': 190, 'Luminex xMAP': 487, 'Neutralizing Antibody Titer Assay': 950, 'Other': 0, 'Surface Plasmon Resonance': 760, 'Transcription profiling by array': 384}",
+      "name": "SDY1058_exact_public_record_reconstructs",
+      "passed": true
+    },
+    {
+      "detail": "visits=6; assays={'Neutralizing Antibody Titer Assay': 392, 'Transcription profiling by array': 173}",
+      "name": "SDY1439_exact_public_record_reconstructs",
+      "passed": true
+    },
+    {
+      "detail": "{'unavailable_authenticated_detail': 2, 'partial_public_detail_locked': 2, 'confirmed_public': 3}",
+      "name": "SDY113_matrix_has_three_confirmed_two_partial_two_locked",
+      "passed": true
+    },
+    {
+      "detail": "{'unavailable_authenticated_detail': 2, 'partial_public_detail_locked': 2, 'confirmed_public': 3}",
+      "name": "SDY180_matrix_has_three_confirmed_two_partial_two_locked",
+      "passed": true
+    },
+    {
+      "detail": "10/10 HTTP 401",
+      "name": "ten_authenticated_detail_probes_fail_closed_at_401",
+      "passed": true
+    },
+    {
+      "detail": "Assay method names cannot substitute for positive result counts.",
+      "name": "zero_count_candidate_is_rejected_not_promoted",
+      "passed": true
+    },
+    {
+      "detail": "SDY1439 title evidence stays inside SDY1439.",
+      "name": "adverse_event_near_miss_is_not_joined_to_another_study",
+      "passed": true
+    },
+    {
+      "detail": "immport_public_shortlist_ready_activation_blocked_by_authenticated_subject_intervention_visit_and_adverse_event_detail",
+      "name": "final_decision_matches_frozen_benchmark",
+      "passed": true
+    },
+    {
+      "detail": "{'failed': [], 'passed': 30, 'total': 30}",
+      "name": "main_tool_reported_no_failed_formal_checks",
+      "passed": true
+    }
+  ],
+  "independence": "Standard-library JSON/gzip/hash/re parser; does not import the main tool or reuse its candidate, assay-count, matrix, or decision functions.",
+  "reconstructed_candidates": {
+    "SDY1058": {
+      "assay_counts": {
+        "CyTOF": 0,
+        "ELISPOT": 276,
+        "Flow Cytometry": 0,
+        "Hemagglutination Inhibition": 190,
+        "Luminex xMAP": 487,
+        "Neutralizing Antibody Titer Assay": 950,
+        "Other": 0,
+        "Surface Plasmon Resonance": 760,
+        "Transcription profiling by array": 384
+      },
+      "metadata_valid": true,
+      "role": "screened_reject",
+      "visits": 12
+    },
+    "SDY113": {
+      "assay_counts": {
+        "CyTOF": 61,
+        "ELISA": 60,
+        "ELISPOT": 60,
+        "Flow Cytometry": 358,
+        "Hemagglutination Inhibition": 128,
+        "Luminex xMAP": 374,
+        "Transcription profiling by array": 57
+      },
+      "metadata_valid": true,
+      "role": "shortlist",
+      "visits": 3
+    },
+    "SDY1439": {
+      "assay_counts": {
+        "Neutralizing Antibody Titer Assay": 392,
+        "Transcription profiling by array": 173
+      },
+      "metadata_valid": true,
+      "role": "no_cross_study_safety_anchor",
+      "visits": 6
+    },
+    "SDY180": {
+      "assay_counts": {
+        "Flow Cytometry": 2208,
+        "Hemagglutination Inhibition": 66,
+        "Luminex xMAP": 229,
+        "Nanostring": 18,
+        "Neutralizing Antibody Titer Assay": 27,
+        "Transcription profiling by array": 703,
+        "Virus Neutralization": 89
+      },
+      "metadata_valid": true,
+      "role": "shortlist",
+      "visits": 17
+    }
+  },
+  "result": "results/P056_immport_study_shortlist_v1.json",
+  "result_sha256": "e3d610bec69395f0ce5d6b83a44e191151e1e099c17af6c5a293700c3968cd9c",
+  "schema_version": "p056_immport_study_shortlist_independent_audit_v1",
+  "source_rows": [
+    {
+      "name": "docs_search_api",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "docs_study_api",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "docs_data_model",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "docs_adverse_event",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "docs_registration",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "docs_download",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "search_sdy113",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "search_sdy180",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "search_sdy1058",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "search_sdy1439",
+      "status": 200,
+      "valid": true
+    },
+    {
+      "name": "sdy113_demographic",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy113_biosample",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy113_intervention",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy113_planned_visit",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy113_adverse_event",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy180_demographic",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy180_biosample",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy180_intervention",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy180_planned_visit",
+      "status": 401,
+      "valid": true
+    },
+    {
+      "name": "sdy180_adverse_event",
+      "status": 401,
+      "valid": true
+    }
+  ],
+  "summary": {
+    "failed": [],
+    "passed": 15,
+    "total": 15
+  }
+}

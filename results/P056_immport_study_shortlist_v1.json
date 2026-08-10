@@ -1,0 +1,849 @@
+{
+  "as_of_date": "2026-08-10",
+  "benchmark": "benchmarks/P056_immport_study_shortlist_v1.json",
+  "benchmark_sha256": "9aa01078adacc359af35d7c159f2bde1382127ef07664debb96c354804b30347",
+  "candidates": {
+    "SDY1058": {
+      "expected_decision": "rejected_zero_cell_state_results",
+      "observed_decision": "rejected_zero_cell_state_results",
+      "public_metadata": {
+        "actual_enrollment": 50,
+        "arm_accession": [
+          "ARM3709",
+          "ARM3710"
+        ],
+        "arm_name": [
+          "Vax010_H5N1",
+          "Vax010_H5N1_AS03"
+        ],
+        "assay_counts": {
+          "CyTOF": 0,
+          "ELISPOT": 276,
+          "Flow Cytometry": 0,
+          "Hemagglutination Inhibition": 190,
+          "Luminex xMAP": 487,
+          "Neutralizing Antibody Titer Assay": 950,
+          "Other": 0,
+          "Surface Plasmon Resonance": 760,
+          "Transcription profiling by array": 384
+        },
+        "assay_method": [
+          "Neutralizing Antibody Titer Assay",
+          "CyTOF",
+          "Other",
+          "ELISPOT",
+          "Surface Plasmon Resonance",
+          "Flow Cytometry",
+          "Luminex xMAP",
+          "Transcription profiling by array",
+          "Hemagglutination Inhibition"
+        ],
+        "biosample_type": [
+          "Plasma",
+          "PBMC"
+        ],
+        "checks": {
+          "arm_tokens": true,
+          "clinical_trial": true,
+          "minimum_visits": true,
+          "release": true,
+          "species": true,
+          "title": true,
+          "zero_result_assays": true
+        },
+        "clinical_trial": "Y",
+        "doi": "10.21430/M3ZJTOHS45",
+        "has_lab_test": "N",
+        "lab_test_panel_count": [],
+        "latest_data_release_date": "2026-04-30",
+        "latest_data_release_version": "DR63",
+        "planned_visit_total_count": [
+          12
+        ],
+        "species": [
+          "Homo sapiens"
+        ],
+        "study_accession": "SDY1058",
+        "title": "H5N1 Vaccine with and without AS03 adjuvant"
+      },
+      "role": "screened_reject"
+    },
+    "SDY113": {
+      "completeness_matrix": [
+        {
+          "dimension": "donor_key",
+          "evidence": "Study-detail demographic and biosample endpoints returned HTTP 401; study accession and arm accession are not donor keys.",
+          "status": "unavailable_authenticated_detail"
+        },
+        {
+          "dimension": "intervention_and_dose",
+          "evidence": "Public arm labels expose 5 contrasts; the per-subject intervention endpoint returned HTTP 401, so dose/route/timing are not confirmed.",
+          "status": "partial_public_detail_locked"
+        },
+        {
+          "dimension": "baseline_response_link",
+          "evidence": "The directory reports 3 planned visits; the actual planned-visit and subject linkage endpoint returned HTTP 401.",
+          "status": "partial_public_detail_locked"
+        },
+        {
+          "dimension": "target_cell_state",
+          "evidence": "Positive public Flow Cytometry/CyTOF result count.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "cytokine_guardrail",
+          "evidence": "Positive public cytokine-assay result count.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "off_target_cell_state_guardrail",
+          "evidence": "Positive public Flow Cytometry/CyTOF result count; an off-target phenotype still must be frozen after authenticated row access.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "adverse_event_guardrail",
+          "evidence": "The same-study adverse-event endpoint returned HTTP 401; unavailable is not absent and does not imply safety.",
+          "status": "unavailable_authenticated_detail"
+        }
+      ],
+      "expected_decision": "shortlisted_access_blocked",
+      "observed_decision": "shortlisted_access_blocked",
+      "public_metadata": {
+        "actual_enrollment": 70,
+        "arm_accession": [
+          "ARM2233",
+          "ARM2526",
+          "ARM645",
+          "ARM647",
+          "ARM646"
+        ],
+        "arm_name": [
+          "phospho flow_cytometry control samples",
+          "LAIV group",
+          "TIV group",
+          "ID TIV group",
+          "CyTOF-control_2011"
+        ],
+        "assay_counts": {
+          "CyTOF": 61,
+          "ELISA": 60,
+          "ELISPOT": 60,
+          "Flow Cytometry": 358,
+          "Hemagglutination Inhibition": 128,
+          "Luminex xMAP": 374,
+          "Transcription profiling by array": 57
+        },
+        "assay_method": [
+          "CyTOF",
+          "ELISPOT",
+          "ELISA",
+          "Flow Cytometry",
+          "Luminex xMAP",
+          "Transcription profiling by array",
+          "Hemagglutination Inhibition"
+        ],
+        "biosample_type": [
+          "Serum",
+          "Plasma",
+          "PBMC",
+          "Other"
+        ],
+        "checks": {
+          "arm_tokens": true,
+          "clinical_trial": true,
+          "minimum_visits": true,
+          "positive_assays": true,
+          "release": true,
+          "species": true,
+          "title": true
+        },
+        "clinical_trial": "Y",
+        "doi": "10.21430/M3KPFS7KXI",
+        "has_lab_test": "Y",
+        "lab_test_panel_count": [
+          "Immunology Test (22)"
+        ],
+        "latest_data_release_date": "2025-10-30",
+        "latest_data_release_version": "DR58",
+        "planned_visit_total_count": [
+          3
+        ],
+        "species": [
+          "Homo sapiens"
+        ],
+        "study_accession": "SDY113",
+        "title": "Plasmablast response to inactivated and live attenuated influenza vaccines (TIV3/TIV3 ID/LAIV) SLVP021 2011"
+      },
+      "role": "shortlist",
+      "status_counts": {
+        "confirmed_public": 3,
+        "not_confirmed_method_absent": 0,
+        "not_confirmed_zero_result_rows": 0,
+        "partial_public_detail_locked": 2,
+        "unavailable_authenticated_detail": 2
+      }
+    },
+    "SDY1439": {
+      "expected_decision": "near_miss_no_cross_study_borrowing",
+      "observed_decision": "near_miss_no_cross_study_borrowing",
+      "public_metadata": {
+        "actual_enrollment": 196,
+        "arm_accession": [
+          "ARM4772"
+        ],
+        "arm_name": [
+          "HIRD study cohort"
+        ],
+        "assay_counts": {
+          "Neutralizing Antibody Titer Assay": 392,
+          "Transcription profiling by array": 173
+        },
+        "assay_method": [
+          "Transcription profiling by array",
+          "Neutralizing Antibody Titer Assay"
+        ],
+        "biosample_type": [
+          "Serum",
+          "PBMC"
+        ],
+        "checks": {
+          "absent_assay_methods": true,
+          "arm_tokens": true,
+          "clinical_trial": true,
+          "minimum_visits": true,
+          "release": true,
+          "species": true,
+          "title": true
+        },
+        "clinical_trial": "N",
+        "doi": "10.21430/M3LJTCB0M1",
+        "has_lab_test": "N",
+        "lab_test_panel_count": [],
+        "latest_data_release_date": "2025-10-30",
+        "latest_data_release_version": "DR58",
+        "planned_visit_total_count": [
+          6
+        ],
+        "species": [
+          "Homo sapiens"
+        ],
+        "study_accession": "SDY1439",
+        "title": "Adjuvanted influenza-H1N1 vaccination reveals lymphoid signatures of age-dependent early responses and of clinical adverse events."
+      },
+      "role": "no_cross_study_safety_anchor"
+    },
+    "SDY180": {
+      "completeness_matrix": [
+        {
+          "dimension": "donor_key",
+          "evidence": "Study-detail demographic and biosample endpoints returned HTTP 401; study accession and arm accession are not donor keys.",
+          "status": "unavailable_authenticated_detail"
+        },
+        {
+          "dimension": "intervention_and_dose",
+          "evidence": "Public arm labels expose 8 contrasts; the per-subject intervention endpoint returned HTTP 401, so dose/route/timing are not confirmed.",
+          "status": "partial_public_detail_locked"
+        },
+        {
+          "dimension": "baseline_response_link",
+          "evidence": "The directory reports 17 planned visits; the actual planned-visit and subject linkage endpoint returned HTTP 401.",
+          "status": "partial_public_detail_locked"
+        },
+        {
+          "dimension": "target_cell_state",
+          "evidence": "Positive public Flow Cytometry/CyTOF result count.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "cytokine_guardrail",
+          "evidence": "Positive public cytokine-assay result count.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "off_target_cell_state_guardrail",
+          "evidence": "Positive public Flow Cytometry/CyTOF result count; an off-target phenotype still must be frozen after authenticated row access.",
+          "status": "confirmed_public"
+        },
+        {
+          "dimension": "adverse_event_guardrail",
+          "evidence": "The same-study adverse-event endpoint returned HTTP 401; unavailable is not absent and does not imply safety.",
+          "status": "unavailable_authenticated_detail"
+        }
+      ],
+      "expected_decision": "shortlisted_access_blocked",
+      "observed_decision": "shortlisted_access_blocked",
+      "public_metadata": {
+        "actual_enrollment": 46,
+        "arm_accession": [
+          "ARM774",
+          "ARM773",
+          "ARM777",
+          "ARM778",
+          "ARM779",
+          "ARM776",
+          "ARM780",
+          "ARM775"
+        ],
+        "arm_name": [
+          "Study group 2 Saline",
+          "Study group 2 Pneunomax23",
+          "Study group 2 2009-2010 Fluzone",
+          "Study group 3 Pneunomax23",
+          "Study group 1 Saline",
+          "Study group 3 2009-2010 Fluzone",
+          "Study group 1 2009-2010 Fluzone",
+          "Study group 1 Pneunomax23"
+        ],
+        "assay_counts": {
+          "Flow Cytometry": 2208,
+          "Hemagglutination Inhibition": 66,
+          "Luminex xMAP": 229,
+          "Nanostring": 18,
+          "Neutralizing Antibody Titer Assay": 27,
+          "Transcription profiling by array": 703,
+          "Virus Neutralization": 89
+        },
+        "assay_method": [
+          "Neutralizing Antibody Titer Assay",
+          "Nanostring",
+          "Flow Cytometry",
+          "Luminex xMAP",
+          "Transcription profiling by array",
+          "Hemagglutination Inhibition",
+          "Virus Neutralization"
+        ],
+        "biosample_type": [
+          "Serum",
+          "Whole blood",
+          "Protein"
+        ],
+        "checks": {
+          "arm_tokens": true,
+          "clinical_trial": true,
+          "minimum_visits": true,
+          "positive_assays": true,
+          "release": true,
+          "species": true,
+          "title": true
+        },
+        "clinical_trial": "N",
+        "doi": "10.21430/M3I44H8R17",
+        "has_lab_test": "Y",
+        "lab_test_panel_count": [
+          "Blood Cell Count (1836)"
+        ],
+        "latest_data_release_date": "2025-10-30",
+        "latest_data_release_version": "DR58",
+        "planned_visit_total_count": [
+          17
+        ],
+        "species": [
+          "Homo sapiens"
+        ],
+        "study_accession": "SDY180",
+        "title": "Systems scale interactive exploration reveals quantitative and qualitative differences in response to 2009-2010 Fluzone influenza vaccine and pneumococcal vaccine"
+      },
+      "role": "shortlist",
+      "status_counts": {
+        "confirmed_public": 3,
+        "not_confirmed_method_absent": 0,
+        "not_confirmed_zero_result_rows": 0,
+        "partial_public_detail_locked": 2,
+        "unavailable_authenticated_detail": 2
+      }
+    }
+  },
+  "decision": {
+    "activation_ready": false,
+    "cross_study_join_allowed": false,
+    "label": "immport_public_shortlist_ready_activation_blocked_by_authenticated_subject_intervention_visit_and_adverse_event_detail",
+    "model_opened": false,
+    "next_falsifier": "After lawful authenticated access, reconstruct all seven layers for SDY113 first, freeze one target phenotype plus distinct cytokine and off-target panels, and reject the study if any retained donor lacks an intervention/dose, actual baseline-response pair, or adverse-event linkage.",
+    "reason": "Both public shortlist candidates confirm cell-state and cytokine assay layers, but donor keys, per-subject intervention/dose, actual baseline-response links, and subject-linked adverse events are not jointly confirmed.",
+    "shortlist": [
+      "SDY113",
+      "SDY180"
+    ]
+  },
+  "detail_probes": [
+    {
+      "endpoint": "demographic",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy113_demographic",
+      "study_accession": "SDY113"
+    },
+    {
+      "endpoint": "biosample",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy113_biosample",
+      "study_accession": "SDY113"
+    },
+    {
+      "endpoint": "intervention",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy113_intervention",
+      "study_accession": "SDY113"
+    },
+    {
+      "endpoint": "planned_visit",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy113_planned_visit",
+      "study_accession": "SDY113"
+    },
+    {
+      "endpoint": "adverse_event",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy113_adverse_event",
+      "study_accession": "SDY113"
+    },
+    {
+      "endpoint": "demographic",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy180_demographic",
+      "study_accession": "SDY180"
+    },
+    {
+      "endpoint": "biosample",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy180_biosample",
+      "study_accession": "SDY180"
+    },
+    {
+      "endpoint": "intervention",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy180_intervention",
+      "study_accession": "SDY180"
+    },
+    {
+      "endpoint": "planned_visit",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy180_planned_visit",
+      "study_accession": "SDY180"
+    },
+    {
+      "endpoint": "adverse_event",
+      "interpretation": "authenticated detail unavailable in this unauthenticated capture; not evidence of absence or safety",
+      "observed_status": 401,
+      "source_name": "sdy180_adverse_event",
+      "study_accession": "SDY180"
+    }
+  ],
+  "documentation": {
+    "docs_adverse_event": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "adverse_event_accession",
+        "causality",
+        "severity",
+        "subject_accession",
+        "relation_to_study_treatment",
+        "start_study_day"
+      ]
+    },
+    "docs_data_model": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "relational database",
+        "study and its attendant protocols are foundational",
+        "Subject",
+        "Results"
+      ]
+    },
+    "docs_download": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "Authentication is required to download data from ImmPort",
+        "programmatic access"
+      ]
+    },
+    "docs_registration": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "won't need an ImmPort account to search",
+        "download the study",
+        "need to register for ImmPort access"
+      ]
+    },
+    "docs_search_api": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "search API is a semi-stable endpoint",
+        "Study Search",
+        "study/download"
+      ]
+    },
+    "docs_study_api": {
+      "missing_phrases": [],
+      "passed": true,
+      "required_phrases": [
+        "DO require an authentication/authorization token",
+        "adverseEvent/{StudyAccession}",
+        "demographic/{StudyAccession}",
+        "intervention/{StudyAccession}",
+        "plannedVisit/{SudyAccession}"
+      ]
+    }
+  },
+  "formal_check_summary": {
+    "failed": [],
+    "passed": 30,
+    "total": 30
+  },
+  "formal_checks": [
+    {
+      "detail": "{'included_catalog_problem_ids': [56], 'excluded_catalog_problem_ids': [49, 50, 51, 52, 53, 54, 55, 57, 58, 59, 60], 'claim': 'unauthenticated_immport_study_shortlist_and_completeness_only'}",
+      "name": "scope_is_only_catalog_problem_056",
+      "passed": true
+    },
+    {
+      "detail": "Two shortlist candidates, one zero-row reject, and one no-borrow safety near-miss.",
+      "name": "candidate_roles_are_frozen",
+      "passed": true
+    },
+    {
+      "detail": "donor_key, intervention_and_dose, baseline_response_link, target_cell_state, cytokine_guardrail, off_target_cell_state_guardrail, adverse_event_guardrail",
+      "name": "seven_completeness_dimensions_are_frozen",
+      "passed": true
+    },
+    {
+      "detail": "20/20 source rows valid",
+      "name": "source_inventory_and_statuses_are_hash_valid",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_search_api_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_study_api_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_data_model_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_adverse_event_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_registration_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "all phrases present",
+      "name": "docs_download_documents_required_boundary",
+      "passed": true
+    },
+    {
+      "detail": "7/7 metadata checks pass",
+      "name": "SDY113_public_metadata_matches_frozen_contract",
+      "passed": true
+    },
+    {
+      "detail": "{'confirmed_public': 3, 'partial_public_detail_locked': 2, 'unavailable_authenticated_detail': 2, 'not_confirmed_zero_result_rows': 0, 'not_confirmed_method_absent': 0}",
+      "name": "SDY113_seven_layer_matrix_is_fail_closed",
+      "passed": true
+    },
+    {
+      "detail": "7/7 metadata checks pass",
+      "name": "SDY180_public_metadata_matches_frozen_contract",
+      "passed": true
+    },
+    {
+      "detail": "{'confirmed_public': 3, 'partial_public_detail_locked': 2, 'unavailable_authenticated_detail': 2, 'not_confirmed_zero_result_rows': 0, 'not_confirmed_method_absent': 0}",
+      "name": "SDY180_seven_layer_matrix_is_fail_closed",
+      "passed": true
+    },
+    {
+      "detail": "7/7 metadata checks pass",
+      "name": "SDY1058_public_metadata_matches_frozen_contract",
+      "passed": true
+    },
+    {
+      "detail": "Flow Cytometry=0; CyTOF=0",
+      "name": "SDY1058_method_names_do_not_override_zero_result_counts",
+      "passed": true
+    },
+    {
+      "detail": "7/7 metadata checks pass",
+      "name": "SDY1439_public_metadata_matches_frozen_contract",
+      "passed": true
+    },
+    {
+      "detail": "adverse_title=True; qualifying_methods=[]",
+      "name": "SDY1439_adverse_event_title_is_not_borrowed_across_studies",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy113_demographic_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy113_biosample_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy113_intervention_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy113_planned_visit_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy113_adverse_event_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy180_demographic_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy180_biosample_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy180_intervention_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy180_planned_visit_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 401",
+      "name": "sdy180_adverse_event_fails_closed_at_unauthenticated_boundary",
+      "passed": true
+    },
+    {
+      "detail": "immport_public_shortlist_ready_activation_blocked_by_authenticated_subject_intervention_visit_and_adverse_event_detail",
+      "name": "overall_decision_matches_frozen_contract",
+      "passed": true
+    },
+    {
+      "detail": "Retrospective metadata and data-readiness research only. No dose, vaccine, immunotherapy, clinical-control, or treatment recommendation; unavailable data never imply safety.",
+      "name": "safety_boundary_forbids_clinical_control_claims",
+      "passed": true
+    }
+  ],
+  "runtime": {
+    "beautifulsoup4": "4.14.3",
+    "python": "3.12.6",
+    "requests": "2.32.5"
+  },
+  "safety_boundary": "Retrospective metadata and data-readiness research only. No dose, vaccine, immunotherapy, clinical-control, or treatment recommendation; unavailable data never imply safety.",
+  "schema_version": "p056_immport_study_shortlist_result_v1",
+  "source_inventory": [
+    {
+      "expected_status": 200,
+      "gzip_sha256": "eb6efdcaaf10cfc9ce24374c84488a416de609fa151773b4eeb19657e68108da",
+      "name": "docs_search_api",
+      "normalized_sha256": "853eb6f689cbcadb42ed34e04423e3a29a1e801ad54d4099e114c03645e7edcf",
+      "observed_status": 200,
+      "raw_sha256": "591cb487f52847825126b93d048de75f2079d4efaab413d685ceb5430afa5ddd",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "99b05e2e2f0ad35193abbad9aca8b83b50e1e55bc1962d3ce336979dcef284cf",
+      "name": "docs_study_api",
+      "normalized_sha256": "fc658d3f6d6617f03f6f4a0526fd72713eb31610fc68885e19ac112c32ce79c5",
+      "observed_status": 200,
+      "raw_sha256": "20e592134d3ada936120c26e8fc113aeb987f1750df94cf678bf594b17a7177a",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "7fd274dd0f7b39b91198bb7dcac54d414a792eff49fb931fa788a264842edc69",
+      "name": "docs_data_model",
+      "normalized_sha256": "b80f6c2f95bca0969e2aba4b86f2eddb66340769d1142510f3e18f589d0b0c63",
+      "observed_status": 200,
+      "raw_sha256": "71dcf932e9077269633b04b58757d898b917f7d39effedd67c83c505c49d8daa",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "1c042135e6b7d7896448d0fa6f3098b3a296d07d31497233edc9f55a1517addb",
+      "name": "docs_adverse_event",
+      "normalized_sha256": "8a6093f8e5ea0b7035ac6716970115f5f040c2a6fa789369bb055f067c39546a",
+      "observed_status": 200,
+      "raw_sha256": "719acd1860ac1975f11ec761c93d3b65fde8dd3c80dd4a2b63e0aae56211406d",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "abc95f7adb9a98b835d94e7f9f78cf5f78ac0a4696ca4f18ab7ef1eecdb3f7a1",
+      "name": "docs_registration",
+      "normalized_sha256": "a61763d7c22d123cdbde5775931ce40954c000c25c689a4e854c1962e66f466a",
+      "observed_status": 200,
+      "raw_sha256": "b36ce76cc58ab656347903ee937a294bde756f470aaf18173e8511c9b17db239",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "ec896cb9696cffff6e6d957ebecb98911a17826f0db8521b61423c5f8d881e5a",
+      "name": "docs_download",
+      "normalized_sha256": "ee9b122fe286534e9e75111cf77d921cf54f4c5b3f29dcbb4b033e5fcb67b40f",
+      "observed_status": 200,
+      "raw_sha256": "f24a6c1a5cbb329128fca11a76f3cff7d909bab75c97f72443afeae5fb6bf531",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "2191d0b4e2dd6734118fdf43889224cead36e7ad28b0e96b21a95ccff9634df4",
+      "name": "search_sdy113",
+      "normalized_sha256": "d941785982b5dd2a05099a4913b0071d20cb612b92aafa2a0faa2fcceda639a3",
+      "observed_status": 200,
+      "raw_sha256": "dddc7cf2de5836a7c8d0c7a8dfc3df297eddd73bb81e8231179d562a02c87fa1",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "987a8c59e2112ea10501ec6c38509db4795c092aa5baa1f41b3510966b915cbe",
+      "name": "search_sdy180",
+      "normalized_sha256": "09fd60946b685b5abb95d8ad60dbdf5f94fa8d717f3f4d4b7188a5cb40d23fc0",
+      "observed_status": 200,
+      "raw_sha256": "e2fa69bf8fa2981bfefa5b0a17d93cbb7f3703b5f568a6417813df588536a597",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "330256a8e4cffbe219b0a2673fff0ee743615169a4a007e01f5e91c4daeeb3fa",
+      "name": "search_sdy1058",
+      "normalized_sha256": "c3874caf7283890508b0783990918deb0a82d79a3d98f579899471954b165f19",
+      "observed_status": 200,
+      "raw_sha256": "6b0bf4e0bef0ad9c578b989f5a8600f83f7be06fdd844a4ecfd20e2c0b2ac7cc",
+      "valid": true
+    },
+    {
+      "expected_status": 200,
+      "gzip_sha256": "2aa9ea6a484633b1ee93ec3de8066ec43696bda31ff1a8e7df1a1bde1692f993",
+      "name": "search_sdy1439",
+      "normalized_sha256": "d6431abd18a735e3384781f447cf8cfa0d46d9074cfd020a715149614d6d5cca",
+      "observed_status": 200,
+      "raw_sha256": "47ce5c6a7e1216f4e19dceda1076e01dfeec4207019ddd7eef7c777a658533ea",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy113_demographic",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy113_biosample",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy113_intervention",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy113_planned_visit",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy113_adverse_event",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy180_demographic",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy180_biosample",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy180_intervention",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy180_planned_visit",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    },
+    {
+      "expected_status": 401,
+      "gzip_sha256": "1d9b412b8827f602e574070655c5db910d98458fe00d720c0a92c70acfa2217c",
+      "name": "sdy180_adverse_event",
+      "normalized_sha256": "745f7c0bb5a360688a2e4c7313391aee891c59eec1b0ab0d5f22bc10fec84a0d",
+      "observed_status": 401,
+      "raw_sha256": "c6b3a6d3be60de07cf0a7a14ee376f5ca67b06cd84cb47754221763408d6b509",
+      "valid": true
+    }
+  ],
+  "source_manifest": "results/P056_immport_study_shortlist_source_v1/capture_manifest.json",
+  "source_manifest_sha256": "bf794021fb6512f8d3f29a8fd3eda4c7de6b7ce1f06ddf98dd575a14b8a9ca21"
+}
