@@ -1,0 +1,488 @@
+{
+  "as_of_date": "2026-08-10",
+  "decision": "adni_timepoint_leakage_manifest_ready_execution_blocked_by_ida_access_and_family_group",
+  "formal_checks": [
+    {
+      "detail": "Independent audit is restricted to catalog problem #055.",
+      "name": "audit_schema_and_scope",
+      "passed": true
+    },
+    {
+      "detail": "f9c2355da5a1bb1c5f053f404f71a6f263689c787964183259500540d3eb63b8",
+      "name": "benchmark_hash",
+      "passed": true
+    },
+    {
+      "detail": "15/15 sources independently hash-verified.",
+      "name": "source_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Approved IDA access boundary independently recovered.",
+      "name": "access_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Longitudinal, multi-site, observational design independently recovered.",
+      "name": "study_design",
+      "passed": true
+    },
+    {
+      "detail": "Structural participant/site/time fields independently recovered.",
+      "name": "structural_time_fields",
+      "passed": true
+    },
+    {
+      "detail": "18 ordered pTau217-table rows.",
+      "name": "ptau_table",
+      "passed": true
+    },
+    {
+      "detail": "Frozen signature definition and missing code independently recovered.",
+      "name": "signature_field",
+      "passed": true
+    },
+    {
+      "detail": "3 exact TOTAL13 phase rows.",
+      "name": "total13_rows",
+      "passed": true
+    },
+    {
+      "detail": "age=1, sex=4, APOE=1 exact rows.",
+      "name": "baseline_denominator_rows",
+      "passed": true
+    },
+    {
+      "detail": "3 current DXSUM rows; phase harmonization remains required.",
+      "name": "diagnosis_rows",
+      "passed": true
+    },
+    {
+      "detail": "0 exact FAMILYID rows; absence remains an unresolved public state.",
+      "name": "family_unresolved",
+      "passed": true
+    },
+    {
+      "detail": "13 roles reconstructed independently; 12 have public anchors.",
+      "name": "manifest_row_count",
+      "passed": true
+    },
+    {
+      "detail": "{\n  \"eligible_participant_count_known\": false,\n  \"family_separation_executable\": false,\n  \"familyid_exact_dictionary_rows\": 0,\n  \"leakage_sentinels\": 9,\n  \"manifest_rows\": 13,\n  \"model_executable\": false,\n  \"ptau217_dictionary_rows\": 18,\n  \"rows_with_public_anchor\": 12,\n  \"rows_without_public_anchor\": 1,\n  \"site_holdout_executable\": false,\n  \"total13_phase_rows\": 3\n}",
+      "name": "coverage_agreement",
+      "passed": true
+    },
+    {
+      "detail": "Month-24 target and nine ordered leakage sentinels independently recovered.",
+      "name": "time_and_leakage_contract",
+      "passed": true
+    },
+    {
+      "detail": "adni_timepoint_leakage_manifest_ready_execution_blocked_by_ida_access_and_family_group",
+      "name": "decision_and_no_execution",
+      "passed": true
+    }
+  ],
+  "interpretation_boundary": "This independently reconstructs public schema and timepoint readiness only. It does not inspect participant rows or establish cause, diagnosis, or treatment effect.",
+  "observed_coverage": {
+    "eligible_participant_count_known": false,
+    "family_separation_executable": false,
+    "familyid_exact_dictionary_rows": 0,
+    "leakage_sentinels": 9,
+    "manifest_rows": 13,
+    "model_executable": false,
+    "ptau217_dictionary_rows": 18,
+    "rows_with_public_anchor": 12,
+    "rows_without_public_anchor": 1,
+    "site_holdout_executable": false,
+    "total13_phase_rows": 3
+  },
+  "observed_dictionary": {
+    "age_rows": [
+      {
+        "code": "-4",
+        "crf": "Key ADNI tables merged into one table",
+        "definition": "Age at baseline",
+        "phase": "ADNI1",
+        "table": "ADNIMERGE",
+        "term": "AGE"
+      }
+    ],
+    "apoe_rows": [
+      {
+        "code": "N/A",
+        "crf": "ApoE Genotyping - Results",
+        "definition": "Apolipoprotein E (Apo-E) Genotype",
+        "phase": "ADNI1, ADNIGO, ADNI2, ADNI3, ADNI4",
+        "table": "APOERES",
+        "term": "GENOTYPE"
+      }
+    ],
+    "diagnosis_rows": [
+      {
+        "code": "1=CN;2=MCI;3=Dementia",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "ADNI3",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      },
+      {
+        "code": "1=CN; 2=MCI; 3=Dementia",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "ADNI4",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      },
+      {
+        "code": "1=CN; 2=MCI; 3=Dementia; 10=TEAM_NODX",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "TEAM",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      }
+    ],
+    "familyid_exact_rows": [],
+    "ptau217_rows": [
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Study phase",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "PHASE"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Patient ID",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "PTID"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Participant roster ID",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "RID"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Visit code",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "VISCODE"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Translated visit code",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "VISCODE2"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Examination Date",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "EXAMDATE"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta40 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB40_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta42 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB42_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta42/40 ratio measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB42_AB40_F"
+      },
+      {
+        "code": "EDT=Ethylenediaminetetraacetic acid",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Sample Additive Type",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Additive"
+      },
+      {
+        "code": "-4=Insufficient sample; -5=Sample quantity not sufficient",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Glial fibrillary acidic protein measured by Quanterix",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "GFAP_Q"
+      },
+      {
+        "code": "-4=Insufficient sample; -5=Sample quantity not sufficient",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Neurofilament light chain measured by Quanterix",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "NfL_Q"
+      },
+      {
+        "code": "BLD=Blood",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Sample Primary Type",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Primary"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "pTau217 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "pT217_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "pTau217/ABeta42 ratio measured by fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "pT217_AB42_F"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Comment",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Comment"
+      },
+      {
+        "code": "-4=missing value",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Glial fibrillary acidic protein measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "GFAP_F"
+      },
+      {
+        "code": "-4=missing value",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Neurofilament light chain measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "NfL_F"
+      }
+    ],
+    "sex_rows": [
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographic Information",
+        "definition": "1. Participant Gender",
+        "phase": "ADNI1",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. Participant Gender",
+        "phase": "ADNIGO, ADNI2",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male;2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. Participant Gender",
+        "phase": "ADNI3",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. What sex was the participant assigned at birth, on their original birth certificate",
+        "phase": "ADNI4",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      }
+    ],
+    "total13_rows": [
+      {
+        "code": "N/A",
+        "crf": "ADAS-Cognitive Behavior Total Score",
+        "definition": "85 point total includingQ4 (Delayed Word Recall) and Q14 (Number Cancellation).",
+        "phase": "ADNI1",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      },
+      {
+        "code": "N/A",
+        "crf": "ADAS-Cognitive Behavior",
+        "definition": "Total Score (ADAS 13)",
+        "phase": "ADNIGO, ADNI2, ADNI4",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      },
+      {
+        "code": "0..85",
+        "crf": "ADAS-Cognitive Behavior",
+        "definition": "Total Score (ADAS 13)",
+        "phase": "ADNI3",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      }
+    ]
+  },
+  "parser_independence": {
+    "audit_parser": "Python standard-library html.parser state machine",
+    "imports_main_tool": false,
+    "main_parser": "BeautifulSoup HTML parser"
+  },
+  "schema_version": "p055_adni_timepoint_leakage_audit_v1",
+  "scope": {
+    "included_catalog_problem_ids": [
+      55
+    ]
+  },
+  "source": {
+    "benchmark": "benchmarks/P055_adni_timepoint_leakage_manifest_v1.json",
+    "benchmark_sha256": "f9c2355da5a1bb1c5f053f404f71a6f263689c787964183259500540d3eb63b8",
+    "main_result": "results/P055_adni_timepoint_leakage_manifest_v1.json",
+    "main_result_sha256": "5d1ac61b7c9148ee8d2bbe9c66feb987566093703f1f7a46a1ad8ac7a02b131b",
+    "protocol_commit": "548d5fa514218448b9779724d87998fd3e858914",
+    "source_directory": "results/P055_adni_timepoint_leakage_source_v1",
+    "tool": "tools/p055_adni_timepoint_leakage_audit.py"
+  },
+  "source_hashes": [
+    {
+      "gzip_sha256": "322dbe8f8b9cdd9c87213ef167fc0591dc02a4da90becfeeaa217cb1391f8b05",
+      "name": "adni_data_access",
+      "normalized_html_sha256": "a97c4c98f3d65ccfef10b133027983d604f8c82d1897b81d11ea304c5110bfc1",
+      "raw_sha256": "05bea4ec2b61cf4e4427f5b5be0b5a15e225da4498a3643ffdb22b54cb875090",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "b5766c9f95814c199d715c7f87ef2e96c8f9a1693bc14a42cf5ea851336d4f29",
+      "name": "adni_about",
+      "normalized_html_sha256": "8ca99197a2b96c678fd53bac7437d6a417bc190c5abe1951ec9b7afe392377f4",
+      "raw_sha256": "07cd832df228404ecabd7d1461a7de1b03e778bcdd3563f296c7edbf54085aa0",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "0c4a74560dc24f41efaa6b56959c4f5a4865e1950a46d99c16d9c1bcb310d5aa",
+      "name": "adni_anatomy",
+      "normalized_html_sha256": "f31fab9291f8fbdcf9127f9b7b84e808bcb37e05c20d77dce6334be3d3e33465",
+      "raw_sha256": "0971683d421717b503d265d5d57383c56ec22b13901fa3259f3383a518fae7f3",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "88f612acb6cdcad29abfc0954e76ad0870999f7d8688d95521bf7adc9c3333c8",
+      "name": "adni_diagnostic",
+      "normalized_html_sha256": "d2f49bbe597f780098589be3f29861913448442ddb30f07c1b21069f9a5cb796",
+      "raw_sha256": "a1d0d1a8367c7858317c33e22a2d52b306b42bd8cff5ac93fd701697c39795fb",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "8ec74b5e09a092769c872019593924835eb1325579009272821a356b20e72a4e",
+      "name": "adni_clinical",
+      "normalized_html_sha256": "58b1e7228c95bbcb97ca1f02a5d79da04da0db4f5a478e9633d7640569d7a471",
+      "raw_sha256": "566e3004d4bb425c3be446ed854db0b1d27a7790552af754f8e8e9ac76da118d",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "055f99adfb8eb0f24e3022e3b400cfef47405f52fd56eedc3f6945c9bfea90b7",
+      "name": "adni_domain",
+      "normalized_html_sha256": "1a1d50f317f1571da83c34c72e9900562c5b5c9ada9f9a8f159a1dafe3650f4f",
+      "raw_sha256": "959c69bbef820bf195d27ac26a3f4945f7184db1b0d4bdf7923de467bb5d9e24",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "19e3b7fd4fb328f648b9b6b81a4e6d63f17f6cba25087d959783db876da1b2a4",
+      "name": "adni_schedules",
+      "normalized_html_sha256": "fe9657caf2f7f1061f6b732ae96dc5058f1b6354b542db49e352a478736d587c",
+      "raw_sha256": "36b33ad292075f7c651b4aeee65f3b80b2450d8d3fe384b7e5bedfd5966a84d0",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "fb3e253a1e652d8d84417bbc5ab02451cfe346248244a31dd2134801b0d947a5",
+      "name": "adni_faq",
+      "normalized_html_sha256": "a6018955ab12b3d7f923809c33b0c7ec84c14f6c91bf9d14cb042b3a8c7fcd86",
+      "raw_sha256": "835af0cd6da2332ba309db4449ea48b0fefa1f0323e22082e8130d0d52f46c81",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "e98163e8677f6d2a64784f171d5a84c18aac1073572fad7048e15a8f3c966e44",
+      "name": "dictionary_ptau217",
+      "normalized_html_sha256": "ab0c1c6938d174e66f29ecacda73b2b43fcb7895f23cf0938097dc0e5a0a6f32",
+      "raw_sha256": "4ed22cb76fff3a0c09869d0584047a42dc5c3212a8d495f8d06fd4cba3f88ada",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "0648d644992311da881a7e1ca9b990e5c1a10d33b30a7653c64b8b3b81e91844",
+      "name": "dictionary_total13",
+      "normalized_html_sha256": "dcea6c3a8addb24ddd08c3d86568c3818c5d971639e813fa7613b064971b91e7",
+      "raw_sha256": "6a97305826a6a8a6e6b43ef2337a031121a7895293c3883158985567e4fb508e",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "2ea5b1796e242a6f96d46beb7a05b01a0dc15947141130600449a7db9dab949f",
+      "name": "dictionary_age_baseline",
+      "normalized_html_sha256": "1f4929de83685169947da99b119fdc5895847751f2bb402fb5af53352f24f0ab",
+      "raw_sha256": "c34f14068bf4618b3eff80e975dd6290dd3efd5bf986d8f2c3766aec75f95430",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "892362c54ba176c534341802edf5e82eb198521affc79c84228ba2a9117355f7",
+      "name": "dictionary_ptgender",
+      "normalized_html_sha256": "d51e1934b0f32a2271b29a985e1d6be8e654c7245cc76a74aa4cb3ee974a400f",
+      "raw_sha256": "d68be7c4dbef441094e711e16a334ac49b2c05180bd7507e1b377e675c3feef6",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "cbab8217492437915c721f1dc23177a802198be968788fd1e694052fce8ce21c",
+      "name": "dictionary_genotype",
+      "normalized_html_sha256": "9f1801b9dfd2e3d30576d38c4b37a49a5ba3be281e396fb113d61fbf0dccfdf0",
+      "raw_sha256": "2debd49306b85fc9003aae9992fafcabafe637361707155f8c5cc29b9d20f1fb",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "62c738c65275daf0cbf4a5a7c5ba57f8b0f894699409672fc7b42735a1e617d6",
+      "name": "dictionary_diagnosis",
+      "normalized_html_sha256": "e212226c0e08b653b3e9348061be83b09b6e222128cbd3c39d39a17b6e440d96",
+      "raw_sha256": "644b6c6783ccdfee12c4132c22e3760c7c03ee7d4b5e6308a8955fff77dc625b",
+      "valid": true
+    },
+    {
+      "gzip_sha256": "a7ad8a66f5ca45da24d450f51a7744785eb4ff88ef8962b6b3835666df8561d4",
+      "name": "dictionary_familyid",
+      "normalized_html_sha256": "692e0b7b1a9b0902b47dd08b1ad706fd52201976b60732450d574c214cc04396",
+      "raw_sha256": "13dbcef79469831d7de75a5bd1232fd1a308c0172b85d12ea3240ee314cb42f4",
+      "valid": true
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "check_count": 16,
+    "failed_checks": 0,
+    "passed_checks": 16
+  }
+}

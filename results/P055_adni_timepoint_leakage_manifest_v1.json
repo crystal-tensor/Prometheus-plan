@@ -1,0 +1,826 @@
+{
+  "as_of_date": "2026-08-10",
+  "controls": {
+    "negative": {
+      "detail": "Post-index clinical data, administrative timestamps, and VISCODE-only joins remain forbidden.",
+      "passed": true
+    },
+    "positive": {
+      "detail": "Baseline pT217_AB42_F and future TOTAL13 change remain role-separated.",
+      "passed": true
+    }
+  },
+  "coverage": {
+    "eligible_participant_count_known": false,
+    "family_separation_executable": false,
+    "familyid_exact_dictionary_rows": 0,
+    "leakage_sentinels": 9,
+    "manifest_rows": 13,
+    "model_executable": false,
+    "ptau217_dictionary_rows": 18,
+    "rows_with_public_anchor": 12,
+    "rows_without_public_anchor": 1,
+    "site_holdout_executable": false,
+    "total13_phase_rows": 3
+  },
+  "decision": "adni_timepoint_leakage_manifest_ready_execution_blocked_by_ida_access_and_family_group",
+  "dictionary_snapshot": {
+    "age_rows": [
+      {
+        "code": "-4",
+        "crf": "Key ADNI tables merged into one table",
+        "definition": "Age at baseline",
+        "phase": "ADNI1",
+        "table": "ADNIMERGE",
+        "term": "AGE"
+      }
+    ],
+    "apoe_rows": [
+      {
+        "code": "N/A",
+        "crf": "ApoE Genotyping - Results",
+        "definition": "Apolipoprotein E (Apo-E) Genotype",
+        "phase": "ADNI1, ADNIGO, ADNI2, ADNI3, ADNI4",
+        "table": "APOERES",
+        "term": "GENOTYPE"
+      }
+    ],
+    "diagnosis_rows": [
+      {
+        "code": "1=CN;2=MCI;3=Dementia",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "ADNI3",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      },
+      {
+        "code": "1=CN; 2=MCI; 3=Dementia",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "ADNI4",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      },
+      {
+        "code": "1=CN; 2=MCI; 3=Dementia; 10=TEAM_NODX",
+        "crf": "Diagnostic Summary",
+        "definition": "1. Which best describes the participant's current diagnosis?",
+        "phase": "TEAM",
+        "table": "DXSUM",
+        "term": "DIAGNOSIS"
+      }
+    ],
+    "familyid_exact_rows": [],
+    "ptau217_table_rows": [
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Study phase",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "PHASE"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Patient ID",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "PTID"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Participant roster ID",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "RID"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Visit code",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "VISCODE"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Translated visit code",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "VISCODE2"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Examination Date",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "EXAMDATE"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta40 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB40_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta42 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB42_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "ABeta42/40 ratio measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "AB42_AB40_F"
+      },
+      {
+        "code": "EDT=Ethylenediaminetetraacetic acid",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Sample Additive Type",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Additive"
+      },
+      {
+        "code": "-4=Insufficient sample; -5=Sample quantity not sufficient",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Glial fibrillary acidic protein measured by Quanterix",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "GFAP_Q"
+      },
+      {
+        "code": "-4=Insufficient sample; -5=Sample quantity not sufficient",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Neurofilament light chain measured by Quanterix",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "NfL_Q"
+      },
+      {
+        "code": "BLD=Blood",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Sample Primary Type",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Primary"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "pTau217 measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "pT217_F"
+      },
+      {
+        "code": "-4=Insufficient sample",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "pTau217/ABeta42 ratio measured by fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "pT217_AB42_F"
+      },
+      {
+        "code": "N/A",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Comment",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "Comment"
+      },
+      {
+        "code": "-4=missing value",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Glial fibrillary acidic protein measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "GFAP_F"
+      },
+      {
+        "code": "-4=missing value",
+        "crf": "UPENN - Plasma Biomarkers (A?42, A?40, ptau217, NfL, GFAP) measured by Fujirebio & Quanterix [ADNI1,GO,2,3,4]",
+        "definition": "Neurofilament light chain measured by Fujirebio",
+        "phase": "[ADNI1, GO, 2, 3, 4]",
+        "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+        "term": "NfL_F"
+      }
+    ],
+    "sex_rows": [
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographic Information",
+        "definition": "1. Participant Gender",
+        "phase": "ADNI1",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. Participant Gender",
+        "phase": "ADNIGO, ADNI2",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male;2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. Participant Gender",
+        "phase": "ADNI3",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      },
+      {
+        "code": "1=Male; 2=Female",
+        "crf": "Participant Demographics",
+        "definition": "1. What sex was the participant assigned at birth, on their original birth certificate",
+        "phase": "ADNI4",
+        "table": "PTDEMOG",
+        "term": "PTGENDER"
+      }
+    ],
+    "total13_rows": [
+      {
+        "code": "N/A",
+        "crf": "ADAS-Cognitive Behavior Total Score",
+        "definition": "85 point total includingQ4 (Delayed Word Recall) and Q14 (Number Cancellation).",
+        "phase": "ADNI1",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      },
+      {
+        "code": "N/A",
+        "crf": "ADAS-Cognitive Behavior",
+        "definition": "Total Score (ADAS 13)",
+        "phase": "ADNIGO, ADNI2, ADNI4",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      },
+      {
+        "code": "0..85",
+        "crf": "ADAS-Cognitive Behavior",
+        "definition": "Total Score (ADAS 13)",
+        "phase": "ADNI3",
+        "table": "ADAS",
+        "term": "TOTAL13"
+      }
+    ]
+  },
+  "formal_checks": [
+    {
+      "detail": "p055_adni_timepoint_leakage_manifest_v1",
+      "name": "schema_version",
+      "passed": true
+    },
+    {
+      "detail": "Only catalog problem #055 is included.",
+      "name": "scope_only_p055",
+      "passed": true
+    },
+    {
+      "detail": "548d5fa514218448b9779724d87998fd3e858914",
+      "name": "protocol_commit",
+      "passed": true
+    },
+    {
+      "detail": "15/15 normalized official snapshots hash-verified.",
+      "name": "capture_inventory",
+      "passed": true
+    },
+    {
+      "detail": "Public schema is visible, but row-level data require approved IDA access.",
+      "name": "approved_access_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Longitudinal, 60+ site, observational design found.",
+      "name": "longitudinal_multisite_observational",
+      "passed": true
+    },
+    {
+      "detail": "Phase, rollover, and diagnostic-group schedule variation retained.",
+      "name": "schedule_variation",
+      "passed": true
+    },
+    {
+      "detail": "Participant, site, visit-label, and actual-date identifiers found.",
+      "name": "structural_identifiers",
+      "passed": true
+    },
+    {
+      "detail": "Administrative timestamps and record IDs remain forbidden predictors.",
+      "name": "administrative_fields_forbidden",
+      "passed": true
+    },
+    {
+      "detail": "VISCODE-only merges fail closed; actual dates are required.",
+      "name": "viscode_phase_collision",
+      "passed": true
+    },
+    {
+      "detail": "PTID enrollment-site holdout and SITEID sensitivity are kept distinct.",
+      "name": "site_identifier_boundary",
+      "passed": true
+    },
+    {
+      "detail": "18 rows / 18 ordered fields.",
+      "name": "ptau217_table_exact",
+      "passed": true
+    },
+    {
+      "detail": "pT217_AB42_F definition and insufficient-sample code found.",
+      "name": "signature_field_exact",
+      "passed": true
+    },
+    {
+      "detail": "3 exact TOTAL13 rows cover ADNI1-GO-2-3-4.",
+      "name": "total13_phase_coverage",
+      "passed": true
+    },
+    {
+      "detail": "[\n  {\n    \"code\": \"-4\",\n    \"crf\": \"Key ADNI tables merged into one table\",\n    \"definition\": \"Age at baseline\",\n    \"phase\": \"ADNI1\",\n    \"table\": \"ADNIMERGE\",\n    \"term\": \"AGE\"\n  }\n]",
+      "name": "baseline_age_exact",
+      "passed": true
+    },
+    {
+      "detail": "4 PTDEMOG rows cover ADNI1-GO-2-3-4.",
+      "name": "sex_phase_coverage",
+      "passed": true
+    },
+    {
+      "detail": "[\n  {\n    \"code\": \"N/A\",\n    \"crf\": \"ApoE Genotyping - Results\",\n    \"definition\": \"Apolipoprotein E (Apo-E) Genotype\",\n    \"phase\": \"ADNI1, ADNIGO, ADNI2, ADNI3, ADNI4\",\n    \"table\": \"APOERES\",\n    \"term\": \"GENOTYPE\"\n  }\n]",
+      "name": "apoe_phase_coverage",
+      "passed": true
+    },
+    {
+      "detail": "3 current DXSUM dictionary rows; cross-phase harmonization retained.",
+      "name": "diagnosis_current_codes",
+      "passed": true
+    },
+    {
+      "detail": "0 exact FAMILYID public dictionary rows; unresolved is not unrelated.",
+      "name": "family_group_unresolved",
+      "passed": true
+    },
+    {
+      "detail": "ADAS-Cog13 presence across study phases found.",
+      "name": "clinical_instrument_continuity",
+      "passed": true
+    },
+    {
+      "detail": "Public plasma pTau217 and amyloid biomarker anchor found.",
+      "name": "plasma_biomarker_anchor",
+      "passed": true
+    },
+    {
+      "detail": "Table- and phase-specific missingness encodings retained.",
+      "name": "missingness_heterogeneity",
+      "passed": true
+    },
+    {
+      "detail": "CDR cannot independently grade a diagnosis that uses CDR criteria.",
+      "name": "cdr_diagnosis_dependence",
+      "passed": true
+    },
+    {
+      "detail": "Baseline ±90 days; future outcome month 24 within months 18-30.",
+      "name": "time_contract_frozen",
+      "passed": true
+    },
+    {
+      "detail": "Nine ordered post-baseline leakage sentinels retained.",
+      "name": "leakage_sentinels_frozen",
+      "passed": true
+    },
+    {
+      "detail": "Baseline signature and future outcome have non-overlapping roles.",
+      "name": "positive_control",
+      "passed": true
+    },
+    {
+      "detail": "Post-index, administrative, and VISCODE-only leakage routes fail closed.",
+      "name": "negative_control",
+      "passed": true
+    },
+    {
+      "detail": "No row-level access, model, participant analysis, root-cause, or treatment claim.",
+      "name": "execution_and_claim_boundary",
+      "passed": true
+    }
+  ],
+  "frozen_prediction_contract": {
+    "acceptance_rule": "The mechanism signature must improve held-out prediction error with a site-clustered bootstrap interval excluding zero and remain calibrated across prespecified site and sex strata.",
+    "denominator": [
+      {
+        "allowed_role": "baseline_covariate_only",
+        "concept": "age",
+        "definition": "Age at baseline",
+        "field": "AGE",
+        "table": "ADNIMERGE"
+      },
+      {
+        "allowed_role": "baseline_covariate_and_stratum",
+        "concept": "sex",
+        "definition": "Participant gender / sex assigned at birth depending on phase",
+        "field": "PTGENDER",
+        "table": "PTDEMOG"
+      },
+      {
+        "allowed_role": "baseline_covariate_only",
+        "concept": "APOE genotype",
+        "definition": "Apolipoprotein E genotype",
+        "field": "GENOTYPE",
+        "table": "APOERES"
+      },
+      {
+        "allowed_role": "baseline_covariate_only",
+        "concept": "baseline diagnosis",
+        "definition": "Clinical diagnosis at the baseline time point after phase-aware harmonization",
+        "field": "DIAGNOSIS",
+        "table": "DXSUM"
+      },
+      {
+        "allowed_role": "baseline_covariate_and_change_anchor",
+        "concept": "baseline cognition",
+        "definition": "ADAS-Cog13 total score",
+        "field": "TOTAL13",
+        "table": "ADAS"
+      }
+    ],
+    "falsifiers": [
+      "No incremental predictive value remains after the frozen denominator.",
+      "Calibration fails in any prespecified site or sex stratum.",
+      "Any mechanism-signature input is dated after index_date.",
+      "Any participant, site, family, or future time point crosses the train-test boundary.",
+      "The eligible family grouping cannot be lawfully reconstructed before outcomes are opened."
+    ],
+    "mechanism_signature": {
+      "allowed_role": "baseline_feature_only",
+      "definition": "pTau217/ABeta42 ratio measured by Fujirebio",
+      "field": "pT217_AB42_F",
+      "label": "baseline_plasma_ptau217_abeta42_ratio",
+      "missing_code": "-4=Insufficient sample",
+      "required_structural_fields": [
+        "PHASE",
+        "PTID",
+        "RID",
+        "VISCODE",
+        "VISCODE2",
+        "EXAMDATE"
+      ],
+      "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX"
+    },
+    "outcome": {
+      "allowed_month_window": [
+        18,
+        30
+      ],
+      "direction": "Higher change means greater cognitive worsening.",
+      "estimand": "future TOTAL13 minus baseline TOTAL13",
+      "field": "TOTAL13",
+      "label": "future_adas_cog13_change",
+      "selection_rule": "Choose the eligible outcome closest to index_date plus 24 months; break a date-distance tie with the earlier actual assessment date.",
+      "table": "ADAS",
+      "target_month": 24
+    },
+    "primary_metric": "Site-held-out difference in prediction error and calibration for 24-month ADAS-Cog13 change between the frozen denominator and denominator-plus-signature models.",
+    "split_contract": {
+      "bootstrap_cluster": "site with participant nesting; family nesting must be added before execution",
+      "evaluation_strata": [
+        "site",
+        "sex"
+      ],
+      "family_group": "required but unresolved in the public dictionary snapshot",
+      "participant_group": "RID",
+      "primary_site_holdout": "leading three-digit PTID enrollment-site prefix",
+      "procedure_site_sensitivity": "SITEID after phase-aware normalization",
+      "training_rule": "All preprocessing, imputation, feature scaling, and model selection fit inside training sites only."
+    },
+    "time_contract": {
+      "baseline_alignment_window_days": [
+        -90,
+        90
+      ],
+      "clinical_baseline_label": "VISCODE2 == bl",
+      "feature_cutoff": "No feature record with an actual date after index_date is allowed.",
+      "index_date": "The latest actual collection or examination date among all retained baseline covariates and the frozen mechanism signature.",
+      "preferred_actual_date_fields": [
+        "EXAMDATE",
+        "VISDATE",
+        "COLDATE"
+      ],
+      "schedule_label_field": "VISCODE2",
+      "schedule_label_is_not_a_substitute_for_actual_date": true
+    }
+  },
+  "interpretation_boundaries": [
+    "This packet freezes a public variable/timepoint contract and leakage sentinels only.",
+    "Public dictionary presence does not prove row-level completeness, temporal eligibility, assay comparability, or lawful access.",
+    "A missing FAMILYID dictionary match is an unresolved grouping state, not proof that participants are unrelated.",
+    "Prediction beyond a denominator would not establish a neurodegenerative root cause, mediation, treatment effect, diagnosis, or clinical utility.",
+    "No participant data, model training, biomarker thresholding, diagnosis, treatment recommendation, or solved-frontier claim is performed."
+  ],
+  "manifest_rows": [
+    {
+      "concept": "participant group",
+      "field": "RID",
+      "public_anchor": true,
+      "table_or_source": "cross-table structural field",
+      "time_role": "all time points / grouping only"
+    },
+    {
+      "concept": "primary site holdout",
+      "field": "PTID",
+      "public_anchor": true,
+      "table_or_source": "PTID enrollment-site prefix",
+      "time_role": "initial enrollment site / grouping only"
+    },
+    {
+      "concept": "procedure-site sensitivity",
+      "field": "SITEID",
+      "public_anchor": true,
+      "table_or_source": "cross-table structural field",
+      "time_role": "procedure-specific / phase-aware"
+    },
+    {
+      "concept": "schedule label",
+      "field": "VISCODE2",
+      "public_anchor": true,
+      "table_or_source": "cross-table structural field",
+      "time_role": "schedule alignment only"
+    },
+    {
+      "concept": "actual observation date",
+      "field": "EXAMDATE | VISDATE | COLDATE",
+      "public_anchor": true,
+      "table_or_source": "table-specific structural field",
+      "time_role": "index cutoff and horizon"
+    },
+    {
+      "concept": "mechanism signature",
+      "field": "pT217_AB42_F",
+      "public_anchor": true,
+      "table_or_source": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+      "time_role": "baseline feature only"
+    },
+    {
+      "concept": "age",
+      "field": "AGE",
+      "public_anchor": true,
+      "table_or_source": "ADNIMERGE",
+      "time_role": "baseline_covariate_only"
+    },
+    {
+      "concept": "sex",
+      "field": "PTGENDER",
+      "public_anchor": true,
+      "table_or_source": "PTDEMOG",
+      "time_role": "baseline_covariate_and_stratum"
+    },
+    {
+      "concept": "APOE genotype",
+      "field": "GENOTYPE",
+      "public_anchor": true,
+      "table_or_source": "APOERES",
+      "time_role": "baseline_covariate_only"
+    },
+    {
+      "concept": "baseline diagnosis",
+      "field": "DIAGNOSIS",
+      "public_anchor": true,
+      "table_or_source": "DXSUM",
+      "time_role": "baseline_covariate_only"
+    },
+    {
+      "concept": "baseline cognition",
+      "field": "TOTAL13",
+      "public_anchor": true,
+      "table_or_source": "ADAS",
+      "time_role": "baseline_covariate_and_change_anchor"
+    },
+    {
+      "concept": "future outcome",
+      "field": "TOTAL13",
+      "public_anchor": true,
+      "table_or_source": "ADAS",
+      "time_role": "18-30 months after index; target month 24"
+    },
+    {
+      "concept": "family group",
+      "field": "FAMILYID or lawful relatedness cluster",
+      "public_anchor": false,
+      "table_or_source": "unresolved public dictionary state",
+      "time_role": "grouping only"
+    }
+  ],
+  "post_baseline_leakage_sentinels": [
+    {
+      "id": "L01",
+      "rule": "Reject every candidate feature whose actual EXAMDATE, VISDATE, or COLDATE is later than index_date."
+    },
+    {
+      "id": "L02",
+      "rule": "Treat every TOTAL13 after index_date as outcome-only; never use longitudinal ADAS values as predictors."
+    },
+    {
+      "id": "L03",
+      "rule": "Treat post-index DIAGNOSIS, DXCHANGE, DXCURREN, BLCHANGE, CDRSB, MMSE, and FAQ as forbidden predictors."
+    },
+    {
+      "id": "L04",
+      "rule": "Do not use USERDATE, USERDATE2, update_stamp, ID, or record_ID as biological, temporal, or participant features."
+    },
+    {
+      "id": "L05",
+      "rule": "Never join longitudinal tables on VISCODE alone; require RID plus phase-aware time reconciliation and an actual date."
+    },
+    {
+      "id": "L06",
+      "rule": "Do not treat a missing scheduled assessment as random; preserve table- and phase-specific -1, -4, -5, NA, empty, and zero encodings until adjudicated."
+    },
+    {
+      "id": "L07",
+      "rule": "Do not fit imputation, scaling, biomarker thresholds, or feature selection before the acquisition-site split."
+    },
+    {
+      "id": "L08",
+      "rule": "Do not let a rollover participant, duplicate RID, family cluster, or enrollment site occur in both training and holdout partitions."
+    },
+    {
+      "id": "L09",
+      "rule": "Do not use CDR to independently grade a diagnostic outcome without modeling their documented criterion dependence."
+    }
+  ],
+  "question": "Can one baseline plasma pTau217/ABeta42 ratio predict future ADAS-Cog13 change beyond age, sex, APOE, diagnosis, and baseline cognition without using a single post-baseline byte?",
+  "schema_version": "p055_adni_timepoint_leakage_manifest_result_v1",
+  "source": {
+    "benchmark": "benchmarks/P055_adni_timepoint_leakage_manifest_v1.json",
+    "benchmark_sha256": "f9c2355da5a1bb1c5f053f404f71a6f263689c787964183259500540d3eb63b8",
+    "capture_manifest": "results/P055_adni_timepoint_leakage_source_v1/capture_manifest.json",
+    "protocol_commit": "548d5fa514218448b9779724d87998fd3e858914",
+    "python": "3.12.6",
+    "retained_normalized_sources": [
+      {
+        "gzip_sha256": "322dbe8f8b9cdd9c87213ef167fc0591dc02a4da90becfeeaa217cb1391f8b05",
+        "name": "adni_data_access",
+        "normalized_html_sha256": "a97c4c98f3d65ccfef10b133027983d604f8c82d1897b81d11ea304c5110bfc1",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_data_access.html.gz",
+        "raw_sha256": "05bea4ec2b61cf4e4427f5b5be0b5a15e225da4498a3643ffdb22b54cb875090",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/adni-data/",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "b5766c9f95814c199d715c7f87ef2e96c8f9a1693bc14a42cf5ea851336d4f29",
+        "name": "adni_about",
+        "normalized_html_sha256": "8ca99197a2b96c678fd53bac7437d6a417bc190c5abe1951ec9b7afe392377f4",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_about.html.gz",
+        "raw_sha256": "07cd832df228404ecabd7d1461a7de1b03e778bcdd3563f296c7edbf54085aa0",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/about.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "0c4a74560dc24f41efaa6b56959c4f5a4865e1950a46d99c16d9c1bcb310d5aa",
+        "name": "adni_anatomy",
+        "normalized_html_sha256": "f31fab9291f8fbdcf9127f9b7b84e808bcb37e05c20d77dce6334be3d3e33465",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_anatomy.html.gz",
+        "raw_sha256": "0971683d421717b503d265d5d57383c56ec22b13901fa3259f3383a518fae7f3",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/anatomy2.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "88f612acb6cdcad29abfc0954e76ad0870999f7d8688d95521bf7adc9c3333c8",
+        "name": "adni_diagnostic",
+        "normalized_html_sha256": "d2f49bbe597f780098589be3f29861913448442ddb30f07c1b21069f9a5cb796",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_diagnostic.html.gz",
+        "raw_sha256": "a1d0d1a8367c7858317c33e22a2d52b306b42bd8cff5ac93fd701697c39795fb",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/diagnostic.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "8ec74b5e09a092769c872019593924835eb1325579009272821a356b20e72a4e",
+        "name": "adni_clinical",
+        "normalized_html_sha256": "58b1e7228c95bbcb97ca1f02a5d79da04da0db4f5a478e9633d7640569d7a471",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_clinical.html.gz",
+        "raw_sha256": "566e3004d4bb425c3be446ed854db0b1d27a7790552af754f8e8e9ac76da118d",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/clinical.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "055f99adfb8eb0f24e3022e3b400cfef47405f52fd56eedc3f6945c9bfea90b7",
+        "name": "adni_domain",
+        "normalized_html_sha256": "1a1d50f317f1571da83c34c72e9900562c5b5c9ada9f9a8f159a1dafe3650f4f",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_domain.html.gz",
+        "raw_sha256": "959c69bbef820bf195d27ac26a3f4945f7184db1b0d4bdf7923de467bb5d9e24",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/domain.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "19e3b7fd4fb328f648b9b6b81a4e6d63f17f6cba25087d959783db876da1b2a4",
+        "name": "adni_schedules",
+        "normalized_html_sha256": "fe9657caf2f7f1061f6b732ae96dc5058f1b6354b542db49e352a478736d587c",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_schedules.html.gz",
+        "raw_sha256": "36b33ad292075f7c651b4aeee65f3b80b2450d8d3fe384b7e5bedfd5966a84d0",
+        "requested_url": "https://adni.loni.usc.edu/quick-start-guide-asset101625/schedules.html",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "fb3e253a1e652d8d84417bbc5ab02451cfe346248244a31dd2134801b0d947a5",
+        "name": "adni_faq",
+        "normalized_html_sha256": "a6018955ab12b3d7f923809c33b0c7ec84c14f6c91bf9d14cb042b3a8c7fcd86",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/adni_faq.html.gz",
+        "raw_sha256": "835af0cd6da2332ba309db4449ea48b0fefa1f0323e22082e8130d0d52f46c81",
+        "requested_url": "https://adni.loni.usc.edu/help-faqs/faqs/",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "e98163e8677f6d2a64784f171d5a84c18aac1073572fad7048e15a8f3c966e44",
+        "name": "dictionary_ptau217",
+        "normalized_html_sha256": "ab0c1c6938d174e66f29ecacda73b2b43fcb7895f23cf0938097dc0e5a0a6f32",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_ptau217.html.gz",
+        "raw_sha256": "4ed22cb76fff3a0c09869d0584047a42dc5c3212a8d495f8d06fd4cba3f88ada",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=PTAU217",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "0648d644992311da881a7e1ca9b990e5c1a10d33b30a7653c64b8b3b81e91844",
+        "name": "dictionary_total13",
+        "normalized_html_sha256": "dcea6c3a8addb24ddd08c3d86568c3818c5d971639e813fa7613b064971b91e7",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_total13.html.gz",
+        "raw_sha256": "6a97305826a6a8a6e6b43ef2337a031121a7895293c3883158985567e4fb508e",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=TOTAL13",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "2ea5b1796e242a6f96d46beb7a05b01a0dc15947141130600449a7db9dab949f",
+        "name": "dictionary_age_baseline",
+        "normalized_html_sha256": "1f4929de83685169947da99b119fdc5895847751f2bb402fb5af53352f24f0ab",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_age_baseline.html.gz",
+        "raw_sha256": "c34f14068bf4618b3eff80e975dd6290dd3efd5bf986d8f2c3766aec75f95430",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=Age%20at%20baseline",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "892362c54ba176c534341802edf5e82eb198521affc79c84228ba2a9117355f7",
+        "name": "dictionary_ptgender",
+        "normalized_html_sha256": "d51e1934b0f32a2271b29a985e1d6be8e654c7245cc76a74aa4cb3ee974a400f",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_ptgender.html.gz",
+        "raw_sha256": "d68be7c4dbef441094e711e16a334ac49b2c05180bd7507e1b377e675c3feef6",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=PTGENDER",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "cbab8217492437915c721f1dc23177a802198be968788fd1e694052fce8ce21c",
+        "name": "dictionary_genotype",
+        "normalized_html_sha256": "9f1801b9dfd2e3d30576d38c4b37a49a5ba3be281e396fb113d61fbf0dccfdf0",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_genotype.html.gz",
+        "raw_sha256": "2debd49306b85fc9003aae9992fafcabafe637361707155f8c5cc29b9d20f1fb",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=GENOTYPE",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "62c738c65275daf0cbf4a5a7c5ba57f8b0f894699409672fc7b42735a1e617d6",
+        "name": "dictionary_diagnosis",
+        "normalized_html_sha256": "e212226c0e08b653b3e9348061be83b09b6e222128cbd3c39d39a17b6e440d96",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_diagnosis.html.gz",
+        "raw_sha256": "644b6c6783ccdfee12c4132c22e3760c7c03ee7d4b5e6308a8955fff77dc625b",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=DIAGNOSIS",
+        "valid": true
+      },
+      {
+        "gzip_sha256": "a7ad8a66f5ca45da24d450f51a7744785eb4ff88ef8962b6b3835666df8561d4",
+        "name": "dictionary_familyid",
+        "normalized_html_sha256": "692e0b7b1a9b0902b47dd08b1ad706fd52201976b60732450d574c214cc04396",
+        "path": "results/P055_adni_timepoint_leakage_source_v1/dictionary_familyid.html.gz",
+        "raw_sha256": "13dbcef79469831d7de75a5bd1232fd1a308c0172b85d12ea3240ee314cb42f4",
+        "requested_url": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=FAMILYID",
+        "valid": true
+      }
+    ],
+    "source_directory": "results/P055_adni_timepoint_leakage_source_v1",
+    "tool": "tools/p055_adni_timepoint_leakage_manifest.py"
+  },
+  "status": "pass",
+  "summary": {
+    "check_count": 28,
+    "failed_checks": 0,
+    "model_executed": false,
+    "normalized_source_snapshots": 15,
+    "participant_analysis_executed": false,
+    "passed_checks": 28,
+    "root_cause_claim_ready": false,
+    "treatment_effect_claim_ready": false
+  }
+}
