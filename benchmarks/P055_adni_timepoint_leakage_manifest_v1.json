@@ -1,0 +1,237 @@
+{
+  "schema_version": "p055_adni_timepoint_leakage_manifest_v1",
+  "as_of_date": "2026-08-10",
+  "scope": {
+    "included_catalog_problem_ids": [55],
+    "excluded_catalog_problem_ids": [49, 50, 51, 52, 53, 54, 56, 57, 58, 59, 60],
+    "claim": "public_adni_schema_and_timepoint_readiness_only"
+  },
+  "question": "Can one baseline plasma pTau217/ABeta42 ratio predict future ADAS-Cog13 change beyond age, sex, APOE, diagnosis, and baseline cognition without using a single post-baseline byte?",
+  "sources": {
+    "adni_data_access": "https://adni.loni.usc.edu/data-samples/adni-data/",
+    "adni_about": "https://adni.loni.usc.edu/quick-start-guide-asset101625/about.html",
+    "adni_anatomy": "https://adni.loni.usc.edu/quick-start-guide-asset101625/anatomy2.html",
+    "adni_diagnostic": "https://adni.loni.usc.edu/quick-start-guide-asset101625/diagnostic.html",
+    "adni_clinical": "https://adni.loni.usc.edu/quick-start-guide-asset101625/clinical.html",
+    "adni_domain": "https://adni.loni.usc.edu/quick-start-guide-asset101625/domain.html",
+    "adni_schedules": "https://adni.loni.usc.edu/quick-start-guide-asset101625/schedules.html",
+    "adni_faq": "https://adni.loni.usc.edu/help-faqs/faqs/",
+    "dictionary_ptau217": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=PTAU217",
+    "dictionary_total13": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=TOTAL13",
+    "dictionary_age_baseline": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=Age%20at%20baseline",
+    "dictionary_ptgender": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=PTGENDER",
+    "dictionary_genotype": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=GENOTYPE",
+    "dictionary_diagnosis": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=DIAGNOSIS",
+    "dictionary_familyid": "https://adni.loni.usc.edu/data-samples/data-dictionary-search/?q=FAMILYID"
+  },
+  "frozen_prediction_contract": {
+    "mechanism_signature": {
+      "label": "baseline_plasma_ptau217_abeta42_ratio",
+      "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+      "field": "pT217_AB42_F",
+      "definition": "pTau217/ABeta42 ratio measured by Fujirebio",
+      "allowed_role": "baseline_feature_only",
+      "missing_code": "-4=Insufficient sample",
+      "required_structural_fields": [
+        "PHASE",
+        "PTID",
+        "RID",
+        "VISCODE",
+        "VISCODE2",
+        "EXAMDATE"
+      ]
+    },
+    "denominator": [
+      {
+        "concept": "age",
+        "table": "ADNIMERGE",
+        "field": "AGE",
+        "definition": "Age at baseline",
+        "allowed_role": "baseline_covariate_only"
+      },
+      {
+        "concept": "sex",
+        "table": "PTDEMOG",
+        "field": "PTGENDER",
+        "definition": "Participant gender / sex assigned at birth depending on phase",
+        "allowed_role": "baseline_covariate_and_stratum"
+      },
+      {
+        "concept": "APOE genotype",
+        "table": "APOERES",
+        "field": "GENOTYPE",
+        "definition": "Apolipoprotein E genotype",
+        "allowed_role": "baseline_covariate_only"
+      },
+      {
+        "concept": "baseline diagnosis",
+        "table": "DXSUM",
+        "field": "DIAGNOSIS",
+        "definition": "Clinical diagnosis at the baseline time point after phase-aware harmonization",
+        "allowed_role": "baseline_covariate_only"
+      },
+      {
+        "concept": "baseline cognition",
+        "table": "ADAS",
+        "field": "TOTAL13",
+        "definition": "ADAS-Cog13 total score",
+        "allowed_role": "baseline_covariate_and_change_anchor"
+      }
+    ],
+    "outcome": {
+      "label": "future_adas_cog13_change",
+      "table": "ADAS",
+      "field": "TOTAL13",
+      "estimand": "future TOTAL13 minus baseline TOTAL13",
+      "target_month": 24,
+      "allowed_month_window": [18, 30],
+      "selection_rule": "Choose the eligible outcome closest to index_date plus 24 months; break a date-distance tie with the earlier actual assessment date.",
+      "direction": "Higher change means greater cognitive worsening."
+    },
+    "time_contract": {
+      "clinical_baseline_label": "VISCODE2 == bl",
+      "baseline_alignment_window_days": [-90, 90],
+      "index_date": "The latest actual collection or examination date among all retained baseline covariates and the frozen mechanism signature.",
+      "feature_cutoff": "No feature record with an actual date after index_date is allowed.",
+      "preferred_actual_date_fields": ["EXAMDATE", "VISDATE", "COLDATE"],
+      "schedule_label_field": "VISCODE2",
+      "schedule_label_is_not_a_substitute_for_actual_date": true
+    },
+    "split_contract": {
+      "participant_group": "RID",
+      "primary_site_holdout": "leading three-digit PTID enrollment-site prefix",
+      "procedure_site_sensitivity": "SITEID after phase-aware normalization",
+      "family_group": "required but unresolved in the public dictionary snapshot",
+      "training_rule": "All preprocessing, imputation, feature scaling, and model selection fit inside training sites only.",
+      "evaluation_strata": ["site", "sex"],
+      "bootstrap_cluster": "site with participant nesting; family nesting must be added before execution"
+    },
+    "primary_metric": "Site-held-out difference in prediction error and calibration for 24-month ADAS-Cog13 change between the frozen denominator and denominator-plus-signature models.",
+    "acceptance_rule": "The mechanism signature must improve held-out prediction error with a site-clustered bootstrap interval excluding zero and remain calibrated across prespecified site and sex strata.",
+    "falsifiers": [
+      "No incremental predictive value remains after the frozen denominator.",
+      "Calibration fails in any prespecified site or sex stratum.",
+      "Any mechanism-signature input is dated after index_date.",
+      "Any participant, site, family, or future time point crosses the train-test boundary.",
+      "The eligible family grouping cannot be lawfully reconstructed before outcomes are opened."
+    ]
+  },
+  "expected_dictionary": {
+    "ptau217_table": {
+      "table": "UPENN_PLASMA_FUJIREBIO_QUANTERIX",
+      "expected_row_count": 18,
+      "expected_fields": [
+        "PHASE",
+        "PTID",
+        "RID",
+        "VISCODE",
+        "VISCODE2",
+        "EXAMDATE",
+        "AB40_F",
+        "AB42_F",
+        "AB42_AB40_F",
+        "Additive",
+        "GFAP_Q",
+        "NfL_Q",
+        "Primary",
+        "pT217_F",
+        "pT217_AB42_F",
+        "Comment",
+        "GFAP_F",
+        "NfL_F"
+      ],
+      "expected_phase_text": "[ADNI1, GO, 2, 3, 4]"
+    },
+    "total13": {
+      "field": "TOTAL13",
+      "table": "ADAS",
+      "expected_exact_rows": 3,
+      "required_phase_tokens": ["ADNI1", "ADNIGO", "ADNI2", "ADNI3", "ADNI4"]
+    },
+    "age": {
+      "field": "AGE",
+      "table": "ADNIMERGE",
+      "definition": "Age at baseline",
+      "expected_exact_rows": 1
+    },
+    "sex": {
+      "field": "PTGENDER",
+      "table": "PTDEMOG",
+      "expected_exact_rows": 4,
+      "required_phase_tokens": ["ADNI1", "ADNIGO", "ADNI2", "ADNI3", "ADNI4"]
+    },
+    "apoe": {
+      "field": "GENOTYPE",
+      "table": "APOERES",
+      "expected_exact_rows": 1,
+      "required_phase_tokens": ["ADNI1", "ADNIGO", "ADNI2", "ADNI3", "ADNI4"]
+    },
+    "diagnosis": {
+      "field": "DIAGNOSIS",
+      "table": "DXSUM",
+      "required_current_codes": ["1", "2", "3"],
+      "public_phase_harmonization_required": true
+    },
+    "family_id": {
+      "query": "FAMILYID",
+      "expected_exact_rows": 0,
+      "interpretation": "No exact public dictionary match in this snapshot; this does not prove that no lawful relatedness solution exists after approved access."
+    }
+  },
+  "post_baseline_leakage_sentinels": [
+    {
+      "id": "L01",
+      "rule": "Reject every candidate feature whose actual EXAMDATE, VISDATE, or COLDATE is later than index_date."
+    },
+    {
+      "id": "L02",
+      "rule": "Treat every TOTAL13 after index_date as outcome-only; never use longitudinal ADAS values as predictors."
+    },
+    {
+      "id": "L03",
+      "rule": "Treat post-index DIAGNOSIS, DXCHANGE, DXCURREN, BLCHANGE, CDRSB, MMSE, and FAQ as forbidden predictors."
+    },
+    {
+      "id": "L04",
+      "rule": "Do not use USERDATE, USERDATE2, update_stamp, ID, or record_ID as biological, temporal, or participant features."
+    },
+    {
+      "id": "L05",
+      "rule": "Never join longitudinal tables on VISCODE alone; require RID plus phase-aware time reconciliation and an actual date."
+    },
+    {
+      "id": "L06",
+      "rule": "Do not treat a missing scheduled assessment as random; preserve table- and phase-specific -1, -4, -5, NA, empty, and zero encodings until adjudicated."
+    },
+    {
+      "id": "L07",
+      "rule": "Do not fit imputation, scaling, biomarker thresholds, or feature selection before the acquisition-site split."
+    },
+    {
+      "id": "L08",
+      "rule": "Do not let a rollover participant, duplicate RID, family cluster, or enrollment site occur in both training and holdout partitions."
+    },
+    {
+      "id": "L09",
+      "rule": "Do not use CDR to independently grade a diagnostic outcome without modeling their documented criterion dependence."
+    }
+  ],
+  "readiness_decision": {
+    "ready_label": "adni_timepoint_leakage_manifest_ready_execution_blocked_by_ida_access_and_family_group",
+    "blocked_label": "blocked_public_schema_mismatch",
+    "row_level_access_available": false,
+    "eligible_participant_count_known": false,
+    "family_group_resolved": false,
+    "model_executed": false,
+    "participant_analysis_executed": false,
+    "root_cause_claim_ready": false,
+    "treatment_effect_claim_ready": false
+  },
+  "interpretation_boundaries": [
+    "This packet freezes a public variable/timepoint contract and leakage sentinels only.",
+    "Public dictionary presence does not prove row-level completeness, temporal eligibility, assay comparability, or lawful access.",
+    "A missing FAMILYID dictionary match is an unresolved grouping state, not proof that participants are unrelated.",
+    "Prediction beyond a denominator would not establish a neurodegenerative root cause, mediation, treatment effect, diagnosis, or clinical utility.",
+    "No participant data, model training, biomarker thresholding, diagnosis, treatment recommendation, or solved-frontier claim is performed."
+  ]
+}
