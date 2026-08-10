@@ -684,7 +684,7 @@ def render_discussion(result: dict[str, Any]) -> str:
             "",
             "A useful contribution is a falsifiable endpoint rule or public analysis-plan reference, not an assay endorsement or patient recommendation.",
             "",
-            f"Reproducibility: {checks['passed_checks']}/{checks['check_count']} formal checks; an independent endpoint replay is required. No participant data, assay comparison, medical recommendation, treatment selection, cure, regulatory, or solved-frontier claim is made.",
+            f"Reproducibility: {checks['passed_checks']}/{checks['check_count']} formal checks; a paired independent endpoint replay is included separately. No participant data, assay comparison, medical recommendation, treatment selection, cure, regulatory, or solved-frontier claim is made.",
             "",
         ]
     )
