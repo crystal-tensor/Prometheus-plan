@@ -327,6 +327,15 @@ points, preserves all four cross-prime monomial supports, and passes
 non-unique partial CRT state. Ten primes and 40 artifacts remain; the next
 shard is prime `536,870,839`.
 
+T-B9-015k executes the fifth added prime `536,870,839`. All four determinants
+complete, moving the new-artifact ledger to `20/56`. The verifier binds all 28
+artifacts across seven primes, matches `140/140` public matrix-determinant
+points, preserves all four cross-prime monomial supports, and passes
+`481,740/481,740` coefficient-slot modular round trips. The partial modulus is
+194 bits versus the 427-bit uniqueness threshold, so the replay remains a
+non-unique partial CRT state. Nine primes and 36 artifacts remain; the next
+shard is prime `536,870,837`.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**
