@@ -1,0 +1,213 @@
+{
+  "adjudication_type": "post_result_integration_gate_not_preregistered",
+  "claim_boundary": {
+    "accepted": [
+      "finite_31_axis_projective_catalog_full_rank_at_n6_n8_n10_for_two_frozen_couplings",
+      "independent_dual_prime_reproduction_of_all_186_declared_rows"
+    ],
+    "continuous_two_parameter_certificate": false,
+    "gauge_equivalence_proved_for_all_sizes_and_primes": false,
+    "new_credit_delta": 0,
+    "not_established": [
+      "continuous_two_dimensional_bloch_sphere_exclusion",
+      "all_bloch_sphere_frame_exclusion",
+      "irrational_axis_exclusion",
+      "all_bloch_sphere_fermionization_exclusion",
+      "nonlinear_frame_mixture_exclusion",
+      "higher_order_majorana_charge_exclusion",
+      "nonlocal_duality_exclusion",
+      "interacting_integrability_exclusion",
+      "complete_integrability_exclusion",
+      "nonintegrability_theorem",
+      "quantum_chaos_theorem",
+      "spectral_hardness_theorem",
+      "quantum_pcp_theorem",
+      "nlts_theorem",
+      "bqp_separation",
+      "hardware_relevance",
+      "solved_frontier"
+    ],
+    "scientific_promotion_accepted": false,
+    "shared_catalog_formula_risk_eliminated": false
+  },
+  "experiment_id": "B9-R200-post-result-integrated-adjudication",
+  "method": "b9_r200_integrated_adjudication_v1",
+  "next_gate": "Build an exact continuous two-parameter projective-patch certificate at n=4, then promote to n=5 only after the n=4 complex or real projective rank-drop set is resolved.",
+  "payload_sha256": "f66228aebf536d0ee3fe34a5b1b6d2ef80c31d3dddbb0387154deb95767b168a",
+  "public_history": {
+    "checked": true,
+    "expected_repository": "crystal-tensor/Prometheus-plan",
+    "fetch_returncode": 0,
+    "preregistration_commit": "ccc8f69dbba15390b96918eb55282122cfbaf824",
+    "preregistration_is_ancestor_of_remote_main": true,
+    "remote_main_commit": "ccc8f69dbba15390b96918eb55282122cfbaf824",
+    "remote_url": "https://github.com/crystal-tensor/Prometheus-plan.git"
+  },
+  "requirements": [
+    {
+      "evidence": {
+        "recorded_payload_sha256": "e96959bd881d88a114bd5f80ff4dfdac2a5623473cc398594746b5c6d4f4da9e",
+        "recorded_protocol_sha256": "c0e26511769afbd95b3bd75a2ab859b9d3e384af1afb057252f31a94173b28ba",
+        "round_trip_sha256": "e96959bd881d88a114bd5f80ff4dfdac2a5623473cc398594746b5c6d4f4da9e"
+      },
+      "label": "The main result survives canonical JSON round-trip verification",
+      "passed": true,
+      "requirement_id": "A1"
+    },
+    {
+      "evidence": {
+        "contract_sha256": "a1208296eeaf56ed7bf51ed740b51931b7e1067cdb53d2e5e6e0d931aca356c0",
+        "expected_contract_sha256": "a1208296eeaf56ed7bf51ed740b51931b7e1067cdb53d2e5e6e0d931aca356c0"
+      },
+      "label": "The published contract and protocol retain their frozen digests",
+      "passed": true,
+      "requirement_id": "A2"
+    },
+    {
+      "evidence": {
+        "checked": true,
+        "expected_repository": "crystal-tensor/Prometheus-plan",
+        "fetch_returncode": 0,
+        "preregistration_commit": "ccc8f69dbba15390b96918eb55282122cfbaf824",
+        "preregistration_is_ancestor_of_remote_main": true,
+        "remote_main_commit": "ccc8f69dbba15390b96918eb55282122cfbaf824",
+        "remote_url": "https://github.com/crystal-tensor/Prometheus-plan.git"
+      },
+      "label": "The preregistration commit is present in the fetched public main history",
+      "passed": true,
+      "requirement_id": "A3"
+    },
+    {
+      "evidence": {
+        "atlas_row_count": 82,
+        "atlas_sha256": "b168b38442f85cd7a485e6e1ea2332fab1fa994e7c13956c405384e31f59cd47",
+        "checked": true,
+        "failure_count": 0,
+        "failures": [],
+        "opposite_representative_count": 15,
+        "projective_row_count": 31,
+        "projective_sha256": "f64e2e63f922d691bdeef5fdf58b2e90207afe3b775d55dafc713e19b7705a2f"
+      },
+      "label": "Atlas and projective metadata pass exact algebra and gauge checks",
+      "passed": true,
+      "requirement_id": "A4"
+    },
+    {
+      "evidence": {
+        "audit_row_count": 186,
+        "checked": true,
+        "cross_implementation_failure_count": 0,
+        "cross_implementation_failures": [],
+        "duplicate_count": 0,
+        "expected_grid_keys_sha256": "29e7360a5411dad01aa7e96a8920be46cd05444e5fdc88b56d3ba621a6a11cdd",
+        "extra": [],
+        "extra_count": 0,
+        "main_row_count": 186,
+        "metadata_failure_count": 0,
+        "metadata_failures": [],
+        "missing": [],
+        "missing_count": 0,
+        "unique_main_row_count": 186
+      },
+      "label": "All 186 grid rows have exact keys, metadata, and cross-implementation hashes",
+      "passed": true,
+      "requirement_id": "A5"
+    },
+    {
+      "evidence": {
+        "error_count": 0,
+        "full_rank_row_count": 186,
+        "grid_shape": {
+          "duplicate_count": 0,
+          "extra_count": 0,
+          "missing_count": 0
+        },
+        "rebuilt_row_count": 186,
+        "status": "pass"
+      },
+      "label": "The frozen independent dual-prime audit passes without errors",
+      "passed": true,
+      "requirement_id": "A6"
+    },
+    {
+      "evidence": {
+        "commutator_ranks": {
+          "1000003": 42,
+          "1000033": 42
+        },
+        "nullities": {
+          "1000003": 37,
+          "1000033": 37
+        },
+        "onsite_witness_count": 6,
+        "operator_ranks": {
+          "1000003": 79,
+          "1000033": 79
+        }
+      },
+      "label": "The positive control recovers the declared ranks and six onsite charges",
+      "passed": true,
+      "requirement_id": "A7"
+    },
+    {
+      "evidence": {
+        "forbidden_claim_count": 17,
+        "main_requirement_count": 13,
+        "main_requirement_pass_count": 13,
+        "new_credit_delta": 0,
+        "scientific_promotion_accepted": false
+      },
+      "label": "Every main gate passes while broad scientific promotion remains disabled",
+      "passed": true,
+      "requirement_id": "A8"
+    },
+    {
+      "evidence": {
+        "audit_primes": [
+          1000037,
+          1000081
+        ],
+        "main_primes": [
+          1000003,
+          1000033
+        ]
+      },
+      "label": "All four modular rank fields use distinct verified primes",
+      "passed": true,
+      "requirement_id": "A9"
+    },
+    {
+      "evidence": {
+        "python": "3.12.6",
+        "sympy": "1.14.0"
+      },
+      "label": "The required Python and SymPy runtime versions are recorded",
+      "passed": true,
+      "requirement_id": "A10"
+    }
+  ],
+  "runtime_versions": {
+    "python": "3.12.6",
+    "sympy": "1.14.0"
+  },
+  "source_artifacts": {
+    "contract": "benchmarks/B9_R200_bloch_atlas_contract_v0.json",
+    "contract_sha256": "a1208296eeaf56ed7bf51ed740b51931b7e1067cdb53d2e5e6e0d931aca356c0",
+    "independent_audit": "results/B9_R200_independent_audit_v1.json",
+    "independent_audit_file_sha256": "1b747e849dbcb081425092c79107960bf95f4d2b7dd10be58739b93e3d406efa",
+    "main_payload_sha256": "e96959bd881d88a114bd5f80ff4dfdac2a5623473cc398594746b5c6d4f4da9e",
+    "main_result": "results/B9_R200_bloch_atlas_stress_v1.json",
+    "main_result_file_sha256": "7261de464a9702aa30749fa71d6dcdbfedcf3dcfc33cc3c8047f45cc38f4920c"
+  },
+  "status": "independently_reproduced_finite_projective_rational_atlas_boundary",
+  "summary": {
+    "independent_error_count": 0,
+    "independent_full_rank_rows": 186,
+    "main_full_rank_rows": 186,
+    "opposite_representative_count": 15,
+    "projective_axis_count": 31,
+    "requirement_count": 10,
+    "requirement_pass_count": 10
+  },
+  "version": "0.1.0"
+}

@@ -397,28 +397,36 @@ adversary must use a new public freeze for a second independent meridian, a
 two-parameter Bloch-sphere patch, quartic Majorana charges, or an explicit
 nonlocal duality.
 
-R200 is now publicly preregistered but has not opened its frozen holdouts. It
-replaces duplicated directed-frame counting with 31 unique rational
-projective parity axes. The future acceptance surface contains unseen
-`J=109/128,113/128`, sizes `n=6,8,10`, and 186 exact grid rows. Eighty-two
-north/south directed frames remain engineering sentinels: exact frame algebra
-passes `82/82`, directed overlap subspaces pass `20/20`, and projective gauge
-subspaces pass `31/31` at `n=4`.
+R200 has now completed the public execution frozen at commit `ccc8f69d...`.
+It replaces duplicated directed-frame counting with 31 unique rational
+projective parity axes and opens the preregistered `J=109/128,113/128`
+holdouts only after publication. Across `n=6,8,10`, all `186/186` exact grid
+rows have full candidate-column rank under primes `1,000,003` and
+`1,000,033`. The largest row has 211 candidate columns and 3,019,797
+commutator nonzeros. All `13/13` main gates pass; protocol
+`c0e26511...`; result payload `e96959bd...`.
 
-The engineering-only `J=13/32` probe contributes zero acceptance decisions.
-Its four `n=6` rows have full column rank, and an independently implemented
-symplectic-bit oracle reproduces all four operator and commutator digests. The
-`J=0,n=6` positive control recovers operator rank 79, commutator rank 42,
-nullity 37, and all six onsite `A=(-4X+3Z)/5` charges. The independent audit
-tool is frozen in the same preregistration commit and seals all 186 expected
-grid keys before it may read the source result.
+A frozen, non-importing sparse symplectic-bit implementation independently
+rebuilds every row under primes `1,000,037` and `1,000,081`. It obtains full
+rank on `186/186` rows with zero missing, extra, duplicate, hash-mismatch, or
+rank-failure rows. The source payload survives a plain JSON round trip. A
+post-result integration gate then checks public-history ancestry, contract and
+protocol digests, all row metadata, projective gauge representatives, cross-
+implementation matrix hashes, all four primes, the positive control, claim
+boundaries, and Python/SymPy versions; it passes `10/10`. The `J=0,n=6`
+control recovers operator rank 79, commutator rank 42, nullity 37, and all six
+onsite `A=(-4X+3Z)/5` charges.
 
-R200 is a finite rational projective-grid stress, not a continuous
-two-dimensional Bloch-sphere certificate. Irrational axes, nonlinear frame
-mixtures, higher-order Majorana charges, nonlocal dualities, interacting
-integrability, nonintegrability, chaos, hardness, Quantum PCP, NLTS, BQP,
-hardware relevance, and solved-frontier status remain open. Frozen holdouts
-executed is false, scientific promotion is false, and new credit remains zero.
+R200 is an independently reproduced finite rational projective-grid boundary,
+not a continuous two-dimensional Bloch-sphere certificate. Both
+implementations still share the declared atlas formulas, and finite `n=4`
+gauge sentinels do not establish a global frame theorem. Irrational axes,
+nonlinear frame mixtures, higher-order Majorana charges, nonlocal dualities,
+interacting integrability, nonintegrability, chaos, hardness, Quantum PCP,
+NLTS, BQP, hardware relevance, and solved-frontier status remain open.
+Scientific promotion is false and new credit remains zero. The next gate is
+an exact continuous two-parameter projective-patch certificate at `n=4`, with
+`n=5` allowed only after the `n=4` complex or real rank-drop set is resolved.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

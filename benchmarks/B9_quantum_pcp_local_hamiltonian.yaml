@@ -1000,7 +1000,7 @@ current_results:
     independent_audit: ../results/B9_R199_independent_audit_v1.json
     markdown_report: ../research/B9_R199_ay_meridian_stress.md
   r200_bloch_atlas_preregistration_v0:
-    status: publicly_preregistered_execution_pending
+    status: independently_reproduced_finite_projective_rational_atlas_boundary
     method: b9_r200_bloch_atlas_stress_v1
     source: r199_ay_meridian_stress_v1
     experiment_id: B9-R200-finite-projective-rational-bloch-atlas-stress
@@ -1015,6 +1015,14 @@ current_results:
     r198_dependency_sha256: c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13
     requirements_sha256: b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88
     engineering_probe_sha256: ff131a74ea5dad85e6aad5b491a1cfa0d1d71790042804246c22dff852aad9a5
+    preregistration_commit: ccc8f69dbba15390b96918eb55282122cfbaf824
+    protocol_sha256: c0e26511769afbd95b3bd75a2ab859b9d3e384af1afb057252f31a94173b28ba
+    result_payload_sha256: e96959bd881d88a114bd5f80ff4dfdac2a5623473cc398594746b5c6d4f4da9e
+    result_file_sha256: 7261de464a9702aa30749fa71d6dcdbfedcf3dcfc33cc3c8047f45cc38f4920c
+    independent_audit_file_sha256: 1b747e849dbcb081425092c79107960bf95f4d2b7dd10be58739b93e3d406efa
+    integrated_adjudication_payload_sha256: f66228aebf536d0ee3fe34a5b1b6d2ef80c31d3dddbb0387154deb95767b168a
+    integrated_adjudication_file_sha256: 6a2d4e0d9828fca5a887adcb918db67d8f93c489b2e82b7ba2894cda31f76381
+    integrated_adjudication_tool_sha256: f8ed4f02b7261dbb21d8c8b5615d6b3e1db217178f73383d87569ff5f1ad1c16
     frozen_holdout_couplings:
       - 109/128
       - 113/128
@@ -1041,10 +1049,22 @@ current_results:
     positive_control_commutator_rank: 42
     positive_control_nullity: 37
     positive_control_onsite_witness_count: 6
-    frozen_holdouts_executed: false
-    frozen_acceptance_count: 0
-    independent_audit_source_result_read: false
+    frozen_holdouts_executed: true
+    frozen_acceptance_count: 186
+    main_full_rank_grid_count: 186
+    main_requirement_pass_count: 13
+    main_requirement_count: 13
+    independent_audit_source_result_read: true
     independent_audit_pre_source_seal_complete: true
+    independent_audit_full_rank_grid_count: 186
+    independent_audit_error_count: 0
+    independent_grid_missing_count: 0
+    independent_grid_extra_count: 0
+    independent_grid_duplicate_count: 0
+    integrated_adjudication_pass_count: 10
+    integrated_adjudication_requirement_count: 10
+    shared_catalog_formula_risk_eliminated: false
+    gauge_equivalence_proved_for_all_sizes_and_primes: false
     continuous_two_dimensional_bloch_sphere_exclusion: false
     all_bloch_sphere_frame_exclusion: false
     all_bloch_sphere_fermionization_exclusion: false
@@ -1068,6 +1088,11 @@ current_results:
     engineering_probe: ../results/B9_R200_engineering_probe_v0.json
     independent_audit_seal: ../results/B9_R200_independent_audit_seal_v0.json
     markdown_preregistration: ../research/B9_R200_bloch_atlas_preregistration.md
+    result: ../results/B9_R200_bloch_atlas_stress_v1.json
+    independent_audit: ../results/B9_R200_independent_audit_v1.json
+    integrated_adjudication: ../results/B9_R200_integrated_adjudication_v1.json
+    markdown_report: ../research/B9_R200_bloch_atlas_stress.md
+    integrated_adjudication_report: ../research/B9_R200_integrated_adjudication.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1102,4 +1127,6 @@ current_results:
   r199_ay_meridian_stress: ../tools/b9_r199_ay_meridian_stress.py
   r199_independent_audit: ../tools/b9_r199_independent_audit.py
   r200_bloch_atlas_stress: ../tools/b9_r200_bloch_atlas_stress.py
+  r200_independent_audit: ../tools/b9_r200_independent_audit.py
+  r200_integrated_adjudication: ../tools/b9_r200_integrated_adjudication.py
   prototype_notes: ../research/B9_prototype_notes.md

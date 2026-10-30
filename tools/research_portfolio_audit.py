@@ -5241,6 +5241,171 @@ def audit_b9_r199(
     return status
 
 
+def audit_b9_r200_completed(
+    root: Path,
+    manifest_entry: dict,
+    errors: list[str],
+) -> dict:
+    """Verify the completed R200 run, independent rebuild, and integration gate."""
+
+    expected = {
+        "protocol_sha256": "c0e26511769afbd95b3bd75a2ab859b9d3e384af1afb057252f31a94173b28ba",
+        "result_payload_sha256": "e96959bd881d88a114bd5f80ff4dfdac2a5623473cc398594746b5c6d4f4da9e",
+        "result_file_sha256": "7261de464a9702aa30749fa71d6dcdbfedcf3dcfc33cc3c8047f45cc38f4920c",
+        "independent_audit_file_sha256": "1b747e849dbcb081425092c79107960bf95f4d2b7dd10be58739b93e3d406efa",
+        "integrated_adjudication_payload_sha256": "f66228aebf536d0ee3fe34a5b1b6d2ef80c31d3dddbb0387154deb95767b168a",
+        "integrated_adjudication_file_sha256": "6a2d4e0d9828fca5a887adcb918db67d8f93c489b2e82b7ba2894cda31f76381",
+        "integrated_adjudication_tool_sha256": "f8ed4f02b7261dbb21d8c8b5615d6b3e1db217178f73383d87569ff5f1ad1c16",
+    }
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_digest(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "result": resolve(manifest_entry.get("result")),
+        "independent audit": resolve(manifest_entry.get("independent_audit")),
+        "integrated adjudication": resolve(manifest_entry.get("integrated_adjudication")),
+        "result report": resolve(manifest_entry.get("markdown_report")),
+        "integrated report": resolve(manifest_entry.get("integrated_adjudication_report")),
+        "integrated tool": root / "tools/b9_r200_integrated_adjudication.py",
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R200 completed {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return {
+            "status": manifest_entry.get("status"),
+            "evidence_integrity_complete": False,
+        }
+
+    result_path = paths["result"]
+    audit_path = paths["independent audit"]
+    integrated_path = paths["integrated adjudication"]
+    integrated_tool = paths["integrated tool"]
+    assert result_path and audit_path and integrated_path and integrated_tool
+    result = json.loads(read(result_path))
+    audit = json.loads(read(audit_path))
+    integrated = json.loads(read(integrated_path))
+    main_copy = dict(result)
+    main_payload = main_copy.pop("payload_sha256", None)
+    integrated_copy = dict(integrated)
+    integrated_payload = integrated_copy.pop("payload_sha256", None)
+    observed = {
+        "protocol_sha256": result.get("protocol_hash"),
+        "result_payload_sha256": main_payload,
+        "result_file_sha256": digest(result_path),
+        "independent_audit_file_sha256": digest(audit_path),
+        "integrated_adjudication_payload_sha256": integrated_payload,
+        "integrated_adjudication_file_sha256": digest(integrated_path),
+        "integrated_adjudication_tool_sha256": digest(integrated_tool),
+    }
+    for field, value in expected.items():
+        if observed[field] != value:
+            errors.append(f"B9 R200 completed {field} mismatch")
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R200 completed manifest {field} mismatch")
+    if canonical_digest(main_copy) != main_payload:
+        errors.append("B9 R200 completed main payload round-trip mismatch")
+    if canonical_digest(integrated_copy) != integrated_payload:
+        errors.append("B9 R200 completed integrated payload round-trip mismatch")
+
+    summary = result.get("summary", {})
+    if (
+        manifest_entry.get("status")
+        != "independently_reproduced_finite_projective_rational_atlas_boundary"
+        or result.get("status")
+        != "checked_finite_projective_rational_bloch_atlas_boundary"
+        or summary.get("grid_row_count") != 186
+        or summary.get("grid_pass_count") != 186
+        or summary.get("requirement_count") != 13
+        or summary.get("requirement_pass_count") != 13
+        or len(result.get("requirements", [])) != 13
+        or any(item.get("passed") is not True for item in result.get("requirements", []))
+    ):
+        errors.append("B9 R200 completed main result boundary mismatch")
+    if (
+        audit.get("status") != "pass"
+        or audit.get("rebuilt_row_count") != 186
+        or audit.get("third_and_fourth_prime_full_rank_grid_count") != 186
+        or audit.get("error_count") != 0
+        or audit.get("errors") != []
+        or audit.get("grid_shape")
+        != {"missing_count": 0, "extra_count": 0, "duplicate_count": 0}
+        or audit.get("source_result", {}).get("payload_round_trip_verified") is not True
+    ):
+        errors.append("B9 R200 completed independent audit mismatch")
+    integrated_summary = integrated.get("summary", {})
+    boundary = integrated.get("claim_boundary", {})
+    if (
+        integrated.get("status")
+        != "independently_reproduced_finite_projective_rational_atlas_boundary"
+        or integrated.get("adjudication_type")
+        != "post_result_integration_gate_not_preregistered"
+        or integrated_summary.get("requirement_count") != 10
+        or integrated_summary.get("requirement_pass_count") != 10
+        or len(integrated.get("requirements", [])) != 10
+        or any(item.get("passed") is not True for item in integrated.get("requirements", []))
+        or boundary.get("continuous_two_parameter_certificate") is not False
+        or boundary.get("shared_catalog_formula_risk_eliminated") is not False
+        or boundary.get("scientific_promotion_accepted") is not False
+        or boundary.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R200 completed integrated adjudication mismatch")
+    if (
+        manifest_entry.get("frozen_holdouts_executed") is not True
+        or manifest_entry.get("frozen_acceptance_count") != 186
+        or manifest_entry.get("independent_audit_full_rank_grid_count") != 186
+        or manifest_entry.get("independent_audit_error_count") != 0
+        or manifest_entry.get("scientific_promotion_accepted") is not False
+        or manifest_entry.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R200 completed manifest result boundary mismatch")
+    report = read(paths["integrated report"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "Main full-rank rows: `186/186`",
+            "Independent full-rank rows: `186/186`",
+            "Why This Does Not Require Quantum Hardware",
+            "Scientific promotion: `false`",
+            "continuous two-parameter projective-patch certificate",
+        )
+    ):
+        errors.append("B9 R200 completed report claim boundary is incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "atlas_row_count": result.get("protocol", {}).get("atlas_catalog", {}).get("atlas_row_count"),
+        "projective_axis_count": summary.get("projective_axis_count"),
+        "expected_grid_row_count": summary.get("grid_row_count"),
+        "frame_algebra_pass_count": result.get("protocol", {}).get("frame_algebra", {}).get("pass_count"),
+        "directed_overlap_pass_count": result.get("protocol", {}).get("subspace_sentinels", {}).get("directed_overlap_pass_count"),
+        "projective_axis_pass_count": result.get("protocol", {}).get("subspace_sentinels", {}).get("projective_pass_count"),
+        "engineering_probe_grid_pass_count": 4,
+        "main_full_rank_grid_count": summary.get("grid_pass_count"),
+        "independent_full_rank_grid_count": audit.get("third_and_fourth_prime_full_rank_grid_count"),
+        "integrated_requirement_pass_count": integrated_summary.get("requirement_pass_count"),
+        "independent_audit_pre_source_seal_complete": audit.get("pre_source_seal", {}).get("anti_circularity", {}).get("checked"),
+        "independent_audit_source_result_read": True,
+        "frozen_holdouts_executed": True,
+        "frozen_acceptance_count": summary.get("grid_pass_count"),
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R200") for message in errors
+        ),
+    }
+
+
 def audit_b9_r200_preregistration(
     root: Path,
     manifest_entry: dict | None,
@@ -5289,6 +5454,11 @@ def audit_b9_r200_preregistration(
     if not manifest_entry:
         warnings.append("B9 manifest has no R200 projective-atlas preregistration")
         return status
+    if (
+        manifest_entry.get("status")
+        == "independently_reproduced_finite_projective_rational_atlas_boundary"
+    ):
+        return audit_b9_r200_completed(root, manifest_entry, errors)
 
     def resolve(relative: str | None) -> Path | None:
         return (root / "benchmarks" / relative).resolve() if relative else None
@@ -58190,10 +58360,10 @@ def markdown_report(report: dict) -> str:
             f"- R199 continuous rows / passed / determinants / finite real common roots: {report['b9']['r199_ay_meridian_stress'].get('continuous_row_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_pass_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_determinant_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_finite_real_common_root_count')}",
             f"- R199 rational/projective frames / grid rows / full-rank rows / largest columns/nonzeros: {report['b9']['r199_ay_meridian_stress'].get('rational_frame_count')} / {report['b9']['r199_ay_meridian_stress'].get('projective_frame_count')} / {report['b9']['r199_ay_meridian_stress'].get('rational_grid_row_count')} / {report['b9']['r199_ay_meridian_stress'].get('rational_grid_pass_count')} / {report['b9']['r199_ay_meridian_stress'].get('largest_candidate_column_count')} / {report['b9']['r199_ay_meridian_stress'].get('largest_commutator_nonzero_count')}",
             f"- R199 independent audit / prime / continuous matches / third-prime grid / missing-extra-duplicate / errors / promotion / full-Bloch exclusion / credit: {report['b9']['r199_ay_meridian_stress'].get('independent_audit_status')} / {report['b9']['r199_ay_meridian_stress'].get('independent_audit_prime')} / {report['b9']['r199_ay_meridian_stress'].get('independent_continuous_exact_match_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_third_prime_full_rank_grid_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_grid_missing_count')}-{report['b9']['r199_ay_meridian_stress'].get('independent_grid_extra_count')}-{report['b9']['r199_ay_meridian_stress'].get('independent_grid_duplicate_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_audit_error_count')} / {report['b9']['r199_ay_meridian_stress'].get('scientific_promotion_accepted')} / {report['b9']['r199_ay_meridian_stress'].get('full_two_dimensional_bloch_sphere_exclusion')} / {report['b9']['r199_ay_meridian_stress'].get('new_credit_delta')}",
-            f"- R200 finite projective-atlas preregistration status: {report['b9']['r200_bloch_atlas_preregistration'].get('status')}",
-            f"- R200 evidence integrity / atlas frames / projective axes / future rows: {report['b9']['r200_bloch_atlas_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('atlas_row_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('expected_grid_row_count')}",
-            f"- R200 frame/overlap/projective/engineering passes: {report['b9']['r200_bloch_atlas_preregistration'].get('frame_algebra_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('directed_overlap_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('engineering_probe_grid_pass_count')}",
-            f"- R200 pre-source seal / source read / holdouts executed / acceptance / promotion / credit: {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_pre_source_seal_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_source_result_read')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_holdouts_executed')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r200_bloch_atlas_preregistration'].get('new_credit_delta')}",
+            f"- R200 finite projective-atlas result status: {report['b9']['r200_bloch_atlas_preregistration'].get('status')}",
+            f"- R200 evidence integrity / atlas frames / projective axes / frozen rows: {report['b9']['r200_bloch_atlas_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('atlas_row_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('expected_grid_row_count')}",
+            f"- R200 main / independent full-rank rows / integrated gates: {report['b9']['r200_bloch_atlas_preregistration'].get('main_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('independent_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('integrated_requirement_pass_count')}",
+            f"- R200 pre-source seal / holdouts executed / accepted rows / promotion / credit: {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_pre_source_seal_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_holdouts_executed')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r200_bloch_atlas_preregistration'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",
