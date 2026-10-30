@@ -354,7 +354,8 @@ promotion and new credit remain zero. The next adversary must use a new public
 freeze for a second Bloch-sphere chart, quartic Majorana charges, or an
 explicit nonlocal duality.
 
-R199 is now publicly preregistered as the second continuous chart. It rotates
+R199 has completed its publicly preregistered frozen run and independent
+audit as the second continuous chart. It rotates
 the exactly solvable local-field axis `A=(-4X+3Z)/5` toward `Y` while fixing
 the orthogonal axis `B=(-3X-4Z)/5`:
 
@@ -365,22 +366,36 @@ R = B
 c = (1-t^2)/(1+t^2), s = 2t/(1+t^2)
 ```
 
-Except at the two XZ-plane endpoints, `P` has a nonzero `Y` component. The
-contract freezes unseen `J=97/128,107/128`, four exact polynomial rows at
-`n=4,5`, 432 directed larger-size rows from 72 rational frames representing
-36 projective subspaces at `n=6,8,10`, a
-`t=0,J=0` positive control, and a non-importing third-prime audit. The
-engineering probe uses only the previously observed `J=13/32`, contributes
-zero acceptance decisions, and passes its exact frame algebra, continuous
-minor, and four-row grid smoke checks. Frozen holdouts remain unopened until
-the preregistration commit is public. Contract `a9679357...`; catalog
-`d3960059...`; byte-stable engineering probe `7881ccdb...`.
+Except at the two XZ-plane endpoints, `P` has a nonzero `Y` component. Public
+commit `766d94e5...` froze unseen `J=97/128,107/128`, four exact polynomial
+rows at `n=4,5`, 432 directed larger-size rows from 72 rational frames
+representing 36 projective subspaces at `n=6,8,10`, a `t=0,J=0` positive
+control, and a non-importing third-prime audit before either holdout opened.
 
-R199 can close only one A-Y great-circle meridian. It cannot establish a full
+All `4/4` continuous rows pass after 16 exact maximal-minor determinants. The
+final common factors have zero finite real roots and all four projective
+endpoints have full column rank. Every one of the `432/432` larger-size rows
+has full candidate-column rank under both declared primes. The positive
+control recovers operator rank 79, commutator rank 42, nullity 37, and all six
+onsite A-axis charges.
+
+An independent implementation imports and dynamically loads none of
+R193-R199. It generates the expected grid before reading the source result,
+uses disjoint anchors, verifies the public code freeze, reproduces `4/4`
+continuous certificates with exact-fraction Sturm checks, verifies every
+projective-infinity column, and rebuilds all `432/432` grid rows at third
+prime `1,000,037`. The grid has zero missing, extra, or duplicate rows; audit
+errors are zero. Requirements pass `14/14`; contract `a9679357...`; protocol
+`c29c8bfd...`; result payload `0527ed73...`; audit payload `40c44f2e...`.
+
+R199 closes only one A-Y great-circle meridian. It cannot establish a full
 two-dimensional Bloch-sphere exclusion, nonlinear or higher-order charge
 exclusion, nonlocal-duality exclusion, interacting nonintegrability, chaos,
 hardness, Quantum PCP, NLTS, BQP separation, hardware relevance, or a solved
-frontier. Scientific promotion is false and new credit remains zero.
+frontier. Scientific promotion is false and new credit remains zero. The next
+adversary must use a new public freeze for a second independent meridian, a
+two-parameter Bloch-sphere patch, quartic Majorana charges, or an explicit
+nonlocal duality.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

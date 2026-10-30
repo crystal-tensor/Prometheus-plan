@@ -2655,6 +2655,11 @@ Overall audit: PASS
 - R198 continuous rows / passed / determinants / finite real common roots: 4 / 4 / 20 / 0
 - R198 rational frames / grid rows / full-rank rows / largest columns/nonzeros: 72 / 432 / 432 / 211 / 122753
 - R198 independent audit / prime / continuous matches / third-prime grid / errors / promotion / all-Bloch exclusion / credit: pass / 1000037 / 4 / 432 / 0 / False / False / 0
+- R199 continuous A-Y meridian status: checked_continuous_ay_meridian_boundary
+- R199 requirements / evidence integrity: 14 / True
+- R199 continuous rows / passed / determinants / finite real common roots: 4 / 4 / 16 / 0
+- R199 rational/projective frames / grid rows / full-rank rows / largest columns/nonzeros: 72 / 36 / 432 / 432 / 211 / 2490766
+- R199 independent audit / prime / continuous matches / third-prime grid / missing-extra-duplicate / errors / promotion / full-Bloch exclusion / credit: pass / 1000037 / 4 / 432 / 0-0-0 / 0 / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 
