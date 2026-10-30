@@ -915,6 +915,40 @@ current_results:
     result: ../results/B9_R198_continuous_frame_stress_v1.json
     independent_audit: ../results/B9_R198_independent_audit_v1.json
     markdown_report: ../research/B9_R198_continuous_frame_stress.md
+  r199_ay_meridian_stress_v1:
+    status: publicly_preregistered_execution_pending
+    method: b9_r199_ay_meridian_stress_v1
+    source: r198_continuous_frame_stress_v1
+    experiment_id: B9-R199-continuous-ay-meridian-frame-stress
+    contract_sha256: a9679357747deb983de1285946ac97c1679c018b383a8e5e0d9c2c9cc6bcb1cb
+    tool_sha256: ba7dda8f92a6deb24fb1be33f2961c0a70b6de9134adc4bd6e56597c81728231
+    r198_dependency_sha256: c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13
+    requirements_sha256: 4f6fee8aef0c9d39f196c6d3b1e03d354da68a99fa831c01e57c6dfd998efa49
+    engineering_probe_sha256: 7881ccdb390e70e6e528197f67540ff314bed492aa90c14d314f0b174560d6e6
+    engineering_probe: ../results/B9_R199_engineering_probe_v0.json
+    frozen_holdout_couplings:
+      - 97/128
+      - 107/128
+    chart: A-Y great-circle meridian
+    continuous_sizes:
+      - 4
+      - 5
+    rational_grid_sizes:
+      - 6
+      - 8
+      - 10
+    rational_frame_catalog_count: 72
+    rational_projective_frame_count: 36
+    rational_frame_catalog_sha256: d39600595c4b54b622e6a76acdf4e0838322901d13aa3b72bda8a67599547842
+    expected_continuous_row_count: 4
+    expected_rational_grid_row_count: 432
+    expected_projective_grid_row_count: 216
+    expected_independent_audit_prime: 1000037
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    contract: B9_R199_ay_meridian_contract_v0.json
+    markdown_preregistration: ../research/B9_R199_ay_meridian_preregistration.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -946,4 +980,5 @@ current_results:
   r197_independent_audit: ../tools/b9_r197_independent_audit.py
   r198_continuous_frame_stress: ../tools/b9_r198_continuous_frame_stress.py
   r198_independent_audit: ../tools/b9_r198_independent_audit.py
+  r199_ay_meridian_stress: ../tools/b9_r199_ay_meridian_stress.py
   prototype_notes: ../research/B9_prototype_notes.md

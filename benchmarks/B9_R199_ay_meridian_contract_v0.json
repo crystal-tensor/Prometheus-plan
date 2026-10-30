@@ -1,0 +1,181 @@
+{
+  "acceptance": {
+    "continuous": {
+      "finite_real_common_root_count": 0,
+      "projective_infinity_full_column_rank": true,
+      "row_count": 4,
+      "sizes": [
+        4,
+        5
+      ]
+    },
+    "frozen_grid": {
+      "catalog_count": 72,
+      "catalog_sha256": "d39600595c4b54b622e6a76acdf4e0838322901d13aa3b72bda8a67599547842",
+      "full_rank_row_count": 432,
+      "projective_frame_count": 36,
+      "projective_row_count": 216,
+      "row_count": 432,
+      "sizes": [
+        6,
+        8,
+        10
+      ]
+    },
+    "independent_audit": {
+      "audit_owned_minor_anchors": [
+        -3,
+        -1,
+        3,
+        5
+      ],
+      "continuous_exact_match_count": 4,
+      "dynamic_loading_forbidden": true,
+      "error_count": 0,
+      "exact_sturm_real_root_counter_required": true,
+      "expected_grid_generated_before_source_comparison": true,
+      "forbidden_imports": [
+        "b9_r193",
+        "b9_r194",
+        "b9_r195",
+        "b9_r196",
+        "b9_r197",
+        "b9_r198",
+        "b9_r199"
+      ],
+      "forbidden_runtime_constructs": [
+        "importlib",
+        "runpy",
+        "SourceFileLoader",
+        "exec",
+        "eval"
+      ],
+      "homogenized_projective_endpoint_check_required": true,
+      "main_and_audit_anchor_sets_disjoint": true,
+      "missing_extra_duplicate_grid_rows": [
+        0,
+        0,
+        0
+      ],
+      "source_fields_consumed_for_rebuild": [],
+      "symbolic_frame_identity_count": 9,
+      "third_prime": 1000037,
+      "third_prime_full_rank_grid_count": 432
+    },
+    "positive_control": {
+      "candidate_column_count": 79,
+      "commutator_rank": 42,
+      "commuting_onsite_witness_count": 6,
+      "in_span_onsite_witness_count": 6,
+      "n": 6,
+      "nullity": 37,
+      "operator_rank": 79
+    }
+  },
+  "chart": {
+    "A": "(-4X+3Z)/5",
+    "B": "(-3X-4Z)/5",
+    "P": "cA+sY",
+    "Q": "-sA+cY",
+    "R": "B",
+    "c": "(1-t^2)/(1+t^2)",
+    "name": "A-Y great-circle meridian",
+    "orientation": "Q cross R = P",
+    "out_of_xz_condition": "s != 0",
+    "s": "2t/(1+t^2)"
+  },
+  "claim_boundary": {
+    "forbidden": [
+      "all Bloch-sphere frame exclusion",
+      "full two-dimensional Bloch-sphere exclusion",
+      "nonlinear frame-mixture exclusion",
+      "higher-order Majorana-charge exclusion",
+      "nonlocal-duality exclusion",
+      "interacting-integrability exclusion",
+      "nonintegrability theorem",
+      "quantum-chaos theorem",
+      "spectral-hardness theorem",
+      "Quantum PCP theorem",
+      "NLTS theorem",
+      "BQP separation",
+      "hardware relevance",
+      "solved frontier"
+    ],
+    "new_credit_delta": 0,
+    "scientific_promotion_accepted": false
+  },
+  "code_freeze": {
+    "current_bytes_must_match_preregistration_commit": true,
+    "paths": [
+      "tools/b9_r199_ay_meridian_stress.py",
+      "tools/b9_r198_continuous_frame_stress.py",
+      "requirements.txt"
+    ],
+    "runtime_versions_recorded": [
+      "python",
+      "sympy"
+    ]
+  },
+  "engineering_probe": {
+    "acceptance_count": 0,
+    "coupling": "13/32"
+  },
+  "experiment_id": "B9-R199-continuous-ay-meridian-frame-stress",
+  "frozen_holdouts": {
+    "couplings": [
+      "97/128",
+      "107/128"
+    ],
+    "disjoint_from_prior_grids": true,
+    "execute_only_after_public_preregistration_commit": true
+  },
+  "positive_control": {
+    "coupling": "0",
+    "expected_axis": "A=(-4X+3Z)/5",
+    "frame": "t=0,c=1,s=0",
+    "n": 6,
+    "purpose": "recover all six onsite commuting A-axis charges inside the declared frame pool"
+  },
+  "preregistration": {
+    "contract_must_be_hash_bound_in_public_commit": true,
+    "frozen_holdouts_must_not_execute_before_public_commit": true,
+    "result_must_record_preregistration_commit": true
+  },
+  "status": "public_preregistration_required",
+  "symbolic_certificate": {
+    "basis_selection_prime": 1000003,
+    "initial_minor_anchors": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "maximum_adaptive_rounds": 12,
+    "parameter": "t",
+    "projective_infinity_frame": {
+      "c": "-1",
+      "s": "0"
+    },
+    "symbolic_frame_identity_count": 10
+  },
+  "candidate_family": {
+    "column_formula": "2n^2+n+1",
+    "column_counts": {
+      "10": 211,
+      "4": 37,
+      "5": 56,
+      "6": 79,
+      "8": 137
+    },
+    "contents": [
+      "all 2n linear Majoranas",
+      "all choose(2n,2) Hermitian quadratic bilinears",
+      "full parity"
+    ],
+    "overlap_sentinels": [
+      "t=0 and projective infinity span the same tilted-A candidate subspace",
+      "t=1 and t=-1 span the same Pauli-Y candidate subspace"
+    ]
+  },
+  "version": "0.1.0"
+}

@@ -354,6 +354,34 @@ promotion and new credit remain zero. The next adversary must use a new public
 freeze for a second Bloch-sphere chart, quartic Majorana charges, or an
 explicit nonlocal duality.
 
+R199 is now publicly preregistered as the second continuous chart. It rotates
+the exactly solvable local-field axis `A=(-4X+3Z)/5` toward `Y` while fixing
+the orthogonal axis `B=(-3X-4Z)/5`:
+
+```text
+P = c A + s Y
+Q = -s A + c Y
+R = B
+c = (1-t^2)/(1+t^2), s = 2t/(1+t^2)
+```
+
+Except at the two XZ-plane endpoints, `P` has a nonzero `Y` component. The
+contract freezes unseen `J=97/128,107/128`, four exact polynomial rows at
+`n=4,5`, 432 directed larger-size rows from 72 rational frames representing
+36 projective subspaces at `n=6,8,10`, a
+`t=0,J=0` positive control, and a non-importing third-prime audit. The
+engineering probe uses only the previously observed `J=13/32`, contributes
+zero acceptance decisions, and passes its exact frame algebra, continuous
+minor, and four-row grid smoke checks. Frozen holdouts remain unopened until
+the preregistration commit is public. Contract `a9679357...`; catalog
+`d3960059...`; byte-stable engineering probe `7881ccdb...`.
+
+R199 can close only one A-Y great-circle meridian. It cannot establish a full
+two-dimensional Bloch-sphere exclusion, nonlinear or higher-order charge
+exclusion, nonlocal-duality exclusion, interacting nonintegrability, chaos,
+hardness, Quantum PCP, NLTS, BQP separation, hardware relevance, or a solved
+frontier. Scientific promotion is false and new credit remains zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
