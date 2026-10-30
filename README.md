@@ -429,6 +429,8 @@ an exact continuous two-parameter projective-patch certificate at `n=4`, with
 `n=5` allowed only after the `n=4` complex or real rank-drop set is resolved.
 
 R201 now turns that next gate into an exact, publicly inspectable protocol.
+Public commit `a10647ec...` freezes the contract, engineering probe, execution
+lock, and independent design seal before either scientific coupling opens.
 The `n=4` engineering matrix has 238 rows, 37 candidate columns, 2,129
 nonzero polynomial entries, and maximal-minor degree bound 184. All eight
 public anchors, including two `c=0` projective-boundary points, have full

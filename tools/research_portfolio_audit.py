@@ -10,6 +10,7 @@ import json
 import math
 import re
 import struct
+import subprocess
 from fractions import Fraction
 from itertools import product
 from pathlib import Path
@@ -5661,6 +5662,7 @@ def audit_b9_r201_preregistration(
         "r198_dependency_sha256": "c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13",
         "requirements_sha256": "b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88",
     }
+    expected_preregistration_commit = "a10647ecca56c503d4188a5e3cf00dde9a0424a8"
 
     def resolve(relative: str | None) -> Path | None:
         return (root / "benchmarks" / relative).resolve() if relative else None
@@ -5696,6 +5698,26 @@ def audit_b9_r201_preregistration(
     for field, expected in expected_hashes.items():
         if observed_hashes[field] != expected or manifest_entry.get(field) != expected:
             errors.append(f"B9 R201 preregistration {field} mismatch")
+    if manifest_entry.get("preregistration_commit") != expected_preregistration_commit:
+        errors.append("B9 R201 preregistration public commit mismatch")
+    frozen_paths = {
+        "benchmarks/B9_R201_projective_patch_contract_v0.json": expected_hashes["contract_sha256"],
+        "tools/b9_r201_projective_patch_certificate.py": expected_hashes["tool_sha256"],
+        "tools/b9_r201_independent_audit.py": expected_hashes["independent_audit_tool_sha256"],
+        "tools/b9_r198_continuous_frame_stress.py": expected_hashes["r198_dependency_sha256"],
+        "requirements.txt": expected_hashes["requirements_sha256"],
+    }
+    for relative, expected in frozen_paths.items():
+        try:
+            frozen = subprocess.check_output(
+                ["git", "show", f"{expected_preregistration_commit}:{relative}"],
+                cwd=root,
+            )
+        except subprocess.CalledProcessError:
+            errors.append(f"B9 R201 preregistration frozen path missing: {relative}")
+            continue
+        if hashlib.sha256(frozen).hexdigest() != expected:
+            errors.append(f"B9 R201 preregistration frozen path hash mismatch: {relative}")
 
     contract = json.loads(read(paths["contract"]))
     probe = json.loads(read(paths["engineering probe"]))
@@ -5779,6 +5801,7 @@ def audit_b9_r201_preregistration(
         "status": manifest_entry.get("status"),
         **observed_hashes,
         "protocol_sha256": protocol.get("protocol_sha256"),
+        "preregistration_commit": manifest_entry.get("preregistration_commit"),
         "engineering_matrix_rows": matrix.get("output_basis_size"),
         "engineering_candidate_columns": matrix.get("candidate_column_count"),
         "engineering_polynomial_nonzero_count": matrix.get("polynomial_commutator_nonzero_count"),
@@ -58536,6 +58559,7 @@ def markdown_report(report: dict) -> str:
             f"- R200 main / independent full-rank rows / integrated gates: {report['b9']['r200_bloch_atlas_preregistration'].get('main_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('independent_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('integrated_requirement_pass_count')}",
             f"- R200 pre-source seal / holdouts executed / accepted rows / promotion / credit: {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_pre_source_seal_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_holdouts_executed')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r200_bloch_atlas_preregistration'].get('new_credit_delta')}",
             f"- R201 continuous projective-patch protocol status: {report['b9']['r201_projective_patch_preregistration'].get('status')}",
+            f"- R201 public preregistration commit: {report['b9']['r201_projective_patch_preregistration'].get('preregistration_commit')}",
             f"- R201 evidence integrity / matrix / columns / polynomial nonzeros / degree bound: {report['b9']['r201_projective_patch_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_matrix_rows')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_candidate_columns')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_polynomial_nonzero_count')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_maximal_minor_degree_bound')}",
             f"- R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: {report['b9']['r201_projective_patch_preregistration'].get('engineering_full_rank_anchor_count')} / {report['b9']['r201_projective_patch_preregistration'].get('independent_design_seal_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_may_execute')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_executed')}",
             f"- R201 accepted rows / promotion / credit: {report['b9']['r201_projective_patch_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r201_projective_patch_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r201_projective_patch_preregistration'].get('new_credit_delta')}",

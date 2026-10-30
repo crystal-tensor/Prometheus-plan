@@ -9,6 +9,7 @@
 - R198 dependency SHA256: `c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13`
 - Requirements SHA256: `b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88`
 - Protocol SHA256: `994905bd727da0eb6ae34aa6c56e4f5477d3f9ea9e8720eea5b23ae8e4188c7d`
+- Public preregistration commit: `a10647ecca56c503d4188a5e3cf00dde9a0424a8`
 - Frozen holdouts executed: `false`
 - Frozen acceptance decisions: `0`
 - Scientific promotion: `false`
@@ -69,7 +70,9 @@ correctly. They are not a continuous proof and contribute zero acceptance.
 
 ## Execution Blockers
 
-The holdouts remain mechanically sealed after this preregistration. Two
+The holdouts remain mechanically sealed after public commit `a10647ec...`.
+An explicit execution attempt against that commit is rejected before either
+holdout is evaluated. Two
 implementation obligations must close before a new public readiness commit:
 
 1. emit and exactly verify a Nullstellensatz identity or complete

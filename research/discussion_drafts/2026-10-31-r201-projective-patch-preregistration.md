@@ -26,6 +26,10 @@ or an equally replayable ideal-membership trace. A Groebner-basis hash is not
 enough. Neither is a finite grid, a modular rank loss, a numerical root, or a
 failed SOS search.
 
+The protocol, engineering probe, and execution lock are public at commit
+`a10647ecca56c503d4188a5e3cf00dde9a0424a8`. A direct frozen-execution attempt
+against that commit is rejected before either scientific coupling is read.
+
 The most useful contribution now is not another sample point. It is one of:
 
 - a sparse rational Nullstellensatz certificate emitter;
