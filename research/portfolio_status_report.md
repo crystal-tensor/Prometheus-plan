@@ -2679,6 +2679,10 @@ Overall audit: PASS
 - R201 modular minor 0 checked / degree / terms: True / 184 / 8649
 - R201 modular minor 0 term hash: 7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b
 - R201 engineering certificate / blocker closed / holdouts executed: False / False / False
+- R201 modular structure status: public_eight_minor_two_prime_structure_verified_characteristic_zero_incomplete
+- R201 modular structure minors / artifacts / point replays / factor replays: 4 / 8 / 40 / 8
+- R201 modular structure common D multiplicity / GCD degree / residual degree / residual terms: 44 / {'1000003': 88, '536870723': 88} / 96 / [2401, 464, 590, 450]
+- R201 modular structure cross-prime factor pattern / characteristic-zero certificate / CRT complete / holdouts executed: True / False / False / False
 
 ## B10 BQP Boundary Graph Status
 

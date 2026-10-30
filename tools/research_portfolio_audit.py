@@ -6352,6 +6352,276 @@ def audit_b9_r201_certificate_readiness(
     }
 
 
+def audit_b9_r201_modular_minor_structure(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the eight-minor, two-prime R201 modular structure replay."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "characteristic_zero_engineering_certificate_verified": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R201 modular-minor structure packet")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    paths = {
+        "structure tool": resolve(manifest_entry.get("structure_tool")),
+        "structure result": resolve(manifest_entry.get("structure_result")),
+        "markdown report": resolve(manifest_entry.get("markdown_report")),
+        "discussion draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    artifact_paths = {
+        label: resolve(relative)
+        for label, relative in manifest_entry.get("artifacts", {}).items()
+    }
+    paths.update({f"artifact {label}": path for label, path in artifact_paths.items()})
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R201 modular-minor structure {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {
+        "structure_tool_sha256": digest(paths["structure tool"]),
+        "structure_result_sha256": digest(paths["structure result"]),
+        "markdown_report_sha256": digest(paths["markdown report"]),
+        "discussion_draft_sha256": digest(paths["discussion draft"]),
+    }
+    observed_artifacts = {
+        label: digest(path) for label, path in artifact_paths.items()
+    }
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R201 modular-minor structure {field} mismatch")
+    if manifest_entry.get("artifact_sha256") != observed_artifacts:
+        errors.append("B9 R201 modular-minor structure artifact hashes mismatch")
+
+    result = json.loads(read(paths["structure result"]))
+    report = read(paths["markdown report"])
+    discussion = read(paths["discussion draft"])
+    rows = result.get("rows", [])
+    expected_rows = {
+        0: (
+            "2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae",
+            8649,
+            2401,
+            [[2, 4], [2, 30], [2, 44], [4, 3], [8, 1], [8, 1]],
+        ),
+        1: (
+            "636ee93903a64bc655cbec5e744a1001c8071b3a7c849fc69622161d56d64bc7",
+            4468,
+            464,
+            [[1, 18], [1, 33], [2, 4], [2, 44], [3, 1], [3, 2], [7, 1], [7, 1], [14, 1]],
+        ),
+        2: (
+            "7d38cb521a1b0cce5a3da989319c296f89093452f8019dec23b102c7ff5a1b76",
+            4770,
+            590,
+            [[1, 18], [1, 29], [2, 2], [2, 44], [3, 1], [3, 5], [27, 1]],
+        ),
+        3: (
+            "b421e4307fda9401cc582f81d54f8b0bb2d4040880d1da4cb2b2d80a8319eccb",
+            2760,
+            450,
+            [[1, 3], [1, 11], [1, 24], [2, 5], [2, 24], [2, 44]],
+        ),
+    }
+    expected_primes = [1000003, 536870723]
+    row_keys = {(row.get("prime"), row.get("minor_index")) for row in rows}
+    expected_row_keys = {
+        (prime, minor_index)
+        for prime in expected_primes
+        for minor_index in range(4)
+    }
+    row_mismatch = row_keys != expected_row_keys or len(rows) != 8
+    for row in rows:
+        minor_index = row.get("minor_index")
+        if minor_index not in expected_rows:
+            row_mismatch = True
+            continue
+        row_hash, terms, residual_terms, factor_pattern = expected_rows[minor_index]
+        artifact_path = root / row.get("path", "")
+        if (
+            row.get("row_words_sha256") != row_hash
+            or row.get("total_degree") != 184
+            or row.get("term_count") != terms
+            or row.get("artifact_binding_errors") != []
+            or row.get("point_replay_match_count") != 5
+            or row.get("nonzero_point_count", 0) < 1
+            or row.get("factorization_replayed") is not True
+            or row.get("D_multiplicity") != 44
+            or row.get("D_removed_degree") != 96
+            or row.get("D_removed_term_count") != residual_terms
+            or row.get("factor_degree_multiplicity") != factor_pattern
+            or not artifact_path.exists()
+            or row.get("artifact_sha256") != digest(artifact_path)
+        ):
+            row_mismatch = True
+    if row_mismatch:
+        errors.append("B9 R201 modular-minor structure row replay mismatch")
+
+    common = result.get("common_factors_by_prime", {})
+    expected_common_factor = {
+        "degree": 2,
+        "multiplicity": 44,
+        "normalized_terms_sha256": "914755ff979132096803bf5bd1213ec02ad32c5f597f63e4ef1785d5911ac2a4",
+        "term_count": 3,
+    }
+    if (
+        result.get("method")
+        != "b9_r201_project_owned_modular_minor_structure_v1"
+        or result.get("version") != "0.1.0"
+        or result.get("scope") != "public_engineering_modular_minor_structure_only"
+        or result.get("primes") != expected_primes
+        or result.get("safe_prime") != 536870723
+        or result.get("safe_prime_half") != 268435361
+        or result.get("minor_count") != 4
+        or result.get("artifact_count") != 8
+        or result.get("artifact_bundle_sha256")
+        != "fa4925cde2b9e4903381f15635720561757b62ba6092dfd1b09f42d8b3206398"
+        or result.get("cross_prime_monomial_support_match")
+        != {"0": True, "1": True, "2": True, "3": True}
+        or result.get("cross_prime_factor_degree_multiplicity_match") is not True
+        or common.get("1000003") != [expected_common_factor]
+        or common.get("536870723") != [expected_common_factor]
+        or result.get("common_gcd_degree_by_prime")
+        != {"1000003": 88, "536870723": 88}
+        or result.get("all_artifact_bindings_clean") is not True
+        or result.get("all_point_replays_match") is not True
+        or result.get("all_factorizations_replay") is not True
+        or result.get("all_minors_have_nonzero_public_replay_point") is not True
+        or result.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or result.get("integer_coefficient_bound_proved") is not False
+        or result.get("characteristic_zero_engineering_certificate_verified")
+        is not False
+        or result.get("ideal_membership_certificate_verified") is not False
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    ):
+        errors.append("B9 R201 modular-minor structure result mismatch")
+
+    for label, path in artifact_paths.items():
+        artifact = json.loads(read(path))
+        minor_index = artifact.get("minor_index")
+        expected_prime = 536870723 if "536870723" in label else 1000003
+        if (
+            minor_index not in expected_rows
+            or artifact.get("method") != "b9_r201_singular_exact_minor_bridge_v2"
+            or artifact.get("version") != "0.2.0"
+            or artifact.get("characteristic") != expected_prime
+            or artifact.get("row_words_sha256") != expected_rows[minor_index][0]
+            or artifact.get("total_degree") != 184
+            or artifact.get("term_count") != expected_rows[minor_index][1]
+            or artifact.get("checked") is not True
+            or artifact.get("frozen_holdouts_executed") is not False
+            or artifact.get("scientific_promotion_accepted") is not False
+            or artifact.get("new_credit_delta") != 0
+        ):
+            errors.append(f"B9 R201 modular-minor artifact mismatch: {label}")
+
+    manifest_expectations = {
+        "status": "public_eight_minor_two_prime_structure_verified_characteristic_zero_incomplete",
+        "method": "b9_r201_project_owned_modular_minor_structure_v1",
+        "primes": expected_primes,
+        "minor_count": 4,
+        "artifact_count": 8,
+        "public_point_replay_count": 40,
+        "public_point_replay_match_count": 40,
+        "factorization_replay_count": 8,
+        "factorization_replay_pass_count": 8,
+        "common_D_multiplicity": 44,
+        "common_gcd_degree_by_prime": 88,
+        "D_removed_degree": 96,
+        "residual_term_counts": [2401, 464, 590, 450],
+        "cross_prime_monomial_support_match": True,
+        "cross_prime_factor_degree_multiplicity_match": True,
+        "artifact_bundle_sha256": result.get("artifact_bundle_sha256"),
+        "characteristic_zero_engineering_certificate_verified": False,
+        "integer_coefficient_bound_proved": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "ideal_membership_certificate_verified": False,
+        "readiness_blocker_closed": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(manifest_entry.get(field) != value for field, value in manifest_expectations.items()):
+        errors.append("B9 R201 modular-minor structure manifest mismatch")
+
+    report_phrases = (
+        "All `40/40` point replays match",
+        "All `8/8` factorizations",
+        "`D^44 = (a^2 + b^2 + c^2)^44`",
+        "degree-`96` residuals",
+        "Two agreeing primes cannot replace an integer coefficient bound",
+        "Characteristic-zero engineering certificate verified: `false`",
+        "Frozen holdouts executed: `false`",
+        "New credit: `0`",
+    )
+    if any(phrase not in report for phrase in report_phrases):
+        errors.append("B9 R201 modular-minor structure report boundary incomplete")
+    discussion_phrases = (
+        "what should we lift first?",
+        "Two primes do not prove a characteristic-zero gcd",
+        "promotion remains false",
+        "credit remains zero",
+        "not quantum-hardware evidence",
+    )
+    if any(phrase not in discussion for phrase in discussion_phrases):
+        errors.append("B9 R201 modular-minor discussion draft boundary incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "artifact_bundle_sha256": result.get("artifact_bundle_sha256"),
+        "minor_count": result.get("minor_count"),
+        "artifact_count": result.get("artifact_count"),
+        "point_replay_match_count": sum(
+            row.get("point_replay_match_count", 0) for row in rows
+        ),
+        "factorization_replay_pass_count": sum(
+            row.get("factorization_replayed") is True for row in rows
+        ),
+        "common_D_multiplicity": 44,
+        "common_gcd_degree_by_prime": result.get("common_gcd_degree_by_prime"),
+        "D_removed_degree": 96,
+        "residual_term_counts": [2401, 464, 590, 450],
+        "cross_prime_factor_degree_multiplicity_match": result.get(
+            "cross_prime_factor_degree_multiplicity_match"
+        ),
+        "characteristic_zero_engineering_certificate_verified": result.get(
+            "characteristic_zero_engineering_certificate_verified"
+        ),
+        "bounded_CRT_integer_reconstruction_complete": result.get(
+            "bounded_CRT_integer_reconstruction_complete"
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R201 modular-minor") for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -44438,6 +44708,15 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r201_modular_structure = b9_results.get(
+        "r201_modular_minor_structure_v0"
+    )
+    b9_r201_modular_structure_status = audit_b9_r201_modular_minor_structure(
+        root,
+        b9_r201_modular_structure,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -54849,6 +55128,7 @@ def audit(root: Path) -> dict:
             "r200_bloch_atlas_preregistration": b9_r200_status,
             "r201_projective_patch_preregistration": b9_r201_status,
             "r201_certificate_readiness": b9_r201_readiness_status,
+            "r201_modular_minor_structure": b9_r201_modular_structure_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -59114,6 +59394,10 @@ def markdown_report(report: dict) -> str:
             f"- R201 modular minor 0 checked / degree / terms: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_checked')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_total_degree')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_term_count')}",
             f"- R201 modular minor 0 term hash: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_terms_sha256')}",
             f"- R201 engineering certificate / blocker closed / holdouts executed: {report['b9']['r201_certificate_readiness'].get('engineering_certificate_verified')} / {report['b9']['r201_certificate_readiness'].get('readiness_blocker_closed')} / {report['b9']['r201_certificate_readiness'].get('frozen_holdouts_executed')}",
+            f"- R201 modular structure status: {report['b9']['r201_modular_minor_structure'].get('status')}",
+            f"- R201 modular structure minors / artifacts / point replays / factor replays: {report['b9']['r201_modular_minor_structure'].get('minor_count')} / {report['b9']['r201_modular_minor_structure'].get('artifact_count')} / {report['b9']['r201_modular_minor_structure'].get('point_replay_match_count')} / {report['b9']['r201_modular_minor_structure'].get('factorization_replay_pass_count')}",
+            f"- R201 modular structure common D multiplicity / GCD degree / residual degree / residual terms: {report['b9']['r201_modular_minor_structure'].get('common_D_multiplicity')} / {report['b9']['r201_modular_minor_structure'].get('common_gcd_degree_by_prime')} / {report['b9']['r201_modular_minor_structure'].get('D_removed_degree')} / {report['b9']['r201_modular_minor_structure'].get('residual_term_counts')}",
+            f"- R201 modular structure cross-prime factor pattern / characteristic-zero certificate / CRT complete / holdouts executed: {report['b9']['r201_modular_minor_structure'].get('cross_prime_factor_degree_multiplicity_match')} / {report['b9']['r201_modular_minor_structure'].get('characteristic_zero_engineering_certificate_verified')} / {report['b9']['r201_modular_minor_structure'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_modular_minor_structure'].get('frozen_holdouts_executed')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

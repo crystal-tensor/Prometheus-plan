@@ -96,19 +96,24 @@ gamma_q` positive control also proves characteristic-zero ranks `79/42`,
 nullity 37, and all six onsite witnesses by combining a modular rank lower
 bound with 37 independent exact integer kernel vectors.
 
-The
-first frozen engineering minor now also completes over `GF(1,000,003)` with
-total degree 184, 8,649 nonzero terms, and a canonical term hash. This is a
-modular bridge validation, not a characteristic-zero or ideal-membership
-certificate. An exact source-dense binding now extends the `238x37` source
-matrix with 18 zero Pauli rows, proves `T*R=R*T=16I`, verifies all 37 candidate
-and commutator column relations, and derives the minor factor
-`(-2)^37*D^72`. The unseen `J=127/128,131/128` rows remain sealed. A real
-degree-184 engineering certificate, emitted-generator binding,
-and isolated pre-source reconstruction are still required. The next lifting
-route must use coefficient-bounded CRT with a modulus larger than twice the
-declared integer coefficient bound, followed by an independent modular replay;
-stable-looking modular factors alone will not count.
+All four frozen engineering minors now complete over both `GF(1,000,003)` and
+the safe prime `GF(536,870,723)`. A project-owned verifier independently
+reconstructs each bound `37x37` matrix, matches all 40 public point
+determinants, and multiplies all eight finite-field factorizations back to the
+original degree-184 polynomials. The factor degree/multiplicity patterns agree
+across both primes. The exact common factor across the four minors in each
+field is `D^44`, reducing the residual lifting targets to degree 96 with 2,401,
+464, 590, and 450 terms.
+
+This remains a modular structure replay, not a characteristic-zero or
+ideal-membership certificate. An exact source-dense binding extends the
+`238x37` source matrix with 18 zero Pauli rows, proves `T*R=R*T=16I`, verifies
+all 37 candidate and commutator column relations, and derives the dense-minor
+factor `(-2)^37*D^72`. The unseen `J=127/128,131/128` rows remain sealed. The
+next lifting route must prove integer coefficient bounds, use a CRT modulus
+larger than twice each bound, reconstruct the degree-96 integer residuals, and
+replay the exact determinant identities. Stable finite-field factors alone do
+not count.
 This is certificate infrastructure and an audit correction, not a continuous
 full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
 solved frontier, scientific promotion, or new credit.
@@ -478,6 +483,16 @@ inputs with an audit-owned pre-source reconstruction. Finite anchors,
 modular rank, Groebner hashes, numerical roots, and failed SOS searches cannot
 promote the result. Scientific promotion remains false and new credit remains
 zero.
+
+The current R201 modular structure step binds four public engineering minors
+to two primes and independently replays all 40 public matrix-determinant
+evaluations. All eight factor products reconstruct their source polynomials.
+Across both primes, the four-minor gcd is exactly `D^44`, so the next bounded
+CRT route works on degree-96 residuals rather than carrying the shared
+degree-88 projective factor. This is a workload reduction and evidence-integrity
+result only. No integer coefficient bound, characteristic-zero gcd,
+ideal-membership certificate, holdout execution permission, scientific
+promotion, or new credit exists yet.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

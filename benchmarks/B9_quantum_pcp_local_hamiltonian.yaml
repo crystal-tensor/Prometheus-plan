@@ -1229,6 +1229,60 @@ current_results:
     source_dense_representation_binding: ../results/B9_R201_source_dense_representation_binding_v0.json
     representation_binding_markdown: ../research/B9_R201_representation_binding.md
     markdown_report: ../research/B9_R201_certificate_readiness.md
+  r201_modular_minor_structure_v0:
+    status: public_eight_minor_two_prime_structure_verified_characteristic_zero_incomplete
+    method: b9_r201_project_owned_modular_minor_structure_v1
+    source: r201_certificate_readiness_v0
+    primes: [1000003, 536870723]
+    safe_prime: 536870723
+    safe_prime_half: 268435361
+    minor_count: 4
+    artifact_count: 8
+    public_point_replay_count: 40
+    public_point_replay_match_count: 40
+    factorization_replay_count: 8
+    factorization_replay_pass_count: 8
+    common_D_multiplicity: 44
+    common_gcd_degree_by_prime: 88
+    D_removed_degree: 96
+    residual_term_counts: [2401, 464, 590, 450]
+    cross_prime_monomial_support_match: true
+    cross_prime_factor_degree_multiplicity_match: true
+    structure_tool_sha256: 767d68b26673c57b5126024c4363c3d4c062c95cd28e7deb89dc9312a731c798
+    structure_result_sha256: 73c74b7c0377201f24315de4d3924c3ba24022b6d835f840f839036cc7886e24
+    artifact_bundle_sha256: fa4925cde2b9e4903381f15635720561757b62ba6092dfd1b09f42d8b3206398
+    markdown_report_sha256: 89cd210d96ccc423a19fe6dbf0e2438a4d7f3b8cb18be5c133de6f4d9dbef55b
+    discussion_draft_sha256: 3e148cc3936d689df8fdfa3e6a01f6aa6221e92a6aca8b4716d9e164f1f8c117
+    artifact_sha256:
+      minor0_mod1000003: 2faae4da4f7f6f13b53e4321ae8cbfdc223d3ea7bc07a0ed7f636c9c91afb2ce
+      minor1_mod1000003: cb0b1ded62b8acc7ef8268b7eebbf73aca2b114440c338f9743919f8709b2233
+      minor2_mod1000003: 3a0b4b15480e5e90148279ab8231bc8ffa34aeec290a715d928a28138e6e2b7b
+      minor3_mod1000003: b3008e98bcfc9ed5d1e6ec10cf40ebe577f368db26d7980974cdd1d49ee763a9
+      minor0_mod536870723: d3317a31d80cb4c204cb427473df8fc837b9db32f4826ff81983b2d6c063d063
+      minor1_mod536870723: f93d4b46958d67d815660aec577a059ccc23b50ed3b63d29866b238d7547302b
+      minor2_mod536870723: cf17f5e2008f2b433da2a1e5f0dd6aa55fdfed6b7ee0b9d6fbec10efb1e664ef
+      minor3_mod536870723: d0d6f6d5ca7b21d22e3ef3ecd37e20564a528ecd7fb778704e73e601d7fc0c9f
+    characteristic_zero_engineering_certificate_verified: false
+    integer_coefficient_bound_proved: false
+    bounded_CRT_integer_reconstruction_complete: false
+    ideal_membership_certificate_verified: false
+    readiness_blocker_closed: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    structure_tool: ../tools/b9_r201_modular_minor_structure.py
+    structure_result: ../results/B9_R201_modular_minor_structure_v0.json
+    markdown_report: ../research/B9_R201_modular_minor_structure.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-eight-minors-two-primes.md
+    artifacts:
+      minor0_mod1000003: ../results/B9_R201_singular_minor0_mod1000003_v0.json
+      minor1_mod1000003: ../results/B9_R201_singular_minor1_mod1000003_v0.json
+      minor2_mod1000003: ../results/B9_R201_singular_minor2_mod1000003_v0.json
+      minor3_mod1000003: ../results/B9_R201_singular_minor3_mod1000003_v0.json
+      minor0_mod536870723: ../results/B9_R201_singular_minor0_mod536870723_v0.json
+      minor1_mod536870723: ../results/B9_R201_singular_minor1_mod536870723_v0.json
+      minor2_mod536870723: ../results/B9_R201_singular_minor2_mod536870723_v0.json
+      minor3_mod536870723: ../results/B9_R201_singular_minor3_mod536870723_v0.json
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
