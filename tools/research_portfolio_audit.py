@@ -6888,6 +6888,303 @@ def audit_b9_r201_determinant_coefficient_bound(
     }
 
 
+def audit_b9_r201_crt_shard_replay(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the first incremental R201 modular CRT execution shard."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "artifact_progress": None,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R201 CRT shard replay")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    paths = {
+        "replay tool": resolve(manifest_entry.get("replay_tool")),
+        "replay result": resolve(manifest_entry.get("replay_result")),
+        "markdown report": resolve(manifest_entry.get("markdown_report")),
+        "discussion draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    artifact_paths = {
+        label: resolve(relative)
+        for label, relative in manifest_entry.get("artifacts", {}).items()
+    }
+    paths.update({f"artifact {label}": path for label, path in artifact_paths.items()})
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R201 CRT shard {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {
+        "replay_tool_sha256": digest(paths["replay tool"]),
+        "replay_result_sha256": digest(paths["replay result"]),
+        "markdown_report_sha256": digest(paths["markdown report"]),
+        "discussion_draft_sha256": digest(paths["discussion draft"]),
+    }
+    observed_artifacts = {
+        label: digest(path) for label, path in artifact_paths.items()
+    }
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R201 CRT shard {field} mismatch")
+    if manifest_entry.get("artifact_sha256") != observed_artifacts:
+        errors.append("B9 R201 CRT shard artifact hashes mismatch")
+
+    result = json.loads(read(paths["replay result"]))
+    report = read(paths["markdown report"])
+    discussion = read(paths["discussion draft"])
+    artifact_rows = result.get("artifact_rows", [])
+    minor_rows = result.get("minor_rows", [])
+    expected_primes = [1000003, 536870723, 536870909]
+    expected_row_hashes = [
+        "2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae",
+        "636ee93903a64bc655cbec5e744a1001c8071b3a7c849fc69622161d56d64bc7",
+        "7d38cb521a1b0cce5a3da989319c296f89093452f8019dec23b102c7ff5a1b76",
+        "b421e4307fda9401cc582f81d54f8b0bb2d4040880d1da4cb2b2d80a8319eccb",
+    ]
+    expected_terms = [8649, 4468, 4770, 2760]
+    expected_support_hashes = [
+        "3eb3df9accd924c2d40acf8f86bf9550b5ff8cb49de8208c841782721ff7153b",
+        "3043ecfb6f02a6bae7563658e7af01f0ec555955ecbae5baa0e5214131ac1eed",
+        "dba93d0b2441ea7d71a85108d0673b9ee895c58acc8d8924228e0a91a175c407",
+        "bfa701e3c97f5f1385fb8ece4bd46be59663b9ac78049ffa372cf2974636f31d",
+    ]
+    expected_partial_hashes = [
+        "b967d2021bea0fad1019f2274054b268e1550b81db05bbf9c37d9998c985a10f",
+        "1e8e250a9885709bc5bff300777c44fd66b4ae4fa05dfdabcdf7e37b74f47bbb",
+        "6b7a4dfaa1b0e54e914f1dac8f57c3e04fd4d6115a9cb45090d5f73042329faa",
+        "840024588abfa532c9a0eaae31a93a23467c97ce7a298aaa8f2c13bc6ab83cb8",
+    ]
+    expected_new_hashes = {
+        0: "4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c",
+        1: "949fce6c4d6190b6b3726bc8c740e1dddb6025a80186713ba805f5670923cc24",
+        2: "b204cb2e02ee5d6885acca4e8aa8c016b8bc80ce774ed2cc52f57405c7920d2f",
+        3: "e04dc6934f5a4baa1d6ba56eb520a3208a834563c5ee212f0a1eacc32ce16ee1",
+    }
+
+    row_keys = {
+        (row.get("prime"), row.get("minor_index")) for row in artifact_rows
+    }
+    expected_keys = {
+        (prime, minor_index)
+        for prime in expected_primes
+        for minor_index in range(4)
+    }
+    row_mismatch = len(artifact_rows) != 12 or row_keys != expected_keys
+    for row in artifact_rows:
+        minor_index = row.get("minor_index")
+        prime = row.get("prime")
+        path = root / row.get("path", "")
+        if minor_index not in range(4):
+            row_mismatch = True
+            continue
+        expected_hash = expected_new_hashes.get(minor_index) if prime == 536870909 else None
+        if (
+            row.get("row_words_sha256") != expected_row_hashes[minor_index]
+            or row.get("total_degree") != 184
+            or row.get("term_count") != expected_terms[minor_index]
+            or row.get("monomial_support_sha256")
+            != expected_support_hashes[minor_index]
+            or row.get("point_replay_count") != 5
+            or row.get("point_replay_match_count") != 5
+            or row.get("binding_errors") != []
+            or not path.exists()
+            or row.get("artifact_sha256") != digest(path)
+            or (expected_hash is not None and row.get("artifact_sha256") != expected_hash)
+        ):
+            row_mismatch = True
+    if row_mismatch:
+        errors.append("B9 R201 CRT shard artifact replay mismatch")
+
+    minor_mismatch = len(minor_rows) != 4
+    for index, row in enumerate(minor_rows):
+        if index >= 4 or (
+            row.get("minor_index") != index
+            or row.get("row_words_sha256") != expected_row_hashes[index]
+            or row.get("cross_prime_monomial_support_match") is not True
+            or row.get("modular_support_term_count") != expected_terms[index]
+            or row.get("homogeneous_lattice_size") != 17205
+            or row.get("partial_CRT_nonzero_symmetric_residue_count")
+            != expected_terms[index]
+            or row.get("partial_CRT_symmetric_payload_sha256")
+            != expected_partial_hashes[index]
+            or row.get("partial_CRT_roundtrip_check_count") != 51615
+            or row.get("partial_CRT_roundtrip_expected_count") != 51615
+            or row.get("partial_CRT_roundtrip_complete") is not True
+        ):
+            minor_mismatch = True
+    if minor_mismatch:
+        errors.append("B9 R201 CRT shard partial CRT mismatch")
+
+    if (
+        result.get("method") != "b9_r201_incremental_modular_CRT_shard_replay_v1"
+        or result.get("version") != "0.1.0"
+        or result.get("scope")
+        != "public_R201_incremental_modular_CRT_execution_only"
+        or result.get("coupling") != "13/32"
+        or result.get("n") != 4
+        or result.get("determinant_degree") != 184
+        or result.get("dimension") != 37
+        or result.get("all_CRT_primes") != expected_primes
+        or result.get("completed_additional_primes") != [536870909]
+        or result.get("completed_additional_prime_count") != 1
+        or result.get("remaining_additional_prime_count") != 13
+        or result.get("completed_additional_minor_artifact_count") != 4
+        or result.get("planned_additional_minor_artifact_count") != 56
+        or result.get("remaining_additional_minor_artifact_count") != 52
+        or result.get("artifact_progress") != "4/56"
+        or result.get("partial_CRT_modulus") != "288231137763316424491621"
+        or result.get("partial_CRT_modulus_bit_length") != 78
+        or result.get("required_twice_bound_bit_length") != 427
+        or result.get("partial_CRT_modulus_exceeds_twice_maximum_bound") is not False
+        or result.get("all_artifact_bindings_clean") is not True
+        or result.get("all_point_replays_match") is not True
+        or result.get("all_cross_prime_monomial_supports_match") is not True
+        or result.get("all_partial_CRT_roundtrips_complete") is not True
+        or result.get("partial_CRT_residues_are_unique_integer_coefficients")
+        is not False
+        or result.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or result.get("characteristic_zero_D44_divisibility_verified") is not False
+        or result.get("characteristic_zero_engineering_certificate_verified")
+        is not False
+        or result.get("ideal_membership_certificate_verified") is not False
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    ):
+        errors.append("B9 R201 CRT shard result mismatch")
+
+    bound_path = root / "results/B9_R201_determinant_coefficient_bound_v0.json"
+    if (
+        result.get("bound_result_sha256") != digest(bound_path)
+        or result.get("bridge_tool_sha256")
+        != digest(root / "tools/b9_r201_singular_minor_bridge.py")
+    ):
+        errors.append("B9 R201 CRT shard source binding mismatch")
+
+    manifest_expectations = {
+        "status": "first_planned_prime_shard_verified_bounded_CRT_incomplete",
+        "method": "b9_r201_incremental_modular_CRT_shard_replay_v1",
+        "all_CRT_primes": expected_primes,
+        "completed_additional_primes": [536870909],
+        "completed_additional_prime_count": 1,
+        "remaining_additional_prime_count": 13,
+        "completed_additional_minor_artifact_count": 4,
+        "planned_additional_minor_artifact_count": 56,
+        "remaining_additional_minor_artifact_count": 52,
+        "artifact_progress": "4/56",
+        "determinant_degree": 184,
+        "homogeneous_monomial_lattice_size": 17205,
+        "partial_CRT_modulus_bit_length": 78,
+        "required_twice_bound_bit_length": 427,
+        "artifact_count": 12,
+        "point_replay_count": 60,
+        "point_replay_match_count": 60,
+        "coefficient_slot_roundtrip_count": 206460,
+        "coefficient_slot_roundtrip_pass_count": 206460,
+        "cross_prime_monomial_support_match": True,
+        "partial_CRT_residues_are_unique_integer_coefficients": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "characteristic_zero_engineering_certificate_verified": False,
+        "ideal_membership_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R201 CRT shard manifest mismatch")
+
+    report_phrases = (
+        "first added prime in the frozen plan is `536,870,909`",
+        "All `60/60` matrix-determinant point replays match",
+        "Aggregate coefficient-slot round trips pass `206,460/206,460`",
+        "current modulus has only 78 bits",
+        "completed new artifacts:   4/56",
+        "Bounded CRT integer reconstruction complete: `false`",
+        "New credit: `0`",
+    )
+    if any(phrase not in report for phrase in report_phrases):
+        errors.append("B9 R201 CRT shard report boundary incomplete")
+    discussion_phrases = (
+        "When do matching modular shards become a proof rather than a pattern?",
+        "`60/60` matches",
+        "All `206,460/206,460` slot-prime round trips pass",
+        "new artifacts remaining:  52",
+        "not quantum-hardware evidence",
+    )
+    if any(phrase not in discussion for phrase in discussion_phrases):
+        errors.append("B9 R201 CRT shard discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "artifact_progress": result.get("artifact_progress"),
+        "completed_additional_prime_count": result.get(
+            "completed_additional_prime_count"
+        ),
+        "remaining_additional_prime_count": result.get(
+            "remaining_additional_prime_count"
+        ),
+        "completed_additional_minor_artifact_count": result.get(
+            "completed_additional_minor_artifact_count"
+        ),
+        "remaining_additional_minor_artifact_count": result.get(
+            "remaining_additional_minor_artifact_count"
+        ),
+        "partial_CRT_modulus_bit_length": result.get(
+            "partial_CRT_modulus_bit_length"
+        ),
+        "required_twice_bound_bit_length": result.get(
+            "required_twice_bound_bit_length"
+        ),
+        "point_replay_match_count": sum(
+            row.get("point_replay_match_count", 0) for row in artifact_rows
+        ),
+        "coefficient_slot_roundtrip_pass_count": sum(
+            row.get("partial_CRT_roundtrip_check_count", 0) for row in minor_rows
+        ),
+        "partial_CRT_residues_are_unique_integer_coefficients": result.get(
+            "partial_CRT_residues_are_unique_integer_coefficients"
+        ),
+        "bounded_CRT_integer_reconstruction_complete": result.get(
+            "bounded_CRT_integer_reconstruction_complete"
+        ),
+        "characteristic_zero_D44_divisibility_verified": result.get(
+            "characteristic_zero_D44_divisibility_verified"
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R201 CRT shard") for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -44994,6 +45291,13 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r201_crt_shard = b9_results.get("r201_crt_shard_replay_v0")
+    b9_r201_crt_shard_status = audit_b9_r201_crt_shard_replay(
+        root,
+        b9_r201_crt_shard,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -55407,6 +55711,7 @@ def audit(root: Path) -> dict:
             "r201_certificate_readiness": b9_r201_readiness_status,
             "r201_modular_minor_structure": b9_r201_modular_structure_status,
             "r201_determinant_coefficient_bound": b9_r201_determinant_bound_status,
+            "r201_crt_shard_replay": b9_r201_crt_shard_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -59680,6 +59985,10 @@ def markdown_report(report: dict) -> str:
             f"- R201 determinant degree / maximum bound bits / doubled bound bits: {report['b9']['r201_determinant_coefficient_bound'].get('determinant_degree')} / {report['b9']['r201_determinant_coefficient_bound'].get('maximum_bound_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('doubled_maximum_bound_bits')}",
             f"- R201 CRT existing / final modulus bits / added primes / added artifacts: {report['b9']['r201_determinant_coefficient_bound'].get('existing_modulus_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('final_modulus_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('planned_additional_prime_count')} / {report['b9']['r201_determinant_coefficient_bound'].get('planned_additional_minor_artifact_count')}",
             f"- R201 integer bound / characteristic-zero D44 / CRT complete / holdouts executed: {report['b9']['r201_determinant_coefficient_bound'].get('integer_coefficient_bound_proved')} / {report['b9']['r201_determinant_coefficient_bound'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_determinant_coefficient_bound'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_determinant_coefficient_bound'].get('frozen_holdouts_executed')}",
+            f"- R201 CRT shard status / artifact progress: {report['b9']['r201_crt_shard_replay'].get('status')} / {report['b9']['r201_crt_shard_replay'].get('artifact_progress')}",
+            f"- R201 CRT shard completed / remaining primes and artifacts: {report['b9']['r201_crt_shard_replay'].get('completed_additional_prime_count')} / {report['b9']['r201_crt_shard_replay'].get('remaining_additional_prime_count')} / {report['b9']['r201_crt_shard_replay'].get('completed_additional_minor_artifact_count')} / {report['b9']['r201_crt_shard_replay'].get('remaining_additional_minor_artifact_count')}",
+            f"- R201 CRT shard modulus / required bits / point replays / coefficient roundtrips: {report['b9']['r201_crt_shard_replay'].get('partial_CRT_modulus_bit_length')} / {report['b9']['r201_crt_shard_replay'].get('required_twice_bound_bit_length')} / {report['b9']['r201_crt_shard_replay'].get('point_replay_match_count')} / {report['b9']['r201_crt_shard_replay'].get('coefficient_slot_roundtrip_pass_count')}",
+            f"- R201 CRT residues unique / CRT complete / characteristic-zero D44 / holdouts executed: {report['b9']['r201_crt_shard_replay'].get('partial_CRT_residues_are_unique_integer_coefficients')} / {report['b9']['r201_crt_shard_replay'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_crt_shard_replay'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_crt_shard_replay'].get('frozen_holdouts_executed')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

@@ -1326,6 +1326,54 @@ current_results:
     bound_result: ../results/B9_R201_determinant_coefficient_bound_v0.json
     markdown_report: ../research/B9_R201_determinant_coefficient_bound.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r201-how-many-primes-buy-a-proof.md
+  r201_crt_shard_replay_v0:
+    status: first_planned_prime_shard_verified_bounded_CRT_incomplete
+    method: b9_r201_incremental_modular_CRT_shard_replay_v1
+    source: r201_determinant_coefficient_bound_v0
+    all_CRT_primes: [1000003, 536870723, 536870909]
+    completed_additional_primes: [536870909]
+    completed_additional_prime_count: 1
+    remaining_additional_prime_count: 13
+    completed_additional_minor_artifact_count: 4
+    planned_additional_minor_artifact_count: 56
+    remaining_additional_minor_artifact_count: 52
+    artifact_progress: 4/56
+    determinant_degree: 184
+    homogeneous_monomial_lattice_size: 17205
+    partial_CRT_modulus_bit_length: 78
+    required_twice_bound_bit_length: 427
+    artifact_count: 12
+    point_replay_count: 60
+    point_replay_match_count: 60
+    coefficient_slot_roundtrip_count: 206460
+    coefficient_slot_roundtrip_pass_count: 206460
+    cross_prime_monomial_support_match: true
+    partial_CRT_residues_are_unique_integer_coefficients: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_D44_divisibility_verified: false
+    characteristic_zero_engineering_certificate_verified: false
+    ideal_membership_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    replay_tool_sha256: 34d02ea896fc73063d09326a8ef3951fca334f93ce8dfead711aaaa1f236610c
+    replay_result_sha256: bc72e698987eb5373721048259fe6a82317c19112a5a4e4e32823323ce16d326
+    markdown_report_sha256: a951ecc697ca5754fe7d19b0134482f9ac91a4bda8bcf37fc1e222eacca2beea
+    discussion_draft_sha256: 6166db5a8d001b45f550dbaf91c240c098cec096fdda959a40222a3e8d0dce92
+    artifact_sha256:
+      minor0_mod536870909: 4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c
+      minor1_mod536870909: 949fce6c4d6190b6b3726bc8c740e1dddb6025a80186713ba805f5670923cc24
+      minor2_mod536870909: b204cb2e02ee5d6885acca4e8aa8c016b8bc80ce774ed2cc52f57405c7920d2f
+      minor3_mod536870909: e04dc6934f5a4baa1d6ba56eb520a3208a834563c5ee212f0a1eacc32ce16ee1
+    replay_tool: ../tools/b9_r201_crt_shard_replay.py
+    replay_result: ../results/B9_R201_crt_shard_replay_v0.json
+    markdown_report: ../research/B9_R201_crt_shard_replay.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-when-do-modular-shards-become-a-proof.md
+    artifacts:
+      minor0_mod536870909: ../results/B9_R201_singular_minor0_mod536870909_v0.json
+      minor1_mod536870909: ../results/B9_R201_singular_minor1_mod536870909_v0.json
+      minor2_mod536870909: ../results/B9_R201_singular_minor2_mod536870909_v0.json
+      minor3_mod536870909: ../results/B9_R201_singular_minor3_mod536870909_v0.json
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py

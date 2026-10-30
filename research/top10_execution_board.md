@@ -290,6 +290,16 @@ then exact `D^44` division over `ZZ[a,b,c]`. The frozen
 `J=127/128,131/128` rows have not executed; integer reconstruction, ideal
 membership, maturity, promotion, and credit do not change.
 
+T-B9-015g executes the first added prime `536,870,909`. All four determinants
+complete, moving the new-artifact ledger to `4/56`. The incremental verifier
+binds all 12 artifacts across three primes, matches `60/60` public
+matrix-determinant points, confirms all four cross-prime monomial supports,
+and passes `206,460/206,460` coefficient-slot modular round trips over the full
+degree-184 lattice. The partial modulus has 78 bits versus the 427-bit
+uniqueness threshold, so no partial CRT representative is promoted to an
+integer coefficient. Thirteen primes and 52 artifacts remain; the next shard
+is prime `536,870,879`.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**
