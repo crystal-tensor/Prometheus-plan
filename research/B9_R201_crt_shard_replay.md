@@ -1,10 +1,10 @@
-# B9 R201 Seventh Incremental CRT Shard Replay
+# B9 R201 Eighth Incremental CRT Shard Replay
 
 - Date: `2026-10-31`
 - Track: `B9`
-- Status: `seven planned prime shards complete; bounded CRT incomplete`
-- New determinant artifacts: `28/56`
-- Completed additional primes: `7/14`
+- Status: `eight planned prime shards complete; bounded CRT incomplete`
+- New determinant artifacts: `32/56`
+- Completed additional primes: `8/14`
 - Bounded CRT integer reconstruction complete: `false`
 - Characteristic-zero `D^44` divisibility verified: `false`
 - Frozen holdouts executed: `false`
@@ -13,19 +13,19 @@
 
 ## Question
 
-Can nine agreeing prime worlds still share one hidden systematic error?
+Can a tenth exact prime world expose one shared construction error?
 
 ## Four New Determinants
 
-The seventh added prime in the frozen plan is `536,870,819`. All four public
-`37x37` determinants complete exactly over `GF(536,870,819)`:
+The eighth added prime in the frozen plan is `536,870,813`. All four public
+`37x37` determinants complete exactly over `GF(536,870,813)`:
 
 | Minor | Total degree | Terms | Artifact SHA-256 |
 | --- | ---: | ---: | --- |
-| 0 | 184 | 8,649 | `851d7747388cd279db97ac1ed2f3d989ae4f174cfe09ab8cdb8bff74297a4ca8` |
-| 1 | 184 | 4,468 | `1ba838bd7a9b3d802c72e3f9bf7cde460be9c83a90a65c0a665bdbbcaf15a46e` |
-| 2 | 184 | 4,770 | `1b2c2123924189bf5029d8c546d7125c86057ba2978fa476026ee5a1d5d11860` |
-| 3 | 184 | 2,760 | `7cad12658ca48c55b6aa58ffc51568d5a4753ef7a3e098316cd7332585ea449a` |
+| 0 | 184 | 8,649 | `1530d30eef1318e72839d3f3fdaf2990844c40a6ad42a636fe00c1d070f32201` |
+| 1 | 184 | 4,468 | `30d8ee9acb69b7c4b15ebdee85d62027865876a355074fe8ec7bafe4ebb0b2d8` |
+| 2 | 184 | 4,770 | `da719639177f09d828d0534738bcfdbc46e6520799a9ed4d78645ac1d7d24618` |
+| 3 | 184 | 2,760 | `4f65ad811e446e5fdfbd7efec203aec535bb184d9a22a7242c14b6937a2acafe` |
 
 Every artifact preserves its frozen row-set hash, source-matrix hash,
 candidate-label hash, bridge-tool hash, degree, term count, and zero-credit
@@ -33,7 +33,7 @@ boundary.
 
 ## Independent Matrix Replay
 
-`tools/b9_r201_crt_shard_replay.py` loads all 36 determinant artifacts now
+`tools/b9_r201_crt_shard_replay.py` loads all 40 determinant artifacts now
 available across
 
 ```text
@@ -46,6 +46,7 @@ available across
 536,870,839
 536,870,837
 536,870,819
+536,870,813
 ```
 
 For every artifact it rebuilds the frozen matrix at five public deterministic
@@ -53,47 +54,47 @@ points, computes the `37x37` determinant with project-owned modular Gaussian
 elimination, evaluates the stored polynomial independently, and compares the
 two values.
 
-All `180/180` matrix-determinant point replays match. Artifact binding errors
+All `200/200` matrix-determinant point replays match. Artifact binding errors
 are zero.
 
 ## Partial CRT State
 
-The nine-prime modulus is
+The ten-prime modulus is
 
 ```text
-6,901,759,698,662,225,667,511,825,424,053,451,348,186,141,581,838,581,409,414,520,966,995,103,636,943
+3,705,353,340,551,424,106,506,541,402,525,646,180,756,639,906,374,785,236,039,059,725,556,207,456,584,845,244,659
 ```
 
-with bit length `252`. For every minor, the verifier walks the complete
+with bit length `281`. For every minor, the verifier walks the complete
 `17,205`-slot homogeneous degree-184 lattice, treats omitted modular terms as
 zero, computes a symmetric partial CRT residue, and reduces that residue back
 modulo every source prime.
 
 | Minor | Support terms | Slot-prime round trips | Partial residue hash |
 | --- | ---: | ---: | --- |
-| 0 | 8,649 | 154,845/154,845 | `2e400a70e95bddd57a5fff61c86ed9225d1946c92ba672c139583fb08ab83c04` |
-| 1 | 4,468 | 154,845/154,845 | `da482369901f16feddff3303877b44abbaa5789d0ed2411eb627def6cfd775df` |
-| 2 | 4,770 | 154,845/154,845 | `67786be9314f61f575271488319aee7ad9013a3197ef4db950b7a227dc924aba` |
-| 3 | 2,760 | 154,845/154,845 | `ff43773999bf35766538e8faf35d2ecaac21d3620a6d05fb8c77aaed7f9b1bf2` |
+| 0 | 8,649 | 172,050/172,050 | `a5b03bfcdbdbb85b2b3d6de0fe1e5c2237a6bbc109a09285c086c89248b3850e` |
+| 1 | 4,468 | 172,050/172,050 | `a535b079d7a8f79257f4bf54c8865dd5020f0c94c283202661700cae30d942b5` |
+| 2 | 4,770 | 172,050/172,050 | `7dec77903cd9cf8bf1df5b3275d3c29dfe132613a24b7a0af7429bf785a6c9a5` |
+| 3 | 2,760 | 172,050/172,050 | `ff43773999bf35766538e8faf35d2ecaac21d3620a6d05fb8c77aaed7f9b1bf2` |
 
-All four monomial supports match across all nine primes. Aggregate coefficient-slot round trips pass `619,380/619,380`.
+All four monomial supports match across all ten primes. Aggregate coefficient-slot round trips pass `688,200/688,200`.
 
 ## Why This Is Not Yet Integer Reconstruction
 
-The proved uniqueness threshold has 427 bits; the current modulus has only 252 bits, so many different bounded and unbounded integers can share the same nine residues. The symmetric values hashed above are partial CRT representatives, not verified characteristic-zero coefficients.
+The proved uniqueness threshold has 427 bits; the current modulus has only 281 bits, so many different bounded and unbounded integers can share the same ten residues. The symmetric values hashed above are partial CRT representatives, not verified characteristic-zero coefficients.
 
 The execution ledger is now:
 
 ```text
-completed new primes:      7/14
-completed new artifacts:  28/56
-remaining new primes:      7
-remaining new artifacts:  28
+completed new primes:      8/14
+completed new artifacts:  32/56
+remaining new primes:      6
+remaining new artifacts:  24
 ```
 
 ## Claim Boundary
 
-This result verifies the first seven modular execution shards and their
+This result verifies the first eight modular execution shards and their
 partial CRT round trips. It does not uniquely reconstruct an integer
 coefficient, verify a characteristic-zero determinant, prove `D^44`
 divisibility, compute a characteristic-zero gcd, emit the ideal-membership
@@ -103,6 +104,6 @@ add credit.
 
 ## Next Gate
 
-Compute the four minors at planned prime `536,870,813`, rerun the full point
-and slot-roundtrip audit, and advance the ledger to `32/56` artifacts only if
+Compute the four minors at planned prime `536,870,791`, rerun the full point
+and slot-roundtrip audit, and advance the ledger to `36/56` artifacts only if
 every binding and replay remains exact.
