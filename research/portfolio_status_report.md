@@ -2664,6 +2664,10 @@ Overall audit: PASS
 - R200 evidence integrity / atlas frames / projective axes / frozen rows: True / 82 / 31 / 186
 - R200 main / independent full-rank rows / integrated gates: 186 / 186 / 10
 - R200 pre-source seal / holdouts executed / accepted rows / promotion / credit: True / True / 186 / False / 0
+- R201 continuous projective-patch protocol status: public_preregistration_ready_execution_blocked
+- R201 evidence integrity / matrix / columns / polynomial nonzeros / degree bound: True / 238 / 37 / 2129 / 184
+- R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: 8 / True / False / False
+- R201 accepted rows / promotion / credit: 0 / False / 0
 
 ## B10 BQP Boundary Graph Status
 

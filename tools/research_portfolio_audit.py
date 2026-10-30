@@ -5633,6 +5633,169 @@ def audit_b9_r200_preregistration(
     return status
 
 
+def audit_b9_r201_preregistration(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the blocked R201 continuous projective-patch preregistration."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "frozen_holdouts_may_execute": None,
+        "frozen_holdouts_executed": None,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R201 projective-patch preregistration")
+        return status
+
+    expected_hashes = {
+        "contract_sha256": "b3c960f5081a776ccd7165c0146c39e81bf6170820ac593c0f37c8b928b6cb99",
+        "tool_sha256": "5b3d9c9aebdb7fa6aa93f28f336e5b95a7ba41ccf8cd926dea28dc04d569216c",
+        "independent_audit_tool_sha256": "be394fec66bb10231550721745e13bb3a6c3a4f2d97ff955a3ac7e965e18a944",
+        "engineering_probe_sha256": "cb33131308ea61bd12c40d1d7b02f65b08e9a198b0e3ef5c773e30f2f7a2b228",
+        "independent_audit_seal_sha256": "732b30fde0931e04d74c1acad4dd8c3fb9cf900a1245546ba9de70434443393c",
+        "r198_dependency_sha256": "c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13",
+        "requirements_sha256": "b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88",
+    }
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    paths = {
+        "contract": resolve(manifest_entry.get("contract")),
+        "engineering probe": resolve(manifest_entry.get("engineering_probe")),
+        "independent audit seal": resolve(manifest_entry.get("independent_audit_seal")),
+        "preregistration report": resolve(manifest_entry.get("markdown_preregistration")),
+        "tool": root / "tools/b9_r201_projective_patch_certificate.py",
+        "independent audit tool": root / "tools/b9_r201_independent_audit.py",
+        "R198 dependency": root / "tools/b9_r198_continuous_frame_stress.py",
+        "requirements": root / "requirements.txt",
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R201 preregistration {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed_hashes = {
+        "contract_sha256": digest(paths["contract"]),
+        "tool_sha256": digest(paths["tool"]),
+        "independent_audit_tool_sha256": digest(paths["independent audit tool"]),
+        "engineering_probe_sha256": digest(paths["engineering probe"]),
+        "independent_audit_seal_sha256": digest(paths["independent audit seal"]),
+        "r198_dependency_sha256": digest(paths["R198 dependency"]),
+        "requirements_sha256": digest(paths["requirements"]),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes[field] != expected or manifest_entry.get(field) != expected:
+            errors.append(f"B9 R201 preregistration {field} mismatch")
+
+    contract = json.loads(read(paths["contract"]))
+    probe = json.loads(read(paths["engineering probe"]))
+    seal = json.loads(read(paths["independent audit seal"]))
+    report = read(paths["preregistration report"])
+    matrix = probe.get("matrix_probe", {})
+    control = probe.get("positive_control", {})
+    protocol = probe.get("protocol", {})
+    readiness = contract.get("execution_readiness", {})
+
+    if (
+        manifest_entry.get("status") != "public_preregistration_ready_execution_blocked"
+        or manifest_entry.get("method") != "b9_r201_homogeneous_projective_patch_certificate_v1"
+        or manifest_entry.get("experiment_id")
+        != "B9-R201-continuous-projective-bloch-patch-certificate"
+        or contract.get("status") != "public_preregistration_required"
+    ):
+        errors.append("B9 R201 preregistration identity mismatch")
+    if (
+        probe.get("status") != "public_preregistration_execution_pending"
+        or probe.get("mode") != "engineering_probe_only"
+        or probe.get("acceptance_count") != 0
+        or probe.get("frozen_holdouts_executed") is not False
+        or matrix.get("candidate_column_count") != 37
+        or matrix.get("output_basis_size") != 238
+        or matrix.get("polynomial_commutator_nonzero_count") != 2129
+        or matrix.get("maximal_minor_total_degree_bound") != 184
+        or matrix.get("full_rank_anchor_count") != 8
+        or matrix.get("checked") is not True
+        or protocol.get("frame_identities", {}).get("identity_pass_count") != 10
+        or protocol.get("protocol_sha256")
+        != "994905bd727da0eb6ae34aa6c56e4f5477d3f9ea9e8720eea5b23ae8e4188c7d"
+    ):
+        errors.append("B9 R201 engineering protocol mismatch")
+    boundary_anchors = {
+        tuple(item.get("anchor", [])): item for item in matrix.get("anchor_selections", [])
+    }
+    if not all(
+        boundary_anchors.get(anchor, {}).get("full_column_rank") is True
+        for anchor in ((1, 0, 0), (0, 1, 0))
+    ):
+        errors.append("B9 R201 projective boundary anchor mismatch")
+    if (
+        control.get("operator_basis_modular_ranks") != {"1000003": 79, "1000033": 79}
+        or control.get("modular_ranks") != {"1000003": 42, "1000033": 42}
+        or control.get("modular_nullities") != {"1000003": 37, "1000033": 37}
+        or control.get("onsite_tilted_charge_witnesses_checked") is not True
+    ):
+        errors.append("B9 R201 positive-control mismatch")
+    if (
+        seal.get("status") != "independent_pre_source_seal_complete"
+        or seal.get("source_result_read") is not False
+        or seal.get("checked") is not True
+        or seal.get("main_and_audit_anchor_sets_disjoint") is not True
+        or seal.get("frame_checks", {}).get("scalar_identity_pass_count") != 16
+        or seal.get("candidate_column_counts") != {"4": 37, "5": 56, "6": 79}
+    ):
+        errors.append("B9 R201 independent design seal mismatch")
+    if (
+        readiness.get("frozen_holdouts_may_execute") is not False
+        or manifest_entry.get("frozen_holdouts_may_execute") is not False
+        or manifest_entry.get("frozen_holdouts_executed") is not False
+        or manifest_entry.get("frozen_acceptance_count") != 0
+        or manifest_entry.get("nullstellensatz_certificate_verified") is not False
+        or manifest_entry.get("audit_owned_pre_source_reconstruction_complete") is not False
+        or manifest_entry.get("scientific_promotion_accepted") is not False
+        or manifest_entry.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R201 execution or claim boundary mismatch")
+    required_report_phrases = (
+        "`238` output rows and `37` candidate columns",
+        "maximal-minor total-degree bound `184`",
+        "Frozen holdouts executed: `false`",
+        "Nullstellensatz",
+        "Scientific promotion: `false`",
+    )
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R201 preregistration report claim boundary is incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed_hashes,
+        "protocol_sha256": protocol.get("protocol_sha256"),
+        "engineering_matrix_rows": matrix.get("output_basis_size"),
+        "engineering_candidate_columns": matrix.get("candidate_column_count"),
+        "engineering_polynomial_nonzero_count": matrix.get("polynomial_commutator_nonzero_count"),
+        "engineering_maximal_minor_degree_bound": matrix.get("maximal_minor_total_degree_bound"),
+        "engineering_full_rank_anchor_count": matrix.get("full_rank_anchor_count"),
+        "independent_design_seal_complete": seal.get("checked"),
+        "frozen_holdouts_may_execute": readiness.get("frozen_holdouts_may_execute"),
+        "frozen_holdouts_executed": probe.get("frozen_holdouts_executed"),
+        "frozen_acceptance_count": probe.get("acceptance_count"),
+        "scientific_promotion_accepted": manifest_entry.get("scientific_promotion_accepted"),
+        "new_credit_delta": manifest_entry.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R201") for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -43705,6 +43868,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r201 = b9_results.get("r201_projective_patch_preregistration_v0")
+    b9_r201_status = audit_b9_r201_preregistration(
+        root,
+        b9_r201,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -54114,6 +54284,7 @@ def audit(root: Path) -> dict:
             "r198_continuous_frame_stress": b9_r198_status,
             "r199_ay_meridian_stress": b9_r199_status,
             "r200_bloch_atlas_preregistration": b9_r200_status,
+            "r201_projective_patch_preregistration": b9_r201_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -58364,6 +58535,10 @@ def markdown_report(report: dict) -> str:
             f"- R200 evidence integrity / atlas frames / projective axes / frozen rows: {report['b9']['r200_bloch_atlas_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('atlas_row_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('expected_grid_row_count')}",
             f"- R200 main / independent full-rank rows / integrated gates: {report['b9']['r200_bloch_atlas_preregistration'].get('main_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('independent_full_rank_grid_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('integrated_requirement_pass_count')}",
             f"- R200 pre-source seal / holdouts executed / accepted rows / promotion / credit: {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_pre_source_seal_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_holdouts_executed')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r200_bloch_atlas_preregistration'].get('new_credit_delta')}",
+            f"- R201 continuous projective-patch protocol status: {report['b9']['r201_projective_patch_preregistration'].get('status')}",
+            f"- R201 evidence integrity / matrix / columns / polynomial nonzeros / degree bound: {report['b9']['r201_projective_patch_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_matrix_rows')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_candidate_columns')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_polynomial_nonzero_count')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_maximal_minor_degree_bound')}",
+            f"- R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: {report['b9']['r201_projective_patch_preregistration'].get('engineering_full_rank_anchor_count')} / {report['b9']['r201_projective_patch_preregistration'].get('independent_design_seal_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_may_execute')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_executed')}",
+            f"- R201 accepted rows / promotion / credit: {report['b9']['r201_projective_patch_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r201_projective_patch_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r201_projective_patch_preregistration'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

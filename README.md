@@ -428,6 +428,21 @@ Scientific promotion is false and new credit remains zero. The next gate is
 an exact continuous two-parameter projective-patch certificate at `n=4`, with
 `n=5` allowed only after the `n=4` complex or real rank-drop set is resolved.
 
+R201 now turns that next gate into an exact, publicly inspectable protocol.
+The `n=4` engineering matrix has 238 rows, 37 candidate columns, 2,129
+nonzero polynomial entries, and maximal-minor degree bound 184. All eight
+public anchors, including two `c=0` projective-boundary points, have full
+column rank. The correct `J=0` control at `[-1:0:2]` again recovers ranks
+79/42, nullity 37, and six onsite charges.
+
+The unseen `J=127/128,131/128` holdouts remain unexecuted. R201 is deliberately
+blocked until the solver emits an exact Nullstellensatz or complete
+ideal-membership certificate and the auditor replaces source-shaped rebuild
+inputs with an audit-owned pre-source reconstruction. Finite anchors,
+modular rank, Groebner hashes, numerical roots, and failed SOS searches cannot
+promote the result. Scientific promotion remains false and new credit remains
+zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
