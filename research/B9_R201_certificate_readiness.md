@@ -55,11 +55,29 @@ The pre-source design seal records:
 
 The dense bilinear columns retain only nonzero powers of `D=a^2+b^2+c^2` relative to the source Pauli-coordinate columns. This changes the coefficient tensor representation but preserves the declared real projective rank problem where `D` is nonzero.
 
+The v1 pre-source seal now removes two more readiness gaps. Every bilinear is constructed directly as `i gamma_p gamma_q`; all candidates and commutators pass exact Hermiticity checks before their upper-triangle coordinates are retained. An anchor-and-coordinate hash order freezes four audit-owned minor row sets, each distinct, with 37 coordinates and rank 37 at its declared engineering anchor.
+
+## Dense Positive Control
+
+At the public homogeneous point `[-1:0:2]`, the audit constructs `P=-4X+3Z`, `Q=3X+4Z`, and `R=5Y` directly from `2x2` matrices. For `n=6`, `J=0`, it builds 12 Majoranas, 66 direct bilinears, and parity for 79 candidates without importing a source R201 module.
+
+The control now proves, rather than only samples, the expected boundary:
+
+- operator rank is exactly `79`;
+- commutator rank is at least `42` from ranks `42/42` modulo audit primes `1,000,037` and `1,000,081`;
+- 37 exact integer kernel vectors are linearly independent and have zero residual, so the commutator rank is at most `42`;
+- therefore the characteristic-zero commutator rank is exactly `42` and nullity is exactly `37`;
+- all six onsite `P_j` witnesses commute and satisfy the direct candidate relation `B(jQ,jR)=-5^(2j+1) P_j`.
+
+The exact kernel contains six onsite vectors, 15 pair-dot vectors, 15 pair-cross vectors, and parity. Its coefficient hash is `df0baa1f6bd27d77d3110fa07df4c83ab2f17e89bdbb04fdc64bdbc318739632`.
+
 ## Exact Minor Backend
 
 Singular `4.4.1` is available as an external discovery backend. `tools/b9_r201_singular_minor_bridge.py` binds the public engineering matrix and the four unique row-set hashes, then requests exact degree-184 determinants. Any resulting polynomial must still be serialized, hash-bound, and replayed by project-owned exact code.
 
 The first public engineering row set now completes as an exact modular bridge validation over `GF(1,000,003)`. Its frozen row-set hash is `2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae`; the determinant has total degree `184`, `8,649` nonzero terms, canonical-term hash `7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b`, and Singular elapsed time `148.98323` seconds. The result is a modular bridge validation only. It shows that the bound matrix, row set, determinant backend, parser, and canonical serializer can complete together; it is not the characteristic-zero engineering certificate or an ideal-membership certificate.
+
+The next lifting protocol is bounded CRT, not an unbounded inference from stable-looking modular factors. Each frozen minor must record an integer coefficient bound, modular determinant transcripts, a CRT modulus strictly larger than twice that bound, the reconstructed integer polynomial, and an independent modular replay. Factorization may reduce the workload, but no factor is accepted until the exact reconstructed determinant identity is checked. The source `238x37` Pauli-coordinate matrix and the audit-owned `256x37` Hermitian-coordinate matrix also still need an exact, reversible cross-representation binding; matching anchor ranks alone is insufficient.
 
 A direct SymPy `domain-ge` attempt on the first `37x37` engineering minor was stopped after `576.02` seconds without producing the determinant. This is a resource diagnostic, not evidence for or against the rank claim.
 
@@ -67,11 +85,9 @@ No Singular conclusion, Groebner hash, modular rank loss, selected-minor root, n
 
 ## Remaining Gates
 
-1. Freeze audit-owned dense row selection and the exact expected minor count.
-2. Reproduce the `79/42/37` positive control and six onsite witnesses in the dense representation.
-3. Compute the four characteristic-zero engineering minors and emit a real `J=13/32` ideal-membership certificate; the first modular minor does not satisfy this gate.
-4. Bind the certificate generators to independently reconstructed dense minors.
-5. Run pre-source holdout reconstruction in an isolated filesystem where the main result path is unavailable.
-6. Publish a new readiness commit before changing any execution permission.
+1. Lift the four frozen engineering minors with coefficient-bounded CRT and emit a real `J=13/32` ideal-membership certificate; the first modular minor does not satisfy this gate.
+2. Bind the certificate generators to independently reconstructed dense minors.
+3. Run pre-source holdout reconstruction in an isolated filesystem where the main result path is unavailable.
+4. Publish a new readiness commit before changing any execution permission.
 
 The conditional `n=5` route, global chart coverage, higher-order charges, nonlocal dualities, interacting integrability, Quantum PCP, NLTS, BQP separation, hardware relevance, solved-frontier status, scientific promotion, and new credit all remain unresolved or zero.

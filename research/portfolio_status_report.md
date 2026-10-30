@@ -2669,9 +2669,11 @@ Overall audit: PASS
 - R201 evidence integrity / matrix / columns / polynomial nonzeros / degree bound: True / 238 / 37 / 2129 / 184
 - R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: 8 / True / False / False
 - R201 accepted rows / promotion / credit: 0 / False / 0
-- R201 certificate readiness status: certificate_infrastructure_verified_engineering_certificate_incomplete
+- R201 certificate readiness status: certificate_infrastructure_and_dense_control_verified_engineering_certificate_incomplete
 - R201 certificate replay / rejected mutations: True / 3
 - R201 dense audit matrix / anchors / source fields: 256x37 / 4 / []
+- R201 dense audit frozen minors: 4
+- R201 dense positive control operator rank / commutator rank / nullity / exact kernels: 79 / 42 / 37 / 37
 - R201 modular minor 0 checked / degree / terms: True / 184 / 8649
 - R201 modular minor 0 term hash: 7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b
 - R201 engineering certificate / blocker closed / holdouts executed: False / False / False

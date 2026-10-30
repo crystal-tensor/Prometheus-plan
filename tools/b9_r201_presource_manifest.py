@@ -17,13 +17,15 @@ from typing import Any
 import sympy as sp
 
 
-VERSION = "0.2.0"
-METHOD = "b9_r201_dense_kronecker_presource_design_seal_v2"
+VERSION = "0.3.0"
+METHOD = "b9_r201_dense_kronecker_presource_design_seal_v3"
 CONTRACT_PATH = Path("benchmarks/B9_R201_projective_patch_contract_v0.json")
-DEFAULT_OUTPUT = Path("results/B9_R201_audit_owned_presource_manifest_v0.json")
+DEFAULT_OUTPUT = Path("results/B9_R201_audit_owned_presource_manifest_v1.json")
 ENGINEERING_COUPLING = Fraction(13, 32)
 AUDIT_ENGINEERING_ANCHORS = ((1, -1, 1), (2, 1, 1), (-1, 2, 1), (1, 2, 3))
 BASIS_PRIME = 1_000_003
+CONTROL_PRIMES = (1_000_037, 1_000_081)
+CONTROL_POINT = (-1, 0, 2)
 A, B, C = sp.symbols("a b c", real=True)
 VARS = (A, B, C)
 D = A * A + B * B + C * C
@@ -144,8 +146,9 @@ def gamma_matrix(n: int, site: int, endpoint: str, frame: dict[str, sp.Matrix]) 
     return kron_all(local)
 
 
-def candidate_matrices(n: int) -> list[tuple[str, sp.Matrix]]:
-    frame = frame_matrices()
+def candidate_matrices_from_frame(
+    n: int, frame: dict[str, sp.Matrix]
+) -> list[tuple[str, sp.Matrix]]:
     gamma_specs = [(site, endpoint) for site in range(n) for endpoint in ("Q", "R")]
     gammas = {
         spec: gamma_matrix(n, spec[0], spec[1], frame) for spec in gamma_specs
@@ -156,34 +159,18 @@ def candidate_matrices(n: int) -> list[tuple[str, sp.Matrix]]:
     ]
     for left_index, left in enumerate(gamma_specs):
         for right in gamma_specs[left_index + 1 :]:
-            left_site, left_endpoint = left
-            right_site, right_endpoint = right
-            if left_site == right_site:
-                local = [
-                    -frame["P"] if index == left_site else I2
-                    for index in range(n)
-                ]
-            else:
-                local = []
-                for index in range(n):
-                    if index == left_site:
-                        local.append(
-                            frame["R"] if left_endpoint == "Q" else -frame["Q"]
-                        )
-                    elif left_site < index < right_site:
-                        local.append(frame["P"])
-                    elif index == right_site:
-                        local.append(frame[right_endpoint])
-                    else:
-                        local.append(I2)
             output.append(
                 (
                     f"bilinear:{left[0]}:{left[1]}:{right[0]}:{right[1]}",
-                    D ** (2 * left_site + 1) * kron_all(local),
+                    sp.expand(sp.I * gammas[left] * gammas[right]),
                 )
             )
     output.append(("parity", kron_all([frame["P"] for _ in range(n)])))
     return output
+
+
+def candidate_matrices(n: int) -> list[tuple[str, sp.Matrix]]:
+    return candidate_matrices_from_frame(n, frame_matrices())
 
 
 def encode_poly(expression: sp.Expr) -> list[list[Any]]:
@@ -242,7 +229,38 @@ def modular_rank(matrix: list[list[int]], prime: int) -> int:
     return rank
 
 
+def select_independent_rows(
+    matrix: list[list[int]], row_labels: list[str], prime: int
+) -> list[str]:
+    basis: dict[int, list[int]] = {}
+    selected: list[str] = []
+    for label, source_row in zip(row_labels, matrix):
+        row = [value % prime for value in source_row]
+        for pivot in sorted(basis):
+            if row[pivot]:
+                factor = row[pivot]
+                row = [
+                    (left - factor * right) % prime
+                    for left, right in zip(row, basis[pivot])
+                ]
+        pivot = next((index for index, value in enumerate(row) if value), None)
+        if pivot is None:
+            continue
+        inverse = pow(row[pivot], prime - 2, prime)
+        row = [value * inverse % prime for value in row]
+        basis[pivot] = row
+        selected.append(label)
+    return selected
+
+
+def is_exactly_hermitian(matrix: sp.Matrix) -> bool:
+    difference = matrix - matrix.conjugate().T
+    return all(sp.expand_complex(value) == 0 for value in difference)
+
+
 def hermitian_coordinates(matrix: sp.Matrix) -> list[tuple[str, sp.Expr]]:
+    if not is_exactly_hermitian(matrix):
+        raise ValueError("Hermitian coordinate projection received a non-Hermitian matrix")
     coordinates: list[tuple[str, sp.Expr]] = []
     for row in range(matrix.rows):
         coordinates.append((f"diag:{row}", sp.re(sp.expand_complex(matrix[row, row]))))
@@ -257,6 +275,11 @@ def hermitian_coordinates(matrix: sp.Matrix) -> list[tuple[str, sp.Expr]]:
 def dense_matrix_commitment(n: int, coupling: Fraction) -> dict[str, Any]:
     hamiltonian = primitive_hamiltonian(n, coupling)
     candidates = candidate_matrices(n)
+    all_candidates_hermitian = all(
+        is_exactly_hermitian(candidate) for _, candidate in candidates
+    )
+    if not all_candidates_hermitian:
+        raise RuntimeError("engineering candidate family is not Hermitian")
     labels = [label for label, _ in candidates]
     columns = []
     row_labels: list[str] | None = None
@@ -278,6 +301,7 @@ def dense_matrix_commitment(n: int, coupling: Fraction) -> dict[str, Any]:
         if payload
     ]
     anchor_ranks = []
+    selected_row_hashes: set[str] = set()
     for anchor in AUDIT_ENGINEERING_ANCHORS:
         matrix = [
             [
@@ -287,12 +311,28 @@ def dense_matrix_commitment(n: int, coupling: Fraction) -> dict[str, Any]:
             for row in range(len(row_labels))
         ]
         rank = modular_rank(matrix, BASIS_PRIME)
+        row_order = sorted(
+            range(len(row_labels)),
+            key=lambda index: canonical_hash(
+                {"anchor": list(anchor), "coordinate": row_labels[index]}
+            ),
+        )
+        ordered_matrix = [matrix[index] for index in row_order]
+        ordered_labels = [row_labels[index] for index in row_order]
+        selected_rows = select_independent_rows(
+            ordered_matrix, ordered_labels, BASIS_PRIME
+        )
+        selected_rows_sha256 = canonical_hash(selected_rows)
+        selected_row_hashes.add(selected_rows_sha256)
         anchor_ranks.append(
             {
                 "anchor": list(anchor),
                 "prime": BASIS_PRIME,
                 "rank": rank,
                 "full_column_rank": rank == len(columns),
+                "row_order_method": "sha256_anchor_and_coordinate_label",
+                "selected_coordinate_rows": selected_rows,
+                "selected_coordinate_rows_sha256": selected_rows_sha256,
             }
         )
     return {
@@ -306,14 +346,205 @@ def dense_matrix_commitment(n: int, coupling: Fraction) -> dict[str, Any]:
         "candidate_labels_sha256": canonical_hash(labels),
         "nonzero_polynomial_entry_count": len(triples),
         "coefficient_tensor_sha256": canonical_hash(triples),
+        "direct_gamma_product_construction": True,
+        "all_candidates_hermitian": all_candidates_hermitian,
+        "all_commutators_hermitian": True,
+        "coordinate_row_labels_sha256": canonical_hash(row_labels),
         "audit_engineering_anchor_ranks": anchor_ranks,
+        "audit_selected_minor_count": len(selected_row_hashes),
+        "audit_selected_minor_rows_frozen": bool(
+            len(selected_row_hashes) == len(AUDIT_ENGINEERING_ANCHORS)
+            and all(len(record["selected_coordinate_rows"]) == len(columns) for record in anchor_ranks)
+        ),
         "all_audit_engineering_anchors_full_column_rank": all(
             record["full_column_rank"] for record in anchor_ranks
         ),
-        "column_scaling_semantics": (
-            "dense bilinears use i*gamma_p*gamma_q and therefore retain only "
-            "nonzero powers of D relative to the source Pauli-coordinate columns"
-        ),
+        "column_scaling_semantics": "bilinears are constructed directly as i*gamma_p*gamma_q",
+    }
+
+
+def numeric_frame(point: tuple[int, int, int]) -> tuple[dict[str, sp.Matrix], int]:
+    substitutions = dict(zip(VARS, point))
+    frame = {
+        label: matrix.applyfunc(lambda value: sp.expand(value.subs(substitutions)))
+        for label, matrix in frame_matrices().items()
+    }
+    d_value = sum(coordinate * coordinate for coordinate in point)
+    return frame, d_value
+
+
+def numeric_coordinates(matrix: sp.Matrix) -> list[int]:
+    values = hermitian_coordinates(matrix)
+    output: list[int] = []
+    for _, value in values:
+        resolved = sp.expand(value)
+        if resolved.is_Integer is not True:
+            raise RuntimeError(f"positive-control coordinate is not integral: {resolved}")
+        output.append(int(resolved))
+    return output
+
+
+def matrix_from_columns(columns: list[list[int]]) -> list[list[int]]:
+    if not columns:
+        return []
+    return [
+        [columns[column][row] for column in range(len(columns))]
+        for row in range(len(columns[0]))
+    ]
+
+
+def dense_positive_control() -> dict[str, Any]:
+    n = 6
+    frame, d_value = numeric_frame(CONTROL_POINT)
+    candidates = candidate_matrices_from_frame(n, frame)
+    labels = [label for label, _ in candidates]
+    label_to_index = {label: index for index, label in enumerate(labels)}
+    hamiltonian = primitive_hamiltonian(n, Fraction(0))
+    all_candidates_hermitian = all(
+        is_exactly_hermitian(matrix) for _, matrix in candidates
+    )
+    if not all_candidates_hermitian:
+        raise RuntimeError("positive-control candidate family is not Hermitian")
+    operator_columns = [numeric_coordinates(matrix) for _, matrix in candidates]
+    commutator_matrices = [
+        sp.expand(-sp.I * (hamiltonian * matrix - matrix * hamiltonian))
+        for _, matrix in candidates
+    ]
+    all_commutators_hermitian = all(
+        is_exactly_hermitian(matrix) for matrix in commutator_matrices
+    )
+    if not all_commutators_hermitian:
+        raise RuntimeError("positive-control commutator family is not Hermitian")
+    commutator_columns = [numeric_coordinates(matrix) for matrix in commutator_matrices]
+    operator_matrix = matrix_from_columns(operator_columns)
+    commutator_matrix = matrix_from_columns(commutator_columns)
+    exact_kernel_rows: list[dict[str, Any]] = []
+    kernel_vectors: list[list[int]] = []
+
+    def add_kernel(label: str, coefficients: dict[str, int]) -> None:
+        vector = [0] * len(candidates)
+        for candidate_label, coefficient in coefficients.items():
+            vector[label_to_index[candidate_label]] = coefficient
+        residual = [
+            sum(vector[column] * commutator_columns[column][row] for column in range(len(candidates)))
+            for row in range(len(commutator_columns[0]))
+        ]
+        kernel_vectors.append(vector)
+        exact_kernel_rows.append(
+            {
+                "label": label,
+                "coefficients": coefficients,
+                "residual_nonzero_count": sum(value != 0 for value in residual),
+                "checked": not any(residual),
+            }
+        )
+
+    for site in range(n):
+        add_kernel(
+            f"onsite_P:{site}",
+            {f"bilinear:{site}:Q:{site}:R": 1},
+        )
+    for left in range(n):
+        for right in range(left + 1, n):
+            add_kernel(
+                f"pair_dot:{left}:{right}",
+                {
+                    f"bilinear:{left}:Q:{right}:Q": 1,
+                    f"bilinear:{left}:R:{right}:R": 1,
+                },
+            )
+            add_kernel(
+                f"pair_cross:{left}:{right}",
+                {
+                    f"bilinear:{left}:Q:{right}:R": 1,
+                    f"bilinear:{left}:R:{right}:Q": -1,
+                },
+            )
+    add_kernel("parity", {"parity": 1})
+
+    kernel_coefficient_rank = int(sp.Matrix(kernel_vectors).rank())
+    kernel_residual_nonzero_count = sum(
+        row["residual_nonzero_count"] for row in exact_kernel_rows
+    )
+
+    witness_rows = []
+    for site in range(n):
+        witness = kron_all(
+            [frame["P"] if index == site else I2 for index in range(n)]
+        )
+        witness_column = numeric_coordinates(witness)
+        commutator_zero = hamiltonian * witness - witness * hamiltonian == sp.zeros(2**n)
+        bilinear_label = f"bilinear:{site}:Q:{site}:R"
+        bilinear = candidates[label_to_index[bilinear_label]][1]
+        exact_scale = -(d_value ** (2 * site + 1))
+        exact_bilinear_relation = bilinear == exact_scale * witness
+        witness_rows.append(
+            {
+                "site": site,
+                "bilinear_label": bilinear_label,
+                "exact_bilinear_scale": exact_scale,
+                "commutator_zero": commutator_zero,
+                "exact_bilinear_relation": exact_bilinear_relation,
+                "checked": commutator_zero and exact_bilinear_relation,
+            }
+        )
+    operator_ranks = {
+        str(prime): modular_rank(operator_matrix, prime) for prime in CONTROL_PRIMES
+    }
+    commutator_ranks = {
+        str(prime): modular_rank(commutator_matrix, prime) for prime in CONTROL_PRIMES
+    }
+    nullities = {
+        str(prime): len(candidates) - commutator_ranks[str(prime)]
+        for prime in CONTROL_PRIMES
+    }
+    commutator_rank_lower_bound = min(commutator_ranks.values())
+    commutator_rank_upper_bound = len(candidates) - kernel_coefficient_rank
+    checked = bool(
+        len(candidates) == 79
+        and all(rank == 79 for rank in operator_ranks.values())
+        and all(rank == 42 for rank in commutator_ranks.values())
+        and all(nullity == 37 for nullity in nullities.values())
+        and len(exact_kernel_rows) == 37
+        and kernel_coefficient_rank == 37
+        and kernel_residual_nonzero_count == 0
+        and commutator_rank_lower_bound == 42
+        and commutator_rank_upper_bound == 42
+        and all(row["checked"] for row in witness_rows)
+    )
+    return {
+        "n": n,
+        "coupling": "0",
+        "homogeneous_point": list(CONTROL_POINT),
+        "D": d_value,
+        "representation": "dense_2x2_kronecker_to_hermitian_upper_coordinates",
+        "candidate_column_count": len(candidates),
+        "candidate_counts": {"gamma": 12, "bilinear": 66, "parity": 1, "total": 79},
+        "candidate_labels_sha256": canonical_hash(labels),
+        "coordinate_row_count": len(operator_matrix),
+        "audit_primes": list(CONTROL_PRIMES),
+        "operator_ranks": operator_ranks,
+        "commutator_ranks": commutator_ranks,
+        "nullities": nullities,
+        "operator_rank_exact": 79,
+        "commutator_rank_lower_bound": commutator_rank_lower_bound,
+        "commutator_rank_upper_bound": commutator_rank_upper_bound,
+        "commutator_rank_exact": 42,
+        "nullity_exact": 37,
+        "exact_kernel_vector_count": len(exact_kernel_rows),
+        "exact_kernel_coefficient_rank": kernel_coefficient_rank,
+        "exact_kernel_residual_nonzero_count": kernel_residual_nonzero_count,
+        "exact_kernel_vectors": exact_kernel_rows,
+        "exact_kernel_coefficient_sha256": canonical_hash(kernel_vectors),
+        "direct_gamma_product_construction": True,
+        "source_modules_imported": [],
+        "all_candidates_hermitian": all_candidates_hermitian,
+        "all_commutators_hermitian": all_commutators_hermitian,
+        "onsite_P_witness_count": len(witness_rows),
+        "onsite_P_witnesses": witness_rows,
+        "operator_coordinate_tensor_sha256": canonical_hash(operator_columns),
+        "commutator_coordinate_tensor_sha256": canonical_hash(commutator_columns),
+        "checked": checked,
     }
 
 
@@ -356,6 +587,7 @@ def build_manifest(root: Path) -> dict[str, Any]:
     contract = json.loads(contract_path.read_text())
     guard = ast_source_result_guard(Path(__file__).resolve())
     engineering = dense_matrix_commitment(4, ENGINEERING_COUPLING)
+    positive_control = dense_positive_control()
     mutations = mutation_checks(engineering)
     frozen_schedule = [
         {"n": n, "coupling": value, "conditional": n == 5}
@@ -366,7 +598,7 @@ def build_manifest(root: Path) -> dict[str, Any]:
         "experiment_id": contract["experiment_id"],
         "method": METHOD,
         "version": VERSION,
-        "status": "audit_owned_presource_design_seal_complete",
+        "status": "audit_owned_presource_minor_and_control_seal_complete",
         "contract_sha256": sha256_file(contract_path),
         "manifest_tool_sha256": sha256_file(Path(__file__).resolve()),
         "input_authority": "contract_and_audit_design_only",
@@ -375,6 +607,7 @@ def build_manifest(root: Path) -> dict[str, Any]:
         "source_result_guard": guard,
         "frame_identity_checks": frame_identity_checks(),
         "engineering_dense_commitment": engineering,
+        "dense_positive_control": positive_control,
         "mutation_checks": mutations,
         "frozen_execution_schedule": frozen_schedule,
         "frozen_holdout_matrix_construction_executed": False,
@@ -383,8 +616,6 @@ def build_manifest(root: Path) -> dict[str, Any]:
         "frozen_holdout_solver_executed": False,
         "frozen_holdout_scientific_decision_executed": False,
         "remaining_readiness_requirements": [
-            "freeze audit-owned dense row selection and exact minor count",
-            "reproduce the 79/42/37 positive control and six onsite witnesses in the dense representation",
             "run the pre-source holdout reconstruction in an isolated filesystem without the main result path",
             "bind the emitted ideal certificate generators to independently reconstructed dense minors",
         ],
@@ -399,6 +630,9 @@ def build_manifest(root: Path) -> dict[str, Any]:
         and engineering["coordinate_row_count"] == 256
         and engineering["candidate_column_count"] == 37
         and engineering["all_audit_engineering_anchors_full_column_rank"]
+        and engineering["audit_selected_minor_count"] == 4
+        and engineering["audit_selected_minor_rows_frozen"]
+        and positive_control["checked"]
         and not payload["frozen_holdout_scientific_decision_executed"]
         and not payload["readiness_blocker_closed"]
     )
@@ -429,6 +663,10 @@ def main() -> int:
                 "source_result_fields_consumed_for_reconstruction": result[
                     "source_result_fields_consumed_for_reconstruction"
                 ],
+                "audit_selected_minor_count": result["engineering_dense_commitment"][
+                    "audit_selected_minor_count"
+                ],
+                "positive_control_checked": result["dense_positive_control"]["checked"],
                 "readiness_blocker_closed": result["readiness_blocker_closed"],
                 "checked": result["checked"],
                 "payload_sha256": result["payload_sha256"],

@@ -267,10 +267,15 @@ shape `256x37` with 9,472 polynomial nonzeros and 4/4 audit-owned rank-37
 anchors. Adversarial review found a zero-minor bypass in the old post-result
 auditor, so that path is rejected as final independence. The first frozen
 engineering minor now completes exactly over `GF(1,000,003)` with total degree
-184 and 8,649 nonzero terms. This validates the modular bridge only. The real
-engineering certificate, dense positive control, fixed audit minors,
-cross-representation binding, and isolated pre-source reconstruction remain
-open. The frozen
+184 and 8,649 nonzero terms. The audit now freezes four distinct minor row sets
+and independently proves the dense positive-control ranks `79/42`, nullity 37,
+and six onsite witnesses using 37 exact integer kernel vectors. The modular
+minor validates the bridge only. The real engineering certificate,
+an exact reversible binding between the `238x37` source representation and
+the `256x37` audit representation, and isolated pre-source reconstruction
+remain open. Characteristic-zero lifting will require coefficient-bounded CRT,
+`M > 2B`, and an independent modular replay rather than factor-pattern
+stability. The frozen
 `J=127/128,131/128` rows have not executed; maturity, promotion, and credit do
 not change.
 

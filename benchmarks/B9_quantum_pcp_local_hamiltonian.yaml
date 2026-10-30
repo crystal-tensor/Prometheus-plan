@@ -1150,17 +1150,17 @@ current_results:
     independent_audit_seal: ../results/B9_R201_independent_audit_seal_v0.json
     markdown_preregistration: ../research/B9_R201_projective_patch_preregistration.md
   r201_certificate_readiness_v0:
-    status: certificate_infrastructure_verified_engineering_certificate_incomplete
+    status: certificate_infrastructure_and_dense_control_verified_engineering_certificate_incomplete
     method: b9_r201_certificate_readiness_and_dense_audit_reset_v0
     source: r201_projective_patch_preregistration_v0
     certificate_replay_tool_sha256: 8c6a4d7ea0b6b6c0703d77441594ceec72fa93350ba28158413aa854be00676e
     certificate_emitter_tool_sha256: ab7d027ca71af228a031e56ce7adc51d4940c846a29ff785752cc1ca13630e9f
-    presource_manifest_tool_sha256: b60af146222cb8f6bd9db8a5e44103ac023b13b661392ea8efc9831c69a389be
+    presource_manifest_tool_sha256: ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa
     singular_minor_bridge_sha256: 0db5eca792cf9e96e3f14e1da7e145cf3149037cac967dd6ec5756c0254469cd
     certificate_selftest_sha256: 6f1fb791bd9675c6314f6ab69bdbf2623bc588fa67d765d8f722bbb1b2eab6c2
     certificate_mutations_sha256: bd4e8653b1b4b091aea25bc383cddb43708d0e68611737d1d77547ce25d6fcd2
     certificate_replay_sha256: e7891f6d703f657f2a30b8409df27f366c1a6ebd0978143e4dfb8cf237ff281a
-    presource_manifest_sha256: c3ac05b725327734908e8cb2b03acf81114e5a7c205a021d62bb82c2ae8d0aaf
+    presource_manifest_sha256: 73d6e0c2b0e8c4049a8d4f672fc2657e6c41a0d18bc7a66c29bde53230136309
     singular_modular_minor0_sha256: 2faae4da4f7f6f13b53e4321ae8cbfdc223d3ea7bc07a0ed7f636c9c91afb2ce
     certificate_schema: sparse-nullstellensatz-v1
     certificate_selftest_generator_count: 3
@@ -1173,6 +1173,18 @@ current_results:
     dense_engineering_nonzero_count: 9472
     dense_engineering_anchor_count: 4
     dense_engineering_full_rank_anchor_count: 4
+    dense_engineering_selected_minor_count: 4
+    dense_engineering_selected_minor_rows_frozen: true
+    dense_engineering_direct_gamma_product_construction: true
+    dense_positive_control_candidate_count: 79
+    dense_positive_control_operator_rank_exact: 79
+    dense_positive_control_commutator_rank_exact: 42
+    dense_positive_control_nullity_exact: 37
+    dense_positive_control_exact_kernel_vector_count: 37
+    dense_positive_control_exact_kernel_coefficient_rank: 37
+    dense_positive_control_exact_kernel_residual_nonzero_count: 0
+    dense_positive_control_exact_kernel_coefficient_sha256: df0baa1f6bd27d77d3110fa07df4c83ab2f17e89bdbb04fdc64bdbc318739632
+    dense_positive_control_onsite_witness_count: 6
     source_result_fields_consumed_for_reconstruction: []
     old_post_result_zero_minor_bypass_found: true
     old_post_result_auditor_accepted_as_final_independence: false
@@ -1187,8 +1199,8 @@ current_results:
     singular_modular_minor0_terms_sha256: 7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b
     singular_modular_bridge_validation_only: true
     engineering_certificate_verified: false
-    dense_positive_control_verified: false
-    audit_minor_rows_frozen: false
+    dense_positive_control_verified: true
+    audit_minor_rows_frozen: true
     cross_representation_generator_binding_verified: false
     isolated_presource_reconstruction_verified: false
     readiness_blocker_closed: false
@@ -1198,7 +1210,7 @@ current_results:
     certificate_selftest: ../results/B9_R201_certificate_engine_selftest_v0.json
     certificate_mutations: ../results/B9_R201_certificate_engine_mutations_v0.json
     certificate_replay: ../results/B9_R201_certificate_engine_replay_v0.json
-    presource_manifest: ../results/B9_R201_audit_owned_presource_manifest_v0.json
+    presource_manifest: ../results/B9_R201_audit_owned_presource_manifest_v1.json
     singular_modular_minor0: ../results/B9_R201_singular_minor0_mod1000003_v0.json
     markdown_report: ../research/B9_R201_certificate_readiness.md
   prototype_artifacts:

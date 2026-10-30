@@ -5893,7 +5893,7 @@ def audit_b9_r201_certificate_readiness(
 
     if (
         manifest_entry.get("status")
-        != "certificate_infrastructure_verified_engineering_certificate_incomplete"
+        != "certificate_infrastructure_and_dense_control_verified_engineering_certificate_incomplete"
         or selftest.get("schema") != "sparse-nullstellensatz-v1"
         or selftest.get("sympy_version") != "1.14.0"
         or selftest.get("stdlib_replay", {}).get("checked") is not True
@@ -5909,7 +5909,11 @@ def audit_b9_r201_certificate_readiness(
         errors.append("B9 R201 certificate engine self-test mismatch")
 
     if (
-        presource.get("status") != "audit_owned_presource_design_seal_complete"
+        presource.get("status")
+        != "audit_owned_presource_minor_and_control_seal_complete"
+        or presource.get("method")
+        != "b9_r201_dense_kronecker_presource_design_seal_v3"
+        or presource.get("version") != "0.3.0"
         or presource.get("checked") is not True
         or presource.get("source_result_path_read") is not False
         or presource.get("source_result_fields_consumed_for_reconstruction") != []
@@ -5918,6 +5922,9 @@ def audit_b9_r201_certificate_readiness(
         or dense.get("coordinate_row_count") != 256
         or dense.get("candidate_column_count") != 37
         or dense.get("nonzero_polynomial_entry_count") != 9472
+        or dense.get("direct_gamma_product_construction") is not True
+        or dense.get("all_candidates_hermitian") is not True
+        or dense.get("all_commutators_hermitian") is not True
         or dense.get("candidate_labels_sha256")
         != "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65"
         or dense.get("coefficient_tensor_sha256")
@@ -5925,6 +5932,21 @@ def audit_b9_r201_certificate_readiness(
         or len(anchor_ranks) != 4
         or not all(
             row.get("rank") == 37 and row.get("full_column_rank") is True
+            for row in anchor_ranks
+        )
+        or dense.get("audit_selected_minor_count") != 4
+        or dense.get("audit_selected_minor_rows_frozen") is not True
+        or len(
+            {
+                row.get("selected_coordinate_rows_sha256")
+                for row in anchor_ranks
+            }
+        )
+        != 4
+        or any(
+            row.get("row_order_method")
+            != "sha256_anchor_and_coordinate_label"
+            or len(row.get("selected_coordinate_rows", [])) != 37
             for row in anchor_ranks
         )
         or presource.get("mutation_checks", {}).get("rejected_count") != 3
@@ -5936,6 +5958,52 @@ def audit_b9_r201_certificate_readiness(
         or presource.get("readiness_blocker_closed") is not False
     ):
         errors.append("B9 R201 dense pre-source audit design mismatch")
+
+    positive_control = presource.get("dense_positive_control", {})
+    if (
+        positive_control.get("representation")
+        != "dense_2x2_kronecker_to_hermitian_upper_coordinates"
+        or positive_control.get("homogeneous_point") != [-1, 0, 2]
+        or positive_control.get("D") != 5
+        or positive_control.get("candidate_column_count") != 79
+        or positive_control.get("candidate_counts")
+        != {"gamma": 12, "bilinear": 66, "parity": 1, "total": 79}
+        or positive_control.get("candidate_labels_sha256")
+        != "6859d3916932eef0dda3b4f0a845f256d87ad26e040d43098ea2c93eba45067a"
+        or positive_control.get("audit_primes") != [1000037, 1000081]
+        or positive_control.get("operator_ranks")
+        != {"1000037": 79, "1000081": 79}
+        or positive_control.get("commutator_ranks")
+        != {"1000037": 42, "1000081": 42}
+        or positive_control.get("operator_rank_exact") != 79
+        or positive_control.get("commutator_rank_lower_bound") != 42
+        or positive_control.get("commutator_rank_upper_bound") != 42
+        or positive_control.get("commutator_rank_exact") != 42
+        or positive_control.get("nullity_exact") != 37
+        or positive_control.get("exact_kernel_vector_count") != 37
+        or positive_control.get("exact_kernel_coefficient_rank") != 37
+        or positive_control.get("exact_kernel_residual_nonzero_count") != 0
+        or positive_control.get("exact_kernel_coefficient_sha256")
+        != "df0baa1f6bd27d77d3110fa07df4c83ab2f17e89bdbb04fdc64bdbc318739632"
+        or positive_control.get("direct_gamma_product_construction") is not True
+        or positive_control.get("source_modules_imported") != []
+        or positive_control.get("all_candidates_hermitian") is not True
+        or positive_control.get("all_commutators_hermitian") is not True
+        or positive_control.get("onsite_P_witness_count") != 6
+        or any(
+            row.get("checked") is not True
+            or row.get("commutator_zero") is not True
+            or row.get("exact_bilinear_relation") is not True
+            for row in positive_control.get("onsite_P_witnesses", [])
+        )
+        or positive_control.get("checked") is not True
+        or presource.get("remaining_readiness_requirements")
+        != [
+            "run the pre-source holdout reconstruction in an isolated filesystem without the main result path",
+            "bind the emitted ideal certificate generators to independently reconstructed dense minors",
+        ]
+    ):
+        errors.append("B9 R201 dense positive control mismatch")
 
     modular_terms = modular_minor.get("canonical_terms", [])
     modular_terms_hash = hashlib.sha256(
@@ -6001,6 +6069,8 @@ def audit_b9_r201_certificate_readiness(
 
     if (
         manifest_entry.get("engineering_certificate_verified") is not False
+        or manifest_entry.get("dense_positive_control_verified") is not True
+        or manifest_entry.get("audit_minor_rows_frozen") is not True
         or manifest_entry.get("readiness_blocker_closed") is not False
         or manifest_entry.get("frozen_holdouts_executed") is not False
         or manifest_entry.get("scientific_promotion_accepted") is not False
@@ -6016,6 +6086,9 @@ def audit_b9_r201_certificate_readiness(
         "`GF(1,000,003)`",
         "`8,649`",
         "modular bridge validation",
+        "37 exact integer kernel vectors",
+        "four audit-owned minor row sets",
+        "characteristic-zero commutator rank is exactly `42`",
         "Frozen holdouts executed: `false`",
         "Readiness blocker closed: `false`",
         "New credit: `0`",
@@ -6033,6 +6106,21 @@ def audit_b9_r201_certificate_readiness(
         "dense_engineering_nonzero_count": dense.get("nonzero_polynomial_entry_count"),
         "dense_engineering_anchor_full_rank_count": sum(
             row.get("full_column_rank") is True for row in anchor_ranks
+        ),
+        "dense_engineering_selected_minor_count": dense.get(
+            "audit_selected_minor_count"
+        ),
+        "dense_positive_control_operator_rank_exact": positive_control.get(
+            "operator_rank_exact"
+        ),
+        "dense_positive_control_commutator_rank_exact": positive_control.get(
+            "commutator_rank_exact"
+        ),
+        "dense_positive_control_nullity_exact": positive_control.get(
+            "nullity_exact"
+        ),
+        "dense_positive_control_exact_kernel_vector_count": positive_control.get(
+            "exact_kernel_vector_count"
         ),
         "source_result_fields_consumed_for_reconstruction": presource.get(
             "source_result_fields_consumed_for_reconstruction"
@@ -58814,6 +58902,8 @@ def markdown_report(report: dict) -> str:
             f"- R201 certificate readiness status: {report['b9']['r201_certificate_readiness'].get('status')}",
             f"- R201 certificate replay / rejected mutations: {report['b9']['r201_certificate_readiness'].get('certificate_replay_checked')} / {report['b9']['r201_certificate_readiness'].get('certificate_mutation_rejected_count')}",
             f"- R201 dense audit matrix / anchors / source fields: {report['b9']['r201_certificate_readiness'].get('dense_engineering_rows')}x{report['b9']['r201_certificate_readiness'].get('dense_engineering_columns')} / {report['b9']['r201_certificate_readiness'].get('dense_engineering_anchor_full_rank_count')} / {report['b9']['r201_certificate_readiness'].get('source_result_fields_consumed_for_reconstruction')}",
+            f"- R201 dense audit frozen minors: {report['b9']['r201_certificate_readiness'].get('dense_engineering_selected_minor_count')}",
+            f"- R201 dense positive control operator rank / commutator rank / nullity / exact kernels: {report['b9']['r201_certificate_readiness'].get('dense_positive_control_operator_rank_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_commutator_rank_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_nullity_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_exact_kernel_vector_count')}",
             f"- R201 modular minor 0 checked / degree / terms: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_checked')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_total_degree')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_term_count')}",
             f"- R201 modular minor 0 term hash: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_terms_sha256')}",
             f"- R201 engineering certificate / blocker closed / holdouts executed: {report['b9']['r201_certificate_readiness'].get('engineering_certificate_verified')} / {report['b9']['r201_certificate_readiness'].get('readiness_blocker_closed')} / {report['b9']['r201_certificate_readiness'].get('frozen_holdouts_executed')}",
