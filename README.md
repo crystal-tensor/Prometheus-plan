@@ -127,18 +127,19 @@ direct quotient lifting is rejected as circular. This proves the bound and
 budget, not the characteristic-zero determinants, `D^44` divisibility, ideal
 certificate, holdout result, promotion, or credit.
 
-The first eight planned CRT execution shards are now complete at primes
+The first nine planned CRT execution shards are now complete at primes
 `536,870,909`, `536,870,879`, `536,870,869`, `536,870,849`,
-`536,870,839`, `536,870,837`, `536,870,819`, and `536,870,813`. All 32 new
-degree-184 determinant artifacts preserve the frozen term counts, advancing
-the new-artifact ledger to `32/56`. The incremental verifier rebuilds all 40
-artifacts across ten primes, matches `200/200` public matrix-determinant point
-replays, and confirms identical monomial support for every minor. It then
+`536,870,839`, `536,870,837`, `536,870,819`, `536,870,813`, and
+`536,870,791`. All 36 new degree-184 determinant artifacts preserve the frozen
+term counts, advancing the new-artifact ledger to `36/56`. The incremental
+verifier rebuilds all 44 artifacts across eleven primes, matches `220/220`
+public matrix-determinant point replays, and confirms identical monomial
+support for every minor. It then
 performs partial symmetric CRT over all 17,205 homogeneous slots per minor and
-passes `688,200/688,200` coefficient-slot modular round trips. The combined
-modulus has 281 bits, still below the 427-bit uniqueness threshold. The partial
-residues are therefore replayable state, not integer coefficients; 6 primes
-and 24 artifacts remain.
+passes `757,020/757,020` coefficient-slot modular round trips. The combined
+modulus has 310 bits, still below the 427-bit uniqueness threshold. The partial
+residues are therefore replayable state, not integer coefficients; 5 primes
+and 20 artifacts remain.
 This is certificate infrastructure and an audit correction, not a continuous
 full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
 solved frontier, scientific promotion, or new credit.
@@ -517,8 +518,8 @@ integer analysis proves coefficient bounds for the original degree-184
 determinants and rejects direct degree-96 quotient lifting: no column carries a
 common `D` factor, so characteristic-zero divisibility cannot be assumed. The
 fixed CRT budget is 14 additional primes and 56 determinant artifacts. Integer
-execution has reached `32/56` artifacts at a 281-bit modulus with all
-`200/200` point replays and `688,200/688,200` coefficient-slot round trips
+execution has reached `36/56` artifacts at a 310-bit modulus with all
+`220/220` point replays and `757,020/757,020` coefficient-slot round trips
 passing.
 Integer reconstruction, exact `D^44` division, the characteristic-zero gcd,
 ideal-membership certificate, holdout execution permission, scientific
