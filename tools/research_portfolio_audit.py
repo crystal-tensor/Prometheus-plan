@@ -6622,6 +6622,272 @@ def audit_b9_r201_modular_minor_structure(
     }
 
 
+def audit_b9_r201_determinant_coefficient_bound(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the unconditional R201 determinant bound and CRT budget."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "integer_coefficient_bound_proved": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R201 determinant coefficient bound")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    paths = {
+        "bound tool": resolve(manifest_entry.get("bound_tool")),
+        "bound result": resolve(manifest_entry.get("bound_result")),
+        "markdown report": resolve(manifest_entry.get("markdown_report")),
+        "discussion draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R201 determinant bound {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {
+        "bound_tool_sha256": digest(paths["bound tool"]),
+        "bound_result_sha256": digest(paths["bound result"]),
+        "markdown_report_sha256": digest(paths["markdown report"]),
+        "discussion_draft_sha256": digest(paths["discussion draft"]),
+    }
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R201 determinant bound {field} mismatch")
+
+    result = json.loads(read(paths["bound result"]))
+    report = read(paths["markdown report"])
+    discussion = read(paths["discussion draft"])
+    rows = result.get("rows", [])
+    expected_bound_bits = [423, 425, 426, 402]
+    expected_methods = [
+        "column_sum_product",
+        "row_sum_product",
+        "row_sum_product",
+        "row_sum_product",
+    ]
+    expected_row_hashes = [
+        "2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae",
+        "636ee93903a64bc655cbec5e744a1001c8071b3a7c849fc69622161d56d64bc7",
+        "7d38cb521a1b0cce5a3da989319c296f89093452f8019dec23b102c7ff5a1b76",
+        "b421e4307fda9401cc582f81d54f8b0bb2d4040880d1da4cb2b2d80a8319eccb",
+    ]
+    expected_column_degrees = [
+        2, 2, 4, 4, 6, 6, 8, 8, 2, 4, 4, 6, 6, 8, 8, 4, 4, 6, 6,
+        8, 8, 2, 4, 4, 6, 6, 4, 4, 6, 6, 2, 4, 4, 4, 4, 2, 8,
+    ]
+    row_mismatch = len(rows) != 4
+    for index, row in enumerate(rows):
+        if index >= 4:
+            row_mismatch = True
+            continue
+        selected = row.get("selected_unconditional_coefficient_bound", {})
+        if (
+            row.get("minor_index") != index
+            or row.get("dimension") != 37
+            or row.get("row_words_sha256") != expected_row_hashes[index]
+            or row.get("integer_polynomial_entry_count") != 1369
+            or row.get("all_entries_are_integer_polynomials") is not True
+            or row.get("all_nonzero_entries_are_column_homogeneous") is not True
+            or row.get("column_homogeneous_degrees") != expected_column_degrees
+            or row.get("determinant_homogeneous_degree") != 184
+            or row.get("homogeneous_monomial_lattice_size") != 17205
+            or row.get("column_common_D_exponents") != [0] * 37
+            or row.get("column_common_D_exponent_sum") != 0
+            or row.get("D_is_not_a_trivial_column_product_factor") is not True
+            or row.get("selected_bound_method") != expected_methods[index]
+            or selected.get("bit_length") != expected_bound_bits[index]
+            or row.get("twice_selected_bound_bit_length")
+            != expected_bound_bits[index] + 1
+        ):
+            row_mismatch = True
+    if row_mismatch:
+        errors.append("B9 R201 determinant bound row proof mismatch")
+
+    expected_primes = [
+        536870909,
+        536870879,
+        536870869,
+        536870849,
+        536870839,
+        536870837,
+        536870819,
+        536870813,
+        536870791,
+        536870779,
+        536870767,
+        536870743,
+        536870729,
+        536870717,
+    ]
+    maximum = result.get("maximum_unconditional_coefficient_bound", {})
+    prime_plan = result.get("prime_plan", {})
+    if (
+        result.get("method")
+        != "b9_r201_unconditional_integer_determinant_bound_v1"
+        or result.get("version") != "0.1.0"
+        or result.get("scope")
+        != "public_R201_integer_determinant_bound_and_CRT_budget_only"
+        or result.get("coupling") != "13/32"
+        or result.get("n") != 4
+        or result.get("minor_count") != 4
+        or result.get("dimension") != 37
+        or result.get("entry_count") != 5476
+        or result.get("determinant_degree") != 184
+        or maximum.get("bit_length") != 426
+        or maximum.get("decimal_digits") != 129
+        or maximum.get("value")
+        != "135883488767919802081805959734473531942782774597943994379184884286550998572489318864226131387733260403643856940950312011694080000"
+        or result.get("maximum_bound_minor_index") != 2
+        or prime_plan.get("existing_primes") != [1000003, 536870723]
+        or prime_plan.get("existing_modulus", {}).get("bit_length") != 49
+        or prime_plan.get("target_twice_maximum_bound", {}).get("bit_length")
+        != 427
+        or prime_plan.get("planned_additional_primes") != expected_primes
+        or prime_plan.get("planned_prime_count") != 14
+        or prime_plan.get("planned_minor_artifact_count") != 56
+        or prime_plan.get("all_planned_values_are_distinct_primes_below_limit")
+        is not True
+        or prime_plan.get("modulus_before_final_prime", {}).get("bit_length")
+        != 426
+        or prime_plan.get("modulus_before_final_prime_is_insufficient") is not True
+        or prime_plan.get("final_modulus", {}).get("bit_length") != 455
+        or prime_plan.get("final_modulus_exceeds_twice_maximum_bound") is not True
+        or result.get("direct_degree_96_residual_CRT_accepted") is not False
+        or result.get("characteristic_zero_D44_divisibility_verified") is not False
+        or result.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or result.get("characteristic_zero_engineering_certificate_verified")
+        is not False
+        or result.get("ideal_membership_certificate_verified") is not False
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    ):
+        errors.append("B9 R201 determinant bound result mismatch")
+
+    source_structure = root / "results/B9_R201_modular_minor_structure_v0.json"
+    if (
+        result.get("source_modular_structure_sha256") != digest(source_structure)
+        or result.get("bridge_tool_sha256")
+        != digest(root / "tools/b9_r201_singular_minor_bridge.py")
+        or result.get("source_tool_sha256")
+        != digest(root / "tools/b9_r201_projective_patch_certificate.py")
+    ):
+        errors.append("B9 R201 determinant bound source binding mismatch")
+
+    manifest_expectations = {
+        "status": "unconditional_integer_determinant_bound_verified_CRT_execution_open",
+        "method": "b9_r201_unconditional_integer_determinant_bound_v1",
+        "minor_count": 4,
+        "dimension": 37,
+        "integer_polynomial_entry_count": 5476,
+        "determinant_degree": 184,
+        "homogeneous_monomial_lattice_size": 17205,
+        "selected_bound_bits": expected_bound_bits,
+        "selected_bound_methods": expected_methods,
+        "maximum_bound_minor_index": 2,
+        "maximum_bound_bits": 426,
+        "doubled_maximum_bound_bits": 427,
+        "existing_primes": [1000003, 536870723],
+        "existing_modulus_bits": 49,
+        "planned_additional_primes": expected_primes,
+        "planned_additional_prime_count": 14,
+        "planned_additional_minor_artifact_count": 56,
+        "final_modulus_bits": 455,
+        "modulus_before_final_prime_is_insufficient": True,
+        "final_modulus_exceeds_twice_maximum_bound": True,
+        "column_common_D_exponent_sums": [0, 0, 0, 0],
+        "direct_degree_96_residual_CRT_accepted": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_engineering_certificate_verified": False,
+        "ideal_membership_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R201 determinant bound manifest mismatch")
+
+    report_phrases = (
+        "All `4 x 37 x 37 = 5,476` entries",
+        "complete reconstruction lattice of `17,205` monomials",
+        "requires 14 additional primes",
+        "`14 x 4 = 56` new determinant artifacts",
+        "all 37 common column `D` exponents are zero",
+        "Directly reconstructing the degree-96 modular quotients would assume",
+        "Bounded CRT integer reconstruction complete: `false`",
+        "New credit: `0`",
+    )
+    if any(phrase not in report for phrase in report_phrases):
+        errors.append("B9 R201 determinant bound report boundary incomplete")
+    discussion_phrases = (
+        "How many primes buy an integer proof",
+        "exact remaining budget is 56 new determinant artifacts",
+        "None of the 37 columns has a common `D` factor",
+        "The coefficient bound is proved, but CRT execution remains open",
+        "not quantum-hardware evidence",
+    )
+    if any(phrase not in discussion for phrase in discussion_phrases):
+        errors.append("B9 R201 determinant bound discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "minor_count": result.get("minor_count"),
+        "determinant_degree": result.get("determinant_degree"),
+        "maximum_bound_bits": maximum.get("bit_length"),
+        "doubled_maximum_bound_bits": prime_plan.get(
+            "target_twice_maximum_bound", {}
+        ).get("bit_length"),
+        "existing_modulus_bits": prime_plan.get("existing_modulus", {}).get(
+            "bit_length"
+        ),
+        "planned_additional_prime_count": prime_plan.get("planned_prime_count"),
+        "planned_additional_minor_artifact_count": prime_plan.get(
+            "planned_minor_artifact_count"
+        ),
+        "final_modulus_bits": prime_plan.get("final_modulus", {}).get(
+            "bit_length"
+        ),
+        "integer_coefficient_bound_proved": result.get("checked"),
+        "characteristic_zero_D44_divisibility_verified": result.get(
+            "characteristic_zero_D44_divisibility_verified"
+        ),
+        "bounded_CRT_integer_reconstruction_complete": result.get(
+            "bounded_CRT_integer_reconstruction_complete"
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R201 determinant bound") for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -44717,6 +44983,17 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r201_determinant_bound = b9_results.get(
+        "r201_determinant_coefficient_bound_v0"
+    )
+    b9_r201_determinant_bound_status = (
+        audit_b9_r201_determinant_coefficient_bound(
+            root,
+            b9_r201_determinant_bound,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -55129,6 +55406,7 @@ def audit(root: Path) -> dict:
             "r201_projective_patch_preregistration": b9_r201_status,
             "r201_certificate_readiness": b9_r201_readiness_status,
             "r201_modular_minor_structure": b9_r201_modular_structure_status,
+            "r201_determinant_coefficient_bound": b9_r201_determinant_bound_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -59398,6 +59676,10 @@ def markdown_report(report: dict) -> str:
             f"- R201 modular structure minors / artifacts / point replays / factor replays: {report['b9']['r201_modular_minor_structure'].get('minor_count')} / {report['b9']['r201_modular_minor_structure'].get('artifact_count')} / {report['b9']['r201_modular_minor_structure'].get('point_replay_match_count')} / {report['b9']['r201_modular_minor_structure'].get('factorization_replay_pass_count')}",
             f"- R201 modular structure common D multiplicity / GCD degree / residual degree / residual terms: {report['b9']['r201_modular_minor_structure'].get('common_D_multiplicity')} / {report['b9']['r201_modular_minor_structure'].get('common_gcd_degree_by_prime')} / {report['b9']['r201_modular_minor_structure'].get('D_removed_degree')} / {report['b9']['r201_modular_minor_structure'].get('residual_term_counts')}",
             f"- R201 modular structure cross-prime factor pattern / characteristic-zero certificate / CRT complete / holdouts executed: {report['b9']['r201_modular_minor_structure'].get('cross_prime_factor_degree_multiplicity_match')} / {report['b9']['r201_modular_minor_structure'].get('characteristic_zero_engineering_certificate_verified')} / {report['b9']['r201_modular_minor_structure'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_modular_minor_structure'].get('frozen_holdouts_executed')}",
+            f"- R201 determinant bound status: {report['b9']['r201_determinant_coefficient_bound'].get('status')}",
+            f"- R201 determinant degree / maximum bound bits / doubled bound bits: {report['b9']['r201_determinant_coefficient_bound'].get('determinant_degree')} / {report['b9']['r201_determinant_coefficient_bound'].get('maximum_bound_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('doubled_maximum_bound_bits')}",
+            f"- R201 CRT existing / final modulus bits / added primes / added artifacts: {report['b9']['r201_determinant_coefficient_bound'].get('existing_modulus_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('final_modulus_bits')} / {report['b9']['r201_determinant_coefficient_bound'].get('planned_additional_prime_count')} / {report['b9']['r201_determinant_coefficient_bound'].get('planned_additional_minor_artifact_count')}",
+            f"- R201 integer bound / characteristic-zero D44 / CRT complete / holdouts executed: {report['b9']['r201_determinant_coefficient_bound'].get('integer_coefficient_bound_proved')} / {report['b9']['r201_determinant_coefficient_bound'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_determinant_coefficient_bound'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_determinant_coefficient_bound'].get('frozen_holdouts_executed')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

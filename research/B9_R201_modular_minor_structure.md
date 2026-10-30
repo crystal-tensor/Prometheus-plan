@@ -60,7 +60,7 @@ at both primes. It has degree `88`. Removing it leaves four degree-`96` residual
 | 2 | 96 | 590 |
 | 3 | 96 | 450 |
 
-This reduces the next bounded-CRT target, but it does not prove that `D^44` is the complete characteristic-zero gcd. Two agreeing primes cannot replace an integer coefficient bound and exact reconstruction.
+This exposes a smaller quotient after characteristic-zero divisibility is proved, but it does not yet reduce the unconditional CRT target. Two agreeing primes cannot replace an integer coefficient bound, exact determinant reconstruction, and exact division over `ZZ[a,b,c]`.
 
 ## What This Does and Does Not Validate
 
@@ -70,9 +70,9 @@ The result does not verify the characteristic-zero determinants, emit an ideal-m
 
 ## Next Gate
 
-1. Prove a coefficient bound for each degree-96 residual.
+1. Prove an unconditional coefficient bound for each degree-184 integer determinant.
 2. Add enough preregistered primes that the CRT modulus exceeds twice the bound.
-3. Reconstruct the integer residuals and replay each determinant identity independently.
-4. Compute and verify the characteristic-zero gcd.
+3. Reconstruct the integer determinants and replay each identity independently.
+4. Verify exact `D^44` division and compute the characteristic-zero gcd.
 5. Emit the `J=13/32` ideal-membership certificate and bind its generators to the frozen dense minors.
 6. Run the pre-source reconstruction in an isolated filesystem before changing holdout permissions.

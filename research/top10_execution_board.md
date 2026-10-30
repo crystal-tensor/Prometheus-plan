@@ -275,11 +275,20 @@ emitted-generator binding, and isolated pre-source reconstruction remain open.
 The source-dense matrix representation gap is now closed exactly: 18 zero Pauli
 rows extend `238x37` to `256x37`, `T*R=R*T=16I`, all 37 candidate and
 commutator column relations pass, and dense minors carry the derived factor
-`(-2)^37*D^72`. Characteristic-zero lifting will require coefficient-bounded CRT,
-`M > 2B`, and an independent modular replay rather than factor-pattern
-stability. The frozen
-`J=127/128,131/128` rows have not executed; maturity, promotion, and credit do
-not change.
+`(-2)^37*D^72`.
+
+All four frozen engineering minors now complete over two primes, with 40/40
+public point replays and 8/8 factor-product replays. T-B9-015f then returns to
+the integer matrices: all 5,476 entries are in `ZZ[a,b,c]`, every determinant
+is homogeneous of degree 184, and selected entry-L1/permanent bounds have
+423/425/426/402 bits. The existing modulus has 49 bits; the doubled worst
+bound has 427 bits. A deterministic plan proves that 14 additional primes, or
+56 new determinant artifacts, produce a sufficient 455-bit CRT modulus. Every
+column has common `D` exponent zero, so direct degree-96 quotient lifting is
+rejected as circular. The accepted order is degree-184 reconstruction first,
+then exact `D^44` division over `ZZ[a,b,c]`. The frozen
+`J=127/128,131/128` rows have not executed; integer reconstruction, ideal
+membership, maturity, promotion, and credit do not change.
 
 ## Manuscript Bets
 

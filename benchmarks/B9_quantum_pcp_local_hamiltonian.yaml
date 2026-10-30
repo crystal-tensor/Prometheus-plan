@@ -1251,8 +1251,8 @@ current_results:
     structure_tool_sha256: 767d68b26673c57b5126024c4363c3d4c062c95cd28e7deb89dc9312a731c798
     structure_result_sha256: 73c74b7c0377201f24315de4d3924c3ba24022b6d835f840f839036cc7886e24
     artifact_bundle_sha256: fa4925cde2b9e4903381f15635720561757b62ba6092dfd1b09f42d8b3206398
-    markdown_report_sha256: 89cd210d96ccc423a19fe6dbf0e2438a4d7f3b8cb18be5c133de6f4d9dbef55b
-    discussion_draft_sha256: 3e148cc3936d689df8fdfa3e6a01f6aa6221e92a6aca8b4716d9e164f1f8c117
+    markdown_report_sha256: e069b82cb6342342a38bc5d3850fc3054096493fd40e88c454b911028e05478f
+    discussion_draft_sha256: 658c5336b170216bd35b3fd984459e4a0ba4bacd316ba0918ebbc46276f09fde
     artifact_sha256:
       minor0_mod1000003: 2faae4da4f7f6f13b53e4321ae8cbfdc223d3ea7bc07a0ed7f636c9c91afb2ce
       minor1_mod1000003: cb0b1ded62b8acc7ef8268b7eebbf73aca2b114440c338f9743919f8709b2233
@@ -1283,6 +1283,49 @@ current_results:
       minor1_mod536870723: ../results/B9_R201_singular_minor1_mod536870723_v0.json
       minor2_mod536870723: ../results/B9_R201_singular_minor2_mod536870723_v0.json
       minor3_mod536870723: ../results/B9_R201_singular_minor3_mod536870723_v0.json
+  r201_determinant_coefficient_bound_v0:
+    status: unconditional_integer_determinant_bound_verified_CRT_execution_open
+    method: b9_r201_unconditional_integer_determinant_bound_v1
+    source: r201_modular_minor_structure_v0
+    minor_count: 4
+    dimension: 37
+    integer_polynomial_entry_count: 5476
+    determinant_degree: 184
+    homogeneous_monomial_lattice_size: 17205
+    selected_bound_bits: [423, 425, 426, 402]
+    selected_bound_methods:
+      - column_sum_product
+      - row_sum_product
+      - row_sum_product
+      - row_sum_product
+    maximum_bound_minor_index: 2
+    maximum_bound_bits: 426
+    doubled_maximum_bound_bits: 427
+    existing_primes: [1000003, 536870723]
+    existing_modulus_bits: 49
+    planned_additional_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779, 536870767, 536870743, 536870729, 536870717]
+    planned_additional_prime_count: 14
+    planned_additional_minor_artifact_count: 56
+    final_modulus_bits: 455
+    modulus_before_final_prime_is_insufficient: true
+    final_modulus_exceeds_twice_maximum_bound: true
+    column_common_D_exponent_sums: [0, 0, 0, 0]
+    direct_degree_96_residual_CRT_accepted: false
+    characteristic_zero_D44_divisibility_verified: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_engineering_certificate_verified: false
+    ideal_membership_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    bound_tool_sha256: 6601a9d7b6394c25554bccf23302c73acf5387d67127745a3d7acef5cf27fae0
+    bound_result_sha256: 9646cdd5d506fd822eb837e33739dbd60ea93dd922a3342f74b5f61ef6ce976e
+    markdown_report_sha256: 28c25d2a10dcbc79d963e4f6a300958e5b975c009916a2da7bc7fb1b7a112e5e
+    discussion_draft_sha256: 335db6be8ce2a30447ce9b41e17823547c633905e8b7f426bdcb65e4415a67b9
+    bound_tool: ../tools/b9_r201_determinant_coefficient_bound.py
+    bound_result: ../results/B9_R201_determinant_coefficient_bound_v0.json
+    markdown_report: ../research/B9_R201_determinant_coefficient_bound.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-how-many-primes-buy-a-proof.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py

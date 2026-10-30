@@ -2,13 +2,13 @@
 
 The R201 continuous-projective-patch route now has eight public modular determinant artifacts: four frozen `37x37` minors, each evaluated over two different primes. A project-owned verifier independently reconstructs the matrices, replays 40 public point evaluations, and multiplies every finite-field factorization back to the original polynomial.
 
-The surprising structure is stable across both primes. All four minors share exactly `D^44`, where `D=a^2+b^2+c^2`. Removing this degree-88 common factor reduces every degree-184 determinant to a degree-96 residual. The residual term counts are 2,401, 464, 590, and 450.
+The surprising structure is stable across both primes. All four minors share exactly `D^44`, where `D=a^2+b^2+c^2`. Removing this degree-88 common factor leaves a degree-96 modular residual in each field. The residual term counts are 2,401, 464, 590, and 450, but direct quotient lifting remains conditional on characteristic-zero divisibility.
 
 The tempting conclusion would be that the hard part is now solved. It is not. Two primes do not prove a characteristic-zero gcd, and they do not supply an integer coefficient bound. The frozen scientific couplings remain unopened, promotion remains false, and credit remains zero.
 
 The useful question for contributors is narrower:
 
-> What is the sharpest replayable coefficient bound for these degree-96 residuals, and can we exploit their stable factor patterns to minimize the number of CRT primes without assuming the conclusion?
+> What is the sharpest replayable coefficient bound for the original degree-184 integer determinants, and can we reduce the CRT budget without assuming characteristic-zero `D^44` divisibility?
 
 High-value contributions include:
 

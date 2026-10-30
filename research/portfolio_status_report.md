@@ -2683,6 +2683,10 @@ Overall audit: PASS
 - R201 modular structure minors / artifacts / point replays / factor replays: 4 / 8 / 40 / 8
 - R201 modular structure common D multiplicity / GCD degree / residual degree / residual terms: 44 / {'1000003': 88, '536870723': 88} / 96 / [2401, 464, 590, 450]
 - R201 modular structure cross-prime factor pattern / characteristic-zero certificate / CRT complete / holdouts executed: True / False / False / False
+- R201 determinant bound status: unconditional_integer_determinant_bound_verified_CRT_execution_open
+- R201 determinant degree / maximum bound bits / doubled bound bits: 184 / 426 / 427
+- R201 CRT existing / final modulus bits / added primes / added artifacts: 49 / 455 / 14 / 56
+- R201 integer bound / characteristic-zero D44 / CRT complete / holdouts executed: True / False / False / False
 
 ## B10 BQP Boundary Graph Status
 
