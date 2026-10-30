@@ -397,6 +397,29 @@ adversary must use a new public freeze for a second independent meridian, a
 two-parameter Bloch-sphere patch, quartic Majorana charges, or an explicit
 nonlocal duality.
 
+R200 is now publicly preregistered but has not opened its frozen holdouts. It
+replaces duplicated directed-frame counting with 31 unique rational
+projective parity axes. The future acceptance surface contains unseen
+`J=109/128,113/128`, sizes `n=6,8,10`, and 186 exact grid rows. Eighty-two
+north/south directed frames remain engineering sentinels: exact frame algebra
+passes `82/82`, directed overlap subspaces pass `20/20`, and projective gauge
+subspaces pass `31/31` at `n=4`.
+
+The engineering-only `J=13/32` probe contributes zero acceptance decisions.
+Its four `n=6` rows have full column rank, and an independently implemented
+symplectic-bit oracle reproduces all four operator and commutator digests. The
+`J=0,n=6` positive control recovers operator rank 79, commutator rank 42,
+nullity 37, and all six onsite `A=(-4X+3Z)/5` charges. The independent audit
+tool is frozen in the same preregistration commit and seals all 186 expected
+grid keys before it may read the source result.
+
+R200 is a finite rational projective-grid stress, not a continuous
+two-dimensional Bloch-sphere certificate. Irrational axes, nonlinear frame
+mixtures, higher-order Majorana charges, nonlocal dualities, interacting
+integrability, nonintegrability, chaos, hardness, Quantum PCP, NLTS, BQP,
+hardware relevance, and solved-frontier status remain open. Frozen holdouts
+executed is false, scientific promotion is false, and new credit remains zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

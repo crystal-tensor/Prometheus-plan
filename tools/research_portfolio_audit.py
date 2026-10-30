@@ -5241,6 +5241,228 @@ def audit_b9_r199(
     return status
 
 
+def audit_b9_r200_preregistration(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify that R200 is sealed, independently auditable, and unexecuted."""
+
+    expected_hashes = {
+        "contract_sha256": "a1208296eeaf56ed7bf51ed740b51931b7e1067cdb53d2e5e6e0d931aca356c0",
+        "atlas_catalog_sha256": "b168b38442f85cd7a485e6e1ea2332fab1fa994e7c13956c405384e31f59cd47",
+        "projective_catalog_sha256": "f64e2e63f922d691bdeef5fdf58b2e90207afe3b775d55dafc713e19b7705a2f",
+        "expected_grid_keys_sha256": "29e7360a5411dad01aa7e96a8920be46cd05444e5fdc88b56d3ba621a6a11cdd",
+        "tool_sha256": "5639bc43f838e310cfef204e575ca4a33eac326c58169f0d431f74c51b522824",
+        "independent_audit_tool_sha256": "7c66b8e362ff25d2d5e80dec87ee0ba1ec18b7b5d6de6d95157e50b99943c941",
+        "independent_audit_seal_sha256": "ee15f20b977b790c065b281f9dfab85a1ed21194ceb2442fea576d00c4ebf1ad",
+        "engineering_probe_sha256": "ff131a74ea5dad85e6aad5b491a1cfa0d1d71790042804246c22dff852aad9a5",
+        "requirements_sha256": "b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88",
+    }
+    false_fields = [
+        "continuous_two_dimensional_bloch_sphere_exclusion",
+        "all_bloch_sphere_frame_exclusion",
+        "all_bloch_sphere_fermionization_exclusion",
+        "irrational_axis_exclusion",
+        "nonlinear_frame_mixture_exclusion",
+        "higher_order_majorana_charge_exclusion",
+        "nonlocal_duality_exclusion",
+        "interacting_integrability_exclusion",
+        "complete_integrability_exclusion",
+        "nonintegrability_theorem",
+        "quantum_chaos_theorem",
+        "spectral_hardness_theorem",
+        "quantum_pcp_theorem",
+        "nlts_theorem",
+        "bqp_separation",
+        "hardware_relevance",
+        "solved_frontier",
+    ]
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "frozen_holdouts_executed": None,
+        "frozen_acceptance_count": None,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R200 projective-atlas preregistration")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def file_hash(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    contract_path = resolve(manifest_entry.get("contract"))
+    probe_path = resolve(manifest_entry.get("engineering_probe"))
+    seal_path = resolve(manifest_entry.get("independent_audit_seal"))
+    report_path = resolve(manifest_entry.get("markdown_preregistration"))
+    tool_path = root / "tools/b9_r200_bloch_atlas_stress.py"
+    audit_tool_path = root / "tools/b9_r200_independent_audit.py"
+    requirements_path = root / "requirements.txt"
+    paths = {
+        "contract": contract_path,
+        "engineering probe": probe_path,
+        "independent audit seal": seal_path,
+        "preregistration report": report_path,
+        "tool": tool_path,
+        "independent audit tool": audit_tool_path,
+        "requirements": requirements_path,
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R200 preregistration {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed_hashes = {
+        "contract_sha256": file_hash(contract_path),
+        "atlas_catalog_sha256": manifest_entry.get("atlas_catalog_sha256"),
+        "projective_catalog_sha256": manifest_entry.get("projective_catalog_sha256"),
+        "expected_grid_keys_sha256": manifest_entry.get("expected_grid_keys_sha256"),
+        "tool_sha256": file_hash(tool_path),
+        "independent_audit_tool_sha256": file_hash(audit_tool_path),
+        "independent_audit_seal_sha256": file_hash(seal_path),
+        "engineering_probe_sha256": file_hash(probe_path),
+        "requirements_sha256": file_hash(requirements_path),
+    }
+    for field, expected in expected_hashes.items():
+        if observed_hashes.get(field) != expected:
+            errors.append(f"B9 R200 preregistration {field} mismatch")
+        if manifest_entry.get(field) != expected:
+            errors.append(f"B9 R200 preregistration manifest {field} mismatch")
+
+    contract = json.loads(read(contract_path))
+    probe = json.loads(read(probe_path))
+    seal = json.loads(read(seal_path))
+    report = read(report_path)
+    protocol = probe.get("protocol", {})
+    atlas = protocol.get("atlas_catalog", {})
+    projective = protocol.get("projective_catalog", {})
+    frame_checks = protocol.get("frame_algebra", {})
+    sentinels = protocol.get("subspace_sentinels", {})
+    control = probe.get("positive_control", {})
+
+    if (
+        manifest_entry.get("status") != "publicly_preregistered_execution_pending"
+        or manifest_entry.get("method") != "b9_r200_bloch_atlas_stress_v1"
+        or manifest_entry.get("experiment_id")
+        != "B9-R200-finite-projective-rational-bloch-atlas-stress"
+        or contract.get("status") != "public_preregistration_required"
+    ):
+        errors.append("B9 R200 preregistration status or identity mismatch")
+    if (
+        probe.get("mode") != "engineering_probe_only"
+        or probe.get("acceptance_count") != 0
+        or probe.get("frozen_holdouts_executed") is not False
+        or protocol.get("grid_row_count") != 186
+        or atlas.get("atlas_row_count") != 82
+        or atlas.get("sha256") != expected_hashes["atlas_catalog_sha256"]
+        or projective.get("row_count") != 31
+        or projective.get("sha256") != expected_hashes["projective_catalog_sha256"]
+        or frame_checks.get("pass_count") != 82
+        or frame_checks.get("row_count") != 82
+        or frame_checks.get("checked") is not True
+        or sentinels.get("directed_overlap_pass_count") != 20
+        or sentinels.get("projective_pass_count") != 31
+        or sentinels.get("checked") is not True
+    ):
+        errors.append("B9 R200 preregistration protocol boundary mismatch")
+
+    probe_rows = probe.get("grid_probe_rows", [])
+    if len(probe_rows) != 4 or any(
+        row.get("checked") is not True
+        or row.get("commutator_full_column_rank") is not True
+        or row.get("operator_basis_independent") is not True
+        or row.get("modular_ranks") != {"1000003": 79, "1000033": 79}
+        for row in probe_rows
+    ):
+        errors.append("B9 R200 engineering probe mismatch")
+    if (
+        control.get("checked") is not True
+        or control.get("operator_basis_modular_ranks")
+        != {"1000003": 79, "1000033": 79}
+        or control.get("modular_ranks")
+        != {"1000003": 42, "1000033": 42}
+        or control.get("modular_nullities")
+        != {"1000003": 37, "1000033": 37}
+        or control.get("onsite_axis_a_witness_count") != 6
+        or control.get("onsite_axis_a_commutes_count") != 6
+        or control.get("onsite_axis_a_in_span_count") != 6
+    ):
+        errors.append("B9 R200 positive-control boundary mismatch")
+
+    anti = seal.get("anti_circularity", {})
+    if (
+        seal.get("mode") != "pre_source_seal"
+        or seal.get("source_result_read") is not False
+        or seal.get("atlas_row_count") != 82
+        or seal.get("atlas_sha256") != expected_hashes["atlas_catalog_sha256"]
+        or seal.get("projective_axis_count") != 31
+        or seal.get("projective_catalog_sha256")
+        != expected_hashes["projective_catalog_sha256"]
+        or seal.get("expected_grid_row_count") != 186
+        or seal.get("expected_grid_keys_sha256")
+        != expected_hashes["expected_grid_keys_sha256"]
+        or seal.get("audit_primes") != [1000037, 1000081]
+        or anti.get("checked") is not True
+        or anti.get("forbidden_imports") != []
+        or anti.get("forbidden_calls") != []
+        or anti.get("source_fields_consumed_for_rebuild") != []
+    ):
+        errors.append("B9 R200 independent pre-source seal mismatch")
+
+    for field in false_fields:
+        if manifest_entry.get(field) is not False:
+            errors.append(f"B9 R200 preregistration claim {field} must remain false")
+    if (
+        manifest_entry.get("frozen_holdouts_executed") is not False
+        or manifest_entry.get("frozen_acceptance_count") != 0
+        or manifest_entry.get("scientific_promotion_accepted") is not False
+        or manifest_entry.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R200 preregistration promotion or execution boundary mismatch")
+    required_report_phrases = [
+        "31 unique projective parity axes",
+        "frozen grid rows: `186`",
+        "Frozen holdouts executed: `false`",
+        "Scientific promotion: `false`",
+        "continuous two-dimensional Bloch-sphere exclusion",
+    ]
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R200 preregistration report claim boundary is incomplete")
+
+    status = {
+        "status": manifest_entry.get("status"),
+        "method": manifest_entry.get("method"),
+        "experiment_id": manifest_entry.get("experiment_id"),
+        **observed_hashes,
+        "atlas_row_count": atlas.get("atlas_row_count"),
+        "projective_axis_count": projective.get("row_count"),
+        "expected_grid_row_count": protocol.get("grid_row_count"),
+        "frame_algebra_pass_count": frame_checks.get("pass_count"),
+        "directed_overlap_pass_count": sentinels.get("directed_overlap_pass_count"),
+        "projective_axis_pass_count": sentinels.get("projective_pass_count"),
+        "engineering_probe_grid_pass_count": sum(
+            row.get("checked") is True for row in probe_rows
+        ),
+        "positive_control_nullity": 37,
+        "independent_audit_pre_source_seal_complete": anti.get("checked") is True,
+        "independent_audit_source_result_read": seal.get("source_result_read"),
+        "frozen_holdouts_executed": probe.get("frozen_holdouts_executed"),
+        "frozen_acceptance_count": probe.get("acceptance_count"),
+        "scientific_promotion_accepted": manifest_entry.get("scientific_promotion_accepted"),
+        "new_credit_delta": manifest_entry.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R200") for message in errors
+        ),
+    }
+    return status
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -43306,6 +43528,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r200 = b9_results.get("r200_bloch_atlas_preregistration_v0")
+    b9_r200_status = audit_b9_r200_preregistration(
+        root,
+        b9_r200,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -53714,6 +53943,7 @@ def audit(root: Path) -> dict:
             "r197_nonstandard_fermionization_stress": b9_r197_status,
             "r198_continuous_frame_stress": b9_r198_status,
             "r199_ay_meridian_stress": b9_r199_status,
+            "r200_bloch_atlas_preregistration": b9_r200_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -57960,6 +58190,10 @@ def markdown_report(report: dict) -> str:
             f"- R199 continuous rows / passed / determinants / finite real common roots: {report['b9']['r199_ay_meridian_stress'].get('continuous_row_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_pass_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_determinant_count')} / {report['b9']['r199_ay_meridian_stress'].get('continuous_finite_real_common_root_count')}",
             f"- R199 rational/projective frames / grid rows / full-rank rows / largest columns/nonzeros: {report['b9']['r199_ay_meridian_stress'].get('rational_frame_count')} / {report['b9']['r199_ay_meridian_stress'].get('projective_frame_count')} / {report['b9']['r199_ay_meridian_stress'].get('rational_grid_row_count')} / {report['b9']['r199_ay_meridian_stress'].get('rational_grid_pass_count')} / {report['b9']['r199_ay_meridian_stress'].get('largest_candidate_column_count')} / {report['b9']['r199_ay_meridian_stress'].get('largest_commutator_nonzero_count')}",
             f"- R199 independent audit / prime / continuous matches / third-prime grid / missing-extra-duplicate / errors / promotion / full-Bloch exclusion / credit: {report['b9']['r199_ay_meridian_stress'].get('independent_audit_status')} / {report['b9']['r199_ay_meridian_stress'].get('independent_audit_prime')} / {report['b9']['r199_ay_meridian_stress'].get('independent_continuous_exact_match_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_third_prime_full_rank_grid_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_grid_missing_count')}-{report['b9']['r199_ay_meridian_stress'].get('independent_grid_extra_count')}-{report['b9']['r199_ay_meridian_stress'].get('independent_grid_duplicate_count')} / {report['b9']['r199_ay_meridian_stress'].get('independent_audit_error_count')} / {report['b9']['r199_ay_meridian_stress'].get('scientific_promotion_accepted')} / {report['b9']['r199_ay_meridian_stress'].get('full_two_dimensional_bloch_sphere_exclusion')} / {report['b9']['r199_ay_meridian_stress'].get('new_credit_delta')}",
+            f"- R200 finite projective-atlas preregistration status: {report['b9']['r200_bloch_atlas_preregistration'].get('status')}",
+            f"- R200 evidence integrity / atlas frames / projective axes / future rows: {report['b9']['r200_bloch_atlas_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('atlas_row_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('expected_grid_row_count')}",
+            f"- R200 frame/overlap/projective/engineering passes: {report['b9']['r200_bloch_atlas_preregistration'].get('frame_algebra_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('directed_overlap_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('projective_axis_pass_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('engineering_probe_grid_pass_count')}",
+            f"- R200 pre-source seal / source read / holdouts executed / acceptance / promotion / credit: {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_pre_source_seal_complete')} / {report['b9']['r200_bloch_atlas_preregistration'].get('independent_audit_source_result_read')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_holdouts_executed')} / {report['b9']['r200_bloch_atlas_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r200_bloch_atlas_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r200_bloch_atlas_preregistration'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

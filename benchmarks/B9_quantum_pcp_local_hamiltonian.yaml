@@ -999,6 +999,75 @@ current_results:
     result: ../results/B9_R199_ay_meridian_stress_v1.json
     independent_audit: ../results/B9_R199_independent_audit_v1.json
     markdown_report: ../research/B9_R199_ay_meridian_stress.md
+  r200_bloch_atlas_preregistration_v0:
+    status: publicly_preregistered_execution_pending
+    method: b9_r200_bloch_atlas_stress_v1
+    source: r199_ay_meridian_stress_v1
+    experiment_id: B9-R200-finite-projective-rational-bloch-atlas-stress
+    contract_sha256: a1208296eeaf56ed7bf51ed740b51931b7e1067cdb53d2e5e6e0d931aca356c0
+    atlas_catalog_sha256: b168b38442f85cd7a485e6e1ea2332fab1fa994e7c13956c405384e31f59cd47
+    projective_catalog_sha256: f64e2e63f922d691bdeef5fdf58b2e90207afe3b775d55dafc713e19b7705a2f
+    expected_grid_keys_sha256: 29e7360a5411dad01aa7e96a8920be46cd05444e5fdc88b56d3ba621a6a11cdd
+    tool_sha256: 5639bc43f838e310cfef204e575ca4a33eac326c58169f0d431f74c51b522824
+    independent_audit_tool_sha256: 7c66b8e362ff25d2d5e80dec87ee0ba1ec18b7b5d6de6d95157e50b99943c941
+    independent_audit_seal_sha256: ee15f20b977b790c065b281f9dfab85a1ed21194ceb2442fea576d00c4ebf1ad
+    r199_dependency_sha256: ba7dda8f92a6deb24fb1be33f2961c0a70b6de9134adc4bd6e56597c81728231
+    r198_dependency_sha256: c2644527c64d863005b61733a719a1f122dd65b922a4b34ae545e7d61bb0fc13
+    requirements_sha256: b48cbe8e5ef1382bb266ff9d39b6d225d7a0effd82cbdc873729195daae52d88
+    engineering_probe_sha256: ff131a74ea5dad85e6aad5b491a1cfa0d1d71790042804246c22dff852aad9a5
+    frozen_holdout_couplings:
+      - 109/128
+      - 113/128
+    chart: finite rational projective Bloch atlas
+    atlas_row_count: 82
+    north_row_count: 41
+    south_row_count: 41
+    directed_axis_count: 62
+    projective_axis_count: 31
+    directed_overlap_count: 20
+    rational_grid_sizes:
+      - 6
+      - 8
+      - 10
+    expected_rational_grid_row_count: 186
+    expected_independent_audit_primes:
+      - 1000037
+      - 1000081
+    frame_algebra_pass_count: 82
+    directed_overlap_pass_count: 20
+    projective_axis_pass_count: 31
+    engineering_probe_grid_pass_count: 4
+    positive_control_operator_rank: 79
+    positive_control_commutator_rank: 42
+    positive_control_nullity: 37
+    positive_control_onsite_witness_count: 6
+    frozen_holdouts_executed: false
+    frozen_acceptance_count: 0
+    independent_audit_source_result_read: false
+    independent_audit_pre_source_seal_complete: true
+    continuous_two_dimensional_bloch_sphere_exclusion: false
+    all_bloch_sphere_frame_exclusion: false
+    all_bloch_sphere_fermionization_exclusion: false
+    irrational_axis_exclusion: false
+    nonlinear_frame_mixture_exclusion: false
+    higher_order_majorana_charge_exclusion: false
+    nonlocal_duality_exclusion: false
+    interacting_integrability_exclusion: false
+    complete_integrability_exclusion: false
+    nonintegrability_theorem: false
+    quantum_chaos_theorem: false
+    spectral_hardness_theorem: false
+    quantum_pcp_theorem: false
+    nlts_theorem: false
+    bqp_separation: false
+    hardware_relevance: false
+    solved_frontier: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    contract: B9_R200_bloch_atlas_contract_v0.json
+    engineering_probe: ../results/B9_R200_engineering_probe_v0.json
+    independent_audit_seal: ../results/B9_R200_independent_audit_seal_v0.json
+    markdown_preregistration: ../research/B9_R200_bloch_atlas_preregistration.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1032,4 +1101,5 @@ current_results:
   r198_independent_audit: ../tools/b9_r198_independent_audit.py
   r199_ay_meridian_stress: ../tools/b9_r199_ay_meridian_stress.py
   r199_independent_audit: ../tools/b9_r199_independent_audit.py
+  r200_bloch_atlas_stress: ../tools/b9_r200_bloch_atlas_stress.py
   prototype_notes: ../research/B9_prototype_notes.md

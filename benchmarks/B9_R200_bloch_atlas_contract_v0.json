@@ -1,0 +1,181 @@
+{
+  "acceptance": {
+    "atlas": {
+      "atlas_row_count": 82,
+      "catalog_sha256": "b168b38442f85cd7a485e6e1ea2332fab1fa994e7c13956c405384e31f59cd47",
+      "directed_axis_count": 62,
+      "directed_overlap_count": 20,
+      "north_row_count": 41,
+      "projective_axis_count": 31,
+      "south_row_count": 41
+    },
+    "frozen_grid": {
+      "full_rank_row_count": 186,
+      "row_count": 186,
+      "sizes": [
+        6,
+        8,
+        10
+      ]
+    },
+    "independent_audit": {
+      "atlas_catalog_generated_before_source_comparison": true,
+      "atlas_overlap_keys_generated_independently": true,
+      "audit_primes": [
+        1000037,
+        1000081
+      ],
+      "dual_parameterization_required": false,
+      "dynamic_loading_forbidden": true,
+      "error_count": 0,
+      "expected_grid_keys_sha256": "29e7360a5411dad01aa7e96a8920be46cd05444e5fdc88b56d3ba621a6a11cdd",
+      "expected_full_rank_row_count": 186,
+      "forbidden_imports": [
+        "b9_r193",
+        "b9_r194",
+        "b9_r195",
+        "b9_r196",
+        "b9_r197",
+        "b9_r198",
+        "b9_r199",
+        "b9_r200"
+      ],
+      "forbidden_runtime_constructs": [
+        "importlib",
+        "runpy",
+        "SourceFileLoader",
+        "exec",
+        "eval",
+        "compile",
+        "pickle",
+        "marshal",
+        "subprocess",
+        "socket"
+      ],
+      "missing_extra_duplicate_grid_rows": [
+        0,
+        0,
+        0
+      ],
+      "source_fields_consumed_for_rebuild": [],
+      "pre_source_seal_required": true,
+      "source_payload_round_trip_verification_required": true,
+      "third_and_fourth_prime_full_rank_grid_count": 186
+    },
+    "positive_control": {
+      "candidate_column_count": 79,
+      "commutator_rank": 42,
+      "commuting_onsite_witness_count": 6,
+      "in_span_onsite_witness_count": 6,
+      "n": 6,
+      "nullity": 37,
+      "operator_rank": 79
+    },
+    "subspace_sentinels": {
+      "directed_overlap_pass_count": 20,
+      "n": 4,
+      "projective_axis_pass_count": 31
+    }
+  },
+  "atlas": {
+    "bound": 2,
+    "north": {
+      "P": "(2ac,2bc,c^2-a^2-b^2)/(a^2+b^2+c^2)",
+      "Q": "(c^2-a^2+b^2,-2ab,-2ac)/(a^2+b^2+c^2)",
+      "R": "(-2ab,c^2+a^2-b^2,-2bc)/(a^2+b^2+c^2)"
+    },
+    "parameter_domain": "primitive integer triples (a,b,c), c in {1,2}, a,b in [-2,2]",
+    "south": {
+      "P": "-P_north",
+      "Q": "Q_north",
+      "R": "-R_north"
+    },
+    "scientific_parameter_space": "31 unique projective parity axes in RP^2; gauge-equivalent directed frames are engineering sentinels, not independent acceptance rows",
+    "topological_boundary": "the finite catalog is not a globally continuous tangent frame and cannot support a continuous Bloch-sphere theorem",
+    "orientation": "Q cross R = P"
+  },
+  "candidate_family": {
+    "column_counts": {
+      "10": 211,
+      "6": 79,
+      "8": 137
+    },
+    "column_formula": "2n^2+n+1",
+    "contents": [
+      "all 2n linear Majoranas",
+      "all choose(2n,2) Hermitian quadratic bilinears",
+      "full parity"
+    ],
+    "gauge_checks": [
+      "all 20 directed north/south overlap pairs span the same candidate subspace at n=4",
+      "all 31 projective-axis groups, including opposite P directions, span the same candidate subspace at n=4"
+    ],
+    "projective_acceptance_catalog_count": 31,
+    "projective_acceptance_catalog_sha256": "f64e2e63f922d691bdeef5fdf58b2e90207afe3b775d55dafc713e19b7705a2f"
+  },
+  "claim_boundary": {
+    "forbidden": [
+      "continuous_two_dimensional_bloch_sphere_exclusion",
+      "all_bloch_sphere_frame_exclusion",
+      "irrational_axis_exclusion",
+      "all_bloch_sphere_fermionization_exclusion",
+      "nonlinear_frame_mixture_exclusion",
+      "higher_order_majorana_charge_exclusion",
+      "nonlocal_duality_exclusion",
+      "interacting_integrability_exclusion",
+      "complete_integrability_exclusion",
+      "nonintegrability_theorem",
+      "quantum_chaos_theorem",
+      "spectral_hardness_theorem",
+      "quantum_pcp_theorem",
+      "nlts_theorem",
+      "bqp_separation",
+      "hardware_relevance",
+      "solved_frontier"
+    ],
+    "new_credit_delta": 0,
+    "scientific_promotion_accepted": false
+  },
+  "code_freeze": {
+    "current_bytes_must_match_preregistration_commit": true,
+    "paths": [
+      "tools/b9_r200_bloch_atlas_stress.py",
+      "tools/b9_r200_independent_audit.py",
+      "tools/b9_r199_ay_meridian_stress.py",
+      "tools/b9_r198_continuous_frame_stress.py",
+      "requirements.txt"
+    ],
+    "runtime_versions_recorded": [
+      "python",
+      "sympy"
+    ]
+  },
+  "engineering_probe": {
+    "acceptance_count": 0,
+    "coupling": "13/32",
+    "sample_row_count": 4
+  },
+  "experiment_id": "B9-R200-finite-projective-rational-bloch-atlas-stress",
+  "frozen_holdouts": {
+    "couplings": [
+      "109/128",
+      "113/128"
+    ],
+    "disjoint_from_prior_grids": true,
+    "execute_only_after_public_preregistration_commit": true
+  },
+  "positive_control": {
+    "coupling": "0",
+    "expected_axis": "A=(-4X+3Z)/5",
+    "frame": "north chart (a,b,c)=(-1,0,2)",
+    "n": 6,
+    "purpose": "recover all six onsite commuting field-axis charges inside the declared atlas pool"
+  },
+  "preregistration": {
+    "contract_must_be_hash_bound_in_public_commit": true,
+    "frozen_holdouts_must_not_execute_before_public_commit": true,
+    "result_must_record_preregistration_commit": true
+  },
+  "status": "public_preregistration_required",
+  "version": "0.1.0"
+}

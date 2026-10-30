@@ -2660,6 +2660,10 @@ Overall audit: PASS
 - R199 continuous rows / passed / determinants / finite real common roots: 4 / 4 / 16 / 0
 - R199 rational/projective frames / grid rows / full-rank rows / largest columns/nonzeros: 72 / 36 / 432 / 432 / 211 / 2490766
 - R199 independent audit / prime / continuous matches / third-prime grid / missing-extra-duplicate / errors / promotion / full-Bloch exclusion / credit: pass / 1000037 / 4 / 432 / 0-0-0 / 0 / False / False / 0
+- R200 finite projective-atlas preregistration status: publicly_preregistered_execution_pending
+- R200 evidence integrity / atlas frames / projective axes / future rows: True / 82 / 31 / 186
+- R200 frame/overlap/projective/engineering passes: 82 / 20 / 31 / 4
+- R200 pre-source seal / source read / holdouts executed / acceptance / promotion / credit: True / False / False / 0 / False / 0
 
 ## B10 BQP Boundary Graph Status
 
