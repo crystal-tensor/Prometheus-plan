@@ -2687,9 +2687,9 @@ Overall audit: PASS
 - R201 determinant degree / maximum bound bits / doubled bound bits: 184 / 426 / 427
 - R201 CRT existing / final modulus bits / added primes / added artifacts: 49 / 455 / 14 / 56
 - R201 integer bound / characteristic-zero D44 / CRT complete / holdouts executed: True / False / False / False
-- R201 CRT shard status / artifact progress: five_planned_prime_shards_verified_bounded_CRT_incomplete / 20/56
-- R201 CRT shard completed / remaining primes and artifacts: 5 / 9 / 20 / 36
-- R201 CRT shard modulus / required bits / point replays / coefficient roundtrips: 194 / 427 / 140 / 481740
+- R201 CRT shard status / artifact progress: six_planned_prime_shards_verified_bounded_CRT_incomplete / 24/56
+- R201 CRT shard completed / remaining primes and artifacts: 6 / 8 / 24 / 32
+- R201 CRT shard modulus / required bits / point replays / coefficient roundtrips: 223 / 427 / 160 / 550560
 - R201 CRT residues unique / CRT complete / characteristic-zero D44 / holdouts executed: False / False / False / False
 
 ## B10 BQP Boundary Graph Status
