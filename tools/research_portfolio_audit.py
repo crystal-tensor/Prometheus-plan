@@ -5850,12 +5850,19 @@ def audit_b9_r201_certificate_readiness(
         "certificate emitter tool": root / "tools/b9_r201_nullstellensatz_certificate.py",
         "pre-source manifest tool": root / "tools/b9_r201_presource_manifest.py",
         "Singular minor bridge": root / "tools/b9_r201_singular_minor_bridge.py",
+        "source-dense binding tool": root / "tools/b9_r201_representation_binding.py",
         "certificate self-test": resolve(manifest_entry.get("certificate_selftest")),
         "certificate mutations": resolve(manifest_entry.get("certificate_mutations")),
         "certificate replay": resolve(manifest_entry.get("certificate_replay")),
         "pre-source manifest": resolve(manifest_entry.get("presource_manifest")),
         "Singular modular minor 0": resolve(
             manifest_entry.get("singular_modular_minor0")
+        ),
+        "source-dense binding": resolve(
+            manifest_entry.get("source_dense_representation_binding")
+        ),
+        "representation binding report": resolve(
+            manifest_entry.get("representation_binding_markdown")
         ),
         "readiness report": resolve(manifest_entry.get("markdown_report")),
     }
@@ -5870,6 +5877,9 @@ def audit_b9_r201_certificate_readiness(
         "certificate_emitter_tool_sha256": digest(paths["certificate emitter tool"]),
         "presource_manifest_tool_sha256": digest(paths["pre-source manifest tool"]),
         "singular_minor_bridge_sha256": digest(paths["Singular minor bridge"]),
+        "source_dense_binding_tool_sha256": digest(
+            paths["source-dense binding tool"]
+        ),
         "certificate_selftest_sha256": digest(paths["certificate self-test"]),
         "certificate_mutations_sha256": digest(paths["certificate mutations"]),
         "certificate_replay_sha256": digest(paths["certificate replay"]),
@@ -5877,6 +5887,7 @@ def audit_b9_r201_certificate_readiness(
         "singular_modular_minor0_sha256": digest(
             paths["Singular modular minor 0"]
         ),
+        "source_dense_binding_sha256": digest(paths["source-dense binding"]),
     }
     for field, observed in observed_hashes.items():
         if manifest_entry.get(field) != observed:
@@ -5887,13 +5898,15 @@ def audit_b9_r201_certificate_readiness(
     replay = json.loads(read(paths["certificate replay"]))
     presource = json.loads(read(paths["pre-source manifest"]))
     modular_minor = json.loads(read(paths["Singular modular minor 0"]))
+    representation_binding = json.loads(read(paths["source-dense binding"]))
+    representation_binding_report = read(paths["representation binding report"])
     report = read(paths["readiness report"])
     dense = presource.get("engineering_dense_commitment", {})
     anchor_ranks = dense.get("audit_engineering_anchor_ranks", [])
 
     if (
         manifest_entry.get("status")
-        != "certificate_infrastructure_and_dense_control_verified_engineering_certificate_incomplete"
+        != "certificate_infrastructure_dense_control_and_representation_binding_verified_engineering_certificate_incomplete"
         or selftest.get("schema") != "sparse-nullstellensatz-v1"
         or selftest.get("sympy_version") != "1.14.0"
         or selftest.get("stdlib_replay", {}).get("checked") is not True
@@ -6005,6 +6018,137 @@ def audit_b9_r201_certificate_readiness(
     ):
         errors.append("B9 R201 dense positive control mismatch")
 
+    binding_without_payload_hash = dict(representation_binding)
+    binding_payload_hash = binding_without_payload_hash.pop("payload_sha256", None)
+    recomputed_binding_payload_hash = hashlib.sha256(
+        json.dumps(
+            binding_without_payload_hash,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode()
+    ).hexdigest()
+    coordinate_transform = representation_binding.get("coordinate_transform", {})
+    column_binding = representation_binding.get("column_binding", {})
+    binding_columns = column_binding.get("columns", [])
+    expected_binding_labels = dense.get("candidate_labels", [])
+
+    def expected_binding_exponent(label: str) -> int:
+        return 2 * int(label.split(":")[1]) + 1 if label.startswith("bilinear:") else 0
+
+    minor_binding = representation_binding.get("minor_binding", {})
+    domain_boundary = representation_binding.get("domain_boundary", {})
+    binding_mutations = representation_binding.get("mutation_checks", [])
+    if (
+        representation_binding.get("method")
+        != "b9_r201_exact_source_dense_representation_binding_v1"
+        or representation_binding.get("version") != "0.1.0"
+        or representation_binding.get("status")
+        != "exact_source_dense_representation_binding_verified"
+        or representation_binding.get("checked") is not True
+        or representation_binding.get("n") != 4
+        or representation_binding.get("coupling") != "13/32"
+        or representation_binding.get("source_representation_shape") != [238, 37]
+        or representation_binding.get(
+            "source_representation_full_shape_after_zero_row_extension"
+        )
+        != [256, 37]
+        or representation_binding.get("dense_representation_shape") != [256, 37]
+        or representation_binding.get("source_zero_row_count") != 18
+        or representation_binding.get("source_zero_rows_sha256")
+        != "9ffd93ee8b9f889e2841acf625f470db6c8c592a3fae08705c7ff09db21fe0dc"
+        or representation_binding.get("candidate_labels_sha256")
+        != "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65"
+        or representation_binding.get("source_matrix_sha256")
+        != "8673dd394e4e3bd72f4bd106623d366b2e0c6cf74336f66a593be5c0b516ebd9"
+        or representation_binding.get("source_matrix_sha256")
+        != representation_binding.get("engineering_probe_source_matrix_sha256")
+        or representation_binding.get("dense_coefficient_tensor_sha256")
+        != "48370c7d01167fbd734dad2ccc941f312254b268299a48a21265c4c7e43a4e42"
+        or representation_binding.get("dense_coefficient_tensor_sha256")
+        != representation_binding.get("presource_dense_coefficient_tensor_sha256")
+        or representation_binding.get("presource_manifest_sha256")
+        != observed_hashes["presource_manifest_sha256"]
+        or representation_binding.get("binding_tool_sha256")
+        != observed_hashes["source_dense_binding_tool_sha256"]
+        or binding_payload_hash != recomputed_binding_payload_hash
+        or binding_payload_hash
+        != "b67f6eee88b3df1ad9c7753ee97e4532de4bb800c5e73411acdf6d6c345e37e6"
+        or representation_binding.get("hamiltonian_binding")
+        != {"dense_equals_source_times": -1, "checked": True}
+        or coordinate_transform.get("shape") != [256, 256]
+        or coordinate_transform.get("coordinate_roundtrip_count") != 256
+        or coordinate_transform.get("transform_nonzero_count") != 2176
+        or coordinate_transform.get("inverse_numerator_nonzero_count") != 2176
+        or coordinate_transform.get("transform_sparse_sha256")
+        != "d7e4c0bd184c41a1fb4bd65091c03e9e97582678877ae2edaf16302e356a76d7"
+        or coordinate_transform.get("inverse_numerator_sparse_sha256")
+        != "94f3a6461841ab405abcfe679f0f06b7e3ca832a031dc22c2dd02ef96607c0fd"
+        or coordinate_transform.get("inverse_denominator") != 16
+        or coordinate_transform.get("transform_times_inverse_equals_16I") is not True
+        or coordinate_transform.get("inverse_times_transform_equals_16I") is not True
+        or coordinate_transform.get("excluded_characteristic") != 2
+        or coordinate_transform.get("checked") is not True
+        or column_binding.get("candidate_relation_pass_count") != 37
+        or column_binding.get("commutator_relation_pass_count") != 37
+        or column_binding.get("column_count") != 37
+        or len(binding_columns) != 37
+        or [row.get("label") for row in binding_columns] != expected_binding_labels
+        or any(
+            row.get("relative_D_exponent")
+            != expected_binding_exponent(row.get("label", ""))
+            or row.get("candidate_factor")
+            != f"D^{expected_binding_exponent(row.get('label', ''))}"
+            or row.get("commutator_factor")
+            != f"-2*D^{expected_binding_exponent(row.get('label', ''))}"
+            or any(
+                re.fullmatch(r"[0-9a-f]{64}", str(row.get(hash_field, "")))
+                is None
+                for hash_field in (
+                    "source_candidate_matrix_sha256",
+                    "dense_candidate_matrix_sha256",
+                    "source_commutator_matrix_sha256",
+                    "dense_commutator_matrix_sha256",
+                )
+            )
+            for row in binding_columns
+        )
+        or column_binding.get("relative_D_exponent_histogram")
+        != {"0": 9, "1": 13, "3": 9, "5": 5, "7": 1}
+        or column_binding.get("relative_D_exponent_sum") != 72
+        or any(
+            row.get("candidate_relation_checked") is not True
+            or row.get("commutator_relation_checked") is not True
+            for row in binding_columns
+        )
+        or minor_binding.get("dense_minor_constant_factor") != "-137438953472"
+        or minor_binding.get("dense_minor_D_exponent") != 72
+        or minor_binding.get("equation")
+        != "det(E*M_dense)=(-2)^37*D^72*det(E*T*M_source_full)"
+        or minor_binding.get("selected_dense_minor_count") != 4
+        or len(set(minor_binding.get("selected_dense_minor_row_hashes", []))) != 4
+        or minor_binding.get("derived_from_exact_column_binding") is not True
+        or domain_boundary.get("D_nonzero_required") is not True
+        or domain_boundary.get("characteristic_two_excluded") is not True
+        or domain_boundary.get("all_anchor_D_values_nonzero_mod_audit_primes")
+        is not True
+        or representation_binding.get("mutation_rejected_count") != 5
+        or len(binding_mutations) != 5
+        or any(row.get("rejected") is not True for row in binding_mutations)
+        or representation_binding.get("frozen_holdout_matrix_construction_executed")
+        is not False
+        or representation_binding.get("frozen_holdout_solver_executed") is not False
+        or representation_binding.get("frozen_holdout_scientific_decision_executed")
+        is not False
+        or representation_binding.get("engineering_characteristic_zero_minors_verified")
+        is not False
+        or representation_binding.get("ideal_membership_certificate_verified")
+        is not False
+        or representation_binding.get("readiness_blocker_closed") is not False
+        or representation_binding.get("scientific_promotion_accepted") is not False
+        or representation_binding.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R201 exact source-dense representation binding mismatch")
+
     modular_terms = modular_minor.get("canonical_terms", [])
     modular_terms_hash = hashlib.sha256(
         json.dumps(modular_terms, sort_keys=True, separators=(",", ":")).encode()
@@ -6071,6 +6215,25 @@ def audit_b9_r201_certificate_readiness(
         manifest_entry.get("engineering_certificate_verified") is not False
         or manifest_entry.get("dense_positive_control_verified") is not True
         or manifest_entry.get("audit_minor_rows_frozen") is not True
+        or manifest_entry.get("source_dense_matrix_representation_binding_verified")
+        is not True
+        or manifest_entry.get("cross_representation_generator_binding_verified")
+        is not False
+        or manifest_entry.get("source_dense_binding_payload_sha256")
+        != binding_payload_hash
+        or manifest_entry.get("source_dense_binding_candidate_relation_count") != 37
+        or manifest_entry.get("source_dense_binding_commutator_relation_count") != 37
+        or manifest_entry.get("source_dense_binding_coordinate_roundtrip_count")
+        != 256
+        or manifest_entry.get("source_dense_binding_source_zero_row_count") != 18
+        or manifest_entry.get("source_dense_binding_transform_nonzero_count") != 2176
+        or manifest_entry.get("source_dense_binding_inverse_nonzero_count") != 2176
+        or manifest_entry.get("source_dense_binding_relative_D_exponent_sum") != 72
+        or manifest_entry.get("source_dense_binding_mutation_rejected_count") != 5
+        or manifest_entry.get("source_dense_binding_transform_sha256")
+        != coordinate_transform.get("transform_sparse_sha256")
+        or manifest_entry.get("source_dense_binding_inverse_sha256")
+        != coordinate_transform.get("inverse_numerator_sparse_sha256")
         or manifest_entry.get("readiness_blocker_closed") is not False
         or manifest_entry.get("frozen_holdouts_executed") is not False
         or manifest_entry.get("scientific_promotion_accepted") is not False
@@ -6089,12 +6252,35 @@ def audit_b9_r201_certificate_readiness(
         "37 exact integer kernel vectors",
         "four audit-owned minor row sets",
         "characteristic-zero commutator rank is exactly `42`",
+        "`T*R = 16I` and `R*T = 16I`",
+        "all `37/37` candidate columns",
+        "all `37/37` commutator columns",
         "Frozen holdouts executed: `false`",
         "Readiness blocker closed: `false`",
         "New credit: `0`",
     )
     if any(phrase not in report for phrase in required_report_phrases):
         errors.append("B9 R201 certificate-readiness report boundary is incomplete")
+
+    required_binding_report_phrases = (
+        "`238x37` Pauli-coordinate matrix",
+        "18 identically zero Pauli rows",
+        "`T*R = 16I` and `R*T = 16I`",
+        "all `37/37` candidate columns",
+        "all `37/37` commutator columns",
+        "(-2)^37 * D^72",
+        "Characteristic two is excluded",
+        "Engineering characteristic-zero minors verified: `false`",
+        "Ideal-membership certificate verified: `false`",
+        "Frozen holdouts executed: `false`",
+        "Readiness blocker closed: `false`",
+        "New credit: `0`",
+    )
+    if any(
+        phrase not in representation_binding_report
+        for phrase in required_binding_report_phrases
+    ):
+        errors.append("B9 R201 representation-binding report boundary is incomplete")
 
     return {
         "status": manifest_entry.get("status"),
@@ -6121,6 +6307,25 @@ def audit_b9_r201_certificate_readiness(
         ),
         "dense_positive_control_exact_kernel_vector_count": positive_control.get(
             "exact_kernel_vector_count"
+        ),
+        "source_dense_binding_checked": representation_binding.get("checked"),
+        "source_dense_binding_source_zero_row_count": representation_binding.get(
+            "source_zero_row_count"
+        ),
+        "source_dense_binding_coordinate_roundtrip_count": coordinate_transform.get(
+            "coordinate_roundtrip_count"
+        ),
+        "source_dense_binding_candidate_relation_count": column_binding.get(
+            "candidate_relation_pass_count"
+        ),
+        "source_dense_binding_commutator_relation_count": column_binding.get(
+            "commutator_relation_pass_count"
+        ),
+        "source_dense_binding_relative_D_exponent_sum": column_binding.get(
+            "relative_D_exponent_sum"
+        ),
+        "source_dense_binding_mutation_rejected_count": representation_binding.get(
+            "mutation_rejected_count"
         ),
         "source_result_fields_consumed_for_reconstruction": presource.get(
             "source_result_fields_consumed_for_reconstruction"
@@ -58904,6 +59109,8 @@ def markdown_report(report: dict) -> str:
             f"- R201 dense audit matrix / anchors / source fields: {report['b9']['r201_certificate_readiness'].get('dense_engineering_rows')}x{report['b9']['r201_certificate_readiness'].get('dense_engineering_columns')} / {report['b9']['r201_certificate_readiness'].get('dense_engineering_anchor_full_rank_count')} / {report['b9']['r201_certificate_readiness'].get('source_result_fields_consumed_for_reconstruction')}",
             f"- R201 dense audit frozen minors: {report['b9']['r201_certificate_readiness'].get('dense_engineering_selected_minor_count')}",
             f"- R201 dense positive control operator rank / commutator rank / nullity / exact kernels: {report['b9']['r201_certificate_readiness'].get('dense_positive_control_operator_rank_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_commutator_rank_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_nullity_exact')} / {report['b9']['r201_certificate_readiness'].get('dense_positive_control_exact_kernel_vector_count')}",
+            f"- R201 source-dense binding checked / zero rows / coordinate roundtrips: {report['b9']['r201_certificate_readiness'].get('source_dense_binding_checked')} / {report['b9']['r201_certificate_readiness'].get('source_dense_binding_source_zero_row_count')} / {report['b9']['r201_certificate_readiness'].get('source_dense_binding_coordinate_roundtrip_count')}",
+            f"- R201 source-dense candidate / commutator relations / D exponent sum / rejected mutations: {report['b9']['r201_certificate_readiness'].get('source_dense_binding_candidate_relation_count')} / {report['b9']['r201_certificate_readiness'].get('source_dense_binding_commutator_relation_count')} / {report['b9']['r201_certificate_readiness'].get('source_dense_binding_relative_D_exponent_sum')} / {report['b9']['r201_certificate_readiness'].get('source_dense_binding_mutation_rejected_count')}",
             f"- R201 modular minor 0 checked / degree / terms: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_checked')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_total_degree')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_term_count')}",
             f"- R201 modular minor 0 term hash: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_terms_sha256')}",
             f"- R201 engineering certificate / blocker closed / holdouts executed: {report['b9']['r201_certificate_readiness'].get('engineering_certificate_verified')} / {report['b9']['r201_certificate_readiness'].get('readiness_blocker_closed')} / {report['b9']['r201_certificate_readiness'].get('frozen_holdouts_executed')}",

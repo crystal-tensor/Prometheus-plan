@@ -100,8 +100,11 @@ The
 first frozen engineering minor now also completes over `GF(1,000,003)` with
 total degree 184, 8,649 nonzero terms, and a canonical term hash. This is a
 modular bridge validation, not a characteristic-zero or ideal-membership
-certificate. The unseen `J=127/128,131/128` rows remain sealed. A real
-degree-184 engineering certificate, cross-representation generator binding,
+certificate. An exact source-dense binding now extends the `238x37` source
+matrix with 18 zero Pauli rows, proves `T*R=R*T=16I`, verifies all 37 candidate
+and commutator column relations, and derives the minor factor
+`(-2)^37*D^72`. The unseen `J=127/128,131/128` rows remain sealed. A real
+degree-184 engineering certificate, emitted-generator binding,
 and isolated pre-source reconstruction are still required. The next lifting
 route must use coefficient-bounded CRT with a modulus larger than twice the
 declared integer coefficient bound, followed by an independent modular replay;

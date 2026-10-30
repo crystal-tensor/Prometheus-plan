@@ -271,9 +271,11 @@ engineering minor now completes exactly over `GF(1,000,003)` with total degree
 and independently proves the dense positive-control ranks `79/42`, nullity 37,
 and six onsite witnesses using 37 exact integer kernel vectors. The modular
 minor validates the bridge only. The real engineering certificate,
-an exact reversible binding between the `238x37` source representation and
-the `256x37` audit representation, and isolated pre-source reconstruction
-remain open. Characteristic-zero lifting will require coefficient-bounded CRT,
+emitted-generator binding, and isolated pre-source reconstruction remain open.
+The source-dense matrix representation gap is now closed exactly: 18 zero Pauli
+rows extend `238x37` to `256x37`, `T*R=R*T=16I`, all 37 candidate and
+commutator column relations pass, and dense minors carry the derived factor
+`(-2)^37*D^72`. Characteristic-zero lifting will require coefficient-bounded CRT,
 `M > 2B`, and an independent modular replay rather than factor-pattern
 stability. The frozen
 `J=127/128,131/128` rows have not executed; maturity, promotion, and credit do

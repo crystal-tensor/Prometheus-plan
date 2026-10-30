@@ -71,13 +71,21 @@ The control now proves, rather than only samples, the expected boundary:
 
 The exact kernel contains six onsite vectors, 15 pair-dot vectors, 15 pair-cross vectors, and parity. Its coefficient hash is `df0baa1f6bd27d77d3110fa07df4c83ab2f17e89bdbb04fdc64bdbc318739632`.
 
+## Exact Source-Dense Representation Binding
+
+`tools/b9_r201_representation_binding.py` now closes the matrix-representation gap without using holdout data. The source `238x37` Pauli matrix is extended by its 18 identically zero Pauli rows, and an exact `256x256` transform maps the full Pauli basis into the dense Hermitian upper-triangle coordinates.
+
+The transform and its integer inverse numerator each contain 2,176 nonzero entries and satisfy `T*R = 16I` and `R*T = 16I`. All 256 Pauli basis matrices roundtrip. For `D=a^2+b^2+c^2`, all `37/37` candidate columns satisfy `C_dense=T*C_source*Lambda`, and all `37/37` commutator columns satisfy `M_dense=-2*T*M_source*Lambda`. The relative `D` exponents have histogram `0^9,1^13,3^9,5^5,7^1` and sum to 72.
+
+Five adversarial mutations are rejected: missing minus sign, missing factor two, wrong `D` exponent, reversed `upper_im` sign, and reversed Kronecker site order. The binding is exact over `QQ`, `RR`, and odd-prime finite fields with `D != 0`; characteristic two is excluded.
+
 ## Exact Minor Backend
 
 Singular `4.4.1` is available as an external discovery backend. `tools/b9_r201_singular_minor_bridge.py` binds the public engineering matrix and the four unique row-set hashes, then requests exact degree-184 determinants. Any resulting polynomial must still be serialized, hash-bound, and replayed by project-owned exact code.
 
 The first public engineering row set now completes as an exact modular bridge validation over `GF(1,000,003)`. Its frozen row-set hash is `2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae`; the determinant has total degree `184`, `8,649` nonzero terms, canonical-term hash `7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b`, and Singular elapsed time `148.98323` seconds. The result is a modular bridge validation only. It shows that the bound matrix, row set, determinant backend, parser, and canonical serializer can complete together; it is not the characteristic-zero engineering certificate or an ideal-membership certificate.
 
-The next lifting protocol is bounded CRT, not an unbounded inference from stable-looking modular factors. Each frozen minor must record an integer coefficient bound, modular determinant transcripts, a CRT modulus strictly larger than twice that bound, the reconstructed integer polynomial, and an independent modular replay. Factorization may reduce the workload, but no factor is accepted until the exact reconstructed determinant identity is checked. The source `238x37` Pauli-coordinate matrix and the audit-owned `256x37` Hermitian-coordinate matrix also still need an exact, reversible cross-representation binding; matching anchor ranks alone is insufficient.
+The next lifting protocol is bounded CRT, not an unbounded inference from stable-looking modular factors. Each frozen minor must record an integer coefficient bound, modular determinant transcripts, a CRT modulus strictly larger than twice that bound, the reconstructed integer polynomial, and an independent modular replay. Factorization may reduce the workload, but no factor is accepted until the exact reconstructed determinant identity is checked. The source-dense matrix representation binding is now exact; the still-missing step is to bind the future emitted ideal generators to the frozen dense minors.
 
 A direct SymPy `domain-ge` attempt on the first `37x37` engineering minor was stopped after `576.02` seconds without producing the determinant. This is a resource diagnostic, not evidence for or against the rank claim.
 
