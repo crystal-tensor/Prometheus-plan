@@ -5819,6 +5819,246 @@ def audit_b9_r201_preregistration(
     }
 
 
+def audit_b9_r201_certificate_readiness(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the blocked R201 certificate engine and dense audit reset."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "engineering_certificate_verified": False,
+        "readiness_blocker_closed": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R201 certificate-readiness packet")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    paths = {
+        "certificate replay tool": root / "tools/b9_r201_certificate_replay.py",
+        "certificate emitter tool": root / "tools/b9_r201_nullstellensatz_certificate.py",
+        "pre-source manifest tool": root / "tools/b9_r201_presource_manifest.py",
+        "Singular minor bridge": root / "tools/b9_r201_singular_minor_bridge.py",
+        "certificate self-test": resolve(manifest_entry.get("certificate_selftest")),
+        "certificate mutations": resolve(manifest_entry.get("certificate_mutations")),
+        "certificate replay": resolve(manifest_entry.get("certificate_replay")),
+        "pre-source manifest": resolve(manifest_entry.get("presource_manifest")),
+        "Singular modular minor 0": resolve(
+            manifest_entry.get("singular_modular_minor0")
+        ),
+        "readiness report": resolve(manifest_entry.get("markdown_report")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R201 certificate-readiness {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed_hashes = {
+        "certificate_replay_tool_sha256": digest(paths["certificate replay tool"]),
+        "certificate_emitter_tool_sha256": digest(paths["certificate emitter tool"]),
+        "presource_manifest_tool_sha256": digest(paths["pre-source manifest tool"]),
+        "singular_minor_bridge_sha256": digest(paths["Singular minor bridge"]),
+        "certificate_selftest_sha256": digest(paths["certificate self-test"]),
+        "certificate_mutations_sha256": digest(paths["certificate mutations"]),
+        "certificate_replay_sha256": digest(paths["certificate replay"]),
+        "presource_manifest_sha256": digest(paths["pre-source manifest"]),
+        "singular_modular_minor0_sha256": digest(
+            paths["Singular modular minor 0"]
+        ),
+    }
+    for field, observed in observed_hashes.items():
+        if manifest_entry.get(field) != observed:
+            errors.append(f"B9 R201 certificate-readiness {field} mismatch")
+
+    selftest = json.loads(read(paths["certificate self-test"]))
+    mutations = json.loads(read(paths["certificate mutations"]))
+    replay = json.loads(read(paths["certificate replay"]))
+    presource = json.loads(read(paths["pre-source manifest"]))
+    modular_minor = json.loads(read(paths["Singular modular minor 0"]))
+    report = read(paths["readiness report"])
+    dense = presource.get("engineering_dense_commitment", {})
+    anchor_ranks = dense.get("audit_engineering_anchor_ranks", [])
+
+    if (
+        manifest_entry.get("status")
+        != "certificate_infrastructure_verified_engineering_certificate_incomplete"
+        or selftest.get("schema") != "sparse-nullstellensatz-v1"
+        or selftest.get("sympy_version") != "1.14.0"
+        or selftest.get("stdlib_replay", {}).get("checked") is not True
+        or len(selftest.get("generators", [])) != 3
+        or selftest.get("stdlib_replay", {}).get("generator_term_count") != 6
+        or selftest.get("stdlib_replay", {}).get("multiplier_term_count") != 3
+        or replay.get("checked") is not True
+        or replay.get("errors") != []
+        or mutations.get("checked") is not True
+        or mutations.get("case_count") != 3
+        or mutations.get("rejected_count") != 3
+    ):
+        errors.append("B9 R201 certificate engine self-test mismatch")
+
+    if (
+        presource.get("status") != "audit_owned_presource_design_seal_complete"
+        or presource.get("checked") is not True
+        or presource.get("source_result_path_read") is not False
+        or presource.get("source_result_fields_consumed_for_reconstruction") != []
+        or dense.get("representation")
+        != "dense_2x2_kronecker_to_hermitian_upper_coordinates"
+        or dense.get("coordinate_row_count") != 256
+        or dense.get("candidate_column_count") != 37
+        or dense.get("nonzero_polynomial_entry_count") != 9472
+        or dense.get("candidate_labels_sha256")
+        != "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65"
+        or dense.get("coefficient_tensor_sha256")
+        != "48370c7d01167fbd734dad2ccc941f312254b268299a48a21265c4c7e43a4e42"
+        or len(anchor_ranks) != 4
+        or not all(
+            row.get("rank") == 37 and row.get("full_column_rank") is True
+            for row in anchor_ranks
+        )
+        or presource.get("mutation_checks", {}).get("rejected_count") != 3
+        or presource.get("frozen_holdout_matrix_construction_executed") is not False
+        or presource.get("frozen_holdout_row_selection_executed") is not False
+        or presource.get("frozen_holdout_minor_computation_executed") is not False
+        or presource.get("frozen_holdout_solver_executed") is not False
+        or presource.get("frozen_holdout_scientific_decision_executed") is not False
+        or presource.get("readiness_blocker_closed") is not False
+    ):
+        errors.append("B9 R201 dense pre-source audit design mismatch")
+
+    modular_terms = modular_minor.get("canonical_terms", [])
+    modular_terms_hash = hashlib.sha256(
+        json.dumps(modular_terms, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    modular_monomials = [
+        tuple(row[0])
+        for row in modular_terms
+        if isinstance(row, list)
+        and row
+        and isinstance(row[0], list)
+    ]
+    modular_terms_well_formed = bool(modular_terms) and all(
+        isinstance(row, list)
+        and len(row) == 2
+        and isinstance(row[0], list)
+        and len(row[0]) == 3
+        and all(isinstance(exponent, int) and exponent >= 0 for exponent in row[0])
+        and isinstance(row[1], str)
+        and row[1].isdigit()
+        and 0 < int(row[1]) < 1000003
+        for row in modular_terms
+    )
+    if (
+        modular_minor.get("method") != "b9_r201_singular_exact_minor_bridge_v2"
+        or modular_minor.get("version") != "0.2.0"
+        or modular_minor.get("coefficient_domain") != "GF(1000003)"
+        or modular_minor.get("characteristic") != 1000003
+        or modular_minor.get("coupling") != "13/32"
+        or modular_minor.get("n") != 4
+        or modular_minor.get("minor_index") != 0
+        or modular_minor.get("dimension") != 37
+        or modular_minor.get("bridge_tool_sha256")
+        != observed_hashes["singular_minor_bridge_sha256"]
+        or modular_minor.get("row_words_sha256")
+        != "2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae"
+        or modular_minor.get("total_degree") != 184
+        or modular_minor.get("term_count") != 8649
+        or len(modular_terms) != 8649
+        or modular_minor.get("canonical_terms_sha256") != modular_terms_hash
+        or modular_terms_hash
+        != "7b1fbbf96d1761b92f507fd96f01676ddcc26486b4e4075689e76795ffe93c9b"
+        or not modular_terms_well_formed
+        or modular_monomials != sorted(modular_monomials, reverse=True)
+        or max(sum(row[0]) for row in modular_terms) != 184
+        or modular_minor.get("checked") is not True
+        or modular_minor.get("modular_bridge_validation_only") is not True
+        or modular_minor.get("integer_engineering_certificate_verified") is not False
+        or modular_minor.get("frozen_holdouts_executed") is not False
+        or modular_minor.get("scientific_promotion_accepted") is not False
+        or modular_minor.get("new_credit_delta") != 0
+        or manifest_entry.get("singular_modular_prime") != 1000003
+        or manifest_entry.get("singular_modular_minor0_checked") is not True
+        or manifest_entry.get("singular_modular_minor0_total_degree") != 184
+        or manifest_entry.get("singular_modular_minor0_term_count") != 8649
+        or manifest_entry.get("singular_modular_minor0_row_words_sha256")
+        != modular_minor.get("row_words_sha256")
+        or manifest_entry.get("singular_modular_minor0_terms_sha256")
+        != modular_minor.get("canonical_terms_sha256")
+        or manifest_entry.get("singular_modular_bridge_validation_only") is not True
+    ):
+        errors.append("B9 R201 Singular modular minor bridge mismatch")
+
+    if (
+        manifest_entry.get("engineering_certificate_verified") is not False
+        or manifest_entry.get("readiness_blocker_closed") is not False
+        or manifest_entry.get("frozen_holdouts_executed") is not False
+        or manifest_entry.get("scientific_promotion_accepted") is not False
+        or manifest_entry.get("new_credit_delta") != 0
+    ):
+        errors.append("B9 R201 certificate-readiness claim boundary mismatch")
+
+    required_report_phrases = (
+        "engine self-test, not yet the degree-184 engineering certificate",
+        "source-shaped zero-minor row",
+        "`256x37`",
+        "source result fields consumed for reconstruction: `[]`",
+        "`GF(1,000,003)`",
+        "`8,649`",
+        "modular bridge validation",
+        "Frozen holdouts executed: `false`",
+        "Readiness blocker closed: `false`",
+        "New credit: `0`",
+    )
+    if any(phrase not in report for phrase in required_report_phrases):
+        errors.append("B9 R201 certificate-readiness report boundary is incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed_hashes,
+        "certificate_replay_checked": replay.get("checked"),
+        "certificate_mutation_rejected_count": mutations.get("rejected_count"),
+        "dense_engineering_rows": dense.get("coordinate_row_count"),
+        "dense_engineering_columns": dense.get("candidate_column_count"),
+        "dense_engineering_nonzero_count": dense.get("nonzero_polynomial_entry_count"),
+        "dense_engineering_anchor_full_rank_count": sum(
+            row.get("full_column_rank") is True for row in anchor_ranks
+        ),
+        "source_result_fields_consumed_for_reconstruction": presource.get(
+            "source_result_fields_consumed_for_reconstruction"
+        ),
+        "singular_modular_minor0_checked": modular_minor.get("checked"),
+        "singular_modular_minor0_total_degree": modular_minor.get("total_degree"),
+        "singular_modular_minor0_term_count": modular_minor.get("term_count"),
+        "singular_modular_minor0_terms_sha256": modular_minor.get(
+            "canonical_terms_sha256"
+        ),
+        "engineering_certificate_verified": manifest_entry.get(
+            "engineering_certificate_verified"
+        ),
+        "readiness_blocker_closed": manifest_entry.get("readiness_blocker_closed"),
+        "frozen_holdouts_executed": manifest_entry.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": manifest_entry.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": manifest_entry.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R201 certificate-readiness")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -43898,6 +44138,13 @@ def audit(root: Path) -> dict:
         errors,
         warnings,
     )
+    b9_r201_readiness = b9_results.get("r201_certificate_readiness_v0")
+    b9_r201_readiness_status = audit_b9_r201_certificate_readiness(
+        root,
+        b9_r201_readiness,
+        errors,
+        warnings,
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -54308,6 +54555,7 @@ def audit(root: Path) -> dict:
             "r199_ay_meridian_stress": b9_r199_status,
             "r200_bloch_atlas_preregistration": b9_r200_status,
             "r201_projective_patch_preregistration": b9_r201_status,
+            "r201_certificate_readiness": b9_r201_readiness_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -58563,6 +58811,12 @@ def markdown_report(report: dict) -> str:
             f"- R201 evidence integrity / matrix / columns / polynomial nonzeros / degree bound: {report['b9']['r201_projective_patch_preregistration'].get('evidence_integrity_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_matrix_rows')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_candidate_columns')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_polynomial_nonzero_count')} / {report['b9']['r201_projective_patch_preregistration'].get('engineering_maximal_minor_degree_bound')}",
             f"- R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: {report['b9']['r201_projective_patch_preregistration'].get('engineering_full_rank_anchor_count')} / {report['b9']['r201_projective_patch_preregistration'].get('independent_design_seal_complete')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_may_execute')} / {report['b9']['r201_projective_patch_preregistration'].get('frozen_holdouts_executed')}",
             f"- R201 accepted rows / promotion / credit: {report['b9']['r201_projective_patch_preregistration'].get('frozen_acceptance_count')} / {report['b9']['r201_projective_patch_preregistration'].get('scientific_promotion_accepted')} / {report['b9']['r201_projective_patch_preregistration'].get('new_credit_delta')}",
+            f"- R201 certificate readiness status: {report['b9']['r201_certificate_readiness'].get('status')}",
+            f"- R201 certificate replay / rejected mutations: {report['b9']['r201_certificate_readiness'].get('certificate_replay_checked')} / {report['b9']['r201_certificate_readiness'].get('certificate_mutation_rejected_count')}",
+            f"- R201 dense audit matrix / anchors / source fields: {report['b9']['r201_certificate_readiness'].get('dense_engineering_rows')}x{report['b9']['r201_certificate_readiness'].get('dense_engineering_columns')} / {report['b9']['r201_certificate_readiness'].get('dense_engineering_anchor_full_rank_count')} / {report['b9']['r201_certificate_readiness'].get('source_result_fields_consumed_for_reconstruction')}",
+            f"- R201 modular minor 0 checked / degree / terms: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_checked')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_total_degree')} / {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_term_count')}",
+            f"- R201 modular minor 0 term hash: {report['b9']['r201_certificate_readiness'].get('singular_modular_minor0_terms_sha256')}",
+            f"- R201 engineering certificate / blocker closed / holdouts executed: {report['b9']['r201_certificate_readiness'].get('engineering_certificate_verified')} / {report['b9']['r201_certificate_readiness'].get('readiness_blocker_closed')} / {report['b9']['r201_certificate_readiness'].get('frozen_holdouts_executed')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

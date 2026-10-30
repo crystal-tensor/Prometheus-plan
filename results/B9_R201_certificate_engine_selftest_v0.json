@@ -1,0 +1,212 @@
+{
+  "discovery_basis_size": 1,
+  "discovery_elapsed_seconds": 0.001183,
+  "generator_bundle_sha256": "5c4eaf21310e40cf12cda0d28a3efb44338a35b3a162ac78c3f96cf50f02ff1b",
+  "generators": [
+    {
+      "label": "toy:a",
+      "term_count": 1,
+      "terms": [
+        [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "terms_sha256": "368cfa270e38d210730a6eae82e7b9cbab84a17b5e93b4df6b6f08d831ef406f",
+      "total_degree": 1
+    },
+    {
+      "label": "toy:1+a+b",
+      "term_count": 3,
+      "terms": [
+        [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "terms_sha256": "cb3877161941f30c75c09acb2d32560918f86a9f51f69f31801b1b943d9fb57b",
+      "total_degree": 1
+    },
+    {
+      "label": "toy:5-7b",
+      "term_count": 2,
+      "terms": [
+        [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            "-7",
+            "1"
+          ]
+        ],
+        [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "5",
+            "1"
+          ]
+        ]
+      ],
+      "terms_sha256": "5ab79f5043267f2892634af42d7484c1e66a725d7089b122ce6559ffd08cb031",
+      "total_degree": 1
+    }
+  ],
+  "monomial_order_used_for_discovery": "grevlex(u,a,b,c)",
+  "multipliers": [
+    {
+      "label": "multiplier:toy:a",
+      "term_count": 1,
+      "terms": [
+        [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "-7",
+            "12"
+          ]
+        ]
+      ],
+      "terms_sha256": "dc48706c23c5703952a92969cadfb1c8ea4ab5f2b199797600770ed4f81add4a",
+      "total_degree": 0
+    },
+    {
+      "label": "multiplier:toy:1+a+b",
+      "term_count": 1,
+      "terms": [
+        [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "7",
+            "12"
+          ]
+        ]
+      ],
+      "terms_sha256": "9c20cdba51080008d88ad68557327eb35b0bca3e488d01bb1c837fac30887970",
+      "total_degree": 0
+    },
+    {
+      "label": "multiplier:toy:5-7b",
+      "term_count": 1,
+      "terms": [
+        [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "1",
+            "12"
+          ]
+        ]
+      ],
+      "terms_sha256": "9b0ba41b3734c2a56d8b21e20e805fee6967b0f96bedc458c60df8d877fc2609",
+      "total_degree": 0
+    }
+  ],
+  "payload_sha256": "6e3b7bd2d9e2329912ceb6c7e2ebac80eed9a67fa4a3fdcd907eeee3850322d5",
+  "provenance": {
+    "mode": "toy_engine_test",
+    "purpose": "validate transition tracking and stdlib replay before engineering minors",
+    "source_tool_sha256": "ab7d027ca71af228a031e56ce7adc51d4940c846a29ff785752cc1ca13630e9f"
+  },
+  "schema": "sparse-nullstellensatz-v1",
+  "stdlib_replay": {
+    "checked": true,
+    "errors": [],
+    "generator_bundle_sha256": "5c4eaf21310e40cf12cda0d28a3efb44338a35b3a162ac78c3f96cf50f02ff1b",
+    "generator_count": 3,
+    "generator_term_count": 6,
+    "identity_sha256": "8cead437cef22243477e6dd55d79c24532b72cb0b5ef23f65d44bf3c1200cf5f",
+    "multiplier_term_count": 3,
+    "schema": "sparse-nullstellensatz-v1",
+    "variable_count": 4
+  },
+  "sympy_version": "1.14.0",
+  "target": {
+    "label": "target:one",
+    "term_count": 1,
+    "terms": [
+      [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    ],
+    "terms_sha256": "8cead437cef22243477e6dd55d79c24532b72cb0b5ef23f65d44bf3c1200cf5f",
+    "total_degree": 0
+  },
+  "variables": [
+    "u",
+    "a",
+    "b",
+    "c"
+  ],
+  "version": "0.1.0"
+}

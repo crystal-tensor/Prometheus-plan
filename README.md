@@ -79,6 +79,29 @@ Current evidence includes:
 - an audit report in `research/portfolio_status_report.md`;
 - a current status page in `research/current_stage_brief.html`.
 
+The latest R201 readiness update adds a sparse exact ideal-membership transport
+and a Python-standard-library replay verifier. The engine self-test passes with
+three generators and rejects coefficient, exponent, and bundle-hash mutations.
+Adversarial review also found that the old post-result auditor could let a
+source-shaped zero-minor row determine its own rebuild workload. That path is
+therefore not accepted as final independence.
+
+A replacement pre-source audit design now constructs the public engineering
+object from exact `2x2` Pauli matrices and dense Kronecker products, without
+importing the source executor or consuming source-result fields. It produces a
+`256x37` Hermitian-coordinate matrix with 9,472 nonzero polynomial entries;
+all four audit-owned engineering anchors have rank 37 modulo 1,000,003. The
+first frozen engineering minor now also completes over `GF(1,000,003)` with
+total degree 184, 8,649 nonzero terms, and a canonical term hash. This is a
+modular bridge validation, not a characteristic-zero or ideal-membership
+certificate. The unseen `J=127/128,131/128` rows remain sealed. A real
+degree-184 engineering certificate, dense positive control, fixed audit minors,
+cross-representation generator binding, and isolated pre-source reconstruction
+are still required.
+This is certificate infrastructure and an audit correction, not a continuous
+full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
+solved frontier, scientific promotion, or new credit.
+
 The current B9 formal line spans R187 through R196. R187 is a checked
 nonzero-scale derived certificate. The previous Lean interface accepted a
 conclusion-shaped `hRatio` equality as an input; R187 removes that assumption

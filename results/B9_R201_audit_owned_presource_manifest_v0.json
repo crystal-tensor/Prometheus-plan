@@ -1,0 +1,186 @@
+{
+  "checked": true,
+  "contract_sha256": "b3c960f5081a776ccd7165c0146c39e81bf6170820ac593c0f37c8b928b6cb99",
+  "engineering_dense_commitment": {
+    "all_audit_engineering_anchors_full_column_rank": true,
+    "audit_engineering_anchor_ranks": [
+      {
+        "anchor": [
+          1,
+          -1,
+          1
+        ],
+        "full_column_rank": true,
+        "prime": 1000003,
+        "rank": 37
+      },
+      {
+        "anchor": [
+          2,
+          1,
+          1
+        ],
+        "full_column_rank": true,
+        "prime": 1000003,
+        "rank": 37
+      },
+      {
+        "anchor": [
+          -1,
+          2,
+          1
+        ],
+        "full_column_rank": true,
+        "prime": 1000003,
+        "rank": 37
+      },
+      {
+        "anchor": [
+          1,
+          2,
+          3
+        ],
+        "full_column_rank": true,
+        "prime": 1000003,
+        "rank": 37
+      }
+    ],
+    "candidate_column_count": 37,
+    "candidate_labels": [
+      "gamma:0:Q",
+      "gamma:0:R",
+      "gamma:1:Q",
+      "gamma:1:R",
+      "gamma:2:Q",
+      "gamma:2:R",
+      "gamma:3:Q",
+      "gamma:3:R",
+      "bilinear:0:Q:0:R",
+      "bilinear:0:Q:1:Q",
+      "bilinear:0:Q:1:R",
+      "bilinear:0:Q:2:Q",
+      "bilinear:0:Q:2:R",
+      "bilinear:0:Q:3:Q",
+      "bilinear:0:Q:3:R",
+      "bilinear:0:R:1:Q",
+      "bilinear:0:R:1:R",
+      "bilinear:0:R:2:Q",
+      "bilinear:0:R:2:R",
+      "bilinear:0:R:3:Q",
+      "bilinear:0:R:3:R",
+      "bilinear:1:Q:1:R",
+      "bilinear:1:Q:2:Q",
+      "bilinear:1:Q:2:R",
+      "bilinear:1:Q:3:Q",
+      "bilinear:1:Q:3:R",
+      "bilinear:1:R:2:Q",
+      "bilinear:1:R:2:R",
+      "bilinear:1:R:3:Q",
+      "bilinear:1:R:3:R",
+      "bilinear:2:Q:2:R",
+      "bilinear:2:Q:3:Q",
+      "bilinear:2:Q:3:R",
+      "bilinear:2:R:3:Q",
+      "bilinear:2:R:3:R",
+      "bilinear:3:Q:3:R",
+      "parity"
+    ],
+    "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+    "coefficient_tensor_sha256": "48370c7d01167fbd734dad2ccc941f312254b268299a48a21265c4c7e43a4e42",
+    "column_scaling_semantics": "dense bilinears use i*gamma_p*gamma_q and therefore retain only nonzero powers of D relative to the source Pauli-coordinate columns",
+    "coordinate_row_count": 256,
+    "coupling": "13/32",
+    "dense_operator_dimension": 16,
+    "n": 4,
+    "nonzero_polynomial_entry_count": 9472,
+    "representation": "dense_2x2_kronecker_to_hermitian_upper_coordinates"
+  },
+  "experiment_id": "B9-R201-continuous-projective-bloch-patch-certificate",
+  "frame_identity_checks": {
+    "checked": true,
+    "checks": {
+      "P2": true,
+      "PQ_anticommutator": true,
+      "Q2": true,
+      "QR_anticommutator": true,
+      "QR_orientation": true,
+      "R2": true,
+      "RP_anticommutator": true
+    },
+    "identity_count": 7,
+    "identity_pass_count": 7
+  },
+  "frozen_execution_schedule": [
+    {
+      "conditional": false,
+      "coupling": "127/128",
+      "n": 4
+    },
+    {
+      "conditional": false,
+      "coupling": "131/128",
+      "n": 4
+    },
+    {
+      "conditional": true,
+      "coupling": "127/128",
+      "n": 5
+    },
+    {
+      "conditional": true,
+      "coupling": "131/128",
+      "n": 5
+    }
+  ],
+  "frozen_holdout_matrix_construction_executed": false,
+  "frozen_holdout_minor_computation_executed": false,
+  "frozen_holdout_row_selection_executed": false,
+  "frozen_holdout_scientific_decision_executed": false,
+  "frozen_holdout_solver_executed": false,
+  "input_authority": "contract_and_audit_design_only",
+  "manifest_tool_sha256": "b60af146222cb8f6bd9db8a5e44103ac023b13b661392ea8efc9831c69a389be",
+  "method": "b9_r201_dense_kronecker_presource_design_seal_v2",
+  "mutation_checks": {
+    "case_count": 3,
+    "checked": true,
+    "records": [
+      {
+        "baseline_local_sha256": "231a2df0cd3e99dd561a34342bfc647be519edd88259bb36c21e8cc59550ebcb",
+        "label": "flip_Q_y_sign",
+        "mutated_local_sha256": "95175bc670cf9359289d9543421e46fb716c62b7e00160bd1d6b35e413c2a15b",
+        "rejected": true
+      },
+      {
+        "baseline_local_sha256": "231a2df0cd3e99dd561a34342bfc647be519edd88259bb36c21e8cc59550ebcb",
+        "label": "swap_Q_R",
+        "mutated_local_sha256": "82964499e0c42a74a2b77893f932519857655865314ba1fa61a83feaf327eb7d",
+        "rejected": true
+      },
+      {
+        "altered_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "label": "coefficient_tensor_hash",
+        "reference_hash": "48370c7d01167fbd734dad2ccc941f312254b268299a48a21265c4c7e43a4e42",
+        "rejected": true
+      }
+    ],
+    "rejected_count": 3
+  },
+  "new_credit_delta": 0,
+  "payload_sha256": "6bd62d063cf30770a257f9b95d84dccfb369b3a6f0a9e583a5bc9c19c210dc49",
+  "readiness_blocker_closed": false,
+  "remaining_readiness_requirements": [
+    "freeze audit-owned dense row selection and exact minor count",
+    "reproduce the 79/42/37 positive control and six onsite witnesses in the dense representation",
+    "run the pre-source holdout reconstruction in an isolated filesystem without the main result path",
+    "bind the emitted ideal certificate generators to independently reconstructed dense minors"
+  ],
+  "scientific_promotion_accepted": false,
+  "source_result_fields_consumed_for_reconstruction": [],
+  "source_result_guard": {
+    "checked": true,
+    "violations": []
+  },
+  "source_result_path_read": false,
+  "status": "audit_owned_presource_design_seal_complete",
+  "version": "0.2.0"
+}

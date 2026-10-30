@@ -252,6 +252,28 @@ quadratic-Majorana-plus-H frames and their linear union. `T-B9-012` owns
 continuous frames, nonlinear mixtures, higher-than-quadratic charges,
 explicit nonlocal dualities, adaptive tails, and larger sparse spectra.
 
+**B9 R198-R201 update.** R198 and R199 replace finite frame samples with two
+exact one-dimensional continuous certificates. R200 then tests 31 exact
+projective parity axes across two publicly frozen couplings and three sizes;
+the main and independent implementations agree on 186 full-rank rows under
+four primes, while the solvable control recovers ranks `79/42`, nullity 37,
+and six onsite charges.
+
+R201 moves to an exact two-parameter homogeneous patch. The source engineering
+matrix is `238x37` with 2,129 polynomial nonzeros and maximal-minor degree
+bound 184. The latest readiness packet adds a standard-library exact
+certificate replay and an independent dense Kronecker engineering matrix of
+shape `256x37` with 9,472 polynomial nonzeros and 4/4 audit-owned rank-37
+anchors. Adversarial review found a zero-minor bypass in the old post-result
+auditor, so that path is rejected as final independence. The first frozen
+engineering minor now completes exactly over `GF(1,000,003)` with total degree
+184 and 8,649 nonzero terms. This validates the modular bridge only. The real
+engineering certificate, dense positive control, fixed audit minors,
+cross-representation binding, and isolated pre-source reconstruction remain
+open. The frozen
+`J=127/128,131/128` rows have not executed; maturity, promotion, and credit do
+not change.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**
