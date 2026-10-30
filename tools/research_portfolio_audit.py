@@ -6952,7 +6952,13 @@ def audit_b9_r201_crt_shard_replay(
     discussion = read(paths["discussion draft"])
     artifact_rows = result.get("artifact_rows", [])
     minor_rows = result.get("minor_rows", [])
-    expected_primes = [1000003, 536870723, 536870909, 536870879]
+    expected_primes = [
+        1000003,
+        536870723,
+        536870909,
+        536870879,
+        536870869,
+    ]
     expected_row_hashes = [
         "2525123337c76d67569a4153a099dfa5e18b28649d8655bdfe2e79a6585b5dae",
         "636ee93903a64bc655cbec5e744a1001c8071b3a7c849fc69622161d56d64bc7",
@@ -6967,10 +6973,10 @@ def audit_b9_r201_crt_shard_replay(
         "bfa701e3c97f5f1385fb8ece4bd46be59663b9ac78049ffa372cf2974636f31d",
     ]
     expected_partial_hashes = [
-        "59c094dda70e69ecc407ba3433ac61b49f86c40a751690eaadf37866755c72e0",
-        "c0d419736be42898e8d9c329c678b02073f149b7b69eafed84c9d766e67a79db",
-        "f6b2cf2c46521329087e4abd130cee7deb2590d8bdeeaf1b7000c7d1dd8a999c",
-        "d64fc6cf87eef6a01a437c5669d098c0ea8426035ee692d16a5ec41236b24bf1",
+        "29e308c7b54749bd1ad054efcb53224e6953880f5c54abd5bcf0252b13c050ef",
+        "ab8fcbd1a460845936ce04ff22d67951bb4ae9ef3a2318c24ec5b69e464994d0",
+        "20efc90ba8502b049f0cc5026520fa6161e8211a13992ee8660c225c6c2fc99b",
+        "7720e769694571e4e8ba46973bfbf1ea04390fff72c66027ffdfdd8e3d6fb078",
     ]
     expected_new_hashes = {
         (536870909, 0): "4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c",
@@ -6981,6 +6987,10 @@ def audit_b9_r201_crt_shard_replay(
         (536870879, 1): "256932177f40634241b65fe76522bc4a0cd3f8f938035c52e88803b14565dbd5",
         (536870879, 2): "5459e77794f7e38c5ca44c7e693e149a33bd66debfdd5b43b5216a5b90b51a89",
         (536870879, 3): "5f9591180b570f137d887695c94b02035625bd46c8e39ffe37e7fcdbc3cdbc53",
+        (536870869, 0): "c3d24d25695b11cb9fa73339cf3141ae782dd38e0a8690be9e2f030af938df61",
+        (536870869, 1): "dd5a4cbdcb73c74f1a9431a86343150085f5aa34cdaabab9dc2f8d080f9ef6bd",
+        (536870869, 2): "1560270161fc9588af6a4b200184518b2fcfb460413b0e166de5655063f2af83",
+        (536870869, 3): "54d4ed04cf54892ad57287c1da4dd8a24ee9d752314ee2be33016a6fda186176",
     }
 
     row_keys = {
@@ -6991,7 +7001,7 @@ def audit_b9_r201_crt_shard_replay(
         for prime in expected_primes
         for minor_index in range(4)
     }
-    row_mismatch = len(artifact_rows) != 16 or row_keys != expected_keys
+    row_mismatch = len(artifact_rows) != 20 or row_keys != expected_keys
     for row in artifact_rows:
         minor_index = row.get("minor_index")
         prime = row.get("prime")
@@ -7029,8 +7039,8 @@ def audit_b9_r201_crt_shard_replay(
             != expected_terms[index]
             or row.get("partial_CRT_symmetric_payload_sha256")
             != expected_partial_hashes[index]
-            or row.get("partial_CRT_roundtrip_check_count") != 68820
-            or row.get("partial_CRT_roundtrip_expected_count") != 68820
+            or row.get("partial_CRT_roundtrip_check_count") != 86025
+            or row.get("partial_CRT_roundtrip_expected_count") != 86025
             or row.get("partial_CRT_roundtrip_complete") is not True
         ):
             minor_mismatch = True
@@ -7047,16 +7057,17 @@ def audit_b9_r201_crt_shard_replay(
         or result.get("determinant_degree") != 184
         or result.get("dimension") != 37
         or result.get("all_CRT_primes") != expected_primes
-        or result.get("completed_additional_primes") != [536870909, 536870879]
-        or result.get("completed_additional_prime_count") != 2
-        or result.get("remaining_additional_prime_count") != 12
-        or result.get("completed_additional_minor_artifact_count") != 8
+        or result.get("completed_additional_primes")
+        != [536870909, 536870879, 536870869]
+        or result.get("completed_additional_prime_count") != 3
+        or result.get("remaining_additional_prime_count") != 11
+        or result.get("completed_additional_minor_artifact_count") != 12
         or result.get("planned_additional_minor_artifact_count") != 56
-        or result.get("remaining_additional_minor_artifact_count") != 48
-        or result.get("artifact_progress") != "8/56"
+        or result.get("remaining_additional_minor_artifact_count") != 44
+        or result.get("artifact_progress") != "12/56"
         or result.get("partial_CRT_modulus")
-        != "154742904286161782771953694404859"
-        or result.get("partial_CRT_modulus_bit_length") != 107
+        != "83076957495695500991368008742897089152471"
+        or result.get("partial_CRT_modulus_bit_length") != 136
         or result.get("required_twice_bound_bit_length") != 427
         or result.get("partial_CRT_modulus_exceeds_twice_maximum_bound") is not False
         or result.get("all_artifact_bindings_clean") is not True
@@ -7086,25 +7097,25 @@ def audit_b9_r201_crt_shard_replay(
         errors.append("B9 R201 CRT shard source binding mismatch")
 
     manifest_expectations = {
-        "status": "two_planned_prime_shards_verified_bounded_CRT_incomplete",
+        "status": "three_planned_prime_shards_verified_bounded_CRT_incomplete",
         "method": "b9_r201_incremental_modular_CRT_shard_replay_v1",
         "all_CRT_primes": expected_primes,
-        "completed_additional_primes": [536870909, 536870879],
-        "completed_additional_prime_count": 2,
-        "remaining_additional_prime_count": 12,
-        "completed_additional_minor_artifact_count": 8,
+        "completed_additional_primes": [536870909, 536870879, 536870869],
+        "completed_additional_prime_count": 3,
+        "remaining_additional_prime_count": 11,
+        "completed_additional_minor_artifact_count": 12,
         "planned_additional_minor_artifact_count": 56,
-        "remaining_additional_minor_artifact_count": 48,
-        "artifact_progress": "8/56",
+        "remaining_additional_minor_artifact_count": 44,
+        "artifact_progress": "12/56",
         "determinant_degree": 184,
         "homogeneous_monomial_lattice_size": 17205,
-        "partial_CRT_modulus_bit_length": 107,
+        "partial_CRT_modulus_bit_length": 136,
         "required_twice_bound_bit_length": 427,
-        "artifact_count": 16,
-        "point_replay_count": 80,
-        "point_replay_match_count": 80,
-        "coefficient_slot_roundtrip_count": 275280,
-        "coefficient_slot_roundtrip_pass_count": 275280,
+        "artifact_count": 20,
+        "point_replay_count": 100,
+        "point_replay_match_count": 100,
+        "coefficient_slot_roundtrip_count": 344100,
+        "coefficient_slot_roundtrip_pass_count": 344100,
         "cross_prime_monomial_support_match": True,
         "partial_CRT_residues_are_unique_integer_coefficients": False,
         "bounded_CRT_integer_reconstruction_complete": False,
@@ -7122,21 +7133,21 @@ def audit_b9_r201_crt_shard_replay(
         errors.append("B9 R201 CRT shard manifest mismatch")
 
     report_phrases = (
-        "second added prime in the frozen plan is `536,870,879`",
-        "All `80/80` matrix-determinant point replays match",
-        "Aggregate coefficient-slot round trips pass `275,280/275,280`",
-        "current modulus has only 107 bits",
-        "completed new artifacts:   8/56",
+        "third added prime in the frozen plan is `536,870,869`",
+        "All `100/100` matrix-determinant point replays match",
+        "Aggregate coefficient-slot round trips pass `344,100/344,100`",
+        "current modulus has only 136 bits",
+        "completed new artifacts:  12/56",
         "Bounded CRT integer reconstruction complete: `false`",
         "New credit: `0`",
     )
     if any(phrase not in report for phrase in report_phrases):
         errors.append("B9 R201 CRT shard report boundary incomplete")
     discussion_phrases = (
-        "Can four matching prime worlds still lie about the integer answer?",
-        "`80/80` exact matrix-determinant matches",
-        "All `275,280/275,280` slot-prime round trips pass",
-        "new artifacts remaining:  48",
+        "Can five agreeing prime worlds still hide the wrong integer lift?",
+        "`100/100` exact matrix-determinant matches",
+        "All `344,100/344,100` slot-prime round trips pass",
+        "new artifacts remaining:  44",
         "not quantum-hardware evidence",
     )
     if any(phrase not in discussion for phrase in discussion_phrases):
