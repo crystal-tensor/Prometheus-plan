@@ -300,6 +300,15 @@ uniqueness threshold, so no partial CRT representative is promoted to an
 integer coefficient. Thirteen primes and 52 artifacts remain; the next shard
 is prime `536,870,879`.
 
+T-B9-015h executes the second added prime `536,870,879`. All four determinants
+complete, moving the new-artifact ledger to `8/56`. The same verifier binds all
+16 artifacts across four primes, matches `80/80` public matrix-determinant
+points, preserves all four cross-prime monomial supports, and passes
+`275,280/275,280` coefficient-slot modular round trips. The partial modulus is
+107 bits versus the 427-bit uniqueness threshold, so the replay remains a
+non-unique partial CRT state. Twelve primes and 48 artifacts remain; the next
+shard is prime `536,870,869`.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**
