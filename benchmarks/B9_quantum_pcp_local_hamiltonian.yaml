@@ -1327,26 +1327,26 @@ current_results:
     markdown_report: ../research/B9_R201_determinant_coefficient_bound.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r201-how-many-primes-buy-a-proof.md
   r201_crt_shard_replay_v0:
-    status: nine_planned_prime_shards_verified_bounded_CRT_incomplete
+    status: ten_planned_prime_shards_verified_bounded_CRT_incomplete
     method: b9_r201_incremental_modular_CRT_shard_replay_v1
     source: r201_determinant_coefficient_bound_v0
-    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791]
-    completed_additional_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791]
-    completed_additional_prime_count: 9
-    remaining_additional_prime_count: 5
-    completed_additional_minor_artifact_count: 36
+    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779]
+    completed_additional_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779]
+    completed_additional_prime_count: 10
+    remaining_additional_prime_count: 4
+    completed_additional_minor_artifact_count: 40
     planned_additional_minor_artifact_count: 56
-    remaining_additional_minor_artifact_count: 20
-    artifact_progress: 36/56
+    remaining_additional_minor_artifact_count: 16
+    artifact_progress: 40/56
     determinant_degree: 184
     homogeneous_monomial_lattice_size: 17205
-    partial_CRT_modulus_bit_length: 310
+    partial_CRT_modulus_bit_length: 339
     required_twice_bound_bit_length: 427
-    artifact_count: 44
-    point_replay_count: 220
-    point_replay_match_count: 220
-    coefficient_slot_roundtrip_count: 757020
-    coefficient_slot_roundtrip_pass_count: 757020
+    artifact_count: 48
+    point_replay_count: 240
+    point_replay_match_count: 240
+    coefficient_slot_roundtrip_count: 825840
+    coefficient_slot_roundtrip_pass_count: 825840
     cross_prime_monomial_support_match: true
     partial_CRT_residues_are_unique_integer_coefficients: false
     bounded_CRT_integer_reconstruction_complete: false
@@ -1357,9 +1357,9 @@ current_results:
     scientific_promotion_accepted: false
     new_credit_delta: 0
     replay_tool_sha256: 34d02ea896fc73063d09326a8ef3951fca334f93ce8dfead711aaaa1f236610c
-    replay_result_sha256: 8f92b145968abf7f0a9e689954b1b864da897394523e46d134a57c9a707a191e
-    markdown_report_sha256: 16cdb5537e70065e0e5e3c1e138b8f4193a4f0629f750b58b075ae36764ef1f9
-    discussion_draft_sha256: 614ba19285c808901256defa15a45226a34c2bcbae9c4c0c3603a4494050bb7f
+    replay_result_sha256: 8af0578d20f807014bb9995a2ab3b4cbffda14cacc966924f944c40a2f3e8ac3
+    markdown_report_sha256: 58010f1b966ea1fee5aed8ac7952eaa59aba19dc9bada21e0bf4186b428b0901
+    discussion_draft_sha256: b76bc913224bb18d139a37a09aa9ec9a81de7085bd29fc7142c90256a8fe8eb3
     artifact_sha256:
       minor0_mod536870909: 4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c
       minor1_mod536870909: 949fce6c4d6190b6b3726bc8c740e1dddb6025a80186713ba805f5670923cc24
@@ -1397,10 +1397,14 @@ current_results:
       minor1_mod536870791: 4481afc6efc76ca2e07a33d7a3a5d4528b04c6249fad19b0c78865113f0a39a5
       minor2_mod536870791: fd3bafdc797ab507f1116337248bc4adc57c2ee756cdc342e05931b7310921b2
       minor3_mod536870791: 0991e46aefeb1dfa1f2dabef958c655aea74dcbcfb2be350f8f13e8d29d1baa2
+      minor0_mod536870779: 1fde4707f262832b54a079f25baa434f19405df8e4ef6a658ceb37eeccacbded
+      minor1_mod536870779: 4e94cd99e523ac0e4806a42d38f4442f1850db8de53c94d9b9b1ba1296438f04
+      minor2_mod536870779: de9ccf2606d2616944edf420d22e66d4cd055e3df080a354287c2db7d300210f
+      minor3_mod536870779: cd3427a8018626888972c2b8a213770674908336032ed46bc23e677790509c46
     replay_tool: ../tools/b9_r201_crt_shard_replay.py
     replay_result: ../results/B9_R201_crt_shard_replay_v0.json
     markdown_report: ../research/B9_R201_crt_shard_replay.md
-    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-what-error-survives-eleven-prime-worlds.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-what-does-the-twelfth-prime-still-not-prove.md
     artifacts:
       minor0_mod536870909: ../results/B9_R201_singular_minor0_mod536870909_v0.json
       minor1_mod536870909: ../results/B9_R201_singular_minor1_mod536870909_v0.json
@@ -1438,6 +1442,10 @@ current_results:
       minor1_mod536870791: ../results/B9_R201_singular_minor1_mod536870791_v0.json
       minor2_mod536870791: ../results/B9_R201_singular_minor2_mod536870791_v0.json
       minor3_mod536870791: ../results/B9_R201_singular_minor3_mod536870791_v0.json
+      minor0_mod536870779: ../results/B9_R201_singular_minor0_mod536870779_v0.json
+      minor1_mod536870779: ../results/B9_R201_singular_minor1_mod536870779_v0.json
+      minor2_mod536870779: ../results/B9_R201_singular_minor2_mod536870779_v0.json
+      minor3_mod536870779: ../results/B9_R201_singular_minor3_mod536870779_v0.json
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
