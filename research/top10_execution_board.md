@@ -441,6 +441,20 @@ any witness, and add independent maximal minors if the component belongs only
 to the selected four-minor subset. Frozen holdouts, promotion, and credit
 remain closed or zero.
 
+T-B9-015w/R203 resolves the first characteristic-zero branch of that
+counterevidence. On the exact `b=0` slice, the four primitive quotients have
+common factor `(a-2c)^5(2a+c)^5` times an unresolved degree-six factor. The two
+linear factors yield rational projective points `[2:0:1]` and `[1:0:-2]`; all
+four quotients vanish exactly and `u=1/5` satisfies the saturation equation.
+However, the complete `256x37` dense matrix and the independently constructed
+`238x37` Pauli matrix both retain exact rank 37 at both points. Four new
+deterministically selected `37x37` integer minors are nonzero and stay nonzero
+under three audit primes. These points therefore classify the R202 signal as
+an insufficient-four-minor artifact, not full-matrix rank loss. The next gate
+is to append independently selected minors that exclude both witnesses and
+classify the remaining degree-six slice factor. Frozen holdouts, promotion,
+and credit remain closed or zero.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**

@@ -7897,6 +7897,292 @@ def audit_b9_r202_modular_ideal_preflight(
     }
 
 
+def audit_b9_r203_rational_common_zero_rank_replay(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R203 rational witnesses and exact full-rank certificates."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "rational_common_zero_count": 0,
+        "all_witnesses_full_rank_over_QQ": False,
+        "four_selected_minors_sufficient_for_full_rank_locus": None,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R203 rational common-zero rank replay")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "replay tool": resolve(manifest_entry.get("replay_tool")),
+        "replay result": resolve(manifest_entry.get("replay_result")),
+        "markdown report": resolve(manifest_entry.get("markdown_report")),
+        "discussion draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R203 rational common-zero rank replay {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {
+        "replay_tool_sha256": digest(paths["replay tool"]),
+        "replay_result_sha256": digest(paths["replay result"]),
+        "markdown_report_sha256": digest(paths["markdown report"]),
+        "discussion_draft_sha256": digest(paths["discussion draft"]),
+    }
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R203 rational common-zero rank replay {field} mismatch")
+
+    result = json.loads(read(paths["replay result"]))
+    report = read(paths["markdown report"])
+    discussion = read(paths["discussion draft"])
+    expected_points = [[2, 0, 1], [1, 0, -2]]
+    expected_primes = [1000003, 536870723, 1000037]
+    expected_primitive_hashes = [
+        "1b9d1b67e5457aa4311dfe1c98b6ed14317da9c194ae31e73b219960422600cc",
+        "decf464d2f5809589649166880f1dc39fd2b778d5056d09f54ce00d3ccd9ddb4",
+        "ab4fbefc1292c2df00c19fcd62ed0c5df5df21928a3e10c62ca6f7ba80fbf95f",
+        "f1bfb86d5e646e5b2191b6d91ad7e9909cc37237ede781989754104f90fadcd9",
+    ]
+    expected_rank_hashes = [
+        {
+            "dense_rows": "134b388e525a432594fa4074a02d50db0637dc72c3ab51bb620634901a8e66f9",
+            "dense_det": "89a13edd7c4556d1a7202a654bb5905ae559577469251b5dad33e9027adbcf03",
+            "source_rows": "4b1858933538516ceb01954ac165db81b6bdd5a4cb4095a8ba32df3d6c1cc484",
+            "source_det": "a48de512995f0c692affe81ec8ff474bd26a84d4755e1af5eba30e15ba7e1f32",
+        },
+        {
+            "dense_rows": "58b158af73807c81f3a8af8cac9386d5c6a8e42b981090a567ac022ec10d34cb",
+            "dense_det": "a244359c46507ec1499119f6e4f01f5fa82a1c543d5714adaff023ec024d5af6",
+            "source_rows": "cba7f1567dc2cf70ce9f5d4bfe91e1ea403c53340c459a9f169379014ae32f2e",
+            "source_det": "6051622288746c81bdffb1e01c434fe7dec7ac1f0f71077c5bfec261e773488c",
+        },
+    ]
+    witness_rows = result.get("witness_rows", [])
+    witness_mismatch = len(witness_rows) != 2
+    for index, row in enumerate(witness_rows):
+        if index >= 2:
+            witness_mismatch = True
+            continue
+        dense = row.get("dense_full_matrix", {})
+        source = row.get("source_full_matrix", {})
+        expected_hashes = expected_rank_hashes[index]
+        if (
+            row.get("projective_point") != expected_points[index]
+            or row.get("D") != 5
+            or row.get("saturation_u") != "1/5"
+            or row.get("saturation_residual") != "0"
+            or row.get("primitive_quotient_values") != [0, 0, 0, 0]
+            or row.get("all_four_primitive_quotients_zero") is not True
+            or row.get("candidate_labels_sha256")
+            != "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65"
+            or row.get("source_symbolic_matrix_sha256")
+            != "8673dd394e4e3bd72f4bd106623d366b2e0c6cf74336f66a593be5c0b516ebd9"
+            or row.get("full_matrix_rank_drop_detected") is not False
+            or row.get("four_minor_common_zero_is_full_rank_artifact") is not True
+            or row.get("checked") is not True
+        ):
+            witness_mismatch = True
+        for label, certificate, shape, row_hash, det_hash in (
+            (
+                "dense",
+                dense,
+                [256, 37],
+                expected_hashes["dense_rows"],
+                expected_hashes["dense_det"],
+            ),
+            (
+                "source",
+                source,
+                [238, 37],
+                expected_hashes["source_rows"],
+                expected_hashes["source_det"],
+            ),
+        ):
+            selected_rows = certificate.get("selected_rows", [])
+            determinant_text = certificate.get("exact_determinant", "0")
+            try:
+                determinant = int(determinant_text)
+            except (TypeError, ValueError):
+                determinant = 0
+            rank_map = certificate.get("modular_ranks", {})
+            residue_map = certificate.get("exact_determinant_residues", {})
+            if (
+                certificate.get("shape") != shape
+                or certificate.get("rank_over_QQ") != 37
+                or certificate.get("rank_proof")
+                != "nonzero_exact_integer_maximal_minor"
+                or certificate.get("row_selection_prime") != 1000037
+                or len(selected_rows) != 37
+                or len(set(selected_rows)) != 37
+                or canonical_hash(selected_rows) != row_hash
+                or certificate.get("selected_rows_sha256") != row_hash
+                or hashlib.sha256(str(determinant).encode()).hexdigest() != det_hash
+                or certificate.get("exact_determinant_sha256") != det_hash
+                or determinant == 0
+                or certificate.get("exact_determinant_sign")
+                != (1 if determinant > 0 else -1)
+                or certificate.get("exact_determinant_bit_length")
+                != abs(determinant).bit_length()
+                or rank_map != {str(prime): 37 for prime in expected_primes}
+                or residue_map
+                != {str(prime): determinant % prime for prime in expected_primes}
+                or any(residue_map.get(str(prime), 0) == 0 for prime in expected_primes)
+                or certificate.get("checked") is not True
+            ):
+                witness_mismatch = True
+                errors.append(
+                    f"B9 R203 rational common-zero rank replay {label} certificate mismatch at point {index}"
+                )
+    if witness_mismatch:
+        errors.append("B9 R203 rational common-zero rank replay witness mismatch")
+
+    stable_payload = result.get("stable_classification_payload", {})
+    payload_without_hash = dict(result)
+    payload_without_hash.pop("payload_sha256", None)
+    result_mismatch = (
+        result.get("method")
+        != "b9_r203_rational_common_zero_full_matrix_replay_v1"
+        or result.get("version") != "0.1.0"
+        or result.get("scope")
+        != "public_R201_four_minor_artifact_classification_only"
+        or result.get("coupling") != "13/32"
+        or result.get("n") != 4
+        or result.get("source_integer_reconstruction_sha256")
+        != digest(root / "results/B9_R201_integer_reconstruction_v0.json")
+        or result.get("source_modular_preflight_sha256")
+        != digest(root / "results/B9_R202_modular_ideal_preflight_v0.json")
+        or result.get("dense_dependency_sha256")
+        != digest(root / "tools/b9_r201_presource_manifest.py")
+        or result.get("source_dependency_sha256")
+        != digest(root / "tools/b9_r201_independent_audit.py")
+        or result.get("source_primitive_quotient_sha256")
+        != expected_primitive_hashes
+        or result.get("b_zero_restricted_gcd_total_degree") != 16
+        or result.get("b_zero_restricted_gcd_term_count") != 17
+        or result.get("b_zero_restricted_gcd_canonical_terms_sha256")
+        != "efb599802c6c3c07f466368c405b740b959ed365c88ca21eaca08555d23d0881"
+        or result.get("rational_linear_factor_multiplicities")
+        != {"a-2*c": 5, "2*a+c": 5}
+        or result.get("restricted_factorization_checked") is not True
+        or result.get("rational_common_zero_count") != 2
+        or result.get("r202_primes") != [1000003, 536870723]
+        or result.get("independent_row_selection_prime") != 1000037
+        or result.get("dense_and_source_paths_separate") is not True
+        or result.get("four_minor_rational_common_zero_verified") is not True
+        or result.get("all_witnesses_full_rank_over_QQ") is not True
+        or result.get("four_selected_minors_sufficient_for_full_rank_locus")
+        is not False
+        or result.get("r202_nonunit_classification_explained_by_rational_artifact")
+        is not True
+        or canonical_hash(stable_payload)
+        != result.get("stable_classification_sha256")
+        or canonical_hash(payload_without_hash) != result.get("payload_sha256")
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    )
+    if result_mismatch:
+        errors.append("B9 R203 rational common-zero rank replay result mismatch")
+
+    manifest_expectations = {
+        "status": "rational_four_minor_common_zeros_classified_as_full_rank_artifacts",
+        "method": "b9_r203_rational_common_zero_full_matrix_replay_v1",
+        "source": "r201_integer_reconstruction_v0_and_r202_modular_ideal_preflight_v0",
+        "rational_common_zero_count": 2,
+        "projective_points": expected_points,
+        "primitive_quotient_values": [[0, 0, 0, 0], [0, 0, 0, 0]],
+        "full_matrix_shapes": [[256, 37], [238, 37]],
+        "dense_exact_ranks": [37, 37],
+        "source_exact_ranks": [37, 37],
+        "audit_primes": expected_primes,
+        "four_selected_minors_sufficient_for_full_rank_locus": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "stable_classification_sha256": result.get(
+            "stable_classification_sha256"
+        ),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R203 rational common-zero rank replay manifest mismatch")
+
+    report_phrases = (
+        "The two rational common zeros are **four-minor selection artifacts**.",
+        "`[2:0:1]`",
+        "`[1:0:-2]`",
+        "`256x37` dense matrix",
+        "`238x37` Pauli matrix",
+        "No `J=127/128,131/128` holdout was evaluated.",
+    )
+    if any(phrase not in report for phrase in report_phrases):
+        errors.append("B9 R203 rational common-zero rank replay report boundary incomplete")
+    discussion_phrases = (
+        "When do four zero maximal minors fail to mean rank loss?",
+        "These are characteristic-zero common zeros",
+        "complete matrix refuses to lose rank",
+        "insufficient-minor certificate",
+        "No frozen holdout was executed",
+    )
+    if any(phrase not in discussion for phrase in discussion_phrases):
+        errors.append("B9 R203 rational common-zero rank replay discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "rational_common_zero_count": result.get("rational_common_zero_count"),
+        "projective_points": [row.get("projective_point") for row in witness_rows],
+        "dense_exact_ranks": [
+            row.get("dense_full_matrix", {}).get("rank_over_QQ")
+            for row in witness_rows
+        ],
+        "source_exact_ranks": [
+            row.get("source_full_matrix", {}).get("rank_over_QQ")
+            for row in witness_rows
+        ],
+        "stable_classification_sha256": result.get(
+            "stable_classification_sha256"
+        ),
+        "all_witnesses_full_rank_over_QQ": result.get(
+            "all_witnesses_full_rank_over_QQ"
+        ),
+        "four_selected_minors_sufficient_for_full_rank_locus": result.get(
+            "four_selected_minors_sufficient_for_full_rank_locus"
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R203 rational common-zero rank replay")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -46032,6 +46318,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r203_rational_common_zero_rank_replay = b9_results.get(
+        "r203_rational_common_zero_rank_replay_v0"
+    )
+    b9_r203_rational_common_zero_rank_replay_status = (
+        audit_b9_r203_rational_common_zero_rank_replay(
+            root,
+            b9_r203_rational_common_zero_rank_replay,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -56448,6 +56745,7 @@ def audit(root: Path) -> dict:
             "r201_crt_shard_replay": b9_r201_crt_shard_status,
             "r201_integer_reconstruction": b9_r201_integer_reconstruction_status,
             "r202_modular_ideal_preflight": b9_r202_modular_ideal_preflight_status,
+            "r203_rational_common_zero_rank_replay": b9_r203_rational_common_zero_rank_replay_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -60733,6 +61031,10 @@ def markdown_report(report: dict) -> str:
             f"- R202 classified / unit / nonunit primes: {report['b9']['r202_modular_ideal_preflight'].get('classified_prime_count')} / {report['b9']['r202_modular_ideal_preflight'].get('unit_ideal_prime_count')} / {report['b9']['r202_modular_ideal_preflight'].get('nonunit_ideal_prime_count')}",
             f"- R202 engineering basis sizes / unit remainders: {report['b9']['r202_modular_ideal_preflight'].get('engineering_basis_sizes')} / {report['b9']['r202_modular_ideal_preflight'].get('engineering_unit_membership_remainders')}",
             f"- R202 four-minor unit route / rational certificate / holdouts / promotion / credit: {report['b9']['r202_modular_ideal_preflight'].get('four_minor_unit_certificate_route_supported')} / {report['b9']['r202_modular_ideal_preflight'].get('rational_nullstellensatz_certificate_verified')} / {report['b9']['r202_modular_ideal_preflight'].get('frozen_holdouts_executed')} / {report['b9']['r202_modular_ideal_preflight'].get('scientific_promotion_accepted')} / {report['b9']['r202_modular_ideal_preflight'].get('new_credit_delta')}",
+            f"- R203 rational common-zero rank replay status: {report['b9']['r203_rational_common_zero_rank_replay'].get('status')}",
+            f"- R203 rational witnesses / points: {report['b9']['r203_rational_common_zero_rank_replay'].get('rational_common_zero_count')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('projective_points')}",
+            f"- R203 dense / source exact ranks: {report['b9']['r203_rational_common_zero_rank_replay'].get('dense_exact_ranks')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('source_exact_ranks')}",
+            f"- R203 all witnesses full rank / four-minor sufficiency / holdouts / promotion / credit: {report['b9']['r203_rational_common_zero_rank_replay'].get('all_witnesses_full_rank_over_QQ')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('four_selected_minors_sufficient_for_full_rank_locus')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('frozen_holdouts_executed')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('scientific_promotion_accepted')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

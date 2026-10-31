@@ -2699,6 +2699,10 @@ Overall audit: PASS
 - R202 classified / unit / nonunit primes: 2 / 0 / 2
 - R202 engineering basis sizes / unit remainders: [43, 43] / ['1', '1']
 - R202 four-minor unit route / rational certificate / holdouts / promotion / credit: False / False / False / False / 0
+- R203 rational common-zero rank replay status: rational_four_minor_common_zeros_classified_as_full_rank_artifacts
+- R203 rational witnesses / points: 2 / [[2, 0, 1], [1, 0, -2]]
+- R203 dense / source exact ranks: [37, 37] / [37, 37]
+- R203 all witnesses full rank / four-minor sufficiency / holdouts / promotion / credit: True / False / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

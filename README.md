@@ -552,6 +552,19 @@ and add independent maximal minors if the common zero belongs only to the
 selected four-minor subset. Holdouts, promotion, and credit remain closed or
 zero.
 
+R203 extracts exact characteristic-zero witnesses from the R202 signal. On
+the `b=0` slice, the four primitive quotients share
+`(a-2c)^5(2a+c)^5` times a degree-six factor, giving rational projective
+points `[2:0:1]` and `[1:0:-2]`. All four quotients vanish exactly at both
+points and `u=1/5` satisfies the saturation equation. Yet the complete
+`256x37` dense matrix and a separate `238x37` Pauli-word matrix both retain
+rank 37, certified by four nonzero exact integer maximal minors and three
+modular replays. The current four selected minors are therefore insufficient
+to characterize the full rank-drop locus. The next gate is an expanded,
+independently selected minor set plus classification of the unresolved
+degree-six slice factor. Holdouts, promotion, and credit remain closed or
+zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

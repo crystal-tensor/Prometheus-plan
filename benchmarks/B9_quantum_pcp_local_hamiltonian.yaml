@@ -1545,6 +1545,30 @@ current_results:
     preflight_result: ../results/B9_R202_modular_ideal_preflight_v0.json
     markdown_report: ../research/B9_R202_modular_ideal_preflight.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r202-can-gcd-one-still-hide-a-common-zero.md
+  r203_rational_common_zero_rank_replay_v0:
+    status: rational_four_minor_common_zeros_classified_as_full_rank_artifacts
+    method: b9_r203_rational_common_zero_full_matrix_replay_v1
+    source: r201_integer_reconstruction_v0_and_r202_modular_ideal_preflight_v0
+    rational_common_zero_count: 2
+    projective_points: [[2, 0, 1], [1, 0, -2]]
+    primitive_quotient_values: [[0, 0, 0, 0], [0, 0, 0, 0]]
+    full_matrix_shapes: [[256, 37], [238, 37]]
+    dense_exact_ranks: [37, 37]
+    source_exact_ranks: [37, 37]
+    audit_primes: [1000003, 536870723, 1000037]
+    four_selected_minors_sufficient_for_full_rank_locus: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    stable_classification_sha256: 5dd7a34310cf74da2fb086a6740c8d4866aa1ca5f725db80e769386aa9de29f5
+    replay_tool_sha256: 4cb8a210bee61e424864139b7bf94cc09ba7e66b6d5f868359456de9a3f74e82
+    replay_result_sha256: accb94e52e4d04509f0a9d5292e74a7f34efeaaad45d123d163afad384694b38
+    markdown_report_sha256: 670cbb75f2fbd64b78a501aaea7950f3e981732b654e5a817d1fdb3594d9220b
+    discussion_draft_sha256: 68b825e3cb0e0bb107535ee7c04af34976e9b1c56981eda074c227cc494fd8f4
+    replay_tool: ../tools/b9_r203_rational_common_zero_rank_replay.py
+    replay_result: ../results/B9_R203_rational_common_zero_rank_replay_v0.json
+    markdown_report: ../research/B9_R203_rational_common_zero_rank_replay.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r203-when-four-zero-minors-do-not-mean-rank-loss.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1582,4 +1606,5 @@ current_results:
   r200_independent_audit: ../tools/b9_r200_independent_audit.py
   r200_integrated_adjudication: ../tools/b9_r200_integrated_adjudication.py
   r202_modular_ideal_preflight: ../tools/b9_r202_modular_ideal_preflight.py
+  r203_rational_common_zero_rank_replay: ../tools/b9_r203_rational_common_zero_rank_replay.py
   prototype_notes: ../research/B9_prototype_notes.md
