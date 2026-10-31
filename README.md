@@ -647,6 +647,17 @@ integer coefficients. The ledger is `3/42` new artifacts complete. No
 characteristic-zero division, rational Nullstellensatz, global-rank, hardware,
 frozen-holdout, Quantum PCP/NLTS, promotion, or new-credit claim is made.
 
+R210 completes the second planned three-minor shard at `536870879`. The lift
+ledger is now `6/42`, and the primary and independent CRT implementations each
+pass `206460/206460` coefficient-slot-prime round trips over four total primes.
+The independent audit rebuilds every completed new-prime source matrix and
+passes `24/24` determinant and `D^44` recomposition checks. The combined
+modulus has grown from 78 to 107 bits, still below the 428-bit worst-case
+uniqueness threshold, so the partial symmetric representatives remain
+non-promotable. The next fixed prime is `536870869`; no characteristic-zero
+division, rational identity, frozen holdout, global-rank, hardware, Quantum
+PCP/NLTS, promotion, or new-credit claim is made.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
