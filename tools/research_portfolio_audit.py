@@ -9512,6 +9512,330 @@ def audit_b9_r207_off_slice_component_rank(
     }
 
 
+def audit_b9_r208_seven_minor_unit_preflight(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R208 seventh-minor bridge and modular unit-ideal route."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "unit_ideal_prime_count": 0,
+        "r207_component_excluded_prime_count": 0,
+        "independent_radical_route_supports_unit_ideal": False,
+        "rational_nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R208 seven-minor unit preflight")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "bridge_tool": resolve(manifest_entry.get("bridge_tool")),
+        "preflight_tool": resolve(manifest_entry.get("preflight_tool")),
+        "independent_audit_tool": resolve(
+            manifest_entry.get("independent_audit_tool")
+        ),
+        "seventh_minor_mod1000003": resolve(
+            manifest_entry.get("seventh_minor_mod1000003")
+        ),
+        "seventh_minor_mod536870723": resolve(
+            manifest_entry.get("seventh_minor_mod536870723")
+        ),
+        "slimgb_result": resolve(manifest_entry.get("slimgb_result")),
+        "independent_audit_result": resolve(
+            manifest_entry.get("independent_audit_result")
+        ),
+        "markdown_report": resolve(manifest_entry.get("markdown_report")),
+        "discussion_draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R208 seven-minor unit preflight {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R208 seven-minor unit preflight {field} mismatch")
+
+    expected_support_hash = (
+        "3e0a3f7bffe3ecd274378f59553c0760680707a843d021a74cf0738f115d1ac2"
+    )
+    expected_row_hash = (
+        "9cd1569d47859421d2f7d6ed2caf6c2f896c9b77df3c0c2b9a1749cc0df1388b"
+    )
+    bridge_results: dict[int, dict] = {}
+    for prime, label in (
+        (1000003, "seventh_minor_mod1000003"),
+        (536870723, "seventh_minor_mod536870723"),
+    ):
+        result = json.loads(read(paths[label]))
+        bridge_results[prime] = result
+        payload = dict(result)
+        payload.pop("payload_sha256", None)
+        stable = dict(payload)
+        stable.pop("stable_payload_sha256", None)
+        stable.pop("elapsed_seconds", None)
+        stable.pop("singular_path", None)
+        support_hash = canonical_hash(
+            [term[0] for term in result.get("quotient_canonical_terms", [])]
+        )
+        mismatch = (
+            result.get("method")
+            != "b9_r208_r207_cross_branch_seventh_minor_bridge_v1"
+            or result.get("version") != "0.1.0"
+            or result.get("scope")
+            != "public_R207_cross_branch_rows_seventh_projective_minor_only"
+            or result.get("characteristic") != prime
+            or result.get("new_minor_index") != 6
+            or result.get("source_representation")
+            != "independent_sparse_Pauli_word_matrix"
+            or result.get("row_words_sha256") != expected_row_hash
+            or result.get("determinant_total_degree") != 184
+            or result.get("determinant_term_count") != 5309
+            or result.get("D_exponent") != 44
+            or result.get("quotient_total_degree") != 96
+            or result.get("quotient_term_count") != 821
+            or support_hash != expected_support_hash
+            or result.get("exact_D44_division_verified") is not True
+            or result.get("factorization_validated") is not True
+            or result.get("scaled_recomposition_validated") is not True
+            or len(result.get("point_replays", [])) != 4
+            or any(
+                row.get("determinant_replay_match") is not True
+                or row.get("D_power_recomposition_match") is not True
+                for row in result.get("point_replays", [])
+            )
+            or canonical_hash(stable) != result.get("stable_payload_sha256")
+            or result.get("stable_payload_sha256")
+            != manifest_entry.get("bridge_stable_payload_sha256", {}).get(
+                str(prime)
+            )
+            or canonical_hash(payload) != result.get("payload_sha256")
+            or result.get("characteristic_zero_certificate_claimed") is not False
+            or result.get("global_rank_theorem_claimed") is not False
+            or result.get("frozen_holdouts_executed") is not False
+            or result.get("scientific_promotion_accepted") is not False
+            or result.get("new_credit_delta") != 0
+            or result.get("checked") is not True
+        )
+        if mismatch:
+            errors.append(
+                f"B9 R208 seven-minor unit preflight bridge mismatch at {prime}"
+            )
+    if [
+        term[0] for term in bridge_results[1000003]["quotient_canonical_terms"]
+    ] != [
+        term[0]
+        for term in bridge_results[536870723]["quotient_canonical_terms"]
+    ]:
+        errors.append("B9 R208 seven-minor unit preflight support mismatch")
+
+    preflight = json.loads(read(paths["slimgb_result"]))
+    preflight_payload = dict(preflight)
+    preflight_payload.pop("payload_sha256", None)
+    prime_rows = preflight.get("prime_rows", [])
+    preflight_mismatch = (
+        preflight.get("method")
+        != "b9_r208_seven_minor_modular_saturated_ideal_preflight_v1"
+        or preflight.get("version") != "0.1.0"
+        or preflight.get("scope")
+        != "public_R201_to_R208_seven_minor_modular_preflight_only"
+        or preflight.get("standard_basis_algorithm") != "slimgb"
+        or preflight.get("primes") != [1000003, 536870723]
+        or preflight.get("old_minor_count") != 6
+        or preflight.get("expanded_minor_count") != 7
+        or preflight.get("new_determinant_total_degree") != 184
+        or preflight.get("new_determinant_term_count") != 5309
+        or preflight.get("new_quotient_total_degree") != 96
+        or preflight.get("new_quotient_term_count") != 821
+        or preflight.get("seventh_minor_support_sha256")
+        != expected_support_hash
+        or len(prime_rows) != 2
+        or [row.get("prime") for row in prime_rows] != [1000003, 536870723]
+        or any(
+            row.get("checked") is not True
+            or row.get("seven_minor_engineering", {}).get("basis_size") != 1
+            or row.get("seven_minor_engineering", {}).get(
+                "unit_membership_remainder"
+            )
+            != "0"
+            or row.get("seven_minor_engineering", {}).get("unit_ideal_detected")
+            is not True
+            or row.get("r207_four_point_chart", {}).get("unit_ideal_detected")
+            is not True
+            or row.get("slice")
+            != {
+                "gcd_term_count": 1,
+                "gcd_total_degree": 0,
+                "normalized_gcd_is_one": True,
+            }
+            for row in prime_rows
+        )
+        or preflight.get("unit_ideal_prime_count") != 2
+        or preflight.get("nonunit_ideal_prime_count") != 0
+        or preflight.get("r207_component_excluded_prime_count") != 2
+        or preflight.get("preflight_conclusion")
+        != "two_prime_unit_preflight_after_seventh_minor"
+        or canonical_hash(preflight.get("stable_classification_payload", {}))
+        != preflight.get("stable_classification_sha256")
+        or preflight.get("stable_classification_sha256")
+        != manifest_entry.get("stable_classification_sha256")
+        or canonical_hash(preflight_payload) != preflight.get("payload_sha256")
+        or preflight.get("rational_nullstellensatz_certificate_verified")
+        is not False
+        or preflight.get("characteristic_zero_rank_theorem_verified") is not False
+        or preflight.get("frozen_holdouts_executed") is not False
+        or preflight.get("scientific_promotion_accepted") is not False
+        or preflight.get("new_credit_delta") != 0
+        or preflight.get("checked") is not True
+    )
+    if preflight_mismatch:
+        errors.append("B9 R208 seven-minor unit preflight slimgb result mismatch")
+
+    audit = json.loads(read(paths["independent_audit_result"]))
+    audit_payload = dict(audit)
+    audit_payload.pop("payload_sha256", None)
+    audit_rows = audit.get("prime_rows", [])
+    audit_mismatch = (
+        audit.get("method")
+        != "b9_r208_independent_radical_component_std_audit_v1"
+        or audit.get("version") != "0.1.0"
+        or audit.get("algorithm") != "std"
+        or audit.get("primes") != [1000003, 536870723]
+        or audit.get("radical_vector_space_dimensions") != [4, 4]
+        or audit.get("excluded_vector_space_dimensions") != [0, 0]
+        or audit.get("radical_plus_seventh_minor_unit_prime_count") != 2
+        or audit.get("independent_radical_route_supports_unit_ideal") is not True
+        or len(audit_rows) != 2
+        or any(
+            row.get("radical_nonunit_before_seventh_minor") is not True
+            or row.get("radical_plus_seventh_minor_is_unit") is not True
+            or row.get("checked") is not True
+            for row in audit_rows
+        )
+        or canonical_hash(audit.get("stable_audit_payload", {}))
+        != audit.get("stable_audit_sha256")
+        or audit.get("stable_audit_sha256")
+        != manifest_entry.get("stable_audit_sha256")
+        or canonical_hash(audit_payload) != audit.get("payload_sha256")
+        or audit.get("rational_nullstellensatz_certificate_verified") is not False
+        or audit.get("characteristic_zero_rank_theorem_verified") is not False
+        or audit.get("frozen_holdouts_executed") is not False
+        or audit.get("scientific_promotion_accepted") is not False
+        or audit.get("new_credit_delta") != 0
+        or audit.get("checked") is not True
+    )
+    if audit_mismatch:
+        errors.append("B9 R208 seven-minor unit preflight independent audit mismatch")
+
+    expected_manifest = {
+        "status": "seven_minors_unit_at_two_primes_qq_certificate_open",
+        "method": "b9_r208_seven_minor_modular_saturated_ideal_preflight_v1",
+        "primes": [1000003, 536870723],
+        "primary_algorithm": "slimgb",
+        "independent_audit_algorithm": "std",
+        "old_minor_count": 6,
+        "expanded_minor_count": 7,
+        "determinant_total_degree": 184,
+        "determinant_term_count": 5309,
+        "D_exponent": 44,
+        "new_quotient_total_degree": 96,
+        "new_quotient_term_count": 821,
+        "seventh_minor_row_sha256": expected_row_hash,
+        "seventh_minor_support_sha256": expected_support_hash,
+        "expanded_standard_basis_sizes": [1, 1],
+        "expanded_unit_membership_remainders": ["0", "0"],
+        "unit_ideal_prime_count": 2,
+        "nonunit_ideal_prime_count": 0,
+        "r207_component_excluded_prime_count": 2,
+        "independent_radical_dimensions": [4, 4],
+        "independent_excluded_dimensions": [0, 0],
+        "independent_radical_route_supports_unit_ideal": True,
+        "preflight_conclusion": "two_prime_unit_preflight_after_seventh_minor",
+        "rational_nullstellensatz_certificate_verified": False,
+        "characteristic_zero_rank_theorem_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in expected_manifest.items()
+    ):
+        errors.append("B9 R208 seven-minor unit preflight manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "Can the cross-branch maximal minor found in R207",
+            "degree 184 and 5,309 terms",
+            "one-element basis `[1]`",
+            "vector-space dimension 4",
+            "did not finish within a useful interactive interval",
+            "No quantum processor or hardware backend was used",
+            "No frozen `J=127/128,131/128` holdout was evaluated.",
+        )
+    ):
+        errors.append("B9 R208 seven-minor unit preflight report boundary incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can One Extra Minor Turn Four False Zeros into a Proof Route?",
+            "basis `[1]`",
+            "vector-space dimension falls from 4 to 0",
+            "Two finite fields do not",
+            "No frozen holdout was executed.",
+            "No quantum hardware was used.",
+        )
+    ):
+        errors.append("B9 R208 seven-minor unit preflight discussion incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "unit_ideal_prime_count": preflight.get("unit_ideal_prime_count"),
+        "r207_component_excluded_prime_count": preflight.get(
+            "r207_component_excluded_prime_count"
+        ),
+        "independent_radical_route_supports_unit_ideal": audit.get(
+            "independent_radical_route_supports_unit_ideal"
+        ),
+        "preflight_conclusion": preflight.get("preflight_conclusion"),
+        "rational_nullstellensatz_certificate_verified": preflight.get(
+            "rational_nullstellensatz_certificate_verified"
+        ),
+        "frozen_holdouts_executed": preflight.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": preflight.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": preflight.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R208 seven-minor unit preflight")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -47702,6 +48026,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r208_seven_minor_unit_preflight = b9_results.get(
+        "r208_seven_minor_unit_preflight_v0"
+    )
+    b9_r208_seven_minor_unit_preflight_status = (
+        audit_b9_r208_seven_minor_unit_preflight(
+            root,
+            b9_r208_seven_minor_unit_preflight,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -58123,6 +58458,7 @@ def audit(root: Path) -> dict:
             "r205_sextic_full_matrix_rank": b9_r205_sextic_full_matrix_rank_status,
             "r206_six_minor_ideal_preflight": b9_r206_six_minor_ideal_preflight_status,
             "r207_off_slice_component_rank": b9_r207_off_slice_component_rank_status,
+            "r208_seven_minor_unit_preflight": b9_r208_seven_minor_unit_preflight_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),

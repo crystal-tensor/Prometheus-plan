@@ -618,6 +618,21 @@ to promote that cross-branch minor and rerun the saturated ideal. No hardware,
 holdout, Nullstellensatz, global-rank, Quantum PCP/NLTS, promotion, or credit
 claim is made.
 
+R208 promotes the fixed cross-branch Pauli row set into a seventh exact
+projective minor. At `GF(1,000,003)` and `GF(536,870,723)`, its degree-184
+determinant has 5,309 terms, divides exactly by `D^44`, and leaves a
+degree-96, 821-term quotient with identical monomial support. Appending that
+quotient makes the seven-minor saturated ideal the unit ideal in both fields:
+Singular `slimgb` returns basis `[1]` and `reduce(1,G)=0` twice. A separate
+`std` audit starts from the complete R207 radical chart; its quotient-space
+dimension falls from 4 to 0 after the seventh quotient is added at both
+primes. This is a two-prime modular route-selection result, not a rational
+Nullstellensatz certificate or a characteristic-zero global-rank theorem.
+The next gate is bounded integer reconstruction of the fifth through seventh
+quotients followed by an explicit, independently replayed `QQ`
+Nullstellensatz identity. No hardware, frozen holdout, Quantum PCP/NLTS,
+promotion, or new-credit claim is made.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
