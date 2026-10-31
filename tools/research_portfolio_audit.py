@@ -8493,6 +8493,392 @@ def audit_b9_r204_expanded_ideal_preflight(
     }
 
 
+def audit_b9_r205_sextic_full_matrix_rank(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R205 exact sextic-component full-matrix rank classification."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "real_root_count": 0,
+        "full_matrix_shapes": [],
+        "matched_determinant_replay_count": 0,
+        "all_six_real_sextic_points_full_rank_in_both_representations": False,
+        "sextic_component_is_full_rank_selected_minor_artifact": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R205 sextic full-matrix rank result")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "rank_tool": resolve(manifest_entry.get("rank_tool")),
+        "independent_audit_tool": resolve(
+            manifest_entry.get("independent_audit_tool")
+        ),
+        "rank_result": resolve(manifest_entry.get("rank_result")),
+        "independent_audit_result": resolve(
+            manifest_entry.get("independent_audit_result")
+        ),
+        "markdown_report": resolve(manifest_entry.get("markdown_report")),
+        "discussion_draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R205 sextic full-matrix rank {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R205 sextic full-matrix rank {field} mismatch")
+
+    rank_result = json.loads(read(paths["rank_result"]))
+    rank_payload = dict(rank_result)
+    rank_payload.pop("payload_sha256", None)
+
+    coefficients = [768, -256, -7227, 5120, 7227, -256, -768]
+
+    def evaluate_sextic(value: Fraction) -> Fraction:
+        total = Fraction(0)
+        for coefficient in coefficients:
+            total = total * value + coefficient
+        return total
+
+    root_rows = rank_result.get("real_root_rows", [])
+    intervals: list[tuple[Fraction, Fraction]] = []
+    roots_valid = len(root_rows) == 6
+    for row in root_rows:
+        try:
+            lower = Fraction(row.get("lower"))
+            upper = Fraction(row.get("upper"))
+        except (TypeError, ValueError, ZeroDivisionError):
+            roots_valid = False
+            continue
+        if (
+            row.get("multiplicity") != 1
+            or lower >= upper
+            or evaluate_sextic(lower) * evaluate_sextic(upper) >= 0
+        ):
+            roots_valid = False
+        intervals.append((lower, upper))
+    if len(intervals) == 6 and any(
+        intervals[index][1] >= intervals[index + 1][0]
+        for index in range(len(intervals) - 1)
+    ):
+        roots_valid = False
+
+    expected_representations = [
+        {
+            "representation": "independent_sparse_Pauli_word_matrix",
+            "shape": [238, 37],
+            "nonzero_entry_count": 629,
+            "selected_rows_sha256": "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6",
+            "specialized_matrix_sha256": "284c276aba6ca3a687bf4f7f6afba3806e64651786871638705054ec4acd7e39",
+            "prime_replays": [
+                {
+                    "prime": 1000117,
+                    "coefficients": [628815, 494224, 219779, 311352, 698249, 821955],
+                    "sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+                },
+                {
+                    "prime": 1000121,
+                    "coefficients": [96507, 732566, 527408, 522072, 622008, 74026],
+                    "sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+                },
+            ],
+        },
+        {
+            "representation": "dense_Kronecker_Hermitian_coordinate_matrix",
+            "shape": [256, 37],
+            "nonzero_entry_count": 1977,
+            "selected_rows_sha256": "d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc",
+            "specialized_matrix_sha256": "85758444cdf4fdf950d63ab04073edd494cb7f5c51f6c6c9a0d17b3a165dea06",
+            "prime_replays": [
+                {
+                    "prime": 1000117,
+                    "coefficients": [198334, 233763, 943041, 881055, 280627, 768205],
+                    "sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+                },
+                {
+                    "prime": 1000121,
+                    "coefficients": [943814, 384045, 330896, 260103, 428703, 681478],
+                    "sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+                },
+            ],
+        },
+    ]
+    representation_rows = rank_result.get("representation_certificates", [])
+    representations_valid = len(representation_rows) == 2
+    for row, expected in zip(representation_rows, expected_representations):
+        if (
+            row.get("representation") != expected["representation"]
+            or row.get("shape") != expected["shape"]
+            or row.get("nonzero_entry_count") != expected["nonzero_entry_count"]
+            or row.get("selected_row_count") != 37
+            or row.get("selected_rows_sha256") != expected["selected_rows_sha256"]
+            or row.get("specialized_matrix_sha256")
+            != expected["specialized_matrix_sha256"]
+            or row.get("rank_over_QQ_t_mod_sextic") != 37
+            or row.get("rank_proof")
+            != "same_maximal_minor_nonzero_under_two_irreducible_good_reductions"
+            or row.get("all_six_conjugate_roots_full_rank") is not True
+            or row.get("checked") is not True
+        ):
+            representations_valid = False
+        replays = row.get("prime_replays", [])
+        if len(replays) != 2:
+            representations_valid = False
+        for replay, expected_replay in zip(replays, expected["prime_replays"]):
+            if (
+                replay.get("prime") != expected_replay["prime"]
+                or replay.get("extension_degree") != 6
+                or replay.get("sextic_irreducible_mod_prime") is not True
+                or replay.get("determinant_nonzero") is not True
+                or replay.get("replayed_rank") != 37
+                or replay.get("determinant_residue_coefficients_low_to_high")
+                != expected_replay["coefficients"]
+                or replay.get("determinant_residue_sha256")
+                != expected_replay["sha256"]
+            ):
+                representations_valid = False
+
+    rank_mismatch = (
+        rank_result.get("method")
+        != "b9_r205_sextic_algebraic_full_matrix_rank_v1"
+        or rank_result.get("version") != "0.1.0"
+        or rank_result.get("scope")
+        != "public_R204_sextic_component_full_matrix_classification_only"
+        or rank_result.get("coupling") != "13/32"
+        or rank_result.get("n") != 4
+        or rank_result.get("sextic_degree") != 6
+        or rank_result.get("sextic_irreducible_over_QQ") is not True
+        or rank_result.get("sextic_discriminant_nonzero") is not True
+        or rank_result.get("real_root_count") != 6
+        or rank_result.get("all_roots_real_and_simple") is not True
+        or rank_result.get("D_positive_on_real_component") is not True
+        or not roots_valid
+        or rank_result.get("audit_primes") != [1000117, 1000121]
+        or rank_result.get("audit_prime_sextic_irreducibility")
+        != {"1000117": True, "1000121": True}
+        or not representations_valid
+        or rank_result.get(
+            "all_six_real_sextic_points_full_rank_in_both_representations"
+        )
+        is not True
+        or rank_result.get("sextic_component_is_full_rank_selected_minor_artifact")
+        is not True
+        or rank_result.get("R204_five_minors_sufficient_for_full_rank_locus")
+        is not False
+        or rank_result.get("rational_nullstellensatz_certificate_verified")
+        is not False
+        or canonical_hash(rank_result.get("stable_classification_payload", {}))
+        != rank_result.get("stable_classification_sha256")
+        or rank_result.get("stable_classification_sha256")
+        != "2351ce307b039c959a2612b3757023eacfbeb61d896ca93487cf1a51aa82698b"
+        or canonical_hash(rank_payload) != rank_result.get("payload_sha256")
+        or rank_result.get("frozen_holdouts_executed") is not False
+        or rank_result.get("scientific_promotion_accepted") is not False
+        or rank_result.get("new_credit_delta") != 0
+        or rank_result.get("checked") is not True
+    )
+    if rank_mismatch:
+        errors.append("B9 R205 sextic full-matrix rank result mismatch")
+
+    independent = json.loads(read(paths["independent_audit_result"]))
+    independent_payload = dict(independent)
+    independent_payload.pop("payload_sha256", None)
+    independent_rows = independent.get("representation_rows", [])
+    independent_rows_valid = len(independent_rows) == 2
+    for row, expected in zip(independent_rows, expected_representations):
+        if (
+            row.get("representation") != expected["representation"]
+            or row.get("shape") != expected["shape"]
+            or row.get("selected_row_count") != 37
+            or row.get("selected_rows_sha256") != expected["selected_rows_sha256"]
+            or row.get("all_replays_match") is not True
+        ):
+            independent_rows_valid = False
+        replays = row.get("prime_replays", [])
+        if len(replays) != 2:
+            independent_rows_valid = False
+        for replay, expected_replay in zip(replays, expected["prime_replays"]):
+            if (
+                replay.get("prime") != expected_replay["prime"]
+                or replay.get("expected_coefficients_low_to_high")
+                != expected_replay["coefficients"]
+                or replay.get("observed_coefficients_low_to_high")
+                != expected_replay["coefficients"]
+                or replay.get("expected_sha256") != expected_replay["sha256"]
+                or replay.get("observed_sha256") != expected_replay["sha256"]
+                or replay.get("coefficient_match") is not True
+                or replay.get("hash_match") is not True
+                or replay.get("nonzero") is not True
+            ):
+                independent_rows_valid = False
+
+    independent_mismatch = (
+        independent.get("method")
+        != "b9_r205_sympy_polynomial_remainder_independent_audit_v1"
+        or independent.get("version") != "0.1.0"
+        or independent.get("scope") != "independent_R205_selected_minor_replay_only"
+        or independent.get("arithmetic_path")
+        != "SymPy_Poly_rem_invert_and_Gaussian_elimination"
+        or independent.get("imports_R205_field_implementation") is not False
+        or independent.get("implementation_independence")
+        != {"checked": True, "violations": []}
+        or independent.get("source_result_sha256")
+        != observed["rank_result_sha256"]
+        or independent.get("matched_representation_count") != 2
+        or independent.get("matched_determinant_replay_count") != 4
+        or independent.get("all_four_determinant_residues_independently_reproduced")
+        is not True
+        or not independent_rows_valid
+        or canonical_hash(independent.get("stable_audit_payload", {}))
+        != independent.get("stable_audit_sha256")
+        or independent.get("stable_audit_sha256")
+        != "3c96ad3bb0295c7ce1932e616c303f37306d152d727aeb455524d057e41ae1e0"
+        or canonical_hash(independent_payload) != independent.get("payload_sha256")
+        or independent.get("frozen_holdouts_executed") is not False
+        or independent.get("scientific_promotion_accepted") is not False
+        or independent.get("new_credit_delta") != 0
+        or independent.get("checked") is not True
+    )
+    if independent_mismatch:
+        errors.append("B9 R205 sextic full-matrix rank independent audit mismatch")
+
+    manifest_expectations = {
+        "status": "sextic_component_classified_as_six_full_rank_artifacts",
+        "method": "b9_r205_sextic_algebraic_full_matrix_rank_v1",
+        "source": "r204_residual_sextic_plus_two_complete_matrix_representations",
+        "sextic_degree": 6,
+        "sextic_irreducible_over_QQ": True,
+        "sextic_discriminant_nonzero": True,
+        "real_root_count": 6,
+        "all_roots_real_and_simple": True,
+        "D_positive_on_real_component": True,
+        "audit_primes": [1000117, 1000121],
+        "full_matrix_shapes": [[238, 37], [256, 37]],
+        "specialized_nonzero_entry_counts": [629, 1977],
+        "selected_row_hashes": {
+            "pauli": expected_representations[0]["selected_rows_sha256"],
+            "dense": expected_representations[1]["selected_rows_sha256"],
+        },
+        "specialized_matrix_hashes": {
+            "pauli": expected_representations[0]["specialized_matrix_sha256"],
+            "dense": expected_representations[1]["specialized_matrix_sha256"],
+        },
+        "determinant_residue_hashes": {
+            "pauli_mod1000117": expected_representations[0]["prime_replays"][0]["sha256"],
+            "pauli_mod1000121": expected_representations[0]["prime_replays"][1]["sha256"],
+            "dense_mod1000117": expected_representations[1]["prime_replays"][0]["sha256"],
+            "dense_mod1000121": expected_representations[1]["prime_replays"][1]["sha256"],
+        },
+        "independent_audit_matched_representation_count": 2,
+        "independent_audit_matched_determinant_replay_count": 4,
+        "all_six_real_sextic_points_full_rank_in_both_representations": True,
+        "sextic_component_is_full_rank_selected_minor_artifact": True,
+        "R204_five_minors_sufficient_for_full_rank_locus": False,
+        "rational_nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "stable_classification_sha256": rank_result.get(
+            "stable_classification_sha256"
+        ),
+        "stable_audit_sha256": independent.get("stable_audit_sha256"),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R205 sextic full-matrix rank manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "R205 does not estimate six floating-point ranks.",
+            "All six real points of the R204 sextic component have full column rank 37",
+            "selected-minor artifact, not a full-matrix rank-drop component",
+            "No `J=127/128,131/128` holdout was evaluated.",
+            "Compute its full\ndegree-184 polynomial",
+        )
+    ):
+        errors.append("B9 R205 sextic full-matrix rank report boundary incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can six exact common zeros all be false rank drops?",
+            "All six common zeros are full-rank points of the complete matrix.",
+            "the next artifact created by looking at too few maximal minors",
+            "promote the R205 excluding minor",
+            "No frozen holdout was executed.",
+        )
+    ):
+        errors.append("B9 R205 sextic full-matrix rank discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "real_root_count": rank_result.get("real_root_count"),
+        "root_isolation_intervals_valid": roots_valid,
+        "full_matrix_shapes": [row.get("shape") for row in representation_rows],
+        "specialized_nonzero_entry_counts": [
+            row.get("nonzero_entry_count") for row in representation_rows
+        ],
+        "matched_representation_count": independent.get(
+            "matched_representation_count"
+        ),
+        "matched_determinant_replay_count": independent.get(
+            "matched_determinant_replay_count"
+        ),
+        "all_six_real_sextic_points_full_rank_in_both_representations": rank_result.get(
+            "all_six_real_sextic_points_full_rank_in_both_representations"
+        ),
+        "sextic_component_is_full_rank_selected_minor_artifact": rank_result.get(
+            "sextic_component_is_full_rank_selected_minor_artifact"
+        ),
+        "R204_five_minors_sufficient_for_full_rank_locus": rank_result.get(
+            "R204_five_minors_sufficient_for_full_rank_locus"
+        ),
+        "rational_nullstellensatz_certificate_verified": rank_result.get(
+            "rational_nullstellensatz_certificate_verified"
+        ),
+        "stable_classification_sha256": rank_result.get(
+            "stable_classification_sha256"
+        ),
+        "stable_audit_sha256": independent.get("stable_audit_sha256"),
+        "frozen_holdouts_executed": rank_result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": rank_result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": rank_result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R205 sextic full-matrix rank")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -46650,6 +47036,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r205_sextic_full_matrix_rank = b9_results.get(
+        "r205_sextic_full_matrix_rank_v0"
+    )
+    b9_r205_sextic_full_matrix_rank_status = (
+        audit_b9_r205_sextic_full_matrix_rank(
+            root,
+            b9_r205_sextic_full_matrix_rank,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -57068,6 +57465,7 @@ def audit(root: Path) -> dict:
             "r202_modular_ideal_preflight": b9_r202_modular_ideal_preflight_status,
             "r203_rational_common_zero_rank_replay": b9_r203_rational_common_zero_rank_replay_status,
             "r204_expanded_ideal_preflight": b9_r204_expanded_ideal_preflight_status,
+            "r205_sextic_full_matrix_rank": b9_r205_sextic_full_matrix_rank_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -61361,6 +61759,11 @@ def markdown_report(report: dict) -> str:
             f"- R204 known artifacts excluded / old-new slice degree: {report['b9']['r204_expanded_ideal_preflight'].get('r203_artifacts_excluded')} / {report['b9']['r204_expanded_ideal_preflight'].get('old_slice_gcd_total_degree')} -> {report['b9']['r204_expanded_ideal_preflight'].get('expanded_slice_gcd_total_degree')}",
             f"- R204 basis sizes / unit remainders / unit-nonunit primes: {report['b9']['r204_expanded_ideal_preflight'].get('expanded_standard_basis_sizes')} / {report['b9']['r204_expanded_ideal_preflight'].get('expanded_unit_membership_remainders')} / {report['b9']['r204_expanded_ideal_preflight'].get('unit_ideal_prime_count')} / {report['b9']['r204_expanded_ideal_preflight'].get('nonunit_ideal_prime_count')}",
             f"- R204 five-minor unit route / holdouts / promotion / credit: {report['b9']['r204_expanded_ideal_preflight'].get('five_minor_unit_certificate_route_supported')} / {report['b9']['r204_expanded_ideal_preflight'].get('frozen_holdouts_executed')} / {report['b9']['r204_expanded_ideal_preflight'].get('scientific_promotion_accepted')} / {report['b9']['r204_expanded_ideal_preflight'].get('new_credit_delta')}",
+            f"- R205 sextic full-matrix rank status: {report['b9']['r205_sextic_full_matrix_rank'].get('status')}",
+            f"- R205 real roots / matrix shapes / nonzero entries: {report['b9']['r205_sextic_full_matrix_rank'].get('real_root_count')} / {report['b9']['r205_sextic_full_matrix_rank'].get('full_matrix_shapes')} / {report['b9']['r205_sextic_full_matrix_rank'].get('specialized_nonzero_entry_counts')}",
+            f"- R205 independent representation / determinant replays: {report['b9']['r205_sextic_full_matrix_rank'].get('matched_representation_count')} / {report['b9']['r205_sextic_full_matrix_rank'].get('matched_determinant_replay_count')}",
+            f"- R205 all six full rank / selected-minor artifact / five-minor sufficiency: {report['b9']['r205_sextic_full_matrix_rank'].get('all_six_real_sextic_points_full_rank_in_both_representations')} / {report['b9']['r205_sextic_full_matrix_rank'].get('sextic_component_is_full_rank_selected_minor_artifact')} / {report['b9']['r205_sextic_full_matrix_rank'].get('R204_five_minors_sufficient_for_full_rank_locus')}",
+            f"- R205 Nullstellensatz / holdouts / promotion / credit: {report['b9']['r205_sextic_full_matrix_rank'].get('rational_nullstellensatz_certificate_verified')} / {report['b9']['r205_sextic_full_matrix_rank'].get('frozen_holdouts_executed')} / {report['b9']['r205_sextic_full_matrix_rank'].get('scientific_promotion_accepted')} / {report['b9']['r205_sextic_full_matrix_rank'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

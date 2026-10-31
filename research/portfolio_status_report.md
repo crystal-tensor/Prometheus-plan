@@ -2707,6 +2707,11 @@ Overall audit: PASS
 - R204 known artifacts excluded / old-new slice degree: True / 16 -> 6
 - R204 basis sizes / unit remainders / unit-nonunit primes: [10, 10] / ['1', '1'] / 0 / 2
 - R204 five-minor unit route / holdouts / promotion / credit: False / False / False / 0
+- R205 sextic full-matrix rank status: sextic_component_classified_as_six_full_rank_artifacts
+- R205 real roots / matrix shapes / nonzero entries: 6 / [[238, 37], [256, 37]] / [629, 1977]
+- R205 independent representation / determinant replays: 2 / 4
+- R205 all six full rank / selected-minor artifact / five-minor sufficiency: True / True / False
+- R205 Nullstellensatz / holdouts / promotion / credit: False / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

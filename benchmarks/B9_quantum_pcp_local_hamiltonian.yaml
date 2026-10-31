@@ -1611,6 +1611,53 @@ current_results:
     expanded_preflight_result: ../results/B9_R204_expanded_ideal_preflight_v0.json
     markdown_report: ../research/B9_R204_expanded_ideal_preflight.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r204-can-one-new-minor-repair-a-false-rank-drop.md
+  r205_sextic_full_matrix_rank_v0:
+    status: sextic_component_classified_as_six_full_rank_artifacts
+    method: b9_r205_sextic_algebraic_full_matrix_rank_v1
+    source: r204_residual_sextic_plus_two_complete_matrix_representations
+    sextic_degree: 6
+    sextic_irreducible_over_QQ: true
+    sextic_discriminant_nonzero: true
+    real_root_count: 6
+    all_roots_real_and_simple: true
+    D_positive_on_real_component: true
+    audit_primes: [1000117, 1000121]
+    full_matrix_shapes: [[238, 37], [256, 37]]
+    specialized_nonzero_entry_counts: [629, 1977]
+    selected_row_hashes:
+      pauli: 9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6
+      dense: d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc
+    specialized_matrix_hashes:
+      pauli: 284c276aba6ca3a687bf4f7f6afba3806e64651786871638705054ec4acd7e39
+      dense: 85758444cdf4fdf950d63ab04073edd494cb7f5c51f6c6c9a0d17b3a165dea06
+    determinant_residue_hashes:
+      pauli_mod1000117: c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34
+      pauli_mod1000121: 1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93
+      dense_mod1000117: 90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e
+      dense_mod1000121: 51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc
+    independent_audit_matched_representation_count: 2
+    independent_audit_matched_determinant_replay_count: 4
+    all_six_real_sextic_points_full_rank_in_both_representations: true
+    sextic_component_is_full_rank_selected_minor_artifact: true
+    R204_five_minors_sufficient_for_full_rank_locus: false
+    rational_nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    stable_classification_sha256: 2351ce307b039c959a2612b3757023eacfbeb61d896ca93487cf1a51aa82698b
+    stable_audit_sha256: 3c96ad3bb0295c7ce1932e616c303f37306d152d727aeb455524d057e41ae1e0
+    rank_tool_sha256: 34c104c4473bb55c61a2f2b61331f7c2cb31113350b466c0a8bd5e4fade45ae5
+    independent_audit_tool_sha256: dd5f0da39d1f0b8cde7ba9d0e334cdd6e1941458dbcdbe2d14342aeee55e80f4
+    rank_result_sha256: a97e2dcdb4710fcdb43e962d1cf5e9ddfcbf319df29206356c55e549fe6ae0df
+    independent_audit_result_sha256: edef66a0acb5e01da3edbe4a1fcf6838c0b17050780679b53d30d1d424007428
+    markdown_report_sha256: cb85e2716f622fd1eb1fb8acfab6f8cdb492ed1a2f35036fe01f58addb6b1b97
+    discussion_draft_sha256: 08aadf991611fe3da40518c062c5a637c3395460f3ad66ec1e0640a10e3eddc0
+    rank_tool: ../tools/b9_r205_sextic_full_matrix_rank.py
+    independent_audit_tool: ../tools/b9_r205_independent_audit.py
+    rank_result: ../results/B9_R205_sextic_full_matrix_rank_v0.json
+    independent_audit_result: ../results/B9_R205_sextic_full_matrix_rank_independent_audit_v0.json
+    markdown_report: ../research/B9_R205_sextic_full_matrix_rank.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r205-can-six-exact-common-zeros-all-be-false-rank-drops.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1651,4 +1698,6 @@ current_results:
   r203_rational_common_zero_rank_replay: ../tools/b9_r203_rational_common_zero_rank_replay.py
   r204_expanded_minor_bridge: ../tools/b9_r204_expanded_minor_bridge.py
   r204_expanded_ideal_preflight: ../tools/b9_r204_expanded_ideal_preflight.py
+  r205_sextic_full_matrix_rank: ../tools/b9_r205_sextic_full_matrix_rank.py
+  r205_independent_audit: ../tools/b9_r205_independent_audit.py
   prototype_notes: ../research/B9_prototype_notes.md

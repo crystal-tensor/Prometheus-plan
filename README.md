@@ -578,6 +578,19 @@ residual factor, while the full saturated standard basis contracts from 43 to
 independent minor only if those roots remain full rank. Holdouts, promotion,
 and credit remain closed or zero.
 
+R205 resolves the exact degree-six component left by R204. The sextic is
+irreducible over `QQ`, has nonzero discriminant, and has six simple real roots.
+Instead of estimating six numerical ranks, R205 works over two irreducible
+good reductions, `GF(1,000,117)[t]/(f)` and
+`GF(1,000,121)[t]/(f)`. One fixed `37x37` minor from each complete matrix is
+nonzero in both fields: the `238x37` Pauli path and the independent `256x37`
+dense Kronecker path therefore retain rank 37 at every conjugate root. A
+separate SymPy `Poly.rem`/`Poly.invert` audit reproduces all four determinant
+residues. The sextic is another selected-minor artifact, not full-matrix rank
+loss. The next gate is to add the R205 excluding minor as a sixth quotient and
+rerun the saturated ideal. Holdouts, promotion, and credit remain closed or
+zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

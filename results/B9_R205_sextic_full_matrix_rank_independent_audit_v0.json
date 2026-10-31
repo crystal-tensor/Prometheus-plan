@@ -1,0 +1,284 @@
+{
+  "all_four_determinant_residues_independently_reproduced": true,
+  "arithmetic_path": "SymPy_Poly_rem_invert_and_Gaussian_elimination",
+  "checked": true,
+  "dense_dependency_sha256": "ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa",
+  "frozen_holdouts_executed": false,
+  "implementation_independence": {
+    "checked": true,
+    "violations": []
+  },
+  "imports_R205_field_implementation": false,
+  "matched_determinant_replay_count": 4,
+  "matched_representation_count": 2,
+  "method": "b9_r205_sympy_polynomial_remainder_independent_audit_v1",
+  "new_credit_delta": 0,
+  "payload_sha256": "1aede0884b1aad39723d2a72cbfee36a8064793b048214f941736ca1dca714b5",
+  "representation_rows": [
+    {
+      "all_replays_match": true,
+      "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+      "parent_symbolic_matrix_sha256": "8673dd394e4e3bd72f4bd106623d366b2e0c6cf74336f66a593be5c0b516ebd9",
+      "prime_replays": [
+        {
+          "coefficient_match": true,
+          "expected_coefficients_low_to_high": [
+            628815,
+            494224,
+            219779,
+            311352,
+            698249,
+            821955
+          ],
+          "expected_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+          "hash_match": true,
+          "nonzero": true,
+          "observed_coefficients_low_to_high": [
+            628815,
+            494224,
+            219779,
+            311352,
+            698249,
+            821955
+          ],
+          "observed_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+          "prime": 1000117
+        },
+        {
+          "coefficient_match": true,
+          "expected_coefficients_low_to_high": [
+            96507,
+            732566,
+            527408,
+            522072,
+            622008,
+            74026
+          ],
+          "expected_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+          "hash_match": true,
+          "nonzero": true,
+          "observed_coefficients_low_to_high": [
+            96507,
+            732566,
+            527408,
+            522072,
+            622008,
+            74026
+          ],
+          "observed_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+          "prime": 1000121
+        }
+      ],
+      "representation": "independent_sparse_Pauli_word_matrix",
+      "selected_row_count": 37,
+      "selected_rows_sha256": "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6",
+      "shape": [
+        238,
+        37
+      ]
+    },
+    {
+      "all_replays_match": true,
+      "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+      "parent_symbolic_matrix_sha256": "a41a85f455162e5d65b3b2eec58ee67621762a83fd9fb0460562ce2af7896a84",
+      "prime_replays": [
+        {
+          "coefficient_match": true,
+          "expected_coefficients_low_to_high": [
+            198334,
+            233763,
+            943041,
+            881055,
+            280627,
+            768205
+          ],
+          "expected_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+          "hash_match": true,
+          "nonzero": true,
+          "observed_coefficients_low_to_high": [
+            198334,
+            233763,
+            943041,
+            881055,
+            280627,
+            768205
+          ],
+          "observed_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+          "prime": 1000117
+        },
+        {
+          "coefficient_match": true,
+          "expected_coefficients_low_to_high": [
+            943814,
+            384045,
+            330896,
+            260103,
+            428703,
+            681478
+          ],
+          "expected_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+          "hash_match": true,
+          "nonzero": true,
+          "observed_coefficients_low_to_high": [
+            943814,
+            384045,
+            330896,
+            260103,
+            428703,
+            681478
+          ],
+          "observed_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+          "prime": 1000121
+        }
+      ],
+      "representation": "dense_Kronecker_Hermitian_coordinate_matrix",
+      "selected_row_count": 37,
+      "selected_rows_sha256": "d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc",
+      "shape": [
+        256,
+        37
+      ]
+    }
+  ],
+  "scientific_promotion_accepted": false,
+  "scope": "independent_R205_selected_minor_replay_only",
+  "source_dependency_sha256": "be394fec66bb10231550721745e13bb3a6c3a4f2d97ff955a3ac7e965e18a944",
+  "source_result_sha256": "a97e2dcdb4710fcdb43e962d1cf5e9ddfcbf319df29206356c55e549fe6ae0df",
+  "stable_audit_payload": {
+    "dense_dependency_sha256": "ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa",
+    "implementation_independence": {
+      "checked": true,
+      "violations": []
+    },
+    "representation_rows": [
+      {
+        "all_replays_match": true,
+        "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+        "parent_symbolic_matrix_sha256": "8673dd394e4e3bd72f4bd106623d366b2e0c6cf74336f66a593be5c0b516ebd9",
+        "prime_replays": [
+          {
+            "coefficient_match": true,
+            "expected_coefficients_low_to_high": [
+              628815,
+              494224,
+              219779,
+              311352,
+              698249,
+              821955
+            ],
+            "expected_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+            "hash_match": true,
+            "nonzero": true,
+            "observed_coefficients_low_to_high": [
+              628815,
+              494224,
+              219779,
+              311352,
+              698249,
+              821955
+            ],
+            "observed_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+            "prime": 1000117
+          },
+          {
+            "coefficient_match": true,
+            "expected_coefficients_low_to_high": [
+              96507,
+              732566,
+              527408,
+              522072,
+              622008,
+              74026
+            ],
+            "expected_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+            "hash_match": true,
+            "nonzero": true,
+            "observed_coefficients_low_to_high": [
+              96507,
+              732566,
+              527408,
+              522072,
+              622008,
+              74026
+            ],
+            "observed_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+            "prime": 1000121
+          }
+        ],
+        "representation": "independent_sparse_Pauli_word_matrix",
+        "selected_row_count": 37,
+        "selected_rows_sha256": "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6",
+        "shape": [
+          238,
+          37
+        ]
+      },
+      {
+        "all_replays_match": true,
+        "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+        "parent_symbolic_matrix_sha256": "a41a85f455162e5d65b3b2eec58ee67621762a83fd9fb0460562ce2af7896a84",
+        "prime_replays": [
+          {
+            "coefficient_match": true,
+            "expected_coefficients_low_to_high": [
+              198334,
+              233763,
+              943041,
+              881055,
+              280627,
+              768205
+            ],
+            "expected_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+            "hash_match": true,
+            "nonzero": true,
+            "observed_coefficients_low_to_high": [
+              198334,
+              233763,
+              943041,
+              881055,
+              280627,
+              768205
+            ],
+            "observed_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+            "prime": 1000117
+          },
+          {
+            "coefficient_match": true,
+            "expected_coefficients_low_to_high": [
+              943814,
+              384045,
+              330896,
+              260103,
+              428703,
+              681478
+            ],
+            "expected_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+            "hash_match": true,
+            "nonzero": true,
+            "observed_coefficients_low_to_high": [
+              943814,
+              384045,
+              330896,
+              260103,
+              428703,
+              681478
+            ],
+            "observed_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+            "prime": 1000121
+          }
+        ],
+        "representation": "dense_Kronecker_Hermitian_coordinate_matrix",
+        "selected_row_count": 37,
+        "selected_rows_sha256": "d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc",
+        "shape": [
+          256,
+          37
+        ]
+      }
+    ],
+    "source_dependency_sha256": "be394fec66bb10231550721745e13bb3a6c3a4f2d97ff955a3ac7e965e18a944",
+    "source_result_sha256": "a97e2dcdb4710fcdb43e962d1cf5e9ddfcbf319df29206356c55e549fe6ae0df"
+  },
+  "stable_audit_sha256": "3c96ad3bb0295c7ce1932e616c303f37306d152d727aeb455524d057e41ae1e0",
+  "version": "0.1.0"
+}

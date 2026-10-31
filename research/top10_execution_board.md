@@ -470,6 +470,20 @@ algebraic extensions. A full-rank replay should select another excluding
 minor; a rank drop must emit an exact nonzero kernel vector. Frozen holdouts,
 promotion, and credit remain closed or zero.
 
+T-B9-015y/R205 resolves the remaining exact `b=0` sextic. Its affine polynomial
+is irreducible over `QQ`, has nonzero discriminant, and has six simple real
+roots. R205 evaluates the complete matrix over two irreducible good reductions,
+`GF(1,000,117)[t]/(f)` and `GF(1,000,121)[t]/(f)`, rather than estimating six
+floating-point ranks. One fixed `37x37` minor is nonzero at both primes for the
+complete `238x37` Pauli matrix, and another is nonzero at both primes for the
+independent `256x37` dense Kronecker matrix. A separate SymPy polynomial
+remainder/inverse implementation reproduces all `4/4` determinant residues.
+All six conjugate points are therefore full-rank selected-minor artifacts, not
+full-matrix rank drops. The next gate is to compute the R205 Pauli excluding
+minor as a full degree-184 polynomial, divide by `D^44`, append it as the sixth
+degree-96 generator, and rerun the saturated ideal. Frozen holdouts, promotion,
+and credit remain closed or zero.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**

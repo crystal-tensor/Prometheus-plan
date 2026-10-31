@@ -1,0 +1,486 @@
+{
+  "D_positive_on_real_component": true,
+  "R204_five_minors_sufficient_for_full_rank_locus": false,
+  "all_roots_real_and_simple": true,
+  "all_six_real_sextic_points_full_rank_in_both_representations": true,
+  "audit_prime_sextic_irreducibility": {
+    "1000117": true,
+    "1000121": true
+  },
+  "audit_primes": [
+    1000117,
+    1000121
+  ],
+  "checked": true,
+  "claim_boundary": "R205 classifies only the irreducible b=0 sextic component left by R204. Good-reduction nonzero determinants prove full rank at its six real conjugate points, but do not prove global full rank outside that component or supply a characteristic-zero unit-ideal certificate.",
+  "coupling": "13/32",
+  "dense_and_source_paths_separate": true,
+  "frozen_holdouts_executed": false,
+  "method": "b9_r205_sextic_algebraic_full_matrix_rank_v1",
+  "n": 4,
+  "new_credit_delta": 0,
+  "next_gate": "append_an_R205_excluding_minor_and_rerun_the_saturated_ideal",
+  "payload_sha256": "cced96b5cbfd03f901009ced502ab89dd19d1c032c2442cb66951ac771db2ef5",
+  "projective_chart": "[a:b:c]=[t:0:1]; c=0 excluded by nonzero a^6 coefficient",
+  "python_version": "3.12.6",
+  "rational_nullstellensatz_certificate_verified": false,
+  "real_root_count": 6,
+  "real_root_rows": [
+    {
+      "lower": "-915275/296152",
+      "multiplicity": 1,
+      "upper": "-143337/46379"
+    },
+    {
+      "lower": "-160714/267757",
+      "multiplicity": 1,
+      "upper": "-159639/265966"
+    },
+    {
+      "lower": "-257352/628895",
+      "multiplicity": 1,
+      "upper": "-7009/17128"
+    },
+    {
+      "lower": "64257/198590",
+      "multiplicity": 1,
+      "upper": "46379/143337"
+    },
+    {
+      "lower": "267757/160714",
+      "multiplicity": 1,
+      "upper": "265966/159639"
+    },
+    {
+      "lower": "902943/369496",
+      "multiplicity": 1,
+      "upper": "920071/376505"
+    }
+  ],
+  "representation_certificates": [
+    {
+      "all_six_conjugate_roots_full_rank": true,
+      "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+      "checked": true,
+      "nonzero_entry_count": 629,
+      "parent_symbolic_matrix_sha256": "8673dd394e4e3bd72f4bd106623d366b2e0c6cf74336f66a593be5c0b516ebd9",
+      "prime_replays": [
+        {
+          "determinant_nonzero": true,
+          "determinant_residue_coefficients_low_to_high": [
+            628815,
+            494224,
+            219779,
+            311352,
+            698249,
+            821955
+          ],
+          "determinant_residue_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+          "extension_degree": 6,
+          "prime": 1000117,
+          "replayed_rank": 37,
+          "sextic_irreducible_mod_prime": true
+        },
+        {
+          "determinant_nonzero": true,
+          "determinant_residue_coefficients_low_to_high": [
+            96507,
+            732566,
+            527408,
+            522072,
+            622008,
+            74026
+          ],
+          "determinant_residue_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+          "extension_degree": 6,
+          "prime": 1000121,
+          "replayed_rank": 37,
+          "sextic_irreducible_mod_prime": true
+        }
+      ],
+      "rank_over_QQ_t_mod_sextic": 37,
+      "rank_proof": "same_maximal_minor_nonzero_under_two_irreducible_good_reductions",
+      "representation": "independent_sparse_Pauli_word_matrix",
+      "row_labels_sha256": "605e58cc4e0b4922cd57107e377d0a78b8a3c0cc7b767be1a45d0f3f8631fba5",
+      "row_selection_method": "sha256(purpose,representation,coordinate,selection_prime)",
+      "row_selection_prime": 1000117,
+      "selected_row_count": 37,
+      "selected_rows": [
+        "XXXI",
+        "XZII",
+        "IXYZ",
+        "IIZY",
+        "XYYI",
+        "XZIX",
+        "YZXZ",
+        "YXXX",
+        "XYZI",
+        "YZIY",
+        "XIYI",
+        "ZIYI",
+        "XZXY",
+        "IZYX",
+        "IYZI",
+        "XYIZ",
+        "ZXII",
+        "ZXXZ",
+        "XXII",
+        "ZYYI",
+        "IYXY",
+        "ZYIY",
+        "IIIY",
+        "ZYII",
+        "IXIY",
+        "XYXX",
+        "IZXX",
+        "IYYX",
+        "ZIII",
+        "IYXX",
+        "IZYY",
+        "IYXZ",
+        "IZXI",
+        "YZII",
+        "YIII",
+        "ZYZI",
+        "IIYI"
+      ],
+      "selected_rows_sha256": "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6",
+      "shape": [
+        238,
+        37
+      ],
+      "specialized_matrix_sha256": "284c276aba6ca3a687bf4f7f6afba3806e64651786871638705054ec4acd7e39"
+    },
+    {
+      "all_six_conjugate_roots_full_rank": true,
+      "candidate_labels_sha256": "8641091b90145c6d05a2c0f754232a8dc78e0c1b93004678b9895cabed0b1e65",
+      "checked": true,
+      "nonzero_entry_count": 1977,
+      "parent_symbolic_matrix_sha256": "edafdbecf5c93c469c4a37d5cdcf50f85255ccbaaba81b11d888778be5578d5a",
+      "prime_replays": [
+        {
+          "determinant_nonzero": true,
+          "determinant_residue_coefficients_low_to_high": [
+            198334,
+            233763,
+            943041,
+            881055,
+            280627,
+            768205
+          ],
+          "determinant_residue_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+          "extension_degree": 6,
+          "prime": 1000117,
+          "replayed_rank": 37,
+          "sextic_irreducible_mod_prime": true
+        },
+        {
+          "determinant_nonzero": true,
+          "determinant_residue_coefficients_low_to_high": [
+            943814,
+            384045,
+            330896,
+            260103,
+            428703,
+            681478
+          ],
+          "determinant_residue_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+          "extension_degree": 6,
+          "prime": 1000121,
+          "replayed_rank": 37,
+          "sextic_irreducible_mod_prime": true
+        }
+      ],
+      "rank_over_QQ_t_mod_sextic": 37,
+      "rank_proof": "same_maximal_minor_nonzero_under_two_irreducible_good_reductions",
+      "representation": "dense_Kronecker_Hermitian_coordinate_matrix",
+      "row_labels_sha256": "df60ae2470cf1687658a3295544b2c62d046fbe0cd997856c8193056b1a5dc6d",
+      "row_selection_method": "sha256(purpose,representation,coordinate,selection_prime)",
+      "row_selection_prime": 1000117,
+      "selected_row_count": 37,
+      "selected_rows": [
+        "upper_im:2:11",
+        "upper_re:8:11",
+        "upper_im:7:10",
+        "upper_re:1:7",
+        "upper_re:14:15",
+        "upper_im:8:11",
+        "upper_re:9:12",
+        "upper_re:4:11",
+        "upper_re:0:4",
+        "upper_im:11:15",
+        "upper_im:6:15",
+        "upper_im:10:15",
+        "upper_im:0:6",
+        "upper_im:6:10",
+        "upper_im:2:14",
+        "upper_re:10:14",
+        "upper_re:1:8",
+        "upper_re:2:4",
+        "diag:7",
+        "upper_re:1:3",
+        "upper_im:1:7",
+        "upper_im:5:15",
+        "diag:9",
+        "upper_im:2:10",
+        "upper_im:3:12",
+        "diag:5",
+        "upper_re:7:9",
+        "upper_re:5:9",
+        "upper_re:1:11",
+        "upper_im:2:5",
+        "upper_im:14:15",
+        "upper_im:7:15",
+        "upper_im:11:13",
+        "upper_im:2:6",
+        "upper_im:1:3",
+        "upper_im:8:14",
+        "upper_im:12:15"
+      ],
+      "selected_rows_sha256": "d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc",
+      "shape": [
+        256,
+        37
+      ],
+      "specialized_matrix_sha256": "85758444cdf4fdf950d63ab04073edd494cb7f5c51f6c6c9a0d17b3a165dea06"
+    }
+  ],
+  "scientific_promotion_accepted": false,
+  "scope": "public_R204_sextic_component_full_matrix_classification_only",
+  "sextic_canonical_terms": [
+    [
+      [
+        6
+      ],
+      "768"
+    ],
+    [
+      [
+        5
+      ],
+      "-256"
+    ],
+    [
+      [
+        4
+      ],
+      "-7227"
+    ],
+    [
+      [
+        3
+      ],
+      "5120"
+    ],
+    [
+      [
+        2
+      ],
+      "7227"
+    ],
+    [
+      [
+        1
+      ],
+      "-256"
+    ],
+    [
+      [
+        0
+      ],
+      "-768"
+    ]
+  ],
+  "sextic_canonical_terms_sha256": "2c9a9550bcfca1c437ae32bf98451395daf4a1ac9f10c38c045c7082e9d2a354",
+  "sextic_component_is_full_rank_selected_minor_artifact": true,
+  "sextic_degree": 6,
+  "sextic_discriminant": "3512955730661788373685882013492445184",
+  "sextic_discriminant_nonzero": true,
+  "sextic_discriminant_sha256": "bd1050d0b4c5a5ec65d9770026e061d8d52f8d168a09d6b7ab130befc7274760",
+  "sextic_irreducible_over_QQ": true,
+  "source_sha256": {
+    "dense_tool": "ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa",
+    "r203": "accb94e52e4d04509f0a9d5292e74a7f34efeaaad45d123d163afad384694b38",
+    "r204": "d404282c45b4ed0ebd490890f19ee3e3113513dedc8abf39cabfee4dea48cdfd",
+    "source_tool": "be394fec66bb10231550721745e13bb3a6c3a4f2d97ff955a3ac7e965e18a944"
+  },
+  "stable_classification_payload": {
+    "audit_primes": [
+      1000117,
+      1000121
+    ],
+    "real_root_rows": [
+      {
+        "lower": "-915275/296152",
+        "multiplicity": 1,
+        "upper": "-143337/46379"
+      },
+      {
+        "lower": "-160714/267757",
+        "multiplicity": 1,
+        "upper": "-159639/265966"
+      },
+      {
+        "lower": "-257352/628895",
+        "multiplicity": 1,
+        "upper": "-7009/17128"
+      },
+      {
+        "lower": "64257/198590",
+        "multiplicity": 1,
+        "upper": "46379/143337"
+      },
+      {
+        "lower": "267757/160714",
+        "multiplicity": 1,
+        "upper": "265966/159639"
+      },
+      {
+        "lower": "902943/369496",
+        "multiplicity": 1,
+        "upper": "920071/376505"
+      }
+    ],
+    "representation_rows": [
+      {
+        "prime_replays": [
+          {
+            "determinant_nonzero": true,
+            "determinant_residue_coefficients_low_to_high": [
+              628815,
+              494224,
+              219779,
+              311352,
+              698249,
+              821955
+            ],
+            "determinant_residue_sha256": "c62bb42dfd1978e96efda0b2fdf8ebc0508c69967901fa5fae4822c48f40fb34",
+            "extension_degree": 6,
+            "prime": 1000117,
+            "replayed_rank": 37,
+            "sextic_irreducible_mod_prime": true
+          },
+          {
+            "determinant_nonzero": true,
+            "determinant_residue_coefficients_low_to_high": [
+              96507,
+              732566,
+              527408,
+              522072,
+              622008,
+              74026
+            ],
+            "determinant_residue_sha256": "1600c9198e052c20333c31ca16c8755b3d0e59ac9a152f1db4f2aaeabe6a1e93",
+            "extension_degree": 6,
+            "prime": 1000121,
+            "replayed_rank": 37,
+            "sextic_irreducible_mod_prime": true
+          }
+        ],
+        "representation": "independent_sparse_Pauli_word_matrix",
+        "selected_rows_sha256": "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6",
+        "shape": [
+          238,
+          37
+        ],
+        "specialized_matrix_sha256": "284c276aba6ca3a687bf4f7f6afba3806e64651786871638705054ec4acd7e39"
+      },
+      {
+        "prime_replays": [
+          {
+            "determinant_nonzero": true,
+            "determinant_residue_coefficients_low_to_high": [
+              198334,
+              233763,
+              943041,
+              881055,
+              280627,
+              768205
+            ],
+            "determinant_residue_sha256": "90a23398a175ccd0e44c52737d8c766d878f4de8e156a7bc3bd058ed7399af4e",
+            "extension_degree": 6,
+            "prime": 1000117,
+            "replayed_rank": 37,
+            "sextic_irreducible_mod_prime": true
+          },
+          {
+            "determinant_nonzero": true,
+            "determinant_residue_coefficients_low_to_high": [
+              943814,
+              384045,
+              330896,
+              260103,
+              428703,
+              681478
+            ],
+            "determinant_residue_sha256": "51a26bbbc7bb29936324b22461de5952d34e5ef980e2c7e5c9e78f19610a6ccc",
+            "extension_degree": 6,
+            "prime": 1000121,
+            "replayed_rank": 37,
+            "sextic_irreducible_mod_prime": true
+          }
+        ],
+        "representation": "dense_Kronecker_Hermitian_coordinate_matrix",
+        "selected_rows_sha256": "d3dde08315a45b7be4c113ec0d5affbe5697018f6b4dd3bd1d0d90aac88057cc",
+        "shape": [
+          256,
+          37
+        ],
+        "specialized_matrix_sha256": "85758444cdf4fdf950d63ab04073edd494cb7f5c51f6c6c9a0d17b3a165dea06"
+      }
+    ],
+    "sextic_canonical_terms": [
+      [
+        [
+          6
+        ],
+        "768"
+      ],
+      [
+        [
+          5
+        ],
+        "-256"
+      ],
+      [
+        [
+          4
+        ],
+        "-7227"
+      ],
+      [
+        [
+          3
+        ],
+        "5120"
+      ],
+      [
+        [
+          2
+        ],
+        "7227"
+      ],
+      [
+        [
+          1
+        ],
+        "-256"
+      ],
+      [
+        [
+          0
+        ],
+        "-768"
+      ]
+    ],
+    "source_sha256": {
+      "dense_tool": "ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa",
+      "r203": "accb94e52e4d04509f0a9d5292e74a7f34efeaaad45d123d163afad384694b38",
+      "r204": "d404282c45b4ed0ebd490890f19ee3e3113513dedc8abf39cabfee4dea48cdfd",
+      "source_tool": "be394fec66bb10231550721745e13bb3a6c3a4f2d97ff955a3ac7e965e18a944"
+    }
+  },
+  "stable_classification_sha256": "2351ce307b039c959a2612b3757023eacfbeb61d896ca93487cf1a51aa82698b",
+  "sympy_version": "1.14.0",
+  "version": "0.1.0"
+}
