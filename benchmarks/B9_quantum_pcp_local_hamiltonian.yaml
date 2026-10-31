@@ -1327,39 +1327,41 @@ current_results:
     markdown_report: ../research/B9_R201_determinant_coefficient_bound.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r201-how-many-primes-buy-a-proof.md
   r201_crt_shard_replay_v0:
-    status: thirteen_planned_prime_shards_verified_bounded_CRT_incomplete
+    status: all_fourteen_planned_prime_shards_verified_bounded_CRT_complete
     method: b9_r201_incremental_modular_CRT_shard_replay_v1
     source: r201_determinant_coefficient_bound_v0
-    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779, 536870767, 536870743, 536870729]
-    completed_additional_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779, 536870767, 536870743, 536870729]
-    completed_additional_prime_count: 13
-    remaining_additional_prime_count: 1
-    completed_additional_minor_artifact_count: 52
+    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779, 536870767, 536870743, 536870729, 536870717]
+    completed_additional_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791, 536870779, 536870767, 536870743, 536870729, 536870717]
+    completed_additional_prime_count: 14
+    remaining_additional_prime_count: 0
+    completed_additional_minor_artifact_count: 56
     planned_additional_minor_artifact_count: 56
-    remaining_additional_minor_artifact_count: 4
-    artifact_progress: 52/56
+    remaining_additional_minor_artifact_count: 0
+    artifact_progress: 56/56
     determinant_degree: 184
     homogeneous_monomial_lattice_size: 17205
-    partial_CRT_modulus_bit_length: 426
+    partial_CRT_modulus_bit_length: 455
     required_twice_bound_bit_length: 427
-    artifact_count: 60
-    point_replay_count: 300
-    point_replay_match_count: 300
-    coefficient_slot_roundtrip_count: 1032300
-    coefficient_slot_roundtrip_pass_count: 1032300
+    artifact_count: 64
+    point_replay_count: 320
+    point_replay_match_count: 320
+    coefficient_slot_roundtrip_count: 1101120
+    coefficient_slot_roundtrip_pass_count: 1101120
     cross_prime_monomial_support_match: true
-    partial_CRT_residues_are_unique_integer_coefficients: false
-    bounded_CRT_integer_reconstruction_complete: false
+    planned_prime_execution_complete: true
+    partial_CRT_modulus_exceeds_twice_maximum_bound: true
+    partial_CRT_residues_are_unique_integer_coefficients: true
+    bounded_CRT_integer_reconstruction_complete: true
     characteristic_zero_D44_divisibility_verified: false
     characteristic_zero_engineering_certificate_verified: false
     ideal_membership_certificate_verified: false
     frozen_holdouts_executed: false
     scientific_promotion_accepted: false
     new_credit_delta: 0
-    replay_tool_sha256: 34d02ea896fc73063d09326a8ef3951fca334f93ce8dfead711aaaa1f236610c
-    replay_result_sha256: 2af114cb78ab8c112f00d9ffb8306fc0693a5b16b241432472ac60827ea7bf3f
-    markdown_report_sha256: 2f4cd0539c52857f05a49d6a2101305bf1bd99d27ddb6dcbb2075145f4e7b570
-    discussion_draft_sha256: 019dc3dc42941cc527f05a2c78f8f59bf6d155a9b3e31b4bcf1e2356e8174d1c
+    replay_tool_sha256: 91396e2d86cbbfe010eceb39c19f4c0890832f5aba370fbbede142609ecb4462
+    replay_result_sha256: 59eb768fbdc2e2830a2fd5b0692533f560f0307f519c6c972305dc05bacc9eff
+    markdown_report_sha256: e54bb97418bf1cc5b6313808dfeaf77e3a5beec7ef5d63713489e75944cf22e0
+    discussion_draft_sha256: e06b9bc3e799d5015dc2735a3666193b01d64d585d27ef0fad3ec2d05bcd6a71
     artifact_sha256:
       minor0_mod536870909: 4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c
       minor1_mod536870909: 949fce6c4d6190b6b3726bc8c740e1dddb6025a80186713ba805f5670923cc24
@@ -1413,10 +1415,14 @@ current_results:
       minor1_mod536870729: 2e40e6fc81e8955944fb50515b560d3613fb339fb89c23bab58e83c2c86b2f88
       minor2_mod536870729: 1e7571244e87d3ec39c6f9b2152ff6e5185bce291e0cbcc4fc753cb946ea9a26
       minor3_mod536870729: 0d334b615b05ae951c443568f5d5c61e6d1ab97f38d6f8b66862f40bc3817e9b
+      minor0_mod536870717: 189ec1fd2a7026f0180430056c88dd5316c681e1cc2c17a1292380b484a62a48
+      minor1_mod536870717: 68019a4cff4d3030afef9087a7ba6dac4106603033fc987be7a7da8cb055af7a
+      minor2_mod536870717: f52149f0906e42c4c5c09e40c439c9d682dc27c4c565bd3814d670bf7a5703e9
+      minor3_mod536870717: 39957de08b307a2f2f1ba72f7118dee0a65c1ef06513c47ec2dbecfde06b0108
     replay_tool: ../tools/b9_r201_crt_shard_replay.py
     replay_result: ../results/B9_R201_crt_shard_replay_v0.json
     markdown_report: ../research/B9_R201_crt_shard_replay.md
-    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-can-one-missing-bit-still-block-a-proof.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-what-changes-when-the-last-prime-crosses-the-proof-boundary.md
     artifacts:
       minor0_mod536870909: ../results/B9_R201_singular_minor0_mod536870909_v0.json
       minor1_mod536870909: ../results/B9_R201_singular_minor1_mod536870909_v0.json
@@ -1470,6 +1476,45 @@ current_results:
       minor1_mod536870729: ../results/B9_R201_singular_minor1_mod536870729_v0.json
       minor2_mod536870729: ../results/B9_R201_singular_minor2_mod536870729_v0.json
       minor3_mod536870729: ../results/B9_R201_singular_minor3_mod536870729_v0.json
+      minor0_mod536870717: ../results/B9_R201_singular_minor0_mod536870717_v0.json
+      minor1_mod536870717: ../results/B9_R201_singular_minor1_mod536870717_v0.json
+      minor2_mod536870717: ../results/B9_R201_singular_minor2_mod536870717_v0.json
+      minor3_mod536870717: ../results/B9_R201_singular_minor3_mod536870717_v0.json
+  r201_integer_reconstruction_v0:
+    status: characteristic_zero_integer_determinants_and_exact_D44_gcd_verified
+    method: b9_r201_bounded_integer_reconstruction_and_D44_division_v1
+    source: r201_crt_shard_replay_v0
+    CRT_prime_count: 16
+    CRT_modulus_bit_length: 455
+    twice_maximum_bound_bit_length: 427
+    determinant_degree: 184
+    determinant_term_counts: [8649, 4468, 4770, 2760]
+    reconstructed_maximum_coefficient_bit_lengths: [276, 294, 291, 250]
+    selected_bound_bit_lengths: [423, 425, 426, 402]
+    quotient_total_degree: 96
+    quotient_term_counts: [2401, 464, 590, 450]
+    integer_reconstruction_uniqueness_proved: true
+    all_coefficient_slot_prime_roundtrips_complete: true
+    all_reconstructed_coefficients_within_selected_bounds: true
+    characteristic_zero_engineering_determinants_verified: true
+    characteristic_zero_D44_divisibility_verified: true
+    quotient_gcd_is_unit: true
+    quotient_gcd_total_degree: 0
+    quotient_gcd_term_count: 1
+    quotient_gcd_canonical_terms_sha256: 09fd7f6e6c63e50501a1908da4fbe0997357fdc3fd593638e578e4d221140236
+    characteristic_zero_gcd_exactly_D44_verified: true
+    ideal_membership_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    reconstruction_tool_sha256: bfcdcae62d88182a266c387b28b0f021dc92e0c48cdc96eaed0b3f7d52e9c6e4
+    reconstruction_result_sha256: f9d988da2b3aa4072a027bb0981adfc7894def761a8d9a555db345388fb7531d
+    markdown_report_sha256: e32a482dc4ece4f61a6518fd56600f12da6ab0feef616fc9e864fa3fd3ce5ab8
+    discussion_draft_sha256: e06b9bc3e799d5015dc2735a3666193b01d64d585d27ef0fad3ec2d05bcd6a71
+    reconstruction_tool: ../tools/b9_r201_integer_reconstruction.py
+    reconstruction_result: ../results/B9_R201_integer_reconstruction_v0.json
+    markdown_report: ../research/B9_R201_integer_reconstruction.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r201-what-changes-when-the-last-prime-crosses-the-proof-boundary.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py

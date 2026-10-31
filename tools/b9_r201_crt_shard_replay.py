@@ -329,13 +329,19 @@ def analyze(root: Path) -> dict[str, Any]:
     )
     planned_count = len(planned)
     completed_count = len(completed)
+    twice_bound = 2 * int(bound["maximum_unconditional_coefficient_bound"]["value"])
+    plan_complete = completed_count == planned_count
+    uniqueness_available = plan_complete and modulus > twice_bound
+    phase_boundary_valid = (
+        (plan_complete and modulus > twice_bound)
+        or (not plan_complete and modulus <= twice_bound)
+    )
     checked = (
         all_bindings_clean
         and all_point_replays_match
         and all_supports_match
         and all_CRT_roundtrips_complete
-        and modulus <= 2
-        * int(bound["maximum_unconditional_coefficient_bound"]["value"])
+        and phase_boundary_valid
     )
     return {
         "method": METHOD,
@@ -363,15 +369,16 @@ def analyze(root: Path) -> dict[str, Any]:
             "target_twice_maximum_bound"
         ]["bit_length"],
         "partial_CRT_modulus_exceeds_twice_maximum_bound": modulus
-        > 2 * int(bound["maximum_unconditional_coefficient_bound"]["value"]),
+        > twice_bound,
+        "planned_prime_execution_complete": plan_complete,
         "artifact_rows": artifact_rows,
         "minor_rows": minor_rows,
         "all_artifact_bindings_clean": all_bindings_clean,
         "all_point_replays_match": all_point_replays_match,
         "all_cross_prime_monomial_supports_match": all_supports_match,
         "all_partial_CRT_roundtrips_complete": all_CRT_roundtrips_complete,
-        "partial_CRT_residues_are_unique_integer_coefficients": False,
-        "bounded_CRT_integer_reconstruction_complete": False,
+        "partial_CRT_residues_are_unique_integer_coefficients": uniqueness_available,
+        "bounded_CRT_integer_reconstruction_complete": uniqueness_available,
         "characteristic_zero_D44_divisibility_verified": False,
         "characteristic_zero_engineering_certificate_verified": False,
         "ideal_membership_certificate_verified": False,

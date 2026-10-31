@@ -105,42 +105,51 @@ across both primes. The exact common factor across the four minors in each
 field is `D^44`; after that finite-field factor is removed, the modular
 degree-96 quotients have 2,401, 464, 590, and 450 terms.
 
-This remains a modular structure replay, not a characteristic-zero or
-ideal-membership certificate. An exact source-dense binding extends the
+At that two-prime stage, this remained a modular structure replay rather than
+a characteristic-zero or ideal-membership certificate. An exact source-dense binding extends the
 `238x37` source matrix with 18 zero Pauli rows, proves `T*R=R*T=16I`, verifies
 all 37 candidate and commutator column relations, and derives the dense-minor
-factor `(-2)^37*D^72`. The unseen `J=127/128,131/128` rows remain sealed. The
-next lifting route must use the new unconditional integer coefficient bounds,
-compute the preregistered prime packet, reconstruct the original degree-184
+factor `(-2)^37*D^72`. The unseen `J=127/128,131/128` rows remain sealed. This
+stage fixed the lifting route: use unconditional integer coefficient bounds,
+execute the preregistered prime packet, reconstruct the original degree-184
 integer determinants, and only then verify exact `D^44` division in
-`ZZ[a,b,c]`. Stable finite-field factors alone do not count.
+`ZZ[a,b,c]`. The later R201 gates below complete that route; stable finite-field
+factors alone still do not count.
 
 The R201 coefficient-bound verifier now checks all 5,476 matrix entries as
 integer polynomials and proves every determinant is homogeneous of degree 184.
 Entry-L1 matrices plus four permanent upper bounds give selected coefficient
-bounds of 423, 425, 426, and 402 bits. The current two-prime modulus has 49
+bounds of 423, 425, 426, and 402 bits. The initial two-prime modulus had 49
 bits; the worst doubled bound has 427 bits. A deterministic descending-prime
 plan below `2^29` proves that 13 additional primes are insufficient and 14 are
-sufficient, fixing the remaining execution budget at 56 determinant artifacts
+sufficient, fixing the execution budget at 56 determinant artifacts
 and a final 455-bit modulus. Every column has common `D` exponent zero, so
-direct quotient lifting is rejected as circular. This proves the bound and
-budget, not the characteristic-zero determinants, `D^44` divisibility, ideal
-certificate, holdout result, promotion, or credit.
+direct quotient lifting is rejected as circular. That gate proved the bound and
+budget but did not itself prove the characteristic-zero determinants, `D^44`
+divisibility, ideal certificate, holdout result, promotion, or credit.
 
-The first thirteen planned CRT execution shards are now complete at primes
+All fourteen planned CRT execution shards are now complete at primes
 `536,870,909`, `536,870,879`, `536,870,869`, `536,870,849`,
 `536,870,839`, `536,870,837`, `536,870,819`, `536,870,813`, and
-`536,870,791`, followed by `536,870,779`, `536,870,767`, `536,870,743`, and
-`536,870,729`. All 52 new degree-184 determinant artifacts preserve the frozen
-term counts, advancing the new-artifact ledger to `52/56`. The incremental
-verifier rebuilds all 60 artifacts across fifteen primes, matches `300/300`
+`536,870,791`, followed by `536,870,779`, `536,870,767`, `536,870,743`,
+`536,870,729`, and `536,870,717`. All 56 new degree-184 determinant artifacts
+preserve the frozen term counts, completing the new-artifact ledger at `56/56`.
+The incremental verifier rebuilds all 64 artifacts across sixteen primes,
+matches `320/320`
 public matrix-determinant point replays, and confirms identical monomial
 support for every minor. It then
 performs partial symmetric CRT over all 17,205 homogeneous slots per minor and
-passes `1,032,300/1,032,300` coefficient-slot modular round trips. The combined
-modulus has 426 bits, still one bit below the 427-bit uniqueness threshold. The
-partial residues are therefore replayable state, not integer coefficients; 1
-prime and 4 artifacts remain.
+passes `1,101,120/1,101,120` coefficient-slot modular round trips. The combined
+modulus has 455 bits and exceeds the proved 427-bit uniqueness threshold.
+
+The bounded integer reconstruction gate now explicitly recovers all four
+degree-184 determinants over `ZZ[a,b,c]`. Their observed maximum coefficient
+sizes are 276, 294, 291, and 250 bits, all below the independently proved
+423/425/426/402-bit bounds. Each determinant divides exactly by
+`(a^2+b^2+c^2)^44` with zero remainder; the degree-96 quotients have
+2,401/464/590/450 terms and gcd 1. Thus the exact characteristic-zero common
+gcd of the four determinants is `D^44` up to a unit. The ideal-membership
+certificate, isolated pre-source reproduction, and frozen holdouts remain open.
 This is certificate infrastructure and an audit correction, not a continuous
 full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
 solved frontier, scientific promotion, or new credit.
@@ -511,20 +520,17 @@ modular rank, Groebner hashes, numerical roots, and failed SOS searches cannot
 promote the result. Scientific promotion remains false and new credit remains
 zero.
 
-The current R201 modular structure step binds four public engineering minors
-to two primes and independently replays all 40 public matrix-determinant
-evaluations. All eight factor products reconstruct their source polynomials.
-Across both primes, the four-minor gcd is exactly `D^44`. The new unconditional
-integer analysis proves coefficient bounds for the original degree-184
-determinants and rejects direct degree-96 quotient lifting: no column carries a
-common `D` factor, so characteristic-zero divisibility cannot be assumed. The
-fixed CRT budget is 14 additional primes and 56 determinant artifacts. Integer
-execution has reached `48/56` artifacts at a 397-bit modulus with all
-`280/280` point replays and `963,480/963,480` coefficient-slot round trips
-passing.
-Integer reconstruction, exact `D^44` division, the characteristic-zero gcd,
-ideal-membership certificate, holdout execution permission, scientific
-promotion, and new credit remain open or zero.
+The completed R201 lift binds four public engineering minors across sixteen
+primes and independently replays all `320/320` public matrix-determinant
+evaluations. All 64 modular artifacts preserve the frozen supports, and all
+`1,101,120/1,101,120` coefficient-slot-prime round trips pass. The 455-bit CRT
+modulus exceeds the proved 427-bit uniqueness threshold. Bounded reconstruction
+therefore recovers the four degree-184 determinants over `ZZ[a,b,c]`; each
+divides exactly by `D^44`, and the four degree-96 quotients have gcd 1. The
+exact characteristic-zero four-minor gcd is consequently `D^44` up to a unit.
+The ideal-membership certificate, isolated pre-source reproduction, holdout
+execution permission, scientific promotion, and new credit remain open or
+zero.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window

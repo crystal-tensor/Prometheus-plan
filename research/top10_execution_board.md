@@ -408,6 +408,23 @@ partial modulus is 426 bits versus the 427-bit uniqueness threshold, so even
 this one-bit gap remains a non-unique partial CRT state. One prime and 4
 artifacts remain; the final planned shard is prime `536,870,717`.
 
+T-B9-015t executes the fourteenth and final added prime `536,870,717`. All four
+determinants complete, closing the new-artifact ledger at `56/56`. The verifier
+binds all 64 artifacts across sixteen primes, matches `320/320` public
+matrix-determinant points, preserves every cross-prime monomial support, and
+passes `1,101,120/1,101,120` coefficient-slot-prime round trips. The 455-bit
+modulus exceeds the proved 427-bit uniqueness threshold, so the bounded CRT
+representatives now determine unique integer coefficients.
+
+T-B9-015u reconstructs those four characteristic-zero degree-184 determinants
+explicitly. Their observed maximum coefficient sizes are 276/294/291/250 bits,
+within the independent 423/425/426/402-bit bounds. Exact division by
+`D^44=(a^2+b^2+c^2)^44` leaves zero remainder in every row; the degree-96
+quotients have 2,401/464/590/450 terms and gcd 1. The exact common gcd is
+therefore `D^44` up to a unit. Ideal-membership multipliers, isolated pre-source
+reproduction, frozen holdouts, scientific promotion, and credit remain open or
+zero.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**
