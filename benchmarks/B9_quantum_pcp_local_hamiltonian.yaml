@@ -2070,6 +2070,70 @@ current_results:
     independent_audit_result: ../results/B9_R212_independent_crt_audit_v0.json
     markdown_report: ../research/B9_R212_characteristic_zero_lift_shard4.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r212-when-do-309690-exact-checks-become-an-integer-theorem.md
+  r213_characteristic_zero_lift_shard5_v0:
+    status: fifth_of_fourteen_prime_shards_complete_nonunique_partial_CRT
+    method: b9_r209_incremental_three_minor_CRT_replay_v1
+    source: r212_characteristic_zero_lift_shard4_v0
+    minor_indices: [4, 5, 6]
+    determinant_total_degree: 184
+    quotient_total_degree: 96
+    D_exponent: 44
+    selected_bound_bits: [417, 418, 427]
+    maximum_twice_bound_bit_length: 428
+    planned_additional_primes: 14
+    planned_new_minor_artifacts: 42
+    completed_planned_primes: [536870909, 536870879, 536870869, 536870849, 536870839]
+    completed_new_minor_artifacts: 15
+    remaining_new_minor_artifacts: 27
+    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839]
+    partial_CRT_modulus: "23945296642706601392761695517859754715840417791845725530481"
+    partial_CRT_modulus_bit_length: 194
+    determinant_term_counts: [5997, 6555, 5309]
+    quotient_term_counts: [1113, 1363, 821]
+    cross_prime_support_identical: [true, true, true]
+    primary_CRT_roundtrip_checks: 361305
+    independent_CRT_roundtrip_checks: 361305
+    independent_matrix_replays: 60
+    independent_matrix_replay_matches: 60
+    independent_D44_recomposition_matches: 60
+    partial_CRT_residues_are_unique_integer_coefficients: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_D44_divisibility_verified: false
+    QQ_Nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    bound_stable_payload_sha256: 6703e04ca28a1e4be6d40d84e8c3a7536863338c8a1ee72545f42c8a0cecdb89
+    shard_stable_payload_sha256:
+      "4": 2e7874ff9c2027cb84a22ad1336b22949f13a9aa7975d49f44037088571f96e6
+      "5": e6232c0dfdb1299b82b50c2917d27b307a806d3fc773406f9ab27a10ed1c1155
+      "6": 6d0068ae75ca346ff6f9d4ced2715602b6ba912bed3402ca706a53d1b60992f4
+    replay_stable_payload_sha256: 2e16e9a40e8f4344384816a318e8f1f5d8e99437815130a623e299bd6197c10e
+    independent_audit_stable_payload_sha256: a84fd00a0ca3a52b6ca8dfcaec9a13e7304fe2b0ffc79abb242fea3c13860663
+    shard_tool_sha256: d625efe39f37e39a6eda5efcf8e7cf7767a1ba7593b9ae11f13c1c3406b9ccbe
+    replay_tool_sha256: daa027d56b2b42eae71a25ced925df25abc226a9f1089aec6f23ad17ebdef638
+    independent_audit_core_tool_sha256: ae94fe5146385201da59ab841284724b5aecf2e496955707cab16f834a47d04d
+    independent_audit_tool_sha256: 66f25e51e3e75a13feb5f33692e110f195a5548ea98a4f86fd85a77c54011e61
+    bound_result_sha256: 78c78b5558f73b380c5a048976957a200f1cc8a4fb1eaae21e2eb5ff561c76d3
+    minor4_mod536870839_sha256: 552263cec90d4e694e2aa909169201c1fca5053ab3593b056c79591a3ce1cf4c
+    minor5_mod536870839_sha256: 9bd45e8860fe439f7726dc883d584cb3ce516f08ffa3bbf080ac23c719875175
+    minor6_mod536870839_sha256: b8e94801cc4a23b1d99028fbb24bbcdeb15f112088df59c7fe20a64912ebdfdb
+    replay_result_sha256: 8dbe0c998eda176322154756da78accc48dd819f2cc61eacdb02ba9d5e732ad5
+    independent_audit_result_sha256: 5de83ecc833fa9b0fdc2af15c333dfe490e2fe7b7dbbdff3e1f86ae2ece1d564
+    markdown_report_sha256: fb232ed0bf3360743ba8769587e8a8376050c4df54562bdad84555d5bf7271c5
+    discussion_draft_sha256: 827edf3708b6b44192c9b888a802d12a31daafb6d12ad0cdeb071d6260ebd8c8
+    shard_tool: ../tools/b9_r209_modular_minor_shard.py
+    replay_tool: ../tools/b9_r209_crt_shard_replay.py
+    independent_audit_core_tool: ../tools/b9_r210_independent_crt_audit.py
+    independent_audit_tool: ../tools/b9_r213_independent_crt_audit.py
+    bound_result: ../results/B9_R209_determinant_coefficient_bound_v0.json
+    minor4_mod536870839: ../results/B9_R209_minor4_mod536870839_v0.json
+    minor5_mod536870839: ../results/B9_R209_minor5_mod536870839_v0.json
+    minor6_mod536870839: ../results/B9_R209_minor6_mod536870839_v0.json
+    replay_result: ../results/B9_R213_crt_shard5_replay_v0.json
+    independent_audit_result: ../results/B9_R213_independent_crt_audit_v0.json
+    markdown_report: ../research/B9_R213_characteristic_zero_lift_shard5.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r213-can-361305-exact-checks-still-be-stopped-by-one-bound.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
