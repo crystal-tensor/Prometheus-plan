@@ -669,6 +669,17 @@ fixed prime is `536870849`; integer reconstruction, characteristic-zero
 division, rational identity, frozen holdout, global-rank, hardware, Quantum
 PCP/NLTS, promotion, and new-credit claims remain open or zero.
 
+R212 completes the fourth planned three-minor shard at `536870849`. The lift
+ledger advances to `12/42`; primary and independent CRT implementations each
+pass `309690/309690` coefficient-slot-prime round trips over six total primes.
+The independent path reproduces `48/48` source-matrix determinant values and
+`48/48` `D^44` recompositions, while adversarial overlays reject a changed
+coefficient and a missing frozen point. The combined modulus grows from 136 to
+165 bits, still below the 428-bit worst-case uniqueness threshold. The next
+fixed prime is `536870839`; integer reconstruction, characteristic-zero
+division, rational identity, frozen holdout, global-rank, hardware, Quantum
+PCP/NLTS, promotion, and new-credit claims remain open or zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python
