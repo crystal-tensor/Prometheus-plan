@@ -9233,6 +9233,285 @@ def audit_b9_r206_six_minor_ideal_preflight(
     }
 
 
+def audit_b9_r207_off_slice_component_rank(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R207 off-slice radical and complete-matrix rank result."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "two_prime_radical_equality_supported": False,
+        "candidate_point_count": 0,
+        "all_four_points_full_rank": False,
+        "one_minor_crosses_both_branches": False,
+        "independent_determinant_replay_count": 0,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R207 off-slice component rank result")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "rank_tool": resolve(manifest_entry.get("rank_tool")),
+        "independent_audit_tool": resolve(
+            manifest_entry.get("independent_audit_tool")
+        ),
+        "rank_result": resolve(manifest_entry.get("rank_result")),
+        "independent_audit_result": resolve(
+            manifest_entry.get("independent_audit_result")
+        ),
+        "markdown_report": resolve(manifest_entry.get("markdown_report")),
+        "discussion_draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R207 off-slice component rank {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R207 off-slice component rank {field} mismatch")
+
+    result = json.loads(read(paths["rank_result"]))
+    payload = dict(result)
+    payload.pop("payload_sha256", None)
+    radical_rows = result.get("radical_classification_rows", [])
+    certificates = result.get("representation_certificates", [])
+    cross_rows = result.get("cross_branch_minor_replays", [])
+    expected_basis_hashes = [
+        "bcecea9fd45d551ead59033b462d592e9c14da98e46bcfff7cd764ad6d281242",
+        "6da778044686abd0f131284957f97333b1c22c5a2e9247b19e419a8063fd5b1e",
+    ]
+    result_mismatch = (
+        result.get("method")
+        != "b9_r207_off_slice_component_full_rank_classification_v1"
+        or result.get("version") != "0.1.0"
+        or result.get("scope")
+        != "public_R206_off_slice_component_classification_only"
+        or result.get("classification_primes") != [1000003, 536870723]
+        or result.get("candidate_radical_generators")
+        != ["169*a^2+407*c^2", "169*b^2-576*c^2", "2*u*c^2-1"]
+        or result.get("candidate_radical_generator_sha256")
+        != "dd5caa8addd5ec664c66ddb480ad259e87737b49a389b27a8f8c1eba1d8f0f3e"
+        or len(radical_rows) != 2
+        or [row.get("prime") for row in radical_rows] != [1000003, 536870723]
+        or [row.get("original_basis_sha256") for row in radical_rows]
+        != expected_basis_hashes
+        or any(
+            row.get("original_basis_size") != 7
+            or row.get("original_generators_reduce_to_zero_mod_candidate_radical")
+            is not True
+            or row.get("candidate_generator_squares_reduce_to_zero_mod_original")
+            is not True
+            or row.get("c_one_original_vector_space_dimension") != 8
+            or row.get("c_one_candidate_radical_vector_space_dimension") != 4
+            or row.get("c_zero_original_is_unit_ideal") is not True
+            or row.get("checked") is not True
+            for row in radical_rows
+        )
+        or result.get("two_prime_radical_equality_supported") is not True
+        or result.get("candidate_point_count_over_algebraic_closure") != 4
+        or result.get("candidate_point_multiplicity_in_original_chart") != 2
+        or result.get("quadratic_polynomial") != "s^2+407"
+        or result.get("rank_primes") != [1000117, 1000039]
+        or len(certificates) != 4
+        or [row.get("shape") for row in certificates]
+        != [[238, 37], [256, 37], [238, 37], [256, 37]]
+        or any(
+            row.get("selected_row_count") != 37
+            or len(row.get("prime_replays", [])) != 2
+            or any(
+                replay.get("quadratic_irreducible_mod_prime") is not True
+                or replay.get("determinant_nonzero") is not True
+                or replay.get("replayed_rank") != 37
+                for replay in row.get("prime_replays", [])
+            )
+            or row.get("both_quadratic_conjugates_full_rank") is not True
+            or row.get("checked") is not True
+            for row in certificates
+        )
+        or len(cross_rows) != 4
+        or any(
+            row.get("same_minor_nonzero_on_target_branch") is not True
+            or len(row.get("prime_replays", [])) != 2
+            or any(
+                replay.get("determinant_nonzero") is not True
+                for replay in row.get("prime_replays", [])
+            )
+            for row in cross_rows
+        )
+        or result.get("all_four_candidate_points_full_rank_in_both_representations")
+        is not True
+        or result.get("off_slice_component_is_full_rank_selected_minor_artifact")
+        is not True
+        or result.get("one_existing_selected_minor_excludes_both_b_sign_branches")
+        is not True
+        or canonical_hash(result.get("stable_classification_payload", {}))
+        != result.get("stable_classification_sha256")
+        or result.get("stable_classification_sha256")
+        != "6c40c16aa49c67aafb07d59c579272e2991ffcc9648fb8614c323fb9ebcc7d15"
+        or canonical_hash(payload) != result.get("payload_sha256")
+        or result.get("rational_nullstellensatz_certificate_verified") is not False
+        or result.get("global_full_rank_theorem_verified") is not False
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    )
+    if result_mismatch:
+        errors.append("B9 R207 off-slice component rank result mismatch")
+
+    audit = json.loads(read(paths["independent_audit_result"]))
+    audit_payload = dict(audit)
+    audit_payload.pop("payload_sha256", None)
+    audit_rows = [
+        *audit.get("certificate_rows", []),
+        *audit.get("cross_branch_rows", []),
+    ]
+    audit_mismatch = (
+        audit.get("method")
+        != "b9_r207_independent_regular_representation_audit_v1"
+        or audit.get("version") != "0.1.0"
+        or audit.get("source_result_sha256") != observed["rank_result_sha256"]
+        or audit.get("source_payload_sha256") != result.get("payload_sha256")
+        or len(audit.get("certificate_rows", [])) != 4
+        or len(audit.get("cross_branch_rows", [])) != 4
+        or any(
+            row.get("regular_representation_shape") != [74, 74]
+            or len(row.get("prime_replays", [])) != 2
+            or any(
+                replay.get("norm_match") is not True
+                or replay.get("independent_nonzero") is not True
+                for replay in row.get("prime_replays", [])
+            )
+            or row.get("checked") is not True
+            for row in audit_rows
+        )
+        or audit.get("all_main_maximal_minors_independently_nonzero") is not True
+        or audit.get("all_cross_branch_maximal_minors_independently_nonzero")
+        is not True
+        or audit.get("main_module_imported") is not False
+        or canonical_hash(audit.get("stable_audit_payload", {}))
+        != audit.get("stable_audit_sha256")
+        or audit.get("stable_audit_sha256")
+        != "39ab9e073f2af9900f9b2037eafaaac627bc9fe2d2e6959ae0b4a4014e28cf65"
+        or canonical_hash(audit_payload) != audit.get("payload_sha256")
+        or audit.get("scientific_promotion_accepted") is not False
+        or audit.get("new_credit_delta") != 0
+        or audit.get("checked") is not True
+    )
+    if audit_mismatch:
+        errors.append("B9 R207 off-slice component rank independent audit mismatch")
+
+    manifest_expectations = {
+        "status": "off_slice_component_is_full_rank_selected_minor_artifact",
+        "method": "b9_r207_off_slice_component_full_rank_classification_v1",
+        "classification_primes": [1000003, 536870723],
+        "candidate_radical_generators": [
+            "169*a^2+407*c^2",
+            "169*b^2-576*c^2",
+            "2*u*c^2-1",
+        ],
+        "candidate_point_count_over_algebraic_closure": 4,
+        "candidate_point_multiplicity_in_original_chart": 2,
+        "rank_primes": [1000117, 1000039],
+        "representation_shapes": [[238, 37], [256, 37], [238, 37], [256, 37]],
+        "all_four_candidate_points_full_rank_in_both_representations": True,
+        "one_existing_selected_minor_excludes_both_b_sign_branches": True,
+        "independent_main_minor_count": 4,
+        "independent_cross_branch_minor_count": 4,
+        "independent_determinant_replay_count": 16,
+        "rational_nullstellensatz_certificate_verified": False,
+        "global_full_rank_theorem_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "stable_classification_sha256": result.get(
+            "stable_classification_sha256"
+        ),
+        "stable_audit_sha256": audit.get("stable_audit_sha256"),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R207 off-slice component rank manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "Can four algebraic common zeros",
+            "vector-space dimension 8",
+            "All eight cross-branch determinant replays are nonzero",
+            "16/16 independent determinants are nonzero",
+            "No quantum processor or hardware backend was used.",
+            "No frozen `J=127/128,131/128` holdout was evaluated.",
+        )
+    ):
+        errors.append("B9 R207 off-slice component rank report boundary incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can four common zeros still be false rank drops?",
+            "four algebraic points",
+            "One seventh minor may therefore",
+            "remove all four false zeros at once.",
+            "16/16 checks pass",
+            "No frozen holdout was executed.",
+        )
+    ):
+        errors.append("B9 R207 off-slice component rank discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "two_prime_radical_equality_supported": result.get(
+            "two_prime_radical_equality_supported"
+        ),
+        "candidate_point_count": result.get(
+            "candidate_point_count_over_algebraic_closure"
+        ),
+        "all_four_points_full_rank": result.get(
+            "all_four_candidate_points_full_rank_in_both_representations"
+        ),
+        "one_minor_crosses_both_branches": result.get(
+            "one_existing_selected_minor_excludes_both_b_sign_branches"
+        ),
+        "independent_determinant_replay_count": sum(
+            len(row.get("prime_replays", [])) for row in audit_rows
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R207 off-slice component rank")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -47412,6 +47691,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r207_off_slice_component_rank = b9_results.get(
+        "r207_off_slice_component_rank_v0"
+    )
+    b9_r207_off_slice_component_rank_status = (
+        audit_b9_r207_off_slice_component_rank(
+            root,
+            b9_r207_off_slice_component_rank,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -57832,6 +58122,7 @@ def audit(root: Path) -> dict:
             "r204_expanded_ideal_preflight": b9_r204_expanded_ideal_preflight_status,
             "r205_sextic_full_matrix_rank": b9_r205_sextic_full_matrix_rank_status,
             "r206_six_minor_ideal_preflight": b9_r206_six_minor_ideal_preflight_status,
+            "r207_off_slice_component_rank": b9_r207_off_slice_component_rank_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),

@@ -1715,6 +1715,54 @@ current_results:
     adjudication_result: ../results/B9_R206_dual_algorithm_adjudication_v0.json
     markdown_report: ../research/B9_R206_six_minor_ideal_preflight.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r206-can-a-slice-close-while-the-global-ideal-stays-open.md
+  r207_off_slice_component_rank_v0:
+    status: off_slice_component_is_full_rank_selected_minor_artifact
+    method: b9_r207_off_slice_component_full_rank_classification_v1
+    source: r206_six_minor_nonunit_standard_basis
+    classification_primes: [1000003, 536870723]
+    candidate_radical_generators:
+      - 169*a^2+407*c^2
+      - 169*b^2-576*c^2
+      - 2*u*c^2-1
+    candidate_radical_generator_sha256: dd5caa8addd5ec664c66ddb480ad259e87737b49a389b27a8f8c1eba1d8f0f3e
+    original_standard_basis_sizes: [7, 7]
+    c_one_original_vector_space_dimensions: [8, 8]
+    c_one_radical_vector_space_dimensions: [4, 4]
+    c_zero_original_is_unit_ideal: [true, true]
+    candidate_point_count_over_algebraic_closure: 4
+    candidate_point_multiplicity_in_original_chart: 2
+    quadratic_polynomial: s^2+407
+    rank_primes: [1000117, 1000039]
+    representation_shapes: [[238, 37], [256, 37], [238, 37], [256, 37]]
+    representation_selected_row_hashes:
+      - 9cd1569d47859421d2f7d6ed2caf6c2f896c9b77df3c0c2b9a1749cc0df1388b
+      - f9a528031f5247c8db944592b4722f4e9339de68356df756e6611f44ff03f191
+      - f73da564bfd5773514c6d807083a34943b76aab3e542f7d8238bed8bba4e54a3
+      - 8c8e48c4d42adf926417cc019d24fb9ea6d15d3ff1265722abceab9e8f034c77
+    all_four_candidate_points_full_rank_in_both_representations: true
+    one_existing_selected_minor_excludes_both_b_sign_branches: true
+    independent_main_minor_count: 4
+    independent_cross_branch_minor_count: 4
+    independent_determinant_replay_count: 16
+    rational_nullstellensatz_certificate_verified: false
+    global_full_rank_theorem_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    stable_classification_sha256: 6c40c16aa49c67aafb07d59c579272e2991ffcc9648fb8614c323fb9ebcc7d15
+    stable_audit_sha256: 39ab9e073f2af9900f9b2037eafaaac627bc9fe2d2e6959ae0b4a4014e28cf65
+    rank_tool_sha256: b70f9e3fb00410605ef3bd690c1e5b19e3bdb20f4857a875758ae2672e05f5f4
+    independent_audit_tool_sha256: 702c95ad211533ac59fbb9708a06054cc2a4d6c9dc98ef58f69b8d14f8ebd618
+    rank_result_sha256: c01da125aba2f8316c5602f1851cb913a2164d753ed9bc9c4373c24d1597d004
+    independent_audit_result_sha256: 79f2b6ef966c56c010b69f95857f5d617a46eff5fa21722643c1c0388ebc4e15
+    markdown_report_sha256: 23892ec165c6aa513813b7667e215396b8f3494221cd9dbdb75aa259618687b6
+    discussion_draft_sha256: 1433be136b2ac70e820f63c5bc4ba0b222a636dd97a0a5bca4a674ff55b3092f
+    rank_tool: ../tools/b9_r207_off_slice_component_rank.py
+    independent_audit_tool: ../tools/b9_r207_independent_audit.py
+    rank_result: ../results/B9_R207_off_slice_component_rank_v0.json
+    independent_audit_result: ../results/B9_R207_off_slice_component_rank_independent_audit_v0.json
+    markdown_report: ../research/B9_R207_off_slice_component_rank.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r207-can-four-common-zeros-still-be-false-rank-drops.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
