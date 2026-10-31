@@ -12532,6 +12532,343 @@ def audit_b9_r216_characteristic_zero_lift_shard8(
     }
 
 
+def audit_b9_r217_characteristic_zero_lift_shard9(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R217 ninth prime shard and eleven-prime CRT audits."""
+
+    prefix = "B9 R217 characteristic-zero lift shard"
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "completed_new_minor_artifacts": 0,
+        "remaining_new_minor_artifacts": 42,
+        "partial_CRT_modulus_bit_length": 0,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "QQ_Nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R217 characteristic-zero lift shard")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    labels = (
+        "shard_tool",
+        "replay_tool",
+        "independent_audit_core_tool",
+        "independent_audit_tool",
+        "bound_result",
+        "minor4_mod536870791",
+        "minor5_mod536870791",
+        "minor6_mod536870791",
+        "replay_result",
+        "independent_audit_result",
+        "markdown_report",
+        "discussion_draft",
+    )
+    paths = {label: resolve(manifest_entry.get(label)) for label in labels}
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"{prefix} {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"{prefix} {field} mismatch")
+
+    bound = json.loads(read(paths["bound_result"]))
+    planned = bound.get("prime_plan", {}).get("planned_additional_primes", [])
+    expected_new_primes = [
+        536870909,
+        536870879,
+        536870869,
+        536870849,
+        536870839,
+        536870837,
+        536870819,
+        536870813,
+        536870791,
+    ]
+    if (
+        bound.get("checked") is not True
+        or bound.get("stable_payload_sha256")
+        != manifest_entry.get("bound_stable_payload_sha256")
+        or planned[:9] != expected_new_primes
+    ):
+        errors.append(f"{prefix} bound or prime-prefix mismatch")
+
+    shard_expectations = {4: (5997, 1113), 5: (6555, 1363), 6: (5309, 821)}
+    frozen_points = {(2, 0, 1), (1, 0, -2), (1, 2, 3), (3, -1, 2)}
+    for minor_index, label in (
+        (4, "minor4_mod536870791"),
+        (5, "minor5_mod536870791"),
+        (6, "minor6_mod536870791"),
+    ):
+        shard = json.loads(read(paths[label]))
+        payload = dict(shard)
+        payload.pop("payload_sha256", None)
+        stable = dict(payload)
+        stable.pop("stable_payload_sha256", None)
+        stable.pop("elapsed_seconds", None)
+        stable.pop("singular_path", None)
+        point_rows = shard.get("point_replays", [])
+        points = {
+            tuple(int(value) for value in row.get("projective_point", []))
+            for row in point_rows
+        }
+        determinant_terms, quotient_terms = shard_expectations[minor_index]
+        if (
+            shard.get("method") != "b9_r209_planned_modular_minor_shard_v1"
+            or shard.get("version") != "0.1.0"
+            or shard.get("characteristic") != 536870791
+            or shard.get("minor_index") != minor_index
+            or shard.get("dimension") != 37
+            or shard.get("determinant_total_degree") != 184
+            or shard.get("determinant_term_count") != determinant_terms
+            or shard.get("D_exponent") != 44
+            or shard.get("quotient_total_degree") != 96
+            or shard.get("quotient_term_count") != quotient_terms
+            or shard.get("exact_D44_division_verified_mod_prime") is not True
+            or shard.get("factorization_validated") is not True
+            or shard.get("remainder_is_zero") is not True
+            or len(point_rows) != 4
+            or points != frozen_points
+            or shard.get("all_direct_integer_point_replays_match") is not True
+            or shard.get("all_D44_point_recompositions_match") is not True
+            or canonical_hash(stable) != shard.get("stable_payload_sha256")
+            or shard.get("stable_payload_sha256")
+            != manifest_entry.get("shard_stable_payload_sha256", {}).get(
+                str(minor_index)
+            )
+            or canonical_hash(payload) != shard.get("payload_sha256")
+            or shard.get("bounded_CRT_integer_reconstruction_complete") is not False
+            or shard.get("characteristic_zero_D44_divisibility_verified") is not False
+            or shard.get("QQ_Nullstellensatz_certificate_verified") is not False
+            or shard.get("frozen_holdouts_executed") is not False
+            or shard.get("scientific_promotion_accepted") is not False
+            or shard.get("new_credit_delta") != 0
+            or shard.get("checked") is not True
+        ):
+            errors.append(f"{prefix} minor {minor_index} mismatch")
+
+    expected_all_primes = [1000003, 536870723, *expected_new_primes]
+    replay = json.loads(read(paths["replay_result"]))
+    replay_payload = dict(replay)
+    replay_payload.pop("payload_sha256", None)
+    replay_stable = dict(replay_payload)
+    replay_stable.pop("stable_payload_sha256", None)
+    replay_rows = replay.get("minor_rows", [])
+    if (
+        replay.get("method") != "b9_r209_incremental_three_minor_CRT_replay_v1"
+        or replay.get("version") != "0.1.0"
+        or replay.get("completed_planned_primes") != expected_new_primes
+        or replay.get("all_CRT_primes") != expected_all_primes
+        or replay.get("completed_planned_prime_count") != 9
+        or replay.get("completed_new_minor_artifact_count") != 27
+        or replay.get("remaining_new_minor_artifact_count") != 15
+        or replay.get("partial_CRT_modulus")
+        != "1989295978876335436236635129448193062848946245037596892127411701755604012176804025112665855269"
+        or replay.get("partial_CRT_modulus_bit_length") != 310
+        or replay.get("maximum_twice_bound_bit_length") != 428
+        or replay.get("total_partial_CRT_roundtrip_check_count") != 567765
+        or replay.get("all_partial_CRT_roundtrips_complete") is not True
+        or replay.get("partial_CRT_residues_are_unique_integer_coefficients")
+        is not False
+        or len(replay.get("artifact_rows", [])) != 33
+        or len(replay_rows) != 3
+        or any(
+            row.get("cross_prime_support_identical") is not True
+            or row.get("partial_CRT_roundtrip_check_count") != 189255
+            or row.get("partial_CRT_roundtrip_complete") is not True
+            or row.get("partial_CRT_modulus_exceeds_twice_selected_bound")
+            is not False
+            for row in replay_rows
+        )
+        or canonical_hash(replay_stable) != replay.get("stable_payload_sha256")
+        or replay.get("stable_payload_sha256")
+        != manifest_entry.get("replay_stable_payload_sha256")
+        or canonical_hash(replay_payload) != replay.get("payload_sha256")
+        or replay.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or replay.get("characteristic_zero_D44_divisibility_verified") is not False
+        or replay.get("QQ_Nullstellensatz_certificate_verified") is not False
+        or replay.get("frozen_holdouts_executed") is not False
+        or replay.get("scientific_promotion_accepted") is not False
+        or replay.get("new_credit_delta") != 0
+        or replay.get("checked") is not True
+    ):
+        errors.append(f"{prefix} replay mismatch")
+
+    audit = json.loads(read(paths["independent_audit_result"]))
+    audit_payload = dict(audit)
+    audit_payload.pop("payload_sha256", None)
+    audit_stable = dict(audit_payload)
+    audit_stable.pop("stable_payload_sha256", None)
+    matrix_rows = audit.get("matrix_rows", [])
+    if (
+        audit.get("method")
+        != "b9_r217_independent_prefix_matrix_and_sympy_CRT_audit_v1"
+        or audit.get("version") != "0.1.0"
+        or audit.get("new_primes") != expected_new_primes
+        or audit.get("all_CRT_primes") != expected_all_primes
+        or audit.get("partial_CRT_modulus_bit_length") != 310
+        or audit.get("matrix_replay_count") != 108
+        or audit.get("matrix_replay_match_count") != 108
+        or audit.get("D44_recomposition_match_count") != 108
+        or len(matrix_rows) != 108
+        or any(
+            row.get("matrix_polynomial_match") is not True
+            or row.get("D44_recomposition_match") is not True
+            or row.get("stored_point_values_match") is not True
+            for row in matrix_rows
+        )
+        or audit.get("total_independent_CRT_roundtrip_check_count") != 567765
+        or len(audit.get("crt_rows", [])) != 3
+        or any(
+            row.get("count_match") is not True
+            or row.get("maximum_match") is not True
+            or row.get("payload_hash_match") is not True
+            or row.get("roundtrip_count_match") is not True
+            for row in audit.get("crt_rows", [])
+        )
+        or canonical_hash(audit_stable) != audit.get("stable_payload_sha256")
+        or audit.get("stable_payload_sha256")
+        != manifest_entry.get("independent_audit_stable_payload_sha256")
+        or canonical_hash(audit_payload) != audit.get("payload_sha256")
+        or audit.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or audit.get("characteristic_zero_D44_divisibility_verified") is not False
+        or audit.get("QQ_Nullstellensatz_certificate_verified") is not False
+        or audit.get("frozen_holdouts_executed") is not False
+        or audit.get("scientific_promotion_accepted") is not False
+        or audit.get("new_credit_delta") != 0
+        or audit.get("checked") is not True
+    ):
+        errors.append(f"{prefix} independent audit mismatch")
+
+    expected_manifest = {
+        "status": "ninth_of_fourteen_prime_shards_complete_nonunique_partial_CRT",
+        "method": "b9_r209_incremental_three_minor_CRT_replay_v1",
+        "minor_indices": [4, 5, 6],
+        "determinant_total_degree": 184,
+        "quotient_total_degree": 96,
+        "D_exponent": 44,
+        "selected_bound_bits": [417, 418, 427],
+        "maximum_twice_bound_bit_length": 428,
+        "planned_additional_primes": 14,
+        "planned_new_minor_artifacts": 42,
+        "completed_planned_primes": expected_new_primes,
+        "completed_new_minor_artifacts": 27,
+        "remaining_new_minor_artifacts": 15,
+        "all_CRT_primes": expected_all_primes,
+        "partial_CRT_modulus": "1989295978876335436236635129448193062848946245037596892127411701755604012176804025112665855269",
+        "partial_CRT_modulus_bit_length": 310,
+        "determinant_term_counts": [5997, 6555, 5309],
+        "quotient_term_counts": [1113, 1363, 821],
+        "cross_prime_support_identical": [True, True, True],
+        "primary_CRT_roundtrip_checks": 567765,
+        "independent_CRT_roundtrip_checks": 567765,
+        "independent_matrix_replays": 108,
+        "independent_matrix_replay_matches": 108,
+        "independent_D44_recomposition_matches": 108,
+        "partial_CRT_residues_are_unique_integer_coefficients": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "QQ_Nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in expected_manifest.items()
+    ):
+        errors.append(f"{prefix} manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "`27/42`",
+            "`567765/567765`",
+            "`108/108`",
+            "`310`",
+            "`428` bits",
+            "not an integer reconstruction",
+            "holdouts remain sealed",
+        )
+    ):
+        errors.append(f"{prefix} report incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can five remaining primes close a 118-bit proof gap without moving the rules?",
+            "`27/42`",
+            "`567765/567765`",
+            "281 bits to 310 bits",
+            "uniqueness threshold is 428 bits",
+            "No integer reconstruction",
+        )
+    ):
+        errors.append(f"{prefix} discussion incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "completed_new_minor_artifacts": replay.get(
+            "completed_new_minor_artifact_count"
+        ),
+        "remaining_new_minor_artifacts": replay.get(
+            "remaining_new_minor_artifact_count"
+        ),
+        "partial_CRT_modulus_bit_length": replay.get(
+            "partial_CRT_modulus_bit_length"
+        ),
+        "maximum_twice_bound_bit_length": replay.get(
+            "maximum_twice_bound_bit_length"
+        ),
+        "primary_CRT_roundtrip_checks": replay.get(
+            "total_partial_CRT_roundtrip_check_count"
+        ),
+        "independent_CRT_roundtrip_checks": audit.get(
+            "total_independent_CRT_roundtrip_check_count"
+        ),
+        "independent_matrix_replay_matches": audit.get(
+            "matrix_replay_match_count"
+        ),
+        "bounded_CRT_integer_reconstruction_complete": replay.get(
+            "bounded_CRT_integer_reconstruction_complete"
+        ),
+        "QQ_Nullstellensatz_certificate_verified": replay.get(
+            "QQ_Nullstellensatz_certificate_verified"
+        ),
+        "frozen_holdouts_executed": replay.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": replay.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": replay.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith(prefix) for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -50821,6 +51158,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r217_characteristic_zero_lift_shard9 = b9_results.get(
+        "r217_characteristic_zero_lift_shard9_v0"
+    )
+    b9_r217_characteristic_zero_lift_shard9_status = (
+        audit_b9_r217_characteristic_zero_lift_shard9(
+            root,
+            b9_r217_characteristic_zero_lift_shard9,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -61251,6 +61599,7 @@ def audit(root: Path) -> dict:
             "r214_characteristic_zero_lift_shard6": b9_r214_characteristic_zero_lift_shard6_status,
             "r215_characteristic_zero_lift_shard7": b9_r215_characteristic_zero_lift_shard7_status,
             "r216_characteristic_zero_lift_shard8": b9_r216_characteristic_zero_lift_shard8_status,
+            "r217_characteristic_zero_lift_shard9": b9_r217_characteristic_zero_lift_shard9_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),

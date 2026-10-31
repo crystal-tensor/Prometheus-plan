@@ -2326,6 +2326,70 @@ current_results:
     independent_audit_result: ../results/B9_R216_independent_crt_audit_v0.json
     markdown_report: ../research/B9_R216_characteristic_zero_lift_shard8.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r216-can-six-primes-close-a-147-bit-proof-gap.md
+  r217_characteristic_zero_lift_shard9_v0:
+    status: ninth_of_fourteen_prime_shards_complete_nonunique_partial_CRT
+    method: b9_r209_incremental_three_minor_CRT_replay_v1
+    source: r216_characteristic_zero_lift_shard8_v0
+    minor_indices: [4, 5, 6]
+    determinant_total_degree: 184
+    quotient_total_degree: 96
+    D_exponent: 44
+    selected_bound_bits: [417, 418, 427]
+    maximum_twice_bound_bit_length: 428
+    planned_additional_primes: 14
+    planned_new_minor_artifacts: 42
+    completed_planned_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791]
+    completed_new_minor_artifacts: 27
+    remaining_new_minor_artifacts: 15
+    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819, 536870813, 536870791]
+    partial_CRT_modulus: "1989295978876335436236635129448193062848946245037596892127411701755604012176804025112665855269"
+    partial_CRT_modulus_bit_length: 310
+    determinant_term_counts: [5997, 6555, 5309]
+    quotient_term_counts: [1113, 1363, 821]
+    cross_prime_support_identical: [true, true, true]
+    primary_CRT_roundtrip_checks: 567765
+    independent_CRT_roundtrip_checks: 567765
+    independent_matrix_replays: 108
+    independent_matrix_replay_matches: 108
+    independent_D44_recomposition_matches: 108
+    partial_CRT_residues_are_unique_integer_coefficients: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_D44_divisibility_verified: false
+    QQ_Nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    bound_stable_payload_sha256: 6703e04ca28a1e4be6d40d84e8c3a7536863338c8a1ee72545f42c8a0cecdb89
+    shard_stable_payload_sha256:
+      "4": ed6b0861175c42295174d6de1141e60367a541a36019de0c745992f0f5dda859
+      "5": 0c68aa9c825f60815cb5e63c4da90d3a083e4d8a970dcb56fc5a6a9512840eec
+      "6": 40a5ecc0669b30571f602c36b85e5b5308f5377614805427b2953ac6d30dbc17
+    replay_stable_payload_sha256: 1005a758065cef3f31732680f28e9dab6c27753fea273ff1e4970094071c408c
+    independent_audit_stable_payload_sha256: 3d53873fc5b53ff31c321de3ef244be280f8c8e1ea17de460b3a82229b7bdd06
+    shard_tool_sha256: d625efe39f37e39a6eda5efcf8e7cf7767a1ba7593b9ae11f13c1c3406b9ccbe
+    replay_tool_sha256: daa027d56b2b42eae71a25ced925df25abc226a9f1089aec6f23ad17ebdef638
+    independent_audit_core_tool_sha256: ae94fe5146385201da59ab841284724b5aecf2e496955707cab16f834a47d04d
+    independent_audit_tool_sha256: c17d0c55d4f43ab4fdc201a33c891c9e521226609c17488dca0ecf1dc4649834
+    bound_result_sha256: 78c78b5558f73b380c5a048976957a200f1cc8a4fb1eaae21e2eb5ff561c76d3
+    minor4_mod536870791_sha256: d4031de331023ae2e793f769e0391b0a2216fcb3e976d13dc182956f765bc4c0
+    minor5_mod536870791_sha256: ca45d6995c2115e4bc45c977c9d330442a44238fc90824348fac251522e53602
+    minor6_mod536870791_sha256: ccdfbea3d2fb7f8926621c2746b7bb5081f8e11be71688ccc0e8e61de67f5223
+    replay_result_sha256: c2892b8328843fe611942cd6596a400dc3b8274d16b22eb0cece2ff3d6ed9b86
+    independent_audit_result_sha256: fe94d8ebdfe82b1357402661b07c39e55e3f85803efc39c20dd9972aff48cfa7
+    markdown_report_sha256: 42c573b3769969fba2e1d49c6023d268830b99a0a42e5bb5615320a4579169b4
+    discussion_draft_sha256: dd38fd3f6bace542b0dd2c74ae43ade787967d6812a366dd6b2a0bd1023e8e25
+    shard_tool: ../tools/b9_r209_modular_minor_shard.py
+    replay_tool: ../tools/b9_r209_crt_shard_replay.py
+    independent_audit_core_tool: ../tools/b9_r210_independent_crt_audit.py
+    independent_audit_tool: ../tools/b9_r217_independent_crt_audit.py
+    bound_result: ../results/B9_R209_determinant_coefficient_bound_v0.json
+    minor4_mod536870791: ../results/B9_R209_minor4_mod536870791_v0.json
+    minor5_mod536870791: ../results/B9_R209_minor5_mod536870791_v0.json
+    minor6_mod536870791: ../results/B9_R209_minor6_mod536870791_v0.json
+    replay_result: ../results/B9_R217_crt_shard9_replay_v0.json
+    independent_audit_result: ../results/B9_R217_independent_crt_audit_v0.json
+    markdown_report: ../research/B9_R217_characteristic_zero_lift_shard9.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r217-can-five-primes-close-a-118-bit-gap-without-moving-the-rules.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
