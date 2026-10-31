@@ -127,20 +127,20 @@ direct quotient lifting is rejected as circular. This proves the bound and
 budget, not the characteristic-zero determinants, `D^44` divisibility, ideal
 certificate, holdout result, promotion, or credit.
 
-The first twelve planned CRT execution shards are now complete at primes
+The first thirteen planned CRT execution shards are now complete at primes
 `536,870,909`, `536,870,879`, `536,870,869`, `536,870,849`,
 `536,870,839`, `536,870,837`, `536,870,819`, `536,870,813`, and
-`536,870,791`, followed by `536,870,779`, `536,870,767`, and `536,870,743`.
-All 48 new degree-184 determinant artifacts preserve the frozen term counts,
-advancing the new-artifact ledger to `48/56`. The incremental verifier rebuilds
-all 56 artifacts across fourteen primes, matches `280/280`
+`536,870,791`, followed by `536,870,779`, `536,870,767`, `536,870,743`, and
+`536,870,729`. All 52 new degree-184 determinant artifacts preserve the frozen
+term counts, advancing the new-artifact ledger to `52/56`. The incremental
+verifier rebuilds all 60 artifacts across fifteen primes, matches `300/300`
 public matrix-determinant point replays, and confirms identical monomial
 support for every minor. It then
 performs partial symmetric CRT over all 17,205 homogeneous slots per minor and
-passes `963,480/963,480` coefficient-slot modular round trips. The combined
-modulus has 397 bits, still below the 427-bit uniqueness threshold. The partial
-residues are therefore replayable state, not integer coefficients; 2 primes
-and 8 artifacts remain.
+passes `1,032,300/1,032,300` coefficient-slot modular round trips. The combined
+modulus has 426 bits, still one bit below the 427-bit uniqueness threshold. The
+partial residues are therefore replayable state, not integer coefficients; 1
+prime and 4 artifacts remain.
 This is certificate infrastructure and an audit correction, not a continuous
 full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
 solved frontier, scientific promotion, or new credit.
