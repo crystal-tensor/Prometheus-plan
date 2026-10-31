@@ -2198,6 +2198,70 @@ current_results:
     independent_audit_result: ../results/B9_R214_independent_crt_audit_v0.json
     markdown_report: ../research/B9_R214_characteristic_zero_lift_shard6.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r214-can-412920-exact-checks-describe-more-than-one-integer-polynomial.md
+  r215_characteristic_zero_lift_shard7_v0:
+    status: seventh_of_fourteen_prime_shards_complete_nonunique_partial_CRT
+    method: b9_r209_incremental_three_minor_CRT_replay_v1
+    source: r214_characteristic_zero_lift_shard6_v0
+    minor_indices: [4, 5, 6]
+    determinant_total_degree: 184
+    quotient_total_degree: 96
+    D_exponent: 44
+    selected_bound_bits: [417, 418, 427]
+    maximum_twice_bound_bit_length: 428
+    planned_additional_primes: 14
+    planned_new_minor_artifacts: 42
+    completed_planned_primes: [536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819]
+    completed_new_minor_artifacts: 21
+    remaining_new_minor_artifacts: 21
+    all_CRT_primes: [1000003, 536870723, 536870909, 536870879, 536870869, 536870849, 536870839, 536870837, 536870819]
+    partial_CRT_modulus: "6901759698662225667511825424053451348186141581838581409414520966995103636943"
+    partial_CRT_modulus_bit_length: 252
+    determinant_term_counts: [5997, 6555, 5309]
+    quotient_term_counts: [1113, 1363, 821]
+    cross_prime_support_identical: [true, true, true]
+    primary_CRT_roundtrip_checks: 464535
+    independent_CRT_roundtrip_checks: 464535
+    independent_matrix_replays: 84
+    independent_matrix_replay_matches: 84
+    independent_D44_recomposition_matches: 84
+    partial_CRT_residues_are_unique_integer_coefficients: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_D44_divisibility_verified: false
+    QQ_Nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    bound_stable_payload_sha256: 6703e04ca28a1e4be6d40d84e8c3a7536863338c8a1ee72545f42c8a0cecdb89
+    shard_stable_payload_sha256:
+      "4": 93ccb334bd9e31db173ae810059295fd90150b898ed3fd14b5cc68863ff64fd2
+      "5": c2b52a41f0d2222259ba6832fd408d37cd118d65ab060e4e5c009a3c989d6534
+      "6": 6d6b40ab79e1bd25bb7b0c9bea5e37e0d7a0afb394ef1ab5d2b8147fb3b0950c
+    replay_stable_payload_sha256: 8921585d611fa62667802e815bfd7eeead42717a66638721d7daaf2ea75c0d16
+    independent_audit_stable_payload_sha256: a6e144b9f4694989bf6827bb38fc6c813cce07d368a2e7197f96f21007825694
+    shard_tool_sha256: d625efe39f37e39a6eda5efcf8e7cf7767a1ba7593b9ae11f13c1c3406b9ccbe
+    replay_tool_sha256: daa027d56b2b42eae71a25ced925df25abc226a9f1089aec6f23ad17ebdef638
+    independent_audit_core_tool_sha256: ae94fe5146385201da59ab841284724b5aecf2e496955707cab16f834a47d04d
+    independent_audit_tool_sha256: ee2a28fd19354459dd15bfd71618ae15a45accc0f20dc449bfd210baa3d9ef01
+    bound_result_sha256: 78c78b5558f73b380c5a048976957a200f1cc8a4fb1eaae21e2eb5ff561c76d3
+    minor4_mod536870819_sha256: 153c2197b3ba243e60fe0916f9f74fba583416df39d44974e6ccbec0b3f84ccc
+    minor5_mod536870819_sha256: 81b8eabbcbea2862e3b05dd652968e9de3c0e93f6e55b67a1e86ef00b6cad693
+    minor6_mod536870819_sha256: daa0ace510f3d6b30a16fa1e577889055c227387a25db72332a7f3d87c440c2a
+    replay_result_sha256: cbd4247db97d0a115d78182931e5fc5e0c2462fa08feccfa6821314f89b38b7f
+    independent_audit_result_sha256: 254d053a8c42ff57b0306206e19b9ea408f8046d565998c0fed6ce201247973d
+    markdown_report_sha256: 6340f5117543979603f44a8d864764f9c9e6a1db74b8d0453dd9b0741a57c58f
+    discussion_draft_sha256: 6f06a96a2be178d094835a8fb79042d94617d60a8b0892129d2a09e5f0b8dadc
+    shard_tool: ../tools/b9_r209_modular_minor_shard.py
+    replay_tool: ../tools/b9_r209_crt_shard_replay.py
+    independent_audit_core_tool: ../tools/b9_r210_independent_crt_audit.py
+    independent_audit_tool: ../tools/b9_r215_independent_crt_audit.py
+    bound_result: ../results/B9_R209_determinant_coefficient_bound_v0.json
+    minor4_mod536870819: ../results/B9_R209_minor4_mod536870819_v0.json
+    minor5_mod536870819: ../results/B9_R209_minor5_mod536870819_v0.json
+    minor6_mod536870819: ../results/B9_R209_minor6_mod536870819_v0.json
+    replay_result: ../results/B9_R215_crt_shard7_replay_v0.json
+    independent_audit_result: ../results/B9_R215_independent_crt_audit_v0.json
+    markdown_report: ../research/B9_R215_characteristic_zero_lift_shard7.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r215-is-21-of-42-evidence-halfway-to-an-integer-theorem.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py

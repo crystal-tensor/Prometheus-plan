@@ -680,6 +680,17 @@ fixed prime is `536870839`; integer reconstruction, characteristic-zero
 division, rational identity, frozen holdout, global-rank, hardware, Quantum
 PCP/NLTS, promotion, and new-credit claims remain open or zero.
 
+R215 completes the seventh planned three-minor shard at `536870819`. The lift
+ledger reaches `21/42`; primary and independent CRT implementations each pass
+`464535/464535` coefficient-slot-prime round trips over nine total primes. The
+independent path reproduces `84/84` source-matrix determinant values and
+`84/84` `D^44` recompositions, while adversarial overlays reject a changed
+coefficient and a missing frozen point. The combined modulus grows from 223 to
+252 bits, still below the 428-bit worst-case uniqueness threshold. The next
+fixed prime is `536870813`; integer reconstruction, characteristic-zero
+division, rational identity, frozen holdout, global-rank, hardware, Quantum
+PCP/NLTS, promotion, and new-credit claims remain open or zero.
+
 R214 completes the sixth planned three-minor shard at `536870837`. The lift
 ledger advances to `18/42`; primary and independent CRT implementations each
 pass `412920/412920` coefficient-slot-prime round trips over eight total primes.
