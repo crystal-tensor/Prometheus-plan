@@ -8183,6 +8183,316 @@ def audit_b9_r203_rational_common_zero_rank_replay(
     }
 
 
+def audit_b9_r204_expanded_ideal_preflight(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R204 fifth-minor bridge and saturated-ideal classification."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "r203_artifacts_excluded": False,
+        "expanded_slice_gcd_total_degree": None,
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 0,
+        "five_minor_unit_certificate_route_supported": None,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R204 expanded ideal preflight")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "bridge_tool": resolve(manifest_entry.get("bridge_tool")),
+        "preflight_tool": resolve(manifest_entry.get("preflight_tool")),
+        "added_minor_mod1000003": resolve(
+            manifest_entry.get("added_minor_mod1000003")
+        ),
+        "added_minor_mod536870723": resolve(
+            manifest_entry.get("added_minor_mod536870723")
+        ),
+        "expanded_preflight_result": resolve(
+            manifest_entry.get("expanded_preflight_result")
+        ),
+        "markdown_report": resolve(manifest_entry.get("markdown_report")),
+        "discussion_draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R204 expanded ideal preflight {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R204 expanded ideal preflight {field} mismatch")
+
+    expected_points = [[2, 0, 1], [1, 0, -2]]
+    expected_quotient_hashes = {
+        1000003: "5746fe20649ed38855a444bf81f93e20b725f9624cc639e6b170671b76e937b1",
+        536870723: "c455c0318bf941c63d1d3446d30776d7f1ddd579f75514a11e91326203ea5e8d",
+    }
+    for prime, label in (
+        (1000003, "added_minor_mod1000003"),
+        (536870723, "added_minor_mod536870723"),
+    ):
+        result = json.loads(read(paths[label]))
+        payload = dict(result)
+        payload.pop("payload_sha256", None)
+        stable = dict(payload)
+        stable.pop("stable_payload_sha256", None)
+        stable.pop("elapsed_seconds", None)
+        stable.pop("singular_path", None)
+        mismatch = (
+            result.get("method")
+            != "b9_r204_independent_added_minor_bridge_v1"
+            or result.get("version") != "0.1.0"
+            or result.get("characteristic") != prime
+            or result.get("new_minor_index") != 4
+            or result.get("bridge_tool_sha256") != observed["bridge_tool_sha256"]
+            or result.get("source_r203_sha256")
+            != digest(root / "results/B9_R203_rational_common_zero_rank_replay_v0.json")
+            or result.get("row_words_sha256")
+            != "4b1858933538516ceb01954ac165db81b6bdd5a4cb4095a8ba32df3d6c1cc484"
+            or result.get("determinant_total_degree") != 184
+            or result.get("determinant_term_count") != 5997
+            or result.get("D_exponent") != 44
+            or result.get("quotient_total_degree") != 96
+            or result.get("quotient_term_count") != 1113
+            or result.get("quotient_canonical_terms_sha256")
+            != expected_quotient_hashes[prime]
+            or result.get("exact_D44_division_verified") is not True
+            or result.get("factorization_validated") is not True
+            or result.get("scaled_recomposition_validated") is not True
+            or result.get("both_R203_rational_artifacts_excluded") is not True
+            or [
+                row.get("projective_point")
+                for row in result.get("point_replays", [])
+            ]
+            != expected_points
+            or not all(
+                row.get("determinant_replay_match") is True
+                and row.get("quotient_nonzero") is True
+                and row.get("D_power_recomposition_match") is True
+                for row in result.get("point_replays", [])
+            )
+            or canonical_hash(stable) != result.get("stable_payload_sha256")
+            or canonical_hash(payload) != result.get("payload_sha256")
+            or result.get("frozen_holdouts_executed") is not False
+            or result.get("scientific_promotion_accepted") is not False
+            or result.get("new_credit_delta") != 0
+            or result.get("checked") is not True
+        )
+        if mismatch:
+            errors.append(
+                f"B9 R204 expanded ideal preflight added-minor result mismatch at {prime}"
+            )
+
+    expanded = json.loads(read(paths["expanded_preflight_result"]))
+    payload = dict(expanded)
+    payload.pop("payload_sha256", None)
+    prime_rows = expanded.get("prime_rows", [])
+    expected_slice = {
+        "gcd_term_count": 7,
+        "gcd_total_degree": 6,
+        "normalized_residual_degree_six_match": True,
+    }
+    expanded_mismatch = (
+        expanded.get("method")
+        != "b9_r204_five_minor_modular_saturated_ideal_preflight_v1"
+        or expanded.get("version") != "0.1.0"
+        or expanded.get("scope")
+        != "public_R201_to_R204_five_minor_modular_preflight_only"
+        or expanded.get("coupling") != "13/32"
+        or expanded.get("n") != 4
+        or expanded.get("old_minor_count") != 4
+        or expanded.get("expanded_minor_count") != 5
+        or expanded.get("r203_artifacts_excluded") is not True
+        or expanded.get("determinant_total_degree") != 184
+        or expanded.get("determinant_term_count") != 5997
+        or expanded.get("D_exponent") != 44
+        or expanded.get("new_quotient_total_degree") != 96
+        or expanded.get("new_quotient_term_count") != 1113
+        or expanded.get("old_slice_gcd_total_degree") != 16
+        or expanded.get("expanded_slice_gcd_total_degree") != 6
+        or expanded.get("expanded_slice_gcd_term_count") != 7
+        or expanded.get("expanded_slice_matches_R203_residual_degree_six")
+        is not True
+        or expanded.get("added_minor_support_sha256")
+        != "ce39d365afc68173cc8d9edae9906db1a2cf5d37c401ae5966f6aa736779b9f7"
+        or expanded.get("primes") != [1000003, 536870723]
+        or len(prime_rows) != 2
+        or any(row.get("checked") is not True for row in prime_rows)
+        or any(row.get("controls_checked") is not True for row in prime_rows)
+        or [
+            row.get("expanded_engineering", {}).get("basis_size")
+            for row in prime_rows
+        ]
+        != [10, 10]
+        or [
+            row.get("expanded_engineering", {}).get(
+                "unit_membership_remainder"
+            )
+            for row in prime_rows
+        ]
+        != ["1", "1"]
+        or any(
+            row.get("expanded_engineering", {}).get("unit_ideal_detected")
+            is not False
+            for row in prime_rows
+        )
+        or any(
+            row.get("expanded_engineering", {}).get("basis_summary_sha256")
+            != "23beb23a5cf653ed00ea92de764528cf9f96fe5e1ef982035bb640d56394daa8"
+            for row in prime_rows
+        )
+        or any(row.get("slice") != expected_slice for row in prime_rows)
+        or expanded.get("classified_prime_count") != 2
+        or expanded.get("unit_ideal_prime_count") != 0
+        or expanded.get("nonunit_ideal_prime_count") != 2
+        or expanded.get("all_classified_primes_detect_nonunit_ideal") is not True
+        or expanded.get("five_minor_unit_certificate_route_supported") is not False
+        or expanded.get("preflight_conclusion")
+        != "two_prime_nonunit_residual_degree_six_after_fifth_minor"
+        or canonical_hash(expanded.get("stable_classification_payload", {}))
+        != expanded.get("stable_classification_sha256")
+        or expanded.get("stable_classification_sha256")
+        != "332e9a0d5a4d5b4b2b67154efe11128a2d2dab9eb336e7743933c860a18a6515"
+        or canonical_hash(payload) != expanded.get("payload_sha256")
+        or expanded.get("execution_complete") is not True
+        or expanded.get("modular_preflight_checked") is not True
+        or expanded.get("rational_nullstellensatz_certificate_verified")
+        is not False
+        or expanded.get("ideal_membership_certificate_verified") is not False
+        or expanded.get("frozen_holdouts_executed") is not False
+        or expanded.get("scientific_promotion_accepted") is not False
+        or expanded.get("new_credit_delta") != 0
+        or expanded.get("checked") is not True
+    )
+    if expanded_mismatch:
+        errors.append("B9 R204 expanded ideal preflight result mismatch")
+
+    manifest_expectations = {
+        "status": "fifth_minor_excludes_known_artifacts_but_sextic_component_remains_nonunit",
+        "method": "b9_r204_five_minor_modular_saturated_ideal_preflight_v1",
+        "source": "r201_r202_r203_plus_independent_source_maximal_minor",
+        "old_minor_count": 4,
+        "expanded_minor_count": 5,
+        "primes": [1000003, 536870723],
+        "determinant_total_degree": 184,
+        "determinant_term_count": 5997,
+        "D_exponent": 44,
+        "new_quotient_total_degree": 96,
+        "new_quotient_term_count": 1113,
+        "r203_artifacts_excluded": True,
+        "old_slice_gcd_total_degree": 16,
+        "expanded_slice_gcd_total_degree": 6,
+        "expanded_slice_gcd_term_count": 7,
+        "expanded_slice_matches_R203_residual_degree_six": True,
+        "old_standard_basis_sizes": [43, 43],
+        "expanded_standard_basis_sizes": [10, 10],
+        "expanded_unit_membership_remainders": ["1", "1"],
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 2,
+        "five_minor_unit_certificate_route_supported": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "added_minor_support_sha256": expanded.get(
+            "added_minor_support_sha256"
+        ),
+        "stable_classification_sha256": expanded.get(
+            "stable_classification_sha256"
+        ),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R204 expanded ideal preflight manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "The fifth quotient therefore excludes both known",
+            "The five-minor basis degree/term-count summary is identical",
+            "standard basis from 43 elements to 10",
+            "It is still insufficient.",
+            "No `J=127/128,131/128` holdout was evaluated.",
+        )
+    ):
+        errors.append("B9 R204 expanded ideal preflight report boundary incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can one new maximal minor repair a false rank-drop certificate?",
+            "The two known false rank drops disappear.",
+            "the same seven-term",
+            "artifact\" or \"rank drop.",
+            "No frozen holdout was executed.",
+        )
+    ):
+        errors.append("B9 R204 expanded ideal preflight discussion draft incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "r203_artifacts_excluded": expanded.get("r203_artifacts_excluded"),
+        "old_slice_gcd_total_degree": expanded.get("old_slice_gcd_total_degree"),
+        "expanded_slice_gcd_total_degree": expanded.get(
+            "expanded_slice_gcd_total_degree"
+        ),
+        "expanded_slice_gcd_term_count": expanded.get(
+            "expanded_slice_gcd_term_count"
+        ),
+        "expanded_standard_basis_sizes": [
+            row.get("expanded_engineering", {}).get("basis_size")
+            for row in prime_rows
+        ],
+        "expanded_unit_membership_remainders": [
+            row.get("expanded_engineering", {}).get(
+                "unit_membership_remainder"
+            )
+            for row in prime_rows
+        ],
+        "unit_ideal_prime_count": expanded.get("unit_ideal_prime_count"),
+        "nonunit_ideal_prime_count": expanded.get("nonunit_ideal_prime_count"),
+        "five_minor_unit_certificate_route_supported": expanded.get(
+            "five_minor_unit_certificate_route_supported"
+        ),
+        "stable_classification_sha256": expanded.get(
+            "stable_classification_sha256"
+        ),
+        "frozen_holdouts_executed": expanded.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": expanded.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": expanded.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R204 expanded ideal preflight")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -46329,6 +46639,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r204_expanded_ideal_preflight = b9_results.get(
+        "r204_expanded_ideal_preflight_v0"
+    )
+    b9_r204_expanded_ideal_preflight_status = (
+        audit_b9_r204_expanded_ideal_preflight(
+            root,
+            b9_r204_expanded_ideal_preflight,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -56746,6 +57067,7 @@ def audit(root: Path) -> dict:
             "r201_integer_reconstruction": b9_r201_integer_reconstruction_status,
             "r202_modular_ideal_preflight": b9_r202_modular_ideal_preflight_status,
             "r203_rational_common_zero_rank_replay": b9_r203_rational_common_zero_rank_replay_status,
+            "r204_expanded_ideal_preflight": b9_r204_expanded_ideal_preflight_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -61035,6 +61357,10 @@ def markdown_report(report: dict) -> str:
             f"- R203 rational witnesses / points: {report['b9']['r203_rational_common_zero_rank_replay'].get('rational_common_zero_count')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('projective_points')}",
             f"- R203 dense / source exact ranks: {report['b9']['r203_rational_common_zero_rank_replay'].get('dense_exact_ranks')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('source_exact_ranks')}",
             f"- R203 all witnesses full rank / four-minor sufficiency / holdouts / promotion / credit: {report['b9']['r203_rational_common_zero_rank_replay'].get('all_witnesses_full_rank_over_QQ')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('four_selected_minors_sufficient_for_full_rank_locus')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('frozen_holdouts_executed')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('scientific_promotion_accepted')} / {report['b9']['r203_rational_common_zero_rank_replay'].get('new_credit_delta')}",
+            f"- R204 expanded ideal preflight status: {report['b9']['r204_expanded_ideal_preflight'].get('status')}",
+            f"- R204 known artifacts excluded / old-new slice degree: {report['b9']['r204_expanded_ideal_preflight'].get('r203_artifacts_excluded')} / {report['b9']['r204_expanded_ideal_preflight'].get('old_slice_gcd_total_degree')} -> {report['b9']['r204_expanded_ideal_preflight'].get('expanded_slice_gcd_total_degree')}",
+            f"- R204 basis sizes / unit remainders / unit-nonunit primes: {report['b9']['r204_expanded_ideal_preflight'].get('expanded_standard_basis_sizes')} / {report['b9']['r204_expanded_ideal_preflight'].get('expanded_unit_membership_remainders')} / {report['b9']['r204_expanded_ideal_preflight'].get('unit_ideal_prime_count')} / {report['b9']['r204_expanded_ideal_preflight'].get('nonunit_ideal_prime_count')}",
+            f"- R204 five-minor unit route / holdouts / promotion / credit: {report['b9']['r204_expanded_ideal_preflight'].get('five_minor_unit_certificate_route_supported')} / {report['b9']['r204_expanded_ideal_preflight'].get('frozen_holdouts_executed')} / {report['b9']['r204_expanded_ideal_preflight'].get('scientific_promotion_accepted')} / {report['b9']['r204_expanded_ideal_preflight'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

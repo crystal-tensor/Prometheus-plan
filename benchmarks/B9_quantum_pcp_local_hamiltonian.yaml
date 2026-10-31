@@ -1569,6 +1569,48 @@ current_results:
     replay_result: ../results/B9_R203_rational_common_zero_rank_replay_v0.json
     markdown_report: ../research/B9_R203_rational_common_zero_rank_replay.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r203-when-four-zero-minors-do-not-mean-rank-loss.md
+  r204_expanded_ideal_preflight_v0:
+    status: fifth_minor_excludes_known_artifacts_but_sextic_component_remains_nonunit
+    method: b9_r204_five_minor_modular_saturated_ideal_preflight_v1
+    source: r201_r202_r203_plus_independent_source_maximal_minor
+    old_minor_count: 4
+    expanded_minor_count: 5
+    primes: [1000003, 536870723]
+    determinant_total_degree: 184
+    determinant_term_count: 5997
+    D_exponent: 44
+    new_quotient_total_degree: 96
+    new_quotient_term_count: 1113
+    r203_artifacts_excluded: true
+    old_slice_gcd_total_degree: 16
+    expanded_slice_gcd_total_degree: 6
+    expanded_slice_gcd_term_count: 7
+    expanded_slice_matches_R203_residual_degree_six: true
+    old_standard_basis_sizes: [43, 43]
+    expanded_standard_basis_sizes: [10, 10]
+    expanded_unit_membership_remainders: ["1", "1"]
+    unit_ideal_prime_count: 0
+    nonunit_ideal_prime_count: 2
+    five_minor_unit_certificate_route_supported: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    added_minor_support_sha256: ce39d365afc68173cc8d9edae9906db1a2cf5d37c401ae5966f6aa736779b9f7
+    stable_classification_sha256: 332e9a0d5a4d5b4b2b67154efe11128a2d2dab9eb336e7743933c860a18a6515
+    bridge_tool_sha256: d777eba3399f8a600a4def0a0303850f123cdd281e83535131ac9ac5fe2a1154
+    preflight_tool_sha256: d8e4868a74b2d8033b3de8b241ea653533a44a063496324f88c86792d1ca9999
+    added_minor_mod1000003_sha256: 105a5e39536ddb8b658062bdb99f3f13e9a5eac4f0de147ee4aff3cd71193f1c
+    added_minor_mod536870723_sha256: 86c40d050dce0942d1de0aac47054d2cfe9619fc843829cf66115b258cb517e1
+    expanded_preflight_result_sha256: d404282c45b4ed0ebd490890f19ee3e3113513dedc8abf39cabfee4dea48cdfd
+    markdown_report_sha256: 9f4a38577ce91b4a942b197f336b86ca6c6af893179b09e7c7742a26b0e849ef
+    discussion_draft_sha256: 4944181fca259e5ba1a991e2a6b865c6ad175eb513fca52d9a948f3b14496114
+    bridge_tool: ../tools/b9_r204_expanded_minor_bridge.py
+    preflight_tool: ../tools/b9_r204_expanded_ideal_preflight.py
+    added_minor_mod1000003: ../results/B9_R204_added_minor_mod1000003_v0.json
+    added_minor_mod536870723: ../results/B9_R204_added_minor_mod536870723_v0.json
+    expanded_preflight_result: ../results/B9_R204_expanded_ideal_preflight_v0.json
+    markdown_report: ../research/B9_R204_expanded_ideal_preflight.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r204-can-one-new-minor-repair-a-false-rank-drop.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1607,4 +1649,6 @@ current_results:
   r200_integrated_adjudication: ../tools/b9_r200_integrated_adjudication.py
   r202_modular_ideal_preflight: ../tools/b9_r202_modular_ideal_preflight.py
   r203_rational_common_zero_rank_replay: ../tools/b9_r203_rational_common_zero_rank_replay.py
+  r204_expanded_minor_bridge: ../tools/b9_r204_expanded_minor_bridge.py
+  r204_expanded_ideal_preflight: ../tools/b9_r204_expanded_ideal_preflight.py
   prototype_notes: ../research/B9_prototype_notes.md

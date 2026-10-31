@@ -455,6 +455,21 @@ is to append independently selected minors that exclude both witnesses and
 classify the remaining degree-six slice factor. Frozen holdouts, promotion,
 and credit remain closed or zero.
 
+T-B9-015x/R204 appends one maximal minor selected independently of the four
+R201 row sets. Singular computes its degree-184 determinant over
+`GF(1,000,003)` and `GF(536,870,723)`; exact sparse recomposition restores the
+finite-field factor scalar, verifies division by `D^44`, and produces a
+degree-96 quotient with 1,113 terms. The quotient is nonzero at both R203
+rational artifacts, removing the two fivefold linear components from the
+`b=0` gcd. The restricted gcd falls from degree 16 to the exact seven-term
+degree-six R203 residual. In the full saturated calculation, both five-minor
+ideals remain nonunit, but the standard basis contracts consistently from 43
+to 10 elements. The next gate is to isolate the sextic's exact projective
+roots and replay the complete `238x37` and `256x37` matrices over the resulting
+algebraic extensions. A full-rank replay should select another excluding
+minor; a rank drop must emit an exact nonzero kernel vector. Frozen holdouts,
+promotion, and credit remain closed or zero.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**

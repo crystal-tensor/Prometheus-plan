@@ -565,6 +565,19 @@ independently selected minor set plus classification of the unresolved
 degree-six slice factor. Holdouts, promotion, and credit remain closed or
 zero.
 
+R204 appends a fifth maximal minor selected independently of the four R201 row
+sets. Its degree-184 determinant is computed over `GF(1,000,003)` and
+`GF(536,870,723)`; exact sparse recomposition verifies `D^44` division and a
+degree-96, 1,113-term quotient. The new quotient is nonzero at both R203
+rational artifacts, so it removes the two fivefold linear slice components.
+The `b=0` gcd contracts from degree 16 to the same seven-term degree-six
+residual factor, while the full saturated standard basis contracts from 43 to
+10 elements in both fields. Both five-minor ideals remain nonunit with
+`reduce(1,G)=1`. The next gate is exact algebraic-root replay of the complete
+`238x37` and `256x37` matrices on that sextic component, followed by another
+independent minor only if those roots remain full rank. Holdouts, promotion,
+and credit remain closed or zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

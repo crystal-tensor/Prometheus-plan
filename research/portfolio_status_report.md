@@ -2703,6 +2703,10 @@ Overall audit: PASS
 - R203 rational witnesses / points: 2 / [[2, 0, 1], [1, 0, -2]]
 - R203 dense / source exact ranks: [37, 37] / [37, 37]
 - R203 all witnesses full rank / four-minor sufficiency / holdouts / promotion / credit: True / False / False / False / 0
+- R204 expanded ideal preflight status: fifth_minor_excludes_known_artifacts_but_sextic_component_remains_nonunit
+- R204 known artifacts excluded / old-new slice degree: True / 16 -> 6
+- R204 basis sizes / unit remainders / unit-nonunit primes: [10, 10] / ['1', '1'] / 0 / 2
+- R204 five-minor unit route / holdouts / promotion / credit: False / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 
