@@ -591,6 +591,19 @@ loss. The next gate is to add the R205 excluding minor as a sixth quotient and
 rerun the saturated ideal. Holdouts, promotion, and credit remain closed or
 zero.
 
+R206 promotes the R205 Pauli row set into a sixth exact projective maximal
+minor. At `GF(1,000,003)` and `GF(536,870,723)`, its degree-184 determinant
+contains 6,555 terms, divides exactly by `D^44`, and yields a degree-96,
+1,363-term quotient with identical support. The new quotient is coprime to the
+R204 residual sextic, and the six-minor `b=0` gcd becomes 1 at both primes.
+The complete saturated ideal remains nonunit, however: `slimgb` and an
+independent `std` run both return seven-element standard bases with
+`reduce(1,G)=1`. R206 therefore closes every currently known `b=0` artifact
+but exposes a surviving off-slice modular component. The next gate is to
+extract that component and replay both complete matrices before selecting a
+seventh minor or accepting a kernel witness. Holdouts, promotion, and credit
+remain closed or zero.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

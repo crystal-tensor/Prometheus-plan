@@ -484,6 +484,19 @@ minor as a full degree-184 polynomial, divide by `D^44`, append it as the sixth
 degree-96 generator, and rerun the saturated ideal. Frozen holdouts, promotion,
 and credit remain closed or zero.
 
+T-B9-015z/R206 promotes that Pauli row set into a full degree-184 determinant
+over `GF(1,000,003)` and `GF(536,870,723)`. Exact sparse division removes
+`D^44` and produces a degree-96 quotient with 1,363 terms and identical support
+at both primes. Its `b=0` restriction is coprime to the R204 residual sextic;
+the six-minor slice gcd therefore contracts from degree 6 to 0. The full
+saturated ideal still remains nonunit at both primes. Singular `slimgb` and an
+independent `std` run agree on basis size 7, `reduce(1,G)=1`, and the nonunit
+classification even though their noncanonical basis summaries differ. The
+next gate is to extract or parameterize the off-slice component and replay the
+complete `238x37` and `256x37` matrices before choosing another excluding
+minor or an exact kernel certificate. Frozen holdouts, promotion, and credit
+remain closed or zero.
+
 ## Manuscript Bets
 
 1. **Technical lead: certified hardware-aware circuit compression.**

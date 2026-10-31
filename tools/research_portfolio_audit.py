@@ -8879,6 +8879,360 @@ def audit_b9_r205_sextic_full_matrix_rank(
     }
 
 
+def audit_b9_r206_six_minor_ideal_preflight(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R206 sixth-minor bridge and dual-algorithm ideal result."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "all_known_b_zero_components_excluded": False,
+        "expanded_slice_gcd_total_degree": None,
+        "standard_basis_sizes": [],
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 0,
+        "dual_algorithm_classification_match": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R206 six-minor ideal preflight")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "bridge_tool": resolve(manifest_entry.get("bridge_tool")),
+        "preflight_tool": resolve(manifest_entry.get("preflight_tool")),
+        "adjudication_tool": resolve(manifest_entry.get("adjudication_tool")),
+        "sixth_minor_mod1000003": resolve(
+            manifest_entry.get("sixth_minor_mod1000003")
+        ),
+        "sixth_minor_mod536870723": resolve(
+            manifest_entry.get("sixth_minor_mod536870723")
+        ),
+        "slimgb_result": resolve(manifest_entry.get("slimgb_result")),
+        "std_result": resolve(manifest_entry.get("std_result")),
+        "adjudication_result": resolve(
+            manifest_entry.get("adjudication_result")
+        ),
+        "markdown_report": resolve(manifest_entry.get("markdown_report")),
+        "discussion_draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R206 six-minor ideal preflight {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R206 six-minor ideal preflight {field} mismatch")
+
+    expected_support_hash = (
+        "a9d2cd596c697af5c0e3ab2b3bb7093083aade0c419867ae21cb370db2e644f3"
+    )
+    expected_bridge_stable = {
+        1000003: "3ea53c6e5e2661681607224a5aabb2924552716423c2d4a353270499851dab5c",
+        536870723: "00d7886ce9f585aa1271aa80bfaba2021411af37489afdb974494da7e904ae90",
+    }
+    bridge_results: dict[int, dict] = {}
+    for prime, label in (
+        (1000003, "sixth_minor_mod1000003"),
+        (536870723, "sixth_minor_mod536870723"),
+    ):
+        result = json.loads(read(paths[label]))
+        bridge_results[prime] = result
+        payload = dict(result)
+        payload.pop("payload_sha256", None)
+        stable = dict(payload)
+        stable.pop("stable_payload_sha256", None)
+        stable.pop("elapsed_seconds", None)
+        stable.pop("singular_path", None)
+        support_hash = canonical_hash(
+            [term[0] for term in result.get("quotient_canonical_terms", [])]
+        )
+        mismatch = (
+            result.get("method")
+            != "b9_r206_r205_selected_rows_sixth_minor_bridge_v1"
+            or result.get("version") != "0.1.0"
+            or result.get("scope")
+            != "public_R205_selected_rows_sixth_projective_minor_only"
+            or result.get("characteristic") != prime
+            or result.get("source_representation")
+            != "independent_sparse_Pauli_word_matrix"
+            or result.get("row_words_sha256")
+            != "9c7ac1a00aa08913b0895cf6be433d2146c3cd99f5292f920d8030f74661b0f6"
+            or result.get("determinant_total_degree") != 184
+            or result.get("determinant_term_count") != 6555
+            or result.get("D_exponent") != 44
+            or result.get("quotient_total_degree") != 96
+            or result.get("quotient_term_count") != 1363
+            or support_hash != expected_support_hash
+            or result.get("exact_D44_division_verified") is not True
+            or result.get("factorization_validated") is not True
+            or result.get("scaled_recomposition_validated") is not True
+            or result.get("five_minor_slice_gcd_degree") != 6
+            or result.get("five_minor_slice_gcd_matches_R204_sextic") is not True
+            or result.get("slice_quotient_gcd_with_R204_sextic_degree") != 0
+            or result.get("R204_sextic_excluded_mod_prime") is not True
+            or result.get(
+                "combined_R204_fifth_plus_R206_sixth_excludes_known_b_zero_components"
+            )
+            is not True
+            or result.get("positive_nonzero_replay_count") != 2
+            or result.get("sixth_minor_alone_excludes_R203_rational_artifacts")
+            is not False
+            or canonical_hash(stable) != result.get("stable_payload_sha256")
+            or result.get("stable_payload_sha256") != expected_bridge_stable[prime]
+            or canonical_hash(payload) != result.get("payload_sha256")
+            or result.get("frozen_holdouts_executed") is not False
+            or result.get("scientific_promotion_accepted") is not False
+            or result.get("new_credit_delta") != 0
+            or result.get("checked") is not True
+        )
+        if mismatch:
+            errors.append(
+                f"B9 R206 six-minor ideal preflight bridge mismatch at {prime}"
+            )
+
+    if [term[0] for term in bridge_results[1000003]["quotient_canonical_terms"]] != [
+        term[0] for term in bridge_results[536870723]["quotient_canonical_terms"]
+    ]:
+        errors.append("B9 R206 six-minor ideal preflight support mismatch")
+
+    expected_algorithms = {
+        "slimgb_result": (
+            "slimgb",
+            "0649302aa2b1dfb93be3b9359ce0562c85846f2db7205b650418ca6b0d5a987f",
+        ),
+        "std_result": (
+            "std",
+            "c883ffffa707c1f69b0c001f1031a96cc316fa361dff080af7da9924cb300d34",
+        ),
+    }
+    ideal_results: dict[str, dict] = {}
+    for label, (algorithm, stable_hash) in expected_algorithms.items():
+        result = json.loads(read(paths[label]))
+        ideal_results[label] = result
+        payload = dict(result)
+        payload.pop("payload_sha256", None)
+        rows = result.get("prime_rows", [])
+        mismatch = (
+            result.get("method")
+            != "b9_r206_six_minor_modular_saturated_ideal_preflight_v1"
+            or result.get("version") != "0.1.0"
+            or result.get("scope")
+            != "public_R201_to_R206_six_minor_modular_preflight_only"
+            or result.get("standard_basis_algorithm") != algorithm
+            or result.get("old_minor_count") != 5
+            or result.get("expanded_minor_count") != 6
+            or result.get("primes") != [1000003, 536870723]
+            or result.get("determinant_total_degree") != 184
+            or result.get("determinant_term_count") != 6555
+            or result.get("D_exponent") != 44
+            or result.get("new_quotient_total_degree") != 96
+            or result.get("new_quotient_term_count") != 1363
+            or result.get("sixth_minor_support_sha256") != expected_support_hash
+            or result.get("old_slice_gcd_total_degree") != 6
+            or result.get("expanded_slice_gcd_total_degree") != 0
+            or result.get("expanded_slice_gcd_term_count") != 1
+            or result.get("all_known_b_zero_components_excluded") is not True
+            or len(rows) != 2
+            or [row.get("prime") for row in rows] != [1000003, 536870723]
+            or any(row.get("checked") is not True for row in rows)
+            or any(
+                row.get("expanded_engineering", {}).get("basis_size") != 7
+                or row.get("expanded_engineering", {}).get(
+                    "unit_membership_remainder"
+                )
+                != "1"
+                or row.get("expanded_engineering", {}).get("unit_ideal_detected")
+                is not False
+                or row.get("slice")
+                != {
+                    "gcd_term_count": 1,
+                    "gcd_total_degree": 0,
+                    "normalized_gcd_is_one": True,
+                }
+                for row in rows
+            )
+            or result.get("unit_ideal_prime_count") != 0
+            or result.get("nonunit_ideal_prime_count") != 2
+            or result.get("preflight_conclusion")
+            != "two_prime_nonunit_outside_b_zero_after_sixth_minor"
+            or result.get("six_minor_unit_certificate_route_supported") is not False
+            or canonical_hash(result.get("stable_classification_payload", {}))
+            != result.get("stable_classification_sha256")
+            or result.get("stable_classification_sha256") != stable_hash
+            or canonical_hash(payload) != result.get("payload_sha256")
+            or result.get("rational_nullstellensatz_certificate_verified")
+            is not False
+            or result.get("ideal_membership_certificate_verified") is not False
+            or result.get("frozen_holdouts_executed") is not False
+            or result.get("scientific_promotion_accepted") is not False
+            or result.get("new_credit_delta") != 0
+            or result.get("checked") is not True
+        )
+        if mismatch:
+            errors.append(
+                f"B9 R206 six-minor ideal preflight {algorithm} result mismatch"
+            )
+
+    adjudication = json.loads(read(paths["adjudication_result"]))
+    adjudication_payload = dict(adjudication)
+    adjudication_payload.pop("payload_sha256", None)
+    adjudication_mismatch = (
+        adjudication.get("method")
+        != "b9_r206_dual_singular_algorithm_adjudication_v1"
+        or adjudication.get("version") != "0.1.0"
+        or adjudication.get("algorithms") != ["slimgb", "std"]
+        or adjudication.get("primes") != [1000003, 536870723]
+        or adjudication.get("source_bindings_match") is not True
+        or adjudication.get("algorithm_independent_classification_match")
+        is not True
+        or adjudication.get("basis_representation_identical") is not False
+        or adjudication.get("slice_gcd_total_degree") != 0
+        or adjudication.get("standard_basis_sizes") != [7, 7]
+        or adjudication.get("unit_membership_remainders") != ["1", "1"]
+        or adjudication.get("unit_ideal_prime_count") != 0
+        or adjudication.get("nonunit_ideal_prime_count") != 2
+        or adjudication.get("preflight_conclusion")
+        != "two_prime_nonunit_outside_b_zero_after_sixth_minor"
+        or canonical_hash(adjudication.get("stable_adjudication_payload", {}))
+        != adjudication.get("stable_adjudication_sha256")
+        or adjudication.get("stable_adjudication_sha256")
+        != "c758e1ce4e96f2bc3f980ad4ba4aa43f5392b2b9166349cadd1c235c43763db4"
+        or canonical_hash(adjudication_payload) != adjudication.get("payload_sha256")
+        or adjudication.get("frozen_holdouts_executed") is not False
+        or adjudication.get("scientific_promotion_accepted") is not False
+        or adjudication.get("new_credit_delta") != 0
+        or adjudication.get("checked") is not True
+    )
+    if adjudication_mismatch:
+        errors.append("B9 R206 six-minor ideal preflight adjudication mismatch")
+
+    slimgb = ideal_results["slimgb_result"]
+    manifest_expectations = {
+        "status": "six_minors_close_b_zero_but_nonunit_components_remain",
+        "method": "b9_r206_six_minor_modular_saturated_ideal_preflight_v1",
+        "source": "r201_r204_r205_plus_r205_pauli_selected_rows",
+        "old_minor_count": 5,
+        "expanded_minor_count": 6,
+        "primes": [1000003, 536870723],
+        "algorithms": ["slimgb", "std"],
+        "determinant_total_degree": 184,
+        "determinant_term_count": 6555,
+        "D_exponent": 44,
+        "new_quotient_total_degree": 96,
+        "new_quotient_term_count": 1363,
+        "six_minor_support_sha256": expected_support_hash,
+        "old_slice_gcd_total_degree": 6,
+        "expanded_slice_gcd_total_degree": 0,
+        "expanded_slice_gcd_term_count": 1,
+        "all_known_b_zero_components_excluded": True,
+        "old_standard_basis_sizes": [10, 10],
+        "expanded_standard_basis_sizes": [7, 7],
+        "expanded_unit_membership_remainders": ["1", "1"],
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 2,
+        "preflight_conclusion": "two_prime_nonunit_outside_b_zero_after_sixth_minor",
+        "dual_algorithm_classification_match": True,
+        "basis_representation_identical": False,
+        "six_minor_unit_certificate_route_supported": False,
+        "rational_nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "slimgb_stable_classification_sha256": slimgb.get(
+            "stable_classification_sha256"
+        ),
+        "std_stable_classification_sha256": ideal_results["std_result"].get(
+            "stable_classification_sha256"
+        ),
+        "stable_adjudication_sha256": adjudication.get(
+            "stable_adjudication_sha256"
+        ),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R206 six-minor ideal preflight manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "Can one exact maximal minor close every known point on a slice",
+            "The old slice degree falls from 6 to 0",
+            "The full saturated ideal nevertheless remains nonunit",
+            "different noncanonical standard-basis",
+            "`J=127/128,131/128` frozen holdout was evaluated.",
+        )
+    ):
+        errors.append("B9 R206 six-minor ideal preflight report boundary incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "Can a slice close while the global ideal stays open?",
+            "the `b=0` gcd",
+            "the full saturated ideal is still nonunit",
+            "noncanonical basis representations differ",
+            "No frozen holdout was executed",
+        )
+    ):
+        errors.append(
+            "B9 R206 six-minor ideal preflight discussion draft incomplete"
+        )
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "all_known_b_zero_components_excluded": slimgb.get(
+            "all_known_b_zero_components_excluded"
+        ),
+        "old_slice_gcd_total_degree": slimgb.get("old_slice_gcd_total_degree"),
+        "expanded_slice_gcd_total_degree": slimgb.get(
+            "expanded_slice_gcd_total_degree"
+        ),
+        "standard_basis_sizes": [
+            row.get("expanded_engineering", {}).get("basis_size")
+            for row in slimgb.get("prime_rows", [])
+        ],
+        "unit_ideal_prime_count": slimgb.get("unit_ideal_prime_count"),
+        "nonunit_ideal_prime_count": slimgb.get("nonunit_ideal_prime_count"),
+        "dual_algorithm_classification_match": adjudication.get(
+            "algorithm_independent_classification_match"
+        ),
+        "preflight_conclusion": slimgb.get("preflight_conclusion"),
+        "frozen_holdouts_executed": slimgb.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": slimgb.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": slimgb.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R206 six-minor ideal preflight")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -47047,6 +47401,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r206_six_minor_ideal_preflight = b9_results.get(
+        "r206_six_minor_ideal_preflight_v0"
+    )
+    b9_r206_six_minor_ideal_preflight_status = (
+        audit_b9_r206_six_minor_ideal_preflight(
+            root,
+            b9_r206_six_minor_ideal_preflight,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -57466,6 +57831,7 @@ def audit(root: Path) -> dict:
             "r203_rational_common_zero_rank_replay": b9_r203_rational_common_zero_rank_replay_status,
             "r204_expanded_ideal_preflight": b9_r204_expanded_ideal_preflight_status,
             "r205_sextic_full_matrix_rank": b9_r205_sextic_full_matrix_rank_status,
+            "r206_six_minor_ideal_preflight": b9_r206_six_minor_ideal_preflight_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
