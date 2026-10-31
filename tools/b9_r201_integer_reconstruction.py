@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
@@ -16,8 +17,8 @@ import b9_r201_crt_shard_replay as shard
 import b9_r201_projective_patch_certificate as r201
 
 
-VERSION = "0.1.0"
-METHOD = "b9_r201_bounded_integer_reconstruction_and_D44_division_v1"
+VERSION = "0.2.0"
+METHOD = "b9_r201_bounded_integer_reconstruction_and_D44_division_v2"
 D_EXPONENT = 44
 
 
@@ -117,8 +118,13 @@ def reconstruct(root: Path) -> dict[str, Any]:
         determinant = sp.Poly.from_dict(coefficients, r201.VARS, domain=sp.ZZ)
         quotient, remainder = sp.div(determinant, D_power, domain=sp.ZZ)
         quotient_polynomials.append(quotient)
+        quotient_content, primitive_quotient = quotient.primitive()
+        if primitive_quotient.LC() < 0:
+            quotient_content = -quotient_content
+            primitive_quotient = -primitive_quotient
         determinant_payload = polynomial_payload(determinant)
         quotient_payload = polynomial_payload(quotient)
+        primitive_quotient_payload = polynomial_payload(primitive_quotient)
         remainder_payload = polynomial_payload(remainder)
         replay_row = replay["minor_rows"][minor_index]
         expected_roundtrips = len(lattice) * len(primes)
@@ -164,6 +170,13 @@ def reconstruct(root: Path) -> dict[str, Any]:
                 "quotient_term_count": len(quotient_payload),
                 "quotient_canonical_terms_sha256": canonical_hash(quotient_payload),
                 "quotient_canonical_terms": quotient_payload,
+                "quotient_integer_content": str(int(quotient_content)),
+                "quotient_integer_content_absolute": str(abs(int(quotient_content))),
+                "primitive_quotient_total_degree": primitive_quotient.total_degree(),
+                "primitive_quotient_term_count": len(primitive_quotient_payload),
+                "primitive_quotient_canonical_terms_sha256": canonical_hash(
+                    primitive_quotient_payload
+                ),
                 "remainder_term_count": len(remainder_payload),
                 "remainder_canonical_terms_sha256": canonical_hash(
                     remainder_payload
@@ -182,22 +195,43 @@ def reconstruct(root: Path) -> dict[str, Any]:
         row["full_lattice_payload_matches_final_replay"] for row in rows
     )
     all_D44_divisions_pass = all(row["exact_D44_division_verified"] for row in rows)
-    quotient_gcd = quotient_polynomials[0]
+    quotient_gcd_over_ZZ = quotient_polynomials[0]
     for quotient in quotient_polynomials[1:]:
-        quotient_gcd = sp.gcd(quotient_gcd, quotient)
-    quotient_gcd = quotient_gcd.primitive()[1]
-    quotient_gcd_payload = polynomial_payload(quotient_gcd)
-    quotient_gcd_is_unit = (
-        quotient_gcd.total_degree() == 0
-        and len(quotient_gcd_payload) == 1
-        and abs(int(quotient_gcd_payload[0][1])) == 1
+        quotient_gcd_over_ZZ = sp.gcd(quotient_gcd_over_ZZ, quotient)
+    if quotient_gcd_over_ZZ.LC() < 0:
+        quotient_gcd_over_ZZ = -quotient_gcd_over_ZZ
+    quotient_gcd_over_ZZ_payload = polynomial_payload(quotient_gcd_over_ZZ)
+    quotient_contents = [
+        abs(int(row["quotient_integer_content"])) for row in rows
+    ]
+    common_integer_content = math.gcd(*quotient_contents)
+    primitive_quotients = [quotient.primitive()[1] for quotient in quotient_polynomials]
+    primitive_quotient_gcd = primitive_quotients[0]
+    for primitive_quotient in primitive_quotients[1:]:
+        primitive_quotient_gcd = sp.gcd(
+            primitive_quotient_gcd, primitive_quotient
+        )
+    primitive_quotient_gcd = primitive_quotient_gcd.primitive()[1]
+    if primitive_quotient_gcd.LC() < 0:
+        primitive_quotient_gcd = -primitive_quotient_gcd
+    primitive_quotient_gcd_payload = polynomial_payload(primitive_quotient_gcd)
+    primitive_quotient_gcd_is_unit = (
+        primitive_quotient_gcd.total_degree() == 0
+        and len(primitive_quotient_gcd_payload) == 1
+        and abs(int(primitive_quotient_gcd_payload[0][1])) == 1
+    )
+    quotient_gcd_over_ZZ_matches_common_content = (
+        quotient_gcd_over_ZZ.total_degree() == 0
+        and quotient_gcd_over_ZZ_payload
+        == [[[0, 0, 0], str(common_integer_content)]]
     )
     checked = (
         all_bounds_pass
         and all_roundtrips_pass
         and all_replay_hashes_match
         and all_D44_divisions_pass
-        and quotient_gcd_is_unit
+        and primitive_quotient_gcd_is_unit
+        and quotient_gcd_over_ZZ_matches_common_content
         and [row["determinant_term_count"] for row in rows]
         == [8649, 4468, 4770, 2760]
         and [row["quotient_term_count"] for row in rows]
@@ -226,17 +260,34 @@ def reconstruct(root: Path) -> dict[str, Any]:
         "all_reconstructed_coefficients_within_selected_bounds": all_bounds_pass,
         "all_coefficient_slot_prime_roundtrips_complete": all_roundtrips_pass,
         "all_integer_payload_hashes_match_final_replay": all_replay_hashes_match,
-        "quotient_gcd_total_degree": quotient_gcd.total_degree(),
-        "quotient_gcd_term_count": len(quotient_gcd_payload),
-        "quotient_gcd_canonical_terms_sha256": canonical_hash(
-            quotient_gcd_payload
+        "quotient_common_integer_content": str(common_integer_content),
+        "quotient_common_integer_content_factorization": {
+            str(prime): exponent
+            for prime, exponent in sorted(sp.factorint(common_integer_content).items())
+        },
+        "quotient_gcd_over_ZZ_total_degree": quotient_gcd_over_ZZ.total_degree(),
+        "quotient_gcd_over_ZZ_term_count": len(quotient_gcd_over_ZZ_payload),
+        "quotient_gcd_over_ZZ_canonical_terms_sha256": canonical_hash(
+            quotient_gcd_over_ZZ_payload
         ),
-        "quotient_gcd_canonical_terms": quotient_gcd_payload,
-        "quotient_gcd_is_unit": quotient_gcd_is_unit,
+        "quotient_gcd_over_ZZ_canonical_terms": quotient_gcd_over_ZZ_payload,
+        "quotient_gcd_over_ZZ_matches_common_integer_content": (
+            quotient_gcd_over_ZZ_matches_common_content
+        ),
+        "primitive_quotient_gcd_total_degree": primitive_quotient_gcd.total_degree(),
+        "primitive_quotient_gcd_term_count": len(primitive_quotient_gcd_payload),
+        "primitive_quotient_gcd_canonical_terms_sha256": canonical_hash(
+            primitive_quotient_gcd_payload
+        ),
+        "primitive_quotient_gcd_canonical_terms": primitive_quotient_gcd_payload,
+        "primitive_quotient_gcd_is_unit": primitive_quotient_gcd_is_unit,
         "characteristic_zero_engineering_determinants_verified": checked,
         "characteristic_zero_D44_divisibility_verified": all_D44_divisions_pass,
-        "characteristic_zero_gcd_exactly_D44_verified": (
-            all_D44_divisions_pass and quotient_gcd_is_unit
+        "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar": (
+            all_D44_divisions_pass and primitive_quotient_gcd_is_unit
+        ),
+        "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign": (
+            all_D44_divisions_pass and quotient_gcd_over_ZZ_matches_common_content
         ),
         "ideal_membership_certificate_verified": False,
         "frozen_holdouts_executed": False,
@@ -272,8 +323,14 @@ def main() -> int:
                 "characteristic_zero_D44_divisibility_verified": result[
                     "characteristic_zero_D44_divisibility_verified"
                 ],
-                "characteristic_zero_gcd_exactly_D44_verified": result[
-                    "characteristic_zero_gcd_exactly_D44_verified"
+                "quotient_common_integer_content": result[
+                    "quotient_common_integer_content"
+                ],
+                "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar": result[
+                    "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar"
+                ],
+                "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign": result[
+                    "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign"
                 ],
                 "new_credit_delta": result["new_credit_delta"],
             },

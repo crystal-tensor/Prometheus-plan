@@ -14,6 +14,8 @@ from typing import Any
 
 Monomial = tuple[int, ...]
 Polynomial = dict[Monomial, Fraction]
+EXPECTED_VARIABLES = ["u", "a", "b", "c"]
+EXPECTED_TARGET_TERMS = [[[0, 0, 0, 0], ["1", "1"]]]
 
 
 def canonical_hash(value: Any) -> str:
@@ -76,6 +78,37 @@ def multiply(left: Polynomial, right: Polynomial) -> Polynomial:
     return {monomial: value for monomial, value in output.items() if value}
 
 
+def total_degree(polynomial: Polynomial) -> int:
+    return max((sum(monomial) for monomial in polynomial), default=0)
+
+
+def decode_record(
+    record: Any,
+    variable_count: int,
+    error_prefix: str,
+    errors: list[str],
+) -> Polynomial:
+    if not isinstance(record, dict):
+        errors.append(f"{error_prefix}_record")
+        return {}
+    terms = record.get("terms")
+    if not isinstance(terms, list):
+        errors.append(f"{error_prefix}_terms")
+        return {}
+    try:
+        polynomial = decode_polynomial(terms, variable_count)
+    except (TypeError, ValueError, ZeroDivisionError):
+        errors.append(f"{error_prefix}_encoding")
+        return {}
+    if canonical_hash(terms) != record.get("terms_sha256"):
+        errors.append(f"{error_prefix}_hash")
+    if record.get("term_count") != len(terms):
+        errors.append(f"{error_prefix}_term_count")
+    if record.get("total_degree") != total_degree(polynomial):
+        errors.append(f"{error_prefix}_total_degree")
+    return polynomial
+
+
 def replay(certificate: dict[str, Any]) -> dict[str, Any]:
     variables = certificate.get("variables", [])
     generators = certificate.get("generators", [])
@@ -83,7 +116,7 @@ def replay(certificate: dict[str, Any]) -> dict[str, Any]:
     errors: list[str] = []
     if certificate.get("schema") != "sparse-nullstellensatz-v1":
         errors.append("schema")
-    if not variables or len(set(variables)) != len(variables):
+    if variables != EXPECTED_VARIABLES:
         errors.append("variables")
     if len(generators) != len(multipliers) or not generators:
         errors.append("generator_multiplier_count")
@@ -91,21 +124,40 @@ def replay(certificate: dict[str, Any]) -> dict[str, Any]:
         return {"checked": False, "errors": errors}
 
     variable_count = len(variables)
-    decoded_generators = []
-    decoded_multipliers = []
+    decoded_generators: list[Polynomial] = []
+    decoded_multipliers: list[Polynomial] = []
+    generator_labels = []
     for index, record in enumerate(generators):
-        if canonical_hash(record["terms"]) != record.get("terms_sha256"):
-            errors.append(f"generator_{index}_hash")
-        decoded_generators.append(decode_polynomial(record["terms"], variable_count))
+        label = record.get("label") if isinstance(record, dict) else None
+        if not isinstance(label, str) or not label:
+            errors.append(f"generator_{index}_label")
+        generator_labels.append(label)
+        decoded_generators.append(
+            decode_record(record, variable_count, f"generator_{index}", errors)
+        )
+    if len(set(generator_labels)) != len(generator_labels):
+        errors.append("generator_labels_unique")
     for index, record in enumerate(multipliers):
-        if canonical_hash(record["terms"]) != record.get("terms_sha256"):
-            errors.append(f"multiplier_{index}_hash")
-        decoded_multipliers.append(decode_polynomial(record["terms"], variable_count))
+        expected_label = (
+            f"multiplier:{generator_labels[index]}"
+            if index < len(generator_labels)
+            else None
+        )
+        if not isinstance(record, dict) or record.get("label") != expected_label:
+            errors.append(f"multiplier_{index}_label")
+        decoded_multipliers.append(
+            decode_record(record, variable_count, f"multiplier_{index}", errors)
+        )
 
     target_record = certificate.get("target", {})
-    if canonical_hash(target_record.get("terms", [])) != target_record.get("terms_sha256"):
-        errors.append("target_hash")
-    target = decode_polynomial(target_record.get("terms", []), variable_count)
+    target = decode_record(target_record, variable_count, "target", errors)
+    if (
+        not isinstance(target_record, dict)
+        or target_record.get("label") != "target:one"
+        or target_record.get("terms") != EXPECTED_TARGET_TERMS
+        or target != {(0, 0, 0, 0): Fraction(1)}
+    ):
+        errors.append("target_one")
     total: Polynomial = {}
     for generator, multiplier in zip(decoded_generators, decoded_multipliers):
         total = add(total, multiply(generator, multiplier))
@@ -120,6 +172,11 @@ def replay(certificate: dict[str, Any]) -> dict[str, Any]:
     expected_bundle_hash = certificate.get("generator_bundle_sha256")
     if canonical_hash(bundle) != expected_bundle_hash:
         errors.append("generator_bundle_hash")
+    if "payload_sha256" in certificate:
+        payload_without_hash = dict(certificate)
+        declared_payload_hash = payload_without_hash.pop("payload_sha256")
+        if canonical_hash(payload_without_hash) != declared_payload_hash:
+            errors.append("payload_hash")
     return {
         "schema": certificate.get("schema"),
         "variable_count": variable_count,

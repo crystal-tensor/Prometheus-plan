@@ -1,13 +1,14 @@
-# B9 R201 Bounded Integer Reconstruction and Exact D^44 GCD
+# B9 R201 Bounded Integer Reconstruction and Corrected Domain-Aware GCD
 
 - Date: `2026-10-31`
 - Track: `B9`
-- Status: `characteristic-zero determinants reconstructed; exact common D^44 factor verified`
+- Status: `characteristic-zero determinants reconstructed; QQ and ZZ gcd semantics corrected`
 - CRT modulus bits: `455`
 - Proved uniqueness threshold bits: `427`
 - Characteristic-zero engineering determinants verified: `true`
 - Exact `D^44` divisibility verified: `true`
-- Exact four-minor gcd equals `D^44` up to a unit: `true`
+- Exact four-minor gcd over `QQ` equals `D^44` up to a nonzero rational scalar: `true`
+- Normalized four-minor gcd over `ZZ` equals `452606540887819905926814498816 * D^44` up to sign: `true`
 - Ideal-membership certificate verified: `false`
 - Frozen holdouts executed: `false`
 - Scientific promotion: `false`
@@ -49,10 +50,25 @@ by `D^44` over `ZZ[a,b,c]` with zero remainder:
 | 2 | 96 | 590 | `94fbdc546fa078c435a739021dbbb572eb1175b22964b76cc42889a700aa9a10` | 0 |
 | 3 | 96 | 450 | `d704ec553cee5903c8a44058b5795ab84af74341304ba3486fc727285551d97a` | 0 |
 
-The gcd of the four degree-96 quotients is the unit polynomial `1`; its payload
-hash is `09fd7f6e6c63e50501a1908da4fbe0997357fdc3fd593638e578e4d221140236`.
-Therefore the four characteristic-zero determinants have exact common gcd
-`D^44` up to a unit.
+The raw degree-96 quotients are not primitive over `ZZ[a,b,c]`. Their common
+integer content is
+
+```text
+C = 452606540887819905926814498816 = 2^52 * 3^6 * 13^10.
+```
+
+After dividing each quotient by its own signed integer content, the four
+primitive quotient polynomials have gcd `1`. This distinction matters:
+
+- over `QQ[a,b,c]`, every nonzero rational is a unit, so the determinant gcd is
+  `D^44` up to a nonzero rational scalar;
+- over `ZZ[a,b,c]`, the normalized determinant gcd is `C * D^44` up to sign.
+
+The prior report wording silently applied `.primitive()[1]` and then described
+the result as though the integer content had never existed. The reconstructed
+determinants and exact `D^44` divisions remain valid; this report corrects the
+coefficient-domain interpretation before any ideal-membership or holdout gate
+can move.
 
 ## Claim Boundary
 

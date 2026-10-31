@@ -1,10 +1,9 @@
 {
-  "case_count": 3,
+  "case_count": 10,
   "checked": true,
   "records": [
     {
       "errors": [
-        "multiplier_0_hash",
         "identity"
       ],
       "label": "multiplier_coefficient",
@@ -12,9 +11,7 @@
     },
     {
       "errors": [
-        "generator_0_hash",
-        "identity",
-        "generator_bundle_hash"
+        "identity"
       ],
       "label": "generator_exponent",
       "rejected": true
@@ -25,7 +22,58 @@
       ],
       "label": "bundle_hash",
       "rejected": true
+    },
+    {
+      "errors": [
+        "target_one",
+        "identity"
+      ],
+      "label": "target_zero",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "target_one",
+        "identity"
+      ],
+      "label": "target_arbitrary_constant",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "variables"
+      ],
+      "label": "variable_order",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "identity"
+      ],
+      "label": "empty_multiplier",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "multiplier_0_label"
+      ],
+      "label": "multiplier_label",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "generator_labels_unique"
+      ],
+      "label": "duplicate_generator_label",
+      "rejected": true
+    },
+    {
+      "errors": [
+        "payload_hash"
+      ],
+      "label": "payload_hash",
+      "rejected": true
     }
   ],
-  "rejected_count": 3
+  "rejected_count": 10
 }

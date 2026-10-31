@@ -27,7 +27,13 @@ The engine self-test passes:
 - generator bundle hash: `5c4eaf21310e40cf12cda0d28a3efb44338a35b3a162ac78c3f96cf50f02ff1b`;
 - identity hash: `8cead437cef22243477e6dd55d79c24532b72cb0b5ef23f65d44bf3c1200cf5f`.
 
-Three mutations are rejected: one multiplier coefficient, one generator exponent, and the generator-bundle hash. This validates the transport and replay format. It is not the engineering `J=13/32` certificate.
+Ten mutations are rejected: multiplier coefficient, generator exponent,
+generator-bundle hash, zero target, arbitrary constant target, variable order,
+empty multiplier, multiplier label, duplicate generator label, and payload hash.
+The replay now requires variables exactly `u,a,b,c` and target exactly the
+constant polynomial `1`; it can no longer accept a self-consistent but
+meaningless `0=0` payload. This validates the transport and replay format. It is
+not the engineering `J=13/32` certificate.
 
 This is an engine self-test, not yet the degree-184 engineering certificate.
 

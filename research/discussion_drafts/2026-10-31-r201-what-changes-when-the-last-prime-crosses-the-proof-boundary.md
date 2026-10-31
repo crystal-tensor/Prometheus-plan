@@ -10,7 +10,17 @@ The reconstructed degree-184 determinants contain `8,649 / 4,468 / 4,770 / 2,760
 D^44 = (a^2+b^2+c^2)^44
 ```
 
-with zero remainder. The four degree-96 quotients contain `2,401 / 464 / 590 / 450` terms, and their characteristic-zero gcd is the unit polynomial `1`. Therefore the exact common gcd of the four determinants is `D^44`, up to a unit.
+with zero remainder. The four degree-96 quotients contain `2,401 / 464 / 590 / 450` terms. But an adversarial audit found a subtle coefficient-domain trap: the code had taken the primitive part before describing the gcd.
+
+The raw quotients share integer content
+
+```text
+C = 452606540887819905926814498816 = 2^52 * 3^6 * 13^10.
+```
+
+Their primitive parts have gcd `1`. Therefore the exact determinant gcd is `D^44` up to a nonzero rational scalar over `QQ[a,b,c]`, while the normalized gcd over `ZZ[a,b,c]` is `C * D^44` up to sign.
+
+That correction suggests a sharper heuristic question: how many research pipelines accidentally turn a nonzero integer into a “unit” because the implementation silently changes coefficient domains?
 
 This raises the next research question: is the hard part now computing an ideal-membership certificate, or designing an independent checker that cannot accidentally share the same construction assumptions as the certificate generator?
 

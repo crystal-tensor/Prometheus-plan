@@ -5916,8 +5916,8 @@ def audit_b9_r201_certificate_readiness(
         or replay.get("checked") is not True
         or replay.get("errors") != []
         or mutations.get("checked") is not True
-        or mutations.get("case_count") != 3
-        or mutations.get("rejected_count") != 3
+        or mutations.get("case_count") != 10
+        or mutations.get("rejected_count") != 10
     ):
         errors.append("B9 R201 certificate engine self-test mismatch")
 
@@ -7302,7 +7302,8 @@ def audit_b9_r201_integer_reconstruction(
         "evidence_integrity_complete": False,
         "integer_reconstruction_uniqueness_proved": False,
         "characteristic_zero_D44_divisibility_verified": False,
-        "characteristic_zero_gcd_exactly_D44_verified": False,
+        "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar": False,
+        "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign": False,
         "ideal_membership_certificate_verified": False,
         "frozen_holdouts_executed": False,
         "new_credit_delta": 0,
@@ -7393,6 +7394,18 @@ def audit_b9_r201_integer_reconstruction(
         "94fbdc546fa078c435a739021dbbb572eb1175b22964b76cc42889a700aa9a10",
         "d704ec553cee5903c8a44058b5795ab84af74341304ba3486fc727285551d97a",
     ]
+    expected_quotient_contents = [
+        "-168204400225607468962404125837617291233067008",
+        "-165107050559914626101983997792607439101011951616",
+        "-509589662221958722536987647508047651546333184",
+        "661674685680547899783603929127133901224520221458432",
+    ]
+    expected_primitive_quotient_hashes = [
+        "1b9d1b67e5457aa4311dfe1c98b6ed14317da9c194ae31e73b219960422600cc",
+        "decf464d2f5809589649166880f1dc39fd2b778d5056d09f54ce00d3ccd9ddb4",
+        "ab4fbefc1292c2df00c19fcd62ed0c5df5df21928a3e10c62ca6f7ba80fbf95f",
+        "f1bfb86d5e646e5b2191b6d91ad7e9909cc37237ede781989754104f90fadcd9",
+    ]
     zero_hash = "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     rows = result.get("rows", [])
     row_mismatch = len(rows) != 4
@@ -7452,6 +7465,13 @@ def audit_b9_r201_integer_reconstruction(
             or row.get("quotient_canonical_terms_sha256")
             != expected_quotient_hashes[index]
             or canonical_hash(quotient_terms) != expected_quotient_hashes[index]
+            or row.get("quotient_integer_content")
+            != expected_quotient_contents[index]
+            or row.get("primitive_quotient_total_degree") != 96
+            or row.get("primitive_quotient_term_count")
+            != expected_quotient_terms[index]
+            or row.get("primitive_quotient_canonical_terms_sha256")
+            != expected_primitive_quotient_hashes[index]
             or row.get("remainder_term_count") != 0
             or row.get("remainder_canonical_terms_sha256") != zero_hash
             or canonical_hash(remainder_terms) != zero_hash
@@ -7460,14 +7480,23 @@ def audit_b9_r201_integer_reconstruction(
     if row_mismatch:
         errors.append("B9 R201 integer reconstruction row mismatch")
 
-    quotient_gcd_terms = result.get("quotient_gcd_canonical_terms", [])
-    quotient_gcd_hash = (
+    primitive_quotient_gcd_terms = result.get(
+        "primitive_quotient_gcd_canonical_terms", []
+    )
+    primitive_quotient_gcd_hash = (
         "09fd7f6e6c63e50501a1908da4fbe0997357fdc3fd593638e578e4d221140236"
     )
+    quotient_gcd_over_ZZ_terms = result.get(
+        "quotient_gcd_over_ZZ_canonical_terms", []
+    )
+    quotient_gcd_over_ZZ_hash = (
+        "47806ffc9ad234470a8121f74c99df26555e6b747d94674b36ffe559b7ee16e8"
+    )
+    common_integer_content = "452606540887819905926814498816"
     if (
         result.get("method")
-        != "b9_r201_bounded_integer_reconstruction_and_D44_division_v1"
-        or result.get("version") != "0.1.0"
+        != "b9_r201_bounded_integer_reconstruction_and_D44_division_v2"
+        or result.get("version") != "0.2.0"
         or result.get("scope")
         != "public_R201_bounded_integer_reconstruction_and_exact_D44_division_only"
         or result.get("coupling") != "13/32"
@@ -7488,12 +7517,33 @@ def audit_b9_r201_integer_reconstruction(
         or result.get("characteristic_zero_engineering_determinants_verified")
         is not True
         or result.get("characteristic_zero_D44_divisibility_verified") is not True
-        or result.get("quotient_gcd_is_unit") is not True
-        or result.get("quotient_gcd_total_degree") != 0
-        or result.get("quotient_gcd_term_count") != 1
-        or result.get("quotient_gcd_canonical_terms_sha256") != quotient_gcd_hash
-        or canonical_hash(quotient_gcd_terms) != quotient_gcd_hash
-        or result.get("characteristic_zero_gcd_exactly_D44_verified") is not True
+        or result.get("quotient_common_integer_content")
+        != common_integer_content
+        or result.get("quotient_common_integer_content_factorization")
+        != {"2": 52, "3": 6, "13": 10}
+        or result.get("quotient_gcd_over_ZZ_matches_common_integer_content")
+        is not True
+        or result.get("quotient_gcd_over_ZZ_total_degree") != 0
+        or result.get("quotient_gcd_over_ZZ_term_count") != 1
+        or result.get("quotient_gcd_over_ZZ_canonical_terms_sha256")
+        != quotient_gcd_over_ZZ_hash
+        or canonical_hash(quotient_gcd_over_ZZ_terms)
+        != quotient_gcd_over_ZZ_hash
+        or result.get("primitive_quotient_gcd_is_unit") is not True
+        or result.get("primitive_quotient_gcd_total_degree") != 0
+        or result.get("primitive_quotient_gcd_term_count") != 1
+        or result.get("primitive_quotient_gcd_canonical_terms_sha256")
+        != primitive_quotient_gcd_hash
+        or canonical_hash(primitive_quotient_gcd_terms)
+        != primitive_quotient_gcd_hash
+        or result.get(
+            "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar"
+        )
+        is not True
+        or result.get(
+            "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign"
+        )
+        is not True
         or result.get("ideal_membership_certificate_verified") is not False
         or result.get("frozen_holdouts_executed") is not False
         or result.get("scientific_promotion_accepted") is not False
@@ -7511,8 +7561,8 @@ def audit_b9_r201_integer_reconstruction(
         errors.append("B9 R201 integer reconstruction source binding mismatch")
 
     manifest_expectations = {
-        "status": "characteristic_zero_integer_determinants_and_exact_D44_gcd_verified",
-        "method": "b9_r201_bounded_integer_reconstruction_and_D44_division_v1",
+        "status": "characteristic_zero_integer_determinants_and_domain_aware_gcd_verified",
+        "method": "b9_r201_bounded_integer_reconstruction_and_D44_division_v2",
         "source": "r201_crt_shard_replay_v0",
         "CRT_prime_count": 16,
         "CRT_modulus_bit_length": 455,
@@ -7528,11 +7578,16 @@ def audit_b9_r201_integer_reconstruction(
         "all_reconstructed_coefficients_within_selected_bounds": True,
         "characteristic_zero_engineering_determinants_verified": True,
         "characteristic_zero_D44_divisibility_verified": True,
-        "quotient_gcd_is_unit": True,
-        "quotient_gcd_total_degree": 0,
-        "quotient_gcd_term_count": 1,
-        "quotient_gcd_canonical_terms_sha256": quotient_gcd_hash,
-        "characteristic_zero_gcd_exactly_D44_verified": True,
+        "quotient_common_integer_content": common_integer_content,
+        "quotient_common_integer_content_factorization": {"2": 52, "3": 6, "13": 10},
+        "primitive_quotient_gcd_is_unit": True,
+        "primitive_quotient_gcd_total_degree": 0,
+        "primitive_quotient_gcd_term_count": 1,
+        "primitive_quotient_gcd_canonical_terms_sha256": primitive_quotient_gcd_hash,
+        "quotient_gcd_over_ZZ_matches_common_integer_content": True,
+        "quotient_gcd_over_ZZ_canonical_terms_sha256": quotient_gcd_over_ZZ_hash,
+        "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar": True,
+        "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign": True,
         "ideal_membership_certificate_verified": False,
         "frozen_holdouts_executed": False,
         "scientific_promotion_accepted": False,
@@ -7548,7 +7603,8 @@ def audit_b9_r201_integer_reconstruction(
         "CRT modulus bits: `455`",
         "All `1,101,120/1,101,120` coefficient-slot-prime round trips pass",
         "by `D^44` over `ZZ[a,b,c]` with zero remainder",
-        "gcd of the four degree-96 quotients is the unit polynomial `1`",
+        "primitive quotient polynomials have gcd `1`",
+        "normalized determinant gcd is `C * D^44` up to sign",
         "Ideal-membership certificate verified: `false`",
         "New credit: `0`",
     )
@@ -7558,7 +7614,8 @@ def audit_b9_r201_integer_reconstruction(
         "What changes when the last prime crosses the proof boundary?",
         "The modulus reaches 455 bits",
         "Each divides exactly in `ZZ[a,b,c]`",
-        "characteristic-zero gcd is the unit polynomial `1`",
+        "primitive parts have gcd `1`",
+        "normalized gcd over `ZZ[a,b,c]` is `C * D^44` up to sign",
         "frozen `J=127/128,131/128` couplings remain sealed",
     )
     if any(phrase not in discussion for phrase in discussion_phrases):
@@ -7583,8 +7640,14 @@ def audit_b9_r201_integer_reconstruction(
         "characteristic_zero_D44_divisibility_verified": result.get(
             "characteristic_zero_D44_divisibility_verified"
         ),
-        "characteristic_zero_gcd_exactly_D44_verified": result.get(
-            "characteristic_zero_gcd_exactly_D44_verified"
+        "quotient_common_integer_content": result.get(
+            "quotient_common_integer_content"
+        ),
+        "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar": result.get(
+            "characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar"
+        ),
+        "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign": result.get(
+            "characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign"
         ),
         "ideal_membership_certificate_verified": result.get(
             "ideal_membership_certificate_verified"
@@ -7596,6 +7659,239 @@ def audit_b9_r201_integer_reconstruction(
         "new_credit_delta": result.get("new_credit_delta"),
         "evidence_integrity_complete": not any(
             message.startswith("B9 R201 integer reconstruction")
+            for message in errors
+        ),
+    }
+
+
+def audit_b9_r202_modular_ideal_preflight(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the controlled two-prime R202 saturated-ideal classification."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "classified_prime_count": 0,
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 0,
+        "rational_nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R202 modular ideal preflight")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    paths = {
+        "preflight tool": resolve(manifest_entry.get("preflight_tool")),
+        "preflight result": resolve(manifest_entry.get("preflight_result")),
+        "markdown report": resolve(manifest_entry.get("markdown_report")),
+        "discussion draft": resolve(manifest_entry.get("discussion_draft")),
+    }
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(f"B9 R202 modular ideal preflight {label} missing: {path}")
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {
+        "preflight_tool_sha256": digest(paths["preflight tool"]),
+        "preflight_result_sha256": digest(paths["preflight result"]),
+        "markdown_report_sha256": digest(paths["markdown report"]),
+        "discussion_draft_sha256": digest(paths["discussion draft"]),
+    }
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R202 modular ideal preflight {field} mismatch")
+
+    result = json.loads(read(paths["preflight result"]))
+    report = read(paths["markdown report"])
+    discussion = read(paths["discussion draft"])
+    source_path = root / "results/B9_R201_integer_reconstruction_v0.json"
+    expected_primes = [1000003, 536870723]
+    expected_primitive_hashes = [
+        "1b9d1b67e5457aa4311dfe1c98b6ed14317da9c194ae31e73b219960422600cc",
+        "decf464d2f5809589649166880f1dc39fd2b778d5056d09f54ce00d3ccd9ddb4",
+        "ab4fbefc1292c2df00c19fcd62ed0c5df5df21928a3e10c62ca6f7ba80fbf95f",
+        "f1bfb86d5e646e5b2191b6d91ad7e9909cc37237ede781989754104f90fadcd9",
+    ]
+    expected_basis_hash = (
+        "b2788d887a92f14a9620d6055bf4a3a3e8966810f047675a2d5881f91bbb236a"
+    )
+    prime_rows = result.get("prime_rows", [])
+    row_mismatch = len(prime_rows) != 2
+    for index, row in enumerate(prime_rows):
+        if index >= 2:
+            row_mismatch = True
+            continue
+        unit_control = row.get("unit_control", {})
+        nonunit_control = row.get("nonunit_control", {})
+        engineering = row.get("engineering", {})
+        if (
+            row.get("prime") != expected_primes[index]
+            or row.get("timed_out") is not False
+            or row.get("memory_limit_exceeded") is not False
+            or row.get("termination_reason") != "completed"
+            or row.get("timeout_seconds") != 600
+            or row.get("max_memory_mib") != 8192
+            or row.get("memory_limit_mode") != "RSS_watchdog"
+            or row.get("algorithm") != "slimgb"
+            or row.get("returncode") != 0
+            or row.get("controls_checked") is not True
+            or row.get("engineering_classified") is not True
+            or row.get("checked") is not True
+            or unit_control.get("unit_ideal_detected") is not True
+            or unit_control.get("unit_membership_remainder") != "0"
+            or nonunit_control.get("unit_ideal_detected") is not False
+            or nonunit_control.get("unit_membership_remainder") != "1"
+            or engineering.get("basis_size") != 43
+            or engineering.get("unit_membership_remainder") != "1"
+            or engineering.get("unit_ideal_detected") is not False
+            or engineering.get("basis_summary_sha256") != expected_basis_hash
+        ):
+            row_mismatch = True
+    if row_mismatch:
+        errors.append("B9 R202 modular ideal preflight prime-row mismatch")
+
+    stable_payload = result.get("stable_classification_payload", {})
+    payload_without_hash = dict(result)
+    payload_without_hash.pop("payload_sha256", None)
+    result_mismatch = (
+        result.get("method") != "b9_r202_modular_saturated_ideal_preflight_v2"
+        or result.get("version") != "0.3.0"
+        or result.get("scope") != "public_R201_modular_preflight_only"
+        or result.get("coupling") != "13/32"
+        or result.get("n") != 4
+        or result.get("source_integer_reconstruction_sha256")
+        != digest(source_path)
+        or result.get("source_primitive_quotient_sha256")
+        != expected_primitive_hashes
+        or result.get("source_quotient_term_counts") != [2401, 464, 590, 450]
+        or result.get("generator_normalization")
+        != "primitive_integer_quotients; QQ units removed"
+        or result.get("saturation_equation") != "1-u*(a^2+b^2+c^2)"
+        or result.get("coefficient_domain") != "finite_fields_only"
+        or result.get("monomial_order") != "dp(u,a,b,c)"
+        or result.get("standard_basis_algorithm") != "slimgb"
+        or result.get("primes") != expected_primes
+        or result.get("per_prime_timeout_seconds") != 600
+        or result.get("per_prime_max_memory_mib") != 8192
+        or result.get("classified_prime_count") != 2
+        or result.get("unit_ideal_prime_count") != 0
+        or result.get("nonunit_ideal_prime_count") != 2
+        or result.get("all_classified_primes_detect_unit_ideal") is not False
+        or result.get("all_classified_primes_detect_nonunit_ideal") is not True
+        or result.get("four_minor_unit_certificate_route_supported") is not False
+        or result.get("preflight_conclusion")
+        != "two_prime_nonunit_counterevidence_to_four_minor_unit_certificate"
+        or canonical_hash(stable_payload)
+        != result.get("stable_classification_sha256")
+        or canonical_hash(payload_without_hash) != result.get("payload_sha256")
+        or result.get("execution_complete") is not True
+        or result.get("modular_preflight_checked") is not True
+        or result.get("rational_nullstellensatz_certificate_verified") is not False
+        or result.get("ideal_membership_certificate_verified") is not False
+        or result.get("isolated_presource_replay_complete") is not False
+        or result.get("frozen_holdouts_executed") is not False
+        or result.get("scientific_promotion_accepted") is not False
+        or result.get("new_credit_delta") != 0
+        or result.get("checked") is not True
+    )
+    if result_mismatch:
+        errors.append("B9 R202 modular ideal preflight result mismatch")
+
+    manifest_expectations = {
+        "status": "two_prime_saturated_ideal_nonunit_counterevidence",
+        "method": "b9_r202_modular_saturated_ideal_preflight_v2",
+        "source": "r201_integer_reconstruction_v0",
+        "primes": expected_primes,
+        "classified_prime_count": 2,
+        "unit_ideal_prime_count": 0,
+        "nonunit_ideal_prime_count": 2,
+        "engineering_basis_sizes": [43, 43],
+        "engineering_unit_membership_remainders": ["1", "1"],
+        "controls_checked_count": 2,
+        "four_minor_unit_certificate_route_supported": False,
+        "rational_nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+        "stable_classification_sha256": result.get(
+            "stable_classification_sha256"
+        ),
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in manifest_expectations.items()
+    ):
+        errors.append("B9 R202 modular ideal preflight manifest mismatch")
+
+    report_phrases = (
+        "This is a stricter question than polynomial gcd.",
+        "| 1,000,003 | pass | 43 | 1 | no |",
+        "| 536,870,723 | pass | 43 | 1 | no |",
+        "current four-minor unit-certificate route is not supported",
+        "does **not** prove",
+        "`J=127/128,131/128` holdouts remain unopened",
+    )
+    if any(phrase not in report for phrase in report_phrases):
+        errors.append("B9 R202 modular ideal preflight report boundary incomplete")
+    discussion_phrases = (
+        "Can gcd one still hide a common projective zero?",
+        "produced a 43-element standard basis",
+        "`reduce(1,G)=1`",
+        "does not yet prove a rational or real rank-drop point",
+        "no frozen holdout was executed",
+    )
+    if any(phrase not in discussion for phrase in discussion_phrases):
+        errors.append(
+            "B9 R202 modular ideal preflight discussion draft incomplete"
+        )
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "classified_prime_count": result.get("classified_prime_count"),
+        "unit_ideal_prime_count": result.get("unit_ideal_prime_count"),
+        "nonunit_ideal_prime_count": result.get("nonunit_ideal_prime_count"),
+        "engineering_basis_sizes": [
+            row.get("engineering", {}).get("basis_size") for row in prime_rows
+        ],
+        "engineering_unit_membership_remainders": [
+            row.get("engineering", {}).get("unit_membership_remainder")
+            for row in prime_rows
+        ],
+        "stable_classification_sha256": result.get(
+            "stable_classification_sha256"
+        ),
+        "four_minor_unit_certificate_route_supported": result.get(
+            "four_minor_unit_certificate_route_supported"
+        ),
+        "rational_nullstellensatz_certificate_verified": result.get(
+            "rational_nullstellensatz_certificate_verified"
+        ),
+        "frozen_holdouts_executed": result.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": result.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": result.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R202 modular ideal preflight")
             for message in errors
         ),
     }
@@ -45725,6 +46021,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r202_modular_ideal_preflight = b9_results.get(
+        "r202_modular_ideal_preflight_v0"
+    )
+    b9_r202_modular_ideal_preflight_status = (
+        audit_b9_r202_modular_ideal_preflight(
+            root,
+            b9_r202_modular_ideal_preflight,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -56140,6 +56447,7 @@ def audit(root: Path) -> dict:
             "r201_determinant_coefficient_bound": b9_r201_determinant_bound_status,
             "r201_crt_shard_replay": b9_r201_crt_shard_status,
             "r201_integer_reconstruction": b9_r201_integer_reconstruction_status,
+            "r202_modular_ideal_preflight": b9_r202_modular_ideal_preflight_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
@@ -60419,8 +60727,12 @@ def markdown_report(report: dict) -> str:
             f"- R201 CRT residues unique / CRT complete / characteristic-zero D44 / holdouts executed: {report['b9']['r201_crt_shard_replay'].get('partial_CRT_residues_are_unique_integer_coefficients')} / {report['b9']['r201_crt_shard_replay'].get('bounded_CRT_integer_reconstruction_complete')} / {report['b9']['r201_crt_shard_replay'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_crt_shard_replay'].get('frozen_holdouts_executed')}",
             f"- R201 integer reconstruction status: {report['b9']['r201_integer_reconstruction'].get('status')}",
             f"- R201 integer reconstruction primes / modulus bits / required bits: {report['b9']['r201_integer_reconstruction'].get('CRT_prime_count')} / {report['b9']['r201_integer_reconstruction'].get('CRT_modulus_bit_length')} / {report['b9']['r201_integer_reconstruction'].get('twice_maximum_bound_bit_length')}",
-            f"- R201 integer uniqueness / determinants / D44 / exact GCD: {report['b9']['r201_integer_reconstruction'].get('integer_reconstruction_uniqueness_proved')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_engineering_determinants_verified')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_gcd_exactly_D44_verified')}",
+            f"- R201 integer uniqueness / determinants / D44 / QQ GCD / ZZ GCD: {report['b9']['r201_integer_reconstruction'].get('integer_reconstruction_uniqueness_proved')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_engineering_determinants_verified')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_D44_divisibility_verified')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar')} / {report['b9']['r201_integer_reconstruction'].get('characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign')}",
             f"- R201 ideal membership / holdouts / promotion / credit: {report['b9']['r201_integer_reconstruction'].get('ideal_membership_certificate_verified')} / {report['b9']['r201_integer_reconstruction'].get('frozen_holdouts_executed')} / {report['b9']['r201_integer_reconstruction'].get('scientific_promotion_accepted')} / {report['b9']['r201_integer_reconstruction'].get('new_credit_delta')}",
+            f"- R202 modular ideal preflight status: {report['b9']['r202_modular_ideal_preflight'].get('status')}",
+            f"- R202 classified / unit / nonunit primes: {report['b9']['r202_modular_ideal_preflight'].get('classified_prime_count')} / {report['b9']['r202_modular_ideal_preflight'].get('unit_ideal_prime_count')} / {report['b9']['r202_modular_ideal_preflight'].get('nonunit_ideal_prime_count')}",
+            f"- R202 engineering basis sizes / unit remainders: {report['b9']['r202_modular_ideal_preflight'].get('engineering_basis_sizes')} / {report['b9']['r202_modular_ideal_preflight'].get('engineering_unit_membership_remainders')}",
+            f"- R202 four-minor unit route / rational certificate / holdouts / promotion / credit: {report['b9']['r202_modular_ideal_preflight'].get('four_minor_unit_certificate_route_supported')} / {report['b9']['r202_modular_ideal_preflight'].get('rational_nullstellensatz_certificate_verified')} / {report['b9']['r202_modular_ideal_preflight'].get('frozen_holdouts_executed')} / {report['b9']['r202_modular_ideal_preflight'].get('scientific_promotion_accepted')} / {report['b9']['r202_modular_ideal_preflight'].get('new_credit_delta')}",
             "",
             "## B10 BQP Boundary Graph Status",
             "",

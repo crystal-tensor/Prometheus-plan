@@ -2670,7 +2670,7 @@ Overall audit: PASS
 - R201 full-rank anchors / independent design seal / execution allowed / holdouts executed: 8 / True / False / False
 - R201 accepted rows / promotion / credit: 0 / False / 0
 - R201 certificate readiness status: certificate_infrastructure_dense_control_and_representation_binding_verified_engineering_certificate_incomplete
-- R201 certificate replay / rejected mutations: True / 3
+- R201 certificate replay / rejected mutations: True / 10
 - R201 dense audit matrix / anchors / source fields: 256x37 / 4 / []
 - R201 dense audit frozen minors: 4
 - R201 dense positive control operator rank / commutator rank / nullity / exact kernels: 79 / 42 / 37 / 37
@@ -2691,10 +2691,14 @@ Overall audit: PASS
 - R201 CRT shard completed / remaining primes and artifacts: 14 / 0 / 56 / 0
 - R201 CRT shard modulus / required bits / point replays / coefficient roundtrips: 455 / 427 / 320 / 1101120
 - R201 CRT residues unique / CRT complete / characteristic-zero D44 / holdouts executed: True / True / False / False
-- R201 integer reconstruction status: characteristic_zero_integer_determinants_and_exact_D44_gcd_verified
+- R201 integer reconstruction status: characteristic_zero_integer_determinants_and_domain_aware_gcd_verified
 - R201 integer reconstruction primes / modulus bits / required bits: 16 / 455 / 427
-- R201 integer uniqueness / determinants / D44 / exact GCD: True / True / True / True
+- R201 integer uniqueness / determinants / D44 / QQ GCD / ZZ GCD: True / True / True / True / True
 - R201 ideal membership / holdouts / promotion / credit: False / False / False / 0
+- R202 modular ideal preflight status: two_prime_saturated_ideal_nonunit_counterevidence
+- R202 classified / unit / nonunit primes: 2 / 0 / 2
+- R202 engineering basis sizes / unit remainders: [43, 43] / ['1', '1']
+- R202 four-minor unit route / rational certificate / holdouts / promotion / credit: False / False / False / False / 0
 
 ## B10 BQP Boundary Graph Status
 

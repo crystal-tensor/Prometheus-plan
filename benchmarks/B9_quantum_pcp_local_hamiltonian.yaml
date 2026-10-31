@@ -1153,13 +1153,13 @@ current_results:
     status: certificate_infrastructure_dense_control_and_representation_binding_verified_engineering_certificate_incomplete
     method: b9_r201_certificate_readiness_and_dense_audit_reset_v0
     source: r201_projective_patch_preregistration_v0
-    certificate_replay_tool_sha256: 8c6a4d7ea0b6b6c0703d77441594ceec72fa93350ba28158413aa854be00676e
-    certificate_emitter_tool_sha256: ab7d027ca71af228a031e56ce7adc51d4940c846a29ff785752cc1ca13630e9f
+    certificate_replay_tool_sha256: 499a681551768ca1fc89786f21051e3197defe1c0a9bb32dc240a061d61d18a2
+    certificate_emitter_tool_sha256: e966cd5475c4c92c3cc2c323299f43360f53359f6d27577d335141b3e9e70435
     presource_manifest_tool_sha256: ff89d03d723ad500b856636f2ec359e4b1b1e497abe0ee0a1330edca541346fa
     singular_minor_bridge_sha256: 0db5eca792cf9e96e3f14e1da7e145cf3149037cac967dd6ec5756c0254469cd
     source_dense_binding_tool_sha256: 7bfff30e7fd8f362ff465f3c485d324784be63f362bc7a931865a2e2b7842532
-    certificate_selftest_sha256: 6f1fb791bd9675c6314f6ab69bdbf2623bc588fa67d765d8f722bbb1b2eab6c2
-    certificate_mutations_sha256: bd4e8653b1b4b091aea25bc383cddb43708d0e68611737d1d77547ce25d6fcd2
+    certificate_selftest_sha256: 0dc8564b806e7b68b72542bd7528b0108981164803b50afb8e66f675986c1212
+    certificate_mutations_sha256: 881e6144ba796b3d1a0e1c5717c4757d0923067599a9e858cb54de1453706f21
     certificate_replay_sha256: e7891f6d703f657f2a30b8409df27f366c1a6ebd0978143e4dfb8cf237ff281a
     presource_manifest_sha256: 73d6e0c2b0e8c4049a8d4f672fc2657e6c41a0d18bc7a66c29bde53230136309
     singular_modular_minor0_sha256: 2faae4da4f7f6f13b53e4321ae8cbfdc223d3ea7bc07a0ed7f636c9c91afb2ce
@@ -1169,8 +1169,8 @@ current_results:
     certificate_selftest_generator_count: 3
     certificate_selftest_generator_term_count: 6
     certificate_selftest_multiplier_term_count: 3
-    certificate_mutation_case_count: 3
-    certificate_mutation_rejected_count: 3
+    certificate_mutation_case_count: 10
+    certificate_mutation_rejected_count: 10
     dense_engineering_matrix_rows: 256
     dense_engineering_candidate_columns: 37
     dense_engineering_nonzero_count: 9472
@@ -1361,7 +1361,7 @@ current_results:
     replay_tool_sha256: 91396e2d86cbbfe010eceb39c19f4c0890832f5aba370fbbede142609ecb4462
     replay_result_sha256: 59eb768fbdc2e2830a2fd5b0692533f560f0307f519c6c972305dc05bacc9eff
     markdown_report_sha256: e54bb97418bf1cc5b6313808dfeaf77e3a5beec7ef5d63713489e75944cf22e0
-    discussion_draft_sha256: e06b9bc3e799d5015dc2735a3666193b01d64d585d27ef0fad3ec2d05bcd6a71
+    discussion_draft_sha256: 5c14fee20101a4a46f0dce1624e9a0b2e7f84ae2c7913bda12238fc25fe204d8
     artifact_sha256:
       minor0_mod536870909: 4be45712c2a8f060fc4f0395a8da24cce99c516e394f0c19226494321f6b690c
       minor1_mod536870909: 949fce6c4d6190b6b3726bc8c740e1dddb6025a80186713ba805f5670923cc24
@@ -1481,8 +1481,8 @@ current_results:
       minor2_mod536870717: ../results/B9_R201_singular_minor2_mod536870717_v0.json
       minor3_mod536870717: ../results/B9_R201_singular_minor3_mod536870717_v0.json
   r201_integer_reconstruction_v0:
-    status: characteristic_zero_integer_determinants_and_exact_D44_gcd_verified
-    method: b9_r201_bounded_integer_reconstruction_and_D44_division_v1
+    status: characteristic_zero_integer_determinants_and_domain_aware_gcd_verified
+    method: b9_r201_bounded_integer_reconstruction_and_D44_division_v2
     source: r201_crt_shard_replay_v0
     CRT_prime_count: 16
     CRT_modulus_bit_length: 455
@@ -1498,23 +1498,53 @@ current_results:
     all_reconstructed_coefficients_within_selected_bounds: true
     characteristic_zero_engineering_determinants_verified: true
     characteristic_zero_D44_divisibility_verified: true
-    quotient_gcd_is_unit: true
-    quotient_gcd_total_degree: 0
-    quotient_gcd_term_count: 1
-    quotient_gcd_canonical_terms_sha256: 09fd7f6e6c63e50501a1908da4fbe0997357fdc3fd593638e578e4d221140236
-    characteristic_zero_gcd_exactly_D44_verified: true
+    quotient_common_integer_content: "452606540887819905926814498816"
+    quotient_common_integer_content_factorization: {"2": 52, "3": 6, "13": 10}
+    primitive_quotient_gcd_is_unit: true
+    primitive_quotient_gcd_total_degree: 0
+    primitive_quotient_gcd_term_count: 1
+    primitive_quotient_gcd_canonical_terms_sha256: 09fd7f6e6c63e50501a1908da4fbe0997357fdc3fd593638e578e4d221140236
+    quotient_gcd_over_ZZ_matches_common_integer_content: true
+    quotient_gcd_over_ZZ_canonical_terms_sha256: 47806ffc9ad234470a8121f74c99df26555e6b747d94674b36ffe559b7ee16e8
+    characteristic_zero_gcd_over_QQ_exactly_D44_up_to_nonzero_rational_scalar: true
+    characteristic_zero_gcd_over_ZZ_exactly_common_content_times_D44_up_to_sign: true
     ideal_membership_certificate_verified: false
     frozen_holdouts_executed: false
     scientific_promotion_accepted: false
     new_credit_delta: 0
-    reconstruction_tool_sha256: bfcdcae62d88182a266c387b28b0f021dc92e0c48cdc96eaed0b3f7d52e9c6e4
-    reconstruction_result_sha256: f9d988da2b3aa4072a027bb0981adfc7894def761a8d9a555db345388fb7531d
-    markdown_report_sha256: e32a482dc4ece4f61a6518fd56600f12da6ab0feef616fc9e864fa3fd3ce5ab8
-    discussion_draft_sha256: e06b9bc3e799d5015dc2735a3666193b01d64d585d27ef0fad3ec2d05bcd6a71
+    reconstruction_tool_sha256: 6ab6851c9d4878beaf332ac96b1f514c56b291d471f110115e73a48c476bf19d
+    reconstruction_result_sha256: cae14a8e2dca71298ffb342bc14fca3d047f232d1b4ae68a7af692863100f3f0
+    markdown_report_sha256: 988428172082a80c0c8867a1f2d70cfea0a5c3b6e998b22af5d8a9065b3ea68f
+    discussion_draft_sha256: 5c14fee20101a4a46f0dce1624e9a0b2e7f84ae2c7913bda12238fc25fe204d8
     reconstruction_tool: ../tools/b9_r201_integer_reconstruction.py
     reconstruction_result: ../results/B9_R201_integer_reconstruction_v0.json
     markdown_report: ../research/B9_R201_integer_reconstruction.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r201-what-changes-when-the-last-prime-crosses-the-proof-boundary.md
+  r202_modular_ideal_preflight_v0:
+    status: two_prime_saturated_ideal_nonunit_counterevidence
+    method: b9_r202_modular_saturated_ideal_preflight_v2
+    source: r201_integer_reconstruction_v0
+    primes: [1000003, 536870723]
+    classified_prime_count: 2
+    unit_ideal_prime_count: 0
+    nonunit_ideal_prime_count: 2
+    engineering_basis_sizes: [43, 43]
+    engineering_unit_membership_remainders: ["1", "1"]
+    controls_checked_count: 2
+    four_minor_unit_certificate_route_supported: false
+    rational_nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    stable_classification_sha256: 38dfd1cb7d7592740c24bf9fb683212f75773de54e34d269703faa943ea442a1
+    preflight_tool_sha256: 104e17405c6c77de993f16eb3e1e32efcf7430101179ac55c134fd959276b300
+    preflight_result_sha256: 43602645ff78e9b07b73c8db66de90b3d5c1935e6318fc46aef0397c9d4016c1
+    markdown_report_sha256: 201bea6ed20fd9fbe945212f187fb0cfdac6826e50019e53e1e655eab4b57f7f
+    discussion_draft_sha256: 981eb0a45076f0ec67c268be525c4dad563795ce7529a50ed044ec5a49198ff0
+    preflight_tool: ../tools/b9_r202_modular_ideal_preflight.py
+    preflight_result: ../results/B9_R202_modular_ideal_preflight_v0.json
+    markdown_report: ../research/B9_R202_modular_ideal_preflight.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r202-can-gcd-one-still-hide-a-common-zero.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1551,4 +1581,5 @@ current_results:
   r200_bloch_atlas_stress: ../tools/b9_r200_bloch_atlas_stress.py
   r200_independent_audit: ../tools/b9_r200_independent_audit.py
   r200_integrated_adjudication: ../tools/b9_r200_integrated_adjudication.py
+  r202_modular_ideal_preflight: ../tools/b9_r202_modular_ideal_preflight.py
   prototype_notes: ../research/B9_prototype_notes.md

@@ -81,7 +81,8 @@ Current evidence includes:
 
 The latest R201 readiness update adds a sparse exact ideal-membership transport
 and a Python-standard-library replay verifier. The engine self-test passes with
-three generators and rejects coefficient, exponent, and bundle-hash mutations.
+three generators and rejects ten targeted mutations, including zero or
+arbitrary targets, variable-order drift, label drift, and payload corruption.
 Adversarial review also found that the old post-result auditor could let a
 source-shaped zero-minor row determine its own rebuild workload. That path is
 therefore not accepted as final independence.
@@ -147,8 +148,10 @@ degree-184 determinants over `ZZ[a,b,c]`. Their observed maximum coefficient
 sizes are 276, 294, 291, and 250 bits, all below the independently proved
 423/425/426/402-bit bounds. Each determinant divides exactly by
 `(a^2+b^2+c^2)^44` with zero remainder; the degree-96 quotients have
-2,401/464/590/450 terms and gcd 1. Thus the exact characteristic-zero common
-gcd of the four determinants is `D^44` up to a unit. The ideal-membership
+2,401/464/590/450 terms, and their primitive parts have gcd 1. Thus the exact
+common gcd over `QQ[a,b,c]` is `D^44` up to nonzero rational scale; over
+`ZZ[a,b,c]`, the normalized gcd retains the shared content
+`2^52 * 3^6 * 13^10`. The ideal-membership
 certificate, isolated pre-source reproduction, and frozen holdouts remain open.
 This is certificate infrastructure and an audit correction, not a continuous
 full-rank result, Quantum PCP or NLTS result, BQP separation, hardware result,
@@ -526,10 +529,27 @@ evaluations. All 64 modular artifacts preserve the frozen supports, and all
 `1,101,120/1,101,120` coefficient-slot-prime round trips pass. The 455-bit CRT
 modulus exceeds the proved 427-bit uniqueness threshold. Bounded reconstruction
 therefore recovers the four degree-184 determinants over `ZZ[a,b,c]`; each
-divides exactly by `D^44`, and the four degree-96 quotients have gcd 1. The
-exact characteristic-zero four-minor gcd is consequently `D^44` up to a unit.
-The ideal-membership certificate, isolated pre-source reproduction, holdout
+divides exactly by `D^44`. After removing each quotient's integer content, the
+four primitive degree-96 quotients have gcd 1. Consequently, over `QQ[a,b,c]`
+the four-minor gcd is `D^44` up to a nonzero rational scalar; over `ZZ[a,b,c]`
+the normalized gcd is
+`452606540887819905926814498816 * D^44 = 2^52 * 3^6 * 13^10 * D^44`, up to
+sign. The ideal-membership certificate, isolated pre-source reproduction, holdout
 execution permission, scientific promotion, and new credit remain open or
+zero.
+
+R202 now tests the missing ideal-membership step instead of inferring it from
+gcd one. After primitive normalization, the four degree-96 quotients and
+`1-u*(a^2+b^2+c^2)` are classified with controlled Singular `slimgb` runs at
+`GF(1,000,003)` and `GF(536,870,723)`. Both unit/nonunit controls pass, but
+both engineering ideals produce a 43-element standard basis with
+`reduce(1,G)=1`; neither is the unit ideal. The present four-minor route is
+therefore not supported as a Nullstellensatz certificate. This is finite-field
+counterevidence, not proof of a rational or real common zero, failure over
+`QQ`, or a full-matrix rank drop. The next gate is to extract and compare the
+modular components, evaluate the complete engineering matrix at any witness,
+and add independent maximal minors if the common zero belongs only to the
+selected four-minor subset. Holdouts, promotion, and credit remain closed or
 zero.
 
 The current B4/B8/B10 result is the completed R186 full VF2 workflow

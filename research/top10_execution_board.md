@@ -420,10 +420,26 @@ T-B9-015u reconstructs those four characteristic-zero degree-184 determinants
 explicitly. Their observed maximum coefficient sizes are 276/294/291/250 bits,
 within the independent 423/425/426/402-bit bounds. Exact division by
 `D^44=(a^2+b^2+c^2)^44` leaves zero remainder in every row; the degree-96
-quotients have 2,401/464/590/450 terms and gcd 1. The exact common gcd is
-therefore `D^44` up to a unit. Ideal-membership multipliers, isolated pre-source
+quotients have 2,401/464/590/450 terms. Their primitive parts have gcd 1. Thus
+the exact common gcd over `QQ[a,b,c]` is `D^44` up to a nonzero rational scalar,
+while the normalized gcd over `ZZ[a,b,c]` is
+`452606540887819905926814498816 * D^44` up to sign. Ideal-membership multipliers, isolated pre-source
 reproduction, frozen holdouts, scientific promotion, and credit remain open or
 zero.
+
+T-B9-015v/R202 tests the missing implication directly: primitive gcd one does
+not by itself imply that the four quotient minors have no common projective
+zero. Controlled Singular `slimgb` runs classify
+`<p0,p1,p2,p3,1-u*(a^2+b^2+c^2)>` over `GF(1,000,003)` and
+`GF(536,870,723)`. Unit and nonunit controls pass in both fields, while both
+engineering ideals return a 43-element standard basis and `reduce(1,G)=1`.
+The present four-minor unit-certificate route is therefore unsupported. This
+is two-prime modular counterevidence, not proof of a rational/real common zero,
+failure over `QQ`, or a full `238x37` matrix rank drop. The next gate is to
+extract and compare modular components, replay the full engineering matrix at
+any witness, and add independent maximal minors if the component belongs only
+to the selected four-minor subset. Frozen holdouts, promotion, and credit
+remain closed or zero.
 
 ## Manuscript Bets
 
