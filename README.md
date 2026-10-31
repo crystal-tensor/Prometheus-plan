@@ -633,6 +633,20 @@ quotients followed by an explicit, independently replayed `QQ`
 Nullstellensatz identity. No hardware, frozen holdout, Quantum PCP/NLTS,
 promotion, or new-credit claim is made.
 
+R209 begins the characteristic-zero lift without promoting modular residues
+prematurely. Exact entry-L1 permanent bounds place the R204, R206, and R208
+degree-184 determinant coefficients within 417, 418, and 427 bits. This fixes
+a 14-prime, 42-artifact execution plan with a final 455-bit CRT modulus. The
+first added prime, `536870909`, is complete for all three determinants: modular
+`D^44` division is exact, the degree-96 quotients contain 1,113, 1,363, and 821
+terms, and `12/12` direct matrix and recomposition replays pass. Primary and
+independent CRT implementations agree on all `154845` coefficient-slot-prime
+round trips. The current modulus is only 78 bits against the 428-bit worst-case
+uniqueness threshold, so the partial representatives are not accepted as
+integer coefficients. The ledger is `3/42` new artifacts complete. No
+characteristic-zero division, rational Nullstellensatz, global-rank, hardware,
+frozen-holdout, Quantum PCP/NLTS, promotion, or new-credit claim is made.
+
 The current B4/B8/B10 result is the completed R186 full VF2 workflow
 translation test. It executes the unchanged exact BigUint, prefix, and window
 arms through both the patched Rust entry point and Qiskit's Python

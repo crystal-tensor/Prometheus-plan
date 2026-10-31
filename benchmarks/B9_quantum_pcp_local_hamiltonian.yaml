@@ -1816,6 +1816,70 @@ current_results:
     independent_audit_result: ../results/B9_R208_independent_component_audit_v0.json
     markdown_report: ../research/B9_R208_seven_minor_unit_preflight.md
     discussion_draft: ../research/discussion_drafts/2026-10-31-r208-can-one-extra-minor-turn-four-false-zeros-into-a-proof-route.md
+  r209_characteristic_zero_lift_shard1_v0:
+    status: coefficient_bound_fixed_first_of_fourteen_prime_shards_complete
+    method: b9_r209_incremental_three_minor_CRT_replay_v1
+    source: r204_r206_r208_degree184_determinants
+    minor_indices: [4, 5, 6]
+    determinant_total_degree: 184
+    quotient_total_degree: 96
+    D_exponent: 44
+    selected_bound_bits: [417, 418, 427]
+    maximum_twice_bound_bit_length: 428
+    planned_additional_primes: 14
+    planned_new_minor_artifacts: 42
+    final_planned_modulus_bit_length: 455
+    completed_planned_primes: [536870909]
+    completed_new_minor_artifacts: 3
+    remaining_new_minor_artifacts: 39
+    all_CRT_primes: [1000003, 536870723, 536870909]
+    partial_CRT_modulus_bit_length: 78
+    determinant_term_counts: [5997, 6555, 5309]
+    quotient_term_counts: [1113, 1363, 821]
+    cross_prime_support_identical: [true, true, true]
+    primary_CRT_roundtrip_checks: 154845
+    independent_CRT_roundtrip_checks: 154845
+    independent_matrix_replays: 12
+    independent_matrix_replay_matches: 12
+    independent_D44_recomposition_matches: 12
+    partial_CRT_residues_are_unique_integer_coefficients: false
+    bounded_CRT_integer_reconstruction_complete: false
+    characteristic_zero_D44_divisibility_verified: false
+    QQ_Nullstellensatz_certificate_verified: false
+    frozen_holdouts_executed: false
+    scientific_promotion_accepted: false
+    new_credit_delta: 0
+    bound_stable_payload_sha256: 6703e04ca28a1e4be6d40d84e8c3a7536863338c8a1ee72545f42c8a0cecdb89
+    shard_stable_payload_sha256:
+      "4": 53030f000fa24f47e2eee0fb36c6064c0178f037ffd20a5330a677aec1b01093
+      "5": 9fb935345c3f7d3aa879f15483658c21fafa8f7e7fa6cad87b301e19a41ab376
+      "6": e0768b123e785d7f01b9b85e8c500d2a82bfda0e43fe4456c72fafd7b8f701ba
+    replay_stable_payload_sha256: 6290a05104a282f39f212581d038b4bc5545a33ca624527a5cbfd129a8521cbd
+    independent_audit_stable_payload_sha256: dca7fe9f0d2166b7ec61ec3f6420eafeb3480ea472f0684cd96d648b41548b44
+    bound_tool_sha256: 31ccede6dc7008bad2300578009e8cb8977aa637a9948f0f3fe96d139b3bb131
+    shard_tool_sha256: d625efe39f37e39a6eda5efcf8e7cf7767a1ba7593b9ae11f13c1c3406b9ccbe
+    replay_tool_sha256: daa027d56b2b42eae71a25ced925df25abc226a9f1089aec6f23ad17ebdef638
+    independent_audit_tool_sha256: 18710a929ac601d6fd2dffa686f2e3f39cea0e3c77e65e1ab4cc3bd6bf15463f
+    bound_result_sha256: 78c78b5558f73b380c5a048976957a200f1cc8a4fb1eaae21e2eb5ff561c76d3
+    minor4_mod536870909_sha256: 1086ed8929a47bf79bcd3c4b9b3f1248ac284af0ff007d18e58c56487d7e0e95
+    minor5_mod536870909_sha256: d22e7db5656f43b6d95f2fab77175f265ca2ed2bc48e3b1859137fe686532774
+    minor6_mod536870909_sha256: f39a862a34e2c51453514cd06a8a10d523e7bda68ea00e08e6c94509a3112407
+    replay_result_sha256: 9109fe88666742e5733e39a9aaf9818896c039e848be5d484998865b1fbc22ab
+    independent_audit_result_sha256: 0319557e2aac65e40b671a752da1b16891605e2b32959cf0335555846457a807
+    markdown_report_sha256: 61aa6f8d4fe954923a7cf34287a87ce6d234af4276c7c10a3f94656f2c12cef6
+    discussion_draft_sha256: 8f37474f3e8518a28cbe49ba7869c7b82af1edd144b76696305ec14ac401a0f0
+    bound_tool: ../tools/b9_r209_determinant_coefficient_bound.py
+    shard_tool: ../tools/b9_r209_modular_minor_shard.py
+    replay_tool: ../tools/b9_r209_crt_shard_replay.py
+    independent_audit_tool: ../tools/b9_r209_independent_crt_audit.py
+    bound_result: ../results/B9_R209_determinant_coefficient_bound_v0.json
+    minor4_mod536870909: ../results/B9_R209_minor4_mod536870909_v0.json
+    minor5_mod536870909: ../results/B9_R209_minor5_mod536870909_v0.json
+    minor6_mod536870909: ../results/B9_R209_minor6_mod536870909_v0.json
+    replay_result: ../results/B9_R209_crt_shard_replay_v0.json
+    independent_audit_result: ../results/B9_R209_independent_crt_audit_v0.json
+    markdown_report: ../research/B9_R209_characteristic_zero_lift_shard1.md
+    discussion_draft: ../research/discussion_drafts/2026-10-31-r209-how-many-primes-turn-a-modular-signal-into-a-proof.md
   prototype_artifacts:
   local_hamiltonian_gap_lab: ../tools/b9_local_hamiltonian_gap_lab.py
   failed_gap_amplification_lemma_builder: ../tools/b9_failed_gap_amplification_lemma.py
@@ -1864,4 +1928,8 @@ current_results:
   r208_seventh_minor_bridge: ../tools/b9_r208_seventh_minor_bridge.py
   r208_seven_minor_ideal_preflight: ../tools/b9_r208_seven_minor_ideal_preflight.py
   r208_independent_component_audit: ../tools/b9_r208_independent_component_audit.py
+  r209_determinant_coefficient_bound: ../tools/b9_r209_determinant_coefficient_bound.py
+  r209_modular_minor_shard: ../tools/b9_r209_modular_minor_shard.py
+  r209_crt_shard_replay: ../tools/b9_r209_crt_shard_replay.py
+  r209_independent_crt_audit: ../tools/b9_r209_independent_crt_audit.py
   prototype_notes: ../research/B9_prototype_notes.md

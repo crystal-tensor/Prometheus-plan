@@ -9836,6 +9836,379 @@ def audit_b9_r208_seven_minor_unit_preflight(
     }
 
 
+def audit_b9_r209_characteristic_zero_lift_shard1(
+    root: Path,
+    manifest_entry: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Verify the R209 coefficient bound, first prime shard, and CRT audits."""
+
+    status: dict[str, object] = {
+        "status": None,
+        "evidence_integrity_complete": False,
+        "completed_new_minor_artifacts": 0,
+        "remaining_new_minor_artifacts": 42,
+        "partial_CRT_modulus_bit_length": 0,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "QQ_Nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "new_credit_delta": 0,
+    }
+    if not manifest_entry:
+        warnings.append("B9 manifest has no R209 characteristic-zero lift shard")
+        return status
+
+    def resolve(relative: str | None) -> Path | None:
+        return (root / "benchmarks" / relative).resolve() if relative else None
+
+    def digest(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def canonical_hash(value: object) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    labels = (
+        "bound_tool",
+        "shard_tool",
+        "replay_tool",
+        "independent_audit_tool",
+        "bound_result",
+        "minor4_mod536870909",
+        "minor5_mod536870909",
+        "minor6_mod536870909",
+        "replay_result",
+        "independent_audit_result",
+        "markdown_report",
+        "discussion_draft",
+    )
+    paths = {label: resolve(manifest_entry.get(label)) for label in labels}
+    for label, path in paths.items():
+        if path is None or not path.exists():
+            errors.append(
+                f"B9 R209 characteristic-zero lift shard {label} missing: {path}"
+            )
+    if any(path is None or not path.exists() for path in paths.values()):
+        return status
+
+    observed = {f"{label}_sha256": digest(path) for label, path in paths.items()}
+    for field, value in observed.items():
+        if manifest_entry.get(field) != value:
+            errors.append(f"B9 R209 characteristic-zero lift shard {field} mismatch")
+
+    bound = json.loads(read(paths["bound_result"]))
+    bound_payload = dict(bound)
+    bound_payload.pop("payload_sha256", None)
+    bound_stable = dict(bound_payload)
+    bound_stable.pop("stable_payload_sha256", None)
+    bound_rows = bound.get("rows", [])
+    bound_mismatch = (
+        bound.get("method")
+        != "b9_r209_three_minor_unconditional_coefficient_bound_v1"
+        or bound.get("version") != "0.1.0"
+        or bound.get("scope")
+        != "public_R209_three_minor_integer_bound_and_CRT_budget_only"
+        or bound.get("minor_count") != 3
+        or bound.get("dimension") != 37
+        or bound.get("determinant_degree") != 184
+        or len(bound_rows) != 3
+        or [row.get("minor_index") for row in bound_rows] != [4, 5, 6]
+        or [
+            row.get("selected_unconditional_coefficient_bound", {}).get(
+                "bit_length"
+            )
+            for row in bound_rows
+        ]
+        != [417, 418, 427]
+        or [row.get("twice_selected_bound_bit_length") for row in bound_rows]
+        != [418, 419, 428]
+        or any(row.get("determinant_homogeneous_degree") != 184 for row in bound_rows)
+        or any(row.get("column_common_D_exponent_sum") != 0 for row in bound_rows)
+        or bound.get("prime_plan", {}).get("planned_prime_count") != 14
+        or bound.get("prime_plan", {}).get("planned_minor_artifact_count") != 42
+        or bound.get("prime_plan", {}).get("final_modulus", {}).get("bit_length")
+        != 455
+        or bound.get("prime_plan", {}).get(
+            "modulus_before_final_prime_is_insufficient"
+        )
+        is not True
+        or bound.get("prime_plan", {}).get(
+            "final_modulus_exceeds_twice_maximum_bound"
+        )
+        is not True
+        or canonical_hash(bound_stable) != bound.get("stable_payload_sha256")
+        or bound.get("stable_payload_sha256")
+        != manifest_entry.get("bound_stable_payload_sha256")
+        or canonical_hash(bound_payload) != bound.get("payload_sha256")
+        or bound.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or bound.get("characteristic_zero_D44_divisibility_verified") is not False
+        or bound.get("QQ_Nullstellensatz_certificate_verified") is not False
+        or bound.get("frozen_holdouts_executed") is not False
+        or bound.get("scientific_promotion_accepted") is not False
+        or bound.get("new_credit_delta") != 0
+        or bound.get("checked") is not True
+    )
+    if bound_mismatch:
+        errors.append("B9 R209 characteristic-zero lift shard bound mismatch")
+
+    shard_expectations = {
+        4: (5997, 1113),
+        5: (6555, 1363),
+        6: (5309, 821),
+    }
+    shard_results = []
+    for minor_index, label in (
+        (4, "minor4_mod536870909"),
+        (5, "minor5_mod536870909"),
+        (6, "minor6_mod536870909"),
+    ):
+        shard = json.loads(read(paths[label]))
+        shard_results.append(shard)
+        payload = dict(shard)
+        payload.pop("payload_sha256", None)
+        stable = dict(payload)
+        stable.pop("stable_payload_sha256", None)
+        stable.pop("elapsed_seconds", None)
+        stable.pop("singular_path", None)
+        determinant_terms, quotient_terms = shard_expectations[minor_index]
+        mismatch = (
+            shard.get("method") != "b9_r209_planned_modular_minor_shard_v1"
+            or shard.get("version") != "0.1.0"
+            or shard.get("scope")
+            != "public_R209_planned_modular_determinant_shard_only"
+            or shard.get("characteristic") != 536870909
+            or shard.get("minor_index") != minor_index
+            or shard.get("dimension") != 37
+            or shard.get("determinant_total_degree") != 184
+            or shard.get("determinant_term_count") != determinant_terms
+            or shard.get("D_exponent") != 44
+            or shard.get("quotient_total_degree") != 96
+            or shard.get("quotient_term_count") != quotient_terms
+            or shard.get("exact_D44_division_verified_mod_prime") is not True
+            or shard.get("factorization_validated") is not True
+            or shard.get("remainder_is_zero") is not True
+            or len(shard.get("point_replays", [])) != 4
+            or shard.get("all_direct_integer_point_replays_match") is not True
+            or shard.get("all_D44_point_recompositions_match") is not True
+            or canonical_hash(stable) != shard.get("stable_payload_sha256")
+            or shard.get("stable_payload_sha256")
+            != manifest_entry.get("shard_stable_payload_sha256", {}).get(
+                str(minor_index)
+            )
+            or canonical_hash(payload) != shard.get("payload_sha256")
+            or shard.get("bounded_CRT_integer_reconstruction_complete") is not False
+            or shard.get("characteristic_zero_D44_divisibility_verified") is not False
+            or shard.get("QQ_Nullstellensatz_certificate_verified") is not False
+            or shard.get("frozen_holdouts_executed") is not False
+            or shard.get("scientific_promotion_accepted") is not False
+            or shard.get("new_credit_delta") != 0
+            or shard.get("checked") is not True
+        )
+        if mismatch:
+            errors.append(
+                f"B9 R209 characteristic-zero lift shard minor {minor_index} mismatch"
+            )
+
+    replay = json.loads(read(paths["replay_result"]))
+    replay_payload = dict(replay)
+    replay_payload.pop("payload_sha256", None)
+    replay_stable = dict(replay_payload)
+    replay_stable.pop("stable_payload_sha256", None)
+    replay_rows = replay.get("minor_rows", [])
+    replay_mismatch = (
+        replay.get("method") != "b9_r209_incremental_three_minor_CRT_replay_v1"
+        or replay.get("version") != "0.1.0"
+        or replay.get("scope")
+        != "public_R209_incremental_modular_CRT_execution_only"
+        or replay.get("minor_indices") != [4, 5, 6]
+        or replay.get("completed_planned_primes") != [536870909]
+        or replay.get("all_CRT_primes") != [1000003, 536870723, 536870909]
+        or replay.get("completed_planned_prime_count") != 1
+        or replay.get("planned_additional_prime_count") != 14
+        or replay.get("completed_new_minor_artifact_count") != 3
+        or replay.get("planned_new_minor_artifact_count") != 42
+        or replay.get("remaining_new_minor_artifact_count") != 39
+        or replay.get("partial_CRT_modulus_bit_length") != 78
+        or replay.get("maximum_twice_bound_bit_length") != 428
+        or replay.get("total_partial_CRT_roundtrip_check_count") != 154845
+        or replay.get("all_partial_CRT_roundtrips_complete") is not True
+        or replay.get("partial_CRT_residues_are_unique_integer_coefficients")
+        is not False
+        or len(replay_rows) != 3
+        or any(
+            row.get("cross_prime_support_identical") is not True
+            or row.get("partial_CRT_roundtrip_check_count") != 51615
+            or row.get("partial_CRT_roundtrip_complete") is not True
+            or row.get("partial_CRT_modulus_exceeds_twice_selected_bound")
+            is not False
+            for row in replay_rows
+        )
+        or canonical_hash(replay_stable) != replay.get("stable_payload_sha256")
+        or replay.get("stable_payload_sha256")
+        != manifest_entry.get("replay_stable_payload_sha256")
+        or canonical_hash(replay_payload) != replay.get("payload_sha256")
+        or replay.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or replay.get("characteristic_zero_D44_divisibility_verified") is not False
+        or replay.get("QQ_Nullstellensatz_certificate_verified") is not False
+        or replay.get("frozen_holdouts_executed") is not False
+        or replay.get("scientific_promotion_accepted") is not False
+        or replay.get("new_credit_delta") != 0
+        or replay.get("checked") is not True
+    )
+    if replay_mismatch:
+        errors.append("B9 R209 characteristic-zero lift shard replay mismatch")
+
+    audit = json.loads(read(paths["independent_audit_result"]))
+    audit_payload = dict(audit)
+    audit_payload.pop("payload_sha256", None)
+    audit_stable = dict(audit_payload)
+    audit_stable.pop("stable_payload_sha256", None)
+    audit_mismatch = (
+        audit.get("method") != "b9_r209_independent_matrix_and_sympy_CRT_audit_v1"
+        or audit.get("version") != "0.1.0"
+        or audit.get("independent_matrix_algorithm")
+        != "custom modular Gaussian elimination"
+        or audit.get("independent_CRT_algorithm")
+        != "sympy.ntheory.modular.crt"
+        or audit.get("new_prime") != 536870909
+        or audit.get("matrix_replay_count") != 12
+        or audit.get("matrix_replay_match_count") != 12
+        or audit.get("D44_recomposition_match_count") != 12
+        or audit.get("total_independent_CRT_roundtrip_check_count") != 154845
+        or any(
+            row.get("payload_hash_match") is not True
+            or row.get("roundtrip_count_match") is not True
+            for row in audit.get("crt_rows", [])
+        )
+        or canonical_hash(audit_stable) != audit.get("stable_payload_sha256")
+        or audit.get("stable_payload_sha256")
+        != manifest_entry.get("independent_audit_stable_payload_sha256")
+        or canonical_hash(audit_payload) != audit.get("payload_sha256")
+        or audit.get("bounded_CRT_integer_reconstruction_complete") is not False
+        or audit.get("characteristic_zero_D44_divisibility_verified") is not False
+        or audit.get("QQ_Nullstellensatz_certificate_verified") is not False
+        or audit.get("frozen_holdouts_executed") is not False
+        or audit.get("scientific_promotion_accepted") is not False
+        or audit.get("new_credit_delta") != 0
+        or audit.get("checked") is not True
+    )
+    if audit_mismatch:
+        errors.append(
+            "B9 R209 characteristic-zero lift shard independent audit mismatch"
+        )
+
+    expected_manifest = {
+        "status": "coefficient_bound_fixed_first_of_fourteen_prime_shards_complete",
+        "method": "b9_r209_incremental_three_minor_CRT_replay_v1",
+        "minor_indices": [4, 5, 6],
+        "determinant_total_degree": 184,
+        "quotient_total_degree": 96,
+        "D_exponent": 44,
+        "selected_bound_bits": [417, 418, 427],
+        "maximum_twice_bound_bit_length": 428,
+        "planned_additional_primes": 14,
+        "planned_new_minor_artifacts": 42,
+        "final_planned_modulus_bit_length": 455,
+        "completed_planned_primes": [536870909],
+        "completed_new_minor_artifacts": 3,
+        "remaining_new_minor_artifacts": 39,
+        "all_CRT_primes": [1000003, 536870723, 536870909],
+        "partial_CRT_modulus_bit_length": 78,
+        "determinant_term_counts": [5997, 6555, 5309],
+        "quotient_term_counts": [1113, 1363, 821],
+        "cross_prime_support_identical": [True, True, True],
+        "primary_CRT_roundtrip_checks": 154845,
+        "independent_CRT_roundtrip_checks": 154845,
+        "independent_matrix_replays": 12,
+        "independent_matrix_replay_matches": 12,
+        "independent_D44_recomposition_matches": 12,
+        "partial_CRT_residues_are_unique_integer_coefficients": False,
+        "bounded_CRT_integer_reconstruction_complete": False,
+        "characteristic_zero_D44_divisibility_verified": False,
+        "QQ_Nullstellensatz_certificate_verified": False,
+        "frozen_holdouts_executed": False,
+        "scientific_promotion_accepted": False,
+        "new_credit_delta": 0,
+    }
+    if any(
+        manifest_entry.get(field) != value
+        for field, value in expected_manifest.items()
+    ):
+        errors.append("B9 R209 characteristic-zero lift shard manifest mismatch")
+
+    report = read(paths["markdown_report"])
+    discussion = read(paths["discussion_draft"])
+    if any(
+        phrase not in report
+        for phrase in (
+            "417, 418, and 427 bits",
+            "14 additional primes",
+            "42 new determinant artifacts",
+            "`3/42` new artifacts complete",
+            "`154845/154845` coefficient-slot-prime round trips",
+            "not a bounded integer reconstruction",
+            "holdouts remain sealed",
+        )
+    ):
+        errors.append("B9 R209 characteristic-zero lift shard report incomplete")
+    if any(
+        phrase not in discussion
+        for phrase in (
+            "How many primes turn a modular signal into a characteristic-zero proof?",
+            "417, 418, and 427 bits",
+            "42 new determinant artifacts",
+            "only 78 bits against a 428-bit uniqueness threshold",
+            "not yet integer coefficients",
+            "No characteristic-zero certificate",
+        )
+    ):
+        errors.append("B9 R209 characteristic-zero lift shard discussion incomplete")
+
+    return {
+        "status": manifest_entry.get("status"),
+        **observed,
+        "selected_bound_bits": manifest_entry.get("selected_bound_bits"),
+        "completed_new_minor_artifacts": replay.get(
+            "completed_new_minor_artifact_count"
+        ),
+        "remaining_new_minor_artifacts": replay.get(
+            "remaining_new_minor_artifact_count"
+        ),
+        "partial_CRT_modulus_bit_length": replay.get(
+            "partial_CRT_modulus_bit_length"
+        ),
+        "maximum_twice_bound_bit_length": replay.get(
+            "maximum_twice_bound_bit_length"
+        ),
+        "primary_CRT_roundtrip_checks": replay.get(
+            "total_partial_CRT_roundtrip_check_count"
+        ),
+        "independent_CRT_roundtrip_checks": audit.get(
+            "total_independent_CRT_roundtrip_check_count"
+        ),
+        "independent_matrix_replay_matches": audit.get(
+            "matrix_replay_match_count"
+        ),
+        "bounded_CRT_integer_reconstruction_complete": replay.get(
+            "bounded_CRT_integer_reconstruction_complete"
+        ),
+        "QQ_Nullstellensatz_certificate_verified": replay.get(
+            "QQ_Nullstellensatz_certificate_verified"
+        ),
+        "frozen_holdouts_executed": replay.get("frozen_holdouts_executed"),
+        "scientific_promotion_accepted": replay.get(
+            "scientific_promotion_accepted"
+        ),
+        "new_credit_delta": replay.get("new_credit_delta"),
+        "evidence_integrity_complete": not any(
+            message.startswith("B9 R209 characteristic-zero lift shard")
+            for message in errors
+        ),
+    }
+
+
 def audit_r161(
     root: Path,
     b4_manifest: dict,
@@ -48037,6 +48410,17 @@ def audit(root: Path) -> dict:
             warnings,
         )
     )
+    b9_r209_characteristic_zero_lift_shard1 = b9_results.get(
+        "r209_characteristic_zero_lift_shard1_v0"
+    )
+    b9_r209_characteristic_zero_lift_shard1_status = (
+        audit_b9_r209_characteristic_zero_lift_shard1(
+            root,
+            b9_r209_characteristic_zero_lift_shard1,
+            errors,
+            warnings,
+        )
+    )
     b9_status = {}
     if not b9_gap_lab:
         warnings.append("B9 manifest has no local-Hamiltonian gap-lab result")
@@ -58459,6 +58843,7 @@ def audit(root: Path) -> dict:
             "r206_six_minor_ideal_preflight": b9_r206_six_minor_ideal_preflight_status,
             "r207_off_slice_component_rank": b9_r207_off_slice_component_rank_status,
             "r208_seven_minor_unit_preflight": b9_r208_seven_minor_unit_preflight_status,
+            "r209_characteristic_zero_lift_shard1": b9_r209_characteristic_zero_lift_shard1_status,
         },
         "b10": {
             "manifest": str(b10_manifest_path),
