@@ -1,0 +1,234 @@
+{
+  "auditor": {
+    "path": "tools/b2_b7_p023_d6_correlated_decoder_freeze_audit.py",
+    "sha256": "dedb7b3a56f5c25338106ab9ec913fafcea78386cefb1742559a670ae1f3978d"
+  },
+  "checks": [
+    {
+      "detail": "b2_b7_p023_d6_correlated_decoder_freeze_result_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "7351143377df8d2cd074bd7b3b8464e39008b95241b05631f004ba66ef25934c",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "ea7390a0bd65c5421ddaa00008262f6a06d23cc29867ce0dd37d8c2ef3ccdb02",
+      "name": "generator_hash",
+      "passed": true
+    },
+    {
+      "detail": "[]",
+      "name": "no_stochastic_generator_calls",
+      "passed": true
+    },
+    {
+      "detail": "All five frozen hashes match.",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "Reference passes X/Z.",
+      "name": "strict_reference",
+      "passed": true
+    },
+    {
+      "detail": "d6_candidate_rejected_by_strict_xz_gate_score_zero_p023_b2_b7_credit_closed",
+      "name": "prior_rejection",
+      "passed": true
+    },
+    {
+      "detail": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "name": "x_circuit",
+      "passed": true
+    },
+    {
+      "detail": "ffe0341ec245de6699f2d886d2ab776bb56d504f43d35d60c192594b0306f84c",
+      "name": "x_canonical",
+      "passed": true
+    },
+    {
+      "detail": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "name": "x_dem",
+      "passed": true
+    },
+    {
+      "detail": "71",
+      "name": "x_qubits",
+      "passed": true
+    },
+    {
+      "detail": "35001 nodes, 169918 edges.",
+      "name": "x_matching",
+      "passed": true
+    },
+    {
+      "detail": "{'error_instructions': 758382, 'decomposed_hyperedge_instructions': 540061, 'decomposed_components': 1154166, 'max_detectors_per_component': 2, 'components_with_observable': 100933}",
+      "name": "x_decomposition",
+      "passed": true
+    },
+    {
+      "detail": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "name": "x_zero_syndrome",
+      "passed": true
+    },
+    {
+      "detail": "71,000.",
+      "name": "x_cost",
+      "passed": true
+    },
+    {
+      "detail": "No stochastic outcome fields.",
+      "name": "x_no_outcome",
+      "passed": true
+    },
+    {
+      "detail": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "name": "z_circuit",
+      "passed": true
+    },
+    {
+      "detail": "4fd739aab97b6dc7534154dbf8565084a4d3d9d671a6e5a8f063bda0386761ef",
+      "name": "z_canonical",
+      "passed": true
+    },
+    {
+      "detail": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "name": "z_dem",
+      "passed": true
+    },
+    {
+      "detail": "71",
+      "name": "z_qubits",
+      "passed": true
+    },
+    {
+      "detail": "34999 nodes, 169908 edges.",
+      "name": "z_matching",
+      "passed": true
+    },
+    {
+      "detail": "{'error_instructions': 758351, 'decomposed_hyperedge_instructions': 540040, 'decomposed_components': 1154120, 'max_detectors_per_component': 2, 'components_with_observable': 96423}",
+      "name": "z_decomposition",
+      "passed": true
+    },
+    {
+      "detail": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "name": "z_zero_syndrome",
+      "passed": true
+    },
+    {
+      "detail": "71,000.",
+      "name": "z_cost",
+      "passed": true
+    },
+    {
+      "detail": "No stochastic outcome fields.",
+      "name": "z_no_outcome",
+      "passed": true
+    },
+    {
+      "detail": "1.3661971830985915",
+      "name": "conditional_score",
+      "passed": true
+    },
+    {
+      "detail": "Correctness is pending.",
+      "name": "score_zero_before_correctness",
+      "passed": true
+    },
+    {
+      "detail": "Salt absent.",
+      "name": "salt_absent",
+      "passed": true
+    },
+    {
+      "detail": "All positive claims false.",
+      "name": "claim_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Candidate/B2/#023/B7 remain closed.",
+      "name": "downstream_closed",
+      "passed": true
+    },
+    {
+      "detail": "80075f1e11637e8696afe1915e4bff6a1675c3185b05cfae316486df33a24665",
+      "name": "run_id",
+      "passed": true
+    },
+    {
+      "detail": "24/24",
+      "name": "producer_checks",
+      "passed": true
+    }
+  ],
+  "independently_recomputed": [
+    {
+      "active_operational_qubits": 71,
+      "canonical_circuit_sha256": "ffe0341ec245de6699f2d886d2ab776bb56d504f43d35d60c192594b0306f84c",
+      "coordinate_count": 71,
+      "cost": 71000,
+      "decomposition_inventory": {
+        "components_with_observable": 100933,
+        "decomposed_components": 1154166,
+        "decomposed_hyperedge_instructions": 540061,
+        "error_instructions": 758382,
+        "max_detectors_per_component": 2
+      },
+      "detector_error_model_sha256": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "detectors": 35001,
+      "index_span_qubits": 89,
+      "matching_edges": 169918,
+      "matching_fault_ids": 1,
+      "matching_nodes": 35001,
+      "memory_basis": "x",
+      "raw_circuit_sha256": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "zero_prediction_nonzero_bytes": 0,
+      "zero_prediction_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    {
+      "active_operational_qubits": 71,
+      "canonical_circuit_sha256": "4fd739aab97b6dc7534154dbf8565084a4d3d9d671a6e5a8f063bda0386761ef",
+      "coordinate_count": 71,
+      "cost": 71000,
+      "decomposition_inventory": {
+        "components_with_observable": 96423,
+        "decomposed_components": 1154120,
+        "decomposed_hyperedge_instructions": 540040,
+        "error_instructions": 758351,
+        "max_detectors_per_component": 2
+      },
+      "detector_error_model_sha256": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "detectors": 34999,
+      "index_span_qubits": 89,
+      "matching_edges": 169908,
+      "matching_fault_ids": 1,
+      "matching_nodes": 34999,
+      "memory_basis": "z",
+      "raw_circuit_sha256": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "zero_prediction_nonzero_bytes": 0,
+      "zero_prediction_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_correlated_decoder_freeze_independent_audit_v1",
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_correlated_decoder_freeze_v1.json",
+    "sha256": "8cd859009bc8a2fbe5021bd975b9bf32527dc6e7df47f7480b2fa8d572d39d15"
+  },
+  "summary": {
+    "basis_count": 2,
+    "checks_failed": 0,
+    "checks_passed": 33,
+    "checks_total": 33,
+    "stochastic_generator_calls": 0,
+    "stochastic_shots": 0
+  }
+}
