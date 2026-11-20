@@ -1,0 +1,103 @@
+{
+  "byte_rows": [
+    {
+      "byte_equal": true,
+      "expected_sha256": "94f7862fb9ef58fd634d035fe73c220ac858add9d05c5550c5a5fede21d8a2d4",
+      "name": "result",
+      "produced_sha256": "94f7862fb9ef58fd634d035fe73c220ac858add9d05c5550c5a5fede21d8a2d4"
+    },
+    {
+      "byte_equal": true,
+      "expected_sha256": "e57c52c7d6e810869c8660d7fe1efee152b187dfac555cb928bc0ddc4d500c76",
+      "name": "report",
+      "produced_sha256": "e57c52c7d6e810869c8660d7fe1efee152b187dfac555cb928bc0ddc4d500c76"
+    },
+    {
+      "byte_equal": true,
+      "expected_sha256": "b5cb1cb69a1f776600f2eabed271b3fe79b903bfc7972dc466aed9309c722892",
+      "name": "discussion",
+      "produced_sha256": "b5cb1cb69a1f776600f2eabed271b3fe79b903bfc7972dc466aed9309c722892"
+    }
+  ],
+  "checks": [
+    {
+      "detail": "exit=0",
+      "name": "subprocess_exit",
+      "passed": true
+    },
+    {
+      "detail": "Replay result was emitted.",
+      "name": "result_exists",
+      "passed": true
+    },
+    {
+      "detail": "94f7862fb9ef58fd634d035fe73c220ac858add9d05c5550c5a5fede21d8a2d4",
+      "name": "result_bytes",
+      "passed": true
+    },
+    {
+      "detail": "e57c52c7d6e810869c8660d7fe1efee152b187dfac555cb928bc0ddc4d500c76",
+      "name": "report_bytes",
+      "passed": true
+    },
+    {
+      "detail": "b5cb1cb69a1f776600f2eabed271b3fe79b903bfc7972dc466aed9309c722892",
+      "name": "discussion_bytes",
+      "passed": true
+    },
+    {
+      "detail": "522ef96ff96eeac990bae343a7d1cb37aa9a6be1",
+      "name": "freeze_commit",
+      "passed": true
+    },
+    {
+      "detail": "341",
+      "name": "discussion_number",
+      "passed": true
+    },
+    {
+      "detail": "Fresh seeds and corpus hashes reproduce.",
+      "name": "corpus_hashes",
+      "passed": true
+    },
+    {
+      "detail": "All decoded rows and payload summaries reproduce.",
+      "name": "basis_rows",
+      "passed": true
+    },
+    {
+      "detail": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+      "name": "producer_classification",
+      "passed": true
+    },
+    {
+      "detail": "All-window exactness passes again.",
+      "name": "window_exactness_replayed",
+      "passed": true
+    },
+    {
+      "detail": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+      "name": "adjudication_replayed",
+      "passed": true
+    },
+    {
+      "detail": "No hardware/B7 credit.",
+      "name": "hard_boundary",
+      "passed": true
+    }
+  ],
+  "producer_stdout_sha256": "a9367aa9532532443a2d87ff340ae8a23b0e54310f178d794952fe36699ee9f7",
+  "producer_subprocess_exit": 0,
+  "replay_id": "d9e908e7c6f60693ae88a4b65bc037a6077ffc2a90d6e0b2bca2ed8513e258c0",
+  "replayed_adjudicated_classification": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+  "replayed_producer_classification": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+  "replayed_window_exactness_gate_pass": true,
+  "schema_version": "b2_b7_p023_d6_explicit_reweight_replay_v2",
+  "summary": {
+    "adjudicated_semantic_veto_pass": true,
+    "all_producer_artifact_bytes_equal": true,
+    "checks_failed": 0,
+    "checks_passed": 13,
+    "checks_total": 13
+  }
+}

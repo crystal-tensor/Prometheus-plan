@@ -1,0 +1,624 @@
+{
+  "adapter_contract": {
+    "allowed_change": "two pybind insertion methods for ordinary and boundary edges; no matching, reweight, discretization, or decode algorithm is changed",
+    "build_helper": "tools/build_pymatching_explicit_rules_adapter.sh",
+    "hardware_interpretation": "software semantic audit adapter only; not Micro Blossom RTL, Verilator, FPGA, cycle, or timing evidence",
+    "patch": {
+      "path": "tools/patches/pymatching_v2.4.0_explicit_rules.patch",
+      "sha256": "8419932f8ac957fcabfd7f88936f4c889eb332fccaa3fe973c24bda034cd120d"
+    },
+    "purpose": "Expose insertion of already-computed integer implied-weight rules into the pinned PyMatching UserGraph so the candidate can exercise the unchanged two-pass decoder without asking PyMatching to derive or rescale candidate weights from probabilities.",
+    "required_runtime_methods": [
+      "add_edge_with_implied_weights",
+      "add_boundary_edge_with_implied_weights"
+    ]
+  },
+  "as_of_date": "2026-11-20",
+  "basis_rows": [
+    {
+      "basis": "x",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 6,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "3c9e23b747a0527ad15a042954a1cf7a6c1be31501450c7c3e0b1366360e1331",
+      "controller_payload": {
+        "actually_lowered_replacement_edges": {
+          "maximum": 170,
+          "mean": 37.884140386814025,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 102.0,
+          "p999": 130.0,
+          "raw_uint32_sha256": "7efc63b160b4adeb97510e09788a5381ab9530337b4993d04ea47603affdb77b",
+          "zero_fraction": 0.01174852324695122
+        },
+        "dynamic_update_payload_bits": {
+          "maximum": 4760,
+          "mean": 1060.7559308307927,
+          "observations": 167936,
+          "p50": 980.0,
+          "p95": 2240.0,
+          "p99": 2856.0,
+          "p999": 3640.0,
+          "raw_uint32_sha256": "c28d27872a3a0d9491901761945951a9c15003f78f740dea60572099cd54fb6c",
+          "zero_fraction": 0.01174852324695122
+        },
+        "encoding": "12-bit edge index plus 16-bit even replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 22,
+          "mean": 5.611524628429878,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "0b7520b23ac8c8e092107dcffbe8f39557d8babbac9a4574b432873a7a561252",
+          "zero_fraction": 0.011742568597560975
+        }
+      },
+      "full_block_logical_failures": 6,
+      "full_block_prediction_sha256": "3c9e23b747a0527ad15a042954a1cf7a6c1be31501450c7c3e0b1366360e1331",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 6,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "3c9e23b747a0527ad15a042954a1cf7a6c1be31501450c7c3e0b1366360e1331",
+      "semantic_veto_pass": true,
+      "shots": 1024,
+      "structural": {
+        "base_even_weight_bits": 16,
+        "base_even_weight_max": 33706,
+        "base_even_weight_min": 18348,
+        "base_even_weights_all_even": true,
+        "basis": "x",
+        "explicit_rule_adapter_active": true,
+        "graph_image_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "graph_sequence_sha256": "5347fb74a54c13957bf0c1f1ef6f34d26f7ba213cc67edd2a52685965d32a4ee",
+        "half_weight_scale": 2048,
+        "implied_even_weight_max": 20966,
+        "implied_even_weight_min": 0,
+        "maximum_active_lowering_rules": 19306,
+        "maximum_directed_rules": 19306,
+        "rule_image_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "rule_sequence_sha256": "bce91c8ac630b830e631b4d6994e812bf33fb1bc238a6601fb2af3cf4322e297",
+        "stored_even_weight_scale": 4096,
+        "unique_graph_images": 3,
+        "unique_rule_images": 3,
+        "windows": 164
+      },
+      "window_observations": 167936,
+      "window_outputs_equal": 167936,
+      "window_syndromes_equal": 167936,
+      "windows_per_shot": 164
+    },
+    {
+      "basis": "z",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 4,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "e58ff61f4ec5898fd137f458c97f7e5db1800abe080d3e727e550229330b1f13",
+      "controller_payload": {
+        "actually_lowered_replacement_edges": {
+          "maximum": 179,
+          "mean": 38.26170684070122,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 103.0,
+          "p999": 129.0,
+          "raw_uint32_sha256": "6d0733cf8c47ea89c530a0b7a6d30052df255267f8e4382f33643f0cd66cccb6",
+          "zero_fraction": 0.011486518673780487
+        },
+        "dynamic_update_payload_bits": {
+          "maximum": 5012,
+          "mean": 1071.327791539634,
+          "observations": 167936,
+          "p50": 980.0,
+          "p95": 2240.0,
+          "p99": 2884.0,
+          "p999": 3612.0,
+          "raw_uint32_sha256": "aa83c4c73b5a1ad0133a7f92dbd5b1080831fe623f318cb439d3583f66886230",
+          "zero_fraction": 0.011486518673780487
+        },
+        "encoding": "12-bit edge index plus 16-bit even replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 23,
+          "mean": 5.6618473704268295,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "1c1f08b821b8e74031d7973388dbbb5ac781cb762d982cd9b1945c0b1751621c",
+          "zero_fraction": 0.011486518673780487
+        }
+      },
+      "full_block_logical_failures": 4,
+      "full_block_prediction_sha256": "e58ff61f4ec5898fd137f458c97f7e5db1800abe080d3e727e550229330b1f13",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 4,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "e58ff61f4ec5898fd137f458c97f7e5db1800abe080d3e727e550229330b1f13",
+      "semantic_veto_pass": true,
+      "shots": 1024,
+      "structural": {
+        "base_even_weight_bits": 16,
+        "base_even_weight_max": 33706,
+        "base_even_weight_min": 18068,
+        "base_even_weights_all_even": true,
+        "basis": "z",
+        "explicit_rule_adapter_active": true,
+        "graph_image_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "graph_sequence_sha256": "6039811ccd7da1078dfccb1e92d7a0d9674780fa4fb3e58924acdc569bb6ef5e",
+        "half_weight_scale": 2048,
+        "implied_even_weight_max": 20966,
+        "implied_even_weight_min": 0,
+        "maximum_active_lowering_rules": 19296,
+        "maximum_directed_rules": 19296,
+        "rule_image_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "rule_sequence_sha256": "642a65da7270e282c359682a7e10b513b473415d184a0eea7df34338bdc27375",
+        "stored_even_weight_scale": 4096,
+        "unique_graph_images": 3,
+        "unique_rule_images": 3,
+        "windows": 164
+      },
+      "window_observations": 167936,
+      "window_outputs_equal": 167936,
+      "window_syndromes_equal": 167936,
+      "windows_per_shot": 164
+    }
+  ],
+  "candidate_contract": {
+    "candidate_base_graph": "extract each merged unquantized online-reference edge with endpoints and complete correction-bit fault_ids; compute h_base=round_C++(2048*w_base) and W_base=2*h_base",
+    "candidate_execution": "insert integral h_base and h_implied through the pinned audit adapter; unchanged PyMatching integer discretization doubles both to the explicit even W values, then unchanged two-pass correlated MWPM performs first match, strict-lowering reweight, and second match",
+    "candidate_rule_table": "source-faithfully aggregate DEM marginal/joint probabilities, compute p_implied=min(0.5,joint/marginal), h_implied=round_C++(2048*log((1-p_implied)/p_implied)), and W_implied=2*h_implied",
+    "changed": "both merged base-edge weights and every implied replacement weight are explicitly rounded onto the same unsigned 16-bit even grid",
+    "half_weight_scale": 2048,
+    "reference_full_block": "unquantized PyMatching 2.4.0 two-pass correlated decode over the complete 1,000-round detector error model",
+    "reference_online": "unquantized public correction-bit fault-vector decoder under the frozen 3d window, d commit, and 2d look-ahead contract",
+    "stored_even_weight_scale": 4096,
+    "stored_weight_bits": 16,
+    "stored_weight_even": true,
+    "stored_weight_unsigned": true,
+    "unchanged": [
+      "distance-6 X/Z circuits, 71 active qubits, physical noise, and 1,000-round horizon",
+      "3d=18 windows, d=6 commits, and 2d=12 look-ahead",
+      "all graph endpoints and detector/observable correction-bit output maps",
+      "decomposed correlation groups, arrival order, propagation, frame, and residual rules",
+      "exact two-pass MWPM algorithm and strict-lowering rewrite semantics",
+      "single-stream execution with no cross-shot batching"
+    ]
+  },
+  "checks": [
+    {
+      "detail": "Exact catalog scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "Public commit and Discussion bind the seeds.",
+      "name": "freeze_binding",
+      "passed": true
+    },
+    {
+      "detail": "Four predecessor artifacts match their public commit.",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "Pinned adapter exposes only explicit rule insertion.",
+      "name": "adapter_patch",
+      "passed": true
+    },
+    {
+      "detail": "Both memory bases executed.",
+      "name": "basis_set",
+      "passed": true
+    },
+    {
+      "detail": "X/Z seeds are distinct.",
+      "name": "seed_separation",
+      "passed": true
+    },
+    {
+      "detail": "1024 fresh shots per basis.",
+      "name": "fresh_shots",
+      "passed": true
+    },
+    {
+      "detail": "Detector and observable bytes are bound.",
+      "name": "corpus_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Three graph and rule images per basis.",
+      "name": "static_images",
+      "passed": true
+    },
+    {
+      "detail": "All base and implied weights fit unsigned sixteen-bit even storage.",
+      "name": "even_sixteen_bit",
+      "passed": true
+    },
+    {
+      "detail": "The classification records the exact per-window semantic veto without preventing a negative result artifact.",
+      "name": "semantic_veto_adjudicated",
+      "passed": true
+    },
+    {
+      "detail": "Every commit and final residual is zero.",
+      "name": "residuals",
+      "passed": true
+    },
+    {
+      "detail": "Complete per-window payload vectors are hashed.",
+      "name": "payload_vectors",
+      "passed": true
+    },
+    {
+      "detail": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "Pinned RTL keeps the dynamic write path TODO/commented.",
+      "name": "source_gap",
+      "passed": true
+    },
+    {
+      "detail": "No hardware or downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    }
+  ],
+  "classification": "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+  "classification_rule": {
+    "order": [
+      "fresh_holdout_explicit_reweight_semantic_regression",
+      "sixteen_bit_even_representation_failure",
+      "sixteen_bit_explicit_reweight_semantic_pass_hardware_write_path_absent"
+    ],
+    "rule": "apply source, exact per-window semantic, final-frame, and residual verification first, then 16-bit width admission; even a pass cannot cross the pinned Micro Blossom dynamic-write source gap"
+  },
+  "corpora": [
+    {
+      "basis": "x",
+      "corpus_sha256": "86185652355a9197eabc0503945820837dbf497ff822812f37f47a0e26836e89",
+      "detector_error_model_sha256": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "detector_shape": [
+        1024,
+        4376
+      ],
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "seed": 3651705782389106044,
+      "seed_digest_sha256": "7ce58abf0f77ad323c7eaf5cc4dd931c52536eaeb21ce8b044adccdc97aa23d3",
+      "shots": 1024
+    },
+    {
+      "basis": "z",
+      "corpus_sha256": "b4ac832c043de211d28a77d5db817d15c6ff3db886af0f0ab3092984d42811cf",
+      "detector_error_model_sha256": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "detector_shape": [
+        1024,
+        4375
+      ],
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "seed": 8540768509709157704,
+      "seed_digest_sha256": "48850e6ab5e78676b6ce4c137e036ae22c62f6a17e1801fde14d4414eb23f93b",
+      "shots": 1024
+    }
+  ],
+  "evidence_id": "0f5c788a433bab8ba41b84b29e8b8964bbc75d7a1a0a14dddf64bd998ad73107",
+  "execution_environment": {
+    "explicit_rule_adapter_active": true,
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "pymatching": "2.4.0",
+    "pymatching_module": "/private/tmp/qec-pymatching-6f63b2b9/oscarhiggott-PyMatching-6f63b2b/src/pymatching/__init__.py",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0"
+  },
+  "external_source_profile": {
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "micro_blossom_repository": "https://github.com/yuewuo/micro-blossom",
+    "micro_blossom_source_files": {
+      "src/cpu/blossom-nostd/src/instruction.rs": "0686cf5e4ff1a6f86d8b4a8f9ae4895bf5b71dbe9575787a03f7fd7930baa291",
+      "src/cpu/blossom/src/example_codes.rs": "14016f6da0826ca0a99f7264f3b7d16633a36f4be6141843c6c4f8bcf462a3b0",
+      "src/cpu/blossom/src/mwpm_solver.rs": "433c736f8bda84ee51c6b0c4e75bf71a6ff02b4a1e901ab150831039d9ded49b",
+      "src/fpga/microblossom/Architecture.scala": "fe2bc13620e2244362cc1a434edfb850c07c839b352a006fda407657c4444fe0",
+      "src/fpga/microblossom/Instruction.scala": "49697a06d6d166e9a8042c421f77894c5870b9b24f862b2e63e3d0ce86b31aa4",
+      "src/fpga/microblossom/modules/Edge.scala": "4bd015361259010c83a70b62bb3b49eb04616fad54c2cb516a8b63a71ef446f7"
+    },
+    "micro_blossom_source_interpretation": "The pinned source requires even graph weights and reserves LoadWeightsExternal, but Edge.scala still marks dynamic edge-weight update TODO, its external write ports are commented, Instruction.scala has no operational load generator, and the embedded solver rejects nonempty dynamic_weights. Static graph compatibility does not establish a functional dynamic write path.",
+    "pymatching_discretization": "When every base and implied user weight is integral, get_edge_weight_normalising_constant returns 1 and both paths store 2*round(weight), guaranteeing even internal edge weights.",
+    "pymatching_repository": "https://github.com/oscarhiggott/PyMatching",
+    "pymatching_rule": "For each decomposed causal edge, aggregate marginal and joint probabilities by Bernoulli XOR; set p_implied=min(0.5,joint/marginal), w_implied=log((1-p_implied)/p_implied), and only replace a target edge when the implied weight is lower.",
+    "pymatching_source_files": {
+      "src/pymatching/sparse_blossom/driver/mwpm_decoding.cc": "6489394bb92008434708802eb258224a5e9b4655e152e339c7867d7801a982f7",
+      "src/pymatching/sparse_blossom/driver/user_graph.cc": "f3f10c3762e8f64348bc650ff75a43e07b8cd51e927c88a21f4000e23c888b2b",
+      "src/pymatching/sparse_blossom/driver/user_graph.h": "9666b5caecb6ab74e03aedda4c3c9e5865585e43a6012b894b26f64aeca1a52d",
+      "src/pymatching/sparse_blossom/driver/user_graph.pybind.cc": "b2d61432fd74014940086b9d9c14ff0c3fabac55effa7ce46195b14ed8a984b7",
+      "src/pymatching/sparse_blossom/flooder/graph.cc": "1eb8b9b93faa838047ad80117be2cafcdba73a285c19219bd5aa32f6d9ef2265",
+      "src/pymatching/sparse_blossom/flooder/graph.h": "510fc55e6869c115b1a72ab4a3a9eb4e6e0749447907d0c5938a9bdd329591a7"
+    },
+    "pymatching_tag_commit": "6f63b2b9474ba0fa7e511fe52bffdce858a06984",
+    "pymatching_version": "2.4.0"
+  },
+  "fresh_holdout_contract": {
+    "cross_shot_batching_in_online_paths": false,
+    "detector_and_observable_bytes_hashed": true,
+    "memory_bases": [
+      "x",
+      "z"
+    ],
+    "seed_derivation": "little-endian uint64 from the first eight SHA-256 bytes of public_freeze_commit:discussion_number:seed_namespace:basis",
+    "seed_namespace": "B2_B7_P023_d6_explicit_reweight_v2",
+    "seed_unavailable_until_public_freeze_and_discussion": true,
+    "shots_per_basis": 1024
+  },
+  "frozen_inputs": {
+    "prior_adjudication": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_explicit_reweight_audit_v1.json",
+      "sha256": "31e0cc5004e0dc574274881084ccb8981efea3e29ff17f271a95f5a30085a9fe"
+    },
+    "prior_protocol": {
+      "matches_artifact_commit": true,
+      "path": "benchmarks/B2_B7_P023_d6_explicit_reweight_v1.json",
+      "sha256": "d3ad4eaa83a85981cc9176766cc1283a8aabc5deff70115433e5becf6747e6d3"
+    },
+    "prior_replay": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_explicit_reweight_replay_v1.json",
+      "sha256": "66df05389798ab6f29f9cbfc26e31f059411e6f7f28c8316a3269a217f246566"
+    },
+    "prior_result": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_explicit_reweight_v1.json",
+      "sha256": "876074b4f85303b3a13a0c2ad56cb1059f5b6047f1aa94504dc76cd85928d559"
+    }
+  },
+  "kaggle_inspired_evaluation": {
+    "absolute_guardrail": "the existing p99 <=1 microsecond and deadline-miss <=1 percent gates remain open and cannot be waived by semantic admission",
+    "aggregate": "X and Z must both pass; no average can hide a failed basis",
+    "cost_after_verification": "report the exact 16-bit even representation and actual strict-lowering replacement payload without converting it into unmeasured hardware latency",
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "fresh candidate frames, full-block reference frames, every residual, source binding, adapter hash, seed, corpus hash, and integer width must verify before payload is discussed"
+  },
+  "known_before_preregistration": {
+    "fresh_holdout_predictions_observed": 0,
+    "fresh_holdout_samples_observed": 0,
+    "post_outcome_route_selection": {
+      "epistemic_status": "Every row below reuses the already-public failed v1 holdout and can select a later candidate but cannot provide acceptance evidence.",
+      "observations": [
+        {
+          "half_weight_scale": 16,
+          "stored_weight_bits": 9,
+          "x_syndrome_output_mismatches": [
+            12,
+            24
+          ],
+          "z_syndrome_output_mismatches": [
+            17,
+            34
+          ]
+        },
+        {
+          "half_weight_scale": 24,
+          "stored_weight_bits": 9,
+          "x_syndrome_output_mismatches": [
+            4,
+            8
+          ],
+          "z_syndrome_output_mismatches": [
+            7,
+            14
+          ]
+        },
+        {
+          "half_weight_scale": 30,
+          "stored_weight_bits": 9,
+          "x_syndrome_output_mismatches": [
+            1,
+            2
+          ],
+          "z_syndrome_output_mismatches": [
+            1,
+            2
+          ]
+        },
+        {
+          "half_weight_scale": 31,
+          "stored_weight_bits": 9,
+          "x_syndrome_output_mismatches": [
+            3,
+            6
+          ],
+          "z_syndrome_output_mismatches": [
+            4,
+            8
+          ]
+        },
+        {
+          "half_weight_scale": 32,
+          "stored_weight_bits": 10,
+          "x_syndrome_output_mismatches": [
+            3,
+            6
+          ],
+          "z_syndrome_output_mismatches": [
+            5,
+            10
+          ]
+        },
+        {
+          "half_weight_scale": 48,
+          "stored_weight_bits": 10,
+          "x_syndrome_output_mismatches": [
+            2,
+            4
+          ],
+          "z_syndrome_output_mismatches": [
+            6,
+            12
+          ]
+        },
+        {
+          "half_weight_scale": 1024,
+          "stored_weight_bits": 15,
+          "x_syndrome_output_mismatches": [
+            0,
+            0
+          ],
+          "z_syndrome_output_mismatches": [
+            1,
+            2
+          ]
+        },
+        {
+          "half_weight_scale": 2048,
+          "stored_weight_bits": 16,
+          "x_syndrome_output_mismatches": [
+            0,
+            0
+          ],
+          "z_syndrome_output_mismatches": [
+            0,
+            0
+          ]
+        },
+        {
+          "bases_tested": [
+            "z"
+          ],
+          "half_weight_scale": 65536,
+          "stored_weight_bits": 21,
+          "z_syndrome_output_mismatches": [
+            0,
+            0
+          ]
+        }
+      ],
+      "selected_artifact": {
+        "evidence_id": "1c7aa0cee931f5cc7e0698773bbf258ee45abe41e5026267e0f4dee148a0adef",
+        "path": "results/B2_B7_P023_d6_explicit_reweight_scale_scout_v1.json",
+        "sha256": "b74460ca6dbf69ec2ef4cfc363145ea8189d7515bf5aa79c2dd68e5cb680572c"
+      },
+      "selected_half_weight_scale": 2048,
+      "selected_stored_even_weight_scale": 4096,
+      "selected_stored_weight_bits": 16,
+      "selection_rule": "Choose the first tested power-of-two scale above 1024 that clears both bases, rather than cherry-picking an arbitrary integer scale."
+    },
+    "public_v1_outcome": {
+      "final_frames_equal": true,
+      "public_freeze_commit": "53eb53954dc548cb6a05581f607e02454a8f69fc",
+      "public_freeze_discussion": 339,
+      "public_result_commit": "c8686d0ecb88d1994b60cae56d95f8f9f3920083",
+      "public_result_discussion": 340,
+      "semantic_veto_pass": false,
+      "x_window_syndrome_output_mismatches": [
+        12,
+        24
+      ],
+      "z_window_syndrome_output_mismatches": [
+        17,
+        34
+      ]
+    },
+    "source_boundary": {
+      "hardware_execution_observed": false,
+      "micro_blossom_dynamic_write_path_complete": false
+    }
+  },
+  "next_gate": "Implement the missing Micro Blossom dynamic-weight register/write path, generate the six bound graph/rule images, and measure exact correction equality plus p99 cycles before hardware credit.",
+  "prior_result_correction": {
+    "prior_hardware_or_latency_credit_changed": false,
+    "prior_semantic_result_retracted": true,
+    "summary": "The public v1 producer label is rejected because its semantic_pass omitted the frozen all-window syndrome/output equality clause. V1 remains valid evidence that 9-bit weights preserve all final frames and residuals, but its 12 syndrome and 24 output mismatches in X plus 17 syndrome and 34 output mismatches in Z fail strict streaming substitutability.",
+    "superseded_phrase": "9-bit explicit reweight semantic pass"
+  },
+  "protocol_binding": {
+    "adapter_patch_path": "tools/patches/pymatching_v2.4.0_explicit_rules.patch",
+    "adapter_patch_sha256": "8419932f8ac957fcabfd7f88936f4c889eb332fccaa3fe973c24bda034cd120d",
+    "path": "benchmarks/B2_B7_P023_d6_explicit_reweight_v2.json",
+    "runner_path": "tools/b2_b7_p023_d6_explicit_reweight_v2.py",
+    "runner_sha256": "2419e28f4ac48cf14b11f0c0c72477949043b154784c2cfcf540af3e4a254f69",
+    "sha256": "d5edc6d539a7b409142160385ac0b3ca5107ecbf9ece3c83b2df1b50b6afe97e"
+  },
+  "public_freeze": {
+    "commit": "522ef96ff96eeac990bae343a7d1cb37aa9a6be1",
+    "discussion_number": 341,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/341"
+  },
+  "question": "Can a preregistered unsigned 16-bit even-weight decoder, selected only after the public 9-bit regression, reproduce every fresh X/Z window syndrome, window output, final frame, and residual exactly?",
+  "schema_version": "b2_b7_p023_d6_explicit_reweight_result_v2",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "fresh_shots_total": 2048,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "semantic_veto_pass": true,
+    "sixteen_bit_even_representation_pass": true
+  },
+  "verdict": {
+    "b7_resource_credit": 0,
+    "cycle_accurate_candidate_executed": false,
+    "explicit_dynamic_reweight_software_bridge_pass": true,
+    "fpga_candidate_executed": false,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "micro_blossom_dynamic_weight_write_path_implemented": false,
+    "micro_blossom_rtl_generated_for_candidate": false,
+    "p023_scalable_memory_ready": false,
+    "semantic_veto_pass": true,
+    "sixteen_bit_even_representation_pass": true
+  }
+}
