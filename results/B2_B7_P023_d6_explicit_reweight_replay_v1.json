@@ -1,0 +1,103 @@
+{
+  "byte_rows": [
+    {
+      "byte_equal": true,
+      "expected_sha256": "876074b4f85303b3a13a0c2ad56cb1059f5b6047f1aa94504dc76cd85928d559",
+      "name": "result",
+      "produced_sha256": "876074b4f85303b3a13a0c2ad56cb1059f5b6047f1aa94504dc76cd85928d559"
+    },
+    {
+      "byte_equal": true,
+      "expected_sha256": "044a447934ebe6fefb8bca818296404a5c9f38bce9cf862bab3998e47204eb9c",
+      "name": "report",
+      "produced_sha256": "044a447934ebe6fefb8bca818296404a5c9f38bce9cf862bab3998e47204eb9c"
+    },
+    {
+      "byte_equal": true,
+      "expected_sha256": "63cf23a3da59d99582ee30191d844310fde868ed79577c23b41673ed4468255e",
+      "name": "discussion",
+      "produced_sha256": "63cf23a3da59d99582ee30191d844310fde868ed79577c23b41673ed4468255e"
+    }
+  ],
+  "checks": [
+    {
+      "detail": "exit=0",
+      "name": "subprocess_exit",
+      "passed": true
+    },
+    {
+      "detail": "Replay result was emitted.",
+      "name": "result_exists",
+      "passed": true
+    },
+    {
+      "detail": "876074b4f85303b3a13a0c2ad56cb1059f5b6047f1aa94504dc76cd85928d559",
+      "name": "result_bytes",
+      "passed": true
+    },
+    {
+      "detail": "044a447934ebe6fefb8bca818296404a5c9f38bce9cf862bab3998e47204eb9c",
+      "name": "report_bytes",
+      "passed": true
+    },
+    {
+      "detail": "63cf23a3da59d99582ee30191d844310fde868ed79577c23b41673ed4468255e",
+      "name": "discussion_bytes",
+      "passed": true
+    },
+    {
+      "detail": "53eb53954dc548cb6a05581f607e02454a8f69fc",
+      "name": "freeze_commit",
+      "passed": true
+    },
+    {
+      "detail": "339",
+      "name": "discussion_number",
+      "passed": true
+    },
+    {
+      "detail": "Fresh seeds and corpus hashes reproduce.",
+      "name": "corpus_hashes",
+      "passed": true
+    },
+    {
+      "detail": "All decoded rows and payload summaries reproduce.",
+      "name": "basis_rows",
+      "passed": true
+    },
+    {
+      "detail": "nine_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+      "name": "producer_classification",
+      "passed": true
+    },
+    {
+      "detail": "All-window exactness fails again.",
+      "name": "window_veto_replayed",
+      "passed": true
+    },
+    {
+      "detail": "fresh_holdout_explicit_reweight_semantic_regression",
+      "name": "adjudication_replayed",
+      "passed": true
+    },
+    {
+      "detail": "No hardware/B7 credit.",
+      "name": "hard_boundary",
+      "passed": true
+    }
+  ],
+  "producer_stdout_sha256": "9f0342fa67276f78fc1f442e6b594839803dfcbe4ae76e2ab6b192ec59ea16a5",
+  "producer_subprocess_exit": 0,
+  "replay_id": "bbb45a2e3223ae705d8fa76bda2e284a08216dca21b768bc9c182321a9fb296f",
+  "replayed_adjudicated_classification": "fresh_holdout_explicit_reweight_semantic_regression",
+  "replayed_producer_classification": "nine_bit_explicit_reweight_semantic_pass_hardware_write_path_absent",
+  "replayed_window_exactness_gate_pass": false,
+  "schema_version": "b2_b7_p023_d6_explicit_reweight_replay_v1",
+  "summary": {
+    "adjudicated_semantic_veto_pass": false,
+    "all_producer_artifact_bytes_equal": true,
+    "checks_failed": 0,
+    "checks_passed": 13,
+    "checks_total": 13
+  }
+}
