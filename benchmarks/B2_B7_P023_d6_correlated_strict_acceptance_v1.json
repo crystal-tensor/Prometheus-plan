@@ -1,0 +1,118 @@
+{
+  "schema_version": "b2_b7_p023_d6_correlated_strict_acceptance_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can the publicly frozen two-pass correlation-aware decoder make the unchanged 71-active-qubit distance-6 memory pass the same strict X/Z verifier that rejected independent MWPM?",
+  "public_freeze": {
+    "commit": "45a5323a8727fe8e90aab8e5109600a69a9f2940",
+    "packet_commit": "45a5323a8727fe8e90aab8e5109600a69a9f2940",
+    "discussion_number": 325,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/325",
+    "candidate_frozen_before_salt": true,
+    "candidate_frozen_before_stochastic_execution": true
+  },
+  "frozen_inputs": {
+    "correlated_decoder_freeze_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_correlated_decoder_freeze_v1.json",
+      "sha256": "7351143377df8d2cd074bd7b3b8464e39008b95241b05631f004ba66ef25934c"
+    },
+    "correlated_decoder_freeze_result": {
+      "path": "results/B2_B7_P023_d6_correlated_decoder_freeze_v1.json",
+      "sha256": "8cd859009bc8a2fbe5021bd975b9bf32527dc6e7df47f7480b2fa8d572d39d15",
+      "required_decision": "d6_two_pass_correlated_decoder_structurally_frozen_before_salt_no_outcome_b2_p023_b7_credit_closed"
+    },
+    "correlated_decoder_freeze_generator": {
+      "path": "tools/b2_b7_p023_d6_correlated_decoder_freeze.py",
+      "sha256": "ea7390a0bd65c5421ddaa00008262f6a06d23cc29867ce0dd37d8c2ef3ccdb02"
+    },
+    "correlated_decoder_freeze_audit": {
+      "path": "results/B2_B7_P023_d6_correlated_decoder_freeze_audit_v1.json",
+      "sha256": "642ba1e1d104652e2aa16254ab115c19680d6b79830d4b5758101d473ec02b30"
+    },
+    "independent_decoder_result": {
+      "path": "results/B2_B7_P023_d6_strict_acceptance_v1.json",
+      "sha256": "7b215bcaa1b723da70eb1ff8787c3231d6072ca6c896060cd9405d826e5418a5",
+      "required_decision": "d6_candidate_rejected_by_strict_xz_gate_score_zero_p023_b2_b7_credit_closed"
+    },
+    "artifact_freeze_commit": "45a5323a8727fe8e90aab8e5109600a69a9f2940"
+  },
+  "execution": {
+    "candidate_id": "rotated_surface_code_d6_two_pass_correlated_matching_v1",
+    "distance": 6,
+    "memory_bases": ["x", "z"],
+    "rounds": 1000,
+    "physical_error": 0.001,
+    "noise_parameters": {
+      "after_clifford_depolarization": 0.001,
+      "before_round_data_depolarization": 0.001,
+      "before_measure_flip_probability": 0.001,
+      "after_reset_flip_probability": 0.001
+    },
+    "shots_per_basis": 102400,
+    "shot_chunk_size": 256,
+    "target_total_logical_failure": 0.01,
+    "confidence_method": "one-sided Clopper-Pearson upper bound",
+    "false_accept_probability": "2^-128",
+    "confidence_level": "1-2^-128",
+    "challenge_seed_derivation": "lower 63 bits of the first eight SHA-256 bytes of UTF8(salt) || 0x00 || coordinate-canonical Stim circuit bytes",
+    "challenge_salt": "AH-QEC-D6-CORRELATED-STRICT-v1|public-freeze=45a5323a8727fe8e90aab8e5109600a69a9f2940|discussion=325|acceptance",
+    "decoder": {
+      "library": "PyMatching",
+      "algorithm": "two-pass correlated matching",
+      "construction": "Matching.from_detector_error_model(dem, enable_correlations=True)",
+      "decode": "decode_batch(..., enable_correlations=True)",
+      "detector_error_model": "Stim decompose_errors=True"
+    },
+    "toolchain": {
+      "python": "3.12.6",
+      "stim": "1.16.0",
+      "pymatching": "2.4.0",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1"
+    }
+  },
+  "kaggle_inspired_verification_contract": {
+    "source": "Google Quantum AI - Verifiable Quantum Circuit Compilation competition overview and evaluation metric, consulted 2026-11-20",
+    "correctness_before_cost": "a candidate that fails either strict basis verifier receives score zero",
+    "reference_relative_cost": "each basis improvement is reference active-qubit-rounds divided by candidate active-qubit-rounds",
+    "geometric_mean_aggregation": "combine X and Z basis improvements by their geometric mean",
+    "submission_bound_randomness": "derive fresh seeds from a public-freeze-bound salt and canonical candidate bytes",
+    "reproducibility": "publish the protocol, exact chunk digests, independent confidence audit, and deterministic stochastic replay",
+    "adaptation_boundary": "this is a QEC memory benchmark inspired by the competition's verification design, not an entry in its three circuit-compilation tasks"
+  },
+  "score_contract": {
+    "reference_active_qubits": 97,
+    "reference_cost_per_basis": 97000,
+    "candidate_active_qubits": 71,
+    "candidate_cost_per_basis": 71000,
+    "basis_improvement": "I_b=97000/71000",
+    "composite_score": "Score_QEC=sqrt(I_X*I_Z) after both bases strictly verify; otherwise 0",
+    "acceptance_threshold": 1.25,
+    "per_basis_regression_allowed": false,
+    "single_basis_credit": false,
+    "invalid_candidate_score": 0
+  },
+  "timing_contract": {
+    "baseline": "frozen independent-MWPM execution on the same host and toolchain",
+    "report": "correlated decode seconds per shot and correlated/independent decode-time ratio by basis",
+    "status": "diagnostic only because no hardware decoder deadline has been declared"
+  },
+  "downstream_gates": {
+    "b2_physical_memory_candidate_gate": "both strict basis gates and Score_QEC>=1.25; full B2 credit remains closed pending decoder timing, mismatch robustness, and implementation constraints",
+    "p023_scalable_memory": "remains false without strict direct million-round X/Z evidence, drift/correlation stress, and a declared decoder deadline",
+    "b7_resource_credit": "remains zero until B2, #023, calibrated dependency, layout, and architecture gates pass"
+  },
+  "claim_boundary": {
+    "new_code_family_claimed": false,
+    "threshold_claimed": false,
+    "scalable_quantum_memory_claimed_before_execution": false,
+    "hardware_result_claimed": false,
+    "production_decoder_claimed": false,
+    "full_b2_credit_claimed_before_execution": false,
+    "b7_resource_credit_claimed_before_execution": false
+  }
+}

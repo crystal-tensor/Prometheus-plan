@@ -6051,6 +6051,52 @@ current_results:
     audit: ../results/B2_B7_P023_d6_correlated_decoder_freeze_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_correlated_decoder_freeze_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_correlated_decoder_freeze_v1.md
+  d6_correlated_strict_acceptance_v1:
+    status: d6_correlated_decoder_strict_xz_pass_physical_memory_gate_b2_p023_b7_credit_closed
+    method: b2_b7_p023_d6_correlated_strict_acceptance_v1
+    catalog_problem_ids: [21, 22, 23]
+    verification_policy: kaggle_inspired_correctness_veto_then_reference_relative_geometric_mean
+    public_freeze_commit: 45a5323a8727fe8e90aab8e5109600a69a9f2940
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/325
+    candidate_id: rotated_surface_code_d6_two_pass_correlated_matching_v1
+    candidate_distance: 6
+    candidate_active_operational_qubits: 71
+    candidate_cost_per_basis_active_qubit_rounds: 71000
+    decoder: PyMatching_2p4p0_two_pass_correlated_matching
+    only_candidate_change: correlations_enabled_at_graph_construction_and_decode
+    shots_per_basis: 102400
+    total_shots: 204800
+    x_logical_failures: 539
+    z_logical_failures: 443
+    x_clopper_pearson_upper_delta_2m128: 0.008795274723030332
+    z_clopper_pearson_upper_delta_2m128: 0.007586892804800322
+    target_total_logical_failure: 0.01
+    x_strict_pass: true
+    z_strict_pass: true
+    both_bases_strict_pass: true
+    conditional_resource_score: 1.3661971830985915
+    accepted_physical_memory_score: 1.3661971830985915
+    physical_memory_candidate_gate_passed: true
+    same_condition_candidate_physical_memory_gain_passed: true
+    aggregate_correlated_to_independent_decode_ratio: 4.14830606476302
+    decoder_timing_is_diagnostic_only: true
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 30
+    independent_audit_checks_passed: 34
+    exact_replay_checks_passed: 22
+    exact_replay_chunk_digests: 800
+    caveat: physical_memory_gate_passes_but_classical_latency_and_all_architecture_gates_remain_unpriced
+    result: ../results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json
+    audit: ../results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_correlated_strict_acceptance_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6079,6 +6125,9 @@ prototype_artifacts:
   d6_strict_acceptance_replay: ../tools/b2_b7_p023_d6_strict_acceptance_replay.py
   d6_correlated_decoder_freeze_runner: ../tools/b2_b7_p023_d6_correlated_decoder_freeze.py
   d6_correlated_decoder_freeze_audit: ../tools/b2_b7_p023_d6_correlated_decoder_freeze_audit.py
+  d6_correlated_strict_acceptance_runner: ../tools/b2_b7_p023_d6_correlated_strict_acceptance.py
+  d6_correlated_strict_acceptance_audit: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_audit.py
+  d6_correlated_strict_acceptance_replay: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_replay.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
