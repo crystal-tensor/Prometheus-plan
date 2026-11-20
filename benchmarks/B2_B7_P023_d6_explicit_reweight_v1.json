@@ -1,0 +1,188 @@
+{
+  "schema_version": "b2_b7_p023_d6_explicit_reweight_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can the complete correlated online decoder, including every second-pass implied weight, be represented explicitly by one unsigned 9-bit even-integer grid without changing any fresh X/Z logical answer?",
+  "frozen_inputs": {
+    "admission_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_microblossom_admission_v1.json",
+      "sha256": "0754acd111887e69339c05979d8dd13bb19411994f4c178340cbc83dca450006"
+    },
+    "admission_result": {
+      "path": "results/B2_B7_P023_d6_microblossom_admission_v1.json",
+      "sha256": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5",
+      "required_classification": "eight_bit_semantic_admission_pass_hardware_execution_unmeasured"
+    },
+    "admission_audit": {
+      "path": "results/B2_B7_P023_d6_microblossom_admission_audit_v1.json",
+      "sha256": "ec5630344db764ec8c5b6edd03fbdb2fc3ca8fa167826d73a882e8175ff329da"
+    },
+    "admission_replay": {
+      "path": "results/B2_B7_P023_d6_microblossom_admission_replay_v1.json",
+      "sha256": "6804e20dee7c9173542fcb23659c765d0de9b6698d50f28c27f15896a9a323f0"
+    },
+    "artifact_commit": "0636e1fd4e87298b21482e4455d4410dfdfd39bf"
+  },
+  "external_source_profile": {
+    "pymatching_repository": "https://github.com/oscarhiggott/PyMatching",
+    "pymatching_version": "2.4.0",
+    "pymatching_tag_commit": "6f63b2b9474ba0fa7e511fe52bffdce858a06984",
+    "pymatching_source_files": {
+      "src/pymatching/sparse_blossom/driver/user_graph.cc": "f3f10c3762e8f64348bc650ff75a43e07b8cd51e927c88a21f4000e23c888b2b",
+      "src/pymatching/sparse_blossom/driver/user_graph.h": "9666b5caecb6ab74e03aedda4c3c9e5865585e43a6012b894b26f64aeca1a52d",
+      "src/pymatching/sparse_blossom/flooder/graph.cc": "1eb8b9b93faa838047ad80117be2cafcdba73a285c19219bd5aa32f6d9ef2265",
+      "src/pymatching/sparse_blossom/flooder/graph.h": "510fc55e6869c115b1a72ab4a3a9eb4e6e0749447907d0c5938a9bdd329591a7",
+      "src/pymatching/sparse_blossom/driver/user_graph.pybind.cc": "b2d61432fd74014940086b9d9c14ff0c3fabac55effa7ce46195b14ed8a984b7",
+      "src/pymatching/sparse_blossom/driver/mwpm_decoding.cc": "6489394bb92008434708802eb258224a5e9b4655e152e339c7867d7801a982f7"
+    },
+    "pymatching_rule": "For each decomposed causal edge, aggregate marginal and joint probabilities by Bernoulli XOR; set p_implied=min(0.5,joint/marginal), w_implied=log((1-p_implied)/p_implied), and only replace a target edge when the implied weight is lower.",
+    "pymatching_discretization": "When every base and implied user weight is integral, get_edge_weight_normalising_constant returns 1 and both paths store 2*round(weight), guaranteeing even internal edge weights.",
+    "micro_blossom_repository": "https://github.com/yuewuo/micro-blossom",
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "micro_blossom_source_files": {
+      "src/fpga/microblossom/modules/Edge.scala": "4bd015361259010c83a70b62bb3b49eb04616fad54c2cb516a8b63a71ef446f7",
+      "src/fpga/microblossom/Instruction.scala": "49697a06d6d166e9a8042c421f77894c5870b9b24f862b2e63e3d0ce86b31aa4",
+      "src/fpga/microblossom/Architecture.scala": "fe2bc13620e2244362cc1a434edfb850c07c839b352a006fda407657c4444fe0",
+      "src/cpu/blossom-nostd/src/instruction.rs": "0686cf5e4ff1a6f86d8b4a8f9ae4895bf5b71dbe9575787a03f7fd7930baa291",
+      "src/cpu/blossom/src/example_codes.rs": "14016f6da0826ca0a99f7264f3b7d16633a36f4be6141843c6c4f8bcf462a3b0",
+      "src/cpu/blossom/src/mwpm_solver.rs": "433c736f8bda84ee51c6b0c4e75bf71a6ff02b4a1e901ab150831039d9ded49b"
+    },
+    "micro_blossom_source_interpretation": "The pinned source requires even graph weights and reserves LoadWeightsExternal, but Edge.scala still marks dynamic edge-weight update TODO, its external write ports are commented, Instruction.scala has no operational load generator, and the embedded solver rejects nonempty dynamic_weights. Static graph compatibility does not establish a functional dynamic write path."
+  },
+  "adapter_contract": {
+    "purpose": "Expose insertion of already-computed integer implied-weight rules into the pinned PyMatching UserGraph so the candidate can exercise the unchanged two-pass decoder without asking PyMatching to derive or rescale candidate weights from probabilities.",
+    "patch": {
+      "path": "tools/patches/pymatching_v2.4.0_explicit_rules.patch",
+      "sha256": "8419932f8ac957fcabfd7f88936f4c889eb332fccaa3fe973c24bda034cd120d"
+    },
+    "build_helper": "tools/build_pymatching_explicit_rules_adapter.sh",
+    "allowed_change": "two pybind insertion methods for ordinary and boundary edges; no matching, reweight, discretization, or decode algorithm is changed",
+    "required_runtime_methods": [
+      "add_edge_with_implied_weights",
+      "add_boundary_edge_with_implied_weights"
+    ],
+    "hardware_interpretation": "software semantic audit adapter only; not Micro Blossom RTL, Verilator, FPGA, cycle, or timing evidence"
+  },
+  "prior_result_correction": {
+    "superseded_phrase": "8-bit graph admission",
+    "summary": "The prior result remains valid as an 8-bit detector-error input-probability experiment, but it did not constrain PyMatching's merged base edges or internally derived implied weights to 8 bits. PyMatching rescaled those non-integral weights into its wide internal integer domain. Its 12+8-bit controller payload was therefore diagnostic, not a realized candidate encoding, and is superseded here by an explicit 12+9-bit replacement payload.",
+    "prior_semantic_result_retracted": false,
+    "prior_hardware_or_latency_credit_changed": false
+  },
+  "known_before_preregistration": {
+    "source_audit": {
+      "pymatching_default_distinct_weights": 16777216,
+      "pymatching_nonintegral_weights_are_globally_rescaled": true,
+      "micro_blossom_input_weights_must_be_even": true,
+      "micro_blossom_dynamic_write_path_complete": false
+    },
+    "post_outcome_development_prefix": {
+      "source": "first four X and first four Z shots from the already public 1,024-shot admission corpora",
+      "x_seed": 6688435014000091791,
+      "z_seed": 16749071433361151958,
+      "x_candidate_frames_equal_reference": "4/4",
+      "z_candidate_frames_equal_reference": "4/4",
+      "x_window_outputs_equal": "656/656",
+      "z_window_outputs_equal": "656/656",
+      "x_commit_and_final_residual_failures": 0,
+      "z_commit_and_final_residual_failures": 0,
+      "disclosure": "route-development evidence on an observed corpus; not the preregistered result"
+    },
+    "structural_diagnostic": {
+      "x_graph_and_rule_classes": 3,
+      "z_graph_and_rule_classes": 3,
+      "steady_windows_per_basis": 162,
+      "x_base_even_range": [144, 264],
+      "z_base_even_range": [142, 264],
+      "x_implied_even_range": [0, 164],
+      "z_implied_even_range": [0, 164],
+      "required_unsigned_width_bits": 9
+    },
+    "fresh_holdout_samples_observed": 0,
+    "fresh_holdout_predictions_observed": 0
+  },
+  "candidate_contract": {
+    "reference_full_block": "unquantized PyMatching 2.4.0 two-pass correlated decode over the complete 1,000-round detector error model",
+    "reference_online": "unquantized public correction-bit fault-vector decoder under the frozen 3d window, d commit, and 2d look-ahead contract",
+    "candidate_base_graph": "extract each merged unquantized online-reference edge with endpoints and complete correction-bit fault_ids; compute h_base=round_C++(16*w_base) and W_base=2*h_base",
+    "candidate_rule_table": "source-faithfully aggregate DEM marginal/joint probabilities, compute p_implied=min(0.5,joint/marginal), h_implied=round_C++(16*log((1-p_implied)/p_implied)), and W_implied=2*h_implied",
+    "candidate_execution": "insert integral h_base and h_implied through the pinned audit adapter; unchanged PyMatching integer discretization doubles both to the explicit even W values, then unchanged two-pass correlated MWPM performs first match, strict-lowering reweight, and second match",
+    "half_weight_scale": 16,
+    "stored_even_weight_scale": 32,
+    "stored_weight_bits": 9,
+    "stored_weight_unsigned": true,
+    "stored_weight_even": true,
+    "unchanged": [
+      "distance-6 X/Z circuits, 71 active qubits, physical noise, and 1,000-round horizon",
+      "3d=18 windows, d=6 commits, and 2d=12 look-ahead",
+      "all graph endpoints and detector/observable correction-bit output maps",
+      "decomposed correlation groups, arrival order, propagation, frame, and residual rules",
+      "exact two-pass MWPM algorithm and strict-lowering rewrite semantics",
+      "single-stream execution with no cross-shot batching"
+    ],
+    "changed": "both merged base-edge weights and every implied replacement weight are explicitly rounded onto the same unsigned 9-bit even grid"
+  },
+  "fresh_holdout_contract": {
+    "memory_bases": ["x", "z"],
+    "shots_per_basis": 1024,
+    "seed_namespace": "B2_B7_P023_d6_explicit_reweight_v1",
+    "seed_derivation": "little-endian uint64 from the first eight SHA-256 bytes of public_freeze_commit:discussion_number:seed_namespace:basis",
+    "seed_unavailable_until_public_freeze_and_discussion": true,
+    "detector_and_observable_bytes_hashed": true,
+    "cross_shot_batching_in_online_paths": false
+  },
+  "semantic_veto": {
+    "candidate_final_frames_equal_reference_online": "1024/1024 in each basis",
+    "reference_online_equal_reference_full_block": "1024/1024 in each basis",
+    "candidate_commit_residual_failures": 0,
+    "candidate_final_residual_failures": 0,
+    "window_syndromes_and_outputs_equal": "167936/167936 in each basis",
+    "base_and_implied_even_weights_fit_unsigned_nine_bits": true,
+    "veto_rule": "no representation or payload result is credited if any required semantic, residual, source, seed, or width condition fails"
+  },
+  "controller_payload_contract": {
+    "first_pass_path": "decode_to_edges_array with correlations disabled on the same explicit integer base graph",
+    "replacement_count": "unique target edges whose implied half-weight is strictly lower than the current base or already selected replacement; this reproduces PyMatching apply_reweights instead of counting every related edge",
+    "edge_index_bits": 12,
+    "weight_bits": 9,
+    "reported_statistics": ["mean", "p50", "p95", "p99", "p999", "maximum", "zero-update fraction"],
+    "latency_interpretation": "payload bits are not cycles, bandwidth, p99 latency, LUTs, BRAMs, timing closure, or device evidence"
+  },
+  "kaggle_inspired_evaluation": {
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "fresh candidate frames, full-block reference frames, every residual, source binding, adapter hash, seed, corpus hash, and integer width must verify before payload is discussed",
+    "cost_after_verification": "report the exact 9-bit even representation and actual strict-lowering replacement payload without converting it into unmeasured hardware latency",
+    "aggregate": "X and Z must both pass; no average can hide a failed basis",
+    "absolute_guardrail": "the existing p99 <=1 microsecond and deadline-miss <=1 percent gates remain open and cannot be waived by semantic admission"
+  },
+  "classification_rule": {
+    "order": [
+      "fresh_holdout_explicit_reweight_semantic_regression",
+      "nine_bit_even_representation_failure",
+      "nine_bit_explicit_reweight_semantic_pass_hardware_write_path_absent"
+    ],
+    "rule": "apply source/semantic/residual verification first, then width admission; even a pass cannot cross the pinned Micro Blossom dynamic-write source gap"
+  },
+  "hard_boundaries": {
+    "micro_blossom_dynamic_weight_write_path_implemented": false,
+    "micro_blossom_rtl_generated_for_candidate": false,
+    "cycle_accurate_candidate_executed": false,
+    "fpga_candidate_executed": false,
+    "hardware_decoder_deadline_passed": false,
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0
+  },
+  "execution_guard": {
+    "preflight_before_publication": "reconstruct all 328 real graphs and rewrite tables, verify exact integer ranges and adapter activation, and run only all-zero syndromes; observe zero fresh stochastic samples",
+    "public_commit_required_before_fresh_seed": true,
+    "public_discussion_required_before_fresh_seed": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true,
+    "runner_verifies_its_own_protocol_and_patch_bytes_at_public_commit": true
+  }
+}

@@ -1,0 +1,61 @@
+diff --git a/src/pymatching/sparse_blossom/driver/user_graph.pybind.cc b/src/pymatching/sparse_blossom/driver/user_graph.pybind.cc
+index 7b227e5..8460d18 100644
+--- a/src/pymatching/sparse_blossom/driver/user_graph.pybind.cc
++++ b/src/pymatching/sparse_blossom/driver/user_graph.pybind.cc
+@@ -150,6 +150,56 @@ void pm_pybind::pybind_user_graph_methods(py::module &m, py::class_<pm::UserGrap
+         "weight"_a,
+         "error_probability"_a,
+         "merge_strategy"_a);
++    g.def(
++        "add_edge_with_implied_weights",
++        [](pm::UserGraph &self,
++           int64_t node1,
++           int64_t node2,
++           const std::set<size_t> &observables,
++           double weight,
++           const std::vector<std::tuple<int64_t, int64_t, double>> &implied_weights) {
++            if (node1 < 0 || node2 < 0)
++                throw std::invalid_argument("Node indices must be non-negative.");
++            self.add_or_merge_edge(node1, node2, std::vector<size_t>(observables.begin(), observables.end()), weight, -1, pm::DISALLOW);
++            size_t index = self.nodes[node1].index_of_neighbor(node2);
++            auto &edge = *self.nodes[node1].neighbors[index].edge_it;
++            edge.implied_weights_for_other_edges.clear();
++            for (const auto &[target1, target2, implied_weight] : implied_weights) {
++                if (target1 < 0 || target2 < -1)
++                    throw std::invalid_argument("Invalid implied-weight target.");
++                edge.implied_weights_for_other_edges.push_back(
++                    {static_cast<size_t>(target1), target2 == -1 ? SIZE_MAX : static_cast<size_t>(target2), implied_weight});
++            }
++        },
++        "node1"_a,
++        "node2"_a,
++        "observables"_a,
++        "weight"_a,
++        "implied_weights"_a);
++    g.def(
++        "add_boundary_edge_with_implied_weights",
++        [](pm::UserGraph &self,
++           int64_t node,
++           const std::set<size_t> &observables,
++           double weight,
++           const std::vector<std::tuple<int64_t, int64_t, double>> &implied_weights) {
++            if (node < 0)
++                throw std::invalid_argument("Node index must be non-negative.");
++            self.add_or_merge_boundary_edge(node, std::vector<size_t>(observables.begin(), observables.end()), weight, -1, pm::DISALLOW);
++            size_t index = self.nodes[node].index_of_neighbor(SIZE_MAX);
++            auto &edge = *self.nodes[node].neighbors[index].edge_it;
++            edge.implied_weights_for_other_edges.clear();
++            for (const auto &[target1, target2, implied_weight] : implied_weights) {
++                if (target1 < 0 || target2 < -1)
++                    throw std::invalid_argument("Invalid implied-weight target.");
++                edge.implied_weights_for_other_edges.push_back(
++                    {static_cast<size_t>(target1), target2 == -1 ? SIZE_MAX : static_cast<size_t>(target2), implied_weight});
++            }
++        },
++        "node"_a,
++        "observables"_a,
++        "weight"_a,
++        "implied_weights"_a);
+     g.def("set_boundary", &pm::UserGraph::set_boundary, "boundary"_a);
+     g.def("get_boundary", &pm::UserGraph::get_boundary);
+     g.def("get_num_observables", &pm::UserGraph::get_num_observables);
