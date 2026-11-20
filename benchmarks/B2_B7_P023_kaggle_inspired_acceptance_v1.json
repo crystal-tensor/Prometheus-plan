@@ -1,0 +1,144 @@
+{
+  "schema_version": "b2_b7_p023_kaggle_inspired_acceptance_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "How should the Google Quantum AI verifiable-compilation evaluation principles be adapted into an honest acceptance standard for logical-memory and QEC resource claims?",
+  "official_sources": [
+    {
+      "id": "kaggle_vqcc_evaluation",
+      "url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+      "source_class": "official_competition_evaluation",
+      "relevant_rules": [
+        "verify a submission before scoring it",
+        "score each task by reference cost divided by candidate cost",
+        "combine task improvements using a geometric mean",
+        "use task-specific cost functions rather than one universal proxy"
+      ]
+    },
+    {
+      "id": "vqcc_companion_paper",
+      "url": "https://arxiv.org/abs/2610.23832",
+      "source_class": "official_companion_preprint",
+      "relevant_rules": [
+        "derive challenge inputs from a salted SHA-256 submission hash",
+        "use a one-sided Clopper-Pearson upper failure bound at confidence 1-2^-128",
+        "include approximation error in the cost only when the algorithm can operationally pay that penalty",
+        "treat logical qubit and Toffoli counts as coarse proxies rather than physical QEC cost"
+      ]
+    }
+  ],
+  "frozen_inputs": {
+    "direct_1k_protocol": {
+      "path": "benchmarks/B2_B7_P023_direct_1k_memory_v1.json",
+      "sha256": "5656abc207e97cc8887414ac6465fb352f167b2e56a1e8a82f4f225c2547f2c8"
+    },
+    "direct_1k_result": {
+      "path": "results/B2_B7_P023_direct_1k_memory_v1.json",
+      "sha256": "e93892fb3f375d786636444831cac595f8f7998b95ed99b8b9c557b79e129e20",
+      "required_decision": "direct_1000_round_staging_gate_passed_p023_scalable_b2_b7_credit_closed"
+    },
+    "direct_1k_generator": {
+      "path": "tools/b2_b7_p023_direct_1k_memory.py",
+      "sha256": "6d4f49b83e40c0d5f186691081a4af4cc4d18559740dcccd93366cd1d11e6d73"
+    },
+    "artifact_freeze_commit": "2c8f3807b504c505751321c7796290bc141a0ae0"
+  },
+  "adoption_map": {
+    "adopted": [
+      "verifier_first_score_second",
+      "fixed_reference_cost_over_candidate_cost",
+      "geometric_mean_across_X_and_Z_memory_tasks",
+      "one_sided_clopper_pearson_upper_bound_at_1_minus_2_to_minus_128",
+      "artifact_hash_derived_challenge_seed",
+      "immutable_machine_readable_submission_and_replay_contract",
+      "zero_score_when_any_correctness_or_evidence_gate_fails"
+    ],
+    "not_copied": [
+      {
+        "rule": "Toffoli and logical-qubit task costs",
+        "reason": "they score fault-tolerant application subroutines, not a physical logical-memory experiment"
+      },
+      {
+        "rule": "DQI repetition penalty R(epsilon_plus)",
+        "reason": "a rejected DQI sample can be rerun, but failure of a stored unknown quantum state cannot be repaired by repeating the memory experiment"
+      },
+      {
+        "rule": "three-task competition portfolio",
+        "reason": "the scoped QEC verifier has two mandatory tasks, X memory and Z memory, at the same physical conditions"
+      }
+    ]
+  },
+  "strict_reference_experiment": {
+    "code_family": "rotated_surface_code_memory",
+    "distance": 7,
+    "memory_bases": ["x", "z"],
+    "rounds": 1000,
+    "physical_error": 0.001,
+    "noise_parameters": {
+      "after_clifford_depolarization": 0.001,
+      "before_round_data_depolarization": 0.001,
+      "before_measure_flip_probability": 0.001,
+      "after_reset_flip_probability": 0.001
+    },
+    "shots_per_basis": 102400,
+    "shot_chunk_size": 256,
+    "target_total_logical_failure": 0.01,
+    "confidence_method": "one-sided Clopper-Pearson upper bound",
+    "false_accept_probability": "2^-128",
+    "confidence_level": "1-2^-128",
+    "challenge_seed_derivation": "lower 63 bits of the first eight SHA-256 bytes of UTF8(salt) || 0x00 || canonical Stim circuit bytes",
+    "challenge_salt": "AH-QEC-KAGGLE-ADAPT-v1|freeze=2c8f3807b504c505751321c7796290bc141a0ae0|acceptance",
+    "artifact_freeze_precedes_acceptance_run": true,
+    "toolchain": {
+      "python": "3.12.6",
+      "stim": "1.16.0",
+      "pymatching": "2.4.0",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1"
+    }
+  },
+  "qec_verification_gate": {
+    "correctness_before_cost": "both X and Z one-sided Clopper-Pearson upper bounds must be <=0.01 at exactly 1,000 rounds and identical physical conditions",
+    "invalid_candidate_score": 0,
+    "projection_credit": false,
+    "single_basis_credit": false,
+    "point_estimate_credit": false,
+    "hardware_credit_from_simulator": false,
+    "decoder_timing": "must be reported; local batch timing is diagnostic and cannot satisfy a hardware deadline gate",
+    "drift_correlation_gate": "required before #023 scalable-memory readiness or B7 credit, but not supplied by this iid circuit-level reference run"
+  },
+  "qec_cost_and_score": {
+    "per_basis_cost": "C_b = physical_qubits * memory_rounds",
+    "reference_cost": "the strict distance-7 surface-code reference cost after both bases pass verification",
+    "basis_improvement": "I_b = C_b_reference / C_b_candidate",
+    "composite_score": "Score_QEC = sqrt(I_X * I_Z) after both bases verify; otherwise Score_QEC=0",
+    "reference_normalized_score": 1.0,
+    "candidate_acceptance": "Score_QEC >=1.25, I_X>=1, I_Z>=1, both strict verification gates pass, and no noise, decoder, connectivity, horizon, or confidence assumption is weakened",
+    "why_no_repetition_factor": "memory failure destroys the stored-state instance; unlike DQI, independent reruns do not operationally recover the same unknown state"
+  },
+  "promotion_ladder": {
+    "exploratory": "95 percent Wilson analysis may guide experiment selection but earns no strict acceptance credit",
+    "strict_1k_reference": "both bases pass the 1-2^-128 Clopper-Pearson gate at 1,000 rounds; normalized reference score becomes 1.0",
+    "b2_candidate_credit": "a same-condition candidate strictly verifies and earns Score_QEC>=1.25 without per-basis regression",
+    "p023_scalable_memory": "strict one-million-round X/Z evidence plus drift/correlation stress and declared decoder deadline",
+    "b7_resource_credit": "P023 and B2 gates pass and calibrated architecture evidence accepts the dependency"
+  },
+  "claim_boundary": {
+    "kaggle_competition_submission_claimed": false,
+    "official_kaggle_metric_reimplemented_claimed": false,
+    "kaggle_principles_adapted_to_qec": true,
+    "new_code_claimed": false,
+    "threshold_claimed": false,
+    "scalable_quantum_memory_claimed": false,
+    "million_round_memory_claimed": false,
+    "hardware_result_claimed": false,
+    "production_decoder_claimed": false,
+    "b2_low_overhead_improvement_claimed": false,
+    "b7_resource_credit_claimed": false,
+    "quantum_advantage_claimed": false
+  }
+}

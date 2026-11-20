@@ -1,0 +1,181 @@
+{
+  "as_of_date": "2026-11-20",
+  "audited_run_id": "72714acb4fc7147da50e7e791c7224789c71e58ef765aab33ab255f63f5525da",
+  "checks": [
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "932cfc764251b9a57ef1f71af984d8a35573fce451bc832f3b64aa0eec727bac",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "All current frozen inputs match.",
+      "name": "current_input_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Freeze commit: 2c8f3807b504c505751321c7796290bc141a0ae0.",
+      "name": "commit_input_hashes",
+      "passed": true
+    },
+    {
+      "detail": "All recorded commit bindings pass.",
+      "name": "recorded_commit_bindings",
+      "passed": true
+    },
+    {
+      "detail": "01fe3bf474ce1cf9f17214ed43d1e6e3c89b40d99a4059d00f09326295e59788",
+      "name": "generator_hash",
+      "passed": true
+    },
+    {
+      "detail": "{'python': '3.12.6', 'stim': '1.16.0', 'pymatching': '2.4.0', 'numpy': '2.4.6', 'scipy': '1.17.1'}",
+      "name": "toolchain",
+      "passed": true
+    },
+    {
+      "detail": "Two official sources.",
+      "name": "official_source_classes",
+      "passed": true
+    },
+    {
+      "detail": "Adopted and rejected transfers are explicit.",
+      "name": "adoption_boundary",
+      "passed": true
+    },
+    {
+      "detail": "X and Z are both present.",
+      "name": "basis_rows",
+      "passed": true
+    },
+    {
+      "detail": "Exactly 102,400 direct 1,000-round shots per basis.",
+      "name": "direct_exposure",
+      "passed": true
+    },
+    {
+      "detail": "Circuit hashes reproduce.",
+      "name": "regenerated_circuits",
+      "passed": true
+    },
+    {
+      "detail": "DEM hashes reproduce.",
+      "name": "regenerated_dems",
+      "passed": true
+    },
+    {
+      "detail": "Salted circuit-hash seeds reproduce.",
+      "name": "regenerated_seeds",
+      "passed": true
+    },
+    {
+      "detail": "Circuit and matching dimensions reproduce.",
+      "name": "regenerated_dimensions",
+      "passed": true
+    },
+    {
+      "detail": "Observed rates reproduce.",
+      "name": "failure_arithmetic",
+      "passed": true
+    },
+    {
+      "detail": "{'x': 0.006386565450246268, 'z': 0.005497006524354125}",
+      "name": "independent_cp_bounds",
+      "passed": true
+    },
+    {
+      "detail": "Strict flags reproduce.",
+      "name": "strict_flags",
+      "passed": true
+    },
+    {
+      "detail": "Both pass: True.",
+      "name": "strict_pair_gate",
+      "passed": true
+    },
+    {
+      "detail": "The old 3,838-shot packet is exploratory only.",
+      "name": "previous_regrade",
+      "passed": true
+    },
+    {
+      "detail": "Floor: 8828.",
+      "name": "zero_failure_floor",
+      "passed": true
+    },
+    {
+      "detail": "400 chunks per basis.",
+      "name": "chunk_coverage",
+      "passed": true
+    },
+    {
+      "detail": "All packed shapes reproduce.",
+      "name": "chunk_shapes",
+      "passed": true
+    },
+    {
+      "detail": "All primary hashes are SHA-256 shaped.",
+      "name": "hash_shapes",
+      "passed": true
+    },
+    {
+      "detail": "{'x': 118000, 'z': 118000}",
+      "name": "costs",
+      "passed": true
+    },
+    {
+      "detail": "Score: 1.0.",
+      "name": "score",
+      "passed": true
+    },
+    {
+      "detail": "Summary totals reproduce.",
+      "name": "summary",
+      "passed": true
+    },
+    {
+      "detail": "Only the strict reference is promoted.",
+      "name": "readiness_boundary",
+      "passed": true
+    },
+    {
+      "detail": "No official-metric or competition claim.",
+      "name": "claim_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Producer: 24/24.",
+      "name": "producer_checks",
+      "passed": true
+    }
+  ],
+  "failure_names": [],
+  "independent_cp_method": "solve log BinomialCDF(k;n,p)=log(2^-128) with Brent root finding, independent of the producer beta inverse-survival path",
+  "independent_cp_upper_by_basis": {
+    "x": 0.006386565450246268,
+    "z": 0.005497006524354125
+  },
+  "schema_version": "b2_b7_p023_kaggle_inspired_acceptance_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "status": "independent_kaggle_inspired_qec_audit_passed",
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 30,
+    "checks_total": 30
+  }
+}
