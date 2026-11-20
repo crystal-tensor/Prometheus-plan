@@ -1,0 +1,190 @@
+{
+  "acceptance": {
+    "axi_phase_control_path": false,
+    "b7_resource_credit": 0,
+    "complete_corrections_compared": false,
+    "edge_mask_weight_rule_banks_replayed": true,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "full_distributed_dual_integration": false,
+    "inactive_selector_rejection_replayed": true,
+    "lut_bram_measured": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "phase_banked_fault_output_map": false,
+    "same_image_x_phase_bank_switching": true,
+    "scalable_p023": false,
+    "vertex_mask_growth_banks_replayed": true,
+    "z_basis_phase_bank_switching": false
+  },
+  "claim_boundary": {
+    "implemented": "same-image X edge-mask/base-weight/rule bank and vertex-mask/growth bank switching",
+    "not_implemented": [
+      "integration into Micro Blossom DistributedDual vertices, edges, convergecast, and conflict logic",
+      "phase-banked fault/output map in RTL",
+      "complete correction or observable comparison",
+      "Z-basis banked RTL",
+      "AXI phase-control path",
+      "FPGA synthesis, Fmax, LUT/BRAM, or routing closure",
+      "end-to-end update-plus-decode latency"
+    ]
+  },
+  "classification": "x_phase_superset_edge_growth_bank_rtl_transition_pass_not_distributed_dual",
+  "date": "2026-11-21",
+  "evidence_id": "c4b2298aefd66f95d537639872c2890adf5cc9bcd16f7283f8af55962a564a86",
+  "generated_rtl": {
+    "artifacts_committed": false,
+    "iverilog_version": "13.0",
+    "spinalhdl_version": "1.9.3",
+    "verilog_bytes": 31684681,
+    "verilog_sha256": "cc0e6bd8944f3932cef38515ecc6504f80745ab8c164ff09b53e38fed64709c1",
+    "vvp_bytes": 53786527,
+    "vvp_sha256": "a831a3b73ba89647ee634251d5988a0e330e5341eb3ff38d9514109af23cd868"
+  },
+  "implementation": {
+    "atomic_event": "phaseSelectValid selects opening/steady/closing and restores every banked register in one simulated clock edge",
+    "basis": "x",
+    "edge_overhead_vs_largest_phase_ratio": 1.00857908847185,
+    "inactive_selector_contract": "an inactive or out-of-range selector increments the rejection counter and cannot update any edge weight",
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "phase_banks": [
+      "edge active mask",
+      "edge base weight",
+      "edge resident rules",
+      "vertex active mask",
+      "vertex maximum growth"
+    ],
+    "superset_edges": 3762,
+    "superset_vertices": 1147
+  },
+  "next_gate": "Integrate the X phase banks and active masks into the real DistributedDual edge/vertex/convergecast paths, add a reset-bound AXI phase command, and compare complete corrections before extending the same mechanism to Z.",
+  "representative_replay": {
+    "batches_passed": 12,
+    "inactive_selector_no_change_edge_comparisons": 45144,
+    "inactive_selectors_rejected": 12,
+    "phase_boundary_batches": [
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 4,
+        "updates": 36
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 6,
+        "updates": 35
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 5,
+        "updates": 44
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 10,
+        "updates": 98
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 11,
+        "updates": 102
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 14,
+        "updates": 117
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 19,
+        "updates": 140
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 15,
+        "updates": 170
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 19,
+        "updates": 148
+      }
+    ],
+    "phase_selections": 12,
+    "post_select_and_post_batch_edge_state_comparisons": 90288,
+    "post_select_and_post_batch_vertex_growth_comparisons": 27528,
+    "selector_commands_accepted": 103
+  },
+  "schema": "b2_b7_p023_d6_x_phase_superset_edge_bank_rtl_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "source": {
+    "phase_trace": "results/B2_B7_P023_d6_microblossom_phase_batch_trace_v1.json",
+    "phase_trace_sha256": "d2ba62b0dca4cf6681391f3cc3976833bbea162d65e26b33bea4df7280a6a938",
+    "rtl_harness": "tools/microblossom/D6XPhaseSupersetEdgeBankReplay.scala",
+    "rtl_harness_sha256": "fea09f2a405251139fc335cca8166c749054c2a2464c2ebf23b0a35008304528",
+    "simulation_transcript": "results/B2_B7_P023_d6_x_phase_superset_edge_bank_sim_v1.log",
+    "simulation_transcript_sha256": "dcfd28b57d9ac4b1ce0e69ae47239442bdeebcb01c5307d22c64695440a7b111",
+    "steady_trace": "results/B2_B7_P023_d6_microblossom_batch_trace_v1.json",
+    "steady_trace_sha256": "ff2236fb612882eb70cc2f28004806987508be5fde34ba85c0099276450f83f6",
+    "superset_plan": "benchmarks/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "superset_plan_evidence_id": "38031dd8b61ff8d0a1a326b13eb5bd7a931084f4d72d62936cc14991091cc1cc",
+    "superset_plan_sha256": "968f66b3fca9691ee3acba96d9036821dd8a3210e6b19406a43189fdb7ace747",
+    "superset_result": "results/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "superset_result_evidence_id": "6c536a2323d0c562d06b5d4a865756950803c3d54ab955eee2f8691ad1a05684",
+    "superset_result_sha256": "924cb092012e1d9aa59ce7c152c5d75e17de63c00a8660756380bf05bbc89f4f"
+  }
+}
