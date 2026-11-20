@@ -1107,10 +1107,14 @@ current_results:
     z_clopper_pearson_upper_delta_2m128: 0.005497006524354128
     target_total_logical_failure: 0.01
     both_bases_strict_pass: true
-    reference_physical_qubits: 118
+    legacy_reference_index_span_qubits: 118
     reference_rounds: 1000
-    reference_cost_per_basis_qubit_rounds: 118000
-    reference_pair_cost_qubit_rounds: 236000
+    legacy_reference_cost_per_basis_qubit_rounds: 118000
+    legacy_reference_pair_cost_qubit_rounds: 236000
+    resource_metric_status: superseded_by_qubit_index_invariance_v1
+    corrected_reference_active_operational_qubits: 97
+    corrected_reference_cost_per_basis_active_qubit_rounds: 97000
+    corrected_reference_pair_cost_active_qubit_rounds: 194000
     normalized_reference_score: 1.0
     future_candidate_score: sqrt((C_x_ref/C_x_candidate)*(C_z_ref/C_z_candidate))
     future_candidate_acceptance_score: '>=1.25'
@@ -1130,6 +1134,43 @@ current_results:
     audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_audit_v1.json
     replay_audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_replay_v1.json
     markdown_report: ../research/B2_B7_P023_kaggle_inspired_acceptance_v1.md
+  qubit_index_invariance_v1:
+    status: qubit_index_loophole_closed_reference_regraded_to_97_active_qubits_b2_p023_b7_credit_closed
+    method: b2_b7_p023_qubit_index_invariance_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_strict_reference: ../results/B2_B7_P023_kaggle_inspired_acceptance_v1.json
+    original_stim_index_span_qubits: 118
+    active_operational_qubits: 97
+    unused_index_slots: 21
+    compacted_index_span_qubits: 97
+    fixed_seed_semantic_replay_shots_per_basis: 8192
+    canonical_circuit_exact_match: true
+    detector_error_model_exact_match: true
+    detector_observable_prediction_failure_trace_exact_match: true
+    raw_byte_challenge_seed_invariant: false
+    canonical_challenge_seed_invariant: true
+    old_label_sensitive_cost_per_basis: 118000
+    corrected_active_qubit_cost_per_basis: 97000
+    corrected_pair_cost: 194000
+    index_only_naive_composite_score: 1.2164948453608246
+    index_only_invariant_composite_score: 1.0
+    index_only_b2_improvement_accepted: false
+    normalized_reference_score: 1.0
+    future_candidate_acceptance_score: '>=1.25'
+    symmetric_1000_round_candidate_max_active_qubits: 77
+    strict_1k_correctness_result_changed: false
+    b2_candidate_score_available: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 30
+    independent_audit_checks_passed: 33
+    exact_replay_checks_passed: 18
+    caveat: resource_metric_correction_not_new_code_hardware_result_scalable_memory_or_b7_credit
+    result: ../results/B2_B7_P023_qubit_index_invariance_v1.json
+    audit: ../results/B2_B7_P023_qubit_index_invariance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_qubit_index_invariance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_qubit_index_invariance_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1166,6 +1207,9 @@ prototype_artifacts:
   kaggle_inspired_acceptance_runner: ../tools/b2_b7_p023_kaggle_inspired_acceptance.py
   kaggle_inspired_acceptance_audit: ../tools/b2_b7_p023_kaggle_inspired_acceptance_audit.py
   kaggle_inspired_acceptance_replay: ../tools/b2_b7_p023_kaggle_inspired_acceptance_replay.py
+  qubit_index_invariance_runner: ../tools/b2_b7_p023_qubit_index_invariance.py
+  qubit_index_invariance_audit: ../tools/b2_b7_p023_qubit_index_invariance_audit.py
+  qubit_index_invariance_replay: ../tools/b2_b7_p023_qubit_index_invariance_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
