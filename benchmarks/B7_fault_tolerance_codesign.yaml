@@ -6617,6 +6617,43 @@ current_results:
     audit: ../results/B2_B7_P023_d6_explicit_reweight_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_explicit_reweight_replay_v1.json
     adjudication_report: ../research/B2_B7_P023_d6_explicit_reweight_adjudication_v1.md
+  d6_explicit_reweight_freeze_v2:
+    status: explicit_sixteen_bit_even_reweight_holdout_preregistered_b7_architecture_credit_zero
+    method: b2_b7_p023_d6_explicit_reweight_v2
+    catalog_problem_ids: [21, 22, 23]
+    source_v1_adjudicated_classification: fresh_holdout_explicit_reweight_semantic_regression
+    post_outcome_route_selection_disclosed: true
+    selected_scale_rule: first_tested_power_of_two_above_1024_clearing_both_public_v1_bases
+    half_weight_scale: 2048
+    stored_even_weight_scale: 4096
+    stored_weight_bits: 16
+    x_preflight_base_even_weight_range: [18348, 33706]
+    z_preflight_base_even_weight_range: [18068, 33706]
+    x_preflight_implied_even_weight_range: [0, 20966]
+    z_preflight_implied_even_weight_range: [0, 20966]
+    unique_graph_and_rule_images_per_basis: 3
+    steady_windows_per_basis: 162
+    fresh_holdout_shots_per_basis: 1024
+    fresh_seed_requires_public_commit_and_discussion: true
+    fresh_stochastic_samples_observed_before_freeze: 0
+    semantic_veto_includes_exact_window_syndromes_and_outputs: true
+    micro_blossom_dynamic_weight_write_path_implemented: false
+    micro_blossom_rtl_generated_for_candidate: false
+    cycle_accurate_candidate_executed: false
+    fpga_candidate_executed: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    caveat: sixteen_bit_software_candidate_only_dynamic_write_path_and_all_hardware_resource_latency_gates_remain_open
+    protocol: B2_B7_P023_d6_explicit_reweight_v2.json
+    runner: ../tools/b2_b7_p023_d6_explicit_reweight_v2.py
+    route_scout: ../tools/b2_b7_p023_d6_explicit_reweight_scale_scout.py
+    adapter_patch: ../tools/patches/pymatching_v2.4.0_explicit_rules.patch
+    markdown_report: ../research/B2_B7_P023_d6_explicit_reweight_freeze_v2.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6667,6 +6704,8 @@ prototype_artifacts:
   d6_microblossom_admission_audit: ../tools/b2_b7_p023_d6_microblossom_admission_audit.py
   d6_microblossom_admission_replay: ../tools/b2_b7_p023_d6_microblossom_admission_replay.py
   d6_explicit_reweight_runner: ../tools/b2_b7_p023_d6_explicit_reweight.py
+  d6_explicit_reweight_v2_runner: ../tools/b2_b7_p023_d6_explicit_reweight_v2.py
+  d6_explicit_reweight_scale_scout: ../tools/b2_b7_p023_d6_explicit_reweight_scale_scout.py
   d6_explicit_reweight_adapter_builder: ../tools/build_pymatching_explicit_rules_adapter.sh
   d6_explicit_reweight_audit: ../tools/b2_b7_p023_d6_explicit_reweight_audit.py
   d6_explicit_reweight_replay: ../tools/b2_b7_p023_d6_explicit_reweight_replay.py
