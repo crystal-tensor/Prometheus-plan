@@ -1,0 +1,83 @@
+{
+  "schema": "b2_b7_p023_d6_microblossom_batch_replay_v1",
+  "date": "2026-11-20",
+  "classification": "accepted_batch_trace_bound_representative_rtl_pass_serial_update_deadline_open",
+  "scope": ["021/B7", "022/B2", "023"],
+  "source": {
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "dynamic_weight_patch_sha256": "990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5",
+    "accepted_batch_trace": "results/B2_B7_P023_d6_microblossom_batch_trace_v1.json",
+    "accepted_batch_trace_sha256": "ff2236fb612882eb70cc2f28004806987508be5fde34ba85c0099276450f83f6",
+    "accepted_batch_trace_evidence_id": "7863dd4cfc9a2e1589b849500f69fbc69767ed70c6aa201468c85e3b2918651e",
+    "simulation_harness": "tools/microblossom/D6RepresentativeBatchReplay.scala",
+    "simulation_harness_sha256": "fe65ef83d7e63e4258e360427d5fa7f1fca950407ca5f397af8bf494a8d368f8",
+    "simulation_transcript": "results/B2_B7_P023_d6_microblossom_representative_batch_sim_v1.log",
+    "simulation_transcript_sha256": "1ef4e78f76d4e279356866def692509adf10c4dd5e118dfd3ec37138c9d1e000"
+  },
+  "accepted_batch_trace": {
+    "fresh_stochastic_samples_observed": 0,
+    "x_window_batches": 167936,
+    "z_window_batches": 167936,
+    "x_unique_update_batches": 160975,
+    "z_unique_update_batches": 161129,
+    "x_total_update_writes": 6362111,
+    "z_total_update_writes": 6425518,
+    "x_update_edges_p99": 102,
+    "z_update_edges_p99": 103,
+    "x_update_edges_maximum": 170,
+    "z_update_edges_maximum": 179,
+    "independent_audit_checks_passed": 108,
+    "independent_audit_checks_total": 108
+  },
+  "representative_rtl_replay": {
+    "graph_phase": "steady",
+    "graph_edges": 2973,
+    "batches_run": 8,
+    "batches_passed": 8,
+    "batches_failed": 0,
+    "full_edge_state_checks": 23784,
+    "full_edge_state_checks_passed": 23784,
+    "reset_before_each_batch": true,
+    "axi64_dynamic_weight_path": true,
+    "spinalhdl_version": "1.9.3",
+    "simulator": "Icarus Verilog 13.0",
+    "rows": [
+      {"basis": "x", "boundary": "zero", "updates": 0, "axi_write_span_slow_cycles": 0, "pass": true},
+      {"basis": "x", "boundary": "p50", "updates": 35, "axi_write_span_slow_cycles": 70, "pass": true},
+      {"basis": "x", "boundary": "p99", "updates": 102, "axi_write_span_slow_cycles": 204, "pass": true},
+      {"basis": "x", "boundary": "maximum", "updates": 170, "axi_write_span_slow_cycles": 340, "pass": true},
+      {"basis": "z", "boundary": "zero", "updates": 0, "axi_write_span_slow_cycles": 0, "pass": true},
+      {"basis": "z", "boundary": "p50", "updates": 35, "axi_write_span_slow_cycles": 70, "pass": true},
+      {"basis": "z", "boundary": "p99", "updates": 103, "axi_write_span_slow_cycles": 206, "pass": true},
+      {"basis": "z", "boundary": "maximum", "updates": 179, "axi_write_span_slow_cycles": 358, "pass": true}
+    ]
+  },
+  "serial_update_pressure": {
+    "observed_slow_cycles_per_update": 2,
+    "x_p99_update_only_cycles": 204,
+    "z_p99_update_only_cycles": 206,
+    "x_p99_minimum_slow_clock_mhz_for_one_microsecond": 204,
+    "z_p99_minimum_slow_clock_mhz_for_one_microsecond": 206,
+    "reset_decode_and_output_cycles_included": false,
+    "fpga_fmax_measured": false,
+    "one_microsecond_deadline_credit": false,
+    "interpretation": "The serial AXI path consumes the entire one-microsecond budget at 204/206 MHz before reset or decode; a resident rule table, wider update lane, or causal-selector broadcast is now the binding architecture fork."
+  },
+  "acceptance": {
+    "representative_steady_edge_state_rtl_replay": true,
+    "opening_representative_rtl_replay": false,
+    "closing_representative_rtl_replay": false,
+    "all_accepted_window_batches_replayed_in_rtl": false,
+    "rtl_corrections_compared": false,
+    "batch_p99_update_cycles_measured": true,
+    "full_update_plus_decode_p99_cycles_measured": false,
+    "p99_le_1us": false,
+    "miss_rate_le_1pct": false,
+    "fpga_timing_closed": false,
+    "lut_bram_measured": false,
+    "full_b2": false,
+    "scalable_p023": false,
+    "b7_resource_credit": 0
+  },
+  "next_gate": "Replace or parallelize the two-cycle-per-edge serial path, then replay opening/steady/closing correction-producing windows and measure full update-plus-decode latency against the one-microsecond gate."
+}
