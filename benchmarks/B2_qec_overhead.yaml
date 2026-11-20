@@ -1034,6 +1034,102 @@ current_results:
     result: ../results/B2_B7_P023_logical_memory_horizon_gate_v1.json
     audit: ../results/B2_B7_P023_logical_memory_horizon_audit_v1.json
     markdown_report: ../research/B2_B7_P023_logical_memory_horizon_gate_v1.md
+  direct_1k_logical_memory_v1:
+    status: direct_1000_round_staging_gate_passed_p023_scalable_b2_b7_credit_closed
+    method: b2_b7_p023_direct_1k_memory_v1
+    catalog_problem_ids: [21, 22, 23]
+    simulator: Stim 1.16.0
+    decoder: PyMatching 2.4.0 MWPM from decomposed detector error model
+    distances: [3, 5, 7]
+    memory_bases: [x, z]
+    physical_error: 0.001
+    direct_rounds: 1000
+    shots_per_configuration: 3838
+    configuration_count: 6
+    total_shots: 23028
+    total_executed_memory_rounds: 23028000
+    total_physical_qubit_rounds: 1596608000
+    total_logical_failures: 1757
+    paired_1_percent_passing_distances: [7]
+    paired_0p1_percent_passing_distances: []
+    d7_x_logical_failures: 13
+    d7_z_logical_failures: 14
+    d7_x_wilson_95_upper: 0.005786885475188773
+    d7_z_wilson_95_upper: 0.006113904487573617
+    confidence_class: exploratory_two_sided_wilson_95_percent
+    p023_direct_1k_staging_pass: true
+    kaggle_inspired_strict_regrade_pass: false
+    d7_x_clopper_pearson_upper_delta_2m128: 0.0332350962319386
+    d7_z_clopper_pearson_upper_delta_2m128: 0.03386966807267319
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    b2_low_overhead_credit_ready: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 24
+    independent_audit_checks_passed: 34
+    exact_replay_checks_passed: 20
+    exact_scientific_replay_rows: 6
+    caveat: direct_1000_round_simulator_evidence_not_million_round_hardware_threshold_scalable_memory_or_low_overhead_claim
+    result: ../results/B2_B7_P023_direct_1k_memory_v1.json
+    manifest: ../results/B2_B7_P023_direct_1k_memory_manifest_v1.json
+    audit: ../results/B2_B7_P023_direct_1k_memory_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_direct_1k_memory_replay_audit_v1.json
+    markdown_report: ../research/B2_B7_P023_direct_1k_memory_v1.md
+  kaggle_inspired_strict_1k_reference_v1:
+    status: kaggle_inspired_strict_1k_reference_verified_p023_b2_b7_credit_closed
+    method: b2_b7_p023_kaggle_inspired_acceptance_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_standard: Google Quantum AI Verifiable Quantum Circuit Compilation evaluation principles
+    official_evaluation_url: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation
+    official_companion_paper: https://arxiv.org/abs/2610.23832
+    adopted_rules:
+      - verifier_first_score_second
+      - reference_cost_over_candidate_cost
+      - geometric_mean_across_x_and_z
+      - one_sided_clopper_pearson_at_1_minus_2_to_minus_128
+      - salted_artifact_hash_challenge_seed
+      - invalid_candidate_score_zero
+    not_copied:
+      - Toffoli_application_circuit_costs
+      - DQI_repetition_penalty_for_memory_failure
+      - three_task_competition_portfolio
+    reference_code_family: rotated_surface_code_memory
+    reference_distance: 7
+    direct_rounds: 1000
+    physical_error: 0.001
+    shots_per_basis: 102400
+    total_shots: 204800
+    x_logical_failures: 350
+    z_logical_failures: 283
+    x_clopper_pearson_upper_delta_2m128: 0.006386565450246276
+    z_clopper_pearson_upper_delta_2m128: 0.005497006524354128
+    target_total_logical_failure: 0.01
+    both_bases_strict_pass: true
+    reference_physical_qubits: 118
+    reference_rounds: 1000
+    reference_cost_per_basis_qubit_rounds: 118000
+    reference_pair_cost_qubit_rounds: 236000
+    normalized_reference_score: 1.0
+    future_candidate_score: sqrt((C_x_ref/C_x_candidate)*(C_z_ref/C_z_candidate))
+    future_candidate_acceptance_score: '>=1.25'
+    per_basis_regression_allowed: false
+    strict_1k_reference_verified: true
+    b2_candidate_score_available: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    b7_resource_credit: 0
+    formal_checks_passed: 24
+    independent_audit_checks_passed: 30
+    exact_replay_checks_passed: 22
+    caveat: kaggle_principles_adapted_not_official_metric_or_submission_strict_simulator_reference_only
+    result: ../results/B2_B7_P023_kaggle_inspired_acceptance_v1.json
+    audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_kaggle_inspired_acceptance_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1064,6 +1160,12 @@ prototype_artifacts:
   c1_calibration_source_replay_packet_gate: ../tools/b2_b7_c1_calibration_source_replay_packet_gate.py
   logical_memory_horizon_gate: ../tools/b2_b7_p023_logical_memory_horizon_gate.py
   logical_memory_horizon_audit: ../tools/b2_b7_p023_logical_memory_horizon_audit.py
+  direct_1k_logical_memory_runner: ../tools/b2_b7_p023_direct_1k_memory.py
+  direct_1k_logical_memory_audit: ../tools/b2_b7_p023_direct_1k_memory_audit.py
+  direct_1k_logical_memory_replay: ../tools/b2_b7_p023_direct_1k_memory_replay.py
+  kaggle_inspired_acceptance_runner: ../tools/b2_b7_p023_kaggle_inspired_acceptance.py
+  kaggle_inspired_acceptance_audit: ../tools/b2_b7_p023_kaggle_inspired_acceptance_audit.py
+  kaggle_inspired_acceptance_replay: ../tools/b2_b7_p023_kaggle_inspired_acceptance_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

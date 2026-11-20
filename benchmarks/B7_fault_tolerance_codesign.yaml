@@ -5849,6 +5849,72 @@ current_results:
     result: ../results/B2_B7_P023_logical_memory_horizon_gate_v1.json
     audit: ../results/B2_B7_P023_logical_memory_horizon_audit_v1.json
     markdown_report: ../research/B2_B7_P023_logical_memory_horizon_gate_v1.md
+  direct_1k_logical_memory_v1:
+    status: direct_1000_round_staging_gate_passed_p023_scalable_b2_b7_credit_closed
+    method: b2_b7_p023_direct_1k_memory_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_horizon_gate: ../results/B2_B7_P023_logical_memory_horizon_gate_v1.json
+    direct_rounds: 1000
+    simulator_configurations: 6
+    shots_per_configuration: 3838
+    total_shots: 23028
+    total_physical_qubit_rounds: 1596608000
+    paired_1_percent_passing_distances: [7]
+    paired_0p1_percent_passing_distances: []
+    p023_direct_1k_staging_pass: true
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    same_condition_candidate_code_gain_passed: false
+    calibrated_dependency_credit_passed: false
+    b2_low_overhead_credit_ready: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 24
+    independent_audit_checks_passed: 34
+    exact_replay_checks_passed: 20
+    caveat: direct_1000_round_simulator_staging_result_only_no_architecture_resource_credit
+    result: ../results/B2_B7_P023_direct_1k_memory_v1.json
+    manifest: ../results/B2_B7_P023_direct_1k_memory_manifest_v1.json
+    audit: ../results/B2_B7_P023_direct_1k_memory_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_direct_1k_memory_replay_audit_v1.json
+    markdown_report: ../research/B2_B7_P023_direct_1k_memory_v1.md
+  kaggle_inspired_strict_1k_reference_v1:
+    status: kaggle_inspired_strict_1k_reference_verified_p023_b2_b7_credit_closed
+    method: b2_b7_p023_kaggle_inspired_acceptance_v1
+    catalog_problem_ids: [21, 22, 23]
+    official_evaluation_url: https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation
+    verification_before_cost: true
+    confidence_method: one_sided_clopper_pearson_1_minus_2_to_minus_128
+    strict_reference_distance: 7
+    strict_reference_rounds: 1000
+    strict_reference_physical_error: 0.001
+    strict_reference_shots_per_basis: 102400
+    x_strict_upper: 0.006386565450246276
+    z_strict_upper: 0.005497006524354128
+    both_bases_strict_pass: true
+    reference_cost_per_basis_qubit_rounds: 118000
+    normalized_reference_score: 1.0
+    future_candidate_score: geometric_mean_of_x_z_reference_over_candidate_cost
+    future_candidate_acceptance_score: '>=1.25'
+    strict_1k_reference_verified: true
+    b2_candidate_score_available: false
+    same_condition_candidate_code_gain_passed: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    p023_scalable_memory_ready: false
+    b2_low_overhead_credit_ready: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 24
+    independent_audit_checks_passed: 30
+    exact_replay_checks_passed: 22
+    caveat: strict_simulator_reference_not_hardware_memory_or_architecture_credit
+    result: ../results/B2_B7_P023_kaggle_inspired_acceptance_v1.json
+    audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_kaggle_inspired_acceptance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_kaggle_inspired_acceptance_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -5860,6 +5926,12 @@ prototype_artifacts:
   b2_b7_c1_calibration_source_replay_packet_gate: ../tools/b2_b7_c1_calibration_source_replay_packet_gate.py
   logical_memory_horizon_gate: ../tools/b2_b7_p023_logical_memory_horizon_gate.py
   logical_memory_horizon_audit: ../tools/b2_b7_p023_logical_memory_horizon_audit.py
+  direct_1k_logical_memory_runner: ../tools/b2_b7_p023_direct_1k_memory.py
+  direct_1k_logical_memory_audit: ../tools/b2_b7_p023_direct_1k_memory_audit.py
+  direct_1k_logical_memory_replay: ../tools/b2_b7_p023_direct_1k_memory_replay.py
+  kaggle_inspired_acceptance_runner: ../tools/b2_b7_p023_kaggle_inspired_acceptance.py
+  kaggle_inspired_acceptance_audit: ../tools/b2_b7_p023_kaggle_inspired_acceptance_audit.py
+  kaggle_inspired_acceptance_replay: ../tools/b2_b7_p023_kaggle_inspired_acceptance_replay.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
