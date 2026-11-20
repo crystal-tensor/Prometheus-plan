@@ -1,0 +1,614 @@
+--- a/src/fpga/microblossom/Instruction.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/Instruction.scala	2026-11-20 21:54:28
+@@ -90,9 +90,10 @@
+   def isAddDefect(): Bool = opCode === OpCode.AddDefectVertex
+   def isFindObstacle(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.FindObstacle)
+   def isReset(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.Reset)
++  def isLoadWeightsExternal(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.LoadWeightsExternal)
+   def isLoadDefectsExternal(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.LoadDefectsExternal)
+ 
+-  def isChangingSyndrome(): Bool = isAddDefect || isReset || isLoadDefectsExternal
++  def isChangingSyndrome(): Bool = isAddDefect || isReset || isLoadWeightsExternal || isLoadDefectsExternal
+ 
+   def assignExtendedOpCode(code: Int) = {
+     opCode := OpCode.SetSpeed
+@@ -109,6 +110,10 @@
+     payload.clearAll()
+     assignExtendedOpCode(ExtendedOpCode.FindObstacle)
+   }
++  def assignLoadWeightsExternal() = {
++    payload.clearAll()
++    assignExtendedOpCode(ExtendedOpCode.LoadWeightsExternal)
++  }
+ }
+ 
+ case class BitRange(msb: Int, lsb: Int) {
+@@ -167,6 +172,9 @@
+   }
+   def generateFindObstacle(): Long = {
+     generateExtendedSuffix(ExtendedOpCode.FindObstacle)
++  }
++  def generateLoadWeightsExternal(): Long = {
++    generateExtendedSuffix(ExtendedOpCode.LoadWeightsExternal)
+   }
+   def generateAddDefect(vertex: Long, node: Long): Long = {
+     opCodeRange.masked(OpCode.AddDefectVertex) | field1Range.masked(vertex) | field2Range.masked(node)
+@@ -202,6 +210,8 @@
+   def isAddDefect(value: Long) = opCode(value) == OpCode.AddDefectVertex
+   def isFindObstacle(value: Long) = isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.FindObstacle)
+   def isReset(value: Long) = isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.Reset)
++  def isLoadWeightsExternal(value: Long) =
++    isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.LoadWeightsExternal)
+   def isLoadDefectsExternal(value: Long) =
+     isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.LoadDefectsExternal)
+ 
+@@ -227,6 +237,8 @@
+       return s"FindObstacle()"
+     } else if (isReset(value)) {
+       return s"Reset()"
++    } else if (isLoadWeightsExternal(value)) {
++      return s"LoadWeightsExternal()"
+     } else if (isLoadDefectsExternal(value)) {
+       return s"LoadDefectsExternal(time=${field1(value)})"
+     } else {
+@@ -264,6 +276,8 @@
+       return spec.generateFindObstacle()
+     } else if (isReset(value)) {
+       return spec.generateReset()
++    } else if (isLoadWeightsExternal(value)) {
++      return spec.generateLoadWeightsExternal()
+     } else if (isLoadDefectsExternal(value)) {
+       val result = spec.generateLoadDefectsExternal(field1(value))
+       assert(spec.field1(result) == field1(value))
+--- a/src/fpga/microblossom/types/BroadcastMessage.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/types/BroadcastMessage.scala	2026-11-20 21:54:28
+@@ -9,6 +9,10 @@
+   val instruction = Instruction(config)
+   val isReset = explicitReset generate Bool
+   val contextId = (config.contextBits > 0) generate UInt(config.contextBits bits)
++  // LoadWeightsExternal uses this sideband because a 32-bit instruction cannot
++  // hold both the architectural 15-bit edge index and a 16+ bit weight.
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
+ 
+   def resizedFrom(source: BroadcastMessage) = {
+     valid := source.valid
+@@ -19,6 +23,8 @@
+     if (config.contextBits > 0) {
+       contextId := source.contextId
+     }
++    weightUpdateEdgeIndex := source.weightUpdateEdgeIndex
++    weightUpdateWeight := source.weightUpdateWeight.resized
+   }
+ }
+ 
+--- a/src/fpga/microblossom/modules/MicroBlossomLooper.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/modules/MicroBlossomLooper.scala	2026-11-20 21:54:46
+@@ -72,6 +72,8 @@
+     if (config.contextBits > 0) { inputEntry.contextId := responseEntry.contextId }
+     if (tagType != null) inputEntry.tag := responseEntry.tag
+     inputEntry.maximumGrowth := responseEntry.maximumGrowth
++    inputEntry.weightUpdateEdgeIndex := 0
++    inputEntry.weightUpdateWeight := 0
+     when(responseEntry.isLoopBackGrow) {
+       inputEntry.grown := responseEntry.grown
+       inputEntry.isLoopBackGrow := False
+@@ -88,6 +90,8 @@
+     inputEntry.maximumGrowth := io.push.payload.maximumGrowth
+     inputEntry.grown := 0
+     inputEntry.isLoopBackGrow := False
++    inputEntry.weightUpdateEdgeIndex := io.push.payload.weightUpdateEdgeIndex
++    inputEntry.weightUpdateWeight := io.push.payload.weightUpdateWeight
+     inputInstruction := io.push.payload.instruction
+   }
+ 
+@@ -95,6 +99,8 @@
+   microBlossom.io.message.valid := inputEntry.valid
+   microBlossom.io.message.instruction := inputInstruction
+   if (config.contextBits > 0) { microBlossom.io.message.contextId := inputEntry.contextId }
++  microBlossom.io.message.weightUpdateEdgeIndex := inputEntry.weightUpdateEdgeIndex
++  microBlossom.io.message.weightUpdateWeight := inputEntry.weightUpdateWeight
+ 
+   // shift pipeline entries
+   for (i <- (0 until pipelineLength).reverse) {
+@@ -143,6 +149,8 @@
+     }
+     io.pop.ready #= true
+     io.push.payload.maximumGrowth #= input.maximumGrowth
++    io.push.payload.weightUpdateEdgeIndex #= 0
++    io.push.payload.weightUpdateWeight #= 0
+     clockDomain.waitSamplingWhere(io.push.ready.toBoolean)
+     io.push.valid #= false
+     clockDomain.waitSamplingWhere(io.pop.valid.toBoolean)
+@@ -189,6 +197,8 @@
+   val instruction = Instruction(config)
+   val contextId = (config.contextBits > 0) generate UInt(config.contextBits bits)
+   val maximumGrowth = UInt(16 bits)
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
+   val tag = (tagType != null) generate cloneOf(tagType)
+ }
+ 
+@@ -210,6 +220,8 @@
+   // the offloading module has not taken effect. The fix is to always issue a FindObstacle
+   // instruction after the loopback Grow instruction (isLoopBackGrow := True)
+   val isLoopBackGrow = Bool
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
+   val tag = (tagType != null) generate cloneOf(tagType)
+ 
+   def initDefault(): PipelineEntry[T] = {
+--- a/src/fpga/microblossom/modules/DistributedDual.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/modules/DistributedDual.scala	2026-11-20 22:06:00
+@@ -32,6 +32,8 @@
+   broadcastMessage.valid := io.message.valid
+   if (config.contextBits > 0) { broadcastMessage.contextId := io.message.contextId }
+   broadcastMessage.isReset := io.message.instruction.isReset
++  broadcastMessage.weightUpdateEdgeIndex := io.message.weightUpdateEdgeIndex
++  broadcastMessage.weightUpdateWeight := io.message.weightUpdateWeight.resized
+ 
+   // delay the signal so that the synthesizer can automatically balancing the registers
+   val broadcastRegInserted = Delay(broadcastMessage, config.broadcastDelay)
+@@ -150,6 +152,8 @@
+   def simExecute(instruction: Long): (DataMaxGrowable, DataConflictRaw) = {
+     io.message.valid #= true
+     io.message.instruction #= instruction
++    io.message.weightUpdateEdgeIndex #= 0
++    io.message.weightUpdateWeight #= 0
+     clockDomain.waitSampling()
+     io.message.valid #= false
+     for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
+@@ -167,6 +171,20 @@
+         io.conflict.vertex2.toInt
+       )
+     )
++  }
++
++  def simUpdateWeight(edgeIndex: Int, weight: Int): Unit = {
++    require(!config.hardCodeWeights, "dynamic weight update requires hardCodeWeights=false")
++    require(edgeIndex >= 0 && edgeIndex < config.edgeNum, "edge index out of range")
++    require(weight >= 0 && BigInt(weight) < (BigInt(1) << config.weightBits), "weight out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= edgeIndex
++    io.message.weightUpdateWeight #= weight
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
+   }
+ 
+   // before compiling the simulator, mark the fields as public to enable snapshot
+@@ -408,6 +426,85 @@
+       }
+   }
+ 
++  test("dynamic weight sideband updates exactly one edge and reset restores base weight") {
++    val vertexTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(4), None, None),
++        BinaryTreeNode(Some(4), Some(0), Some(1)),
++        BinaryTreeNode(None, Some(3), Some(2))
++      )
++    )
++    val edgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(None, Some(0), Some(1))
++      )
++    )
++    val vertexEdgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(8), None, None),
++        BinaryTreeNode(Some(7), Some(0), Some(1)),
++        BinaryTreeNode(Some(7), Some(2), Some(3)),
++        BinaryTreeNode(Some(8), Some(5), Some(6)),
++        BinaryTreeNode(None, Some(7), Some(4))
++      )
++    )
++    val graph = SingleGraph(
++      positions = Seq(Position(0, 0, 0), Position(1, 0, 0), Position(2, 0, 0)),
++      vertex_num = 3,
++      weighted_edges = Seq(WeightedEdge(0, 1, 2), WeightedEdge(1, 2, 3)),
++      virtual_vertices = Seq(),
++      vertex_binary_tree = vertexTree,
++      edge_binary_tree = edgeTree,
++      vertex_edge_binary_tree = vertexEdgeTree,
++      vertex_max_growth = Seq(3, 5, 3),
++      offloading = Seq(),
++      layer_fusion = None,
++      parity_reporters = None
++    )
++    val config = DualConfig(graph = graph)
++    val ioConfig = DualConfig()
++    config.contextDepth = 1
++    config.hardCodeWeights = false
++    config.sanityCheck()
++    val baseWeight0 = config.graph.weighted_edges(0).w.toInt
++    val baseWeight1 = config.graph.weighted_edges(1).w.toInt
++    val replacementWeight = baseWeight0 + 1
++    require(replacementWeight < (1 << config.weightBits))
++
++    Config.sim
++      .withIVerilog
++      .compile({
++        val dut = DistributedDual(config, ioConfig)
++        dut.simMakePublicSnapshot()
++        dut
++      })
++      .doSim("dynamic_weight_sideband") { dut =>
++        dut.clockDomain.forkStimulus(period = 10)
++        dut.io.message.valid #= false
++        dut.io.message.weightUpdateEdgeIndex #= 0
++        dut.io.message.weightUpdateWeight #= 0
++        for (_ <- 0 to 3) { dut.clockDomain.waitSampling() }
++
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++        dut.simUpdateWeight(edgeIndex = 0, weight = replacementWeight)
++        assert(dut.edges(0).register.weight.toInt == replacementWeight)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++
++        dut.simExecute(ioConfig.instructionSpec.generateReset())
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++      }
++  }
++
+ }
+ 
+ // sbt "runMain microblossom.modules.DistributedDualTestDebug1"
+--- a/src/fpga/microblossom/modules/Edge.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/modules/Edge.scala	2026-11-20 21:54:46
+@@ -88,7 +88,19 @@
+     message := io.message
+   }
+ 
+-  stages.offloadSet.state := fetchState
++  val nextFetchState = EdgeState(config.weightBits)
++  nextFetchState := fetchState
++  if (!config.hardCodeWeights) {
++    when(message.valid && message.isReset) {
++      nextFetchState := EdgeState.resetValue(config, edgeIndex)
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++    ) {
++      nextFetchState.weight := message.weightUpdateWeight
++    }
++  }
++  stages.offloadSet.state := nextFetchState
+   stages.offloadSet.compact.connect(message)
+ 
+   stages.offloadSet2.connect(stages.offloadGet) // weight might be changed later
+@@ -135,8 +147,6 @@
+ 
+   stages.offloadSet4.connect(stages.offloadGet3)
+ 
+-  // TODO: dynamically update edge weights
+-  // Mux(message.isReset, EdgeState.resetValue(config, edgeIndex), fetchState)
+   stages.executeSet.connect(stages.offloadGet4)
+ 
+   stages.executeSet2.connect(stages.executeGet)
+@@ -185,21 +195,24 @@
+   io.maxGrowable := Delay(edgeResponse.io.maxGrowable, outDelay)
+   io.conflict := Delay(edgeResponse.io.conflict, outDelay)
+ 
+-  /* No write back: giving ports for external edge weights channels */
+-  // val writeState = stages.updateGet3.state
+-  // if (config.contextBits > 0) {
+-  //   ram.write(
+-  //     address = stages.updateGet3.compact.contextId,
+-  //     data = writeState,
+-  //     enable = stages.updateGet3.compact.valid
+-  //   )
+-  // } else {
+-  //   when(stages.updateGet3.compact.valid) {
+-  //     if (!config.hardCodeWeights) {
+-  //       register := writeState
+-  //     }
+-  //   }
+-  // }
++  if (!config.hardCodeWeights) {
++    val writeWeight = message.valid &&
++      (message.isReset || (
++        message.instruction.isLoadWeightsExternal &&
++          message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++      ))
++    if (config.contextBits > 0) {
++      ram.write(
++        address = message.contextId,
++        data = nextFetchState,
++        enable = writeWeight
++      )
++    } else {
++      when(writeWeight) {
++        register := nextFetchState
++      }
++    }
++  }
+ 
+   // inject registers
+   for (stageName <- config.injectRegisters) {
+--- a/src/fpga/microblossom/MicroBlossomBus.scala	2026-07-13 03:42:53
++++ b/src/fpga/microblossom/MicroBlossomBus.scala	2026-11-20 22:09:28
+@@ -68,6 +68,10 @@
+ //    0x2004: 32 bits instruction for context 1
+ //    0x2008: ... repeat for 1024: in total 4KB space
+ //    0x2FFC
++//  - (dynamic weights only) the following 4KB section accepts one weight update per write
++//    0x3000: edge index [14:0], reserved [15], weight [31:16], context id [47:32] on 64-bit buses
++//    0x3000: edge index [14:0], reserved [15], weight [31:16] on 32-bit buses; context id is in the address
++//    0x3008/0x3004: next update slot (the mapping is intentionally alias-like for burst writes)
+ // 2. 128KB context readouts at [0x2_0000, 0x4_0000), each context takes 128 byte space, assuming no more than 1024 contexts
+ //    [context 0]
+ //      0: (R) 64 bits timestamp of receiving the last ``load'' instruction
+@@ -310,6 +314,31 @@
+   } else {
+     factory.nonStopWrite(instruction.value, bitOffset = 0)
+     instruction.contextId := factory.writeAddress().resized
++  }
++  val weightUpdate = new Area {
++    val edgeIndex = UInt(15 bits)
++    val weight = UInt(config.weightBits bits)
++    val contextIdRaw = UInt(16 bits)
++    val contextId = UInt(config.contextBits bits)
++    val mapping = SizeMapping(base = 12 KiB, size = 4 KiB)
++    val documentation = "dynamic edge-weight update array"
++  }
++  if (!config.hardCodeWeights) {
++    require(config.weightBits <= 16, "the packed dynamic-weight bus protocol supports at most 16 weight bits")
++    factory.nonStopWrite(weightUpdate.edgeIndex, bitOffset = 0)
++    factory.nonStopWrite(weightUpdate.weight, bitOffset = 16)
++    if (is64bus) {
++      factory.nonStopWrite(weightUpdate.contextIdRaw, bitOffset = 32)
++      weightUpdate.contextId := weightUpdate.contextIdRaw.resized
++    } else {
++      weightUpdate.contextIdRaw := (factory.writeAddress().resize(log2Up(4 KiB)) >> 2).resized
++      weightUpdate.contextId := weightUpdate.contextIdRaw.resized
++    }
++  } else {
++    weightUpdate.edgeIndex.assignDontCare()
++    weightUpdate.weight.assignDontCare()
++    weightUpdate.contextIdRaw.assignDontCare()
++    weightUpdate.contextId.assignDontCare()
+   }
+   // read address: factory.readAddress()
+   val readout = new Area {
+@@ -358,6 +387,10 @@
+   }
+   factory.onWritePrimitive(instruction.mapping, haltSensitive = false, instruction.documentation)(onAskWrite)
+   factory.onWritePrimitive(instruction.mapping, haltSensitive = true, instruction.documentation)(onDoWrite)
++  if (!config.hardCodeWeights) {
++    factory.onWritePrimitive(weightUpdate.mapping, haltSensitive = false, weightUpdate.documentation)(onAskWrite)
++    factory.onWritePrimitive(weightUpdate.mapping, haltSensitive = true, weightUpdate.documentation)(onDoWrite)
++  }
+   factory.onWritePrimitive(readout.mapping, haltSensitive = false, readout.documentation)(onAskWrite)
+   factory.onWritePrimitive(readout.mapping, haltSensitive = true, readout.documentation)(onDoWrite)
+   factory.onReadPrimitive(readout.mapping, haltSensitive = false, readout.documentation)(onAskRead)
+@@ -447,8 +480,17 @@
+           }
+         } elsewhen (isWriteAsk) {
+           when(instruction.mapping.hit(factory.writeAddress())) {
++            when(instruction.value.isLoadWeightsExternal) {
++              // A bare opcode has no edge/weight payload. Require the packed sideband window.
++              hasError := True
++              isWriteHalt := False
++            } otherwise {
++              hardwareInfo.instructionCounter := hardwareInfo.instructionCounter + 1
++              goto(stateWriteInstruction)
++            }
++          } elsewhen (Bool(!config.hardCodeWeights) && weightUpdate.mapping.hit(factory.writeAddress())) {
+             hardwareInfo.instructionCounter := hardwareInfo.instructionCounter + 1
+-            goto(stateWriteInstruction)
++            goto(stateWriteWeightUpdate)
+           } elsewhen (readout.mapping.hit(factory.writeAddress())) {
+             val builder = WhenBuilder()
+             builder.when(readout.writeSubAddress === U(16)) { goto(stateUpdateMaximumGrowth) }
+@@ -619,6 +661,8 @@
+         looperInput.tag.isFindObstacle := True
+         looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
+         looperInput.maximumGrowth := fsmMaximumGrowth.data - fsmAccumulatedGrown.data
++        looperInput.weightUpdateEdgeIndex := 0
++        looperInput.weightUpdateWeight := 0
+         // prepare the data into the push FIFO
+         ccFifoPush.io.push.valid := True
+         ccFifoPush.io.push.payload := looperInput
+@@ -789,6 +833,8 @@
+           looperInput.tag.instructionId := instructionId
+           looperInput.tag.isFindObstacle := isFindObstacle
+           looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
++          looperInput.weightUpdateEdgeIndex := 0
++          looperInput.weightUpdateWeight := 0
+           when(isFindObstacle) {
+             looperInput.maximumGrowth := fsmMaximumGrowth.data - fsmAccumulatedGrown.data
+           } otherwise {
+@@ -832,6 +878,49 @@
+         ccFifoPush.io.push.valid := True
+         ccFifoPush.io.push.payload := dataWaitFiFoPushLooperInput
+         when(ccFifoPush.io.push.ready) {
++          isWriteHalt := False
++          goto(stateIdle)
++        }
++      }
++    }
++
++    val stateWriteWeightUpdate: State = new State {
++      whenIsNext {
++        fsmPushId.readNext(weightUpdate.contextId)
++        fsmAccumulatedGrown.readNext(weightUpdate.contextId)
++        fsmTimeLoad.upper.writeNext(weightUpdate.contextId, counter.valueNext(63 downto 32))
++        fsmTimeLoad.lower.writeNext(weightUpdate.contextId, counter.valueNext(31 downto 0))
++        fsmTimeFinish.upper.writeNext(weightUpdate.contextId, ~U(0, 32 bits))
++        fsmTimeFinish.lower.writeNext(weightUpdate.contextId, ~U(0, 32 bits))
++      }
++      whenIsActive {
++        when(
++          weightUpdate.edgeIndex < U(config.edgeNum, 15 bits) &&
++            weightUpdate.contextIdRaw <= weightUpdate.contextId.maxValue
++        ) {
++          val instructionId = fsmPushId.data + 1
++          val looperInput = LooperInput(config, InstructionTag(config))
++          looperInput.instruction.assignLoadWeightsExternal()
++          if (config.contextBits > 0) { looperInput.contextId := weightUpdate.contextId }
++          looperInput.maximumGrowth.clearAll()
++          looperInput.weightUpdateEdgeIndex := weightUpdate.edgeIndex
++          looperInput.weightUpdateWeight := weightUpdate.weight
++          looperInput.tag.instructionId := instructionId
++          looperInput.tag.isFindObstacle := False
++          looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
++          ccFifoPush.io.push.valid := True
++          ccFifoPush.io.push.payload := looperInput
++          fsmPushId.writeNext(weightUpdate.contextId, instructionId)
++          fsmIsLastFindObstacle.writeNext(weightUpdate.contextId, False)
++          when(ccFifoPush.io.push.ready) {
++            isWriteHalt := False
++            goto(stateIdle)
++          } otherwise {
++            dataWaitFiFoPushLooperInput := looperInput
++            goto(stateWriteWaitFiFoPush)
++          }
++        } otherwise {
++          hasError := True
+           isWriteHalt := False
+           goto(stateIdle)
+         }
+@@ -887,6 +976,51 @@
+ 
+ // sbt 'testOnly *MicroBlossomBusTest'
+ class MicroBlossomBusTest extends AnyFunSuite {
++
++  def dynamicWeightGraph(): SingleGraph = {
++    val vertexTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(4), None, None),
++        BinaryTreeNode(Some(4), Some(0), Some(1)),
++        BinaryTreeNode(None, Some(3), Some(2))
++      )
++    )
++    val edgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(None, Some(0), Some(1))
++      )
++    )
++    val vertexEdgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(8), None, None),
++        BinaryTreeNode(Some(7), Some(0), Some(1)),
++        BinaryTreeNode(Some(7), Some(2), Some(3)),
++        BinaryTreeNode(Some(8), Some(5), Some(6)),
++        BinaryTreeNode(None, Some(7), Some(4))
++      )
++    )
++    SingleGraph(
++      positions = Seq(Position(0, 0, 0), Position(1, 0, 0), Position(2, 0, 0)),
++      vertex_num = 3,
++      weighted_edges = Seq(WeightedEdge(0, 1, 2), WeightedEdge(1, 2, 3)),
++      virtual_vertices = Seq(),
++      vertex_binary_tree = vertexTree,
++      edge_binary_tree = edgeTree,
++      vertex_edge_binary_tree = vertexEdgeTree,
++      vertex_max_growth = Seq(3, 5, 3),
++      offloading = Seq(),
++      layer_fusion = None,
++      parity_reporters = None
++    )
++  }
+ 
+   test("logic_validity") {
+     val config = DualConfig(filename = "./resources/graphs/example_code_capacity_d3.json")
+@@ -913,6 +1047,78 @@
+ 
+   }
+ 
++  test("packed AXI weight update reaches one edge and reset restores base weight") {
++    val config = DualConfig(graph = dynamicWeightGraph())
++    config.contextDepth = 1
++    config.hardCodeWeights = false
++    config.sanityCheck()
++    val clockDivideBy = 2
++    val baseWeight0 = config.graph.weighted_edges(0).w.toInt
++    val baseWeight1 = config.graph.weighted_edges(1).w.toInt
++    val replacementWeight = baseWeight0 + 1
++
++    Config.sim
++      .withIVerilog
++      .compile({
++        val dut = MicroBlossomAxi4(config, clockDivideBy = clockDivideBy)
++        dut.simMakePublicSnapshot()
++        dut
++      })
++      .doSim("packed_dynamic_weight") { dut =>
++        dut.clockDomain.forkStimulus(period = 10)
++        dut.slow.clockDomain.forkStimulus(period = 10 * clockDivideBy)
++        val driver = dut.getSimDriver()
++        for (_ <- 0 to 5) { dut.slow.clockDomain.waitSampling() }
++
++        val updateWord = (BigInt(replacementWeight) << 16) | BigInt(0)
++        driver.write_64(0x3000, updateWord)
++        for (_ <- 0 to 8) { dut.slow.clockDomain.waitSampling() }
++        assert(dut.microBlossom.microBlossom.edges(0).register.weight.toInt == replacementWeight)
++        assert(dut.microBlossom.microBlossom.edges(1).register.weight.toInt == baseWeight1)
++
++        driver.write_64(0x1000, BigInt(DualConfig().instructionSpec.generateReset()))
++        for (_ <- 0 to 8) { dut.slow.clockDomain.waitSampling() }
++        assert(dut.microBlossom.microBlossom.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.microBlossom.microBlossom.edges(1).register.weight.toInt == baseWeight1)
++      }
++  }
++
++  test("packed 32-bit AXI-Lite weight update reaches one edge") {
++    val config = DualConfig(graph = dynamicWeightGraph())
++    config.contextDepth = 1
++    config.hardCodeWeights = false
++    config.sanityCheck()
++    val clockDivideBy = 2
++    val baseWeight0 = config.graph.weighted_edges(0).w.toInt
++    val baseWeight1 = config.graph.weighted_edges(1).w.toInt
++    val replacementWeight = baseWeight0 + 1
++
++    Config.sim
++      .withIVerilog
++      .compile({
++        val dut = MicroBlossomAxiLite4Bus32(config, clockDivideBy = clockDivideBy)
++        dut.simMakePublicSnapshot()
++        dut
++      })
++      .doSim("packed_dynamic_weight_32") { dut =>
++        dut.clockDomain.forkStimulus(period = 10)
++        dut.slow.clockDomain.forkStimulus(period = 10 * clockDivideBy)
++        val driver = dut.getSimDriver()
++        for (_ <- 0 to 5) { dut.slow.clockDomain.waitSampling() }
++
++        val updateWord = (BigInt(replacementWeight) << 16) | BigInt(0)
++        driver.write_32(0x3000, updateWord)
++        for (_ <- 0 to 8) { dut.slow.clockDomain.waitSampling() }
++        assert(dut.microBlossom.microBlossom.edges(0).register.weight.toInt == replacementWeight)
++        assert(dut.microBlossom.microBlossom.edges(1).register.weight.toInt == baseWeight1)
++
++        driver.write_32(0x2000, BigInt(DualConfig().instructionSpec.generateReset()))
++        for (_ <- 0 to 8) { dut.slow.clockDomain.waitSampling() }
++        assert(dut.microBlossom.microBlossom.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.microBlossom.microBlossom.edges(1).register.weight.toInt == baseWeight1)
++      }
++  }
++
+ }
+ 
+ class MicroBlossomBusGeneratorConf(arguments: Seq[String]) extends ScallopConf(arguments) {
+

@@ -1,0 +1,58 @@
+{
+  "schema": "b2_b7_p023_d6_microblossom_dynamic_weight_rtl_v1",
+  "date": "2026-11-20",
+  "classification": "dynamic_weight_write_path_rtl_sim_pass_d6_batch_and_timing_open",
+  "scope": ["021/B7", "022/B2", "023"],
+  "external_source": {
+    "repository": "https://github.com/yuewuo/micro-blossom",
+    "commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731"
+  },
+  "patch": {
+    "path": "tools/patches/micro_blossom_a3530d9_dynamic_weight_sideband.patch",
+    "sha256": "990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5",
+    "bytes": 26216,
+    "lines": 614,
+    "clean_apply_dry_run": true,
+    "reverse_dry_run_on_tested_tree": true
+  },
+  "protocol": {
+    "semantic_opcode": "LoadWeightsExternal",
+    "write_window_base": "0x3000",
+    "edge_index_bits": 15,
+    "weight_bits_max": 16,
+    "word_layout": "edge[14:0], reserved[15], weight[31:16], context[47:32] on 64-bit; context from address slot on 32-bit",
+    "ordering": "existing instruction FIFO, context race guard, broadcast path, and response accounting",
+    "bare_opcode_rejected": true,
+    "reset_restores_base_weight": true
+  },
+  "verification": {
+    "scala_compile": "pass",
+    "spinalhdl_version": "1.9.3",
+    "simulator": "Icarus Verilog 13.0",
+    "test_log_sha256": "547d0fb40508748a6e9f472fc08005cf9d9814614e7b17ca438dc2995b4eef81",
+    "tests_run": 3,
+    "tests_passed": 3,
+    "tests_failed": 0,
+    "core_sideband_test": "pass",
+    "axi64_end_to_end_test": "pass",
+    "axi_lite32_end_to_end_test": "pass",
+    "target_edge_changed": true,
+    "adjacent_edge_unchanged": true,
+    "reset_recovered_frozen_base": true
+  },
+  "acceptance": {
+    "dynamic_write_path_present": true,
+    "generated_rtl_simulated": true,
+    "six_bound_d6_graph_rule_images_generated": false,
+    "fresh_xz_exact_corrections_replayed_in_rtl": false,
+    "batch_p99_cycles_measured": false,
+    "p99_le_1us": false,
+    "miss_rate_le_1pct": false,
+    "fpga_timing_closed": false,
+    "lut_bram_measured": false,
+    "full_b2": false,
+    "scalable_p023": false,
+    "b7_resource_credit": 0
+  },
+  "next_gate": "Generate the six frozen d6 graph/rule images, stream every X/Z replacement batch through this exact bus path, replay corrections, and measure update plus decode p99 cycles before any hardware credit."
+}
