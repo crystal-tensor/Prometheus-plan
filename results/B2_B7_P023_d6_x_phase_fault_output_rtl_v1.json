@@ -1,0 +1,179 @@
+{
+  "acceptance": {
+    "all_phase_edge_maps_compared": true,
+    "axi_phase_control_path": false,
+    "b7_resource_credit": 0,
+    "complete_corrections_compared": false,
+    "complete_reference_corrections_compared": true,
+    "distributed_dual_selected_complete_subgraphs": false,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "inactive_edge_maps_empty": true,
+    "lut_bram_measured": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "phase_banked_fault_output_map": true,
+    "real_distributed_dual_edge_vertex_path": true,
+    "same_image_x_phase_bank_switching": true,
+    "scalable_p023": false,
+    "z_basis_phase_bank_switching": false
+  },
+  "claim_boundary": {
+    "implemented": "X opening/steady/closing phase-banked sparse fault map and RTL correction accumulator, exhaustively checked per edge and on twelve complete reference subgraphs",
+    "not_implemented": [
+      "Rust primal host plus phase-aware DistributedDual generation of the compared subgraphs",
+      "Z-basis phase banks and fault-output map",
+      "AXI phase-control and correction-readout path with race proof",
+      "FPGA synthesis, Fmax, LUT/BRAM, or routing closure",
+      "end-to-end update-plus-decode latency"
+    ]
+  },
+  "classification": "x_phase_banked_fault_output_and_complete_reference_subgraph_readout_pass_not_distributed_dual_subgraph_selection",
+  "date": "2026-11-21",
+  "evidence_id": "8bd353f5cd2785fb2221a123d819d42ddca53fa20fa621188db1724d4234e852",
+  "generated_rtl": {
+    "artifacts_committed": false,
+    "iverilog_version": "13.0",
+    "spinalhdl_version": "1.9.3",
+    "verilog_bytes": 573238230,
+    "verilog_sha256": "0ce72d50ae3232edaccfb5caa337be6dc0b49cd3caf746b1817c377e074909d6",
+    "vvp_bytes": 701116898,
+    "vvp_sha256": "83895af47f47a35239fd8215047c8e7486837f89dbf5f602c03ef61eb35c9171"
+  },
+  "implementation": {
+    "basis": "x",
+    "maximum_fault_ids_per_edge": 2,
+    "phase_banks": [
+      "opening",
+      "steady",
+      "closing"
+    ],
+    "phase_fault_vector_bits": {
+      "closing": 789,
+      "opening": 229,
+      "steady": 246
+    },
+    "phase_select_clears_correction_accumulator": true,
+    "readout_contract": "the primal host submits each selected subgraph edge exactly once; phase-local zero/one/two fault IDs are XORed into a reset-bound correction accumulator",
+    "superset_edges": 3762,
+    "superset_vertices": 1147
+  },
+  "next_gate": "Integrate the Rust primal host with phase selection and resident selectors so the compared subgraph is produced by the real phase-aware DistributedDual, then feed that subgraph through this verified fault-output accumulator.",
+  "rtl_replay": {
+    "batches": [
+      {
+        "boundary": "zero",
+        "correction_bits": 229,
+        "nonzero_bits": 0,
+        "phase": "opening",
+        "selected_edges": 0
+      },
+      {
+        "boundary": "p50",
+        "correction_bits": 229,
+        "nonzero_bits": 0,
+        "phase": "opening",
+        "selected_edges": 4
+      },
+      {
+        "boundary": "p99",
+        "correction_bits": 229,
+        "nonzero_bits": 3,
+        "phase": "opening",
+        "selected_edges": 11
+      },
+      {
+        "boundary": "maximum",
+        "correction_bits": 229,
+        "nonzero_bits": 13,
+        "phase": "opening",
+        "selected_edges": 19
+      },
+      {
+        "boundary": "zero",
+        "correction_bits": 246,
+        "nonzero_bits": 0,
+        "phase": "steady",
+        "selected_edges": 0
+      },
+      {
+        "boundary": "p50",
+        "correction_bits": 246,
+        "nonzero_bits": 4,
+        "phase": "steady",
+        "selected_edges": 6
+      },
+      {
+        "boundary": "p99",
+        "correction_bits": 246,
+        "nonzero_bits": 6,
+        "phase": "steady",
+        "selected_edges": 11
+      },
+      {
+        "boundary": "maximum",
+        "correction_bits": 246,
+        "nonzero_bits": 8,
+        "phase": "steady",
+        "selected_edges": 15
+      },
+      {
+        "boundary": "zero",
+        "correction_bits": 789,
+        "nonzero_bits": 0,
+        "phase": "closing",
+        "selected_edges": 0
+      },
+      {
+        "boundary": "p50",
+        "correction_bits": 789,
+        "nonzero_bits": 9,
+        "phase": "closing",
+        "selected_edges": 5
+      },
+      {
+        "boundary": "p99",
+        "correction_bits": 789,
+        "nonzero_bits": 25,
+        "phase": "closing",
+        "selected_edges": 14
+      },
+      {
+        "boundary": "maximum",
+        "correction_bits": 789,
+        "nonzero_bits": 34,
+        "phase": "closing",
+        "selected_edges": 19
+      }
+    ],
+    "complete_reference_corrections": 12,
+    "edge_map_checks": 11286,
+    "inactive_edge_empty_map_checks": 1682,
+    "phase_selections": 15,
+    "selected_subgraph_edges": 104
+  },
+  "schema": "b2_b7_p023_d6_x_phase_fault_output_rtl_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "source": {
+    "correction_trace": "benchmarks/B2_B7_P023_d6_x_phase_fault_output_trace_v1.json",
+    "correction_trace_evidence_id": "18be1c22c8ed8ecac4084e71209ee5c9d3bdca11599e99cda044b964251b3e34",
+    "correction_trace_sha256": "294cd8ba4f66ba119a4dddbee27b779456c37c9ecef53c3adf6bd6e941592177",
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "previous_distributed_dual_evidence_id": "32a8e2361e87637032474675457cd137350b73f594322610794f24aa79311520",
+    "previous_distributed_dual_result": "results/B2_B7_P023_d6_x_phase_superset_distributed_dual_rtl_v1.json",
+    "previous_distributed_dual_result_sha256": "a9d30901f181b407028ee1e418e26e91ecba28ef2c8791d3aea072e6b888f67d",
+    "replay_harness": "tools/microblossom/D6XPhaseSupersetFaultOutputReplay.scala",
+    "replay_harness_sha256": "75d70e58eed3208322406768839b40fbe52e6450772d1ed4ccc8ad9cab3dc6ba",
+    "simulation_transcript": "results/B2_B7_P023_d6_x_phase_fault_output_sim_v1.log",
+    "simulation_transcript_sha256": "9def2cf3dc11941ba2f9bda6c4b53b75715d8b224ffa1fe0bd5df74330a63081",
+    "source_patch": "tools/microblossom/d6_x_phase_superset_fault_output_v2.patch",
+    "source_patch_sha256": "34f107d8cc4e2688a55ff09821fc9d48571c0fb687d7c8aaa1a142e2efea75ab",
+    "superset_plan": "benchmarks/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "superset_plan_evidence_id": "38031dd8b61ff8d0a1a326b13eb5bd7a931084f4d72d62936cc14991091cc1cc",
+    "superset_plan_sha256": "968f66b3fca9691ee3acba96d9036821dd8a3210e6b19406a43189fdb7ace747"
+  }
+}

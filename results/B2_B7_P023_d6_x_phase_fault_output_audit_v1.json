@@ -1,0 +1,483 @@
+{
+  "checks": [
+    {
+      "label": "canonical evidence id",
+      "pass": true
+    },
+    {
+      "label": "strict scope",
+      "pass": true
+    },
+    {
+      "label": "bounded classification",
+      "pass": true
+    },
+    {
+      "label": "superset_plan: exists",
+      "pass": true
+    },
+    {
+      "label": "superset_plan: hash",
+      "pass": true
+    },
+    {
+      "label": "correction_trace: exists",
+      "pass": true
+    },
+    {
+      "label": "correction_trace: hash",
+      "pass": true
+    },
+    {
+      "label": "previous_distributed_dual_result: exists",
+      "pass": true
+    },
+    {
+      "label": "previous_distributed_dual_result: hash",
+      "pass": true
+    },
+    {
+      "label": "source_patch: exists",
+      "pass": true
+    },
+    {
+      "label": "source_patch: hash",
+      "pass": true
+    },
+    {
+      "label": "replay_harness: exists",
+      "pass": true
+    },
+    {
+      "label": "replay_harness: hash",
+      "pass": true
+    },
+    {
+      "label": "simulation_transcript: exists",
+      "pass": true
+    },
+    {
+      "label": "simulation_transcript: hash",
+      "pass": true
+    },
+    {
+      "label": "plan evidence",
+      "pass": true
+    },
+    {
+      "label": "trace evidence",
+      "pass": true
+    },
+    {
+      "label": "previous dual evidence",
+      "pass": true
+    },
+    {
+      "label": "previous real dual path",
+      "pass": true
+    },
+    {
+      "label": "X superset edges",
+      "pass": true
+    },
+    {
+      "label": "X superset vertices",
+      "pass": true
+    },
+    {
+      "label": "phase widths",
+      "pass": true
+    },
+    {
+      "label": "twelve correction traces",
+      "pass": true
+    },
+    {
+      "label": "all phase-boundary trace keys",
+      "pass": true
+    },
+    {
+      "label": "opening/zero: width",
+      "pass": true
+    },
+    {
+      "label": "opening/zero: selected active",
+      "pass": true
+    },
+    {
+      "label": "opening/zero: unique selected",
+      "pass": true
+    },
+    {
+      "label": "opening/zero: fault range",
+      "pass": true
+    },
+    {
+      "label": "opening/p50: width",
+      "pass": true
+    },
+    {
+      "label": "opening/p50: selected active",
+      "pass": true
+    },
+    {
+      "label": "opening/p50: unique selected",
+      "pass": true
+    },
+    {
+      "label": "opening/p50: fault range",
+      "pass": true
+    },
+    {
+      "label": "opening/p99: width",
+      "pass": true
+    },
+    {
+      "label": "opening/p99: selected active",
+      "pass": true
+    },
+    {
+      "label": "opening/p99: unique selected",
+      "pass": true
+    },
+    {
+      "label": "opening/p99: fault range",
+      "pass": true
+    },
+    {
+      "label": "opening/maximum: width",
+      "pass": true
+    },
+    {
+      "label": "opening/maximum: selected active",
+      "pass": true
+    },
+    {
+      "label": "opening/maximum: unique selected",
+      "pass": true
+    },
+    {
+      "label": "opening/maximum: fault range",
+      "pass": true
+    },
+    {
+      "label": "steady/zero: width",
+      "pass": true
+    },
+    {
+      "label": "steady/zero: selected active",
+      "pass": true
+    },
+    {
+      "label": "steady/zero: unique selected",
+      "pass": true
+    },
+    {
+      "label": "steady/zero: fault range",
+      "pass": true
+    },
+    {
+      "label": "steady/p50: width",
+      "pass": true
+    },
+    {
+      "label": "steady/p50: selected active",
+      "pass": true
+    },
+    {
+      "label": "steady/p50: unique selected",
+      "pass": true
+    },
+    {
+      "label": "steady/p50: fault range",
+      "pass": true
+    },
+    {
+      "label": "steady/p99: width",
+      "pass": true
+    },
+    {
+      "label": "steady/p99: selected active",
+      "pass": true
+    },
+    {
+      "label": "steady/p99: unique selected",
+      "pass": true
+    },
+    {
+      "label": "steady/p99: fault range",
+      "pass": true
+    },
+    {
+      "label": "steady/maximum: width",
+      "pass": true
+    },
+    {
+      "label": "steady/maximum: selected active",
+      "pass": true
+    },
+    {
+      "label": "steady/maximum: unique selected",
+      "pass": true
+    },
+    {
+      "label": "steady/maximum: fault range",
+      "pass": true
+    },
+    {
+      "label": "closing/zero: width",
+      "pass": true
+    },
+    {
+      "label": "closing/zero: selected active",
+      "pass": true
+    },
+    {
+      "label": "closing/zero: unique selected",
+      "pass": true
+    },
+    {
+      "label": "closing/zero: fault range",
+      "pass": true
+    },
+    {
+      "label": "closing/p50: width",
+      "pass": true
+    },
+    {
+      "label": "closing/p50: selected active",
+      "pass": true
+    },
+    {
+      "label": "closing/p50: unique selected",
+      "pass": true
+    },
+    {
+      "label": "closing/p50: fault range",
+      "pass": true
+    },
+    {
+      "label": "closing/p99: width",
+      "pass": true
+    },
+    {
+      "label": "closing/p99: selected active",
+      "pass": true
+    },
+    {
+      "label": "closing/p99: unique selected",
+      "pass": true
+    },
+    {
+      "label": "closing/p99: fault range",
+      "pass": true
+    },
+    {
+      "label": "closing/maximum: width",
+      "pass": true
+    },
+    {
+      "label": "closing/maximum: selected active",
+      "pass": true
+    },
+    {
+      "label": "closing/maximum: unique selected",
+      "pass": true
+    },
+    {
+      "label": "closing/maximum: fault range",
+      "pass": true
+    },
+    {
+      "label": "twelve transcript batches",
+      "pass": true
+    },
+    {
+      "label": "transcript binds result batches",
+      "pass": true
+    },
+    {
+      "label": "exhaustive edge map accounting",
+      "pass": true
+    },
+    {
+      "label": "inactive empty map accounting",
+      "pass": true
+    },
+    {
+      "label": "complete correction accounting",
+      "pass": true
+    },
+    {
+      "label": "selected subgraph accounting",
+      "pass": true
+    },
+    {
+      "label": "FULL_SOURCE_COMPILE PASS",
+      "pass": true
+    },
+    {
+      "label": "REPLAY_HARNESS_COMPILE PASS",
+      "pass": true
+    },
+    {
+      "label": "PATCH_REPLAY PASS",
+      "pass": true
+    },
+    {
+      "label": "SPINAL_ELABORATION PASS",
+      "pass": true
+    },
+    {
+      "label": "VERILOG_GENERATION PASS",
+      "pass": true
+    },
+    {
+      "label": "IVERILOG_COMPILE PASS",
+      "pass": true
+    },
+    {
+      "label": "PHASE_FAULT_OUTPUT_REPLAY_PASS",
+      "pass": true
+    },
+    {
+      "label": "SIMULATION PASS",
+      "pass": true
+    },
+    {
+      "label": "Verilog bytes",
+      "pass": true
+    },
+    {
+      "label": "VVP bytes",
+      "pass": true
+    },
+    {
+      "label": "Verilog hash",
+      "pass": true
+    },
+    {
+      "label": "VVP hash",
+      "pass": true
+    },
+    {
+      "label": "generated artifacts uncommitted",
+      "pass": true
+    },
+    {
+      "label": "patch marker: edgeFaultIds: Seq[Seq[Int]]",
+      "pass": true
+    },
+    {
+      "label": "patch marker: faultIdCount: Int",
+      "pass": true
+    },
+    {
+      "label": "patch marker: val correctionAccumulator",
+      "pass": true
+    },
+    {
+      "label": "patch marker: io.correctionEdgeValid",
+      "pass": true
+    },
+    {
+      "label": "patch marker: correctionAccumulator(selectedFaultId0)",
+      "pass": true
+    },
+    {
+      "label": "patch marker: def simAccumulateCorrectionEdge",
+      "pass": true
+    },
+    {
+      "label": "harness marker: DistributedDual(config, ioConfig)",
+      "pass": true
+    },
+    {
+      "label": "harness marker: dut.simAccumulateCorrectionEdge",
+      "pass": true
+    },
+    {
+      "label": "harness marker: for (edgeIndex <- 0 until edgeNum)",
+      "pass": true
+    },
+    {
+      "label": "harness marker: PHASE_FAULT_OUTPUT_BATCH_PASS",
+      "pass": true
+    },
+    {
+      "label": "harness marker: PHASE_FAULT_OUTPUT_REPLAY_PASS",
+      "pass": true
+    },
+    {
+      "label": "positive credit: same_image_x_phase_bank_switching",
+      "pass": true
+    },
+    {
+      "label": "positive credit: real_distributed_dual_edge_vertex_path",
+      "pass": true
+    },
+    {
+      "label": "positive credit: phase_banked_fault_output_map",
+      "pass": true
+    },
+    {
+      "label": "positive credit: all_phase_edge_maps_compared",
+      "pass": true
+    },
+    {
+      "label": "positive credit: inactive_edge_maps_empty",
+      "pass": true
+    },
+    {
+      "label": "positive credit: complete_reference_corrections_compared",
+      "pass": true
+    },
+    {
+      "label": "closed gate: distributed_dual_selected_complete_subgraphs",
+      "pass": true
+    },
+    {
+      "label": "closed gate: complete_corrections_compared",
+      "pass": true
+    },
+    {
+      "label": "closed gate: z_basis_phase_bank_switching",
+      "pass": true
+    },
+    {
+      "label": "closed gate: axi_phase_control_path",
+      "pass": true
+    },
+    {
+      "label": "closed gate: fpga_fmax_measured",
+      "pass": true
+    },
+    {
+      "label": "closed gate: lut_bram_measured",
+      "pass": true
+    },
+    {
+      "label": "closed gate: p99_le_1us",
+      "pass": true
+    },
+    {
+      "label": "closed gate: miss_rate_le_1pct",
+      "pass": true
+    },
+    {
+      "label": "closed gate: full_b2",
+      "pass": true
+    },
+    {
+      "label": "closed gate: scalable_p023",
+      "pass": true
+    },
+    {
+      "label": "zero B7 credit",
+      "pass": true
+    }
+  ],
+  "checks_passed": 119,
+  "checks_total": 119,
+  "classification": "x_phase_fault_output_evidence_audit_pass"
+}

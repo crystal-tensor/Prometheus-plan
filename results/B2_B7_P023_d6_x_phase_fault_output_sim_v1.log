@@ -1,0 +1,25 @@
+MICRO_BLOSSOM_COMMIT a3530d9e58ff790dafc93d56c9a2769ceac84731
+JAVA openjdk 17.0.21
+SPINALHDL 1.9.3
+IVERILOG 13.0
+FULL_SOURCE_COMPILE PASS
+REPLAY_HARNESS_COMPILE PASS
+PATCH_REPLAY PASS source_files=7 exact_hash_matches=7
+SPINAL_ELABORATION PASS
+VERILOG_GENERATION PASS bytes=573238230 sha256=0ce72d50ae3232edaccfb5caa337be6dc0b49cd3caf746b1817c377e074909d6
+IVERILOG_COMPILE PASS vvp_bytes=701116898 vvp_sha256=83895af47f47a35239fd8215047c8e7486837f89dbf5f602c03ef61eb35c9171
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=opening boundary=zero selected_edges=0 correction_bits=229 nonzero_bits=0
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=opening boundary=p50 selected_edges=4 correction_bits=229 nonzero_bits=0
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=opening boundary=p99 selected_edges=11 correction_bits=229 nonzero_bits=3
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=opening boundary=maximum selected_edges=19 correction_bits=229 nonzero_bits=13
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=steady boundary=zero selected_edges=0 correction_bits=246 nonzero_bits=0
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=steady boundary=p50 selected_edges=6 correction_bits=246 nonzero_bits=4
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=steady boundary=p99 selected_edges=11 correction_bits=246 nonzero_bits=6
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=steady boundary=maximum selected_edges=15 correction_bits=246 nonzero_bits=8
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=closing boundary=zero selected_edges=0 correction_bits=789 nonzero_bits=0
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=closing boundary=p50 selected_edges=5 correction_bits=789 nonzero_bits=9
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=closing boundary=p99 selected_edges=14 correction_bits=789 nonzero_bits=25
+PHASE_FAULT_OUTPUT_BATCH_PASS phase=closing boundary=maximum selected_edges=19 correction_bits=789 nonzero_bits=34
+PHASE_FAULT_OUTPUT_REPLAY_PASS phase_selections=15 map_checks=11286 inactive_empty_checks=1682 complete_corrections=12 selected_edges=104
+SIMULATION PASS elapsed_ms=45007.852 total_sbt_seconds=248
+CLAIM_BOUNDARY phase_banked_fault_output_map_and_complete_reference_subgraph_readout_pass_not_DistributedDual_subgraph_selection
