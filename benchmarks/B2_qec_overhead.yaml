@@ -1350,6 +1350,39 @@ current_results:
     protocol: B2_B7_P023_d6_decoder_latency_matrix_v1.json
     runner: ../tools/b2_b7_p023_d6_decoder_latency_matrix.py
     markdown_report: ../research/B2_B7_P023_d6_decoder_latency_matrix_freeze_v1.md
+  d6_decoder_latency_matrix_v1:
+    status: d6_correlated_decoder_batch1_software_backlog_proxy_pass_hardware_deadline_b2_p023_b7_open
+    method: b2_b7_p023_d6_decoder_latency_matrix_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: 6882dfeed3c48623585d5676dce91d7644b6fc41
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/327
+    corpus_shots_per_basis: 1024
+    source_chunks_replayed_exactly: 8
+    matrix_rows: 20
+    timed_repetitions_total: 180
+    software_backlog_proxy_microseconds_per_round: 1.0
+    x_correlated_batch1_median_microseconds_per_round: 0.5208544111328125
+    z_correlated_batch1_median_microseconds_per_round: 0.5158256425781251
+    x_correlated_batch256_median_microseconds_per_round: 0.51366015625
+    z_correlated_batch256_median_microseconds_per_round: 0.5125717363281251
+    x_batch1_correlated_to_independent_ratio: 3.5454668275826897
+    z_batch1_correlated_to_independent_ratio: 3.5380091894987644
+    software_batch1_backlog_proxy_pass: true
+    software_batch256_throughput_proxy_pass: true
+    prediction_rows_replayed_exactly: 20
+    physical_memory_score_preserved: 1.3661971830985915
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 13
+    independent_audit_checks_passed: 15
+    exact_replay_checks_passed: 13
+    caveat: offline_batch1_full_block_proxy_pass_not_online_window_communication_control_feedback_or_hardware_deadline
+    result: ../results/B2_B7_P023_d6_decoder_latency_matrix_v1.json
+    audit: ../results/B2_B7_P023_d6_decoder_latency_matrix_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_decoder_latency_matrix_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_decoder_latency_matrix_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1401,6 +1434,8 @@ prototype_artifacts:
   d6_correlated_strict_acceptance_audit: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_audit.py
   d6_correlated_strict_acceptance_replay: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_replay.py
   d6_decoder_latency_matrix_runner: ../tools/b2_b7_p023_d6_decoder_latency_matrix.py
+  d6_decoder_latency_matrix_audit: ../tools/b2_b7_p023_d6_decoder_latency_matrix_audit.py
+  d6_decoder_latency_matrix_replay: ../tools/b2_b7_p023_d6_decoder_latency_matrix_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

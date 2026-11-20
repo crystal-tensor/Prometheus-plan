@@ -1,0 +1,300 @@
+{
+  "auditor": {
+    "path": "tools/b2_b7_p023_d6_decoder_latency_matrix_audit.py",
+    "sha256": "8314cfd53cfa13baa5c73512bda7fe78f9ef5904930f6ff8a4257ba31ac7a7f1"
+  },
+  "checks": [
+    {
+      "detail": "b2_b7_p023_d6_decoder_latency_matrix_result_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "3dec39c8d64547adea2649a6343b7810c8b5a0f7ee7d78e648503c79577083df",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "6053b08ae1ed7303bbf1b799439bcb63000cb3b1dc1ab246a6f313f463ad5259",
+      "name": "runner_hash",
+      "passed": true
+    },
+    {
+      "detail": "ba1f03a23b820d2e4719c7bbc4ad69edf49d389c",
+      "name": "input_hashes",
+      "passed": true
+    },
+    {
+      "detail": "{'python': '3.12.6', 'stim': '1.16.0', 'pymatching': '2.4.0', 'numpy': '2.4.6', 'scipy': '1.17.1', 'system': 'Darwin', 'machine': 'arm64'}",
+      "name": "environment",
+      "passed": true
+    },
+    {
+      "detail": "Both corpora and eight chunks reproduce.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "All 20 prediction rows reproduce.",
+      "name": "prediction_matrix",
+      "passed": true
+    },
+    {
+      "detail": "All timing summaries recompute from raw nanoseconds.",
+      "name": "metric_arithmetic",
+      "passed": true
+    },
+    {
+      "detail": "{'batch1': True, 'batch256': True}",
+      "name": "proxy",
+      "passed": true
+    },
+    {
+      "detail": "d6_correlated_decoder_batch1_software_backlog_proxy_pass_hardware_deadline_b2_p023_b7_open",
+      "name": "decision",
+      "passed": true
+    },
+    {
+      "detail": "Hardware/full-credit gates remain closed.",
+      "name": "hard_boundary",
+      "passed": true
+    },
+    {
+      "detail": "d818abd1ed0f73653fabee058d319f35338da6dfe2dc84f3659828e5ed415b2c",
+      "name": "deterministic_id",
+      "passed": true
+    },
+    {
+      "detail": "cd59350da60f3d17b59f36cdaf300c2b2a62923cdbdb73f14e9e054c578c99b5",
+      "name": "timing_evidence_id",
+      "passed": true
+    },
+    {
+      "detail": "13/13",
+      "name": "producer_checks",
+      "passed": true
+    }
+  ],
+  "input_hashes": {
+    "strict_audit": {
+      "commit": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd",
+      "current": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd",
+      "expected": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd"
+    },
+    "strict_generator": {
+      "commit": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57",
+      "current": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57",
+      "expected": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57"
+    },
+    "strict_protocol": {
+      "commit": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430",
+      "current": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430",
+      "expected": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430"
+    },
+    "strict_replay": {
+      "commit": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab",
+      "current": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab",
+      "expected": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab"
+    },
+    "strict_result": {
+      "commit": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de",
+      "current": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de",
+      "expected": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de"
+    }
+  },
+  "reconstructed": {
+    "corpora": [
+      {
+        "basis": "x",
+        "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+        "correlated_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+        "correlated_prefix_failures": 5,
+        "independent_prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+        "independent_prefix_failures": 14,
+        "matches_result": true,
+        "source_chunk_sha256": [
+          "bb6b7030ac2b3395e05bf3d664355dedaf6857a19880cdc947b4bec6f781ab4b",
+          "41e9eddbd31d50ec858d77fea132005b0e080c134152e8b807db411770312258",
+          "cb898455c021b9a3fa9c95fcf5bf4f2dbf66876fc83a14f2e04f1584e92a4c88",
+          "c9a49452ef692f4311694850cab1f79bf264a3b0cc81858816d6ebc90e73b1dd"
+        ]
+      },
+      {
+        "basis": "z",
+        "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+        "correlated_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+        "correlated_prefix_failures": 2,
+        "independent_prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+        "independent_prefix_failures": 14,
+        "matches_result": true,
+        "source_chunk_sha256": [
+          "5fe6e055d82033cc8cafa43d9dcbb3cf4ec42fd4173259c5df3ea6d9037db491",
+          "b0b0ec4ec24722b5980d28bee35e02e2248b7a04119c425110cca9987db622cd",
+          "32d99b97a790e2fb666163ba0d529390f40cb502923a4212d59105ed36dca49a",
+          "0ee1702fe2c9b626e9102c7aa97fc2165ea0cae02025393975b2d760ff1cf5f7"
+        ]
+      }
+    ],
+    "prediction_rows": [
+      {
+        "batch_size": 1,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d"
+      },
+      {
+        "batch_size": 4,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d"
+      },
+      {
+        "batch_size": 16,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d"
+      },
+      {
+        "batch_size": 64,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d"
+      },
+      {
+        "batch_size": 256,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d"
+      },
+      {
+        "batch_size": 1,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3"
+      },
+      {
+        "batch_size": 4,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3"
+      },
+      {
+        "batch_size": 16,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3"
+      },
+      {
+        "batch_size": 64,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3"
+      },
+      {
+        "batch_size": 256,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "x",
+        "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3"
+      },
+      {
+        "batch_size": 1,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34"
+      },
+      {
+        "batch_size": 4,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34"
+      },
+      {
+        "batch_size": 16,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34"
+      },
+      {
+        "batch_size": 64,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34"
+      },
+      {
+        "batch_size": 256,
+        "decoder": "independent_mwpm",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34"
+      },
+      {
+        "batch_size": 1,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822"
+      },
+      {
+        "batch_size": 4,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822"
+      },
+      {
+        "batch_size": 16,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822"
+      },
+      {
+        "batch_size": 64,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822"
+      },
+      {
+        "batch_size": 256,
+        "decoder": "two_pass_correlated_matching",
+        "matches_canonical": true,
+        "memory_basis": "z",
+        "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822"
+      }
+    ]
+  },
+  "schema_version": "b2_b7_p023_d6_decoder_latency_matrix_independent_audit_v1",
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+    "sha256": "6c242bc32497bb0df1306e8e558cc255b280439a216389e1ebbd1022a4300da0"
+  },
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 15,
+    "checks_total": 15,
+    "exact_prediction_rows": 20,
+    "exact_source_chunks": 8,
+    "hardware_decoder_deadline_passed": false,
+    "software_batch1_backlog_proxy_pass": true
+  }
+}

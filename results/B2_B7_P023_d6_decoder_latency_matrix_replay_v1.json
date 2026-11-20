@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "detail": "{\"checks_failed\": 0, \"checks_passed\": 15, \"checks_total\": 15, \"exact_prediction_rows\": 20, \"exact_source_chunks\": 8, \"hardware_decoder_deadline_passed\": false, \"software_batch1_backlog_proxy_pass\": true}",
+      "name": "auditor_exit",
+      "passed": true
+    },
+    {
+      "detail": "9b1665bbb32dbaefda5363a06def4c472586a1395dc6721f01086fc8a1d6f1b2",
+      "name": "audit_bytes",
+      "passed": true
+    },
+    {
+      "detail": "b2_b7_p023_d6_decoder_latency_matrix_independent_audit_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "6c242bc32497bb0df1306e8e558cc255b280439a216389e1ebbd1022a4300da0",
+      "name": "source_result",
+      "passed": true
+    },
+    {
+      "detail": "8314cfd53cfa13baa5c73512bda7fe78f9ef5904930f6ff8a4257ba31ac7a7f1",
+      "name": "auditor",
+      "passed": true
+    },
+    {
+      "detail": "All frozen input hashes exact.",
+      "name": "input_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Both corpus reconstructions exact.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "All 20 prediction rows exact.",
+      "name": "prediction_rows",
+      "passed": true
+    },
+    {
+      "detail": "Eight source chunks exact.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "Twenty prediction rows exact.",
+      "name": "prediction_count",
+      "passed": true
+    },
+    {
+      "detail": "15/15",
+      "name": "checks",
+      "passed": true
+    },
+    {
+      "detail": "True",
+      "name": "proxy_verdict",
+      "passed": true
+    },
+    {
+      "detail": "Hardware/full-credit gates remain closed.",
+      "name": "hardware_boundary",
+      "passed": true
+    }
+  ],
+  "replayed_audit_sha256": "9b1665bbb32dbaefda5363a06def4c472586a1395dc6721f01086fc8a1d6f1b2",
+  "schema_version": "b2_b7_p023_d6_decoder_latency_matrix_replay_v1",
+  "source": {
+    "audit": {
+      "path": "results/B2_B7_P023_d6_decoder_latency_matrix_audit_v1.json",
+      "sha256": "9b1665bbb32dbaefda5363a06def4c472586a1395dc6721f01086fc8a1d6f1b2"
+    },
+    "auditor": {
+      "path": "tools/b2_b7_p023_d6_decoder_latency_matrix_audit.py",
+      "sha256": "8314cfd53cfa13baa5c73512bda7fe78f9ef5904930f6ff8a4257ba31ac7a7f1"
+    },
+    "protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+      "sha256": "3dec39c8d64547adea2649a6343b7810c8b5a0f7ee7d78e648503c79577083df"
+    },
+    "result": {
+      "path": "results/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+      "sha256": "6c242bc32497bb0df1306e8e558cc255b280439a216389e1ebbd1022a4300da0"
+    }
+  },
+  "summary": {
+    "audit_bytes_exact": true,
+    "checks_failed": 0,
+    "checks_passed": 13,
+    "checks_total": 13,
+    "exact_prediction_rows": 20,
+    "exact_source_chunks": 8
+  }
+}

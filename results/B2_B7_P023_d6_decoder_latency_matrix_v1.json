@@ -1,0 +1,856 @@
+{
+  "as_of_date": "2026-11-20",
+  "corpora": [
+    {
+      "basis": "x",
+      "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+      "correlated_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "correlated_prefix_failures": 5,
+      "detector_error_model_sha256": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "detector_shape": [
+        1024,
+        4376
+      ],
+      "independent_prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "independent_prefix_failures": 14,
+      "matching_dimensions": {
+        "correlated_edges": 169918,
+        "correlated_nodes": 35001,
+        "independent_edges": 169918,
+        "independent_nodes": 35001
+      },
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "seed": 500821869213481396,
+      "shots": 1024,
+      "source_chunk_replay": [
+        {
+          "chunk_index": 0,
+          "matches": true,
+          "replayed_sha256": "bb6b7030ac2b3395e05bf3d664355dedaf6857a19880cdc947b4bec6f781ab4b",
+          "source_sha256": "bb6b7030ac2b3395e05bf3d664355dedaf6857a19880cdc947b4bec6f781ab4b"
+        },
+        {
+          "chunk_index": 1,
+          "matches": true,
+          "replayed_sha256": "41e9eddbd31d50ec858d77fea132005b0e080c134152e8b807db411770312258",
+          "source_sha256": "41e9eddbd31d50ec858d77fea132005b0e080c134152e8b807db411770312258"
+        },
+        {
+          "chunk_index": 2,
+          "matches": true,
+          "replayed_sha256": "cb898455c021b9a3fa9c95fcf5bf4f2dbf66876fc83a14f2e04f1584e92a4c88",
+          "source_sha256": "cb898455c021b9a3fa9c95fcf5bf4f2dbf66876fc83a14f2e04f1584e92a4c88"
+        },
+        {
+          "chunk_index": 3,
+          "matches": true,
+          "replayed_sha256": "c9a49452ef692f4311694850cab1f79bf264a3b0cc81858816d6ebc90e73b1dd",
+          "source_sha256": "c9a49452ef692f4311694850cab1f79bf264a3b0cc81858816d6ebc90e73b1dd"
+        }
+      ]
+    },
+    {
+      "basis": "z",
+      "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+      "correlated_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "correlated_prefix_failures": 2,
+      "detector_error_model_sha256": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "detector_shape": [
+        1024,
+        4375
+      ],
+      "independent_prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "independent_prefix_failures": 14,
+      "matching_dimensions": {
+        "correlated_edges": 169908,
+        "correlated_nodes": 34999,
+        "independent_edges": 169908,
+        "independent_nodes": 34999
+      },
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "seed": 7444983191663564330,
+      "shots": 1024,
+      "source_chunk_replay": [
+        {
+          "chunk_index": 0,
+          "matches": true,
+          "replayed_sha256": "5fe6e055d82033cc8cafa43d9dcbb3cf4ec42fd4173259c5df3ea6d9037db491",
+          "source_sha256": "5fe6e055d82033cc8cafa43d9dcbb3cf4ec42fd4173259c5df3ea6d9037db491"
+        },
+        {
+          "chunk_index": 1,
+          "matches": true,
+          "replayed_sha256": "b0b0ec4ec24722b5980d28bee35e02e2248b7a04119c425110cca9987db622cd",
+          "source_sha256": "b0b0ec4ec24722b5980d28bee35e02e2248b7a04119c425110cca9987db622cd"
+        },
+        {
+          "chunk_index": 2,
+          "matches": true,
+          "replayed_sha256": "32d99b97a790e2fb666163ba0d529390f40cb502923a4212d59105ed36dca49a",
+          "source_sha256": "32d99b97a790e2fb666163ba0d529390f40cb502923a4212d59105ed36dca49a"
+        },
+        {
+          "chunk_index": 3,
+          "matches": true,
+          "replayed_sha256": "0ee1702fe2c9b626e9102c7aa97fc2165ea0cae02025393975b2d760ff1cf5f7",
+          "source_sha256": "0ee1702fe2c9b626e9102c7aa97fc2165ea0cae02025393975b2d760ff1cf5f7"
+        }
+      ]
+    }
+  ],
+  "corpus_contract": {
+    "graph_construction_excluded_from_timed_region": true,
+    "prediction_equality_across_batch_sizes_required_per_decoder": true,
+    "rounds_per_shot": 1000,
+    "same_detector_corpus_for_both_decoders": true,
+    "sampling_excluded_from_timed_region": true,
+    "shots_per_basis": 1024,
+    "source": "the first four 256-shot chunks of each publicly frozen strict X/Z run",
+    "source_chunk_digest_reproduction_required": true,
+    "source_chunk_size": 256,
+    "source_chunks_per_basis": 4
+  },
+  "decision": "d6_correlated_decoder_batch1_software_backlog_proxy_pass_hardware_deadline_b2_p023_b7_open",
+  "deterministic_id": "d818abd1ed0f73653fabee058d319f35338da6dfe2dc84f3659828e5ed415b2c",
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0",
+    "system": "Darwin"
+  },
+  "external_basis": {
+    "notes": "the literature motivates a backlog proxy near 1 microsecond per round, but platform, windowing, communication, control, and feedback conditions differ from this host-local benchmark",
+    "one_microsecond_per_round_source": "https://www.nature.com/articles/s41467-025-66773-x",
+    "pymatching_correlated_mode_source": "https://github.com/oscarhiggott/PyMatching/releases",
+    "real_time_decoder_context": "https://www.nature.com/articles/s41586-024-08449-y"
+  },
+  "formal_checks": [
+    {
+      "detail": "Exact QEC scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "6882dfeed3c48623585d5676dce91d7644b6fc41",
+      "name": "public_freeze",
+      "passed": true
+    },
+    {
+      "detail": "https://github.com/crystal-tensor/Prometheus-plan/discussions/327",
+      "name": "discussion",
+      "passed": true
+    },
+    {
+      "detail": "ba1f03a23b820d2e4719c7bbc4ad69edf49d389c",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "d6_correlated_decoder_strict_xz_pass_physical_memory_gate_b2_p023_b7_credit_closed",
+      "name": "strict_source",
+      "passed": true
+    },
+    {
+      "detail": "Two 1,024-shot corpora.",
+      "name": "corpus_count",
+      "passed": true
+    },
+    {
+      "detail": "Eight source chunks replay.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "2 bases x 2 decoders x 5 batch sizes.",
+      "name": "matrix_rows",
+      "passed": true
+    },
+    {
+      "detail": "Nine timings per row.",
+      "name": "repetitions",
+      "passed": true
+    },
+    {
+      "detail": "Positive ordered timing statistics.",
+      "name": "positive_timing",
+      "passed": true
+    },
+    {
+      "detail": "All prediction hashes present.",
+      "name": "prediction_hashes",
+      "passed": true
+    },
+    {
+      "detail": "{'x': 0.5208544111328125, 'z': 0.5158256425781251}",
+      "name": "proxy_rule",
+      "passed": true
+    },
+    {
+      "detail": "Hardware/full-credit gates remain closed.",
+      "name": "hardware_boundary",
+      "passed": true
+    }
+  ],
+  "frozen_inputs_at_commit": {
+    "bindings": {
+      "strict_audit": {
+        "matches": true,
+        "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json",
+        "sha256": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd"
+      },
+      "strict_generator": {
+        "matches": true,
+        "path": "tools/b2_b7_p023_d6_correlated_strict_acceptance.py",
+        "sha256": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57"
+      },
+      "strict_protocol": {
+        "matches": true,
+        "path": "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+        "sha256": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430"
+      },
+      "strict_replay": {
+        "matches": true,
+        "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json",
+        "sha256": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab"
+      },
+      "strict_result": {
+        "matches": true,
+        "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+        "sha256": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de"
+      }
+    },
+    "commit": "ba1f03a23b820d2e4719c7bbc4ad69edf49d389c"
+  },
+  "frozen_inputs_current": {
+    "strict_audit": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json",
+      "sha256": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd"
+    },
+    "strict_generator": {
+      "path": "tools/b2_b7_p023_d6_correlated_strict_acceptance.py",
+      "sha256": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57"
+    },
+    "strict_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430"
+    },
+    "strict_replay": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json",
+      "sha256": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab"
+    },
+    "strict_result": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de"
+    }
+  },
+  "generator": {
+    "path": "tools/b2_b7_p023_d6_decoder_latency_matrix.py",
+    "sha256": "6053b08ae1ed7303bbf1b799439bcb63000cb3b1dc1ab246a6f313f463ad5259"
+  },
+  "hard_boundaries": {
+    "b7_resource_credit": 0,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "reason": "the benchmark is offline, decodes complete 1000-round blocks, excludes communication/control/feedback, and does not implement an online O(d) sliding window"
+  },
+  "known_before_preregistration": {
+    "aggregate_correlated_to_independent_decode_ratio": 4.14830606476302,
+    "disclosure": "the prior strict run already exposed one batch-256 timing point on a 102400-shot corpus; the batch-size matrix, single-shot proxy, and nine-repeat distributions below have not been measured",
+    "new_matrix_timing_outcomes_observed": false,
+    "strict_batch_size": 256,
+    "strict_corpus_shots_per_basis": 102400,
+    "strict_correctness_outcome_known": true,
+    "strict_physical_memory_score": 1.3661971830985915,
+    "x_correlated_decode_seconds_per_shot": 0.000519927697373248,
+    "z_correlated_decode_seconds_per_shot": 0.0005286218217584349
+  },
+  "matrix_contract": {
+    "batch_sizes": [
+      1,
+      4,
+      16,
+      64,
+      256
+    ],
+    "clock": "time.perf_counter_ns",
+    "decoders": [
+      "independent_mwpm",
+      "two_pass_correlated_matching"
+    ],
+    "primary_statistic": "median total decode time across nine repetitions",
+    "reported_statistics": [
+      "min",
+      "median",
+      "max",
+      "median_seconds_per_shot",
+      "median_microseconds_per_round",
+      "median_memory_rounds_per_second"
+    ],
+    "schedule": "round-robin over all basis/decoder/batch configurations; rotate by repetition and reverse odd repetitions",
+    "timed_repetitions": 9,
+    "timing_replay_policy": "wall-clock values are diagnostic and not expected to replay bit-for-bit; corpus and prediction hashes must replay exactly",
+    "warmup_repetitions": 1
+  },
+  "measurements": [
+    {
+      "batch_size": 1,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.15313779200000002,
+      "median_memory_rounds_per_second": 6807020.833080037,
+      "median_microseconds_per_round": 0.14690714550781248,
+      "median_seconds_per_shot": 0.0001469071455078125,
+      "median_total_decode_seconds": 0.150432917,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.140310667,
+      "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "raw_total_decode_nanoseconds": [
+        150432917,
+        150984250,
+        151119250,
+        153137792,
+        146905333,
+        149043417,
+        151639000,
+        140310667,
+        147132291
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 4,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.162890583,
+      "median_memory_rounds_per_second": 7023245.3371446505,
+      "median_microseconds_per_round": 0.142384318359375,
+      "median_seconds_per_shot": 0.000142384318359375,
+      "median_total_decode_seconds": 0.145801542,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.138639,
+      "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "raw_total_decode_nanoseconds": [
+        145801542,
+        147077833,
+        162890583,
+        148283625,
+        145598708,
+        141324416,
+        148931167,
+        139080292,
+        138639000
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 16,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.15772333400000002,
+      "median_memory_rounds_per_second": 6912607.661417237,
+      "median_microseconds_per_round": 0.1446632080078125,
+      "median_seconds_per_shot": 0.0001446632080078125,
+      "median_total_decode_seconds": 0.148135125,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.14211041700000002,
+      "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "raw_total_decode_nanoseconds": [
+        152394292,
+        153500791,
+        146008500,
+        157723334,
+        147419917,
+        148135125,
+        150671875,
+        143567625,
+        142110417
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 64,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.149737209,
+      "median_memory_rounds_per_second": 7068654.221288472,
+      "median_microseconds_per_round": 0.14146964453125,
+      "median_seconds_per_shot": 0.00014146964453125,
+      "median_total_decode_seconds": 0.144864916,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.137955875,
+      "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "raw_total_decode_nanoseconds": [
+        146573458,
+        141670458,
+        139507042,
+        149737209,
+        145728375,
+        145882375,
+        144864916,
+        143441334,
+        137955875
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 256,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.151325375,
+      "median_memory_rounds_per_second": 7063664.379368443,
+      "median_microseconds_per_round": 0.14156958007812503,
+      "median_seconds_per_shot": 0.00014156958007812502,
+      "median_total_decode_seconds": 0.14496725000000002,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.13687525,
+      "prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+      "raw_total_decode_nanoseconds": [
+        146735750,
+        144212166,
+        144114917,
+        151325375,
+        144967250,
+        146757333,
+        145092375,
+        136875250,
+        138755500
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 1,
+      "correlated_to_independent_median_ratio": 3.5454668275826897,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.548246083,
+      "median_memory_rounds_per_second": 1919922.3019443916,
+      "median_microseconds_per_round": 0.5208544111328125,
+      "median_seconds_per_shot": 0.0005208544111328125,
+      "median_total_decode_seconds": 0.533354917,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.5167812500000001,
+      "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "raw_total_decode_nanoseconds": [
+        536346209,
+        533354917,
+        526516208,
+        538251334,
+        548246083,
+        519828250,
+        535399333,
+        523830333,
+        516781250
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 4,
+      "correlated_to_independent_median_ratio": 3.6300907846365575,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.5459088750000001,
+      "median_memory_rounds_per_second": 1934729.9430826255,
+      "median_microseconds_per_round": 0.516868001953125,
+      "median_seconds_per_shot": 0.000516868001953125,
+      "median_total_decode_seconds": 0.529272834,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.518081042,
+      "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "raw_total_decode_nanoseconds": [
+        545908875,
+        525622583,
+        530392167,
+        531528291,
+        545029708,
+        525094125,
+        518081042,
+        529272834,
+        520541750
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 16,
+      "correlated_to_independent_median_ratio": 3.557771440095656,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.536538959,
+      "median_memory_rounds_per_second": 1942960.0180362852,
+      "median_microseconds_per_round": 0.5146786298828125,
+      "median_seconds_per_shot": 0.0005146786298828125,
+      "median_total_decode_seconds": 0.527030917,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.512528,
+      "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "raw_total_decode_nanoseconds": [
+        536538959,
+        524754250,
+        530742500,
+        532535375,
+        535120709,
+        514966916,
+        521222917,
+        527030917,
+        512528000
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 64,
+      "correlated_to_independent_median_ratio": 3.663764655066655,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.543164125,
+      "median_memory_rounds_per_second": 1929341.780049426,
+      "median_microseconds_per_round": 0.5183114833984376,
+      "median_seconds_per_shot": 0.0005183114833984375,
+      "median_total_decode_seconds": 0.530750959,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.510688542,
+      "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "raw_total_decode_nanoseconds": [
+        537308750,
+        513540541,
+        542206416,
+        530750959,
+        534598917,
+        510688542,
+        513326541,
+        510884208,
+        543164125
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 256,
+      "correlated_to_independent_median_ratio": 3.6283229488039535,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.5502461670000001,
+      "median_memory_rounds_per_second": 1946812.474809311,
+      "median_microseconds_per_round": 0.51366015625,
+      "median_seconds_per_shot": 0.00051366015625,
+      "median_total_decode_seconds": 0.525988,
+      "memory_basis": "x",
+      "min_total_decode_seconds": 0.5149520000000001,
+      "prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "raw_total_decode_nanoseconds": [
+        536200375,
+        515335667,
+        550246167,
+        538956083,
+        525988000,
+        514952000,
+        515818167,
+        526839959,
+        522671208
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 1,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.159442,
+      "median_memory_rounds_per_second": 6858924.600598758,
+      "median_microseconds_per_round": 0.1457954501953125,
+      "median_seconds_per_shot": 0.0001457954501953125,
+      "median_total_decode_seconds": 0.149294541,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.14168625,
+      "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "raw_total_decode_nanoseconds": [
+        149596000,
+        146906167,
+        159442000,
+        149979667,
+        144052166,
+        141686250,
+        145270791,
+        149294541,
+        152739792
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 4,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.150883292,
+      "median_memory_rounds_per_second": 7059579.855033872,
+      "median_microseconds_per_round": 0.1416514892578125,
+      "median_seconds_per_shot": 0.0001416514892578125,
+      "median_total_decode_seconds": 0.145051125,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.13661783300000002,
+      "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "raw_total_decode_nanoseconds": [
+        147782292,
+        148459584,
+        146458417,
+        150883292,
+        144436375,
+        136617833,
+        142728875,
+        145051125,
+        139756666
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 16,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.165180083,
+      "median_memory_rounds_per_second": 7152363.410132045,
+      "median_microseconds_per_round": 0.1398139248046875,
+      "median_seconds_per_shot": 0.0001398139248046875,
+      "median_total_decode_seconds": 0.143169459,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.131641416,
+      "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "raw_total_decode_nanoseconds": [
+        131641416,
+        141814209,
+        152300000,
+        151758750,
+        143988125,
+        138844167,
+        138710834,
+        143169459,
+        165180083
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 64,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.17340175000000002,
+      "median_memory_rounds_per_second": 7127763.19939062,
+      "median_microseconds_per_round": 0.14029646777343752,
+      "median_seconds_per_shot": 0.0001402964677734375,
+      "median_total_decode_seconds": 0.143663583,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.13589895800000001,
+      "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "raw_total_decode_nanoseconds": [
+        144204250,
+        143663583,
+        173401750,
+        145507500,
+        141996250,
+        142888250,
+        138767792,
+        148525166,
+        135898958
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 256,
+      "decoder": "independent_mwpm",
+      "max_total_decode_seconds": 0.16016633300000002,
+      "median_memory_rounds_per_second": 7170744.91813019,
+      "median_microseconds_per_round": 0.139455525390625,
+      "median_seconds_per_shot": 0.00013945552539062502,
+      "median_total_decode_seconds": 0.14280245800000002,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.140939583,
+      "prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+      "raw_total_decode_nanoseconds": [
+        142272541,
+        142487042,
+        160166333,
+        142802458,
+        146882916,
+        140939583,
+        141277917,
+        155592750,
+        144760458
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 1,
+      "correlated_to_independent_median_ratio": 3.5380091894987644,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.578846834,
+      "median_memory_rounds_per_second": 1938639.5662727132,
+      "median_microseconds_per_round": 0.5158256425781251,
+      "median_seconds_per_shot": 0.0005158256425781251,
+      "median_total_decode_seconds": 0.5282054580000001,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.514582416,
+      "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "raw_total_decode_nanoseconds": [
+        526076500,
+        521232000,
+        578846834,
+        531439583,
+        528205458,
+        518250417,
+        533594875,
+        535588334,
+        514582416
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 4,
+      "correlated_to_independent_median_ratio": 3.584287664090851,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.5581945,
+      "median_memory_rounds_per_second": 1969590.7573937771,
+      "median_microseconds_per_round": 0.5077196855468751,
+      "median_seconds_per_shot": 0.000507719685546875,
+      "median_total_decode_seconds": 0.519904958,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.5153980420000001,
+      "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "raw_total_decode_nanoseconds": [
+        519797583,
+        519301042,
+        558194500,
+        532082708,
+        527671792,
+        518605875,
+        519904958,
+        521428375,
+        515398042
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 16,
+      "correlated_to_independent_median_ratio": 3.6278832554644214,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.5401058750000001,
+      "median_memory_rounds_per_second": 1971497.6768778188,
+      "median_microseconds_per_round": 0.5072285966796876,
+      "median_seconds_per_shot": 0.0005072285966796875,
+      "median_total_decode_seconds": 0.519402083,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.510553,
+      "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "raw_total_decode_nanoseconds": [
+        518412041,
+        517356834,
+        525543250,
+        540105875,
+        526867125,
+        521580209,
+        519402083,
+        518545375,
+        510553000
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 64,
+      "correlated_to_independent_median_ratio": 3.627622526997673,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.538221375,
+      "median_memory_rounds_per_second": 1964858.0155029984,
+      "median_microseconds_per_round": 0.508942626953125,
+      "median_seconds_per_shot": 0.000508942626953125,
+      "median_total_decode_seconds": 0.52115725,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.5103194590000001,
+      "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "raw_total_decode_nanoseconds": [
+        520168542,
+        515912458,
+        538221375,
+        532826375,
+        527636333,
+        526183250,
+        521157250,
+        510597458,
+        510319459
+      ],
+      "timed_repetitions": 9
+    },
+    {
+      "batch_size": 256,
+      "correlated_to_independent_median_ratio": 3.6755211734520703,
+      "decoder": "two_pass_correlated_matching",
+      "max_total_decode_seconds": 0.570797709,
+      "median_memory_rounds_per_second": 1950946.431739743,
+      "median_microseconds_per_round": 0.5125717363281251,
+      "median_seconds_per_shot": 0.0005125717363281251,
+      "median_total_decode_seconds": 0.5248734580000001,
+      "memory_basis": "z",
+      "min_total_decode_seconds": 0.5042661660000001,
+      "prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "raw_total_decode_nanoseconds": [
+        519081083,
+        517986459,
+        570797709,
+        525341083,
+        525936542,
+        528369167,
+        524873458,
+        504266166,
+        512728458
+      ],
+      "timed_repetitions": 9
+    }
+  ],
+  "next_gate": "Implement and time an online O(d) sliding-window decoder with communication, control, feedback, and tail latency before any hardware deadline, full B2, #023, or B7 claim.",
+  "protocol_binding": {
+    "path": "benchmarks/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+    "sha256": "3dec39c8d64547adea2649a6343b7810c8b5a0f7ee7d78e648503c79577083df"
+  },
+  "public_freeze": {
+    "commit": "6882dfeed3c48623585d5676dce91d7644b6fc41",
+    "discussion_number": 327,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/327",
+    "protocol_sha256": "3dec39c8d64547adea2649a6343b7810c8b5a0f7ee7d78e648503c79577083df",
+    "runner_sha256": "6053b08ae1ed7303bbf1b799439bcb63000cb3b1dc1ab246a6f313f463ad5259"
+  },
+  "question": "Can the correlation-aware distance-6 decoder sustain a literature-grounded 1 microsecond per syndrome round software backlog proxy when batching is removed, and what latency price accompanies the 26-qubit saving?",
+  "schema_version": "b2_b7_p023_d6_decoder_latency_matrix_result_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "software_backlog_proxy": {
+    "batch_256_throughput_reported_separately": true,
+    "interpretation": "host-local offline block-decoding feasibility proxy only",
+    "pass_rule": "both X and Z median_microseconds_per_round <= 1.0",
+    "primary_configuration": "two_pass_correlated_matching with batch_size=1",
+    "threshold_microseconds_per_round": 1.0
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 13,
+    "checks_total": 13,
+    "corpus_shots_total": 2048,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "matrix_rows": 20,
+    "p023_scalable_memory_ready": false,
+    "software_batch1_backlog_proxy_pass": true,
+    "software_batch256_throughput_proxy_pass": true,
+    "timed_repetitions_total": 180
+  },
+  "timing_evidence_id": "cd59350da60f3d17b59f36cdaf300c2b2a62923cdbdb73f14e9e054c578c99b5",
+  "verdict": {
+    "b7_resource_credit": 0,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "physical_memory_gate_passed": true,
+    "software_batch1_backlog_proxy_pass": true,
+    "software_batch256_throughput_proxy_pass": true,
+    "threshold_microseconds_per_round": 1.0
+  }
+}
