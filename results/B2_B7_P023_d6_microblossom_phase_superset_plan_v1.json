@@ -1,0 +1,287 @@
+{
+  "acceptance": {
+    "b7_resource_credit": 0,
+    "canonical_superset_mapping_constructed": true,
+    "complete_corrections_compared": false,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "lut_bram_measured": false,
+    "masked_superset_rtl_implemented": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "phase_maps_injective": true,
+    "rule_targets_stay_inside_phase_masks": true,
+    "runtime_phase_switching_implemented": false,
+    "scalable_p023": false
+  },
+  "basis_rows": [
+    {
+      "basis": "x",
+      "canonical_maps_injective": true,
+      "edge_overlap": [
+        {
+          "intersection": 2890,
+          "jaccard": 0.9684986595174263,
+          "left": "opening",
+          "left_count": 2901,
+          "right": "steady",
+          "right_count": 2973,
+          "union": 2984
+        },
+        {
+          "intersection": 2869,
+          "jaccard": 0.7626262626262627,
+          "left": "opening",
+          "left_count": 2901,
+          "right": "closing",
+          "right_count": 3730,
+          "union": 3762
+        },
+        {
+          "intersection": 2952,
+          "jaccard": 0.786990135963743,
+          "left": "steady",
+          "left_count": 2973,
+          "right": "closing",
+          "right_count": 3730,
+          "union": 3751
+        }
+      ],
+      "frozen_windows": 164,
+      "phase_active_rule_count": {
+        "count": 3,
+        "maximum": 19306,
+        "mean": 16661.333333333332,
+        "minimum": 15072
+      },
+      "phase_rows": [
+        {
+          "active_rules": 15072,
+          "baseline_commit_component_candidates": 7291,
+          "detector_vertices": 613,
+          "edges": 2901,
+          "fault_id_count": 229,
+          "phase": "opening",
+          "vertices": 891,
+          "virtual_vertices": 278
+        },
+        {
+          "active_rules": 15606,
+          "baseline_commit_component_candidates": 8241,
+          "detector_vertices": 630,
+          "edges": 2973,
+          "fault_id_count": 246,
+          "phase": "steady",
+          "vertices": 903,
+          "virtual_vertices": 273
+        },
+        {
+          "active_rules": 19306,
+          "baseline_commit_component_candidates": 30154,
+          "detector_vertices": 788,
+          "edges": 3730,
+          "fault_id_count": 789,
+          "phase": "closing",
+          "vertices": 1115,
+          "virtual_vertices": 327
+        }
+      ],
+      "shared_edges_with_phase_dependent_base_weight": 76,
+      "shared_rule_conflict_digest": "64a48ec6f5711b63f983c3fa25e4234529007f84c33e4b367e226ffb6eb5cb5b",
+      "shared_rule_pairs_with_phase_dependent_replacement": 370,
+      "shared_weight_conflict_digest": "b623dbc27869fa3842bf9c89f9cbc07ffe8a9eb45b9b3fe2b53866191e0d2d93",
+      "superset": {
+        "edges": 3762,
+        "edges_vs_largest_phase_ratio": 1.00857908847185,
+        "edges_vs_three_images_ratio": 0.39171178675551854,
+        "phase_control_bits": 2,
+        "three_phase_edge_mask_bits": 11286,
+        "three_phase_vertex_mask_bits": 3441,
+        "vertices": 1147,
+        "vertices_vs_largest_phase_ratio": 1.0286995515695068
+      },
+      "translated_rule_targets_all_active": true,
+      "unique_graph_images": 3,
+      "vertex_overlap": [
+        {
+          "intersection": 880,
+          "jaccard": 0.962800875273523,
+          "left": "opening",
+          "left_count": 891,
+          "right": "steady",
+          "right_count": 903,
+          "union": 914
+        },
+        {
+          "intersection": 859,
+          "jaccard": 0.7489102005231038,
+          "left": "opening",
+          "left_count": 891,
+          "right": "closing",
+          "right_count": 1115,
+          "union": 1147
+        },
+        {
+          "intersection": 882,
+          "jaccard": 0.7764084507042254,
+          "left": "steady",
+          "left_count": 903,
+          "right": "closing",
+          "right_count": 1115,
+          "union": 1136
+        }
+      ]
+    },
+    {
+      "basis": "z",
+      "canonical_maps_injective": true,
+      "edge_overlap": [
+        {
+          "intersection": 2886,
+          "jaccard": 0.9674824002681864,
+          "left": "opening",
+          "left_count": 2896,
+          "right": "steady",
+          "right_count": 2973,
+          "union": 2983
+        },
+        {
+          "intersection": 2865,
+          "jaccard": 0.762779552715655,
+          "left": "opening",
+          "left_count": 2896,
+          "right": "closing",
+          "right_count": 3725,
+          "union": 3756
+        },
+        {
+          "intersection": 2952,
+          "jaccard": 0.7880405766150561,
+          "left": "steady",
+          "left_count": 2973,
+          "right": "closing",
+          "right_count": 3725,
+          "union": 3746
+        }
+      ],
+      "frozen_windows": 164,
+      "phase_active_rule_count": {
+        "count": 3,
+        "maximum": 19296,
+        "mean": 16654.666666666668,
+        "minimum": 15062
+      },
+      "phase_rows": [
+        {
+          "active_rules": 15062,
+          "baseline_commit_component_candidates": 7256,
+          "detector_vertices": 612,
+          "edges": 2896,
+          "fault_id_count": 228,
+          "phase": "opening",
+          "vertices": 887,
+          "virtual_vertices": 275
+        },
+        {
+          "active_rules": 15606,
+          "baseline_commit_component_candidates": 8241,
+          "detector_vertices": 630,
+          "edges": 2973,
+          "fault_id_count": 246,
+          "phase": "steady",
+          "vertices": 903,
+          "virtual_vertices": 273
+        },
+        {
+          "active_rules": 19296,
+          "baseline_commit_component_candidates": 30133,
+          "detector_vertices": 787,
+          "edges": 3725,
+          "fault_id_count": 788,
+          "phase": "closing",
+          "vertices": 1111,
+          "virtual_vertices": 324
+        }
+      ],
+      "shared_edges_with_phase_dependent_base_weight": 76,
+      "shared_rule_conflict_digest": "3ce8c9acded44c1239638267e4907cb7b102300dee5754e272f27c842b7668ab",
+      "shared_rule_pairs_with_phase_dependent_replacement": 371,
+      "shared_weight_conflict_digest": "cab6705933cd4d3676186673f0da8ea85710545df7868f3d468d31efd57f1fb2",
+      "superset": {
+        "edges": 3756,
+        "edges_vs_largest_phase_ratio": 1.0083221476510067,
+        "edges_vs_three_images_ratio": 0.391494684177611,
+        "phase_control_bits": 2,
+        "three_phase_edge_mask_bits": 11268,
+        "three_phase_vertex_mask_bits": 3426,
+        "vertices": 1142,
+        "vertices_vs_largest_phase_ratio": 1.0279027902790279
+      },
+      "translated_rule_targets_all_active": true,
+      "unique_graph_images": 3,
+      "vertex_overlap": [
+        {
+          "intersection": 877,
+          "jaccard": 0.9605695509309967,
+          "left": "opening",
+          "left_count": 887,
+          "right": "steady",
+          "right_count": 903,
+          "union": 913
+        },
+        {
+          "intersection": 856,
+          "jaccard": 0.7495621716287215,
+          "left": "opening",
+          "left_count": 887,
+          "right": "closing",
+          "right_count": 1111,
+          "union": 1142
+        },
+        {
+          "intersection": 882,
+          "jaccard": 0.7791519434628975,
+          "left": "steady",
+          "left_count": 903,
+          "right": "closing",
+          "right_count": 1111,
+          "union": 1132
+        }
+      ]
+    }
+  ],
+  "classification": "phase_superset_mapping_feasible_phase_banked_state_required_no_rtl_credit",
+  "date": "2026-11-21",
+  "evidence_id": "6c536a2323d0c562d06b5d4a865756950803c3d54ab955eee2f8691ad1a05684",
+  "next_gate": "Implement one-basis masked-superset RTL with atomic phase-bank selection and reset-bound switching, then replay opening-to-steady-to-closing transitions against the three independent frozen images.",
+  "schema": "b2_b7_p023_d6_microblossom_phase_superset_result_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "selected_route": {
+    "name": "masked_superset_with_phase_banked_semantics",
+    "required_invariants": [
+      "the active masked subgraph is isomorphic to the frozen phase image",
+      "inactive vertices and edges cannot grow, become tight, conflict, or report parity",
+      "selectors are accepted only for active sources and can update only active targets",
+      "phase-specific base weights, resident rules, growth bounds, and fault maps are selected atomically",
+      "a phase change is legal only at a quiescent reset boundary with all transient state cleared",
+      "complete correction and observable output equals the independent frozen phase image"
+    ],
+    "why_not_mask_only": [
+      "shared canonical edges can carry phase-dependent base weights",
+      "shared source/target rule pairs can carry phase-dependent replacements",
+      "fault/output maps and commit-component counts are phase-specific",
+      "vertex_max_growth and tree participation must be phase-isolated"
+    ]
+  },
+  "source": {
+    "image_manifest": "benchmarks/B2_B7_P023_d6_microblossom_images_v1.json",
+    "image_manifest_sha256": "b644d1e6081bc9ccd7b563489ed2cb7a2cbe4a63c5dfde54e4b94c53059c84ab",
+    "plan": "benchmarks/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "plan_evidence_id": "38031dd8b61ff8d0a1a326b13eb5bd7a931084f4d72d62936cc14991091cc1cc",
+    "plan_sha256": "968f66b3fca9691ee3acba96d9036821dd8a3210e6b19406a43189fdb7ace747"
+  }
+}
