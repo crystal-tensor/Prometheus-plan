@@ -1171,6 +1171,40 @@ current_results:
     audit: ../results/B2_B7_P023_qubit_index_invariance_audit_v1.json
     replay_audit: ../results/B2_B7_P023_qubit_index_invariance_replay_v1.json
     markdown_report: ../research/B2_B7_P023_qubit_index_invariance_v1.md
+  d6_candidate_freeze_v1:
+    status: distance6_candidate_structurally_frozen_before_salt_no_outcome_b2_p023_b7_credit_closed
+    method: b2_b7_p023_d6_candidate_freeze_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_index_invariant_reference: ../results/B2_B7_P023_qubit_index_invariance_v1.json
+    candidate_code_family: rotated_surface_code_memory
+    candidate_distance: 6
+    candidate_rounds: 1000
+    candidate_physical_error: 0.001
+    candidate_active_operational_qubits: 71
+    candidate_cost_per_basis_active_qubit_rounds: 71000
+    reference_active_operational_qubits: 97
+    reference_cost_per_basis_active_qubit_rounds: 97000
+    conditional_basis_improvement: 1.3661971830985915
+    conditional_composite_score_if_both_bases_verify: 1.3661971830985915
+    acceptance_threshold: 1.25
+    candidate_stochastic_shots_before_freeze: 0
+    candidate_logical_failures_observed: null
+    acceptance_salt_present: false
+    acceptance_seed_present: false
+    candidate_correctness_tested: false
+    candidate_accepted: false
+    accepted_score_before_correctness: 0
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 21
+    independent_audit_checks_passed: 29
+    exact_replay_checks_passed: 19
+    caveat: structural_preregistration_only_no_candidate_outcome_code_improvement_scalable_memory_or_b7_credit
+    result: ../results/B2_B7_P023_d6_candidate_freeze_v1.json
+    audit: ../results/B2_B7_P023_d6_candidate_freeze_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_candidate_freeze_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_candidate_freeze_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1210,6 +1244,9 @@ prototype_artifacts:
   qubit_index_invariance_runner: ../tools/b2_b7_p023_qubit_index_invariance.py
   qubit_index_invariance_audit: ../tools/b2_b7_p023_qubit_index_invariance_audit.py
   qubit_index_invariance_replay: ../tools/b2_b7_p023_qubit_index_invariance_replay.py
+  d6_candidate_freeze_runner: ../tools/b2_b7_p023_d6_candidate_freeze.py
+  d6_candidate_freeze_audit: ../tools/b2_b7_p023_d6_candidate_freeze_audit.py
+  d6_candidate_freeze_replay: ../tools/b2_b7_p023_d6_candidate_freeze_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
