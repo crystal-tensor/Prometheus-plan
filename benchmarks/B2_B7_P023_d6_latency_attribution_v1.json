@@ -1,0 +1,127 @@
+{
+  "schema_version": "b2_b7_p023_d6_latency_attribution_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "If exact online windowing misses almost every one-microsecond deadline, is the first failing boundary the correlated matching kernel, Python window bookkeeping, or synchronous packing/socket/feedback transport?",
+  "frozen_inputs": {
+    "online_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_online_window_v1.json",
+      "sha256": "6fd3fe1df21de5c039c45790a168fbae2a7438d02bbd75577d17147df94c2074"
+    },
+    "online_result": {
+      "path": "results/B2_B7_P023_d6_online_window_v1.json",
+      "sha256": "b302e7f8f653a7f87bd104e63761b237baf272254effab85c313f156c8c1392d",
+      "required_decision": "d6_correlated_online_window_host_proxy_fail_hardware_deadline_b2_p023_b7_open"
+    },
+    "online_audit": {
+      "path": "results/B2_B7_P023_d6_online_window_audit_v1.json",
+      "sha256": "f602b7856cc4b4c79c6e51a854b0880890dc5757ba7cf87cceea3c49aba934a6"
+    },
+    "online_replay": {
+      "path": "results/B2_B7_P023_d6_online_window_replay_v1.json",
+      "sha256": "fdc9591acb78aa6c15ae014509144fcd3586255c848ce503434e1cdc9872aa00"
+    },
+    "artifact_commit": "f04d0ac364dbf79553d9536cf4713251db86b49f"
+  },
+  "known_before_preregistration": {
+    "online_semantics_passed": true,
+    "prediction_rows_equal_full_block": 4096,
+    "commit_and_final_residual_failures": 0,
+    "online_correlated_host_proxy_passed": false,
+    "x_correlated_p50_microseconds_per_committed_layer": 4.708333333333333,
+    "x_correlated_p99_microseconds_per_committed_layer": 9.034666666666666,
+    "x_correlated_deadline_miss_fraction": 0.9997141768292683,
+    "z_correlated_p50_microseconds_per_committed_layer": 4.791666666666667,
+    "z_correlated_p99_microseconds_per_committed_layer": 9.375,
+    "z_correlated_deadline_miss_fraction": 0.9996189024390244,
+    "x_correlated_decode_commit_phase_median_nanoseconds": 23333.0,
+    "x_correlated_decode_commit_phase_p99_nanoseconds": 49417.0,
+    "z_correlated_decode_commit_phase_median_nanoseconds": 23625.0,
+    "z_correlated_decode_commit_phase_p99_nanoseconds": 50917.0,
+    "new_direct_path_or_fine_phase_timings_observed": false,
+    "disclosure": "the prior result already exposes coarse input, decode/commit, feedback, and end-to-end timing summaries; no direct no-socket rerun, matching-kernel vector, edge-mapping vector, commit-propagation vector, attribution classification, or new relative speedup has been observed"
+  },
+  "corpus_contract": {
+    "source": "the identical frozen 1,024-shot X/Z corpora and full-block correlated predictions used by the online-window result",
+    "shots_per_basis_for_direct_semantics": 1024,
+    "timed_shots_per_basis": 128,
+    "timed_windows_per_shot": 164,
+    "rounds_per_shot": 1000,
+    "same_detector_bytes_required": true,
+    "source_chunk_digest_reproduction_required": true,
+    "full_block_prediction_hash_reproduction_required": true,
+    "sampling_excluded_from_timed_region": true,
+    "graph_construction_excluded_from_timed_region": true
+  },
+  "attribution_contract": {
+    "decoder": "two_pass_correlated_matching",
+    "window_algorithm": "unchanged sequential 3d=18 overlapping recovery with d=6 commits and 2d=12 look-ahead",
+    "sync_path": "the existing packed same-process Unix socket input, matching, correction propagation, and reverse feedback acknowledgement path",
+    "direct_path": "the same compiled windows, syndrome bytes, matching objects, component mapping, correction propagation, and logical frame, but detector arrivals are copied directly and feedback is read directly without packing or sockets",
+    "direct_path_phases": [
+      "arrival_delivery",
+      "syndrome_materialization",
+      "matching_kernel",
+      "edge_to_component_mapping",
+      "commit_propagation_and_residual",
+      "direct_feedback_read"
+    ],
+    "timed_mode_order": "sync_then_direct on even shot indices and direct_then_sync on odd shot indices",
+    "raw_vectors_required": "little-endian uint64 nanoseconds for sync total and phases plus direct total and every direct phase",
+    "phase_additivity_required": true,
+    "semantic_requirements": [
+      "direct path equals all 1,024 frozen correlated full-block predictions in each basis",
+      "sync rerun equals the first 128 frozen correlated full-block predictions in each basis",
+      "direct and sync rerun leave every committed region and final syndrome with zero residual",
+      "direct and sync predictions agree on every timed row"
+    ]
+  },
+  "timing_contract": {
+    "warmup_shots_per_basis_and_path": 1,
+    "clock": "time.perf_counter_ns",
+    "quantile_method": "nearest_rank_ceil_qn",
+    "primary_statistic": "nearest-rank p99 microseconds per committed syndrome layer",
+    "threshold_microseconds_per_committed_layer": 1.0,
+    "maximum_deadline_miss_fraction": 0.01,
+    "absolute_deadline_not_replaced_by_relative_speedup": true,
+    "wall_clock_replay_policy": "raw bytes and arithmetic are auditable, while a later independent run may reproduce the classification without requiring identical nanoseconds"
+  },
+  "classification_rule": {
+    "order": [
+      "semantic_regression",
+      "matching_kernel_tail_bottleneck",
+      "python_window_bookkeeping_tail_bottleneck",
+      "synchronous_transport_feedback_tail_bottleneck",
+      "sync_host_proxy_pass"
+    ],
+    "rule": "after the semantic veto, select the first stage that fails the p99 and miss-fraction gate in either X or Z: matching_kernel, then direct_end_to_end, then sync_end_to_end",
+    "interpretation": "a classification localizes the first measured software boundary only and does not establish a hardware bottleneck"
+  },
+  "kaggle_inspired_evaluation": {
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "semantic correctness, clean residuals, source hashes, and frozen predictions are checked before any timing improvement is credited",
+    "reference_relative_cost": "for each basis report sync_path_p99/direct_path_p99 only after the semantic veto passes",
+    "aggregate": "geometric mean across X and Z of the two reference-relative p99 speedups",
+    "absolute_guardrail": "relative speedup cannot waive the frozen one-microsecond p99 and one-percent miss limits",
+    "confidence_analogy": "the competition prices decoder failure using an upper confidence bound; this experiment instead keeps exact fixed-corpus equality and tail/deadline statistics as separate vetoes"
+  },
+  "hard_boundaries": {
+    "hardware_decoder_deadline_passed": false,
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0,
+    "reason": "both execution paths remain same-host Python processes without a QPU, measurement stack, controller, asynchronous hardware queue, cryogenic link, or device feedback path"
+  },
+  "execution_guard": {
+    "preflight_before_publication": "real DEM structure and all-zero syndrome only; zero stochastic candidate shots and zero direct-path timing observations",
+    "public_commit_required_before_outcomes": true,
+    "public_discussion_required_before_outcomes": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true,
+    "runner_verifies_its_own_and_protocol_bytes_at_public_commit": true
+  }
+}

@@ -1450,6 +1450,34 @@ current_results:
     audit: ../results/B2_B7_P023_d6_online_window_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_online_window_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_online_window_v1.md
+  d6_latency_attribution_freeze_v1:
+    status: d6_latency_attribution_preregistered_before_direct_path_or_fine_phase_timings
+    method: b2_b7_p023_d6_latency_attribution_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_online_result: ../results/B2_B7_P023_d6_online_window_v1.json
+    source_online_decision: d6_correlated_online_window_host_proxy_fail_hardware_deadline_b2_p023_b7_open
+    known_prediction_rows_equal_full_block: 4096
+    known_commit_and_final_residual_failures: 0
+    known_x_correlated_p99_microseconds_per_committed_layer: 9.034666666666666
+    known_z_correlated_p99_microseconds_per_committed_layer: 9.375
+    frozen_paths: [sync_socket_feedback, direct_no_pack_no_socket]
+    frozen_direct_phases: [arrival_delivery, syndrome_materialization, matching_kernel, edge_to_component_mapping, commit_propagation_and_residual, direct_feedback_read]
+    timed_shots_per_basis: 128
+    direct_semantic_shots_per_basis: 1024
+    frozen_tail_threshold_microseconds_per_committed_layer: 1.0
+    maximum_deadline_miss_fraction: 0.01
+    classification_order: [semantic_regression, matching_kernel_tail_bottleneck, python_window_bookkeeping_tail_bottleneck, synchronous_transport_feedback_tail_bottleneck, sync_host_proxy_pass]
+    kaggle_inspired_correctness_veto_before_reference_relative_p99_geometric_mean: true
+    direct_path_timing_outcomes_observed_before_freeze: false
+    fine_phase_timing_outcomes_observed_before_freeze: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    caveat: public_preregistration_only_same_host_attribution_cannot_satisfy_hardware_deadline
+    protocol: B2_B7_P023_d6_latency_attribution_v1.json
+    runner: ../tools/b2_b7_p023_d6_latency_attribution.py
+    markdown_report: ../research/B2_B7_P023_d6_latency_attribution_freeze_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1506,6 +1534,7 @@ prototype_artifacts:
   d6_online_window_runner: ../tools/b2_b7_p023_d6_online_window.py
   d6_online_window_audit: ../tools/b2_b7_p023_d6_online_window_audit.py
   d6_online_window_replay: ../tools/b2_b7_p023_d6_online_window_replay.py
+  d6_latency_attribution_runner: ../tools/b2_b7_p023_d6_latency_attribution.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
