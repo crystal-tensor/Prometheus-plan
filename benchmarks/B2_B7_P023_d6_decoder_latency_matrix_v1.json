@@ -1,0 +1,94 @@
+{
+  "schema_version": "b2_b7_p023_d6_decoder_latency_matrix_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can the correlation-aware distance-6 decoder sustain a literature-grounded 1 microsecond per syndrome round software backlog proxy when batching is removed, and what latency price accompanies the 26-qubit saving?",
+  "frozen_inputs": {
+    "strict_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430"
+    },
+    "strict_result": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de",
+      "required_decision": "d6_correlated_decoder_strict_xz_pass_physical_memory_gate_b2_p023_b7_credit_closed"
+    },
+    "strict_audit": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json",
+      "sha256": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd"
+    },
+    "strict_replay": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json",
+      "sha256": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab"
+    },
+    "strict_generator": {
+      "path": "tools/b2_b7_p023_d6_correlated_strict_acceptance.py",
+      "sha256": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57"
+    },
+    "artifact_commit": "ba1f03a23b820d2e4719c7bbc4ad69edf49d389c"
+  },
+  "known_before_preregistration": {
+    "strict_correctness_outcome_known": true,
+    "strict_physical_memory_score": 1.3661971830985915,
+    "strict_batch_size": 256,
+    "strict_corpus_shots_per_basis": 102400,
+    "x_correlated_decode_seconds_per_shot": 0.000519927697373248,
+    "z_correlated_decode_seconds_per_shot": 0.0005286218217584349,
+    "aggregate_correlated_to_independent_decode_ratio": 4.14830606476302,
+    "new_matrix_timing_outcomes_observed": false,
+    "disclosure": "the prior strict run already exposed one batch-256 timing point on a 102400-shot corpus; the batch-size matrix, single-shot proxy, and nine-repeat distributions below have not been measured"
+  },
+  "corpus_contract": {
+    "source": "the first four 256-shot chunks of each publicly frozen strict X/Z run",
+    "shots_per_basis": 1024,
+    "source_chunk_size": 256,
+    "source_chunks_per_basis": 4,
+    "rounds_per_shot": 1000,
+    "sampling_excluded_from_timed_region": true,
+    "graph_construction_excluded_from_timed_region": true,
+    "source_chunk_digest_reproduction_required": true,
+    "same_detector_corpus_for_both_decoders": true,
+    "prediction_equality_across_batch_sizes_required_per_decoder": true
+  },
+  "matrix_contract": {
+    "decoders": ["independent_mwpm", "two_pass_correlated_matching"],
+    "batch_sizes": [1, 4, 16, 64, 256],
+    "warmup_repetitions": 1,
+    "timed_repetitions": 9,
+    "clock": "time.perf_counter_ns",
+    "schedule": "round-robin over all basis/decoder/batch configurations; rotate by repetition and reverse odd repetitions",
+    "primary_statistic": "median total decode time across nine repetitions",
+    "reported_statistics": ["min", "median", "max", "median_seconds_per_shot", "median_microseconds_per_round", "median_memory_rounds_per_second"],
+    "timing_replay_policy": "wall-clock values are diagnostic and not expected to replay bit-for-bit; corpus and prediction hashes must replay exactly"
+  },
+  "software_backlog_proxy": {
+    "threshold_microseconds_per_round": 1.0,
+    "primary_configuration": "two_pass_correlated_matching with batch_size=1",
+    "pass_rule": "both X and Z median_microseconds_per_round <= 1.0",
+    "batch_256_throughput_reported_separately": true,
+    "interpretation": "host-local offline block-decoding feasibility proxy only"
+  },
+  "external_basis": {
+    "one_microsecond_per_round_source": "https://www.nature.com/articles/s41467-025-66773-x",
+    "real_time_decoder_context": "https://www.nature.com/articles/s41586-024-08449-y",
+    "pymatching_correlated_mode_source": "https://github.com/oscarhiggott/PyMatching/releases",
+    "notes": "the literature motivates a backlog proxy near 1 microsecond per round, but platform, windowing, communication, control, and feedback conditions differ from this host-local benchmark"
+  },
+  "hard_boundaries": {
+    "hardware_decoder_deadline_passed": false,
+    "reason": "the benchmark is offline, decodes complete 1000-round blocks, excludes communication/control/feedback, and does not implement an online O(d) sliding window",
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0
+  },
+  "execution_guard": {
+    "public_commit_required_before_timing": true,
+    "public_discussion_required_before_timing": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true
+  }
+}

@@ -6097,6 +6097,32 @@ current_results:
     audit: ../results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_correlated_strict_acceptance_v1.md
+  d6_decoder_latency_matrix_freeze_v1:
+    status: d6_decoder_latency_matrix_preregistered_before_new_batch_size_measurements
+    method: b2_b7_p023_d6_decoder_latency_matrix_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_strict_result: ../results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json
+    known_batch_size_before_freeze: 256
+    known_aggregate_correlated_to_independent_ratio: 4.14830606476302
+    corpus_shots_per_basis: 1024
+    source_chunks_per_basis: 4
+    frozen_decoders: [independent_mwpm, two_pass_correlated_matching]
+    frozen_batch_sizes: [1, 4, 16, 64, 256]
+    timed_repetitions: 9
+    software_backlog_proxy_microseconds_per_round: 1.0
+    primary_configuration: two_pass_correlated_matching_batch_1
+    new_matrix_timing_outcomes_observed: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    caveat: offline_host_latency_matrix_cannot_create_architecture_credit_or_hardware_deadline
+    protocol: B2_B7_P023_d6_decoder_latency_matrix_v1.json
+    runner: ../tools/b2_b7_p023_d6_decoder_latency_matrix.py
+    markdown_report: ../research/B2_B7_P023_d6_decoder_latency_matrix_freeze_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6128,6 +6154,7 @@ prototype_artifacts:
   d6_correlated_strict_acceptance_runner: ../tools/b2_b7_p023_d6_correlated_strict_acceptance.py
   d6_correlated_strict_acceptance_audit: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_audit.py
   d6_correlated_strict_acceptance_replay: ../tools/b2_b7_p023_d6_correlated_strict_acceptance_replay.py
+  d6_decoder_latency_matrix_runner: ../tools/b2_b7_p023_d6_decoder_latency_matrix.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
