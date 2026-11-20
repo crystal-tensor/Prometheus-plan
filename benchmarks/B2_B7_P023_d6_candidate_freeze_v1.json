@@ -1,0 +1,88 @@
+{
+  "schema_version": "b2_b7_p023_d6_candidate_freeze_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can a 71-active-qubit distance-6 memory preserve the verified distance-7 reliability while clearing the frozen 1.25 resource threshold?",
+  "frozen_inputs": {
+    "index_invariance_protocol": {
+      "path": "benchmarks/B2_B7_P023_qubit_index_invariance_v1.json",
+      "sha256": "4e01e8675e9ced8692ff658965f52bbe0bb13b256176de1e84da3fb23ff40cb4"
+    },
+    "index_invariance_result": {
+      "path": "results/B2_B7_P023_qubit_index_invariance_v1.json",
+      "sha256": "6f4648e8da8b0837fcbafc75c41ea3628648829f651693cd10279580e1613956",
+      "required_decision": "qubit_index_loophole_closed_reference_regraded_to_97_active_qubits_b2_p023_b7_credit_closed"
+    },
+    "index_invariance_generator": {
+      "path": "tools/b2_b7_p023_qubit_index_invariance.py",
+      "sha256": "bb31b67d7421738a7a3f067129c27b6d99083632135e93273ffa7a4bf533d444"
+    },
+    "strict_reference_result": {
+      "path": "results/B2_B7_P023_kaggle_inspired_acceptance_v1.json",
+      "sha256": "3a7702d0a5956d1255c02d723e5b617de0f99fe330c6e7952833ae1a36375cc0",
+      "required_decision": "kaggle_inspired_strict_1k_reference_verified_p023_b2_b7_credit_closed"
+    },
+    "artifact_freeze_commit": "ee8033619827e223dd29906411cfee4d0bb147c0"
+  },
+  "candidate": {
+    "candidate_id": "rotated_surface_code_d6_memory_candidate_v1",
+    "selection_rule": "choose the nearest lower-distance member of the same Stim rotated-surface-code family whose index-invariant active-qubit cost can exceed the preregistered 1.25 score threshold; do not inspect candidate samples before freezing",
+    "code_family": "rotated_surface_code_memory",
+    "distance": 6,
+    "memory_bases": ["x", "z"],
+    "rounds": 1000,
+    "physical_error": 0.001,
+    "noise_parameters": {
+      "after_clifford_depolarization": 0.001,
+      "before_round_data_depolarization": 0.001,
+      "before_measure_flip_probability": 0.001,
+      "after_reset_flip_probability": 0.001
+    },
+    "decoder": "PyMatching MWPM from decomposed Stim detector error model",
+    "expected_active_operational_qubits": 71,
+    "expected_cost_per_basis_active_qubit_rounds": 71000,
+    "reference_cost_per_basis_active_qubit_rounds": 97000,
+    "conditional_basis_improvement": 1.3661971830985915,
+    "conditional_composite_score": 1.3661971830985915
+  },
+  "post_freeze_acceptance_contract": {
+    "shots_per_basis": 102400,
+    "shot_chunk_size": 256,
+    "target_total_logical_failure": 0.01,
+    "confidence_method": "one-sided Clopper-Pearson upper bound",
+    "false_accept_probability": "2^-128",
+    "confidence_level": "1-2^-128",
+    "correctness_gate": "both X and Z upper bounds must be <=0.01 under identical frozen conditions",
+    "score_gate": "Score_QEC=sqrt((97000/C_x_candidate)*(97000/C_z_candidate))>=1.25 with no per-basis regression",
+    "invalid_candidate_score": 0,
+    "challenge_binding": "after this packet is committed and published, derive each seed from secret salt and the coordinate-canonical candidate circuit bytes",
+    "salt_present_in_freeze_packet": false,
+    "seed_present_in_freeze_packet": false
+  },
+  "pre_outcome_integrity": {
+    "candidate_stochastic_shots_before_freeze": 0,
+    "candidate_logical_failures_observed_before_freeze": 0,
+    "candidate_acceptance_salt_revealed_before_freeze": false,
+    "candidate_acceptance_seed_derived_before_freeze": false,
+    "allowed_pre_freeze_operations": [
+      "deterministic circuit generation",
+      "active-qubit counting",
+      "coordinate canonicalization",
+      "detector-error-model construction and hashing",
+      "matching graph dimension inspection"
+    ]
+  },
+  "claim_boundary": {
+    "candidate_correctness_tested": false,
+    "candidate_accepted": false,
+    "b2_low_overhead_improvement_claimed": false,
+    "scalable_quantum_memory_claimed": false,
+    "b7_resource_credit_claimed": false,
+    "hardware_result_claimed": false,
+    "threshold_claimed": false
+  }
+}
