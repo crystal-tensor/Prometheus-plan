@@ -1,0 +1,57 @@
+COMMAND
+For each of x:opening, x:closing, z:opening, z:closing:
+sbt -batch "runMain microblossom.D6PhaseResidentRuleSelectorReplay <image.json> <phase_trace.json> <basis> <phase>"
+
+PINNED_ENVIRONMENT
+micro_blossom_commit=a3530d9e58ff790dafc93d56c9a2769ceac84731
+spinalhdl=1.9.3
+java=Homebrew OpenJDK 17.0.21.0.3
+iverilog=13.0
+dynamic_weight_patch_sha256=990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5
+resident_selector_patch_sha256=cd2f7a819a7fea699f07c504d5ae5c88dfe447dbe3b9515ebd580aec4c55b511
+phase_trace_evidence_id=9fe10f289a4ab8a3bf77d736ea2511ed48e80e776dfa86960f85fb5bc5428bfc
+
+X_OPENING
+PHASE_SELECTOR_BATCH_PASS basis=x phase=opening boundary=maximum selectors=19 updates=140 checked_edges=2901 axi_write_span_slow_cycles=38
+PHASE_SELECTOR_BATCH_PASS basis=x phase=opening boundary=p50 selectors=4 updates=36 checked_edges=2901 axi_write_span_slow_cycles=8
+PHASE_SELECTOR_BATCH_PASS basis=x phase=opening boundary=p99 selectors=10 updates=98 checked_edges=2901 axi_write_span_slow_cycles=20
+PHASE_SELECTOR_BATCH_PASS basis=x phase=opening boundary=zero selectors=0 updates=0 checked_edges=2901 axi_write_span_slow_cycles=0
+PHASE_RTL_ARTIFACT basis=x phase=opening verilog_bytes=403691974 verilog_sha256=883045ac3f42620b622120bb3a640272443dba9491fd49a016bdd56016eb9fde vvp_bytes=485868006 vvp_sha256=b34d96ff4c90b15ac1326cab485a0a76f1c361ee0ced30fba298517b0305d77e
+
+X_CLOSING
+PHASE_SELECTOR_BATCH_PASS basis=x phase=closing boundary=maximum selectors=19 updates=148 checked_edges=3730 axi_write_span_slow_cycles=38
+PHASE_SELECTOR_BATCH_PASS basis=x phase=closing boundary=p50 selectors=5 updates=44 checked_edges=3730 axi_write_span_slow_cycles=10
+PHASE_SELECTOR_BATCH_PASS basis=x phase=closing boundary=p99 selectors=14 updates=117 checked_edges=3730 axi_write_span_slow_cycles=28
+PHASE_SELECTOR_BATCH_PASS basis=x phase=closing boundary=zero selectors=0 updates=0 checked_edges=3730 axi_write_span_slow_cycles=0
+PHASE_RTL_ARTIFACT basis=x phase=closing verilog_bytes=516206724 verilog_sha256=c1e98693ad670d62188235295c9e5ce9aee7f2816448c6e61bb03b0f740b09ce vvp_bytes=621627223 vvp_sha256=e21c4d97ad1124cc19e0b9ac4d6c861f72ddcc1b83f6aa0d91f7d299137a0987
+
+Z_OPENING
+PHASE_SELECTOR_BATCH_PASS basis=z phase=opening boundary=maximum selectors=18 updates=172 checked_edges=2896 axi_write_span_slow_cycles=36
+PHASE_SELECTOR_BATCH_PASS basis=z phase=opening boundary=p50 selectors=5 updates=35 checked_edges=2896 axi_write_span_slow_cycles=10
+PHASE_SELECTOR_BATCH_PASS basis=z phase=opening boundary=p99 selectors=14 updates=114 checked_edges=2896 axi_write_span_slow_cycles=28
+PHASE_SELECTOR_BATCH_PASS basis=z phase=opening boundary=zero selectors=0 updates=0 checked_edges=2896 axi_write_span_slow_cycles=0
+PHASE_RTL_ARTIFACT basis=z phase=opening verilog_bytes=402764279 verilog_sha256=98961a87374471bb7b84946365086af2c78815f2b53b1d6646d80e40663fa495 vvp_bytes=484709811 vvp_sha256=7222229b0673128d106ddd736de08481bdf71df50213aea1ddfbabe811bd8647
+
+Z_CLOSING
+PHASE_SELECTOR_BATCH_PASS basis=z phase=closing boundary=maximum selectors=18 updates=152 checked_edges=3725 axi_write_span_slow_cycles=36
+PHASE_SELECTOR_BATCH_PASS basis=z phase=closing boundary=p50 selectors=6 updates=44 checked_edges=3725 axi_write_span_slow_cycles=12
+PHASE_SELECTOR_BATCH_PASS basis=z phase=closing boundary=p99 selectors=12 updates=119 checked_edges=3725 axi_write_span_slow_cycles=24
+PHASE_SELECTOR_BATCH_PASS basis=z phase=closing boundary=zero selectors=0 updates=0 checked_edges=3725 axi_write_span_slow_cycles=0
+PHASE_RTL_ARTIFACT basis=z phase=closing verilog_bytes=515281783 verilog_sha256=75472bc8121d7436831ae7457614bc50ac94b937b07f963c2350e296cb2ef5ae vvp_bytes=620466844 vvp_sha256=55d10df754d37c5fc2ac9216e9d47cde9c65840fc86830624224ab187657bbe2
+
+SUMMARY
+phase_images=4
+batches_run=16
+batches_passed=16
+checked_edge_states=53008
+mismatches=0
+spinalhdl_elaboration=PASS
+spinalhdl_verilog_generation=PASS
+iverilog_compile=PASS
+simulation=PASS
+
+LIMITS
+Each phase image is generated and simulated independently.
+This does not implement runtime opening/steady/closing switching in one FPGA image.
+It is not FPGA Fmax, timing closure, LUT/BRAM, all-batch replay, full-correction,
+or end-to-end one-microsecond deadline credit.

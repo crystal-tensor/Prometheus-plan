@@ -1,0 +1,359 @@
+{
+  "acceptance": {
+    "all_accepted_phase_batches_replayed_in_rtl": false,
+    "b7_resource_credit": 0,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "full_update_plus_decode_p99_cycles_measured": false,
+    "lut_bram_measured": false,
+    "miss_rate_le_1pct": false,
+    "opening_closing_representative_edge_state_rtl_replay": true,
+    "p99_le_1us": false,
+    "rtl_corrections_compared": false,
+    "runtime_phase_switching_implemented": false,
+    "scalable_p023": false
+  },
+  "classification": "opening_closing_representative_resident_selector_rtl_replay_pass_no_runtime_switch_timing_or_resource_credit",
+  "date": "2026-11-21",
+  "evidence_id": "15e90f8c1847ed1a30b3057fc790f3f4bb2e57d0472e2f026c211e45fe8cff4c",
+  "implementation": {
+    "axi_selector_window": "0x4000-0x4fff",
+    "exact_edge_semantics": "on reset restore base; on each selected source, every matching target stores min(current, resident replacement)",
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "prerequisite_dynamic_weight_patch": "tools/patches/micro_blossom_a3530d9_dynamic_weight_sideband.patch",
+    "prerequisite_dynamic_weight_patch_sha256": "990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5",
+    "resident_selector_patch": "tools/patches/micro_blossom_a3530d9_resident_rule_selector_on_dynamic_patch.patch",
+    "resident_selector_patch_sha256": "cd2f7a819a7fea699f07c504d5ae5c88dfe447dbe3b9515ebd580aec4c55b511"
+  },
+  "next_gate": "Choose and implement an honest opening/steady/closing integration route, then replay complete corrections; separate per-phase RTL images do not establish runtime switching, FPGA timing, or resources.",
+  "representative_rtl_replay": {
+    "batches_failed": 0,
+    "batches_passed": 16,
+    "batches_run": 16,
+    "full_edge_state_checks": 53008,
+    "full_edge_state_checks_passed": 53008,
+    "mismatches": 0,
+    "phase_images": 4
+  },
+  "rtl_generation": {
+    "generated_artifacts_committed": false,
+    "iverilog_version": "13.0",
+    "java": "Homebrew OpenJDK 17.0.21.0.3",
+    "phase_images_compiled": 4,
+    "phase_images_generated": 4,
+    "phase_rows": [
+      {
+        "accepted_phase_batches": 1024,
+        "accepted_selector_distribution": {
+          "maximum": 19,
+          "mean": 5.67578125,
+          "observations": 1024,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "8cbbde27dc41e1b1a85e3c4e2c9e268bacae097ece44806d98c703a46a0835c8",
+          "zero_fraction": 0.0078125
+        },
+        "accepted_update_distribution": {
+          "maximum": 140,
+          "mean": 38.7744140625,
+          "observations": 1024,
+          "p50": 36.0,
+          "p95": 81.0,
+          "p99": 98.0,
+          "p999": 123.0,
+          "raw_uint32_sha256": "82540a89e5684050e1222ad74101693665d25ea2372829a4343641c1e7a203ac",
+          "zero_fraction": 0.0078125
+        },
+        "active_resident_rules": 15072,
+        "basis": "x",
+        "directed_rules": 15076,
+        "generated_verilog_bytes": 403691974,
+        "generated_verilog_sha256": "883045ac3f42620b622120bb3a640272443dba9491fd49a016bdd56016eb9fde",
+        "generated_vvp_bytes": 485868006,
+        "generated_vvp_sha256": "b34d96ff4c90b15ac1326cab485a0a76f1c361ee0ced30fba298517b0305d77e",
+        "graph_edges": 2901,
+        "image": "benchmarks/B2_B7_P023_d6_microblossom_images_v1/x_opening.json",
+        "image_sha256": "d79377cb0de8becce4d2e80ecd5bd734f435669d8a91dc76e142b465cb0e8d79",
+        "phase": "opening",
+        "representative_replay": [
+          {
+            "axi_write_span_slow_cycles": 0,
+            "boundary": "zero",
+            "checked_edges": 2901,
+            "expected_weight_updates": 0,
+            "pass": true,
+            "selected_source_edges": 0
+          },
+          {
+            "axi_write_span_slow_cycles": 8,
+            "boundary": "p50",
+            "checked_edges": 2901,
+            "expected_weight_updates": 36,
+            "pass": true,
+            "selected_source_edges": 4
+          },
+          {
+            "axi_write_span_slow_cycles": 20,
+            "boundary": "p99",
+            "checked_edges": 2901,
+            "expected_weight_updates": 98,
+            "pass": true,
+            "selected_source_edges": 10
+          },
+          {
+            "axi_write_span_slow_cycles": 38,
+            "boundary": "maximum",
+            "checked_edges": 2901,
+            "expected_weight_updates": 140,
+            "pass": true,
+            "selected_source_edges": 19
+          }
+        ]
+      },
+      {
+        "accepted_phase_batches": 1024,
+        "accepted_selector_distribution": {
+          "maximum": 19,
+          "mean": 6.9404296875,
+          "observations": 1024,
+          "p50": 7.0,
+          "p95": 12.0,
+          "p99": 15.0,
+          "p999": 18.0,
+          "raw_uint32_sha256": "415f7495e48d3a2069f231622a7dfce4f742a595c5c5574ffd272d329f4d9e59",
+          "zero_fraction": 0.001953125
+        },
+        "accepted_update_distribution": {
+          "maximum": 148,
+          "mean": 46.642578125,
+          "observations": 1024,
+          "p50": 44.0,
+          "p95": 94.0,
+          "p99": 117.0,
+          "p999": 145.0,
+          "raw_uint32_sha256": "fcc26f59a2435d1c8e49878e2ee61d0a23d663fa214c6aa0c9442185a72e7ba8",
+          "zero_fraction": 0.0029296875
+        },
+        "active_resident_rules": 19306,
+        "basis": "x",
+        "directed_rules": 19306,
+        "generated_verilog_bytes": 516206724,
+        "generated_verilog_sha256": "c1e98693ad670d62188235295c9e5ce9aee7f2816448c6e61bb03b0f740b09ce",
+        "generated_vvp_bytes": 621627223,
+        "generated_vvp_sha256": "e21c4d97ad1124cc19e0b9ac4d6c861f72ddcc1b83f6aa0d91f7d299137a0987",
+        "graph_edges": 3730,
+        "image": "benchmarks/B2_B7_P023_d6_microblossom_images_v1/x_closing.json",
+        "image_sha256": "31f91661b105b7c49b740dc2688a87e30bb17718f108d74022fde55aced35860",
+        "phase": "closing",
+        "representative_replay": [
+          {
+            "axi_write_span_slow_cycles": 0,
+            "boundary": "zero",
+            "checked_edges": 3730,
+            "expected_weight_updates": 0,
+            "pass": true,
+            "selected_source_edges": 0
+          },
+          {
+            "axi_write_span_slow_cycles": 10,
+            "boundary": "p50",
+            "checked_edges": 3730,
+            "expected_weight_updates": 44,
+            "pass": true,
+            "selected_source_edges": 5
+          },
+          {
+            "axi_write_span_slow_cycles": 28,
+            "boundary": "p99",
+            "checked_edges": 3730,
+            "expected_weight_updates": 117,
+            "pass": true,
+            "selected_source_edges": 14
+          },
+          {
+            "axi_write_span_slow_cycles": 38,
+            "boundary": "maximum",
+            "checked_edges": 3730,
+            "expected_weight_updates": 148,
+            "pass": true,
+            "selected_source_edges": 19
+          }
+        ]
+      },
+      {
+        "accepted_phase_batches": 1024,
+        "accepted_selector_distribution": {
+          "maximum": 18,
+          "mean": 5.677734375,
+          "observations": 1024,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 17.0,
+          "raw_uint32_sha256": "adc5b90e57e0e86d90d1c049083424af236f2b2fdf220358ec382619c4e086c1",
+          "zero_fraction": 0.0166015625
+        },
+        "accepted_update_distribution": {
+          "maximum": 172,
+          "mean": 38.7333984375,
+          "observations": 1024,
+          "p50": 35.0,
+          "p95": 84.0,
+          "p99": 114.0,
+          "p999": 139.0,
+          "raw_uint32_sha256": "0a920714c68f15cd5b0b52236baceb1b2583c23d52021a678bf5257baa7dfa94",
+          "zero_fraction": 0.0166015625
+        },
+        "active_resident_rules": 15062,
+        "basis": "z",
+        "directed_rules": 15066,
+        "generated_verilog_bytes": 402764279,
+        "generated_verilog_sha256": "98961a87374471bb7b84946365086af2c78815f2b53b1d6646d80e40663fa495",
+        "generated_vvp_bytes": 484709811,
+        "generated_vvp_sha256": "7222229b0673128d106ddd736de08481bdf71df50213aea1ddfbabe811bd8647",
+        "graph_edges": 2896,
+        "image": "benchmarks/B2_B7_P023_d6_microblossom_images_v1/z_opening.json",
+        "image_sha256": "9126a015073e8511eeec51cc00622e2648771e238aa9e49973f77472dac4137f",
+        "phase": "opening",
+        "representative_replay": [
+          {
+            "axi_write_span_slow_cycles": 0,
+            "boundary": "zero",
+            "checked_edges": 2896,
+            "expected_weight_updates": 0,
+            "pass": true,
+            "selected_source_edges": 0
+          },
+          {
+            "axi_write_span_slow_cycles": 10,
+            "boundary": "p50",
+            "checked_edges": 2896,
+            "expected_weight_updates": 35,
+            "pass": true,
+            "selected_source_edges": 5
+          },
+          {
+            "axi_write_span_slow_cycles": 28,
+            "boundary": "p99",
+            "checked_edges": 2896,
+            "expected_weight_updates": 114,
+            "pass": true,
+            "selected_source_edges": 14
+          },
+          {
+            "axi_write_span_slow_cycles": 36,
+            "boundary": "maximum",
+            "checked_edges": 2896,
+            "expected_weight_updates": 172,
+            "pass": true,
+            "selected_source_edges": 18
+          }
+        ]
+      },
+      {
+        "accepted_phase_batches": 1024,
+        "accepted_selector_distribution": {
+          "maximum": 21,
+          "mean": 7.0224609375,
+          "observations": 1024,
+          "p50": 7.0,
+          "p95": 13.0,
+          "p99": 16.0,
+          "p999": 19.0,
+          "raw_uint32_sha256": "963c587bf933022e9b155ea8cb42ff10f489f38264015289ec6964b1ec1475ac",
+          "zero_fraction": 0.00390625
+        },
+        "accepted_update_distribution": {
+          "maximum": 152,
+          "mean": 47.53515625,
+          "observations": 1024,
+          "p50": 44.0,
+          "p95": 100.0,
+          "p99": 119.0,
+          "p999": 144.0,
+          "raw_uint32_sha256": "6836474b94adbe2a2f26ce588ae0c36069526436ac57daa74f56093875059fbd",
+          "zero_fraction": 0.00390625
+        },
+        "active_resident_rules": 19296,
+        "basis": "z",
+        "directed_rules": 19296,
+        "generated_verilog_bytes": 515281783,
+        "generated_verilog_sha256": "75472bc8121d7436831ae7457614bc50ac94b937b07f963c2350e296cb2ef5ae",
+        "generated_vvp_bytes": 620466844,
+        "generated_vvp_sha256": "55d10df754d37c5fc2ac9216e9d47cde9c65840fc86830624224ab187657bbe2",
+        "graph_edges": 3725,
+        "image": "benchmarks/B2_B7_P023_d6_microblossom_images_v1/z_closing.json",
+        "image_sha256": "9e4da8189e6d270fa50cdb4e5fa50c478d86a6cb084f9b6669277571ee87c952",
+        "phase": "closing",
+        "representative_replay": [
+          {
+            "axi_write_span_slow_cycles": 0,
+            "boundary": "zero",
+            "checked_edges": 3725,
+            "expected_weight_updates": 0,
+            "pass": true,
+            "selected_source_edges": 0
+          },
+          {
+            "axi_write_span_slow_cycles": 12,
+            "boundary": "p50",
+            "checked_edges": 3725,
+            "expected_weight_updates": 44,
+            "pass": true,
+            "selected_source_edges": 6
+          },
+          {
+            "axi_write_span_slow_cycles": 24,
+            "boundary": "p99",
+            "checked_edges": 3725,
+            "expected_weight_updates": 119,
+            "pass": true,
+            "selected_source_edges": 12
+          },
+          {
+            "axi_write_span_slow_cycles": 36,
+            "boundary": "maximum",
+            "checked_edges": 3725,
+            "expected_weight_updates": 152,
+            "pass": true,
+            "selected_source_edges": 18
+          }
+        ]
+      }
+    ],
+    "spinalhdl_version": "1.9.3"
+  },
+  "schema": "b2_b7_p023_d6_microblossom_phase_selector_rtl_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "source": {
+    "phase_batch_trace": "results/B2_B7_P023_d6_microblossom_phase_batch_trace_v1.json",
+    "phase_batch_trace_evidence_id": "9fe10f289a4ab8a3bf77d736ea2511ed48e80e776dfa86960f85fb5bc5428bfc",
+    "phase_batch_trace_sha256": "d2ba62b0dca4cf6681391f3cc3976833bbea162d65e26b33bea4df7280a6a938",
+    "simulation_harness": "tools/microblossom/D6PhaseResidentRuleSelectorReplay.scala",
+    "simulation_harness_sha256": "ecb809d8c91e99c40d913e8d9d3bf0789041eda493cd435d54b56ab2705b2eb0",
+    "simulation_transcript": "results/B2_B7_P023_d6_microblossom_phase_selector_sim_v1.log",
+    "simulation_transcript_sha256": "94015233b038173465165cd44829c2bccd2e4939778f10f0af862335d5646b1c"
+  },
+  "transport": {
+    "accepted_distribution_p99_update_only_slow_cycles": {
+      "x_closing": 30,
+      "x_opening": 26,
+      "z_closing": 32,
+      "z_opening": 26
+    },
+    "distribution_cycle_classification": "projected_from_all_4096_accepted_phase_batches_not_full_rtl_replay",
+    "measured_slow_cycles_per_selector_command": 2,
+    "representative_p99_slow_cycles": {
+      "x_closing": 28,
+      "x_opening": 20,
+      "z_closing": 24,
+      "z_opening": 28
+    }
+  }
+}
