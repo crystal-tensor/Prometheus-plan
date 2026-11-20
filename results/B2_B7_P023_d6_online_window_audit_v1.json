@@ -1,0 +1,315 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_id": "5b796c8fce2d995a21f9933b551bf0e5ee275f49a87c4a5ff02ccf5751dd564d",
+  "auditor": {
+    "imports_online_window_producer": false,
+    "path": "tools/b2_b7_p023_d6_online_window_audit.py",
+    "sha256": "8c93bc977cc0f808d26a8d0f61b85dcb6b1ca20de09e2bb99edcfb9fce365b99"
+  },
+  "checks": [
+    {
+      "detail": "Exact #021/#022/#023 scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "benchmarks/B2_B7_P023_d6_online_window_v1.json",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "b302e7f8f653a7f87bd104e63761b237baf272254effab85c313f156c8c1392d",
+      "name": "result_binding",
+      "passed": true
+    },
+    {
+      "detail": "057989cb707498d968a8d91bb44023c2a245a505",
+      "name": "public_freeze_protocol",
+      "passed": true
+    },
+    {
+      "detail": "tools/b2_b7_p023_d6_online_window.py",
+      "name": "public_freeze_producer",
+      "passed": true
+    },
+    {
+      "detail": "a3698d4b3260b6aae36202c7972d748470cdbe49",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "Strict and latency sources match.",
+      "name": "source_decisions",
+      "passed": true
+    },
+    {
+      "detail": "8/8 chunks independently replayed.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "Both corpus hashes match.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "Both window structures match.",
+      "name": "structures",
+      "passed": true
+    },
+    {
+      "detail": "Four online arms independently reproduce.",
+      "name": "online_predictions",
+      "passed": true
+    },
+    {
+      "detail": "4,096/4,096 online rows equal full-block rows.",
+      "name": "prediction_equality",
+      "passed": true
+    },
+    {
+      "detail": "All committed/final residuals are zero.",
+      "name": "residuals",
+      "passed": true
+    },
+    {
+      "detail": "Four raw timing byte streams match.",
+      "name": "timing_bytes",
+      "passed": true
+    },
+    {
+      "detail": "Counts, quantiles, maxima, misses, and phase sums match.",
+      "name": "timing_arithmetic",
+      "passed": true
+    },
+    {
+      "detail": "d6_correlated_online_window_host_proxy_fail_hardware_deadline_b2_p023_b7_open",
+      "name": "primary_verdict",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    },
+    {
+      "detail": "56c09cbc2e1a29d12428d48de636b9000b8021cd77d545d2cedc3cca215401ab",
+      "name": "evidence_id",
+      "passed": true
+    }
+  ],
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0",
+    "system": "Darwin"
+  },
+  "reconstruction_rows": [
+    {
+      "arms": [
+        {
+          "commit_residual_failure_shots": 0,
+          "decoder": "independent_mwpm",
+          "full_prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+          "matches_result": true,
+          "online_prediction_sha256": "2405451af143b611c363182610c1df38e7edb533c1db0567b185d69ceab0f49d",
+          "prediction_rows_equal": 1024,
+          "prefix_failures": 14,
+          "residual_nonzero_shots": 0,
+          "selected_components_total": 320185
+        },
+        {
+          "commit_residual_failure_shots": 0,
+          "decoder": "two_pass_correlated_matching",
+          "full_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+          "matches_result": true,
+          "online_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+          "prediction_rows_equal": 1024,
+          "prefix_failures": 5,
+          "residual_nonzero_shots": 0,
+          "selected_components_total": 326644
+        }
+      ],
+      "basis": "x",
+      "chunk_matches": 4,
+      "corpus_matches_result": true,
+      "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+      "structure": {
+        "component_commit_assignments": 1372487,
+        "first_window": {
+          "commit_layers": 6,
+          "end": 18,
+          "start": 0
+        },
+        "last_window": {
+          "commit_layers": 23,
+          "end": 1001,
+          "start": 978
+        },
+        "max_window_components": 30154,
+        "max_window_edges": 3730,
+        "max_window_fault_ids": 30154,
+        "max_window_nodes": 788,
+        "num_components": 1372487,
+        "num_detector_triggering_components": 1372487,
+        "num_error_groups": 758382,
+        "num_undetectable_components": 0,
+        "num_windows": 164,
+        "prebuffer_detectors": 403
+      },
+      "structure_matches_result": true
+    },
+    {
+      "arms": [
+        {
+          "commit_residual_failure_shots": 0,
+          "decoder": "independent_mwpm",
+          "full_prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+          "matches_result": true,
+          "online_prediction_sha256": "beb99a09805ec6b0fcee197548be0df747782a5206bc81b71e3d7973c52ddf34",
+          "prediction_rows_equal": 1024,
+          "prefix_failures": 14,
+          "residual_nonzero_shots": 0,
+          "selected_components_total": 319937
+        },
+        {
+          "commit_residual_failure_shots": 0,
+          "decoder": "two_pass_correlated_matching",
+          "full_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+          "matches_result": true,
+          "online_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+          "prediction_rows_equal": 1024,
+          "prefix_failures": 2,
+          "residual_nonzero_shots": 0,
+          "selected_components_total": 326530
+        }
+      ],
+      "basis": "z",
+      "chunk_matches": 4,
+      "corpus_matches_result": true,
+      "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+      "structure": {
+        "component_commit_assignments": 1372431,
+        "first_window": {
+          "commit_layers": 6,
+          "end": 18,
+          "start": 0
+        },
+        "last_window": {
+          "commit_layers": 23,
+          "end": 1001,
+          "start": 978
+        },
+        "max_window_components": 30133,
+        "max_window_edges": 3725,
+        "max_window_fault_ids": 30133,
+        "max_window_nodes": 787,
+        "num_components": 1372431,
+        "num_detector_triggering_components": 1372431,
+        "num_error_groups": 758351,
+        "num_undetectable_components": 0,
+        "num_windows": 164,
+        "prebuffer_detectors": 402
+      },
+      "structure_matches_result": true
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_online_window_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_online_window_v1.json",
+    "sha256": "b302e7f8f653a7f87bd104e63761b237baf272254effab85c313f156c8c1392d"
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 18,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "online_arms_replayed": 4,
+    "online_correlated_host_proxy_pass": false,
+    "p023_scalable_memory_ready": false,
+    "prediction_rows_replayed": 4096,
+    "source_chunks_replayed": 8
+  },
+  "timing_rows": [
+    {
+      "basis": "x",
+      "count": 20992,
+      "deadline_miss_fraction": 0.9997141768292683,
+      "deadline_misses": 20986,
+      "decoder": "independent_mwpm",
+      "expected_count": 20992,
+      "matches_result": true,
+      "maximum": 87.96516666666668,
+      "p50": 4.333333333333333,
+      "p95": 6.923666666666667,
+      "p99": 9.368166666666665,
+      "p999": 24.1875,
+      "phase_sum_matches_total": true,
+      "raw_sha256": "c06a5a53c2025163bfcf3fd766a3e9f874f6dc4db8e85557c050d81d1edcf9a7"
+    },
+    {
+      "basis": "x",
+      "count": 20992,
+      "deadline_miss_fraction": 0.9997141768292683,
+      "deadline_misses": 20986,
+      "decoder": "two_pass_correlated_matching",
+      "expected_count": 20992,
+      "matches_result": true,
+      "maximum": 14.722166666666666,
+      "p50": 4.708333333333333,
+      "p95": 7.569333333333333,
+      "p99": 9.034666666666666,
+      "p999": 11.416666666666666,
+      "phase_sum_matches_total": true,
+      "raw_sha256": "3e19611ad2188080da266ab63df3e6ccf3d5b14184c6ecc5a7825a7e3acc4695"
+    },
+    {
+      "basis": "z",
+      "count": 20992,
+      "deadline_miss_fraction": 0.9995236280487805,
+      "deadline_misses": 20982,
+      "decoder": "independent_mwpm",
+      "expected_count": 20992,
+      "matches_result": true,
+      "maximum": 23.159666666666666,
+      "p50": 4.1805,
+      "p95": 6.493166666666667,
+      "p99": 7.916666666666667,
+      "p999": 10.145833333333334,
+      "phase_sum_matches_total": true,
+      "raw_sha256": "904c149b3859cb8c1c3638501c614bb41b0cb92bdb3003dbd36d98847b9fb5fb"
+    },
+    {
+      "basis": "z",
+      "count": 20992,
+      "deadline_miss_fraction": 0.9996189024390244,
+      "deadline_misses": 20984,
+      "decoder": "two_pass_correlated_matching",
+      "expected_count": 20992,
+      "matches_result": true,
+      "maximum": 33.86116666666666,
+      "p50": 4.791666666666667,
+      "p95": 7.75,
+      "p99": 9.375,
+      "p999": 11.784833333333333,
+      "phase_sum_matches_total": true,
+      "raw_sha256": "58477983c17c1cd3cdd7bd6f844005536442d7f60251a086ae57f850d5b0fc86"
+    }
+  ]
+}

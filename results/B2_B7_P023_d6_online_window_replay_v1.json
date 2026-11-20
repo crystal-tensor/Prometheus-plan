@@ -1,0 +1,117 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_bytes_exact": true,
+  "auditor": {
+    "path": "tools/b2_b7_p023_d6_online_window_audit.py",
+    "sha256": "8c93bc977cc0f808d26a8d0f61b85dcb6b1ca20de09e2bb99edcfb9fce365b99"
+  },
+  "checks": [
+    {
+      "detail": "Exact QEC scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "b302e7f8f653a7f87bd104e63761b237baf272254effab85c313f156c8c1392d",
+      "name": "result_binding",
+      "passed": true
+    },
+    {
+      "detail": "f602b7856cc4b4c79c6e51a854b0880890dc5757ba7cf87cceea3c49aba934a6",
+      "name": "audit_binding",
+      "passed": true
+    },
+    {
+      "detail": "8c93bc977cc0f808d26a8d0f61b85dcb6b1ca20de09e2bb99edcfb9fce365b99",
+      "name": "auditor_binding",
+      "passed": true
+    },
+    {
+      "detail": "returncode=0",
+      "name": "subprocess_exit",
+      "passed": true
+    },
+    {
+      "detail": "bytes=9755",
+      "name": "audit_recreated",
+      "passed": true
+    },
+    {
+      "detail": "f602b7856cc4b4c79c6e51a854b0880890dc5757ba7cf87cceea3c49aba934a6",
+      "name": "audit_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "18/18 independent checks.",
+      "name": "audit_checks",
+      "passed": true
+    },
+    {
+      "detail": "8/8 source chunks.",
+      "name": "chunk_replay",
+      "passed": true
+    },
+    {
+      "detail": "Four arms and 4,096 rows.",
+      "name": "prediction_replay",
+      "passed": true
+    },
+    {
+      "detail": "d6_correlated_online_window_host_proxy_fail_hardware_deadline_b2_p023_b7_open",
+      "name": "negative_verdict",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    }
+  ],
+  "replay_environment": {
+    "machine": "arm64",
+    "python": "3.12.6",
+    "system": "Darwin"
+  },
+  "replay_id": "58f4fd7faba9da023bd0d75740ffcb04217a59719e97a1c1f65a6ed8c7e200b6",
+  "replayed_audit_sha256": "f602b7856cc4b4c79c6e51a854b0880890dc5757ba7cf87cceea3c49aba934a6",
+  "schema_version": "b2_b7_p023_d6_online_window_replay_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_audit": {
+    "audit_id": "5b796c8fce2d995a21f9933b551bf0e5ee275f49a87c4a5ff02ccf5751dd564d",
+    "path": "results/B2_B7_P023_d6_online_window_audit_v1.json",
+    "sha256": "f602b7856cc4b4c79c6e51a854b0880890dc5757ba7cf87cceea3c49aba934a6"
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_online_window_v1.json",
+    "sha256": "b302e7f8f653a7f87bd104e63761b237baf272254effab85c313f156c8c1392d"
+  },
+  "subprocess": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"b7_resource_credit\": 0,\n  \"checks_failed\": 0,\n  \"checks_passed\": 18,\n  \"full_b2_credit_ready\": false,\n  \"hardware_decoder_deadline_passed\": false,\n  \"online_arms_replayed\": 4,\n  \"online_correlated_host_proxy_pass\": false,\n  \"p023_scalable_memory_ready\": false,\n  \"prediction_rows_replayed\": 4096,\n  \"source_chunks_replayed\": 8\n}\n"
+  },
+  "summary": {
+    "audit_bytes_exact": true,
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 12,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "online_arms_replayed": 4,
+    "online_correlated_host_proxy_pass": false,
+    "p023_scalable_memory_ready": false,
+    "prediction_rows_replayed": 4096,
+    "source_chunks_replayed": 8
+  }
+}
