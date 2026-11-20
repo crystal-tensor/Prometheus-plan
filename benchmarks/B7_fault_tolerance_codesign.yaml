@@ -5830,6 +5830,25 @@ current_results:
     caveat: bounded_three_cnot_five_angle_mixed_support_search_not_global_synthesis_lower_bound
     result: ../results/B7_w8_21_three_cnot_five_angle_mixed_support_search_v0.json
     markdown_report: ../research/B7_w8_21_three_cnot_five_angle_mixed_support_search.md
+  logical_memory_horizon_gate_v1:
+    status: logical_memory_horizon_gate_ready_short_memory_calibration_only_p023_b2_b7_credit_closed
+    method: b2_b7_p023_logical_memory_horizon_gate_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_b2_memory_baseline: ../results/B2_stim_surface_code_memory_baseline_v0.json
+    source_b7_calibrated_credit_gate: ../results/B7_B2_calibrated_dependency_credit_gate_v0.json
+    source_maximum_direct_rounds: 7
+    frozen_horizon_rounds: [10, 100, 1000, 1000000]
+    paired_basis_direct_horizon_passes: 0
+    p023_scalable_memory_ready: false
+    b2_low_overhead_credit_ready: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 17
+    independent_audit_checks_passed: 21
+    caveat: no_direct_memory_horizon_no_same_condition_code_gain_no_calibrated_b7_credit
+    result: ../results/B2_B7_P023_logical_memory_horizon_gate_v1.json
+    audit: ../results/B2_B7_P023_logical_memory_horizon_audit_v1.json
+    markdown_report: ../research/B2_B7_P023_logical_memory_horizon_gate_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -5839,6 +5858,8 @@ prototype_artifacts:
   b7_b2_calibrated_trace_acceptance_boundary: ../tools/b7_b2_calibrated_trace_acceptance_boundary.py
   b2_b7_calibrated_trace_post_boundary_submission_triage: ../tools/b2_b7_calibrated_trace_post_boundary_submission_triage.py
   b2_b7_c1_calibration_source_replay_packet_gate: ../tools/b2_b7_c1_calibration_source_replay_packet_gate.py
+  logical_memory_horizon_gate: ../tools/b2_b7_p023_logical_memory_horizon_gate.py
+  logical_memory_horizon_audit: ../tools/b2_b7_p023_logical_memory_horizon_audit.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
