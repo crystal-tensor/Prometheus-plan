@@ -1,0 +1,45 @@
+COMMAND
+sbt -batch "runMain microblossom.D6ResidentRuleSelectorReplay <x_steady.json> <z_steady.json> <batch_trace.json>"
+
+PINNED_ENVIRONMENT
+micro_blossom_commit=a3530d9e58ff790dafc93d56c9a2769ceac84731
+spinalhdl=1.9.3
+java=Homebrew OpenJDK 17.0.21.0.3
+iverilog=13.0
+dynamic_weight_patch_sha256=990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5
+resident_selector_patch_sha256=cd2f7a819a7fea699f07c504d5ae5c88dfe447dbe3b9515ebd580aec4c55b511
+harness_sha256=8b6c97fd250373addc755930a2ab59127a64b0aaa108e74b63c275cd69291dd1
+
+ELABORATION_AND_COMPILE
+active_resident_rules=15606
+full_d6_edges=2973
+spinalhdl_elaboration=PASS
+spinalhdl_verilog_generation=PASS
+pruned_signals=1322474
+iverilog_compile=PASS
+generated_verilog_bytes=412800759
+generated_verilog_sha256=e6b27894217a8e671e1d5f122e6f208fea118a6a4fb0738b9b3ed3a32fe0e961
+generated_vvp_bytes=496850097
+generated_vvp_sha256=4cf7c6dfc1d3bf902a325221cb6c6309f864f49e069a9d7baeec5488de0b6aaa
+
+SIMULATION
+RESIDENT_SELECTOR_BATCH_PASS name=x/maximum selectors=15 updates=170 checked_edges=2973 axi_write_span_slow_cycles=30
+RESIDENT_SELECTOR_BATCH_PASS name=x/p50 selectors=6 updates=35 checked_edges=2973 axi_write_span_slow_cycles=12
+RESIDENT_SELECTOR_BATCH_PASS name=x/p99 selectors=11 updates=102 checked_edges=2973 axi_write_span_slow_cycles=22
+RESIDENT_SELECTOR_BATCH_PASS name=x/zero selectors=0 updates=0 checked_edges=2973 axi_write_span_slow_cycles=0
+RESIDENT_SELECTOR_BATCH_PASS name=z/maximum selectors=19 updates=179 checked_edges=2973 axi_write_span_slow_cycles=38
+RESIDENT_SELECTOR_BATCH_PASS name=z/p50 selectors=5 updates=35 checked_edges=2973 axi_write_span_slow_cycles=10
+RESIDENT_SELECTOR_BATCH_PASS name=z/p99 selectors=12 updates=103 checked_edges=2973 axi_write_span_slow_cycles=24
+RESIDENT_SELECTOR_BATCH_PASS name=z/zero selectors=0 updates=0 checked_edges=2973 axi_write_span_slow_cycles=0
+checked_edge_states=23784
+mismatches=0
+simulation=PASS
+simulation_wall_seconds=15.556022
+sbt_total_wall_seconds=132
+
+LIMITS
+This is a functional RTL replay of eight frozen steady representative batches.
+The cycle spans are measured AXI write spans in the configured simulation.
+They are not FPGA Fmax, timing closure, LUT/BRAM, opening/closing, full-corpus,
+full-correction, or end-to-end one-microsecond deadline credit.
+

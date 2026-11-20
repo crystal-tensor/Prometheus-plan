@@ -1,0 +1,541 @@
+diff --git a/src/fpga/microblossom/D6ResidentRuleSelectorReplay.scala b/src/fpga/microblossom/D6ResidentRuleSelectorReplay.scala
+new file mode 100644
+index 0000000..16af333
+--- /dev/null
++++ b/src/fpga/microblossom/D6ResidentRuleSelectorReplay.scala
+@@ -0,0 +1,198 @@
++package microblossom
++
++import io.circe.Json
++import io.circe.parser.parse
++import java.nio.file.{Files, Paths}
++import scala.collection.mutable.ArrayBuffer
++import spinal.core.sim._
++import spinal.core._
++
++/** Replay accepted zero/p50/p99/maximum batches through the resident rule
++  * selector on the full d=6 steady RTL.
++  *
++  * The selected source edges are the commands. Every batch is reset first and
++  * every dynamic edge register is compared with the frozen expected state.
++  * Simulation cycle spans are functional interface evidence only; they are not
++  * FPGA Fmax, timing closure, resource, or one-microsecond deadline credit.
++  */
++object D6ResidentRuleSelectorReplay extends App {
++  require(args.length == 3, "expected x_steady.json z_steady.json batch_trace.json")
++
++  def readJson(path: String): Json = {
++    val text = new String(Files.readAllBytes(Paths.get(path)), "UTF-8")
++    parse(text).fold(throw _, identity)
++  }
++
++  def residentRules(path: String): Map[Int, Seq[(Int, Int)]] = {
++    val image = readJson(path)
++    val correlations = image.hcursor
++      .downField("qec_image_metadata")
++      .downField("correlation_rules")
++      .as[Vector[Json]]
++      .fold(throw _, identity)
++    val byTarget = scala.collection.mutable.Map.empty[Int, ArrayBuffer[(Int, Int)]]
++    correlations.foreach { correlation =>
++      val sourceEdgeIndex = correlation.hcursor.get[Int]("source_edge_index").fold(throw _, identity)
++      val targets = correlation.hcursor.downField("targets").as[Vector[Json]].fold(throw _, identity)
++      targets.foreach { target =>
++        val lowersBase = target.hcursor.get[Boolean]("lowers_base").fold(throw _, identity)
++        val replacementEven =
++          target.hcursor.get[Int]("replacement_even_weight").fold(throw _, identity)
++        val replacementHalf =
++          target.hcursor.get[Int]("replacement_half_weight").fold(throw _, identity)
++        val replacementHardware =
++          target.hcursor.get[Int]("replacement_hardware_weight").fold(throw _, identity)
++        require(replacementEven % 2 == 0, "resident rule has odd accepted-even weight")
++        require(replacementEven / 2 == replacementHalf, "resident rule half-weight mismatch")
++        require(replacementHalf == replacementHardware, "resident rule hardware-weight mismatch")
++        if (lowersBase) {
++          val targetEdgeIndex =
++            target.hcursor.get[Int]("target_edge_index").fold(throw _, identity)
++          byTarget.getOrElseUpdate(targetEdgeIndex, ArrayBuffer.empty) +=
++            ((sourceEdgeIndex, replacementHardware))
++        }
++      }
++    }
++    val result = byTarget.toSeq.map { case (targetEdgeIndex, rules) =>
++      require(
++        rules.map(_._1).distinct.length == rules.length,
++        s"target edge ${targetEdgeIndex} has duplicate source rules"
++      )
++      targetEdgeIndex -> rules.toVector.sortBy(_._1)
++    }.toMap
++    require(result.values.map(_.length).sum == 15606, "unexpected active resident-rule count")
++    result
++  }
++
++  val xConfig = new DualConfig(filename = args(0), hardCodeWeights = false)
++  val zConfig = new DualConfig(filename = args(1), hardCodeWeights = false)
++  xConfig.sanityCheck()
++  zConfig.sanityCheck()
++  require(xConfig.graph.vertex_num == zConfig.graph.vertex_num, "steady vertex count differs")
++  require(xConfig.graph.weighted_edges == zConfig.graph.weighted_edges, "steady hardware edges differ")
++  require(xConfig.graph.virtual_vertices == zConfig.graph.virtual_vertices, "steady virtuals differ")
++  require(xConfig.graph.vertex_max_growth == zConfig.graph.vertex_max_growth, "steady growth differs")
++
++  val xRules = residentRules(args(0))
++  val zRules = residentRules(args(1))
++  require(xRules == zRules, "X/Z steady resident rule tables differ")
++  xConfig.residentWeightRules = xRules
++
++  case class Batch(
++      name: String,
++      selectedEdgeIndices: Vector[Int],
++      updates: Vector[(Int, Int)]
++  )
++  val trace = readJson(args(2))
++  val rows = trace.hcursor.downField("basis_rows").as[Vector[Json]].fold(throw _, identity)
++  val batches = rows.flatMap { row =>
++    val basis = row.hcursor.get[String]("basis").fold(throw _, identity)
++    val representatives = row.hcursor
++      .downField("representative_batches")
++      .focus
++      .flatMap(_.asObject)
++      .getOrElse(throw new Exception(s"${basis} representatives missing"))
++    representatives.toVector.sortBy(_._1).map { case (boundary, value) =>
++      val phase = value.hcursor.get[String]("phase").fold(throw _, identity)
++      require(phase == "steady", s"${basis}/${boundary} is not a steady batch")
++      val selected = value.hcursor
++        .downField("selected_edge_indices")
++        .as[Vector[Int]]
++        .fold(throw _, identity)
++      val updates = value.hcursor
++        .downField("updates")
++        .as[Vector[Vector[Int]]]
++        .fold(throw _, identity)
++        .map { pair =>
++          require(pair.length == 2, s"${basis}/${boundary} malformed update")
++          (pair(0), pair(1))
++        }
++      Batch(s"${basis}/${boundary}", selected, updates)
++    }
++  }
++  require(batches.length == 8, s"expected eight representative batches, got ${batches.length}")
++  require(
++    batches.map(_.name).toSet == Set(
++      "x/zero", "x/p50", "x/p99", "x/maximum",
++      "z/zero", "z/p50", "z/p99", "z/maximum"
++    )
++  )
++
++  val baseWeights = xConfig.graph.weighted_edges.map(_.w.toInt).toVector
++  val rulesBySource = xRules.toVector
++    .flatMap { case (targetEdgeIndex, rules) =>
++      rules.map { case (sourceEdgeIndex, replacementWeight) =>
++        sourceEdgeIndex -> (targetEdgeIndex, replacementWeight)
++      }
++    }
++    .groupBy(_._1)
++    .map { case (sourceEdgeIndex, entries) =>
++      sourceEdgeIndex -> entries.map(_._2)
++    }
++  batches.foreach { batch =>
++    val reconstructed = baseWeights.toArray
++    batch.selectedEdgeIndices.foreach { sourceEdgeIndex =>
++      require(sourceEdgeIndex >= 0 && sourceEdgeIndex < baseWeights.length)
++      rulesBySource.getOrElse(sourceEdgeIndex, Seq.empty).foreach {
++        case (targetEdgeIndex, replacementWeight) =>
++          reconstructed(targetEdgeIndex) = math.min(reconstructed(targetEdgeIndex), replacementWeight)
++      }
++    }
++    val reconstructedUpdates = reconstructed.indices
++      .filter(edgeIndex => reconstructed(edgeIndex) != baseWeights(edgeIndex))
++      .map(edgeIndex => edgeIndex -> reconstructed(edgeIndex))
++      .toMap
++    require(
++      reconstructedUpdates == batch.updates.toMap,
++      s"${batch.name}: selected-source software reconstruction differs from frozen updates"
++    )
++  }
++
++  val clockDivideBy = 2
++  Config.sim
++    .withIVerilog
++    .compile({
++      val dut = MicroBlossomAxi4(xConfig, clockDivideBy = clockDivideBy)
++      dut.simMakePublicSnapshot()
++      dut
++    })
++    .doSim("d6_resident_rule_selector_batches") { dut =>
++      dut.clockDomain.forkStimulus(period = 10)
++      dut.slow.clockDomain.forkStimulus(period = 10 * clockDivideBy)
++      var slowCycles = 0L
++      dut.slow.clockDomain.onActiveEdges { slowCycles += 1 }
++      val driver = dut.getSimDriver()
++      for (_ <- 0 until 12) { dut.slow.clockDomain.waitSampling() }
++      batches.foreach { batch =>
++        driver.write_64(0x1000, BigInt(DualConfig().instructionSpec.generateReset()))
++        for (_ <- 0 until 16) { dut.slow.clockDomain.waitSampling() }
++        for (edgeIndex <- baseWeights.indices) {
++          assert(
++            dut.microBlossom.microBlossom.edges(edgeIndex).register.weight.toInt == baseWeights(edgeIndex),
++            s"${batch.name}: reset mismatch at edge ${edgeIndex}"
++          )
++        }
++        val writeStart = slowCycles
++        batch.selectedEdgeIndices.foreach { sourceEdgeIndex =>
++          driver.write_64(0x4000, BigInt(sourceEdgeIndex))
++        }
++        val writeEnd = slowCycles
++        for (_ <- 0 until 16) { dut.slow.clockDomain.waitSampling() }
++        val expected = batch.updates.toMap
++        for (edgeIndex <- baseWeights.indices) {
++          val observed = dut.microBlossom.microBlossom.edges(edgeIndex).register.weight.toInt
++          val wanted = expected.getOrElse(edgeIndex, baseWeights(edgeIndex))
++          assert(
++            observed == wanted,
++            s"${batch.name}: edge ${edgeIndex} observed=${observed} expected=${wanted}"
++          )
++        }
++        println(
++          s"RESIDENT_SELECTOR_BATCH_PASS name=${batch.name} " +
++            s"selectors=${batch.selectedEdgeIndices.length} updates=${batch.updates.length} " +
++            s"checked_edges=${baseWeights.length} axi_write_span_slow_cycles=${writeEnd - writeStart}"
++        )
++      }
++    }
++}
++
+diff --git a/src/fpga/microblossom/DualConfig.scala b/src/fpga/microblossom/DualConfig.scala
+index 310b2cf..7d6f818 100644
+--- a/src/fpga/microblossom/DualConfig.scala
++++ b/src/fpga/microblossom/DualConfig.scala
+@@ -19,6 +19,9 @@ case class DualConfig(
+     var contextDepth: Int = 1, // how many different contexts are supported
+     var conflictChannels: Int = 1, // how many conflicts are collected at once in parallel
+     var hardCodeWeights: Boolean = true, // hard-code the edge weights to simplify logic
++    // Optional edge-local rule table for a resident causal selector.
++    // target edge -> sequence of (source edge, replacement weight).
++    var residentWeightRules: Map[Int, Seq[(Int, Int)]] = Map.empty,
+     // optional features
+     var supportAddDefectVertex: Boolean = true,
+     var supportOffloading: Boolean = false,
+diff --git a/src/fpga/microblossom/MicroBlossomBus.scala b/src/fpga/microblossom/MicroBlossomBus.scala
+index d780df0..6cfba3d 100644
+--- a/src/fpga/microblossom/MicroBlossomBus.scala
++++ b/src/fpga/microblossom/MicroBlossomBus.scala
+@@ -72,6 +72,10 @@ import org.rogach.scallop._
+ //    0x3000: edge index [14:0], reserved [15], weight [31:16], context id [47:32] on 64-bit buses
+ //    0x3000: edge index [14:0], reserved [15], weight [31:16] on 32-bit buses; context id is in the address
+ //    0x3008/0x3004: next update slot (the mapping is intentionally alias-like for burst writes)
++//  - (resident rules only) the following 4KB section accepts one causal source selector per write
++//    0x4000: source edge index [14:0], context id [47:32] on 64-bit buses
++//    0x4000: source edge index [14:0] on 32-bit buses; context id is in the address
++//    0x4008/0x4004: next selector slot (the mapping is intentionally alias-like for burst writes)
+ // 2. 128KB context readouts at [0x2_0000, 0x4_0000), each context takes 128 byte space, assuming no more than 1024 contexts
+ //    [context 0]
+ //      0: (R) 64 bits timestamp of receiving the last ``load'' instruction
+@@ -340,6 +344,27 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+     weightUpdate.contextIdRaw.assignDontCare()
+     weightUpdate.contextId.assignDontCare()
+   }
++  val ruleSelector = new Area {
++    val sourceEdgeIndex = UInt(15 bits)
++    val contextIdRaw = UInt(16 bits)
++    val contextId = UInt(config.contextBits bits)
++    val mapping = SizeMapping(base = 16 KiB, size = 4 KiB)
++    val documentation = "resident causal weight-rule selector array"
++  }
++  if (!config.hardCodeWeights && config.residentWeightRules.nonEmpty) {
++    factory.nonStopWrite(ruleSelector.sourceEdgeIndex, bitOffset = 0)
++    if (is64bus) {
++      factory.nonStopWrite(ruleSelector.contextIdRaw, bitOffset = 32)
++      ruleSelector.contextId := ruleSelector.contextIdRaw.resized
++    } else {
++      ruleSelector.contextIdRaw := (factory.writeAddress().resize(log2Up(4 KiB)) >> 2).resized
++      ruleSelector.contextId := ruleSelector.contextIdRaw.resized
++    }
++  } else {
++    ruleSelector.sourceEdgeIndex.assignDontCare()
++    ruleSelector.contextIdRaw.assignDontCare()
++    ruleSelector.contextId.assignDontCare()
++  }
+   // read address: factory.readAddress()
+   val readout = new Area {
+     val value = Bits(factory.busDataWidth bits).assignDontCare()
+@@ -391,6 +416,10 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+     factory.onWritePrimitive(weightUpdate.mapping, haltSensitive = false, weightUpdate.documentation)(onAskWrite)
+     factory.onWritePrimitive(weightUpdate.mapping, haltSensitive = true, weightUpdate.documentation)(onDoWrite)
+   }
++  if (!config.hardCodeWeights && config.residentWeightRules.nonEmpty) {
++    factory.onWritePrimitive(ruleSelector.mapping, haltSensitive = false, ruleSelector.documentation)(onAskWrite)
++    factory.onWritePrimitive(ruleSelector.mapping, haltSensitive = true, ruleSelector.documentation)(onDoWrite)
++  }
+   factory.onWritePrimitive(readout.mapping, haltSensitive = false, readout.documentation)(onAskWrite)
+   factory.onWritePrimitive(readout.mapping, haltSensitive = true, readout.documentation)(onDoWrite)
+   factory.onReadPrimitive(readout.mapping, haltSensitive = false, readout.documentation)(onAskRead)
+@@ -491,6 +520,12 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+           } elsewhen (Bool(!config.hardCodeWeights) && weightUpdate.mapping.hit(factory.writeAddress())) {
+             hardwareInfo.instructionCounter := hardwareInfo.instructionCounter + 1
+             goto(stateWriteWeightUpdate)
++          } elsewhen (
++            Bool(!config.hardCodeWeights && config.residentWeightRules.nonEmpty) &&
++              ruleSelector.mapping.hit(factory.writeAddress())
++          ) {
++            hardwareInfo.instructionCounter := hardwareInfo.instructionCounter + 1
++            goto(stateWriteRuleSelector)
+           } elsewhen (readout.mapping.hit(factory.writeAddress())) {
+             val builder = WhenBuilder()
+             builder.when(readout.writeSubAddress === U(16)) { goto(stateUpdateMaximumGrowth) }
+@@ -663,6 +698,7 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+         looperInput.maximumGrowth := fsmMaximumGrowth.data - fsmAccumulatedGrown.data
+         looperInput.weightUpdateEdgeIndex := 0
+         looperInput.weightUpdateWeight := 0
++        looperInput.weightUpdateIsRuleSelector := False
+         // prepare the data into the push FIFO
+         ccFifoPush.io.push.valid := True
+         ccFifoPush.io.push.payload := looperInput
+@@ -835,6 +871,7 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+           looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
+           looperInput.weightUpdateEdgeIndex := 0
+           looperInput.weightUpdateWeight := 0
++          looperInput.weightUpdateIsRuleSelector := False
+           when(isFindObstacle) {
+             looperInput.maximumGrowth := fsmMaximumGrowth.data - fsmAccumulatedGrown.data
+           } otherwise {
+@@ -905,6 +942,7 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+           looperInput.maximumGrowth.clearAll()
+           looperInput.weightUpdateEdgeIndex := weightUpdate.edgeIndex
+           looperInput.weightUpdateWeight := weightUpdate.weight
++          looperInput.weightUpdateIsRuleSelector := False
+           looperInput.tag.instructionId := instructionId
+           looperInput.tag.isFindObstacle := False
+           looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
+@@ -926,6 +964,50 @@ case class MicroBlossomBus[T <: IMasterSlave, F <: BusSlaveFactoryDelayed](
+         }
+       }
+     }
++
++    val stateWriteRuleSelector: State = new State {
++      whenIsNext {
++        fsmPushId.readNext(ruleSelector.contextId)
++        fsmAccumulatedGrown.readNext(ruleSelector.contextId)
++        fsmTimeLoad.upper.writeNext(ruleSelector.contextId, counter.valueNext(63 downto 32))
++        fsmTimeLoad.lower.writeNext(ruleSelector.contextId, counter.valueNext(31 downto 0))
++        fsmTimeFinish.upper.writeNext(ruleSelector.contextId, ~U(0, 32 bits))
++        fsmTimeFinish.lower.writeNext(ruleSelector.contextId, ~U(0, 32 bits))
++      }
++      whenIsActive {
++        when(
++          ruleSelector.sourceEdgeIndex < U(config.edgeNum, 15 bits) &&
++            ruleSelector.contextIdRaw <= ruleSelector.contextId.maxValue
++        ) {
++          val instructionId = fsmPushId.data + 1
++          val looperInput = LooperInput(config, InstructionTag(config))
++          looperInput.instruction.assignLoadWeightsExternal()
++          if (config.contextBits > 0) { looperInput.contextId := ruleSelector.contextId }
++          looperInput.maximumGrowth.clearAll()
++          looperInput.weightUpdateEdgeIndex := ruleSelector.sourceEdgeIndex
++          looperInput.weightUpdateWeight := 0
++          looperInput.weightUpdateIsRuleSelector := True
++          looperInput.tag.instructionId := instructionId
++          looperInput.tag.isFindObstacle := False
++          looperInput.tag.accumulatedGrown := fsmAccumulatedGrown.data
++          ccFifoPush.io.push.valid := True
++          ccFifoPush.io.push.payload := looperInput
++          fsmPushId.writeNext(ruleSelector.contextId, instructionId)
++          fsmIsLastFindObstacle.writeNext(ruleSelector.contextId, False)
++          when(ccFifoPush.io.push.ready) {
++            isWriteHalt := False
++            goto(stateIdle)
++          } otherwise {
++            dataWaitFiFoPushLooperInput := looperInput
++            goto(stateWriteWaitFiFoPush)
++          }
++        } otherwise {
++          hasError := True
++          isWriteHalt := False
++          goto(stateIdle)
++        }
++      }
++    }
+   }
+ 
+   // handle the response from the Micro Blossom Looper module
+diff --git a/src/fpga/microblossom/modules/DistributedDual.scala b/src/fpga/microblossom/modules/DistributedDual.scala
+index f000c2c..284840f 100644
+--- a/src/fpga/microblossom/modules/DistributedDual.scala
++++ b/src/fpga/microblossom/modules/DistributedDual.scala
+@@ -34,6 +34,7 @@ case class DistributedDual(config: DualConfig, ioConfig: DualConfig) extends Com
+   broadcastMessage.isReset := io.message.instruction.isReset
+   broadcastMessage.weightUpdateEdgeIndex := io.message.weightUpdateEdgeIndex
+   broadcastMessage.weightUpdateWeight := io.message.weightUpdateWeight.resized
++  broadcastMessage.weightUpdateIsRuleSelector := io.message.weightUpdateIsRuleSelector
+ 
+   // delay the signal so that the synthesizer can automatically balancing the registers
+   val broadcastRegInserted = Delay(broadcastMessage, config.broadcastDelay)
+@@ -154,6 +155,7 @@ case class DistributedDual(config: DualConfig, ioConfig: DualConfig) extends Com
+     io.message.instruction #= instruction
+     io.message.weightUpdateEdgeIndex #= 0
+     io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= false
+     clockDomain.waitSampling()
+     io.message.valid #= false
+     for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
+@@ -181,6 +183,22 @@ case class DistributedDual(config: DualConfig, ioConfig: DualConfig) extends Com
+     io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
+     io.message.weightUpdateEdgeIndex #= edgeIndex
+     io.message.weightUpdateWeight #= weight
++    io.message.weightUpdateIsRuleSelector #= false
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simApplyResidentRuleSelector(sourceEdgeIndex: Int): Unit = {
++    require(!config.hardCodeWeights, "resident rule selector requires hardCodeWeights=false")
++    require(config.residentWeightRules.nonEmpty, "resident rule selector table is empty")
++    require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, "source edge index out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= sourceEdgeIndex
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= true
+     clockDomain.waitSampling()
+     io.message.valid #= false
+     for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
+@@ -491,6 +509,7 @@ class DistributedDualTest extends AnyFunSuite {
+         dut.io.message.valid #= false
+         dut.io.message.weightUpdateEdgeIndex #= 0
+         dut.io.message.weightUpdateWeight #= 0
++        dut.io.message.weightUpdateIsRuleSelector #= false
+         for (_ <- 0 to 3) { dut.clockDomain.waitSampling() }
+ 
+         assert(dut.edges(0).register.weight.toInt == baseWeight0)
+diff --git a/src/fpga/microblossom/modules/Edge.scala b/src/fpga/microblossom/modules/Edge.scala
+index de6d63c..f99c6b6 100644
+--- a/src/fpga/microblossom/modules/Edge.scala
++++ b/src/fpga/microblossom/modules/Edge.scala
+@@ -90,11 +90,41 @@ case class Edge(config: DualConfig, edgeIndex: Int) extends Component {
+ 
+   val nextFetchState = EdgeState(config.weightBits)
+   nextFetchState := fetchState
++  val residentRules = config.residentWeightRules.getOrElse(edgeIndex, Seq.empty)
++  require(
++    residentRules.map(_._1).distinct.length == residentRules.length,
++    s"edge $edgeIndex has duplicate resident selector sources"
++  )
++  residentRules.foreach { case (sourceEdgeIndex, replacementWeight) =>
++    require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, s"edge $edgeIndex selector source out of range")
++    require(
++      replacementWeight >= 0 && BigInt(replacementWeight) < (BigInt(1) << config.weightBits),
++      s"edge $edgeIndex selector replacement weight out of range"
++    )
++  }
++  val residentSelectorHit = Bool
++  val residentSelectorReplacement = UInt(config.weightBits bits)
++  residentSelectorHit := False
++  residentSelectorReplacement := fetchState.weight
++  residentRules.foreach { case (sourceEdgeIndex, replacementWeight) =>
++    when(message.weightUpdateEdgeIndex === U(sourceEdgeIndex, 15 bits)) {
++      residentSelectorHit := True
++      residentSelectorReplacement := U(replacementWeight, config.weightBits bits)
++    }
++  }
+   if (!config.hardCodeWeights) {
+     when(message.valid && message.isReset) {
+       nextFetchState := EdgeState.resetValue(config, edgeIndex)
+     } elsewhen (
+       message.valid && message.instruction.isLoadWeightsExternal &&
++        message.weightUpdateIsRuleSelector && residentSelectorHit
++    ) {
++      when(residentSelectorReplacement < fetchState.weight) {
++        nextFetchState.weight := residentSelectorReplacement
++      }
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        !message.weightUpdateIsRuleSelector &&
+         message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
+     ) {
+       nextFetchState.weight := message.weightUpdateWeight
+@@ -199,7 +229,10 @@ case class Edge(config: DualConfig, edgeIndex: Int) extends Component {
+     val writeWeight = message.valid &&
+       (message.isReset || (
+         message.instruction.isLoadWeightsExternal &&
++          ((message.weightUpdateIsRuleSelector && residentSelectorHit) ||
++            (!message.weightUpdateIsRuleSelector &&
+           message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++            ))
+       ))
+     if (config.contextBits > 0) {
+       ram.write(
+diff --git a/src/fpga/microblossom/modules/MicroBlossomLooper.scala b/src/fpga/microblossom/modules/MicroBlossomLooper.scala
+index ddf5248..277bab3 100644
+--- a/src/fpga/microblossom/modules/MicroBlossomLooper.scala
++++ b/src/fpga/microblossom/modules/MicroBlossomLooper.scala
+@@ -74,6 +74,7 @@ case class MicroBlossomLooper[T <: Data](config: DualConfig, tagType: HardType[T
+     inputEntry.maximumGrowth := responseEntry.maximumGrowth
+     inputEntry.weightUpdateEdgeIndex := 0
+     inputEntry.weightUpdateWeight := 0
++    inputEntry.weightUpdateIsRuleSelector := False
+     when(responseEntry.isLoopBackGrow) {
+       inputEntry.grown := responseEntry.grown
+       inputEntry.isLoopBackGrow := False
+@@ -92,6 +93,7 @@ case class MicroBlossomLooper[T <: Data](config: DualConfig, tagType: HardType[T
+     inputEntry.isLoopBackGrow := False
+     inputEntry.weightUpdateEdgeIndex := io.push.payload.weightUpdateEdgeIndex
+     inputEntry.weightUpdateWeight := io.push.payload.weightUpdateWeight
++    inputEntry.weightUpdateIsRuleSelector := io.push.payload.weightUpdateIsRuleSelector
+     inputInstruction := io.push.payload.instruction
+   }
+ 
+@@ -101,6 +103,7 @@ case class MicroBlossomLooper[T <: Data](config: DualConfig, tagType: HardType[T
+   if (config.contextBits > 0) { microBlossom.io.message.contextId := inputEntry.contextId }
+   microBlossom.io.message.weightUpdateEdgeIndex := inputEntry.weightUpdateEdgeIndex
+   microBlossom.io.message.weightUpdateWeight := inputEntry.weightUpdateWeight
++  microBlossom.io.message.weightUpdateIsRuleSelector := inputEntry.weightUpdateIsRuleSelector
+ 
+   // shift pipeline entries
+   for (i <- (0 until pipelineLength).reverse) {
+@@ -151,6 +154,7 @@ case class MicroBlossomLooper[T <: Data](config: DualConfig, tagType: HardType[T
+     io.push.payload.maximumGrowth #= input.maximumGrowth
+     io.push.payload.weightUpdateEdgeIndex #= 0
+     io.push.payload.weightUpdateWeight #= 0
++    io.push.payload.weightUpdateIsRuleSelector #= false
+     clockDomain.waitSamplingWhere(io.push.ready.toBoolean)
+     io.push.valid #= false
+     clockDomain.waitSamplingWhere(io.pop.valid.toBoolean)
+@@ -199,6 +203,7 @@ case class LooperInput[T <: Data](config: DualConfig, tagType: HardType[T] = Emp
+   val maximumGrowth = UInt(16 bits)
+   val weightUpdateEdgeIndex = UInt(15 bits)
+   val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
+   val tag = (tagType != null) generate cloneOf(tagType)
+ }
+ 
+@@ -222,6 +227,7 @@ case class PipelineEntry[T <: Data](config: DualConfig, tagType: HardType[T] = E
+   val isLoopBackGrow = Bool
+   val weightUpdateEdgeIndex = UInt(15 bits)
+   val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
+   val tag = (tagType != null) generate cloneOf(tagType)
+ 
+   def initDefault(): PipelineEntry[T] = {
+diff --git a/src/fpga/microblossom/types/BroadcastMessage.scala b/src/fpga/microblossom/types/BroadcastMessage.scala
+index 4e4a96a..a844a07 100644
+--- a/src/fpga/microblossom/types/BroadcastMessage.scala
++++ b/src/fpga/microblossom/types/BroadcastMessage.scala
+@@ -13,6 +13,7 @@ case class BroadcastMessage(config: DualConfig, explicitReset: Boolean = true) e
+   // hold both the architectural 15-bit edge index and a 16+ bit weight.
+   val weightUpdateEdgeIndex = UInt(15 bits)
+   val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
+ 
+   def resizedFrom(source: BroadcastMessage) = {
+     valid := source.valid
+@@ -25,6 +26,7 @@ case class BroadcastMessage(config: DualConfig, explicitReset: Boolean = true) e
+     }
+     weightUpdateEdgeIndex := source.weightUpdateEdgeIndex
+     weightUpdateWeight := source.weightUpdateWeight.resized
++    weightUpdateIsRuleSelector := source.weightUpdateIsRuleSelector
+   }
+ }
+ 
+

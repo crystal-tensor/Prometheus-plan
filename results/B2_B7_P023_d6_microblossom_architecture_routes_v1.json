@@ -1,0 +1,337 @@
+{
+  "acceptance": {
+    "architecture_route_selected": true,
+    "b7_resource_credit": 0,
+    "full_b2": false,
+    "full_update_plus_decode_p99_cycles_measured": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "resident_selector_representative_replay": false,
+    "resident_selector_rtl_implemented": false,
+    "resource_synthesis_measured": false,
+    "scalable_p023": false
+  },
+  "basis_rows": [
+    {
+      "accepted_selected_source_edges": {
+        "maximum": 22,
+        "mean": 5.611524628429878,
+        "observations": 167936,
+        "p50": 5.0,
+        "p95": 11.0,
+        "p99": 13.0,
+        "p999": 16.0,
+        "raw_uint32_sha256": "0b7520b23ac8c8e092107dcffbe8f39557d8babbac9a4574b432873a7a561252",
+        "zero_fraction": 0.011742568597560975
+      },
+      "accepted_update_edges": {
+        "maximum": 170,
+        "mean": 37.884140386814025,
+        "observations": 167936,
+        "p50": 35.0,
+        "p95": 80.0,
+        "p99": 102.0,
+        "p999": 130.0,
+        "raw_uint32_sha256": "7efc63b160b4adeb97510e09788a5381ab9530337b4993d04ea47603affdb77b",
+        "zero_fraction": 0.01174852324695122
+      },
+      "basis": "x",
+      "routes": [
+        {
+          "command_word_bits": 32,
+          "evidence": "measured",
+          "maximum_commands": 170,
+          "maximum_slow_cycles": 340,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 204,
+          "p99_bus_bits": 3264,
+          "p99_commands": 102,
+          "p99_slow_cycles": 204,
+          "route": "serial_weight_words",
+          "updates_per_command": 1
+        },
+        {
+          "command_word_bits": 64,
+          "evidence": "modeled_requires_new_packing",
+          "maximum_commands": 85,
+          "maximum_slow_cycles": 170,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 102,
+          "p99_bus_bits": 3264,
+          "p99_commands": 51,
+          "p99_slow_cycles": 102,
+          "route": "dual_weight_words",
+          "updates_per_command": 2
+        },
+        {
+          "command_word_bits": 128,
+          "evidence": "modeled_requires_new_stream",
+          "maximum_commands": 43,
+          "maximum_slow_cycles": 86,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 52,
+          "p99_bus_bits": 3328,
+          "p99_commands": 26,
+          "p99_slow_cycles": 52,
+          "route": "quad_weight_words",
+          "updates_per_command": 4
+        },
+        {
+          "command_word_bits": 32,
+          "evidence": "modeled_from_accepted_selected-edge_trace_hardware_not_yet_implemented",
+          "maximum_commands": 22,
+          "maximum_slow_cycles": 44,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 26,
+          "p99_bus_bits": 416,
+          "p99_commands": 13,
+          "p99_slow_cycles": 26,
+          "route": "resident_rule_causal_selector",
+          "updates_per_command": "parallel_fanout_from_one_selected_source",
+          "useful_selector_bits": 15
+        }
+      ],
+      "selector_vs_serial_p99_command_reduction": 7.846153846153846
+    },
+    {
+      "accepted_selected_source_edges": {
+        "maximum": 23,
+        "mean": 5.6618473704268295,
+        "observations": 167936,
+        "p50": 5.0,
+        "p95": 11.0,
+        "p99": 13.0,
+        "p999": 16.0,
+        "raw_uint32_sha256": "1c1f08b821b8e74031d7973388dbbb5ac781cb762d982cd9b1945c0b1751621c",
+        "zero_fraction": 0.011486518673780487
+      },
+      "accepted_update_edges": {
+        "maximum": 179,
+        "mean": 38.26170684070122,
+        "observations": 167936,
+        "p50": 35.0,
+        "p95": 80.0,
+        "p99": 103.0,
+        "p999": 129.0,
+        "raw_uint32_sha256": "6d0733cf8c47ea89c530a0b7a6d30052df255267f8e4382f33643f0cd66cccb6",
+        "zero_fraction": 0.011486518673780487
+      },
+      "basis": "z",
+      "routes": [
+        {
+          "command_word_bits": 32,
+          "evidence": "measured",
+          "maximum_commands": 179,
+          "maximum_slow_cycles": 358,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 206,
+          "p99_bus_bits": 3296,
+          "p99_commands": 103,
+          "p99_slow_cycles": 206,
+          "route": "serial_weight_words",
+          "updates_per_command": 1
+        },
+        {
+          "command_word_bits": 64,
+          "evidence": "modeled_requires_new_packing",
+          "maximum_commands": 90,
+          "maximum_slow_cycles": 180,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 104,
+          "p99_bus_bits": 3328,
+          "p99_commands": 52,
+          "p99_slow_cycles": 104,
+          "route": "dual_weight_words",
+          "updates_per_command": 2
+        },
+        {
+          "command_word_bits": 128,
+          "evidence": "modeled_requires_new_stream",
+          "maximum_commands": 45,
+          "maximum_slow_cycles": 90,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 52,
+          "p99_bus_bits": 3328,
+          "p99_commands": 26,
+          "p99_slow_cycles": 52,
+          "route": "quad_weight_words",
+          "updates_per_command": 4
+        },
+        {
+          "command_word_bits": 32,
+          "evidence": "modeled_from_accepted_selected-edge_trace_hardware_not_yet_implemented",
+          "maximum_commands": 23,
+          "maximum_slow_cycles": 46,
+          "minimum_slow_clock_mhz_for_p99_update_only_under_1us": 26,
+          "p99_bus_bits": 416,
+          "p99_commands": 13,
+          "p99_slow_cycles": 26,
+          "route": "resident_rule_causal_selector",
+          "updates_per_command": "parallel_fanout_from_one_selected_source",
+          "useful_selector_bits": 15
+        }
+      ],
+      "selector_vs_serial_p99_command_reduction": 7.923076923076923
+    }
+  ],
+  "classification": "resident_rule_causal_selector_selected_for_rtl_prototype_no_timing_or_resource_credit",
+  "date": "2026-11-20",
+  "evidence_id": "4838975c1cbe4e677fc2b31d5a1342446869d4258d78322554709771406c2969",
+  "measured_transport_contract": {
+    "decode_cycles_included": false,
+    "fpga_frequency_measured": false,
+    "measurement_scope": "representative steady edge-state replay",
+    "serial_axi_slow_cycles_per_command": 2
+  },
+  "next_gate": "Implement the steady resident-rule selector in the pinned RTL, replay all eight boundary batches by sending selected source edges rather than weights, and compare all 2,973 edge states before any timing or resource claim.",
+  "resident_rule_resource_lower_bound": {
+    "encoding_lower_bound": "per directed rule: edge/source index bits plus 15-bit normalized weight; excludes mux/comparator/routing/BRAM granularity",
+    "images": [
+      {
+        "basis": "x",
+        "directed_rules": 15076,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 407052,
+        "edge_local_raw_rule_kib": 49.68896484375,
+        "edges": 2901,
+        "phase": "opening",
+        "rule_image_sha256": "079a4a0ab906ebd88c8899bae09747de8449a06fe1a36017bfbab92fadb52cbb",
+        "source_csr_raw_bits_with_offsets": 447442,
+        "source_csr_raw_kib_with_offsets": 54.619384765625,
+        "source_edges_with_rules": 2884,
+        "source_fanout_maximum": 24,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 24,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      },
+      {
+        "basis": "x",
+        "directed_rules": 15610,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 421470,
+        "edge_local_raw_rule_kib": 51.448974609375,
+        "edges": 2973,
+        "phase": "steady",
+        "rule_image_sha256": "52c9f1b1636c6290536ca911679abbbbbef57b1e848c8df37c9956ef5ceb2375",
+        "source_csr_raw_bits_with_offsets": 463106,
+        "source_csr_raw_kib_with_offsets": 56.531494140625,
+        "source_edges_with_rules": 2973,
+        "source_fanout_maximum": 19,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 19,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      },
+      {
+        "basis": "x",
+        "directed_rules": 19306,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 521262,
+        "edge_local_raw_rule_kib": 63.630615234375,
+        "edges": 3730,
+        "phase": "closing",
+        "rule_image_sha256": "a440e26e866e23751f07d3c86313958acc26e176038decad37b40cea8a2adde0",
+        "source_csr_raw_bits_with_offsets": 576972,
+        "source_csr_raw_kib_with_offsets": 70.43115234375,
+        "source_edges_with_rules": 3713,
+        "source_fanout_maximum": 24,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 24,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      },
+      {
+        "basis": "z",
+        "directed_rules": 15066,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 406782,
+        "edge_local_raw_rule_kib": 49.656005859375,
+        "edges": 2896,
+        "phase": "opening",
+        "rule_image_sha256": "1156c15a1181208774ad9892b7a421dbf5385702a27f982c2e159ff53e46c37f",
+        "source_csr_raw_bits_with_offsets": 447116,
+        "source_csr_raw_kib_with_offsets": 54.57958984375,
+        "source_edges_with_rules": 2880,
+        "source_fanout_maximum": 24,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 24,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      },
+      {
+        "basis": "z",
+        "directed_rules": 15610,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 421470,
+        "edge_local_raw_rule_kib": 51.448974609375,
+        "edges": 2973,
+        "phase": "steady",
+        "rule_image_sha256": "52c9f1b1636c6290536ca911679abbbbbef57b1e848c8df37c9956ef5ceb2375",
+        "source_csr_raw_bits_with_offsets": 463106,
+        "source_csr_raw_kib_with_offsets": 56.531494140625,
+        "source_edges_with_rules": 2973,
+        "source_fanout_maximum": 19,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 19,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      },
+      {
+        "basis": "z",
+        "directed_rules": 19296,
+        "edge_index_bits": 12,
+        "edge_local_raw_rule_bits": 520992,
+        "edge_local_raw_rule_kib": 63.59765625,
+        "edges": 3725,
+        "phase": "closing",
+        "rule_image_sha256": "bc4506b8af20d30304190cbc0bb43c072aaa4f99f5d7062936cdaf0eb4a53d86",
+        "source_csr_raw_bits_with_offsets": 576642,
+        "source_csr_raw_kib_with_offsets": 70.390869140625,
+        "source_edges_with_rules": 3709,
+        "source_fanout_maximum": 24,
+        "source_fanout_p99": 19,
+        "target_rule_indegree_maximum": 24,
+        "target_rule_indegree_p99": 19,
+        "weight_bits": 15
+      }
+    ],
+    "six_image_directed_rules": 99964,
+    "six_image_edge_local_raw_rule_bits": 2699028,
+    "six_image_edge_local_raw_rule_kib": 329.47119140625,
+    "unique_rule_edge_local_raw_bits": 2277558,
+    "unique_rule_edge_local_raw_kib": 278.022216796875,
+    "unique_rule_table_hashes": [
+      "079a4a0ab906ebd88c8899bae09747de8449a06fe1a36017bfbab92fadb52cbb",
+      "1156c15a1181208774ad9892b7a421dbf5385702a27f982c2e159ff53e46c37f",
+      "52c9f1b1636c6290536ca911679abbbbbef57b1e848c8df37c9956ef5ceb2375",
+      "a440e26e866e23751f07d3c86313958acc26e176038decad37b40cea8a2adde0",
+      "bc4506b8af20d30304190cbc0bb43c072aaa4f99f5d7062936cdaf0eb4a53d86"
+    ],
+    "unique_rule_tables": 5
+  },
+  "schema": "b2_b7_p023_d6_microblossom_architecture_routes_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "selected_route": {
+    "exact_semantics": "Reset to base, then apply selected source-edge selectors sequentially; each target edge takes min(current, resident replacement), making selector order irrelevant and reproducing strict-lowering aggregation.",
+    "name": "resident_rule_causal_selector",
+    "unproven_costs": [
+      "selector decode fanout and comparator timing",
+      "routing congestion and synthesis mapping of roughly 278 KiB unique raw rule data",
+      "integration with first-pass selected-edge production",
+      "opening/closing switching, full correction equivalence, FPGA Fmax, LUT/BRAM, and one-microsecond deadline"
+    ],
+    "why": [
+      "accepted X/Z p99 selected-source count is 13 versus 102/103 replacement writes",
+      "under the measured two-cycle command path, modeled p99 update span falls from 204/206 to 26/26 slow cycles",
+      "one source fans out to at most 24 target edges in the six frozen images",
+      "one target compares at most 24 resident source rules, with p99 indegree 19"
+    ]
+  },
+  "source": {
+    "batch_trace": "results/B2_B7_P023_d6_microblossom_batch_trace_v1.json",
+    "batch_trace_evidence_id": "7863dd4cfc9a2e1589b849500f69fbc69767ed70c6aa201468c85e3b2918651e",
+    "batch_trace_sha256": "ff2236fb612882eb70cc2f28004806987508be5fde34ba85c0099276450f83f6",
+    "image_manifest": "benchmarks/B2_B7_P023_d6_microblossom_images_v1.json",
+    "image_manifest_sha256": "b644d1e6081bc9ccd7b563489ed2cb7a2cbe4a63c5dfde54e4b94c53059c84ab",
+    "representative_replay": "results/B2_B7_P023_d6_microblossom_batch_replay_v1.json",
+    "representative_replay_sha256": "69f119d4782983e39de092cd7b31aa19fdb4cf61f9b8dac0d3a083476dac6d59"
+  }
+}
