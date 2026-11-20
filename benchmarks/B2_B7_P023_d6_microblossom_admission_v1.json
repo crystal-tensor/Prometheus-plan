@@ -1,0 +1,178 @@
+{
+  "schema_version": "b2_b7_p023_d6_microblossom_admission_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can an 8-bit fixed-point, correlation-preserving window graph pass a fresh exact-semantic holdout and expose a bounded controller update payload before any Micro Blossom latency or resource credit is claimed?",
+  "frozen_inputs": {
+    "fault_vector_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_fault_vector_v1.json",
+      "sha256": "b8997e0c0496e15efc4bbeeef35bfe7975ae5033a64488f713e502bb41c3fd3c"
+    },
+    "fault_vector_result": {
+      "path": "results/B2_B7_P023_d6_fault_vector_v1.json",
+      "sha256": "e101a30f598a9f02ddbc19c8b50185eef40691d1b0bfea287d6ce60094232299",
+      "required_classification": "public_fault_vector_decode_tail_bottleneck"
+    },
+    "fault_vector_audit": {
+      "path": "results/B2_B7_P023_d6_fault_vector_audit_v1.json",
+      "sha256": "71f1ae4143047394e81d92c23db9bfd6762a1b35eed02c3d203cbaf9003ab674"
+    },
+    "fault_vector_replay": {
+      "path": "results/B2_B7_P023_d6_fault_vector_replay_v1.json",
+      "sha256": "bdedef14e5e70c26d203b60e6a375c3548219f5eeca3751fc2f4806236fd8889"
+    },
+    "fault_vector_runner": {
+      "path": "tools/b2_b7_p023_d6_fault_vector.py",
+      "sha256": "d4658c872e85083a7d1931f0c6fc6febe2c8c66f6a6290db37ed0eb9d15dc373"
+    },
+    "artifact_commit": "23fa77ea086ec557e5c899c3e9c3d5b873675133"
+  },
+  "external_source_profile": {
+    "micro_blossom_repository": "https://github.com/yuewuo/micro-blossom",
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "micro_blossom_files": {
+      "README.md": "edeabbd6456b6c01b73139126712cfd7c3c8e12d1a5248e9a564a6efb290d856",
+      "src/fpga/microblossom/DualConfig.scala": "93ae9bbdd2a94af7484d2940ee71a00efecfb382764dd79c50e36750ec94c1ee",
+      "src/fpga/microblossom/MicroBlossomBus.scala": "f72028de2208bd2b43e7798cec01bcdeb910f30e01aa9f62405653750ec04879",
+      "src/cpu/blossom-nostd/src/instruction.rs": "0686cf5e4ff1a6f86d8b4a8f9ae4895bf5b71dbe9575787a03f7fd7930baa291",
+      "src/fpga/microblossom/util/SingleGraph.scala": "b6676898a3b123165461c01fc8d4f19b6f5ec4043b0b8b28bb2e099ef4a95cf7"
+    },
+    "pymatching_repository": "https://github.com/oscarhiggott/PyMatching",
+    "pymatching_version": "2.4.0",
+    "pymatching_tag_commit": "6f63b2b9474ba0fa7e511fe52bffdce858a06984",
+    "source_interpretation": "Micro Blossom supplies arbitrary static graph generation, unsigned dynamic edge-weight registers, and an external weight-load instruction. PyMatching 2.4.0 caps correlation-conditioned probability at 0.5, so its second-pass implied weights are nonnegative and only lower affected edges. This is interface compatibility evidence, not an implemented or timed hardware path."
+  },
+  "known_before_preregistration": {
+    "source_classification": "public_fault_vector_decode_tail_bottleneck",
+    "alternate_fusion_blossom_rejected_as_primary_route": "the maintained Fusion Blossom README states PyMatching v2 has roughly 5x to 20x better single-thread performance, and Fusion Blossom does not expose the frozen two-pass correlated semantic as a drop-in interface",
+    "simple_zero_or_single_graph_edge_cache": {
+      "x_fast_coverage": 0.04971536775914634,
+      "z_fast_coverage": 0.049459317835365856,
+      "x_fallback_fraction": 0.9502846322408537,
+      "z_fallback_fraction": 0.9505406821646342,
+      "decision": "rejected because even zero-cost hits cannot meet the one-percent miss limit"
+    },
+    "single_stream_decode_batch_size_one": {
+      "x_scalar_p99_microseconds_per_committed_layer": 4.298666666666667,
+      "x_batch1_p99_microseconds_per_committed_layer": 4.034666666666666,
+      "x_batch1_deadline_miss_fraction": 0.5984184451219512,
+      "z_scalar_p99_microseconds_per_committed_layer": 4.118166666666667,
+      "z_batch1_p99_microseconds_per_committed_layer": 4.013833333333333,
+      "z_batch1_deadline_miss_fraction": 0.5710746951219512,
+      "decision": "rejected as insufficient interface-only improvement"
+    },
+    "static_graph_diagnostic": {
+      "x_unique_graphs": 3,
+      "z_unique_graphs": 3,
+      "steady_windows_per_basis": 162,
+      "steady_vertices": 630,
+      "steady_edges": 2973,
+      "negative_base_weights": 0
+    },
+    "fixed_point_diagnostic_on_observed_64_shot_prefix": {
+      "four_bit_x_final_frames_equal": 63,
+      "four_bit_z_final_frames_equal": 63,
+      "six_bit_x_final_frames_equal": 64,
+      "six_bit_z_final_frames_equal": 64,
+      "eight_bit_x_final_frames_equal": 64,
+      "eight_bit_z_final_frames_equal": 64,
+      "ten_bit_x_final_frames_equal": 64,
+      "ten_bit_z_final_frames_equal": 64,
+      "eight_bit_x_window_outputs_equal": 10494,
+      "eight_bit_z_window_outputs_equal": 10478,
+      "window_outputs_per_basis": 10496,
+      "disclosure": "post-outcome route-selection diagnostic on an already observed corpus; it is not the preregistered result"
+    },
+    "controller_payload_diagnostic_on_observed_128_shot_prefix": {
+      "x_first_pass_selected_edges_p99": 13,
+      "z_first_pass_selected_edges_p99": 13,
+      "x_unique_affected_edges_upper_bound_p99": 103,
+      "z_unique_affected_edges_upper_bound_p99": 102,
+      "x_dynamic_update_payload_p99_bits": 2060,
+      "z_dynamic_update_payload_p99_bits": 2040,
+      "payload_encoding": "12-bit edge index plus 8-bit replacement weight for every unique potentially affected edge",
+      "disclosure": "upper-bound diagnostic; only a measured controller implementation can establish actual cycles or latency"
+    },
+    "fresh_holdout_samples_observed": 0,
+    "fresh_holdout_predictions_observed": 0
+  },
+  "candidate_contract": {
+    "reference_full_block": "unquantized PyMatching 2.4.0 two-pass correlated decode over the complete 1,000-round detector error model",
+    "reference_online": "unquantized public correction-bit fault-vector decoder under the frozen 3d window, d commit, and 2d look-ahead contract",
+    "candidate": "the same correction-bit online decoder after quantizing each decomposed detector-error probability by its log-likelihood weight",
+    "weight_bits": 8,
+    "fixed_point_scale": 16,
+    "quantization": "q=max(1, round(16*log((1-p)/p))); p_quantized=1/(1+exp(q/16)); require q<=255",
+    "unchanged": [
+      "distance-6 X/Z circuits, 71 active qubits, physical noise, and 1,000-round horizon",
+      "3d=18 windows, d=6 commits, and 2d=12 look-ahead",
+      "detector and observable correction-bit output maps",
+      "decomposed correlation groups and all graph endpoints",
+      "two-pass correlated matching, arrival order, propagation, frame, and residual rules",
+      "single-stream execution with no cross-shot batching"
+    ],
+    "changed": "only the probability-derived base and implied weight values are represented on an 8-bit fixed-point grid"
+  },
+  "fresh_holdout_contract": {
+    "shots_per_basis": 1024,
+    "seed_namespace": "B2_B7_P023_d6_microblossom_admission_v1",
+    "seed_derivation": "little-endian uint64 from the first eight SHA-256 bytes of public_freeze_commit:discussion_number:seed_namespace:basis",
+    "seed_unavailable_until_public_freeze_and_discussion": true,
+    "detector_and_observable_bytes_hashed": true,
+    "cross_shot_batching_in_online_paths": false
+  },
+  "semantic_veto": {
+    "candidate_final_frames_equal_reference_online": "1024/1024 in each basis",
+    "reference_online_equal_reference_full_block": "1024/1024 in each basis",
+    "candidate_commit_residual_failures": 0,
+    "candidate_final_residual_failures": 0,
+    "topology_equal_windows": "164/164 in each basis",
+    "quantized_weights_fit_unsigned_eight_bits": true,
+    "veto_rule": "no geometry or controller-payload result is credited if any required semantic or residual condition fails"
+  },
+  "controller_payload_contract": {
+    "first_pass_path": "decode_to_edges_array with correlations disabled on the quantized graph",
+    "relation_table": "every decomposed error component points to the other components in the same correlated mechanism",
+    "affected_edge_count": "unique union of relation-table targets for first-pass selected edges; an upper bound because PyMatching only applies a strictly lower implied weight",
+    "edge_index_bits": 12,
+    "weight_bits": 8,
+    "reported_statistics": ["mean", "p50", "p95", "p99", "p999", "maximum", "zero-update fraction"],
+    "latency_interpretation": "payload bits are not cycles, bandwidth, p99 latency, LUTs, BRAMs, timing closure, or device evidence"
+  },
+  "kaggle_inspired_evaluation": {
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "fresh candidate frames, full-block reference frames, every residual, topology, seed, and corpus hash must verify before representation cost is discussed",
+    "cost_after_verification": "report 8-bit weight payload and per-window dynamic update payload without converting them into unmeasured hardware latency",
+    "aggregate": "X and Z must both pass; no average can hide a failed basis",
+    "absolute_guardrail": "the existing p99 <=1 microsecond and deadline-miss <=1 percent gates remain open and cannot be waived by semantic admission"
+  },
+  "classification_rule": {
+    "order": [
+      "fresh_holdout_semantic_regression",
+      "eight_bit_graph_admission_failure",
+      "eight_bit_semantic_admission_pass_hardware_execution_unmeasured"
+    ],
+    "rule": "apply the semantic veto first, then graph/weight admission; a pass only authorizes a cycle-accurate or real-device implementation experiment"
+  },
+  "hard_boundaries": {
+    "micro_blossom_rtl_generated_for_candidate": false,
+    "cycle_accurate_candidate_executed": false,
+    "fpga_candidate_executed": false,
+    "hardware_decoder_deadline_passed": false,
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0
+  },
+  "execution_guard": {
+    "preflight_before_publication": "reconstruct every real graph, quantize weights, verify topology, output maps, unsigned range, and all-zero paths only; observe zero fresh stochastic samples",
+    "public_commit_required_before_fresh_seed": true,
+    "public_discussion_required_before_fresh_seed": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true,
+    "runner_verifies_its_own_and_protocol_bytes_at_public_commit": true
+  }
+}

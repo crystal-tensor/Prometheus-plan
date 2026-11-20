@@ -6454,6 +6454,42 @@ current_results:
     audit: ../results/B2_B7_P023_d6_fault_vector_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_fault_vector_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_fault_vector_v1.md
+  d6_microblossom_admission_freeze_v1:
+    status: eight_bit_graph_admission_preregistered_b7_architecture_credit_zero
+    method: b2_b7_p023_d6_microblossom_admission_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_fault_vector_result: ../results/B2_B7_P023_d6_fault_vector_v1.json
+    required_source_classification: public_fault_vector_decode_tail_bottleneck
+    candidate: eight_bit_fixed_point_correlation_preserving_public_fault_vector_windows
+    external_profile: micro_blossom_a3530d9e58ff790dafc93d56c9a2769ceac84731
+    quantized_weight_bits: 8
+    fixed_point_scale: 16
+    unique_static_graphs_per_basis: 3
+    steady_windows_per_basis: 162
+    steady_vertices: 630
+    steady_edges: 2973
+    edge_index_bits: 12
+    x_known_payload_upper_bound_p99_bits: 2060
+    z_known_payload_upper_bound_p99_bits: 2040
+    known_payload_is_post_outcome_route_selection_only: true
+    fresh_holdout_shots_per_basis: 1024
+    fresh_seed_requires_public_commit_and_discussion: true
+    fresh_stochastic_samples_observed_before_freeze: 0
+    semantic_veto_before_geometry_or_payload_credit: true
+    micro_blossom_rtl_generated_for_candidate: false
+    cycle_accurate_candidate_executed: false
+    fpga_candidate_executed: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    caveat: graph_and_control_payload_admission_only_no_lut_bram_timing_or_resource_credit
+    protocol: B2_B7_P023_d6_microblossom_admission_v1.json
+    runner: ../tools/b2_b7_p023_d6_microblossom_admission.py
+    markdown_report: ../research/B2_B7_P023_d6_microblossom_admission_freeze_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6500,6 +6536,7 @@ prototype_artifacts:
   d6_fault_vector_runner: ../tools/b2_b7_p023_d6_fault_vector.py
   d6_fault_vector_audit: ../tools/b2_b7_p023_d6_fault_vector_audit.py
   d6_fault_vector_replay: ../tools/b2_b7_p023_d6_fault_vector_replay.py
+  d6_microblossom_admission_runner: ../tools/b2_b7_p023_d6_microblossom_admission.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py

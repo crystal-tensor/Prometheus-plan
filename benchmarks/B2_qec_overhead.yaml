@@ -1693,6 +1693,42 @@ current_results:
     audit: ../results/B2_B7_P023_d6_fault_vector_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_fault_vector_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_fault_vector_v1.md
+  d6_microblossom_admission_freeze_v1:
+    status: eight_bit_graph_and_semantic_holdout_preregistered_hardware_execution_unmeasured
+    method: b2_b7_p023_d6_microblossom_admission_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_fault_vector_result: ../results/B2_B7_P023_d6_fault_vector_v1.json
+    required_source_classification: public_fault_vector_decode_tail_bottleneck
+    candidate: eight_bit_fixed_point_correlation_preserving_public_fault_vector_windows
+    external_profile: micro_blossom_a3530d9e58ff790dafc93d56c9a2769ceac84731
+    quantized_weight_bits: 8
+    fixed_point_scale: 16
+    x_unique_static_graphs: 3
+    z_unique_static_graphs: 3
+    steady_windows_per_basis: 162
+    steady_vertices: 630
+    steady_edges: 2973
+    x_preflight_quantized_group_weight_range: [86, 154]
+    z_preflight_quantized_group_weight_range: [82, 154]
+    preflight_topologies_equal: 328
+    preflight_output_maps_equal: 328
+    fresh_holdout_shots_per_basis: 1024
+    fresh_seed_requires_public_commit_and_discussion: true
+    fresh_stochastic_samples_observed_before_freeze: 0
+    fresh_nonzero_predictions_observed_before_freeze: 0
+    semantic_veto_before_payload_credit: true
+    controller_payload_reported_as_upper_bound_not_latency: true
+    micro_blossom_rtl_generated_for_candidate: false
+    cycle_accurate_candidate_executed: false
+    fpga_candidate_executed: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    caveat: architecture_admission_preregistration_only_no_hardware_or_downstream_credit
+    protocol: B2_B7_P023_d6_microblossom_admission_v1.json
+    runner: ../tools/b2_b7_p023_d6_microblossom_admission.py
+    markdown_report: ../research/B2_B7_P023_d6_microblossom_admission_freeze_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1758,6 +1794,7 @@ prototype_artifacts:
   d6_fault_vector_runner: ../tools/b2_b7_p023_d6_fault_vector.py
   d6_fault_vector_audit: ../tools/b2_b7_p023_d6_fault_vector_audit.py
   d6_fault_vector_replay: ../tools/b2_b7_p023_d6_fault_vector_replay.py
+  d6_microblossom_admission_runner: ../tools/b2_b7_p023_d6_microblossom_admission.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py
