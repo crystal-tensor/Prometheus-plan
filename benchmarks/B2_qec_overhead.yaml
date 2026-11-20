@@ -1383,6 +1383,37 @@ current_results:
     audit: ../results/B2_B7_P023_d6_decoder_latency_matrix_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_decoder_latency_matrix_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_decoder_latency_matrix_v1.md
+  d6_online_window_freeze_v1:
+    status: d6_online_window_preregistered_before_prediction_residual_and_tail_latency_outcomes
+    method: b2_b7_p023_d6_online_window_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_strict_result: ../results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json
+    source_latency_result: ../results/B2_B7_P023_d6_decoder_latency_matrix_v1.json
+    distance: 6
+    rounds_per_shot: 1000
+    corpus_shots_per_basis: 1024
+    window_size_layers: 18
+    commit_stride_layers: 6
+    buffer_layers: 12
+    windows_per_shot: 164
+    inner_decoders: [independent_mwpm, two_pass_correlated_matching]
+    timed_shots_per_basis_decoder: 128
+    timed_path: bit_pack_unix_socket_decode_commit_propagation_feedback_ack
+    p99_proxy_microseconds_per_committed_layer: 1.0
+    maximum_deadline_miss_fraction: 0.01
+    exact_full_block_prediction_equality_required: true
+    zero_commit_and_final_residual_required: true
+    stochastic_samples_observed_before_freeze: 0
+    online_prediction_outcomes_observed_before_freeze: false
+    online_latency_outcomes_observed_before_freeze: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    caveat: public_preregistration_only_same_host_socket_emulator_cannot_satisfy_hardware_deadline
+    protocol: B2_B7_P023_d6_online_window_v1.json
+    runner: ../tools/b2_b7_p023_d6_online_window.py
+    markdown_report: ../research/B2_B7_P023_d6_online_window_freeze_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1436,6 +1467,7 @@ prototype_artifacts:
   d6_decoder_latency_matrix_runner: ../tools/b2_b7_p023_d6_decoder_latency_matrix.py
   d6_decoder_latency_matrix_audit: ../tools/b2_b7_p023_d6_decoder_latency_matrix_audit.py
   d6_decoder_latency_matrix_replay: ../tools/b2_b7_p023_d6_decoder_latency_matrix_replay.py
+  d6_online_window_runner: ../tools/b2_b7_p023_d6_online_window.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

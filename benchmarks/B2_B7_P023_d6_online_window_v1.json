@@ -1,0 +1,161 @@
+{
+  "schema_version": "b2_b7_p023_d6_online_window_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can the accepted 71-qubit correlation-aware memory decoder preserve its frozen predictions and a 1 microsecond per syndrome-layer tail budget when converted from offline full-block decoding into sequential O(d) overlapping recovery with a measured host communication and feedback path?",
+  "frozen_inputs": {
+    "strict_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430"
+    },
+    "strict_result": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+      "sha256": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de",
+      "required_decision": "d6_correlated_decoder_strict_xz_pass_physical_memory_gate_b2_p023_b7_credit_closed"
+    },
+    "strict_audit": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_audit_v1.json",
+      "sha256": "1d88dd2d6fd96d78f8f27e8cbeac19ada802f54f2354331e4126927b2f1517dd"
+    },
+    "strict_replay": {
+      "path": "results/B2_B7_P023_d6_correlated_strict_acceptance_replay_v1.json",
+      "sha256": "8dd3e7aaebb45d2f83363d3339b867a7da3a6b91bd5d5373ebfd8070a3991cab"
+    },
+    "latency_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+      "sha256": "3dec39c8d64547adea2649a6343b7810c8b5a0f7ee7d78e648503c79577083df"
+    },
+    "latency_result": {
+      "path": "results/B2_B7_P023_d6_decoder_latency_matrix_v1.json",
+      "sha256": "6c242bc32497bb0df1306e8e558cc255b280439a216389e1ebbd1022a4300da0",
+      "required_decision": "d6_correlated_decoder_batch1_software_backlog_proxy_pass_hardware_deadline_b2_p023_b7_open"
+    },
+    "latency_audit": {
+      "path": "results/B2_B7_P023_d6_decoder_latency_matrix_audit_v1.json",
+      "sha256": "9b1665bbb32dbaefda5363a06def4c472586a1395dc6721f01086fc8a1d6f1b2"
+    },
+    "latency_replay": {
+      "path": "results/B2_B7_P023_d6_decoder_latency_matrix_replay_v1.json",
+      "sha256": "dfbbf73b835d9f52c9372a95b43912a2888a98c385a24dadf2444e0b12ef742a"
+    },
+    "artifact_commit": "a3698d4b3260b6aae36202c7972d748470cdbe49"
+  },
+  "known_before_preregistration": {
+    "strict_correctness_outcome_known": true,
+    "strict_physical_memory_score": 1.3661971830985915,
+    "offline_batch1_x_microseconds_per_round": 0.5208544111328125,
+    "offline_batch1_z_microseconds_per_round": 0.5158256425781251,
+    "offline_batch1_software_proxy_pass": true,
+    "full_block_prediction_hashes_known": true,
+    "online_window_prediction_outcomes_observed": false,
+    "online_window_latency_outcomes_observed": false,
+    "disclosure": "the exact 1,024-shot X/Z corpora and their offline full-block predictions are already public; no overlapping-window prediction, residual, socket-path latency, p99, or deadline-miss outcome has been observed"
+  },
+  "corpus_contract": {
+    "source": "the same first four 256-shot chunks from each strict X/Z run used by the frozen decoder latency matrix",
+    "shots_per_basis": 1024,
+    "source_chunk_size": 256,
+    "source_chunks_per_basis": 4,
+    "rounds_per_shot": 1000,
+    "sampling_excluded_from_timed_region": true,
+    "graph_construction_excluded_from_timed_region": true,
+    "source_chunk_digest_reproduction_required": true,
+    "full_block_prediction_hash_reproduction_required": true,
+    "same_detector_corpus_for_independent_and_correlated_arms": true
+  },
+  "window_contract": {
+    "algorithm": "sequential overlapping recovery with tentative buffer corrections and committed correction propagation",
+    "distance": 6,
+    "window_size_formula": "3*d",
+    "window_size_layers": 18,
+    "stride_formula": "d",
+    "stride_layers": 6,
+    "buffer_layers": 12,
+    "last_window_rule": "the final window consumes every remaining detector layer and commits all of them; its size is at most window_size+stride-1",
+    "time_coordinate_index": 2,
+    "inner_decoders": ["independent_mwpm", "two_pass_correlated_matching"],
+    "correlation_preservation": "Stim suggested graphlike decomposition components remain grouped by their original error instruction inside each window; two-pass PyMatching reweights those components before the commit decision",
+    "commit_rule": "commit only correction components triggered by detectors in the oldest stride layers; propagate every committed component endpoint and logical-frame flip into later windows",
+    "semantic_invariants": [
+      "every committed detector has zero residual syndrome after its window",
+      "the final residual syndrome is zero",
+      "all detector input packets reproduce the frozen syndrome exactly",
+      "the primary correlated online prediction equals the frozen correlated full-block prediction on every one of 1024 shots per basis"
+    ]
+  },
+  "transport_contract": {
+    "model": "same-process Unix domain socketpair control-path emulator",
+    "input_packet": "16-byte network-order header plus little-endian packed detector bits",
+    "feedback_packet": "13-byte network-order logical-frame acknowledgement",
+    "prebuffer": "the first window_size-stride layers are transported before steady-state timing",
+    "timed_start": "immediately before packing the newly arrived detector layers for a window",
+    "timed_end": "after the logical-frame feedback acknowledgement is received and verified",
+    "included": [
+      "detector bit packing and header construction",
+      "kernel socket send and receive in both directions",
+      "detector bit unpacking and header validation",
+      "correction decoding and commit propagation",
+      "logical-frame feedback packing, transport, and acknowledgement"
+    ],
+    "excluded": [
+      "quantum syndrome extraction time",
+      "Stim sampling",
+      "detector error model construction",
+      "window graph compilation",
+      "a physical QPU/controller/interconnect"
+    ]
+  },
+  "timing_contract": {
+    "timed_shots_per_basis_decoder": 128,
+    "warmup_shots_per_basis_decoder": 1,
+    "clock": "time.perf_counter_ns",
+    "raw_primary_timing_encoding": "base64 little-endian uint64 nanoseconds",
+    "primary_statistic": "nearest-rank p99 of end-to-end microseconds per committed detector layer",
+    "reported_statistics": [
+      "p50",
+      "p95",
+      "p99",
+      "p99.9",
+      "maximum",
+      "deadline miss count and fraction",
+      "input, decode/commit, and feedback phase summaries"
+    ],
+    "timing_replay_policy": "wall-clock values are non-deterministic; raw timing bytes, arithmetic, structure, corpus, predictions, and verdict logic must be independently auditable"
+  },
+  "online_software_proxy": {
+    "threshold_microseconds_per_round": 1.0,
+    "tail_quantile": 0.99,
+    "maximum_deadline_miss_fraction": 0.01,
+    "primary_decoder": "two_pass_correlated_matching",
+    "pass_rule": "both X and Z require exact equality to all frozen full-block predictions, zero committed/final residual syndrome, nearest-rank p99 end-to-end time <=1 microsecond per committed layer, and deadline miss fraction <=1 percent",
+    "interpretation": "host-local online software proxy only; it is stricter than the earlier offline median backlog proxy but cannot satisfy a hardware deadline"
+  },
+  "external_basis": {
+    "overlapping_recovery_source": "https://arxiv.org/abs/2209.08552",
+    "sandwich_window_source": "https://doi.org/10.1103/PRXQuantum.4.040344",
+    "one_microsecond_per_round_source": "https://www.nature.com/articles/s41467-025-66773-x",
+    "real_time_decoder_context": "https://www.nature.com/articles/s41586-024-08449-y",
+    "pymatching_correlated_mode_source": "https://github.com/oscarhiggott/PyMatching/releases/tag/v2.3.0",
+    "notes": "the sources motivate O(d) overlapping windows, explicit throughput/latency separation, and a roughly 1 microsecond per round target; none validates this host/socket implementation as hardware"
+  },
+  "hard_boundaries": {
+    "hardware_decoder_deadline_passed": false,
+    "reason": "the transport is a synchronous same-host socketpair and no real QPU, measurement electronics, controller, asynchronous queue, cryogenic link, or device feedback path is present",
+    "strict_102400_shot_online_correctness_claimed": false,
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0
+  },
+  "execution_guard": {
+    "preflight_before_publication": "real DEM structure plus all-zero syndrome only; zero stochastic candidate shots",
+    "public_commit_required_before_online_outcomes": true,
+    "public_discussion_required_before_online_outcomes": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true,
+    "runner_verifies_its_own_and_protocol_bytes_at_public_commit": true
+  }
+}
