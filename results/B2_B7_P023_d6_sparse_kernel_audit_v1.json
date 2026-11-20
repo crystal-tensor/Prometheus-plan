@@ -1,0 +1,528 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_id": "68a6ff7041cb163278ca1897994dcc2a6971b273fc7391eec50b23ea56a0a283",
+  "auditor": {
+    "imports_sparse_kernel_producer": false,
+    "path": "tools/b2_b7_p023_d6_sparse_kernel_audit.py",
+    "sha256": "222dcbb78862a59c122f81cf94a953a111854fab7a38eeb2fcd2aba96536a672"
+  },
+  "checks": [
+    {
+      "detail": "Exact #021/#022/#023 scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "benchmarks/B2_B7_P023_d6_sparse_kernel_v1.json",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "4228242a655a89b764c176457eba4a687cc9c15d",
+      "name": "public_freeze_protocol",
+      "passed": true
+    },
+    {
+      "detail": "tools/b2_b7_p023_d6_sparse_kernel.py",
+      "name": "public_freeze_producer",
+      "passed": true
+    },
+    {
+      "detail": "eda18b7a5eb881fe5a2e52c8a34d377670c983de",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "matching_kernel_tail_bottleneck",
+      "name": "source_classification",
+      "passed": true
+    },
+    {
+      "detail": "2.4.0",
+      "name": "pymatching_version",
+      "passed": true
+    },
+    {
+      "detail": "8/8 frozen source chunks.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "Both corpus hashes reproduce.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "Both independently rebuilt window structures match.",
+      "name": "structures",
+      "passed": true
+    },
+    {
+      "detail": "Every edge is uniquely indexed with zero or one fault ID.",
+      "name": "preindexes",
+      "passed": true
+    },
+    {
+      "detail": "Candidate and timed baseline predictions reproduce.",
+      "name": "predictions",
+      "passed": true
+    },
+    {
+      "detail": "semantic_veto_pass=True",
+      "name": "semantic_veto",
+      "passed": true
+    },
+    {
+      "detail": "All 18 raw timing vectors reproduce their statistics.",
+      "name": "raw_vectors",
+      "passed": true
+    },
+    {
+      "detail": "Every candidate event total equals its seven phases.",
+      "name": "phase_additivity",
+      "passed": true
+    },
+    {
+      "detail": "All absolute stage verdicts reproduce.",
+      "name": "stage_passes",
+      "passed": true
+    },
+    {
+      "detail": "cpp_correlated_matching_tail_bottleneck",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "geometric_speedup=1.156192484141532",
+      "name": "relative_score",
+      "passed": true
+    },
+    {
+      "detail": "14/14 producer checks.",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    },
+    {
+      "detail": "e25cd66cc162fedb319eff534915a7ac961787f5b7b8cca17f557c4c708f5c8a",
+      "name": "evidence_id",
+      "passed": true
+    }
+  ],
+  "derived": {
+    "candidate_direct_tail_pass": false,
+    "classification": "cpp_correlated_matching_tail_bottleneck",
+    "cpp_correlated_matching_tail_pass": false,
+    "geometric_mean_baseline_to_candidate_p99_speedup": 1.156192484141532,
+    "preindexed_edge_mapping_tail_pass": false,
+    "semantic_veto_pass": true,
+    "x_baseline_to_candidate_p99_speedup": 1.1639479283442768,
+    "z_baseline_to_candidate_p99_speedup": 1.148488714857671
+  },
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0",
+    "system": "Darwin"
+  },
+  "reconstruction_rows": [
+    {
+      "baseline_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40732
+      },
+      "baseline_prediction_rows_equal_full_block": 128,
+      "baseline_timed_prediction_sha256": "a2965755167d1e8a0fd0f116e0e0a2bb4d12e5c6782b35979a991d923d63e401",
+      "basis": "x",
+      "candidate_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 326644
+      },
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "corpus_matches": true,
+      "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+      "full_block_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "index_matches": true,
+      "index_totals": {
+        "edge_count": 488257,
+        "maximum_fault_ids_per_edge": 1,
+        "one_fault_edges": 169918,
+        "zero_fault_edges": 318339
+      },
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structure_matches": true,
+      "timed_cross_path_prediction_rows_equal": 128
+    },
+    {
+      "baseline_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40649
+      },
+      "baseline_prediction_rows_equal_full_block": 128,
+      "baseline_timed_prediction_sha256": "fda92bcc25361d632ca6de874e1af989e58a0bdf15bde1c864020334d1a1f937",
+      "basis": "z",
+      "candidate_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 326530
+      },
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "corpus_matches": true,
+      "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+      "full_block_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "index_matches": true,
+      "index_totals": {
+        "edge_count": 488247,
+        "maximum_fault_ids_per_edge": 1,
+        "one_fault_edges": 169908,
+        "zero_fault_edges": 318339
+      },
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structure_matches": true,
+      "timed_cross_path_prediction_rows_equal": 128
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_sparse_kernel_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_sparse_kernel_v1.json",
+    "sha256": "1666d4de107351eac13441060e54021f25f4873598c3e2e2d3998c1ba8ade921"
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "baseline_timed_prediction_rows_replayed": 256,
+    "candidate_prediction_rows_replayed": 2048,
+    "checks_failed": 0,
+    "checks_passed": 21,
+    "classification": "cpp_correlated_matching_tail_bottleneck",
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "raw_timing_vectors_replayed": 18,
+    "semantic_veto_pass": true,
+    "source_chunks_replayed": 8
+  },
+  "timing_rows": [
+    {
+      "all_vectors_match_result": true,
+      "basis": "x",
+      "derived": {
+        "baseline_direct_end_to_end": {
+          "deadline_miss_fraction": 0.9991901676829268,
+          "deadline_misses": 20975,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 17.92366666666667,
+          "mean_nanoseconds": 24792.335604039636,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.9375,
+          "p95_microseconds_per_committed_layer": 6.854166666666667,
+          "p999_microseconds_per_committed_layer": 10.666666666666666,
+          "p99_microseconds_per_committed_layer": 8.479166666666666,
+          "raw_nanoseconds_sha256": "0018d810c9239b0afb952f6f23f6d05191baba2cca18d9dcd7d7abf2ccb2032d",
+          "sum_nanoseconds": 520440709
+        },
+        "candidate::arrival_delivery": {
+          "deadline_miss_fraction": 0.0002858231707317073,
+          "deadline_misses": 6,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.229166666666667,
+          "mean_nanoseconds": 534.3439881859756,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.08333333333333333,
+          "p95_microseconds_per_committed_layer": 0.11116666666666668,
+          "p999_microseconds_per_committed_layer": 0.17366666666666666,
+          "p99_microseconds_per_committed_layer": 0.13183333333333333,
+          "raw_nanoseconds_sha256": "c6f21d785a40431eee406c7b65a89df62e99dd16953a4762d800685ee4b43e6a",
+          "sum_nanoseconds": 11216949
+        },
+        "candidate::commit_propagation_and_residual": {
+          "deadline_miss_fraction": 0.010337271341463415,
+          "deadline_misses": 217,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.909833333333333,
+          "mean_nanoseconds": 2963.5532583841464,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.4515,
+          "p95_microseconds_per_committed_layer": 0.7846666666666666,
+          "p999_microseconds_per_committed_layer": 1.9096666666666668,
+          "p99_microseconds_per_committed_layer": 1.0138333333333334,
+          "raw_nanoseconds_sha256": "dda29b13ac3be68ff8d2e98f0f98da5bcb1800c5089370be7da8a2571ecdb543",
+          "sum_nanoseconds": 62210910
+        },
+        "candidate::cpp_correlated_matching": {
+          "deadline_miss_fraction": 0.8262195121951219,
+          "deadline_misses": 17344,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 11.0625,
+          "mean_nanoseconds": 10760.342797256097,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 1.6666666666666667,
+          "p95_microseconds_per_committed_layer": 3.3193333333333337,
+          "p999_microseconds_per_committed_layer": 6.389,
+          "p99_microseconds_per_committed_layer": 4.409666666666667,
+          "raw_nanoseconds_sha256": "83a0281d79e037af4a214a0c1d0b160f0433e81ad79fe07f09b04fdee1bb9226",
+          "sum_nanoseconds": 225881116
+        },
+        "candidate::detection_event_extraction": {
+          "deadline_miss_fraction": 0.0007621951219512195,
+          "deadline_misses": 16,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.166666666666667,
+          "mean_nanoseconds": 1313.8580411585365,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.21533333333333335,
+          "p95_microseconds_per_committed_layer": 0.23616666666666666,
+          "p999_microseconds_per_committed_layer": 0.7638333333333334,
+          "p99_microseconds_per_committed_layer": 0.2846666666666667,
+          "raw_nanoseconds_sha256": "661185e7cec4b4c376f4b10ed63f899fbe31381261ee88a615c0848e67fe2969",
+          "sum_nanoseconds": 27580508
+        },
+        "candidate::direct_feedback_read": {
+          "deadline_miss_fraction": 4.763719512195122e-05,
+          "deadline_misses": 1,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 1.2638333333333334,
+          "mean_nanoseconds": 129.8283631859756,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.05566666666666666,
+          "p99_microseconds_per_committed_layer": 0.034666666666666665,
+          "raw_nanoseconds_sha256": "620e8ea70ceef26d786923e4165251eb7b4e11633ca084b2212d0d5d6ef847e7",
+          "sum_nanoseconds": 2725357
+        },
+        "candidate::preindexed_edge_mapping": {
+          "deadline_miss_fraction": 0.18997713414634146,
+          "deadline_misses": 3988,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 5.013833333333333,
+          "mean_nanoseconds": 4383.056926448171,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.6945,
+          "p95_microseconds_per_committed_layer": 1.3125,
+          "p999_microseconds_per_committed_layer": 2.5903333333333336,
+          "p99_microseconds_per_committed_layer": 1.6666666666666667,
+          "raw_nanoseconds_sha256": "6c389c782fff8660f7f88393d9a9f1eb1a97d255a533a0d901b71d7b261825da",
+          "sum_nanoseconds": 92009131
+        },
+        "candidate::syndrome_materialization": {
+          "deadline_miss_fraction": 0.00038109756097560977,
+          "deadline_misses": 8,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 3.1943333333333337,
+          "mean_nanoseconds": 1146.6067549542684,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.1875,
+          "p95_microseconds_per_committed_layer": 0.21533333333333335,
+          "p999_microseconds_per_committed_layer": 0.3958333333333333,
+          "p99_microseconds_per_committed_layer": 0.243,
+          "raw_nanoseconds_sha256": "2b69e360db75a66b3bbe3615cf4109a1a292405e862f65bc690f9773ecd3a1b8",
+          "sum_nanoseconds": 24069569
+        },
+        "candidate_direct_end_to_end": {
+          "deadline_miss_fraction": 0.9933307926829268,
+          "deadline_misses": 20852,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 14.514,
+          "mean_nanoseconds": 21231.59012957317,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.375,
+          "p95_microseconds_per_committed_layer": 5.777666666666667,
+          "p999_microseconds_per_committed_layer": 9.5555,
+          "p99_microseconds_per_committed_layer": 7.284833333333333,
+          "raw_nanoseconds_sha256": "c98507fe53bab076f642309dc6af04557be99f7d2569655e9cacfcaf05690b06",
+          "sum_nanoseconds": 445693540
+        }
+      },
+      "phase_additivity": true,
+      "stage_pass": {
+        "candidate_direct_end_to_end": false,
+        "cpp_correlated_matching": false,
+        "preindexed_edge_mapping": false
+      },
+      "stage_pass_matches_result": true
+    },
+    {
+      "all_vectors_match_result": true,
+      "basis": "z",
+      "derived": {
+        "baseline_direct_end_to_end": {
+          "deadline_miss_fraction": 0.998999618902439,
+          "deadline_misses": 20971,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 15.354166666666666,
+          "mean_nanoseconds": 25156.264576981706,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.9653333333333336,
+          "p95_microseconds_per_committed_layer": 6.986166666666667,
+          "p999_microseconds_per_committed_layer": 11.284666666666666,
+          "p99_microseconds_per_committed_layer": 8.701333333333334,
+          "raw_nanoseconds_sha256": "31967d8e85bb69b3ee12019a03358fa8fef601e3e2b161a35dd963bb8a5b6c7c",
+          "sum_nanoseconds": 528080306
+        },
+        "candidate::arrival_delivery": {
+          "deadline_miss_fraction": 0.00014291158536585365,
+          "deadline_misses": 3,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 1.8471666666666668,
+          "mean_nanoseconds": 563.957412347561,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.09033333333333333,
+          "p95_microseconds_per_committed_layer": 0.11816666666666667,
+          "p999_microseconds_per_committed_layer": 0.18066666666666667,
+          "p99_microseconds_per_committed_layer": 0.13883333333333334,
+          "raw_nanoseconds_sha256": "2467afa66057cb82b0704691e098ddb275391348b0d370b545c03d0e453b3484",
+          "sum_nanoseconds": 11838594
+        },
+        "candidate::commit_propagation_and_residual": {
+          "deadline_miss_fraction": 0.013624237804878049,
+          "deadline_misses": 286,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.006833333333334,
+          "mean_nanoseconds": 3067.8008765243903,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.4721666666666667,
+          "p95_microseconds_per_committed_layer": 0.8125,
+          "p999_microseconds_per_committed_layer": 2.3195,
+          "p99_microseconds_per_committed_layer": 1.0485,
+          "raw_nanoseconds_sha256": "40ca1a7c4385157dfcc44860b4ea39596e305a78adbec1ceffa009ad6699a2bd",
+          "sum_nanoseconds": 64399276
+        },
+        "candidate::cpp_correlated_matching": {
+          "deadline_miss_fraction": 0.8374618902439024,
+          "deadline_misses": 17580,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 11.875,
+          "mean_nanoseconds": 10968.735947027439,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 1.6943333333333332,
+          "p95_microseconds_per_committed_layer": 3.4375,
+          "p999_microseconds_per_committed_layer": 6.270833333333333,
+          "p99_microseconds_per_committed_layer": 4.618166666666667,
+          "raw_nanoseconds_sha256": "ec7568bf0e6654967203f25e8200e9c12b0cb8912b11b77d62c272526f564036",
+          "sum_nanoseconds": 230255705
+        },
+        "candidate::detection_event_extraction": {
+          "deadline_miss_fraction": 0.0002381859756097561,
+          "deadline_misses": 5,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.6945,
+          "mean_nanoseconds": 1338.5520198170732,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.22216666666666665,
+          "p95_microseconds_per_committed_layer": 0.243,
+          "p999_microseconds_per_committed_layer": 0.7153333333333334,
+          "p99_microseconds_per_committed_layer": 0.2916666666666667,
+          "raw_nanoseconds_sha256": "56a21cf594651571cd0da12cf79a3e77da5a16cbb7dcc56eefe9f2701f1c8391",
+          "sum_nanoseconds": 28098884
+        },
+        "candidate::direct_feedback_read": {
+          "deadline_miss_fraction": 0.00014291158536585365,
+          "deadline_misses": 3,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.257,
+          "mean_nanoseconds": 134.4004382621951,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.08333333333333333,
+          "p99_microseconds_per_committed_layer": 0.034666666666666665,
+          "raw_nanoseconds_sha256": "51140839f36426b5abb9fff918161304d2b5171eb3a1011a69a77beb627e1abd",
+          "sum_nanoseconds": 2821334
+        },
+        "candidate::preindexed_edge_mapping": {
+          "deadline_miss_fraction": 0.21203315548780488,
+          "deadline_misses": 4451,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 5.354166666666667,
+          "mean_nanoseconds": 4509.832793445122,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.7151666666666666,
+          "p95_microseconds_per_committed_layer": 1.3473333333333333,
+          "p999_microseconds_per_committed_layer": 2.5903333333333336,
+          "p99_microseconds_per_committed_layer": 1.6805,
+          "raw_nanoseconds_sha256": "2dda9fefc102103fd7b576e88e4197cd2835388f1bec1c10246bb2b58c00de73",
+          "sum_nanoseconds": 94670410
+        },
+        "candidate::syndrome_materialization": {
+          "deadline_miss_fraction": 0.00038109756097560977,
+          "deadline_misses": 8,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 7.986,
+          "mean_nanoseconds": 1193.7794397865853,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.1945,
+          "p95_microseconds_per_committed_layer": 0.22916666666666666,
+          "p999_microseconds_per_committed_layer": 0.4305,
+          "p99_microseconds_per_committed_layer": 0.257,
+          "raw_nanoseconds_sha256": "ee72faa0bbab57de8aaf6a559eb4be656a25eda963e75db424220b2f7d381dfc",
+          "sum_nanoseconds": 25059818
+        },
+        "candidate_direct_end_to_end": {
+          "deadline_miss_fraction": 0.9963795731707317,
+          "deadline_misses": 20916,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 21.416666666666668,
+          "mean_nanoseconds": 21777.058927210364,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.4445,
+          "p95_microseconds_per_committed_layer": 5.986166666666667,
+          "p999_microseconds_per_committed_layer": 9.833333333333334,
+          "p99_microseconds_per_committed_layer": 7.576333333333333,
+          "raw_nanoseconds_sha256": "db1a6fc2e32e36fe5798da5a70b7c71aa8b7e64ee9daef49edffee2755e8a3af",
+          "sum_nanoseconds": 457144021
+        }
+      },
+      "phase_additivity": true,
+      "stage_pass": {
+        "candidate_direct_end_to_end": false,
+        "cpp_correlated_matching": false,
+        "preindexed_edge_mapping": false
+      },
+      "stage_pass_matches_result": true
+    }
+  ]
+}

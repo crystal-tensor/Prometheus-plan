@@ -1560,6 +1560,53 @@ current_results:
     protocol: B2_B7_P023_d6_sparse_kernel_v1.json
     runner: ../tools/b2_b7_p023_d6_sparse_kernel.py
     markdown_report: ../research/B2_B7_P023_d6_sparse_kernel_freeze_v1.md
+  d6_sparse_kernel_v1:
+    status: cpp_correlated_matching_tail_bottleneck_semantics_pass_absolute_deadline_b2_p023_b7_open
+    method: b2_b7_p023_d6_sparse_kernel_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: 4228242a655a89b764c176457eba4a687cc9c15d
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/333
+    classification: cpp_correlated_matching_tail_bottleneck
+    candidate_prediction_rows_equal_full_block: 2048
+    baseline_timed_prediction_rows_equal_full_block: 256
+    timed_cross_path_prediction_rows_equal: 256
+    commit_and_final_residual_failures: 0
+    x_cpp_matching_p50_microseconds_per_committed_layer: 1.6666666666666667
+    x_cpp_matching_p99_microseconds_per_committed_layer: 4.409666666666667
+    x_cpp_matching_deadline_miss_fraction: 0.8262195121951219
+    z_cpp_matching_p50_microseconds_per_committed_layer: 1.6943333333333332
+    z_cpp_matching_p99_microseconds_per_committed_layer: 4.618166666666667
+    z_cpp_matching_deadline_miss_fraction: 0.8374618902439024
+    x_preindexed_mapping_p99_microseconds_per_committed_layer: 1.6666666666666667
+    x_preindexed_mapping_deadline_miss_fraction: 0.18997713414634146
+    z_preindexed_mapping_p99_microseconds_per_committed_layer: 1.6805
+    z_preindexed_mapping_deadline_miss_fraction: 0.21203315548780488
+    x_candidate_direct_p99_microseconds_per_committed_layer: 7.284833333333333
+    z_candidate_direct_p99_microseconds_per_committed_layer: 7.576333333333333
+    x_baseline_direct_p99_microseconds_per_committed_layer: 8.479166666666666
+    z_baseline_direct_p99_microseconds_per_committed_layer: 8.701333333333334
+    x_baseline_to_candidate_p99_speedup: 1.1639479283442768
+    z_baseline_to_candidate_p99_speedup: 1.148488714857671
+    geometric_mean_baseline_to_candidate_p99_speedup: 1.156192484141532
+    semantic_veto_pass: true
+    cpp_correlated_matching_tail_pass: false
+    preindexed_edge_mapping_tail_pass: false
+    candidate_direct_tail_pass: false
+    absolute_deadline_waived: false
+    private_api_diagnostic_only: true
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 14
+    independent_audit_checks_passed: 21
+    exact_replay_checks_passed: 12
+    exact_replay_audit_bytes_equal: true
+    caveat: sparse_preindexed_private_api_improves_p99_1p156_geomean_but_cpp_matching_and_absolute_single_stream_tail_still_fail
+    result: ../results/B2_B7_P023_d6_sparse_kernel_v1.json
+    audit: ../results/B2_B7_P023_d6_sparse_kernel_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_sparse_kernel_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_sparse_kernel_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1620,6 +1667,8 @@ prototype_artifacts:
   d6_latency_attribution_audit: ../tools/b2_b7_p023_d6_latency_attribution_audit.py
   d6_latency_attribution_replay: ../tools/b2_b7_p023_d6_latency_attribution_replay.py
   d6_sparse_kernel_runner: ../tools/b2_b7_p023_d6_sparse_kernel.py
+  d6_sparse_kernel_audit: ../tools/b2_b7_p023_d6_sparse_kernel_audit.py
+  d6_sparse_kernel_replay: ../tools/b2_b7_p023_d6_sparse_kernel_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

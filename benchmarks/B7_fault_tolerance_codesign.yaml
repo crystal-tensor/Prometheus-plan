@@ -6334,6 +6334,47 @@ current_results:
     protocol: B2_B7_P023_d6_sparse_kernel_v1.json
     runner: ../tools/b2_b7_p023_d6_sparse_kernel.py
     markdown_report: ../research/B2_B7_P023_d6_sparse_kernel_freeze_v1.md
+  d6_sparse_kernel_v1:
+    status: cpp_correlated_matching_tail_bottleneck_semantics_pass_architecture_credit_zero
+    method: b2_b7_p023_d6_sparse_kernel_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: 4228242a655a89b764c176457eba4a687cc9c15d
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/333
+    classification: cpp_correlated_matching_tail_bottleneck
+    candidate_prediction_rows_equal_full_block: 2048
+    baseline_timed_prediction_rows_equal_full_block: 256
+    timed_cross_path_prediction_rows_equal: 256
+    commit_and_final_residual_failures: 0
+    x_cpp_matching_p99_microseconds_per_committed_layer: 4.409666666666667
+    x_cpp_matching_deadline_miss_fraction: 0.8262195121951219
+    z_cpp_matching_p99_microseconds_per_committed_layer: 4.618166666666667
+    z_cpp_matching_deadline_miss_fraction: 0.8374618902439024
+    x_preindexed_mapping_p99_microseconds_per_committed_layer: 1.6666666666666667
+    z_preindexed_mapping_p99_microseconds_per_committed_layer: 1.6805
+    x_candidate_direct_p99_microseconds_per_committed_layer: 7.284833333333333
+    z_candidate_direct_p99_microseconds_per_committed_layer: 7.576333333333333
+    geometric_mean_baseline_to_candidate_p99_speedup: 1.156192484141532
+    semantic_veto_pass: true
+    cpp_correlated_matching_tail_pass: false
+    preindexed_edge_mapping_tail_pass: false
+    candidate_direct_tail_pass: false
+    private_api_diagnostic_only: true
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    formal_checks_passed: 14
+    independent_audit_checks_passed: 21
+    exact_replay_checks_passed: 12
+    exact_replay_audit_bytes_equal: true
+    caveat: private_same_host_sparse_kernel_diagnostic_localizes_cpp_tail_but_cannot_create_hardware_or_architecture_credit
+    result: ../results/B2_B7_P023_d6_sparse_kernel_v1.json
+    audit: ../results/B2_B7_P023_d6_sparse_kernel_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_sparse_kernel_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_sparse_kernel_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6375,6 +6416,8 @@ prototype_artifacts:
   d6_latency_attribution_audit: ../tools/b2_b7_p023_d6_latency_attribution_audit.py
   d6_latency_attribution_replay: ../tools/b2_b7_p023_d6_latency_attribution_replay.py
   d6_sparse_kernel_runner: ../tools/b2_b7_p023_d6_sparse_kernel.py
+  d6_sparse_kernel_audit: ../tools/b2_b7_p023_d6_sparse_kernel_audit.py
+  d6_sparse_kernel_replay: ../tools/b2_b7_p023_d6_sparse_kernel_replay.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
