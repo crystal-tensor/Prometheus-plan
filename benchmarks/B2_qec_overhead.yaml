@@ -1205,6 +1205,43 @@ current_results:
     audit: ../results/B2_B7_P023_d6_candidate_freeze_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_candidate_freeze_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_candidate_freeze_v1.md
+  d6_strict_acceptance_v1:
+    status: d6_candidate_rejected_by_strict_xz_gate_score_zero_p023_b2_b7_credit_closed
+    method: b2_b7_p023_d6_strict_acceptance_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: 569d61572e3fd8e40fd6152dcdc032af7999845a
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/323
+    candidate_distance: 6
+    candidate_rounds: 1000
+    candidate_active_operational_qubits: 71
+    candidate_cost_per_basis_active_qubit_rounds: 71000
+    shots_per_basis: 102400
+    total_shots: 204800
+    x_logical_failures: 1354
+    z_logical_failures: 1282
+    x_logical_error_rate: 0.01322265625
+    z_logical_error_rate: 0.01251953125
+    x_clopper_pearson_upper_delta_2m128: 0.018443501561868633
+    z_clopper_pearson_upper_delta_2m128: 0.017617683486950003
+    target_total_logical_failure: 0.01
+    x_strict_pass: false
+    z_strict_pass: false
+    both_bases_strict_pass: false
+    conditional_resource_score: 1.3661971830985915
+    accepted_resource_score: 0
+    candidate_accepted: false
+    b2_candidate_improvement_verified: false
+    p023_scalable_memory_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 27
+    independent_audit_checks_passed: 32
+    exact_replay_checks_passed: 22
+    exact_replay_chunk_digests: 800
+    caveat: lower_cost_candidate_rejected_by_hard_correctness_veto_no_b2_p023_or_b7_credit
+    result: ../results/B2_B7_P023_d6_strict_acceptance_v1.json
+    audit: ../results/B2_B7_P023_d6_strict_acceptance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_strict_acceptance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_strict_acceptance_v1.md
 prototype_artifacts:
   baseline_runner: ../tools/b2_repetition_code_baseline.py
   target_volume_estimator: ../tools/b2_target_volume.py
@@ -1247,6 +1284,9 @@ prototype_artifacts:
   d6_candidate_freeze_runner: ../tools/b2_b7_p023_d6_candidate_freeze.py
   d6_candidate_freeze_audit: ../tools/b2_b7_p023_d6_candidate_freeze_audit.py
   d6_candidate_freeze_replay: ../tools/b2_b7_p023_d6_candidate_freeze_replay.py
+  d6_strict_acceptance_runner: ../tools/b2_b7_p023_d6_strict_acceptance.py
+  d6_strict_acceptance_audit: ../tools/b2_b7_p023_d6_strict_acceptance_audit.py
+  d6_strict_acceptance_replay: ../tools/b2_b7_p023_d6_strict_acceptance_replay.py
   posterior_likelihood_decoder_injection_gate: ../tools/b2_posterior_likelihood_decoder_injection_gate.py
   dem_informed_detector_edge_semantics_gate: ../tools/b2_dem_informed_detector_edge_semantics_gate.py
   hardware_like_leakage_model_gate: ../tools/b2_hardware_like_leakage_model_gate.py

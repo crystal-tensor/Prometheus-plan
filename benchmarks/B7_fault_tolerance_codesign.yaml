@@ -5984,6 +5984,36 @@ current_results:
     audit: ../results/B2_B7_P023_d6_candidate_freeze_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_candidate_freeze_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_candidate_freeze_v1.md
+  d6_strict_acceptance_v1:
+    status: d6_candidate_rejected_by_strict_xz_gate_score_zero_p023_b2_b7_credit_closed
+    method: b2_b7_p023_d6_strict_acceptance_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: 569d61572e3fd8e40fd6152dcdc032af7999845a
+    candidate_distance: 6
+    candidate_active_operational_qubits: 71
+    candidate_cost_per_basis_active_qubit_rounds: 71000
+    strict_shots_per_basis: 102400
+    x_strict_upper: 0.018443501561868633
+    z_strict_upper: 0.017617683486950003
+    both_bases_strict_pass: false
+    conditional_resource_score: 1.3661971830985915
+    accepted_resource_score: 0
+    candidate_accepted: false
+    same_condition_candidate_code_gain_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    b7_memory_credit_ready: false
+    b7_resource_credit: 0
+    formal_checks_passed: 27
+    independent_audit_checks_passed: 32
+    exact_replay_checks_passed: 22
+    caveat: resource_ratio_passes_conditionally_but_correctness_veto_forces_zero_score_and_zero_b7_credit
+    result: ../results/B2_B7_P023_d6_strict_acceptance_v1.json
+    audit: ../results/B2_B7_P023_d6_strict_acceptance_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_strict_acceptance_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_strict_acceptance_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6007,6 +6037,9 @@ prototype_artifacts:
   d6_candidate_freeze_runner: ../tools/b2_b7_p023_d6_candidate_freeze.py
   d6_candidate_freeze_audit: ../tools/b2_b7_p023_d6_candidate_freeze_audit.py
   d6_candidate_freeze_replay: ../tools/b2_b7_p023_d6_candidate_freeze_replay.py
+  d6_strict_acceptance_runner: ../tools/b2_b7_p023_d6_strict_acceptance.py
+  d6_strict_acceptance_audit: ../tools/b2_b7_p023_d6_strict_acceptance_audit.py
+  d6_strict_acceptance_replay: ../tools/b2_b7_p023_d6_strict_acceptance_replay.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py
