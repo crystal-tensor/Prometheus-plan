@@ -1,0 +1,195 @@
+{
+  "acceptance": {
+    "axi_phase_control_path": false,
+    "b7_resource_credit": 0,
+    "complete_corrections_compared": false,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "inactive_edge_tightness_conflict_exclusion": true,
+    "inactive_vertex_command_growable_exclusion": true,
+    "lut_bram_measured": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "phase_banked_fault_output_map": false,
+    "real_distributed_dual_edge_vertex_path": true,
+    "representative_phase_batch_replay": true,
+    "same_image_x_phase_bank_switching": true,
+    "scalable_p023": false,
+    "z_basis_phase_bank_switching": false
+  },
+  "claim_boundary": {
+    "implemented": "real X DistributedDual Edge/Vertex/tightness/max-growable/conflict/convergecast phase slice",
+    "not_implemented": [
+      "phase-banked fault/output map",
+      "complete correction or observable comparison",
+      "Z-basis phase banks",
+      "AXI phase-control path and race proof",
+      "FPGA synthesis, Fmax, LUT/BRAM, or routing closure",
+      "end-to-end update-plus-decode latency"
+    ]
+  },
+  "classification": "x_phase_superset_real_distributed_dual_edge_vertex_convergecast_pass_not_complete_correction",
+  "date": "2026-11-21",
+  "evidence_id": "32a8e2361e87637032474675457cd137350b73f594322610794f24aa79311520",
+  "generated_rtl": {
+    "artifacts_committed": false,
+    "iverilog_version": "13.0",
+    "spinalhdl_version": "1.9.3",
+    "verilog_bytes": 571867041,
+    "verilog_sha256": "8fcf5ed027f8912192afd242b777e4d7c057347a4213f8db21ba34b689d9cb6b",
+    "vvp_bytes": 697900922,
+    "vvp_sha256": "7e46da3f8fc1b4e70b0381f886b8061d89c15ce0096f0503cd0efe2dceb03e24"
+  },
+  "implementation": {
+    "basis": "x",
+    "phase_banks": [
+      "opening",
+      "steady",
+      "closing"
+    ],
+    "phase_select_contract": "quiescent Reset plus phase select restores active masks, weights, rules, and vertex reset state",
+    "real_paths_exercised": [
+      "DistributedDual phase register and broadcast",
+      "Edge phase-active and base-weight registers",
+      "Edge resident-rule selection",
+      "Edge offload and execute tightness gates",
+      "Edge max-growable and conflict gates",
+      "Vertex phase-active and virtual reset state",
+      "Vertex command gate and max-growable gate",
+      "DistributedDual max-growable and conflict convergecast trees"
+    ],
+    "superset_edges": 3762,
+    "superset_vertices": 1147
+  },
+  "next_gate": "Bank the X fault/output map, drive complete accepted syndromes through the phase-aware DistributedDual, and compare complete corrections before extending the same path to Z and AXI.",
+  "representative_replay": {
+    "batches": [
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "zero",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 0,
+        "updates": 0
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 4,
+        "updates": 36
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 6,
+        "updates": 35
+      },
+      {
+        "boundary": "p50",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 5,
+        "updates": 44
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 10,
+        "updates": 98
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 11,
+        "updates": 102
+      },
+      {
+        "boundary": "p99",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 14,
+        "updates": 117
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "opening",
+        "selectors": 19,
+        "updates": 140
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "steady",
+        "selectors": 15,
+        "updates": 170
+      },
+      {
+        "boundary": "maximum",
+        "checked_edges": 3762,
+        "checked_vertices": 1147,
+        "phase": "closing",
+        "selectors": 19,
+        "updates": 148
+      }
+    ],
+    "checked_edges": 3762,
+    "checked_vertices": 1147,
+    "convergecast_no_obstacle_checks": 12,
+    "inactive_edge_output_gate_checks": 13456,
+    "inactive_vertex_output_gate_checks": 4256,
+    "phase_selections": 12,
+    "post_select_and_post_batch_edge_register_comparisons": 90288,
+    "post_select_and_post_batch_vertex_active_comparisons": 27528,
+    "selector_commands": 103
+  },
+  "schema": "b2_b7_p023_d6_x_phase_superset_distributed_dual_rtl_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "source": {
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "replay_harness": "tools/microblossom/D6XPhaseSupersetDistributedDualReplay.scala",
+    "replay_harness_sha256": "62cbdff6556f0d7127c6b04df17438ba6664dee95d6b1af848565e8e377196e8",
+    "simulation_transcript": "results/B2_B7_P023_d6_x_phase_superset_distributed_dual_sim_v1.log",
+    "simulation_transcript_sha256": "84707ec2786a53bc7443a5ad7caae5868cb7e051c8b6a8c058f6a202e3cda570",
+    "source_patch": "tools/microblossom/d6_x_phase_superset_distributed_dual_v1.patch",
+    "source_patch_sha256": "dec7d9db8f87f38c66f84debd15283a71216d9b2dab5129b83070d79806cf85e",
+    "superset_plan": "benchmarks/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "superset_plan_evidence_id": "38031dd8b61ff8d0a1a326b13eb5bd7a931084f4d72d62936cc14991091cc1cc",
+    "superset_plan_sha256": "968f66b3fca9691ee3acba96d9036821dd8a3210e6b19406a43189fdb7ace747",
+    "superset_result": "results/B2_B7_P023_d6_microblossom_phase_superset_plan_v1.json",
+    "superset_result_evidence_id": "6c536a2323d0c562d06b5d4a865756950803c3d54ab955eee2f8691ad1a05684",
+    "superset_result_sha256": "924cb092012e1d9aa59ce7c152c5d75e17de63c00a8660756380bf05bbc89f4f"
+  }
+}

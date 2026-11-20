@@ -1,0 +1,411 @@
+--- a/src/fpga/microblossom/DualConfig.scala
++++ b/src/fpga/microblossom/DualConfig.scala
+@@ -12,0 +13,10 @@
++case class DualPhaseBank(
++    name: String,
++    edgeActive: Seq[Boolean],
++    edgeBaseWeights: Seq[Int],
++    residentWeightRules: Map[Int, Seq[(Int, Int)]],
++    vertexActive: Seq[Boolean],
++    vertexVirtual: Seq[Boolean],
++    vertexMaxGrowth: Seq[Int]
++)
++
+@@ -21,0 +32,6 @@
++    // Optional edge-local rule table for a resident causal selector.
++    // target edge -> sequence of (source edge, replacement weight).
++    var residentWeightRules: Map[Int, Seq[(Int, Int)]] = Map.empty,
++    // Optional reset-bound opening/steady/closing banks over one superset graph.
++    // Phase selection is legal only while the decoder is quiescent.
++    var phaseBanks: Seq[DualPhaseBank] = Seq.empty,
+@@ -41,0 +58,2 @@
++  def phaseBits = log2Up(phaseBanks.length.max(2))
++  def hasPhaseBanks = phaseBanks.nonEmpty
+@@ -292,0 +311,21 @@
++    if (phaseBanks.nonEmpty) {
++      assert(phaseBanks.length >= 2)
++      phaseBanks.foreach { bank =>
++        assert(bank.edgeActive.length == edgeNum)
++        assert(bank.edgeBaseWeights.length == edgeNum)
++        assert(bank.vertexActive.length == vertexNum)
++        assert(bank.vertexVirtual.length == vertexNum)
++        assert(bank.vertexMaxGrowth.length == vertexNum)
++        bank.edgeBaseWeights.foreach(weight => assert(weight >= 0 && BigInt(weight) < (BigInt(1) << weightBits)))
++        bank.residentWeightRules.foreach { case (target, rules) =>
++          assert(target >= 0 && target < edgeNum)
++          assert(rules.map(_._1).distinct.length == rules.length)
++          rules.foreach { case (source, replacement) =>
++            assert(source >= 0 && source < edgeNum)
++            assert(bank.edgeActive(source))
++            assert(bank.edgeActive(target))
++            assert(replacement >= 0 && BigInt(replacement) < (BigInt(1) << weightBits))
++          }
++        }
++      }
++    }
+--- a/src/fpga/microblossom/types/BroadcastMessage.scala
++++ b/src/fpga/microblossom/types/BroadcastMessage.scala
+@@ -11,0 +12,7 @@
++  // LoadWeightsExternal uses this sideband because a 32-bit instruction cannot
++  // hold both the architectural 15-bit edge index and a 16+ bit weight.
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
++  val phaseSelectValid = Bool
++  val phaseId = UInt(config.phaseBits bits)
+@@ -21,0 +29,5 @@
++    weightUpdateEdgeIndex := source.weightUpdateEdgeIndex
++    weightUpdateWeight := source.weightUpdateWeight.resized
++    weightUpdateIsRuleSelector := source.weightUpdateIsRuleSelector
++    phaseSelectValid := source.phaseSelectValid
++    phaseId := source.phaseId.resized
+--- a/src/fpga/microblossom/modules/DistributedDual.scala
++++ b/src/fpga/microblossom/modules/DistributedDual.scala
+@@ -34,0 +35,9 @@
++  broadcastMessage.weightUpdateEdgeIndex := io.message.weightUpdateEdgeIndex
++  broadcastMessage.weightUpdateWeight := io.message.weightUpdateWeight.resized
++  broadcastMessage.weightUpdateIsRuleSelector := io.message.weightUpdateIsRuleSelector
++  val currentPhase = Reg(UInt(config.phaseBits bits)) init (0)
++  when(io.message.phaseSelectValid) {
++    currentPhase := io.message.phaseId.resized
++  }
++  broadcastMessage.phaseSelectValid := io.message.phaseSelectValid
++  broadcastMessage.phaseId := Mux(io.message.phaseSelectValid, io.message.phaseId.resized, currentPhase)
+@@ -152,0 +162,5 @@
++    io.message.weightUpdateEdgeIndex #= 0
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
+@@ -171,0 +186,54 @@
++  def simUpdateWeight(edgeIndex: Int, weight: Int): Unit = {
++    require(!config.hardCodeWeights, "dynamic weight update requires hardCodeWeights=false")
++    require(edgeIndex >= 0 && edgeIndex < config.edgeNum, "edge index out of range")
++    require(weight >= 0 && BigInt(weight) < (BigInt(1) << config.weightBits), "weight out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= edgeIndex
++    io.message.weightUpdateWeight #= weight
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simApplyResidentRuleSelector(sourceEdgeIndex: Int): Unit = {
++    require(!config.hardCodeWeights, "resident rule selector requires hardCodeWeights=false")
++    require(
++      config.residentWeightRules.nonEmpty || config.phaseBanks.exists(_.residentWeightRules.nonEmpty),
++      "resident rule selector table is empty"
++    )
++    require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, "source edge index out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= sourceEdgeIndex
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= true
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simSelectPhase(phaseId: Int): Unit = {
++    require(config.phaseBanks.nonEmpty, "phase banks are not configured")
++    require(phaseId >= 0 && phaseId < config.phaseBanks.length, "phase id out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateReset()
++    io.message.weightUpdateEdgeIndex #= 0
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= true
++    io.message.phaseId #= phaseId
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    io.message.phaseSelectValid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
+@@ -175,0 +244 @@
++      vertex.activeRegister.simPublic()
+@@ -181,0 +251 @@
++      edge.activeRegister.simPublic()
+@@ -406,0 +477,56 @@
++
++      }
++  }
++
++  test("dynamic weight sideband updates exactly one edge and reset restores base weight") {
++    val vertexTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(4), None, None),
++        BinaryTreeNode(Some(4), Some(0), Some(1)),
++        BinaryTreeNode(None, Some(3), Some(2))
++      )
++    )
++    val edgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(None, Some(0), Some(1))
++      )
++    )
++    val vertexEdgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(8), None, None),
++        BinaryTreeNode(Some(7), Some(0), Some(1)),
++        BinaryTreeNode(Some(7), Some(2), Some(3)),
++        BinaryTreeNode(Some(8), Some(5), Some(6)),
++        BinaryTreeNode(None, Some(7), Some(4))
++      )
++    )
++    val graph = SingleGraph(
++      positions = Seq(Position(0, 0, 0), Position(1, 0, 0), Position(2, 0, 0)),
++      vertex_num = 3,
++      weighted_edges = Seq(WeightedEdge(0, 1, 2), WeightedEdge(1, 2, 3)),
++      virtual_vertices = Seq(),
++      vertex_binary_tree = vertexTree,
++      edge_binary_tree = edgeTree,
++      vertex_edge_binary_tree = vertexEdgeTree,
++      vertex_max_growth = Seq(3, 5, 3),
++      offloading = Seq(),
++      layer_fusion = None,
++      parity_reporters = None
++    )
++    val config = DualConfig(graph = graph)
++    val ioConfig = DualConfig()
++    config.contextDepth = 1
++    config.hardCodeWeights = false
++    config.sanityCheck()
++    val baseWeight0 = config.graph.weighted_edges(0).w.toInt
++    val baseWeight1 = config.graph.weighted_edges(1).w.toInt
++    val replacementWeight = baseWeight0 + 1
++    require(replacementWeight < (1 << config.weightBits))
+@@ -407,0 +534,24 @@
++    Config.sim
++      .withIVerilog
++      .compile({
++        val dut = DistributedDual(config, ioConfig)
++        dut.simMakePublicSnapshot()
++        dut
++      })
++      .doSim("dynamic_weight_sideband") { dut =>
++        dut.clockDomain.forkStimulus(period = 10)
++        dut.io.message.valid #= false
++        dut.io.message.weightUpdateEdgeIndex #= 0
++        dut.io.message.weightUpdateWeight #= 0
++        dut.io.message.weightUpdateIsRuleSelector #= false
++        for (_ <- 0 to 3) { dut.clockDomain.waitSampling() }
++
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++        dut.simUpdateWeight(edgeIndex = 0, weight = replacementWeight)
++        assert(dut.edges(0).register.weight.toInt == replacementWeight)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++
++        dut.simExecute(ioConfig.instructionSpec.generateReset())
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
+--- a/src/fpga/microblossom/modules/Edge.scala
++++ b/src/fpga/microblossom/modules/Edge.scala
+@@ -63,0 +64,3 @@
++  val activeRegister = Reg(Bool) init (
++    if (config.hasPhaseBanks) config.phaseBanks.head.edgeActive(edgeIndex) else true
++  )
+@@ -91 +94,78 @@
+-  stages.offloadSet.state := fetchState
++  val selectedPhaseActive = Bool
++  val selectedPhaseBaseWeight = UInt(config.weightBits bits)
++  selectedPhaseActive := True
++  selectedPhaseBaseWeight := U(config.graph.weighted_edges(edgeIndex).w.toInt, config.weightBits bits)
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          selectedPhaseActive := (if (bank.edgeActive(edgeIndex)) True else False)
++          selectedPhaseBaseWeight := U(bank.edgeBaseWeights(edgeIndex), config.weightBits bits)
++        }
++      }
++    }
++  }
++
++  val nextFetchState = EdgeState(config.weightBits)
++  nextFetchState := fetchState
++  val residentSelectorHit = Bool
++  val residentSelectorReplacement = UInt(config.weightBits bits)
++  residentSelectorHit := False
++  residentSelectorReplacement := fetchState.weight
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          bank.residentWeightRules.getOrElse(edgeIndex, Seq.empty).foreach {
++            case (sourceEdgeIndex, replacementWeight) =>
++              when(message.weightUpdateEdgeIndex === U(sourceEdgeIndex, 15 bits)) {
++                residentSelectorHit := True
++                residentSelectorReplacement := U(replacementWeight, config.weightBits bits)
++              }
++          }
++        }
++      }
++    }
++  } else {
++    val residentRules = config.residentWeightRules.getOrElse(edgeIndex, Seq.empty)
++    require(
++      residentRules.map(_._1).distinct.length == residentRules.length,
++      s"edge $edgeIndex has duplicate resident selector sources"
++    )
++    residentRules.foreach { case (sourceEdgeIndex, replacementWeight) =>
++      require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, s"edge $edgeIndex selector source out of range")
++      require(
++        replacementWeight >= 0 && BigInt(replacementWeight) < (BigInt(1) << config.weightBits),
++        s"edge $edgeIndex selector replacement weight out of range"
++      )
++      when(message.weightUpdateEdgeIndex === U(sourceEdgeIndex, 15 bits)) {
++        residentSelectorHit := True
++        residentSelectorReplacement := U(replacementWeight, config.weightBits bits)
++      }
++    }
++  }
++  if (!config.hardCodeWeights) {
++    when(message.valid && message.phaseSelectValid) {
++      nextFetchState.weight := selectedPhaseBaseWeight
++    } elsewhen (message.valid && message.isReset) {
++      if (config.hasPhaseBanks) {
++        nextFetchState.weight := selectedPhaseBaseWeight
++      } else {
++        nextFetchState := EdgeState.resetValue(config, edgeIndex)
++      }
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        message.weightUpdateIsRuleSelector && activeRegister && residentSelectorHit
++    ) {
++      when(residentSelectorReplacement < fetchState.weight) {
++        nextFetchState.weight := residentSelectorReplacement
++      }
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        !message.weightUpdateIsRuleSelector &&
++        message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++    ) {
++      nextFetchState.weight := message.weightUpdateWeight
++    }
++  }
++  stages.offloadSet.state := nextFetchState
+@@ -126 +206 @@
+-    stages.offloadSet2.isTight := edgeIsTight.io.isTight
++    stages.offloadSet2.isTight := activeRegister && edgeIsTight.io.isTight
+@@ -128 +208 @@
+-      stages.offloadSet2.isTightExFusion := edgeIsTight.io.isTight && !conditionedVertexIsVirtual
++      stages.offloadSet2.isTightExFusion := activeRegister && edgeIsTight.io.isTight && !conditionedVertexIsVirtual
+@@ -130 +210 @@
+-      stages.offloadSet2.isTightExFusion := edgeIsTight.io.isTight
++      stages.offloadSet2.isTightExFusion := activeRegister && edgeIsTight.io.isTight
+@@ -138,2 +217,0 @@
+-  // TODO: dynamically update edge weights
+-  // Mux(message.isReset, EdgeState.resetValue(config, edgeIndex), fetchState)
+@@ -154 +232 @@
+-    stages.executeSet3.isTight := edgeIsTight.io.isTight
++    stages.executeSet3.isTight := activeRegister && edgeIsTight.io.isTight
+@@ -185,2 +263,8 @@
+-  io.maxGrowable := Delay(edgeResponse.io.maxGrowable, outDelay)
+-  io.conflict := Delay(edgeResponse.io.conflict, outDelay)
++  val delayedMaxGrowable = Delay(edgeResponse.io.maxGrowable, outDelay)
++  val delayedConflict = Delay(edgeResponse.io.conflict, outDelay)
++  io.maxGrowable := delayedMaxGrowable
++  io.conflict := delayedConflict
++  when(!activeRegister) {
++    io.maxGrowable.length := io.maxGrowable.length.maxValue
++    io.conflict.valid := False
++  }
+@@ -188,15 +272,24 @@
+-  /* No write back: giving ports for external edge weights channels */
+-  // val writeState = stages.updateGet3.state
+-  // if (config.contextBits > 0) {
+-  //   ram.write(
+-  //     address = stages.updateGet3.compact.contextId,
+-  //     data = writeState,
+-  //     enable = stages.updateGet3.compact.valid
+-  //   )
+-  // } else {
+-  //   when(stages.updateGet3.compact.valid) {
+-  //     if (!config.hardCodeWeights) {
+-  //       register := writeState
+-  //     }
+-  //   }
+-  // }
++  if (!config.hardCodeWeights) {
++    val writeWeight = message.valid &&
++      (message.phaseSelectValid || message.isReset || (
++        message.instruction.isLoadWeightsExternal &&
++          ((message.weightUpdateIsRuleSelector && residentSelectorHit) ||
++            (!message.weightUpdateIsRuleSelector &&
++          message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++            ))
++      ))
++    if (config.contextBits > 0) {
++      ram.write(
++        address = message.contextId,
++        data = nextFetchState,
++        enable = writeWeight
++      )
++    } else {
++      when(writeWeight) {
++        register := nextFetchState
++      }
++    }
++  }
++  when(message.valid && message.phaseSelectValid) {
++    activeRegister := selectedPhaseActive
++  }
+--- a/src/fpga/microblossom/modules/Vertex.scala
++++ b/src/fpga/microblossom/modules/Vertex.scala
+@@ -75,0 +76,3 @@
++  val activeRegister = Reg(Bool) init (
++    if (config.hasPhaseBanks) config.phaseBanks.head.vertexActive(vertexIndex) else true
++  )
+@@ -90,0 +94,15 @@
++  }
++
++  val selectedPhaseActive = Bool
++  val selectedResetState = VertexState(config.vertexBits, config.grownBitsOf(vertexIndex))
++  selectedPhaseActive := True
++  selectedResetState := VertexState.resetValue(config, vertexIndex)
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          selectedPhaseActive := (if (bank.vertexActive(vertexIndex)) True else False)
++          selectedResetState.isVirtual := (if (bank.vertexVirtual(vertexIndex)) True else False)
++        }
++      }
++    }
+@@ -94 +112,7 @@
+-  stages.offloadSet.state := Mux(message.isReset, VertexState.resetValue(config, vertexIndex), fetchState)
++  when(!activeRegister && !message.phaseSelectValid) {
++    stages.offloadSet.message.valid := False
++  }
++  stages.offloadSet.state := fetchState
++  when(message.isReset || message.phaseSelectValid) {
++    stages.offloadSet.state := selectedResetState
++  }
+@@ -187,0 +212,3 @@
++  when(!activeRegister) {
++    io.maxGrowable.length := io.maxGrowable.length.maxValue
++  }
+@@ -201,0 +229,3 @@
++  when(message.valid && message.phaseSelectValid) {
++    activeRegister := selectedPhaseActive
++  }
