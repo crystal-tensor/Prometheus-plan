@@ -1,0 +1,119 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_bytes_exact": true,
+  "auditor": {
+    "path": "tools/b2_b7_p023_d6_fault_vector_audit.py",
+    "sha256": "c7836a9c987aef9e4a81d93996538ae92e9f1d20b4a62c799305daf1562ce798"
+  },
+  "checks": [
+    {
+      "detail": "Exact QEC scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "e101a30f598a9f02ddbc19c8b50185eef40691d1b0bfea287d6ce60094232299",
+      "name": "result_binding",
+      "passed": true
+    },
+    {
+      "detail": "c7836a9c987aef9e4a81d93996538ae92e9f1d20b4a62c799305daf1562ce798",
+      "name": "auditor_binding",
+      "passed": true
+    },
+    {
+      "detail": "returncode=0",
+      "name": "subprocess_exit",
+      "passed": true
+    },
+    {
+      "detail": "bytes=21091",
+      "name": "audit_recreated",
+      "passed": true
+    },
+    {
+      "detail": "71f1ae4143047394e81d92c23db9bfd6762a1b35eed02c3d203cbaf9003ab674",
+      "name": "audit_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "20/20 independent checks.",
+      "name": "audit_checks",
+      "passed": true
+    },
+    {
+      "detail": "8/8 chunks.",
+      "name": "corpus_replay",
+      "passed": true
+    },
+    {
+      "detail": "2,304 prediction rows.",
+      "name": "prediction_replay",
+      "passed": true
+    },
+    {
+      "detail": "16 raw timing vectors.",
+      "name": "timing_replay",
+      "passed": true
+    },
+    {
+      "detail": "public_fault_vector_decode_tail_bottleneck",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    }
+  ],
+  "recreated_audit_sha256": "71f1ae4143047394e81d92c23db9bfd6762a1b35eed02c3d203cbaf9003ab674",
+  "replay_environment": {
+    "machine": "arm64",
+    "python": "3.12.6",
+    "system": "Darwin"
+  },
+  "replay_id": "d5c2c68904b45d60a3baa7b151096ff836cafe3c0df6688d2b8d02fc80314b7d",
+  "schema_version": "b2_b7_p023_d6_fault_vector_replay_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_audit": {
+    "audit_id": "81954a894f69fddeb74d10775af1ad954b26b29d5b947b902b6cfb30b762a941",
+    "path": "results/B2_B7_P023_d6_fault_vector_audit_v1.json",
+    "sha256": "71f1ae4143047394e81d92c23db9bfd6762a1b35eed02c3d203cbaf9003ab674"
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_fault_vector_v1.json",
+    "sha256": "e101a30f598a9f02ddbc19c8b50185eef40691d1b0bfea287d6ce60094232299"
+  },
+  "subprocess": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"b7_resource_credit\": 0,\n  \"baseline_timed_prediction_rows_replayed\": 256,\n  \"candidate_prediction_rows_replayed\": 2048,\n  \"checks_failed\": 0,\n  \"checks_passed\": 20,\n  \"classification\": \"public_fault_vector_decode_tail_bottleneck\",\n  \"full_b2_credit_ready\": false,\n  \"hardware_decoder_deadline_passed\": false,\n  \"p023_scalable_memory_ready\": false,\n  \"raw_timing_vectors_replayed\": 16,\n  \"semantic_veto_pass\": true,\n  \"source_chunks_replayed\": 8\n}\n"
+  },
+  "summary": {
+    "audit_bytes_exact": true,
+    "b7_resource_credit": 0,
+    "baseline_timed_prediction_rows_replayed": 256,
+    "candidate_prediction_rows_replayed": 2048,
+    "checks_failed": 0,
+    "checks_passed": 12,
+    "classification": "public_fault_vector_decode_tail_bottleneck",
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "raw_timing_vectors_replayed": 16,
+    "semantic_veto_pass": true,
+    "source_chunks_replayed": 8
+  }
+}

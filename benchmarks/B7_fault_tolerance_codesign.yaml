@@ -6410,6 +6410,50 @@ current_results:
     protocol: B2_B7_P023_d6_fault_vector_v1.json
     runner: ../tools/b2_b7_p023_d6_fault_vector.py
     markdown_report: ../research/B2_B7_P023_d6_fault_vector_freeze_v1.md
+  d6_fault_vector_v1:
+    status: public_fault_vector_decode_tail_bottleneck_semantics_pass_representation_stages_pass_architecture_credit_zero
+    method: b2_b7_p023_d6_fault_vector_v1
+    catalog_problem_ids: [21, 22, 23]
+    public_freeze_commit: b500f8394d7288339e5129834cccf9aa85a419d7
+    public_freeze_discussion: https://github.com/crystal-tensor/Prometheus-plan/discussions/335
+    classification: public_fault_vector_decode_tail_bottleneck
+    candidate_prediction_rows_equal_full_block: 2048
+    baseline_timed_prediction_rows_equal_full_block: 256
+    timed_cross_path_prediction_rows_equal: 256
+    commit_and_final_residual_failures: 0
+    graph_signatures_equal: 328
+    x_public_decode_p99_microseconds_per_committed_layer: 6.9515
+    x_public_decode_deadline_miss_fraction: 0.9516958841463414
+    z_public_decode_p99_microseconds_per_committed_layer: 6.305666666666667
+    z_public_decode_deadline_miss_fraction: 0.9566501524390244
+    x_vectorized_correction_apply_p99_microseconds_per_committed_layer: 0.4515
+    z_vectorized_correction_apply_p99_microseconds_per_committed_layer: 0.8611666666666666
+    x_commit_residual_check_p99_microseconds_per_committed_layer: 0.4026666666666667
+    z_commit_residual_check_p99_microseconds_per_committed_layer: 0.6666666666666666
+    x_public_candidate_p99_microseconds_per_committed_layer: 8.0765
+    z_public_candidate_p99_microseconds_per_committed_layer: 8.25
+    geometric_mean_baseline_to_candidate_p99_speedup: 1.0440489028624234
+    semantic_veto_pass: true
+    public_fault_vector_decode_tail_pass: false
+    vectorized_correction_apply_tail_pass: true
+    commit_residual_check_tail_pass: true
+    public_candidate_direct_tail_pass: false
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    formal_checks_passed: 15
+    independent_audit_checks_passed: 20
+    exact_replay_checks_passed: 12
+    exact_replay_audit_bytes_equal: true
+    caveat: supported_public_fault_vector_closes_host_representation_stages_but_cannot_create_hardware_or_architecture_credit
+    result: ../results/B2_B7_P023_d6_fault_vector_v1.json
+    audit: ../results/B2_B7_P023_d6_fault_vector_audit_v1.json
+    replay_audit: ../results/B2_B7_P023_d6_fault_vector_replay_v1.json
+    markdown_report: ../research/B2_B7_P023_d6_fault_vector_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6454,6 +6498,8 @@ prototype_artifacts:
   d6_sparse_kernel_audit: ../tools/b2_b7_p023_d6_sparse_kernel_audit.py
   d6_sparse_kernel_replay: ../tools/b2_b7_p023_d6_sparse_kernel_replay.py
   d6_fault_vector_runner: ../tools/b2_b7_p023_d6_fault_vector.py
+  d6_fault_vector_audit: ../tools/b2_b7_p023_d6_fault_vector_audit.py
+  d6_fault_vector_replay: ../tools/b2_b7_p023_d6_fault_vector_replay.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py

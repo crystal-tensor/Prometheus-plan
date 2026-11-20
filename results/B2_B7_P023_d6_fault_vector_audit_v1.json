@@ -1,0 +1,506 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_id": "81954a894f69fddeb74d10775af1ad954b26b29d5b947b902b6cfb30b762a941",
+  "auditor": {
+    "imports_fault_vector_producer": false,
+    "path": "tools/b2_b7_p023_d6_fault_vector_audit.py",
+    "sha256": "c7836a9c987aef9e4a81d93996538ae92e9f1d20b4a62c799305daf1562ce798"
+  },
+  "checks": [
+    {
+      "detail": "Exact #021/#022/#023 scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "benchmarks/B2_B7_P023_d6_fault_vector_v1.json",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "b500f8394d7288339e5129834cccf9aa85a419d7",
+      "name": "public_freeze_protocol",
+      "passed": true
+    },
+    {
+      "detail": "tools/b2_b7_p023_d6_fault_vector.py",
+      "name": "public_freeze_producer",
+      "passed": true
+    },
+    {
+      "detail": "a0b42ea2037519df047a4542e61d76890729636d",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "cpp_correlated_matching_tail_bottleneck",
+      "name": "source_classification",
+      "passed": true
+    },
+    {
+      "detail": "2.4.0",
+      "name": "pymatching_version",
+      "passed": true
+    },
+    {
+      "detail": "8/8 frozen source chunks.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "Both corpus hashes reproduce.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "328 graph signatures and all output maps reproduce.",
+      "name": "graphs_and_output_maps",
+      "passed": true
+    },
+    {
+      "detail": "Candidate and timed baseline predictions reproduce.",
+      "name": "predictions",
+      "passed": true
+    },
+    {
+      "detail": "semantic_veto_pass=True",
+      "name": "semantic_veto",
+      "passed": true
+    },
+    {
+      "detail": "All 16 raw timing vectors reproduce their statistics.",
+      "name": "raw_vectors",
+      "passed": true
+    },
+    {
+      "detail": "Every candidate event total equals its six phases.",
+      "name": "phase_additivity",
+      "passed": true
+    },
+    {
+      "detail": "All absolute stage verdicts reproduce.",
+      "name": "stage_passes",
+      "passed": true
+    },
+    {
+      "detail": "public_fault_vector_decode_tail_bottleneck",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "geometric_speedup=1.0440489028624234",
+      "name": "relative_score",
+      "passed": true
+    },
+    {
+      "detail": "15/15 producer checks.",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    },
+    {
+      "detail": "8c39e11b5b2be6eb2c1731038e08535d23e4a4e6d64b3aea2b21e86f8ef328c4",
+      "name": "evidence_id",
+      "passed": true
+    }
+  ],
+  "derived": {
+    "classification": "public_fault_vector_decode_tail_bottleneck",
+    "commit_residual_check_tail_pass": true,
+    "geometric_mean_baseline_to_candidate_p99_speedup": 1.0440489028624234,
+    "public_candidate_direct_tail_pass": false,
+    "public_fault_vector_decode_tail_pass": false,
+    "semantic_veto_pass": true,
+    "vectorized_correction_apply_tail_pass": true,
+    "x_baseline_to_candidate_p99_speedup": 0.9999793639984317,
+    "z_baseline_to_candidate_p99_speedup": 1.0900606060606062
+  },
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0",
+    "system": "Darwin"
+  },
+  "reconstruction_rows": [
+    {
+      "baseline_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40732
+      },
+      "baseline_prediction_rows_equal_full_block": 128,
+      "baseline_timed_prediction_sha256": "a2965755167d1e8a0fd0f116e0e0a2bb4d12e5c6782b35979a991d923d63e401",
+      "basis": "x",
+      "candidate_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "output_nonzero_bits_total": 597812,
+        "residual_nonzero_shots": 0
+      },
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "corpus_matches": true,
+      "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+      "full_block_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structural": {
+        "correlation_groups_preserved_by_construction": true,
+        "graph_signature_manifest_sha256": "ab18bd2f58b0e9e62cba0e26da0fecae267e8a794558ef57c43c95bb3b788939",
+        "graph_signatures_equal": 164,
+        "max_detector_output_bits_per_window": 788,
+        "max_fault_vector_bits_per_window": 789,
+        "max_observable_output_bits_per_window": 1,
+        "maximum_fault_ids_per_merged_edge": 2,
+        "merged_edges_with_multiple_output_fault_ids": 159898,
+        "total_fault_vector_bits_across_windows": 40870,
+        "windows": 164
+      },
+      "structural_matches": true,
+      "timed_cross_path_prediction_rows_equal": 128
+    },
+    {
+      "baseline_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40649
+      },
+      "baseline_prediction_rows_equal_full_block": 128,
+      "baseline_timed_prediction_sha256": "fda92bcc25361d632ca6de874e1af989e58a0bdf15bde1c864020334d1a1f937",
+      "basis": "z",
+      "candidate_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "output_nonzero_bits_total": 597741,
+        "residual_nonzero_shots": 0
+      },
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "corpus_matches": true,
+      "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+      "full_block_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structural": {
+        "correlation_groups_preserved_by_construction": true,
+        "graph_signature_manifest_sha256": "2f49fadf2b84cf4b26a5ff93596e5f3421f2ed9830781498a75aa4e4d219bc58",
+        "graph_signatures_equal": 164,
+        "max_detector_output_bits_per_window": 787,
+        "max_fault_vector_bits_per_window": 788,
+        "max_observable_output_bits_per_window": 1,
+        "maximum_fault_ids_per_merged_edge": 2,
+        "merged_edges_with_multiple_output_fault_ids": 158893,
+        "total_fault_vector_bits_across_windows": 40868,
+        "windows": 164
+      },
+      "structural_matches": true,
+      "timed_cross_path_prediction_rows_equal": 128
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_fault_vector_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_fault_vector_v1.json",
+    "sha256": "e101a30f598a9f02ddbc19c8b50185eef40691d1b0bfea287d6ce60094232299"
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "baseline_timed_prediction_rows_replayed": 256,
+    "candidate_prediction_rows_replayed": 2048,
+    "checks_failed": 0,
+    "checks_passed": 20,
+    "classification": "public_fault_vector_decode_tail_bottleneck",
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "raw_timing_vectors_replayed": 16,
+    "semantic_veto_pass": true,
+    "source_chunks_replayed": 8
+  },
+  "timing_rows": [
+    {
+      "all_vectors_match_result": true,
+      "basis": "x",
+      "derived": {
+        "candidate::arrival_delivery": {
+          "deadline_miss_fraction": 0.0002381859756097561,
+          "deadline_misses": 5,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.4096666666666664,
+          "mean_nanoseconds": 521.665205792683,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.08333333333333333,
+          "p95_microseconds_per_committed_layer": 0.11116666666666668,
+          "p999_microseconds_per_committed_layer": 0.3888333333333333,
+          "p99_microseconds_per_committed_layer": 0.132,
+          "raw_nanoseconds_sha256": "c1a24c24f1e2c1333c377db8d41452c1f5a6b6a3bc0c8b17480304407548876f",
+          "sum_nanoseconds": 10950796
+        },
+        "candidate::commit_residual_check": {
+          "deadline_miss_fraction": 0.0011909298780487805,
+          "deadline_misses": 25,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.7015,
+          "mean_nanoseconds": 1926.4343083079268,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.3125,
+          "p95_microseconds_per_committed_layer": 0.3473333333333333,
+          "p999_microseconds_per_committed_layer": 1.375,
+          "p99_microseconds_per_committed_layer": 0.4026666666666667,
+          "raw_nanoseconds_sha256": "67c8ef08b7febbec4edc6b8074b44528c410ab3fb5c06884b515ee0d0d7280c7",
+          "sum_nanoseconds": 40439709
+        },
+        "candidate::direct_feedback_read": {
+          "deadline_miss_fraction": 4.763719512195122e-05,
+          "deadline_misses": 1,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 1.8055,
+          "mean_nanoseconds": 129.4887576219512,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.048666666666666664,
+          "p99_microseconds_per_committed_layer": 0.02783333333333333,
+          "raw_nanoseconds_sha256": "818e7c60e3cef56fe0f3a0d2d39947a40e5d8d7c8368dcb78254741e6e910c66",
+          "sum_nanoseconds": 2718228
+        },
+        "candidate::public_fault_vector_decode": {
+          "deadline_miss_fraction": 0.9516958841463414,
+          "deadline_misses": 19978,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 20.395833333333332,
+          "mean_nanoseconds": 15249.593416539634,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 2.3541666666666665,
+          "p95_microseconds_per_committed_layer": 4.4445,
+          "p999_microseconds_per_committed_layer": 14.326333333333334,
+          "p99_microseconds_per_committed_layer": 6.9515,
+          "raw_nanoseconds_sha256": "92e75459e2c49c061b84d6222b883b3591afde1607c256ed4626e4f11c1de9c1",
+          "sum_nanoseconds": 320119465
+        },
+        "candidate::syndrome_materialization": {
+          "deadline_miss_fraction": 0.00033346036585365856,
+          "deadline_misses": 7,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.3125,
+          "mean_nanoseconds": 1138.3673780487804,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.1875,
+          "p95_microseconds_per_committed_layer": 0.21533333333333335,
+          "p999_microseconds_per_committed_layer": 0.3055,
+          "p99_microseconds_per_committed_layer": 0.24316666666666667,
+          "raw_nanoseconds_sha256": "e4fddecd7867df5f029e40e78c0d19ee394347b3f048635b92f70ca68eec0d2b",
+          "sum_nanoseconds": 23896608
+        },
+        "candidate::vectorized_correction_apply": {
+          "deadline_miss_fraction": 0.0011909298780487805,
+          "deadline_misses": 25,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.715166666666667,
+          "mean_nanoseconds": 2052.3064977134145,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.3333333333333333,
+          "p95_microseconds_per_committed_layer": 0.3958333333333333,
+          "p999_microseconds_per_committed_layer": 1.243,
+          "p99_microseconds_per_committed_layer": 0.4515,
+          "raw_nanoseconds_sha256": "94a961c55a0eace4d7db42f391eae81736f6a1aa260ff5065d75985f3552812f",
+          "sum_nanoseconds": 43082018
+        },
+        "public_candidate_end_to_end": {
+          "deadline_miss_fraction": 0.9983326981707317,
+          "deadline_misses": 20957,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 21.5695,
+          "mean_nanoseconds": 21017.85556402439,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.3055,
+          "p95_microseconds_per_committed_layer": 5.472166666666667,
+          "p999_microseconds_per_committed_layer": 15.354166666666666,
+          "p99_microseconds_per_committed_layer": 8.0765,
+          "raw_nanoseconds_sha256": "1f1a77bf7111a011570ecb70360e94539d156ec467e416f3cc8caeeeffc00541",
+          "sum_nanoseconds": 441206824
+        },
+        "sparse_baseline_end_to_end": {
+          "deadline_miss_fraction": 0.9954744664634146,
+          "deadline_misses": 20897,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 22.007,
+          "mean_nanoseconds": 23420.749952362807,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.7223333333333333,
+          "p95_microseconds_per_committed_layer": 6.389,
+          "p999_microseconds_per_committed_layer": 11.9445,
+          "p99_microseconds_per_committed_layer": 8.076333333333332,
+          "raw_nanoseconds_sha256": "077b2f59bf75af44ca8bf4799c3363cd97fca190aefa1ea3f34915eaf441f472",
+          "sum_nanoseconds": 491648383
+        }
+      },
+      "phase_additivity": true,
+      "stage_pass": {
+        "candidate_direct_end_to_end": false,
+        "commit_residual_check": true,
+        "public_fault_vector_decode": false,
+        "vectorized_correction_apply": true
+      },
+      "stage_pass_matches_result": true
+    },
+    {
+      "all_vectors_match_result": true,
+      "basis": "z",
+      "derived": {
+        "candidate::arrival_delivery": {
+          "deadline_miss_fraction": 0.0007621951219512195,
+          "deadline_misses": 16,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 8.722166666666666,
+          "mean_nanoseconds": 609.2518578506098,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.09033333333333333,
+          "p95_microseconds_per_committed_layer": 0.139,
+          "p999_microseconds_per_committed_layer": 0.8888333333333334,
+          "p99_microseconds_per_committed_layer": 0.18066666666666667,
+          "raw_nanoseconds_sha256": "a7047482aee90b8503f90feca618d43aea8442b69db4115ff4d8683f14a13936",
+          "sum_nanoseconds": 12789415
+        },
+        "candidate::commit_residual_check": {
+          "deadline_miss_fraction": 0.005430640243902439,
+          "deadline_misses": 114,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 10.986166666666666,
+          "mean_nanoseconds": 2111.1576791158536,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.3265,
+          "p95_microseconds_per_committed_layer": 0.4096666666666667,
+          "p999_microseconds_per_committed_layer": 3.3958333333333335,
+          "p99_microseconds_per_committed_layer": 0.6666666666666666,
+          "raw_nanoseconds_sha256": "3a6acc6ab0133d0e51fe0ddc2b22888d6179695cbc1ed2d4869887119b3e5bdf",
+          "sum_nanoseconds": 44317422
+        },
+        "candidate::direct_feedback_read": {
+          "deadline_miss_fraction": 0.0002381859756097561,
+          "deadline_misses": 5,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 9.104166666666666,
+          "mean_nanoseconds": 143.06435785060975,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.15983333333333336,
+          "p99_microseconds_per_committed_layer": 0.041666666666666664,
+          "raw_nanoseconds_sha256": "087297d1ba0af68d359f2c810eefe7f9f40fe23bd4669108ba7022756ed35c2e",
+          "sum_nanoseconds": 3003207
+        },
+        "candidate::public_fault_vector_decode": {
+          "deadline_miss_fraction": 0.9566501524390244,
+          "deadline_misses": 20082,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 57.63883333333334,
+          "mean_nanoseconds": 15184.665491615853,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 2.3401666666666667,
+          "p95_microseconds_per_committed_layer": 4.395833333333333,
+          "p999_microseconds_per_committed_layer": 15.097166666666666,
+          "p99_microseconds_per_committed_layer": 6.305666666666667,
+          "raw_nanoseconds_sha256": "b9280e0b850c791bd0a6db14d1d3cfff7092aa060e20126f3effa309c5837ce2",
+          "sum_nanoseconds": 318756498
+        },
+        "candidate::syndrome_materialization": {
+          "deadline_miss_fraction": 0.0013338414634146342,
+          "deadline_misses": 28,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 9.826333333333334,
+          "mean_nanoseconds": 1259.350038109756,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.1945,
+          "p95_microseconds_per_committed_layer": 0.2638333333333333,
+          "p999_microseconds_per_committed_layer": 1.6318333333333332,
+          "p99_microseconds_per_committed_layer": 0.3195,
+          "raw_nanoseconds_sha256": "1e86341e0a0b8e0e5d0ec1296ca085a0922422bdfd844bda4e82ac8c63739473",
+          "sum_nanoseconds": 26436276
+        },
+        "candidate::vectorized_correction_apply": {
+          "deadline_miss_fraction": 0.008669969512195123,
+          "deadline_misses": 182,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 31.520833333333332,
+          "mean_nanoseconds": 2356.0710746951218,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.3541666666666667,
+          "p95_microseconds_per_committed_layer": 0.4653333333333333,
+          "p999_microseconds_per_committed_layer": 6.368,
+          "p99_microseconds_per_committed_layer": 0.8611666666666666,
+          "raw_nanoseconds_sha256": "1394a5b00498801f80de26c16a578d4b28610842e75d9759dafc33a82d9c99d4",
+          "sum_nanoseconds": 49458644
+        },
+        "public_candidate_end_to_end": {
+          "deadline_miss_fraction": 0.9984756097560976,
+          "deadline_misses": 20960,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 97.90966666666667,
+          "mean_nanoseconds": 21663.560499237807,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.3611666666666666,
+          "p95_microseconds_per_committed_layer": 5.583333333333333,
+          "p999_microseconds_per_committed_layer": 24.027833333333334,
+          "p99_microseconds_per_committed_layer": 8.25,
+          "raw_nanoseconds_sha256": "39c24e590f067738af0995080b00388ac8da80ee38dead8c441679e96e91ebcc",
+          "sum_nanoseconds": 454761462
+        },
+        "sparse_baseline_end_to_end": {
+          "deadline_miss_fraction": 0.998046875,
+          "deadline_misses": 20951,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 113.08333333333333,
+          "mean_nanoseconds": 24272.04120617378,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.7848333333333333,
+          "p95_microseconds_per_committed_layer": 6.631833333333333,
+          "p999_microseconds_per_committed_layer": 24.4375,
+          "p99_microseconds_per_committed_layer": 8.993,
+          "raw_nanoseconds_sha256": "6a242342ec0df01f5db5fe3b61d545ae74e8841b31c20c7458e01cfeaa9b748d",
+          "sum_nanoseconds": 509518689
+        }
+      },
+      "phase_additivity": true,
+      "stage_pass": {
+        "candidate_direct_end_to_end": false,
+        "commit_residual_check": true,
+        "public_fault_vector_decode": false,
+        "vectorized_correction_apply": true
+      },
+      "stage_pass_matches_result": true
+    }
+  ]
+}
