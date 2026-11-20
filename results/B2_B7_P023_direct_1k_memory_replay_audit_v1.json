@@ -1,0 +1,131 @@
+{
+  "as_of_date": "2026-11-20",
+  "checks": [
+    {
+      "detail": "b2_b7_p023_direct_1k_memory_result_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "direct_1000_round_staging_gate_passed_p023_scalable_b2_b7_credit_closed",
+      "name": "decision",
+      "passed": true
+    },
+    {
+      "detail": "Exact scope matches.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "5656abc207e97cc8887414ac6465fb352f167b2e56a1e8a82f4f225c2547f2c8",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "6d4f49b83e40c0d5f186691081a4af4cc4d18559740dcccd93366cd1d11e6d73",
+      "name": "generator_binding",
+      "passed": true
+    },
+    {
+      "detail": "{'machine': 'arm64', 'numpy': '2.4.6', 'pymatching': '2.4.0', 'python': '3.12.6', 'release': '27.0.0', 'stim': '1.16.0', 'system': 'Darwin'}",
+      "name": "execution_environment",
+      "passed": true
+    },
+    {
+      "detail": "Frozen experiment contracts match.",
+      "name": "experiment_contract",
+      "passed": true
+    },
+    {
+      "detail": "['x_d3_r1000_p0p001', 'x_d5_r1000_p0p001', 'x_d7_r1000_p0p001', 'z_d3_r1000_p0p001', 'z_d5_r1000_p0p001', 'z_d7_r1000_p0p001']",
+      "name": "configuration_ids",
+      "passed": true
+    },
+    {
+      "detail": "All non-timing row fields match exactly.",
+      "name": "scientific_rows",
+      "passed": true
+    },
+    {
+      "detail": "All four trace bindings match in all six rows.",
+      "name": "trace_bindings",
+      "passed": true
+    },
+    {
+      "detail": "Per-configuration failures match exactly.",
+      "name": "logical_failures",
+      "passed": true
+    },
+    {
+      "detail": "All ordered chunk digests match exactly.",
+      "name": "chunk_manifests",
+      "passed": true
+    },
+    {
+      "detail": "All paired-basis gates match exactly.",
+      "name": "paired_gates",
+      "passed": true
+    },
+    {
+      "detail": "All readiness flags match exactly.",
+      "name": "readiness",
+      "passed": true
+    },
+    {
+      "detail": "Trace policy matches.",
+      "name": "trace_policy",
+      "passed": true
+    },
+    {
+      "detail": "Producer formal checks match exactly.",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "{'checks_failed': 0, 'checks_passed': 24, 'checks_total': 24, 'configuration_count': 6, 'logical_failures': 1757, 'paired_0p1pct_pass_count': 0, 'paired_1pct_pass_count': 1, 'total_executed_memory_rounds': 23028000, 'total_physical_qubit_rounds': 1596608000, 'total_shots': 23028}",
+      "name": "summary",
+      "passed": true
+    },
+    {
+      "detail": "Claim boundary matches exactly.",
+      "name": "claim_boundary",
+      "passed": true
+    },
+    {
+      "detail": "9c66f24c0dd198d80624805c85f801ec670f0bb5205978ea6c54912fb237c047",
+      "name": "run_id",
+      "passed": true
+    },
+    {
+      "detail": "Both executions contain positive timing observations.",
+      "name": "timing_positive",
+      "passed": true
+    }
+  ],
+  "failure_names": [],
+  "primary_result_sha256": "e93892fb3f375d786636444831cac595f8f7998b95ed99b8b9c557b79e129e20",
+  "replay_result_sha256": "a1a3427207d7e94ae26613ce67e817378ae483882c2e4db0423f5c49dfbb5208",
+  "run_id": "9c66f24c0dd198d80624805c85f801ec670f0bb5205978ea6c54912fb237c047",
+  "schema_version": "b2_b7_p023_direct_1k_memory_replay_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "status": "exact_scientific_replay_passed",
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 20,
+    "checks_total": 20,
+    "configuration_count": 6,
+    "exact_scientific_rows": 6
+  },
+  "timing_boundary": "Wall-clock timing is intentionally measured rather than replay-identical; all scientific inputs, traces, failures, confidence gates, and claim boundaries must match exactly."
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": "b2_b7_p023_direct_1k_memory_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can a source-bound Stim/PyMatching experiment directly reproduce both X and Z logical memory at 1,000 rounds without promoting simulator evidence into a scalable-memory or hardware claim?",
+  "inputs": {
+    "logical_memory_horizon_protocol": {
+      "path": "benchmarks/B2_B7_P023_logical_memory_horizon_gate_v1.json",
+      "sha256": "5f588d03c0fb0b4bc7b38588d87f1490fe7df14d0b295727087faf61ff5d4d20"
+    },
+    "logical_memory_horizon_result": {
+      "path": "results/B2_B7_P023_logical_memory_horizon_gate_v1.json",
+      "sha256": "6ca9fdc5031d6ca441ec74d5a1c5a26dc3161ecfd675ba4e07b55b6f73e006d8",
+      "required_decision": "logical_memory_horizon_gate_ready_short_memory_calibration_only_p023_b2_b7_credit_closed"
+    },
+    "short_memory_baseline": {
+      "path": "results/B2_stim_surface_code_memory_baseline_v0.json",
+      "sha256": "d98d73438330f389f8024e5f3149e54c83e0ec94383bea160178f1ee4109d9b8",
+      "required_status": "stim_pymatching_surface_code_memory_baseline"
+    }
+  },
+  "toolchain_contract": {
+    "python": "3.12.6",
+    "stim": "1.16.0",
+    "pymatching": "2.4.0",
+    "numpy": "2.4.6",
+    "stim_tasks": [
+      "surface_code:rotated_memory_x",
+      "surface_code:rotated_memory_z"
+    ],
+    "decoder": "PyMatching MWPM built from Stim detector error model with decompose_errors=true",
+    "sampling": "Stim compiled detector sampler with explicit per-configuration seed, 256-shot chunks, and bit-packed detector/observable output",
+    "reproducibility_boundary": "trace hashes are bound to the frozen versions, seeds, chunking, and execution architecture; they are not promised portable across a changed Stim build, SIMD path, or chunk schedule"
+  },
+  "experiment_contract": {
+    "rounds": 1000,
+    "shots_per_configuration": 3838,
+    "shot_chunk_size": 256,
+    "distances": [3, 5, 7],
+    "memory_bases": ["x", "z"],
+    "physical_error": 0.001,
+    "noise_parameters": {
+      "after_clifford_depolarization": 0.001,
+      "before_round_data_depolarization": 0.001,
+      "before_measure_flip_probability": 0.001,
+      "after_reset_flip_probability": 0.001
+    },
+    "confidence_method": "two-sided Wilson 95 percent interval with z=1.959963984540054",
+    "total_logical_failure_targets": [0.01, 0.001],
+    "basis_pair_rule": "X and Z must independently clear the same total-failure target at identical distance, rounds, shots, physical-error parameters, decoder family, and toolchain",
+    "direct_evidence_rule": "every accepted row must execute exactly 1,000 correction rounds; no shorter-row projection is accepted",
+    "configurations": [
+      {"configuration_id": "x_d3_r1000_p0p001", "memory_basis": "x", "distance": 3, "seed": 231003},
+      {"configuration_id": "x_d5_r1000_p0p001", "memory_basis": "x", "distance": 5, "seed": 231005},
+      {"configuration_id": "x_d7_r1000_p0p001", "memory_basis": "x", "distance": 7, "seed": 231007},
+      {"configuration_id": "z_d3_r1000_p0p001", "memory_basis": "z", "distance": 3, "seed": 232003},
+      {"configuration_id": "z_d5_r1000_p0p001", "memory_basis": "z", "distance": 5, "seed": 232005},
+      {"configuration_id": "z_d7_r1000_p0p001", "memory_basis": "z", "distance": 7, "seed": 232007}
+    ]
+  },
+  "trace_binding": {
+    "circuit_sha256": "SHA-256 of canonical Stim circuit text",
+    "detector_error_model_sha256": "SHA-256 of canonical decomposed Stim detector-error-model text",
+    "sample_prediction_trace_sha256": "SHA-256 over ordered chunk headers and bit-packed detector, observable, and decoder-prediction bytes",
+    "failure_vector_sha256": "SHA-256 over ordered per-shot logical-failure bits",
+    "chunk_digest_manifest": "one SHA-256 digest per frozen shot chunk, including offset, shapes, detectors, observables, and predictions",
+    "raw_trace_published": false,
+    "raw_trace_boundary": "hash-bound aggregate evidence permits exact same-environment rerun comparison but does not substitute for a public raw hardware trace dataset"
+  },
+  "acceptance_gate": {
+    "direct_1k_staging_pass": "at least one distance passes both X and Z Wilson upper bounds at the 1 percent total logical-failure target",
+    "p023_scalable_memory_ready": false,
+    "p023_reason": "the previously frozen scalable-memory gate also requires direct one-million-round evidence, decoder timing, and drift/correlation stress",
+    "b2_low_overhead_credit_ready": false,
+    "b2_reason": "no same-condition candidate-code versus surface-code physical-qubit-cycle comparison is performed",
+    "b7_memory_credit_ready": false,
+    "b7_resource_credit": 0,
+    "b7_reason": "the one-million-round, calibrated-evidence, and candidate-overhead gates remain closed"
+  },
+  "controls": {
+    "exact_input_hashes_required": true,
+    "exact_tool_versions_required": true,
+    "configuration_matrix_exact_match_required": true,
+    "circuit_and_dem_hashes_required": true,
+    "sample_prediction_and_failure_hashes_required": true,
+    "wilson_bounds_recomputed": true,
+    "paired_basis_gate_recomputed": true,
+    "independent_audit_required": true,
+    "no_projection_credit": true
+  },
+  "claim_boundary": {
+    "simulator_experiment": true,
+    "new_code_claimed": false,
+    "threshold_claimed": false,
+    "scalable_quantum_memory_claimed": false,
+    "million_round_memory_claimed": false,
+    "hardware_result_claimed": false,
+    "production_decoder_claimed": false,
+    "drift_or_correlation_robustness_claimed": false,
+    "b2_low_overhead_improvement_claimed": false,
+    "b7_resource_credit_claimed": false,
+    "quantum_advantage_claimed": false
+  }
+}

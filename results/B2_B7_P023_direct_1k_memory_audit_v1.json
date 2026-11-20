@@ -1,0 +1,197 @@
+{
+  "as_of_date": "2026-11-20",
+  "audited_run_id": "9c66f24c0dd198d80624805c85f801ec670f0bb5205978ea6c54912fb237c047",
+  "checks": [
+    {
+      "detail": "Exact scope reproduced.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "5656abc207e97cc8887414ac6465fb352f167b2e56a1e8a82f4f225c2547f2c8",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "All three inputs reproduce their frozen SHA-256.",
+      "name": "input_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Result binds the exact input set.",
+      "name": "bound_input_projection",
+      "passed": true
+    },
+    {
+      "detail": "{'python': '3.12.6', 'stim': '1.16.0', 'pymatching': '2.4.0', 'numpy': '2.4.6'}",
+      "name": "tool_versions",
+      "passed": true
+    },
+    {
+      "detail": "Recorded versions match the audit environment.",
+      "name": "result_environment_versions",
+      "passed": true
+    },
+    {
+      "detail": "6d4f49b83e40c0d5f186691081a4af4cc4d18559740dcccd93366cd1d11e6d73",
+      "name": "generator_hash",
+      "passed": true
+    },
+    {
+      "detail": "Rows: 6.",
+      "name": "configuration_order",
+      "passed": true
+    },
+    {
+      "detail": "All rows are direct frozen 1,000-round experiments.",
+      "name": "direct_contract",
+      "passed": true
+    },
+    {
+      "detail": "All canonical Stim circuits reproduce.",
+      "name": "regenerated_circuit_hashes",
+      "passed": true
+    },
+    {
+      "detail": "All decomposed DEMs reproduce.",
+      "name": "regenerated_dem_hashes",
+      "passed": true
+    },
+    {
+      "detail": "Circuit and matching dimensions reproduce.",
+      "name": "regenerated_dimensions",
+      "passed": true
+    },
+    {
+      "detail": "All trace bindings are valid SHA-256.",
+      "name": "trace_hash_shapes",
+      "passed": true
+    },
+    {
+      "detail": "Every configuration has a distinct trace digest.",
+      "name": "trace_hash_distinct",
+      "passed": true
+    },
+    {
+      "detail": "Frozen chunk counts reproduce.",
+      "name": "chunk_count",
+      "passed": true
+    },
+    {
+      "detail": "Chunk indices and offsets are contiguous.",
+      "name": "chunk_sequence",
+      "passed": true
+    },
+    {
+      "detail": "Bit-packed detector/observable/prediction shapes reproduce.",
+      "name": "chunk_shapes",
+      "passed": true
+    },
+    {
+      "detail": "Every chunk carries a valid SHA-256.",
+      "name": "chunk_hash_shapes",
+      "passed": true
+    },
+    {
+      "detail": "All logical rates reproduce.",
+      "name": "failure_rates",
+      "passed": true
+    },
+    {
+      "detail": "All Wilson intervals independently reproduce.",
+      "name": "wilson_intervals",
+      "passed": true
+    },
+    {
+      "detail": "Every per-row target flag reproduces.",
+      "name": "target_flags",
+      "passed": true
+    },
+    {
+      "detail": "All six paired-basis gates independently reproduce.",
+      "name": "paired_gates",
+      "passed": true
+    },
+    {
+      "detail": "Passing distances: [7].",
+      "name": "one_percent_outcome",
+      "passed": true
+    },
+    {
+      "detail": "Passing distances: [].",
+      "name": "strict_outcome",
+      "passed": true
+    },
+    {
+      "detail": "direct_1000_round_staging_gate_passed_p023_scalable_b2_b7_credit_closed",
+      "name": "decision",
+      "passed": true
+    },
+    {
+      "detail": "9c66f24c0dd198d80624805c85f801ec670f0bb5205978ea6c54912fb237c047",
+      "name": "run_id",
+      "passed": true
+    },
+    {
+      "detail": "All summary totals reproduce.",
+      "name": "summary_counts",
+      "passed": true
+    },
+    {
+      "detail": "All local timing fields are positive.",
+      "name": "timing_fields",
+      "passed": true
+    },
+    {
+      "detail": "Manifest row projection exactly matches the full result.",
+      "name": "manifest_rows",
+      "passed": true
+    },
+    {
+      "detail": "Manifest gates and totals exactly match.",
+      "name": "manifest_gates",
+      "passed": true
+    },
+    {
+      "detail": "Only the simulator-experiment classification is true.",
+      "name": "claim_boundary",
+      "passed": true
+    },
+    {
+      "detail": "All downstream credit gates remain closed.",
+      "name": "readiness_boundary",
+      "passed": true
+    },
+    {
+      "detail": "No public raw-trace claim is made.",
+      "name": "raw_trace_boundary",
+      "passed": true
+    },
+    {
+      "detail": "Producer checks: 24/24.",
+      "name": "producer_formal_checks",
+      "passed": true
+    }
+  ],
+  "failure_names": [],
+  "independence_boundary": "The audit independently rebuilds circuits, DEMs, matching dimensions, statistics, paired gates, summaries, manifest projections, and run identity. Exact sampled-trace bytes are verified separately by a second frozen execution because raw detector streams are not stored.",
+  "schema_version": "b2_b7_p023_direct_1k_memory_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "status": "independent_direct_1k_memory_audit_passed",
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 34,
+    "checks_total": 34
+  }
+}
