@@ -1,0 +1,123 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_checks": [
+    {
+      "detail": "Exact catalog scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "logical_memory_horizon_gate_ready_short_memory_calibration_only_p023_b2_b7_credit_closed",
+      "name": "decision",
+      "passed": true
+    },
+    {
+      "detail": "Rows: 30.",
+      "name": "baseline_row_count",
+      "passed": true
+    },
+    {
+      "detail": "Rows: 120.",
+      "name": "projection_row_count",
+      "passed": true
+    },
+    {
+      "detail": "Every projection joins to a baseline row.",
+      "name": "projection_source_join",
+      "passed": true
+    },
+    {
+      "detail": "All source rounds match.",
+      "name": "source_rounds_match",
+      "passed": true
+    },
+    {
+      "detail": "Four frozen horizons.",
+      "name": "horizon_set",
+      "passed": true
+    },
+    {
+      "detail": "No source experiment reaches ten rounds.",
+      "name": "no_direct_projection",
+      "passed": true
+    },
+    {
+      "detail": "Rows: 120.",
+      "name": "paired_count",
+      "passed": true
+    },
+    {
+      "detail": "Both basis rows are present for every group.",
+      "name": "paired_basis_presence",
+      "passed": true
+    },
+    {
+      "detail": "No direct pair passes.",
+      "name": "paired_direct_zero",
+      "passed": true
+    },
+    {
+      "detail": "Minimum: 381.",
+      "name": "zero_failure_1pct",
+      "passed": true
+    },
+    {
+      "detail": "Minimum: 3838.",
+      "name": "zero_failure_0p1pct",
+      "passed": true
+    },
+    {
+      "detail": "Rows: 24.",
+      "name": "resolution_count",
+      "passed": true
+    },
+    {
+      "detail": "All qubit-cycle products reproduce.",
+      "name": "resolution_arithmetic",
+      "passed": true
+    },
+    {
+      "detail": "Three external denominator captures.",
+      "name": "capture_count",
+      "passed": true
+    },
+    {
+      "detail": "All source semantic sentinels pass.",
+      "name": "capture_semantics",
+      "passed": true
+    },
+    {
+      "detail": "All three readiness flags remain false.",
+      "name": "readiness_false",
+      "passed": true
+    },
+    {
+      "detail": "No B7 credit.",
+      "name": "b7_credit_zero",
+      "passed": true
+    },
+    {
+      "detail": "Producer checks all pass.",
+      "name": "formal_checks_passed",
+      "passed": true
+    },
+    {
+      "detail": "Forbidden claims remain false.",
+      "name": "claim_boundary",
+      "passed": true
+    }
+  ],
+  "decision": "logical_memory_horizon_gate_ready_short_memory_calibration_only_p023_b2_b7_credit_closed",
+  "schema_version": "b2_b7_p023_logical_memory_horizon_audit_v1",
+  "source": {
+    "baseline_path": "results/B2_stim_surface_code_memory_baseline_v0.json",
+    "baseline_sha256": "d98d73438330f389f8024e5f3149e54c83e0ec94383bea160178f1ee4109d9b8",
+    "result_path": "results/B2_B7_P023_logical_memory_horizon_gate_v1.json",
+    "result_sha256": "6ca9fdc5031d6ca441ec74d5a1c5a26dc3161ecfd675ba4e07b55b6f73e006d8"
+  },
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 21,
+    "checks_total": 21
+  }
+}
