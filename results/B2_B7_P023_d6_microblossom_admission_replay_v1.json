@@ -1,0 +1,181 @@
+{
+  "as_of_date": "2026-11-20",
+  "byte_equality": {
+    "audit": true,
+    "discussion": true,
+    "report": true,
+    "result": true
+  },
+  "checks": [
+    {
+      "detail": "Exact QEC scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "24fda82627bfa88b5918a5e7955309fc32fbd55d / Discussion #337",
+      "name": "freeze_binding",
+      "passed": true
+    },
+    {
+      "detail": "0754acd111887e69339c05979d8dd13bb19411994f4c178340cbc83dca450006",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "ab992011d4816599f755d0bc2e3fabe91a0fe3c935e66e1a3d7ccd691514b93d",
+      "name": "producer_binding",
+      "passed": true
+    },
+    {
+      "detail": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5",
+      "name": "audit_result_binding",
+      "passed": true
+    },
+    {
+      "detail": "The auditor does not import the admission producer.",
+      "name": "auditor_independence",
+      "passed": true
+    },
+    {
+      "detail": "a9b7b679114d47ed4996020bd1bfc719229608fafb05800895537dbfb2709f49",
+      "name": "evidence_id",
+      "passed": true
+    },
+    {
+      "detail": "8fc757f7dfa43ab9f037ea5cb73143205bb9328f863e12e20aa9ed5c1a04155f",
+      "name": "audit_id",
+      "passed": true
+    },
+    {
+      "detail": "returncode=0",
+      "name": "producer_exit",
+      "passed": true
+    },
+    {
+      "detail": "returncode=0",
+      "name": "auditor_exit",
+      "passed": true
+    },
+    {
+      "detail": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5",
+      "name": "result_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "425e83de74b48eb614150eed49169a8e0c7e7db40352e1ecc93a51aa8dceba51",
+      "name": "report_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "6c53286443985b3673fc1a0cd0c1d25b425a6ac751d9fad6e44f5ec534eec2af",
+      "name": "discussion_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "ec5630344db764ec8c5b6edd03fbdb2fc3ca8fa167826d73a882e8175ff329da",
+      "name": "audit_bytes_exact",
+      "passed": true
+    },
+    {
+      "detail": "17/17 producer and 20/20 independent audit checks.",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "eight_bit_semantic_admission_pass_hardware_execution_unmeasured",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "No hardware or downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    }
+  ],
+  "public_freeze": {
+    "commit": "24fda82627bfa88b5918a5e7955309fc32fbd55d",
+    "discussion_number": 337,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/337"
+  },
+  "recreated_sha256": {
+    "audit": "ec5630344db764ec8c5b6edd03fbdb2fc3ca8fa167826d73a882e8175ff329da",
+    "discussion": "6c53286443985b3673fc1a0cd0c1d25b425a6ac751d9fad6e44f5ec534eec2af",
+    "report": "425e83de74b48eb614150eed49169a8e0c7e7db40352e1ecc93a51aa8dceba51",
+    "result": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5"
+  },
+  "replay_environment": {
+    "machine": "arm64",
+    "python": "3.12.6",
+    "system": "Darwin"
+  },
+  "replay_id": "b3a359c5d2981edc1af28dfc135c4d38ec3b4028218847c706612e26d6b9361c",
+  "schema_version": "b2_b7_p023_d6_microblossom_admission_replay_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_artifacts": {
+    "audit": {
+      "audit_id": "8fc757f7dfa43ab9f037ea5cb73143205bb9328f863e12e20aa9ed5c1a04155f",
+      "path": "results/B2_B7_P023_d6_microblossom_admission_audit_v1.json",
+      "sha256": "ec5630344db764ec8c5b6edd03fbdb2fc3ca8fa167826d73a882e8175ff329da"
+    },
+    "auditor": {
+      "path": "tools/b2_b7_p023_d6_microblossom_admission_audit.py",
+      "sha256": "2467b5172f2fce00d6572388cd6ea857e0a6a639443f927e0b09c2d05eb40676"
+    },
+    "discussion": {
+      "path": "research/B2_B7_P023_d6_microblossom_admission_discussion_v1.md",
+      "sha256": "6c53286443985b3673fc1a0cd0c1d25b425a6ac751d9fad6e44f5ec534eec2af"
+    },
+    "producer": {
+      "path": "tools/b2_b7_p023_d6_microblossom_admission.py",
+      "sha256": "ab992011d4816599f755d0bc2e3fabe91a0fe3c935e66e1a3d7ccd691514b93d"
+    },
+    "protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_microblossom_admission_v1.json",
+      "sha256": "0754acd111887e69339c05979d8dd13bb19411994f4c178340cbc83dca450006"
+    },
+    "report": {
+      "path": "research/B2_B7_P023_d6_microblossom_admission_v1.md",
+      "sha256": "425e83de74b48eb614150eed49169a8e0c7e7db40352e1ecc93a51aa8dceba51"
+    },
+    "result": {
+      "evidence_id": "a9b7b679114d47ed4996020bd1bfc719229608fafb05800895537dbfb2709f49",
+      "path": "results/B2_B7_P023_d6_microblossom_admission_v1.json",
+      "sha256": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5"
+    }
+  },
+  "subprocesses": {
+    "auditor": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"audit_id\": \"8fc757f7dfa43ab9f037ea5cb73143205bb9328f863e12e20aa9ed5c1a04155f\",\n  \"summary\": {\n    \"checks_failed\": 0,\n    \"checks_passed\": 20,\n    \"checks_total\": 20\n  }\n}\n"
+    },
+    "producer": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "x: decoded 128/1024\nx: decoded 256/1024\nx: decoded 384/1024\nx: decoded 512/1024\nx: decoded 640/1024\nx: decoded 768/1024\nx: decoded 896/1024\nx: decoded 1024/1024\nz: decoded 128/1024\nz: decoded 256/1024\nz: decoded 384/1024\nz: decoded 512/1024\nz: decoded 640/1024\nz: decoded 768/1024\nz: decoded 896/1024\nz: decoded 1024/1024\n{\n  \"classification\": \"eight_bit_semantic_admission_pass_hardware_execution_unmeasured\",\n  \"evidence_id\": \"a9b7b679114d47ed4996020bd1bfc719229608fafb05800895537dbfb2709f49\",\n  \"summary\": {\n    \"architecture_admission_pass\": true,\n    \"b7_resource_credit\": 0,\n    \"checks_failed\": 0,\n    \"checks_passed\": 17,\n    \"checks_total\": 17,\n    \"eight_bit_graph_admission_pass\": true,\n    \"fresh_shots_total\": 2048,\n    \"full_b2_credit_ready\": false,\n    \"hardware_decoder_deadline_passed\": false,\n    \"p023_scalable_memory_ready\": false,\n    \"semantic_veto_pass\": true\n  }\n}\n"
+    }
+  },
+  "summary": {
+    "all_artifact_bytes_exact": true,
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 17,
+    "checks_total": 17,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "semantic_veto_pass": true
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "as_of_date": "2026-11-20",
+  "basis_rows": [
+    {
+      "basis": "x",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 3,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "controller_payload": {
+        "dynamic_update_payload_bits_upper_bound": {
+          "maximum": 3620,
+          "mean": 763.9119664634146,
+          "observations": 167936,
+          "p50": 700.0,
+          "p95": 1600.0,
+          "p99": 2040.0,
+          "p999": 2600.0,
+          "raw_uint32_sha256": "0491612fdccc18a54379c8b74a14cadde1240393f39774f6a844fe2ae2e8f2ac",
+          "zero_fraction": 0.011563929115853659
+        },
+        "encoding": "12-bit edge index plus 8-bit replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 23,
+          "mean": 5.6388743330792686,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "a3add31823ac924de8b9f1e8edfefb8eef0cfc85646f56ef2070d38579ad718b",
+          "zero_fraction": 0.011563929115853659
+        },
+        "unique_affected_edges_upper_bound": {
+          "maximum": 181,
+          "mean": 38.195598323170735,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 102.0,
+          "p999": 130.0,
+          "raw_uint32_sha256": "b6c997b8a15c9770a3f9d073674a370a90ff4b7dbf0af9a5df487d0a5a36dfd0",
+          "zero_fraction": 0.011563929115853659
+        }
+      },
+      "full_block_logical_failures": 3,
+      "full_block_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 3,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "semantic_veto_pass": true,
+      "shots": 1024,
+      "structural": {
+        "edge_index_bits": 12,
+        "maximum_correlation_table": {
+          "causal_keys": 3713,
+          "directed_relations": 19306,
+          "undirected_pairs": 9653
+        },
+        "output_map_equal_windows": 164,
+        "quantized_graph_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "quantized_group_weight_max": 154,
+        "quantized_group_weight_min": 86,
+        "quantized_group_weight_unique": 36,
+        "quantized_weights_fit_unsigned_width": true,
+        "relation_manifest_sha256": "9ae10eb516c5e322771a236b53dc307aeef4b9706428e58ddb18dafb3d42734f",
+        "steady_correlation_table": {
+          "causal_keys": 2973,
+          "directed_relations": 15610,
+          "undirected_pairs": 7805
+        },
+        "steady_geometry": {
+          "detectors": 630,
+          "edges": 2973,
+          "fault_vector_bits": 246,
+          "nodes": 630
+        },
+        "steady_windows": 162,
+        "topology_equal_windows": 164,
+        "total_edges_across_windows": 488257,
+        "unique_quantized_graphs": 3,
+        "unique_reference_topologies": 3,
+        "windows": 164
+      },
+      "window_observations": 167936,
+      "window_outputs_equal": 167836,
+      "window_syndromes_equal": 167886,
+      "windows_per_shot": 164
+    },
+    {
+      "basis": "z",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 6,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "controller_payload": {
+        "dynamic_update_payload_bits_upper_bound": {
+          "maximum": 3520,
+          "mean": 762.7041253810976,
+          "observations": 167936,
+          "p50": 700.0,
+          "p95": 1600.0,
+          "p99": 2060.0,
+          "p999": 2620.0,
+          "raw_uint32_sha256": "5d81d85138c3915fcf5a662de07fa53e96f7b19aa4f8343be8fb9d58c6d88b78",
+          "zero_fraction": 0.012248713795731708
+        },
+        "encoding": "12-bit edge index plus 8-bit replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 22,
+          "mean": 5.631931211890244,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "6a22ffafe85b1abdd00296d9ef87a71488660b87d0b54bffcddb983cc69c9601",
+          "zero_fraction": 0.012248713795731708
+        },
+        "unique_affected_edges_upper_bound": {
+          "maximum": 176,
+          "mean": 38.135206269054876,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 103.0,
+          "p999": 131.0,
+          "raw_uint32_sha256": "9c2e91c848686329612d3d5a210a31ce9e1144b0e34d733c9deb2e4ddc01a747",
+          "zero_fraction": 0.012248713795731708
+        }
+      },
+      "full_block_logical_failures": 6,
+      "full_block_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 6,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "semantic_veto_pass": true,
+      "shots": 1024,
+      "structural": {
+        "edge_index_bits": 12,
+        "maximum_correlation_table": {
+          "causal_keys": 3709,
+          "directed_relations": 19296,
+          "undirected_pairs": 9648
+        },
+        "output_map_equal_windows": 164,
+        "quantized_graph_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "quantized_group_weight_max": 154,
+        "quantized_group_weight_min": 82,
+        "quantized_group_weight_unique": 38,
+        "quantized_weights_fit_unsigned_width": true,
+        "relation_manifest_sha256": "e1735a3ed0896929d6747680d4a740e762cf1d0116ce31895b5584c4fa751519",
+        "steady_correlation_table": {
+          "causal_keys": 2973,
+          "directed_relations": 15610,
+          "undirected_pairs": 7805
+        },
+        "steady_geometry": {
+          "detectors": 630,
+          "edges": 2973,
+          "fault_vector_bits": 246,
+          "nodes": 630
+        },
+        "steady_windows": 162,
+        "topology_equal_windows": 164,
+        "total_edges_across_windows": 488247,
+        "unique_quantized_graphs": 3,
+        "unique_reference_topologies": 3,
+        "windows": 164
+      },
+      "window_observations": 167936,
+      "window_outputs_equal": 167844,
+      "window_syndromes_equal": 167890,
+      "windows_per_shot": 164
+    }
+  ],
+  "candidate_contract": {
+    "candidate": "the same correction-bit online decoder after quantizing each decomposed detector-error probability by its log-likelihood weight",
+    "changed": "only the probability-derived base and implied weight values are represented on an 8-bit fixed-point grid",
+    "fixed_point_scale": 16,
+    "quantization": "q=max(1, round(16*log((1-p)/p))); p_quantized=1/(1+exp(q/16)); require q<=255",
+    "reference_full_block": "unquantized PyMatching 2.4.0 two-pass correlated decode over the complete 1,000-round detector error model",
+    "reference_online": "unquantized public correction-bit fault-vector decoder under the frozen 3d window, d commit, and 2d look-ahead contract",
+    "unchanged": [
+      "distance-6 X/Z circuits, 71 active qubits, physical noise, and 1,000-round horizon",
+      "3d=18 windows, d=6 commits, and 2d=12 look-ahead",
+      "detector and observable correction-bit output maps",
+      "decomposed correlation groups and all graph endpoints",
+      "two-pass correlated matching, arrival order, propagation, frame, and residual rules",
+      "single-stream execution with no cross-shot batching"
+    ],
+    "weight_bits": 8
+  },
+  "checks": [
+    {
+      "detail": "Exact catalog scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "Public commit and Discussion bind the seeds.",
+      "name": "freeze_binding",
+      "passed": true
+    },
+    {
+      "detail": "Five source artifacts match the predecessor commit.",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "public_fault_vector_decode_tail_bottleneck",
+      "name": "source_classification",
+      "passed": true
+    },
+    {
+      "detail": "Both memory bases executed.",
+      "name": "basis_set",
+      "passed": true
+    },
+    {
+      "detail": "X/Z seeds are distinct.",
+      "name": "seed_separation",
+      "passed": true
+    },
+    {
+      "detail": "1024 fresh shots per basis.",
+      "name": "fresh_shots",
+      "passed": true
+    },
+    {
+      "detail": "Detector and observable bytes are bound.",
+      "name": "corpus_hashes",
+      "passed": true
+    },
+    {
+      "detail": "All 328 window topologies match.",
+      "name": "topology",
+      "passed": true
+    },
+    {
+      "detail": "All correction output maps match.",
+      "name": "output_maps",
+      "passed": true
+    },
+    {
+      "detail": "Three graphs per basis; 162 steady windows.",
+      "name": "static_graph_classes",
+      "passed": true
+    },
+    {
+      "detail": "Every group weight fits uint8.",
+      "name": "unsigned_eight_bit",
+      "passed": true
+    },
+    {
+      "detail": "Fresh candidate, online reference, and full-block frames agree.",
+      "name": "semantic_veto",
+      "passed": true
+    },
+    {
+      "detail": "Every commit and final residual is zero.",
+      "name": "residuals",
+      "passed": true
+    },
+    {
+      "detail": "Complete per-window payload vectors are hashed.",
+      "name": "payload_vectors",
+      "passed": true
+    },
+    {
+      "detail": "eight_bit_semantic_admission_pass_hardware_execution_unmeasured",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "No hardware or downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    }
+  ],
+  "classification": "eight_bit_semantic_admission_pass_hardware_execution_unmeasured",
+  "classification_rule": {
+    "order": [
+      "fresh_holdout_semantic_regression",
+      "eight_bit_graph_admission_failure",
+      "eight_bit_semantic_admission_pass_hardware_execution_unmeasured"
+    ],
+    "rule": "apply the semantic veto first, then graph/weight admission; a pass only authorizes a cycle-accurate or real-device implementation experiment"
+  },
+  "corpora": [
+    {
+      "basis": "x",
+      "corpus_sha256": "6b196721f139017dd3b1fe762a8b6702af95f2e5fcec2c3a8475075afd364c42",
+      "detector_error_model_sha256": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "detector_shape": [
+        1024,
+        4376
+      ],
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "seed": 6688435014000091791,
+      "seed_digest_sha256": "8fa2c2583518d25c2472f8743e8d5d8acbb4cf05b3df155e2b3785a3e6bc4d8d",
+      "shots": 1024
+    },
+    {
+      "basis": "z",
+      "corpus_sha256": "c76ccca2f52838f192d6490d507abecc1509948e302d8bc79ae64027d2e5a8e0",
+      "detector_error_model_sha256": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "detector_shape": [
+        1024,
+        4375
+      ],
+      "observable_shape": [
+        1024,
+        1
+      ],
+      "raw_circuit_sha256": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "seed": 16749071433361151958,
+      "seed_digest_sha256": "d657226fbaa770e84b6c061c9e5826ec80c13749945f297ae3e87b3959bcd8ec",
+      "shots": 1024
+    }
+  ],
+  "evidence_id": "a9b7b679114d47ed4996020bd1bfc719229608fafb05800895537dbfb2709f49",
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0"
+  },
+  "external_source_profile": {
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "micro_blossom_files": {
+      "README.md": "edeabbd6456b6c01b73139126712cfd7c3c8e12d1a5248e9a564a6efb290d856",
+      "src/cpu/blossom-nostd/src/instruction.rs": "0686cf5e4ff1a6f86d8b4a8f9ae4895bf5b71dbe9575787a03f7fd7930baa291",
+      "src/fpga/microblossom/DualConfig.scala": "93ae9bbdd2a94af7484d2940ee71a00efecfb382764dd79c50e36750ec94c1ee",
+      "src/fpga/microblossom/MicroBlossomBus.scala": "f72028de2208bd2b43e7798cec01bcdeb910f30e01aa9f62405653750ec04879",
+      "src/fpga/microblossom/util/SingleGraph.scala": "b6676898a3b123165461c01fc8d4f19b6f5ec4043b0b8b28bb2e099ef4a95cf7"
+    },
+    "micro_blossom_repository": "https://github.com/yuewuo/micro-blossom",
+    "pymatching_repository": "https://github.com/oscarhiggott/PyMatching",
+    "pymatching_tag_commit": "6f63b2b9474ba0fa7e511fe52bffdce858a06984",
+    "pymatching_version": "2.4.0",
+    "source_interpretation": "Micro Blossom supplies arbitrary static graph generation, unsigned dynamic edge-weight registers, and an external weight-load instruction. PyMatching 2.4.0 caps correlation-conditioned probability at 0.5, so its second-pass implied weights are nonnegative and only lower affected edges. This is interface compatibility evidence, not an implemented or timed hardware path."
+  },
+  "fresh_holdout_contract": {
+    "cross_shot_batching_in_online_paths": false,
+    "detector_and_observable_bytes_hashed": true,
+    "seed_derivation": "little-endian uint64 from the first eight SHA-256 bytes of public_freeze_commit:discussion_number:seed_namespace:basis",
+    "seed_namespace": "B2_B7_P023_d6_microblossom_admission_v1",
+    "seed_unavailable_until_public_freeze_and_discussion": true,
+    "shots_per_basis": 1024
+  },
+  "frozen_inputs": {
+    "fault_vector_audit": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_fault_vector_audit_v1.json",
+      "sha256": "71f1ae4143047394e81d92c23db9bfd6762a1b35eed02c3d203cbaf9003ab674"
+    },
+    "fault_vector_protocol": {
+      "matches_artifact_commit": true,
+      "path": "benchmarks/B2_B7_P023_d6_fault_vector_v1.json",
+      "sha256": "b8997e0c0496e15efc4bbeeef35bfe7975ae5033a64488f713e502bb41c3fd3c"
+    },
+    "fault_vector_replay": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_fault_vector_replay_v1.json",
+      "sha256": "bdedef14e5e70c26d203b60e6a375c3548219f5eeca3751fc2f4806236fd8889"
+    },
+    "fault_vector_result": {
+      "matches_artifact_commit": true,
+      "path": "results/B2_B7_P023_d6_fault_vector_v1.json",
+      "sha256": "e101a30f598a9f02ddbc19c8b50185eef40691d1b0bfea287d6ce60094232299"
+    },
+    "fault_vector_runner": {
+      "matches_artifact_commit": true,
+      "path": "tools/b2_b7_p023_d6_fault_vector.py",
+      "sha256": "d4658c872e85083a7d1931f0c6fc6febe2c8c66f6a6290db37ed0eb9d15dc373"
+    }
+  },
+  "kaggle_inspired_evaluation": {
+    "absolute_guardrail": "the existing p99 <=1 microsecond and deadline-miss <=1 percent gates remain open and cannot be waived by semantic admission",
+    "aggregate": "X and Z must both pass; no average can hide a failed basis",
+    "cost_after_verification": "report 8-bit weight payload and per-window dynamic update payload without converting them into unmeasured hardware latency",
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "fresh candidate frames, full-block reference frames, every residual, topology, seed, and corpus hash must verify before representation cost is discussed"
+  },
+  "known_before_preregistration": {
+    "alternate_fusion_blossom_rejected_as_primary_route": "the maintained Fusion Blossom README states PyMatching v2 has roughly 5x to 20x better single-thread performance, and Fusion Blossom does not expose the frozen two-pass correlated semantic as a drop-in interface",
+    "controller_payload_diagnostic_on_observed_128_shot_prefix": {
+      "disclosure": "upper-bound diagnostic; only a measured controller implementation can establish actual cycles or latency",
+      "payload_encoding": "12-bit edge index plus 8-bit replacement weight for every unique potentially affected edge",
+      "x_dynamic_update_payload_p99_bits": 2060,
+      "x_first_pass_selected_edges_p99": 13,
+      "x_unique_affected_edges_upper_bound_p99": 103,
+      "z_dynamic_update_payload_p99_bits": 2040,
+      "z_first_pass_selected_edges_p99": 13,
+      "z_unique_affected_edges_upper_bound_p99": 102
+    },
+    "fixed_point_diagnostic_on_observed_64_shot_prefix": {
+      "disclosure": "post-outcome route-selection diagnostic on an already observed corpus; it is not the preregistered result",
+      "eight_bit_x_final_frames_equal": 64,
+      "eight_bit_x_window_outputs_equal": 10494,
+      "eight_bit_z_final_frames_equal": 64,
+      "eight_bit_z_window_outputs_equal": 10478,
+      "four_bit_x_final_frames_equal": 63,
+      "four_bit_z_final_frames_equal": 63,
+      "six_bit_x_final_frames_equal": 64,
+      "six_bit_z_final_frames_equal": 64,
+      "ten_bit_x_final_frames_equal": 64,
+      "ten_bit_z_final_frames_equal": 64,
+      "window_outputs_per_basis": 10496
+    },
+    "fresh_holdout_predictions_observed": 0,
+    "fresh_holdout_samples_observed": 0,
+    "simple_zero_or_single_graph_edge_cache": {
+      "decision": "rejected because even zero-cost hits cannot meet the one-percent miss limit",
+      "x_fallback_fraction": 0.9502846322408537,
+      "x_fast_coverage": 0.04971536775914634,
+      "z_fallback_fraction": 0.9505406821646342,
+      "z_fast_coverage": 0.049459317835365856
+    },
+    "single_stream_decode_batch_size_one": {
+      "decision": "rejected as insufficient interface-only improvement",
+      "x_batch1_deadline_miss_fraction": 0.5984184451219512,
+      "x_batch1_p99_microseconds_per_committed_layer": 4.034666666666666,
+      "x_scalar_p99_microseconds_per_committed_layer": 4.298666666666667,
+      "z_batch1_deadline_miss_fraction": 0.5710746951219512,
+      "z_batch1_p99_microseconds_per_committed_layer": 4.013833333333333,
+      "z_scalar_p99_microseconds_per_committed_layer": 4.118166666666667
+    },
+    "source_classification": "public_fault_vector_decode_tail_bottleneck",
+    "static_graph_diagnostic": {
+      "negative_base_weights": 0,
+      "steady_edges": 2973,
+      "steady_vertices": 630,
+      "steady_windows_per_basis": 162,
+      "x_unique_graphs": 3,
+      "z_unique_graphs": 3
+    }
+  },
+  "next_gate": "Generate the six admitted static graph images, implement on-chip parallel correlation reweighting, and measure exact correction equality plus p99 cycles before any hardware or downstream credit.",
+  "protocol_binding": {
+    "path": "benchmarks/B2_B7_P023_d6_microblossom_admission_v1.json",
+    "runner_path": "tools/b2_b7_p023_d6_microblossom_admission.py",
+    "runner_sha256": "ab992011d4816599f755d0bc2e3fabe91a0fe3c935e66e1a3d7ccd691514b93d",
+    "sha256": "0754acd111887e69339c05979d8dd13bb19411994f4c178340cbc83dca450006"
+  },
+  "public_freeze": {
+    "commit": "24fda82627bfa88b5918a5e7955309fc32fbd55d",
+    "discussion_number": 337,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/337"
+  },
+  "question": "Can an 8-bit fixed-point, correlation-preserving window graph pass a fresh exact-semantic holdout and expose a bounded controller update payload before any Micro Blossom latency or resource credit is claimed?",
+  "schema_version": "b2_b7_p023_d6_microblossom_admission_result_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "summary": {
+    "architecture_admission_pass": true,
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 17,
+    "checks_total": 17,
+    "eight_bit_graph_admission_pass": true,
+    "fresh_shots_total": 2048,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "semantic_veto_pass": true
+  },
+  "verdict": {
+    "architecture_admission_pass": true,
+    "b7_resource_credit": 0,
+    "cycle_accurate_candidate_executed": false,
+    "eight_bit_graph_admission_pass": true,
+    "fpga_candidate_executed": false,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "micro_blossom_rtl_generated_for_candidate": false,
+    "p023_scalable_memory_ready": false,
+    "semantic_veto_pass": true
+  }
+}

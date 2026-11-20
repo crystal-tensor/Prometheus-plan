@@ -1,0 +1,302 @@
+{
+  "audit_id": "8fc757f7dfa43ab9f037ea5cb73143205bb9328f863e12e20aa9ed5c1a04155f",
+  "checks": [
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "24fda82627bfa88b5918a5e7955309fc32fbd55d",
+      "name": "protocol_freeze",
+      "passed": true
+    },
+    {
+      "detail": "tools/b2_b7_p023_d6_microblossom_admission.py",
+      "name": "runner_freeze",
+      "passed": true
+    },
+    {
+      "detail": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5",
+      "name": "result_digest",
+      "passed": true
+    },
+    {
+      "detail": "a9b7b679114d47ed4996020bd1bfc719229608fafb05800895537dbfb2709f49",
+      "name": "evidence_id",
+      "passed": true
+    },
+    {
+      "detail": "['x', 'z']",
+      "name": "basis_set",
+      "passed": true
+    },
+    {
+      "detail": "Seeds independently derived.",
+      "name": "seeds",
+      "passed": true
+    },
+    {
+      "detail": "Detector/observable bytes reproduce.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "X graph manifest exact.",
+      "name": "x_structure",
+      "passed": true
+    },
+    {
+      "detail": "Z graph manifest exact.",
+      "name": "z_structure",
+      "passed": true
+    },
+    {
+      "detail": "X predictions, residuals, and failures exact.",
+      "name": "x_semantics",
+      "passed": true
+    },
+    {
+      "detail": "Z predictions, residuals, and failures exact.",
+      "name": "z_semantics",
+      "passed": true
+    },
+    {
+      "detail": "X payload vectors exact.",
+      "name": "x_payload",
+      "passed": true
+    },
+    {
+      "detail": "Z payload vectors exact.",
+      "name": "z_payload",
+      "passed": true
+    },
+    {
+      "detail": "Both basis vetoes pass.",
+      "name": "semantic_pass",
+      "passed": true
+    },
+    {
+      "detail": "eight_bit_semantic_admission_pass_hardware_execution_unmeasured",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "{'architecture_admission_pass': True, 'b7_resource_credit': 0, 'checks_failed': 0, 'checks_passed': 17, 'checks_total': 17, 'eight_bit_graph_admission_pass': True, 'fresh_shots_total': 2048, 'full_b2_credit_ready': False, 'hardware_decoder_deadline_passed': False, 'p023_scalable_memory_ready': False, 'semantic_veto_pass': True}",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "Hardware remains unmeasured.",
+      "name": "no_hardware_claim",
+      "passed": true
+    },
+    {
+      "detail": "B2/#023/B7 remain closed.",
+      "name": "no_downstream_credit",
+      "passed": true
+    },
+    {
+      "detail": "External source commits pinned.",
+      "name": "external_pin",
+      "passed": true
+    }
+  ],
+  "producer_imported": false,
+  "recomputed": {
+    "x": {
+      "basis": "x",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 3,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "controller_payload": {
+        "dynamic_update_payload_bits_upper_bound": {
+          "maximum": 3620,
+          "mean": 763.9119664634146,
+          "observations": 167936,
+          "p50": 700.0,
+          "p95": 1600.0,
+          "p99": 2040.0,
+          "p999": 2600.0,
+          "raw_uint32_sha256": "0491612fdccc18a54379c8b74a14cadde1240393f39774f6a844fe2ae2e8f2ac",
+          "zero_fraction": 0.011563929115853659
+        },
+        "encoding": "12-bit edge index plus 8-bit replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 23,
+          "mean": 5.6388743330792686,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "a3add31823ac924de8b9f1e8edfefb8eef0cfc85646f56ef2070d38579ad718b",
+          "zero_fraction": 0.011563929115853659
+        },
+        "unique_affected_edges_upper_bound": {
+          "maximum": 181,
+          "mean": 38.195598323170735,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 102.0,
+          "p999": 130.0,
+          "raw_uint32_sha256": "b6c997b8a15c9770a3f9d073674a370a90ff4b7dbf0af9a5df487d0a5a36dfd0",
+          "zero_fraction": 0.011563929115853659
+        }
+      },
+      "corpus_sha256": "6b196721f139017dd3b1fe762a8b6702af95f2e5fcec2c3a8475075afd364c42",
+      "full_block_logical_failures": 3,
+      "full_block_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 3,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "173dedd9e62888a1d1c20a514b6ee080f974ad7c75ee12dc0c76fb37b315ff8c",
+      "seed": 6688435014000091791,
+      "seed_digest_sha256": "8fa2c2583518d25c2472f8743e8d5d8acbb4cf05b3df155e2b3785a3e6bc4d8d",
+      "structural": {
+        "edge_index_bits": 12,
+        "maximum_correlation_table": {
+          "causal_keys": 3713,
+          "directed_relations": 19306,
+          "undirected_pairs": 9653
+        },
+        "output_map_equal_windows": 164,
+        "quantized_graph_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "quantized_group_weight_max": 154,
+        "quantized_group_weight_min": 86,
+        "quantized_group_weight_unique": 36,
+        "quantized_weights_fit_unsigned_width": true,
+        "relation_manifest_sha256": "9ae10eb516c5e322771a236b53dc307aeef4b9706428e58ddb18dafb3d42734f",
+        "steady_correlation_table": {
+          "causal_keys": 2973,
+          "directed_relations": 15610,
+          "undirected_pairs": 7805
+        },
+        "steady_geometry": {
+          "detectors": 630,
+          "edges": 2973,
+          "fault_vector_bits": 246,
+          "nodes": 630
+        },
+        "steady_windows": 162,
+        "topology_equal_windows": 164,
+        "total_edges_across_windows": 488257,
+        "unique_quantized_graphs": 3,
+        "unique_reference_topologies": 3,
+        "windows": 164
+      },
+      "window_outputs_equal": 167836,
+      "window_syndromes_equal": 167886
+    },
+    "z": {
+      "basis": "z",
+      "candidate_commit_residual_failures": 0,
+      "candidate_final_residual_failure_shots": 0,
+      "candidate_logical_failures": 6,
+      "candidate_prediction_rows_equal_full_block": 1024,
+      "candidate_prediction_rows_equal_reference_online": 1024,
+      "candidate_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "controller_payload": {
+        "dynamic_update_payload_bits_upper_bound": {
+          "maximum": 3520,
+          "mean": 762.7041253810976,
+          "observations": 167936,
+          "p50": 700.0,
+          "p95": 1600.0,
+          "p99": 2060.0,
+          "p999": 2620.0,
+          "raw_uint32_sha256": "5d81d85138c3915fcf5a662de07fa53e96f7b19aa4f8343be8fb9d58c6d88b78",
+          "zero_fraction": 0.012248713795731708
+        },
+        "encoding": "12-bit edge index plus 8-bit replacement weight",
+        "first_pass_selected_edges": {
+          "maximum": 22,
+          "mean": 5.631931211890244,
+          "observations": 167936,
+          "p50": 5.0,
+          "p95": 11.0,
+          "p99": 13.0,
+          "p999": 16.0,
+          "raw_uint32_sha256": "6a22ffafe85b1abdd00296d9ef87a71488660b87d0b54bffcddb983cc69c9601",
+          "zero_fraction": 0.012248713795731708
+        },
+        "unique_affected_edges_upper_bound": {
+          "maximum": 176,
+          "mean": 38.135206269054876,
+          "observations": 167936,
+          "p50": 35.0,
+          "p95": 80.0,
+          "p99": 103.0,
+          "p999": 131.0,
+          "raw_uint32_sha256": "9c2e91c848686329612d3d5a210a31ce9e1144b0e34d733c9deb2e4ddc01a747",
+          "zero_fraction": 0.012248713795731708
+        }
+      },
+      "corpus_sha256": "c76ccca2f52838f192d6490d507abecc1509948e302d8bc79ae64027d2e5a8e0",
+      "full_block_logical_failures": 6,
+      "full_block_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "reference_commit_residual_failures": 0,
+      "reference_final_residual_failure_shots": 0,
+      "reference_online_logical_failures": 6,
+      "reference_online_prediction_rows_equal_full_block": 1024,
+      "reference_online_prediction_sha256": "e1a006eef96751d05be0c3f02491ee901f59e9391eae0ef9b455e00e5dd8b257",
+      "seed": 16749071433361151958,
+      "seed_digest_sha256": "d657226fbaa770e84b6c061c9e5826ec80c13749945f297ae3e87b3959bcd8ec",
+      "structural": {
+        "edge_index_bits": 12,
+        "maximum_correlation_table": {
+          "causal_keys": 3709,
+          "directed_relations": 19296,
+          "undirected_pairs": 9648
+        },
+        "output_map_equal_windows": 164,
+        "quantized_graph_multiplicities": [
+          162,
+          1,
+          1
+        ],
+        "quantized_group_weight_max": 154,
+        "quantized_group_weight_min": 82,
+        "quantized_group_weight_unique": 38,
+        "quantized_weights_fit_unsigned_width": true,
+        "relation_manifest_sha256": "e1735a3ed0896929d6747680d4a740e762cf1d0116ce31895b5584c4fa751519",
+        "steady_correlation_table": {
+          "causal_keys": 2973,
+          "directed_relations": 15610,
+          "undirected_pairs": 7805
+        },
+        "steady_geometry": {
+          "detectors": 630,
+          "edges": 2973,
+          "fault_vector_bits": 246,
+          "nodes": 630
+        },
+        "steady_windows": 162,
+        "topology_equal_windows": 164,
+        "total_edges_across_windows": 488247,
+        "unique_quantized_graphs": 3,
+        "unique_reference_topologies": 3,
+        "windows": 164
+      },
+      "window_outputs_equal": 167844,
+      "window_syndromes_equal": 167890
+    }
+  },
+  "schema_version": "b2_b7_p023_d6_microblossom_admission_audit_v1",
+  "source_result_path": "results/B2_B7_P023_d6_microblossom_admission_v1.json",
+  "source_result_sha256": "d063538cb4cdd4ee23b1aee80b9d54760510a522c7c7927100f69ca6d8ddbbd5",
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 20,
+    "checks_total": 20
+  }
+}
