@@ -1,0 +1,109 @@
+{
+  "schema_version": "b2_b7_p023_logical_memory_horizon_gate_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "When may a short surface-code memory result count as scalable logical memory, and when may that evidence enter the B7 fault-tolerance resource ledger?",
+  "inputs": {
+    "b2_memory_baseline": {
+      "path": "results/B2_stim_surface_code_memory_baseline_v0.json",
+      "sha256": "d98d73438330f389f8024e5f3149e54c83e0ec94383bea160178f1ee4109d9b8",
+      "required_status": "stim_pymatching_surface_code_memory_baseline"
+    },
+    "b2_target_volume": {
+      "path": "results/B2_stim_surface_code_target_volume_v0.json",
+      "sha256": "6597c6e4757d61b22e95c31d9ddc73bc14529a6800717f3a41011a27c18adfa5",
+      "required_status": "stim_surface_code_target_volume_baseline"
+    },
+    "b7_dependency_bridge": {
+      "path": "results/B7_b1_b2_dependency_schedule_bridge_v0.json",
+      "sha256": "d25f4ec01d1f8ba5d3be183bbed7c7264e0b0dfb4a3fea6b9e86f93bbdaf92ed",
+      "required_status": "dependency_schedule_bridge_not_physical_layout"
+    },
+    "b7_calibrated_credit_gate": {
+      "path": "results/B7_B2_calibrated_dependency_credit_gate_v0.json",
+      "sha256": "dff9e67707583df5088f44759972f3c358f292c32bd233482e693dadb2f0eeb0",
+      "required_status": "b2_calibrated_dependency_credit_rejected_missing_hardware_evidence"
+    }
+  },
+  "external_evidence": [
+    {
+      "id": "willow_surface_code_memory",
+      "origin_url": "https://www.nature.com/articles/s41586-024-08449-y",
+      "capture_url": "https://r.jina.ai/http://www.nature.com/articles/s41586-024-08449-y",
+      "evidence_class": "peer_reviewed_hardware_experiment",
+      "required_fragments": [
+        "distance-7",
+        "0.143%",
+        "real-time decoder",
+        "1.1",
+        "10^{6} cycles",
+        "correlated error"
+      ]
+    },
+    {
+      "id": "qldpc_low_overhead_memory",
+      "origin_url": "https://www.nature.com/articles/s41586-024-07107-7",
+      "capture_url": "https://r.jina.ai/http://www.nature.com/articles/s41586-024-07107-7",
+      "evidence_class": "peer_reviewed_protocol_and_simulation",
+      "required_fragments": [
+        "low-density parity-check",
+        "12 logical qubits",
+        "288 physical qubits",
+        "1 million syndrome cycles",
+        "0.1%"
+      ]
+    },
+    {
+      "id": "ibm_cloud_surface_code_memory",
+      "origin_url": "https://arxiv.org/abs/2610.23840",
+      "capture_url": "https://r.jina.ai/http://arxiv.org/abs/2610.23840",
+      "evidence_class": "public_preprint_hardware_experiment",
+      "required_fragments": [
+        "cloud-accessible IBM",
+        "up to 150 rounds",
+        "0.53% to 0.24%",
+        "0.52% to 0.22%",
+        "long-lived correlations"
+      ]
+    }
+  ],
+  "horizon_contract": {
+    "memory_round_horizons": [10, 100, 1000, 1000000],
+    "total_logical_failure_targets": [0.01, 0.001],
+    "confidence_method": "two-sided Wilson 95 percent upper bound with z=1.959963984540054",
+    "direct_evidence_rule": "source experiment rounds must be at least the claimed memory horizon; shorter experiments never become direct horizon evidence by extrapolation",
+    "basis_rule": "both X and Z memory must independently pass at the same distance, physical-error setting, horizon, and target",
+    "projection_model": "stationary independent logical flips using p_H=(1-(1-2*epsilon)^H)/2; projection is diagnostic only",
+    "projection_inverse": "epsilon=(1-(1-2*p_r)^(1/r))/2",
+    "projection_claim_credit": false,
+    "statistical_resolution": "report the minimum zero-failure direct-horizon shots and qubit-cycle exposure required for the Wilson upper bound alone to clear each target"
+  },
+  "acceptance_gate": {
+    "p023_scalable_memory_ready": "at least one distance and physical-error pair passes both bases by direct experiments at 1,000 and 1,000,000 rounds with total failure <= 0.01, reports decoder throughput and latency, and survives a declared drift/correlation stress",
+    "b2_low_overhead_credit_ready": "P023 direct-horizon gate passes and a same-condition surface-code versus candidate-code comparison improves physical-qubit-cycle volume by at least 25 percent without weakening failure target, decoder, connectivity, or noise assumptions",
+    "b7_memory_credit_ready": "P023 and B2 gates pass and the existing B7 calibrated dependency-credit gate permits credit",
+    "failure_action": "retain short-memory rows as simulator calibration only; assign zero scalable-memory and B7 resource credit"
+  },
+  "controls": {
+    "zero_failure_wilson_upper_recomputed": true,
+    "parity_projection_roundtrip_required": true,
+    "row_order_invariance_required": true,
+    "independent_audit_required": true,
+    "offline_byte_identical_replay_required": true
+  },
+  "claim_boundary": {
+    "new_code_claimed": false,
+    "threshold_claimed": false,
+    "scalable_quantum_memory_claimed": false,
+    "hardware_result_claimed": false,
+    "production_decoder_claimed": false,
+    "b7_resource_credit_claimed": false,
+    "quantum_advantage_claimed": false,
+    "external_results_are_denominators_not_local_reproductions": true,
+    "text_relay_capture_is_not_raw_publisher_byte_identity": true
+  }
+}
