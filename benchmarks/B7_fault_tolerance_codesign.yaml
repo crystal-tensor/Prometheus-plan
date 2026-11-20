@@ -6375,6 +6375,41 @@ current_results:
     audit: ../results/B2_B7_P023_d6_sparse_kernel_audit_v1.json
     replay_audit: ../results/B2_B7_P023_d6_sparse_kernel_replay_v1.json
     markdown_report: ../research/B2_B7_P023_d6_sparse_kernel_v1.md
+  d6_fault_vector_freeze_v1:
+    status: d6_public_fault_vector_preregistered_architecture_credit_still_zero
+    method: b2_b7_p023_d6_fault_vector_v1
+    catalog_problem_ids: [21, 22, 23]
+    source_sparse_result: ../results/B2_B7_P023_d6_sparse_kernel_v1.json
+    required_source_classification: cpp_correlated_matching_tail_bottleneck
+    baseline: sparse_private_edge_return_plus_preindexed_component_mapping
+    candidate: public_matching_decode_with_correction_bit_fault_vector_and_vectorized_xor
+    required_pymatching_version: 2.4.0
+    x_graph_signatures_equal: 164
+    z_graph_signatures_equal: 164
+    x_total_fault_vector_bits_across_windows: 40870
+    z_total_fault_vector_bits_across_windows: 40868
+    graph_topology_weights_probabilities_and_correlations_unchanged: true
+    candidate_semantic_shots_per_basis: 1024
+    timed_shots_per_basis_and_path: 128
+    shot_batching_forbidden: true
+    frozen_tail_threshold_microseconds_per_committed_layer: 1.0
+    maximum_deadline_miss_fraction: 0.01
+    classification_order: [semantic_regression, public_fault_vector_decode_tail_bottleneck, vectorized_correction_apply_tail_bottleneck, commit_residual_check_tail_bottleneck, public_candidate_direct_tail_bottleneck, public_candidate_host_proxy_pass]
+    kaggle_inspired_correctness_veto_before_reference_relative_p99_geometric_mean: true
+    stochastic_samples_observed_before_freeze: 0
+    nonzero_candidate_predictions_observed_before_freeze: 0
+    candidate_timing_observations_before_freeze: 0
+    hardware_decoder_deadline_passed: false
+    b2_low_overhead_credit_ready: false
+    p023_scalable_memory_ready: false
+    million_round_direct_evidence: false
+    drift_correlation_stress_passed: false
+    calibrated_dependency_credit_passed: false
+    b7_resource_credit: 0
+    caveat: public_supported_api_preregistration_only_same_host_software_cannot_create_hardware_or_architecture_credit
+    protocol: B2_B7_P023_d6_fault_vector_v1.json
+    runner: ../tools/b2_b7_p023_d6_fault_vector.py
+    markdown_report: ../research/B2_B7_P023_d6_fault_vector_freeze_v1.md
 prototype_artifacts:
   resource_model: ../tools/b7_fault_tolerance_codesign.py
   w8_21_three_cnot_five_angle_search: ../tools/b7_w8_21_three_cnot_five_angle_search.py
@@ -6418,6 +6453,7 @@ prototype_artifacts:
   d6_sparse_kernel_runner: ../tools/b2_b7_p023_d6_sparse_kernel.py
   d6_sparse_kernel_audit: ../tools/b2_b7_p023_d6_sparse_kernel_audit.py
   d6_sparse_kernel_replay: ../tools/b2_b7_p023_d6_sparse_kernel_replay.py
+  d6_fault_vector_runner: ../tools/b2_b7_p023_d6_fault_vector.py
   b7_b1_cone01_resource_escape_boundary: ../tools/b7_b1_cone01_resource_escape_boundary.py
   b1_b7_cone01_post_boundary_submission_triage: ../tools/b1_b7_cone01_post_boundary_submission_triage.py
   b1_b7_cone01_r1_line1381_resolution_packet_gate: ../tools/b1_b7_cone01_r1_line1381_resolution_packet_gate.py

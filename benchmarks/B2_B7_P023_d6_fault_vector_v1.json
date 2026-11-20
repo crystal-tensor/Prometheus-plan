@@ -1,0 +1,138 @@
+{
+  "schema_version": "b2_b7_p023_d6_fault_vector_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can a graph-equivalent correction-bit fault-vector encoding turn PyMatching's supported public decode interface into a lower-tail single-stream decoder without changing a correction?",
+  "frozen_inputs": {
+    "sparse_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_sparse_kernel_v1.json",
+      "sha256": "c84835e82d3985225aad55dfe45b9f0397bd5de8723cd2afa94c2fba9ad157d6"
+    },
+    "sparse_result": {
+      "path": "results/B2_B7_P023_d6_sparse_kernel_v1.json",
+      "sha256": "1666d4de107351eac13441060e54021f25f4873598c3e2e2d3998c1ba8ade921",
+      "required_classification": "cpp_correlated_matching_tail_bottleneck"
+    },
+    "sparse_audit": {
+      "path": "results/B2_B7_P023_d6_sparse_kernel_audit_v1.json",
+      "sha256": "2acddeb777363d04e14af2fbf9a657c68122348535cb7c58a82b18661f95357a"
+    },
+    "sparse_replay": {
+      "path": "results/B2_B7_P023_d6_sparse_kernel_replay_v1.json",
+      "sha256": "0a89c1a6d72f47ce95d09e392d39b398a0af636c8955a9f24a43297ba2d49c5d"
+    },
+    "sparse_runner": {
+      "path": "tools/b2_b7_p023_d6_sparse_kernel.py",
+      "sha256": "8ea6b7e32667859a0c20ba44671eebc6bb3a5cda33cae607ed44eb7588892796"
+    },
+    "artifact_commit": "a0b42ea2037519df047a4542e61d76890729636d"
+  },
+  "known_before_preregistration": {
+    "source_semantic_veto_passed": true,
+    "source_classification": "cpp_correlated_matching_tail_bottleneck",
+    "source_x_candidate_p99_microseconds_per_committed_layer": 7.284833333333333,
+    "source_z_candidate_p99_microseconds_per_committed_layer": 7.576333333333333,
+    "source_x_cpp_matching_p99_microseconds_per_committed_layer": 4.409666666666667,
+    "source_z_cpp_matching_p99_microseconds_per_committed_layer": 4.618166666666667,
+    "x_graph_signatures_equal": 164,
+    "z_graph_signatures_equal": 164,
+    "x_total_fault_vector_bits_across_windows": 40870,
+    "z_total_fault_vector_bits_across_windows": 40868,
+    "x_max_fault_vector_bits_per_window": 789,
+    "z_max_fault_vector_bits_per_window": 788,
+    "x_max_detector_output_bits_per_window": 788,
+    "z_max_detector_output_bits_per_window": 787,
+    "max_observable_output_bits_per_window": 1,
+    "maximum_fault_ids_per_merged_edge": 2,
+    "all_zero_output_nonzero_bits": 0,
+    "public_fault_vector_candidate_predictions_observed": false,
+    "public_fault_vector_candidate_timings_observed": false,
+    "disclosure": "the deterministic graph scan proved graph signature equality and correction-vector geometry using all-zero inputs only; no nonzero frozen-corpus candidate prediction, timing vector, speedup, tail verdict, or classification has been observed"
+  },
+  "candidate_contract": {
+    "baseline": "the frozen sparse private C++ decode_to_edges_array path plus complete edge-to-component preindex",
+    "candidate": "a graph-equivalent matching object whose fault IDs encode detector and observable correction bits, decoded through public Matching.decode and applied with vectorized XOR",
+    "graph_equivalence": "for every window, normalized edge endpoints, weights, and error probabilities must exactly match the baseline graph; only fault-ID payloads may differ",
+    "fault_vector_encoding": "contiguous detector-output IDs followed by observable-output IDs over the parity union of every committed component's correction support",
+    "public_api": "Matching.decode",
+    "required_pymatching_version": "2.4.0",
+    "unchanged": [
+      "distance-6 circuits, noise, 1,000-round horizon, and frozen X/Z corpora",
+      "3d=18 windows, d=6 commits, and 2d=12 look-ahead",
+      "two-pass correlated matching topology, weights, probabilities, and correlation groups",
+      "arrival order, correction propagation semantics, logical frame, and residual checks",
+      "single-stream execution with no shot batching",
+      "one-microsecond p99 and one-percent miss thresholds"
+    ],
+    "candidate_phases": [
+      "arrival_delivery",
+      "syndrome_materialization",
+      "public_fault_vector_decode",
+      "vectorized_correction_apply",
+      "commit_residual_check",
+      "direct_feedback_read"
+    ]
+  },
+  "corpus_contract": {
+    "shots_per_basis_for_candidate_semantics": 1024,
+    "timed_shots_per_basis_and_path": 128,
+    "windows_per_shot": 164,
+    "timed_order": "sparse baseline then public candidate on even shots and public candidate then sparse baseline on odd shots",
+    "same_detector_bytes_required": true,
+    "candidate_must_equal_all_frozen_full_block_predictions": true,
+    "baseline_must_equal_all_timed_frozen_full_block_predictions": true,
+    "timed_cross_path_prediction_equality_required": true,
+    "zero_commit_and_final_residual_required": true,
+    "sampling_and_graph_construction_excluded_from_timing": true,
+    "shot_batching_forbidden": true
+  },
+  "timing_contract": {
+    "warmup_shots_per_basis_and_path": 1,
+    "clock": "time.perf_counter_ns",
+    "raw_vectors": "sparse baseline total plus public fault-vector candidate total and all six candidate phases as base64 little-endian uint64 nanoseconds",
+    "phase_additivity_required": true,
+    "quantile_method": "nearest_rank_ceil_qn",
+    "threshold_microseconds_per_committed_layer": 1.0,
+    "maximum_deadline_miss_fraction": 0.01,
+    "relative_score": "sparse-baseline p99 divided by public-candidate p99 for X and Z, aggregated by geometric mean only after the semantic veto",
+    "absolute_deadline_not_waived": true
+  },
+  "classification_rule": {
+    "order": [
+      "semantic_regression",
+      "public_fault_vector_decode_tail_bottleneck",
+      "vectorized_correction_apply_tail_bottleneck",
+      "commit_residual_check_tail_bottleneck",
+      "public_candidate_direct_tail_bottleneck",
+      "public_candidate_host_proxy_pass"
+    ],
+    "rule": "after the semantic veto, select the first candidate stage failing p99 <=1 microsecond per committed layer and miss fraction <=1 percent in either basis: public decode, vectorized correction apply, commit residual check, then candidate end-to-end",
+    "interpretation": "a supported public API removes the private-interface boundary but remains a same-host diagnostic and cannot by itself prove a hardware deadline"
+  },
+  "kaggle_inspired_evaluation": {
+    "official_evaluation_url": "https://www.kaggle.com/competitions/google-verifiable-quantum-circuit-compilation/overview/evaluation",
+    "verification_veto": "candidate predictions, residuals, corpus hashes, graph equivalence, and output maps must pass before a speedup is credited",
+    "reference_relative_cost": "sparse-baseline direct p99 divided by public-candidate direct p99 per basis",
+    "aggregate": "geometric mean across X and Z",
+    "absolute_guardrail": "a relative improvement cannot waive the absolute tail and miss limits"
+  },
+  "hard_boundaries": {
+    "hardware_decoder_deadline_passed": false,
+    "full_b2_credit_ready": false,
+    "p023_scalable_memory_ready": false,
+    "b7_resource_credit": 0,
+    "reason": "the candidate uses a supported API but remains same-host Python software, not a QPU, controller, asynchronous device link, or hardware feedback path"
+  },
+  "execution_guard": {
+    "preflight_before_publication": "real graph reconstruction, exact graph-signature equality, complete output-map verification, and all-zero syndrome only; zero nonzero frozen-corpus candidate predictions and zero candidate timing observations",
+    "public_commit_required_before_outcomes": true,
+    "public_discussion_required_before_outcomes": true,
+    "runner_requires_explicit_public_freeze_commit": true,
+    "runner_requires_explicit_discussion_number": true,
+    "runner_verifies_its_own_and_protocol_bytes_at_public_commit": true
+  }
+}
