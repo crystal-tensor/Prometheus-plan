@@ -1,0 +1,215 @@
+{
+  "auditor": {
+    "path": "tools/b2_b7_p023_d6_strict_acceptance_audit.py",
+    "sha256": "2e8a6d8b11660719140c14fe420df1868911cbb6c00bcfb0dc60debb1f82c553"
+  },
+  "checks": [
+    {
+      "detail": "b2_b7_p023_d6_strict_acceptance_result_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "be4ea14f88400d5c7d4c16ddfeaf7665efdf5e67da2bd558700e64a46c533501",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "cca00a6967cac953fb90304a4b9910f181ecf9eabc08250476fc2b0398eb0340",
+      "name": "generator_hash",
+      "passed": true
+    },
+    {
+      "detail": "All current frozen inputs match.",
+      "name": "current_inputs",
+      "passed": true
+    },
+    {
+      "detail": "569d61572e3fd8e40fd6152dcdc032af7999845a",
+      "name": "commit_inputs",
+      "passed": true
+    },
+    {
+      "detail": "569d61572e3fd8e40fd6152dcdc032af7999845a",
+      "name": "public_freeze",
+      "passed": true
+    },
+    {
+      "detail": "Candidate was frozen before outcomes.",
+      "name": "freeze_pre_outcome",
+      "passed": true
+    },
+    {
+      "detail": "{'python': '3.12.6', 'stim': '1.16.0', 'pymatching': '2.4.0', 'numpy': '2.4.6', 'scipy': '1.17.1'}",
+      "name": "toolchain",
+      "passed": true
+    },
+    {
+      "detail": "X and Z rows.",
+      "name": "basis_set",
+      "passed": true
+    },
+    {
+      "detail": "Raw circuits reproduce and match freeze.",
+      "name": "circuits",
+      "passed": true
+    },
+    {
+      "detail": "Coordinate-canonical circuits reproduce.",
+      "name": "canonical_circuits",
+      "passed": true
+    },
+    {
+      "detail": "DEMs reproduce and match freeze.",
+      "name": "dem",
+      "passed": true
+    },
+    {
+      "detail": "Canonical salt-derived seeds reproduce.",
+      "name": "seeds",
+      "passed": true
+    },
+    {
+      "detail": "Circuit and matching dimensions reproduce.",
+      "name": "dimensions",
+      "passed": true
+    },
+    {
+      "detail": "102,400 direct 1,000-round shots per basis.",
+      "name": "direct_exposure",
+      "passed": true
+    },
+    {
+      "detail": "Observed rates reproduce.",
+      "name": "failure_arithmetic",
+      "passed": true
+    },
+    {
+      "detail": "{'x': 0.018443501561868636, 'z': 0.017617683486950003}",
+      "name": "independent_cp",
+      "passed": true
+    },
+    {
+      "detail": "{'x': False, 'z': False}",
+      "name": "strict_flags",
+      "passed": true
+    },
+    {
+      "detail": "False",
+      "name": "pair_gate",
+      "passed": true
+    },
+    {
+      "detail": "400 chunks per basis.",
+      "name": "chunk_coverage",
+      "passed": true
+    },
+    {
+      "detail": "Packed shapes reproduce.",
+      "name": "chunk_shapes",
+      "passed": true
+    },
+    {
+      "detail": "All primary hashes are SHA-256 shaped.",
+      "name": "hash_shapes",
+      "passed": true
+    },
+    {
+      "detail": "71,000 active-qubit-rounds.",
+      "name": "costs",
+      "passed": true
+    },
+    {
+      "detail": "{'x': 1.3661971830985915, 'z': 1.3661971830985915}",
+      "name": "basis_improvement",
+      "passed": true
+    },
+    {
+      "detail": "{'conditional': 1.3661971830985915, 'accepted': 0}",
+      "name": "score",
+      "passed": true
+    },
+    {
+      "detail": "d6_candidate_rejected_by_strict_xz_gate_score_zero_p023_b2_b7_credit_closed",
+      "name": "decision",
+      "passed": true
+    },
+    {
+      "detail": "Summary reproduces.",
+      "name": "summary",
+      "passed": true
+    },
+    {
+      "detail": "B2 follows verdict; #023/B7 remain closed.",
+      "name": "readiness",
+      "passed": true
+    },
+    {
+      "detail": "No downstream overclaim.",
+      "name": "claim_boundary",
+      "passed": true
+    },
+    {
+      "detail": "0608457c4db51035111974eb371533e8c2d5f8216e92cf5e0651745b7465cd50",
+      "name": "run_id",
+      "passed": true
+    },
+    {
+      "detail": "27/27",
+      "name": "producer_checks",
+      "passed": true
+    }
+  ],
+  "independent_cp_method": "solve log BinomialCDF(k;n,p)=log(2^-128) with Brent root finding, independent of producer beta inverse-survival",
+  "independent_cp_upper_by_basis": {
+    "x": 0.018443501561868636,
+    "z": 0.017617683486950003
+  },
+  "regenerated": [
+    {
+      "active_qubits": 71,
+      "canonical_circuit_sha256": "ffe0341ec245de6699f2d886d2ab776bb56d504f43d35d60c192594b0306f84c",
+      "challenge_hash": "4fe02f55e86fc2318a518fdb12cc0c537d582cf33523311cfc75850e87292fcd",
+      "dem_sha256": "2f9970ab6cdc64b0a72c2487b5c9b53a4163869bb2046251053af4c8dc759e88",
+      "detectors": 35001,
+      "index_span": 89,
+      "matching_edges": 169918,
+      "matching_nodes": 35001,
+      "memory_basis": "x",
+      "observables": 1,
+      "raw_circuit_sha256": "25ff38889a317147d115623bd66ebd13a5fa758b7d9e02e8acd131b81131842f",
+      "seed": 5755652369797857841
+    },
+    {
+      "active_qubits": 71,
+      "canonical_circuit_sha256": "4fd739aab97b6dc7534154dbf8565084a4d3d9d671a6e5a8f063bda0386761ef",
+      "challenge_hash": "cd5e98da91fa05ef0fe8db714c9da1974114b58e0b2120d005cdc6699ec7d7c7",
+      "dem_sha256": "113c545b9f17db94fbe96445fb9882b1e5b3920806a075f116843fa0e0659ec8",
+      "detectors": 34999,
+      "index_span": 89,
+      "matching_edges": 169908,
+      "matching_nodes": 34999,
+      "memory_basis": "z",
+      "observables": 1,
+      "raw_circuit_sha256": "07a03803963f6bf120b969abf4eb9fc3da0cfe46f367580baf37ad0e45efce52",
+      "seed": 5575061453250627055
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_strict_acceptance_independent_audit_v1",
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_strict_acceptance_v1.json",
+    "sha256": "7b215bcaa1b723da70eb1ff8787c3231d6072ca6c896060cd9405d826e5418a5"
+  },
+  "summary": {
+    "both_bases_strict_pass": false,
+    "candidate_accepted": false,
+    "checks_failed": 0,
+    "checks_passed": 32,
+    "checks_total": 32
+  }
+}

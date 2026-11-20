@@ -1,0 +1,92 @@
+{
+  "schema_version": "b2_b7_p023_d6_strict_acceptance_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Does the publicly frozen 71-active-qubit distance-6 candidate survive the same strict X/Z verifier as the 97-qubit reference?",
+  "public_freeze": {
+    "commit": "569d61572e3fd8e40fd6152dcdc032af7999845a",
+    "packet_commit": "6b3f03085e0b6a3bd7e5551717411c2f40d6a103",
+    "discussion_number": 323,
+    "discussion_url": "https://github.com/crystal-tensor/Prometheus-plan/discussions/323",
+    "candidate_frozen_before_salt": true,
+    "candidate_frozen_before_stochastic_execution": true
+  },
+  "frozen_inputs": {
+    "candidate_freeze_protocol": {
+      "path": "benchmarks/B2_B7_P023_d6_candidate_freeze_v1.json",
+      "sha256": "e3a160104cb38ad692e4b373ecb3b5905faa1440e65af9a50b2b9fc2e601215a"
+    },
+    "candidate_freeze_result": {
+      "path": "results/B2_B7_P023_d6_candidate_freeze_v1.json",
+      "sha256": "56355c57bb1235bc10d42cf89b825e5319aa6be62d3138a9e7c8dccb9bf4c13a",
+      "required_decision": "distance6_candidate_structurally_frozen_before_salt_no_outcome_b2_p023_b7_credit_closed"
+    },
+    "candidate_freeze_generator": {
+      "path": "tools/b2_b7_p023_d6_candidate_freeze.py",
+      "sha256": "d0856f95496db34115aa108698094f8f2801ee6c64b3834a87090a474e6caef3"
+    },
+    "candidate_freeze_audit": {
+      "path": "results/B2_B7_P023_d6_candidate_freeze_audit_v1.json",
+      "sha256": "bfbf26246e9631f8197d6a0512bf3e1520c723d7af83345901b62317908a8632"
+    },
+    "artifact_freeze_commit": "569d61572e3fd8e40fd6152dcdc032af7999845a"
+  },
+  "execution": {
+    "candidate_id": "rotated_surface_code_d6_memory_candidate_v1",
+    "distance": 6,
+    "memory_bases": ["x", "z"],
+    "rounds": 1000,
+    "physical_error": 0.001,
+    "noise_parameters": {
+      "after_clifford_depolarization": 0.001,
+      "before_round_data_depolarization": 0.001,
+      "before_measure_flip_probability": 0.001,
+      "after_reset_flip_probability": 0.001
+    },
+    "shots_per_basis": 102400,
+    "shot_chunk_size": 256,
+    "target_total_logical_failure": 0.01,
+    "confidence_method": "one-sided Clopper-Pearson upper bound",
+    "false_accept_probability": "2^-128",
+    "confidence_level": "1-2^-128",
+    "challenge_seed_derivation": "lower 63 bits of the first eight SHA-256 bytes of UTF8(salt) || 0x00 || coordinate-canonical Stim circuit bytes",
+    "challenge_salt": "AH-QEC-D6-STRICT-v1|public-freeze=569d61572e3fd8e40fd6152dcdc032af7999845a|discussion=323|acceptance",
+    "decoder": "PyMatching MWPM from decomposed Stim detector error model",
+    "toolchain": {
+      "python": "3.12.6",
+      "stim": "1.16.0",
+      "pymatching": "2.4.0",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1"
+    }
+  },
+  "score_contract": {
+    "reference_active_qubits": 97,
+    "reference_cost_per_basis": 97000,
+    "candidate_active_qubits": 71,
+    "candidate_cost_per_basis": 71000,
+    "basis_improvement": "I_b=97000/71000",
+    "composite_score": "Score_QEC=sqrt(I_X*I_Z) after both bases strictly verify; otherwise 0",
+    "acceptance_threshold": 1.25,
+    "per_basis_regression_allowed": false,
+    "single_basis_credit": false,
+    "invalid_candidate_score": 0
+  },
+  "downstream_gates": {
+    "b2_candidate_improvement": "candidate must pass both strict basis gates and Score_QEC>=1.25",
+    "p023_scalable_memory": "remains false without strict direct million-round X/Z evidence, drift/correlation stress, and a declared decoder deadline",
+    "b7_resource_credit": "remains zero until B2, #023, calibrated dependency, layout, and architecture gates pass"
+  },
+  "claim_boundary": {
+    "new_code_family_claimed": false,
+    "threshold_claimed": false,
+    "scalable_quantum_memory_claimed_before_execution": false,
+    "hardware_result_claimed": false,
+    "production_decoder_claimed": false,
+    "b7_resource_credit_claimed_before_execution": false
+  }
+}
