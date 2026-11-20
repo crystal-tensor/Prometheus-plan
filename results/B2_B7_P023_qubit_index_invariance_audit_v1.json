@@ -1,0 +1,323 @@
+{
+  "as_of_date": "2026-11-20",
+  "auditor": {
+    "path": "tools/b2_b7_p023_qubit_index_invariance_audit.py",
+    "sha256": "c0ec0aeaf31b07b9329eed09ea800cee8b47b7cc12d120ff4ccccab66c68928e"
+  },
+  "checks": [
+    {
+      "detail": "b2_b7_p023_qubit_index_invariance_result_v1",
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "detail": "Exact scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "4e01e8675e9ced8692ff658965f52bbe0bb13b256176de1e84da3fb23ff40cb4",
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "detail": "bb31b67d7421738a7a3f067129c27b6d99083632135e93273ffa7a4bf533d444",
+      "name": "generator_hash",
+      "passed": true
+    },
+    {
+      "detail": "All frozen input hashes match.",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "kaggle_inspired_strict_1k_reference_verified_p023_b2_b7_credit_closed",
+      "name": "strict_decision",
+      "passed": true
+    },
+    {
+      "detail": "Strict X/Z correctness remains verified.",
+      "name": "strict_gate",
+      "passed": true
+    },
+    {
+      "detail": "3b67a9bfb804dfb371638d21b36d164b1c59b9b2c9c423facf354c4608ed742a",
+      "name": "x_strict_raw_binding",
+      "passed": true
+    },
+    {
+      "detail": "97",
+      "name": "x_active_count",
+      "passed": true
+    },
+    {
+      "detail": "21",
+      "name": "x_holes",
+      "passed": true
+    },
+    {
+      "detail": "97",
+      "name": "x_compact_count",
+      "passed": true
+    },
+    {
+      "detail": "b772f1ab1fbbce5597cef8a21dc0d7f757e12cb592ea6db11bf91ee3e770ff2e",
+      "name": "x_canonical",
+      "passed": true
+    },
+    {
+      "detail": "906f81bfa6712e5451fa470839298c68b291ae1283a665f14397bba99148c4bf",
+      "name": "x_dem",
+      "passed": true
+    },
+    {
+      "detail": "8192 shots.",
+      "name": "x_semantic_replay",
+      "passed": true
+    },
+    {
+      "detail": "1588448686012969345",
+      "name": "x_challenge_binding",
+      "passed": true
+    },
+    {
+      "detail": "97,000 active-qubit-rounds.",
+      "name": "x_cost",
+      "passed": true
+    },
+    {
+      "detail": "1003f3120bf57f36ea7a4049363e7cf41a1519ae21385e2d2d320ec0d913fe67",
+      "name": "z_strict_raw_binding",
+      "passed": true
+    },
+    {
+      "detail": "97",
+      "name": "z_active_count",
+      "passed": true
+    },
+    {
+      "detail": "21",
+      "name": "z_holes",
+      "passed": true
+    },
+    {
+      "detail": "97",
+      "name": "z_compact_count",
+      "passed": true
+    },
+    {
+      "detail": "74dcc16ce0fe3bb1368fc548f76f18c60078ff39279da3d81da62299df433b57",
+      "name": "z_canonical",
+      "passed": true
+    },
+    {
+      "detail": "41180433d7ff460e4ff4ccccdc18f382cdd9f0ce91fcd6e039d82a75d62134ab",
+      "name": "z_dem",
+      "passed": true
+    },
+    {
+      "detail": "8192 shots.",
+      "name": "z_semantic_replay",
+      "passed": true
+    },
+    {
+      "detail": "4938492380772644754",
+      "name": "z_challenge_binding",
+      "passed": true
+    },
+    {
+      "detail": "97,000 active-qubit-rounds.",
+      "name": "z_cost",
+      "passed": true
+    },
+    {
+      "detail": "1.2164948453608246",
+      "name": "naive_score",
+      "passed": true
+    },
+    {
+      "detail": "1.0",
+      "name": "invariant_score",
+      "passed": true
+    },
+    {
+      "detail": "194,000.",
+      "name": "pair_cost",
+      "passed": true
+    },
+    {
+      "detail": "At most 77 active qubits.",
+      "name": "candidate_threshold",
+      "passed": true
+    },
+    {
+      "detail": "8e71bd695f1abd895ce369740fb9a25a185f56876075d6434cdafbf1f794f6b5",
+      "name": "run_id",
+      "passed": true
+    },
+    {
+      "detail": "30/30",
+      "name": "producer_checks",
+      "passed": true
+    },
+    {
+      "detail": "B2/#023/B7 remain closed.",
+      "name": "readiness",
+      "passed": true
+    },
+    {
+      "detail": "qubit_index_loophole_closed_reference_regraded_to_97_active_qubits_b2_p023_b7_credit_closed",
+      "name": "decision",
+      "passed": true
+    }
+  ],
+  "environment": {
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "stim": "1.16.0"
+  },
+  "independently_recomputed": [
+    {
+      "active_operational_qubits": 97,
+      "canonical_challenge_compacted": "160b4da9f9bd3181125c2280effa0da47f1dba71dc1941dd477ff8f5447c6a9d",
+      "canonical_challenge_original": "160b4da9f9bd3181125c2280effa0da47f1dba71dc1941dd477ff8f5447c6a9d",
+      "canonical_circuit_sha256": "b772f1ab1fbbce5597cef8a21dc0d7f757e12cb592ea6db11bf91ee3e770ff2e",
+      "canonical_equal": true,
+      "canonical_seed_compacted": 1588448686012969345,
+      "canonical_seed_original": 1588448686012969345,
+      "compacted_active_operational_qubits": 97,
+      "compacted_index_span_qubits": 97,
+      "compacted_raw_circuit_sha256": "42d436163eac7caa61f7690114c6ec907900420a3b2adf75a4a06366dbaeee6c",
+      "corrected_cost": 97000,
+      "dem_equal": true,
+      "dem_sha256": "906f81bfa6712e5451fa470839298c68b291ae1283a665f14397bba99148c4bf",
+      "index_span_qubits": 118,
+      "memory_basis": "x",
+      "raw_challenge_compacted": "ae667fed8114e86a8e49d64b4b0a5fea61569a86227dd36f4681448a9f155c01",
+      "raw_challenge_original": "d2402877bb3b082b7841afb2ac9f9d2a250983b6c30fac0c3af3b78f48a1710f",
+      "raw_circuit_sha256": "3b67a9bfb804dfb371638d21b36d164b1c59b9b2c9c423facf354c4608ed742a",
+      "raw_seed_compacted": 3343500431418779754,
+      "raw_seed_original": 5926781604327000107,
+      "replay_compacted": {
+        "detector_shape": [
+          8192,
+          6000
+        ],
+        "detectors_sha256": "8716124a0551aa3f4da4e3d3de76d6cdb35eb66213b3f9adbf9b0ddf8211f5a2",
+        "failure_vector_sha256": "7c473bf9bc3104d804e68529ba995da60af2f1c16a428a39a635e9a86a7f8789",
+        "logical_failures": 20,
+        "observable_shape": [
+          8192,
+          1
+        ],
+        "observables_sha256": "0c07309c53f13eb6d0440a297ca3019eb5dc6e983f1666f12444ab5270ec6231",
+        "prediction_shape": [
+          8192,
+          1
+        ],
+        "predictions_sha256": "43890b44b363d3348074a438cb3f64cc221e2e4ce6c5928f0340e1f5fd388dcb",
+        "shots": 8192,
+        "trace_sha256": "cc55f4d804191b77ae3a4cb6be1a5a386cced836d56015a333e822fa0cc3ed12"
+      },
+      "replay_original": {
+        "detector_shape": [
+          8192,
+          6000
+        ],
+        "detectors_sha256": "8716124a0551aa3f4da4e3d3de76d6cdb35eb66213b3f9adbf9b0ddf8211f5a2",
+        "failure_vector_sha256": "7c473bf9bc3104d804e68529ba995da60af2f1c16a428a39a635e9a86a7f8789",
+        "logical_failures": 20,
+        "observable_shape": [
+          8192,
+          1
+        ],
+        "observables_sha256": "0c07309c53f13eb6d0440a297ca3019eb5dc6e983f1666f12444ab5270ec6231",
+        "prediction_shape": [
+          8192,
+          1
+        ],
+        "predictions_sha256": "43890b44b363d3348074a438cb3f64cc221e2e4ce6c5928f0340e1f5fd388dcb",
+        "shots": 8192,
+        "trace_sha256": "cc55f4d804191b77ae3a4cb6be1a5a386cced836d56015a333e822fa0cc3ed12"
+      },
+      "unused_index_slots": 21
+    },
+    {
+      "active_operational_qubits": 97,
+      "canonical_challenge_compacted": "44890ca7b1ed3792fb6835ace7c3913cceffb92aa7de3863bf95923512d14633",
+      "canonical_challenge_original": "44890ca7b1ed3792fb6835ace7c3913cceffb92aa7de3863bf95923512d14633",
+      "canonical_circuit_sha256": "74dcc16ce0fe3bb1368fc548f76f18c60078ff39279da3d81da62299df433b57",
+      "canonical_equal": true,
+      "canonical_seed_compacted": 4938492380772644754,
+      "canonical_seed_original": 4938492380772644754,
+      "compacted_active_operational_qubits": 97,
+      "compacted_index_span_qubits": 97,
+      "compacted_raw_circuit_sha256": "bd298248ef0506f974172cb11532a3744e6e218c618ba46946fa2668026154bf",
+      "corrected_cost": 97000,
+      "dem_equal": true,
+      "dem_sha256": "41180433d7ff460e4ff4ccccdc18f382cdd9f0ce91fcd6e039d82a75d62134ab",
+      "index_span_qubits": 118,
+      "memory_basis": "z",
+      "raw_challenge_compacted": "143024b4a116dedc25449e75687a2b291f7e6592e5bce907c722effa174c958d",
+      "raw_challenge_original": "12b08483c7e1b01f7e7147f9f7b67b0a9bf2e8df4a1d04b635e4a6eae1814b1f",
+      "raw_circuit_sha256": "1003f3120bf57f36ea7a4049363e7cf41a1519ae21385e2d2d320ec0d913fe67",
+      "raw_seed_compacted": 1454703037856014044,
+      "raw_seed_original": 1346721990112817183,
+      "replay_compacted": {
+        "detector_shape": [
+          8192,
+          6000
+        ],
+        "detectors_sha256": "b90b6d82d99fa5f9912b2ed148ab99b52fcfe0d5cc3bbe932dc8735004807bb1",
+        "failure_vector_sha256": "88298d917ba728d2bf30711e87438e454946e5f09f5c162a25992c0a03c9fced",
+        "logical_failures": 21,
+        "observable_shape": [
+          8192,
+          1
+        ],
+        "observables_sha256": "37fdcf54507428a52601ed8e8ced10f4f5c1ae80dc870995a32b9aa697a90364",
+        "prediction_shape": [
+          8192,
+          1
+        ],
+        "predictions_sha256": "f3f45e100c976a665bcad0eb64303ee53c317b7332c1eb73a0a4dc39012dde1a",
+        "shots": 8192,
+        "trace_sha256": "b385cb055de7b6281a2d3eea194715e7a16e5adef2075b6678e386c3a030ef32"
+      },
+      "replay_original": {
+        "detector_shape": [
+          8192,
+          6000
+        ],
+        "detectors_sha256": "b90b6d82d99fa5f9912b2ed148ab99b52fcfe0d5cc3bbe932dc8735004807bb1",
+        "failure_vector_sha256": "88298d917ba728d2bf30711e87438e454946e5f09f5c162a25992c0a03c9fced",
+        "logical_failures": 21,
+        "observable_shape": [
+          8192,
+          1
+        ],
+        "observables_sha256": "37fdcf54507428a52601ed8e8ced10f4f5c1ae80dc870995a32b9aa697a90364",
+        "prediction_shape": [
+          8192,
+          1
+        ],
+        "predictions_sha256": "f3f45e100c976a665bcad0eb64303ee53c317b7332c1eb73a0a4dc39012dde1a",
+        "shots": 8192,
+        "trace_sha256": "b385cb055de7b6281a2d3eea194715e7a16e5adef2075b6678e386c3a030ef32"
+      },
+      "unused_index_slots": 21
+    }
+  ],
+  "schema_version": "b2_b7_p023_qubit_index_invariance_independent_audit_v1",
+  "source_result": {
+    "path": "results/B2_B7_P023_qubit_index_invariance_v1.json",
+    "sha256": "6f4648e8da8b0837fcbafc75c41ea3628648829f651693cd10279580e1613956"
+  },
+  "summary": {
+    "basis_count": 2,
+    "checks_failed": 0,
+    "checks_passed": 33,
+    "checks_total": 33
+  }
+}

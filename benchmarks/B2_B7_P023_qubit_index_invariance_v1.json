@@ -1,0 +1,64 @@
+{
+  "schema_version": "b2_b7_p023_qubit_index_invariance_protocol_v1",
+  "as_of_date": "2026-11-20",
+  "scope": {
+    "included_catalog_problem_ids": [21, 22, 23],
+    "included_tracks": ["B2", "B7"],
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023"
+  },
+  "question": "Can the QEC resource score be improved by relabeling the same physical circuit instead of reducing hardware?",
+  "frozen_inputs": {
+    "strict_protocol": {
+      "path": "benchmarks/B2_B7_P023_kaggle_inspired_acceptance_v1.json",
+      "sha256": "932cfc764251b9a57ef1f71af984d8a35573fce451bc832f3b64aa0eec727bac"
+    },
+    "strict_result": {
+      "path": "results/B2_B7_P023_kaggle_inspired_acceptance_v1.json",
+      "sha256": "3a7702d0a5956d1255c02d723e5b617de0f99fe330c6e7952833ae1a36375cc0",
+      "required_decision": "kaggle_inspired_strict_1k_reference_verified_p023_b2_b7_credit_closed"
+    },
+    "strict_generator": {
+      "path": "tools/b2_b7_p023_kaggle_inspired_acceptance.py",
+      "sha256": "01fe3bf474ce1cf9f17214ed43d1e6e3c89b40d99a4059d00f09326295e59788"
+    },
+    "artifact_freeze_commit": "7375ed1347095c044e20ed9b74593ae0ae14bb8e"
+  },
+  "adversarial_audit": {
+    "bases": ["x", "z"],
+    "audit_seed": 314159,
+    "audit_shots_per_basis": 8192,
+    "transformation": "map the sorted distinct operational qubit identifiers to contiguous identifiers 0..Q_active-1 without changing instruction order, gate arguments, coordinates, record targets, detector annotations, or observables",
+    "required_equivalence": [
+      "canonical compact circuit bytes are identical",
+      "detector error models are byte-identical",
+      "fixed-seed detector and observable samples are byte-identical",
+      "MWPM predictions and logical failure vectors are byte-identical"
+    ]
+  },
+  "resource_metric_v2": {
+    "active_physical_qubits": "number of distinct qubit identifiers targeted by operational Stim instructions; QUBIT_COORDS-only identifiers do not count",
+    "index_span_qubits": "Stim circuit.num_qubits, retained as a diagnostic only because it equals max referenced identifier plus one",
+    "canonicalization": "bind each active qubit to its unique QUBIT_COORDS tuple, order active qubits lexicographically by coordinates, then relabel to 0..Q_active-1 before resource hashing or challenge-seed derivation; reject missing or duplicate coordinate bindings",
+    "per_basis_cost": "C_b = Q_active * memory_rounds",
+    "basis_improvement": "I_b = C_b_reference / C_b_candidate",
+    "composite_score": "Score_QEC = sqrt(I_X * I_Z) after both strict verification gates pass; otherwise Score_QEC=0",
+    "candidate_acceptance": "Score_QEC >=1.25, I_X>=1, I_Z>=1, both strict verification gates pass, and no physical or statistical assumption is weakened",
+    "index_only_candidate_score": 1.0,
+    "invalid_candidate_score": 0
+  },
+  "challenge_binding_v2": {
+    "derivation": "lower 63 bits of the first eight SHA-256 bytes of UTF8(secret salt) || 0x00 || canonical compact Stim circuit bytes",
+    "audit_salt": "AH-QEC-INDEX-INVARIANCE-v1|freeze=7375ed1347095c044e20ed9b74593ae0ae14bb8e|audit",
+    "candidate_freeze_precedes_secret_salt_reveal": true
+  },
+  "claim_boundary": {
+    "strict_correctness_result_changed": false,
+    "resource_baseline_corrected": true,
+    "new_code_claimed": false,
+    "b2_low_overhead_improvement_claimed": false,
+    "scalable_quantum_memory_claimed": false,
+    "b7_resource_credit_claimed": false,
+    "hardware_result_claimed": false,
+    "official_kaggle_metric_claimed": false
+  }
+}
