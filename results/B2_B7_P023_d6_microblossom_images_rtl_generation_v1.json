@@ -1,0 +1,99 @@
+{
+  "schema": "b2_b7_p023_d6_microblossom_images_rtl_generation_v1",
+  "date": "2026-11-20",
+  "classification": "six_bound_d6_images_direct_load_and_rtl_generation_pass_batch_replay_and_timing_open",
+  "scope": ["021/B7", "022/B2", "023"],
+  "source": {
+    "micro_blossom_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "dynamic_weight_patch_sha256": "990beb9fc86329960a6eef88b9f88b601f5807f0e2ae2abd71acc0d3671e27d5",
+    "image_manifest": "benchmarks/B2_B7_P023_d6_microblossom_images_v1.json",
+    "image_manifest_sha256": "b644d1e6081bc9ccd7b563489ed2cb7a2cbe4a63c5dfde54e4b94c53059c84ab",
+    "image_evidence_id": "b80bc090b32ac4a3aad2e3eca7247156a8571bfd9ee659c302afd4f67b95e3f8"
+  },
+  "normalization": {
+    "accepted_even_weight_max": 33706,
+    "hardware_weight_max": 16853,
+    "exact_common_divisor": 2,
+    "rounding_or_clamping": false,
+    "path_order_and_tie_relation_preserved": true,
+    "maximum_vertex_growth_before": 74622,
+    "maximum_vertex_growth_after": 37311,
+    "bus_maximum_growth_bits": 16,
+    "bound_pass": true
+  },
+  "verification": {
+    "fresh_stochastic_samples_observed": 0,
+    "independent_image_audit": "pass",
+    "direct_load_sanity_checks_run": 6,
+    "direct_load_sanity_checks_passed": 6,
+    "inferred_weight_bits": 15,
+    "spinalhdl_version": "1.9.3",
+    "generated_axi4_dynamic_weight_rtl_images": 6,
+    "generated_axi4_dynamic_weight_rtl_passed": 6,
+    "independent_iverilog_version": "13.0",
+    "independent_iverilog_full_compile_image": "x_closing",
+    "independent_iverilog_full_compile": "pass",
+    "generation_evidence_audit_checks_passed": 35,
+    "generation_evidence_audit_checks_total": 35
+  },
+  "generated_rtl": [
+    {
+      "basis": "x",
+      "phase": "opening",
+      "input_image_sha256": "d79377cb0de8becce4d2e80ecd5bd734f435669d8a91dc76e142b465cb0e8d79",
+      "rtl_sha256": "0d18e5a914b4e208249888d7395d1d49fe15ea7741dd67240ba0230239612172",
+      "rtl_bytes": 378495749
+    },
+    {
+      "basis": "x",
+      "phase": "steady",
+      "input_image_sha256": "3aa0fb7613651694e88d1a9616c10a6c44836557d92b76e3f57ffdeb2c826005",
+      "rtl_sha256": "73c7a76bc95a97f07c8aefc90c6cba26a82434597040a8fe659af123aaf04a98",
+      "rtl_bytes": 386993287
+    },
+    {
+      "basis": "x",
+      "phase": "closing",
+      "input_image_sha256": "31f91661b105b7c49b740dc2688a87e30bb17718f108d74022fde55aced35860",
+      "rtl_sha256": "8f8c7064a16a965a33aaa9d49330b5622334fbd3620e93d0c2c61c28f28c1ea4",
+      "rtl_bytes": 484005989
+    },
+    {
+      "basis": "z",
+      "phase": "opening",
+      "input_image_sha256": "9126a015073e8511eeec51cc00622e2648771e238aa9e49973f77472dac4137f",
+      "rtl_sha256": "a2bacc18a3e40b11c3fc60094d284e434b1fc4997c8291d833f318ba8a45fc1d",
+      "rtl_bytes": 377621160
+    },
+    {
+      "basis": "z",
+      "phase": "steady",
+      "input_image_sha256": "4750aff561183ec0f3e9a82fce8d01fc81a8560e36ddea40c83947232daa41cf",
+      "rtl_sha256": "73c7a76bc95a97f07c8aefc90c6cba26a82434597040a8fe659af123aaf04a98",
+      "rtl_bytes": 386993287
+    },
+    {
+      "basis": "z",
+      "phase": "closing",
+      "input_image_sha256": "9e4da8189e6d270fa50cdb4e5fa50c478d86a6cb084f9b6669277571ee87c952",
+      "rtl_sha256": "3d50e98f44a09654eeff451f179f0c8f47ee9c5b25a6828823d3c5c12783c706",
+      "rtl_bytes": 483134187
+    }
+  ],
+  "acceptance": {
+    "six_bound_d6_graph_rule_images_generated": true,
+    "all_six_directly_loaded_by_pinned_micro_blossom": true,
+    "all_six_dynamic_weight_axi4_rtl_generated": true,
+    "largest_generated_rtl_independently_compiled": true,
+    "fresh_xz_exact_corrections_replayed_in_rtl": false,
+    "batch_p99_cycles_measured": false,
+    "p99_le_1us": false,
+    "miss_rate_le_1pct": false,
+    "fpga_timing_closed": false,
+    "lut_bram_measured": false,
+    "full_b2": false,
+    "scalable_p023": false,
+    "b7_resource_credit": 0
+  },
+  "next_gate": "Replay the accepted X/Z dynamic replacement batches through the generated RTL, compare every addressed edge and correction against the frozen software trace, then measure update-plus-decode p99 cycles."
+}
