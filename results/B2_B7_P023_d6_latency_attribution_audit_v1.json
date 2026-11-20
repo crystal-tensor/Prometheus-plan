@@ -1,0 +1,570 @@
+{
+  "as_of_date": "2026-11-20",
+  "audit_id": "2345cd4c115c0718e2e38569d06d6f3a3dae334ade689e98af8380a783d4576f",
+  "auditor": {
+    "imports_attribution_producer": false,
+    "path": "tools/b2_b7_p023_d6_latency_attribution_audit.py",
+    "sha256": "fa2e2369c18bd96d878a18392507e4594afa2f06a605cea94f7ee5c80d8f45b8"
+  },
+  "checks": [
+    {
+      "detail": "Exact #021/#022/#023 scope.",
+      "name": "scope",
+      "passed": true
+    },
+    {
+      "detail": "benchmarks/B2_B7_P023_d6_latency_attribution_v1.json",
+      "name": "protocol_binding",
+      "passed": true
+    },
+    {
+      "detail": "7d0e19d98b0d9d274f4431d6c9e42c4ab90f3623",
+      "name": "public_freeze_protocol",
+      "passed": true
+    },
+    {
+      "detail": "tools/b2_b7_p023_d6_latency_attribution.py",
+      "name": "public_freeze_producer",
+      "passed": true
+    },
+    {
+      "detail": "f04d0ac364dbf79553d9536cf4713251db86b49f",
+      "name": "frozen_inputs",
+      "passed": true
+    },
+    {
+      "detail": "Online source decision matches.",
+      "name": "source_negative",
+      "passed": true
+    },
+    {
+      "detail": "8/8 source chunks.",
+      "name": "source_chunks",
+      "passed": true
+    },
+    {
+      "detail": "Both corpus hashes match.",
+      "name": "corpora",
+      "passed": true
+    },
+    {
+      "detail": "Both window structures match.",
+      "name": "structures",
+      "passed": true
+    },
+    {
+      "detail": "Direct and timed sync prediction hashes reproduce.",
+      "name": "predictions",
+      "passed": true
+    },
+    {
+      "detail": "semantic_veto_pass=True",
+      "name": "semantic_veto",
+      "passed": true
+    },
+    {
+      "detail": "All 22 timing vectors reproduce counts, hashes, sums, quantiles, and misses.",
+      "name": "raw_vectors",
+      "passed": true
+    },
+    {
+      "detail": "Every per-event phase sum equals its total.",
+      "name": "phase_additivity",
+      "passed": true
+    },
+    {
+      "detail": "All stage verdicts reproduce.",
+      "name": "stage_passes",
+      "passed": true
+    },
+    {
+      "detail": "matching_kernel_tail_bottleneck",
+      "name": "classification",
+      "passed": true
+    },
+    {
+      "detail": "geometric_speedup=1.0941980642931515",
+      "name": "relative_score",
+      "passed": true
+    },
+    {
+      "detail": "13/13 producer checks.",
+      "name": "formal_checks",
+      "passed": true
+    },
+    {
+      "detail": "No downstream credit.",
+      "name": "hard_boundaries",
+      "passed": true
+    },
+    {
+      "detail": "5aabec7f51db5fcc3d3df81d8bbc1073aff7f8fb385f8fef4d0dbab85434c5e4",
+      "name": "evidence_id",
+      "passed": true
+    }
+  ],
+  "derived": {
+    "classification": "matching_kernel_tail_bottleneck",
+    "direct_path_tail_pass": false,
+    "geometric_mean_sync_to_direct_p99_speedup": 1.0941980642931515,
+    "matching_kernel_tail_pass": false,
+    "semantic_veto_pass": true,
+    "sync_path_tail_pass": false,
+    "x_sync_to_direct_p99_speedup": 1.1063718592964824,
+    "z_sync_to_direct_p99_speedup": 1.0821582217973231
+  },
+  "execution_environment": {
+    "machine": "arm64",
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "python": "3.12.6",
+    "scipy": "1.17.1",
+    "stim": "1.16.0",
+    "system": "Darwin"
+  },
+  "reconstruction_rows": [
+    {
+      "basis": "x",
+      "corpus_matches": true,
+      "corpus_sha256": "07d6d51ab5a70d93f088680c5b71a778ec30aa96e7d3b60de93182ea01de49e2",
+      "direct_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 326644
+      },
+      "direct_prediction_rows_equal_full_block": 1024,
+      "direct_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "full_prediction_sha256": "f079043b50276f1a1a2f424559a947f8bc0fafc2f665825a06d59db6319c31c3",
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structure_matches": true,
+      "sync_prediction_rows_equal_full_block": 128,
+      "sync_timed_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40732
+      },
+      "sync_timed_prediction_sha256": "a2965755167d1e8a0fd0f116e0e0a2bb4d12e5c6782b35979a991d923d63e401",
+      "timed_cross_path_prediction_rows_equal": 128
+    },
+    {
+      "basis": "z",
+      "corpus_matches": true,
+      "corpus_sha256": "9ee7dc251b3e5345e92891c6e5f9fc0710f0a14b27cb51fa1665808678401ccf",
+      "direct_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 326530
+      },
+      "direct_prediction_rows_equal_full_block": 1024,
+      "direct_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "full_prediction_sha256": "6e35bd4487ad2fd3c0336a68484f456ce52b3413cc34939b1c493bfb6f302822",
+      "matches_result": true,
+      "source_chunks_replayed": 4,
+      "structure_matches": true,
+      "sync_prediction_rows_equal_full_block": 128,
+      "sync_timed_diagnostics": {
+        "commit_residual_failure_shots": 0,
+        "residual_nonzero_shots": 0,
+        "selected_components_total": 40649
+      },
+      "sync_timed_prediction_sha256": "fda92bcc25361d632ca6de874e1af989e58a0bdf15bde1c864020334d1a1f937",
+      "timed_cross_path_prediction_rows_equal": 128
+    }
+  ],
+  "schema_version": "b2_b7_p023_d6_latency_attribution_audit_v1",
+  "scope": {
+    "excluded_work": "all catalog problems and research tracks other than #021/B7, #022/B2, and #023",
+    "included_catalog_problem_ids": [
+      21,
+      22,
+      23
+    ],
+    "included_tracks": [
+      "B2",
+      "B7"
+    ]
+  },
+  "source_result": {
+    "path": "results/B2_B7_P023_d6_latency_attribution_v1.json",
+    "sha256": "5cb8918902caa0e3d93f3ad669f1842ad002ce5ef18c0269b65df8c219e83f54"
+  },
+  "summary": {
+    "b7_resource_credit": 0,
+    "checks_failed": 0,
+    "checks_passed": 19,
+    "classification": "matching_kernel_tail_bottleneck",
+    "direct_prediction_rows_replayed": 2048,
+    "full_b2_credit_ready": false,
+    "hardware_decoder_deadline_passed": false,
+    "p023_scalable_memory_ready": false,
+    "raw_timing_vectors_replayed": 22,
+    "semantic_veto_pass": true,
+    "source_chunks_replayed": 8,
+    "sync_timed_prediction_rows_replayed": 256
+  },
+  "timing_rows": [
+    {
+      "all_vectors_match_result": true,
+      "basis": "x",
+      "derived": {
+        "direct::arrival_delivery": {
+          "deadline_miss_fraction": 0.00014291158536585365,
+          "deadline_misses": 3,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 2.1111666666666666,
+          "mean_nanoseconds": 538.8739519817074,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.08333333333333333,
+          "p95_microseconds_per_committed_layer": 0.118,
+          "p999_microseconds_per_committed_layer": 0.1805,
+          "p99_microseconds_per_committed_layer": 0.13883333333333334,
+          "raw_nanoseconds_sha256": "a2f9a5ac4b8c3d1c438dc8bf07baee6fec47bc70beaa40b6b33ba4d126f1eaaa",
+          "sum_nanoseconds": 11312042
+        },
+        "direct::commit_propagation_and_residual": {
+          "deadline_miss_fraction": 0.011194740853658536,
+          "deadline_misses": 235,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 15.555666666666665,
+          "mean_nanoseconds": 3065.680497332317,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.4721666666666667,
+          "p95_microseconds_per_committed_layer": 0.7986666666666666,
+          "p999_microseconds_per_committed_layer": 1.8125,
+          "p99_microseconds_per_committed_layer": 1.014,
+          "raw_nanoseconds_sha256": "2efcb9c694cd3873505a8708feed641e830935040a71c41333d6d1bc868aff27",
+          "sum_nanoseconds": 64354765
+        },
+        "direct::direct_feedback_read": {
+          "deadline_miss_fraction": 0.0,
+          "deadline_misses": 0,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 0.9791666666666666,
+          "mean_nanoseconds": 133.5369188262195,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.0625,
+          "p99_microseconds_per_committed_layer": 0.034833333333333334,
+          "raw_nanoseconds_sha256": "c65b2f3870011ec785774855d9441f65f3a865abee0a2a5dd4f7a013c0675c9b",
+          "sum_nanoseconds": 2803207
+        },
+        "direct::edge_to_component_mapping": {
+          "deadline_miss_fraction": 0.5040967987804879,
+          "deadline_misses": 10582,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 7.8125,
+          "mean_nanoseconds": 6522.326648246952,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 1.007,
+          "p95_microseconds_per_committed_layer": 2.0693333333333337,
+          "p999_microseconds_per_committed_layer": 3.6111666666666666,
+          "p99_microseconds_per_committed_layer": 2.6596666666666664,
+          "raw_nanoseconds_sha256": "63218d3ec5843cda6a7cb1976c3a9a490151908651eff2b5c419c50e60e5408d",
+          "sum_nanoseconds": 136916681
+        },
+        "direct::matching_kernel": {
+          "deadline_miss_fraction": 0.9270674542682927,
+          "deadline_misses": 19461,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 9.7985,
+          "mean_nanoseconds": 12276.937738185976,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 1.9236666666666666,
+          "p95_microseconds_per_committed_layer": 3.5416666666666665,
+          "p999_microseconds_per_committed_layer": 6.326333333333333,
+          "p99_microseconds_per_committed_layer": 4.597166666666667,
+          "raw_nanoseconds_sha256": "865d0b875590a382d51de1fb0dbcba1d03e0550711e57b2fb06ecd9f803381d6",
+          "sum_nanoseconds": 257717477
+        },
+        "direct::syndrome_materialization": {
+          "deadline_miss_fraction": 0.00033346036585365856,
+          "deadline_misses": 7,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 3.8888333333333334,
+          "mean_nanoseconds": 1171.1723513719512,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.1875,
+          "p95_microseconds_per_committed_layer": 0.22916666666666666,
+          "p999_microseconds_per_committed_layer": 0.3333333333333333,
+          "p99_microseconds_per_committed_layer": 0.257,
+          "raw_nanoseconds_sha256": "3f5a9a040ee250bd58489a99cc3e039318e74540c00fbfc7634ad0511379a7b4",
+          "sum_nanoseconds": 24585250
+        },
+        "direct_end_to_end": {
+          "deadline_miss_fraction": 0.9984279725609756,
+          "deadline_misses": 20959,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 22.51383333333333,
+          "mean_nanoseconds": 23708.528105945123,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.743,
+          "p95_microseconds_per_committed_layer": 6.5625,
+          "p999_microseconds_per_committed_layer": 10.888833333333334,
+          "p99_microseconds_per_committed_layer": 8.291666666666666,
+          "raw_nanoseconds_sha256": "4aa349c8c7726b6b70ae13bacbecc2ded9a18048f3c582f9cfce1bb3c4084622",
+          "sum_nanoseconds": 497689422
+        },
+        "sync::decoder_and_commit": {
+          "deadline_miss_fraction": 0.9940453506097561,
+          "deadline_misses": 20867,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 33.7015,
+          "mean_nanoseconds": 23140.137242759145,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.6181666666666663,
+          "p95_microseconds_per_committed_layer": 6.618,
+          "p999_microseconds_per_committed_layer": 10.826333333333334,
+          "p99_microseconds_per_committed_layer": 8.229166666666666,
+          "raw_nanoseconds_sha256": "f0ae1163af68e895af18dd88f103a3da79ea0433fda60bdc26b08b8d271cfb67",
+          "sum_nanoseconds": 485757761
+        },
+        "sync::feedback": {
+          "deadline_miss_fraction": 0.001524390243902439,
+          "deadline_misses": 32,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 3.0763333333333334,
+          "mean_nanoseconds": 1536.1322408536585,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.25,
+          "p95_microseconds_per_committed_layer": 0.2846666666666667,
+          "p999_microseconds_per_committed_layer": 1.139,
+          "p99_microseconds_per_committed_layer": 0.368,
+          "raw_nanoseconds_sha256": "b0dbd7393eaf064ee10ced05a10de5ea9950b9c4a5ae596fb42fd44a170ae5af",
+          "sum_nanoseconds": 32246488
+        },
+        "sync::input_transport": {
+          "deadline_miss_fraction": 0.004763719512195122,
+          "deadline_misses": 100,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 7.8125,
+          "mean_nanoseconds": 3737.044064405488,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.611,
+          "p95_microseconds_per_committed_layer": 0.6805,
+          "p999_microseconds_per_committed_layer": 1.9653333333333332,
+          "p99_microseconds_per_committed_layer": 0.8333333333333334,
+          "raw_nanoseconds_sha256": "1d1a1830d0f2505c6927b7a9120e288d4d13d126791b7dd40de8cef54cc1fb9c",
+          "sum_nanoseconds": 78448029
+        },
+        "sync_end_to_end": {
+          "deadline_miss_fraction": 0.9996189024390244,
+          "deadline_misses": 20984,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 35.493,
+          "mean_nanoseconds": 28413.313548018294,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 4.493,
+          "p95_microseconds_per_committed_layer": 7.514,
+          "p999_microseconds_per_committed_layer": 12.083333333333334,
+          "p99_microseconds_per_committed_layer": 9.173666666666666,
+          "raw_nanoseconds_sha256": "be57238731b6f66440a9469704844bd3dd29d64b59e204ef8724afd8696b76c2",
+          "sum_nanoseconds": 596452278
+        }
+      },
+      "phase_additivity": {
+        "direct": true,
+        "sync": true
+      },
+      "stage_pass": {
+        "direct_end_to_end": false,
+        "matching_kernel": false,
+        "sync_end_to_end": false
+      },
+      "stage_pass_matches_result": true
+    },
+    {
+      "all_vectors_match_result": true,
+      "basis": "z",
+      "derived": {
+        "direct::arrival_delivery": {
+          "deadline_miss_fraction": 9.527439024390244e-05,
+          "deadline_misses": 2,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 3.2986666666666666,
+          "mean_nanoseconds": 533.9963795731708,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.08333333333333333,
+          "p95_microseconds_per_committed_layer": 0.11116666666666668,
+          "p999_microseconds_per_committed_layer": 0.15983333333333336,
+          "p99_microseconds_per_committed_layer": 0.13183333333333333,
+          "raw_nanoseconds_sha256": "48e465b77f572fc26e1ca55184d49a613c4f0a15e05d0a6ac78cf7d567a71692",
+          "sum_nanoseconds": 11209652
+        },
+        "direct::commit_propagation_and_residual": {
+          "deadline_miss_fraction": 0.01171875,
+          "deadline_misses": 246,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 6.305666666666667,
+          "mean_nanoseconds": 3062.781678734756,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.4721666666666667,
+          "p95_microseconds_per_committed_layer": 0.8055,
+          "p999_microseconds_per_committed_layer": 2.027833333333333,
+          "p99_microseconds_per_committed_layer": 1.0278333333333332,
+          "raw_nanoseconds_sha256": "9e84ec59183fd217ae90749bfd58dc41398edc672a36eaf1e08c96881b5b3f59",
+          "sum_nanoseconds": 64293913
+        },
+        "direct::direct_feedback_read": {
+          "deadline_miss_fraction": 0.0,
+          "deadline_misses": 0,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 0.3333333333333333,
+          "mean_nanoseconds": 131.1093273628049,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.020833333333333332,
+          "p95_microseconds_per_committed_layer": 0.02783333333333333,
+          "p999_microseconds_per_committed_layer": 0.0625,
+          "p99_microseconds_per_committed_layer": 0.034666666666666665,
+          "raw_nanoseconds_sha256": "c0750a2e4b1267e7c8f73d52d1dbfd607b56ca54b84c42bbd4aef1e3cb1c91b1",
+          "sum_nanoseconds": 2752247
+        },
+        "direct::edge_to_component_mapping": {
+          "deadline_miss_fraction": 0.47270388719512196,
+          "deadline_misses": 9923,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 8.083333333333332,
+          "mean_nanoseconds": 6295.421541539634,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.9721666666666666,
+          "p95_microseconds_per_committed_layer": 2.0348333333333333,
+          "p999_microseconds_per_committed_layer": 3.4166666666666665,
+          "p99_microseconds_per_committed_layer": 2.6528333333333336,
+          "raw_nanoseconds_sha256": "e7fb102cd5beb7db118e7ffef67e4dc97eb7447862ac15cabaa6f5fa45211916",
+          "sum_nanoseconds": 132153489
+        },
+        "direct::matching_kernel": {
+          "deadline_miss_fraction": 0.9161108993902439,
+          "deadline_misses": 19231,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 11.173666666666666,
+          "mean_nanoseconds": 12083.874952362805,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 1.875,
+          "p95_microseconds_per_committed_layer": 3.5763333333333334,
+          "p999_microseconds_per_committed_layer": 6.534833333333333,
+          "p99_microseconds_per_committed_layer": 4.673666666666667,
+          "raw_nanoseconds_sha256": "c3dd0bc99f66ecfdc8939acb6c78c7d38a7134cefd76142ee4af24f492a63fad",
+          "sum_nanoseconds": 253664703
+        },
+        "direct::syndrome_materialization": {
+          "deadline_miss_fraction": 0.0010003810975609756,
+          "deadline_misses": 21,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 4.222166666666667,
+          "mean_nanoseconds": 1179.673494664634,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.19433333333333333,
+          "p95_microseconds_per_committed_layer": 0.22233333333333336,
+          "p999_microseconds_per_committed_layer": 1.0208333333333335,
+          "p99_microseconds_per_committed_layer": 0.25,
+          "raw_nanoseconds_sha256": "ca2d8defa89298521ba156f845608722ab8fe3ac4052b2c35a195b86d0313350",
+          "sum_nanoseconds": 24763706
+        },
+        "direct_end_to_end": {
+          "deadline_miss_fraction": 0.9975705030487805,
+          "deadline_misses": 20941,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 16.833333333333332,
+          "mean_nanoseconds": 23286.857374237807,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.6528333333333336,
+          "p95_microseconds_per_committed_layer": 6.611166666666667,
+          "p999_microseconds_per_committed_layer": 10.979166666666666,
+          "p99_microseconds_per_committed_layer": 8.368,
+          "raw_nanoseconds_sha256": "948ba82dbc54804dee34788d9c63de5a4c82155e95e99769c76a1fc8c83ca4a1",
+          "sum_nanoseconds": 488837710
+        },
+        "sync::decoder_and_commit": {
+          "deadline_miss_fraction": 0.9934260670731707,
+          "deadline_misses": 20854,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 30.145833333333332,
+          "mean_nanoseconds": 23030.054449314026,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 3.6041666666666665,
+          "p95_microseconds_per_committed_layer": 6.507,
+          "p999_microseconds_per_committed_layer": 10.229166666666666,
+          "p99_microseconds_per_committed_layer": 8.132,
+          "raw_nanoseconds_sha256": "26ab83644a8d77470b9af588dea1c42c6996e1aaefe552a8aba25d42a2ec1ec8",
+          "sum_nanoseconds": 483446903
+        },
+        "sync::feedback": {
+          "deadline_miss_fraction": 0.0009051067073170732,
+          "deadline_misses": 19,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 5.743,
+          "mean_nanoseconds": 1529.94921875,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.25,
+          "p95_microseconds_per_committed_layer": 0.2778333333333333,
+          "p999_microseconds_per_committed_layer": 0.875,
+          "p99_microseconds_per_committed_layer": 0.3541666666666667,
+          "raw_nanoseconds_sha256": "d8be5a4faf59a838e24eafe588091f57e339724c6809ad4108cf4a11649a4070",
+          "sum_nanoseconds": 32116694
+        },
+        "sync::input_transport": {
+          "deadline_miss_fraction": 0.0033346036585365853,
+          "deadline_misses": 70,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 6.458333333333333,
+          "mean_nanoseconds": 3694.7218940548782,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 0.6041666666666666,
+          "p95_microseconds_per_committed_layer": 0.6598333333333334,
+          "p999_microseconds_per_committed_layer": 2.020833333333333,
+          "p99_microseconds_per_committed_layer": 0.7916666666666666,
+          "raw_nanoseconds_sha256": "7ef6ed79c1d44d32adfa3548f7b4a9b767a19755dd1d07154e53a9d1ecae31e3",
+          "sum_nanoseconds": 77559602
+        },
+        "sync_end_to_end": {
+          "deadline_miss_fraction": 0.9995236280487805,
+          "deadline_misses": 20982,
+          "expected_observations": 20992,
+          "matches_result": true,
+          "max_microseconds_per_committed_layer": 35.05566666666667,
+          "mean_nanoseconds": 28254.725562118903,
+          "observations": 20992,
+          "p50_microseconds_per_committed_layer": 4.472166666666667,
+          "p95_microseconds_per_committed_layer": 7.402833333333333,
+          "p999_microseconds_per_committed_layer": 11.159666666666666,
+          "p99_microseconds_per_committed_layer": 9.0555,
+          "raw_nanoseconds_sha256": "3a97e59f5f8340421d395a4517f18f28e3b4335b0b8f17330124ab427455db8c",
+          "sum_nanoseconds": 593123199
+        }
+      },
+      "phase_additivity": {
+        "direct": true,
+        "sync": true
+      },
+      "stage_pass": {
+        "direct_end_to_end": false,
+        "matching_kernel": false,
+        "sync_end_to_end": false
+      },
+      "stage_pass_matches_result": true
+    }
+  ]
+}
