@@ -1,0 +1,182 @@
+{
+  "acceptance": {
+    "axi": false,
+    "b7_resource_credit": 0,
+    "closed_loop_semantic_gate": true,
+    "fpga": false,
+    "full_b2": false,
+    "full_x": false,
+    "miss_rate_le_1pct": false,
+    "open_loop_127_shot_block_accepted": false,
+    "p99_le_1us": false,
+    "scalable_p023": false,
+    "z_basis": false
+  },
+  "checks": [
+    {
+      "name": "pilot binds frozen shots 0 and 15",
+      "passed": true
+    },
+    {
+      "name": "pilot has complete windows",
+      "passed": true
+    },
+    {
+      "name": "formal capture accepted",
+      "passed": true
+    },
+    {
+      "name": "formal process exited cleanly",
+      "passed": true
+    },
+    {
+      "name": "Verilator version pinned",
+      "passed": true
+    },
+    {
+      "name": "v9 patch bound",
+      "passed": true
+    },
+    {
+      "name": "pilot bound",
+      "passed": true
+    },
+    {
+      "name": "selector server bound",
+      "passed": true
+    },
+    {
+      "name": "output bound",
+      "passed": true
+    },
+    {
+      "name": "log bound",
+      "passed": true
+    },
+    {
+      "name": "no forbidden runtime hits",
+      "passed": true
+    },
+    {
+      "name": "no unexpected warnings",
+      "passed": true
+    },
+    {
+      "name": "complete two-shot cardinality",
+      "passed": true
+    },
+    {
+      "name": "all closed-loop syndromes valid",
+      "passed": true
+    },
+    {
+      "name": "all committed residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final logical frames match",
+      "passed": true
+    },
+    {
+      "name": "occupancy audit complete",
+      "passed": true
+    },
+    {
+      "name": "shot 0 replay-equivalent calibration",
+      "passed": true
+    },
+    {
+      "name": "closed-loop response diverges only at next window",
+      "passed": true
+    },
+    {
+      "name": "first counterexample changes next syndrome",
+      "passed": true
+    },
+    {
+      "name": "first counterexample changes next selector set size",
+      "passed": true
+    },
+    {
+      "name": "counterexample shot remains fully committed",
+      "passed": true
+    },
+    {
+      "name": "prior open-loop block remains rejected",
+      "passed": true
+    }
+  ],
+  "classification": "x_closed_loop_calibration_and_first_degenerate_correction_shot_pass",
+  "closed_loop_result": {
+    "cases": 328,
+    "commit_residual_failures": 0,
+    "final_frame_failures": 0,
+    "final_residual_failures": 0,
+    "maximum_iterations": 18,
+    "occupancy_checks_clear": 3254,
+    "shots": [
+      0,
+      15
+    ],
+    "syndrome_valid_cases": 328,
+    "total_iterations": 1906
+  },
+  "date": "2026-11-21",
+  "evidence_id": "06a37cc1d9345554cec548351dbc09aa99f347651d27d8fe78c30ffda0dcefbb",
+  "frozen_denominator": {
+    "accepted_cases": 1640,
+    "accepted_distinct_shots": 10,
+    "accepted_shot_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      15
+    ],
+    "basis": "x",
+    "cases": 167936,
+    "fraction_tested": 0.009765625,
+    "remaining_cases": 166296,
+    "remaining_shots": 1014,
+    "shots": 1024
+  },
+  "next_gate": "Run the remaining frozen X shots through the closed-loop state-feedback route; do not count the rejected 127-shot open-loop block.",
+  "schema": "b2_b7_p023_d6_x_closed_loop_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "sources": {
+    "benchmarks/B2_B7_P023_d6_x_closed_loop_pilot_v1.json": "13f145c96d444fd792e4176f85563761e7756af0fb4b0eea84e5919b5b40aa42",
+    "results/B2_B7_P023_d6_x_closed_loop_pilot_verilator_capture_v1.json": "18c0104a089ba5be40aeb2da9d4ce85311289ca3353207e3b032d36bd8e4424d",
+    "results/B2_B7_P023_d6_x_closed_loop_pilot_verilator_capture_v1.log": "7a47af44518c009c12a2cafc170058ea855deecd18bccdc2ef67fa9e01867cf7",
+    "results/B2_B7_P023_d6_x_closed_loop_pilot_verilator_v1.json": "eeb6904432d595023176f5f8268f075d6b5495230d4bef51d5241d0cc07f3561",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_verilator_v1.json": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_v1.json": "3e964152a0f1885981d65e1b22e18a1e0d14c4399a1b1008627ad10becce6e57",
+    "results/B2_B7_P023_d6_x_lookahead_divergence_evidence_v1.json": "0e97c4f491729a6c944e86233ae446492a1e2b52bfe245108a8b57bef2012c13",
+    "tools/b2_b7_p023_d6_x_selector_server_v1.py": "124f0b388a45d72e32c38947cca776534236e67fc80b2670c3def2d3fb0c5393",
+    "tools/microblossom/d6_x_phase_primal_dual_closed_loop_v9.patch": "e488e84a0efff1e0493d4a03c8723e14e6bc477701bc1e368fc89d51acb01443"
+  },
+  "trajectory_falsifier": {
+    "closed_loop_window_60_defects": 12,
+    "closed_loop_window_60_selectors": 6,
+    "feedback_response_window": 60,
+    "final_frame_hex": "1",
+    "final_residual_clear": true,
+    "first_noncanonical_correction_window": 59,
+    "later_differing_windows": [],
+    "open_loop_window_60_defects": 14,
+    "open_loop_window_60_selectors": 7,
+    "shot": 15
+  }
+}

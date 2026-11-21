@@ -1,0 +1,705 @@
+    Finished release [optimized] target(s) in 0.09s
+     Running `target/release/d6_x_phase_primal_dual_closed_loop /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_closed_loop_pilot_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_closed_loop_pilot_verilator_v1.json /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12 /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/tools/b2_b7_p023_d6_x_selector_server_v1.py`
+Starting Scala simulator host... this may take a while (listening on 127.0.0.1:55810)
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project yuewuo-micro-blossom-a3530d9-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/)
+[info] running (fork) microblossom.DualHost 127.0.0.1 55810 d6_x_phase_primal_dual_full_corpus_shard
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.21 11:34:08
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 5.916 : Checks and transforms
+[info] [Progress] at 31.326 : Generate Verilog
+[info] [Warning] 1788383 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 50.630
+[info] [Progress] Simulation workspace in /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/./simWorkspace/dualHost/d6_x_phase_primal_dual_full_corpus_shard
+[info] [Progress] Verilator compilation started
+[info] [info] Found cached verilator binaries
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:116:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+[info]   116 |       uint8_t values[byteCount + !sint];
+[info]       |                      ^~~~~~~~~~~~~~~~~
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:116:22: note: read of non-const variable 'byteCount' is not allowed in a constant expression
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:113:16: note: declared here
+[info]   113 |       uint32_t byteCount = wordsCount*4;
+[info]       |                ^
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:131:19: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+[info]   131 |       jbyte value[length];
+[info]       |                   ^~~~~~
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:131:19: note: function parameter 'length' with unknown value cannot be used in a constant expression
+[info] ../verilator/VDistributedDual__spinalWrapper.cpp:129:57: note: declared here
+[info]   129 |     void setAU8_mem(JNIEnv *env, jbyteArray jvalue, int length, size_t index) {
+[info]       |                                                         ^
+[info] 2 warnings generated.
+[info] [Progress] Verilator compilation done in 4863.299 ms
+[info] [Progress] Start DistributedDual hosted simulation with seed 1740796073
+[info] waveform disabled
+CLOSED_LOOP_START shot=0 window=0 phase=opening defects=16 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=0 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=1 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=1 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=2 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=2 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=3 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=3 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=4 phase=steady defects=16 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=4 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=5 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=5 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=6 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=6 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=7 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=7 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=8 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=8 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=9 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=9 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=10 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=10 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=11 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=11 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=12 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=12 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=13 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=13 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=14 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=14 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=15 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=15 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=16 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=16 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=17 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=17 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=18 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=18 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=19 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=19 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=20 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=20 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=21 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=21 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=22 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=22 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=23 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=23 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=24 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=24 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=25 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=25 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=26 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=26 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=27 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=27 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=28 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=28 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=29 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=29 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=30 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=30 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=31 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=31 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=32 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=32 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=33 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=33 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=34 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=34 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=35 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=35 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=36 phase=steady defects=15 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=36 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=37 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=37 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=38 phase=steady defects=12 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=38 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=39 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=39 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=40 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=40 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=41 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=41 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=42 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=42 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=43 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=43 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=44 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=44 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=45 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=45 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=46 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=46 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=47 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=47 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=48 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=48 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=49 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=49 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=50 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=50 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=51 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=51 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=52 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=52 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=53 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=53 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=54 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=54 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=55 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=55 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=56 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=56 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=57 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=57 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=58 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=58 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=59 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=59 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=60 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=0 window=60 iterations=12 commit_clear=true
+CLOSED_LOOP_START shot=0 window=61 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=61 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=62 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=62 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=63 phase=steady defects=16 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=63 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=64 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=64 iterations=12 commit_clear=true
+CLOSED_LOOP_START shot=0 window=65 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=65 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=66 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=66 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=67 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=67 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=68 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=68 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=69 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=69 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=70 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=70 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=71 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=71 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=72 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=72 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=73 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=73 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=74 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=74 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=75 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=75 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=76 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=76 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=77 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=77 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=78 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=78 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=79 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=79 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=80 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=80 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=81 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=81 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=82 phase=steady defects=12 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=82 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=83 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=83 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=84 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=84 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=85 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=85 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=86 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=86 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=87 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=87 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=88 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=88 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=89 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=89 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=90 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=90 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=91 phase=steady defects=12 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=91 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=92 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=92 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=93 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=93 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=94 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=94 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=95 phase=steady defects=15 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=95 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=96 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=96 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=97 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=97 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=98 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=98 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=99 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=99 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=100 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=100 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=101 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=101 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=102 phase=steady defects=16 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=102 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=103 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=103 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=104 phase=steady defects=15 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=104 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=105 phase=steady defects=14 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=105 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=106 phase=steady defects=15 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=106 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=107 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=107 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=108 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=108 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=109 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=109 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=110 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=110 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=111 phase=steady defects=12 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=111 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=112 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=112 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=113 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=113 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=114 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=114 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=115 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=115 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=116 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=116 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=117 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=117 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=118 phase=steady defects=16 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=118 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=119 phase=steady defects=12 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=119 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=120 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=120 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=121 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=121 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=122 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=122 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=123 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=123 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=124 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=124 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=125 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=125 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=126 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=126 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=127 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=127 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=128 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=128 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=129 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=129 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=130 phase=steady defects=20 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=130 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=131 phase=steady defects=21 selectors=11
+CLOSED_LOOP_SOLVED shot=0 window=131 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=132 phase=steady defects=22 selectors=13
+CLOSED_LOOP_SOLVED shot=0 window=132 iterations=13 commit_clear=true
+CLOSED_LOOP_START shot=0 window=133 phase=steady defects=14 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=133 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=134 phase=steady defects=12 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=134 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=135 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=135 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=136 phase=steady defects=5 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=136 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=137 phase=steady defects=10 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=137 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=138 phase=steady defects=10 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=138 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=139 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=139 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=140 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=140 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=141 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=141 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=142 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=142 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=143 phase=steady defects=1 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=143 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=144 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=144 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=145 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=145 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=146 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=146 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=147 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=147 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=148 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=148 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=149 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=149 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=150 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=150 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=151 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=151 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=152 phase=steady defects=25 selectors=14
+CLOSED_LOOP_SOLVED shot=0 window=152 iterations=15 commit_clear=true
+CLOSED_LOOP_START shot=0 window=153 phase=steady defects=20 selectors=11
+CLOSED_LOOP_SOLVED shot=0 window=153 iterations=12 commit_clear=true
+CLOSED_LOOP_START shot=0 window=154 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=154 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=155 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=155 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=156 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=156 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=157 phase=steady defects=16 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=157 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=158 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=158 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=159 phase=steady defects=19 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=159 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=160 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=160 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=161 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=161 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=162 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=162 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=163 phase=closing defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=163 iterations=4 commit_clear=true
+CLOSED_LOOP_SHOT shot=0 residual_clear=true frame=0 expected_frame=0
+CLOSED_LOOP_START shot=15 window=0 phase=opening defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=0 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=1 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=1 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=2 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=2 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=3 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=3 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=4 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=4 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=5 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=5 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=6 phase=steady defects=20 selectors=11
+CLOSED_LOOP_SOLVED shot=15 window=6 iterations=12 commit_clear=true
+CLOSED_LOOP_START shot=15 window=7 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=7 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=8 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=8 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=9 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=9 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=10 phase=steady defects=8 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=10 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=11 phase=steady defects=5 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=11 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=12 phase=steady defects=1 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=12 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=13 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=13 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=14 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=14 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=15 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=15 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=16 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=16 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=17 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=17 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=18 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=18 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=19 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=19 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=20 phase=steady defects=5 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=20 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=21 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=21 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=22 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=22 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=23 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=23 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=24 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=24 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=25 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=25 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=26 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=26 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=27 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=27 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=28 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=28 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=29 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=29 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=30 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=30 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=31 phase=steady defects=26 selectors=15
+CLOSED_LOOP_SOLVED shot=15 window=31 iterations=16 commit_clear=true
+CLOSED_LOOP_START shot=15 window=32 phase=steady defects=25 selectors=14
+CLOSED_LOOP_SOLVED shot=15 window=32 iterations=15 commit_clear=true
+CLOSED_LOOP_START shot=15 window=33 phase=steady defects=22 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=33 iterations=13 commit_clear=true
+CLOSED_LOOP_START shot=15 window=34 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=34 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=35 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=35 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=36 phase=steady defects=1 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=36 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=37 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=37 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=38 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=38 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=39 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=39 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=40 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=40 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=41 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=41 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=42 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=42 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=43 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=43 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=44 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=44 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=45 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=45 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=46 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=46 iterations=12 commit_clear=true
+CLOSED_LOOP_START shot=15 window=47 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=47 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=48 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=48 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=49 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=49 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=50 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=50 iterations=13 commit_clear=true
+CLOSED_LOOP_START shot=15 window=51 phase=steady defects=22 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=51 iterations=13 commit_clear=true
+CLOSED_LOOP_START shot=15 window=52 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=52 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=53 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=53 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=54 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=54 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=55 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=55 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=56 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=56 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=57 phase=steady defects=4 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=57 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=58 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=58 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=59 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=59 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=60 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=60 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=61 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=61 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=62 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=62 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=63 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=63 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=64 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=64 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=65 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=65 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=66 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=66 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=67 phase=steady defects=21 selectors=11
+CLOSED_LOOP_SOLVED shot=15 window=67 iterations=15 commit_clear=true
+CLOSED_LOOP_START shot=15 window=68 phase=steady defects=25 selectors=13
+CLOSED_LOOP_SOLVED shot=15 window=68 iterations=18 commit_clear=true
+CLOSED_LOOP_START shot=15 window=69 phase=steady defects=19 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=69 iterations=15 commit_clear=true
+CLOSED_LOOP_START shot=15 window=70 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=70 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=71 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=71 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=72 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=72 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=73 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=73 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=74 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=74 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=75 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=75 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=76 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=76 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=77 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=77 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=78 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=78 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=79 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=79 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=80 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=80 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=81 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=81 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=82 phase=steady defects=17 selectors=9
+CLOSED_LOOP_SOLVED shot=15 window=82 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=83 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=83 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=84 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=84 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=85 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=85 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=86 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=86 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=87 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=87 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=88 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=88 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=89 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=89 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=90 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=90 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=91 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=91 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=92 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=92 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=93 phase=steady defects=17 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=93 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=94 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=94 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=95 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=95 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=96 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=96 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=97 phase=steady defects=14 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=97 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=15 window=98 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=98 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=99 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=99 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=100 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=100 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=101 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=101 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=102 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=102 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=103 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=103 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=15 window=104 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=104 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=105 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=105 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=106 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=106 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=107 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=107 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=108 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=108 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=109 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=109 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=110 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=110 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=111 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=111 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=112 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=112 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=113 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=113 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=114 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=114 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=115 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=115 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=116 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=116 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=117 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=117 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=118 phase=steady defects=16 selectors=9
+CLOSED_LOOP_SOLVED shot=15 window=118 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=119 phase=steady defects=24 selectors=14
+CLOSED_LOOP_SOLVED shot=15 window=119 iterations=14 commit_clear=true
+CLOSED_LOOP_START shot=15 window=120 phase=steady defects=17 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=120 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=121 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=121 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=122 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=122 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=123 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=123 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=124 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=124 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=125 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=125 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=126 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=126 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=127 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=127 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=128 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=128 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=129 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=129 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=130 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=130 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=131 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=131 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=132 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=132 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=133 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=133 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=134 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=134 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=135 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=135 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=136 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=136 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=137 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=137 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=138 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=138 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=139 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=139 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=140 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=140 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=141 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=141 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=142 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=142 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=15 window=143 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=143 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=144 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=144 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=145 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=145 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=146 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=146 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=147 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=147 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=148 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=148 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=149 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=149 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=150 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=150 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=151 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=151 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=152 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=152 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=153 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=153 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=154 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=154 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=155 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=155 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=156 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=156 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=157 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=157 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=158 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=158 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=159 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=159 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=160 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=160 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=161 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=161 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=162 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=162 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=163 phase=closing defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=163 iterations=2 commit_clear=true
+CLOSED_LOOP_SHOT shot=15 residual_clear=true frame=1 expected_frame=1
+{"shots":2,"windows":164,"cases":328,"total_defects":3254,"total_selectors":1824,"all_syndromes_valid":true,"commit_residual_failures":0,"final_residual_failures":0,"final_frame_failures":0,"max_iterations":18,"total_iterations":1906,"accepted_closed_loop_gate":true}
+[info] requested quit, aborting...
+[info] [Done] Simulation done in 15126.272 ms
+[success] Total time: 75 s (01:15), completed 2026年11月21日 上午11:35:20
+Scala process quit normally
+Successfully remove build folder
