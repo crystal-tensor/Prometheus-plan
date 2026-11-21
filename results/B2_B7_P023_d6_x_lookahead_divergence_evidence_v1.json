@@ -1,0 +1,1116 @@
+{
+  "acceptance": {
+    "accepted_frozen_x_cases": 1476,
+    "accepted_frozen_x_shots": 9,
+    "axi": false,
+    "b7_resource_credit": 0,
+    "fpga": false,
+    "full_b2": false,
+    "full_x": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "previous_nine_shot_evidence_revoked": false,
+    "scalable_p023": false,
+    "trial_accepted_as_full_x_progress": false,
+    "z_basis": false
+  },
+  "checks": [
+    {
+      "name": "frozen shot interval",
+      "passed": true
+    },
+    {
+      "name": "case cardinality",
+      "passed": true
+    },
+    {
+      "name": "capture rejected replay gate",
+      "passed": true
+    },
+    {
+      "name": "process rejected exact-correction mismatch",
+      "passed": true
+    },
+    {
+      "name": "all syndrome checks passed",
+      "passed": true
+    },
+    {
+      "name": "exact correction gate failed",
+      "passed": true
+    },
+    {
+      "name": "occupancy checks complete",
+      "passed": true
+    },
+    {
+      "name": "simulator pinned",
+      "passed": true
+    },
+    {
+      "name": "patch bound",
+      "passed": true
+    },
+    {
+      "name": "raw output bound",
+      "passed": true
+    },
+    {
+      "name": "log bound",
+      "passed": true
+    },
+    {
+      "name": "mismatch count reproduced",
+      "passed": true
+    },
+    {
+      "name": "all mismatches remain syndrome-valid",
+      "passed": true
+    },
+    {
+      "name": "observable frame unchanged",
+      "passed": true
+    },
+    {
+      "name": "all deltas are detector corrections",
+      "passed": true
+    },
+    {
+      "name": "all divergent detectors commit next window",
+      "passed": true
+    },
+    {
+      "name": "all divergent detectors were prior arrivals",
+      "passed": true
+    },
+    {
+      "name": "all divergent detectors span three-window detection",
+      "passed": true
+    }
+  ],
+  "classification": "x_open_loop_replay_gate_falsified_by_next_window_correction_divergence",
+  "date": "2026-11-21",
+  "diagnosis": {
+    "delta_rows": [
+      {
+        "arrival_windows": [
+          58
+        ],
+        "bit": 222,
+        "commit_windows": [
+          60
+        ],
+        "detection_windows": [
+          58,
+          59,
+          60
+        ],
+        "global_detector": 12595,
+        "kind": "detector",
+        "shot": 15,
+        "window": 59
+      },
+      {
+        "arrival_windows": [
+          58
+        ],
+        "bit": 227,
+        "commit_windows": [
+          60
+        ],
+        "detection_windows": [
+          58,
+          59,
+          60
+        ],
+        "global_detector": 12600,
+        "kind": "detector",
+        "shot": 15,
+        "window": 59
+      },
+      {
+        "arrival_windows": [
+          142
+        ],
+        "bit": 227,
+        "commit_windows": [
+          144
+        ],
+        "detection_windows": [
+          142,
+          143,
+          144
+        ],
+        "global_detector": 30240,
+        "kind": "detector",
+        "shot": 29,
+        "window": 143
+      },
+      {
+        "arrival_windows": [
+          142
+        ],
+        "bit": 234,
+        "commit_windows": [
+          144
+        ],
+        "detection_windows": [
+          142,
+          143,
+          144
+        ],
+        "global_detector": 30247,
+        "kind": "detector",
+        "shot": 29,
+        "window": 143
+      },
+      {
+        "arrival_windows": [
+          126
+        ],
+        "bit": 221,
+        "commit_windows": [
+          128
+        ],
+        "detection_windows": [
+          126,
+          127,
+          128
+        ],
+        "global_detector": 26874,
+        "kind": "detector",
+        "shot": 36,
+        "window": 127
+      },
+      {
+        "arrival_windows": [
+          126
+        ],
+        "bit": 226,
+        "commit_windows": [
+          128
+        ],
+        "detection_windows": [
+          126,
+          127,
+          128
+        ],
+        "global_detector": 26879,
+        "kind": "detector",
+        "shot": 36,
+        "window": 127
+      },
+      {
+        "arrival_windows": [
+          144
+        ],
+        "bit": 212,
+        "commit_windows": [
+          146
+        ],
+        "detection_windows": [
+          144,
+          145,
+          146
+        ],
+        "global_detector": 30645,
+        "kind": "detector",
+        "shot": 38,
+        "window": 145
+      },
+      {
+        "arrival_windows": [
+          144
+        ],
+        "bit": 216,
+        "commit_windows": [
+          146
+        ],
+        "detection_windows": [
+          144,
+          145,
+          146
+        ],
+        "global_detector": 30649,
+        "kind": "detector",
+        "shot": 38,
+        "window": 145
+      },
+      {
+        "arrival_windows": [
+          153
+        ],
+        "bit": 222,
+        "commit_windows": [
+          155
+        ],
+        "detection_windows": [
+          153,
+          154,
+          155
+        ],
+        "global_detector": 32545,
+        "kind": "detector",
+        "shot": 54,
+        "window": 154
+      },
+      {
+        "arrival_windows": [
+          153
+        ],
+        "bit": 229,
+        "commit_windows": [
+          155
+        ],
+        "detection_windows": [
+          153,
+          154,
+          155
+        ],
+        "global_detector": 32552,
+        "kind": "detector",
+        "shot": 54,
+        "window": 154
+      },
+      {
+        "arrival_windows": [
+          119
+        ],
+        "bit": 213,
+        "commit_windows": [
+          121
+        ],
+        "detection_windows": [
+          119,
+          120,
+          121
+        ],
+        "global_detector": 25396,
+        "kind": "detector",
+        "shot": 58,
+        "window": 120
+      },
+      {
+        "arrival_windows": [
+          119
+        ],
+        "bit": 220,
+        "commit_windows": [
+          121
+        ],
+        "detection_windows": [
+          119,
+          120,
+          121
+        ],
+        "global_detector": 25403,
+        "kind": "detector",
+        "shot": 58,
+        "window": 120
+      },
+      {
+        "arrival_windows": [
+          14
+        ],
+        "bit": 225,
+        "commit_windows": [
+          16
+        ],
+        "detection_windows": [
+          14,
+          15,
+          16
+        ],
+        "global_detector": 3358,
+        "kind": "detector",
+        "shot": 60,
+        "window": 15
+      },
+      {
+        "arrival_windows": [
+          14
+        ],
+        "bit": 232,
+        "commit_windows": [
+          16
+        ],
+        "detection_windows": [
+          14,
+          15,
+          16
+        ],
+        "global_detector": 3365,
+        "kind": "detector",
+        "shot": 60,
+        "window": 15
+      },
+      {
+        "arrival_windows": [
+          12
+        ],
+        "bit": 216,
+        "commit_windows": [
+          14
+        ],
+        "detection_windows": [
+          12,
+          13,
+          14
+        ],
+        "global_detector": 2929,
+        "kind": "detector",
+        "shot": 73,
+        "window": 13
+      },
+      {
+        "arrival_windows": [
+          12
+        ],
+        "bit": 221,
+        "commit_windows": [
+          14
+        ],
+        "detection_windows": [
+          12,
+          13,
+          14
+        ],
+        "global_detector": 2934,
+        "kind": "detector",
+        "shot": 73,
+        "window": 13
+      },
+      {
+        "arrival_windows": [
+          128
+        ],
+        "bit": 216,
+        "commit_windows": [
+          130
+        ],
+        "detection_windows": [
+          128,
+          129,
+          130
+        ],
+        "global_detector": 27289,
+        "kind": "detector",
+        "shot": 74,
+        "window": 129
+      },
+      {
+        "arrival_windows": [
+          128
+        ],
+        "bit": 221,
+        "commit_windows": [
+          130
+        ],
+        "detection_windows": [
+          128,
+          129,
+          130
+        ],
+        "global_detector": 27294,
+        "kind": "detector",
+        "shot": 74,
+        "window": 129
+      },
+      {
+        "arrival_windows": [
+          147
+        ],
+        "bit": 233,
+        "commit_windows": [
+          149
+        ],
+        "detection_windows": [
+          147,
+          148,
+          149
+        ],
+        "global_detector": 31296,
+        "kind": "detector",
+        "shot": 75,
+        "window": 148
+      },
+      {
+        "arrival_windows": [
+          147
+        ],
+        "bit": 238,
+        "commit_windows": [
+          149
+        ],
+        "detection_windows": [
+          147,
+          148,
+          149
+        ],
+        "global_detector": 31301,
+        "kind": "detector",
+        "shot": 75,
+        "window": 148
+      },
+      {
+        "arrival_windows": [
+          31
+        ],
+        "bit": 232,
+        "commit_windows": [
+          33
+        ],
+        "detection_windows": [
+          31,
+          32,
+          33
+        ],
+        "global_detector": 6935,
+        "kind": "detector",
+        "shot": 99,
+        "window": 32
+      },
+      {
+        "arrival_windows": [
+          31
+        ],
+        "bit": 237,
+        "commit_windows": [
+          33
+        ],
+        "detection_windows": [
+          31,
+          32,
+          33
+        ],
+        "global_detector": 6940,
+        "kind": "detector",
+        "shot": 99,
+        "window": 32
+      },
+      {
+        "arrival_windows": [
+          25
+        ],
+        "bit": 211,
+        "commit_windows": [
+          27
+        ],
+        "detection_windows": [
+          25,
+          26,
+          27
+        ],
+        "global_detector": 5654,
+        "kind": "detector",
+        "shot": 102,
+        "window": 26
+      },
+      {
+        "arrival_windows": [
+          25
+        ],
+        "bit": 214,
+        "commit_windows": [
+          27
+        ],
+        "detection_windows": [
+          25,
+          26,
+          27
+        ],
+        "global_detector": 5657,
+        "kind": "detector",
+        "shot": 102,
+        "window": 26
+      },
+      {
+        "arrival_windows": [
+          19
+        ],
+        "bit": 221,
+        "commit_windows": [
+          21
+        ],
+        "detection_windows": [
+          19,
+          20,
+          21
+        ],
+        "global_detector": 4404,
+        "kind": "detector",
+        "shot": 106,
+        "window": 20
+      },
+      {
+        "arrival_windows": [
+          19
+        ],
+        "bit": 228,
+        "commit_windows": [
+          21
+        ],
+        "detection_windows": [
+          19,
+          20,
+          21
+        ],
+        "global_detector": 4411,
+        "kind": "detector",
+        "shot": 106,
+        "window": 20
+      },
+      {
+        "arrival_windows": [
+          5
+        ],
+        "bit": 220,
+        "commit_windows": [
+          7
+        ],
+        "detection_windows": [
+          5,
+          6,
+          7
+        ],
+        "global_detector": 1463,
+        "kind": "detector",
+        "shot": 108,
+        "window": 6
+      },
+      {
+        "arrival_windows": [
+          5
+        ],
+        "bit": 225,
+        "commit_windows": [
+          7
+        ],
+        "detection_windows": [
+          5,
+          6,
+          7
+        ],
+        "global_detector": 1468,
+        "kind": "detector",
+        "shot": 108,
+        "window": 6
+      },
+      {
+        "arrival_windows": [
+          138
+        ],
+        "bit": 212,
+        "commit_windows": [
+          140
+        ],
+        "detection_windows": [
+          138,
+          139,
+          140
+        ],
+        "global_detector": 29385,
+        "kind": "detector",
+        "shot": 111,
+        "window": 139
+      },
+      {
+        "arrival_windows": [
+          138
+        ],
+        "bit": 216,
+        "commit_windows": [
+          140
+        ],
+        "detection_windows": [
+          138,
+          139,
+          140
+        ],
+        "global_detector": 29389,
+        "kind": "detector",
+        "shot": 111,
+        "window": 139
+      },
+      {
+        "arrival_windows": [
+          65
+        ],
+        "bit": 211,
+        "commit_windows": [
+          67
+        ],
+        "detection_windows": [
+          65,
+          66,
+          67
+        ],
+        "global_detector": 14054,
+        "kind": "detector",
+        "shot": 115,
+        "window": 66
+      },
+      {
+        "arrival_windows": [
+          65
+        ],
+        "bit": 214,
+        "commit_windows": [
+          67
+        ],
+        "detection_windows": [
+          65,
+          66,
+          67
+        ],
+        "global_detector": 14057,
+        "kind": "detector",
+        "shot": 115,
+        "window": 66
+      },
+      {
+        "arrival_windows": [
+          61
+        ],
+        "bit": 211,
+        "commit_windows": [
+          63
+        ],
+        "detection_windows": [
+          61,
+          62,
+          63
+        ],
+        "global_detector": 13214,
+        "kind": "detector",
+        "shot": 116,
+        "window": 62
+      },
+      {
+        "arrival_windows": [
+          61
+        ],
+        "bit": 214,
+        "commit_windows": [
+          63
+        ],
+        "detection_windows": [
+          61,
+          62,
+          63
+        ],
+        "global_detector": 13217,
+        "kind": "detector",
+        "shot": 116,
+        "window": 62
+      },
+      {
+        "arrival_windows": [
+          7
+        ],
+        "bit": 233,
+        "commit_windows": [
+          9
+        ],
+        "detection_windows": [
+          7,
+          8,
+          9
+        ],
+        "global_detector": 1896,
+        "kind": "detector",
+        "shot": 118,
+        "window": 8
+      },
+      {
+        "arrival_windows": [
+          7
+        ],
+        "bit": 238,
+        "commit_windows": [
+          9
+        ],
+        "detection_windows": [
+          7,
+          8,
+          9
+        ],
+        "global_detector": 1901,
+        "kind": "detector",
+        "shot": 118,
+        "window": 8
+      },
+      {
+        "arrival_windows": [
+          29
+        ],
+        "bit": 233,
+        "commit_windows": [
+          31
+        ],
+        "detection_windows": [
+          29,
+          30,
+          31
+        ],
+        "global_detector": 6516,
+        "kind": "detector",
+        "shot": 119,
+        "window": 30
+      },
+      {
+        "arrival_windows": [
+          29
+        ],
+        "bit": 243,
+        "commit_windows": [
+          31
+        ],
+        "detection_windows": [
+          29,
+          30,
+          31
+        ],
+        "global_detector": 6526,
+        "kind": "detector",
+        "shot": 119,
+        "window": 30
+      },
+      {
+        "arrival_windows": [
+          47
+        ],
+        "bit": 215,
+        "commit_windows": [
+          49
+        ],
+        "detection_windows": [
+          47,
+          48,
+          49
+        ],
+        "global_detector": 10278,
+        "kind": "detector",
+        "shot": 121,
+        "window": 48
+      },
+      {
+        "arrival_windows": [
+          140
+        ],
+        "bit": 220,
+        "commit_windows": [
+          142
+        ],
+        "detection_windows": [
+          140,
+          141,
+          142
+        ],
+        "global_detector": 29813,
+        "kind": "detector",
+        "shot": 127,
+        "window": 141
+      },
+      {
+        "arrival_windows": [
+          140
+        ],
+        "bit": 222,
+        "commit_windows": [
+          142
+        ],
+        "detection_windows": [
+          140,
+          141,
+          142
+        ],
+        "global_detector": 29815,
+        "kind": "detector",
+        "shot": 127,
+        "window": 141
+      }
+    ],
+    "finding": "Every correction delta is a detector carried by the three-window overlap and committed in the immediately following window. A frozen open-loop defect replay therefore cannot establish sequential correctness after the first delta.",
+    "mismatches": [
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          222,
+          227
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 15,
+        "syndrome_valid": true,
+        "window": 59
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          227,
+          234
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 29,
+        "syndrome_valid": true,
+        "window": 143
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          221,
+          226
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 36,
+        "syndrome_valid": true,
+        "window": 127
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          212,
+          216
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 38,
+        "syndrome_valid": true,
+        "window": 145
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          222,
+          229
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 54,
+        "syndrome_valid": true,
+        "window": 154
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          213,
+          220
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 58,
+        "syndrome_valid": true,
+        "window": 120
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          225,
+          232
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 60,
+        "syndrome_valid": true,
+        "window": 15
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          216,
+          221
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 73,
+        "syndrome_valid": true,
+        "window": 13
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          216,
+          221
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 74,
+        "syndrome_valid": true,
+        "window": 129
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          233,
+          238
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 75,
+        "syndrome_valid": true,
+        "window": 148
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          232,
+          237
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 99,
+        "syndrome_valid": true,
+        "window": 32
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          211,
+          214
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 102,
+        "syndrome_valid": true,
+        "window": 26
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          221,
+          228
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 106,
+        "syndrome_valid": true,
+        "window": 20
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          220,
+          225
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 108,
+        "syndrome_valid": true,
+        "window": 6
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          212,
+          216
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 111,
+        "syndrome_valid": true,
+        "window": 139
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          211,
+          214
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 115,
+        "syndrome_valid": true,
+        "window": 66
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          211,
+          214
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 116,
+        "syndrome_valid": true,
+        "window": 62
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          233,
+          238
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 118,
+        "syndrome_valid": true,
+        "window": 8
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          233,
+          243
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 119,
+        "syndrome_valid": true,
+        "window": 30
+      },
+      {
+        "delta_bit_count": 1,
+        "delta_bits": [
+          215
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 121,
+        "syndrome_valid": true,
+        "window": 48
+      },
+      {
+        "delta_bit_count": 2,
+        "delta_bits": [
+          220,
+          222
+        ],
+        "observable_delta_bits": [],
+        "phase": "steady",
+        "shot": 127,
+        "syndrome_valid": true,
+        "window": 141
+      }
+    ]
+  },
+  "evidence_id": "8e7c0a3fc7edbd1497ad534ee3ac993af49ead319bea8e7573628cace0043948",
+  "next_gate": "Build a closed-loop RTL harness that applies each actual correction to the persistent detector state before deriving the next window syndrome and selector set.",
+  "schema": "b2_b7_p023_d6_x_lookahead_divergence_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "sources": {
+    "benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_v1.json": "52c331845f53bd136bc0b606a6d360eee518fddfa5e4645a9be97997c1fe3733",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_capture_v1.json": "9031c95cb0a21ae4de904e13f85b198118fbe7ed9a79f5ffe309db78e13537ea",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_capture_v1.log": "04692c2a37b99fc4b672319d568d717799c2aae19a84bd7836beb4b4dbb069ef",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_v1.json": "3e964152a0f1885981d65e1b22e18a1e0d14c4399a1b1008627ad10becce6e57",
+    "tools/microblossom/d6_x_phase_primal_dual_full_corpus_shard_v8.patch": "53db7a175be9938881df182f8bfbd466b9a549c5b4f0e60dd0fbb1c7cb63c767"
+  },
+  "trial": {
+    "cases": 20828,
+    "exact_correction_mismatches": 21,
+    "mismatch_rate": 0.0010082581140772038,
+    "observable_frame_mismatches": 0,
+    "occupancy_checks_clear": 210748,
+    "shot_end": 136,
+    "shot_start": 9,
+    "shots": 127,
+    "syndrome_valid_cases": 20828,
+    "unique_divergent_detectors": 41
+  }
+}

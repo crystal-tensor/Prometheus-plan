@@ -1,0 +1,52 @@
+{
+  "accepted_x_shard_real_rtl_gate": false,
+  "base_input_sha256": "c0ce03b85f33344138ac384a0cb9ee01f54dc81d70674774ada02268afdf8f55",
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--bin",
+    "d6_x_phase_primal_dual_shard",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_v1.json"
+  ],
+  "elapsed_seconds": 1062.926278,
+  "elapsed_seconds_per_case": 0.051033525926637215,
+  "exit_code": 101,
+  "finished_utc": "2026-11-21T03:10:10.659619+00:00",
+  "forbidden_hits": [
+    "thread 'main' panicked at src/bin/d6_x_phase_primal_dual_shard.rs:208:5:"
+  ],
+  "known_warning_lines": [
+    "[info] [warning] 1788383 signals were pruned. you can call printpruned on the backend report to get more informations.",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:116:22: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:131:19: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] 2 warnings generated."
+  ],
+  "log_sha256": "04692c2a37b99fc4b672319d568d717799c2aae19a84bd7836beb4b4dbb069ef",
+  "occupancy_audit": {
+    "all_clear": true,
+    "checks": 210748,
+    "expected_checks": 210748
+  },
+  "output_sha256": "3e964152a0f1885981d65e1b22e18a1e0d14c4399a1b1008627ad10becce6e57",
+  "result_summary": {
+    "all_corrections_equal": false,
+    "all_syndromes_valid": true,
+    "cases": 20828,
+    "max_iterations": 26,
+    "total_defects": 210748,
+    "total_iterations": 122770,
+    "total_selectors": 117233
+  },
+  "schema": "b2_b7_p023_d6_x_full_corpus_shard_capture_v1",
+  "shard_sha256": "52c331845f53bd136bc0b606a6d360eee518fddfa5e4645a9be97997c1fe3733",
+  "simulator": "verilator",
+  "simulator_version": "Verilator 5.040 2025-08-30 rev v5.040",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_patch_sha256": "53db7a175be9938881df182f8bfbd466b9a549c5b4f0e60dd0fbb1c7cb63c767",
+  "started_utc": "2026-11-21T02:52:27.733341+00:00",
+  "unexpected_warning_lines": []
+}
