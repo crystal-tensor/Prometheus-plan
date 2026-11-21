@@ -23,6 +23,8 @@ FORBIDDEN = (
 KNOWN_WARNINGS = (
     "signals were pruned",
     "value 'z' at position 0 is neither '0' or '1'. value set to '0'",
+    "variable length arrays in c++ are a clang extension",
+    "warnings generated.",
 )
 
 
@@ -44,7 +46,13 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--log", type=Path, required=True)
     parser.add_argument("--metadata", type=Path, required=True)
+    parser.add_argument("--simulator", choices=("iverilog", "verilator"), default="iverilog")
+    parser.add_argument("--verilator-bin", type=Path)
+    parser.add_argument("--verilator-root", type=Path)
     args = parser.parse_args()
+
+    if args.simulator == "verilator" and (args.verilator_bin is None or args.verilator_root is None):
+        parser.error("--verilator-bin and --verilator-root are required for Verilator captures")
 
     shard = json.loads(args.shard.read_text(encoding="utf-8"))
     expected_cases = int(shard["shots"]) * int(shard["windows_per_shot"])
@@ -63,6 +71,19 @@ def main() -> None:
     environment["JAVA_HOME"] = "/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
     environment["PATH"] = "/opt/homebrew/opt/openjdk@17/bin:/opt/homebrew/bin:" + environment["PATH"]
     environment["RUST_BACKTRACE"] = "1"
+    environment["MICROBLOSSOM_PHASE_SIMULATOR"] = args.simulator
+    simulator_version = None
+    if args.simulator == "verilator":
+        assert args.verilator_bin is not None
+        assert args.verilator_root is not None
+        environment["PATH"] = str(args.verilator_bin) + ":" + environment["PATH"]
+        environment["VERILATOR_ROOT"] = str(args.verilator_root)
+        simulator_version = subprocess.run(
+            [str(args.verilator_bin / "verilator"), "--version"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
 
     started = dt.datetime.now(dt.timezone.utc)
     process = subprocess.Popen(
@@ -117,6 +138,8 @@ def main() -> None:
         "elapsed_seconds_per_case": elapsed / expected_cases,
         "command": command,
         "exit_code": exit_code,
+        "simulator": args.simulator,
+        "simulator_version": simulator_version,
         "source_archive_sha256": sha256(args.source_archive),
         "source_patch_sha256": sha256(args.source_patch),
         "base_input_sha256": sha256(args.base_input),

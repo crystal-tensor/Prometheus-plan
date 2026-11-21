@@ -1,0 +1,48 @@
+{
+  "schema": "b2_b7_p023_verilator_5_040_toolchain_v1",
+  "date": "2026-11-21",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "host": {
+    "architecture": "arm64",
+    "operating_system": "macOS",
+    "compiler": "Apple Clang 21"
+  },
+  "verilator": {
+    "repository": "https://github.com/verilator/verilator.git",
+    "tag": "v5.040",
+    "commit": "51cdf52d0f3a3e59b51fd87762646a851e9f4aff",
+    "reported_version": "Verilator 5.040 2025-08-30 rev v5.040",
+    "configure": "./configure --prefix=<isolated-prefix>",
+    "build": "make -j4 && make install",
+    "dependencies": {
+      "autoconf": "2.73",
+      "bison": "3.8.2",
+      "help2man": "1.49.3_5"
+    },
+    "temporary_host_compiler_backport": {
+      "file": "src/V3Hash.h",
+      "reason": "Resolve Apple Clang 21 pointer-constructor ambiguity while building the pinned Verilator release.",
+      "replacement": "static_cast<uint64_t>(reinterpret_cast<uintptr_t>(val))",
+      "upstream_source": "https://github.com/verilator/verilator/blob/v5.054/src/V3Hash.h",
+      "scientific_model_effect": "none; this changes only the Verilator compiler build on the host"
+    }
+  },
+  "spinalhdl": {
+    "version": "1.9.3",
+    "compatibility_flags": [
+      "-std=c++14",
+      "-DVL_TIME_CONTEXT"
+    ],
+    "vl_time_context_reason": "Avoid the legacy sc_time_stamp callback before the generated wrapper initializes its thread-local simulation handle."
+  },
+  "micro_blossom": {
+    "commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+    "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+    "source_patch_sha256": "53db7a175be9938881df182f8bfbd466b9a549c5b4f0e60dd0fbb1c7cb63c767"
+  },
+  "claim_boundary": "This manifest pins the software-host simulation toolchain. It is not FPGA synthesis, timing, routing, or hardware-latency evidence."
+}

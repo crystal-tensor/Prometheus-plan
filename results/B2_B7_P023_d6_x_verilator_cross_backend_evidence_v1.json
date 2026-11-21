@@ -1,0 +1,154 @@
+{
+  "acceptance": {
+    "all_accepted_x_corpus_end_to_end": false,
+    "axi_phase_control_path": false,
+    "b7_resource_credit": 0,
+    "cross_backend_replay_equivalent": true,
+    "fpga_fmax_measured": false,
+    "full_b2": false,
+    "miss_rate_le_1pct": false,
+    "nine_frozen_x_shots_real_rtl": true,
+    "p99_le_1us": false,
+    "scalable_p023": false,
+    "z_basis_phase_bank_switching": false
+  },
+  "checks": [
+    {
+      "name": "single-shot Icarus capture accepted",
+      "passed": true
+    },
+    {
+      "name": "single-shot Verilator capture accepted",
+      "passed": true
+    },
+    {
+      "name": "eight-shot Verilator capture accepted",
+      "passed": true
+    },
+    {
+      "name": "Verilator version pinned",
+      "passed": true
+    },
+    {
+      "name": "toolchain manifest binds Verilator version",
+      "passed": true
+    },
+    {
+      "name": "Verilator captures have no unexpected warnings",
+      "passed": true
+    },
+    {
+      "name": "single-shot outputs are byte-identical",
+      "passed": true
+    },
+    {
+      "name": "single-shot output metadata binds exact files",
+      "passed": true
+    },
+    {
+      "name": "eight-shot output metadata binds exact file",
+      "passed": true
+    },
+    {
+      "name": "single-shot shard binding",
+      "passed": true
+    },
+    {
+      "name": "eight-shot shard binding",
+      "passed": true
+    },
+    {
+      "name": "disjoint contiguous shot intervals",
+      "passed": true
+    },
+    {
+      "name": "frozen corpus binding",
+      "passed": true
+    },
+    {
+      "name": "frozen prediction binding",
+      "passed": true
+    },
+    {
+      "name": "eight-shot case cardinality",
+      "passed": true
+    },
+    {
+      "name": "eight-shot syndrome gate",
+      "passed": true
+    },
+    {
+      "name": "eight-shot correction gate",
+      "passed": true
+    },
+    {
+      "name": "eight-shot occupancy gate",
+      "passed": true
+    },
+    {
+      "name": "v8 patch binding",
+      "passed": true
+    }
+  ],
+  "classification": "x_cross_backend_replay_equivalent_nine_shots_pass",
+  "cross_backend_equivalence": {
+    "byte_identical": true,
+    "cases": 164,
+    "icarus_output_sha256": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153",
+    "verilator_output_sha256": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153"
+  },
+  "date": "2026-11-21",
+  "evidence_id": "a197aa85dceaac69238da847b6207a49936ad10502125451945bfee63ee25538",
+  "frozen_denominator": {
+    "basis": "x",
+    "cases": 167936,
+    "fraction_tested": 0.0087890625,
+    "remaining_cases": 166460,
+    "remaining_shots": 1015,
+    "shots": 1024,
+    "tested_cases": 1476,
+    "tested_shots": 9,
+    "windows_per_shot": 164
+  },
+  "next_gate": "Run the remaining 1015 frozen X shots through the replay-equivalent Verilator path without changing corpus or acceptance rules.",
+  "schema": "b2_b7_p023_d6_x_verilator_cross_backend_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "software_simulation_cost": {
+    "icarus_single_shot_body_seconds": 439.699413,
+    "persistent_1024_shot_body_projection_hours": 2.0463329066666667,
+    "single_shot_body_speedup": 59.55748781656973,
+    "verilator_eight_shot_body_seconds": 57.553112999999996,
+    "verilator_eight_shot_body_seconds_per_case": 0.043866701981707314,
+    "verilator_eight_shot_body_seconds_per_shot": 7.1941391249999995,
+    "verilator_single_shot_body_seconds": 7.382773,
+    "warning": "Software-host simulation cost only; it is not FPGA or decoder hardware latency."
+  },
+  "sources": {
+    "benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0000_v1.json": "3e5683eaeb978a7ce2ba2574af6957537731c28bc565d13728e0b9fa137e4da8",
+    "benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_v1.json": "de00d33d0eedde884a1709caa96844b7dc4c815139a2910ba0ff6b79a23564f6",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_capture_v1.json": "b30cc67056cae403a1d39384c49a802e5f3d395a7fd501fd148fd255c9f4ac32",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_rtl_v1.json": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_verilator_capture_v1.json": "16875c09595c3d1487f9e5c9fed02af41e8e28afcab12803a3b0d3a4fc770b42",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_verilator_capture_v1.log": "7886e6e4b1c211d73942a74b0dd7fe0e35e26759b57d8695d2beb75da3e077a8",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0000_verilator_v1.json": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_verilator_capture_v1.json": "49f147b1156f5f68ef48ea346c499024a185a30b40a539e3577c3e3a8490f19d",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_verilator_capture_v1.log": "3ce460808d1285768f2c2f10b634fd08e98b5c5ae9ab9eb3a161579e230648ba",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_verilator_v1.json": "a514b80345bea96c265f9dd0be4b74c31c5705b035a47f52acc726e34c4200dd",
+    "results/B2_B7_P023_verilator_5_040_toolchain_v1.json": "ba276d86a79992216ffd1b7f1603cb130fc75fac3eef14e4805fb4c18b936bbb",
+    "tools/microblossom/d6_x_phase_primal_dual_full_corpus_shard_v8.patch": "53db7a175be9938881df182f8bfbd466b9a549c5b4f0e60dd0fbb1c7cb63c767"
+  },
+  "verilator_result": {
+    "all_corrections_equal": true,
+    "all_occupancy_checks_clear": true,
+    "all_syndromes_valid": true,
+    "eight_shot_cases": 1312,
+    "maximum_iterations": 18,
+    "occupancy_checks": 14638,
+    "simulator": "Verilator 5.040 2025-08-30 rev v5.040",
+    "single_shot_cases": 164
+  }
+}

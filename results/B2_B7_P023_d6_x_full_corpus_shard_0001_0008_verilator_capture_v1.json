@@ -1,0 +1,50 @@
+{
+  "accepted_x_shard_real_rtl_gate": true,
+  "base_input_sha256": "c0ce03b85f33344138ac384a0cb9ee01f54dc81d70674774ada02268afdf8f55",
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--bin",
+    "d6_x_phase_primal_dual_shard",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_full_corpus_shard_0001_0008_verilator_v1.json"
+  ],
+  "elapsed_seconds": 120.637715,
+  "elapsed_seconds_per_case": 0.09194947789634146,
+  "exit_code": 0,
+  "finished_utc": "2026-11-21T02:22:28.907549+00:00",
+  "forbidden_hits": [],
+  "known_warning_lines": [
+    "[info] [warning] 1788383 signals were pruned. you can call printpruned on the backend report to get more informations.",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:116:22: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:131:19: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] 2 warnings generated."
+  ],
+  "log_sha256": "3ce460808d1285768f2c2f10b634fd08e98b5c5ae9ab9eb3a161579e230648ba",
+  "occupancy_audit": {
+    "all_clear": true,
+    "checks": 12990,
+    "expected_checks": 12990
+  },
+  "output_sha256": "a514b80345bea96c265f9dd0be4b74c31c5705b035a47f52acc726e34c4200dd",
+  "result_summary": {
+    "all_corrections_equal": true,
+    "all_syndromes_valid": true,
+    "cases": 1312,
+    "max_iterations": 18,
+    "total_defects": 12990,
+    "total_iterations": 7500,
+    "total_selectors": 7217
+  },
+  "schema": "b2_b7_p023_d6_x_full_corpus_shard_capture_v1",
+  "shard_sha256": "de00d33d0eedde884a1709caa96844b7dc4c815139a2910ba0ff6b79a23564f6",
+  "simulator": "verilator",
+  "simulator_version": "Verilator 5.040 2025-08-30 rev v5.040",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_patch_sha256": "53db7a175be9938881df182f8bfbd466b9a549c5b4f0e60dd0fbb1c7cb63c767",
+  "started_utc": "2026-11-21T02:20:28.269834+00:00",
+  "unexpected_warning_lines": []
+}
