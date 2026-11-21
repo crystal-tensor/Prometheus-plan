@@ -1,0 +1,60 @@
+   Compiling micro-blossom v0.0.0 (/private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/src/cpu/blossom)
+    Finished release [optimized] target(s) in 5.15s
+     Running `target/release/d6_x_phase_primal_dual /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_phase_primal_dual_rtl_v2.json`
+Starting Scala simulator host... this may take a while (listening on 127.0.0.1:50159)
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project yuewuo-micro-blossom-a3530d9-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/)
+[info] running (fork) microblossom.DualHost 127.0.0.1 50159 d6_x_phase_primal_dual_watchdog
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.21 08:25:37
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 5.696 : Checks and transforms
+[info] [Progress] at 32.592 : Generate Verilog
+[info] [Warning] 1788383 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 53.964
+[info] [Progress] Simulation workspace in /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/./simWorkspace/dualHost/d6_x_phase_primal_dual_watchdog
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 224.294 ms
+[info] [Progress] Start DistributedDual hosted simulation with seed 160847078
+[info] waveform disabled
+CASE_START index=0 phase=opening boundary=zero defects=0 selectors=0
+CASE_SOLVED index=0 phase=opening boundary=zero iterations=0
+CASE_START index=1 phase=opening boundary=p50 defects=8 selectors=4
+CASE_SOLVED index=1 phase=opening boundary=p50 iterations=4
+CASE_START index=2 phase=opening boundary=p99 defects=14 selectors=10
+CASE_SOLVED index=2 phase=opening boundary=p99 iterations=12
+CASE_START index=3 phase=opening boundary=maximum defects=35 selectors=19
+CASE_SOLVED index=3 phase=opening boundary=maximum iterations=21
+CASE_START index=4 phase=steady boundary=zero defects=0 selectors=0
+CASE_SOLVED index=4 phase=steady boundary=zero iterations=0
+CASE_START index=5 phase=steady boundary=p50 defects=11 selectors=6
+CASE_SOLVED index=5 phase=steady boundary=p50 iterations=6
+CASE_START index=6 phase=steady boundary=p99 defects=20 selectors=11
+CASE_SOLVED index=6 phase=steady boundary=p99 iterations=13
+CASE_START index=7 phase=steady boundary=maximum defects=22 selectors=15
+CASE_SOLVED index=7 phase=steady boundary=maximum iterations=17
+CASE_START index=8 phase=closing boundary=zero defects=0 selectors=0
+CASE_SOLVED index=8 phase=closing boundary=zero iterations=0
+CASE_START index=9 phase=closing boundary=p50 defects=9 selectors=5
+CASE_SOLVED index=9 phase=closing boundary=p50 iterations=5
+CASE_START index=10 phase=closing boundary=p99 defects=24 selectors=14
+CASE_SOLVED index=10 phase=closing boundary=p99 iterations=15
+CASE_START index=11 phase=closing boundary=maximum defects=34 selectors=19
+CASE_SOLVED index=11 phase=closing boundary=maximum iterations=20
+{"cases":12,"all_syndromes_valid":true,"all_corrections_equal":true,"exact_reference_subgraphs":12}
+[info] requested quit, aborting...
+[info] Shared memory key : SpinalHDL_0_1_6317612_656757087_1795220937324_-3837878553307942758
+[info] Start of simulation
+[info] Warning, value 'z' at position 0 is neither '0' or '1'. value set to '0'.
+[info] End of simulation
+[info] [Done] Simulation done in 50911.395 ms
+[success] Total time: 270 s (04:30), completed 2026年11月21日 上午8:30:04
+Scala process quit normally
+Successfully remove build folder

@@ -1,0 +1,40 @@
+{
+  "accepted_representative_x_rtl_gate": true,
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--bin",
+    "d6_x_phase_primal_dual",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_phase_primal_dual_rtl_v2.json"
+  ],
+  "elapsed_seconds": 280.255283,
+  "exit_code": 0,
+  "finished_utc": "2026-11-21T00:30:04.805643+00:00",
+  "forbidden_hits": [],
+  "input_sha256": "c0ce03b85f33344138ac384a0cb9ee01f54dc81d70674774ada02268afdf8f55",
+  "known_warning_lines": [
+    "[info] [warning] 1788383 signals were pruned. you can call printpruned on the backend report to get more informations.",
+    "[info] warning, value 'z' at position 0 is neither '0' or '1'. value set to '0'."
+  ],
+  "log_sha256": "55d7cb4c43cc9ccef9f86f2f73b96fa8dd6af4916f9be55b6e2aed1de581b7a2",
+  "occupancy_audit": {
+    "all_clear": true,
+    "checks": 177,
+    "expected_checks": 177
+  },
+  "output_sha256": "ed42a907557862163b45084261758bf6c0a385e82df366051041a4ce99486dbd",
+  "result_summary": {
+    "all_corrections_equal": true,
+    "all_syndromes_valid": true,
+    "cases": 12,
+    "exact_reference_subgraphs": 12
+  },
+  "schema": "b2_b7_p023_d6_x_phase_primal_dual_capture_v1",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_patch_sha256": "fd53fd5f6b90751cfaf78808f91b5f95b3981c174fe55689cfa20ccc9ea59230",
+  "started_utc": "2026-11-21T00:25:24.550360+00:00",
+  "unexpected_warning_lines": []
+}
