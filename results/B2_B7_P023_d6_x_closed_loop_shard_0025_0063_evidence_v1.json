@@ -1,0 +1,341 @@
+{
+  "acceptance": {
+    "axi": false,
+    "b7_resource_credit": 0,
+    "cumulative_x_prefix_zero_through_sixty_three": true,
+    "fpga": false,
+    "full_b2": false,
+    "full_x": false,
+    "miss_rate_le_1pct": false,
+    "new_closed_loop_shard": true,
+    "p99_le_1us": false,
+    "scalable_p023": false,
+    "z_basis": false
+  },
+  "checks": [
+    {
+      "name": "pilot binds exact shot range twenty-five through sixty-three",
+      "passed": true
+    },
+    {
+      "name": "pilot has complete windows",
+      "passed": true
+    },
+    {
+      "name": "prior evidence accepted contiguous zero through twenty-four",
+      "passed": true
+    },
+    {
+      "name": "new and prior shot sets are disjoint",
+      "passed": true
+    },
+    {
+      "name": "cumulative shot set is contiguous zero through sixty-three",
+      "passed": true
+    },
+    {
+      "name": "formal capture accepted",
+      "passed": true
+    },
+    {
+      "name": "formal process exited cleanly",
+      "passed": true
+    },
+    {
+      "name": "Verilator version pinned",
+      "passed": true
+    },
+    {
+      "name": "v9 patch bound",
+      "passed": true
+    },
+    {
+      "name": "pilot bound",
+      "passed": true
+    },
+    {
+      "name": "selector server bound",
+      "passed": true
+    },
+    {
+      "name": "output bound",
+      "passed": true
+    },
+    {
+      "name": "log bound",
+      "passed": true
+    },
+    {
+      "name": "no forbidden runtime hits",
+      "passed": true
+    },
+    {
+      "name": "no unexpected warnings",
+      "passed": true
+    },
+    {
+      "name": "complete thirty-nine-shot cardinality",
+      "passed": true
+    },
+    {
+      "name": "all closed-loop syndromes valid",
+      "passed": true
+    },
+    {
+      "name": "all committed residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final logical frames match",
+      "passed": true
+    },
+    {
+      "name": "closed-loop semantic gate accepted",
+      "passed": true
+    },
+    {
+      "name": "occupancy audit complete",
+      "passed": true
+    },
+    {
+      "name": "all case rows individually pass",
+      "passed": true
+    },
+    {
+      "name": "open-loop evidence identifies exact six initiators",
+      "passed": true
+    },
+    {
+      "name": "closed-loop divergences occur only in six response windows",
+      "passed": true
+    },
+    {
+      "name": "all six response windows clear commit residuals",
+      "passed": true
+    },
+    {
+      "name": "all six trajectories reconverge by following window",
+      "passed": true
+    },
+    {
+      "name": "raw rows cover each new shot exactly once per window",
+      "passed": true
+    }
+  ],
+  "classification": "closed_loop_x_prefix_64_with_six_feedback_sensitive_shots_pass",
+  "cumulative_feedback_sensitive_shots": [
+    15,
+    29,
+    36,
+    38,
+    54,
+    58,
+    60
+  ],
+  "date": "2026-11-21",
+  "evidence_id": "49871986321dd63fc8b869f795af90b74af0f595019627f9d351494816100122",
+  "frozen_denominator": {
+    "accepted_cases": 10496,
+    "accepted_distinct_shots": 64,
+    "accepted_shot_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "basis": "x",
+    "cases": 167936,
+    "fraction_tested": 0.0625,
+    "remaining_cases": 157440,
+    "remaining_shots": 960,
+    "shots": 1024
+  },
+  "new_closed_loop_result": {
+    "all_response_commit_residuals_clear": true,
+    "all_trajectories_reconverge_by_following_window": true,
+    "cases": 6396,
+    "closed_loop_response_windows": [
+      {
+        "shot": 29,
+        "window": 144
+      },
+      {
+        "shot": 36,
+        "window": 128
+      },
+      {
+        "shot": 38,
+        "window": 146
+      },
+      {
+        "shot": 54,
+        "window": 155
+      },
+      {
+        "shot": 58,
+        "window": 121
+      },
+      {
+        "shot": 60,
+        "window": 16
+      }
+    ],
+    "commit_residual_failures": 0,
+    "elapsed_seconds": 396.525728,
+    "feedback_sensitive_initiators": [
+      {
+        "shot": 29,
+        "window": 143
+      },
+      {
+        "shot": 36,
+        "window": 127
+      },
+      {
+        "shot": 38,
+        "window": 145
+      },
+      {
+        "shot": 54,
+        "window": 154
+      },
+      {
+        "shot": 58,
+        "window": 120
+      },
+      {
+        "shot": 60,
+        "window": 15
+      }
+    ],
+    "final_frame_failures": 0,
+    "final_residual_failures": 0,
+    "maximum_iterations": 23,
+    "occupancy_checks_clear": 64465,
+    "shots": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "syndrome_valid_cases": 6396,
+    "total_iterations": 37454
+  },
+  "next_gate": "Continue the frozen X corpus from shot 64 through the same closed-loop route, including the remaining known open-loop mismatch initiators.",
+  "schema": "b2_b7_p023_d6_x_closed_loop_shard_0025_0063_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "sources": {
+    "benchmarks/B2_B7_P023_d6_x_closed_loop_shard_0025_0063_v1.json": "608c89bfd8fd8f7da906f9cf43ac8f3cf25e7da89e35ae1956affa7aad24fc74",
+    "results/B2_B7_P023_d6_x_closed_loop_shard_0009_0024_evidence_v1.json": "3e4a207a7346edbeec4f1b97834b58f825c7114e6c2367ae3be69d4ddcb39695",
+    "results/B2_B7_P023_d6_x_closed_loop_shard_0025_0063_verilator_capture_v1.json": "be39ade966aceebba267081243390329615635526e9eaa7cc903e97a0733793e",
+    "results/B2_B7_P023_d6_x_closed_loop_shard_0025_0063_verilator_capture_v1.log": "9e80a25f4c17767dd1a801068414f9efdfd7f8fbe9fa63d308b1a607304ce52e",
+    "results/B2_B7_P023_d6_x_closed_loop_shard_0025_0063_verilator_v1.json": "bb4af6d4fcdac0b5269c1e3a2190771879ddf7210d27167837f9424cd8781548",
+    "results/B2_B7_P023_d6_x_full_corpus_shard_0009_0135_verilator_v1.json": "3e964152a0f1885981d65e1b22e18a1e0d14c4399a1b1008627ad10becce6e57",
+    "results/B2_B7_P023_d6_x_lookahead_divergence_evidence_v1.json": "0e97c4f491729a6c944e86233ae446492a1e2b52bfe245108a8b57bef2012c13",
+    "tools/b2_b7_p023_d6_x_selector_server_v1.py": "124f0b388a45d72e32c38947cca776534236e67fc80b2670c3def2d3fb0c5393",
+    "tools/microblossom/d6_x_phase_primal_dual_closed_loop_v9.patch": "e488e84a0efff1e0493d4a03c8723e14e6bc477701bc1e368fc89d51acb01443"
+  }
+}
