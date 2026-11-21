@@ -1,0 +1,46 @@
+{
+  "accepted_x_shard_real_rtl_gate": true,
+  "base_input_sha256": "c0ce03b85f33344138ac384a0cb9ee01f54dc81d70674774ada02268afdf8f55",
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--bin",
+    "d6_x_phase_primal_dual_shard",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0000_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_full_corpus_shard_0000_rtl_v1.json"
+  ],
+  "elapsed_seconds": 658.652475,
+  "elapsed_seconds_per_case": 4.01617362804878,
+  "exit_code": 0,
+  "finished_utc": "2026-11-21T01:08:39.703273+00:00",
+  "forbidden_hits": [],
+  "known_warning_lines": [
+    "[info] [warning] 1788383 signals were pruned. you can call printpruned on the backend report to get more informations.",
+    "[info] warning, value 'z' at position 0 is neither '0' or '1'. value set to '0'."
+  ],
+  "log_sha256": "7510bb0bac8cda21b729b2d2fe7645c23f3e4aa06a85fca1f1aa7f09873a5067",
+  "occupancy_audit": {
+    "all_clear": true,
+    "checks": 1648,
+    "expected_checks": 1648
+  },
+  "output_sha256": "aca01e62906d01664872ecb3e934f8ea6fa09f6e9d82b692c920436aa399a153",
+  "result_summary": {
+    "all_corrections_equal": true,
+    "all_syndromes_valid": true,
+    "cases": 164,
+    "max_iterations": 15,
+    "total_defects": 1648,
+    "total_iterations": 946,
+    "total_selectors": 918
+  },
+  "schema": "b2_b7_p023_d6_x_full_corpus_shard_capture_v1",
+  "shard_sha256": "3e5683eaeb978a7ce2ba2574af6957537731c28bc565d13728e0b9fa137e4da8",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_patch_sha256": "e943b2fea3d13bdae01f6649b7eebfabeef2033057f22b2adbbe612af162645b",
+  "started_utc": "2026-11-21T00:57:41.050798+00:00",
+  "unexpected_warning_lines": []
+}

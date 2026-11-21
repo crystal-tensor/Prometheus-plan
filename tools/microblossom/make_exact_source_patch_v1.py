@@ -22,6 +22,7 @@ FILES = (
     "src/cpu/blossom/src/dual_module_comb.rs",
     "src/cpu/blossom/src/mwpm_solver.rs",
     "src/cpu/blossom/src/bin/d6_x_phase_primal_dual.rs",
+    "src/cpu/blossom/src/bin/d6_x_phase_primal_dual_shard.rs",
     "src/cpu/blossom/src/bin/d6_x_phase_primal_dual_comb.rs",
 )
 

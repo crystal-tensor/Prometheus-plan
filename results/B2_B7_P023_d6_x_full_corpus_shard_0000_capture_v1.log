@@ -1,0 +1,363 @@
+    Finished release [optimized] target(s) in 0.19s
+     Running `target/release/d6_x_phase_primal_dual_shard /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_full_corpus_shard_0000_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_x_full_corpus_shard_0000_rtl_v1.json`
+Starting Scala simulator host... this may take a while (listening on 127.0.0.1:65367)
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project yuewuo-micro-blossom-a3530d9-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/)
+[info] running (fork) microblossom.DualHost 127.0.0.1 65367 d6_x_phase_primal_dual_full_corpus_shard
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.21 08:57:48
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 5.594 : Checks and transforms
+[info] [Progress] at 31.641 : Generate Verilog
+[info] [Warning] 1788383 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 49.975
+[info] [Progress] Simulation workspace in /private/tmp/qec-microblossom-a3530d9e.5vMJJw/yuewuo-micro-blossom-a3530d9/./simWorkspace/dualHost/d6_x_phase_primal_dual_full_corpus_shard
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 211.843 ms
+[info] [Progress] Start DistributedDual hosted simulation with seed 704579594
+[info] waveform disabled
+CASE_START index=0 shot=0 window=0 phase=opening defects=16 selectors=10
+CASE_SOLVED index=0 shot=0 window=0 iterations=10
+CASE_START index=1 shot=0 window=1 phase=steady defects=11 selectors=7
+CASE_SOLVED index=1 shot=0 window=1 iterations=8
+CASE_START index=2 shot=0 window=2 phase=steady defects=13 selectors=7
+CASE_SOLVED index=2 shot=0 window=2 iterations=8
+CASE_START index=3 shot=0 window=3 phase=steady defects=18 selectors=10
+CASE_SOLVED index=3 shot=0 window=3 iterations=10
+CASE_START index=4 shot=0 window=4 phase=steady defects=16 selectors=8
+CASE_SOLVED index=4 shot=0 window=4 iterations=8
+CASE_START index=5 shot=0 window=5 phase=steady defects=13 selectors=7
+CASE_SOLVED index=5 shot=0 window=5 iterations=7
+CASE_START index=6 shot=0 window=6 phase=steady defects=5 selectors=3
+CASE_SOLVED index=6 shot=0 window=6 iterations=3
+CASE_START index=7 shot=0 window=7 phase=steady defects=7 selectors=4
+CASE_SOLVED index=7 shot=0 window=7 iterations=4
+CASE_START index=8 shot=0 window=8 phase=steady defects=7 selectors=4
+CASE_SOLVED index=8 shot=0 window=8 iterations=4
+CASE_START index=9 shot=0 window=9 phase=steady defects=11 selectors=6
+CASE_SOLVED index=9 shot=0 window=9 iterations=6
+CASE_START index=10 shot=0 window=10 phase=steady defects=10 selectors=6
+CASE_SOLVED index=10 shot=0 window=10 iterations=6
+CASE_START index=11 shot=0 window=11 phase=steady defects=10 selectors=5
+CASE_SOLVED index=11 shot=0 window=11 iterations=5
+CASE_START index=12 shot=0 window=12 phase=steady defects=9 selectors=5
+CASE_SOLVED index=12 shot=0 window=12 iterations=5
+CASE_START index=13 shot=0 window=13 phase=steady defects=12 selectors=6
+CASE_SOLVED index=13 shot=0 window=13 iterations=7
+CASE_START index=14 shot=0 window=14 phase=steady defects=14 selectors=8
+CASE_SOLVED index=14 shot=0 window=14 iterations=9
+CASE_START index=15 shot=0 window=15 phase=steady defects=11 selectors=6
+CASE_SOLVED index=15 shot=0 window=15 iterations=6
+CASE_START index=16 shot=0 window=16 phase=steady defects=9 selectors=5
+CASE_SOLVED index=16 shot=0 window=16 iterations=5
+CASE_START index=17 shot=0 window=17 phase=steady defects=6 selectors=3
+CASE_SOLVED index=17 shot=0 window=17 iterations=3
+CASE_START index=18 shot=0 window=18 phase=steady defects=4 selectors=2
+CASE_SOLVED index=18 shot=0 window=18 iterations=2
+CASE_START index=19 shot=0 window=19 phase=steady defects=4 selectors=2
+CASE_SOLVED index=19 shot=0 window=19 iterations=2
+CASE_START index=20 shot=0 window=20 phase=steady defects=4 selectors=2
+CASE_SOLVED index=20 shot=0 window=20 iterations=2
+CASE_START index=21 shot=0 window=21 phase=steady defects=8 selectors=4
+CASE_SOLVED index=21 shot=0 window=21 iterations=4
+CASE_START index=22 shot=0 window=22 phase=steady defects=8 selectors=4
+CASE_SOLVED index=22 shot=0 window=22 iterations=4
+CASE_START index=23 shot=0 window=23 phase=steady defects=8 selectors=4
+CASE_SOLVED index=23 shot=0 window=23 iterations=4
+CASE_START index=24 shot=0 window=24 phase=steady defects=6 selectors=3
+CASE_SOLVED index=24 shot=0 window=24 iterations=3
+CASE_START index=25 shot=0 window=25 phase=steady defects=4 selectors=2
+CASE_SOLVED index=25 shot=0 window=25 iterations=2
+CASE_START index=26 shot=0 window=26 phase=steady defects=8 selectors=4
+CASE_SOLVED index=26 shot=0 window=26 iterations=4
+CASE_START index=27 shot=0 window=27 phase=steady defects=6 selectors=3
+CASE_SOLVED index=27 shot=0 window=27 iterations=3
+CASE_START index=28 shot=0 window=28 phase=steady defects=7 selectors=4
+CASE_SOLVED index=28 shot=0 window=28 iterations=4
+CASE_START index=29 shot=0 window=29 phase=steady defects=2 selectors=1
+CASE_SOLVED index=29 shot=0 window=29 iterations=1
+CASE_START index=30 shot=0 window=30 phase=steady defects=2 selectors=1
+CASE_SOLVED index=30 shot=0 window=30 iterations=1
+CASE_START index=31 shot=0 window=31 phase=steady defects=2 selectors=1
+CASE_SOLVED index=31 shot=0 window=31 iterations=1
+CASE_START index=32 shot=0 window=32 phase=steady defects=2 selectors=1
+CASE_SOLVED index=32 shot=0 window=32 iterations=1
+CASE_START index=33 shot=0 window=33 phase=steady defects=8 selectors=4
+CASE_SOLVED index=33 shot=0 window=33 iterations=4
+CASE_START index=34 shot=0 window=34 phase=steady defects=13 selectors=7
+CASE_SOLVED index=34 shot=0 window=34 iterations=7
+CASE_START index=35 shot=0 window=35 phase=steady defects=15 selectors=8
+CASE_SOLVED index=35 shot=0 window=35 iterations=8
+CASE_START index=36 shot=0 window=36 phase=steady defects=15 selectors=9
+CASE_SOLVED index=36 shot=0 window=36 iterations=9
+CASE_START index=37 shot=0 window=37 phase=steady defects=9 selectors=5
+CASE_SOLVED index=37 shot=0 window=37 iterations=5
+CASE_START index=38 shot=0 window=38 phase=steady defects=12 selectors=7
+CASE_SOLVED index=38 shot=0 window=38 iterations=7
+CASE_START index=39 shot=0 window=39 phase=steady defects=6 selectors=3
+CASE_SOLVED index=39 shot=0 window=39 iterations=3
+CASE_START index=40 shot=0 window=40 phase=steady defects=10 selectors=5
+CASE_SOLVED index=40 shot=0 window=40 iterations=5
+CASE_START index=41 shot=0 window=41 phase=steady defects=4 selectors=2
+CASE_SOLVED index=41 shot=0 window=41 iterations=2
+CASE_START index=42 shot=0 window=42 phase=steady defects=6 selectors=3
+CASE_SOLVED index=42 shot=0 window=42 iterations=3
+CASE_START index=43 shot=0 window=43 phase=steady defects=4 selectors=2
+CASE_SOLVED index=43 shot=0 window=43 iterations=2
+CASE_START index=44 shot=0 window=44 phase=steady defects=8 selectors=4
+CASE_SOLVED index=44 shot=0 window=44 iterations=4
+CASE_START index=45 shot=0 window=45 phase=steady defects=10 selectors=5
+CASE_SOLVED index=45 shot=0 window=45 iterations=5
+CASE_START index=46 shot=0 window=46 phase=steady defects=8 selectors=4
+CASE_SOLVED index=46 shot=0 window=46 iterations=4
+CASE_START index=47 shot=0 window=47 phase=steady defects=7 selectors=4
+CASE_SOLVED index=47 shot=0 window=47 iterations=4
+CASE_START index=48 shot=0 window=48 phase=steady defects=5 selectors=3
+CASE_SOLVED index=48 shot=0 window=48 iterations=3
+CASE_START index=49 shot=0 window=49 phase=steady defects=8 selectors=4
+CASE_SOLVED index=49 shot=0 window=49 iterations=4
+CASE_START index=50 shot=0 window=50 phase=steady defects=12 selectors=6
+CASE_SOLVED index=50 shot=0 window=50 iterations=7
+CASE_START index=51 shot=0 window=51 phase=steady defects=10 selectors=5
+CASE_SOLVED index=51 shot=0 window=51 iterations=6
+CASE_START index=52 shot=0 window=52 phase=steady defects=13 selectors=7
+CASE_SOLVED index=52 shot=0 window=52 iterations=8
+CASE_START index=53 shot=0 window=53 phase=steady defects=7 selectors=4
+CASE_SOLVED index=53 shot=0 window=53 iterations=4
+CASE_START index=54 shot=0 window=54 phase=steady defects=9 selectors=5
+CASE_SOLVED index=54 shot=0 window=54 iterations=5
+CASE_START index=55 shot=0 window=55 phase=steady defects=6 selectors=3
+CASE_SOLVED index=55 shot=0 window=55 iterations=3
+CASE_START index=56 shot=0 window=56 phase=steady defects=4 selectors=2
+CASE_SOLVED index=56 shot=0 window=56 iterations=2
+CASE_START index=57 shot=0 window=57 phase=steady defects=2 selectors=1
+CASE_SOLVED index=57 shot=0 window=57 iterations=1
+CASE_START index=58 shot=0 window=58 phase=steady defects=8 selectors=5
+CASE_SOLVED index=58 shot=0 window=58 iterations=5
+CASE_START index=59 shot=0 window=59 phase=steady defects=14 selectors=7
+CASE_SOLVED index=59 shot=0 window=59 iterations=7
+CASE_START index=60 shot=0 window=60 phase=steady defects=23 selectors=12
+CASE_SOLVED index=60 shot=0 window=60 iterations=12
+CASE_START index=61 shot=0 window=61 phase=steady defects=13 selectors=7
+CASE_SOLVED index=61 shot=0 window=61 iterations=7
+CASE_START index=62 shot=0 window=62 phase=steady defects=15 selectors=8
+CASE_SOLVED index=62 shot=0 window=62 iterations=10
+CASE_START index=63 shot=0 window=63 phase=steady defects=16 selectors=8
+CASE_SOLVED index=63 shot=0 window=63 iterations=10
+CASE_START index=64 shot=0 window=64 phase=steady defects=18 selectors=10
+CASE_SOLVED index=64 shot=0 window=64 iterations=12
+CASE_START index=65 shot=0 window=65 phase=steady defects=13 selectors=7
+CASE_SOLVED index=65 shot=0 window=65 iterations=7
+CASE_START index=66 shot=0 window=66 phase=steady defects=10 selectors=6
+CASE_SOLVED index=66 shot=0 window=66 iterations=6
+CASE_START index=67 shot=0 window=67 phase=steady defects=11 selectors=6
+CASE_SOLVED index=67 shot=0 window=67 iterations=6
+CASE_START index=68 shot=0 window=68 phase=steady defects=13 selectors=7
+CASE_SOLVED index=68 shot=0 window=68 iterations=7
+CASE_START index=69 shot=0 window=69 phase=steady defects=14 selectors=7
+CASE_SOLVED index=69 shot=0 window=69 iterations=7
+CASE_START index=70 shot=0 window=70 phase=steady defects=10 selectors=5
+CASE_SOLVED index=70 shot=0 window=70 iterations=5
+CASE_START index=71 shot=0 window=71 phase=steady defects=11 selectors=6
+CASE_SOLVED index=71 shot=0 window=71 iterations=6
+CASE_START index=72 shot=0 window=72 phase=steady defects=5 selectors=3
+CASE_SOLVED index=72 shot=0 window=72 iterations=3
+CASE_START index=73 shot=0 window=73 phase=steady defects=11 selectors=6
+CASE_SOLVED index=73 shot=0 window=73 iterations=6
+CASE_START index=74 shot=0 window=74 phase=steady defects=12 selectors=6
+CASE_SOLVED index=74 shot=0 window=74 iterations=6
+CASE_START index=75 shot=0 window=75 phase=steady defects=13 selectors=7
+CASE_SOLVED index=75 shot=0 window=75 iterations=7
+CASE_START index=76 shot=0 window=76 phase=steady defects=7 selectors=4
+CASE_SOLVED index=76 shot=0 window=76 iterations=4
+CASE_START index=77 shot=0 window=77 phase=steady defects=5 selectors=3
+CASE_SOLVED index=77 shot=0 window=77 iterations=3
+CASE_START index=78 shot=0 window=78 phase=steady defects=6 selectors=3
+CASE_SOLVED index=78 shot=0 window=78 iterations=3
+CASE_START index=79 shot=0 window=79 phase=steady defects=11 selectors=7
+CASE_SOLVED index=79 shot=0 window=79 iterations=7
+CASE_START index=80 shot=0 window=80 phase=steady defects=14 selectors=7
+CASE_SOLVED index=80 shot=0 window=80 iterations=7
+CASE_START index=81 shot=0 window=81 phase=steady defects=14 selectors=7
+CASE_SOLVED index=81 shot=0 window=81 iterations=7
+CASE_START index=82 shot=0 window=82 phase=steady defects=12 selectors=7
+CASE_SOLVED index=82 shot=0 window=82 iterations=7
+CASE_START index=83 shot=0 window=83 phase=steady defects=15 selectors=8
+CASE_SOLVED index=83 shot=0 window=83 iterations=8
+CASE_START index=84 shot=0 window=84 phase=steady defects=15 selectors=8
+CASE_SOLVED index=84 shot=0 window=84 iterations=8
+CASE_START index=85 shot=0 window=85 phase=steady defects=14 selectors=7
+CASE_SOLVED index=85 shot=0 window=85 iterations=7
+CASE_START index=86 shot=0 window=86 phase=steady defects=11 selectors=6
+CASE_SOLVED index=86 shot=0 window=86 iterations=6
+CASE_START index=87 shot=0 window=87 phase=steady defects=10 selectors=5
+CASE_SOLVED index=87 shot=0 window=87 iterations=5
+CASE_START index=88 shot=0 window=88 phase=steady defects=6 selectors=3
+CASE_SOLVED index=88 shot=0 window=88 iterations=3
+CASE_START index=89 shot=0 window=89 phase=steady defects=8 selectors=5
+CASE_SOLVED index=89 shot=0 window=89 iterations=5
+CASE_START index=90 shot=0 window=90 phase=steady defects=11 selectors=7
+CASE_SOLVED index=90 shot=0 window=90 iterations=7
+CASE_START index=91 shot=0 window=91 phase=steady defects=12 selectors=8
+CASE_SOLVED index=91 shot=0 window=91 iterations=8
+CASE_START index=92 shot=0 window=92 phase=steady defects=9 selectors=6
+CASE_SOLVED index=92 shot=0 window=92 iterations=6
+CASE_START index=93 shot=0 window=93 phase=steady defects=9 selectors=6
+CASE_SOLVED index=93 shot=0 window=93 iterations=6
+CASE_START index=94 shot=0 window=94 phase=steady defects=13 selectors=8
+CASE_SOLVED index=94 shot=0 window=94 iterations=8
+CASE_START index=95 shot=0 window=95 phase=steady defects=15 selectors=9
+CASE_SOLVED index=95 shot=0 window=95 iterations=9
+CASE_START index=96 shot=0 window=96 phase=steady defects=13 selectors=7
+CASE_SOLVED index=96 shot=0 window=96 iterations=7
+CASE_START index=97 shot=0 window=97 phase=steady defects=9 selectors=5
+CASE_SOLVED index=97 shot=0 window=97 iterations=5
+CASE_START index=98 shot=0 window=98 phase=steady defects=11 selectors=6
+CASE_SOLVED index=98 shot=0 window=98 iterations=7
+CASE_START index=99 shot=0 window=99 phase=steady defects=9 selectors=5
+CASE_SOLVED index=99 shot=0 window=99 iterations=6
+CASE_START index=100 shot=0 window=100 phase=steady defects=14 selectors=8
+CASE_SOLVED index=100 shot=0 window=100 iterations=9
+CASE_START index=101 shot=0 window=101 phase=steady defects=14 selectors=7
+CASE_SOLVED index=101 shot=0 window=101 iterations=7
+CASE_START index=102 shot=0 window=102 phase=steady defects=16 selectors=8
+CASE_SOLVED index=102 shot=0 window=102 iterations=8
+CASE_START index=103 shot=0 window=103 phase=steady defects=8 selectors=4
+CASE_SOLVED index=103 shot=0 window=103 iterations=4
+CASE_START index=104 shot=0 window=104 phase=steady defects=15 selectors=10
+CASE_SOLVED index=104 shot=0 window=104 iterations=11
+CASE_START index=105 shot=0 window=105 phase=steady defects=14 selectors=10
+CASE_SOLVED index=105 shot=0 window=105 iterations=11
+CASE_START index=106 shot=0 window=106 phase=steady defects=15 selectors=10
+CASE_SOLVED index=106 shot=0 window=106 iterations=11
+CASE_START index=107 shot=0 window=107 phase=steady defects=10 selectors=6
+CASE_SOLVED index=107 shot=0 window=107 iterations=6
+CASE_START index=108 shot=0 window=108 phase=steady defects=10 selectors=5
+CASE_SOLVED index=108 shot=0 window=108 iterations=5
+CASE_START index=109 shot=0 window=109 phase=steady defects=8 selectors=4
+CASE_SOLVED index=109 shot=0 window=109 iterations=4
+CASE_START index=110 shot=0 window=110 phase=steady defects=7 selectors=4
+CASE_SOLVED index=110 shot=0 window=110 iterations=4
+CASE_START index=111 shot=0 window=111 phase=steady defects=12 selectors=8
+CASE_SOLVED index=111 shot=0 window=111 iterations=7
+CASE_START index=112 shot=0 window=112 phase=steady defects=13 selectors=8
+CASE_SOLVED index=112 shot=0 window=112 iterations=7
+CASE_START index=113 shot=0 window=113 phase=steady defects=8 selectors=5
+CASE_SOLVED index=113 shot=0 window=113 iterations=4
+CASE_START index=114 shot=0 window=114 phase=steady defects=3 selectors=2
+CASE_SOLVED index=114 shot=0 window=114 iterations=2
+CASE_START index=115 shot=0 window=115 phase=steady defects=4 selectors=2
+CASE_SOLVED index=115 shot=0 window=115 iterations=2
+CASE_START index=116 shot=0 window=116 phase=steady defects=5 selectors=3
+CASE_SOLVED index=116 shot=0 window=116 iterations=3
+CASE_START index=117 shot=0 window=117 phase=steady defects=13 selectors=7
+CASE_SOLVED index=117 shot=0 window=117 iterations=7
+CASE_START index=118 shot=0 window=118 phase=steady defects=16 selectors=9
+CASE_SOLVED index=118 shot=0 window=118 iterations=9
+CASE_START index=119 shot=0 window=119 phase=steady defects=12 selectors=7
+CASE_SOLVED index=119 shot=0 window=119 iterations=7
+CASE_START index=120 shot=0 window=120 phase=steady defects=5 selectors=3
+CASE_SOLVED index=120 shot=0 window=120 iterations=3
+CASE_START index=121 shot=0 window=121 phase=steady defects=8 selectors=4
+CASE_SOLVED index=121 shot=0 window=121 iterations=4
+CASE_START index=122 shot=0 window=122 phase=steady defects=8 selectors=4
+CASE_SOLVED index=122 shot=0 window=122 iterations=4
+CASE_START index=123 shot=0 window=123 phase=steady defects=6 selectors=3
+CASE_SOLVED index=123 shot=0 window=123 iterations=3
+CASE_START index=124 shot=0 window=124 phase=steady defects=6 selectors=4
+CASE_SOLVED index=124 shot=0 window=124 iterations=5
+CASE_START index=125 shot=0 window=125 phase=steady defects=8 selectors=5
+CASE_SOLVED index=125 shot=0 window=125 iterations=6
+CASE_START index=126 shot=0 window=126 phase=steady defects=10 selectors=6
+CASE_SOLVED index=126 shot=0 window=126 iterations=7
+CASE_START index=127 shot=0 window=127 phase=steady defects=4 selectors=2
+CASE_SOLVED index=127 shot=0 window=127 iterations=2
+CASE_START index=128 shot=0 window=128 phase=steady defects=4 selectors=2
+CASE_SOLVED index=128 shot=0 window=128 iterations=2
+CASE_START index=129 shot=0 window=129 phase=steady defects=11 selectors=6
+CASE_SOLVED index=129 shot=0 window=129 iterations=6
+CASE_START index=130 shot=0 window=130 phase=steady defects=20 selectors=10
+CASE_SOLVED index=130 shot=0 window=130 iterations=10
+CASE_START index=131 shot=0 window=131 phase=steady defects=21 selectors=11
+CASE_SOLVED index=131 shot=0 window=131 iterations=11
+CASE_START index=132 shot=0 window=132 phase=steady defects=22 selectors=13
+CASE_SOLVED index=132 shot=0 window=132 iterations=13
+CASE_START index=133 shot=0 window=133 phase=steady defects=14 selectors=9
+CASE_SOLVED index=133 shot=0 window=133 iterations=9
+CASE_START index=134 shot=0 window=134 phase=steady defects=12 selectors=8
+CASE_SOLVED index=134 shot=0 window=134 iterations=8
+CASE_START index=135 shot=0 window=135 phase=steady defects=2 selectors=1
+CASE_SOLVED index=135 shot=0 window=135 iterations=1
+CASE_START index=136 shot=0 window=136 phase=steady defects=5 selectors=4
+CASE_SOLVED index=136 shot=0 window=136 iterations=4
+CASE_START index=137 shot=0 window=137 phase=steady defects=10 selectors=7
+CASE_SOLVED index=137 shot=0 window=137 iterations=7
+CASE_START index=138 shot=0 window=138 phase=steady defects=10 selectors=7
+CASE_SOLVED index=138 shot=0 window=138 iterations=7
+CASE_START index=139 shot=0 window=139 phase=steady defects=7 selectors=4
+CASE_SOLVED index=139 shot=0 window=139 iterations=4
+CASE_START index=140 shot=0 window=140 phase=steady defects=8 selectors=4
+CASE_SOLVED index=140 shot=0 window=140 iterations=4
+CASE_START index=141 shot=0 window=141 phase=steady defects=8 selectors=4
+CASE_SOLVED index=141 shot=0 window=141 iterations=4
+CASE_START index=142 shot=0 window=142 phase=steady defects=8 selectors=4
+CASE_SOLVED index=142 shot=0 window=142 iterations=4
+CASE_START index=143 shot=0 window=143 phase=steady defects=1 selectors=1
+CASE_SOLVED index=143 shot=0 window=143 iterations=1
+CASE_START index=144 shot=0 window=144 phase=steady defects=5 selectors=3
+CASE_SOLVED index=144 shot=0 window=144 iterations=3
+CASE_START index=145 shot=0 window=145 phase=steady defects=13 selectors=8
+CASE_SOLVED index=145 shot=0 window=145 iterations=8
+CASE_START index=146 shot=0 window=146 phase=steady defects=11 selectors=7
+CASE_SOLVED index=146 shot=0 window=146 iterations=7
+CASE_START index=147 shot=0 window=147 phase=steady defects=10 selectors=6
+CASE_SOLVED index=147 shot=0 window=147 iterations=6
+CASE_START index=148 shot=0 window=148 phase=steady defects=5 selectors=3
+CASE_SOLVED index=148 shot=0 window=148 iterations=3
+CASE_START index=149 shot=0 window=149 phase=steady defects=5 selectors=3
+CASE_SOLVED index=149 shot=0 window=149 iterations=3
+CASE_START index=150 shot=0 window=150 phase=steady defects=9 selectors=5
+CASE_SOLVED index=150 shot=0 window=150 iterations=5
+CASE_START index=151 shot=0 window=151 phase=steady defects=14 selectors=7
+CASE_SOLVED index=151 shot=0 window=151 iterations=7
+CASE_START index=152 shot=0 window=152 phase=steady defects=25 selectors=14
+CASE_SOLVED index=152 shot=0 window=152 iterations=15
+CASE_START index=153 shot=0 window=153 phase=steady defects=20 selectors=11
+CASE_SOLVED index=153 shot=0 window=153 iterations=12
+CASE_START index=154 shot=0 window=154 phase=steady defects=13 selectors=8
+CASE_SOLVED index=154 shot=0 window=154 iterations=9
+CASE_START index=155 shot=0 window=155 phase=steady defects=10 selectors=6
+CASE_SOLVED index=155 shot=0 window=155 iterations=8
+CASE_START index=156 shot=0 window=156 phase=steady defects=10 selectors=6
+CASE_SOLVED index=156 shot=0 window=156 iterations=8
+CASE_START index=157 shot=0 window=157 phase=steady defects=16 selectors=9
+CASE_SOLVED index=157 shot=0 window=157 iterations=11
+CASE_START index=158 shot=0 window=158 phase=steady defects=12 selectors=6
+CASE_SOLVED index=158 shot=0 window=158 iterations=6
+CASE_START index=159 shot=0 window=159 phase=steady defects=19 selectors=10
+CASE_SOLVED index=159 shot=0 window=159 iterations=10
+CASE_START index=160 shot=0 window=160 phase=steady defects=13 selectors=7
+CASE_SOLVED index=160 shot=0 window=160 iterations=7
+CASE_START index=161 shot=0 window=161 phase=steady defects=13 selectors=7
+CASE_SOLVED index=161 shot=0 window=161 iterations=7
+CASE_START index=162 shot=0 window=162 phase=steady defects=9 selectors=5
+CASE_SOLVED index=162 shot=0 window=162 iterations=5
+CASE_START index=163 shot=0 window=163 phase=closing defects=8 selectors=4
+CASE_SOLVED index=163 shot=0 window=163 iterations=4
+{"cases":164,"total_defects":1648,"total_selectors":918,"all_syndromes_valid":true,"all_corrections_equal":true,"max_iterations":15,"total_iterations":946}
+[info] requested quit, aborting...
+[info] Shared memory key : SpinalHDL_0_1_6317612_656757087_1795222864413_1559992186812204362
+[info] Start of simulation
+[info] Warning, value 'z' at position 0 is neither '0' or '1'. value set to '0'.
+[info] End of simulation
+[info] [Done] Simulation done in 439699.413 ms
+[success] Total time: 653 s (10:53), completed 2026年11月21日 上午9:08:39
+Scala process quit normally
+Successfully remove build folder
