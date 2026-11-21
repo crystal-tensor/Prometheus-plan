@@ -1,0 +1,59 @@
+{
+  "accepted_z_closed_loop_real_rtl_gate": true,
+  "base_input_sha256": "515da2d108d0984bc9bb74453b487bc3ed5f6657d3c10e936c8fd253c99a1a5f",
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--bin",
+    "d6_z_phase_primal_dual_closed_loop",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_z_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_z_closed_loop_shard_0008_0063_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/results/B2_B7_P023_d6_z_closed_loop_shard_0008_0063_verilator_v1.json",
+    "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/tools/b2_b7_p023_d6_z_selector_server_v1.py"
+  ],
+  "elapsed_seconds": 491.264955,
+  "elapsed_seconds_per_case": 0.053491393183797906,
+  "exit_code": 0,
+  "finished_utc": "2026-11-21T08:14:01.515266+00:00",
+  "forbidden_hits": [],
+  "known_warning_lines": [
+    "[info] [warning] 1784830 signals were pruned. you can call printpruned on the backend report to get more informations.",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:116:22: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] ../verilator/vdistributeddual__spinalwrapper.cpp:131:19: warning: variable length arrays in c++ are a clang extension [-wvla-cxx-extension]",
+    "[info] 2 warnings generated."
+  ],
+  "log_sha256": "ea97e9306a633043d0ef3a2f16739dcabea2dcd0a5e81fdc113294ed50af75b9",
+  "occupancy_audit": {
+    "all_clear": true,
+    "checks": 93512,
+    "expected_checks": 93512
+  },
+  "output_sha256": "94fc87747cc245017a54741a0c843a9cf060cfe5c0153c048c444daa8a1f7b97",
+  "pilot_sha256": "5aee10a36d1989b5b0477008054afef51334ed354a37de7a2b01405f2d344aa2",
+  "python_version": "Python 3.12.6",
+  "result_summary": {
+    "accepted_closed_loop_gate": true,
+    "all_syndromes_valid": true,
+    "cases": 9184,
+    "commit_residual_failures": 0,
+    "final_frame_failures": 0,
+    "final_residual_failures": 0,
+    "max_iterations": 21,
+    "shots": 56,
+    "total_defects": 93512,
+    "total_iterations": 54502,
+    "total_selectors": 51968,
+    "windows": 164
+  },
+  "schema": "b2_b7_p023_d6_z_closed_loop_capture_v1",
+  "selector_server_sha256": "263a79e1f1d359605cd51a0121d174e98719fdfdb6de5d7afe993e4e26883b77",
+  "simulator": "verilator",
+  "simulator_version": "Verilator 5.040 2025-08-30 rev UNKNOWN.REV",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_patch_sha256": "a1b1b4a2036f44039f6448d16a357ea07d1105c272644e805e9f8ebc7c5b5b27",
+  "started_utc": "2026-11-21T08:05:50.250311+00:00",
+  "unexpected_warning_lines": []
+}
