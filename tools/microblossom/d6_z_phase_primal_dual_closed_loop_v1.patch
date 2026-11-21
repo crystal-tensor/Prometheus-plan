@@ -1,0 +1,2157 @@
+--- a/src/fpga/microblossom/Instruction.scala
++++ b/src/fpga/microblossom/Instruction.scala
+@@ -90,9 +90,10 @@
+   def isAddDefect(): Bool = opCode === OpCode.AddDefectVertex
+   def isFindObstacle(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.FindObstacle)
+   def isReset(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.Reset)
++  def isLoadWeightsExternal(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.LoadWeightsExternal)
+   def isLoadDefectsExternal(): Bool = isExtended && (extendedOpCode === ExtendedOpCode.LoadDefectsExternal)
+ 
+-  def isChangingSyndrome(): Bool = isAddDefect || isReset || isLoadDefectsExternal
++  def isChangingSyndrome(): Bool = isAddDefect || isReset || isLoadWeightsExternal || isLoadDefectsExternal
+ 
+   def assignExtendedOpCode(code: Int) = {
+     opCode := OpCode.SetSpeed
+@@ -109,6 +110,10 @@
+     payload.clearAll()
+     assignExtendedOpCode(ExtendedOpCode.FindObstacle)
+   }
++  def assignLoadWeightsExternal() = {
++    payload.clearAll()
++    assignExtendedOpCode(ExtendedOpCode.LoadWeightsExternal)
++  }
+ }
+ 
+ case class BitRange(msb: Int, lsb: Int) {
+@@ -167,6 +172,9 @@
+   }
+   def generateFindObstacle(): Long = {
+     generateExtendedSuffix(ExtendedOpCode.FindObstacle)
++  }
++  def generateLoadWeightsExternal(): Long = {
++    generateExtendedSuffix(ExtendedOpCode.LoadWeightsExternal)
+   }
+   def generateAddDefect(vertex: Long, node: Long): Long = {
+     opCodeRange.masked(OpCode.AddDefectVertex) | field1Range.masked(vertex) | field2Range.masked(node)
+@@ -202,6 +210,8 @@
+   def isAddDefect(value: Long) = opCode(value) == OpCode.AddDefectVertex
+   def isFindObstacle(value: Long) = isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.FindObstacle)
+   def isReset(value: Long) = isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.Reset)
++  def isLoadWeightsExternal(value: Long) =
++    isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.LoadWeightsExternal)
+   def isLoadDefectsExternal(value: Long) =
+     isExtended(value) && (extendedOpCode(value) == ExtendedOpCode.LoadDefectsExternal)
+ 
+@@ -227,6 +237,8 @@
+       return s"FindObstacle()"
+     } else if (isReset(value)) {
+       return s"Reset()"
++    } else if (isLoadWeightsExternal(value)) {
++      return s"LoadWeightsExternal()"
+     } else if (isLoadDefectsExternal(value)) {
+       return s"LoadDefectsExternal(time=${field1(value)})"
+     } else {
+@@ -264,6 +276,8 @@
+       return spec.generateFindObstacle()
+     } else if (isReset(value)) {
+       return spec.generateReset()
++    } else if (isLoadWeightsExternal(value)) {
++      return spec.generateLoadWeightsExternal()
+     } else if (isLoadDefectsExternal(value)) {
+       val result = spec.generateLoadDefectsExternal(field1(value))
+       assert(spec.field1(result) == field1(value))
+--- a/src/fpga/microblossom/DualConfig.scala
++++ b/src/fpga/microblossom/DualConfig.scala
+@@ -9,6 +9,18 @@
+ object DualConfig {
+   def version = Integer.parseInt("24" + "01" + "23" + "c0", 16) // year - month - date - 'c'revision
+ }
++
++case class DualPhaseBank(
++    name: String,
++    edgeActive: Seq[Boolean],
++    edgeBaseWeights: Seq[Int],
++    residentWeightRules: Map[Int, Seq[(Int, Int)]],
++    edgeFaultIds: Seq[Seq[Int]],
++    faultIdCount: Int,
++    vertexActive: Seq[Boolean],
++    vertexVirtual: Seq[Boolean],
++    vertexMaxGrowth: Seq[Int]
++)
+ 
+ case class DualConfig(
+     var vertexBits: Int = 15,
+@@ -19,6 +31,12 @@
+     var contextDepth: Int = 1, // how many different contexts are supported
+     var conflictChannels: Int = 1, // how many conflicts are collected at once in parallel
+     var hardCodeWeights: Boolean = true, // hard-code the edge weights to simplify logic
++    // Optional edge-local rule table for a resident causal selector.
++    // target edge -> sequence of (source edge, replacement weight).
++    var residentWeightRules: Map[Int, Seq[(Int, Int)]] = Map.empty,
++    // Optional reset-bound opening/steady/closing banks over one superset graph.
++    // Phase selection is legal only while the decoder is quiescent.
++    var phaseBanks: Seq[DualPhaseBank] = Seq.empty,
+     // optional features
+     var supportAddDefectVertex: Boolean = true,
+     var supportOffloading: Boolean = false,
+@@ -39,6 +57,10 @@
+   def edgeNum = graph.weighted_edges.length.toInt
+   def offloaderNum = activeOffloading.length.toInt
+   def instructionSpec = InstructionSpec(this)
++  def phaseBits = log2Up(phaseBanks.length.max(2))
++  def hasPhaseBanks = phaseBanks.nonEmpty
++  def correctionBits = phaseBanks.map(_.faultIdCount).foldLeft(1)(_.max(_))
++  def correctionIdBits = log2Up(correctionBits.max(2))
+   def contextBits = log2Up(contextDepth)
+   def instructionBufferBits = log2Up(2 * instructionBufferDepth + 2) // the dual module may be processing an instruction
+   def IndexNone = (1 << vertexBits) - 1
+@@ -290,6 +312,35 @@
+     assert(weightBits <= 30)
+     assert(weightBits > 0)
+     assert(contextDepth > 0)
++    if (phaseBanks.nonEmpty) {
++      assert(phaseBanks.length >= 2)
++      phaseBanks.foreach { bank =>
++        assert(bank.edgeActive.length == edgeNum)
++        assert(bank.edgeBaseWeights.length == edgeNum)
++        assert(bank.edgeFaultIds.length == edgeNum)
++        assert(bank.faultIdCount > 0)
++        assert(bank.vertexActive.length == vertexNum)
++        assert(bank.vertexVirtual.length == vertexNum)
++        assert(bank.vertexMaxGrowth.length == vertexNum)
++        bank.edgeBaseWeights.foreach(weight => assert(weight >= 0 && BigInt(weight) < (BigInt(1) << weightBits)))
++        bank.edgeFaultIds.zip(bank.edgeActive).foreach { case (faultIds, active) =>
++          assert(faultIds.length <= 2)
++          assert(faultIds.distinct.length == faultIds.length)
++          assert(active || faultIds.isEmpty)
++          faultIds.foreach(faultId => assert(faultId >= 0 && faultId < bank.faultIdCount))
++        }
++        bank.residentWeightRules.foreach { case (target, rules) =>
++          assert(target >= 0 && target < edgeNum)
++          assert(rules.map(_._1).distinct.length == rules.length)
++          rules.foreach { case (source, replacement) =>
++            assert(source >= 0 && source < edgeNum)
++            assert(bank.edgeActive(source))
++            assert(bank.edgeActive(target))
++            assert(replacement >= 0 && BigInt(replacement) < (BigInt(1) << weightBits))
++          }
++        }
++      }
++    }
+     instructionSpec.sanityCheck()
+   }
+ }
+--- a/src/fpga/microblossom/types/BroadcastMessage.scala
++++ b/src/fpga/microblossom/types/BroadcastMessage.scala
+@@ -9,6 +9,13 @@
+   val instruction = Instruction(config)
+   val isReset = explicitReset generate Bool
+   val contextId = (config.contextBits > 0) generate UInt(config.contextBits bits)
++  // LoadWeightsExternal uses this sideband because a 32-bit instruction cannot
++  // hold both the architectural 15-bit edge index and a 16+ bit weight.
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
++  val phaseSelectValid = Bool
++  val phaseId = UInt(config.phaseBits bits)
+ 
+   def resizedFrom(source: BroadcastMessage) = {
+     valid := source.valid
+@@ -19,6 +26,11 @@
+     if (config.contextBits > 0) {
+       contextId := source.contextId
+     }
++    weightUpdateEdgeIndex := source.weightUpdateEdgeIndex
++    weightUpdateWeight := source.weightUpdateWeight.resized
++    weightUpdateIsRuleSelector := source.weightUpdateIsRuleSelector
++    phaseSelectValid := source.phaseSelectValid
++    phaseId := source.phaseId.resized
+   }
+ }
+ 
+--- a/src/fpga/microblossom/modules/DistributedDual.scala
++++ b/src/fpga/microblossom/modules/DistributedDual.scala
+@@ -24,6 +24,15 @@
+     val maxGrowable = out(ConvergecastMaxGrowable(ioConfig.weightBits))
+     val conflict = out(ConvergecastConflict(ioConfig.vertexBits))
+     val parityReports = out(Bits(config.parityReportersNum bits))
++
++    // Sparse phase-banked correction readout. The primal host submits each
++    // selected subgraph edge once; this block XORs its zero, one, or two fault
++    // IDs into the correction vector for the currently selected phase.
++    val correctionClear = in(Bool)
++    val correctionEdgeValid = in(Bool)
++    val correctionEdgeIndex = in(UInt(log2Up(config.edgeNum) bits))
++    val correctionVector = out(Bits(config.correctionBits bits))
++    val correctionFaultIdCount = out(UInt(log2Up(config.correctionBits + 1) bits))
+   }
+ 
+   // width conversion
+@@ -32,6 +41,57 @@
+   broadcastMessage.valid := io.message.valid
+   if (config.contextBits > 0) { broadcastMessage.contextId := io.message.contextId }
+   broadcastMessage.isReset := io.message.instruction.isReset
++  broadcastMessage.weightUpdateEdgeIndex := io.message.weightUpdateEdgeIndex
++  broadcastMessage.weightUpdateWeight := io.message.weightUpdateWeight.resized
++  broadcastMessage.weightUpdateIsRuleSelector := io.message.weightUpdateIsRuleSelector
++  val currentPhase = Reg(UInt(config.phaseBits bits)) init (0)
++  when(io.message.phaseSelectValid) {
++    currentPhase := io.message.phaseId.resized
++  }
++  broadcastMessage.phaseSelectValid := io.message.phaseSelectValid
++  broadcastMessage.phaseId := Mux(io.message.phaseSelectValid, io.message.phaseId.resized, currentPhase)
++
++  val correctionAccumulator = Reg(Bits(config.correctionBits bits)) init (0)
++  val correctionFaultIdCount = UInt(log2Up(config.correctionBits + 1) bits)
++  val selectedFaultCount = UInt(2 bits)
++  val selectedFaultId0 = UInt(config.correctionIdBits bits)
++  val selectedFaultId1 = UInt(config.correctionIdBits bits)
++  correctionFaultIdCount := 0
++  selectedFaultCount := 0
++  selectedFaultId0 := 0
++  selectedFaultId1 := 0
++  if (config.hasPhaseBanks) {
++    switch(currentPhase) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(phaseIndex) {
++          correctionFaultIdCount := bank.faultIdCount
++          switch(io.correctionEdgeIndex) {
++            bank.edgeFaultIds.zipWithIndex.foreach { case (faultIds, edgeIndex) =>
++              if (faultIds.nonEmpty) {
++                is(edgeIndex) {
++                  selectedFaultCount := faultIds.length
++                  selectedFaultId0 := faultIds.head
++                  selectedFaultId1 := faultIds.lift(1).getOrElse(0)
++                }
++              }
++            }
++          }
++        }
++      }
++    }
++  }
++  when(io.correctionClear || io.message.phaseSelectValid) {
++    correctionAccumulator := 0
++  } elsewhen (io.correctionEdgeValid) {
++    when(selectedFaultCount > 0) {
++      correctionAccumulator(selectedFaultId0) := !correctionAccumulator(selectedFaultId0)
++    }
++    when(selectedFaultCount > 1) {
++      correctionAccumulator(selectedFaultId1) := !correctionAccumulator(selectedFaultId1)
++    }
++  }
++  io.correctionVector := correctionAccumulator
++  io.correctionFaultIdCount := correctionFaultIdCount
+ 
+   // delay the signal so that the synthesizer can automatically balancing the registers
+   val broadcastRegInserted = Delay(broadcastMessage, config.broadcastDelay)
+@@ -150,6 +210,11 @@
+   def simExecute(instruction: Long): (DataMaxGrowable, DataConflictRaw) = {
+     io.message.valid #= true
+     io.message.instruction #= instruction
++    io.message.weightUpdateEdgeIndex #= 0
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
+     clockDomain.waitSampling()
+     io.message.valid #= false
+     for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
+@@ -169,16 +234,98 @@
+     )
+   }
+ 
++  def simUpdateWeight(edgeIndex: Int, weight: Int): Unit = {
++    require(!config.hardCodeWeights, "dynamic weight update requires hardCodeWeights=false")
++    require(edgeIndex >= 0 && edgeIndex < config.edgeNum, "edge index out of range")
++    require(weight >= 0 && BigInt(weight) < (BigInt(1) << config.weightBits), "weight out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= edgeIndex
++    io.message.weightUpdateWeight #= weight
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simApplyResidentRuleSelector(sourceEdgeIndex: Int): Unit = {
++    require(!config.hardCodeWeights, "resident rule selector requires hardCodeWeights=false")
++    require(
++      config.residentWeightRules.nonEmpty || config.phaseBanks.exists(_.residentWeightRules.nonEmpty),
++      "resident rule selector table is empty"
++    )
++    require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, "source edge index out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateLoadWeightsExternal()
++    io.message.weightUpdateEdgeIndex #= sourceEdgeIndex
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= true
++    io.message.phaseSelectValid #= false
++    io.message.phaseId #= 0
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simSelectPhase(phaseId: Int): Unit = {
++    require(config.phaseBanks.nonEmpty, "phase banks are not configured")
++    require(phaseId >= 0 && phaseId < config.phaseBanks.length, "phase id out of range")
++    io.message.valid #= true
++    io.message.instruction #= ioConfig.instructionSpec.generateReset()
++    io.message.weightUpdateEdgeIndex #= 0
++    io.message.weightUpdateWeight #= 0
++    io.message.weightUpdateIsRuleSelector #= false
++    io.message.phaseSelectValid #= true
++    io.message.phaseId #= phaseId
++    clockDomain.waitSampling()
++    io.message.valid #= false
++    io.message.phaseSelectValid #= false
++    for (idx <- 0 until config.readLatency - 1) { clockDomain.waitSampling() }
++    sleep(1)
++  }
++
++  def simClearCorrection(): Unit = {
++    io.correctionClear #= true
++    io.correctionEdgeValid #= false
++    io.correctionEdgeIndex #= 0
++    clockDomain.waitSampling()
++    io.correctionClear #= false
++    sleep(1)
++  }
++
++  def simAccumulateCorrectionEdge(edgeIndex: Int): Unit = {
++    require(edgeIndex >= 0 && edgeIndex < config.edgeNum, "correction edge index out of range")
++    io.correctionClear #= false
++    io.correctionEdgeValid #= true
++    io.correctionEdgeIndex #= edgeIndex
++    clockDomain.waitSampling()
++    io.correctionEdgeValid #= false
++    sleep(1)
++  }
++
+   // before compiling the simulator, mark the fields as public to enable snapshot
++  def simMakePublicOccupancyAudit() = {
++    vertices.foreach(vertex => {
++      vertex.register.node.simPublic()
++      vertex.activeRegister.simPublic()
++    })
++  }
++
+   def simMakePublicSnapshot() = {
+     vertices.foreach(vertex => {
+       vertex.register.simPublic()
++      vertex.activeRegister.simPublic()
+       vertex.io.simPublic()
+     })
+     edges.foreach(edge => {
+       if (!config.hardCodeWeights) {
+         edge.register.simPublic()
+       }
++      edge.activeRegister.simPublic()
+       edge.io.simPublic()
+     })
+     offloaders.foreach(offloader => {
+@@ -408,6 +555,86 @@
+       }
+   }
+ 
++  test("dynamic weight sideband updates exactly one edge and reset restores base weight") {
++    val vertexTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(3), None, None),
++        BinaryTreeNode(Some(4), None, None),
++        BinaryTreeNode(Some(4), Some(0), Some(1)),
++        BinaryTreeNode(None, Some(3), Some(2))
++      )
++    )
++    val edgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(Some(2), None, None),
++        BinaryTreeNode(None, Some(0), Some(1))
++      )
++    )
++    val vertexEdgeTree = BinaryTree(
++      Seq(
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(5), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(6), None, None),
++        BinaryTreeNode(Some(8), None, None),
++        BinaryTreeNode(Some(7), Some(0), Some(1)),
++        BinaryTreeNode(Some(7), Some(2), Some(3)),
++        BinaryTreeNode(Some(8), Some(5), Some(6)),
++        BinaryTreeNode(None, Some(7), Some(4))
++      )
++    )
++    val graph = SingleGraph(
++      positions = Seq(Position(0, 0, 0), Position(1, 0, 0), Position(2, 0, 0)),
++      vertex_num = 3,
++      weighted_edges = Seq(WeightedEdge(0, 1, 2), WeightedEdge(1, 2, 3)),
++      virtual_vertices = Seq(),
++      vertex_binary_tree = vertexTree,
++      edge_binary_tree = edgeTree,
++      vertex_edge_binary_tree = vertexEdgeTree,
++      vertex_max_growth = Seq(3, 5, 3),
++      offloading = Seq(),
++      layer_fusion = None,
++      parity_reporters = None
++    )
++    val config = DualConfig(graph = graph)
++    val ioConfig = DualConfig()
++    config.contextDepth = 1
++    config.hardCodeWeights = false
++    config.sanityCheck()
++    val baseWeight0 = config.graph.weighted_edges(0).w.toInt
++    val baseWeight1 = config.graph.weighted_edges(1).w.toInt
++    val replacementWeight = baseWeight0 + 1
++    require(replacementWeight < (1 << config.weightBits))
++
++    Config.sim
++      .withIVerilog
++      .compile({
++        val dut = DistributedDual(config, ioConfig)
++        dut.simMakePublicSnapshot()
++        dut
++      })
++      .doSim("dynamic_weight_sideband") { dut =>
++        dut.clockDomain.forkStimulus(period = 10)
++        dut.io.message.valid #= false
++        dut.io.message.weightUpdateEdgeIndex #= 0
++        dut.io.message.weightUpdateWeight #= 0
++        dut.io.message.weightUpdateIsRuleSelector #= false
++        for (_ <- 0 to 3) { dut.clockDomain.waitSampling() }
++
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++        dut.simUpdateWeight(edgeIndex = 0, weight = replacementWeight)
++        assert(dut.edges(0).register.weight.toInt == replacementWeight)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++
++        dut.simExecute(ioConfig.instructionSpec.generateReset())
++        assert(dut.edges(0).register.weight.toInt == baseWeight0)
++        assert(dut.edges(1).register.weight.toInt == baseWeight1)
++      }
++  }
++
+ }
+ 
+ // sbt "runMain microblossom.modules.DistributedDualTestDebug1"
+--- a/src/fpga/microblossom/modules/Edge.scala
++++ b/src/fpga/microblossom/modules/Edge.scala
+@@ -61,6 +61,9 @@
+   // fetch
+   var ram: Mem[EdgeState] = null
+   var register = (!config.hardCodeWeights) generate Reg(EdgeState(config.weightBits, config.hardCodeWeights))
++  val activeRegister = Reg(Bool) init (
++    if (config.hasPhaseBanks) config.phaseBanks.head.edgeActive(edgeIndex) else true
++  )
+   if (!config.hardCodeWeights) {
+     register.init(EdgeState.resetValue(config, edgeIndex))
+   }
+@@ -88,7 +91,84 @@
+     message := io.message
+   }
+ 
+-  stages.offloadSet.state := fetchState
++  val selectedPhaseActive = Bool
++  val selectedPhaseBaseWeight = UInt(config.weightBits bits)
++  selectedPhaseActive := True
++  selectedPhaseBaseWeight := U(config.graph.weighted_edges(edgeIndex).w.toInt, config.weightBits bits)
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          selectedPhaseActive := (if (bank.edgeActive(edgeIndex)) True else False)
++          selectedPhaseBaseWeight := U(bank.edgeBaseWeights(edgeIndex), config.weightBits bits)
++        }
++      }
++    }
++  }
++
++  val nextFetchState = EdgeState(config.weightBits)
++  nextFetchState := fetchState
++  val residentSelectorHit = Bool
++  val residentSelectorReplacement = UInt(config.weightBits bits)
++  residentSelectorHit := False
++  residentSelectorReplacement := fetchState.weight
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          bank.residentWeightRules.getOrElse(edgeIndex, Seq.empty).foreach {
++            case (sourceEdgeIndex, replacementWeight) =>
++              when(message.weightUpdateEdgeIndex === U(sourceEdgeIndex, 15 bits)) {
++                residentSelectorHit := True
++                residentSelectorReplacement := U(replacementWeight, config.weightBits bits)
++              }
++          }
++        }
++      }
++    }
++  } else {
++    val residentRules = config.residentWeightRules.getOrElse(edgeIndex, Seq.empty)
++    require(
++      residentRules.map(_._1).distinct.length == residentRules.length,
++      s"edge $edgeIndex has duplicate resident selector sources"
++    )
++    residentRules.foreach { case (sourceEdgeIndex, replacementWeight) =>
++      require(sourceEdgeIndex >= 0 && sourceEdgeIndex < config.edgeNum, s"edge $edgeIndex selector source out of range")
++      require(
++        replacementWeight >= 0 && BigInt(replacementWeight) < (BigInt(1) << config.weightBits),
++        s"edge $edgeIndex selector replacement weight out of range"
++      )
++      when(message.weightUpdateEdgeIndex === U(sourceEdgeIndex, 15 bits)) {
++        residentSelectorHit := True
++        residentSelectorReplacement := U(replacementWeight, config.weightBits bits)
++      }
++    }
++  }
++  if (!config.hardCodeWeights) {
++    when(message.valid && message.phaseSelectValid) {
++      nextFetchState.weight := selectedPhaseBaseWeight
++    } elsewhen (message.valid && message.isReset) {
++      if (config.hasPhaseBanks) {
++        nextFetchState.weight := selectedPhaseBaseWeight
++      } else {
++        nextFetchState := EdgeState.resetValue(config, edgeIndex)
++      }
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        message.weightUpdateIsRuleSelector && activeRegister && residentSelectorHit
++    ) {
++      when(residentSelectorReplacement < fetchState.weight) {
++        nextFetchState.weight := residentSelectorReplacement
++      }
++    } elsewhen (
++      message.valid && message.instruction.isLoadWeightsExternal &&
++        !message.weightUpdateIsRuleSelector &&
++        message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++    ) {
++      nextFetchState.weight := message.weightUpdateWeight
++    }
++  }
++  stages.offloadSet.state := nextFetchState
+   stages.offloadSet.compact.connect(message)
+ 
+   stages.offloadSet2.connect(stages.offloadGet) // weight might be changed later
+@@ -123,11 +203,11 @@
+     edgeIsTight.io.leftGrown := io.leftVertexInput.offloadGet.state.grown
+     edgeIsTight.io.rightGrown := io.rightVertexInput.offloadGet.state.grown
+     edgeIsTight.io.weight := offload2Weight
+-    stages.offloadSet2.isTight := edgeIsTight.io.isTight
++    stages.offloadSet2.isTight := activeRegister && edgeIsTight.io.isTight
+     if (hasLayerFusion) {
+-      stages.offloadSet2.isTightExFusion := edgeIsTight.io.isTight && !conditionedVertexIsVirtual
+-    } else {
+-      stages.offloadSet2.isTightExFusion := edgeIsTight.io.isTight
++      stages.offloadSet2.isTightExFusion := activeRegister && edgeIsTight.io.isTight && !conditionedVertexIsVirtual
++    } else {
++      stages.offloadSet2.isTightExFusion := activeRegister && edgeIsTight.io.isTight
+     }
+   }
+ 
+@@ -135,8 +215,6 @@
+ 
+   stages.offloadSet4.connect(stages.offloadGet3)
+ 
+-  // TODO: dynamically update edge weights
+-  // Mux(message.isReset, EdgeState.resetValue(config, edgeIndex), fetchState)
+   stages.executeSet.connect(stages.offloadGet4)
+ 
+   stages.executeSet2.connect(stages.executeGet)
+@@ -151,7 +229,7 @@
+     edgeIsTight.io.leftGrown := io.leftVertexInput.executeGet2.state.grown
+     edgeIsTight.io.rightGrown := io.rightVertexInput.executeGet2.state.grown
+     edgeIsTight.io.weight := stages.executeGet2.state.weight
+-    stages.executeSet3.isTight := edgeIsTight.io.isTight
++    stages.executeSet3.isTight := activeRegister && edgeIsTight.io.isTight
+   }
+ 
+   stages.updateSet.connect(stages.executeGet3)
+@@ -182,24 +260,39 @@
+ 
+   // 1 cycle delay when context is used (to ensure read latency >= execute latency)
+   val outDelay = (config.contextDepth != 1).toInt
+-  io.maxGrowable := Delay(edgeResponse.io.maxGrowable, outDelay)
+-  io.conflict := Delay(edgeResponse.io.conflict, outDelay)
+-
+-  /* No write back: giving ports for external edge weights channels */
+-  // val writeState = stages.updateGet3.state
+-  // if (config.contextBits > 0) {
+-  //   ram.write(
+-  //     address = stages.updateGet3.compact.contextId,
+-  //     data = writeState,
+-  //     enable = stages.updateGet3.compact.valid
+-  //   )
+-  // } else {
+-  //   when(stages.updateGet3.compact.valid) {
+-  //     if (!config.hardCodeWeights) {
+-  //       register := writeState
+-  //     }
+-  //   }
+-  // }
++  val delayedMaxGrowable = Delay(edgeResponse.io.maxGrowable, outDelay)
++  val delayedConflict = Delay(edgeResponse.io.conflict, outDelay)
++  io.maxGrowable := delayedMaxGrowable
++  io.conflict := delayedConflict
++  when(!activeRegister) {
++    io.maxGrowable.length := io.maxGrowable.length.maxValue
++    io.conflict.valid := False
++  }
++
++  if (!config.hardCodeWeights) {
++    val writeWeight = message.valid &&
++      (message.phaseSelectValid || message.isReset || (
++        message.instruction.isLoadWeightsExternal &&
++          ((message.weightUpdateIsRuleSelector && residentSelectorHit) ||
++            (!message.weightUpdateIsRuleSelector &&
++          message.weightUpdateEdgeIndex === U(edgeIndex, 15 bits)
++            ))
++      ))
++    if (config.contextBits > 0) {
++      ram.write(
++        address = message.contextId,
++        data = nextFetchState,
++        enable = writeWeight
++      )
++    } else {
++      when(writeWeight) {
++        register := nextFetchState
++      }
++    }
++  }
++  when(message.valid && message.phaseSelectValid) {
++    activeRegister := selectedPhaseActive
++  }
+ 
+   // inject registers
+   for (stageName <- config.injectRegisters) {
+--- a/src/fpga/microblossom/modules/Vertex.scala
++++ b/src/fpga/microblossom/modules/Vertex.scala
+@@ -73,6 +73,9 @@
+   // fetch
+   var ram: Mem[VertexState] = null
+   var register = Reg(VertexState(config.vertexBits, config.grownBitsOf(vertexIndex)))
++  val activeRegister = Reg(Bool) init (
++    if (config.hasPhaseBanks) config.phaseBanks.head.vertexActive(vertexIndex) else true
++  )
+   register.init(VertexState.resetValue(config, vertexIndex))
+   var fetchState = VertexState(config.vertexBits, config.grownBitsOf(vertexIndex))
+   var message = BroadcastMessage(config)
+@@ -90,8 +93,29 @@
+     message := io.message
+   }
+ 
++  val selectedPhaseActive = Bool
++  val selectedResetState = VertexState(config.vertexBits, config.grownBitsOf(vertexIndex))
++  selectedPhaseActive := True
++  selectedResetState := VertexState.resetValue(config, vertexIndex)
++  if (config.hasPhaseBanks) {
++    switch(message.phaseId) {
++      config.phaseBanks.zipWithIndex.foreach { case (bank, phaseIndex) =>
++        is(U(phaseIndex, config.phaseBits bits)) {
++          selectedPhaseActive := (if (bank.vertexActive(vertexIndex)) True else False)
++          selectedResetState.isVirtual := (if (bank.vertexVirtual(vertexIndex)) True else False)
++        }
++      }
++    }
++  }
++
+   stages.offloadSet.message := message
+-  stages.offloadSet.state := Mux(message.isReset, VertexState.resetValue(config, vertexIndex), fetchState)
++  when(!activeRegister && !message.phaseSelectValid) {
++    stages.offloadSet.message.valid := False
++  }
++  stages.offloadSet.state := fetchState
++  when(message.isReset || message.phaseSelectValid) {
++    stages.offloadSet.state := selectedResetState
++  }
+ 
+   stages.offloadSet2.connect(stages.offloadGet)
+ 
+@@ -185,6 +209,9 @@
+   // 1 cycle delay when context is used (to ensure read latency >= execute latency)
+   val outDelay = (config.contextDepth != 1).toInt
+   io.maxGrowable := Delay(vertexResponse.io.maxGrowable, outDelay)
++  when(!activeRegister) {
++    io.maxGrowable.length := io.maxGrowable.length.maxValue
++  }
+ 
+   // write back
+   val writeState = stages.updateGet3.state
+@@ -198,6 +225,9 @@
+     when(stages.updateGet3.compact.valid) {
+       register := writeState
+     }
++  }
++  when(message.valid && message.phaseSelectValid) {
++    activeRegister := selectedPhaseActive
+   }
+ 
+   // inject registers
+--- a/src/fpga/microblossom/modules/MicroBlossomLooper.scala
++++ b/src/fpga/microblossom/modules/MicroBlossomLooper.scala
+@@ -50,6 +50,10 @@
+ 
+   // create MicroBlossom module
+   val microBlossom = DistributedDual(config, config)
++  // The looper does not expose the optional correction readout stream.
++  microBlossom.io.correctionClear := False
++  microBlossom.io.correctionEdgeValid := False
++  microBlossom.io.correctionEdgeIndex := 0
+ 
+   // immediate feedback happens when the response allows immediate growth
+   // when maximumGrowth is 0, the loopback is forbidden
+@@ -72,6 +76,9 @@
+     if (config.contextBits > 0) { inputEntry.contextId := responseEntry.contextId }
+     if (tagType != null) inputEntry.tag := responseEntry.tag
+     inputEntry.maximumGrowth := responseEntry.maximumGrowth
++    inputEntry.weightUpdateEdgeIndex := 0
++    inputEntry.weightUpdateWeight := 0
++    inputEntry.weightUpdateIsRuleSelector := False
+     when(responseEntry.isLoopBackGrow) {
+       inputEntry.grown := responseEntry.grown
+       inputEntry.isLoopBackGrow := False
+@@ -88,6 +95,9 @@
+     inputEntry.maximumGrowth := io.push.payload.maximumGrowth
+     inputEntry.grown := 0
+     inputEntry.isLoopBackGrow := False
++    inputEntry.weightUpdateEdgeIndex := io.push.payload.weightUpdateEdgeIndex
++    inputEntry.weightUpdateWeight := io.push.payload.weightUpdateWeight
++    inputEntry.weightUpdateIsRuleSelector := io.push.payload.weightUpdateIsRuleSelector
+     inputInstruction := io.push.payload.instruction
+   }
+ 
+@@ -95,6 +105,9 @@
+   microBlossom.io.message.valid := inputEntry.valid
+   microBlossom.io.message.instruction := inputInstruction
+   if (config.contextBits > 0) { microBlossom.io.message.contextId := inputEntry.contextId }
++  microBlossom.io.message.weightUpdateEdgeIndex := inputEntry.weightUpdateEdgeIndex
++  microBlossom.io.message.weightUpdateWeight := inputEntry.weightUpdateWeight
++  microBlossom.io.message.weightUpdateIsRuleSelector := inputEntry.weightUpdateIsRuleSelector
+ 
+   // shift pipeline entries
+   for (i <- (0 until pipelineLength).reverse) {
+@@ -143,6 +156,9 @@
+     }
+     io.pop.ready #= true
+     io.push.payload.maximumGrowth #= input.maximumGrowth
++    io.push.payload.weightUpdateEdgeIndex #= 0
++    io.push.payload.weightUpdateWeight #= 0
++    io.push.payload.weightUpdateIsRuleSelector #= false
+     clockDomain.waitSamplingWhere(io.push.ready.toBoolean)
+     io.push.valid #= false
+     clockDomain.waitSamplingWhere(io.pop.valid.toBoolean)
+@@ -189,6 +205,9 @@
+   val instruction = Instruction(config)
+   val contextId = (config.contextBits > 0) generate UInt(config.contextBits bits)
+   val maximumGrowth = UInt(16 bits)
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
+   val tag = (tagType != null) generate cloneOf(tagType)
+ }
+ 
+@@ -210,6 +229,9 @@
+   // the offloading module has not taken effect. The fix is to always issue a FindObstacle
+   // instruction after the loopback Grow instruction (isLoopBackGrow := True)
+   val isLoopBackGrow = Bool
++  val weightUpdateEdgeIndex = UInt(15 bits)
++  val weightUpdateWeight = UInt(config.weightBits bits)
++  val weightUpdateIsRuleSelector = Bool
+   val tag = (tagType != null) generate cloneOf(tagType)
+ 
+   def initDefault(): PipelineEntry[T] = {
+--- a/src/fpga/microblossom/DualHost.scala
++++ b/src/fpga/microblossom/DualHost.scala
+@@ -15,7 +15,7 @@
+ import util._
+ import spinal.core._
+ import spinal.core.sim._
+-import io.circe.parser.decode
++import io.circe.parser.{decode, parse}
+ import scala.reflect.io.Directory
+ import scala.util.control.Breaks._
+ import modules._
+@@ -38,19 +38,73 @@
+     // initial handshake and obtain a decoding graph
+     outStream.println("DualHost v0.0.1, ask for decoding graph")
+     var response = inStream.readLine()
+-    val graph = decode[SingleGraph](response) match {
++    val requestJson = parse(response).fold(throw _, identity)
++    val graphJson = requestJson.hcursor.downField("graph").focus.getOrElse(requestJson)
++    val graph = decode[SingleGraph](graphJson.noSpaces) match {
+       case Right(graph) => graph
+       case Left(ex)     => throw ex
+     }
++    def boolVector(value: io.circe.Json, field: String): Vector[Boolean] =
++      value.hcursor.downField(field).as[Vector[Boolean]].fold(throw _, identity)
++    def intVector(value: io.circe.Json, field: String): Vector[Int] =
++      value.hcursor.downField(field).as[Vector[Int]].fold(throw _, identity)
++    def nestedIntVector(value: io.circe.Json, field: String): Vector[Vector[Int]] =
++      value.hcursor.downField(field).as[Vector[Vector[Int]]].fold(throw _, identity)
++    val phaseBanks = requestJson.hcursor
++      .downField("phase_banks")
++      .as[Vector[io.circe.Json]]
++      .toOption
++      .getOrElse(Vector.empty)
++      .map { row =>
++        val rules = row.hcursor
++          .downField("resident_weight_rules")
++          .as[Vector[io.circe.Json]]
++          .fold(throw _, identity)
++          .map { rule =>
++            val target = rule.hcursor.get[Int]("target").fold(throw _, identity)
++            val pairs = nestedIntVector(rule, "rules").map(pair => (pair(0), pair(1)))
++            target -> pairs
++          }
++          .toMap
++        DualPhaseBank(
++          row.hcursor.get[String]("name").fold(throw _, identity),
++          boolVector(row, "edge_active"),
++          intVector(row, "edge_base_weights"),
++          rules,
++          nestedIntVector(row, "edge_fault_ids"),
++          row.hcursor.get[Int]("fault_id_count").fold(throw _, identity),
++          boolVector(row, "vertex_active"),
++          boolVector(row, "vertex_virtual"),
++          intVector(row, "vertex_max_growth")
++        )
++      }
+ 
+     // construct and compile a dual accelerator for simulation
+     val config = DualConfig(graph = graph, minimizeBits = false)
++    if (phaseBanks.nonEmpty) {
++      config.hardCodeWeights = false
++      config.supportOffloading = false
++      config.supportLayerFusion = false
++      config.phaseBanks = phaseBanks
++    }
+     config.sanityCheck()
+     val ioConfig = DualConfig() // use internal width conversion
++    ioConfig.phaseBanks = phaseBanks
+     val simConfig = SimConfig
+       .withConfig(Config.spinal())
+       .workspacePath(workspacePath)
+       .workspaceName(host_name)
++    if (phaseBanks.nonEmpty) {
++      sys.env.getOrElse("MICROBLOSSOM_PHASE_SIMULATOR", "iverilog") match {
++        case "iverilog" => simConfig.withIVerilog
++        case "verilator" =>
++          simConfig.withVerilator
++          simConfig.addSimulatorFlag("-CFLAGS \"-std=c++14 -DVL_TIME_CONTEXT\"")
++          simConfig.addSimulatorFlag("-LDFLAGS -std=c++14")
++        case other =>
++          throw new IllegalArgumentException(s"unsupported MICROBLOSSOM_PHASE_SIMULATOR: $other")
++      }
++    }
+ 
+     var command = inStream.readLine()
+     var withWaveform = false
+@@ -66,6 +120,7 @@
+     simConfig
+       .compile({
+         val dut = DistributedDual(config, ioConfig)
++        dut.simMakePublicOccupancyAudit()
+         if (withWaveform) {
+           dut.simMakePublicSnapshot()
+         }
+@@ -86,6 +141,9 @@
+ 
+         dut.io.message.valid #= false
+         dut.io.message.instruction #= 0
++        dut.io.correctionClear #= false
++        dut.io.correctionEdgeValid #= false
++        dut.io.correctionEdgeIndex #= 0
+         dut.clockDomain.forkStimulus(period = 10)
+ 
+         for (idx <- 0 to 10) { dut.clockDomain.waitSampling() }
+@@ -94,6 +152,7 @@
+ 
+         // start hosting the commands
+         var maxGrowth = Long.MaxValue
++        var occupancyAuditChecks = 0L
+         breakable {
+           while (true) {
+             command = inStream.readLine()
+@@ -103,6 +162,24 @@
+               break
+             } else if (command == "reset()") {
+               dut.simExecute(ioConfig.instructionSpec.generateReset())
++            } else if (command.startsWith("select_phase(")) {
++              val phase = command.substring("select_phase(".length, command.length - 1).toInt
++              dut.simSelectPhase(phase)
++            } else if (command.startsWith("apply_rule_selector(")) {
++              val edge = command.substring("apply_rule_selector(".length, command.length - 1).toInt
++              dut.simApplyResidentRuleSelector(edge)
++            } else if (command == "correction_clear()") {
++              dut.simClearCorrection()
++            } else if (command.startsWith("correction_edge(")) {
++              val edge = command.substring("correction_edge(".length, command.length - 1).toInt
++              dut.simAccumulateCorrectionEdge(edge)
++            } else if (command == "correction_read()") {
++              outStream.println(
++                "Correction(%d, %s)".format(
++                  dut.io.correctionFaultIdCount.toInt,
++                  dut.io.correctionVector.toBigInt.toString(16)
++                )
++              )
+             } else if (command.startsWith("set_speed(")) {
+               val parameters = command.substring("set_speed(".length, command.length - 1).split(", ")
+               assert(parameters.length == 2)
+@@ -160,7 +237,19 @@
+               assert(parameters.length == 2)
+               val vertex = parameters(0).toInt
+               val node = parameters(1).toInt
++              occupancyAuditChecks += 1
++              assert(
++                dut.vertices(vertex).activeRegister.toBoolean,
++                s"cannot add defect node $node to inactive vertex $vertex"
++              )
++              assert(
++                dut.vertices(vertex).register.node.toInt == config.IndexNone,
++                s"cannot add defect node $node to occupied vertex $vertex " +
++                  s"(existing node ${dut.vertices(vertex).register.node.toInt})"
++              )
+               dut.simExecute(ioConfig.instructionSpec.generateAddDefect(vertex, node))
++            } else if (command == "occupancy_audit_read()") {
++              outStream.println(s"OccupancyAudit($occupancyAuditChecks)")
+             } else if (command.startsWith("snapshot(")) {
+               val parameters = command.substring("snapshot(".length, command.length - 1).split(", ")
+               assert(parameters.length == 1)
+--- a/src/cpu/blossom/Cargo.toml
++++ b/src/cpu/blossom/Cargo.toml
+@@ -17,7 +17,7 @@
+ [lib]
+ name = "micro_blossom"
+ path = "src/lib.rs"
+-crate-type = ["lib", "cdylib"]
++crate-type = ["lib"]
+ 
+ [[bin]]
+ name = "micro_blossom"
+--- a/src/cpu/blossom/src/dual_module_scala.rs
++++ b/src/cpu/blossom/src/dual_module_scala.rs
+@@ -18,16 +18,18 @@
+ use micro_blossom_nostd::util::*;
+ use scan_fmt::*;
+ use serde::*;
++use serde_json::json;
+ use std::io::prelude::*;
+ use std::io::{BufReader, LineWriter};
+ use std::net::{TcpListener, TcpStream};
+-use std::process::Child;
++use std::process::{Child, Command, Stdio};
+ use std::sync::Mutex;
+ use wait_timeout::ChildExt;
+ 
+ pub struct DualModuleScalaDriver {
+     pub link: Mutex<Link>,
+     pub config: DualScalaConfig,
++    pending_rule_selectors: Vec<usize>,
+ }
+ 
+ #[derive(Debug, Clone, Serialize, Deserialize)]
+@@ -37,6 +39,8 @@
+     pub sim_config: SimulationConfig,
+     #[serde(default = "random_name_16")]
+     pub name: String,
++    #[serde(default)]
++    pub phase_banks: Option<serde_json::Value>,
+ }
+ 
+ pub struct Link {
+@@ -51,6 +55,12 @@
+ impl SolverTrackedDual for DualModuleScalaDriver {
+     fn new_from_graph_config(graph: MicroBlossomSingle, config: serde_json::Value) -> Self {
+         Self::new(graph, serde_json::from_value(config).unwrap()).unwrap()
++    }
++    fn after_defects_loaded(&mut self) {
++        let selectors = std::mem::take(&mut self.pending_rule_selectors);
++        for edge_index in selectors {
++            self.apply_rule_selector(edge_index);
++        }
+     }
+     fn fuse_layer(&mut self, layer_id: usize) {
+         self.load_syndrome_external(ni!(layer_id));
+@@ -109,17 +119,37 @@
+         let port = listener.local_addr()?.port();
+         // start the scala simulator host
+         println!("Starting Scala simulator host... this may take a while (listening on {hostname}:{port})");
+-        let child = SCALA_MICRO_BLOSSOM_RUNNER.run(
+-            "microblossom.DualHost",
+-            [format!("{hostname}"), format!("{port}"), format!("{}", config.name)],
+-        )?;
++        let child = if config.phase_banks.is_some() {
++            Command::new("sbt")
++                .current_dir("../../..")
++                .arg("-batch")
++                .arg(format!(
++                    "runMain microblossom.DualHost {hostname} {port} {}",
++                    config.name
++                ))
++                .stdout(Stdio::inherit())
++                .stderr(Stdio::inherit())
++                .spawn()?
++        } else {
++            SCALA_MICRO_BLOSSOM_RUNNER.run(
++                "microblossom.DualHost",
++                [format!("{hostname}"), format!("{port}"), format!("{}", config.name)],
++            )?
++        };
+         let (socket, _addr) = listener.accept()?;
+         let mut reader = BufReader::new(socket.try_clone()?);
+         let mut writer = LineWriter::new(socket);
+         let mut line = String::new();
+         reader.read_line(&mut line)?;
+         assert_eq!(line, "DualHost v0.0.1, ask for decoding graph\n", "handshake error");
+-        write!(writer, "{}\n", serde_json::to_string(&micro_blossom).unwrap())?;
++        let graph_request = match config.phase_banks.as_ref() {
++            Some(phase_banks) => json!({
++                "graph": micro_blossom,
++                "phase_banks": phase_banks,
++            }),
++            None => serde_json::to_value(&micro_blossom).unwrap(),
++        };
++        write!(writer, "{}\n", serde_json::to_string(&graph_request).unwrap())?;
+         let simulation_lock = SCALA_SIMULATION_LOCK.lock();
+         write!(writer, "{}\n", if cfg!(test) { "with waveform" } else { "no waveform" })?;
+         line.clear();
+@@ -135,16 +165,63 @@
+                 writer,
+             }),
+             config,
++            pending_rule_selectors: Vec::new(),
+         })
+     }
+ 
+     fn load_syndrome_external(&mut self, layer_id: CompactVertexIndex) {
+         write!(self.link.lock().unwrap().writer, "load_syndrome_external({layer_id})\n").unwrap();
+     }
++
++    pub fn select_phase(&mut self, phase_id: usize) {
++        write!(self.link.lock().unwrap().writer, "select_phase({phase_id})\n").unwrap();
++    }
++
++    pub fn apply_rule_selector(&mut self, edge_index: usize) {
++        write!(self.link.lock().unwrap().writer, "apply_rule_selector({edge_index})\n").unwrap();
++    }
++
++    pub fn queue_rule_selector(&mut self, edge_index: usize) {
++        self.pending_rule_selectors.push(edge_index);
++    }
++
++    pub fn correction_clear(&mut self) {
++        write!(self.link.lock().unwrap().writer, "correction_clear()\n").unwrap();
++    }
++
++    pub fn correction_edge(&mut self, edge_index: usize) {
++        write!(self.link.lock().unwrap().writer, "correction_edge({edge_index})\n").unwrap();
++    }
++
++    pub fn correction_read(&mut self) -> (usize, String) {
++        write!(self.link.lock().unwrap().writer, "correction_read()\n").unwrap();
++        let mut line = String::new();
++        self.link.lock().unwrap().reader.read_line(&mut line).unwrap();
++        let payload = line
++            .trim()
++            .strip_prefix("Correction(")
++            .and_then(|value| value.strip_suffix(')'))
++            .expect("correction response");
++        let (width, hex) = payload.split_once(", ").expect("correction response fields");
++        (width.parse().unwrap(), hex.to_string())
++    }
++
++    pub fn occupancy_audit_read(&mut self) -> usize {
++        write!(self.link.lock().unwrap().writer, "occupancy_audit_read()\n").unwrap();
++        let mut line = String::new();
++        self.link.lock().unwrap().reader.read_line(&mut line).unwrap();
++        line.trim()
++            .strip_prefix("OccupancyAudit(")
++            .and_then(|value| value.strip_suffix(')'))
++            .expect("occupancy audit response")
++            .parse()
++            .unwrap()
++    }
+ }
+ 
+ impl DualStacklessDriver for DualModuleScalaDriver {
+     fn reset(&mut self) {
++        self.pending_rule_selectors.clear();
+         write!(self.link.lock().unwrap().writer, "reset()\n").unwrap();
+     }
+     fn set_speed(&mut self, _is_blossom: bool, node: CompactNodeIndex, speed: CompactGrowState) {
+--- a/src/cpu/blossom/src/dual_module_comb.rs
++++ b/src/cpu/blossom/src/dual_module_comb.rs
+@@ -41,6 +41,7 @@
+     /// only enabled when `config.log_instructions` is true
+     pub profiler_instruction_history: Vec<Instruction>,
+     pub profiler_response_history: Vec<(CompactObstacle, CompactWeight)>,
++    pending_edge_weights: Vec<(EdgeIndex, Weight)>,
+ }
+ 
+ #[derive(Debug, Clone, Serialize, Deserialize)]
+@@ -82,6 +83,13 @@
+ impl SolverTrackedDual for DualModuleCombDriver {
+     fn new_from_graph_config(graph: MicroBlossomSingle, config: serde_json::Value) -> Self {
+         Self::new(graph, serde_json::from_value(config).unwrap())
++    }
++    fn after_defects_loaded(&mut self) {
++        let updates = std::mem::take(&mut self.pending_edge_weights);
++        for (edge_index, weight) in updates {
++            self.edges[edge_index].registers.weight = weight;
++        }
++        self.register_updated();
+     }
+     fn reset_profiler(&mut self) {
+         self.profiler_instruction_history.clear();
+@@ -193,6 +201,7 @@
+             config,
+             profiler_instruction_history: vec![],
+             profiler_response_history: vec![],
++            pending_edge_weights: vec![],
+         };
+         let mut offloading_vec = graph.offloading.0.clone();
+         if comb_driver.config.sim_config.support_layer_fusion {
+@@ -244,6 +253,7 @@
+     }
+ 
+     pub fn clear(&mut self) {
++        self.pending_edge_weights.clear();
+         for vertex in self.vertices.iter_mut() {
+             vertex.clear();
+         }
+@@ -265,6 +275,12 @@
+         for offloading_unit in self.offloading_units.iter_mut() {
+             offloading_unit.register_updated()
+         }
++    }
++
++    pub fn queue_edge_weight(&mut self, edge_index: EdgeIndex, weight: Weight) {
++        assert!(edge_index < self.edges.len(), "edge index out of range");
++        assert!(weight >= 0, "edge weight must be non-negative");
++        self.pending_edge_weights.push((edge_index, weight));
+     }
+ 
+     pub fn propagate_signals(&mut self, instruction: Instruction) {
+--- a/src/cpu/blossom/src/mwpm_solver.rs
++++ b/src/cpu/blossom/src/mwpm_solver.rs
+@@ -229,6 +229,9 @@
+ 
+ pub trait SolverTrackedDual: DualStacklessDriver + DualTrackedDriver + FusionVisualizer {
+     fn new_from_graph_config(graph: MicroBlossomSingle, config: serde_json::Value) -> Self;
++    /// Commit any state that must become visible only after every syndrome defect
++    /// has been loaded.  The default dual has no deferred state.
++    fn after_defects_loaded(&mut self) {}
+     fn reset_profiler(&mut self) {}
+     fn generate_profiler_report(&self) -> serde_json::Value {
+         json!({})
+@@ -251,6 +254,9 @@
+     /// to debug the infinite loop bugs: terminate and save the waveform in the middle
+     #[serde(default = "solver_embedded_boxed_config_default::max_iterations")]
+     pub max_iterations: usize,
++    /// Emit a deterministic progress marker every N resolved obstacles; zero disables it.
++    #[serde(default)]
++    pub iteration_progress: usize,
+ }
+ 
+ pub mod solver_embedded_boxed_config_default {
+@@ -265,6 +271,7 @@
+     subgraph_builder: SubGraphBuilder,
+     defect_nodes: Vec<VertexIndex>,
+     pub offloaded: usize,
++    pub last_iterations: usize,
+     layer_id: usize,
+     graph: MicroBlossomSingle,
+     sim_config: SimulationConfig,
+@@ -316,6 +323,7 @@
+             subgraph_builder: SubGraphBuilder::new(&initializer),
+             defect_nodes: vec![],
+             offloaded: 0,
++            last_iterations: 0,
+             layer_id: 0,
+             graph,
+             sim_config,
+@@ -330,6 +338,7 @@
+         self.dual_module.reset();
+         self.subgraph_builder.clear();
+         self.defect_nodes.clear();
++        self.last_iterations = 0;
+         self.layer_id = 0;
+     }
+     fn reset_profiler(&mut self) {
+@@ -343,6 +352,7 @@
+             self.dual_module.add_defect(ni!(defect_index), ni!(node_index));
+             self.defect_nodes.push(defect_index);
+         }
++        self.dual_module.driver.driver.after_defects_loaded();
+         if let Some(visualizer) = visualizer.as_mut() {
+             visualizer.snapshot("syndrome".to_string(), self).unwrap();
+         }
+@@ -351,6 +361,9 @@
+             let (mut obstacle, _) = self.dual_module.find_obstacle();
+             while !obstacle.is_none() && iteration < self.config.max_iterations {
+                 iteration += 1;
++                if self.config.iteration_progress > 0 && iteration % self.config.iteration_progress == 0 {
++                    eprintln!("PRIMAL_DUAL_PROGRESS iterations={iteration}");
++                }
+                 // println!("obstacle: {obstacle:?}");
+                 debug_assert!(
+                     obstacle.is_obstacle(),
+@@ -383,6 +396,12 @@
+             }
+             break;
+         }
++        self.last_iterations = iteration;
++        assert!(
++            iteration < self.config.max_iterations,
++            "primal/dual watchdog reached {} resolved obstacles",
++            self.config.max_iterations
++        );
+         if let Some(visualizer) = visualizer.as_mut() {
+             visualizer.snapshot("solved".to_string(), self).unwrap();
+         }
+--- /dev/null
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual.rs
+@@ -0,0 +1,165 @@
++use fusion_blossom::mwpm_solver::PrimalDualSolver;
++use fusion_blossom::primal_module::SubGraphBuilder;
++use fusion_blossom::util::SyndromePattern;
++use micro_blossom::mwpm_solver::SolverEmbeddedScala;
++use micro_blossom::resources::MicroBlossomSingle;
++use serde::{Deserialize, Serialize};
++use serde_json::{json, Value};
++use std::collections::BTreeSet;
++use std::env;
++use std::fs;
++
++#[derive(Deserialize)]
++struct Input {
++    graph: MicroBlossomSingle,
++    phase_banks: Value,
++    phase_graphs: Vec<PhaseGraph>,
++    cases: Vec<Case>,
++    evidence_id: String,
++}
++
++#[derive(Deserialize)]
++struct PhaseGraph {
++    name: String,
++    graph: MicroBlossomSingle,
++    local_to_superset_edge: Vec<usize>,
++}
++
++#[derive(Deserialize)]
++struct Case {
++    phase: String,
++    phase_index: usize,
++    boundary: String,
++    shot: usize,
++    window: usize,
++    defect_vertices: Vec<usize>,
++    selector_edges: Vec<usize>,
++    expected_reference_subgraph_superset_edges: Vec<usize>,
++    expected_correction_hex: String,
++    fault_id_count: usize,
++}
++
++#[derive(Serialize)]
++struct Row {
++    phase: String,
++    boundary: String,
++    shot: usize,
++    window: usize,
++    defects: usize,
++    selectors: usize,
++    reference_subgraph_edges: usize,
++    actual_subgraph_local_edges: Vec<usize>,
++    actual_subgraph_superset_edges: Vec<usize>,
++    exact_reference_subgraph_edges: bool,
++    syndrome_valid: bool,
++    fault_id_count: usize,
++    correction_hex: String,
++    correction_equal: bool,
++    iterations: usize,
++}
++
++fn main() {
++    let args: Vec<String> = env::args().collect();
++    assert_eq!(args.len(), 3, "usage: <input.json> <output.json>");
++    let input: Input = serde_json::from_slice(&fs::read(&args[1]).unwrap()).unwrap();
++    assert_eq!(input.phase_graphs.len(), 3);
++    let expected_occupancy_checks: usize = input.cases.iter().map(|case| case.defect_vertices.len()).sum();
++    let mut solver = SolverEmbeddedScala::new(
++        input.graph.clone(),
++        json!({
++            "max_iterations": 500000,
++            "iteration_progress": 10000,
++            "dual": {
++                "name": "d6_z_phase_primal_dual_watchdog",
++                "phase_banks": input.phase_banks,
++            }
++        }),
++    );
++    let mut rows = Vec::new();
++    for (case_index, case) in input.cases.into_iter().enumerate() {
++        let phase = &input.phase_graphs[case.phase_index];
++        assert_eq!(phase.name, case.phase);
++        println!(
++            "CASE_START index={} phase={} boundary={} defects={} selectors={}",
++            case_index,
++            case.phase,
++            case.boundary,
++            case.defect_vertices.len(),
++            case.selector_edges.len()
++        );
++        solver.clear();
++        solver.dual_module.driver.driver.select_phase(case.phase_index);
++        for &edge in &case.selector_edges {
++            solver.dual_module.driver.driver.queue_rule_selector(edge);
++        }
++        let syndrome = SyndromePattern::new_vertices(case.defect_vertices.clone());
++        solver.solve_visualizer(&syndrome, None);
++        let perfect_matching = solver.perfect_matching_visualizer(None);
++        println!(
++            "CASE_SOLVED index={} phase={} boundary={} iterations={}",
++            case_index, case.phase, case.boundary, solver.last_iterations
++        );
++        let initializer = phase.graph.get_initializer();
++        let mut builder = SubGraphBuilder::new(&initializer);
++        builder.load_perfect_matching(&perfect_matching);
++        let actual_local = builder.get_subgraph();
++        let syndrome_vertices = initializer.syndrome_of(&actual_local);
++        let expected_vertices: BTreeSet<_> = case.defect_vertices.iter().copied().collect();
++        let syndrome_valid = syndrome_vertices == expected_vertices;
++        let actual_superset: Vec<_> = actual_local.iter().map(|&edge| phase.local_to_superset_edge[edge]).collect();
++        solver.dual_module.driver.driver.correction_clear();
++        for &edge in &actual_superset {
++            solver.dual_module.driver.driver.correction_edge(edge);
++        }
++        let (fault_id_count, correction_hex) = solver.dual_module.driver.driver.correction_read();
++        assert_eq!(fault_id_count, case.fault_id_count);
++        let mut sorted_actual = actual_superset.clone();
++        sorted_actual.sort_unstable();
++        let mut sorted_reference = case.expected_reference_subgraph_superset_edges.clone();
++        sorted_reference.sort_unstable();
++        rows.push(Row {
++            phase: case.phase,
++            boundary: case.boundary,
++            shot: case.shot,
++            window: case.window,
++            defects: case.defect_vertices.len(),
++            selectors: case.selector_edges.len(),
++            reference_subgraph_edges: sorted_reference.len(),
++            actual_subgraph_local_edges: actual_local,
++            actual_subgraph_superset_edges: actual_superset,
++            exact_reference_subgraph_edges: sorted_actual == sorted_reference,
++            syndrome_valid,
++            fault_id_count,
++            correction_equal: correction_hex == case.expected_correction_hex,
++            correction_hex,
++            iterations: solver.last_iterations,
++        });
++    }
++    let all_syndromes_valid = rows.iter().all(|row| row.syndrome_valid);
++    let all_corrections_equal = rows.iter().all(|row| row.correction_equal);
++    let exact_reference_subgraphs = rows.iter().filter(|row| row.exact_reference_subgraph_edges).count();
++    let case_count = rows.len();
++    let occupancy_checks = solver.dual_module.driver.driver.occupancy_audit_read();
++    assert_eq!(occupancy_checks, expected_occupancy_checks);
++    let output = json!({
++        "schema": "d6_z_phase_primal_dual_deferred_selector_rtl_v2",
++        "input_evidence_id": input.evidence_id,
++        "selector_commit_order": "after_all_defects_before_first_obstacle",
++        "occupancy_audit": {
++            "checks": occupancy_checks,
++            "expected_checks": expected_occupancy_checks,
++            "all_clear": true,
++        },
++        "cases": rows,
++        "summary": {
++            "cases": case_count,
++            "all_syndromes_valid": all_syndromes_valid,
++            "all_corrections_equal": all_corrections_equal,
++            "exact_reference_subgraphs": exact_reference_subgraphs,
++        }
++    });
++    fs::write(&args[2], serde_json::to_vec_pretty(&output).unwrap()).unwrap();
++    println!("{}", serde_json::to_string(&output["summary"]).unwrap());
++    assert!(all_syndromes_valid, "phase-local subgraph does not correct syndrome");
++    assert!(all_corrections_equal, "phase-aware primal/dual correction mismatch");
++}
+--- /dev/null
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_shard.rs
+@@ -0,0 +1,209 @@
++use fusion_blossom::mwpm_solver::PrimalDualSolver;
++use fusion_blossom::primal_module::SubGraphBuilder;
++use fusion_blossom::util::SyndromePattern;
++use micro_blossom::mwpm_solver::SolverEmbeddedScala;
++use micro_blossom::resources::MicroBlossomSingle;
++use serde::{Deserialize, Serialize};
++use serde_json::{json, Value};
++use std::collections::BTreeSet;
++use std::env;
++use std::fs;
++
++#[derive(Deserialize)]
++struct BaseInput {
++    graph: MicroBlossomSingle,
++    phase_banks: Value,
++    phase_graphs: Vec<PhaseGraph>,
++    evidence_id: String,
++}
++
++#[derive(Deserialize)]
++struct PhaseGraph {
++    name: String,
++    graph: MicroBlossomSingle,
++    local_to_superset_edge: Vec<usize>,
++}
++
++#[derive(Deserialize)]
++struct Shard {
++    schema: String,
++    basis: String,
++    base_input_evidence_id: String,
++    accepted_corpus_sha256: String,
++    accepted_candidate_prediction_sha256: String,
++    shot_start: usize,
++    shot_end: usize,
++    shots: usize,
++    windows_per_shot: usize,
++    case_sequence_sha256: String,
++    shard_final_prediction_sha256: String,
++    commit_residual_failures: usize,
++    final_residual_failures: usize,
++    evidence_id: String,
++    cases: Vec<Case>,
++}
++
++#[derive(Deserialize)]
++struct Case {
++    phase: String,
++    phase_index: usize,
++    shot: usize,
++    window: usize,
++    defect_vertices: Vec<usize>,
++    selector_edges: Vec<usize>,
++    expected_correction_hex: String,
++    fault_id_count: usize,
++}
++
++#[derive(Serialize)]
++struct Row {
++    phase: String,
++    phase_index: usize,
++    shot: usize,
++    window: usize,
++    defects: usize,
++    selectors: usize,
++    actual_subgraph_local_edges: Vec<usize>,
++    actual_subgraph_superset_edges: Vec<usize>,
++    syndrome_valid: bool,
++    fault_id_count: usize,
++    correction_hex: String,
++    correction_equal: bool,
++    iterations: usize,
++}
++
++fn main() {
++    let args: Vec<String> = env::args().collect();
++    assert_eq!(
++        args.len(),
++        4,
++        "usage: <base_input.json> <shard.json> <output.json>"
++    );
++    let base: BaseInput = serde_json::from_slice(&fs::read(&args[1]).unwrap()).unwrap();
++    let shard: Shard = serde_json::from_slice(&fs::read(&args[2]).unwrap()).unwrap();
++    assert_eq!(base.phase_graphs.len(), 3);
++    assert_eq!(shard.schema, "b2_b7_p023_d6_z_full_corpus_shard_v1");
++    assert_eq!(shard.basis, "z");
++    assert_eq!(shard.base_input_evidence_id, base.evidence_id);
++    assert_eq!(shard.shots, shard.shot_end - shard.shot_start);
++    assert_eq!(shard.cases.len(), shard.shots * shard.windows_per_shot);
++    assert_eq!(shard.commit_residual_failures, 0);
++    assert_eq!(shard.final_residual_failures, 0);
++
++    let expected_occupancy_checks: usize =
++        shard.cases.iter().map(|case| case.defect_vertices.len()).sum();
++    let mut solver = SolverEmbeddedScala::new(
++        base.graph.clone(),
++        json!({
++            "max_iterations": 500000,
++            "iteration_progress": 10000,
++            "dual": {
++                "name": "d6_z_phase_primal_dual_full_corpus_shard",
++                "phase_banks": base.phase_banks,
++            }
++        }),
++    );
++    let mut rows = Vec::with_capacity(shard.cases.len());
++    for (case_index, case) in shard.cases.into_iter().enumerate() {
++        let phase = &base.phase_graphs[case.phase_index];
++        assert_eq!(phase.name, case.phase);
++        println!(
++            "CASE_START index={} shot={} window={} phase={} defects={} selectors={}",
++            case_index,
++            case.shot,
++            case.window,
++            case.phase,
++            case.defect_vertices.len(),
++            case.selector_edges.len()
++        );
++        solver.clear();
++        solver.dual_module.driver.driver.select_phase(case.phase_index);
++        for &edge in &case.selector_edges {
++            solver.dual_module.driver.driver.queue_rule_selector(edge);
++        }
++        let syndrome = SyndromePattern::new_vertices(case.defect_vertices.clone());
++        solver.solve_visualizer(&syndrome, None);
++        let perfect_matching = solver.perfect_matching_visualizer(None);
++        println!(
++            "CASE_SOLVED index={} shot={} window={} iterations={}",
++            case_index, case.shot, case.window, solver.last_iterations
++        );
++
++        let initializer = phase.graph.get_initializer();
++        let mut builder = SubGraphBuilder::new(&initializer);
++        builder.load_perfect_matching(&perfect_matching);
++        let actual_local = builder.get_subgraph();
++        let syndrome_vertices = initializer.syndrome_of(&actual_local);
++        let expected_vertices: BTreeSet<_> = case.defect_vertices.iter().copied().collect();
++        let syndrome_valid = syndrome_vertices == expected_vertices;
++        let actual_superset: Vec<_> = actual_local
++            .iter()
++            .map(|&edge| phase.local_to_superset_edge[edge])
++            .collect();
++
++        solver.dual_module.driver.driver.correction_clear();
++        for &edge in &actual_superset {
++            solver.dual_module.driver.driver.correction_edge(edge);
++        }
++        let (fault_id_count, correction_hex) =
++            solver.dual_module.driver.driver.correction_read();
++        assert_eq!(fault_id_count, case.fault_id_count);
++        rows.push(Row {
++            phase: case.phase,
++            phase_index: case.phase_index,
++            shot: case.shot,
++            window: case.window,
++            defects: case.defect_vertices.len(),
++            selectors: case.selector_edges.len(),
++            actual_subgraph_local_edges: actual_local,
++            actual_subgraph_superset_edges: actual_superset,
++            syndrome_valid,
++            fault_id_count,
++            correction_equal: correction_hex == case.expected_correction_hex,
++            correction_hex,
++            iterations: solver.last_iterations,
++        });
++    }
++
++    let all_syndromes_valid = rows.iter().all(|row| row.syndrome_valid);
++    let all_corrections_equal = rows.iter().all(|row| row.correction_equal);
++    let max_iterations = rows.iter().map(|row| row.iterations).max().unwrap_or(0);
++    let total_iterations: usize = rows.iter().map(|row| row.iterations).sum();
++    let total_defects: usize = rows.iter().map(|row| row.defects).sum();
++    let total_selectors: usize = rows.iter().map(|row| row.selectors).sum();
++    let case_count = rows.len();
++    let occupancy_checks = solver.dual_module.driver.driver.occupancy_audit_read();
++    assert_eq!(occupancy_checks, expected_occupancy_checks);
++    let output = json!({
++        "schema": "d6_z_phase_primal_dual_full_corpus_shard_rtl_v1",
++        "base_input_evidence_id": base.evidence_id,
++        "shard_evidence_id": shard.evidence_id,
++        "accepted_corpus_sha256": shard.accepted_corpus_sha256,
++        "accepted_candidate_prediction_sha256": shard.accepted_candidate_prediction_sha256,
++        "case_sequence_sha256": shard.case_sequence_sha256,
++        "shard_final_prediction_sha256": shard.shard_final_prediction_sha256,
++        "shot_start": shard.shot_start,
++        "shot_end": shard.shot_end,
++        "selector_commit_order": "after_all_defects_before_first_obstacle",
++        "subgraph_acceptance": "syndrome_and_correction_only_matching_may_be_non_unique",
++        "occupancy_audit": {
++            "checks": occupancy_checks,
++            "expected_checks": expected_occupancy_checks,
++            "all_clear": true,
++        },
++        "cases": rows,
++        "summary": {
++            "cases": case_count,
++            "total_defects": total_defects,
++            "total_selectors": total_selectors,
++            "all_syndromes_valid": all_syndromes_valid,
++            "all_corrections_equal": all_corrections_equal,
++            "max_iterations": max_iterations,
++            "total_iterations": total_iterations,
++        }
++    });
++    fs::write(&args[3], serde_json::to_vec_pretty(&output).unwrap()).unwrap();
++    println!("{}", serde_json::to_string(&output["summary"]).unwrap());
++    assert!(all_syndromes_valid, "phase-local subgraph does not correct syndrome");
++    assert!(all_corrections_equal, "phase-aware primal/dual correction mismatch");
++}
+--- /dev/null
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_comb.rs
+@@ -0,0 +1,199 @@
++use fusion_blossom::mwpm_solver::PrimalDualSolver;
++use fusion_blossom::primal_module::SubGraphBuilder;
++use fusion_blossom::util::SyndromePattern;
++use micro_blossom::mwpm_solver::SolverEmbeddedComb;
++use micro_blossom::resources::MicroBlossomSingle;
++use serde::{Deserialize, Serialize};
++use serde_json::json;
++use std::collections::{BTreeMap, BTreeSet};
++use std::env;
++use std::fs;
++
++#[derive(Deserialize)]
++struct Input {
++    phase_banks: Vec<PhaseBank>,
++    phase_graphs: Vec<PhaseGraph>,
++    cases: Vec<Case>,
++    evidence_id: String,
++}
++
++#[derive(Deserialize)]
++struct PhaseBank {
++    name: String,
++    resident_weight_rules: Vec<ResidentRule>,
++    edge_fault_ids: Vec<Vec<usize>>,
++    fault_id_count: usize,
++}
++
++#[derive(Deserialize)]
++struct ResidentRule {
++    target: usize,
++    rules: Vec<(usize, isize)>,
++}
++
++#[derive(Deserialize)]
++struct PhaseGraph {
++    name: String,
++    graph: MicroBlossomSingle,
++    local_to_superset_edge: Vec<usize>,
++}
++
++#[derive(Deserialize)]
++struct Case {
++    phase: String,
++    phase_index: usize,
++    boundary: String,
++    shot: usize,
++    window: usize,
++    defect_vertices: Vec<usize>,
++    selector_edges: Vec<usize>,
++    expected_correction_hex: String,
++    fault_id_count: usize,
++}
++
++#[derive(Serialize)]
++struct Row {
++    phase: String,
++    boundary: String,
++    shot: usize,
++    window: usize,
++    defects: usize,
++    selectors: usize,
++    iterations: usize,
++    actual_subgraph_superset_edges: Vec<usize>,
++    syndrome_valid: bool,
++    correction_hex: String,
++    correction_equal: bool,
++}
++
++fn bits_hex(bits: &[bool]) -> String {
++    let mut value = String::new();
++    for nibble in (0..bits.len().div_ceil(4)).rev() {
++        let mut digit = 0u8;
++        for offset in 0..4 {
++            let index = nibble * 4 + offset;
++            if index < bits.len() && bits[index] {
++                digit |= 1 << offset;
++            }
++        }
++        value.push(char::from_digit(digit as u32, 16).unwrap());
++    }
++    let trimmed = value.trim_start_matches('0');
++    if trimmed.is_empty() {
++        "0".to_string()
++    } else {
++        trimmed.to_string()
++    }
++}
++
++fn main() {
++    let args: Vec<String> = env::args().collect();
++    assert_eq!(args.len(), 3, "usage: <input.json> <output.json>");
++    let input: Input = serde_json::from_slice(&fs::read(&args[1]).unwrap()).unwrap();
++    let mut rows = Vec::new();
++    for (case_index, case) in input.cases.into_iter().enumerate() {
++        let phase = &input.phase_graphs[case.phase_index];
++        let bank = &input.phase_banks[case.phase_index];
++        assert_eq!(phase.name, case.phase);
++        assert_eq!(bank.name, case.phase);
++        assert_eq!(bank.fault_id_count, case.fault_id_count);
++        let graph = phase.graph.clone();
++        let superset_to_local: BTreeMap<_, _> = phase
++            .local_to_superset_edge
++            .iter()
++            .enumerate()
++            .map(|(local, &superset)| (superset, local))
++            .collect();
++        let selectors: BTreeSet<_> = case.selector_edges.iter().copied().collect();
++        let mut deferred_weights: BTreeMap<usize, isize> = graph
++            .weighted_edges
++            .iter()
++            .enumerate()
++            .map(|(edge, weighted)| (edge, weighted.w))
++            .collect();
++        for rule in &bank.resident_weight_rules {
++            let Some(&target_local) = superset_to_local.get(&rule.target) else {
++                continue;
++            };
++            for &(source, replacement) in &rule.rules {
++                if selectors.contains(&source) {
++                    let weight = deferred_weights.get_mut(&target_local).unwrap();
++                    *weight = (*weight).min(replacement);
++                }
++            }
++        }
++        println!(
++            "COMB_CASE_START index={} phase={} boundary={} defects={} selectors={}",
++            case_index,
++            case.phase,
++            case.boundary,
++            case.defect_vertices.len(),
++            case.selector_edges.len()
++        );
++        let mut solver = SolverEmbeddedComb::new(
++            graph.clone(),
++            json!({
++                "max_iterations": 500000,
++                "iteration_progress": 10000,
++                "dual": {}
++            }),
++        );
++        for (edge, weight) in deferred_weights {
++            if weight != graph.weighted_edges[edge].w {
++                solver.dual_module.driver.driver.queue_edge_weight(edge, weight);
++            }
++        }
++        let syndrome = SyndromePattern::new_vertices(case.defect_vertices.clone());
++        solver.solve_visualizer(&syndrome, None);
++        let perfect_matching = solver.perfect_matching_visualizer(None);
++        let initializer = graph.get_initializer();
++        let mut builder = SubGraphBuilder::new(&initializer);
++        builder.load_perfect_matching(&perfect_matching);
++        let actual_local = builder.get_subgraph();
++        let expected_vertices: BTreeSet<_> = case.defect_vertices.iter().copied().collect();
++        let syndrome_valid = initializer.syndrome_of(&actual_local) == expected_vertices;
++        let actual_superset: Vec<_> = actual_local.iter().map(|&edge| phase.local_to_superset_edge[edge]).collect();
++        let mut correction = vec![false; bank.fault_id_count];
++        for &edge in &actual_superset {
++            for &fault in &bank.edge_fault_ids[edge] {
++                correction[fault] = !correction[fault];
++            }
++        }
++        let correction_hex = bits_hex(&correction);
++        let correction_equal = correction_hex == case.expected_correction_hex;
++        println!(
++            "COMB_CASE_DONE index={} phase={} boundary={} iterations={} syndrome_valid={} correction_equal={}",
++            case_index, case.phase, case.boundary, solver.last_iterations, syndrome_valid, correction_equal
++        );
++        rows.push(Row {
++            phase: case.phase,
++            boundary: case.boundary,
++            shot: case.shot,
++            window: case.window,
++            defects: case.defect_vertices.len(),
++            selectors: case.selector_edges.len(),
++            iterations: solver.last_iterations,
++            actual_subgraph_superset_edges: actual_superset,
++            syndrome_valid,
++            correction_hex,
++            correction_equal,
++        });
++    }
++    let all_syndromes_valid = rows.iter().all(|row| row.syndrome_valid);
++    let all_corrections_equal = rows.iter().all(|row| row.correction_equal);
++    let output = json!({
++        "schema": "d6_z_phase_primal_dual_comb_control_v1",
++        "input_evidence_id": input.evidence_id,
++        "cases": rows,
++        "summary": {
++            "cases": rows.len(),
++            "all_syndromes_valid": all_syndromes_valid,
++            "all_corrections_equal": all_corrections_equal,
++            "max_iterations": rows.iter().map(|row| row.iterations).max().unwrap_or(0),
++        }
++    });
++    fs::write(&args[2], serde_json::to_vec_pretty(&output).unwrap()).unwrap();
++    println!("{}", serde_json::to_string(&output["summary"]).unwrap());
++    assert!(all_syndromes_valid, "comb control syndrome mismatch");
++    assert!(all_corrections_equal, "comb control correction mismatch");
++}
+--- /dev/null	2026-11-21 11:32:00
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_closed_loop.rs	2026-11-21 11:28:22
+@@ -0,0 +1,352 @@
++use fusion_blossom::mwpm_solver::PrimalDualSolver;
++use fusion_blossom::primal_module::SubGraphBuilder;
++use fusion_blossom::util::SyndromePattern;
++use micro_blossom::mwpm_solver::SolverEmbeddedScala;
++use micro_blossom::resources::MicroBlossomSingle;
++use serde::{Deserialize, Serialize};
++use serde_json::{json, Value};
++use std::collections::BTreeSet;
++use std::env;
++use std::fs;
++use std::io::{BufRead, BufReader, BufWriter, Write};
++use std::process::{Command, Stdio};
++
++#[derive(Deserialize)]
++struct BaseInput {
++    graph: MicroBlossomSingle,
++    phase_banks: Value,
++    phase_graphs: Vec<PhaseGraph>,
++    evidence_id: String,
++}
++
++#[derive(Deserialize)]
++struct PhaseGraph {
++    name: String,
++    graph: MicroBlossomSingle,
++    local_to_superset_edge: Vec<usize>,
++}
++
++#[derive(Deserialize)]
++struct Pilot {
++    schema: String,
++    accepted_corpus_sha256: String,
++    detector_count: usize,
++    observable_count: usize,
++    prebuffer_detectors: Vec<usize>,
++    phases: Vec<PhaseInfo>,
++    windows: Vec<WindowInfo>,
++    shots: Vec<ShotInfo>,
++    evidence_id: String,
++}
++
++#[derive(Deserialize)]
++struct PhaseInfo {
++    name: String,
++    phase_index: usize,
++    local_to_superset_vertex: Vec<usize>,
++    fault_id_count: usize,
++}
++
++#[derive(Deserialize)]
++struct WindowInfo {
++    window: usize,
++    phase: String,
++    phase_index: usize,
++    arrival_detectors: Vec<usize>,
++    detection_detectors: Vec<usize>,
++    commit_detectors: Vec<usize>,
++    detector_outputs: Vec<usize>,
++    observable_outputs: Vec<usize>,
++}
++
++#[derive(Deserialize)]
++struct ShotInfo {
++    shot: usize,
++    raw_detector_hex: String,
++    expected_final_frame_hex: String,
++}
++
++#[derive(Deserialize)]
++struct SelectorResponse {
++    window: Option<usize>,
++    phase: Option<String>,
++    defects: Option<usize>,
++    selectors: Option<Vec<usize>>,
++    error: Option<String>,
++    ready: Option<bool>,
++}
++
++#[derive(Serialize)]
++struct Row {
++    shot: usize,
++    window: usize,
++    phase: String,
++    defects: usize,
++    selectors: usize,
++    actual_subgraph_local_edges: Vec<usize>,
++    actual_subgraph_superset_edges: Vec<usize>,
++    syndrome_valid: bool,
++    correction_hex: String,
++    commit_residual_clear: bool,
++    iterations: usize,
++}
++
++fn bits_from_hex(value: &str, count: usize) -> Vec<bool> {
++    let mut result = vec![false; count];
++    for (nibble_index, character) in value.chars().rev().enumerate() {
++        let nibble = character.to_digit(16).expect("invalid hex") as usize;
++        for offset in 0..4 {
++            let bit = 4 * nibble_index + offset;
++            if bit < count {
++                result[bit] = ((nibble >> offset) & 1) != 0;
++            }
++        }
++    }
++    result
++}
++
++fn bits_hex(bits: &[bool]) -> String {
++    let mut digits = Vec::with_capacity((bits.len() + 3) / 4);
++    for base in (0..bits.len()).step_by(4) {
++        let mut nibble = 0u8;
++        for offset in 0..4 {
++            if base + offset < bits.len() && bits[base + offset] {
++                nibble |= 1 << offset;
++            }
++        }
++        digits.push(std::char::from_digit(nibble as u32, 16).unwrap());
++    }
++    while digits.len() > 1 && digits.last() == Some(&'0') {
++        digits.pop();
++    }
++    digits.iter().rev().collect()
++}
++
++fn main() {
++    let args: Vec<String> = env::args().collect();
++    assert_eq!(
++        args.len(),
++        6,
++        "usage: <base_input.json> <pilot.json> <output.json> <python> <selector_server.py>"
++    );
++    let base: BaseInput = serde_json::from_slice(&fs::read(&args[1]).unwrap()).unwrap();
++    let pilot: Pilot = serde_json::from_slice(&fs::read(&args[2]).unwrap()).unwrap();
++    assert_eq!(pilot.schema, "b2_b7_p023_d6_z_closed_loop_pilot_v1");
++    assert_eq!(base.phase_graphs.len(), 3);
++    assert_eq!(pilot.phases.len(), 3);
++    assert_eq!(pilot.windows.len(), 164);
++    for (index, phase) in pilot.phases.iter().enumerate() {
++        assert_eq!(phase.phase_index, index);
++        assert_eq!(phase.name, base.phase_graphs[index].name);
++    }
++
++    let mut selector_child = Command::new(&args[4])
++        .arg(&args[5])
++        .stdin(Stdio::piped())
++        .stdout(Stdio::piped())
++        .stderr(Stdio::inherit())
++        .spawn()
++        .expect("failed to start selector server");
++    let mut selector_input = BufWriter::new(selector_child.stdin.take().unwrap());
++    let mut selector_output = BufReader::new(selector_child.stdout.take().unwrap());
++    let mut response_line = String::new();
++    selector_output.read_line(&mut response_line).unwrap();
++    let ready: SelectorResponse = serde_json::from_str(&response_line).unwrap();
++    assert_eq!(ready.ready, Some(true));
++
++    let mut solver = SolverEmbeddedScala::new(
++        base.graph.clone(),
++        json!({
++            "max_iterations": 500000,
++            "iteration_progress": 10000,
++            "dual": {
++                "name": "d6_z_phase_primal_dual_full_corpus_shard",
++                "phase_banks": base.phase_banks,
++            }
++        }),
++    );
++    let mut rows: Vec<Row> = Vec::new();
++    let mut total_defects = 0usize;
++    let mut total_selectors = 0usize;
++    let mut commit_residual_failures = 0usize;
++    let mut final_residual_failures = 0usize;
++    let mut final_frame_failures = 0usize;
++    let mut all_syndromes_valid = true;
++    let mut max_iterations = 0usize;
++    let mut total_iterations = 0usize;
++
++    for shot in &pilot.shots {
++        let raw = bits_from_hex(&shot.raw_detector_hex, pilot.detector_count);
++        let mut received = vec![false; pilot.detector_count];
++        let mut correction = vec![false; pilot.detector_count];
++        let mut frame = vec![false; pilot.observable_count];
++        for &detector in &pilot.prebuffer_detectors {
++            received[detector] = raw[detector];
++        }
++        for window in &pilot.windows {
++            assert_eq!(window.window, rows.len() % pilot.windows.len());
++            assert_eq!(window.phase, pilot.phases[window.phase_index].name);
++            for &detector in &window.arrival_detectors {
++                received[detector] = raw[detector];
++            }
++            let syndrome_bits: Vec<bool> = window
++                .detection_detectors
++                .iter()
++                .map(|&detector| received[detector] ^ correction[detector])
++                .collect();
++            let defect_count = syndrome_bits.iter().filter(|&&bit| bit).count();
++            let request = json!({
++                "window": window.window,
++                "syndrome_hex": bits_hex(&syndrome_bits),
++            });
++            writeln!(selector_input, "{}", serde_json::to_string(&request).unwrap()).unwrap();
++            selector_input.flush().unwrap();
++            response_line.clear();
++            selector_output.read_line(&mut response_line).unwrap();
++            let response: SelectorResponse = serde_json::from_str(&response_line).unwrap();
++            assert!(response.error.is_none(), "selector server: {:?}", response.error);
++            assert_eq!(response.window, Some(window.window));
++            assert_eq!(response.phase.as_deref(), Some(window.phase.as_str()));
++            assert_eq!(response.defects, Some(defect_count));
++            let selectors = response.selectors.unwrap();
++
++            let phase = &pilot.phases[window.phase_index];
++            let defects: Vec<usize> = syndrome_bits
++                .iter()
++                .enumerate()
++                .filter_map(|(index, &bit)| {
++                    if bit {
++                        Some(phase.local_to_superset_vertex[index])
++                    } else {
++                        None
++                    }
++                })
++                .collect();
++            println!(
++                "CLOSED_LOOP_START shot={} window={} phase={} defects={} selectors={}",
++                shot.shot,
++                window.window,
++                window.phase,
++                defects.len(),
++                selectors.len()
++            );
++            solver.clear();
++            solver.dual_module.driver.driver.select_phase(window.phase_index);
++            for &edge in &selectors {
++                solver.dual_module.driver.driver.queue_rule_selector(edge);
++            }
++            let syndrome = SyndromePattern::new_vertices(defects.clone());
++            solver.solve_visualizer(&syndrome, None);
++            let perfect_matching = solver.perfect_matching_visualizer(None);
++            let initializer = base.phase_graphs[window.phase_index].graph.get_initializer();
++            let mut builder = SubGraphBuilder::new(&initializer);
++            builder.load_perfect_matching(&perfect_matching);
++            let actual_local = builder.get_subgraph();
++            let syndrome_vertices = initializer.syndrome_of(&actual_local);
++            let expected_vertices: BTreeSet<_> = defects.iter().copied().collect();
++            let syndrome_valid = syndrome_vertices == expected_vertices;
++            let actual_superset: Vec<_> = actual_local
++                .iter()
++                .map(|&edge| base.phase_graphs[window.phase_index].local_to_superset_edge[edge])
++                .collect();
++
++            solver.dual_module.driver.driver.correction_clear();
++            for &edge in &actual_superset {
++                solver.dual_module.driver.driver.correction_edge(edge);
++            }
++            let (fault_id_count, correction_hex) =
++                solver.dual_module.driver.driver.correction_read();
++            assert_eq!(fault_id_count, phase.fault_id_count);
++            assert_eq!(
++                fault_id_count,
++                window.detector_outputs.len() + window.observable_outputs.len()
++            );
++            let correction_bits = bits_from_hex(&correction_hex, fault_id_count);
++            for (local, &global) in window.detector_outputs.iter().enumerate() {
++                correction[global] ^= correction_bits[local];
++            }
++            let observable_offset = window.detector_outputs.len();
++            for (local, &global) in window.observable_outputs.iter().enumerate() {
++                frame[global] ^= correction_bits[observable_offset + local];
++            }
++            let commit_residual_clear = window
++                .commit_detectors
++                .iter()
++                .all(|&detector| received[detector] == correction[detector]);
++            commit_residual_failures += usize::from(!commit_residual_clear);
++            all_syndromes_valid &= syndrome_valid;
++            total_defects += defects.len();
++            total_selectors += selectors.len();
++            total_iterations += solver.last_iterations;
++            max_iterations = max_iterations.max(solver.last_iterations);
++            println!(
++                "CLOSED_LOOP_SOLVED shot={} window={} iterations={} commit_clear={}",
++                shot.shot, window.window, solver.last_iterations, commit_residual_clear
++            );
++            rows.push(Row {
++                shot: shot.shot,
++                window: window.window,
++                phase: window.phase.clone(),
++                defects: defects.len(),
++                selectors: selectors.len(),
++                actual_subgraph_local_edges: actual_local,
++                actual_subgraph_superset_edges: actual_superset,
++                syndrome_valid,
++                correction_hex,
++                commit_residual_clear,
++                iterations: solver.last_iterations,
++            });
++        }
++        let final_residual_clear = received
++            .iter()
++            .zip(&correction)
++            .all(|(left, right)| left == right);
++        final_residual_failures += usize::from(!final_residual_clear);
++        let final_frame_hex = bits_hex(&frame);
++        final_frame_failures += usize::from(final_frame_hex != shot.expected_final_frame_hex);
++        println!(
++            "CLOSED_LOOP_SHOT shot={} residual_clear={} frame={} expected_frame={}",
++            shot.shot, final_residual_clear, final_frame_hex, shot.expected_final_frame_hex
++        );
++    }
++
++    let occupancy_checks = solver.dual_module.driver.driver.occupancy_audit_read();
++    let accepted = all_syndromes_valid
++        && commit_residual_failures == 0
++        && final_residual_failures == 0
++        && final_frame_failures == 0
++        && occupancy_checks == total_defects;
++    let output = json!({
++        "schema": "d6_z_phase_primal_dual_closed_loop_rtl_v1",
++        "base_input_evidence_id": base.evidence_id,
++        "pilot_evidence_id": pilot.evidence_id,
++        "accepted_corpus_sha256": pilot.accepted_corpus_sha256,
++        "selector_contract": "persistent_frozen_pymatching_first_pass_over_actual_rtl_state",
++        "occupancy_audit": {
++            "checks": occupancy_checks,
++            "expected_checks": total_defects,
++            "all_clear": occupancy_checks == total_defects,
++        },
++        "cases": rows,
++        "summary": {
++            "shots": pilot.shots.len(),
++            "windows": pilot.windows.len(),
++            "cases": pilot.shots.len() * pilot.windows.len(),
++            "total_defects": total_defects,
++            "total_selectors": total_selectors,
++            "all_syndromes_valid": all_syndromes_valid,
++            "commit_residual_failures": commit_residual_failures,
++            "final_residual_failures": final_residual_failures,
++            "final_frame_failures": final_frame_failures,
++            "max_iterations": max_iterations,
++            "total_iterations": total_iterations,
++            "accepted_closed_loop_gate": accepted,
++        }
++    });
++    fs::write(&args[3], serde_json::to_vec_pretty(&output).unwrap()).unwrap();
++    println!("{}", serde_json::to_string(&output["summary"]).unwrap());
++    drop(selector_input);
++    let selector_status = selector_child.wait().unwrap();
++    assert!(selector_status.success());
++    assert!(accepted, "closed-loop Z pilot failed");
++}

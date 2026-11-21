@@ -1,0 +1,194 @@
+{
+  "acceptance": {
+    "axi": false,
+    "b7_resource_credit": 0,
+    "first_bounded_z_closed_loop_shard": true,
+    "fpga": false,
+    "full_b2": false,
+    "full_x": true,
+    "full_z": false,
+    "miss_rate_le_1pct": false,
+    "p99_le_1us": false,
+    "scalable_p023": false
+  },
+  "checks": [
+    {
+      "name": "pilot binds exact Z shot prefix zero through seven",
+      "passed": true
+    },
+    {
+      "name": "pilot declares Z basis",
+      "passed": true
+    },
+    {
+      "name": "pilot has complete windows",
+      "passed": true
+    },
+    {
+      "name": "accepted Z corpus hash bound",
+      "passed": true
+    },
+    {
+      "name": "base input evidence bound",
+      "passed": true
+    },
+    {
+      "name": "pilot evidence bound",
+      "passed": true
+    },
+    {
+      "name": "runtime corpus hash bound",
+      "passed": true
+    },
+    {
+      "name": "formal capture accepted",
+      "passed": true
+    },
+    {
+      "name": "formal process exited cleanly",
+      "passed": true
+    },
+    {
+      "name": "Verilator 5.040 pinned",
+      "passed": true
+    },
+    {
+      "name": "pinned source archive bound",
+      "passed": true
+    },
+    {
+      "name": "self-contained Z patch bound",
+      "passed": true
+    },
+    {
+      "name": "pilot file bound",
+      "passed": true
+    },
+    {
+      "name": "base input file bound",
+      "passed": true
+    },
+    {
+      "name": "selector server bound",
+      "passed": true
+    },
+    {
+      "name": "output bound",
+      "passed": true
+    },
+    {
+      "name": "log bound",
+      "passed": true
+    },
+    {
+      "name": "no forbidden runtime hits",
+      "passed": true
+    },
+    {
+      "name": "no unexpected warnings",
+      "passed": true
+    },
+    {
+      "name": "complete eight-shot cardinality",
+      "passed": true
+    },
+    {
+      "name": "all closed-loop syndromes valid",
+      "passed": true
+    },
+    {
+      "name": "all committed residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final residuals clear",
+      "passed": true
+    },
+    {
+      "name": "all final logical frames match",
+      "passed": true
+    },
+    {
+      "name": "closed-loop semantic gate accepted",
+      "passed": true
+    },
+    {
+      "name": "occupancy audit complete",
+      "passed": true
+    },
+    {
+      "name": "all case rows individually pass",
+      "passed": true
+    },
+    {
+      "name": "raw rows cover every shot and window exactly once",
+      "passed": true
+    }
+  ],
+  "classification": "first_bounded_closed_loop_z_rtl_shard_pass",
+  "closed_loop_result": {
+    "cases": 1312,
+    "commit_residual_failures": 0,
+    "elapsed_seconds": 474.100425,
+    "final_frame_failures": 0,
+    "final_residual_failures": 0,
+    "maximum_iterations": 23,
+    "occupancy_checks_clear": 13498,
+    "shots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "syndrome_valid_cases": 1312,
+    "total_iterations": 7907
+  },
+  "date": "2026-11-21",
+  "evidence_id": "016fcda68094d8c4368bc36f9b991bd295d8288f84f3a366539f4751a0de0077",
+  "excluded_from_acceptance_design": {
+    "circuit_depth": 7000,
+    "qubits": 120,
+    "reason": "capacity exploration only; not part of this QEC evidence gate"
+  },
+  "frozen_denominator": {
+    "accepted_cases": 1312,
+    "accepted_distinct_shots": 8,
+    "accepted_shot_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "basis": "z",
+    "cases": 167936,
+    "fraction_tested": 0.0078125,
+    "remaining_cases": 166624,
+    "remaining_shots": 1016,
+    "shots": 1024
+  },
+  "next_gate": "Continue the frozen Z corpus from shot 8 through the same closed-loop route; do not infer full Z, FPGA behavior, or hardware latency from this bounded shard.",
+  "schema": "b2_b7_p023_d6_z_closed_loop_shard_0000_0007_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "sources": {
+    "benchmarks/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_v1.json": "b4d28c0db667669a924dca137d8fa5aefc1d9468547eb483e39d763fe4dfc690",
+    "benchmarks/B2_B7_P023_d6_z_phase_primal_dual_input_v1.json": "515da2d108d0984bc9bb74453b487bc3ed5f6657d3c10e936c8fd253c99a1a5f",
+    "results/B2_B7_P023_d6_explicit_reweight_v2.json": "94f7862fb9ef58fd634d035fe73c220ac858add9d05c5550c5a5fede21d8a2d4",
+    "results/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_verilator_capture_v1.json": "442058deecfdb1d22c356865c400580ba4acefbae3e6d96d5b91f8358ceb12ca",
+    "results/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_verilator_v1.json": "241395363b0a775d540881061673ba4dd1c8a66dbb1b9bbf1483efde085ace99",
+    "results/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_verilator_v1.log": "1a2242b954bf2a9ba0c30ad4f7aae581d44036e8ac1487156fc399db59f146fb",
+    "tools/b2_b7_p023_d6_z_selector_server_v1.py": "263a79e1f1d359605cd51a0121d174e98719fdfdb6de5d7afe993e4e26883b77",
+    "tools/microblossom/d6_z_phase_primal_dual_closed_loop_v1.patch": "a1b1b4a2036f44039f6448d16a357ea07d1105c272644e805e9f8ebc7c5b5b27"
+  }
+}
