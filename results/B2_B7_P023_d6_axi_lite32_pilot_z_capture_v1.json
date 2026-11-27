@@ -1,0 +1,49 @@
+{
+  "basis": "z",
+  "command": [
+    "cargo",
+    "run",
+    "--locked",
+    "--release",
+    "--jobs",
+    "4",
+    "--bin",
+    "d6_z_phase_primal_dual_closed_loop",
+    "--",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_z_phase_primal_dual_input_v1.json",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_v1.json",
+    "/private/tmp/qec-axi-phase.XC3wWp/receipt/B2_B7_P023_d6_axi_lite32_pilot_z_raw_v1.json",
+    "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "/Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/tools/b2_b7_p023_d6_z_selector_server_v1.py"
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-11-27T03:10:44.865259+00:00",
+  "generated_endpoint_rtl_sha256": "8fd8c62afb013f0b457ef4e349bd8b551fab9fcaadb460a13a8eae998e0873e8",
+  "host_elapsed_seconds": 887.12113162491,
+  "input_sha256": {
+    "benchmarks/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_v1.json": "b4d28c0db667669a924dca137d8fa5aefc1d9468547eb483e39d763fe4dfc690",
+    "benchmarks/B2_B7_P023_d6_z_phase_primal_dual_input_v1.json": "515da2d108d0984bc9bb74453b487bc3ed5f6657d3c10e936c8fd253c99a1a5f",
+    "results/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_verilator_capture_v1.json": "442058deecfdb1d22c356865c400580ba4acefbae3e6d96d5b91f8358ceb12ca",
+    "results/B2_B7_P023_d6_z_closed_loop_shard_0000_0007_verilator_v1.json": "241395363b0a775d540881061673ba4dd1c8a66dbb1b9bbf1483efde085ace99",
+    "tools/b2_b7_p023_d6_axi_lite_replay_v1.py": "ca74b905196377040c3f4c7042fdad4107f8c47b578456be0a76abfaf781467e",
+    "tools/b2_b7_p023_d6_z_selector_server_v1.py": "263a79e1f1d359605cd51a0121d174e98719fdfdb6de5d7afe993e4e26883b77",
+    "tools/microblossom/D6PhaseAxiDriver.scala": "a8eec549efc7e6ef9aeaf7ae21367c07c9515bdd6f81a6b3027db5e2cdab51e6",
+    "tools/microblossom/D6PhaseAxiEndpoint.scala": "972debc72d67d3211c8bb3aaa91c6db08163e9bc0254acb97b197e11b5cd835b",
+    "tools/microblossom/d6_phase_axi_lite_host_v1.patch": "241953f498151be7739915583fe474bb7e76fab4a41c0060e38efb68134bc3b5",
+    "tools/microblossom/d6_z_phase_primal_dual_closed_loop_v1.patch": "a1b1b4a2036f44039f6448d16a357ea07d1105c272644e805e9f8ebc7c5b5b27"
+  },
+  "log_sha256": "421be8ff461e041cddfc8fef45a9980e4ce92265cac46dce856b766fcb62984e",
+  "raw_sha256": "241395363b0a775d540881061673ba4dd1c8a66dbb1b9bbf1483efde085ace99",
+  "schema": "b2_b7_p023_d6_axi_lite32_capture_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "simulator_binary_sha256": "23a38c73be223952f9669e4f0e939b513e434900091e30bc33f6534135cefb97",
+  "simulator_version": "Verilator 5.040 2025-08-30 rev UNKNOWN.REV",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+  "started_utc": "2026-11-27T02:55:57.745268+00:00",
+  "transport": "axi_lite32"
+}

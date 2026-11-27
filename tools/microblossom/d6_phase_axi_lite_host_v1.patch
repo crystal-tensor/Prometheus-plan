@@ -1,0 +1,199 @@
+--- a/src/fpga/microblossom/DualHost.scala
++++ b/src/fpga/microblossom/DualHost.scala
+@@ -117,16 +117,20 @@
+       throw new IllegalArgumentException
+     }
+ 
+-    simConfig
+-      .compile({
+-        val dut = DistributedDual(config, ioConfig)
+-        dut.simMakePublicOccupancyAudit()
+-        if (withWaveform) {
+-          dut.simMakePublicSnapshot()
++    def exposeAuditSignals(dut: DistributedDual): Unit = {
++      dut.simMakePublicOccupancyAudit()
++      if (withWaveform) dut.simMakePublicSnapshot()
++    }
++
++    def runHost(
++        dut: DistributedDual,
++        clock: ClockDomain,
++        axi: Option[D6PhaseAxiDriver]
++    ): Unit = {
++        def execute(instruction: Long): Unit = axi match {
++          case Some(bus) => bus.execute(instruction)
++          case None => dut.simExecute(instruction); ()
+         }
+-        dut
+-      })
+-      .doSim("hosted") { dut =>
+         outStream.println("simulation started")
+         if (withWaveform) {
+           println("view waveform: `gtkwave %s/%s/hosted.fst`".format(workspacePath, host_name))
+@@ -135,20 +139,24 @@
+         }
+ 
+         var cycleCounter = 0L
+-        dut.clockDomain.onActiveEdges {
++        clock.onActiveEdges {
+           cycleCounter += 1
+         }
+ 
+-        dut.io.message.valid #= false
+-        dut.io.message.instruction #= 0
+-        dut.io.correctionClear #= false
+-        dut.io.correctionEdgeValid #= false
+-        dut.io.correctionEdgeIndex #= 0
+-        dut.clockDomain.forkStimulus(period = 10)
++        if (axi.isEmpty) {
++          dut.io.message.valid #= false
++          dut.io.message.instruction #= 0
++          dut.io.correctionClear #= false
++          dut.io.correctionEdgeValid #= false
++          dut.io.correctionEdgeIndex #= 0
++        }
++        clock.forkStimulus(period = 10)
+ 
+-        for (idx <- 0 to 10) { dut.clockDomain.waitSampling() }
++        for (idx <- 0 to 10) { clock.waitSampling() }
++        sleep(1)
+ 
+-        dut.simExecute(ioConfig.instructionSpec.generateReset())
++        execute(ioConfig.instructionSpec.generateReset())
++        axi.foreach(_.directedProbes())
+ 
+         // start hosting the commands
+         var maxGrowth = Long.MaxValue
+@@ -161,25 +169,23 @@
+               println("requested quit, aborting...")
+               break
+             } else if (command == "reset()") {
+-              dut.simExecute(ioConfig.instructionSpec.generateReset())
++              execute(ioConfig.instructionSpec.generateReset())
+             } else if (command.startsWith("select_phase(")) {
+               val phase = command.substring("select_phase(".length, command.length - 1).toInt
+-              dut.simSelectPhase(phase)
++              axi.fold(dut.simSelectPhase(phase))(_.selectPhase(phase))
+             } else if (command.startsWith("apply_rule_selector(")) {
+               val edge = command.substring("apply_rule_selector(".length, command.length - 1).toInt
+-              dut.simApplyResidentRuleSelector(edge)
++              axi.fold(dut.simApplyResidentRuleSelector(edge))(_.selector(edge))
+             } else if (command == "correction_clear()") {
+-              dut.simClearCorrection()
++              axi.fold(dut.simClearCorrection())(_.clearCorrection())
+             } else if (command.startsWith("correction_edge(")) {
+               val edge = command.substring("correction_edge(".length, command.length - 1).toInt
+-              dut.simAccumulateCorrectionEdge(edge)
++              axi.fold(dut.simAccumulateCorrectionEdge(edge))(_.accumulate(edge))
+             } else if (command == "correction_read()") {
+-              outStream.println(
+-                "Correction(%d, %s)".format(
+-                  dut.io.correctionFaultIdCount.toInt,
+-                  dut.io.correctionVector.toBigInt.toString(16)
+-                )
+-              )
++              val (count, hex) = axi.fold((
++                dut.io.correctionFaultIdCount.toInt, dut.io.correctionVector.toBigInt.toString(16)
++              ))(_.correctionRead())
++              outStream.println("Correction(%d, %s)".format(count, hex))
+             } else if (command.startsWith("set_speed(")) {
+               val parameters = command.substring("set_speed(".length, command.length - 1).split(", ")
+               assert(parameters.length == 2)
+@@ -187,19 +193,20 @@
+               val speed = if (parameters(1) == "Grow") { Speed.Grow }
+               else if (parameters(1) == "Shrink") { Speed.Shrink }
+               else { Speed.Stay }
+-              dut.simExecute(ioConfig.instructionSpec.generateSetSpeed(node, speed))
++              execute(ioConfig.instructionSpec.generateSetSpeed(node, speed))
+             } else if (command.startsWith("set_blossom(")) {
+               val parameters = command.substring("set_blossom(".length, command.length - 1).split(", ")
+               assert(parameters.length == 2)
+               val node = parameters(0).toInt
+               val blossom = parameters(1).toInt
+-              dut.simExecute(ioConfig.instructionSpec.generateSetBlossom(node, blossom))
++              execute(ioConfig.instructionSpec.generateSetBlossom(node, blossom))
+             } else if (command.startsWith("set_maximum_growth(")) {
+               val parameters = command.substring("set_maximum_growth(".length, command.length - 1).split(", ")
+               assert(parameters.length == 1)
+               maxGrowth = parameters(0).toLong
+             } else if (command == "find_obstacle()") {
+-              val (maxGrowable, conflict, grown) = dut.simFindObstacle(maxGrowth)
++              val (maxGrowable, conflict, grown) =
++                axi.fold(dut.simFindObstacle(maxGrowth))(_.findObstacle(maxGrowth))
+               maxGrowth -= grown
+               if (!conflict.valid) {
+                 outStream.println(
+@@ -247,8 +254,9 @@
+                 s"cannot add defect node $node to occupied vertex $vertex " +
+                   s"(existing node ${dut.vertices(vertex).register.node.toInt})"
+               )
+-              dut.simExecute(ioConfig.instructionSpec.generateAddDefect(vertex, node))
++              execute(ioConfig.instructionSpec.generateAddDefect(vertex, node))
+             } else if (command == "occupancy_audit_read()") {
++              axi.foreach(_.report())
+               outStream.println(s"OccupancyAudit($occupancyAuditChecks)")
+             } else if (command.startsWith("snapshot(")) {
+               val parameters = command.substring("snapshot(".length, command.length - 1).split(", ")
+@@ -261,9 +269,27 @@
+           }
+         }
+ 
+-        for (idx <- 0 to 10) { dut.clockDomain.waitSampling() }
+-      }
++        for (idx <- 0 to 10) { clock.waitSampling() }
++    }
+ 
++    sys.env.getOrElse("MICROBLOSSOM_PHASE_TRANSPORT", "direct") match {
++      case "direct" =>
++        simConfig.compile {
++          val dut = DistributedDual(config, ioConfig)
++          exposeAuditSignals(dut)
++          dut
++        }.doSim("hosted") { dut => runHost(dut, dut.clockDomain, None) }
++      case "axi_lite32" =>
++        simConfig.compile {
++          val endpoint = D6PhaseAxiEndpoint(config, ioConfig)
++          exposeAuditSignals(endpoint.dual)
++          endpoint
++        }.doSim("hosted") { endpoint =>
++          runHost(endpoint.dual, endpoint.clockDomain, Some(new D6PhaseAxiDriver(endpoint)))
++        }
++      case other => throw new IllegalArgumentException(s"unsupported phase transport: $other")
++    }
++
+   } catch {
+     case e: Exception => e.printStackTrace()
+   } finally {
+--- a/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_closed_loop.rs
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_closed_loop.rs
+@@ -131,7 +131,11 @@
+     );
+     let base: BaseInput = serde_json::from_slice(&fs::read(&args[1]).unwrap()).unwrap();
+     let pilot: Pilot = serde_json::from_slice(&fs::read(&args[2]).unwrap()).unwrap();
+-    assert_eq!(pilot.schema, "b2_b7_p023_d6_z_closed_loop_pilot_v1");
++    let basis = match pilot.schema.as_str() {
++        "b2_b7_p023_d6_x_closed_loop_pilot_v1" => "x",
++        "b2_b7_p023_d6_z_closed_loop_pilot_v1" => "z",
++        _ => panic!("expected a frozen X or Z closed-loop pilot"),
++    };
+     assert_eq!(base.phase_graphs.len(), 3);
+     assert_eq!(pilot.phases.len(), 3);
+     assert_eq!(pilot.windows.len(), 164);
+@@ -160,7 +164,7 @@
+             "max_iterations": 500000,
+             "iteration_progress": 10000,
+             "dual": {
+-                "name": "d6_z_phase_primal_dual_full_corpus_shard",
++                "name": format!("d6_{}_phase_primal_dual_full_corpus_shard", basis),
+                 "phase_banks": base.phase_banks,
+             }
+         }),
+@@ -317,7 +321,7 @@
+         && final_frame_failures == 0
+         && occupancy_checks == total_defects;
+     let output = json!({
+-        "schema": "d6_z_phase_primal_dual_closed_loop_rtl_v1",
++        "schema": format!("d6_{}_phase_primal_dual_closed_loop_rtl_v1", basis),
+         "base_input_evidence_id": base.evidence_id,
+         "pilot_evidence_id": pilot.evidence_id,
+         "accepted_corpus_sha256": pilot.accepted_corpus_sha256,
