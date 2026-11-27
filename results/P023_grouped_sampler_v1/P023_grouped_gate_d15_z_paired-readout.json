@@ -1,0 +1,125 @@
+{
+  "arm": "paired-readout",
+  "basis": "z",
+  "code_sha256": {
+    "p023_grouped_fault_scatter_v1.cc": "ea10e6532fef6579caef1a156bdd6866a9fe62fcad7125da06f65d17e244236d",
+    "p023_grouped_sampler_gate_v1.py": "0f5f92114c2e79116904d3d991693a085f48a5abdfda4776b4e268bfbfa69719",
+    "p023_grouped_sampler_v1.py": "f8dd0659ba2a22cbd008a62cf4e9330237b23be6a4f3cce65a07074e65244277"
+  },
+  "controls": {
+    "correction_nonzero_cut_batches": 7,
+    "max_graph_detectors": 35392,
+    "monolithic_sample_sha256": "c9af4e69ae33fcebe021128dd472f3cecd14adc5cec08a45416999d843cfb3fd",
+    "negative_controls": [
+      {
+        "message": "trajectory stitch dropped parity at window 1",
+        "mutation": "drop_physical_spill"
+      },
+      {
+        "message": "trajectory stitch dropped parity at window 1",
+        "mutation": "drop_correction_spill"
+      }
+    ],
+    "physical_nonzero_cut_batches": 7,
+    "shots": 24,
+    "windows": 8
+  },
+  "counts_toward_memory_gate": false,
+  "distance": 15,
+  "gate_sha256": "427fc74459d8570418643a91a66172e23e843c544c9ec2b3da14060eb17c99c7",
+  "kernel_sha256": "64ff47fb2694e77ff1c939268c05050b7ac36a67c0de7b8b0b5823568e75a355",
+  "performance": {
+    "exact_probability_classes": 47,
+    "mechanisms_per_steady_segment": 687232,
+    "median_pipeline_ratio": 0.5145213779244556,
+    "median_sampler_ratio": 0.12407703089430198,
+    "pipeline_sample_and_decode_ns": {
+      "baseline": [
+        [
+          633567459,
+          592790791
+        ],
+        [
+          720109791,
+          505277503
+        ],
+        [
+          670716082,
+          479652958
+        ]
+      ],
+      "grouped": [
+        [
+          83090168,
+          547397791
+        ],
+        [
+          96371208,
+          496090292
+        ],
+        [
+          86165334,
+          580605874
+        ]
+      ]
+    },
+    "shots": 128,
+    "speed_gate_passed": true,
+    "steady_samples_ns": {
+      "baseline": [
+        81289417,
+        85645958,
+        81251542,
+        72618000,
+        78119125,
+        91950292,
+        79142083,
+        68293791,
+        89863792,
+        101031583,
+        92520875,
+        78161250,
+        76976709,
+        69806958,
+        102241208,
+        86796083,
+        71360750,
+        82153875,
+        92774125,
+        103943959,
+        83192667,
+        88754584,
+        78622958,
+        85620209
+      ],
+      "grouped": [
+        9569541,
+        9051875,
+        9239625,
+        17516583,
+        15775916,
+        11071875,
+        10611375,
+        9302375,
+        9699875,
+        8959375,
+        19577333,
+        12241833,
+        18299167,
+        17573375,
+        9930833,
+        21683875,
+        9371333,
+        8862417,
+        14562250,
+        10584875,
+        9259500,
+        13085458,
+        9414333,
+        9374250
+      ]
+    }
+  },
+  "sampling_model_sha256": "5b5c6a04292f14eee097fc1a869566526f6f65318a2a61304b246d2a45ea6592",
+  "schema": "p023_grouped_sampler_gate_v1"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "p023_streamed_memory_grouped_v2",
+  "scope": "#023 direct logical memory; no hardware, B2 or B7 resource credit",
+  "inherits": "benchmarks/P023_streamed_memory_v1.json",
+  "distance": 15,
+  "implementation_change": "Use identical physical DEMs and matching graphs. Evoke one independent Bernoulli flag per joint fault and trajectory, grouping equal exact probabilities and XORing endpoints with the native scatter routine.",
+  "admission_protocol": "benchmarks/P023_grouped_sampler_gate_v1.json",
+  "admission_directory": "results/P023_grouped_sampler_v1",
+  "admission": "Four matching exact-fault replay/speed receipts are required before any qualification. Selection uses runtime and semantic checks, not logical failure counts.",
+  "acceptance": "Inherit the original 1000- and 1000000-round horizons, both X/Z bases, both nominal and synthetic paired-readout arms, 1024 shots in each fixed cell, and Wilson 95% upper bound <= 1%; no pooling with v1.",
+  "futility": "Stop starting additional shards of a cell only after observed failures exceed the allowed count for the complete fixed sample. Already running shards may complete.",
+  "pre_freeze_seed_access": false,
+  "source_files": [
+    "benchmarks/P023_streamed_memory_v1.json",
+    "benchmarks/P023_grouped_sampler_gate_v1.json",
+    "tools/p023_streamed_memory_v1.py",
+    "tools/p023_grouped_fault_scatter_v1.cc",
+    "tools/p023_grouped_sampler_v1.py",
+    "tools/p023_grouped_sampler_gate_v1.py",
+    "tools/p023_streamed_memory_grouped_v2.py"
+  ]
+}
