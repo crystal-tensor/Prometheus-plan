@@ -1,0 +1,158 @@
+{
+  "experiment_freeze": "351f1cb24200b3f5fa7dfc2d23311de846c1969f",
+  "factual_replay_validated": true,
+  "kernel_sha256": "64ff47fb2694e77ff1c939268c05050b7ac36a67c0de7b8b0b5823568e75a355",
+  "original_shard_seed": 342295494256839493,
+  "protocol_sha256": "9b11f00ee87f3241860e86099c54d1161e50bb75e96afc58420f2eb014e5869d",
+  "qualification_credit": false,
+  "rounds": 1000000,
+  "schema": "p023_b2_stress_counterfactual_v1",
+  "selection": {
+    "basis": "x",
+    "distance": 15,
+    "file": "P023_grouped_d15_x_paired-readout_r1000000_shard02.json",
+    "sha256": "32fc3df6936c2bc3b1c6ffb56837b2931f8b8e18361759433d00907d9647567b",
+    "shard": 2,
+    "source_failures": 2
+  },
+  "timings": {
+    "batch_window_p99_ns": 45384875,
+    "decode_ns": 59977039154,
+    "max_window_ns": 662337208,
+    "sample_ns": 182186050126
+  },
+  "traces": [
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 1
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 16,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": 179,
+          "truth": 1
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 11,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": 179,
+          "truth": 1
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 11192,
+      "source_shot_zero_based": 91
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 0
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 6,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": 1173,
+          "truth": 0
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 4,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": 1173,
+          "truth": 0
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 11351,
+      "source_shot_zero_based": 115
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": null,
+          "truth": 0
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 18,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": 872,
+          "truth": 0
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 14,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": 2082,
+          "truth": 0
+        }
+      },
+      "original_failure": false,
+      "paired_faults_removed": 11083,
+      "source_shot_zero_based": 0
+    }
+  ],
+  "unit_controls": {
+    "bulk": {
+      "calls": 2,
+      "removed_events": [
+        4,
+        8,
+        2,
+        2
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "head": {
+      "calls": 2,
+      "removed_events": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "tail": {
+      "calls": 2,
+      "removed_events": [
+        0,
+        8,
+        2,
+        2
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    }
+  },
+  "window_commits_sha256": "a9fc13f347f043c96b98f4b3f0ac783aea20f323d201dc3f5e0db2dab8bf07d8"
+}

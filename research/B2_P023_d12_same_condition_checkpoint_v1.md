@@ -31,6 +31,8 @@ The [original gate](../benchmarks/B2_B7_P023_logical_memory_horizon_gate_v1.json
 
 In the next [audited snapshot](../results/B2_P023_d12_million_progress_v1/checkpoint.json), the d=12 nominal X and Z first tranches each have 1/128 failures; the paired-readout tranches are still running. The d=15 rows have 0/512 nominal X, 2/512 paired-readout X, 0/512 nominal Z and 0/512 paired-readout Z. None has the scheduled 1,024 shots yet. No resource comparison is scored and the maximum of three failures per full cell is unchanged. The checkpoint binds the original short receipts together with the new, separate long receipt files.
 
+**Subsequent decision:** the d=12 stressed X arm reached **6/256**. It cannot pass the frozen cap of 3, so the tested 287-qubit version was stopped with no B2 credit. d=15 remained in qualification. See [the counterfactual replay and structural next candidate](P023_B2_stress_counterfactual_and_corner_v1.md).
+
 ## Reproduce
 
 See the [candidate manifest](../benchmarks/B2_P023_d12_same_condition_v1.json), [same-fault controls](../results/B2_P023_d12_controls_v1/), and [combined audit and disjoint receipts](../results/B2_P023_d12_checkpoint_v1/checkpoint.json). The candidate freeze `f81f11d9af1f76cfae4cef1f151d804aaf74d389` was committed before drawing its qualification salt. Use the pinned dependencies and kernel build from the [d=15 grouped sampler](P023_grouped_sampler_checkpoint_v1.md).

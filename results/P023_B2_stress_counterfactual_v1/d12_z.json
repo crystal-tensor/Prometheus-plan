@@ -1,0 +1,158 @@
+{
+  "experiment_freeze": "a06bb74ad712bf6ce8c70bbebd27a4b872dfd5f3",
+  "factual_replay_validated": true,
+  "kernel_sha256": "64ff47fb2694e77ff1c939268c05050b7ac36a67c0de7b8b0b5823568e75a355",
+  "original_shard_seed": 4195456369317118706,
+  "protocol_sha256": "9b11f00ee87f3241860e86099c54d1161e50bb75e96afc58420f2eb014e5869d",
+  "qualification_credit": false,
+  "rounds": 1000000,
+  "schema": "p023_b2_stress_counterfactual_v1",
+  "selection": {
+    "basis": "z",
+    "distance": 12,
+    "file": "B2_d12_z_paired-readout_r1000000_shard00.json",
+    "sha256": "9a7cc3060e577623d137356bd713d6746377209366dd9f61556c85129ac52b41",
+    "shard": 0,
+    "source_failures": 2
+  },
+  "timings": {
+    "batch_window_p99_ns": 33875042,
+    "decode_ns": 35488217199,
+    "max_window_ns": 635690333,
+    "sample_ns": 117169684642
+  },
+  "traces": [
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 1
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 5,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": 87,
+          "truth": 1
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 6,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": 87,
+          "truth": 1
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 7294,
+      "source_shot_zero_based": 37
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 0
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 12,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": 2634,
+          "truth": 0
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 8,
+          "correction": 1,
+          "failed": true,
+          "first_changed_window_zero_based": 2634,
+          "truth": 0
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 7030,
+      "source_shot_zero_based": 74
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": null,
+          "truth": 0
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 10,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": 1751,
+          "truth": 0
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 6,
+          "correction": 0,
+          "failed": false,
+          "first_changed_window_zero_based": 1751,
+          "truth": 0
+        }
+      },
+      "original_failure": false,
+      "paired_faults_removed": 7114,
+      "source_shot_zero_based": 0
+    }
+  ],
+  "unit_controls": {
+    "bulk": {
+      "calls": 2,
+      "removed_events": [
+        2,
+        1,
+        4,
+        1
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "head": {
+      "calls": 2,
+      "removed_events": [
+        3,
+        2,
+        1,
+        2
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "tail": {
+      "calls": 2,
+      "removed_events": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    }
+  },
+  "window_commits_sha256": "7148b8bdad6778f5df8c0d1c8839dc458f3be3a9857ad005f03f2f95d37f47b8"
+}

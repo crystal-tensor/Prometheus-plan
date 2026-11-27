@@ -252,15 +252,16 @@ def main():
     ap.add_argument("--git", default="git")
     a = ap.parse_args()
     source = Path(__file__).resolve()
-    for path in (PROTOCOL, source):
+    protocol_bytes = PROTOCOL.read_bytes()
+    for path, checked in ((PROTOCOL, protocol_bytes), (source, source.read_bytes())):
         frozen = subprocess.check_output([a.git, "show", f"{a.freeze}:{path.relative_to(v1.ROOT)}"],
                                          cwd=v1.ROOT)
-        v1.require(frozen == path.read_bytes(), "not running the frozen diagnostic")
+        v1.require(frozen == checked, "not running the frozen diagnostic")
     v1.require(not a.out.exists(), "diagnostic already exists")
-    p = v2.read(PROTOCOL)
+    p = json.loads(protocol_bytes)
     answer = run_case(p, p["cases"][a.case], a.source_dir, a.kernel, a.git)
     answer |= {"schema": p["schema"], "experiment_freeze": a.freeze,
-               "protocol_sha256": v1.sha(PROTOCOL.read_bytes())}
+               "protocol_sha256": v1.sha(protocol_bytes)}
     v2.atomic_save(a.out, answer)
     print(json.dumps([r["branches"] for r in answer["traces"]]), flush=True)
 

@@ -1,0 +1,158 @@
+{
+  "experiment_freeze": "351f1cb24200b3f5fa7dfc2d23311de846c1969f",
+  "factual_replay_validated": true,
+  "kernel_sha256": "64ff47fb2694e77ff1c939268c05050b7ac36a67c0de7b8b0b5823568e75a355",
+  "original_shard_seed": 2363796991189766424,
+  "protocol_sha256": "9b11f00ee87f3241860e86099c54d1161e50bb75e96afc58420f2eb014e5869d",
+  "qualification_credit": false,
+  "rounds": 1000000,
+  "schema": "p023_b2_stress_counterfactual_v1",
+  "selection": {
+    "basis": "x",
+    "distance": 12,
+    "file": "B2_d12_x_paired-readout_r1000000_shard00.json",
+    "sha256": "69ecc006011b1c5511a2f4f078370994fdebd57003263df160fac3b370b56e76",
+    "shard": 0,
+    "source_failures": 2
+  },
+  "timings": {
+    "batch_window_p99_ns": 37135375,
+    "decode_ns": 36256019904,
+    "max_window_ns": 525425042,
+    "sample_ns": 124656665197
+  },
+  "traces": [
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 1
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 12,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": 1324,
+          "truth": 1
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 9,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": 1324,
+          "truth": 1
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 6948,
+      "source_shot_zero_based": 9
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": null,
+          "truth": 1
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 10,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": 66,
+          "truth": 1
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 8,
+          "correction": 0,
+          "failed": true,
+          "first_changed_window_zero_based": 66,
+          "truth": 1
+        }
+      },
+      "original_failure": true,
+      "paired_faults_removed": 7067,
+      "source_shot_zero_based": 44
+    },
+    {
+      "branches": {
+        "observed_nominal_decoder": {
+          "changed_commit_windows": 0,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": null,
+          "truth": 1
+        },
+        "observed_pair_aware_decoder": {
+          "changed_commit_windows": 6,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": 585,
+          "truth": 1
+        },
+        "same_faults_without_pairs": {
+          "changed_commit_windows": 2,
+          "correction": 1,
+          "failed": false,
+          "first_changed_window_zero_based": 698,
+          "truth": 1
+        }
+      },
+      "original_failure": false,
+      "paired_faults_removed": 7154,
+      "source_shot_zero_based": 0
+    }
+  ],
+  "unit_controls": {
+    "bulk": {
+      "calls": 2,
+      "removed_events": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "head": {
+      "calls": 2,
+      "removed_events": [
+        2,
+        2,
+        3,
+        3
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    },
+    "tail": {
+      "calls": 2,
+      "removed_events": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "selected_original_positions": [
+        0,
+        63,
+        64,
+        127
+      ]
+    }
+  },
+  "window_commits_sha256": "229c317e042e7715202ee11c7e54215d824138f3234a78287120251b892061f4"
+}
