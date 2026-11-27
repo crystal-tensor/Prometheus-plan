@@ -36,6 +36,8 @@ The [admission gate](../benchmarks/P023_grouped_sampler_gate_v1.json) was frozen
 
 All four new, independent 1,000-round cohorts have **0/1,024** failures (upper bound 0.374% each). The **million-round** qualification is still running; incomplete cohorts have no credit. The [previous 1,000,000-round d=7 rejection](P023_streamed_memory_checkpoint_v1.md) stands. No full #023 result, calibrated device claim, #022/B2 or #021/B7 credit, or 120-qubit/depth-7,000 criterion is asserted here.
 
+**First old-sampler long tranche.** After the grouped experiment was frozen, the earlier sampler completed 128 continuous million-round trajectories in each d=15 cell: **0/128** failures in nominal X, nominal Z, stressed X and stressed Z. The [separate original-sampler audit](../results/P023_stream_d15_million_first_v1/checkpoint.json) and its four raw receipts bind those trajectories to the original freeze. These 512 trajectories support continuing with d=15; none of the four cells is complete, and they contribute zero to the independent grouped cohorts.
+
 ## Reproduce
 
 See the [admission receipts](../results/P023_grouped_sampler_v1/) and [qualification and timing audit](../results/P023_grouped_sampler_checkpoint_v1/checkpoint.json) for exact timing vectors, outcome bitsets, model hashes, cohort membership and the replay scripts.
