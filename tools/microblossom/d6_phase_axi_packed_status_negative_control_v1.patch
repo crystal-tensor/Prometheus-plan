@@ -1,0 +1,17 @@
+--- a/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
++++ b/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
+@@ -167,6 +167,14 @@
+   io.axi.r.valid := rValid
+   io.axi.r.data := rData
+   io.axi.r.resp := rResp
++  // Deliberate test fault: replace only the packed R latch with live state.
++  val packedReadInFlight = RegInit(False)
++  when(io.axi.ar.fire) {
++    packedReadInFlight := io.axi.ar.addr === ObstacleStatus
++  }
++  when(rValid && packedReadInFlight) {
++    io.axi.r.data := conflictValid.asBits ## growable.asBits.resize(31)
++  }
+   when(io.axi.r.fire) {
+     rValid := False
+   }

@@ -1,0 +1,52 @@
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project d6-axi-3gnl0ggs-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-axi-phase.XC3wWp/d6-axi-3gnl0ggs/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-axi-phase.XC3wWp/d6-axi-3gnl0ggs/)
+[info] compiling 1 Scala source to /private/tmp/qec-axi-phase.XC3wWp/d6-axi-3gnl0ggs/target/scala-2.12/classes ...
+[info] done compiling
+[info] running (fork) microblossom.D6PhaseAxiSmoke packed
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 11:46:28
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 0.539 : Checks and transforms
+[info] [Progress] at 0.782 : Generate Verilog
+[info] [Warning] 1887 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 1.010
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-3gnl0ggs/./simWorkspace/D6PhaseAxiEndpoint
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 31.276 ms
+[info] [Progress] Start D6PhaseAxiEndpoint smoke simulation with seed 20261127
+[info] AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] AXI_STATUS_SMOKE_RESULT status=packed result=(DataMaxGrowable(0),DataConflictRaw(true,0,32767,0,32767,0,2),4)
+[info] [Error] Simulation failed at time=3422
+[info] Shared memory key : SpinalHDL_0_1_203401172_167117794_1795751189912_-7685074121823340962
+[info] Start of simulation
+[info] End of simulation
+[error] Exception in thread "main" java.lang.AssertionError: assertion failed: RVALID/RDATA/RRESP changed during a stall
+[error] 	at scala.Predef$.assert(Predef.scala:223)
+[error] 	at microblossom.D6PhaseAxiDriver.$anonfun$step$3(D6PhaseAxiDriver.scala:60)
+[error] 	at microblossom.D6PhaseAxiDriver.$anonfun$step$3$adapted(D6PhaseAxiDriver.scala:60)
+[error] 	at scala.Option.foreach(Option.scala:407)
+[error] 	at microblossom.D6PhaseAxiDriver.step(D6PhaseAxiDriver.scala:60)
+[error] 	at microblossom.D6PhaseAxiDriver.$anonfun$awaitB$1(D6PhaseAxiDriver.scala:111)
+[error] 	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:158)
+[error] 	at microblossom.D6PhaseAxiDriver.awaitB(D6PhaseAxiDriver.scala:110)
+[error] 	at microblossom.D6PhaseAxiDriver.write(D6PhaseAxiDriver.scala:135)
+[error] 	at microblossom.D6PhaseAxiDriver.execute(D6PhaseAxiDriver.scala:203)
+[error] 	at microblossom.D6PhaseAxiDriver.probePackedStatusAcrossQueries(D6PhaseAxiDriver.scala:286)
+[error] 	at microblossom.D6PhaseAxiSmoke$.$anonfun$new$2(D6PhaseAxiSmoke.scala:95)
+[error] 	at microblossom.D6PhaseAxiSmoke$.$anonfun$new$2$adapted(D6PhaseAxiSmoke.scala:82)
+[error] 	at spinal.core.sim.SimCompiled.$anonfun$doSimApi$2(SimBootstraps.scala:608)
+[error] 	at spinal.sim.SimManager.threadBody$1(SimManager.scala:229)
+[error] 	at spinal.sim.SimManager.$anonfun$run$1(SimManager.scala:232)
+[error] 	at spinal.sim.SimThread.$anonfun$jvmThread$1(SimThread.scala:93)
+[error] 	at spinal.sim.JvmThread.run(SimManager.scala:51)
+[error] Nonzero exit code returned from runner: 1
+[error] (Compile / runMain) Nonzero exit code returned from runner: 1
+[error] Total time: 6 s, completed 2026年11月27日 上午11:46:30

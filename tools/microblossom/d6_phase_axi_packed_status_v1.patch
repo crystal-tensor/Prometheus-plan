@@ -1,0 +1,251 @@
+--- a/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
++++ b/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
+@@ -21,6 +21,9 @@
+   val ConflictVertices = 0x028
+   val SnapshotMeta = 0x02c
+   val SnapshotGeneration = 0x030
++  val ObstacleStatus = 0x034
++  val ObstacleConflictMask = 0x80000000L
++  val ObstacleLengthMask = 0x7fffffffL
+   val CorrectionBase = 0x100
+   val Okay = 0
+   val SlaveError = 2
+@@ -33,6 +36,7 @@
+   require(config.phaseBanks.length == 3 && !config.hardCodeWeights)
+   require(config.phaseBits <= 2 && config.correctionBits <= 65535)
+   require(config.readLatency > 0 && ioConfig.instructionSpec.numBits == 32)
++  require(ioConfig.weightBits > 0 && ioConfig.weightBits <= 31, "growable length must fit under the flag")
+ 
+   val io = new Bundle {
+     val axi = slave(AxiLite4(AxiLite4Config(addressWidth = AddressWidth, dataWidth = 32)))
+@@ -176,6 +180,9 @@
+     switch(io.axi.ar.addr) {
+       is(Growable) { rData := growable.asBits.resized }
+       is(ConflictValid) { rData := conflictValid.asBits.resized }
++      // Both fields were captured by the same FindObstacle. Use the existing R
++      // register so a later query cannot change an already accepted read beat.
++      is(ObstacleStatus) { rData := conflictValid.asBits ## growable.asBits.resize(31) }
+       is(ConflictNodes) { rData := conflictNodes }
+       is(ConflictTouches) { rData := conflictTouches }
+       is(ConflictVertices) { rData := conflictVertices }
+--- a/src/fpga/microblossom/D6PhaseAxiDriver.scala
++++ b/src/fpga/microblossom/D6PhaseAxiDriver.scala
+@@ -4,7 +4,7 @@
+ import spinal.core.sim._
+ 
+ /** Test manager. The decoder's only functional command/result access is the bus. */
+-final class D6PhaseAxiDriver(dut: D6PhaseAxiEndpoint) {
++final class D6PhaseAxiDriver(dut: D6PhaseAxiEndpoint, obstacleStatusMode: String = "split") {
+   import D6PhaseAxiMap._
+ 
+   private val bus = dut.io.axi
+@@ -18,8 +18,9 @@
+   private var priorB: Option[Int] = None
+   private var priorR: Option[(Long, Int)] = None
+   private var activePhase = 0
++  require(Set("split", "packed").contains(obstacleStatusMode), s"unknown obstacle status mode $obstacleStatusMode")
+   private val timing = sys.env.get("MICROBLOSSOM_AXI_TIMING_POLICY")
+-    .map(new D6PhaseAxiCycleTiming(_, dut.config.readLatency))
++    .map(new D6PhaseAxiCycleTiming(_, dut.config.readLatency, obstacleStatusMode))
+ 
+   private def timingTally(): D6AxiCycleTally =
+     D6AxiCycleTally(cycles, bCount, rCount, bStallCycles, rStallCycles, awWSkew)
+@@ -146,7 +147,8 @@
+         case CorrectionClear | CorrectionEdge | LatchCorrection => 3
+         case _ => throw new IllegalStateException(s"unclassified measured write $address")
+       }
+-      meter.record(stage, "W", address, data, strobe, response, timingTally() - before.get)
++      meter.record(stage, "W", address, data, strobe, response, timingTally() - before.get,
++        obstacleQuery = address == Instruction && spec.isFindObstacle(data))
+     }
+   }
+ 
+@@ -188,7 +190,7 @@
+     }
+     measured.foreach { meter =>
+       val stage = addr match {
+-        case Growable | ConflictValid | ConflictNodes | ConflictTouches | ConflictVertices => 2
++        case Growable | ConflictValid | ObstacleStatus | ConflictNodes | ConflictTouches | ConflictVertices => 2
+         case SnapshotMeta | SnapshotGeneration => 4
+         case word if word >= CorrectionBase => 4
+         case _ => throw new IllegalStateException(s"unclassified measured read $addr")
+@@ -235,8 +237,14 @@
+   private def obstacle(): (DataMaxGrowable, DataConflictRaw) = {
+     execute(spec.generateFindObstacle())
+     obstacleReads += 1
+-    val growable = DataMaxGrowable(read(Growable).toInt)
+-    if (read(ConflictValid) == 0) {
++    val (length, valid) = if (obstacleStatusMode == "packed") {
++      val status = read(ObstacleStatus)
++      val packedLength = status & ObstacleLengthMask
++      assert(packedLength >>> dut.ioConfig.weightBits == 0L, "packed obstacle has nonzero reserved bits")
++      (packedLength, (status & ObstacleConflictMask) != 0L)
++    } else (read(Growable), read(ConflictValid) != 0L)
++    val growable = DataMaxGrowable(length.toInt)
++    if (!valid) {
+       val none = dut.ioConfig.IndexNone
+       (growable, DataConflictRaw(false, none, none, none, none, none, none))
+     } else {
+@@ -261,6 +269,28 @@
+       conflict = next._2
+     }
+     (growable, conflict, grown)
++  }
++
++  // The caller establishes a real conflict on a small regression graph first.
++  // This probe is separate from the measured corpus to keep AW/W indices fixed.
++  def probePackedStatusAcrossQueries(): Unit = {
++    require(obstacleStatusMode == "packed" && timing.isEmpty)
++    val packedA = read(ObstacleStatus)
++    val splitA = (read(ConflictValid) << 31) | read(Growable)
++    assert(packedA == splitA && (packedA & ObstacleConflictMask) != 0L,
++      "query A did not return the expected nonzero conflict flag")
++    val held = beginRead(ObstacleStatus)
++    assert(held == ((packedA, Okay)), "query A beat was not latched")
++    // B is allowed to retire while the manager keeps RREADY low for A.
++    execute(spec.generateReset())
++    execute(spec.generateFindObstacle())
++    assert(priorR.contains(held), "no held R beat during consecutive FindObstacle")
++    finishR(held)
++    val packedB = read(ObstacleStatus)
++    val splitB = (read(ConflictValid) << 31) | read(Growable)
++    assert(packedB == splitB && packedB == dut.ioConfig.LengthNone.toLong && packedB != packedA,
++      "fresh read did not return query B's complete, no-conflict length sentinel")
++    println(f"AXI_PACKED_STATUS_PROBE_PASS old=0x$packedA%08x new=0x$packedB%08x held_across_find_obstacle=1")
+   }
+ 
+   private def probePendingWrite(): Unit = {
+--- a/src/fpga/microblossom/D6PhaseAxiCycleTiming.scala
++++ b/src/fpga/microblossom/D6PhaseAxiCycleTiming.scala
+@@ -19,16 +19,20 @@
+   def csv: String = s"$cycles,$writes,$reads,$bStalls,$rStalls,$awWSkew"
+ }
+ 
+-final class D6PhaseAxiCycleTiming(val policy: String, readLatency: Int) {
++final class D6PhaseAxiCycleTiming(val policy: String, readLatency: Int, statusMode: String) {
++  import D6PhaseAxiMap._
+   val labels = Vector("ingress", "solve_cmd", "obstacle_read", "correction_write", "correction_read")
+   require(Set("ready_high", "legacy_hold").contains(policy), s"unknown AXI timing policy $policy")
+   require(readLatency > 0)
+   private final case class Window(
+       shot: Int, index: Int, phase: Int, start: D6AxiCycleTally,
+-      groups: Array[D6AxiCycleTally], sequence: MessageDigest
+-  )
++      groups: Array[D6AxiCycleTally], sequence: MessageDigest, splitSequence: MessageDigest
++  ) {
++    var queries, packedReads = 0
++  }
+   private var window: Option[Window] = None
+   private var count = 0
++  private var queries, packedReads = 0L
+   private var summed = D6AxiCycleTally()
+ 
+   def active: Boolean = window.nonEmpty
+@@ -38,19 +42,28 @@
+     require(!active, "previous cycle window not closed")
+     require(shot >= 0 && index >= 0 && phase >= 0 && phase < 3, "invalid cycle window key")
+     window = Some(Window(shot, index, phase, start, Array.fill(labels.length)(D6AxiCycleTally()),
+-      MessageDigest.getInstance("SHA-256")))
++      MessageDigest.getInstance("SHA-256"), MessageDigest.getInstance("SHA-256")))
+   }
+ 
+   def record(stage: Int, verb: String, address: Int, data: Long, mask: Int, response: Int,
+-             delta: D6AxiCycleTally): Unit = {
++             delta: D6AxiCycleTally, obstacleQuery: Boolean = false): Unit = {
+     val current = window.getOrElse(throw new IllegalStateException("operation outside cycle window"))
+     val expected = if (verb == "W") (1L, 0L) else (0L, 1L)
+     require((delta.writes, delta.reads) == expected && response == D6PhaseAxiMap.Okay,
+       "wrong accepted transaction count inside a measured operation")
+     if (acceptImmediately) require(delta.bStalls == 0 && delta.rStalls == 0, "READY was withheld")
+     current.groups(stage) = current.groups(stage) + delta
+-    val text = s"$stage $verb $address $data $mask $response\n"
+-    current.sequence.update(text.getBytes(StandardCharsets.US_ASCII))
++    def tx(addr: Int, word: Long): Array[Byte] =
++      s"$stage $verb $addr $word $mask $response\n".getBytes(StandardCharsets.US_ASCII)
++    val physical = tx(address, data)
++    current.sequence.update(physical)
++    if (obstacleQuery) current.queries += 1
++    if (verb == "R" && address == ObstacleStatus) {
++      require(statusMode == "packed" && stage == 2)
++      current.packedReads += 1
++      current.splitSequence.update(tx(Growable, data & ObstacleLengthMask))
++      current.splitSequence.update(tx(ConflictValid, (data & ObstacleConflictMask) >>> 31))
++    } else current.splitSequence.update(physical)
+   }
+ 
+   def finish(activePhase: Int, end: D6AxiCycleTally): Unit = {
+@@ -58,17 +71,25 @@
+     require(activePhase == current.phase, "cycle window ended in wrong phase")
+     val delta = end - current.start
+     require(current.groups.foldLeft(D6AxiCycleTally())(_ + _) == delta, "unattributed measured cycles")
+-    val digest = current.sequence.digest().map(b => f"${b & 0xff}%02x").mkString
++    require(current.packedReads == (if (statusMode == "packed") current.queries else 0),
++      "expected exactly one packed status read per FindObstacle")
++    def hex(sequence: MessageDigest): String = sequence.digest().map(b => f"${b & 0xff}%02x").mkString
++    val digest = hex(current.sequence)
++    val splitDigest = hex(current.splitSequence)
+     val groups = labels.zip(current.groups).map { case (key, total) => s"$key=${total.csv}" }.mkString(" ")
+     println(s"AXI_CYCLE_WINDOW mode=$policy shot=${current.shot} window=${current.index} phase=${current.phase} " +
+-      s"b_start=${current.start.writes} r_start=${current.start.reads} tx_sha256=$digest total=${delta.csv} $groups")
++      s"b_start=${current.start.writes} r_start=${current.start.reads} tx_sha256=$digest total=${delta.csv} $groups " +
++      s"status=$statusMode queries=${current.queries} packed_reads=${current.packedReads} split_tx_sha256=$splitDigest")
+     summed = summed + delta
++    queries += current.queries
++    packedReads += current.packedReads
+     count += 1
+     window = None
+   }
+ 
+   def report(): Unit = {
+     require(!active && count > 0, "incomplete cycle profile")
+-    println(s"AXI_CYCLE_PROFILE mode=$policy read_latency=$readLatency windows=$count total=${summed.csv}")
++    println(s"AXI_CYCLE_PROFILE mode=$policy read_latency=$readLatency windows=$count total=${summed.csv} " +
++      s"status=$statusMode queries=$queries packed_reads=$packedReads")
+   }
+ }
+--- a/src/fpga/microblossom/DualHost.scala
++++ b/src/fpga/microblossom/DualHost.scala
+@@ -291,7 +291,8 @@
+           endpoint
+         }
+         val body = (endpoint: D6PhaseAxiEndpoint) => {
+-          runHost(endpoint.dual, endpoint.clockDomain, Some(new D6PhaseAxiDriver(endpoint)))
++          val status = sys.env.getOrElse("MICROBLOSSOM_AXI_OBSTACLE_STATUS", "split")
++          runHost(endpoint.dual, endpoint.clockDomain, Some(new D6PhaseAxiDriver(endpoint, status)))
+         }
+         if (sys.env.contains("MICROBLOSSOM_AXI_TIMING_POLICY")) {
+           compiled.doSim("hosted", seed = 20261127)(body)
+--- a/src/fpga/microblossom/D6PhaseAxiSmoke.scala
++++ b/src/fpga/microblossom/D6PhaseAxiSmoke.scala
+@@ -5,6 +5,8 @@
+ 
+ /** Fast regression for the bus probes; not part of the d=6 acceptance denominator. */
+ object D6PhaseAxiSmoke extends App {
++  require(args.isEmpty || (args.length == 1 && Set("split", "packed").contains(args(0))))
++  val statusMode = args.headOption.getOrElse("split")
+   def tree(leaves: Int): BinaryTree = {
+     val rows = collection.mutable.ArrayBuffer.fill(leaves)(BinaryTreeNode(None, None, None))
+     var left = 0
+@@ -77,8 +79,8 @@
+   }
+ 
+   SimConfig.withConfig(Config.spinal()).withIVerilog.compile(D6PhaseAxiEndpoint(config, ioConfig))
+-    .doSim("smoke") { dut =>
+-      val bus = new D6PhaseAxiDriver(dut)
++    .doSim("smoke", seed = 20261127) { dut =>
++      val bus = new D6PhaseAxiDriver(dut, statusMode)
+       dut.clockDomain.forkStimulus(period = 10)
+       dut.clockDomain.waitSampling(12)
+       sleep(1)
+@@ -87,7 +89,10 @@
+       bus.directedProbes()
+       bus.selectPhase(0)
+       bus.execute(ioConfig.instructionSpec.generateAddDefect(0, 0))
+-      assert(bus.findObstacle(100)._2.valid)
++      val result = bus.findObstacle(100)
++      assert(result._2.valid)
++      println(s"AXI_STATUS_SMOKE_RESULT status=$statusMode result=$result")
++      if (statusMode == "packed") bus.probePackedStatusAcrossQueries()
+       bus.clearCorrection()
+       bus.accumulate(0)
+       assert(bus.correctionRead() == ((64, "180000000")), "unsigned 32-bit read or little-endian packing failed")
