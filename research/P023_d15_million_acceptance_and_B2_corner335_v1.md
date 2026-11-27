@@ -23,6 +23,8 @@ The [287-qubit memory was rejected](P023_B2_stress_counterfactual_and_corner_v1.
 
 The [335-qubit checkpoint](../results/B2_P023_corner335_checkpoint_v1/checkpoint.json) records **0 / 1,024 failures in each of the four independent 1,000-round cells**. The four million-round cohorts are running under the same [precommitted test](../benchmarks/B2_P023_corner335_same_condition_v1.json). All eight cells must pass independently before the reduction from 449 to 335 active-qubit-rounds per round (**25.39%**) is credited. Four failures in any cell are enough to stop that verdict early. Neither a detector count nor short-horizon success certifies the reduction.
 
+The [first two long batches in each cell](../results/B2_P023_corner335_first_million_v1/checkpoint.json) recorded 2, 1, 1 and 3 failures out of 256 each in the same order as the reference table. In particular, one more stressed-Z failure would rule out a pass. This is an audited, incomplete screening snapshot, not a confidence verdict at 1,024 trajectories.
+
 ## Recount the released evidence
 
 From the repository root with Python 3.12.6, Stim 1.16.0, PyMatching 2.4.0 and NumPy 2.4.6:
@@ -45,4 +47,4 @@ python3 -B tools/b2_p023_corner335_audit_v1.py \
 cmp "$qec_audit/335.json" results/B2_P023_corner335_checkpoint_v1/checkpoint.json
 ```
 
-Both audits were reconstructed byte-for-byte from the archived shard receipts. The archived 335 snapshot is the independent short-horizon result, not a rolling claim about the long cohorts.
+Both audits were reconstructed byte-for-byte from the archived shard receipts. To reproduce the first long snapshot, copy the 32 short-horizon shards and eight first-million shards to one temporary directory and run the 335 audit on that directory with the same freeze and salt.
