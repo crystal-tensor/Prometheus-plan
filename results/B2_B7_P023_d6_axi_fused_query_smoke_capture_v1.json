@@ -1,0 +1,61 @@
+{
+  "commands": {
+    "duplicate": [
+      "sbt",
+      "-batch",
+      "runMain microblossom.D6PhaseAxiSmoke fused"
+    ],
+    "early_r": [
+      "sbt",
+      "-batch",
+      "runMain microblossom.D6PhaseAxiSmoke fused"
+    ],
+    "positive": [
+      "sbt",
+      "-batch",
+      "runMain microblossom.D6PhaseAxiSmoke split",
+      "runMain microblossom.D6PhaseAxiSmoke packed",
+      "runMain microblossom.D6PhaseAxiSmoke fused"
+    ]
+  },
+  "exit_codes": {
+    "duplicate": 1,
+    "early_r": 1,
+    "positive": 0
+  },
+  "finished_utc": "2026-11-27T04:11:22.137364+00:00",
+  "log_sha256": {
+    "duplicate": "e10e3de769cbf53987843716a92d93c308837812045f1846c3df69f71958f894",
+    "early_r": "a1f6d13339d095dad829c45b86d25ab948e75cdd41dbf1950ed43be974083162",
+    "positive": "aa6f11295f76b331689c5c5254d4c277bf6825c29bcfcb6fd8bc1a120f1fd90c"
+  },
+  "schema": "b2_b7_p023_d6_axi_fused_query_smoke_capture_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "seed": 20261127,
+  "simulator": "Icarus Verilog version 13.0 (stable) (v13_0)",
+  "source_archive_sha256": "284f3e52ab0a3de038821d7b9063ea978c16ec0f8b3a35204f8d862f6595659b",
+  "source_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731",
+  "sources_sha256": {
+    "results/B2_B7_P023_d6_axi_cycle_profile_evidence_v1.json": "6101ef4076bd80c6c1ff43098d4de84b259d7104be86ed32f7d3be66a999bb1c",
+    "results/B2_B7_P023_d6_axi_packed_status_evidence_v1.json": "501f69531d67f85ef83524d48f70433c3a0448e98dc44403f1ac3b1dca97c4f8",
+    "tools/b2_b7_p023_d6_axi_fused_query_record_v1.py": "e75eef03c173eb3597bce6ff6c36b2c3d180cfe0e0ffd557dd74bf61d7a0158a",
+    "tools/b2_b7_p023_d6_axi_packed_status_record_v1.py": "ce4059557829d6ab26c50fc7cb6f5bdcc2f99020fb608086e40d7547f04eedc9",
+    "tools/microblossom/D6PhaseAxiCycleTiming.scala": "72b18386cc24fb5693a812827b594effa39d7a9dd1c0ad182bcee84f2cf498dc",
+    "tools/microblossom/D6PhaseAxiDriver.scala": "a8eec549efc7e6ef9aeaf7ae21367c07c9515bdd6f81a6b3027db5e2cdab51e6",
+    "tools/microblossom/D6PhaseAxiEndpoint.scala": "972debc72d67d3211c8bb3aaa91c6db08163e9bc0254acb97b197e11b5cd835b",
+    "tools/microblossom/D6PhaseAxiSmoke.scala": "d6f2c69a467995e3f77c9d8cd8f9ca2fd2183088e06b3b7b1f0b5cf2e29abd10",
+    "tools/microblossom/d6_phase_axi_cycle_profile_v1.patch": "b98859a6b69a86f1ba638766ec3b03376aa18cbeeef10b0aec785b90769be49d",
+    "tools/microblossom/d6_phase_axi_fused_query_duplicate_control_v1.patch": "3872e5aa313c641feb61f0bad8a29151e690581d1eecbef7abad8ef3d02eb10b",
+    "tools/microblossom/d6_phase_axi_fused_query_early_r_control_v1.patch": "d07d270c2aec81bdcfb96461b83ae1b0c82297983c6afdbc7f998078d40c61bf",
+    "tools/microblossom/d6_phase_axi_fused_query_v1.patch": "f7e31f1c2c54efce60a271afa6467f5aa50e566628092291b6641f24d03cb659",
+    "tools/microblossom/d6_phase_axi_lite_host_v1.patch": "241953f498151be7739915583fe474bb7e76fab4a41c0060e38efb68134bc3b5",
+    "tools/microblossom/d6_phase_axi_packed_status_negative_control_v1.patch": "37be535ab9fdf7478aa48c2aea3baa89e4d07c86d9d8c3c79007e0ecf70b1e6e",
+    "tools/microblossom/d6_phase_axi_packed_status_v1.patch": "086585fd0860dc73d12b9df15738fe09cb98e752c805614e504bde472df02f1e",
+    "tools/microblossom/d6_z_phase_primal_dual_closed_loop_v1.patch": "a1b1b4a2036f44039f6448d16a357ea07d1105c272644e805e9f8ebc7c5b5b27"
+  },
+  "started_utc": "2026-11-27T04:10:25.266444+00:00"
+}

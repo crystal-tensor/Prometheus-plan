@@ -1,0 +1,49 @@
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project d6-axi-ziv2ut13-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/)
+[info] compiling 1 Scala source to /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/target/scala-2.12/classes ...
+[info] done compiling
+[info] running (fork) microblossom.D6PhaseAxiSmoke fused
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 12:11:20
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 0.909 : Checks and transforms
+[info] [Progress] at 1.156 : Generate Verilog
+[info] [Warning] 1887 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 1.353
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/./simWorkspace/D6PhaseAxiEndpoint
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 36.666 ms
+[info] [Progress] Start D6PhaseAxiEndpoint smoke simulation with seed 20261127
+[info] AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] [Error] Simulation failed at time=2432
+[info] Shared memory key : SpinalHDL_0_1_302059473_-1407626279_1795752681903_-7685074121823340962
+[info] Start of simulation
+[info] End of simulation
+[error] Exception in thread "main" java.lang.AssertionError: assertion failed: fused R became valid before the core capture
+[error] 	at scala.Predef$.assert(Predef.scala:223)
+[error] 	at microblossom.D6PhaseAxiDriver.step(D6PhaseAxiDriver.scala:76)
+[error] 	at microblossom.D6PhaseAxiDriver.$anonfun$awaitR$1(D6PhaseAxiDriver.scala:200)
+[error] 	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:158)
+[error] 	at microblossom.D6PhaseAxiDriver.awaitR(D6PhaseAxiDriver.scala:199)
+[error] 	at microblossom.D6PhaseAxiDriver.beginRead(D6PhaseAxiDriver.scala:208)
+[error] 	at microblossom.D6PhaseAxiDriver.read(D6PhaseAxiDriver.scala:223)
+[error] 	at microblossom.D6PhaseAxiDriver.obstacle(D6PhaseAxiDriver.scala:283)
+[error] 	at microblossom.D6PhaseAxiDriver.findObstacle(D6PhaseAxiDriver.scala:302)
+[error] 	at microblossom.D6PhaseAxiSmoke$.$anonfun$new$2(D6PhaseAxiSmoke.scala:100)
+[error] 	at microblossom.D6PhaseAxiSmoke$.$anonfun$new$2$adapted(D6PhaseAxiSmoke.scala:90)
+[error] 	at spinal.core.sim.SimCompiled.$anonfun$doSimApi$2(SimBootstraps.scala:608)
+[error] 	at spinal.sim.SimManager.threadBody$1(SimManager.scala:229)
+[error] 	at spinal.sim.SimManager.$anonfun$run$1(SimManager.scala:232)
+[error] 	at spinal.sim.SimThread.$anonfun$jvmThread$1(SimThread.scala:93)
+[error] 	at spinal.sim.JvmThread.run(SimManager.scala:51)
+[error] Nonzero exit code returned from runner: 1
+[error] (Compile / runMain) Nonzero exit code returned from runner: 1
+[error] Total time: 7 s, completed 2026年11月27日 下午12:11:22

@@ -1,0 +1,10 @@
+--- a/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
++++ b/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
+@@ -114,5 +114,6 @@
+   }
+   when(fusedIssue) {
+-    fusedPending := False
++    // Deliberate test fault: leave the consumed request queued for a second issue.
++    fusedPending := True
+     waitCycles := config.readLatency
+     captureObstacle := True

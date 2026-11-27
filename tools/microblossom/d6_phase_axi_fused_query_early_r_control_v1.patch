@@ -1,0 +1,13 @@
+--- a/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
++++ b/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
+@@ -200,6 +200,10 @@
+   val queryAr = if (enableFused) io.axi.ar.addr === QueryObstacleStatus else False
+   when(io.axi.ar.fire && queryAr) {
+     fusedPending := True
++    // Deliberate test fault: return before FindObstacle reaches the capture edge.
++    rValid := True
++    rResp := B(Okay, 2 bits)
++    rData := 0
+   }
+   when(io.axi.ar.fire && !queryAr) {
+     rValid := True

@@ -1,0 +1,505 @@
+--- a/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
++++ b/src/fpga/microblossom/D6PhaseAxiEndpoint.scala
+@@ -22,6 +22,7 @@
+   val SnapshotMeta = 0x02c
+   val SnapshotGeneration = 0x030
+   val ObstacleStatus = 0x034
++  val QueryObstacleStatus = 0x038
+   val ObstacleConflictMask = 0x80000000L
+   val ObstacleLengthMask = 0x7fffffffL
+   val CorrectionBase = 0x100
+@@ -29,7 +30,7 @@
+   val SlaveError = 2
+ }
+ 
+-case class D6PhaseAxiEndpoint(config: DualConfig, ioConfig: DualConfig) extends Component {
++case class D6PhaseAxiEndpoint(config: DualConfig, ioConfig: DualConfig, enableFused: Boolean = false) extends Component {
+   import D6PhaseAxiMap.{Instruction => InstructionAddress, _}
+ 
+   require(config.contextDepth == 1, "phase and correction state are single-context")
+@@ -52,9 +53,16 @@
+   val waitCycles = Reg(UInt(log2Up(config.readLatency + 1) bits)) init 0
+   val bValid = RegInit(False)
+   val bResp = Reg(Bits(2 bits)) init 0
++  val rValid = RegInit(False)
++  val rResp = Reg(Bits(2 bits)) init 0
++  val rData = Reg(Bits(32 bits)) init 0
++  val fusedPending = RegInit(False)
++  val fusedCapture = RegInit(False)
+ 
+   // Capture addresses and data independently, then issue exactly once.
+-  val writeSlot = !bValid && waitCycles === 0
++  // A staged query lets an older half-write finish, but does not let new
++  // writes overtake it. READY depends on registered state, not live AXI inputs.
++  val writeSlot = !bValid && waitCycles === 0 && (!fusedPending || awPending || wPending)
+   io.axi.aw.ready := writeSlot && !awPending
+   io.axi.w.ready := writeSlot && !wPending
+   io.axi.b.valid := bValid
+@@ -90,6 +98,7 @@
+   )
+   val join = writeSlot && awPending && wPending
+   val issue = join && supported
++  val fusedIssue = if (enableFused) fusedPending && waitCycles === 0 && !awPending && !wPending else False
+   val captureObstacle = RegInit(False)
+   when(join) {
+     awPending := False
+@@ -97,19 +106,28 @@
+     when(supported) {
+       waitCycles := config.readLatency
+       captureObstacle := isRaw && submitted.isFindObstacle()
++      fusedCapture := False
+     } otherwise {
+       bValid := True
+       bResp := B(SlaveError, 2 bits)
+     }
+   }
++  when(fusedIssue) {
++    fusedPending := False
++    waitCycles := config.readLatency
++    captureObstacle := True
++    fusedCapture := True
++  }
+ 
+   val phaseId = Reg(UInt(config.phaseBits bits)) init 0
+   when(issue && isPhase) {
+     phaseId := wWord.asUInt.resized
+   }
+-  dual.io.message.valid := issue && (isRaw || isPhase || isSelector)
++  dual.io.message.valid := fusedIssue || (issue && (isRaw || isPhase || isSelector))
+   dual.io.message.instruction := submitted
+-  when(isPhase) {
++  when(fusedIssue) {
++    dual.io.message.instruction := B(ioConfig.instructionSpec.generateFindObstacle(), 32 bits)
++  } elsewhen(isPhase) {
+     dual.io.message.instruction := B(ioConfig.instructionSpec.generateReset(), 32 bits)
+   } elsewhen(isSelector) {
+     dual.io.message.instruction := B(ioConfig.instructionSpec.generateLoadWeightsExternal(), 32 bits)
+@@ -140,9 +158,17 @@
+         conflictTouches := pair(conflict.touch1, conflict.touch2)
+         conflictVertices := pair(conflict.vertex1, conflict.vertex2)
+       }
+-      // A successful B response fences the core command/readout, not just AW/W receipt.
+-      bValid := True
+-      bResp := B(Okay, 2 bits)
++      when(fusedCapture) {
++        // The read command returns the same snapshot as the detail registers.
++        rData := dual.io.conflict.valid.asBits ## dual.io.maxGrowable.length.asBits.resize(31)
++        rResp := B(Okay, 2 bits)
++        rValid := True
++        fusedCapture := False
++      } otherwise {
++        // The write response fences the core operation, not just AW/W receipt.
++        bValid := True
++        bResp := B(Okay, 2 bits)
++      }
+     }
+   }
+ 
+@@ -161,19 +187,21 @@
+     snapshotGeneration := snapshotGeneration + 1
+   }
+ 
+-  val rValid = RegInit(False)
+-  val rResp = Reg(Bits(2 bits)) init 0
+-  val rData = Reg(Bits(32 bits)) init 0
+-  // Reads sample committed state. An incomplete write pair cannot block a read.
++  // Ordinary reads sample committed state, even with an incomplete write.
++  // The explicit, opt-in query read is staged until any older write commits.
+   // A latched R beat and the B beat have independent lifetimes.
+-  io.axi.ar.ready := !rValid && waitCycles === 0 && !join
++  io.axi.ar.ready := !rValid && !fusedPending && waitCycles === 0 && !join
+   io.axi.r.valid := rValid
+   io.axi.r.data := rData
+   io.axi.r.resp := rResp
+   when(io.axi.r.fire) {
+     rValid := False
+   }
+-  when(io.axi.ar.fire) {
++  val queryAr = if (enableFused) io.axi.ar.addr === QueryObstacleStatus else False
++  when(io.axi.ar.fire && queryAr) {
++    fusedPending := True
++  }
++  when(io.axi.ar.fire && !queryAr) {
+     rValid := True
+     rData := 0
+     rResp := B(Okay, 2 bits)
+--- a/src/fpga/microblossom/D6PhaseAxiDriver.scala
++++ b/src/fpga/microblossom/D6PhaseAxiDriver.scala
+@@ -18,9 +18,15 @@
+   private var priorB: Option[Int] = None
+   private var priorR: Option[(Long, Int)] = None
+   private var activePhase = 0
+-  require(Set("split", "packed").contains(obstacleStatusMode), s"unknown obstacle status mode $obstacleStatusMode")
++  require(Set("split", "packed", "fused").contains(obstacleStatusMode))
++  require(dut.enableFused == (obstacleStatusMode == "fused"))
++  private var fusedAr, fusedExec, fusedR = 0L
++  private var fusedOutstanding = false
++  private var fusedIssuedAt = -1L
++  private var virtualWrites = 0L
++  private def writeOrdinal: Long = awCount + virtualWrites
+   private val timing = sys.env.get("MICROBLOSSOM_AXI_TIMING_POLICY")
+-    .map(new D6PhaseAxiCycleTiming(_, dut.config.readLatency, obstacleStatusMode))
++    .map(new D6PhaseAxiCycleTiming(_, dut.config.readLatency, obstacleStatusMode, spec.generateFindObstacle()))
+ 
+   private def timingTally(): D6AxiCycleTally =
+     D6AxiCycleTally(cycles, bCount, rCount, bStallCycles, rStallCycles, awWSkew)
+@@ -56,6 +62,30 @@
+       if (bus.b.valid.toBoolean) Some(bus.b.resp.toInt) else None,
+       if (bus.r.valid.toBoolean) Some((bus.r.data.toLong & 0xffffffffL, bus.r.resp.toInt)) else None
+     )
++    if (dut.enableFused) {
++      if (dut.fusedIssue.toBoolean) {
++        assert(fusedOutstanding && fusedExec < fusedAr && fusedIssuedAt < 0,
++          "fused command without a fresh AR or duplicate execution")
++        assert(dut.dual.io.message.valid.toBoolean &&
++          dut.dual.io.message.instruction.toLong == spec.generateFindObstacle(), "wrong fused core command")
++        fusedExec += 1
++        fusedIssuedAt = cycles
++      }
++      if (fusedOutstanding && sample.r.nonEmpty) {
++        assert(fusedIssuedAt >= 0 && cycles - fusedIssuedAt >= dut.config.readLatency + 1,
++          "fused R became valid before the core capture")
++        if (bus.r.ready.toBoolean) {
++          fusedR += 1
++          fusedOutstanding = false
++        }
++      }
++      if (sample.arFire && bus.ar.addr.toInt == QueryObstacleStatus) {
++        assert(!fusedOutstanding && fusedAr == fusedExec && fusedExec == fusedR)
++        fusedOutstanding = true
++        fusedIssuedAt = -1
++        fusedAr += 1
++      }
++    }
+     priorB.foreach(value => assert(sample.b.contains(value), "BVALID/BRESP changed during a stall"))
+     priorR.foreach(value => assert(sample.r.contains(value), "RVALID/RDATA/RRESP changed during a stall"))
+     sample.b.foreach { response =>
+@@ -121,7 +151,7 @@
+   }
+ 
+   private def write(address: Int, data: Long, strobe: Int = 15, expected: Int = Okay): Unit = {
+-    val seq = awCount
++    val seq = writeOrdinal
+     val measured = timing.filter(_.active)
+     val before = measured.map(_ => timingTally())
+     val alwaysReady = measured.exists(_.acceptImmediately)
+@@ -152,7 +182,7 @@
+     }
+   }
+ 
+-  private def beginRead(addr: Int): (Long, Int) = {
++  private def acceptAR(addr: Int): Unit = {
+     bus.ar.addr #= addr
+     bus.ar.valid #= true
+     var ar = false
+@@ -163,6 +193,9 @@
+     }
+     assert(ar, s"AR timeout on address $addr")
+     bus.ar.valid #= false
++  }
++
++  private def awaitR(addr: Int): (Long, Int) = {
+     for (_ <- 0 until cycleLimit) {
+       val sample = step()
+       if (sample.r.nonEmpty) return sample.r.get
+@@ -170,6 +203,11 @@
+     throw new AssertionError(s"R response timeout on address $addr")
+   }
+ 
++  private def beginRead(addr: Int): (Long, Int) = {
++    acceptAR(addr)
++    awaitR(addr)
++  }
++
+   private def finishR(expected: (Long, Int)): Unit = {
+     bus.r.ready #= true
+     assert(step().r.contains(expected), "R changed before consumption")
+@@ -179,6 +217,7 @@
+   private def read(addr: Int, expected: Int = Okay): Long = {
+     val measured = timing.filter(_.active)
+     val before = measured.map(_ => timingTally())
++    val omittedOrdinal = if (addr == QueryObstacleStatus) writeOrdinal else -1L
+     val alwaysReady = measured.exists(_.acceptImmediately)
+     if (alwaysReady) bus.r.ready #= true
+     val response = beginRead(addr)
+@@ -188,14 +227,17 @@
+       for (_ <- 0 until (arCount % 5).toInt) assert(step().r.contains(response))
+       finishR(response)
+     }
++    if (omittedOrdinal >= 0) virtualWrites += 1
+     measured.foreach { meter =>
+       val stage = addr match {
+-        case Growable | ConflictValid | ObstacleStatus | ConflictNodes | ConflictTouches | ConflictVertices => 2
++        case Growable | ConflictValid | ObstacleStatus | QueryObstacleStatus |
++             ConflictNodes | ConflictTouches | ConflictVertices => 2
+         case SnapshotMeta | SnapshotGeneration => 4
+         case word if word >= CorrectionBase => 4
+         case _ => throw new IllegalStateException(s"unclassified measured read $addr")
+       }
+-      meter.record(stage, "R", addr, response._1, 0, response._2, timingTally() - before.get)
++      meter.record(stage, "R", addr, response._1, 0, response._2, timingTally() - before.get,
++        fusedWriteOrdinal = omittedOrdinal)
+     }
+     response._1
+   }
+@@ -235,10 +277,10 @@
+   }
+ 
+   private def obstacle(): (DataMaxGrowable, DataConflictRaw) = {
+-    execute(spec.generateFindObstacle())
++    if (!dut.enableFused) execute(spec.generateFindObstacle())
+     obstacleReads += 1
+-    val (length, valid) = if (obstacleStatusMode == "packed") {
+-      val status = read(ObstacleStatus)
++    val (length, valid) = if (obstacleStatusMode != "split") {
++      val status = read(if (dut.enableFused) QueryObstacleStatus else ObstacleStatus)
+       val packedLength = status & ObstacleLengthMask
+       assert(packedLength >>> dut.ioConfig.weightBits == 0L, "packed obstacle has nonzero reserved bits")
+       (packedLength, (status & ObstacleConflictMask) != 0L)
+@@ -293,6 +335,61 @@
+     println(f"AXI_PACKED_STATUS_PROBE_PASS old=0x$packedA%08x new=0x$packedB%08x held_across_find_obstacle=1")
+   }
+ 
++  def probeFusedWaitsForHalfWrite(addressFirst: Boolean): Unit = {
++    require(dut.enableFused && timing.isEmpty)
++    assert((read(ObstacleStatus) & ObstacleConflictMask) != 0L, "need prior conflicting query")
++    bus.aw.addr #= Instruction
++    bus.w.data #= spec.generateReset()
++    bus.w.strb #= 15
++    bus.aw.valid #= addressFirst
++    bus.w.valid #= !addressFirst
++    val half = step()
++    assert(half.awFire == addressFirst && half.wFire != addressFirst)
++    bus.aw.valid #= false
++    bus.w.valid #= false
++    val before = fusedExec
++    acceptAR(QueryObstacleStatus)
++    for (_ <- 0 until 5) {
++      val sample = step()
++      assert(sample.r.isEmpty && sample.b.isEmpty && fusedExec == before, "fused query overtook half-write")
++    }
++    bus.aw.valid #= !addressFirst
++    bus.w.valid #= addressFirst
++    val rest = step()
++    assert(rest.awFire != addressFirst && rest.wFire == addressFirst)
++    bus.aw.valid #= false
++    bus.w.valid #= false
++    val held = awaitR(QueryObstacleStatus)
++    assert(held == ((dut.ioConfig.LengthNone.toLong, Okay)) && priorB.contains(Okay),
++      "fused result did not follow reset while its B was held")
++    for (_ <- 0 until 5) {
++      val sample = step()
++      assert(sample.r.contains(held) && sample.b.contains(Okay) && fusedExec == before + 1)
++    }
++    finishR(held)
++    finishB(Okay)
++    val order = if (addressFirst) "aw_first" else "w_first"
++    println(s"AXI_FUSED_HALF_WRITE_PASS order=$order both_responses_held=1")
++  }
++
++  def probeFusedHeldAcrossLaterQuery(): Unit = {
++    require(dut.enableFused && timing.isEmpty)
++    val held = beginRead(QueryObstacleStatus)
++    assert(held._2 == Okay && (held._1 & ObstacleConflictMask) != 0L, "need a conflicting fused result")
++    execute(spec.generateReset())
++    execute(spec.generateFindObstacle())
++    assert(priorR.contains(held), "old fused response not retained")
++    finishR(held)
++    val fresh = read(QueryObstacleStatus)
++    assert(fresh == dut.ioConfig.LengthNone.toLong && fresh != held._1)
++    println(f"AXI_FUSED_HELD_PASS old=0x${held._1}%08x new=0x$fresh%08x")
++  }
++
++  private def reportFused(): Unit = {
++    assert(!fusedOutstanding && fusedAr == fusedExec && fusedExec == fusedR && fusedR > 0)
++    println(s"AXI_FUSED_EXEC_PASS accepted=$fusedAr executed=$fusedExec returned=$fusedR min_capture_gap=${dut.config.readLatency + 1}")
++  }
++
+   private def probePendingWrite(): Unit = {
+     drivePair(Phase, 0, 15, 0, 0)
+     assert(awaitB() == Okay)
+@@ -363,6 +460,7 @@
+ 
+   def report(): Unit = {
+     timing.foreach(_.report())
++    if (dut.enableFused) reportFused()
+     assert(awCount == wCount && wCount == bCount && arCount == rCount, "lost AXI handshakes")
+     assert(addressFirst > 0 && dataFirst > 0 && simultaneous > 0 && bStallCycles > 0 && rStallCycles > 0)
+     assert(vectors > 0 && obstacleReads > 0 && errorB == 6 && errorR == 2)
+--- a/src/fpga/microblossom/D6PhaseAxiCycleTiming.scala
++++ b/src/fpga/microblossom/D6PhaseAxiCycleTiming.scala
+@@ -19,20 +19,22 @@
+   def csv: String = s"$cycles,$writes,$reads,$bStalls,$rStalls,$awWSkew"
+ }
+ 
+-final class D6PhaseAxiCycleTiming(val policy: String, readLatency: Int, statusMode: String) {
++final class D6PhaseAxiCycleTiming(val policy: String, readLatency: Int, statusMode: String, findInstruction: Long) {
+   import D6PhaseAxiMap._
+   val labels = Vector("ingress", "solve_cmd", "obstacle_read", "correction_write", "correction_read")
+   require(Set("ready_high", "legacy_hold").contains(policy), s"unknown AXI timing policy $policy")
+   require(readLatency > 0)
+   private final case class Window(
+       shot: Int, index: Int, phase: Int, start: D6AxiCycleTally,
+-      groups: Array[D6AxiCycleTally], sequence: MessageDigest, splitSequence: MessageDigest
++      groups: Array[D6AxiCycleTally], sequence: MessageDigest, splitSequence: MessageDigest,
++      packedSequence: MessageDigest
+   ) {
+     var queries, packedReads = 0
++    val fusedOrdinals = collection.mutable.ArrayBuffer.empty[Long]
+   }
+   private var window: Option[Window] = None
+   private var count = 0
+-  private var queries, packedReads = 0L
++  private var queries, packedReads, fusedQueries = 0L
+   private var summed = D6AxiCycleTally()
+ 
+   def active: Boolean = window.nonEmpty
+@@ -42,11 +44,11 @@
+     require(!active, "previous cycle window not closed")
+     require(shot >= 0 && index >= 0 && phase >= 0 && phase < 3, "invalid cycle window key")
+     window = Some(Window(shot, index, phase, start, Array.fill(labels.length)(D6AxiCycleTally()),
+-      MessageDigest.getInstance("SHA-256"), MessageDigest.getInstance("SHA-256")))
++      MessageDigest.getInstance("SHA-256"), MessageDigest.getInstance("SHA-256"), MessageDigest.getInstance("SHA-256")))
+   }
+ 
+   def record(stage: Int, verb: String, address: Int, data: Long, mask: Int, response: Int,
+-             delta: D6AxiCycleTally, obstacleQuery: Boolean = false): Unit = {
++             delta: D6AxiCycleTally, obstacleQuery: Boolean = false, fusedWriteOrdinal: Long = -1): Unit = {
+     val current = window.getOrElse(throw new IllegalStateException("operation outside cycle window"))
+     val expected = if (verb == "W") (1L, 0L) else (0L, 1L)
+     require((delta.writes, delta.reads) == expected && response == D6PhaseAxiMap.Okay,
+@@ -58,12 +60,27 @@
+     val physical = tx(address, data)
+     current.sequence.update(physical)
+     if (obstacleQuery) current.queries += 1
+-    if (verb == "R" && address == ObstacleStatus) {
+-      require(statusMode == "packed" && stage == 2)
++    val fused = verb == "R" && address == QueryObstacleStatus
++    require(fused == (fusedWriteOrdinal >= 0))
++    if (fused) {
++      require(statusMode == "fused" && stage == 2 && !obstacleQuery)
++      if (acceptImmediately) require(delta.cycles == readLatency + 3, "unexpected fused round trip")
++      current.queries += 1
++      current.fusedOrdinals += fusedWriteOrdinal
++      val logicalWrite = s"1 W $Instruction $findInstruction 15 $Okay\n".getBytes(StandardCharsets.US_ASCII)
++      current.splitSequence.update(logicalWrite)
++      current.packedSequence.update(logicalWrite)
++    }
++    if (fused || (verb == "R" && address == ObstacleStatus)) {
++      require(Set("packed", "fused").contains(statusMode) && stage == 2)
+       current.packedReads += 1
+       current.splitSequence.update(tx(Growable, data & ObstacleLengthMask))
+       current.splitSequence.update(tx(ConflictValid, (data & ObstacleConflictMask) >>> 31))
+-    } else current.splitSequence.update(physical)
++      current.packedSequence.update(tx(ObstacleStatus, data))
++    } else {
++      current.splitSequence.update(physical)
++      current.packedSequence.update(physical)
++    }
+   }
+ 
+   def finish(activePhase: Int, end: D6AxiCycleTally): Unit = {
+@@ -71,18 +88,23 @@
+     require(activePhase == current.phase, "cycle window ended in wrong phase")
+     val delta = end - current.start
+     require(current.groups.foldLeft(D6AxiCycleTally())(_ + _) == delta, "unattributed measured cycles")
+-    require(current.packedReads == (if (statusMode == "packed") current.queries else 0),
++    require(current.packedReads == (if (statusMode != "split") current.queries else 0) &&
++      current.fusedOrdinals.size == (if (statusMode == "fused") current.queries else 0),
+       "expected exactly one packed status read per FindObstacle")
+     def hex(sequence: MessageDigest): String = sequence.digest().map(b => f"${b & 0xff}%02x").mkString
+     val digest = hex(current.sequence)
+     val splitDigest = hex(current.splitSequence)
++    val packedDigest = hex(current.packedSequence)
++    val ordinals = if (current.fusedOrdinals.isEmpty) "-" else current.fusedOrdinals.mkString(",")
+     val groups = labels.zip(current.groups).map { case (key, total) => s"$key=${total.csv}" }.mkString(" ")
+     println(s"AXI_CYCLE_WINDOW mode=$policy shot=${current.shot} window=${current.index} phase=${current.phase} " +
+       s"b_start=${current.start.writes} r_start=${current.start.reads} tx_sha256=$digest total=${delta.csv} $groups " +
+-      s"status=$statusMode queries=${current.queries} packed_reads=${current.packedReads} split_tx_sha256=$splitDigest")
++      s"status=$statusMode queries=${current.queries} packed_reads=${current.packedReads} split_tx_sha256=$splitDigest " +
++      s"packed_tx_sha256=$packedDigest fused_ordinals=$ordinals")
+     summed = summed + delta
+     queries += current.queries
+     packedReads += current.packedReads
++    fusedQueries += current.fusedOrdinals.size
+     count += 1
+     window = None
+   }
+@@ -90,6 +112,6 @@
+   def report(): Unit = {
+     require(!active && count > 0, "incomplete cycle profile")
+     println(s"AXI_CYCLE_PROFILE mode=$policy read_latency=$readLatency windows=$count total=${summed.csv} " +
+-      s"status=$statusMode queries=$queries packed_reads=$packedReads")
++      s"status=$statusMode queries=$queries packed_reads=$packedReads fused_queries=$fusedQueries")
+   }
+ }
+--- a/src/fpga/microblossom/DualHost.scala
++++ b/src/fpga/microblossom/DualHost.scala
+@@ -285,13 +285,18 @@
+           dut
+         }.doSim("hosted") { dut => runHost(dut, dut.clockDomain, None) }
+       case "axi_lite32" =>
++        val status = sys.env.getOrElse("MICROBLOSSOM_AXI_OBSTACLE_STATUS", "split")
+         val compiled = simConfig.compile {
+-          val endpoint = D6PhaseAxiEndpoint(config, ioConfig)
++          val endpoint = D6PhaseAxiEndpoint(config, ioConfig, enableFused = status == "fused")
+           exposeAuditSignals(endpoint.dual)
++          if (endpoint.enableFused) {
++            endpoint.fusedIssue.simPublic()
++            endpoint.dual.io.message.valid.simPublic()
++            endpoint.dual.io.message.instruction.simPublic()
++          }
+           endpoint
+         }
+         val body = (endpoint: D6PhaseAxiEndpoint) => {
+-          val status = sys.env.getOrElse("MICROBLOSSOM_AXI_OBSTACLE_STATUS", "split")
+           runHost(endpoint.dual, endpoint.clockDomain, Some(new D6PhaseAxiDriver(endpoint, status)))
+         }
+         if (sys.env.contains("MICROBLOSSOM_AXI_TIMING_POLICY")) {
+--- a/src/fpga/microblossom/D6PhaseAxiSmoke.scala
++++ b/src/fpga/microblossom/D6PhaseAxiSmoke.scala
+@@ -5,7 +5,7 @@
+ 
+ /** Fast regression for the bus probes; not part of the d=6 acceptance denominator. */
+ object D6PhaseAxiSmoke extends App {
+-  require(args.isEmpty || (args.length == 1 && Set("split", "packed").contains(args(0))))
++  require(args.isEmpty || (args.length == 1 && Set("split", "packed", "fused").contains(args(0))))
+   val statusMode = args.headOption.getOrElse("split")
+   def tree(leaves: Int): BinaryTree = {
+     val rows = collection.mutable.ArrayBuffer.fill(leaves)(BinaryTreeNode(None, None, None))
+@@ -78,7 +78,15 @@
+     println("AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS")
+   }
+ 
+-  SimConfig.withConfig(Config.spinal()).withIVerilog.compile(D6PhaseAxiEndpoint(config, ioConfig))
++  SimConfig.withConfig(Config.spinal()).withIVerilog.compile {
++    val dut = D6PhaseAxiEndpoint(config, ioConfig, enableFused = statusMode == "fused")
++    if (dut.enableFused) {
++      dut.fusedIssue.simPublic()
++      dut.dual.io.message.valid.simPublic()
++      dut.dual.io.message.instruction.simPublic()
++    }
++    dut
++  }
+     .doSim("smoke", seed = 20261127) { dut =>
+       val bus = new D6PhaseAxiDriver(dut, statusMode)
+       dut.clockDomain.forkStimulus(period = 10)
+@@ -93,6 +101,18 @@
+       assert(result._2.valid)
+       println(s"AXI_STATUS_SMOKE_RESULT status=$statusMode result=$result")
+       if (statusMode == "packed") bus.probePackedStatusAcrossQueries()
++      if (statusMode == "fused") {
++        bus.probeFusedWaitsForHalfWrite(addressFirst = true)
++        def establishConflict(): Unit = {
++          bus.selectPhase(0)
++          bus.execute(ioConfig.instructionSpec.generateAddDefect(0, 0))
++          assert(bus.findObstacle(100) == result)
++        }
++        establishConflict()
++        bus.probeFusedWaitsForHalfWrite(addressFirst = false)
++        establishConflict()
++        bus.probeFusedHeldAcrossLaterQuery()
++      }
+       bus.clearCorrection()
+       bus.accumulate(0)
+       assert(bus.correctionRead() == ((64, "180000000")), "unsigned 32-bit read or little-endian packing failed")

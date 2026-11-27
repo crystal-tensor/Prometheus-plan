@@ -1,0 +1,88 @@
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project d6-axi-ziv2ut13-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/)
+[info] compiling 60 Scala sources to /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/target/scala-2.12/classes ...
+[warn] there were 96 deprecation warnings
+[warn] there were two deprecation warnings (since ???)
+[warn] there were 7 deprecation warnings (since SpinalHDL 1.3.1)
+[warn] there were 105 deprecation warnings in total; re-run with -deprecation for details
+[warn] there was one unchecked warning; re-run with -unchecked for details
+[warn] there were 6 feature warnings; re-run with -feature for details
+[warn] 6 warnings found
+[info] done compiling
+[info] running (fork) microblossom.D6PhaseAxiSmoke split
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 12:10:49
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 0.677 : Checks and transforms
+[info] [Progress] at 0.967 : Generate Verilog
+[info] [Warning] 1887 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 1.214
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/./simWorkspace/D6PhaseAxiEndpoint
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 38.451 ms
+[info] [Progress] Start D6PhaseAxiEndpoint smoke simulation with seed 20261127
+[info] AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] AXI_STATUS_SMOKE_RESULT status=split result=(DataMaxGrowable(0),DataConflictRaw(true,0,32767,0,32767,0,2),4)
+[info] AXI_PHASE_TRANSPORT_PASS aw=27 w=27 b=27 ar=27 r=27 aw_first=8 w_first=8 simultaneous=11 b_stalls=68 r_stalls=93 b_errors=6 r_errors=2 phase_writes=1 selector_writes=0 xor_writes=1 snapshots=1 vector_words=2 obstacle_reads=3 simulated_bus_cycles=343
+[info] Shared memory key : SpinalHDL_0_1_874981105_-1407626279_1795752654209_-7685074121823340962
+[info] Start of simulation
+[info] End of simulation
+[info] [Done] Simulation done in 389.745 ms
+[success] Total time: 22 s, completed 2026年11月27日 下午12:10:55
+[info] running (fork) microblossom.D6PhaseAxiSmoke packed
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 12:10:55
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 0.614 : Checks and transforms
+[info] [Progress] at 0.935 : Generate Verilog
+[info] [Warning] 1887 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 1.218
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/./simWorkspace/D6PhaseAxiEndpoint
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 40.796 ms
+[info] [Progress] Start D6PhaseAxiEndpoint smoke simulation with seed 20261127
+[info] AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] AXI_STATUS_SMOKE_RESULT status=packed result=(DataMaxGrowable(0),DataConflictRaw(true,0,32767,0,32767,0,2),4)
+[info] AXI_PACKED_STATUS_PROBE_PASS old=0x80000000 new=0x03ffffff held_across_find_obstacle=1
+[info] AXI_PHASE_TRANSPORT_PASS aw=29 w=29 b=29 ar=31 r=31 aw_first=9 w_first=8 simultaneous=12 b_stalls=73 r_stalls=115 b_errors=6 r_errors=2 phase_writes=1 selector_writes=0 xor_writes=1 snapshots=1 vector_words=2 obstacle_reads=3 simulated_bus_cycles=375
+[info] Shared memory key : SpinalHDL_0_1_1810349933_-1407626279_1795752657050_-7685074121823340962
+[info] Start of simulation
+[info] End of simulation
+[info] [Done] Simulation done in 115.920 ms
+[success] Total time: 2 s, completed 2026年11月27日 下午12:10:57
+[info] running (fork) microblossom.D6PhaseAxiSmoke fused
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 12:10:57
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 0.758 : Checks and transforms
+[info] [Progress] at 1.083 : Generate Verilog
+[info] [Warning] 1887 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 1.370
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-ziv2ut13/./simWorkspace/D6PhaseAxiEndpoint
+[info] [Progress] IVerilog compilation started
+[info] [Progress] IVerilog compilation done in 46.533 ms
+[info] [Progress] Start D6PhaseAxiEndpoint smoke simulation with seed 20261127
+[info] AXI_PHASE_SMOKE_PARTIAL_WRITE_READ_PASS
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] AXI_STATUS_SMOKE_RESULT status=fused result=(DataMaxGrowable(0),DataConflictRaw(true,0,32767,0,32767,0,2),4)
+[info] AXI_FUSED_HALF_WRITE_PASS order=aw_first both_responses_held=1
+[info] AXI_FUSED_HALF_WRITE_PASS order=w_first both_responses_held=1
+[info] AXI_FUSED_HELD_PASS old=0x80000000 new=0x03ffffff
+[info] AXI_FUSED_EXEC_PASS accepted=13 executed=13 returned=13 min_capture_gap=2
+[info] AXI_PHASE_TRANSPORT_PASS aw=36 w=36 b=36 ar=42 r=42 aw_first=11 w_first=10 simultaneous=13 b_stalls=98 r_stalls=158 b_errors=6 r_errors=2 phase_writes=3 selector_writes=0 xor_writes=1 snapshots=1 vector_words=2 obstacle_reads=9 simulated_bus_cycles=520
+[info] Shared memory key : SpinalHDL_0_1_1952194564_-1407626279_1795752659327_-7685074121823340962
+[info] Start of simulation
+[info] End of simulation
+[info] [Done] Simulation done in 254.699 ms
+[success] Total time: 2 s, completed 2026年11月27日 下午12:10:59
