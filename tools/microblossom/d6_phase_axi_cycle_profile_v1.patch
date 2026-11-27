@@ -1,0 +1,173 @@
+--- a/src/fpga/microblossom/D6PhaseAxiDriver.scala
++++ b/src/fpga/microblossom/D6PhaseAxiDriver.scala
+@@ -13,11 +13,21 @@
+   private var cycles, awCount, wCount, bCount, arCount, rCount = 0L
+   private var addressFirst, dataFirst, simultaneous, bStallCycles, rStallCycles = 0L
+   private var errorB, errorR = 0L
++  private var awWSkew = 0L
+   private var phaseWrites, selectorWrites, xorWrites, vectors, vectorWords, obstacleReads = 0L
+   private var priorB: Option[Int] = None
+   private var priorR: Option[(Long, Int)] = None
+   private var activePhase = 0
++  private val timing = sys.env.get("MICROBLOSSOM_AXI_TIMING_POLICY")
++    .map(new D6PhaseAxiCycleTiming(_, dut.config.readLatency))
+ 
++  private def timingTally(): D6AxiCycleTally =
++    D6AxiCycleTally(cycles, bCount, rCount, bStallCycles, rStallCycles, awWSkew)
++
++  def beginCycleWindow(shot: Int, window: Int, phase: Int): Unit =
++    timing.getOrElse(throw new IllegalStateException("AXI timing policy not configured"))
++      .begin(shot, window, phase, timingTally())
++
+   bus.aw.valid #= false
+   bus.aw.addr #= 0
+   bus.aw.prot #= 0
+@@ -89,6 +99,7 @@
+     }
+     bus.aw.valid #= false
+     bus.w.valid #= false
++    awWSkew += math.abs(aAt - dAt)
+     if (aAt < dAt) addressFirst += 1
+     else if (dAt < aAt) dataFirst += 1
+     else simultaneous += 1
+@@ -110,6 +121,10 @@
+ 
+   private def write(address: Int, data: Long, strobe: Int = 15, expected: Int = Okay): Unit = {
+     val seq = awCount
++    val measured = timing.filter(_.active)
++    val before = measured.map(_ => timingTally())
++    val alwaysReady = measured.exists(_.acceptImmediately)
++    if (alwaysReady) bus.b.ready #= true
+     val (aDelay, dDelay) = (seq % 3).toInt match {
+       case 0 => (0, 0)
+       case 1 => (0, 2)
+@@ -118,8 +133,21 @@
+     drivePair(address, data, strobe, aDelay, dDelay)
+     val response = awaitB()
+     assert(response == expected, s"address $address: B response $response != $expected")
+-    for (_ <- 0 until (seq % 4).toInt) assert(step().b.contains(response))
+-    finishB(response)
++    if (alwaysReady) bus.b.ready #= false
++    else {
++      for (_ <- 0 until (seq % 4).toInt) assert(step().b.contains(response))
++      finishB(response)
++    }
++    measured.foreach { meter =>
++      val stage = address match {
++        case Phase | Selector => 0
++        case Instruction if spec.isReset(data) || spec.isAddDefect(data) => 0
++        case Instruction => 1
++        case CorrectionClear | CorrectionEdge | LatchCorrection => 3
++        case _ => throw new IllegalStateException(s"unclassified measured write $address")
++      }
++      meter.record(stage, "W", address, data, strobe, response, timingTally() - before.get)
++    }
+   }
+ 
+   private def beginRead(addr: Int): (Long, Int) = {
+@@ -147,10 +175,26 @@
+   }
+ 
+   private def read(addr: Int, expected: Int = Okay): Long = {
++    val measured = timing.filter(_.active)
++    val before = measured.map(_ => timingTally())
++    val alwaysReady = measured.exists(_.acceptImmediately)
++    if (alwaysReady) bus.r.ready #= true
+     val response = beginRead(addr)
+     assert(response._2 == expected, s"address $addr: R response ${response._2} != $expected")
+-    for (_ <- 0 until (arCount % 5).toInt) assert(step().r.contains(response))
+-    finishR(response)
++    if (alwaysReady) bus.r.ready #= false
++    else {
++      for (_ <- 0 until (arCount % 5).toInt) assert(step().r.contains(response))
++      finishR(response)
++    }
++    measured.foreach { meter =>
++      val stage = addr match {
++        case Growable | ConflictValid | ConflictNodes | ConflictTouches | ConflictVertices => 2
++        case SnapshotMeta | SnapshotGeneration => 4
++        case word if word >= CorrectionBase => 4
++        case _ => throw new IllegalStateException(s"unclassified measured read $addr")
++      }
++      meter.record(stage, "R", addr, response._1, 0, response._2, timingTally() - before.get)
++    }
+     response._1
+   }
+ 
+@@ -184,6 +228,7 @@
+     assert(vector.bitLength <= count && read(SnapshotGeneration) == generation, "torn correction")
+     vectors += 1
+     vectorWords += words
++    timing.foreach(_.finish(activePhase, timingTally()))
+     (count, vector.toString(16))
+   }
+ 
+@@ -287,6 +332,7 @@
+   }
+ 
+   def report(): Unit = {
++    timing.foreach(_.report())
+     assert(awCount == wCount && wCount == bCount && arCount == rCount, "lost AXI handshakes")
+     assert(addressFirst > 0 && dataFirst > 0 && simultaneous > 0 && bStallCycles > 0 && rStallCycles > 0)
+     assert(vectors > 0 && obstacleReads > 0 && errorB == 6 && errorR == 2)
+--- a/src/fpga/microblossom/DualHost.scala
++++ b/src/fpga/microblossom/DualHost.scala
+@@ -170,6 +170,11 @@
+               break
+             } else if (command == "reset()") {
+               execute(ioConfig.instructionSpec.generateReset())
++            } else if (command.startsWith("axi_cycle_window(")) {
++              val key = command.stripPrefix("axi_cycle_window(").stripSuffix(")").split(", ").map(_.toInt)
++              require(key.length == 3, "cycle window key needs shot, window and phase")
++              axi.getOrElse(throw new IllegalStateException("cycle marker without AXI transport"))
++                .beginCycleWindow(key(0), key(1), key(2))
+             } else if (command.startsWith("select_phase(")) {
+               val phase = command.substring("select_phase(".length, command.length - 1).toInt
+               axi.fold(dut.simSelectPhase(phase))(_.selectPhase(phase))
+@@ -280,13 +285,19 @@
+           dut
+         }.doSim("hosted") { dut => runHost(dut, dut.clockDomain, None) }
+       case "axi_lite32" =>
+-        simConfig.compile {
++        val compiled = simConfig.compile {
+           val endpoint = D6PhaseAxiEndpoint(config, ioConfig)
+           exposeAuditSignals(endpoint.dual)
+           endpoint
+-        }.doSim("hosted") { endpoint =>
++        }
++        val body = (endpoint: D6PhaseAxiEndpoint) => {
+           runHost(endpoint.dual, endpoint.clockDomain, Some(new D6PhaseAxiDriver(endpoint)))
+         }
++        if (sys.env.contains("MICROBLOSSOM_AXI_TIMING_POLICY")) {
++          compiled.doSim("hosted", seed = 20261127)(body)
++        } else {
++          compiled.doSim("hosted")(body)
++        }
+       case other => throw new IllegalArgumentException(s"unsupported phase transport: $other")
+     }
+ 
+--- a/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_closed_loop.rs
++++ b/src/cpu/blossom/src/bin/d6_z_phase_primal_dual_closed_loop.rs
+@@ -178,6 +178,7 @@
+     let mut all_syndromes_valid = true;
+     let mut max_iterations = 0usize;
+     let mut total_iterations = 0usize;
++    let profile_axi_cycles = env::var_os("MICROBLOSSOM_AXI_TIMING_POLICY").is_some();
+ 
+     for shot in &pilot.shots {
+         let raw = bits_from_hex(&shot.raw_detector_hex, pilot.detector_count);
+@@ -234,6 +235,14 @@
+                 defects.len(),
+                 selectors.len()
+             );
++            if profile_axi_cycles {
++                let driver = &solver.dual_module.driver.driver;
++                writeln!(
++                    driver.link.lock().unwrap().writer,
++                    "axi_cycle_window({}, {}, {})",
++                    shot.shot, window.window, window.phase_index,
++                ).unwrap();
++            }
+             solver.clear();
+             solver.dual_module.driver.driver.select_phase(window.phase_index);
+             for &edge in &selectors {

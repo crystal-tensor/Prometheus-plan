@@ -1,0 +1,1051 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+   Compiling micro-blossom-nostd v0.0.0 (/private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/src/cpu/blossom-nostd)
+   Compiling embedded-blossom v0.1.0 (/private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/src/cpu/embedded)
+   Compiling micro-blossom v0.0.0 (/private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/src/cpu/blossom)
+    Finished release [optimized] target(s) in 22.32s
+     Running `/private/tmp/qec-axi-phase.XC3wWp/micro-blossom/src/cpu/blossom/target/release/d6_z_phase_primal_dual_closed_loop /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_phase_primal_dual_input_v1.json /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/benchmarks/B2_B7_P023_d6_x_closed_loop_pilot_v1.json /private/tmp/qec-axi-phase.XC3wWp/cycle-receipt/B2_B7_P023_d6_axi_cycle_profile_x_legacy_hold_raw_v1.json /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12 /Users/avalok/work/FurturePlan/outputs/codex-worktrees/qec-021-023/tools/b2_b7_p023_d6_x_selector_server_v1.py`
+Starting Scala simulator host... this may take a while (listening on 127.0.0.1:53602)
+[info] welcome to sbt 1.9.6 (Homebrew Java 17.0.21.0.3)
+[info] loading settings for project d6-axi-_hp9w43y-build from plugins.sbt ...
+[info] loading project definition from /private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/project
+[info] loading settings for project microblossom from build.sbt ...
+[info] loading settings for project vexriscv-build from plugins.sbt ...
+[info] loading project definition from /Users/avalok/.sbt/1.0/staging/179ba6fe1a7a42154afb/vexriscv/project
+[info] loading settings for project root from build.sbt ...
+[info] set current project to microblossom (in build file:/private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/)
+[info] compiling 59 Scala sources to /private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/target/scala-2.12/classes ...
+[warn] there were 96 deprecation warnings
+[warn] there were two deprecation warnings (since ???)
+[warn] there were 7 deprecation warnings (since SpinalHDL 1.3.1)
+[warn] there were 105 deprecation warnings in total; re-run with -deprecation for details
+[warn] there was one unchecked warning; re-run with -unchecked for details
+[warn] there was one feature warning; re-run with -feature for details
+[warn] 6 warnings found
+[info] done compiling
+[info] running (fork) microblossom.DualHost 127.0.0.1 53602 d6_x_phase_primal_dual_full_corpus_shard
+[info] [Runtime] SpinalHDL v1.9.3    git head : 029104c77a54c53f1edda327a3bea333f7d65fd9
+[info] [Runtime] JVM max memory : 32768.0MiB
+[info] [Runtime] Current date : 2026.11.27 11:25:14
+[info] [Progress] at 0.000 : Elaborate components
+[info] [Progress] at 6.309 : Checks and transforms
+[info] [Progress] at 35.336 : Generate Verilog
+[info] [Warning] 1788383 signals were pruned. You can call printPruned on the backend report to get more informations.
+[info] [Done] at 64.223
+[info] [Progress] Simulation workspace in /private/tmp/qec-axi-phase.XC3wWp/d6-axi-_hp9w43y/./simWorkspace/dualHost/d6_x_phase_primal_dual_full_corpus_shard
+[info] [Progress] Verilator compilation started
+[info] [info] Found cached verilator binaries
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:116:22: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+[info]   116 |       uint8_t values[byteCount + !sint];
+[info]       |                      ^~~~~~~~~~~~~~~~~
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:116:22: note: read of non-const variable 'byteCount' is not allowed in a constant expression
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:113:16: note: declared here
+[info]   113 |       uint32_t byteCount = wordsCount*4;
+[info]       |                ^
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:131:19: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+[info]   131 |       jbyte value[length];
+[info]       |                   ^~~~~~
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:131:19: note: function parameter 'length' with unknown value cannot be used in a constant expression
+[info] ../verilator/VD6PhaseAxiEndpoint__spinalWrapper.cpp:129:57: note: declared here
+[info]   129 |     void setAU8_mem(JNIEnv *env, jbyteArray jvalue, int length, size_t index) {
+[info]       |                                                         ^
+[info] 2 warnings generated.
+[info] [Progress] Verilator compilation done in 7896.340 ms
+[info] [Progress] Start D6PhaseAxiEndpoint hosted simulation with seed 20261127
+[info] waveform disabled
+CLOSED_LOOP_START shot=0 window=0 phase=opening defects=16 selectors=10
+[info] AXI_PHASE_PROBES_PASS held_b_queued_write=1 held_r_snapshot_swap=1 invalid_writes=6 invalid_reads=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=0 phase=0 b_start=18 r_start=35 tx_sha256=11fe56e73005d1f820d55706c706288f56668effb6f6cd9a2e143c91ebdf2800 total=1074,83,79,208,239,137 ingress=227,28,0,70,0,45 solve_cmd=352,43,0,108,0,72 obstacle_read=340,0,68,0,204,0 correction_write=98,12,0,30,0,20 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=0 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=1 phase=steady defects=11 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=1 phase=1 b_start=101 r_start=114 tx_sha256=73e76e48e06bdef131b87f01994095dc3f005431531bb15957342aaac42089b3 total=831,62,65,155,195,103 ingress=163,20,0,50,0,33 solve_cmd=269,33,0,82,0,55 obstacle_read=268,0,54,0,160,0 correction_write=74,9,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=1 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=2 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=2 phase=1 b_start=163 r_start=179 tx_sha256=054ff41af4ac101625fb2de38898d36cbd2648b7a5f4ba290e4c112b2488c3fe total=915,70,69,175,205,117 ingress=180,22,0,55,0,37 solve_cmd=320,39,0,99,0,65 obstacle_read=287,0,58,0,171,0 correction_write=72,9,0,21,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=2 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=3 phase=steady defects=18 selectors=10
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=3 phase=1 b_start=233 r_start=248 tx_sha256=5562bd048b5978a5b96809e97f3dc687cbbc12e0c00521db399260036f73eb84 total=1160,91,83,229,248,153 ingress=245,30,0,75,0,50 solve_cmd=403,49,0,124,0,83 obstacle_read=360,0,72,0,216,0 correction_write=98,12,0,30,0,20 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=3 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=4 phase=steady defects=16 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=4 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=4 phase=1 b_start=324 r_start=331 tx_sha256=f6a269efff148349bbeb06f3370f8da46ca31d405918e1c14c2fe3afa7dcb89f total=972,77,69,191,208,127 ingress=209,26,0,63,0,42 solve_cmd=335,41,0,103,0,68 obstacle_read=293,0,58,0,177,0 correction_write=82,10,0,25,0,17 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=5 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=5 phase=1 b_start=401 r_start=400 tx_sha256=e2224f76652d72308a2017f623367de636ad6ba371e7d88e11123577b5d4e83d total=877,68,64,170,194,113 ingress=181,22,0,55,0,38 solve_cmd=302,37,0,94,0,60 obstacle_read=265,0,53,0,159,0 correction_write=72,9,0,21,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=5 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=6 phase=steady defects=5 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=6 phase=1 b_start=469 r_start=464 tx_sha256=150548f3f67e9fb69ed6a817baef80eef1951473173703dd52ae5cb2dc7aa1f0 total=441,32,36,80,106,55 ingress=82,10,0,25,0,17 solve_cmd=140,17,0,44,0,28 obstacle_read=125,0,25,0,75,0 correction_write=41,5,0,11,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=6 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=7 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=7 phase=1 b_start=501 r_start=500 tx_sha256=e5bf71d0d83d90e29164a7894b6702cce5edc74bbad2ee370398d6b63b510181 total=548,41,43,102,129,67 ingress=104,13,0,32,0,20 solve_cmd=182,22,0,57,0,37 obstacle_read=159,0,32,0,95,0 correction_write=47,6,0,13,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=7 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=8 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=8 phase=1 b_start=542 r_start=543 tx_sha256=86165ce27c154cadbf405089754ce9ddf2a93c9ed724fa6cbd60d011923e52d3 total=526,39,41,98,125,65 ingress=108,13,0,33,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=8 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=9 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=9 phase=1 b_start=581 r_start=584 tx_sha256=496267c7a668c920bd7bab74935c0cb84439b4ca436d6f15682a6ac30e667117 total=740,57,55,142,165,95 ingress=158,19,0,49,0,33 solve_cmd=243,30,0,73,0,50 obstacle_read=218,0,44,0,130,0 correction_write=64,8,0,20,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=9 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=10 phase=steady defects=10 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=10 phase=1 b_start=638 r_start=639 tx_sha256=d345ee169b0b921219d44ab10fd7f0b03022705c881858ebcf54bf4b0604570a total=670,51,51,128,151,85 ingress=149,18,0,47,0,30 solve_cmd=204,25,0,61,0,43 obstacle_read=200,0,40,0,120,0 correction_write=64,8,0,20,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=10 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=11 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=11 phase=1 b_start=689 r_start=690 tx_sha256=a6fe7316f58818c680bf7a885608c4cf5f873bd2969cba22ca8a46a9a878ef74 total=599,46,44,115,134,78 ingress=138,17,0,42,0,28 solve_cmd=182,22,0,57,0,37 obstacle_read=165,0,33,0,99,0 correction_write=57,7,0,16,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=11 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=12 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=12 phase=1 b_start=735 r_start=734 tx_sha256=9a93f92448c6b3726ad8330d459395b5c7afe0009a0d1ae0e56ec08323469c77 total=629,48,48,120,141,80 ingress=129,16,0,40,0,25 solve_cmd=206,25,0,64,0,42 obstacle_read=182,0,37,0,108,0 correction_write=57,7,0,16,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=12 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=13 phase=steady defects=12 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=13 phase=1 b_start=783 r_start=782 tx_sha256=c0b80ac1f356804b4c1d75061180e3777e9cb40b6bbb18d80299cb389ca0855d total=779,61,56,154,169,100 ingress=162,20,0,50,0,32 solve_cmd=271,33,0,84,0,55 obstacle_read=225,0,45,0,135,0 correction_write=65,8,0,20,0,13 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=13 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=14 phase=steady defects=14 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=14 phase=1 b_start=844 r_start=838 tx_sha256=b76b7392a466bc69cf207e0b7ad0aad63f5461c45dc248ef43014ce708293914 total=989,77,72,191,216,130 ingress=196,24,0,60,0,40 solve_cmd=350,43,0,106,0,72 obstacle_read=307,0,61,0,185,0 correction_write=83,10,0,25,0,18 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=14 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=15 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=15 phase=1 b_start=921 r_start=910 tx_sha256=3b651c2411ce0c40e45b0cf4b48e5e7a1d6d81c3325b5a98d9a45c3fdb9b6bbd total=740,57,55,142,165,95 ingress=155,19,0,49,0,30 solve_cmd=243,30,0,73,0,50 obstacle_read=222,0,44,0,134,0 correction_write=67,8,0,20,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=15 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=16 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=16 phase=1 b_start=978 r_start=965 tx_sha256=57cfc6e732f2125fa6f7c7436f6cb91ffad939e15d7a19929721c6f0e37d4191 total=632,48,48,120,144,80 ingress=129,16,0,40,0,25 solve_cmd=205,25,0,63,0,42 obstacle_read=184,0,37,0,110,0 correction_write=58,7,0,17,0,13 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=16 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=17 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=17 phase=1 b_start=1026 r_start=1013 tx_sha256=be82ac28a4706015648487b56cd7204b7bad73acbc80090d5df99d1acc0e3115 total=429,32,34,80,101,52 ingress=89,11,0,28,0,17 solve_cmd=132,16,0,40,0,28 obstacle_read=114,0,23,0,68,0 correction_write=39,5,0,12,0,7 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=17 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=18 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=18 phase=1 b_start=1058 r_start=1047 tx_sha256=65919a2fbfe093e301005f6837dff8424c03500aba4ac5cf9a90aefccf2c6046 total=326,23,27,58,84,38 ingress=65,8,0,20,0,13 solve_cmd=92,11,0,28,0,20 obstacle_read=81,0,16,0,49,0 correction_write=31,4,0,10,0,5 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=18 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=19 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=19 phase=1 b_start=1081 r_start=1074 tx_sha256=2233891f7fa9413381b7c77d4a3ac3849ddac913d9703141becd6b79c73d861a total=323,23,27,59,78,40 ingress=67,8,0,20,0,15 solve_cmd=90,11,0,29,0,17 obstacle_read=78,0,16,0,46,0 correction_write=34,4,0,10,0,8 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=19 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=20 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=20 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=20 phase=1 b_start=1104 r_start=1101 tx_sha256=29d0d434b45e2e28bfb3352f520bea9189940b5f4392fe2d837a4d62b49b2b16 total=321,23,27,56,82,37 ingress=64,8,0,20,0,12 solve_cmd=88,11,0,26,0,18 obstacle_read=80,0,16,0,48,0 correction_write=33,4,0,10,0,7 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=21 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=21 phase=1 b_start=1127 r_start=1128 tx_sha256=16e3a5454bcafb4fc563c4e5fd846c53ed40f8c9c1bb01f95aad416fedffc7c5 total=543,41,41,104,125,68 ingress=114,14,0,35,0,23 solve_cmd=171,21,0,52,0,35 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=21 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=22 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=22 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=22 phase=1 b_start=1168 r_start=1169 tx_sha256=63c1d0092da34b5a3c0794b01f3ed8fb6cd75199237957b4a5449c10d0c9a5fe total=538,41,41,101,121,70 ingress=114,14,0,33,0,25 solve_cmd=172,21,0,53,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=23 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=23 phase=1 b_start=1209 r_start=1210 tx_sha256=4cc342ab0573e49b1c0b5bd2e3280062cde069b4bc5333c0ff4f3f6245c7a6f8 total=537,41,41,102,122,67 ingress=113,14,0,35,0,22 solve_cmd=173,21,0,54,0,35 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=23 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=24 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=24 phase=1 b_start=1250 r_start=1251 tx_sha256=e14cb608bc246f6607d3a2e7ddcc8a866006829fc4c97a499874d95758d6eed0 total=432,32,34,80,103,53 ingress=90,11,0,28,0,18 solve_cmd=131,16,0,40,0,27 obstacle_read=118,0,23,0,72,0 correction_write=40,5,0,12,0,8 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=24 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=25 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=25 phase=1 b_start=1282 r_start=1285 tx_sha256=e1156355dfd9caf897293a5728d225bf00644748bded6490435934440ae51073 total=324,23,27,58,80,40 ingress=67,8,0,20,0,15 solve_cmd=89,11,0,28,0,17 obstacle_read=79,0,16,0,47,0 correction_write=34,4,0,10,0,8 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=25 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=26 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=26 phase=1 b_start=1305 r_start=1312 tx_sha256=da0737b894a4d8951dee310372d598faef2074f25e7fec1d99c07762bf50d18c total=592,45,45,112,135,75 ingress=113,14,0,35,0,22 solve_cmd=207,25,0,64,0,43 obstacle_read=170,0,34,0,102,0 correction_write=47,6,0,13,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=26 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=27 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=27 phase=1 b_start=1350 r_start=1357 tx_sha256=3a9e2599cc82bd13c917fe486209af0f184c1aad76166e1c3ad23ea1270917a5 total=485,36,38,90,115,60 ingress=89,11,0,28,0,17 solve_cmd=163,20,0,50,0,33 obstacle_read=138,0,27,0,84,0 correction_write=42,5,0,12,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=27 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=28 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=28 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=28 phase=1 b_start=1386 r_start=1395 tx_sha256=5e47c8842e6509cc8aba1e12c01caf18c77a60147340fc470ba71fd965fe9aef total=575,43,45,108,135,70 ingress=105,13,0,33,0,20 solve_cmd=196,24,0,60,0,40 obstacle_read=172,0,34,0,104,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=29 phase=steady defects=2 selectors=1
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=29 phase=1 b_start=1429 r_start=1440 tx_sha256=240a9ee4594a291ccb49b4cd984ade16e565770b825dbacfdda75962c88dac10 total=216,14,20,35,60,25 ingress=42,5,0,12,0,10 solve_cmd=51,6,0,17,0,10 obstacle_read=47,0,9,0,29,0 correction_write=23,3,0,6,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=29 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=30 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=30 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=30 phase=1 b_start=1443 r_start=1460 tx_sha256=df371c4ca40450362da91d6b37cf7d9adcebade8bd9056b0f59cfd15f64e17e0 total=213,14,20,35,60,22 ingress=41,5,0,14,0,7 solve_cmd=47,6,0,13,0,10 obstacle_read=47,0,9,0,29,0 correction_write=25,3,0,8,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=31 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=31 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=31 phase=1 b_start=1457 r_start=1480 tx_sha256=8b915c7fa7754af6d9ce00ff4385ab9b193d4568798acbcf2e9d85dc8c06f793 total=214,14,20,35,60,23 ingress=40,5,0,12,0,8 solve_cmd=51,6,0,17,0,10 obstacle_read=47,0,9,0,29,0 correction_write=23,3,0,6,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=32 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=32 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=32 phase=1 b_start=1471 r_start=1500 tx_sha256=cca740bdc12fc39d8169091c74c77abf0dd378e710e6b726531072d133bbbc5b total=216,14,20,35,60,25 ingress=44,5,0,14,0,10 solve_cmd=47,6,0,13,0,10 obstacle_read=47,0,9,0,29,0 correction_write=25,3,0,8,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=33 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=33 phase=1 b_start=1485 r_start=1520 tx_sha256=806fc5653da6dc2c7fe544d673ca7fc39aa9ceb2a9260f5abaca08ec99e225b1 total=517,39,39,99,119,65 ingress=113,14,0,35,0,22 solve_cmd=156,19,0,47,0,33 obstacle_read=140,0,28,0,84,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=33 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=34 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=34 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=34 phase=1 b_start=1524 r_start=1559 tx_sha256=c0247f3c7ad1b1d47b63d0ddf745ba4d98a94ad027f1992d62b9ab8ff548c8a2 total=821,64,60,160,180,105 ingress=176,22,0,53,0,35 solve_cmd=270,33,0,83,0,55 obstacle_read=243,0,49,0,145,0 correction_write=75,9,0,24,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=35 phase=steady defects=15 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=35 phase=1 b_start=1588 r_start=1619 tx_sha256=ceb4f2ee8b017ddf61c019895c0224302e52e97300f0408523007f9530b469d7 total=905,71,65,176,195,120 ingress=203,25,0,61,0,42 solve_cmd=294,36,0,90,0,60 obstacle_read=268,0,54,0,160,0 correction_write=83,10,0,25,0,18 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=35 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=36 phase=steady defects=15 selectors=9
+CLOSED_LOOP_SOLVED shot=0 window=36 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=36 phase=1 b_start=1659 r_start=1684 tx_sha256=f577a9dcf0cb82ea8851d464adbf0629c37d823a27fe8091bf829f18d9b13d12 total=953,74,70,185,210,122 ingress=211,26,0,65,0,42 solve_cmd=303,37,0,92,0,63 obstacle_read=293,0,59,0,175,0 correction_write=89,11,0,28,0,17 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=37 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=37 phase=1 b_start=1733 r_start=1754 tx_sha256=44b70b7c4f7fdae7bc4f3ae06ec4486160da783fa2600f1f76695db54ba2a031 total=629,48,48,120,141,80 ingress=132,16,0,40,0,28 solve_cmd=202,25,0,62,0,40 obstacle_read=182,0,37,0,108,0 correction_write=58,7,0,18,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=37 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=38 phase=steady defects=12 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=38 phase=1 b_start=1781 r_start=1802 tx_sha256=0c146e812b03590897a79cc77843edc1cc69c57e2c9d1ef8237c2d4ea9b841fe total=837,64,62,160,189,108 ingress=171,21,0,52,0,35 solve_cmd=281,34,0,87,0,58 obstacle_read=256,0,51,0,154,0 correction_write=72,9,0,21,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=38 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=39 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=39 phase=1 b_start=1845 r_start=1864 tx_sha256=80648d89cbb6bdfa256e97659f4f2ebcbee8b8bf6d90f0a29521ed9d509baf90 total=428,32,34,80,100,52 ingress=90,11,0,29,0,17 solve_cmd=132,16,0,40,0,28 obstacle_read=112,0,23,0,66,0 correction_write=38,5,0,11,0,7 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=39 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=40 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=40 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=40 phase=1 b_start=1877 r_start=1898 tx_sha256=99fb298d1ba723a18b96631e89002ab8ba912eb63626e65935d04af4f58624aa total=624,48,46,120,140,80 ingress=138,17,0,42,0,28 solve_cmd=196,24,0,60,0,40 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,18,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=41 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=41 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=41 phase=1 b_start=1925 r_start=1944 tx_sha256=2859999a6a8f4aa038e8c1115d490a7ebb261512b819a0f4eab3d66bd8668e2f total=321,23,27,59,78,38 ingress=65,8,0,20,0,13 solve_cmd=93,11,0,29,0,20 obstacle_read=78,0,16,0,46,0 correction_write=31,4,0,10,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=42 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=42 phase=1 b_start=1948 r_start=1971 tx_sha256=14e2025e5bb263d71a54a0fc43841cf162eec66f46d110ab8f90ec4dc08ab73e total=434,32,34,80,103,55 ingress=90,11,0,26,0,20 solve_cmd=129,16,0,40,0,25 obstacle_read=118,0,23,0,72,0 correction_write=44,5,0,14,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=42 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=43 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=43 phase=1 b_start=1980 r_start=2005 tx_sha256=f30f22a0c49270a03966ab4a4f1172b455ee21d8843c9e21dc04f4e5daddb962 total=319,23,27,56,80,37 ingress=64,8,0,20,0,12 solve_cmd=88,11,0,26,0,18 obstacle_read=79,0,16,0,47,0 correction_write=33,4,0,10,0,7 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=43 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=44 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=44 phase=1 b_start=2003 r_start=2032 tx_sha256=890b5cbcc30833544da4f5c7892c747b18103326ac0259e12b045678cfc5d233 total=513,39,39,97,117,65 ingress=114,14,0,35,0,23 solve_cmd=157,19,0,49,0,32 obstacle_read=141,0,28,0,85,0 correction_write=47,6,0,13,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=44 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=45 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=45 phase=1 b_start=2042 r_start=2071 tx_sha256=5c73ab743c22b358c36f6dcb4288f4b7eb9a51a4759969c0e05d0ef72e8bf4dd total=653,50,48,127,147,83 ingress=139,17,0,43,0,28 solve_cmd=214,26,0,65,0,45 obstacle_read=186,0,37,0,112,0 correction_write=57,7,0,19,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=45 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=46 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=46 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=46 phase=1 b_start=2092 r_start=2119 tx_sha256=31c89a7f4e6fa3145ce3b65e25cacdd7847838ed35835c8b896c39120a6636cb total=538,41,41,101,121,70 ingress=114,14,0,33,0,25 solve_cmd=172,21,0,53,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=47 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=47 phase=1 b_start=2133 r_start=2160 tx_sha256=bdbe008d4a65b041f8c4e5a7834290995e07b00d2fdfd664718e75d8d7802cd2 total=524,39,41,99,122,65 ingress=104,13,0,32,0,20 solve_cmd=165,20,0,50,0,35 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=47 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=48 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=48 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=48 phase=1 b_start=2172 r_start=2201 tx_sha256=300076a4756a0bcb8bff72283bd9e85b5d6de82843f89cd9028c1a8ba6ae42e0 total=414,30,34,73,103,50 ingress=78,10,0,23,0,15 solve_cmd=123,15,0,38,0,25 obstacle_read=118,0,23,0,72,0 correction_write=42,5,0,12,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=49 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=49 phase=1 b_start=2202 r_start=2235 tx_sha256=7b97cf16b4461c3adc23d9c842bac1c0ad8404e4f69e9ab2888ad6a23c153e42 total=538,41,41,103,122,67 ingress=115,14,0,37,0,22 solve_cmd=170,21,0,51,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=49 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=50 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=50 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=50 phase=1 b_start=2243 r_start=2276 tx_sha256=14828b5bd8983fb4eee172b22ea9bea563cef7702e43a3e7f47af01cebb51fde total=801,61,60,154,180,103 ingress=163,20,0,50,0,33 solve_cmd=263,32,0,80,0,55 obstacle_read=246,0,49,0,148,0 correction_write=75,9,0,24,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=51 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=51 phase=1 b_start=2304 r_start=2336 tx_sha256=c3aaf2b20f7d1770c041705d1cc0a9601f2835972eaafa732e2d19a002452bb0 total=691,52,53,130,162,85 ingress=136,17,0,41,0,27 solve_cmd=222,27,0,69,0,45 obstacle_read=211,0,42,0,127,0 correction_write=65,8,0,20,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=51 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=52 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=52 phase=1 b_start=2356 r_start=2389 tx_sha256=c5d50aefeb7ddce56e83782d6d53ee80d4097e2bc81ce2a2326c5eefc5917a66 total=889,68,67,170,198,115 ingress=178,22,0,53,0,37 solve_cmd=294,36,0,90,0,60 obstacle_read=278,0,56,0,166,0 correction_write=85,10,0,27,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=52 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=53 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=53 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=53 phase=1 b_start=2424 r_start=2456 tx_sha256=6fbe215555fd7cfb2f6eea1ab6b14f41e00469d46e70437e2476de8ddececf48 total=495,37,39,91,118,60 ingress=103,13,0,31,0,20 solve_cmd=147,18,0,45,0,30 obstacle_read=143,0,28,0,87,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=54 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=54 phase=1 b_start=2461 r_start=2495 tx_sha256=5e4bf32e125605bdd58bd6b994e28b1be74a23a750639e3f5a275508f43f3676 total=605,46,46,115,137,77 ingress=131,16,0,40,0,27 solve_cmd=189,23,0,59,0,38 obstacle_read=175,0,35,0,105,0 correction_write=56,7,0,16,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=54 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=55 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=55 phase=1 b_start=2507 r_start=2541 tx_sha256=26abcb0aa5a7d36fd92107244cb13821034b6dcbfcdd9acdbede92c1cd7303d0 total=406,30,32,75,97,50 ingress=89,11,0,27,0,18 solve_cmd=118,14,0,37,0,25 obstacle_read=105,0,21,0,63,0 correction_write=38,5,0,11,0,7 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=55 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=56 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=56 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=56 phase=1 b_start=2537 r_start=2573 tx_sha256=ccb401d0402c0eb10f7dc2da44661dc2b612aa90e02acd981dda3632f94adf54 total=324,23,27,59,81,38 ingress=65,8,0,20,0,13 solve_cmd=93,11,0,29,0,20 obstacle_read=82,0,16,0,50,0 correction_write=31,4,0,10,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=57 phase=steady defects=2 selectors=1
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=57 phase=1 b_start=2560 r_start=2600 tx_sha256=b3526f62d76fb520a9e684e5c3e990c92f12a9f81216ce0f69d58889b0ec1adc total=214,14,20,33,60,25 ingress=41,5,0,11,0,10 solve_cmd=49,6,0,15,0,10 obstacle_read=47,0,9,0,29,0 correction_write=24,3,0,7,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=57 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=0 window=58 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=58 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=58 phase=1 b_start=2574 r_start=2620 tx_sha256=8410bea9f5b00aea53fc44b7497b50346b2f160f9fb5fbf07dd6a14bf24adc7b total=642,48,50,120,150,80 ingress=123,15,0,38,0,25 solve_cmd=211,26,0,65,0,42 obstacle_read=197,0,39,0,119,0 correction_write=58,7,0,17,0,13 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=59 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=59 phase=1 b_start=2622 r_start=2670 tx_sha256=5708eba11a4e2b16b5adee437a3f0cdf35ccd703fb681acc325d8ceb76c255ac total=811,64,58,160,174,105 ingress=187,23,0,58,0,37 solve_cmd=261,32,0,80,0,53 obstacle_read=234,0,47,0,140,0 correction_write=73,9,0,22,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=59 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=60 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=0 window=60 iterations=12 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=60 phase=1 b_start=2686 r_start=2728 tx_sha256=9855761ed0e9eaf4d62573f4fe1afbb0ec152e7cbfbe809bdd42b7e4ca3c0549 total=1315,105,91,263,275,175 ingress=303,37,0,93,0,62 solve_cmd=441,54,0,135,0,90 obstacle_read=400,0,80,0,240,0 correction_write=114,14,0,35,0,23 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=61 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=61 phase=1 b_start=2791 r_start=2819 tx_sha256=451178d327175364e216e5c335da8d9825cae34edd128bc1f0b1e390e680451c total=823,64,60,160,180,107 ingress=180,22,0,55,0,37 solve_cmd=269,33,0,82,0,55 obstacle_read=243,0,49,0,145,0 correction_write=74,9,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=61 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=62 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=62 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=62 phase=1 b_start=2855 r_start=2879 tx_sha256=cf1d34531d4d89c709f5221616017a8ac1f075a29f04a0a5ee2b3f8b4a3d764b total=1100,85,81,214,241,143 ingress=207,25,0,64,0,43 solve_cmd=405,50,0,123,0,82 obstacle_read=350,0,70,0,210,0 correction_write=85,10,0,27,0,18 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=63 phase=steady defects=16 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=63 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=63 phase=1 b_start=2940 r_start=2960 tx_sha256=f609a5bc6ff48c4c3385c852a5d8526da92ef14bdea8c754106ae387dcd35a52 total=1165,91,85,226,255,150 ingress=209,26,0,63,0,42 solve_cmd=451,55,0,138,0,93 obstacle_read=372,0,74,0,224,0 correction_write=80,10,0,25,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=64 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=64 iterations=12 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=64 phase=1 b_start=3031 r_start=3045 tx_sha256=31fc6e317f81d64379b522977636e5970ebefe3071c01569d5e76be086dd0216 total=1356,105,99,264,299,175 ingress=245,30,0,75,0,50 solve_cmd=516,63,0,159,0,105 obstacle_read=440,0,88,0,264,0 correction_write=98,12,0,30,0,20 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=65 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=65 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=65 phase=1 b_start=3136 r_start=3144 tx_sha256=e1089c45122681e5d82e53c328f06031f604d40dcd8ff652198709ba091646f2 total=844,66,62,163,183,110 ingress=178,22,0,53,0,37 solve_cmd=286,35,0,88,0,58 obstacle_read=253,0,51,0,151,0 correction_write=73,9,0,22,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=66 phase=steady defects=10 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=66 phase=1 b_start=3202 r_start=3206 tx_sha256=0cadd930dd7403cd41158abf64d0bd164cd242d39b1072f0ced87dccbe64a8dc total=752,57,57,143,172,95 ingress=149,18,0,47,0,30 solve_cmd=252,31,0,76,0,52 obstacle_read=230,0,46,0,138,0 correction_write=65,8,0,20,0,13 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=66 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=67 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=67 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=67 phase=1 b_start=3259 r_start=3263 tx_sha256=789d3fc06e521e3661d5d86ddb04dfb033494368f1e38264cc7cc425dc096d96 total=742,57,55,144,165,95 ingress=155,19,0,47,0,32 solve_cmd=247,30,0,77,0,50 obstacle_read=219,0,44,0,131,0 correction_write=65,8,0,20,0,13 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=68 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=68 phase=1 b_start=3316 r_start=3318 tx_sha256=90be7a55a92e73a548b3d1c11d220dff599736394db0b07d25d76d573bdbdc7b total=847,66,62,163,186,110 ingress=178,22,0,53,0,37 solve_cmd=286,35,0,88,0,58 obstacle_read=257,0,51,0,155,0 correction_write=73,9,0,22,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=68 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=69 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=69 phase=1 b_start=3382 r_start=3380 tx_sha256=6a0b7132907865e31f7b75333a52ac014741241d7af3bbcd187f2c75f477a1a3 total=813,64,58,160,174,107 ingress=190,23,0,58,0,40 solve_cmd=260,32,0,80,0,52 obstacle_read=234,0,47,0,140,0 correction_write=73,9,0,22,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=69 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=70 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=70 phase=1 b_start=3446 r_start=3438 tx_sha256=c89f7a5d16a7f5e71dfa6e14a55c17ec1fc939f44ac05a84412dc51cdc624f11 total=598,46,44,117,131,78 ingress=139,17,0,43,0,28 solve_cmd=180,22,0,55,0,37 obstacle_read=164,0,33,0,98,0 correction_write=60,7,0,19,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=70 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=71 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=71 phase=1 b_start=3492 r_start=3482 tx_sha256=f05968dc403d164540a667eb76d1f244e91a35335bab4b9d089446527f489c95 total=712,55,53,136,160,90 ingress=152,19,0,46,0,30 solve_cmd=229,28,0,70,0,47 obstacle_read=213,0,42,0,129,0 correction_write=65,8,0,20,0,13 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=71 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=72 phase=steady defects=5 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=72 phase=1 b_start=3547 r_start=3535 tx_sha256=fa3449ede6737274f640267868174f4c64661194ffe547e5eac171839904dce2 total=417,30,34,75,104,50 ingress=82,10,0,25,0,17 solve_cmd=124,15,0,39,0,25 obstacle_read=115,0,23,0,69,0 correction_write=39,5,0,11,0,8 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=72 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=73 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=73 phase=1 b_start=3577 r_start=3569 tx_sha256=547fb89df9c42fcb2d5e9b44d45f97063ebc0c7681059b02d247e19a7c477107 total=740,57,55,142,165,95 ingress=157,19,0,49,0,32 solve_cmd=243,30,0,73,0,50 obstacle_read=218,0,44,0,130,0 correction_write=65,8,0,20,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=73 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=74 phase=steady defects=12 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=74 phase=1 b_start=3634 r_start=3624 tx_sha256=b21338bced9731b3ab8c2972b23794f7dd72264e2aa9b9b001d066a38d99c2d3 total=728,57,53,143,156,95 ingress=165,20,0,50,0,35 solve_cmd=236,29,0,73,0,47 obstacle_read=207,0,42,0,123,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=74 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=75 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=75 phase=1 b_start=3691 r_start=3677 tx_sha256=211e1edc46c959c20613443e554057d463c222d899e25c2d19109cc79890cdfb total=823,64,60,160,180,107 ingress=180,22,0,55,0,37 solve_cmd=269,33,0,82,0,55 obstacle_read=245,0,49,0,147,0 correction_write=74,9,0,23,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=75 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=76 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=76 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=76 phase=1 b_start=3755 r_start=3737 tx_sha256=a8d6c92509ff57be443e3eeaf627e0e498736ff683c8e8938a8254502bf5a47e total=524,39,41,97,124,65 ingress=109,13,0,34,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=77 phase=steady defects=5 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=77 phase=1 b_start=3794 r_start=3778 tx_sha256=f67b14e474e69ad77c4bcdc52776df029eb382a950469de47e6ad891636afc49 total=416,30,34,77,101,50 ingress=85,10,0,27,0,18 solve_cmd=121,15,0,36,0,25 obstacle_read=114,0,23,0,68,0 correction_write=41,5,0,14,0,7 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=77 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=78 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=78 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=78 phase=1 b_start=3824 r_start=3812 tx_sha256=76fad786c24893932aef9a6b4a72b23e2bff892c0530d106164e52c54e66878e total=458,34,36,83,109,58 ingress=88,11,0,26,0,18 solve_cmd=147,18,0,45,0,30 obstacle_read=125,0,25,0,75,0 correction_write=42,5,0,12,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=79 phase=steady defects=11 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=79 phase=1 b_start=3858 r_start=3848 tx_sha256=a7eedc1087560aff14b6c2331e5437156ac1c845c90274be995af9b15d1fc189 total=948,72,72,180,216,120 ingress=162,20,0,50,0,32 solve_cmd=353,43,0,108,0,73 obstacle_read=307,0,61,0,185,0 correction_write=73,9,0,22,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=79 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=80 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=80 phase=1 b_start=3930 r_start=3920 tx_sha256=5c1d666027fa07212b5760f1fb3e4dbe45d04f08793d2c6514ecf24e939a21e7 total=863,68,62,170,185,112 ingress=187,23,0,58,0,37 solve_cmd=294,36,0,90,0,60 obstacle_read=254,0,51,0,152,0 correction_write=73,9,0,22,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=80 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=81 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=81 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=81 phase=1 b_start=3998 r_start=3982 tx_sha256=d23117b8c98186893f3d9a06aded1375bfdf5f17f56eeb1867e44c57c12c9892 total=815,64,58,160,175,108 ingress=188,23,0,58,0,38 solve_cmd=263,32,0,80,0,55 obstacle_read=238,0,47,0,144,0 correction_write=73,9,0,22,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=82 phase=steady defects=12 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=82 phase=1 b_start=4062 r_start=4040 tx_sha256=237e1db6a6233dc6005553b68191ff028ef9b6bc3a755c55774e0ace49f66fa3 total=830,64,62,160,185,105 ingress=172,21,0,53,0,35 solve_cmd=276,34,0,85,0,55 obstacle_read=254,0,51,0,152,0 correction_write=73,9,0,22,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=82 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=83 phase=steady defects=15 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=83 phase=1 b_start=4126 r_start=4102 tx_sha256=6e6886d193a0a7f796e2e2610fe26e272cdbc3af23ef1d08afc68a127c64b7aa total=907,71,65,178,195,120 ingress=205,25,0,63,0,42 solve_cmd=294,36,0,90,0,60 obstacle_read=270,0,54,0,162,0 correction_write=83,10,0,25,0,18 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=83 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=84 phase=steady defects=15 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=84 phase=1 b_start=4197 r_start=4167 tx_sha256=08a29ef188de1c5626018aa4cd4d413d9a173f6e4f296e490e6242e4cff8b9be total=905,71,65,179,195,117 ingress=202,25,0,62,0,40 solve_cmd=294,36,0,90,0,60 obstacle_read=270,0,54,0,162,0 correction_write=84,10,0,27,0,17 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=84 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=85 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=85 phase=1 b_start=4268 r_start=4232 tx_sha256=764b98d709602f1c08f69ccec873168d8ec5096ded602811792d88ac0e7bdbec total=837,66,60,163,180,110 ingress=186,23,0,56,0,38 solve_cmd=278,34,0,85,0,57 obstacle_read=245,0,49,0,147,0 correction_write=73,9,0,22,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=85 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=86 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=86 phase=1 b_start=4334 r_start=4292 tx_sha256=bb35f7f7aa2ad541a178e288d3491c6bce3230cf78b3139f586d0fbd86cfb5e7 total=741,57,55,143,165,95 ingress=157,19,0,48,0,33 solve_cmd=245,30,0,75,0,50 obstacle_read=220,0,44,0,132,0 correction_write=64,8,0,20,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=86 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=87 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=87 phase=1 b_start=4391 r_start=4347 tx_sha256=3bc6a66b2e1b661d1ee38ccd222cb4486549d4797091159f55edb93f750cb037 total=597,46,44,115,132,78 ingress=140,17,0,44,0,28 solve_cmd=178,22,0,53,0,37 obstacle_read=166,0,33,0,100,0 correction_write=59,7,0,18,0,13 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=87 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=88 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=88 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=88 phase=1 b_start=4437 r_start=4391 tx_sha256=31d9d41f2ae95dd8473882359dbbc2be96e0c8b44eb69a3c4aa3dca0310d2a0f total=406,30,32,75,97,50 ingress=90,11,0,29,0,17 solve_cmd=112,14,0,33,0,23 obstacle_read=105,0,21,0,63,0 correction_write=43,5,0,13,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=89 phase=steady defects=8 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=89 phase=1 b_start=4467 r_start=4423 tx_sha256=12e003eb074fbfb82a9d448cb82c6516d6ba831ec9e95113ce4011ea7bad316c total=613,46,48,115,143,75 ingress=122,15,0,37,0,25 solve_cmd=196,24,0,60,0,40 obstacle_read=185,0,37,0,111,0 correction_write=56,7,0,18,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=89 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=90 phase=steady defects=11 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=90 phase=1 b_start=4513 r_start=4471 tx_sha256=24ff2191611691e0471b0be20f890b744ac4a173e4be99130505c7c734aa6d18 total=819,62,62,155,187,105 ingress=165,20,0,50,0,35 solve_cmd=269,33,0,82,0,55 obstacle_read=255,0,51,0,153,0 correction_write=74,9,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=90 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=91 phase=steady defects=12 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=91 phase=1 b_start=4575 r_start=4533 tx_sha256=40d6b6bf4f0406399f0a6f328bf61906f103a2ebbd53e623d08fd9df7b362271 total=909,69,69,174,206,115 ingress=178,22,0,55,0,35 solve_cmd=302,37,0,92,0,62 obstacle_read=289,0,58,0,173,0 correction_write=85,10,0,27,0,18 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=91 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=92 phase=steady defects=9 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=92 phase=1 b_start=4644 r_start=4602 tx_sha256=58f76fa1142cd5cc94b25b3bfe1da36b29b22dfbed574c21a37767326e22ae56 total=705,53,55,131,165,87 ingress=136,17,0,41,0,27 solve_cmd=230,28,0,70,0,48 obstacle_read=220,0,44,0,132,0 correction_write=64,8,0,20,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=92 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=93 phase=steady defects=9 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=93 phase=1 b_start=4697 r_start=4657 tx_sha256=5ae6890a4f9d813dd71262712dbb3da30ffe9c1cb1fc2887880d23f4234c6cfb total=707,53,55,132,165,88 ingress=138,17,0,42,0,28 solve_cmd=229,28,0,70,0,47 obstacle_read=220,0,44,0,132,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=93 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=94 phase=steady defects=13 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=94 phase=1 b_start=4750 r_start=4712 tx_sha256=04b71eb86859ac77ea50191ed6f95cc3e7c2303fb9fdc49ca255b6a80b17e54a total=902,69,67,173,204,115 ingress=190,23,0,58,0,40 solve_cmd=294,36,0,90,0,60 obstacle_read=281,0,56,0,169,0 correction_write=80,10,0,25,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=94 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=95 phase=steady defects=15 selectors=9
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=95 phase=1 b_start=4819 r_start=4779 tx_sha256=7f29942f227ef26071cdd667ab320f92d019262d325695672f657bfaae065b25 total=1005,78,74,195,220,130 ingress=214,26,0,65,0,45 solve_cmd=333,41,0,102,0,67 obstacle_read=312,0,63,0,186,0 correction_write=90,11,0,28,0,18 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=95 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=96 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=96 phase=1 b_start=4897 r_start=4853 tx_sha256=1dfba6eba9b2738ffaf18b28bfad447d5b8724e1398ecb865a57a6a1672bd565 total=797,62,58,155,173,105 ingress=180,22,0,55,0,37 solve_cmd=254,31,0,77,0,53 obstacle_read=235,0,47,0,141,0 correction_write=74,9,0,23,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=96 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=97 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=97 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=97 phase=1 b_start=4959 r_start=4911 tx_sha256=03efdbbf9f8374c52323eab9bb3182d03a5929208a0c53880656e658f6b91f76 total=604,46,46,115,138,75 ingress=129,16,0,40,0,25 solve_cmd=189,23,0,57,0,40 obstacle_read=175,0,35,0,105,0 correction_write=56,7,0,18,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=98 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=98 phase=1 b_start=5005 r_start=4957 tx_sha256=0f4ee571de9868e098329663435817d0d42df143f813f6d9ddd41c1c6398dec2 total=811,61,62,152,189,102 ingress=157,19,0,49,0,32 solve_cmd=277,34,0,83,0,58 obstacle_read=256,0,51,0,154,0 correction_write=64,8,0,20,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=98 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=99 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=99 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=99 phase=1 b_start=5066 r_start=5019 tx_sha256=888316cb06cbe7130a7d694eddaebd4cac0c2d4ace213fca5c536d57fbb1243a total=701,52,55,130,165,88 ingress=132,16,0,40,0,28 solve_cmd=236,29,0,73,0,47 obstacle_read=218,0,44,0,130,0 correction_write=58,7,0,17,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=100 phase=steady defects=14 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=100 phase=1 b_start=5118 r_start=5074 tx_sha256=cca3f194fa0a51aaef07fc0e6d3335f7ed43e27216f5fb0fa2519be7cb380cb9 total=1006,77,76,193,226,127 ingress=196,24,0,60,0,40 solve_cmd=350,43,0,108,0,70 obstacle_read=325,0,65,0,195,0 correction_write=82,10,0,25,0,17 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=100 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=101 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=101 phase=1 b_start=5195 r_start=5150 tx_sha256=cbb9bd6ebb1bfed4e18bc7b035c02e33e6840532e3e6904239df9f9cd75f784d total=864,68,62,170,185,113 ingress=187,23,0,57,0,38 solve_cmd=294,36,0,90,0,60 obstacle_read=254,0,51,0,152,0 correction_write=74,9,0,23,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=101 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=102 phase=steady defects=16 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=102 phase=1 b_start=5263 r_start=5212 tx_sha256=a051e2ed350033df0d7059b4a4387c98da77f4151bc08f4e9c3c4b449bb7c98a total=977,77,69,194,207,130 ingress=214,26,0,65,0,45 solve_cmd=333,41,0,102,0,67 obstacle_read=291,0,58,0,175,0 correction_write=85,10,0,27,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=102 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=103 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=103 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=103 phase=1 b_start=5340 r_start=5281 tx_sha256=3fb58115d5ee6dfd250ad339530c7a5bcc9bc4ad67a527f614903269b703ecc6 total=537,41,41,101,123,67 ingress=111,14,0,33,0,22 solve_cmd=172,21,0,53,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=104 phase=steady defects=15 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=104 iterations=11 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=104 phase=1 b_start=5381 r_start=5322 tx_sha256=26df1a4023ff1a37aecc998fb237d46bafba7a904dc1a9650cae56ce133eca2d total=1133,86,86,215,259,143 ingress=222,27,0,69,0,45 solve_cmd=366,45,0,111,0,75 obstacle_read=375,0,75,0,225,0 correction_write=114,14,0,35,0,23 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=105 phase=steady defects=14 selectors=10
+CLOSED_LOOP_SOLVED shot=0 window=105 iterations=11 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=105 phase=1 b_start=5467 r_start=5408 tx_sha256=2d3c11dbcddea4026b9aa019e53a7a2c7d944f0d2aba04a9480bd99f0d5824ff total=1118,84,86,210,260,140 ingress=214,26,0,65,0,45 solve_cmd=358,44,0,110,0,72 obstacle_read=375,0,75,0,225,0 correction_write=114,14,0,35,0,23 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=106 phase=steady defects=15 selectors=10
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=106 phase=1 b_start=5551 r_start=5494 tx_sha256=d58d4df9bdd44912755209063c17f9e83b31f96cecf8d0b34f1444b32430ecb9 total=1132,86,86,215,256,145 ingress=220,27,0,67,0,45 solve_cmd=368,45,0,113,0,75 obstacle_read=375,0,75,0,225,0 correction_write=116,14,0,35,0,25 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=106 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=107 phase=steady defects=10 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=107 phase=1 b_start=5637 r_start=5580 tx_sha256=2fa20c7e45d274f108882cc57e031fbdd059a7c9f6ccd37e3787724be634768c total=696,53,53,132,159,87 ingress=147,18,0,45,0,30 solve_cmd=220,27,0,67,0,45 obstacle_read=209,0,42,0,125,0 correction_write=64,8,0,20,0,12 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=107 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=108 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=108 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=108 phase=1 b_start=5690 r_start=5633 tx_sha256=9c6edf6563dc67f382ef6db6ac9772fde553410cbe5e8b0a5235995df1f1b8c1 total=624,48,46,120,140,80 ingress=139,17,0,43,0,28 solve_cmd=196,24,0,60,0,40 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,17,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=109 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=109 phase=1 b_start=5738 r_start=5679 tx_sha256=08496e77ebb55e3b2e272ea9e3cda2f1fa0502f3a25faa58d4866206de7c16bd total=512,39,39,98,115,65 ingress=116,14,0,37,0,23 solve_cmd=154,19,0,46,0,32 obstacle_read=137,0,28,0,81,0 correction_write=49,6,0,15,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=109 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=110 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=110 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=110 phase=1 b_start=5777 r_start=5718 tx_sha256=9f5ce596566cce6d5a3acf6bfa6731fa12e278d37f20a2a2ea726d4dbcc615ab total=527,39,41,99,125,65 ingress=107,13,0,32,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=111 phase=steady defects=12 selectors=8
+CLOSED_LOOP_SOLVED shot=0 window=111 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=111 phase=1 b_start=5816 r_start=5759 tx_sha256=557cf75794d14dd6a11190766c34192ba85da8e3a1dd5adde31683587fed56aa total=844,66,62,163,183,110 ingress=179,22,0,53,0,38 solve_cmd=278,34,0,87,0,55 obstacle_read=253,0,51,0,151,0 correction_write=80,10,0,23,0,17 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=112 phase=steady defects=13 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=112 phase=1 b_start=5882 r_start=5821 tx_sha256=165b5998d01fa141b800d687e19c7447b15ee05dfd657072a5db7bc98a6aaa28 total=866,68,62,170,187,113 ingress=188,23,0,58,0,38 solve_cmd=289,35,0,89,0,60 obstacle_read=255,0,51,0,153,0 correction_write=78,10,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=112 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=113 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=113 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=113 phase=1 b_start=5950 r_start=5883 tx_sha256=0d0219703e2ebc28df077ca2404cd324f17ddc906ad2c9d86744bb5e5eed9e0a total=559,43,41,108,125,72 ingress=123,15,0,38,0,25 solve_cmd=171,21,0,52,0,35 obstacle_read=150,0,30,0,90,0 correction_write=58,7,0,18,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=114 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=114 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=114 phase=1 b_start=5993 r_start=5924 tx_sha256=f23d212aafb1f68edfceef0e6da6a6e0778b760f347e1528e0510b1414c97aaf total=303,21,27,52,78,35 ingress=60,7,0,19,0,13 solve_cmd=78,10,0,23,0,15 obstacle_read=78,0,16,0,46,0 correction_write=33,4,0,10,0,7 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=115 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=115 phase=1 b_start=6014 r_start=5951 tx_sha256=a196f009bb717df8c355de58a742e99c1eb4bfb3a032cb2d3098be7d1cd1071f total=324,23,27,58,82,38 ingress=65,8,0,20,0,13 solve_cmd=92,11,0,28,0,20 obstacle_read=80,0,16,0,48,0 correction_write=31,4,0,10,0,5 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=115 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=116 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=116 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=116 phase=1 b_start=6037 r_start=5978 tx_sha256=811a171dc6fc8dabb0386b5fbb293076a16854343a55f00fa6d1168b4318bd87 total=414,30,34,75,101,50 ingress=82,10,0,25,0,17 solve_cmd=122,15,0,37,0,25 obstacle_read=114,0,23,0,68,0 correction_write=41,5,0,13,0,8 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=117 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=117 phase=1 b_start=6067 r_start=6012 tx_sha256=e53143a68a1eda380cb3c83b2c3d3096de00ec1ab6676ece478b8a552efd3b41 total=799,62,58,155,175,105 ingress=180,22,0,55,0,37 solve_cmd=256,31,0,79,0,53 obstacle_read=238,0,47,0,144,0 correction_write=72,9,0,21,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=117 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=118 phase=steady defects=16 selectors=9
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=118 phase=1 b_start=6129 r_start=6070 tx_sha256=426c1b827a826607c6176a29e0af0a72aa9aa41f0178b9e0f338cf0e5c46d03c total=943,74,68,185,204,122 ingress=222,27,0,69,0,45 solve_cmd=294,36,0,90,0,60 obstacle_read=284,0,57,0,170,0 correction_write=87,11,0,26,0,17 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=118 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=119 phase=steady defects=12 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=119 phase=1 b_start=6203 r_start=6138 tx_sha256=0c42e7182efddc20394494cf764375b8c4946632ec77f3bda25da349c87be4e6 total=757,58,56,145,170,98 ingress=173,21,0,54,0,35 solve_cmd=230,28,0,70,0,48 obstacle_read=225,0,45,0,135,0 correction_write=72,9,0,21,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=119 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=120 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=120 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=120 phase=1 b_start=6261 r_start=6194 tx_sha256=27e8dfc99484f1d22ba6c51e83393f7c52dbf2096b80f06a5598ed79a8063623 total=384,28,32,70,93,45 ingress=80,10,0,25,0,15 solve_cmd=108,13,0,34,0,22 obstacle_read=103,0,21,0,61,0 correction_write=39,5,0,11,0,8 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=121 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=121 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=121 phase=1 b_start=6289 r_start=6226 tx_sha256=0feeb95ca7ec00b960fd5acdde0c332218516502574beff8d75b691388d6f96c total=516,39,39,99,118,65 ingress=116,14,0,35,0,25 solve_cmd=153,19,0,47,0,30 obstacle_read=143,0,28,0,87,0 correction_write=51,6,0,17,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=122 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=122 phase=1 b_start=6328 r_start=6265 tx_sha256=973b733e6e3fec8e83cc67dd890cff8995cde2f73166dab49c14dd8946adf7b3 total=514,39,39,96,119,65 ingress=114,14,0,33,0,25 solve_cmd=154,19,0,48,0,30 obstacle_read=140,0,28,0,84,0 correction_write=49,6,0,15,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=122 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=123 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=123 phase=1 b_start=6367 r_start=6304 tx_sha256=9601850d7381fe0b0286797992c9752aacce22febfa60d660fe9eaa43f856409 total=402,30,32,75,93,50 ingress=91,11,0,27,0,20 solve_cmd=115,14,0,37,0,22 obstacle_read=103,0,21,0,61,0 correction_write=39,5,0,11,0,8 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=123 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=124 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=124 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=124 phase=1 b_start=6397 r_start=6336 tx_sha256=d054b601ebb0ef9be2b6e54b9c700c4172e8ad80c456f728dcc12d85925fa088 total=579,41,48,102,147,70 ingress=98,12,0,30,0,20 solve_cmd=191,23,0,59,0,40 obstacle_read=186,0,37,0,112,0 correction_write=47,6,0,13,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=125 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=0 window=125 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=125 phase=1 b_start=6438 r_start=6384 tx_sha256=da594f2635744619cbbf604a967fb786279388a6d8c2a3fdbf5e348b205882b4 total=684,50,55,127,165,82 ingress=123,15,0,38,0,25 solve_cmd=227,28,0,70,0,45 obstacle_read=218,0,44,0,130,0 correction_write=59,7,0,19,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=126 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=126 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=126 phase=1 b_start=6488 r_start=6439 tx_sha256=088fcb07649d2b236fd8180458292ec4a2dbf64e2b6170494b501b45403fcb66 total=764,57,60,141,180,95 ingress=145,18,0,43,0,30 solve_cmd=255,31,0,78,0,53 obstacle_read=243,0,49,0,145,0 correction_write=64,8,0,20,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=127 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=0 window=127 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=127 phase=1 b_start=6545 r_start=6499 tx_sha256=2531f4f3df9976178885ca78a951b85b640ea2bf46b4facec194dd2b39944dd7 total=321,23,27,59,78,38 ingress=65,8,0,20,0,13 solve_cmd=93,11,0,29,0,20 obstacle_read=78,0,16,0,46,0 correction_write=31,4,0,10,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=128 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=128 phase=1 b_start=6568 r_start=6526 tx_sha256=be5cea66167ec593184cdabd8404fdd292da1f6c9ea231569c6906bdd636108d total=324,23,27,56,82,40 ingress=67,8,0,20,0,15 solve_cmd=87,11,0,26,0,17 obstacle_read=80,0,16,0,48,0 correction_write=34,4,0,10,0,8 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=128 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=0 window=129 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=129 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=129 phase=1 b_start=6591 r_start=6553 tx_sha256=dae9b79011ad1f8fe6b5744552b7f6ecb689245fea1fd4891160b6f6cfcebebf total=742,57,55,144,165,95 ingress=153,19,0,47,0,30 solve_cmd=247,30,0,77,0,50 obstacle_read=219,0,44,0,131,0 correction_write=67,8,0,20,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=130 phase=steady defects=20 selectors=10
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=130 phase=1 b_start=6648 r_start=6608 tx_sha256=9d68f1bc662299b22d1e6a3cbda5d281f9b6011a2d9176faebbaeac0ee08814a total=1134,91,79,226,236,150 ingress=260,32,0,80,0,52 solve_cmd=382,47,0,116,0,78 obstacle_read=339,0,68,0,203,0 correction_write=98,12,0,30,0,20 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=130 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=131 phase=steady defects=21 selectors=11
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=131 phase=1 b_start=6739 r_start=6687 tx_sha256=500ec1f6edca3d82d69c8a1f1be342ebbca5db3223a56b8f8cdb547f80399bbc total=1233,98,86,245,259,165 ingress=278,34,0,85,0,57 solve_cmd=418,51,0,129,0,85 obstacle_read=375,0,75,0,225,0 correction_write=106,13,0,31,0,23 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=131 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=132 phase=steady defects=22 selectors=13
+CLOSED_LOOP_SOLVED shot=0 window=132 iterations=13 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=132 phase=1 b_start=6837 r_start=6773 tx_sha256=25c480f3b4a409bdc34dd45f51c5fd7ae5cf6e3272d719932484ebf844aa2914 total=1397,110,100,275,300,182 ingress=300,37,0,92,0,60 solve_cmd=476,58,0,147,0,97 obstacle_read=444,0,89,0,266,0 correction_write=121,15,0,36,0,25 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=133 phase=steady defects=14 selectors=9
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=133 phase=1 b_start=6947 r_start=6873 tx_sha256=da9039e6b0f168cc6cc7dcfe3bd5c59aba21846856a218cf8d018332ee4202e6 total=991,76,74,190,221,128 ingress=207,25,0,64,0,43 solve_cmd=325,40,0,100,0,65 obstacle_read=314,0,63,0,188,0 correction_write=90,11,0,26,0,20 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=133 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=134 phase=steady defects=12 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=134 phase=1 b_start=7023 r_start=6947 tx_sha256=91b10571ae9c33e0402b6a040e38a585fddfebbd5629edc3d553ec36787bdd7e total=883,67,67,167,204,110 ingress=178,22,0,55,0,35 solve_cmd=289,35,0,89,0,60 obstacle_read=281,0,56,0,169,0 correction_write=78,10,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=134 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=135 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=135 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=135 phase=1 b_start=7090 r_start=7014 tx_sha256=9480a23a7e69249ddc690b6fef0c82b08ff8121e40cc97e1bf1bb77787127711 total=218,14,20,37,60,25 ingress=43,5,0,13,0,10 solve_cmd=49,6,0,15,0,10 obstacle_read=43,0,9,0,25,0 correction_write=26,3,0,9,0,5 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=136 phase=steady defects=5 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=136 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=136 phase=1 b_start=7104 r_start=7034 tx_sha256=e2da0c2c51fb68c19d8696a311cfde2b952116571995a19f6ea5a3c3786437a2 total=486,35,41,86,121,57 ingress=87,11,0,26,0,17 solve_cmd=147,18,0,45,0,30 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=137 phase=steady defects=10 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=137 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=137 phase=1 b_start=7139 r_start=7075 tx_sha256=3657cc3c77be33ade17d8ea3bb63c899d04e73ab4492562856552e327c617e7a total=799,60,62,150,185,100 ingress=156,19,0,47,0,33 solve_cmd=260,32,0,80,0,52 obstacle_read=254,0,51,0,152,0 correction_write=74,9,0,23,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=138 phase=steady defects=10 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=138 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=138 phase=1 b_start=7199 r_start=7137 tx_sha256=60460dda00f726e8224b95adf31251ffd8663544612d820d988a4adad0b83225 total=803,60,62,150,189,100 ingress=156,19,0,47,0,33 solve_cmd=260,32,0,80,0,52 obstacle_read=256,0,51,0,154,0 correction_write=74,9,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=139 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=139 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=139 phase=1 b_start=7259 r_start=7199 tx_sha256=5959ad6aa1635712247de5ff50ed7a28eb27ddf3cd0698b9095ad7d32bb6cbf9 total=521,39,41,97,121,65 ingress=109,13,0,34,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=140 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=140 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=140 phase=1 b_start=7298 r_start=7240 tx_sha256=2e7b1dffe1a557b817ee46979817ef04875e1f23ad9728fd2c4a6d90ce1fa456 total=516,39,39,98,119,65 ingress=116,14,0,37,0,23 solve_cmd=154,19,0,46,0,32 obstacle_read=140,0,28,0,84,0 correction_write=49,6,0,15,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=0 window=141 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=141 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=141 phase=1 b_start=7337 r_start=7279 tx_sha256=66422a9ea746b2680fc22a8f532ad8ae3c93d7968d06c7ef205fa72f7d5bc9e9 total=513,39,39,99,115,65 ingress=114,14,0,35,0,23 solve_cmd=155,19,0,47,0,32 obstacle_read=137,0,28,0,81,0 correction_write=51,6,0,17,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=142 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=142 phase=1 b_start=7376 r_start=7318 tx_sha256=5fda951257212959fe8d51e9c79de061cbf38d0df5d6ca62d6f8bee771f9329b total=511,39,39,96,116,65 ingress=112,14,0,33,0,23 solve_cmd=156,19,0,48,0,32 obstacle_read=139,0,28,0,83,0 correction_write=49,6,0,15,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=142 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=0 window=143 phase=steady defects=1 selectors=1
+CLOSED_LOOP_SOLVED shot=0 window=143 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=143 phase=1 b_start=7415 r_start=7357 tx_sha256=a068a17e2718b9dd83c23bb6e7da713279cace78ea9d74ce75f91e5f3022f790 total=198,12,20,30,60,20 ingress=34,4,0,10,0,8 solve_cmd=41,5,0,14,0,7 obstacle_read=45,0,9,0,27,0 correction_write=23,3,0,6,0,5 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=144 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=144 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=144 phase=1 b_start=7427 r_start=7377 tx_sha256=c497b6df5d18c6a68d64d214bea8581ce3c86b8b6ee833676721979799bccf0b total=415,30,34,75,102,50 ingress=83,10,0,25,0,18 solve_cmd=124,15,0,39,0,25 obstacle_read=116,0,23,0,70,0 correction_write=38,5,0,11,0,7 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=145 phase=steady defects=13 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=145 phase=1 b_start=7457 r_start=7411 tx_sha256=658080f8c5ffe086b9ec3147f230f7810f23d8984ada21f1baa4c3cd194578c8 total=927,71,69,179,208,118 ingress=189,23,0,59,0,38 solve_cmd=310,38,0,93,0,65 obstacle_read=293,0,58,0,177,0 correction_write=82,10,0,27,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=145 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=146 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=146 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=146 phase=1 b_start=7528 r_start=7480 tx_sha256=d6cd0284917bc24548caa3435f48c2c544f6a2bf364b4820d40975b9b96358e8 total=815,62,62,153,185,105 ingress=165,20,0,50,0,35 solve_cmd=268,33,0,81,0,55 obstacle_read=254,0,51,0,152,0 correction_write=73,9,0,22,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=147 phase=steady defects=10 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=147 phase=1 b_start=7590 r_start=7542 tx_sha256=d587db230313fe6521c36c31e1522408d7f783783cc072181eb3a4780624f68d total=723,55,55,138,165,90 ingress=149,18,0,47,0,30 solve_cmd=234,29,0,71,0,47 obstacle_read=220,0,44,0,132,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=147 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=148 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=0 window=148 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=148 phase=1 b_start=7645 r_start=7597 tx_sha256=d10df089f6fcb506d6ce032d2b4283bdf64c6238f7974dd1b0986c8d164948f3 total=444,32,36,80,109,55 ingress=82,10,0,25,0,17 solve_cmd=140,17,0,44,0,28 obstacle_read=125,0,25,0,75,0 correction_write=41,5,0,11,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=149 phase=steady defects=5 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=149 phase=1 b_start=7677 r_start=7633 tx_sha256=b36bb03e1bcf97a236ba83d9b6531f7602b55fec638b07182f0b2a12d4f7aae6 total=442,32,36,80,110,52 ingress=80,10,0,25,0,15 solve_cmd=142,17,0,44,0,30 obstacle_read=125,0,25,0,75,0 correction_write=38,5,0,11,0,7 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=0 window=149 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=0 window=150 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=150 phase=1 b_start=7709 r_start=7669 tx_sha256=8eb4b24316cb537696998233894251fb9b486b1ac34af5a3df6c68327bfcce3e total=629,48,48,120,141,80 ingress=132,16,0,40,0,28 solve_cmd=202,25,0,62,0,40 obstacle_read=182,0,37,0,108,0 correction_write=58,7,0,18,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=150 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=151 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=0 window=151 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=151 phase=1 b_start=7757 r_start=7717 tx_sha256=0ce092aecb7c9e0db155784e1989e884a4a7c5e67e51d33e6fe6dd3ab9b47376 total=787,62,56,155,169,103 ingress=189,23,0,59,0,38 solve_cmd=243,30,0,73,0,50 obstacle_read=225,0,45,0,135,0 correction_write=74,9,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=0 window=152 phase=steady defects=25 selectors=14
+CLOSED_LOOP_SOLVED shot=0 window=152 iterations=15 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=152 phase=1 b_start=7819 r_start=7773 tx_sha256=3d09266af0d63fa07273067f6c3295a01218ab756af99b9a4a75c70b8112a643 total=1615,129,112,324,336,215 ingress=338,41,0,104,0,70 solve_cmd=588,72,0,180,0,120 obstacle_read=507,0,101,0,305,0 correction_write=129,16,0,40,0,25 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=0 window=153 phase=steady defects=20 selectors=11
+CLOSED_LOOP_SOLVED shot=0 window=153 iterations=12 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=153 phase=1 b_start=7948 r_start=7885 tx_sha256=9daae4520e48a84547c6a413cf929a04e1d5a42a3992c8ffdcd83aa72952a1f3 total=1285,102,91,253,272,170 ingress=268,33,0,81,0,55 solve_cmd=459,56,0,140,0,95 obstacle_read=400,0,80,0,240,0 correction_write=104,13,0,32,0,20 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=0 window=154 phase=steady defects=13 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=154 phase=1 b_start=8050 r_start=7976 tx_sha256=ac52f586b92f2aa25bf0410de1fb78d5659d42658b9bed152a09b23d989fec17 total=974,75,72,188,217,125 ingress=190,23,0,58,0,40 solve_cmd=343,42,0,105,0,70 obstacle_read=305,0,61,0,183,0 correction_write=80,10,0,25,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=154 iterations=9 commit_clear=true
+CLOSED_LOOP_START shot=0 window=155 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=0 window=155 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=155 phase=1 b_start=8125 r_start=8048 tx_sha256=8fff46d23432627987a2ea788ca87b18fab0c2c16de10bb4927c4dbcc7007aac total=893,67,69,169,206,112 ingress=147,18,0,45,0,30 solve_cmd=338,41,0,104,0,70 obstacle_read=289,0,58,0,173,0 correction_write=64,8,0,20,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=0 window=156 phase=steady defects=10 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=156 phase=1 b_start=8192 r_start=8117 tx_sha256=3a779c203405f003ff5de2a0048f60ac6d97ec189458ef62a203a31e10767ce9 total=892,67,69,166,207,113 ingress=145,18,0,43,0,30 solve_cmd=335,41,0,103,0,68 obstacle_read=291,0,58,0,175,0 correction_write=67,8,0,20,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=156 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=0 window=157 phase=steady defects=16 selectors=9
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=157 phase=1 b_start=8259 r_start=8186 tx_sha256=bf681fc117a4f52cdf1b4e56fb77dda70a3d66ca81051d3e37733b1b535542b9 total=1165,90,86,225,258,150 ingress=220,27,0,67,0,45 solve_cmd=423,52,0,130,0,85 obstacle_read=375,0,75,0,225,0 correction_write=92,11,0,28,0,20 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=157 iterations=11 commit_clear=true
+CLOSED_LOOP_START shot=0 window=158 phase=steady defects=12 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=158 phase=1 b_start=8349 r_start=8272 tx_sha256=e03752ae0ac288419817d35b5a97d4da543e06967e8ccdc3f73716d62e5589d9 total=676,53,49,132,147,87 ingress=162,20,0,50,0,32 solve_cmd=205,25,0,62,0,43 obstacle_read=191,0,38,0,115,0 correction_write=64,8,0,20,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=0 window=158 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=0 window=159 phase=steady defects=19 selectors=10
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=159 phase=1 b_start=8402 r_start=8321 tx_sha256=129ab0444b03b2366c8e1839afc72025e9c5ba6c562859456b5810645bb32811 total=1097,87,77,218,232,145 ingress=255,31,0,78,0,53 solve_cmd=358,44,0,110,0,72 obstacle_read=330,0,66,0,198,0 correction_write=98,12,0,30,0,20 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=0 window=159 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=0 window=160 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=160 phase=1 b_start=8489 r_start=8398 tx_sha256=d76fb95ef06b0295f04e7a8d85323a0b37a60d7bc0cc9a88221a18e5d33a5506 total=849,66,62,165,186,110 ingress=181,22,0,55,0,38 solve_cmd=284,35,0,87,0,57 obstacle_read=257,0,51,0,155,0 correction_write=74,9,0,23,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=160 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=161 phase=steady defects=13 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=161 phase=1 b_start=8555 r_start=8460 tx_sha256=19cebc34df511845f1c703ffa031372b7430586704d640ffec47706940984101 total=848,66,62,165,185,110 ingress=181,22,0,55,0,38 solve_cmd=286,35,0,89,0,57 obstacle_read=254,0,51,0,152,0 correction_write=72,9,0,21,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=0 window=161 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=0 window=162 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=162 phase=1 b_start=8621 r_start=8522 tx_sha256=701c9ca33a874488675b59983e73e2610f3acb5384411a6c0773f0aab4c8ef81 total=633,48,48,120,145,80 ingress=132,16,0,40,0,28 solve_cmd=202,25,0,62,0,40 obstacle_read=188,0,37,0,114,0 correction_write=58,7,0,18,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=0 window=162 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=0 window=163 phase=closing defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=0 window=163 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=0 window=163 phase=2 b_start=8669 r_start=8570 tx_sha256=0a25870125b83cc721b1838287fab0c7d48309852690315d54e5b518364b88a5 total=599,39,56,99,167,65 ingress=114,14,0,35,0,23 solve_cmd=155,19,0,47,0,32 obstacle_read=140,0,28,0,84,0 correction_write=51,6,0,17,0,10 correction_read=139,0,28,0,83,0
+CLOSED_LOOP_SHOT shot=0 residual_clear=true frame=0 expected_frame=0
+CLOSED_LOOP_START shot=15 window=0 phase=opening defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=0 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=0 phase=0 b_start=8708 r_start=8626 tx_sha256=bfc974f5bbe136a2a2da81727d62d280320033f4eb0d93281fc96fe0fcfbda5e total=414,30,34,73,103,50 ingress=81,10,0,23,0,18 solve_cmd=123,15,0,38,0,25 obstacle_read=118,0,23,0,72,0 correction_write=39,5,0,12,0,7 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=1 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=1 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=1 phase=1 b_start=8738 r_start=8660 tx_sha256=acda382a7c8a00df07a04f75f0eb25d30a4b68c097214927ca60bea40e364783 total=568,43,43,108,129,73 ingress=116,14,0,37,0,23 solve_cmd=188,23,0,56,0,40 obstacle_read=159,0,32,0,95,0 correction_write=49,6,0,15,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=2 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=2 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=2 phase=1 b_start=8781 r_start=8703 tx_sha256=dbcb506d95af5313887a8b8d9c9bc618f784dad5600d1baf7f5256a9cfedaa5d total=1050,81,78,202,233,135 ingress=178,22,0,55,0,35 solve_cmd=402,49,0,124,0,82 obstacle_read=335,0,67,0,201,0 correction_write=81,10,0,23,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=3 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=3 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=3 phase=1 b_start=8862 r_start=8781 tx_sha256=6d15348ffa4f52de5e70548b5ec9f5a8918cb7078122cf84cdf89c3a9a100da9 total=1055,81,78,203,237,135 ingress=180,22,0,57,0,35 solve_cmd=399,49,0,121,0,82 obstacle_read=336,0,67,0,202,0 correction_write=83,10,0,25,0,18 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=4 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=4 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=4 phase=1 b_start=8943 r_start=8859 tx_sha256=4958a33d973d8779fdfa4e2667faa511e2ef14aa788fbd9d407580dee8f3cbd8 total=1142,88,85,220,255,145 ingress=196,24,0,60,0,40 solve_cmd=433,53,0,134,0,87 obstacle_read=368,0,74,0,220,0 correction_write=88,11,0,26,0,18 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=5 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=5 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=5 phase=1 b_start=9031 r_start=8944 tx_sha256=00e944c88714903cb71c8d7d9f3ba34e37a1869f8f9de3c77bebe38945b6458d total=647,50,48,125,141,85 ingress=142,17,0,44,0,30 solve_cmd=209,26,0,63,0,42 obstacle_read=182,0,37,0,108,0 correction_write=59,7,0,18,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=6 phase=steady defects=20 selectors=11
+CLOSED_LOOP_SOLVED shot=15 window=6 iterations=12 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=6 phase=1 b_start=9081 r_start=8992 tx_sha256=d1639aba58623cc28a9077bbbec801da98798a6eefbceb72b7b355559de62677 total=1308,102,95,255,285,170 ingress=269,33,0,82,0,55 solve_cmd=456,56,0,140,0,92 obstacle_read=420,0,84,0,252,0 correction_write=108,13,0,33,0,23 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=7 phase=steady defects=14 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=7 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=7 phase=1 b_start=9183 r_start=9087 tx_sha256=b8f9746300a6aa5a46c7aefe9ccd4db330aa0f64fad1fbd8a116e1da12bb6da1 total=933,72,69,180,207,120 ingress=186,23,0,57,0,37 solve_cmd=328,40,0,100,0,68 obstacle_read=291,0,58,0,175,0 correction_write=74,9,0,23,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=8 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=8 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=8 phase=1 b_start=9255 r_start=9156 tx_sha256=4391da52990b35cb93ac11a673c3474efe7491927448cafc048b694802513dea total=1000,77,74,194,223,127 ingress=204,25,0,64,0,40 solve_cmd=341,42,0,103,0,70 obstacle_read=318,0,63,0,192,0 correction_write=84,10,0,27,0,17 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=9 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=9 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=9 phase=1 b_start=9332 r_start=9230 tx_sha256=c5b440413eaf9d3a3a91f4745c865f70217194d0df8908743e7caac66b0cbbfb total=570,42,46,103,137,70 ingress=112,14,0,33,0,23 solve_cmd=172,21,0,53,0,35 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,17,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=10 phase=steady defects=8 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=10 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=10 phase=1 b_start=9374 r_start=9276 tx_sha256=a4a40e2463bcd422eac7d773d097d2f52995e1da397ea80a0b514a8c617bbbab total=639,47,51,118,153,78 ingress=132,16,0,40,0,28 solve_cmd=187,23,0,58,0,37 obstacle_read=200,0,40,0,120,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=11 phase=steady defects=5 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=11 phase=1 b_start=9421 r_start=9327 tx_sha256=9983348b892e08ee5549d1ce62d690c99af5e3a797dd55c02b026168d619d41d total=464,33,39,82,117,55 ingress=93,11,0,29,0,20 solve_cmd=129,16,0,40,0,25 obstacle_read=141,0,28,0,85,0 correction_write=47,6,0,13,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=15 window=11 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=12 phase=steady defects=1 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=12 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=12 phase=1 b_start=9454 r_start=9366 tx_sha256=7edea8dea65c91a55063947244e24b83a332f9fa628576ff4d77ac449e858704 total=198,12,20,30,60,20 ingress=33,4,0,10,0,7 solve_cmd=41,5,0,13,0,8 obstacle_read=46,0,9,0,28,0 correction_write=24,3,0,7,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=13 phase=steady defects=0 selectors=0
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=13 phase=1 b_start=9466 r_start=9386 tx_sha256=24a62f5c1338d8517a76ad5fb0d0377cab239657b08d2babe20e633e22deb8ea total=111,5,13,13,42,10 ingress=20,2,0,7,0,5 solve_cmd=5,1,0,1,0,0 obstacle_read=11,0,2,0,7,0 correction_write=18,2,0,5,0,5 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=13 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=14 phase=steady defects=0 selectors=0
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=14 phase=1 b_start=9471 r_start=9399 tx_sha256=57c9f1a18ba1dcfef2aa88445bad6deb9136b201c956804ce251a77d121e9e39 total=103,5,13,14,36,7 ingress=15,2,0,5,0,2 solve_cmd=9,1,0,2,0,3 obstacle_read=7,0,2,0,3,0 correction_write=17,2,0,7,0,2 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=14 iterations=0 commit_clear=true
+CLOSED_LOOP_START shot=15 window=15 phase=steady defects=7 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=15 phase=1 b_start=9476 r_start=9412 tx_sha256=0852e6998eadc24d12200867762e28cc304eb0e21ea030e163661bb5e2ed0473 total=572,42,46,103,139,70 ingress=112,14,0,33,0,23 solve_cmd=172,21,0,53,0,35 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,17,0,12 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=15 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=16 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=16 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=16 phase=1 b_start=9518 r_start=9458 tx_sha256=b55c072ec1f7afc3ca9a47993d7f1fca21eea045ce1628858ee2457a4a2c5958 total=715,55,53,138,158,93 ingress=157,19,0,48,0,33 solve_cmd=227,28,0,70,0,45 obstacle_read=210,0,42,0,126,0 correction_write=67,8,0,20,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=17 phase=steady defects=15 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=17 phase=1 b_start=9573 r_start=9511 tx_sha256=4b580a452d85dad197e96dbcfae23c390f4811ca7d210d9c7557ab09c3917600 total=930,73,67,182,202,120 ingress=202,25,0,62,0,40 solve_cmd=314,38,0,97,0,65 obstacle_read=280,0,56,0,168,0 correction_write=78,10,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=17 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=18 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=18 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=18 phase=1 b_start=9646 r_start=9578 tx_sha256=bdf6b1b230a7b3e6c5e13c43a403f050fee86ded9316a66cd02756023092c3aa total=972,73,75,183,225,122 ingress=149,18,0,47,0,30 solve_cmd=384,47,0,116,0,80 obstacle_read=319,0,64,0,191,0 correction_write=64,8,0,20,0,12 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=19 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=19 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=19 phase=1 b_start=9719 r_start=9653 tx_sha256=09ebab306fd2cb2333e19617d8d5d0f50134fafd3b6429cbcc278f1875ff129d total=863,64,68,160,203,108 ingress=122,15,0,37,0,25 solve_cmd=345,42,0,107,0,70 obstacle_read=285,0,57,0,171,0 correction_write=57,7,0,16,0,13 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=20 phase=steady defects=5 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=20 phase=1 b_start=9783 r_start=9721 tx_sha256=ef9f3531c76011fbce182031461eda3e59350f8a161ab8a4d471244f9022bdb5 total=738,53,61,134,183,87 ingress=88,11,0,27,0,17 solve_cmd=294,36,0,90,0,60 obstacle_read=250,0,50,0,150,0 correction_write=51,6,0,17,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=20 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=21 phase=steady defects=2 selectors=1
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=21 phase=1 b_start=9836 r_start=9782 tx_sha256=528ce69d35a6c7de268827bd1532e66689da8a9694295e43449242e9d6533d49 total=212,14,20,33,60,23 ingress=39,5,0,11,0,8 solve_cmd=49,6,0,15,0,10 obstacle_read=45,0,9,0,27,0 correction_write=24,3,0,7,0,5 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=21 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=22 phase=steady defects=4 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=22 phase=1 b_start=9850 r_start=9802 tx_sha256=41815a61c3b42bd1311a7bf44e6c369533b663c7d426b50dcf772c39ef9bae27 total=328,23,27,58,84,40 ingress=67,8,0,20,0,15 solve_cmd=89,11,0,28,0,17 obstacle_read=81,0,16,0,49,0 correction_write=34,4,0,10,0,8 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=22 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=23 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=23 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=23 phase=1 b_start=9873 r_start=9829 tx_sha256=1fff9818929070b6098bdf3a3ac142fe29a8e86380f57a3d5805674a67a1bbc6 total=320,23,27,59,78,37 ingress=64,8,0,20,0,12 solve_cmd=91,11,0,29,0,18 obstacle_read=78,0,16,0,46,0 correction_write=33,4,0,10,0,7 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=24 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=24 phase=1 b_start=9896 r_start=9856 tx_sha256=d8f2f327cb80810658eb55f3083d0e26cb49ee926d325f7b045d0c8339b050e0 total=522,39,41,96,123,65 ingress=106,13,0,31,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=24 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=25 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=25 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=25 phase=1 b_start=9935 r_start=9897 tx_sha256=e22ffbf8f3940a9fbf33478ef8bd51f4ad02d4a6fbda78719d7c47fb5c5a58b6 total=542,41,41,104,124,68 ingress=114,14,0,35,0,23 solve_cmd=171,21,0,52,0,35 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=26 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=26 phase=1 b_start=9976 r_start=9938 tx_sha256=2eb534dac96e2d72c7a52f90365e97add9bbf3d512e8048db95d292073e2c13b total=432,32,34,80,101,55 ingress=90,11,0,26,0,20 solve_cmd=129,16,0,40,0,25 obstacle_read=114,0,23,0,68,0 correction_write=44,5,0,14,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=26 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=27 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=27 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=27 phase=1 b_start=10008 r_start=9972 tx_sha256=11cc8888bf2ba9ec388857a494637552b74f0f13fcfa294789ef5fd5b68fc357 total=323,23,27,56,84,37 ingress=64,8,0,20,0,12 solve_cmd=88,11,0,26,0,18 obstacle_read=81,0,16,0,49,0 correction_write=33,4,0,10,0,7 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=28 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=28 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=28 phase=1 b_start=10031 r_start=9999 tx_sha256=583af52ccab733eb87b39bd9679e6d729734bb4763293312dccce874ff335946 total=319,23,27,57,78,38 ingress=65,8,0,20,0,13 solve_cmd=91,11,0,27,0,20 obstacle_read=78,0,16,0,46,0 correction_write=31,4,0,10,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=29 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=29 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=29 phase=1 b_start=10054 r_start=10026 tx_sha256=b9a5ade25665d1ce60d7f216a3ace40e98a4e8a36fa0230f28cd8c2a817506cd total=608,46,46,117,138,77 ingress=131,16,0,40,0,27 solve_cmd=188,23,0,58,0,38 obstacle_read=175,0,35,0,105,0 correction_write=59,7,0,19,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=30 phase=steady defects=11 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=30 phase=1 b_start=10100 r_start=10072 tx_sha256=633a2b0125e70303c5f67c09c1a75d3a675f2f7ed1a400d79206a7ec4ea1233f total=764,58,58,143,175,98 ingress=163,20,0,50,0,33 solve_cmd=237,29,0,71,0,50 obstacle_read=238,0,47,0,144,0 correction_write=73,9,0,22,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=30 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=31 phase=steady defects=26 selectors=15
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=31 phase=1 b_start=10158 r_start=10130 tx_sha256=329266608e30d39c9310eb226f4b643f899a0910c16f226922cb2e61d5958d49 total=1606,126,115,317,345,210 ingress=350,43,0,108,0,70 solve_cmd=539,66,0,165,0,110 obstacle_read=522,0,104,0,314,0 correction_write=142,17,0,44,0,30 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=31 iterations=16 commit_clear=true
+CLOSED_LOOP_START shot=15 window=32 phase=steady defects=25 selectors=14
+CLOSED_LOOP_SOLVED shot=15 window=32 iterations=15 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=32 phase=1 b_start=10284 r_start=10245 tx_sha256=5209f79e645534426bd74d77b39f2286abba39e8d28f23ac408fae6792e1317d total=1562,123,112,306,335,205 ingress=332,41,0,101,0,67 solve_cmd=539,66,0,165,0,110 obstacle_read=504,0,101,0,302,0 correction_write=132,16,0,40,0,28 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=33 phase=steady defects=22 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=33 iterations=13 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=33 phase=1 b_start=10407 r_start=10357 tx_sha256=b24fbcc006c3633ec258c0324beaed02741b58e63179d5faef3d26e74057c43a total=1390,109,100,274,300,180 ingress=294,36,0,90,0,60 solve_cmd=480,59,0,147,0,97 obstacle_read=445,0,89,0,267,0 correction_write=116,14,0,37,0,23 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=34 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=34 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=34 phase=1 b_start=10516 r_start=10457 tx_sha256=18f7819d7877e7f32dafd6ae72b2af12a65f2247f935a2cc57f2f31bceb1ebe9 total=523,39,41,96,124,65 ingress=105,13,0,31,0,22 solve_cmd=163,20,0,50,0,33 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=35 phase=steady defects=3 selectors=2
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=35 phase=1 b_start=10555 r_start=10498 tx_sha256=6bb90dd7a4f822ccaa92c96c9763d6163e4aa116bf3a2ab3c210fb798c3781e7 total=308,21,27,54,81,35 ingress=57,7,0,17,0,12 solve_cmd=85,10,0,27,0,18 obstacle_read=82,0,16,0,50,0 correction_write=31,4,0,10,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=35 iterations=2 commit_clear=true
+CLOSED_LOOP_START shot=15 window=36 phase=steady defects=1 selectors=1
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=36 phase=1 b_start=10576 r_start=10525 tx_sha256=77e8dc26f41a74ed61b91db258805840232950ace45b067a4d2f68c58202be79 total=198,12,20,30,60,20 ingress=33,4,0,10,0,7 solve_cmd=39,5,0,11,0,8 obstacle_read=47,0,9,0,29,0 correction_write=26,3,0,9,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=36 iterations=1 commit_clear=true
+CLOSED_LOOP_START shot=15 window=37 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=37 iterations=0 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=37 phase=1 b_start=10588 r_start=10545 tx_sha256=74b6c165c319cdcb8ca4c5936c20b2240d1954e9f03115672ba7a6ff3c8bf8c7 total=106,5,13,11,39,10 ingress=16,2,0,3,0,5 solve_cmd=7,1,0,3,0,0 obstacle_read=9,0,2,0,5,0 correction_write=18,2,0,5,0,5 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=38 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=38 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=38 phase=1 b_start=10593 r_start=10558 tx_sha256=d154837212ef29d67e45d4c18266618b5de93797518bed1cb613b9f09b9503ad total=306,21,27,52,81,35 ingress=57,7,0,19,0,10 solve_cmd=80,10,0,23,0,17 obstacle_read=82,0,16,0,50,0 correction_write=34,4,0,10,0,8 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=39 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=39 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=39 phase=1 b_start=10614 r_start=10585 tx_sha256=11de20212a3762bd4fd9fcb61bb14d272d86d1afbcb19da8df0b08c559a8cb19 total=432,32,34,80,104,52 ingress=89,11,0,28,0,17 solve_cmd=132,16,0,40,0,28 obstacle_read=115,0,23,0,69,0 correction_write=39,5,0,12,0,7 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=40 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=40 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=40 phase=1 b_start=10646 r_start=10619 tx_sha256=789782f09bbd687d9b0bcd0a08c64574f7339f3140d5af481a929cb8e1542c7e total=930,73,67,183,198,123 ingress=206,25,0,63,0,43 solve_cmd=309,38,0,95,0,62 obstacle_read=278,0,56,0,166,0 correction_write=83,10,0,25,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=41 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=41 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=41 phase=1 b_start=10719 r_start=10686 tx_sha256=2ef526b70cdcb66243813b35fdbd306461254cb6abb3182869b5742abb4e66ed total=821,64,60,160,180,105 ingress=178,22,0,55,0,35 solve_cmd=269,33,0,82,0,55 obstacle_read=246,0,49,0,148,0 correction_write=74,9,0,23,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=42 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=42 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=42 phase=1 b_start=10783 r_start=10746 tx_sha256=5a4864612cb7d3583cc2de652a0a3e8953c40d5fbced4592e6290ae72940deb4 total=917,71,67,177,202,120 ingress=196,24,0,60,0,40 solve_cmd=304,37,0,94,0,62 obstacle_read=280,0,56,0,168,0 correction_write=81,10,0,23,0,18 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=43 phase=steady defects=8 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=43 phase=1 b_start=10854 r_start=10813 tx_sha256=fb56d10730223846be29847ff58fc49d923c32f8eb185924ff88eda24994c9b5 total=541,41,41,103,125,67 ingress=115,14,0,37,0,22 solve_cmd=170,21,0,51,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=43 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=44 phase=steady defects=12 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=44 phase=1 b_start=10895 r_start=10854 tx_sha256=fe4191a7a6398d781dbcd1174ac81c23d8e000183a8448f3aa221bc5d4cd05b1 total=756,59,55,147,165,98 ingress=163,20,0,50,0,33 solve_cmd=253,31,0,77,0,52 obstacle_read=218,0,44,0,130,0 correction_write=65,8,0,20,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=44 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=45 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=45 phase=1 b_start=10954 r_start=10909 tx_sha256=fd5a014ad9a119aa7ae1505aa5e2a047f852ca10166d44446f914f7f06debd84 total=810,64,58,160,171,107 ingress=190,23,0,58,0,40 solve_cmd=260,32,0,80,0,52 obstacle_read=232,0,47,0,138,0 correction_write=73,9,0,22,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=45 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=46 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=46 iterations=12 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=46 phase=1 b_start=11018 r_start=10967 tx_sha256=f0076053b2374e05ba98ec89436fdfe49540187c6b6929cf45e4fa57c36f5d7d total=1288,103,89,258,267,173 ingress=304,37,0,93,0,63 solve_cmd=423,52,0,130,0,85 obstacle_read=391,0,78,0,235,0 correction_write=116,14,0,35,0,25 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=47 phase=steady defects=18 selectors=10
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=47 phase=1 b_start=11121 r_start=11056 tx_sha256=35c5401d4883c78f7685551be7ff1e5fd4bd96e8c87d5aa53b5023d7a456b7da total=1130,89,81,222,243,147 ingress=245,30,0,75,0,50 solve_cmd=382,47,0,117,0,77 obstacle_read=350,0,70,0,210,0 correction_write=98,12,0,30,0,20 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_SOLVED shot=15 window=47 iterations=10 commit_clear=true
+CLOSED_LOOP_START shot=15 window=48 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=48 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=48 phase=1 b_start=11210 r_start=11137 tx_sha256=38076b8850861b1c697ccce0ee2044296ccd7100c89d8987deedeff4fff8f4fe total=918,71,67,178,204,118 ingress=196,24,0,60,0,40 solve_cmd=304,37,0,93,0,63 obstacle_read=281,0,56,0,169,0 correction_write=80,10,0,25,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=49 phase=steady defects=14 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=49 phase=1 b_start=11281 r_start=11204 tx_sha256=5a8dad56acb0f97a6daf2fab5648f425845f3c18b310e8909a60c77106ce613c total=939,73,69,182,205,122 ingress=196,24,0,60,0,40 solve_cmd=320,39,0,99,0,65 obstacle_read=287,0,58,0,171,0 correction_write=80,10,0,23,0,17 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=49 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=50 phase=steady defects=23 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=50 iterations=13 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=50 phase=1 b_start=11354 r_start=11273 tx_sha256=be4c20fe98c6ce5a14dd965580724ce45805aed9f7108564ea2adf57141cda24 total=1407,111,100,278,300,185 ingress=304,37,0,93,0,63 solve_cmd=480,59,0,147,0,97 obstacle_read=444,0,89,0,266,0 correction_write=123,15,0,38,0,25 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=51 phase=steady defects=22 selectors=12
+CLOSED_LOOP_SOLVED shot=15 window=51 iterations=13 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=51 phase=1 b_start=11465 r_start=11373 tx_sha256=40fd7843924a6115b50e4ccf8dbd96e5684126d5be4b8318059aa3d403c0af97 total=1391,109,100,272,300,183 ingress=294,36,0,90,0,60 solve_cmd=475,58,0,145,0,98 obstacle_read=444,0,89,0,266,0 correction_write=122,15,0,37,0,25 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=52 phase=steady defects=12 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=52 phase=1 b_start=11574 r_start=11473 tx_sha256=a460c11c8a62b973ccf102daef6e441b68bf4ccbc37c5cdd62dcf6011f4831b8 total=797,61,60,153,180,100 ingress=162,20,0,50,0,32 solve_cmd=261,32,0,80,0,53 obstacle_read=244,0,49,0,146,0 correction_write=74,9,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=52 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=53 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=53 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=53 phase=1 b_start=11635 r_start=11533 tx_sha256=c0a3caa37c0223accf635fbe4f7508689e1301ef4d0503d9831b95104b66a4df total=511,37,41,94,125,62 ingress=98,12,0,30,0,20 solve_cmd=155,19,0,47,0,32 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=54 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=54 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=54 phase=1 b_start=11672 r_start=11574 tx_sha256=cec8aac68bd0390984db81dc8d1d15f450c9281de38c6446b4f80ca74a48a5fd total=603,46,46,113,136,78 ingress=132,16,0,40,0,28 solve_cmd=185,23,0,56,0,37 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,17,0,13 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=55 phase=steady defects=9 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=55 phase=1 b_start=11718 r_start=11620 tx_sha256=a48b503e1cd1a3d233bed5947b35e4281e577104912021ef2bb609a34d2fa8ef total=605,46,46,117,137,75 ingress=129,16,0,40,0,25 solve_cmd=190,23,0,58,0,40 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,19,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=15 window=55 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=56 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=56 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=56 phase=1 b_start=11764 r_start=11666 tx_sha256=2d0166e73a5ad692f41b5a20b4fa93242aa1436ebfa203f78800e71c5bfe07f3 total=295,21,25,51,75,35 ingress=67,8,0,20,0,15 solve_cmd=72,9,0,21,0,15 obstacle_read=71,0,14,0,43,0 correction_write=31,4,0,10,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=57 phase=steady defects=4 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=57 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=57 phase=1 b_start=11785 r_start=11691 tx_sha256=61db5a41845ab2d648d554654cbcf1ab7d6ab8c821f68cb8d26fadf306092ea5 total=400,28,34,70,103,47 ingress=73,9,0,22,0,15 solve_cmd=118,14,0,37,0,25 obstacle_read=118,0,23,0,72,0 correction_write=38,5,0,11,0,7 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=58 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=58 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=58 phase=1 b_start=11813 r_start=11725 tx_sha256=4563d33b183384f71cc80b7c41b3c3f22a2858eac492e4a544cdbbcb83f58f5a total=767,59,57,149,170,98 ingress=158,19,0,49,0,33 solve_cmd=260,32,0,80,0,52 obstacle_read=229,0,46,0,137,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=59 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=59 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=59 phase=1 b_start=11872 r_start=11782 tx_sha256=66dbd9a5ef6d4dd5a022a68b2d32ba4221266505620cf83bc444efecf5cf11b7 total=850,66,62,163,189,110 ingress=178,22,0,53,0,37 solve_cmd=286,35,0,88,0,58 obstacle_read=256,0,51,0,154,0 correction_write=73,9,0,22,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=60 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=60 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=60 phase=1 b_start=11938 r_start=11844 tx_sha256=55f66a6aabc74369551f3580ed543319a42d65177405816a328b9003833fca13 total=703,55,51,138,151,92 ingress=165,20,0,50,0,35 solve_cmd=221,27,0,68,0,45 obstacle_read=200,0,40,0,120,0 correction_write=64,8,0,20,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=61 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=61 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=61 phase=1 b_start=11993 r_start=11895 tx_sha256=36b79058501d1c1e71878b23792c1039e17c52ec639435c1fa6d546491396020 total=621,48,46,120,137,80 ingress=138,17,0,42,0,28 solve_cmd=196,24,0,60,0,40 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,18,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=62 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=62 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=62 phase=1 b_start=12041 r_start=11941 tx_sha256=9727a7799307e4e56c849421c2eab567ad1b5f014a0d9e91bbbaee9cf4d60dd7 total=622,48,46,120,138,80 ingress=138,17,0,42,0,28 solve_cmd=196,24,0,60,0,40 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,18,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=63 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=63 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=63 phase=1 b_start=12089 r_start=11987 tx_sha256=e93c51795b2cc40da50888c21afa5bbafb9c9e2827b2a8bc9637fb2be0bf81c5 total=515,39,39,99,117,65 ingress=114,14,0,35,0,23 solve_cmd=155,19,0,47,0,32 obstacle_read=141,0,28,0,85,0 correction_write=51,6,0,17,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=64 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=64 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=64 phase=1 b_start=12128 r_start=12026 tx_sha256=7309ddb179ca89ff152552b54b8415d1ec22366271730d3e756b08a5f82147d9 total=605,46,46,113,138,78 ingress=132,16,0,40,0,28 solve_cmd=185,23,0,56,0,37 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,17,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=65 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=65 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=65 phase=1 b_start=12174 r_start=12072 tx_sha256=c132ad7cbba0f063ca43f9b0695630e14b3e68f66bf162b1832cbfa088d25249 total=607,46,46,117,139,75 ingress=129,16,0,40,0,25 solve_cmd=190,23,0,58,0,40 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,19,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=66 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=66 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=66 phase=1 b_start=12220 r_start=12118 tx_sha256=1197d2fd1097b52947b95f8c30c3941492a02f026557549aa525c19aefa2a276 total=823,64,60,160,180,107 ingress=178,22,0,53,0,37 solve_cmd=270,33,0,83,0,55 obstacle_read=244,0,49,0,146,0 correction_write=75,9,0,24,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=67 phase=steady defects=21 selectors=11
+CLOSED_LOOP_SOLVED shot=15 window=67 iterations=15 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=67 phase=1 b_start=12284 r_start=12178 tx_sha256=8e5f4a465f6243d8e7fe424ae57e167cf6422c462246f874ad845044e090c304 total=1538,121,110,301,330,203 ingress=277,34,0,83,0,58 solve_cmd=605,74,0,187,0,122 obstacle_read=494,0,99,0,296,0 correction_write=106,13,0,31,0,23 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=68 phase=steady defects=25 selectors=13
+CLOSED_LOOP_SOLVED shot=15 window=68 iterations=18 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=68 phase=1 b_start=12405 r_start=12288 tx_sha256=f33e257b92d03f4eda21486f19833052d9eb618c75339a70d0b17964278dfc4d total=1859,147,131,369,395,245 ingress=325,40,0,100,0,65 solve_cmd=753,92,0,230,0,155 obstacle_read=600,0,120,0,360,0 correction_write=124,15,0,39,0,25 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=69 phase=steady defects=19 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=69 iterations=15 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=69 phase=1 b_start=12552 r_start=12419 tx_sha256=9ff3d8c793f7231ea05939b0386b568dcc7dbb1bdb0fe002d9118461665dace8 total=1550,122,112,303,333,202 ingress=250,31,0,76,0,50 solve_cmd=645,79,0,197,0,132 obstacle_read=503,0,101,0,301,0 correction_write=98,12,0,30,0,20 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=70 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=70 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=70 phase=1 b_start=12674 r_start=12531 tx_sha256=22a687a47251e95ab1ca1e5db74f06e0d4bfa607ecd5bf6770e31eb7fbfa0e3a total=815,63,60,158,180,105 ingress=157,19,0,48,0,33 solve_cmd=294,36,0,90,0,60 obstacle_read=246,0,49,0,148,0 correction_write=64,8,0,20,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=71 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=71 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=71 phase=1 b_start=12737 r_start=12591 tx_sha256=b871ef13d6d407bef8ae997b26d60a7013638a3f6bd474a616363ebfd0be471c total=709,54,53,135,162,90 ingress=132,16,0,40,0,28 solve_cmd=253,31,0,79,0,50 obstacle_read=211,0,42,0,127,0 correction_write=56,7,0,16,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=72 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=72 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=72 phase=1 b_start=12791 r_start=12644 tx_sha256=5ce774c739e78fb761b3dea27e583ae213bb40f043baba90ee64811bee99c25d total=1003,79,72,197,213,133 ingress=207,25,0,64,0,43 solve_cmd=358,44,0,110,0,72 obstacle_read=303,0,61,0,181,0 correction_write=81,10,0,23,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=73 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=73 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=73 phase=1 b_start=12870 r_start=12716 tx_sha256=f1e9a763f1082bd7eae5687b049a37faabbc8f431bc622cb888ef5808f3dab8d total=890,68,67,170,202,112 ingress=162,20,0,50,0,32 solve_cmd=319,39,0,98,0,65 obstacle_read=280,0,56,0,168,0 correction_write=73,9,0,22,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=74 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=74 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=74 phase=1 b_start=12938 r_start=12783 tx_sha256=617027d89d7f6bb357b466b4c3cb4fbe1cdae781116a1104278085b5c00f404d total=591,44,46,110,140,73 ingress=123,15,0,38,0,25 solve_cmd=181,22,0,55,0,38 obstacle_read=175,0,35,0,105,0 correction_write=55,7,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=75 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=75 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=75 phase=1 b_start=12982 r_start=12829 tx_sha256=d5e27839e11fa949178d6f45d06068a453ee6b54fbc3a1dcde1292e2a0b0f23b total=642,48,50,120,150,80 ingress=123,15,0,38,0,25 solve_cmd=214,26,0,65,0,45 obstacle_read=193,0,39,0,115,0 correction_write=55,7,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=76 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=76 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=76 phase=1 b_start=13030 r_start=12879 tx_sha256=37b611d30ee241a8d768ab68baf6fd15f5bed362fec94d453c8c28fba3618f6e total=606,46,46,117,136,77 ingress=131,16,0,40,0,27 solve_cmd=188,23,0,58,0,38 obstacle_read=175,0,35,0,105,0 correction_write=59,7,0,19,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=77 phase=steady defects=14 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=77 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=77 phase=1 b_start=13076 r_start=12925 tx_sha256=cf684e6dd8d3c4f5a833ea530a3ec5ccbd62edb8283279b1bca076a1b704ab7c total=983,75,74,186,224,125 ingress=196,24,0,60,0,40 solve_cmd=328,40,0,100,0,68 obstacle_read=315,0,63,0,189,0 correction_write=87,11,0,26,0,17 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=78 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=78 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=78 phase=1 b_start=13151 r_start=12999 tx_sha256=68a5aa4ce31a8d9cae12ed6a3021c3125f5297531eb8dcd56773ce30cb40c8a7 total=688,52,53,130,156,88 ingress=140,17,0,44,0,28 solve_cmd=219,27,0,66,0,45 obstacle_read=207,0,42,0,123,0 correction_write=67,8,0,20,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=79 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=79 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=79 phase=1 b_start=13203 r_start=13052 tx_sha256=b023025b31814c9e2463a3b609e1f55b791ce66ef8c79b085ae5ee70efdc7e52 total=698,52,55,130,165,85 ingress=129,16,0,40,0,25 solve_cmd=229,28,0,70,0,47 obstacle_read=220,0,44,0,132,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=80 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=80 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=80 phase=1 b_start=13255 r_start=13107 tx_sha256=14667b46b931d69453070be6f6c8aff2a0cb57c5ad586a44bddfaf53ec79b58d total=524,39,41,97,124,65 ingress=108,13,0,34,0,22 solve_cmd=163,20,0,50,0,33 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=81 phase=steady defects=18 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=81 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=81 phase=1 b_start=13294 r_start=13148 tx_sha256=ea2127a4e92f266def48a5a4e5b088fac3d911fc2aa370bf58714ad9a49ae118 total=1080,85,77,213,231,142 ingress=247,30,0,77,0,50 solve_cmd=350,43,0,106,0,72 obstacle_read=332,0,66,0,200,0 correction_write=98,12,0,30,0,20 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=82 phase=steady defects=17 selectors=9
+CLOSED_LOOP_SOLVED shot=15 window=82 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=82 phase=1 b_start=13379 r_start=13225 tx_sha256=bf03b3cf47ccaadb52a4cc3125480ced7fc09542991a177f1a0c005b474a5639 total=933,74,66,185,197,123 ingress=230,28,0,70,0,48 solve_cmd=284,35,0,87,0,57 obstacle_read=275,0,55,0,165,0 correction_write=90,11,0,28,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=83 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=83 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=83 phase=1 b_start=13453 r_start=13291 tx_sha256=f6a2ee0c1df35e72b6097faa0fc9af387db0d5e0f4dd548395074e6382e6333c total=854,67,61,169,183,112 ingress=204,25,0,62,0,42 solve_cmd=261,32,0,80,0,53 obstacle_read=250,0,50,0,150,0 correction_write=84,10,0,27,0,17 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=84 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=84 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=84 phase=1 b_start=13520 r_start=13352 tx_sha256=c2db7271f1fd3542d784f4d3cd4d88c0eb2ecfbd7f0abc10a00fc15ca512527f total=539,41,41,101,124,68 ingress=112,14,0,33,0,23 solve_cmd=172,21,0,53,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=85 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=85 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=85 phase=1 b_start=13561 r_start=13393 tx_sha256=682e8dfdaf8577672785b5f4800b6e51c7f96a6b32f3f26d7450ebffe8e048cc total=432,32,34,80,101,55 ingress=93,11,0,29,0,20 solve_cmd=129,16,0,40,0,25 obstacle_read=114,0,23,0,68,0 correction_write=41,5,0,11,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=86 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=86 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=86 phase=1 b_start=13593 r_start=13427 tx_sha256=1b894f06a44d5007ff66cc891eec658f5f08823957eaa184b73c98488fb2f026 total=326,23,27,59,84,37 ingress=64,8,0,20,0,12 solve_cmd=91,11,0,29,0,18 obstacle_read=81,0,16,0,49,0 correction_write=33,4,0,10,0,7 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=87 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=87 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=87 phase=1 b_start=13616 r_start=13454 tx_sha256=39ec47efb53f97024833ff56ff8759e7cf96ca6af5db75b7766f077ab8bc596c total=318,23,27,56,78,38 ingress=65,8,0,20,0,13 solve_cmd=90,11,0,26,0,20 obstacle_read=78,0,16,0,46,0 correction_write=31,4,0,10,0,5 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=88 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=88 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=88 phase=1 b_start=13639 r_start=13481 tx_sha256=511ddf6fe77893c0b206ffe118de203fb0a8e27149602d6624cc67e36d8b0523 total=724,55,55,137,165,92 ingress=147,18,0,45,0,30 solve_cmd=238,29,0,72,0,50 obstacle_read=221,0,44,0,133,0 correction_write=64,8,0,20,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=89 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=89 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=89 phase=1 b_start=13694 r_start=13536 tx_sha256=cac6fb3e3318c33d531941027d82284a14eb7282e920b8aeb518b3373fe42dc1 total=726,55,55,138,165,93 ingress=149,18,0,47,0,30 solve_cmd=235,29,0,71,0,48 obstacle_read=221,0,44,0,133,0 correction_write=67,8,0,20,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=90 phase=steady defects=7 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=90 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=90 phase=1 b_start=13749 r_start=13591 tx_sha256=c5040ab0693edba96278f66091565d2693f3d8f9a6775811ba34080894219b0b total=601,44,48,110,147,72 ingress=113,14,0,35,0,22 solve_cmd=187,23,0,57,0,38 obstacle_read=186,0,37,0,112,0 correction_write=58,7,0,18,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=91 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=91 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=91 phase=1 b_start=13793 r_start=13639 tx_sha256=114078303cc3f7a3d1e6ad7590a09e5d4692c2082fb7a9571c64eaa756e4e013 total=694,53,53,132,156,88 ingress=147,18,0,45,0,30 solve_cmd=220,27,0,67,0,45 obstacle_read=207,0,42,0,123,0 correction_write=65,8,0,20,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=92 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=92 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=92 phase=1 b_start=13846 r_start=13692 tx_sha256=0e3806c65b4b818ef3a50c0b445146ee0f37c5be4bc424b644a7d9e4abaaf8da total=873,67,65,168,195,112 ingress=190,23,0,58,0,40 solve_cmd=276,34,0,85,0,55 obstacle_read=270,0,54,0,162,0 correction_write=82,10,0,25,0,17 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=93 phase=steady defects=17 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=93 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=93 phase=1 b_start=13913 r_start=13757 tx_sha256=11cff0c81b5ecabcd7f900df4b085e2fb3292d8b93f8f478a8108ebab5c92dbc total=1090,85,79,212,237,143 ingress=236,29,0,72,0,48 solve_cmd=361,44,0,110,0,75 obstacle_read=341,0,68,0,205,0 correction_write=98,12,0,30,0,20 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=94 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=94 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=94 phase=1 b_start=13998 r_start=13836 tx_sha256=4d11a0f1830d20bac264f6a57fa80bc683eb7a464fb61baacf17cbb63d762d54 total=619,46,48,117,147,75 ingress=123,15,0,38,0,25 solve_cmd=196,24,0,60,0,40 obstacle_read=186,0,37,0,112,0 correction_write=57,7,0,19,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=95 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=95 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=95 phase=1 b_start=14044 r_start=13884 tx_sha256=70b49eb09cb90535272755a9bb140a737d11bd1da13dd3fae07fb37e0df5ee21 total=1028,78,79,193,235,130 ingress=170,21,0,51,0,35 solve_cmd=387,47,0,119,0,80 obstacle_read=337,0,68,0,201,0 correction_write=78,10,0,23,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=96 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=96 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=96 phase=1 b_start=14122 r_start=13963 tx_sha256=7d87cfd8bcc1eeca90267f20e75b5d2eb1878f296864ddf950687177ea68c2f2 total=1125,86,84,217,251,145 ingress=172,21,0,53,0,35 solve_cmd=449,55,0,137,0,92 obstacle_read=364,0,73,0,218,0 correction_write=85,10,0,27,0,18 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=97 phase=steady defects=14 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=97 iterations=11 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=97 phase=1 b_start=14208 r_start=14047 tx_sha256=2e9014d94d7666e06e05d01ff34ce0aeed82bee5a9d6770a35f51dd3292214a0 total=1296,100,96,250,289,165 ingress=209,26,0,63,0,42 solve_cmd=508,62,0,157,0,103 obstacle_read=425,0,85,0,255,0 correction_write=98,12,0,30,0,20 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=98 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=98 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=98 phase=1 b_start=14308 r_start=14143 tx_sha256=9d0e43b1f12d34984452f9c3280aaf54295dffc5ea957a36e1c2706af208d6f9 total=1054,81,79,201,236,135 ingress=188,23,0,56,0,40 solve_cmd=392,48,0,120,0,80 obstacle_read=339,0,68,0,203,0 correction_write=80,10,0,25,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=99 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=99 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=99 phase=1 b_start=14389 r_start=14222 tx_sha256=641781772f6cfa9730b08da316492fd12f20430d9e2e45beb182612daa09bf8a total=717,55,53,139,160,92 ingress=157,19,0,49,0,32 solve_cmd=230,28,0,70,0,48 obstacle_read=213,0,42,0,129,0 correction_write=64,8,0,20,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=100 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=100 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=100 phase=1 b_start=14444 r_start=14275 tx_sha256=e63ea85fbf72060f01798e527419cc8020e8bf592caa929d0eea673950dbbed7 total=646,50,48,123,144,83 ingress=137,17,0,41,0,28 solve_cmd=214,26,0,65,0,45 obstacle_read=184,0,37,0,110,0 correction_write=55,7,0,17,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=101 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=101 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=101 phase=1 b_start=14494 r_start=14323 tx_sha256=b56a07d178f6b4ca4063cee63f67ee2fe104dbec1f667dfaa2c28d73ac07d34e total=617,46,48,117,143,77 ingress=123,15,0,38,0,25 solve_cmd=196,24,0,60,0,40 obstacle_read=185,0,37,0,111,0 correction_write=59,7,0,19,0,12 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=102 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=102 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=102 phase=1 b_start=14540 r_start=14371 tx_sha256=dde27ac75bb1acde4283d7331992f7403f95ab9911c59d59a13befea6df50ee6 total=1008,76,77,190,232,128 ingress=179,22,0,53,0,38 solve_cmd=368,45,0,113,0,75 obstacle_read=330,0,66,0,198,0 correction_write=75,9,0,24,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=103 phase=steady defects=15 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=103 iterations=11 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=103 phase=1 b_start=14616 r_start=14448 tx_sha256=574cdbbdc3c8f26d8cd8227b909022933a51086a5c79cd768d25f4a75af8b8d2 total=1110,85,84,211,251,140 ingress=201,25,0,61,0,40 solve_cmd=410,50,0,125,0,85 obstacle_read=364,0,73,0,218,0 correction_write=80,10,0,25,0,15 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=104 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=104 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=104 phase=1 b_start=14701 r_start=14532 tx_sha256=a9466fe7667a06ae616b2b8b96349baf7906ce902a92fdec4b4b91e3703100f1 total=852,66,62,165,189,110 ingress=180,22,0,55,0,37 solve_cmd=285,35,0,87,0,58 obstacle_read=256,0,51,0,154,0 correction_write=74,9,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=105 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=105 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=105 phase=1 b_start=14767 r_start=14594 tx_sha256=4498183c571af04b230df27b0447608779a39a99d0eab594694f15eb83cd1360 total=629,48,48,120,141,80 ingress=131,16,0,40,0,27 solve_cmd=207,25,0,64,0,43 obstacle_read=182,0,37,0,108,0 correction_write=54,7,0,16,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=106 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=106 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=106 phase=1 b_start=14815 r_start=14642 tx_sha256=726c3e814bcd5d5f05776f8e18b2be8f07564ad43079c57eedca31c89ffc374b total=633,48,48,120,145,80 ingress=131,16,0,40,0,27 solve_cmd=207,25,0,64,0,43 obstacle_read=188,0,37,0,114,0 correction_write=54,7,0,16,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=107 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=107 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=107 phase=1 b_start=14863 r_start=14690 tx_sha256=538d1736f2235f25fa69724c35ba473ae5877b37dabde39764c8e77a2857df0f total=701,53,53,134,159,90 ingress=147,18,0,45,0,30 solve_cmd=222,27,0,69,0,45 obstacle_read=209,0,42,0,125,0 correction_write=67,8,0,20,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=108 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=108 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=108 phase=1 b_start=14916 r_start=14743 tx_sha256=e47fa82c5d0607ef1527b6e26004d20abc7b9ffbb66de469127e14cc393fc092 total=611,46,48,113,143,75 ingress=121,15,0,36,0,25 solve_cmd=196,24,0,60,0,40 obstacle_read=185,0,37,0,111,0 correction_write=55,7,0,17,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=109 phase=steady defects=7 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=109 phase=1 b_start=14962 r_start=14791 tx_sha256=7ee0de6cbde36096ba86a1f21ae366eec562f691b921b397b3227a681d175025 total=604,44,48,110,147,75 ingress=118,14,0,37,0,25 solve_cmd=185,23,0,56,0,37 obstacle_read=186,0,37,0,112,0 correction_write=58,7,0,17,0,13 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=109 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=110 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=110 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=110 phase=1 b_start=15006 r_start=14839 tx_sha256=7dab333edb5e667f15473d4152cc74f13f672eab73e1a8c345057fc8303b051d total=613,46,48,117,141,75 ingress=123,15,0,38,0,25 solve_cmd=196,24,0,60,0,40 obstacle_read=182,0,37,0,108,0 correction_write=57,7,0,19,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=111 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=111 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=111 phase=1 b_start=15052 r_start=14887 tx_sha256=baca0f4e05ebe01e6c4e6a604be4fc660a38bb7d15ab92d4c045492015be5704 total=633,48,48,120,145,80 ingress=131,16,0,40,0,27 solve_cmd=204,25,0,61,0,43 obstacle_read=188,0,37,0,114,0 correction_write=57,7,0,19,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=112 phase=steady defects=6 selectors=3
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=112 phase=1 b_start=15100 r_start=14935 tx_sha256=d6f0af378d45db1b20616457b3f47dea3f516f5895bc4e8188562814a95d53c4 total=435,32,34,80,104,55 ingress=90,11,0,26,0,20 solve_cmd=129,16,0,40,0,25 obstacle_read=115,0,23,0,69,0 correction_write=44,5,0,14,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=112 iterations=3 commit_clear=true
+CLOSED_LOOP_START shot=15 window=113 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=113 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=113 phase=1 b_start=15132 r_start=14969 tx_sha256=0a4a6a2e3dda2e4dd16e42ba8815a56952d9139d9d4b4309a251bcf3ceeb3a1c total=317,23,27,56,78,37 ingress=64,8,0,20,0,12 solve_cmd=88,11,0,26,0,18 obstacle_read=78,0,16,0,46,0 correction_write=33,4,0,10,0,7 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=114 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=114 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=114 phase=1 b_start=15155 r_start=14996 tx_sha256=6b40c5a55331c73238faa6b63ae2cf86acb0261e49c4f2cf7279a1dc0936f49f total=635,48,48,120,147,80 ingress=132,16,0,40,0,28 solve_cmd=204,25,0,64,0,40 obstacle_read=186,0,37,0,112,0 correction_write=56,7,0,16,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=115 phase=steady defects=10 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=115 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=115 phase=1 b_start=15203 r_start=15044 tx_sha256=14a655262d310a8fe72ec24f5e5639d2c0b9502eff11a15570a2e51fccc1834b total=645,50,48,125,141,83 ingress=140,17,0,44,0,28 solve_cmd=212,26,0,63,0,45 obstacle_read=182,0,37,0,108,0 correction_write=56,7,0,18,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=116 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=116 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=116 phase=1 b_start=15253 r_start=15092 tx_sha256=ed85cc482004e51b12ffcb33ecc4a1ee93ac774d917735e578959b40840e83a6 total=542,41,41,102,124,70 ingress=116,14,0,35,0,25 solve_cmd=173,21,0,54,0,35 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=117 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=117 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=117 phase=1 b_start=15294 r_start=15133 tx_sha256=bae056d27690ba99eb0b79d15775731a621b8ebd97de3190ffb9fa4e8c74dc68 total=751,57,57,143,171,95 ingress=149,18,0,47,0,30 solve_cmd=250,31,0,76,0,50 obstacle_read=232,0,46,0,140,0 correction_write=67,8,0,20,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=118 phase=steady defects=16 selectors=9
+CLOSED_LOOP_SOLVED shot=15 window=118 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=118 phase=1 b_start=15351 r_start=15190 tx_sha256=65a6e55a140c57840e5e45f404ebfa4f964c44f292002d40419e91849de9801c total=1047,82,76,205,227,135 ingress=220,27,0,67,0,45 solve_cmd=358,44,0,110,0,72 obstacle_read=325,0,65,0,195,0 correction_write=90,11,0,28,0,18 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=119 phase=steady defects=24 selectors=14
+CLOSED_LOOP_SOLVED shot=15 window=119 iterations=14 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=119 phase=1 b_start=15433 r_start=15266 tx_sha256=a6af25f3fd3ade2c640a71b390c1bf993a51e0149af98610f541f13c91c17032 total=1511,119,107,299,322,200 ingress=327,40,0,100,0,67 solve_cmd=516,63,0,159,0,105 obstacle_read=480,0,96,0,288,0 correction_write=132,16,0,40,0,28 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=120 phase=steady defects=17 selectors=10
+CLOSED_LOOP_SOLVED shot=15 window=120 iterations=10 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=120 phase=1 b_start=15552 r_start=15373 tx_sha256=20a3832ab43a4ffbddc5f5967ce6df7ed4497faf041f8969221d3fc0538b84e0 total=1116,87,81,216,245,145 ingress=234,29,0,71,0,47 solve_cmd=377,46,0,115,0,78 obstacle_read=350,0,70,0,210,0 correction_write=98,12,0,30,0,20 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=121 phase=steady defects=14 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=121 phase=1 b_start=15639 r_start=15454 tx_sha256=bcac2e8c8d470913dfb206c4c332009b7ab9aee2a75acea3bcbfc59e5a775b5d total=910,71,67,177,198,117 ingress=196,24,0,60,0,40 solve_cmd=302,37,0,94,0,60 obstacle_read=278,0,56,0,166,0 correction_write=80,10,0,23,0,17 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_SOLVED shot=15 window=121 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=122 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=122 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=122 phase=1 b_start=15710 r_start=15521 tx_sha256=b55a28d15f7ffaf5d7a05217f547bd5331f4ea1e2bbd505e26eb82a316544b53 total=308,21,27,53,82,35 ingress=59,7,0,18,0,13 solve_cmd=80,10,0,25,0,15 obstacle_read=80,0,16,0,48,0 correction_write=33,4,0,10,0,7 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=123 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=123 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=123 phase=1 b_start=15731 r_start=15548 tx_sha256=19ca57fcea1c337498ecf1dd24a40c93d6cb152750e19b548c4f63589b701e91 total=322,23,27,57,81,38 ingress=65,8,0,20,0,13 solve_cmd=91,11,0,27,0,20 obstacle_read=82,0,16,0,50,0 correction_write=31,4,0,10,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=124 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=124 phase=1 b_start=15754 r_start=15575 tx_sha256=9984911f21c372bada131bad6a7dc818c5250ec97d7f2fab9c68809442e41a80 total=500,37,39,93,119,62 ingress=107,13,0,33,0,22 solve_cmd=147,18,0,45,0,30 obstacle_read=140,0,28,0,84,0 correction_write=49,6,0,15,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=124 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=125 phase=steady defects=13 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=125 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=125 phase=1 b_start=15791 r_start=15614 tx_sha256=14b5c1ef4154f4af6f28a3518db5f255baaf6442e37e3328fcc458e3a3f446bb total=824,64,60,160,180,108 ingress=181,22,0,55,0,38 solve_cmd=269,33,0,82,0,55 obstacle_read=243,0,49,0,145,0 correction_write=74,9,0,23,0,15 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=126 phase=steady defects=13 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=126 iterations=8 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=126 phase=1 b_start=15855 r_start=15674 tx_sha256=1e1ee7d0d9a468f55ab3153f5ba13a6d2b0e073c122045c2c4b0f39b5f5e2a50 total=921,71,69,177,205,117 ingress=186,23,0,57,0,37 solve_cmd=312,38,0,97,0,63 obstacle_read=287,0,58,0,171,0 correction_write=80,10,0,23,0,17 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=127 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=127 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=127 phase=1 b_start=15926 r_start=15743 tx_sha256=942dbc7cb7542a43212cc1e1379aa1caeda66d99b9ab0cd3a05b21f245ab6fcf total=741,57,55,143,165,95 ingress=157,19,0,48,0,33 solve_cmd=245,30,0,75,0,50 obstacle_read=219,0,44,0,131,0 correction_write=64,8,0,20,0,12 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=128 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=128 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=128 phase=1 b_start=15983 r_start=15798 tx_sha256=93612688a8b85fc3bc3cd157875d52d8fd3891490186ae08b3703d350abc6307 total=414,30,34,75,101,50 ingress=83,10,0,25,0,18 solve_cmd=124,15,0,39,0,25 obstacle_read=114,0,23,0,68,0 correction_write=38,5,0,11,0,7 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=129 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=129 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=129 phase=1 b_start=16013 r_start=15832 tx_sha256=3987f2c85c19ec89f683182b82d71dc19930ec9fd15e25ebcfb8c474d965cccd total=214,14,20,35,60,23 ingress=40,5,0,12,0,8 solve_cmd=51,6,0,17,0,10 obstacle_read=45,0,9,0,27,0 correction_write=23,3,0,6,0,5 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=130 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=130 iterations=0 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=130 phase=1 b_start=16027 r_start=15852 tx_sha256=f371bb36102df9c81234e2d4767928162df53efcdf6d6569f1475c46bc8302da total=110,5,13,14,40,10 ingress=18,2,0,5,0,5 solve_cmd=6,1,0,2,0,0 obstacle_read=13,0,2,0,9,0 correction_write=20,2,0,7,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=131 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=131 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=131 phase=1 b_start=16032 r_start=15865 tx_sha256=48d1f9cd4eb4e2e517822a26821ec60d4a4915477d2034a59d7b887fea1d24df total=211,14,20,33,60,22 ingress=38,5,0,11,0,7 solve_cmd=49,6,0,15,0,10 obstacle_read=47,0,9,0,29,0 correction_write=24,3,0,7,0,5 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=132 phase=steady defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=132 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=132 phase=1 b_start=16046 r_start=15885 tx_sha256=d2e4ffa81188a4ea9f3b9bf57105afe367b0e1a66c4b930dfc8b1d9b18d4fe68 total=322,23,27,58,80,38 ingress=65,8,0,20,0,13 solve_cmd=92,11,0,28,0,20 obstacle_read=79,0,16,0,47,0 correction_write=31,4,0,10,0,5 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=133 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=133 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=133 phase=1 b_start=16069 r_start=15912 tx_sha256=12daaa6ff88f34b43c276a0104cb3fa416e3721f7ca8613b4c23b5e45cf3740e total=408,30,32,75,99,50 ingress=93,11,0,29,0,20 solve_cmd=111,14,0,33,0,22 obstacle_read=106,0,21,0,64,0 correction_write=41,5,0,13,0,8 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=134 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=134 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=134 phase=1 b_start=16099 r_start=15944 tx_sha256=532647b07d5b2ed2a42476ec0532f3f89091f8f8951f07cccc574e797a4d68fb total=604,46,46,115,136,77 ingress=131,16,0,40,0,27 solve_cmd=187,23,0,57,0,38 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,18,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=135 phase=steady defects=9 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=135 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=135 phase=1 b_start=16145 r_start=15990 tx_sha256=faac4f6b5b2e543a0eeafbcb33c156dc5611735acfa2bb6d5fadf971725011e4 total=606,46,46,115,137,78 ingress=132,16,0,40,0,28 solve_cmd=188,23,0,59,0,37 obstacle_read=175,0,35,0,105,0 correction_write=57,7,0,16,0,13 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=136 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=136 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=136 phase=1 b_start=16191 r_start=16036 tx_sha256=ebc4bd7325fff6a728c256aacb38b5f467e0878ee98a626e22944000f2284d87 total=688,53,51,134,153,87 ingress=153,19,0,47,0,30 solve_cmd=216,26,0,67,0,45 obstacle_read=200,0,40,0,120,0 correction_write=64,8,0,20,0,12 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=137 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=137 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=137 phase=1 b_start=16244 r_start=16087 tx_sha256=670488a2430fa1168f3348b586873f2489112d73ff46717bfd0bbbcb08a88cf8 total=523,39,41,96,124,65 ingress=106,13,0,31,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=138 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=138 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=138 phase=1 b_start=16283 r_start=16128 tx_sha256=7a210ea50f44d2e78b8eeaa5dbea31d43364336956a1b1dcc526ccf672d6fdcb total=512,39,39,97,116,65 ingress=114,14,0,35,0,23 solve_cmd=157,19,0,49,0,32 obstacle_read=139,0,28,0,83,0 correction_write=47,6,0,13,0,10 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=139 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=139 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=139 phase=1 b_start=16322 r_start=16167 tx_sha256=8d220317cc942a68b3ed27d9e8bd97be52b3e0d563eae07ffe37e4222019d612 total=431,32,34,80,102,53 ingress=90,11,0,28,0,18 solve_cmd=131,16,0,40,0,27 obstacle_read=116,0,23,0,70,0 correction_write=40,5,0,12,0,8 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=140 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=140 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=140 phase=1 b_start=16354 r_start=16201 tx_sha256=51c284963167edbf3e26a419b25eb326c3857e0f1f71e23f95c826b2b912e9ed total=710,53,55,133,165,90 ingress=141,17,0,43,0,30 solve_cmd=227,28,0,70,0,45 obstacle_read=221,0,44,0,133,0 correction_write=67,8,0,20,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=141 phase=steady defects=9 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=141 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=141 phase=1 b_start=16407 r_start=16256 tx_sha256=e7be95b03a75060268040467e211fec1617058a239fd52f4438c247cb79e170e total=778,57,62,144,187,95 ingress=139,17,0,44,0,27 solve_cmd=261,32,0,80,0,53 obstacle_read=255,0,51,0,153,0 correction_write=67,8,0,20,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_START shot=15 window=142 phase=steady defects=11 selectors=8
+CLOSED_LOOP_SOLVED shot=15 window=142 iterations=9 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=142 phase=1 b_start=16464 r_start=16318 tx_sha256=450740af7c3e6fb5f2d9603e66ca3220f2018a87d4571acef84e5d96fc0a2cdb total=982,73,78,181,233,120 ingress=170,21,0,51,0,35 solve_cmd=343,42,0,105,0,70 obstacle_read=335,0,67,0,201,0 correction_write=80,10,0,25,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=143 phase=steady defects=6 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=143 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=143 phase=1 b_start=16537 r_start=16396 tx_sha256=adca7a9f956b2e003ecf2170dbe8a24ebe748c3ddb605483fb41b051274c0b3e total=538,39,43,99,132,65 ingress=98,12,0,30,0,20 solve_cmd=171,21,0,52,0,35 obstacle_read=161,0,32,0,97,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=144 phase=steady defects=7 selectors=4
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=144 phase=1 b_start=16576 r_start=16439 tx_sha256=8e9803c6766186fad4e5df5580bbd7fcb4f074522e6323815f8ff42a0a5ec43d total=520,39,41,96,121,65 ingress=105,13,0,31,0,22 solve_cmd=163,20,0,50,0,33 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=144 iterations=4 commit_clear=true
+CLOSED_LOOP_START shot=15 window=145 phase=steady defects=5 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=145 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=145 phase=1 b_start=16615 r_start=16480 tx_sha256=22958135ee53f3b1b9ceac8d9eefa0cbe9f31758aa0997b3fea36a6cf8055135 total=417,30,34,75,104,50 ingress=82,10,0,25,0,17 solve_cmd=124,15,0,39,0,25 obstacle_read=115,0,23,0,69,0 correction_write=39,5,0,11,0,8 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=146 phase=steady defects=10 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=146 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=146 phase=1 b_start=16645 r_start=16514 tx_sha256=372cf776851cb10c7df1d3eb1641e11dd1350e3da52628a70ae46b19d9081307 total=726,55,55,139,165,92 ingress=147,18,0,45,0,30 solve_cmd=240,29,0,74,0,50 obstacle_read=218,0,44,0,130,0 correction_write=64,8,0,20,0,12 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=147 phase=steady defects=11 selectors=7
+CLOSED_LOOP_SOLVED shot=15 window=147 iterations=7 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=147 phase=1 b_start=16700 r_start=16569 tx_sha256=336a5da375cd09491bed2441a15f29c2b9767767fe2adfd01b2f2c04383f2adf total=811,62,62,153,183,103 ingress=163,20,0,50,0,33 solve_cmd=268,33,0,81,0,55 obstacle_read=253,0,51,0,151,0 correction_write=73,9,0,22,0,15 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=148 phase=steady defects=8 selectors=5
+CLOSED_LOOP_SOLVED shot=15 window=148 iterations=5 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=148 phase=1 b_start=16762 r_start=16631 tx_sha256=b9bbca4beb7e1d99d12431660df08bc5683ad43411980c54a61f8075a2d2097f total=591,44,46,110,138,75 ingress=123,15,0,38,0,25 solve_cmd=180,22,0,55,0,37 obstacle_read=175,0,35,0,105,0 correction_write=58,7,0,17,0,13 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=149 phase=steady defects=3 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=149 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=149 phase=1 b_start=16806 r_start=16677 tx_sha256=758c366a40a87a64e6a14cbe933527bcdcca6cc50af2bef10108f1ac904e42cc total=310,21,27,53,84,35 ingress=56,7,0,18,0,10 solve_cmd=82,10,0,25,0,17 obstacle_read=81,0,16,0,49,0 correction_write=34,4,0,10,0,8 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=150 phase=steady defects=0 selectors=0
+CLOSED_LOOP_SOLVED shot=15 window=150 iterations=0 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=150 phase=1 b_start=16827 r_start=16704 tx_sha256=5ccaf813b315a12806479dde21b201de6580f161dc1beb7e86789001c61cd971 total=103,5,13,14,36,7 ingress=15,2,0,5,0,2 solve_cmd=9,1,0,2,0,3 obstacle_read=7,0,2,0,3,0 correction_write=17,2,0,7,0,2 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=151 phase=steady defects=2 selectors=1
+CLOSED_LOOP_SOLVED shot=15 window=151 iterations=1 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=151 phase=1 b_start=16832 r_start=16717 tx_sha256=cade00af5400e4e58536cad40f58d8ca17b6d93b2418f1681437ae30aa1c8058 total=212,14,20,33,60,23 ingress=39,5,0,11,0,8 solve_cmd=49,6,0,15,0,10 obstacle_read=45,0,9,0,27,0 correction_write=24,3,0,7,0,5 correction_read=55,0,11,0,33,0
+CLOSED_LOOP_START shot=15 window=152 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=152 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=152 phase=1 b_start=16846 r_start=16737 tx_sha256=f00b8bf5e4fea8222c6b9aaf55bbf4ad12e7a7857ecffc5745ab95ec053a4951 total=716,55,53,138,160,92 ingress=156,19,0,48,0,32 solve_cmd=230,28,0,70,0,48 obstacle_read=213,0,42,0,129,0 correction_write=64,8,0,20,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=153 phase=steady defects=11 selectors=6
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=153 phase=1 b_start=16901 r_start=16790 tx_sha256=b175746569ffe67f82f1ca2757fd9fe31e19fbc1acbf188a85466da6abb0c7e9 total=717,55,53,139,159,93 ingress=158,19,0,49,0,33 solve_cmd=227,28,0,70,0,45 obstacle_read=209,0,42,0,125,0 correction_write=67,8,0,20,0,15 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=153 iterations=6 commit_clear=true
+CLOSED_LOOP_START shot=15 window=154 phase=steady defects=14 selectors=8
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=154 phase=1 b_start=16956 r_start=16843 tx_sha256=4dc16ed7bcc637fe11e2c764773eb05555d129f115626c9c9006bdc8b9d4f1eb total=887,69,65,171,195,115 ingress=196,24,0,60,0,40 solve_cmd=283,35,0,86,0,57 obstacle_read=269,0,54,0,161,0 correction_write=83,10,0,25,0,18 correction_read=56,0,11,0,34,0
+CLOSED_LOOP_SOLVED shot=15 window=154 iterations=8 commit_clear=true
+CLOSED_LOOP_START shot=15 window=155 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=155 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=155 phase=1 b_start=17025 r_start=16908 tx_sha256=a1330857597349e15c558ec6acf1327455ef3ebe3796d865fdb1b21783110573 total=527,39,41,99,125,65 ingress=104,13,0,32,0,20 solve_cmd=165,20,0,50,0,35 obstacle_read=150,0,30,0,90,0 correction_write=51,6,0,17,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_START shot=15 window=156 phase=steady defects=11 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=156 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=156 phase=1 b_start=17064 r_start=16949 tx_sha256=963c031bce297c827b629def00eb291090b58d4ccb00ba75335f34acc5614645 total=683,53,51,131,151,87 ingress=152,19,0,46,0,30 solve_cmd=214,26,0,65,0,45 obstacle_read=200,0,40,0,120,0 correction_write=64,8,0,20,0,12 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=157 phase=steady defects=14 selectors=7
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=157 phase=1 b_start=17117 r_start=17000 tx_sha256=2a426e6dc799c9ab8b9e71bc499c2e583e2c019c4399e490471ca3b1e347028d total=839,66,60,165,180,110 ingress=189,23,0,59,0,38 solve_cmd=276,34,0,83,0,57 obstacle_read=247,0,49,0,149,0 correction_write=74,9,0,23,0,15 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_SOLVED shot=15 window=157 iterations=7 commit_clear=true
+CLOSED_LOOP_START shot=15 window=158 phase=steady defects=12 selectors=6
+CLOSED_LOOP_SOLVED shot=15 window=158 iterations=6 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=158 phase=1 b_start=17183 r_start=17060 tx_sha256=29a736fdd1e39a412433c5602630bbab3ebe514511653a4a6d0e1d749b121996 total=756,59,55,147,165,98 ingress=163,20,0,50,0,33 solve_cmd=253,31,0,77,0,52 obstacle_read=222,0,44,0,134,0 correction_write=65,8,0,20,0,13 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=159 phase=steady defects=8 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=159 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=159 phase=1 b_start=17242 r_start=17115 tx_sha256=775d7d31cba47778b391890fdbd7220434d8707d8470f88883e58ad88f923cae total=541,41,41,103,122,70 ingress=118,14,0,37,0,25 solve_cmd=170,21,0,51,0,35 obstacle_read=150,0,30,0,90,0 correction_write=49,6,0,15,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=160 phase=steady defects=6 selectors=3
+CLOSED_LOOP_SOLVED shot=15 window=160 iterations=3 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=160 phase=1 b_start=17283 r_start=17156 tx_sha256=03aadb913cab1918ee3708cc1b285d1a52c3406c7ebcc0b79a50ff45072763c5 total=431,32,34,80,103,52 ingress=88,11,0,27,0,17 solve_cmd=132,16,0,40,0,28 obstacle_read=118,0,23,0,72,0 correction_write=40,5,0,13,0,7 correction_read=53,0,11,0,31,0
+CLOSED_LOOP_START shot=15 window=161 phase=steady defects=7 selectors=4
+CLOSED_LOOP_SOLVED shot=15 window=161 iterations=4 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=161 phase=1 b_start=17315 r_start=17190 tx_sha256=27301f99e71a4c594a313016edd7a73311c8bf9a501d3c55d0ea62d42811242c total=522,39,41,97,122,65 ingress=109,13,0,34,0,23 solve_cmd=162,20,0,50,0,32 obstacle_read=150,0,30,0,90,0 correction_write=47,6,0,13,0,10 correction_read=54,0,11,0,32,0
+CLOSED_LOOP_START shot=15 window=162 phase=steady defects=10 selectors=5
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=162 phase=1 b_start=17354 r_start=17231 tx_sha256=9b6612c197a444203d7c994ecde1371e1fc8c9b9fc91ba1c49c3e9e9b64c840d total=653,50,48,127,147,83 ingress=139,17,0,43,0,28 solve_cmd=214,26,0,65,0,45 obstacle_read=186,0,37,0,112,0 correction_write=57,7,0,19,0,10 correction_read=57,0,11,0,35,0
+CLOSED_LOOP_SOLVED shot=15 window=162 iterations=5 commit_clear=true
+CLOSED_LOOP_START shot=15 window=163 phase=closing defects=4 selectors=2
+CLOSED_LOOP_SOLVED shot=15 window=163 iterations=2 commit_clear=true
+[info] AXI_CYCLE_WINDOW mode=legacy_hold shot=15 window=163 phase=2 b_start=17404 r_start=17279 tx_sha256=7fead8acd51d143087cd6fd662d4837ac44afad389775a5424d7da8e913c3d2f total=406,23,44,56,130,40 ingress=67,8,0,20,0,15 solve_cmd=87,11,0,26,0,17 obstacle_read=78,0,16,0,46,0 correction_write=34,4,0,10,0,8 correction_read=140,0,28,0,84,0
+CLOSED_LOOP_SHOT shot=15 residual_clear=true frame=1 expected_frame=1
+[info] AXI_CYCLE_PROFILE mode=legacy_hold read_latency=1 windows=328 total=228614,17409,17288,43523,51864,29015
+[info] AXI_PHASE_TRANSPORT_PASS aw=17427 w=17427 b=17427 ar=17323 r=17323 aw_first=5808 w_first=5808 simultaneous=5811 b_stalls=43568 r_stalls=51982 b_errors=6 r_errors=2 phase_writes=328 selector_writes=1824 xor_writes=1842 snapshots=328 vector_words=2658 obstacle_reads=3964 simulated_bus_cycles=228924
+{"shots":2,"windows":164,"cases":328,"total_defects":3254,"total_selectors":1824,"all_syndromes_valid":true,"commit_residual_failures":0,"final_residual_failures":0,"final_frame_failures":0,"max_iterations":18,"total_iterations":1906,"accepted_closed_loop_gate":true}
+[info] requested quit, aborting...
+[info] [Done] Simulation done in 140785.619 ms
+[success] Total time: 233 s (03:53), completed 2026年11月27日 上午11:28:50
+Scala process quit normally
+Successfully remove build folder

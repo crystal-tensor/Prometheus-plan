@@ -1,0 +1,559 @@
+{
+  "acceptance": {
+    "b7_resource_credit": 0,
+    "fpga": false,
+    "full_axi_denominator": false,
+    "full_b2": false,
+    "miss_rate_le_1pct": false,
+    "multi_context_or_cdc": false,
+    "p99_le_1us": false,
+    "paired_cycle_attribution": true,
+    "scalable_p023": false
+  },
+  "audit_tool_sha256": "8ac7a6784c2476858cfe26d7902ed834b14dbe6a4c80610a2149cbd4f4170cbc",
+  "basis_rows": [
+    {
+      "basis": "x",
+      "closed_loop_summary_per_replay": {
+        "accepted_closed_loop_gate": true,
+        "all_syndromes_valid": true,
+        "cases": 328,
+        "commit_residual_failures": 0,
+        "final_frame_failures": 0,
+        "final_residual_failures": 0,
+        "max_iterations": 18,
+        "shots": 2,
+        "total_defects": 3254,
+        "total_iterations": 1906,
+        "total_selectors": 1824,
+        "windows": 164
+      },
+      "compiled_model_archive_sha256": "eb1d0f38f44e6ea841e03ba26535b0b30250ce06e440915bfd0caba0d3dc6064",
+      "direct_and_paired_raw_sha256": "eeb6904432d595023176f5f8268f075d6b5495230d4bef51d5241d0cc07f3561",
+      "generated_endpoint_rtl_sha256": "c5e7f3c73216c5812c61c28ca29ceb77c3e0854a0b60b6e5a8c2178f11d23c72",
+      "matched_windows": 328,
+      "occupancy_checks_per_replay": 3254,
+      "paired_transaction_sequence_sha256": "441a407b9c35342d0a2f944fb1899e94701b06a88f2b944f96c001cb4082cb7f",
+      "paired_window_cycle_delta": {
+        "max": 764,
+        "min": 50,
+        "n": 328,
+        "p50": 274,
+        "p95": 525,
+        "p99": 641
+      },
+      "phase_window_counts": {
+        "closing": 2,
+        "opening": 2,
+        "steady": 324
+      },
+      "policies": {
+        "legacy_hold": {
+          "bus_with_probes": {
+            "ar": 17323,
+            "aw": 17427,
+            "aw_first": 5808,
+            "b": 17427,
+            "b_errors": 6,
+            "b_stalls": 43568,
+            "obstacle_reads": 3964,
+            "phase_writes": 328,
+            "r": 17323,
+            "r_errors": 2,
+            "r_stalls": 51982,
+            "selector_writes": 1824,
+            "simulated_bus_cycles": 228924,
+            "simultaneous": 5811,
+            "snapshots": 328,
+            "vector_words": 2658,
+            "w": 17427,
+            "w_first": 5808,
+            "xor_writes": 1842
+          },
+          "capture_sha256": "5277671f8c71d518de33f890e749119beaad81c4d53b4e908ebfaad8d4aadaf1",
+          "log_sha256": "c9ae3b84ad5767dcbed5ec5593ec5f5085d233b92f5e856392b72612e450c2c4",
+          "phase_window_cycles": {
+            "closing": {
+              "max": 599,
+              "n": 2,
+              "p50": 406
+            },
+            "opening": {
+              "max": 1074,
+              "n": 2,
+              "p50": 414
+            },
+            "steady": {
+              "max": 1859,
+              "n": 324,
+              "p50": 670
+            }
+          },
+          "stages": {
+            "correction_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 18230,
+              "r_stalls": 10946,
+              "reads": 3642,
+              "writes": 0
+            },
+            "correction_write": {
+              "aw_w_skew": 4152,
+              "b_stalls": 6228,
+              "cycles": 20372,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 2498
+            },
+            "ingress": {
+              "aw_w_skew": 9568,
+              "b_stalls": 14333,
+              "cycles": 46837,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 5734
+            },
+            "obstacle_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 68210,
+              "r_stalls": 40918,
+              "reads": 13646,
+              "writes": 0
+            },
+            "solve_cmd": {
+              "aw_w_skew": 15295,
+              "b_stalls": 22962,
+              "cycles": 74965,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 9177
+            },
+            "total": {
+              "aw_w_skew": 29015,
+              "b_stalls": 43523,
+              "cycles": 228614,
+              "r_stalls": 51864,
+              "reads": 17288,
+              "writes": 17409
+            }
+          },
+          "window_cycles": {
+            "max": 1859,
+            "min": 103,
+            "n": 328,
+            "p50": 653,
+            "p95": 1285,
+            "p99": 1562
+          }
+        },
+        "ready_high": {
+          "bus_with_probes": {
+            "ar": 17323,
+            "aw": 17427,
+            "aw_first": 5808,
+            "b": 17427,
+            "b_errors": 6,
+            "b_stalls": 45,
+            "obstacle_reads": 3964,
+            "phase_writes": 328,
+            "r": 17323,
+            "r_errors": 2,
+            "r_stalls": 118,
+            "selector_writes": 1824,
+            "simulated_bus_cycles": 133537,
+            "simultaneous": 5811,
+            "snapshots": 328,
+            "vector_words": 2658,
+            "w": 17427,
+            "w_first": 5808,
+            "xor_writes": 1842
+          },
+          "capture_sha256": "ab17a87d00a700d1be66cd579b8095ad6a5643661e922bd7921bc2e2aec09628",
+          "log_sha256": "2fd09c58237b8fd0125dfbabdd60d4bc1b52acc86e7146498299995a0b630f24",
+          "phase_window_cycles": {
+            "closing": {
+              "max": 333,
+              "n": 2,
+              "p50": 220
+            },
+            "opening": {
+              "max": 627,
+              "n": 2,
+              "p50": 238
+            },
+            "steady": {
+              "max": 1095,
+              "n": 324,
+              "p50": 391
+            }
+          },
+          "stages": {
+            "correction_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 7284,
+              "r_stalls": 0,
+              "reads": 3642,
+              "writes": 0
+            },
+            "correction_write": {
+              "aw_w_skew": 4152,
+              "b_stalls": 0,
+              "cycles": 14144,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 2498
+            },
+            "ingress": {
+              "aw_w_skew": 9568,
+              "b_stalls": 0,
+              "cycles": 32504,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 5734
+            },
+            "obstacle_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 27292,
+              "r_stalls": 0,
+              "reads": 13646,
+              "writes": 0
+            },
+            "solve_cmd": {
+              "aw_w_skew": 15295,
+              "b_stalls": 0,
+              "cycles": 52003,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 9177
+            },
+            "total": {
+              "aw_w_skew": 29015,
+              "b_stalls": 0,
+              "cycles": 133227,
+              "r_stalls": 0,
+              "reads": 17288,
+              "writes": 17409
+            }
+          },
+          "window_cycles": {
+            "max": 1095,
+            "min": 53,
+            "n": 328,
+            "p50": 381,
+            "p95": 757,
+            "p99": 921
+          }
+        }
+      },
+      "ready_high_tail": {
+        "phase_window_counts": {
+          "steady": 4
+        },
+        "stage_cycle_sums": {
+          "correction_read": 88,
+          "correction_write": 364,
+          "ingress": 932,
+          "obstacle_read": 852,
+          "solve_cmd": 1679,
+          "total": 3915
+        },
+        "threshold_cycles": 921,
+        "windows_at_or_above_threshold": 4
+      },
+      "shots": [
+        0,
+        15
+      ],
+      "simulator_binary_sha256": "23a38c73be223952f9669e4f0e939b513e434900091e30bc33f6534135cefb97",
+      "warmup_completed_writes_reads": [
+        18,
+        35
+      ]
+    },
+    {
+      "basis": "z",
+      "closed_loop_summary_per_replay": {
+        "accepted_closed_loop_gate": true,
+        "all_syndromes_valid": true,
+        "cases": 1312,
+        "commit_residual_failures": 0,
+        "final_frame_failures": 0,
+        "final_residual_failures": 0,
+        "max_iterations": 23,
+        "shots": 8,
+        "total_defects": 13498,
+        "total_iterations": 7907,
+        "total_selectors": 7498,
+        "windows": 164
+      },
+      "compiled_model_archive_sha256": "520a94d6d4fe9341d2a0a1468e0903635028faed6026fa7a047c943a4f534860",
+      "direct_and_paired_raw_sha256": "241395363b0a775d540881061673ba4dd1c8a66dbb1b9bbf1483efde085ace99",
+      "generated_endpoint_rtl_sha256": "8fd8c62afb013f0b457ef4e349bd8b551fab9fcaadb460a13a8eae998e0873e8",
+      "matched_windows": 1312,
+      "occupancy_checks_per_replay": 13498,
+      "paired_transaction_sequence_sha256": "02fb3f6fd57469a48470b9f52cf25fb1446bbaf814ed448b721af8fce73164b2",
+      "paired_window_cycle_delta": {
+        "max": 988,
+        "min": 48,
+        "n": 1312,
+        "p50": 284,
+        "p95": 544,
+        "p99": 664
+      },
+      "phase_window_counts": {
+        "closing": 8,
+        "opening": 8,
+        "steady": 1296
+      },
+      "policies": {
+        "legacy_hold": {
+          "bus_with_probes": {
+            "ar": 71132,
+            "aw": 72057,
+            "aw_first": 24018,
+            "b": 72057,
+            "b_errors": 6,
+            "b_stalls": 180143,
+            "obstacle_reads": 16404,
+            "phase_writes": 1312,
+            "r": 71132,
+            "r_errors": 2,
+            "r_stalls": 213408,
+            "selector_writes": 7498,
+            "simulated_bus_cycles": 944113,
+            "simultaneous": 24021,
+            "snapshots": 1312,
+            "vector_words": 10632,
+            "w": 72057,
+            "w_first": 24018,
+            "xor_writes": 7613
+          },
+          "capture_sha256": "5a1747fa35ae9ca1c8e807c7e0b2d5e4e72e208ed7a20dbda9f5dbd7bbb4f5d0",
+          "log_sha256": "e27f48bbe9656d43f234563e724abe204510d21b4842b73a53457dc912516120",
+          "phase_window_cycles": {
+            "closing": {
+              "max": 1265,
+              "n": 8,
+              "p50": 704
+            },
+            "opening": {
+              "max": 949,
+              "n": 8,
+              "p50": 500
+            },
+            "steady": {
+              "max": 2407,
+              "n": 1296,
+              "p50": 675
+            }
+          },
+          "stages": {
+            "correction_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 72827,
+              "r_stalls": 43691,
+              "reads": 14568,
+              "writes": 0
+            },
+            "correction_write": {
+              "aw_w_skew": 17036,
+              "b_stalls": 25591,
+              "cycles": 83575,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 10237
+            },
+            "ingress": {
+              "aw_w_skew": 39381,
+              "b_stalls": 59076,
+              "cycles": 192937,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 23620
+            },
+            "obstacle_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 282657,
+              "r_stalls": 169599,
+              "reads": 56529,
+              "writes": 0
+            },
+            "solve_cmd": {
+              "aw_w_skew": 63648,
+              "b_stalls": 95431,
+              "cycles": 311807,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 38182
+            },
+            "total": {
+              "aw_w_skew": 120065,
+              "b_stalls": 180098,
+              "cycles": 943803,
+              "r_stalls": 213290,
+              "reads": 71097,
+              "writes": 72039
+            }
+          },
+          "window_cycles": {
+            "max": 2407,
+            "min": 101,
+            "n": 1312,
+            "p50": 678,
+            "p95": 1319,
+            "p99": 1609
+          }
+        },
+        "ready_high": {
+          "bus_with_probes": {
+            "ar": 71132,
+            "aw": 72057,
+            "aw_first": 24018,
+            "b": 72057,
+            "b_errors": 6,
+            "b_stalls": 45,
+            "obstacle_reads": 16404,
+            "phase_writes": 1312,
+            "r": 71132,
+            "r_errors": 2,
+            "r_stalls": 118,
+            "selector_writes": 7498,
+            "simulated_bus_cycles": 550725,
+            "simultaneous": 24021,
+            "snapshots": 1312,
+            "vector_words": 10632,
+            "w": 72057,
+            "w_first": 24018,
+            "xor_writes": 7613
+          },
+          "capture_sha256": "ad7df8b6cede420ede01f3213b9a34dfe0282a6c7c9fee2870dc369428623736",
+          "log_sha256": "4bcfcfbe5988af0b039483f4ebee06850ea51861b5ee9cb8d734efe0dd77251f",
+          "phase_window_cycles": {
+            "closing": {
+              "max": 732,
+              "n": 8,
+              "p50": 398
+            },
+            "opening": {
+              "max": 559,
+              "n": 8,
+              "p50": 289
+            },
+            "steady": {
+              "max": 1419,
+              "n": 1296,
+              "p50": 395
+            }
+          },
+          "stages": {
+            "correction_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 29136,
+              "r_stalls": 0,
+              "reads": 14568,
+              "writes": 0
+            },
+            "correction_write": {
+              "aw_w_skew": 17036,
+              "b_stalls": 0,
+              "cycles": 57984,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 10237
+            },
+            "ingress": {
+              "aw_w_skew": 39381,
+              "b_stalls": 0,
+              "cycles": 133861,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 23620
+            },
+            "obstacle_read": {
+              "aw_w_skew": 0,
+              "b_stalls": 0,
+              "cycles": 113058,
+              "r_stalls": 0,
+              "reads": 56529,
+              "writes": 0
+            },
+            "solve_cmd": {
+              "aw_w_skew": 63648,
+              "b_stalls": 0,
+              "cycles": 216376,
+              "r_stalls": 0,
+              "reads": 0,
+              "writes": 38182
+            },
+            "total": {
+              "aw_w_skew": 120065,
+              "b_stalls": 0,
+              "cycles": 550415,
+              "r_stalls": 0,
+              "reads": 71097,
+              "writes": 72039
+            }
+          },
+          "window_cycles": {
+            "max": 1419,
+            "min": 53,
+            "n": 1312,
+            "p50": 395,
+            "p95": 775,
+            "p99": 946
+          }
+        }
+      },
+      "ready_high_tail": {
+        "phase_window_counts": {
+          "steady": 14
+        },
+        "stage_cycle_sums": {
+          "correction_read": 308,
+          "correction_write": 1271,
+          "ingress": 3214,
+          "obstacle_read": 3398,
+          "solve_cmd": 6924,
+          "total": 15115
+        },
+        "threshold_cycles": 946,
+        "windows_at_or_above_threshold": 14
+      },
+      "shots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "simulator_binary_sha256": "23a38c73be223952f9669e4f0e939b513e434900091e30bc33f6534135cefb97",
+      "warmup_completed_writes_reads": [
+        18,
+        35
+      ]
+    }
+  ],
+  "classification": "bounded_paired_axi_lite32_rtl_simulation_cycle_attribution",
+  "evidence_id": "cbc6dd10c1e15e1cd78aec263d057be3bc5c78fa91cd38387ae0fe98bd9badeb",
+  "paired_windows": 1640,
+  "prior_evidence_sha256": "5f2d3d212c4852a2ffda5554ef870a4f4b5ab3e1f162a310d3f33e5053dfb1f2",
+  "quantile_method": "nearest rank: ceil(n * percentile / 100), 1-indexed, within basis",
+  "schema": "b2_b7_p023_d6_axi_cycle_profile_evidence_v1",
+  "scope": [
+    "021/B7",
+    "022/B2",
+    "023"
+  ],
+  "simulator_seed": 20261127,
+  "source_commit": "a3530d9e58ff790dafc93d56c9a2769ceac84731"
+}
