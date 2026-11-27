@@ -1,0 +1,167 @@
+{
+  "audit_scope": "calibration streams fully regenerated; first heldout chunk reproduced; all archived holdout bits counted",
+  "audit_tool_sha256": "aef62619e0b84ef3786eb855514b4f65010ec4f84ed8a00d757b39112ccbcc3b",
+  "challenge_salt": "1b685d21f723196f148c6b6eb8b71d0d8ae44334e7aa169c27130be07dc90887",
+  "claim_boundary": {
+    "b7_resource_credit": 0,
+    "calibrated_device": false,
+    "full_b2": false,
+    "hardware_deadline": false,
+    "scalable_023": false,
+    "temporal_correlation_stress": false
+  },
+  "decision": {
+    "calibration_rescue": false,
+    "decision": "retain_71_in_this_stress_calibration_not_needed_to_pass",
+    "policies": {
+      "frozen": {
+        "both_bases_by_design": {
+          "candidate": true,
+          "reference": true
+        },
+        "relative_resource_gate": true,
+        "scored_cost_ratio": 1.3661971830985915
+      },
+      "recalibrated": {
+        "both_bases_by_design": {
+          "candidate": true,
+          "reference": true
+        },
+        "relative_resource_gate": true,
+        "scored_cost_ratio": 1.3661971830985915
+      }
+    }
+  },
+  "evidence_id": "3fd6b59647b82c3e307eec5cbf43e41681b895a617b32127278b14e206b3baf3",
+  "freeze_commit": "527fa3d692cd16f688ca150fa7e1c180fbfdb793",
+  "mismatch": {
+    "all_other_noise_parameters": 0.001,
+    "classification": "synthetic single-channel measurement-noise mismatch, no hardware calibration or correlated temporal faults",
+    "heldout_stress": 0.00125,
+    "nominal": 0.001,
+    "parameter": "before_measure_flip_probability",
+    "selection": "one predeclared 25% measurement-channel perturbation; diagnostic magnitude, not a device estimate; no choice based on sampled outcomes"
+  },
+  "protocol_sha256": "e6004fa244da5bd93e97f1d29d5ff37313855a997a4c4428dd5cc07e0aef1f86",
+  "rows": [
+    {
+      "active_qubits": 97,
+      "archived_nominal_failures_not_a_control_arm": 350,
+      "basis": "x",
+      "calibration_seed": 7958610386277590954,
+      "calibration_shots": 256,
+      "challenge_salt": "1b685d21f723196f148c6b6eb8b71d0d8ae44334e7aa169c27130be07dc90887",
+      "counts": {
+        "frozen": {
+          "cp_upper": 0.006057487175069506,
+          "failures": 325,
+          "passes": true
+        },
+        "recalibrated": {
+          "cp_upper": 0.006057487175069506,
+          "failures": 325,
+          "passes": true
+        }
+      },
+      "design": "reference",
+      "estimated_readout_probability": 0.0012469941512409438,
+      "freeze_commit": "527fa3d692cd16f688ca150fa7e1c180fbfdb793",
+      "holdout_seed": 5206246480543841032,
+      "paired_harmed": 1,
+      "paired_p_two_sided_exploratory": 1.0,
+      "paired_recovered": 1,
+      "raw_artifact_sha256": "2d690796860e85a42f0f978e558551582e9ca25699a355336e78aed17c667c36",
+      "shots": 102400
+    },
+    {
+      "active_qubits": 97,
+      "archived_nominal_failures_not_a_control_arm": 283,
+      "basis": "z",
+      "calibration_seed": 4140573294626204791,
+      "calibration_shots": 256,
+      "challenge_salt": "1b685d21f723196f148c6b6eb8b71d0d8ae44334e7aa169c27130be07dc90887",
+      "counts": {
+        "frozen": {
+          "cp_upper": 0.005497006524354128,
+          "failures": 283,
+          "passes": true
+        },
+        "recalibrated": {
+          "cp_upper": 0.005429569308720075,
+          "failures": 278,
+          "passes": true
+        }
+      },
+      "design": "reference",
+      "estimated_readout_probability": 0.0012407755362000223,
+      "freeze_commit": "527fa3d692cd16f688ca150fa7e1c180fbfdb793",
+      "holdout_seed": 3589855748030137239,
+      "paired_harmed": 3,
+      "paired_p_two_sided_exploratory": 0.2265625,
+      "paired_recovered": 8,
+      "raw_artifact_sha256": "c3996fdcfc59681ffb69547cd913d915ff1f626697e45c3da493b5b5fa82d9e4",
+      "shots": 102400
+    },
+    {
+      "active_qubits": 71,
+      "archived_nominal_failures_not_a_control_arm": 539,
+      "basis": "x",
+      "calibration_seed": 6774126984177966815,
+      "calibration_shots": 256,
+      "challenge_salt": "1b685d21f723196f148c6b6eb8b71d0d8ae44334e7aa169c27130be07dc90887",
+      "counts": {
+        "frozen": {
+          "cp_upper": 0.008533153112006982,
+          "failures": 518,
+          "passes": true
+        },
+        "recalibrated": {
+          "cp_upper": 0.008558166506816949,
+          "failures": 520,
+          "passes": true
+        }
+      },
+      "design": "candidate",
+      "estimated_readout_probability": 0.0012354185062768727,
+      "freeze_commit": "527fa3d692cd16f688ca150fa7e1c180fbfdb793",
+      "holdout_seed": 5262577936834651824,
+      "paired_harmed": 7,
+      "paired_p_two_sided_exploratory": 0.7744140625,
+      "paired_recovered": 5,
+      "raw_artifact_sha256": "d69d7750beb4bc806fdc1fe3258752638a1d8a51aaaccfc718df2a25ecf1a784",
+      "shots": 102400
+    },
+    {
+      "active_qubits": 71,
+      "archived_nominal_failures_not_a_control_arm": 443,
+      "basis": "z",
+      "calibration_seed": 5413669534777277795,
+      "calibration_shots": 256,
+      "challenge_salt": "1b685d21f723196f148c6b6eb8b71d0d8ae44334e7aa169c27130be07dc90887",
+      "counts": {
+        "frozen": {
+          "cp_upper": 0.007625076240680198,
+          "failures": 446,
+          "passes": true
+        },
+        "recalibrated": {
+          "cp_upper": 0.007586892804800322,
+          "failures": 443,
+          "passes": true
+        }
+      },
+      "design": "candidate",
+      "estimated_readout_probability": 0.0011643987855715437,
+      "freeze_commit": "527fa3d692cd16f688ca150fa7e1c180fbfdb793",
+      "holdout_seed": 1195661864912420015,
+      "paired_harmed": 0,
+      "paired_p_two_sided_exploratory": 0.25,
+      "paired_recovered": 3,
+      "raw_artifact_sha256": "87bc1d5d9ecbf8f49dd26a8a84173b93b03fc0613b526a6943b625917d1e189b",
+      "shots": 102400
+    }
+  ],
+  "schema": "b2_b7_p023_readout_recalibration_evidence_v1",
+  "scope": "022/B2 only; 021/B7 and 023 downstream gates remain closed",
+  "strict_maximum_failed_shots_per_basis": 636
+}
