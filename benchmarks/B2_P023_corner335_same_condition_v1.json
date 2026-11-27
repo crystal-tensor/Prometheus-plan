@@ -1,0 +1,16 @@
+{
+  "schema": "b2_p023_corner335_same_condition_v1",
+  "scope": "#022/B2 335-active-qubit X-protected corner against the qualified #023 449-qubit reference",
+  "selection": "Choose fix_corner_x from the prior 335-qubit structural check because stressed X disqualified the 287-qubit path; no candidate qualification outputs have been consulted.",
+  "reference_directory": "results/P023_d15_million_acceptance_v1",
+  "reference_checkpoint_sha256": "4b227ab57def5cac63ef624e866f301f598f914c46ea76b29606dc6c8bb4e7b0",
+  "reference_freeze": "d51146380aba2c20357d70f6f6576b07f5509b63",
+  "original_gate_sha256": "5f588d03c0fb0b4bc7b38588d87f1490fe7df14d0b295727087faf61ff5d4d20",
+  "corner_preflight_sha256": "c8b91221070d9c7c5bd0a430fd3d0e501ff3b5d4e33759a0627a8a0c38015606",
+  "controls_dir": "results/B2_P023_corner335_controls_v1",
+  "commit_periods": 64,
+  "guard_periods": 15,
+  "controls_per_cell": 16,
+  "acceptance": "Use the original two-sided Wilson upper bound <=1%, 1024 shots (at most 3 failures) in every X/Z, nominal/paired readout cell at both horizons. No pooling or projection; validate short before long; report compute throughput and timing.",
+  "comparator": "Same four 0.001 rates, same extra 0.0001 paired-ancilla flip per line and eligible period, same nominal MWPM and commit rule, 128-round core, 30-round guard, seven ticks per round, retained local CNOTs. No calibration/hardware/B7 credit."
+}
