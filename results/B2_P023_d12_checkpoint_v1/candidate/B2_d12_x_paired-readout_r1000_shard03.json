@@ -1,0 +1,62 @@
+{
+  "receipt": {
+    "arm": "paired-readout",
+    "basis": "x",
+    "circuit_sha256": "a048889ff9f1f460b2a5037d703a10f849deb5328712d288673ed72203b63fd4",
+    "controls": [
+      {
+        "file": "B2_d12_control_x_nominal.json",
+        "sha256": "850a680f865819bb855f49333d54ecdef6ffe4fc057eb084fded9b45338b620e"
+      },
+      {
+        "file": "B2_d12_control_x_paired-readout.json",
+        "sha256": "2a734f7f37455a075f4152400a19ae27bfa2bd735418e64028b34b122485b437"
+      },
+      {
+        "file": "B2_d12_control_z_nominal.json",
+        "sha256": "a720d6f5f127de346d2d21c30c5a6a7aa6a4b9da6381f875e913d08811984d26"
+      },
+      {
+        "file": "B2_d12_control_z_paired-readout.json",
+        "sha256": "153947c9c60dac4259a8a9d268d54a116fe02f02f33a1267ef08a3dc45eff7a1"
+      }
+    ],
+    "correction_le_hex": "958148c8db148eec5e4f83c42fd5522a",
+    "correction_nonzero_cut_batches": 7,
+    "decoder_dem_sha256": "89683f1bf46b8108092d6b7b252f339e489889a95b5140efd4681bf39c4f9ee1",
+    "detector_count": 143001,
+    "distance": 12,
+    "failures_le_hex": "00000000000000000000000000000000",
+    "freeze": "f81f11d9af1f76cfae4cef1f151d804aaf74d389",
+    "geometry": {
+      "active_qubits": 287,
+      "all_cx_local": true,
+      "bulk_detectors": 143,
+      "round0_detectors": 72,
+      "round8_detectors": 72,
+      "ticks_per_round": 7,
+      "used_nearest_neighbor_couplings": 528
+    },
+    "graph_types": 5,
+    "kernel_sha256": "64ff47fb2694e77ff1c939268c05050b7ac36a67c0de7b8b0b5823568e75a355",
+    "max_graph_detectors": 22594,
+    "physical_nonzero_cut_batches": 7,
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "rounds": 1000,
+    "salt": "9f05baa8bae7862cee870bed704aa9ccafd778a76bbce8b0b7617f4f57c2545c",
+    "sample_sha256": "773eaab775efee4c30a5f0901369ef5ea2a2a5c5672ef4ee1241aceb0280e79a",
+    "sampling_dem_sha256": "6e70d7fa6f83d2663950d12128821884e5d8cd425541755918a5f96587203745",
+    "schema": "b2_p023_d12_shard_v1",
+    "seed": 1147533469447143788,
+    "shard": 3,
+    "shots": 128,
+    "truth_le_hex": "958148c8db148eec5e4f83c42fd5522a",
+    "windows": 8
+  },
+  "timings": {
+    "batch_window_p99_ns": 86875166,
+    "decode_ns": 413377374,
+    "max_window_ns": 86875166,
+    "sample_ns": 57664166
+  }
+}
