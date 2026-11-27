@@ -1,0 +1,69 @@
+{
+  "schema": "b2_b7_p023_readout_recalibration_protocol_v1",
+  "scope": "022/B2 only; 021/B7 and 023 downstream gates remain closed",
+  "question": "Can label-free readout recalibration qualify the 71-active-qubit design under one predeclared measurement-channel mismatch?",
+  "reference": {
+    "distance": 7,
+    "active_qubits": 97,
+    "enable_correlations": false,
+    "protocol": "benchmarks/B2_B7_P023_kaggle_inspired_acceptance_v1.json",
+    "execution_key": "strict_reference_experiment",
+    "result": "results/B2_B7_P023_kaggle_inspired_acceptance_v1.json",
+    "rows_key": "strict_reference_rows",
+    "circuit_sha_key": "circuit_sha256",
+    "generator": "tools/b2_b7_p023_kaggle_inspired_acceptance.py"
+  },
+  "candidate": {
+    "distance": 6,
+    "active_qubits": 71,
+    "enable_correlations": true,
+    "protocol": "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+    "execution_key": "execution",
+    "result": "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json",
+    "rows_key": "candidate_rows",
+    "circuit_sha_key": "raw_circuit_sha256",
+    "generator": "tools/b2_b7_p023_d6_correlated_strict_acceptance.py"
+  },
+  "input_sha256": {
+    "benchmarks/B2_B7_P023_kaggle_inspired_acceptance_v1.json": "932cfc764251b9a57ef1f71af984d8a35573fce451bc832f3b64aa0eec727bac",
+    "results/B2_B7_P023_kaggle_inspired_acceptance_v1.json": "3a7702d0a5956d1255c02d723e5b617de0f99fe330c6e7952833ae1a36375cc0",
+    "tools/b2_b7_p023_kaggle_inspired_acceptance.py": "01fe3bf474ce1cf9f17214ed43d1e6e3c89b40d99a4059d00f09326295e59788",
+    "benchmarks/B2_B7_P023_d6_correlated_strict_acceptance_v1.json": "e98e486679db1a1640563f54f1a882167e660865bb60c4365bb5767dcd29a430",
+    "results/B2_B7_P023_d6_correlated_strict_acceptance_v1.json": "c2c67516ac29da44225b94cda6eae9105a29b2a49b243d999ec29f5e7dbaa5de",
+    "tools/b2_b7_p023_d6_correlated_strict_acceptance.py": "49f79fac4a22e9d154ec8f44c0dbdc4cf56a83ed6943168228d93c21a25c5e57"
+  },
+  "mismatch": {
+    "classification": "synthetic single-channel measurement-noise mismatch, no hardware calibration or correlated temporal faults",
+    "parameter": "before_measure_flip_probability",
+    "nominal": 0.001,
+    "heldout_stress": 0.00125,
+    "selection": "one predeclared 25% measurement-channel perturbation; diagnostic magnitude, not a device estimate; no choice based on sampled outcomes",
+    "all_other_noise_parameters": 0.001
+  },
+  "calibration": {
+    "shots_per_design_and_basis": 256,
+    "observables_visible_to_fitter": false,
+    "inputs_visible_to_fitter": "aggregate detector one-count, detector trial count, zero-measurement-noise DEM parity coefficients and detector measurement arities",
+    "method": "invert expected mean detector rate by fixed-iteration bisection in a predetermined range",
+    "probability_bracket": [0.0001, 0.005],
+    "bisection_iterations": 48,
+    "calibration_sampling_role": "calibration-only",
+    "holdout_sampling_role": "strict-heldout",
+    "one_fixed_estimate_per_design_and_basis": true,
+    "no_holdout_refit": true
+  },
+  "acceptance": {
+    "memory_bases": ["x", "z"],
+    "rounds": 1000,
+    "heldout_shots_per_design_and_basis": 102400,
+    "chunk_shots": 256,
+    "maximum_cp_upper": 0.01,
+    "one_sided_delta_log2": -128,
+    "score_threshold_if_both_designs_pass": 1.25,
+    "selection": "for each decoder policy require both bases of both designs to qualify before comparing 97000 / 71000; the recalibrated track is the candidate solution and the frozen track is its control",
+    "calibration_rescue": "recalibrated track qualifies and frozen candidate does not while the frozen reference qualifies",
+    "no_fallback_evidence_when_reference_fails": true,
+    "no_hardware_or_full_b2_credit": true,
+    "ignore_120_qubit_depth_7000": true
+  }
+}
