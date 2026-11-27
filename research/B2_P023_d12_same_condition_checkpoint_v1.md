@@ -27,6 +27,10 @@ The long gate still needs both X/Z bases and both noise arms at a fixed 1,024 sh
 
 The [original gate](../benchmarks/B2_B7_P023_logical_memory_horizon_gate_v1.json) remains controlling. Even a comparable simulator pass supplies no calibrated leakage, hardware deadline or B7 resource credit. The 120-qubit/depth-7,000 acceptance proposal remains out of scope.
 
+## Million-round follow-up
+
+In the next [audited snapshot](../results/B2_P023_d12_million_progress_v1/checkpoint.json), the d=12 nominal X and Z first tranches each have 1/128 failures; the paired-readout tranches are still running. The d=15 rows have 0/512 nominal X, 2/512 paired-readout X, 0/512 nominal Z and 0/512 paired-readout Z. None has the scheduled 1,024 shots yet. No resource comparison is scored and the maximum of three failures per full cell is unchanged. The checkpoint binds the original short receipts together with the new, separate long receipt files.
+
 ## Reproduce
 
 See the [candidate manifest](../benchmarks/B2_P023_d12_same_condition_v1.json), [same-fault controls](../results/B2_P023_d12_controls_v1/), and [combined audit and disjoint receipts](../results/B2_P023_d12_checkpoint_v1/checkpoint.json). The candidate freeze `f81f11d9af1f76cfae4cef1f151d804aaf74d389` was committed before drawing its qualification salt. Use the pinned dependencies and kernel build from the [d=15 grouped sampler](P023_grouped_sampler_checkpoint_v1.md).
