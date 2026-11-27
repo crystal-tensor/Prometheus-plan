@@ -1,0 +1,52 @@
+{
+  "schema": "p023_streamed_memory_v1",
+  "scope": "#023 direct logical memory; no B2 or B7 credit from this experiment",
+  "noise_source": "benchmarks/B2_B7_P023_direct_1k_memory_v1.json",
+  "source_sha256": {
+    "benchmarks/B2_B7_P023_logical_memory_horizon_gate_v1.json": "5f588d03c0fb0b4bc7b38588d87f1490fe7df14d0b295727087faf61ff5d4d20",
+    "benchmarks/B2_B7_P023_direct_1k_memory_v1.json": "5656abc207e97cc8887414ac6465fb352f167b2e56a1e8a82f4f225c2547f2c8",
+    "results/B2_B7_P023_direct_1k_memory_v1.json": "e93892fb3f375d786636444831cac595f8f7998b95ed99b8b9c557b79e129e20"
+  },
+  "toolchain": {"Python": "3.12.6", "Stim": "1.16.0", "PyMatching": "2.4.0", "NumPy": "2.4.6"},
+  "distances": [7, 15],
+  "noise": {
+    "after_clifford_depolarization": 0.001,
+    "before_round_data_depolarization": 0.001,
+    "before_measure_flip_probability": 0.001,
+    "after_reset_flip_probability": 0.001
+  },
+  "chunk_loop_periods": 64,
+  "overlap": "one distance in folded loop periods (two syndrome rounds per period), shortened at the physical end",
+  "sampler": "Stim samples independent mechanisms in each segment of one folded DEM, preserving decomposed fault correlations; no block initialization or measurement",
+  "decoder": "independent MWPM on the nominal graph; past edges removed; future edges truncated to a virtual boundary; commit by earliest incident detector, carrying residual endpoints and the logical frame",
+  "stress": {
+    "arm": "paired-readout",
+    "rule": "Add one independent two-consecutive-ancilla-readout flip event per bulk stabilizer per folded period; the shared syndrome cancels, producing a temporal length-two edge",
+    "decoder_aware_of_stress": false,
+    "classification": "synthetic correlated readout stress, not a hardware calibration or worst-case claim"
+  },
+  "burst_probability": 0.0001,
+  "control_rounds": 1000,
+  "control_shots": 24,
+  "control_seed": 2370001,
+  "controls": [
+    "same fault flags replayed through unpartitioned Stim DEM for all four (d,basis) cells with and without stress",
+    "bitwise equality of committed detector correction parity to the syndrome input",
+    "disable either cross-cut transfer and require the trajectory stitch check to reject the result",
+    "direct timeline and detector coordinates checked against the original circuit"
+  ],
+  "qualification": {
+    "horizons": [1000, 1000000],
+    "bases": ["x", "z"],
+    "arms": ["nominal", "paired-readout"],
+    "shards": 8,
+    "shots_per_shard": 128,
+    "prespecified_total_shots": 1024,
+    "failure_target": 0.01,
+    "interval": "two-sided Wilson 95 percent upper bound, z=1.959963984540054",
+    "pair_gate": "Both bases of the same distance must clear both horizons and both arms separately with a completed fixed cohort.",
+    "futility": "Stop a row only when cumulative failures are greater than the static maximum for the full 1024-shot Wilson gate; no positive inference from a truncated row.",
+    "timing": "Host sampled and decode/stitch windows timed separately; batch-window p99 is not single-trajectory latency and no hardware real-time claim is made."
+  },
+  "claims_excluded": ["calibrated device", "controller deadline", "full B2", "B7 resource credit", "120-qubit depth-7000 acceptance"]
+}
