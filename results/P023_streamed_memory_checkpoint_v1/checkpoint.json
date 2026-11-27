@@ -1,0 +1,756 @@
+{
+  "audit_sha256": "ea30a07b3e04f7267bd8153b8568138f8a6b602566f21c1bfc25bd8d832cd950",
+  "both_horizons_bases_and_arms_pass_distance": [],
+  "claim_boundary": {
+    "b7_resource_credit": 0,
+    "batch_window_timing_is_not_controller_response": true,
+    "full_b2": false,
+    "hardware": false
+  },
+  "complete_direct_rows": 8,
+  "controls": [
+    {
+      "receipt": "P023_stream_controls_d7_x.json",
+      "sha256": "ae811405f4d0ddaecf130fdd0b21c318e05eb6c3fee38bf42391e56c80d5af07"
+    },
+    {
+      "receipt": "P023_stream_controls_d7_z.json",
+      "sha256": "4d7b94fd3c079cc81b46b06cc65415c0c6c3e565da519da13d91d264bf3bbe18"
+    },
+    {
+      "receipt": "P023_stream_controls_d15_x.json",
+      "sha256": "e3c823c3b91ec60ebd3cc054c817101a8a50e31ab88c517b29b1ec9bd90eae0a"
+    },
+    {
+      "receipt": "P023_stream_controls_d15_z.json",
+      "sha256": "95cfacfaae372918c4101d377032c2e98feea61fd70c65c6e9dff06ec019b9b3"
+    }
+  ],
+  "freeze": "91398ae931b2fb268e30fc1d8ef5f16bf87b7389",
+  "max_failed_shots": 3,
+  "planned_shots": 1024,
+  "protocol_sha256": "f41d7fa104892ed2c8cff83e0193159be4f6cdfba33d89f139798ccacfe1f167",
+  "rows": [
+    {
+      "arm": "nominal",
+      "basis": "x",
+      "distance": 7,
+      "failures": 2,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 544200.358620171,
+        "max_of_shard_batch_window_p99_ms": 76.901375,
+        "min_of_shard_batch_window_p99_ms": 41.477125,
+        "total_decoder_stitch_seconds": 1.881659914,
+        "total_sampler_seconds": 1.156436166
+      },
+      "max_graph_detectors": 6816,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard00.json",
+            "sha256": "ad03ef5602e692b1c39f40d3b82d0d10b94d05690381b68b8c59f974e119e820"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard01.json",
+            "sha256": "ca29c34c2214276c9b4b1bd94b27e1486fefc7be6839efbdea00656779f7ab36"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard02.json",
+            "sha256": "372bcfd09f93b00bb1036e39a15a3c81f3398ed66ab69f4f4d8139953ab13b97"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard03.json",
+            "sha256": "7af276e9624284d15e193c1e51a390b2fdf206e7f071ec6777943b449f510fe7"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard04.json",
+            "sha256": "c9319a8a0f329974791a473540b9ab3286df0eddd67eeceafb5c7da94c1fd7ed"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard05.json",
+            "sha256": "4c556b673fc9f4a328b16acd1323329039c49c430d723621d3fdfb36439d5d0b"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard06.json",
+            "sha256": "86005cca9324a81dc49e16912c2a26b621d6999c1316f494cb2a764c3c143333"
+          },
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000_shard07.json",
+            "sha256": "fcc1a054f88d557d6a3212bde65f168ff074bd65ddeacb9f0f813b287a988e74"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.007093273978132256,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "x",
+      "distance": 7,
+      "failures": 2,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 523301.98345111747,
+        "max_of_shard_batch_window_p99_ms": 156.380083,
+        "min_of_shard_batch_window_p99_ms": 41.417709,
+        "total_decoder_stitch_seconds": 1.956805119,
+        "total_sampler_seconds": 1.032983461
+      },
+      "max_graph_detectors": 6816,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard00.json",
+            "sha256": "bb574e516e2b59d16bf786cd0c7fa049ca7cb098e8dd0a56226d3f961870445b"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard01.json",
+            "sha256": "56766a83a8f4b228b0a5375b86971ad54d42f8c555a1091d789535a26897f7d1"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard02.json",
+            "sha256": "03d0c13f7fc8e49b531734005967bef8020cabaa14e71a84e5020e1612351954"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard03.json",
+            "sha256": "9c540c8012447c95be27fdf68884091bb454ff61abcda8546993e080cb749514"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard04.json",
+            "sha256": "2ec0d18fc566736cf78ac057da51f04eec474f2f5db9cb5878e07312dca13e89"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard05.json",
+            "sha256": "8ce446c39e5b50e91e301b982bf8cd56e6482b25d8d8eb0f97f39960c8695c07"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard06.json",
+            "sha256": "37952a6cf2fe9f7dcd4fb3047057d2afcfa7686ed6cb1c6ead15544cfe4c191b"
+          },
+          {
+            "receipt": "P023_stream_d7_x_paired-readout_r1000_shard07.json",
+            "sha256": "1f1e01ab32cf0f0755c9730fbdcc64767953e3cfaed804e3e9ceb72eee42db09"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.007093273978132256,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "nominal",
+      "basis": "z",
+      "distance": 7,
+      "failures": 5,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 543043.0326995028,
+        "max_of_shard_batch_window_p99_ms": 83.244208,
+        "min_of_shard_batch_window_p99_ms": 56.701,
+        "total_decoder_stitch_seconds": 1.885670082,
+        "total_sampler_seconds": 1.073465042
+      },
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard00.json",
+            "sha256": "128c121dcd062fecad6325ad3df070bb3479137c4a6b383fb016310e7df660c7"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard01.json",
+            "sha256": "81b9109900cacbb81ee55efb85f26d8b9937c33cb53ae6eea0898f5deaad17c5"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard02.json",
+            "sha256": "2dbb5a908050ad4378af95ab5c8bdfe01afd242a62465f4214fc67808ae6d19d"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard03.json",
+            "sha256": "2406eadc053cb54f34e061454456f4c736379200b451672cc5d59465d9693d28"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard04.json",
+            "sha256": "e0c47d672889868ada2b0c07da5b6bff03ff41aee213ae6ec5965fc28aee6697"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard05.json",
+            "sha256": "dc5eabe0798d4175949e221ac0ea5abd3e013b75c0a105f84251ad80bdc4820c"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard06.json",
+            "sha256": "4289f128cad898eb2eba12f7dee105a6ecc138d2a129932f5730a51ab035627e"
+          },
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000_shard07.json",
+            "sha256": "eb8dc049ba1c79458177c2c3b767a2bc9c5f045744e17276d71b116cdd6f835b"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "cannot_pass_even_if_remaining_shots_succeed",
+      "wilson_95_upper": 0.011379135979515554,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "z",
+      "distance": 7,
+      "failures": 4,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 639642.1669814073,
+        "max_of_shard_batch_window_p99_ms": 55.345083,
+        "min_of_shard_batch_window_p99_ms": 42.555125,
+        "total_decoder_stitch_seconds": 1.600895083,
+        "total_sampler_seconds": 0.952314412
+      },
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard00.json",
+            "sha256": "3007eadaf998e8b783ff068e142ba4fe071b517ba40de84a2426026dcaa09410"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard01.json",
+            "sha256": "c873424c6fdaf5365233050b86bbf1e96957965a41bd3a3569b1b078a979ef85"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard02.json",
+            "sha256": "dabf75f544c36ec38b04bba3f71ba2fd99059b82c95f670c4255bdb17aa1dbf0"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard03.json",
+            "sha256": "67d9e829e4038173bf0a756915092e08078a8f23ce0eeb29609551587e5baddc"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard04.json",
+            "sha256": "06d6baa6a7133253de61cb0f2674a030fccdc08239b686357101e1094088e9a5"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard05.json",
+            "sha256": "b8022b56ca1c476a8419cc4be03ae9de9b817d41daaf7d871724d01ffb70cda8"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard06.json",
+            "sha256": "95ef108cc6e1290455e0f8ddc41b81c656060d143745cf1ddc1bc8a7a175f633"
+          },
+          {
+            "receipt": "P023_stream_d7_z_paired-readout_r1000_shard07.json",
+            "sha256": "ca1107ed61cdcb65c8cb517a44bdcb6415272a8a6e534c52d95c9151e97f3dbd"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "cannot_pass_even_if_remaining_shots_succeed",
+      "wilson_95_upper": 0.010000624405379549,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "nominal",
+      "basis": "x",
+      "distance": 7,
+      "failures": 57,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 2058692.5663085787,
+        "max_of_shard_batch_window_p99_ms": 30.700708,
+        "min_of_shard_batch_window_p99_ms": 30.700708,
+        "total_decoder_stitch_seconds": 62.175383588,
+        "total_sampler_seconds": 129.980823235
+      },
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 128000000,
+      "selector": {
+        "missing_shards": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_x_nominal_r1000000_shard00.json",
+            "sha256": "e9f3b2d59f43dd826dcfcd66339a621494213bbfa378b214669e0100d43c6bce"
+          }
+        ]
+      },
+      "shots": 128,
+      "status": "cannot_pass_even_if_remaining_shots_succeed",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "x",
+      "distance": 7,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "nominal",
+      "basis": "z",
+      "distance": 7,
+      "failures": 61,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 2161379.6929869642,
+        "max_of_shard_batch_window_p99_ms": 28.458791,
+        "min_of_shard_batch_window_p99_ms": 28.458791,
+        "total_decoder_stitch_seconds": 59.221431762,
+        "total_sampler_seconds": 129.989913783
+      },
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 128000000,
+      "selector": {
+        "missing_shards": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d7_z_nominal_r1000000_shard00.json",
+            "sha256": "33b54a288b007a8665a660d9cbab251d4022bbf8ae95ae50c734ed3a95b298ba"
+          }
+        ]
+      },
+      "shots": 128,
+      "status": "cannot_pass_even_if_remaining_shots_succeed",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "z",
+      "distance": 7,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 6816,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "nominal",
+      "basis": "x",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 81452.88483015358,
+        "max_of_shard_batch_window_p99_ms": 401.662917,
+        "min_of_shard_batch_window_p99_ms": 286.851958,
+        "total_decoder_stitch_seconds": 12.571684872,
+        "total_sampler_seconds": 5.906529752
+      },
+      "max_graph_detectors": 35392,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard00.json",
+            "sha256": "a0e47f2c7dea588891e205a3bfee7d5af8c347b8a5551865a6e51cf9d1fb9d9a"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard01.json",
+            "sha256": "5e82439d49440c0d1179bde16c4b35d074b3ece12cc1637005aced8b4f27aedc"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard02.json",
+            "sha256": "aa54b018f1565045ccf824ce4eac5b1bc78cc97a1bf91b48dac8684c94d65a0d"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard03.json",
+            "sha256": "753dc9de6eafc98f0d10c9475c98ff2a5f3c66eca6b1a5411136dd9743ae40bc"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard04.json",
+            "sha256": "82ddd1a3411a1c94dfdf7c4cf3df23700048c3512d309425a33b4e604f981cb7"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard05.json",
+            "sha256": "8445abb00b0362dab882abe3ea02a8a868a28c59cb3af6413c567b245f8b984d"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard06.json",
+            "sha256": "51750cf3394325ba1934fd925d842bba417c6e9788694e402b6863931924ef27"
+          },
+          {
+            "receipt": "P023_stream_d15_x_nominal_r1000_shard07.json",
+            "sha256": "45a62b02273ef4b9ae404ce25ad2441470c6cddf699f0389b06f8f296d4f11db"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.0037374040400176764,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "x",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 77974.8296942112,
+        "max_of_shard_batch_window_p99_ms": 401.313916,
+        "min_of_shard_batch_window_p99_ms": 284.829583,
+        "total_decoder_stitch_seconds": 13.132442918,
+        "total_sampler_seconds": 5.791341416
+      },
+      "max_graph_detectors": 35392,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard00.json",
+            "sha256": "e666765e8033a272165beba6685e9b7e19161cd5b2c0b88e8bf548314cb349a6"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard01.json",
+            "sha256": "9f46d9bceaf2e33de280dc8291e4a299c19cc0a800e5011dfe1ec58022f883ed"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard02.json",
+            "sha256": "1a99c4c556387af6a6b7af1ecbba7206e353bacc21fc6411051e0db1ab33f012"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard03.json",
+            "sha256": "8eb24753e7846cafc8360d5c24e497f0d2ef46b2484ea4f58204d5ac99c10fa0"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard04.json",
+            "sha256": "3f48068bf619dcc728b10be43188e9a14c0896f07548d50acf7dd17f050c6a7d"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard05.json",
+            "sha256": "7e8b79ceb27c16f836185acac4d1761fc60a212b87f2770862fe339c3e05b131"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard06.json",
+            "sha256": "81c9ba59d3f3d403a39594db56386cc49b26d938a2493c96143b068d36c6f7cf"
+          },
+          {
+            "receipt": "P023_stream_d15_x_paired-readout_r1000_shard07.json",
+            "sha256": "a5a7b78d44d89bede8d634f9946d930b594910efd1c3d029ee5f52705d1c9f43"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.0037374040400176764,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "nominal",
+      "basis": "z",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 76076.1909251136,
+        "max_of_shard_batch_window_p99_ms": 497.275083,
+        "min_of_shard_batch_window_p99_ms": 311.457416,
+        "total_decoder_stitch_seconds": 13.460190206,
+        "total_sampler_seconds": 5.547964417
+      },
+      "max_graph_detectors": 35392,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard00.json",
+            "sha256": "afe500e71883dcc69fb877c9c9c3c38914e9b2cd7cf95b406c31b077ed33c26f"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard01.json",
+            "sha256": "fe636e63df77daf17c77f65124af039fa217d2a73b556cc45495e4e54616ffd4"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard02.json",
+            "sha256": "b0b2d10a96ede4474461dae3078400ba8b5e0f360f96af76fcc4682ff9fa5f43"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard03.json",
+            "sha256": "8716311dba3409b206be348335c0b6a5adeadf23e7602804068f2413c99c4937"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard04.json",
+            "sha256": "aa21ee948df39fbb4fbf8d6dbe1906e1e84efdc3e6213f104e4726a218e0bca2"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard05.json",
+            "sha256": "14d5c70ff9f558b8e1f641a5aa52b1ab94c1642e32aaeb6f55f2f312dfabcf42"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard06.json",
+            "sha256": "c01f69b3d287d6254b63b7ed09475789ea5dd00cf0aae9e99db6635249e6c5fa"
+          },
+          {
+            "receipt": "P023_stream_d15_z_nominal_r1000_shard07.json",
+            "sha256": "f1f2b783089d039ff92c88966856ebd6077e7c6215aebafdb0aa2ef58767edcf"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.0037374040400176764,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "z",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": {
+        "batch_size": 128,
+        "decode_rounds_per_second_sum_of_shard_seconds": 74937.87437621901,
+        "max_of_shard_batch_window_p99_ms": 417.406334,
+        "min_of_shard_batch_window_p99_ms": 331.6525,
+        "total_decoder_stitch_seconds": 13.664652334,
+        "total_sampler_seconds": 6.110487462
+      },
+      "max_graph_detectors": 35392,
+      "qualified": true,
+      "rounds": 1000,
+      "row_rounds_simulated": 1024000,
+      "selector": {
+        "missing_shards": [],
+        "used_shards": [
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard00.json",
+            "sha256": "4ea1b1fc73478fca901a9f2c4b620561634cedd1b0ba8d7d812ef34f80d4be4f"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard01.json",
+            "sha256": "69b0d3828aba4cc2811811a6905a532798c0295df99f91de4a95a0575d7f8f46"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard02.json",
+            "sha256": "20d5bd6ebb453e4d617c214905148e1395db27e57e6baac86551b91d7a8888ad"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard03.json",
+            "sha256": "0afed7d73239e61a217fbbf5dbbd51beb34d96f6e795aa5d4154d80750ada3ac"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard04.json",
+            "sha256": "15b677fdd3de500639484b26d46b72d5a3dedf404fa7bee8897d7a49d75f88c0"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard05.json",
+            "sha256": "80033bf2e7955492cfde71f0ee31fa89620f6201e2e0c5d01413ea4ab3c550bd"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard06.json",
+            "sha256": "d74496d42dd79eef091adf923129baf01a5749d724f2c3a0e6cbf0e7d5f8cba4"
+          },
+          {
+            "receipt": "P023_stream_d15_z_paired-readout_r1000_shard07.json",
+            "sha256": "cc5d72491b5ada8a5ba2fa75c92c35abf28d6a8fad6fed726b572a75716ca8c8"
+          }
+        ]
+      },
+      "shots": 1024,
+      "status": "pass",
+      "wilson_95_upper": 0.0037374040400176764,
+      "windows_per_shot": 8
+    },
+    {
+      "arm": "nominal",
+      "basis": "x",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 35392,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "x",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 35392,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "nominal",
+      "basis": "z",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 35392,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    },
+    {
+      "arm": "paired-readout",
+      "basis": "z",
+      "distance": 15,
+      "failures": 0,
+      "host_timings": null,
+      "max_graph_detectors": 35392,
+      "qualified": false,
+      "rounds": 1000000,
+      "row_rounds_simulated": 0,
+      "selector": {
+        "missing_shards": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "used_shards": []
+      },
+      "shots": 0,
+      "status": "not_yet_measured",
+      "wilson_95_upper": null,
+      "windows_per_shot": 7813
+    }
+  ],
+  "salt": "5799635e79308a9d6f14ffb1eba754cf4bb22cba40b43552d279463ee6fc0ec7",
+  "schema": "p023_streamed_checkpoint_v1",
+  "unbatched_timing_only": []
+}

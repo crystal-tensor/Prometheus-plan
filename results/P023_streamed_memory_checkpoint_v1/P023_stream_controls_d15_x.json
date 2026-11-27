@@ -1,0 +1,62 @@
+{
+  "arms": {
+    "nominal": {
+      "circuit_sha256": "5e4dc27755940a02cb0a5f5856ffd3a462a1d632ed0f771687ca465ba7559be8",
+      "negative_controls": [
+        {
+          "mutation": "drop_physical_spill",
+          "rejected_by": "trajectory stitch dropped parity at window 1"
+        },
+        {
+          "mutation": "drop_correction_spill",
+          "rejected_by": "trajectory stitch dropped parity at window 1"
+        }
+      ],
+      "same_fault_replay": {
+        "correction_le_hex": "9111c9",
+        "correction_nonzero_cut_batches": 7,
+        "failures_le_hex": "000000",
+        "graph_types": 5,
+        "max_graph_detectors": 35392,
+        "monolithic_sample_sha256": "51fcf0388b297dfe40848b78169e0ebee2e2714dec6b6af06c946cdf313d1d8c",
+        "physical_nonzero_cut_batches": 7,
+        "sample_sha256": "11f8e3c56eb2e719f828f70bcc88cde078495205ea58b223734a43ddecf7cbc4",
+        "seed": 2370001,
+        "shots": 24,
+        "truth_le_hex": "9111c9",
+        "windows": 8
+      }
+    },
+    "paired-readout": {
+      "circuit_sha256": "5e4dc27755940a02cb0a5f5856ffd3a462a1d632ed0f771687ca465ba7559be8",
+      "negative_controls": [
+        {
+          "mutation": "drop_physical_spill",
+          "rejected_by": "trajectory stitch dropped parity at window 1"
+        },
+        {
+          "mutation": "drop_correction_spill",
+          "rejected_by": "trajectory stitch dropped parity at window 1"
+        }
+      ],
+      "same_fault_replay": {
+        "correction_le_hex": "1752e8",
+        "correction_nonzero_cut_batches": 7,
+        "failures_le_hex": "000000",
+        "graph_types": 5,
+        "max_graph_detectors": 35392,
+        "monolithic_sample_sha256": "0e8d65130ad61e3d22a4afb1dc1b77dc8ef5ec76fe1f3bc4c361e12120dd3c01",
+        "physical_nonzero_cut_batches": 7,
+        "sample_sha256": "af5e012b863a1f77e666da6da456650891066e6e1493ea38f69d382b448a3759",
+        "seed": 2370001,
+        "shots": 24,
+        "truth_le_hex": "1752e8",
+        "windows": 8
+      }
+    }
+  },
+  "basis": "x",
+  "coordinate_lines_checked": 224,
+  "deterministic_circuit_bursts_checked": 3,
+  "distance": 15
+}
