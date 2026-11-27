@@ -1,0 +1,30 @@
+{
+  "schema": "b7_qutech_ternary_same_shot_v1",
+  "scope": "#021/B7 public diagnostic: test the value of measured ancilla leakage flags on the exact same repetitions. Not a replacement for the original T5 challenge.",
+  "source": {
+    "archive": "qutech_lru_4tu_v1",
+    "inventory_sha256": "30b023f7517a649980acf36d8aeda9df8f781a1dacb2c1e27777589142c6e359",
+    "paper": "https://doi.org/10.1103/y66v-988s",
+    "format_reference": "https://github.com/MarcSerraPeralta/data-lru-integrated-with-measurement-for-qec/tree/42f374076dbb98549d4022ab468fa480668f0294",
+    "prefix": "Data/Figure 4/measurement_outcomes"
+  },
+  "experiment": {
+    "code": "Z-basis distance-3 repetition code",
+    "mode": "no_lru",
+    "rounds": 8,
+    "injection_levels_as_named_by_provider": [0, 3],
+    "prepared_bitstrings_as_integer": [0, 1, 2, 3, 4, 5, 6, 7],
+    "selection": "First shared power-of-two round count >4 in provider train/test. Retain all eight states and all test shots; choose level 0 and level 3 (no and active injection) before scoring."
+  },
+  "decoder": {
+    "family": "Exact sum-product on independent data flips and two accumulating ancilla bits; finally condition on two terminal parities, not the individual data bits or terminal flags.",
+    "ancilla_and_terminal_hard_rule": "1 and 2 map to 1, matching the source preprocessing.",
+    "training": "Use only provider train files and 512 evenly-spaced rows per prepared state. Choose (data_flip, measurement_flip) per injection level by joint hard-view likelihood including terminal data; freeze those same parameters across all test policies. Use measurement_flip independently on each terminal data bit.",
+    "data_flip_grid": [0.005, 0.012, 0.025, 0.05, 0.10],
+    "measurement_flip_grid": [0.015, 0.04, 0.08, 0.16],
+    "policies": ["hard", "aligned_ternary_mask", "one_round_cyclic_shift"],
+    "mask": "Ignore the corresponding ancilla emission when source readout is class 2; otherwise exactly the hard decoder. The shift control retains flags per readout line and misaligns them by one cyclic round."
+  },
+  "diagnostic": "Report paired recoveries/regressions and exact one-sided binomial p values per arm, with no pooled outcome, no shot postselection, and no transfer to the original three challenge rows.",
+  "claim_boundary": "Provider class 2 is a measured assignment, not latent ground truth. This repetition-code replay alone does not establish readout-calibration epoch identity, original T5 improvement, B7 credit or production performance."
+}

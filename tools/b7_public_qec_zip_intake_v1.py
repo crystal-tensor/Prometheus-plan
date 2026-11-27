@@ -24,6 +24,11 @@ ARCHIVES = {
         "bytes": 426118216,
         "provider_md5_not_rehashed": "de5a595beaa3087a6e38f7c6ac3c39fb",
     },
+    "qutech_lru_4tu_v1": {
+        "url": "https://data.4tu.nl/file/902d7f9e-38bf-48a2-a2f7-52bbf7aeeedf/c2e0c7c1-60b7-493f-baeb-1791a6e85cc5",
+        "bytes": 6494638141,
+        "dataset_doi": "10.4121/902d7f9e-38bf-48a2-a2f7-52bbf7aeeedf",
+    },
 }
 
 
