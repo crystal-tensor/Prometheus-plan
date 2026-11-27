@@ -1,0 +1,78 @@
+{
+  "arm": "nominal",
+  "basis": "x",
+  "controls_source_sha256": {
+    "B2_P023_d12_same_condition_v1.json": "cda0e0d90e4cfe2bae1403364e05ca198533ad6af188c6890954ec78631764af",
+    "b2_p023_d12_gate_v1.py": "93ac1339b67f13a955144d4e816df60f40baa4ea62554d58cbce9d5ac2f81e47",
+    "b2_p023_d12_stream_v1.py": "43faa6e7d79f0d0e9685f372452876031a4e57b71927c87ca9b56d4e7a0f62c1"
+  },
+  "d12_detector_count": 143001,
+  "d12_geometry": {
+    "active_qubits": 287,
+    "all_cx_local": true,
+    "bulk_detectors": 143,
+    "round0_detectors": 72,
+    "round8_detectors": 72,
+    "ticks_per_round": 7,
+    "used_nearest_neighbor_couplings": 528
+  },
+  "d12_models": {
+    "circuit_sha256": "a048889ff9f1f460b2a5037d703a10f849deb5328712d288673ed72203b63fd4",
+    "decoder_dem_sha256": "89683f1bf46b8108092d6b7b252f339e489889a95b5140efd4681bf39c4f9ee1",
+    "sampling_dem_sha256": "89683f1bf46b8108092d6b7b252f339e489889a95b5140efd4681bf39c4f9ee1"
+  },
+  "d12_negative_controls": [
+    {
+      "mutation": "drop_physical_spill",
+      "rejected_for": "trajectory stitch dropped parity"
+    },
+    {
+      "mutation": "drop_correction_spill",
+      "rejected_for": "trajectory stitch dropped parity"
+    },
+    {
+      "mutation": "truncate_terminal_byte",
+      "rejected_for": "terminal detector byte was truncated"
+    }
+  ],
+  "d12_same_fault": {
+    "correction_le_hex": "2277",
+    "correction_nonzero_cut_batches": 7,
+    "failures_le_hex": "0000",
+    "graph_types": 5,
+    "max_graph_detectors": 22594,
+    "monolithic_sample_sha256": "c52f3056d219dbf17e0b0f01f3af79f1b87eebbfa5363e31fee6bf298eac8bf0",
+    "physical_nonzero_cut_batches": 7,
+    "sample_sha256": "8849274a74a9912ce4192fe5a9da96284195c4cb25fc01b75ebfe8bcfc54816c",
+    "seed": 9796491623487767529,
+    "shots": 16,
+    "truth_le_hex": "2277",
+    "windows": 8
+  },
+  "d12_stress_geometry": {
+    "bulk_lines": 143,
+    "deterministic_physical_checks": 3
+  },
+  "d12_terminal_bits": 14873,
+  "d15_bit_exact_same_seed": true,
+  "d15_geometry": {
+    "active_qubits": 449,
+    "all_cx_local": true,
+    "bulk_detectors": 224,
+    "round0_detectors": 112,
+    "round8_detectors": 112,
+    "ticks_per_round": 7,
+    "used_nearest_neighbor_couplings": 840
+  },
+  "d15_models": {
+    "circuit_sha256": "5e4dc27755940a02cb0a5f5856ffd3a462a1d632ed0f771687ca465ba7559be8",
+    "decoder_dem_sha256": "79236de632a11c66a3a2d262ce4be8f0d870a30bd64e8664395d065d94d7e894",
+    "sampling_dem_sha256": "79236de632a11c66a3a2d262ce4be8f0d870a30bd64e8664395d065d94d7e894"
+  },
+  "distance": 12,
+  "qubit_round_ratio": 1.5644599303135889,
+  "qubit_round_reduction": 0.3608017817371938,
+  "rounds": 1000,
+  "schema": "b2_p023_d12_control_v1",
+  "status": "validated_not_qualification"
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "b2_p023_d12_same_condition_v1",
+  "scope": "#022/B2 same-condition active-qubit-round comparison, conditional on the unchanged #023 gate",
+  "reference_distance": 15,
+  "candidate_distance": 12,
+  "reference_sampler_freeze": "d51146380aba2c20357d70f6f6576b07f5509b63",
+  "child_guard_periods": 15,
+  "commit_periods": 64,
+  "minimum_physical_qubit_round_reduction": 0.25,
+  "selection": "Largest square rotated patch meeting the 25% active-count reduction against distance 15; d13 has 337 active qubits (just over 75% of 449), d12 has 287. Chosen before candidate qualification.",
+  "decoder": "Same nominal-model independent MWPM, same edge weights and commitment rule, identical 128-round core and up-to-30-round guard, no look-ahead advantage given to the candidate.",
+  "noise": "Inherit all four 0.001 circuit-level probabilities and the same independent 0.0001 paired-ancilla-readout process from the reference.",
+  "calibrated_hardware_credit": false,
+  "same_condition_credit": "Require a fully qualified d15 reference and a fully qualified d12 candidate from separate salted, fixed 1024-shot X/Z cohorts at both 1000 and 1000000 rounds, with and without paired readout. Fill the relative resource ledger only if both qualify. No projection, pooling, or change of target.",
+  "source_hashes": {
+    "benchmarks/B2_B7_P023_logical_memory_horizon_gate_v1.json": "5f588d03c0fb0b4bc7b38588d87f1490fe7df14d0b295727087faf61ff5d4d20",
+    "benchmarks/P023_streamed_memory_v1.json": "f41d7fa104892ed2c8cff83e0193159be4f6cdfba33d89f139798ccacfe1f167",
+    "benchmarks/P023_streamed_memory_grouped_v2.json": "647d6eb2293b119e1c07d92b10fceedf2676fca60f7937b08b5e77eea44d3e51"
+  },
+  "controls": {
+    "directory": "results/B2_P023_d12_controls_v1",
+    "rounds": 1000,
+    "shots": 16,
+    "seed": 23151216,
+    "rule": "d15 must have packed stream and logical correction outputs equal to the frozen implementation in all four cells. d12 must reproduce the monolithic model on identical fault flags and reject loss of either seam carry or partial terminal byte. Verify same stabilizer, ticks and local topology."
+  }
+}
