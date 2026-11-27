@@ -1,0 +1,27 @@
+{
+  "schema": "p023_grouped_sampler_gate_v1",
+  "question": "Can probability-grouped Bernoulli draws shorten direct #023 simulation without changing a single sampled mechanism or decoder rule?",
+  "scope": "#023 software simulator; no hardware, B2 or B7 credit",
+  "baseline": "benchmarks/P023_streamed_memory_v1.json",
+  "distance": 15,
+  "bases": ["x", "z"],
+  "arms": ["nominal", "paired-readout"],
+  "same_fault_controls": {
+    "rounds": 1000,
+    "shots": 24,
+    "seed": 938715,
+    "required": "all grouped flag vectors reproduce the whole Stim DEM replay, committed parity is exact, and disabling either cut transfer is rejected"
+  },
+  "performance": {
+    "rounds": 1000,
+    "shots": 128,
+    "steady_repeats_after_warmup": 24,
+    "pipeline_repeats_after_warmup": 3,
+    "seed": 573001,
+    "selection": "alternate execution order; warmed sampler median and warmed 1000-round pipeline median per cell; pipeline sum includes only sample calls and decode/stitch, not compilation, hashing, or logging",
+    "require_grouped_to_baseline_sampler_ratio_at_most": 0.5,
+    "require_grouped_to_baseline_pipeline_ratio_at_most": 0.8,
+    "access_to_logical_failures_for_selection": false
+  },
+  "adoption": "Any arm can reject the change. Qualification may only begin under a new freeze containing the grouped sampler with an independent salt and complete fixed cohorts. No cross-version pooling or changes to the original noise, length, basis, or Wilson gate."
+}
