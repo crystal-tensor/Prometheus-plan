@@ -1,0 +1,35 @@
+{
+  "schema": "b7_b2_willow_d6_source_replay_v1",
+  "scope": "#021/B7 versus #022/B2 public source fields and trace replay, no calibrated-row or resource credit",
+  "primary_record": "https://doi.org/10.5281/zenodo.24142014",
+  "selection": {
+    "experiment_type": "memory",
+    "patch": "d6_0+0j",
+    "distance": 6,
+    "bases": ["X", "Z"],
+    "rounds": 6,
+    "shots_per_basis": 200000,
+    "fixed_source_procedure": "Select the unique distance-six patch and the round count equal to its distance, in both bases, before scoring.",
+    "holdout_boundary": "Public fixture for reconstruction and untuned matching comparison; no leakage-aware holdout or calibrated-improvement claim."
+  },
+  "replay": {
+    "reference_weights": "Use the archive error_model.dem, not a newly generated error model from the separately provided noisy circuit.",
+    "validate": "Recompute all detector and logical vectors using published binary measurements, sweep bits and ideal circuit, including padding and shot count. Require byte equality. Correlated outputs are compared to the archived prediction vector, and mismatches are reported rather than hidden.",
+    "negative_control": "Replace shot-local sweep vectors with zeros and require changed detector or observable rows; deliberately use wrong shot count and require rejection before reading outcomes."
+  },
+  "separate_calibration": {
+    "sycamore": {
+      "record": "https://doi.org/10.5281/zenodo.7302032",
+      "file": "readout_clouds.zip",
+      "md5": "63c3173c6070c09dfe63c5376eef1c28",
+      "rule": "Each source and qubit's prepared 0/1/2/3 clouds are split at the row midpoint before estimating a fixed class Gaussian, with equal priors and 1e-6 covariance ridge. Report held-out confusion. No cross-device calibration transfer."
+    },
+    "ankaa": {
+      "record": "https://zenodo.org/records/15364358",
+      "file": "fast_feedback_raw_data.h5",
+      "md5": "3b2503a80f2b92916660489e2f07e880",
+      "rule": "Read the provider's qubit-50 assignment outcomes against prepared 0/1 in measurement_fidelity; no state-2/3 confusion matrix."
+    }
+  },
+  "credit_rule": "Willow binary replay, separate Sycamore prepared-state confusion, and Ankaa binary confusion must not be joined. They do not provide an original challenge-bound, acquisition-window, shot/qubit/time-aligned leakage replay, a calibrated candidate comparison, or all-challenge nonregression. T5 transfer acceptance and B7 credit remain unavailable."
+}
